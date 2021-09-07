@@ -135,9 +135,11 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("current_step")]
 		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? CurrentStep { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("next_step")]
 		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? NextStep { get; set; }
 	}

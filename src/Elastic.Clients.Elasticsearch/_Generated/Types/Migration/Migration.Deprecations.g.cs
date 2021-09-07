@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Migration.Deprecations
 {
 	public partial class Deprecation
 	{
+		[JsonInclude]
 		[JsonPropertyName("details")]
 		public string Details
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Migration.Deprecations
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("level")]
 		public Elastic.Clients.Elasticsearch.Migration.Deprecations.DeprecationLevel Level
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Migration.Deprecations
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("message")]
 		public string Message
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Migration.Deprecations
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("url")]
 		public string Url
 		{

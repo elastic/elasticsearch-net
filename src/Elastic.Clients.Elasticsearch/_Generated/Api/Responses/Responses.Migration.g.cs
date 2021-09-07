@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 {
 	public partial class DeprecationsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_settings")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation> ClusterSettings
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_settings")]
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation>> IndexSettings
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ml_settings")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation> MlSettings
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Migration
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_settings")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Migration.Deprecations.Deprecation> NodeSettings
 		{

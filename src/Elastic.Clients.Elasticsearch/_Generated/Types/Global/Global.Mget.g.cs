@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 {
 	public partial class Hit<TDocument>
 	{
+		[JsonInclude]
 		[JsonPropertyName("error")]
 		public Elastic.Clients.Elasticsearch.MainError? Error
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool? Found
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long? PrimaryTerm
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public TDocument? Source
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -150,27 +161,35 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 
 	public partial class Operation
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public OneOf<bool, Fields, Global.Search.SourceFilter>? Source { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stored_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version_type")]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 	}

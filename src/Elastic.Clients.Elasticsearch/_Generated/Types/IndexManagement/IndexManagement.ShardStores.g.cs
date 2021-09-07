@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 {
 	public partial class IndicesShardStores
 	{
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStoreWrapper> Shards
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 
 	public partial class ShardStore
 	{
+		[JsonInclude]
 		[JsonPropertyName("allocation")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStoreAllocation Allocation
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("allocation_id")]
 		public Elastic.Clients.Elasticsearch.Id AllocationId
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public Dictionary<string, object> Attributes
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("legacy_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber LegacyVersion
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store_exception")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStoreException StoreException
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 
 	public partial class ShardStoreException
 	{
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -156,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 
 	public partial class ShardStoreWrapper
 	{
+		[JsonInclude]
 		[JsonPropertyName("stores")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStore> Stores
 		{

@@ -26,12 +26,15 @@ namespace Elastic.Clients.Elasticsearch.Ilm.MoveToStep
 {
 	public partial class StepKey
 	{
+		[JsonInclude]
 		[JsonPropertyName("action")]
 		public string Action { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("phase")]
 		public string Phase { get; set; }
 	}

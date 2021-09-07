@@ -29,6 +29,7 @@ namespace Elastic.Clients.Elasticsearch
 			Options = new JsonSerializerOptions
 			{
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+				IncludeFields= true,
 				Converters =
 				{
 					new CustomJsonWriterConverterFactory(settings),
@@ -49,7 +50,15 @@ namespace Elastic.Clients.Elasticsearch
 			//if (stream.Length == 0) // throws on some responses
 			//	return default;
 			using var reader = new StreamReader(stream);
-			return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
+
+			try
+			{
+				return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
+			}
+			catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
+			{
+				return default;
+			}
 		}
 
 		public object Deserialize(Type type, Stream stream) =>

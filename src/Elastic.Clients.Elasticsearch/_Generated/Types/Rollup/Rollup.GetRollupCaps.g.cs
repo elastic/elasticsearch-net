@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 {
 	public partial class RollupCapabilities
 	{
+		[JsonInclude]
 		[JsonPropertyName("rollup_jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps.RollupCapabilitySummary> RollupJobs
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 
 	public partial class RollupCapabilitySummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, object>> Fields
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_pattern")]
 		public string IndexPattern
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public string JobId
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollup_index")]
 		public string RollupIndex
 		{

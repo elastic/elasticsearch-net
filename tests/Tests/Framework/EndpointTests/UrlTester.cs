@@ -6,6 +6,7 @@ using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework.Extensions;
+using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Tests.Framework.EndpointTests
 {

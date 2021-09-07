@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetMapping
 {
 	public partial class IndexMappingRecord
 	{
+		[JsonInclude]
 		[JsonPropertyName("item")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetMapping
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
 		{

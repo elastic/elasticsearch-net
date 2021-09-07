@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 
 	public partial class MountResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount.MountedSnapshot Snapshot
 		{
@@ -42,6 +43,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 
 	public partial class StatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public object Stats
 		{
@@ -53,6 +55,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public object Total
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings
 {
 	public partial class NodeReloadException
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reload_exception")]
 		public Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings.NodeReloadExceptionCausedBy? ReloadException
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings
 
 	public partial class NodeReloadExceptionCausedBy
 	{
+		[JsonInclude]
 		[JsonPropertyName("caused_by")]
 		public Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings.NodeReloadExceptionCausedBy? CausedBy
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutSettings
 {
 	public partial class IndexSettingsBody : IndexManagement.IndexSettings
 	{
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}

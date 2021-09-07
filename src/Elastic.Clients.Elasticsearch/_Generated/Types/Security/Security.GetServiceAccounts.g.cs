@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 {
 	public partial class RoleDescriptor
 	{
+		[JsonInclude]
 		[JsonPropertyName("applications")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IReadOnlyCollection<string> Cluster
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("global")]
 		public Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>, Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("run_as")]
 		public IReadOnlyCollection<string>? RunAs
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transient_metadata")]
 		public Dictionary<string, object>? TransientMetadata
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 
 	public partial class RoleDescriptorWrapper
 	{
+		[JsonInclude]
 		[JsonPropertyName("role_descriptor")]
 		public Elastic.Clients.Elasticsearch.Security.GetServiceAccounts.RoleDescriptor RoleDescriptor
 		{

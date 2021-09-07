@@ -98,30 +98,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public IEnumerable<string>? Attributes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("char_filter")]
 		public IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>>? CharFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("explain")]
 		public bool? Explain { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>>? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("normalizer")]
 		public string? Normalizer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? Text { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
 		public Union<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
 	}
@@ -203,9 +212,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 	}
@@ -284,12 +295,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 	}
@@ -876,12 +890,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("flat_settings")]
 		public bool? FlatSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_type_name")]
 		public bool? IncludeTypeName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("master_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get; set; }
 	}
@@ -1134,18 +1151,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_routing")]
 		public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("is_write_index")]
 		public bool? IsWriteIndex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_routing")]
 		public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 	}
@@ -1182,24 +1204,31 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
 		public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("composed_of")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("data_stream")]
 		public Elastic.Clients.Elasticsearch.EmptyObject? DataStream { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("priority")]
 		public int? Priority { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta { get; set; }
 	}
@@ -1265,36 +1294,47 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("date_detection")]
 		public bool? DateDetection { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic")]
 		public Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? Dynamic { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic_date_formats")]
 		public IEnumerable<string>? DynamicDateFormats { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic_templates")]
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_field_names")]
 		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Dictionary<string, object>? Meta { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("numeric_detection")]
 		public bool? NumericDetection { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? Runtime { get; set; }
 	}
@@ -1391,18 +1431,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public int? Order { get => Q<int?>("order"); set => Q("order", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
 		public Union<string, IEnumerable<string>>? IndexPatterns { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 	}
@@ -1570,15 +1615,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("conditions")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? Conditions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 	}
@@ -1688,9 +1737,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 	}
@@ -1721,15 +1772,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? IndexPatterns { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("composed_of")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("overlapping")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? Overlapping { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? Template { get; set; }
 	}
@@ -1796,9 +1851,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 	}
@@ -1891,6 +1948,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? Actions { get; set; }
 	}
@@ -1959,6 +2017,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}

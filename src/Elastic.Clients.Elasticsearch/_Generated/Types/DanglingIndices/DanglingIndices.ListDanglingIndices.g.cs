@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 {
 	public partial class DanglingIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("creation_date_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis CreationDateMillis
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_name")]
 		public string IndexName
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_uuid")]
 		public string IndexUuid
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_ids")]
 		public Elastic.Clients.Elasticsearch.Ids NodeIds
 		{

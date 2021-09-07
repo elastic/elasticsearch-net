@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 {
 	public partial class RollupJob
 	{
+		[JsonInclude]
 		[JsonPropertyName("config")]
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJobConfiguration Config
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJobStats Stats
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJobStatus Status
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 
 	public partial class RollupJobConfiguration
 	{
+		[JsonInclude]
 		[JsonPropertyName("cron")]
 		public string Cron
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public Elastic.Clients.Elasticsearch.Rollup.Groupings Groups
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_pattern")]
 		public string IndexPattern
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric> Metrics
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("page_size")]
 		public long PageSize
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollup_index")]
 		public Elastic.Clients.Elasticsearch.IndexName RollupIndex
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time Timeout
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 
 	public partial class RollupJobStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("documents_processed")]
 		public long DocumentsProcessed
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_failures")]
 		public long IndexFailures
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_time_in_ms")]
 		public long IndexTimeInMs
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_total")]
 		public long IndexTotal
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pages_processed")]
 		public long PagesProcessed
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processing_time_in_ms")]
 		public long ProcessingTimeInMs
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processing_total")]
 		public long ProcessingTotal
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollups_indexed")]
 		public long RollupsIndexed
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_failures")]
 		public long SearchFailures
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_time_in_ms")]
 		public long SearchTimeInMs
 		{
@@ -263,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_total")]
 		public long SearchTotal
 		{
@@ -274,6 +296,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trigger_count")]
 		public long TriggerCount
 		{
@@ -288,6 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 
 	public partial class RollupJobStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("current_position")]
 		public Dictionary<string, object>? CurrentPosition
 		{
@@ -299,6 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_state")]
 		public Elastic.Clients.Elasticsearch.Rollup.GetJobs.IndexingJobState JobState
 		{
@@ -310,6 +335,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("upgraded_doc_id")]
 		public bool? UpgradedDocId
 		{

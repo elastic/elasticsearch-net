@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.GetLifecycle
 {
 	public partial class Lifecycle
 	{
+		[JsonInclude]
 		[JsonPropertyName("modified_date")]
 		public Elastic.Clients.Elasticsearch.DateString ModifiedDate
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.GetLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policy")]
 		public Elastic.Clients.Elasticsearch.Ilm.Policy Policy
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.GetLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{

@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 {
 	public partial class AckWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus Status
 		{
@@ -38,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ActivateWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActivationStatus Status
 		{
@@ -52,6 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class DeactivateWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActivationStatus Status
 		{
@@ -66,6 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class DeleteWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -77,6 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -88,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -102,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecuteWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -113,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch_record")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch.WatchRecord WatchRecord
 		{
@@ -127,6 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class GetWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -138,6 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -149,6 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public int? PrimaryTerm
 		{
@@ -160,6 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
@@ -171,6 +183,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status
 		{
@@ -182,6 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -193,6 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch")]
 		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch
 		{
@@ -207,6 +222,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class PutWatchResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public bool Created
 		{
@@ -218,6 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -229,6 +246,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long PrimaryTerm
 		{
@@ -240,6 +258,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber SeqNo
 		{
@@ -251,6 +270,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -265,6 +285,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class QueryWatchesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -276,6 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watches")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.QueryWatch> Watches
 		{
@@ -294,6 +316,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class StatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -305,6 +328,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("manually_stopped")]
 		public bool ManuallyStopped
 		{
@@ -316,6 +340,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
@@ -327,6 +352,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.Stats.WatcherNodeStats> Stats
 		{

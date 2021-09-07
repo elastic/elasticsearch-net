@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class ClusterStateBlockIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("aliases_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? AliasesVersion
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("in_sync_allocations")]
 		public Dictionary<string, IReadOnlyCollection<string>>? InSyncAllocations
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("levels")]
 		public IReadOnlyCollection<string>? Levels
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mapping_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? MappingVersion
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_terms")]
 		public Dictionary<string, int>? PrimaryTerms
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retryable")]
 		public bool? Retryable
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollover_info")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions>? RolloverInfo
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("routing_num_shards")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? RoutingNumShards
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? Settings
 		{
@@ -158,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? SettingsVersion
 		{
@@ -169,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public string? State
 		{
@@ -180,6 +194,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("system")]
 		public bool? System
 		{
@@ -191,6 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp_range")]
 		public Dictionary<string, object>? TimestampRange
 		{
@@ -202,6 +218,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -216,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateDeletedSnapshots
 	{
+		[JsonInclude]
 		[JsonPropertyName("snapshot_deletions")]
 		public IReadOnlyCollection<string> SnapshotDeletions
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateIndexLifecycle
 	{
+		[JsonInclude]
 		[JsonPropertyName("operation_mode")]
 		public Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policies")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.ClusterStateIndexLifecycleSummary> Policies
 		{
@@ -255,6 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateIndexLifecyclePolicy
 	{
+		[JsonInclude]
 		[JsonPropertyName("phases")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phases Phases
 		{
@@ -269,6 +290,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateIndexLifecycleSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("headers")]
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
@@ -280,6 +302,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("modified_date")]
 		public long ModifiedDate
 		{
@@ -291,6 +314,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("modified_date_string")]
 		public Elastic.Clients.Elasticsearch.DateString ModifiedDateString
 		{
@@ -302,6 +326,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policy")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateIndexLifecyclePolicy Policy
 		{
@@ -313,6 +338,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -327,6 +353,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateIngest
 	{
+		[JsonInclude]
 		[JsonPropertyName("pipeline")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterStateIngestPipeline> Pipeline
 		{
@@ -341,6 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateIngestPipeline
 	{
+		[JsonInclude]
 		[JsonPropertyName("config")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateIngestPipelineConfig Config
 		{
@@ -352,6 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -366,6 +395,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateIngestPipelineConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -377,6 +407,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processors")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer> Processors
 		{
@@ -388,6 +419,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -402,6 +434,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateMetadata
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_coordination")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateMetadataClusterCoordination ClusterCoordination
 		{
@@ -413,6 +446,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
@@ -424,6 +458,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_uuid_committed")]
 		public bool ClusterUuidCommitted
 		{
@@ -435,6 +470,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("component_template")]
 		public Dictionary<string, object>? ComponentTemplate
 		{
@@ -446,6 +482,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index-graveyard")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateMetadataIndexGraveyard IndexGraveyard
 		{
@@ -457,6 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_lifecycle")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateIndexLifecycle? IndexLifecycle
 		{
@@ -468,6 +506,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_template")]
 		public Dictionary<string, object>? IndexTemplate
 		{
@@ -479,6 +518,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.ClusterStateBlockIndex>? Indices
 		{
@@ -490,6 +530,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateIngest? Ingest
 		{
@@ -501,6 +542,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("repositories")]
 		public Dictionary<string, string>? Repositories
 		{
@@ -512,6 +554,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("templates")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateMetadataTemplate Templates
 		{
@@ -526,6 +569,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateMetadataClusterCoordination
 	{
+		[JsonInclude]
 		[JsonPropertyName("last_accepted_config")]
 		public IReadOnlyCollection<string> LastAcceptedConfig
 		{
@@ -537,6 +581,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_committed_config")]
 		public IReadOnlyCollection<string> LastCommittedConfig
 		{
@@ -548,6 +593,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public int Term
 		{
@@ -559,6 +605,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("voting_config_exclusions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.VotingConfigExclusionsItem> VotingConfigExclusions
 		{
@@ -573,6 +620,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateMetadataIndexGraveyard
 	{
+		[JsonInclude]
 		[JsonPropertyName("tombstones")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Tombstone> Tombstones
 		{
@@ -591,6 +639,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateRoutingNodes
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Nodes
 		{
@@ -602,6 +651,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unassigned")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard> Unassigned
 		{
@@ -616,6 +666,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateSnapshots
 	{
+		[JsonInclude]
 		[JsonPropertyName("snapshots")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> Snapshots
 		{
@@ -630,6 +681,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ComponentTemplate
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -644,6 +696,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ComponentTemplateNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta
 		{
@@ -655,6 +708,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template
 		{
@@ -666,6 +720,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -680,6 +735,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ComponentTemplateSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases
 		{
@@ -691,6 +747,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings
 		{
@@ -702,6 +759,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta
 		{
@@ -713,6 +771,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> Settings
 		{
@@ -724,6 +783,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -738,6 +798,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class Tombstone
 	{
+		[JsonInclude]
 		[JsonPropertyName("delete_date")]
 		public Elastic.Clients.Elasticsearch.DateString? DeleteDate
 		{
@@ -749,6 +810,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delete_date_in_millis")]
 		public long DeleteDateInMillis
 		{
@@ -760,6 +822,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Cluster.TombstoneIndex Index
 		{
@@ -774,6 +837,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class TombstoneIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("index_name")]
 		public Elastic.Clients.Elasticsearch.Name IndexName
 		{
@@ -785,6 +849,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid IndexUuid
 		{
@@ -799,6 +864,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class VotingConfigExclusionsItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -810,6 +876,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_name")]
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{

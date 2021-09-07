@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 {
 	public partial class FieldStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc_count")]
 		public int DocCount
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sum_doc_freq")]
 		public long SumDocFreq
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sum_ttf")]
 		public long SumTtf
 		{
@@ -62,30 +65,38 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 
 	public partial class Filter
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_doc_freq")]
 		public int? MaxDocFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_terms")]
 		public int? MaxNumTerms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_term_freq")]
 		public int? MaxTermFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_word_length")]
 		public int? MaxWordLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_doc_freq")]
 		public int? MinDocFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_term_freq")]
 		public int? MinTermFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_word_length")]
 		public int? MinWordLength { get; set; }
 	}
 
 	public partial class Term
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc_freq")]
 		public int? DocFreq
 		{
@@ -97,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("score")]
 		public double? Score
 		{
@@ -108,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("term_freq")]
 		public int TermFreq
 		{
@@ -119,6 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokens")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Termvectors.Token> Tokens
 		{
@@ -130,6 +144,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ttf")]
 		public int? Ttf
 		{
@@ -144,6 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 
 	public partial class TermVector
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_statistics")]
 		public Elastic.Clients.Elasticsearch.Global.Termvectors.FieldStatistics FieldStatistics
 		{
@@ -155,6 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.Termvectors.Term> Terms
 		{
@@ -169,6 +186,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 
 	public partial class Token
 	{
+		[JsonInclude]
 		[JsonPropertyName("end_offset")]
 		public int? EndOffset
 		{
@@ -180,6 +198,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("payload")]
 		public string? Payload
 		{
@@ -191,6 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("position")]
 		public int Position
 		{
@@ -202,6 +222,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_offset")]
 		public int? StartOffset
 		{

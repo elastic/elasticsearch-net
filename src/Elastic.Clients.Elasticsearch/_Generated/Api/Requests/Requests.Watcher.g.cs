@@ -147,24 +147,31 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		[JsonIgnore]
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("action_modes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.ActionExecutionMode>? ActionModes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("alternative_input")]
 		public Dictionary<string, object>? AlternativeInput { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_condition")]
 		public bool? IgnoreCondition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("record_execution")]
 		public bool? RecordExecution { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("simulated_actions")]
 		public Elastic.Clients.Elasticsearch.Watcher.SimulatedActions? SimulatedActions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("trigger_data")]
 		public Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent? TriggerData { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("watch")]
 		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch { get; set; }
 	}
@@ -233,24 +240,31 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get => Q<Elastic.Clients.Elasticsearch.VersionNumber?>("version"); set => Q("version", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.Action>? Actions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("condition")]
 		public Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? Condition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Elastic.Clients.Elasticsearch.Watcher.InputContainer? Input { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("throttle_period")]
 		public string? ThrottlePeriod { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public Elastic.Clients.Elasticsearch.TransformContainer? Transform { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("trigger")]
 		public Elastic.Clients.Elasticsearch.Watcher.TriggerContainer? Trigger { get; set; }
 	}
@@ -283,18 +297,23 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_after")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortResults? SearchAfter { get; set; }
 	}

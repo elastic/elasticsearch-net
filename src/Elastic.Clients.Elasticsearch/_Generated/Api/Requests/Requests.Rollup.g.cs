@@ -142,21 +142,27 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cron")]
 		public string? Cron { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public Elastic.Clients.Elasticsearch.Rollup.Groupings? Groups { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_pattern")]
 		public string? IndexPattern { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? Metrics { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("page_size")]
 		public long? PageSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rollup_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? RollupIndex { get; set; }
 	}
@@ -211,12 +217,15 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aggs")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 	}

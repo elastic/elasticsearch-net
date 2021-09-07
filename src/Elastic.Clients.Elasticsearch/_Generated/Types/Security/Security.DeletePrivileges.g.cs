@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.DeletePrivileges
 {
 	public partial class FoundStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{

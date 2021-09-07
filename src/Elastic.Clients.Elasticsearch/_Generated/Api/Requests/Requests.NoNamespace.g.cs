@@ -117,6 +117,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 	}
@@ -191,6 +192,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
@@ -401,9 +403,11 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slice")]
 		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	}
@@ -613,6 +617,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public string? LuceneQueryString { get => Q<string?>("q"); set => Q("q", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
@@ -657,6 +662,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("index_filter")]
 		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
 	}
@@ -947,9 +953,11 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.Operation>? Docs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ids")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId>? Ids { get; set; }
 	}
@@ -1113,6 +1121,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.Operation>? Docs { get; set; }
 	}
@@ -1196,6 +1205,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.StoredScript? Script { get; set; }
 	}
@@ -1239,9 +1249,11 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("requests")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalRequestItem> Requests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metric")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetric? Metric { get; set; }
 	}
@@ -1300,21 +1312,27 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("conflicts")]
 		public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_docs")]
 		public long? MaxDocs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public long? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source { get; set; }
 	}
@@ -1371,12 +1389,15 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("file")]
 		public string? File { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string? Source { get; set; }
 	}
@@ -1405,12 +1426,15 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("context")]
 		public string? Context { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("context_setup")]
 		public Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.InlineScript? Script { get; set; }
 	}
@@ -1633,54 +1657,71 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public Union<string, IEnumerable<string>>? Sort { get => Q<Union<string, IEnumerable<string>>?>("sort"); set => Q("sort", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aggs")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("collapse")]
 		public Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices_boost")]
 		public IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public double? MinScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("post_filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("profile")]
 		public bool? Profile { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rescore")]
 		public Union<Elastic.Clients.Elasticsearch.Global.Search.Rescore, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>>? Rescore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_after")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortResults? SearchAfter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slice")]
 		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest")]
 		public Union<Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer, Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer>>? Suggest { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pit")]
 		public Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 	}
@@ -1796,12 +1837,15 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string? Source { get; set; }
 	}
@@ -1838,24 +1882,31 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("string")]
 		public string? String { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_after")]
 		public string? SearchAfter { get; set; }
 	}
@@ -1922,12 +1973,15 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("doc")]
 		public TDocument? Doc { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 	}
@@ -1998,21 +2052,27 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("detect_noop")]
 		public bool? DetectNoop { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("doc")]
 		public TPartialDocument? Doc { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("doc_as_upsert")]
 		public bool? DocAsUpsert { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scripted_upsert")]
 		public bool? ScriptedUpsert { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("upsert")]
 		public TDocument? Upsert { get; set; }
 	}
@@ -2145,15 +2205,19 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("max_docs")]
 		public long? MaxDocs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slice")]
 		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	}

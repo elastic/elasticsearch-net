@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 {
 	public partial class Configuration
 	{
+		[JsonInclude]
 		[JsonPropertyName("geo_match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy? GeoMatch
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy Match
 		{
@@ -51,24 +53,30 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 
 	public partial class Policy
 	{
+		[JsonInclude]
 		[JsonPropertyName("enrich_fields")]
 		public Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_field")]
 		public Elastic.Clients.Elasticsearch.Field MatchField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string? Query { get; set; }
 	}
 
 	public partial class Summary
 	{
+		[JsonInclude]
 		[JsonPropertyName("config")]
 		public Elastic.Clients.Elasticsearch.Enrich.Configuration Config
 		{

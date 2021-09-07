@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.AddBlock
 {
 	public partial class IndicesBlockStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("blocked")]
 		public bool Blocked
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.AddBlock
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.IndexName Name
 		{

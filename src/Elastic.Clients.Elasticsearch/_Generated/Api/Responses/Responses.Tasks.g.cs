@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 {
 	public partial class CancelResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("node_failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.TaskExecutingNode> Nodes
 		{
@@ -49,6 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 	public partial class GetResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("completed")]
 		public bool Completed
 		{
@@ -60,6 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("response")]
 		public Elastic.Clients.Elasticsearch.Tasks.Status? Response
 		{
@@ -71,6 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task")]
 		public Elastic.Clients.Elasticsearch.Tasks.Info Task
 		{
@@ -85,6 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 	public partial class ListResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("node_failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures
 		{
@@ -96,6 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.TaskExecutingNode>? Nodes
 		{
@@ -107,6 +114,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tasks")]
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.Info>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.Info>>? Tasks
 		{

@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 	public partial class ExplainLifecycleResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Union<Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplain>, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainProject> Indices
 		{
@@ -46,6 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 	public partial class GetStatusResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("operation_mode")]
 		public Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode
 		{
@@ -68,6 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 	public partial class RemovePolicyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("failed_indexes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> FailedIndexes
 		{
@@ -79,6 +82,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_failures")]
 		public bool HasFailures
 		{

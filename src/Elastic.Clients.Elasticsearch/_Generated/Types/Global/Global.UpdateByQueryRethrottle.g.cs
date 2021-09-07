@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.UpdateByQueryRethrottle
 {
 	public partial class UpdateByQueryRethrottleNode : SpecUtils.BaseNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("tasks")]
 		public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.Info> Tasks
 		{

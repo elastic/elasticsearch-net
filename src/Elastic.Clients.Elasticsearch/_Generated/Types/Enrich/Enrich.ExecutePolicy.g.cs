@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy
 {
 	public partial class ExecuteEnrichPolicyStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("phase")]
 		public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy.EnrichPolicyPhase Phase
 		{

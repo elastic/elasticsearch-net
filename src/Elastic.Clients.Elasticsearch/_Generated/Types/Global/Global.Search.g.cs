@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 {
 	public partial class AggregationBreakdown
 	{
+		[JsonInclude]
 		[JsonPropertyName("build_aggregation")]
 		public long BuildAggregation
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("build_aggregation_count")]
 		public long BuildAggregationCount
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("build_leaf_collector")]
 		public long BuildLeafCollector
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("build_leaf_collector_count")]
 		public long BuildLeafCollectorCount
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("collect")]
 		public long Collect
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("collect_count")]
 		public long CollectCount
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initialize")]
 		public long Initialize
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initialize_count")]
 		public long InitializeCount
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("post_collection")]
 		public long? PostCollection
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("post_collection_count")]
 		public long? PostCollectionCount
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reduce")]
 		public long Reduce
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reduce_count")]
 		public long ReduceCount
 		{
@@ -161,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class AggregationProfile
 	{
+		[JsonInclude]
 		[JsonPropertyName("breakdown")]
 		public Elastic.Clients.Elasticsearch.Global.Search.AggregationBreakdown Breakdown
 		{
@@ -172,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("children")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.AggregationProfileDebug>? Children
 		{
@@ -183,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("debug")]
 		public Elastic.Clients.Elasticsearch.Global.Search.AggregationProfileDebug? Debug
 		{
@@ -194,6 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -205,6 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
 		public long TimeInNanos
 		{
@@ -216,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -234,6 +252,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class Collector
 	{
+		[JsonInclude]
 		[JsonPropertyName("children")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Collector>? Children
 		{
@@ -245,6 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name
 		{
@@ -256,6 +276,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -267,6 +288,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
 		public long TimeInNanos
 		{
@@ -281,6 +303,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class CompletionSuggestOption<TDocument>
 	{
+		[JsonInclude]
 		[JsonPropertyName("collate_match")]
 		public bool? CollateMatch
 		{
@@ -292,6 +315,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("contexts")]
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Context>>? Contexts
 		{
@@ -303,6 +327,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -314,6 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public string Id
 		{
@@ -325,6 +351,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -336,6 +363,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing
 		{
@@ -347,6 +375,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_score")]
 		public double Score
 		{
@@ -358,6 +387,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public TDocument Source
 		{
@@ -369,6 +399,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string Text
 		{
@@ -380,6 +411,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -394,84 +426,107 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class CompletionSuggester : Global.Search.SuggesterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("contexts")]
 		public Dictionary<string, OneOf<string, IReadOnlyCollection<string>, QueryDsl.GeoLocation, IReadOnlyCollection<Global.Search.SuggestContextQuery>>>? Contexts { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SuggestFuzziness? Fuzzy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public string? Prefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("regex")]
 		public string? Regex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("skip_duplicates")]
 		public bool? SkipDuplicates { get; set; }
 	}
 
 	public partial class DirectGenerator
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_edits")]
 		public int? MaxEdits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_inspections")]
 		public float? MaxInspections { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_term_freq")]
 		public float? MaxTermFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_doc_freq")]
 		public float? MinDocFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_word_length")]
 		public int? MinWordLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("post_filter")]
 		public string? PostFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pre_filter")]
 		public string? PreFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest_mode")]
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 	}
 
 	public partial class FieldAndFormat
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_unmapped")]
 		public bool? IncludeUnmapped { get; set; }
 	}
 
 	public partial class FieldCollapse
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
 		public Union<Elastic.Clients.Elasticsearch.Global.Search.InnerHits, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.InnerHits>>? InnerHits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_concurrent_group_searches")]
 		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
 	public partial class GeoDistanceSort
 	{
+		[JsonInclude]
 		[JsonPropertyName("distance_type")]
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType
 		{
@@ -483,6 +538,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortMode? Mode
 		{
@@ -494,6 +550,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortOrder? Order
 		{
@@ -505,6 +562,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unit")]
 		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit
 		{
@@ -519,135 +577,177 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class Highlight
 	{
+		[JsonInclude]
 		[JsonPropertyName("boundary_chars")]
 		public string? BoundaryChars { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boundary_max_scan")]
 		public int? BoundaryMaxScan { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boundary_scanner")]
 		public Elastic.Clients.Elasticsearch.Global.Search.BoundaryScanner? BoundaryScanner { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boundary_scanner_locale")]
 		public string? BoundaryScannerLocale { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("encoder")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterEncoder? Encoder { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Search.HighlightField> Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fragmenter")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterFragmenter? Fragmenter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fragment_offset")]
 		public int? FragmentOffset { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fragment_size")]
 		public int? FragmentSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("highlight_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_analyzed_offset")]
 		public Union<string, int>? MaxAnalyzedOffset { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_fragment_length")]
 		public int? MaxFragmentLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("no_match_size")]
 		public int? NoMatchSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_fragments")]
 		public int? NumberOfFragments { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterOrder? Order { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("post_tags")]
 		public IEnumerable<string>? PostTags { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pre_tags")]
 		public IEnumerable<string>? PreTags { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("require_field_match")]
 		public bool? RequireFieldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tags_schema")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterTagsSchema? TagsSchema { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterType? Type { get; set; }
 	}
 
 	public partial class HighlightField
 	{
+		[JsonInclude]
 		[JsonPropertyName("boundary_chars")]
 		public string? BoundaryChars { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boundary_max_scan")]
 		public int? BoundaryMaxScan { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boundary_scanner")]
 		public Elastic.Clients.Elasticsearch.Global.Search.BoundaryScanner? BoundaryScanner { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boundary_scanner_locale")]
 		public string? BoundaryScannerLocale { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("force_source")]
 		public bool? ForceSource { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fragmenter")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterFragmenter? Fragmenter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fragment_offset")]
 		public int? FragmentOffset { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fragment_size")]
 		public int? FragmentSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("highlight_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("matched_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? MatchedFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_fragment_length")]
 		public int? MaxFragmentLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("no_match_size")]
 		public int? NoMatchSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_fragments")]
 		public int? NumberOfFragments { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterOrder? Order { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("phrase_limit")]
 		public int? PhraseLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("post_tags")]
 		public IEnumerable<string>? PostTags { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pre_tags")]
 		public IEnumerable<string>? PreTags { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("require_field_match")]
 		public bool? RequireFieldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tags_schema")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterTagsSchema? TagsSchema { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Union<Elastic.Clients.Elasticsearch.Global.Search.HighlighterType, string>? Type { get; set; }
 	}
 
 	public partial class Hit<TDocument>
 	{
+		[JsonInclude]
 		[JsonPropertyName("_explanation")]
 		public Elastic.Clients.Elasticsearch.Global.Explain.Explanation? Explanation
 		{
@@ -659,6 +759,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -670,6 +771,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("highlight")]
 		public Dictionary<string, IReadOnlyCollection<string>>? Highlight
 		{
@@ -681,6 +783,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -692,6 +795,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_ignored")]
 		public IReadOnlyCollection<string>? Ignored
 		{
@@ -703,6 +807,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -714,6 +819,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.InnerHitsResult>? InnerHits
 		{
@@ -725,6 +831,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("matched_queries")]
 		public IReadOnlyCollection<string>? MatchedQueries
 		{
@@ -736,6 +843,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nested")]
 		public Elastic.Clients.Elasticsearch.Global.Search.NestedIdentity? Nested
 		{
@@ -747,6 +855,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_node")]
 		public string? Node
 		{
@@ -758,6 +867,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long? PrimaryTerm
 		{
@@ -769,6 +879,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public string? Routing
 		{
@@ -780,6 +891,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_score")]
 		public double? Score
 		{
@@ -791,6 +903,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
@@ -802,6 +915,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shard")]
 		public string? Shard
 		{
@@ -813,6 +927,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortResults? Sort
 		{
@@ -824,6 +939,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public TDocument? Source
 		{
@@ -835,6 +951,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -846,6 +963,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -860,6 +978,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class HitsMetadata<T>
 	{
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Hit<T>> Hits
 		{
@@ -871,6 +990,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_score")]
 		public double? MaxScore
 		{
@@ -882,6 +1002,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Union<Elastic.Clients.Elasticsearch.Global.Search.TotalHits, long> Total
 		{
@@ -896,57 +1017,74 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class InnerHits
 	{
+		[JsonInclude]
 		[JsonPropertyName("collapse")]
 		public Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("docvalue_fields")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.FieldAndFormat>? DocvalueFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("explain")]
 		public bool? Explain { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("seq_no_primary_term")]
 		public bool? SeqNoPrimaryTerm { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? Source { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stored_field")]
 		public Elastic.Clients.Elasticsearch.Fields? StoredField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("track_scores")]
 		public bool? TrackScores { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public bool? Version { get; set; }
 	}
 
 	public partial class InnerHitsMetadata
 	{
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Hit<Dictionary<string, object>>> Hits
 		{
@@ -958,6 +1096,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_score")]
 		public double? MaxScore
 		{
@@ -969,6 +1108,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Union<Elastic.Clients.Elasticsearch.Global.Search.TotalHits, long> Total
 		{
@@ -983,6 +1123,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class InnerHitsResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.InnerHitsMetadata Hits
 		{
@@ -997,24 +1138,29 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class LaplaceSmoothingModel
 	{
+		[JsonInclude]
 		[JsonPropertyName("alpha")]
 		public double Alpha { get; set; }
 	}
 
 	public partial class LinearInterpolationSmoothingModel
 	{
+		[JsonInclude]
 		[JsonPropertyName("bigram_lambda")]
 		public double BigramLambda { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("trigram_lambda")]
 		public double TrigramLambda { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("unigram_lambda")]
 		public double UnigramLambda { get; set; }
 	}
 
 	public partial class NestedIdentity
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field
 		{
@@ -1026,6 +1172,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nested")]
 		public Elastic.Clients.Elasticsearch.Global.Search.NestedIdentity? Nested
 		{
@@ -1037,6 +1184,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("offset")]
 		public int Offset
 		{
@@ -1051,36 +1199,44 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class PhraseSuggestCollate
 	{
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prune")]
 		public bool? Prune { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggestCollateQuery Query { get; set; }
 	}
 
 	public partial class PhraseSuggestCollateQuery
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string? Source { get; set; }
 	}
 
 	public partial class PhraseSuggestHighlight
 	{
+		[JsonInclude]
 		[JsonPropertyName("post_tag")]
 		public string PostTag { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pre_tag")]
 		public string PreTag { get; set; }
 	}
 
 	public partial class PhraseSuggestOption
 	{
+		[JsonInclude]
 		[JsonPropertyName("highlighted")]
 		public string Highlighted
 		{
@@ -1092,6 +1248,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("score")]
 		public double Score
 		{
@@ -1103,6 +1260,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string Text
 		{
@@ -1117,57 +1275,73 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class PhraseSuggester : Global.Search.SuggesterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("collate")]
 		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggestCollate? Collate { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("confidence")]
 		public double? Confidence { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("direct_generator")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.DirectGenerator>? DirectGenerator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("force_unigrams")]
 		public bool? ForceUnigrams { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("gram_size")]
 		public int? GramSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggestHighlight? Highlight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_errors")]
 		public double? MaxErrors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("real_word_error_likelihood")]
 		public double? RealWordErrorLikelihood { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("separator")]
 		public string? Separator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("smoothing")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SmoothingModelContainer? Smoothing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string? Text { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("token_limit")]
 		public int? TokenLimit { get; set; }
 	}
 
 	public partial class PointInTimeReference
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
 		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
 	}
 
 	public partial class Profile
 	{
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.ShardProfile> Shards
 		{
@@ -1182,6 +1356,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class QueryBreakdown
 	{
+		[JsonInclude]
 		[JsonPropertyName("advance")]
 		public long Advance
 		{
@@ -1193,6 +1368,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("advance_count")]
 		public long AdvanceCount
 		{
@@ -1204,6 +1380,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("build_scorer")]
 		public long BuildScorer
 		{
@@ -1215,6 +1392,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("build_scorer_count")]
 		public long BuildScorerCount
 		{
@@ -1226,6 +1404,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("compute_max_score")]
 		public long ComputeMaxScore
 		{
@@ -1237,6 +1416,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("compute_max_score_count")]
 		public long ComputeMaxScoreCount
 		{
@@ -1248,6 +1428,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_weight")]
 		public long CreateWeight
 		{
@@ -1259,6 +1440,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_weight_count")]
 		public long CreateWeightCount
 		{
@@ -1270,6 +1452,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public long Match
 		{
@@ -1281,6 +1464,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("match_count")]
 		public long MatchCount
 		{
@@ -1292,6 +1476,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("next_doc")]
 		public long NextDoc
 		{
@@ -1303,6 +1488,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("next_doc_count")]
 		public long NextDocCount
 		{
@@ -1314,6 +1500,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("score")]
 		public long Score
 		{
@@ -1325,6 +1512,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("score_count")]
 		public long ScoreCount
 		{
@@ -1336,6 +1524,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("set_min_competitive_score")]
 		public long SetMinCompetitiveScore
 		{
@@ -1347,6 +1536,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("set_min_competitive_score_count")]
 		public long SetMinCompetitiveScoreCount
 		{
@@ -1358,6 +1548,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shallow_advance")]
 		public long ShallowAdvance
 		{
@@ -1369,6 +1560,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shallow_advance_count")]
 		public long ShallowAdvanceCount
 		{
@@ -1383,6 +1575,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class QueryProfile
 	{
+		[JsonInclude]
 		[JsonPropertyName("breakdown")]
 		public Elastic.Clients.Elasticsearch.Global.Search.QueryBreakdown Breakdown
 		{
@@ -1394,6 +1587,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("children")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.QueryProfile>? Children
 		{
@@ -1405,6 +1599,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -1416,6 +1611,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
 		public long TimeInNanos
 		{
@@ -1427,6 +1623,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -1441,30 +1638,37 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class Rescore
 	{
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.Global.Search.RescoreQuery Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("window_size")]
 		public int? WindowSize { get; set; }
 	}
 
 	public partial class RescoreQuery
 	{
+		[JsonInclude]
 		[JsonPropertyName("rescore_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query_weight")]
 		public double? QueryWeight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rescore_query_weight")]
 		public double? RescoreQueryWeight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("score_mode")]
 		public Elastic.Clients.Elasticsearch.Global.Search.ScoreMode? ScoreMode { get; set; }
 	}
 
 	public partial class ScoreSort
 	{
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortMode? Mode
 		{
@@ -1476,6 +1680,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortOrder? Order
 		{
@@ -1490,6 +1695,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class ScriptSort
 	{
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortOrder? Order
 		{
@@ -1501,6 +1707,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script
 		{
@@ -1512,6 +1719,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string? Type
 		{
@@ -1526,6 +1734,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class SearchProfile
 	{
+		[JsonInclude]
 		[JsonPropertyName("collector")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Collector> Collector
 		{
@@ -1537,6 +1746,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.QueryProfile> Query
 		{
@@ -1548,6 +1758,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rewrite_time")]
 		public long RewriteTime
 		{
@@ -1562,6 +1773,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class ShardProfile
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.AggregationProfile> Aggregations
 		{
@@ -1573,6 +1785,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public string Id
 		{
@@ -1584,6 +1797,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("searches")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.SearchProfile> Searches
 		{
@@ -1598,18 +1812,22 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class SmoothingModelContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("laplace")]
 		public Elastic.Clients.Elasticsearch.Global.Search.LaplaceSmoothingModel? Laplace { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("linear_interpolation")]
 		public Elastic.Clients.Elasticsearch.Global.Search.LinearInterpolationSmoothingModel? LinearInterpolation { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stupid_backoff")]
 		public Elastic.Clients.Elasticsearch.Global.Search.StupidBackoffSmoothingModel? StupidBackoff { get; set; }
 	}
 
 	public partial class SortContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("_doc")]
 		public Elastic.Clients.Elasticsearch.Global.Search.ScoreSort? Doc
 		{
@@ -1621,6 +1839,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_geo_distance")]
 		public Elastic.Clients.Elasticsearch.Global.Search.GeoDistanceSort? GeoDistance
 		{
@@ -1632,6 +1851,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_score")]
 		public Elastic.Clients.Elasticsearch.Global.Search.ScoreSort? Score
 		{
@@ -1643,6 +1863,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_script")]
 		public Elastic.Clients.Elasticsearch.Global.Search.ScriptSort? Script
 		{
@@ -1657,27 +1878,33 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class SourceFilter
 	{
+		[JsonInclude]
 		[JsonPropertyName("exclude")]
 		public Elastic.Clients.Elasticsearch.Fields? Exclude { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("excludes")]
 		public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include")]
 		public Elastic.Clients.Elasticsearch.Fields? Include { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("includes")]
 		public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 	}
 
 	public partial class StupidBackoffSmoothingModel
 	{
+		[JsonInclude]
 		[JsonPropertyName("discount")]
 		public double Discount { get; set; }
 	}
 
 	public partial class Suggest<T>
 	{
+		[JsonInclude]
 		[JsonPropertyName("length")]
 		public int Length
 		{
@@ -1689,6 +1916,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("offset")]
 		public int Offset
 		{
@@ -1700,6 +1928,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("options")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.SuggestOption<T>> Options
 		{
@@ -1711,6 +1940,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string Text
 		{
@@ -1725,75 +1955,95 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class SuggestContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("completion")]
 		public Elastic.Clients.Elasticsearch.Global.Search.CompletionSuggester? Completion { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("phrase")]
 		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggester? Phrase { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public string? Prefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("regex")]
 		public string? Regex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public Elastic.Clients.Elasticsearch.Global.Search.TermSuggester? Term { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string? Text { get; set; }
 	}
 
 	public partial class SuggestContextQuery
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("context")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Context Context { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("neighbours")]
 		public Union<IEnumerable<Elastic.Clients.Elasticsearch.Distance>, IEnumerable<int>>? Neighbours { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public Union<Elastic.Clients.Elasticsearch.Distance, int>? Precision { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public bool? Prefix { get; set; }
 	}
 
 	public partial class SuggestFuzziness
 	{
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_length")]
 		public int MinLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transpositions")]
 		public bool Transpositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("unicode_aware")]
 		public bool UnicodeAware { get; set; }
 	}
 
 	public partial class SuggesterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 	}
 
 	public partial class TermSuggestOption
 	{
+		[JsonInclude]
 		[JsonPropertyName("freq")]
 		public long? Freq
 		{
@@ -1805,6 +2055,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("score")]
 		public double Score
 		{
@@ -1816,6 +2067,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string Text
 		{
@@ -1830,45 +2082,58 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class TermSuggester : Global.Search.SuggesterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("lowercase_terms")]
 		public bool? LowercaseTerms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_edits")]
 		public int? MaxEdits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_inspections")]
 		public int? MaxInspections { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_term_freq")]
 		public float? MaxTermFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_doc_freq")]
 		public float? MinDocFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_word_length")]
 		public int? MinWordLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SuggestSort? Sort { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("string_distance")]
 		public Elastic.Clients.Elasticsearch.Global.Search.StringDistance? StringDistance { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest_mode")]
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string? Text { get; set; }
 	}
 
 	public partial class TotalHits
 	{
+		[JsonInclude]
 		[JsonPropertyName("relation")]
 		public Elastic.Clients.Elasticsearch.Global.Search.TotalHitsRelation Relation
 		{
@@ -1880,6 +2145,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public long Value
 		{

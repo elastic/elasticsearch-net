@@ -13,6 +13,7 @@ using Elastic.Clients.Elasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Extensions;
+using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Tests.Framework.EndpointTests
 {

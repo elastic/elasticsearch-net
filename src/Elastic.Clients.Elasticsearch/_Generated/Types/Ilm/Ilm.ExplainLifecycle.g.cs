@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 {
 	public partial class LifecycleExplain
 	{
+		[JsonInclude]
 		[JsonPropertyName("action")]
 		public Elastic.Clients.Elasticsearch.Name Action
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("action_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ActionTimeMillis
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("age")]
 		public Elastic.Clients.Elasticsearch.Time Age
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_step")]
 		public Elastic.Clients.Elasticsearch.Name? FailedStep
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_step_retry_count")]
 		public int? FailedStepRetryCount
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_auto_retryable_error")]
 		public bool? IsAutoRetryableError
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lifecycle_date_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis LifecycleDateMillis
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("managed")]
 		public bool Managed
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("phase")]
 		public Elastic.Clients.Elasticsearch.Name Phase
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("phase_execution")]
 		public Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainPhaseExecution PhaseExecution
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("phase_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis PhaseTimeMillis
 		{
@@ -158,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policy")]
 		public Elastic.Clients.Elasticsearch.Name Policy
 		{
@@ -169,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("step")]
 		public Elastic.Clients.Elasticsearch.Name Step
 		{
@@ -180,6 +194,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("step_info")]
 		public Dictionary<string, object>? StepInfo
 		{
@@ -191,6 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("step_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StepTimeMillis
 		{
@@ -205,6 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 
 	public partial class LifecycleExplainPhaseExecution
 	{
+		[JsonInclude]
 		[JsonPropertyName("modified_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ModifiedDateInMillis
 		{
@@ -216,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policy")]
 		public Elastic.Clients.Elasticsearch.Name Policy
 		{
@@ -227,6 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 
 	public partial class LifecycleExplainProject
 	{
+		[JsonInclude]
 		[JsonPropertyName("project")]
 		public Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainProjectSummary Project
 		{
@@ -255,6 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 
 	public partial class LifecycleExplainProjectSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -266,6 +287,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("managed")]
 		public bool Managed
 		{

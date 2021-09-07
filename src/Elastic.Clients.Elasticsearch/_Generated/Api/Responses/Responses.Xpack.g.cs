@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 {
 	public partial class InfoResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("build")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.BuildInformation Build
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("features")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Features Features
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("license")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.MinimalLicenseInformation License
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tagline")]
 		public string Tagline
 		{
@@ -71,6 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 
 	public partial class UsageResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregate_metric")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base AggregateMetric
 		{
@@ -82,6 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analytics")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Analytics Analytics
 		{
@@ -93,6 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ccr")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Ccr Ccr
 		{
@@ -104,6 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frame")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base? DataFrame
 		{
@@ -115,6 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_science")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base? DataScience
 		{
@@ -126,6 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_streams")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataStreams? DataStreams
 		{
@@ -137,6 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_tiers")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTiers DataTiers
 		{
@@ -148,6 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enrich")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base? Enrich
 		{
@@ -159,6 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("eql")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Eql Eql
 		{
@@ -170,6 +183,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("flattened")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Flattened? Flattened
 		{
@@ -181,6 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frozen_indices")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FrozenIndices FrozenIndices
 		{
@@ -192,6 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("graph")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Graph
 		{
@@ -203,6 +219,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ilm")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Ilm Ilm
 		{
@@ -214,6 +231,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("logstash")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Logstash
 		{
@@ -225,6 +243,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ml")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MachineLearning Ml
 		{
@@ -236,6 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("monitoring")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Monitoring Monitoring
 		{
@@ -247,6 +267,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollup")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Rollup
 		{
@@ -258,6 +279,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_fields")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.RuntimeFieldTypes? RuntimeFields
 		{
@@ -269,6 +291,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("searchable_snapshots")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SearchableSnapshots SearchableSnapshots
 		{
@@ -280,6 +303,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("security")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Security Security
 		{
@@ -291,6 +315,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("slm")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Slm Slm
 		{
@@ -302,6 +327,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("spatial")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Spatial
 		{
@@ -313,6 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sql")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Sql Sql
 		{
@@ -324,6 +351,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Transform
 		{
@@ -335,6 +363,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("vectors")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Vector Vectors
 		{
@@ -346,6 +375,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("voting_only")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base VotingOnly
 		{
@@ -357,6 +387,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watcher")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Watcher Watcher
 		{

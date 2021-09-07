@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 {
 	public partial class Info
 	{
+		[JsonInclude]
 		[JsonPropertyName("action")]
 		public string Action
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cancellable")]
 		public bool Cancellable
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("children")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.Info>? Children
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("headers")]
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public long Id
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public string Node
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("parent_task_id")]
 		public Elastic.Clients.Elasticsearch.Id? ParentTaskId
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("running_time_in_nanos")]
 		public long RunningTimeInNanos
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public long StartTimeInMillis
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Tasks.Status? Status
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -161,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 	public partial class State
 	{
+		[JsonInclude]
 		[JsonPropertyName("action")]
 		public string Action
 		{
@@ -172,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cancellable")]
 		public bool Cancellable
 		{
@@ -183,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -194,6 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("headers")]
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
@@ -205,6 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public long Id
 		{
@@ -216,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public string Node
 		{
@@ -227,6 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("parent_task_id")]
 		public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId
 		{
@@ -238,6 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("running_time_in_nanos")]
 		public long RunningTimeInNanos
 		{
@@ -249,6 +269,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public long StartTimeInMillis
 		{
@@ -260,6 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Tasks.Status? Status
 		{
@@ -271,6 +293,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -285,6 +308,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 	public partial class Status
 	{
+		[JsonInclude]
 		[JsonPropertyName("batches")]
 		public long Batches
 		{
@@ -296,6 +320,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("canceled")]
 		public string? Canceled
 		{
@@ -307,6 +332,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public long Created
 		{
@@ -318,6 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public long Deleted
 		{
@@ -329,6 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<string>? Failures
 		{
@@ -340,6 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("noops")]
 		public long Noops
 		{
@@ -351,6 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("requests_per_second")]
 		public float RequestsPerSecond
 		{
@@ -362,6 +392,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retries")]
 		public Elastic.Clients.Elasticsearch.Retries Retries
 		{
@@ -373,6 +404,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled")]
 		public Elastic.Clients.Elasticsearch.Time? Throttled
 		{
@@ -384,6 +416,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
 		public long ThrottledMillis
 		{
@@ -395,6 +428,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_until")]
 		public Elastic.Clients.Elasticsearch.Time? ThrottledUntil
 		{
@@ -406,6 +440,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
 		public long ThrottledUntilMillis
 		{
@@ -417,6 +452,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool? TimedOut
 		{
@@ -428,6 +464,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long? Took
 		{
@@ -439,6 +476,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -450,6 +488,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("updated")]
 		public long Updated
 		{
@@ -461,6 +500,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_conflicts")]
 		public long VersionConflicts
 		{
@@ -475,6 +515,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 
 	public partial class TaskExecutingNode : SpecUtils.BaseNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("tasks")]
 		public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.State> Tasks
 		{

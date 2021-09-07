@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.VerifyRepository
 {
 	public partial class CompactNodeInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{

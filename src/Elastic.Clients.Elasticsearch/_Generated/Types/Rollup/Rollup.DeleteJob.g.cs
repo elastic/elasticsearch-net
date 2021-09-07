@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.DeleteJob
 {
 	public partial class TaskFailure
 	{
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.DeleteJob
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public Elastic.Clients.Elasticsearch.Rollup.DeleteJob.TaskFailureReason Reason
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.DeleteJob
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public string Status
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.DeleteJob
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task_id")]
 		public Elastic.Clients.Elasticsearch.TaskId TaskId
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.DeleteJob
 
 	public partial class TaskFailureReason
 	{
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.DeleteJob
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{

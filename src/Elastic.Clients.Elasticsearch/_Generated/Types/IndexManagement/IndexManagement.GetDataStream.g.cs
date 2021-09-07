@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 {
 	public partial class IndicesGetDataStreamItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("generation")]
 		public int Generation
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hidden")]
 		public bool Hidden
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ilm_policy")]
 		public Elastic.Clients.Elasticsearch.Name? IlmPolicy
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItemIndex> Indices
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.DataStreamName Name
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamHealthStatus Status
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("system")]
 		public bool? System
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.Name Template
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp_field")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItemTimestampField TimestampField
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 
 	public partial class IndicesGetDataStreamItemIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("index_name")]
 		public Elastic.Clients.Elasticsearch.IndexName IndexName
 		{
@@ -150,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid IndexUuid
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 
 	public partial class IndicesGetDataStreamItemTimestampField
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Field Name
 		{

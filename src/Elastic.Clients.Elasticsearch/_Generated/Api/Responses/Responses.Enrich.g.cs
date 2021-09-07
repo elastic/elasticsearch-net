@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 
 	public partial class ExecutePolicyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy.ExecuteEnrichPolicyStatus Status
 		{
@@ -39,6 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task_id")]
 		public Elastic.Clients.Elasticsearch.TaskId? TaskId
 		{
@@ -53,6 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 
 	public partial class GetPolicyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("policies")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Summary> Policies
 		{
@@ -71,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 
 	public partial class StatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("coordinator_stats")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.CoordinatorStats> CoordinatorStats
 		{
@@ -82,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("executing_policies")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.Stats.ExecutingPolicy> ExecutingPolicies
 		{

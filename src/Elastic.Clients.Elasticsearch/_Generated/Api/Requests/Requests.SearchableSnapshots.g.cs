@@ -91,15 +91,19 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		[JsonIgnore]
 		public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("renamed_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? RenamedIndex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_settings")]
 		public Dictionary<string, object>? IndexSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_index_settings")]
 		public IEnumerable<string>? IgnoreIndexSettings { get; set; }
 	}

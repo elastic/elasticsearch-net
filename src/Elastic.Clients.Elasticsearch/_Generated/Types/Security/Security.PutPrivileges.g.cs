@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.PutPrivileges
 {
 	public partial class Actions
 	{
+		[JsonInclude]
 		[JsonPropertyName("application")]
 		public string? Application
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.PutPrivileges
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Security.PutPrivileges
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name
 		{

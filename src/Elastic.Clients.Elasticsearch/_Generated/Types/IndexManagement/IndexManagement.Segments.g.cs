@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 {
 	public partial class IndexSegment
 	{
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardsSegment>>> Shards
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 
 	public partial class Segment
 	{
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public Dictionary<string, string> Attributes
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("committed")]
 		public bool Committed
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("compound")]
 		public bool Compound
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted_docs")]
 		public long DeletedDocs
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("generation")]
 		public int Generation
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_in_bytes")]
 		public double MemoryInBytes
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_docs")]
 		public long NumDocs
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search")]
 		public bool Search
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
 		public double SizeInBytes
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 
 	public partial class ShardSegmentRouting
 	{
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public string Node
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary")]
 		public bool Primary
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public string State
 		{
@@ -189,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 
 	public partial class ShardsSegment
 	{
+		[JsonInclude]
 		[JsonPropertyName("num_committed_segments")]
 		public int NumCommittedSegments
 		{
@@ -200,6 +215,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_search_segments")]
 		public int NumSearchSegments
 		{
@@ -211,6 +227,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardSegmentRouting Routing
 		{
@@ -222,6 +239,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("segments")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segments.Segment> Segments
 		{

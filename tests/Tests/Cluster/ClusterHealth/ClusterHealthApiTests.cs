@@ -5,6 +5,7 @@ using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Tests.Cluster.ClusterHealth
 {

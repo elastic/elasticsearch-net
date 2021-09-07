@@ -26,18 +26,23 @@ namespace Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics
 {
 	public partial class DataframePreviewConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int? MaxNumThreads { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string? ModelMemoryLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; set; }
 	}

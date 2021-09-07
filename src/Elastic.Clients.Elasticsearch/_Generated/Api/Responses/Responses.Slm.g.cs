@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 	public partial class ExecuteLifecycleResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("snapshot_name")]
 		public Elastic.Clients.Elasticsearch.Name SnapshotName
 		{
@@ -50,6 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 	public partial class GetStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("policy_stats")]
 		public IReadOnlyCollection<string> PolicyStats
 		{
@@ -61,6 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_deletion_time")]
 		public string RetentionDeletionTime
 		{
@@ -72,6 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_deletion_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis RetentionDeletionTimeMillis
 		{
@@ -83,6 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_failed")]
 		public long RetentionFailed
 		{
@@ -94,6 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_runs")]
 		public long RetentionRuns
 		{
@@ -105,6 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_timed_out")]
 		public long RetentionTimedOut
 		{
@@ -116,6 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_snapshot_deletion_failures")]
 		public long TotalSnapshotDeletionFailures
 		{
@@ -127,6 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_snapshots_deleted")]
 		public long TotalSnapshotsDeleted
 		{
@@ -138,6 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_snapshots_failed")]
 		public long TotalSnapshotsFailed
 		{
@@ -149,6 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_snapshots_taken")]
 		public long TotalSnapshotsTaken
 		{
@@ -163,6 +174,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 	public partial class GetStatusResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("operation_mode")]
 		public Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode
 		{

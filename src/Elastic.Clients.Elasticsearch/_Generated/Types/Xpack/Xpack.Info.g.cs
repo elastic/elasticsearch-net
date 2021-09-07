@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 {
 	public partial class BuildInformation
 	{
+		[JsonInclude]
 		[JsonPropertyName("date")]
 		public Elastic.Clients.Elasticsearch.DateString Date
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hash")]
 		public string Hash
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 
 	public partial class Feature
 	{
+		[JsonInclude]
 		[JsonPropertyName("available")]
 		public bool Available
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("native_code_info")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.NativeCodeInformation? NativeCodeInfo
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 
 	public partial class Features
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregate_metric")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature AggregateMetric
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analytics")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Analytics
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ccr")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Ccr
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frame")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature? DataFrame
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_science")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature? DataScience
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_streams")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature DataStreams
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_tiers")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature DataTiers
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enrich")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Enrich
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("eql")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Eql
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("flattened")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature? Flattened
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frozen_indices")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature FrozenIndices
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("graph")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Graph
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ilm")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Ilm
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("logstash")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Logstash
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ml")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Ml
 		{
@@ -263,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("monitoring")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Monitoring
 		{
@@ -274,6 +296,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollup")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Rollup
 		{
@@ -285,6 +308,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_fields")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature? RuntimeFields
 		{
@@ -296,6 +320,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("searchable_snapshots")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature SearchableSnapshots
 		{
@@ -307,6 +332,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("security")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Security
 		{
@@ -318,6 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("slm")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Slm
 		{
@@ -329,6 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("spatial")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Spatial
 		{
@@ -340,6 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sql")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Sql
 		{
@@ -351,6 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Transform
 		{
@@ -362,6 +392,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("vectors")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Vectors
 		{
@@ -373,6 +404,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("voting_only")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature VotingOnly
 		{
@@ -384,6 +416,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watcher")]
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Feature Watcher
 		{
@@ -398,6 +431,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 
 	public partial class MinimalLicenseInformation
 	{
+		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis
 		{
@@ -409,6 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.License.LicenseType Mode
 		{
@@ -420,6 +455,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.License.LicenseStatus Status
 		{
@@ -431,6 +467,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.License.LicenseType Type
 		{
@@ -442,6 +479,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uid")]
 		public string Uid
 		{
@@ -456,6 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 
 	public partial class NativeCodeInformation
 	{
+		[JsonInclude]
 		[JsonPropertyName("build_hash")]
 		public string BuildHash
 		{
@@ -467,6 +506,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{

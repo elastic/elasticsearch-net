@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class AdaptiveSelection
 	{
+		[JsonInclude]
 		[JsonPropertyName("avg_queue_size")]
 		public long AvgQueueSize
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("avg_response_time")]
 		public long AvgResponseTime
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("avg_response_time_ns")]
 		public long AvgResponseTimeNs
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("avg_service_time")]
 		public string AvgServiceTime
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("avg_service_time_ns")]
 		public long AvgServiceTimeNs
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("outgoing_searches")]
 		public long OutgoingSearches
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rank")]
 		public string Rank
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Breaker
 	{
+		[JsonInclude]
 		[JsonPropertyName("estimated_size")]
 		public string EstimatedSize
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("estimated_size_in_bytes")]
 		public long EstimatedSizeInBytes
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("limit_size")]
 		public string LimitSize
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("limit_size_in_bytes")]
 		public long LimitSizeInBytes
 		{
@@ -150,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("overhead")]
 		public float Overhead
 		{
@@ -161,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tripped")]
 		public float Tripped
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Cpu
 	{
+		[JsonInclude]
 		[JsonPropertyName("load_average")]
 		public Dictionary<string, double>? LoadAverage
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("percent")]
 		public int Percent
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sys")]
 		public string? Sys
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sys_in_millis")]
 		public long? SysInMillis
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public string? Total
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_millis")]
 		public long? TotalInMillis
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("user")]
 		public string? User
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("user_in_millis")]
 		public long? UserInMillis
 		{
@@ -266,6 +287,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class DataPathStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("available")]
 		public string Available
 		{
@@ -277,6 +299,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("available_in_bytes")]
 		public long AvailableInBytes
 		{
@@ -288,6 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_queue")]
 		public string DiskQueue
 		{
@@ -299,6 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_reads")]
 		public long DiskReads
 		{
@@ -310,6 +335,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_read_size")]
 		public string DiskReadSize
 		{
@@ -321,6 +347,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_read_size_in_bytes")]
 		public long DiskReadSizeInBytes
 		{
@@ -332,6 +359,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_writes")]
 		public long DiskWrites
 		{
@@ -343,6 +371,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_write_size")]
 		public string DiskWriteSize
 		{
@@ -354,6 +383,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("disk_write_size_in_bytes")]
 		public long DiskWriteSizeInBytes
 		{
@@ -365,6 +395,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free")]
 		public string Free
 		{
@@ -376,6 +407,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
 		public long FreeInBytes
 		{
@@ -387,6 +419,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mount")]
 		public string Mount
 		{
@@ -398,6 +431,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string Path
 		{
@@ -409,6 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public string Total
 		{
@@ -420,6 +455,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
 		public long TotalInBytes
 		{
@@ -431,6 +467,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -445,6 +482,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class ExtendedMemoryStats : Nodes.MemoryStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("free_percent")]
 		public int FreePercent
 		{
@@ -456,6 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_percent")]
 		public int UsedPercent
 		{
@@ -470,6 +509,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class FileSystem
 	{
+		[JsonInclude]
 		[JsonPropertyName("data")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats> Data
 		{
@@ -481,6 +521,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{
@@ -492,6 +533,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal Total
 		{
@@ -506,6 +548,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class FileSystemTotal
 	{
+		[JsonInclude]
 		[JsonPropertyName("available")]
 		public string Available
 		{
@@ -517,6 +560,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("available_in_bytes")]
 		public long AvailableInBytes
 		{
@@ -528,6 +572,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free")]
 		public string Free
 		{
@@ -539,6 +584,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
 		public long FreeInBytes
 		{
@@ -550,6 +596,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public string Total
 		{
@@ -561,6 +608,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
 		public long TotalInBytes
 		{
@@ -575,6 +623,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class GarbageCollector
 	{
+		[JsonInclude]
 		[JsonPropertyName("collectors")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal> Collectors
 		{
@@ -589,6 +638,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class GarbageCollectorTotal
 	{
+		[JsonInclude]
 		[JsonPropertyName("collection_count")]
 		public long CollectionCount
 		{
@@ -600,6 +650,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("collection_time")]
 		public string CollectionTime
 		{
@@ -611,6 +662,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("collection_time_in_millis")]
 		public long CollectionTimeInMillis
 		{
@@ -625,6 +677,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Http
 	{
+		[JsonInclude]
 		[JsonPropertyName("current_open")]
 		public int CurrentOpen
 		{
@@ -636,6 +689,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_opened")]
 		public long TotalOpened
 		{
@@ -650,6 +704,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Ingest
 	{
+		[JsonInclude]
 		[JsonPropertyName("pipelines")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.IngestTotal> Pipelines
 		{
@@ -661,6 +716,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.Nodes.IngestTotal Total
 		{
@@ -675,6 +731,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class IngestTotal
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -686,6 +743,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("current")]
 		public long Current
 		{
@@ -697,6 +755,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public long Failed
 		{
@@ -708,6 +767,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processors")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor> Processors
 		{
@@ -719,6 +779,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
 		public long TimeInMillis
 		{
@@ -733,6 +794,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Jvm
 	{
+		[JsonInclude]
 		[JsonPropertyName("buffer_pools")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool> BufferPools
 		{
@@ -744,6 +806,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("classes")]
 		public Elastic.Clients.Elasticsearch.Nodes.JvmClasses Classes
 		{
@@ -755,6 +818,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("gc")]
 		public Elastic.Clients.Elasticsearch.Nodes.GarbageCollector Gc
 		{
@@ -766,6 +830,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mem")]
 		public Elastic.Clients.Elasticsearch.Nodes.MemoryStats Mem
 		{
@@ -777,6 +842,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("threads")]
 		public Elastic.Clients.Elasticsearch.Nodes.JvmThreads Threads
 		{
@@ -788,6 +854,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{
@@ -799,6 +866,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uptime")]
 		public string Uptime
 		{
@@ -810,6 +878,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uptime_in_millis")]
 		public long UptimeInMillis
 		{
@@ -824,6 +893,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class JvmClasses
 	{
+		[JsonInclude]
 		[JsonPropertyName("current_loaded_count")]
 		public long CurrentLoadedCount
 		{
@@ -835,6 +905,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_loaded_count")]
 		public long TotalLoadedCount
 		{
@@ -846,6 +917,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_unloaded_count")]
 		public long TotalUnloadedCount
 		{
@@ -860,6 +932,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class JvmThreads
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -871,6 +944,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("peak_count")]
 		public long PeakCount
 		{
@@ -885,6 +959,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class KeyedProcessor
 	{
+		[JsonInclude]
 		[JsonPropertyName("statistics")]
 		public Elastic.Clients.Elasticsearch.Nodes.Process Statistics
 		{
@@ -896,6 +971,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -910,6 +986,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class MemoryStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
 		public long FreeInBytes
 		{
@@ -921,6 +998,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("resident")]
 		public string? Resident
 		{
@@ -932,6 +1010,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("resident_in_bytes")]
 		public long? ResidentInBytes
 		{
@@ -943,6 +1022,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("share")]
 		public string? Share
 		{
@@ -954,6 +1034,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("share_in_bytes")]
 		public long? ShareInBytes
 		{
@@ -965,6 +1046,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
 		public long TotalInBytes
 		{
@@ -976,6 +1058,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_virtual")]
 		public string? TotalVirtual
 		{
@@ -987,6 +1070,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_virtual_in_bytes")]
 		public long? TotalVirtualInBytes
 		{
@@ -998,6 +1082,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_in_bytes")]
 		public long UsedInBytes
 		{
@@ -1012,6 +1097,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class NodeBufferPool
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -1023,6 +1109,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_capacity")]
 		public string TotalCapacity
 		{
@@ -1034,6 +1121,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_capacity_in_bytes")]
 		public long TotalCapacityInBytes
 		{
@@ -1045,6 +1133,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used")]
 		public string Used
 		{
@@ -1056,6 +1145,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_in_bytes")]
 		public long UsedInBytes
 		{
@@ -1070,6 +1160,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class OperatingSystem
 	{
+		[JsonInclude]
 		[JsonPropertyName("cpu")]
 		public Elastic.Clients.Elasticsearch.Nodes.Cpu Cpu
 		{
@@ -1081,6 +1172,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mem")]
 		public Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats Mem
 		{
@@ -1092,6 +1184,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("swap")]
 		public Elastic.Clients.Elasticsearch.Nodes.MemoryStats Swap
 		{
@@ -1103,6 +1196,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{
@@ -1117,6 +1211,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Process
 	{
+		[JsonInclude]
 		[JsonPropertyName("cpu")]
 		public Elastic.Clients.Elasticsearch.Nodes.Cpu Cpu
 		{
@@ -1128,6 +1223,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mem")]
 		public Elastic.Clients.Elasticsearch.Nodes.MemoryStats Mem
 		{
@@ -1139,6 +1235,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("open_file_descriptors")]
 		public int OpenFileDescriptors
 		{
@@ -1150,6 +1247,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{
@@ -1164,6 +1262,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Scripting
 	{
+		[JsonInclude]
 		[JsonPropertyName("cache_evictions")]
 		public long CacheEvictions
 		{
@@ -1175,6 +1274,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("compilations")]
 		public long Compilations
 		{
@@ -1189,6 +1289,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Stats
 	{
+		[JsonInclude]
 		[JsonPropertyName("adaptive_selection")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection> AdaptiveSelection
 		{
@@ -1200,6 +1301,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, string> Attributes
 		{
@@ -1211,6 +1313,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("breakers")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker> Breakers
 		{
@@ -1222,6 +1325,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fs")]
 		public Elastic.Clients.Elasticsearch.Nodes.FileSystem Fs
 		{
@@ -1233,6 +1337,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("host")]
 		public Elastic.Clients.Elasticsearch.Host Host
 		{
@@ -1244,6 +1349,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("http")]
 		public Elastic.Clients.Elasticsearch.Nodes.Http Http
 		{
@@ -1255,6 +1361,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Indices
 		{
@@ -1266,6 +1373,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest")]
 		public Elastic.Clients.Elasticsearch.Nodes.Ingest Ingest
 		{
@@ -1277,6 +1385,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ip")]
 		public Union<Elastic.Clients.Elasticsearch.Ip, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ip>> Ip
 		{
@@ -1288,6 +1397,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("jvm")]
 		public Elastic.Clients.Elasticsearch.Nodes.Jvm Jvm
 		{
@@ -1299,6 +1409,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -1310,6 +1421,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("os")]
 		public Elastic.Clients.Elasticsearch.Nodes.OperatingSystem Os
 		{
@@ -1321,6 +1433,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("process")]
 		public Elastic.Clients.Elasticsearch.Nodes.Process Process
 		{
@@ -1332,6 +1445,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public Elastic.Clients.Elasticsearch.NodeRoles Roles
 		{
@@ -1343,6 +1457,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Nodes.Scripting Script
 		{
@@ -1354,6 +1469,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("thread_pool")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount> ThreadPool
 		{
@@ -1365,6 +1481,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{
@@ -1376,6 +1493,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport")]
 		public Elastic.Clients.Elasticsearch.Nodes.Transport Transport
 		{
@@ -1387,6 +1505,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
@@ -1401,6 +1520,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class ThreadCount
 	{
+		[JsonInclude]
 		[JsonPropertyName("active")]
 		public long Active
 		{
@@ -1412,6 +1532,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("completed")]
 		public long Completed
 		{
@@ -1423,6 +1544,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("largest")]
 		public long Largest
 		{
@@ -1434,6 +1556,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("queue")]
 		public long Queue
 		{
@@ -1445,6 +1568,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rejected")]
 		public long Rejected
 		{
@@ -1456,6 +1580,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("threads")]
 		public long Threads
 		{
@@ -1470,6 +1595,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class Transport
 	{
+		[JsonInclude]
 		[JsonPropertyName("rx_count")]
 		public long RxCount
 		{
@@ -1481,6 +1607,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rx_size")]
 		public string RxSize
 		{
@@ -1492,6 +1619,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rx_size_in_bytes")]
 		public long RxSizeInBytes
 		{
@@ -1503,6 +1631,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("server_open")]
 		public int ServerOpen
 		{
@@ -1514,6 +1643,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tx_count")]
 		public long TxCount
 		{
@@ -1525,6 +1655,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tx_size")]
 		public string TxSize
 		{
@@ -1536,6 +1667,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tx_size_in_bytes")]
 		public long TxSizeInBytes
 		{

@@ -26,48 +26,62 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 {
 	public partial class Operation
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc")]
 		public object? Doc { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field_statistics")]
 		public bool? FieldStatistics { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("offsets")]
 		public bool? Offsets { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("payloads")]
 		public bool? Payloads { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("positions")]
 		public bool? Positions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term_statistics")]
 		public bool? TermStatistics { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version_type")]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 	}
 
 	public partial class TermVectorsResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("error")]
 		public Elastic.Clients.Elasticsearch.ErrorCause? Error
 		{
@@ -79,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool? Found
 		{
@@ -90,6 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -101,6 +117,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -112,6 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("term_vectors")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Termvectors.TermVector>? TermVectors
 		{
@@ -123,6 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long? Took
 		{
@@ -134,6 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{

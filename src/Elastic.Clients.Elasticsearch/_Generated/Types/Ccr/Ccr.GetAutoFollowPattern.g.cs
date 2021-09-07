@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 {
 	public partial class AutoFollowPattern
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pattern")]
 		public Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern.AutoFollowPatternSummary Pattern
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 
 	public partial class AutoFollowPatternSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("active")]
 		public bool Active
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follow_index_pattern")]
 		public Elastic.Clients.Elasticsearch.IndexPattern? FollowIndexPattern
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("leader_index_patterns")]
 		public Elastic.Clients.Elasticsearch.IndexPatterns LeaderIndexPatterns
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
 		public int MaxOutstandingReadRequests
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_cluster")]
 		public string RemoteCluster
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 {
 	public partial class ConfusionMatrixItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("actual_class")]
 		public Elastic.Clients.Elasticsearch.Name ActualClass
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("actual_class_doc_count")]
 		public int ActualClassDocCount
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("other_predicted_class_doc_count")]
 		public int OtherPredictedClassDocCount
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("predicted_classes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.ConfusionMatrixPrediction> PredictedClasses
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class ConfusionMatrixPrediction
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("predicted_class")]
 		public Elastic.Clients.Elasticsearch.Name PredictedClass
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class ConfusionMatrixThreshold
 	{
+		[JsonInclude]
 		[JsonPropertyName("fn")]
 		public int false_negative
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fp")]
 		public int false_positive
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tn")]
 		public int true_negative
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tp")]
 		public int true_positive
 		{
@@ -145,6 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeClassificationSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("accuracy")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryAccuracy? Accuracy
 		{
@@ -156,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("auc_roc")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationSummaryAucRoc? AucRoc
 		{
@@ -167,6 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("multiclass_confusion_matrix")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryMulticlassConfusionMatrix? MulticlassConfusionMatrix
 		{
@@ -178,6 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryPrecision? Precision
 		{
@@ -189,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recall")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryRecall? Recall
 		{
@@ -203,6 +218,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeClassificationSummaryAccuracy
 	{
+		[JsonInclude]
 		[JsonPropertyName("classes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationClass> Classes
 		{
@@ -214,6 +230,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("overall_accuracy")]
 		public double OverallAccuracy
 		{
@@ -228,6 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeClassificationSummaryMulticlassConfusionMatrix
 	{
+		[JsonInclude]
 		[JsonPropertyName("confusion_matrix")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.ConfusionMatrixItem> ConfusionMatrix
 		{
@@ -239,6 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("other_actual_class_count")]
 		public int OtherActualClassCount
 		{
@@ -253,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeClassificationSummaryPrecision
 	{
+		[JsonInclude]
 		[JsonPropertyName("avg_precision")]
 		public double AvgPrecision
 		{
@@ -264,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("classes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationClass> Classes
 		{
@@ -278,6 +299,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeClassificationSummaryRecall
 	{
+		[JsonInclude]
 		[JsonPropertyName("avg_recall")]
 		public double AvgRecall
 		{
@@ -289,6 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("classes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationClass> Classes
 		{
@@ -303,6 +326,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeEvaluationClass : Ml.EvaluateDataFrame.DataframeEvaluationValue
 	{
+		[JsonInclude]
 		[JsonPropertyName("class_name")]
 		public Elastic.Clients.Elasticsearch.Name ClassName
 		{
@@ -317,6 +341,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeEvaluationSummaryAucRoc : Ml.EvaluateDataFrame.DataframeEvaluationValue
 	{
+		[JsonInclude]
 		[JsonPropertyName("curve")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationSummaryAucRocCurveItem>? Curve
 		{
@@ -331,6 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeEvaluationSummaryAucRocCurveItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("fpr")]
 		public double Fpr
 		{
@@ -342,6 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("threshold")]
 		public double Threshold
 		{
@@ -353,6 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tpr")]
 		public double Tpr
 		{
@@ -367,6 +395,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeEvaluationValue
 	{
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public double Value
 		{
@@ -381,6 +410,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeOutlierDetectionSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("auc_roc")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationSummaryAucRoc? AucRoc
 		{
@@ -392,6 +422,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("confusion_matrix")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.ConfusionMatrixThreshold>? ConfusionMatrix
 		{
@@ -403,6 +434,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public Dictionary<string, double>? Precision
 		{
@@ -414,6 +446,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recall")]
 		public Dictionary<string, double>? Recall
 		{
@@ -428,6 +461,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 
 	public partial class DataframeRegressionSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("huber")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? Huber
 		{
@@ -439,6 +473,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mse")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? Mse
 		{
@@ -450,6 +485,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("msle")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? Msle
 		{
@@ -461,6 +497,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("r_squared")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? RSquared
 		{

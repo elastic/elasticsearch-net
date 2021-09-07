@@ -23,6 +23,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 {
 	public abstract class EqlSearchResponseBase<TEvent> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id
 		{
@@ -34,6 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_partial")]
 		public bool? IsPartial
 		{
@@ -45,6 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_running")]
 		public bool? IsRunning
 		{
@@ -56,6 +59,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public int? Took
 		{
@@ -67,6 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool? TimedOut
 		{
@@ -78,6 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits
 		{

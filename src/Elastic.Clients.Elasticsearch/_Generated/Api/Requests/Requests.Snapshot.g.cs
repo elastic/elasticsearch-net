@@ -74,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public string Indices { get; set; }
 	}
@@ -114,21 +115,27 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unavailable")]
 		public bool? IgnoreUnavailable { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_global_state")]
 		public bool? IncludeGlobalState { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("feature_states")]
 		public IEnumerable<string>? FeatureStates { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("partial")]
 		public bool? Partial { get; set; }
 	}
@@ -164,9 +171,11 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		[JsonIgnore]
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings Settings { get; set; }
 	}
@@ -325,30 +334,39 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		[JsonIgnore]
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_index_settings")]
 		public IEnumerable<string>? IgnoreIndexSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unavailable")]
 		public bool? IgnoreUnavailable { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_aliases")]
 		public bool? IncludeAliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_global_state")]
 		public bool? IncludeGlobalState { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_settings")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.PutSettingsRequest? IndexSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("partial")]
 		public bool? Partial { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rename_pattern")]
 		public string? RenamePattern { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rename_replacement")]
 		public string? RenameReplacement { get; set; }
 	}

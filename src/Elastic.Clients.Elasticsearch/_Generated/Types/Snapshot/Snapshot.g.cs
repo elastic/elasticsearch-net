@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 {
 	public partial class FileCountSnapshotStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("file_count")]
 		public int FileCount
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
 		public long SizeInBytes
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class IndexDetails
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_segments_per_shard")]
 		public long MaxSegmentsPerShard
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_count")]
 		public int ShardCount
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Size
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
 		public long SizeInBytes
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class InfoFeatureState
 	{
+		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public string FeatureName
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
@@ -123,6 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class Repository
 	{
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings Settings
 		{
@@ -134,6 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -145,6 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid? Uuid
 		{
@@ -159,24 +170,30 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class RepositorySettings
 	{
+		[JsonInclude]
 		[JsonPropertyName("chunk_size")]
 		public string? ChunkSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("compress")]
 		public Union<string, bool>? Compress { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("concurrent_streams")]
 		public Union<string, int>? ConcurrentStreams { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("location")]
 		public string Location { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("read_only")]
 		public Union<string, bool>? ReadOnly { get; set; }
 	}
 
 	public partial class ShardsStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("done")]
 		public long Done
 		{
@@ -188,6 +205,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public long Failed
 		{
@@ -199,6 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("finalizing")]
 		public long Finalizing
 		{
@@ -210,6 +229,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initializing")]
 		public long Initializing
 		{
@@ -221,6 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("started")]
 		public long Started
 		{
@@ -232,6 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -246,6 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class ShardsStatsSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("incremental")]
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Incremental
 		{
@@ -257,6 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public long StartTimeInMillis
 		{
@@ -268,6 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
 		public long TimeInMillis
 		{
@@ -279,6 +304,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Total
 		{
@@ -293,6 +319,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class ShardsStatsSummaryItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("file_count")]
 		public long FileCount
 		{
@@ -304,6 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
 		public long SizeInBytes
 		{
@@ -318,6 +346,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class SnapshotIndexStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> Shards
 		{
@@ -329,6 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_stats")]
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats
 		{
@@ -340,6 +370,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats
 		{
@@ -354,6 +385,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class SnapshotInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("data_streams")]
 		public IReadOnlyCollection<string> DataStreams
 		{
@@ -365,6 +397,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("duration")]
 		public Elastic.Clients.Elasticsearch.Time? Duration
 		{
@@ -376,6 +409,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("duration_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? DurationInMillis
 		{
@@ -387,6 +421,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("end_time")]
 		public Elastic.Clients.Elasticsearch.Time? EndTime
 		{
@@ -398,6 +433,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("end_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? EndTimeInMillis
 		{
@@ -409,6 +445,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? Failures
 		{
@@ -420,6 +457,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("feature_states")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? FeatureStates
 		{
@@ -431,6 +469,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("include_global_state")]
 		public bool? IncludeGlobalState
 		{
@@ -442,6 +481,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_details")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>? IndexDetails
 		{
@@ -453,6 +493,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices
 		{
@@ -464,6 +505,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
@@ -475,6 +517,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string? Reason
 		{
@@ -486,6 +529,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("repository")]
 		public Elastic.Clients.Elasticsearch.Name? Repository
 		{
@@ -497,6 +541,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
@@ -508,6 +553,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public Elastic.Clients.Elasticsearch.Name Snapshot
 		{
@@ -519,6 +565,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time")]
 		public Elastic.Clients.Elasticsearch.Time? StartTime
 		{
@@ -530,6 +577,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? StartTimeInMillis
 		{
@@ -541,6 +589,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public string? State
 		{
@@ -552,6 +601,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid Uuid
 		{
@@ -563,6 +613,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -574,6 +625,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_id")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? VersionId
 		{
@@ -588,6 +640,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class SnapshotShardFailure
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -599,6 +652,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -610,6 +664,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -621,6 +676,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_id")]
 		public Elastic.Clients.Elasticsearch.Id ShardId
 		{
@@ -632,6 +688,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public string Status
 		{
@@ -646,6 +703,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class SnapshotShardsStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("stage")]
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage Stage
 		{
@@ -657,6 +715,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary Stats
 		{
@@ -671,6 +730,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class SnapshotStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("incremental")]
 		public Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Incremental
 		{
@@ -682,6 +742,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public long StartTimeInMillis
 		{
@@ -693,6 +754,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
 		public long TimeInMillis
 		{
@@ -704,6 +766,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Total
 		{
@@ -718,6 +781,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class Status
 	{
+		[JsonInclude]
 		[JsonPropertyName("include_global_state")]
 		public bool IncludeGlobalState
 		{
@@ -729,6 +793,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats> Indices
 		{
@@ -740,6 +805,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("repository")]
 		public string Repository
 		{
@@ -751,6 +817,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_stats")]
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats
 		{
@@ -762,6 +829,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public string Snapshot
 		{
@@ -773,6 +841,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public string State
 		{
@@ -784,6 +853,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats
 		{
@@ -795,6 +865,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid Uuid
 		{

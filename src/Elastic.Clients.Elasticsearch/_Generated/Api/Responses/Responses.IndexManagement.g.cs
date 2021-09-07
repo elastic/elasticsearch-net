@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class AddBlockResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AddBlock.IndicesBlockStatus> Indices
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -49,6 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class AnalyzeResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("detail")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.AnalyzeDetail? Detail
 		{
@@ -60,6 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokens")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.AnalyzeToken>? Tokens
 		{
@@ -78,6 +82,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class CloneResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -89,6 +94,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -103,6 +109,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class CloseResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseIndexResult> Indices
 		{
@@ -114,6 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -132,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class CreateResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -143,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -157,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class DataStreamsStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("backing_indices")]
 		public int BackingIndices
 		{
@@ -168,6 +179,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_stream_count")]
 		public int DataStreamCount
 		{
@@ -179,6 +191,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_streams")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats.DataStreamsStatsItem> DataStreams
 		{
@@ -190,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -201,6 +215,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_store_size_bytes")]
 		public int TotalStoreSizeBytes
 		{
@@ -212,6 +227,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_store_sizes")]
 		public Elastic.Clients.Elasticsearch.ByteSize? TotalStoreSizes
 		{
@@ -274,6 +290,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class GetDataStreamResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("data_streams")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItem> DataStreams
 		{
@@ -292,6 +309,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class GetIndexTemplateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("index_templates")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate.IndexTemplateItem> IndexTemplates
 		{
@@ -326,6 +344,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class OpenResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -372,6 +391,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class ReloadSearchAnalyzersResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("reload_details")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers.ReloadDetails> ReloadDetails
 		{
@@ -383,6 +403,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -397,6 +418,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class ResolveIndexResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex.ResolveIndexAliasItem> Aliases
 		{
@@ -408,6 +430,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_streams")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex.ResolveIndexDataStreamsItem> DataStreams
 		{
@@ -419,6 +442,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex.ResolveIndexItem> Indices
 		{
@@ -433,6 +457,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class RolloverResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("conditions")]
 		public Dictionary<string, bool> Conditions
 		{
@@ -444,6 +469,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dry_run")]
 		public bool DryRun
 		{
@@ -455,6 +481,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("new_index")]
 		public string NewIndex
 		{
@@ -466,6 +493,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("old_index")]
 		public string OldIndex
 		{
@@ -477,6 +505,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rolled_over")]
 		public bool RolledOver
 		{
@@ -488,6 +517,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -502,6 +532,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class SegmentsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segments.IndexSegment> Indices
 		{
@@ -513,6 +544,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -527,6 +559,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class ShardStoresResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.IndicesShardStores> Indices
 		{
@@ -541,6 +574,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class ShrinkResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -552,6 +586,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -570,6 +605,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class SimulateTemplateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate.Template Template
 		{
@@ -584,6 +620,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class SplitResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -595,6 +632,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
 		public bool ShardsAcknowledged
 		{
@@ -609,6 +647,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class StatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_all")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats All
 		{
@@ -620,6 +659,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats>? Indices
 		{
@@ -631,6 +671,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -649,6 +690,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class ValidateQueryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("explanations")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery.IndicesValidationExplanation>? Explanations
 		{
@@ -660,6 +702,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
@@ -671,6 +714,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("valid")]
 		public bool Valid
 		{

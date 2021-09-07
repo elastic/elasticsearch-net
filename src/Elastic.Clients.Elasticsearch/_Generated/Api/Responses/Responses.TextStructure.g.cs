@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 {
 	public partial class FindStructureResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("charset")]
 		public string Charset
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("column_names")]
 		public IReadOnlyCollection<string>? ColumnNames
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delimiter")]
 		public string? Delimiter
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exclude_lines_pattern")]
 		public string? ExcludeLinesPattern
 		{
@@ -68,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("explanation")]
 		public IReadOnlyCollection<string>? Explanation
 		{
@@ -79,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("field_stats")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.TextStructure.FindStructure.FieldStat> FieldStats
 		{
@@ -90,6 +96,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string Format
 		{
@@ -101,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("grok_pattern")]
 		public string? GrokPattern
 		{
@@ -112,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_byte_order_marker")]
 		public bool HasByteOrderMarker
 		{
@@ -123,6 +132,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_header_row")]
 		public bool? HasHeaderRow
 		{
@@ -134,6 +144,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest_pipeline")]
 		public Elastic.Clients.Elasticsearch.Ingest.PipelineConfig IngestPipeline
 		{
@@ -145,6 +156,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("java_timestamp_formats")]
 		public IReadOnlyCollection<string>? JavaTimestampFormats
 		{
@@ -156,6 +168,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("joda_timestamp_formats")]
 		public IReadOnlyCollection<string>? JodaTimestampFormats
 		{
@@ -167,6 +180,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
 		{
@@ -178,6 +192,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("multiline_start_pattern")]
 		public string? MultilineStartPattern
 		{
@@ -189,6 +204,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("need_client_timezone")]
 		public bool NeedClientTimezone
 		{
@@ -200,6 +216,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_lines_analyzed")]
 		public int NumLinesAnalyzed
 		{
@@ -211,6 +228,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_messages_analyzed")]
 		public int NumMessagesAnalyzed
 		{
@@ -222,6 +240,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("quote")]
 		public string? Quote
 		{
@@ -233,6 +252,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sample_start")]
 		public string SampleStart
 		{
@@ -244,6 +264,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("should_trim_fields")]
 		public bool? ShouldTrimFields
 		{
@@ -255,6 +276,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp_field")]
 		public Elastic.Clients.Elasticsearch.Field? TimestampField
 		{

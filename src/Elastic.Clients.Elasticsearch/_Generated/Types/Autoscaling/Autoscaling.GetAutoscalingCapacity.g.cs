@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 {
 	public partial class AutoscalingCapacity
 	{
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingResources Node
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingResources Total
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 
 	public partial class AutoscalingDecider
 	{
+		[JsonInclude]
 		[JsonPropertyName("reason_details")]
 		public object? ReasonDetails
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason_summary")]
 		public string? ReasonSummary
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("required_capacity")]
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingCapacity RequiredCapacity
 		{
@@ -87,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 
 	public partial class AutoscalingDeciders
 	{
+		[JsonInclude]
 		[JsonPropertyName("current_capacity")]
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingCapacity CurrentCapacity
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("current_nodes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingNode> CurrentNodes
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deciders")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingDecider> Deciders
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("required_capacity")]
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingCapacity RequiredCapacity
 		{
@@ -134,6 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 
 	public partial class AutoscalingNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.NodeName Name
 		{
@@ -148,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 
 	public partial class AutoscalingResources
 	{
+		[JsonInclude]
 		[JsonPropertyName("memory")]
 		public int Memory
 		{
@@ -159,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("storage")]
 		public int Storage
 		{

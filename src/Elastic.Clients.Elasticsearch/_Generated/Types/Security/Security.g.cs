@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 {
 	public partial class ApplicationGlobalUserPrivileges
 	{
+		[JsonInclude]
 		[JsonPropertyName("manage")]
 		public Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges Manage
 		{
@@ -40,18 +41,22 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class ApplicationPrivileges
 	{
+		[JsonInclude]
 		[JsonPropertyName("application")]
 		public string Application { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("privileges")]
 		public IEnumerable<string> Privileges { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("resources")]
 		public IEnumerable<string> Resources { get; set; }
 	}
 
 	public partial class ClusterNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -66,6 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class CreatedStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public bool Created
 		{
@@ -80,15 +86,18 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class FieldSecurity
 	{
+		[JsonInclude]
 		[JsonPropertyName("except")]
 		public Elastic.Clients.Elasticsearch.Fields? Except { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("grant")]
 		public Elastic.Clients.Elasticsearch.Fields Grant { get; set; }
 	}
 
 	public partial class GlobalPrivilege
 	{
+		[JsonInclude]
 		[JsonPropertyName("application")]
 		public Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Application
 		{
@@ -103,24 +112,30 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class IndicesPrivileges
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_restricted_indices")]
 		public bool? AllowRestrictedIndices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field_security")]
 		public Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurity { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("names")]
 		public Elastic.Clients.Elasticsearch.Indices Names { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("privileges")]
 		public IEnumerable<string> Privileges { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Union<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Query { get; set; }
 	}
 
 	public partial class ManageUserPrivileges
 	{
+		[JsonInclude]
 		[JsonPropertyName("applications")]
 		public IReadOnlyCollection<string> Applications
 		{
@@ -135,6 +150,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class RealmInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -146,6 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -160,6 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class RoleMapping
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled
 		{
@@ -171,6 +189,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
@@ -182,6 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public IReadOnlyCollection<string> Roles
 		{
@@ -193,6 +213,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("role_templates")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GetRole.RoleTemplate>? RoleTemplates
 		{
@@ -204,6 +225,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rules")]
 		public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase Rules
 		{
@@ -222,6 +244,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class User
 	{
+		[JsonInclude]
 		[JsonPropertyName("email")]
 		public string? Email
 		{
@@ -233,6 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled
 		{
@@ -244,6 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("full_name")]
 		public Elastic.Clients.Elasticsearch.Name? FullName
 		{
@@ -255,6 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
@@ -266,6 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public IReadOnlyCollection<string> Roles
 		{
@@ -277,6 +304,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username Username
 		{

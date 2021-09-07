@@ -26,12 +26,15 @@ namespace Elastic.Clients.Elasticsearch.Security.GrantApiKey
 {
 	public partial class ApiKey
 	{
+		[JsonInclude]
 		[JsonPropertyName("expiration")]
 		public Elastic.Clients.Elasticsearch.Time? Expiration { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("role_descriptors")]
 		public IEnumerable<Dictionary<string, object>>? RoleDescriptors { get; set; }
 	}

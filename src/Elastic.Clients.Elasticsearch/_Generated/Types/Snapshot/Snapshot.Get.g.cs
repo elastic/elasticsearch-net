@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Get
 {
 	public partial class SnapshotResponseItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("error")]
 		public Elastic.Clients.Elasticsearch.ErrorCause? Error
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("repository")]
 		public Elastic.Clients.Elasticsearch.Name Repository
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshots")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots
 		{

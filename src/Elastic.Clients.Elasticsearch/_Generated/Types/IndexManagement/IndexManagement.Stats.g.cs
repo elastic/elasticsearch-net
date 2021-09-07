@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 {
 	public partial class IndexStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("bulk")]
 		public Elastic.Clients.Elasticsearch.BulkStats? Bulk
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("completion")]
 		public Elastic.Clients.Elasticsearch.CompletionStats? Completion
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public Elastic.Clients.Elasticsearch.DocStats? Docs
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("flush")]
 		public Elastic.Clients.Elasticsearch.FlushStats? Flush
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("get")]
 		public Elastic.Clients.Elasticsearch.GetStats? Get
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indexing")]
 		public Elastic.Clients.Elasticsearch.IndexingStats? Indexing
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("merges")]
 		public Elastic.Clients.Elasticsearch.MergesStats? Merges
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query_cache")]
 		public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovery")]
 		public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("refresh")]
 		public Elastic.Clients.Elasticsearch.RefreshStats? Refresh
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("request_cache")]
 		public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache
 		{
@@ -158,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search")]
 		public Elastic.Clients.Elasticsearch.SearchStats? Search
 		{
@@ -169,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("segments")]
 		public Elastic.Clients.Elasticsearch.SegmentsStats? Segments
 		{
@@ -180,6 +194,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store")]
 		public Elastic.Clients.Elasticsearch.StoreStats? Store
 		{
@@ -191,6 +206,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("translog")]
 		public Elastic.Clients.Elasticsearch.TranslogStats? Translog
 		{
@@ -202,6 +218,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("warmer")]
 		public Elastic.Clients.Elasticsearch.WarmerStats? Warmer
 		{
@@ -216,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class IndicesStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("primaries")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Primaries
 		{
@@ -227,6 +245,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardStats>>? Shards
 		{
@@ -238,6 +257,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Total
 		{
@@ -249,6 +269,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid? Uuid
 		{
@@ -263,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardCommit
 	{
+		[JsonInclude]
 		[JsonPropertyName("generation")]
 		public int Generation
 		{
@@ -274,6 +296,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -285,6 +308,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_docs")]
 		public long NumDocs
 		{
@@ -296,6 +320,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("user_data")]
 		public Dictionary<string, string> UserData
 		{
@@ -310,6 +335,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardFileSizeInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("average_size_in_bytes")]
 		public long? AverageSizeInBytes
 		{
@@ -321,6 +347,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long? Count
 		{
@@ -332,6 +359,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -343,6 +371,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_size_in_bytes")]
 		public long? MaxSizeInBytes
 		{
@@ -354,6 +383,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_size_in_bytes")]
 		public long? MinSizeInBytes
 		{
@@ -365,6 +395,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
 		public long SizeInBytes
 		{
@@ -379,6 +410,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardLease
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -390,6 +422,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retaining_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber RetainingSeqNo
 		{
@@ -401,6 +434,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source
 		{
@@ -412,6 +446,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{
@@ -426,6 +461,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardPath
 	{
+		[JsonInclude]
 		[JsonPropertyName("data_path")]
 		public string DataPath
 		{
@@ -437,6 +473,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_custom_data_path")]
 		public bool IsCustomDataPath
 		{
@@ -448,6 +485,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state_path")]
 		public string StatePath
 		{
@@ -462,6 +500,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardQueryCache
 	{
+		[JsonInclude]
 		[JsonPropertyName("cache_count")]
 		public long CacheCount
 		{
@@ -473,6 +512,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cache_size")]
 		public long CacheSize
 		{
@@ -484,6 +524,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("evictions")]
 		public long Evictions
 		{
@@ -495,6 +536,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hit_count")]
 		public long HitCount
 		{
@@ -506,6 +548,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_size_in_bytes")]
 		public long MemorySizeInBytes
 		{
@@ -517,6 +560,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("miss_count")]
 		public long MissCount
 		{
@@ -528,6 +572,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_count")]
 		public long TotalCount
 		{
@@ -542,6 +587,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardRetentionLeases
 	{
+		[JsonInclude]
 		[JsonPropertyName("leases")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardLease> Leases
 		{
@@ -553,6 +599,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_term")]
 		public long PrimaryTerm
 		{
@@ -564,6 +611,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -578,6 +626,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardRouting
 	{
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public string Node
 		{
@@ -589,6 +638,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary")]
 		public bool Primary
 		{
@@ -600,6 +650,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("relocating_node")]
 		public string? RelocatingNode
 		{
@@ -611,6 +662,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRoutingState State
 		{
@@ -625,6 +677,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardSequenceNumber
 	{
+		[JsonInclude]
 		[JsonPropertyName("global_checkpoint")]
 		public long GlobalCheckpoint
 		{
@@ -636,6 +689,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("local_checkpoint")]
 		public long LocalCheckpoint
 		{
@@ -647,6 +701,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber MaxSeqNo
 		{
@@ -661,6 +716,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 	public partial class ShardStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("bulk")]
 		public Elastic.Clients.Elasticsearch.BulkStats? Bulk
 		{
@@ -672,6 +728,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("commit")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardCommit Commit
 		{
@@ -683,6 +740,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("completion")]
 		public Elastic.Clients.Elasticsearch.CompletionStats Completion
 		{
@@ -694,6 +752,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public Elastic.Clients.Elasticsearch.DocStats Docs
 		{
@@ -705,6 +764,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.FielddataStats Fielddata
 		{
@@ -716,6 +776,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("flush")]
 		public Elastic.Clients.Elasticsearch.FlushStats Flush
 		{
@@ -727,6 +788,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("get")]
 		public Elastic.Clients.Elasticsearch.GetStats Get
 		{
@@ -738,6 +800,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indexing")]
 		public Elastic.Clients.Elasticsearch.IndexingStats Indexing
 		{
@@ -749,6 +812,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("merges")]
 		public Elastic.Clients.Elasticsearch.MergesStats Merges
 		{
@@ -760,6 +824,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query_cache")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardQueryCache QueryCache
 		{
@@ -771,6 +836,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovery")]
 		public Elastic.Clients.Elasticsearch.RecoveryStats Recovery
 		{
@@ -782,6 +848,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("refresh")]
 		public Elastic.Clients.Elasticsearch.RefreshStats Refresh
 		{
@@ -793,6 +860,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("request_cache")]
 		public Elastic.Clients.Elasticsearch.RequestCacheStats RequestCache
 		{
@@ -804,6 +872,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_leases")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRetentionLeases RetentionLeases
 		{
@@ -815,6 +884,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRouting Routing
 		{
@@ -826,6 +896,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search")]
 		public Elastic.Clients.Elasticsearch.SearchStats Search
 		{
@@ -837,6 +908,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("segments")]
 		public Elastic.Clients.Elasticsearch.SegmentsStats Segments
 		{
@@ -848,6 +920,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("seq_no")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardSequenceNumber SeqNo
 		{
@@ -859,6 +932,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_path")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardPath ShardPath
 		{
@@ -870,6 +944,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store")]
 		public Elastic.Clients.Elasticsearch.StoreStats Store
 		{
@@ -881,6 +956,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("translog")]
 		public Elastic.Clients.Elasticsearch.TranslogStats Translog
 		{
@@ -892,6 +968,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("warmer")]
 		public Elastic.Clients.Elasticsearch.WarmerStats Warmer
 		{

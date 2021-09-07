@@ -26,12 +26,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 {
 	public partial class IndexTemplateMapping
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 {
 	public partial class IndexTemplate
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_auto_create")]
 		public bool? AllowAutoCreate
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("composed_of")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> ComposedOf
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_stream")]
 		public Dictionary<string, object>? DataStream
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> IndexPatterns
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("priority")]
 		public long? Priority
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate.IndexTemplateSummary Template
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 
 	public partial class IndexTemplateItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("index_template")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate.IndexTemplate IndexTemplate
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 
 	public partial class IndexTemplateSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings
 		{

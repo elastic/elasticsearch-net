@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 {
 	public partial class CloseIndexResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("closed")]
 		public bool Closed
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseShardResult>? Shards
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 
 	public partial class CloseShardResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures
 		{

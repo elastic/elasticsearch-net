@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 {
 	public partial class Feature
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name
 		{

@@ -26,21 +26,26 @@ namespace Elastic.Clients.Elasticsearch.Security.CreateApiKey
 {
 	public partial class IndexPrivileges
 	{
+		[JsonInclude]
 		[JsonPropertyName("names")]
 		public Elastic.Clients.Elasticsearch.Indices Names { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("privileges")]
 		public IEnumerable<string> Privileges { get; set; }
 	}
 
 	public partial class RoleDescriptor
 	{
+		[JsonInclude]
 		[JsonPropertyName("applications")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IEnumerable<string> Cluster { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.CreateApiKey.IndexPrivileges> Index { get; set; }
 	}

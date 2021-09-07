@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 {
 	public partial class FollowIndexStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.ShardStats> Shards
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class ReadException
 	{
+		[JsonInclude]
 		[JsonPropertyName("exception")]
 		public Elastic.Clients.Elasticsearch.ErrorCause Exception
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("from_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber FromSeqNo
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retries")]
 		public int Retries
 		{
@@ -87,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class ShardStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("bytes_read")]
 		public long BytesRead
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_read_requests")]
 		public long FailedReadRequests
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_write_requests")]
 		public long FailedWriteRequests
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fatal_exception")]
 		public Elastic.Clients.Elasticsearch.ErrorCause? FatalException
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_aliases_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber FollowerAliasesVersion
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_global_checkpoint")]
 		public long FollowerGlobalCheckpoint
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_index")]
 		public string FollowerIndex
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_mapping_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber FollowerMappingVersion
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_max_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber FollowerMaxSeqNo
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_settings_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber FollowerSettingsVersion
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_requested_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber LastRequestedSeqNo
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("leader_global_checkpoint")]
 		public long LeaderGlobalCheckpoint
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("leader_index")]
 		public string LeaderIndex
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("leader_max_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber LeaderMaxSeqNo
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("operations_read")]
 		public long OperationsRead
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("operations_written")]
 		public long OperationsWritten
 		{
@@ -263,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("outstanding_read_requests")]
 		public int OutstandingReadRequests
 		{
@@ -274,6 +296,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("outstanding_write_requests")]
 		public int OutstandingWriteRequests
 		{
@@ -285,6 +308,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("read_exceptions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.ReadException> ReadExceptions
 		{
@@ -296,6 +320,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_cluster")]
 		public string RemoteCluster
 		{
@@ -307,6 +332,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_id")]
 		public int ShardId
 		{
@@ -318,6 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("successful_read_requests")]
 		public long SuccessfulReadRequests
 		{
@@ -329,6 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("successful_write_requests")]
 		public long SuccessfulWriteRequests
 		{
@@ -340,6 +368,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_since_last_read_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TimeSinceLastReadMillis
 		{
@@ -351,6 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_read_remote_exec_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalReadRemoteExecTimeMillis
 		{
@@ -362,6 +392,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_read_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalReadTimeMillis
 		{
@@ -373,6 +404,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_write_time_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalWriteTimeMillis
 		{
@@ -384,6 +416,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("write_buffer_operation_count")]
 		public long WriteBufferOperationCount
 		{
@@ -395,6 +428,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("write_buffer_size_in_bytes")]
 		public Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes
 		{

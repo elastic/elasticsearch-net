@@ -153,18 +153,23 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("on_failure")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("processors")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? Processors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 	}
@@ -199,9 +204,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		[JsonIgnore]
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? Docs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pipeline")]
 		public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
 	}

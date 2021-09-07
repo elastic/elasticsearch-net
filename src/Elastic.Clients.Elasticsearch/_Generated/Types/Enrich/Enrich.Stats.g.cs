@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 {
 	public partial class CoordinatorStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("executed_searches_total")]
 		public long ExecutedSearchesTotal
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("queue_size")]
 		public int QueueSize
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_requests_current")]
 		public int RemoteRequestsCurrent
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_requests_total")]
 		public long RemoteRequestsTotal
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 
 	public partial class ExecutingPolicy
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task")]
 		public Elastic.Clients.Elasticsearch.Tasks.Info Task
 		{

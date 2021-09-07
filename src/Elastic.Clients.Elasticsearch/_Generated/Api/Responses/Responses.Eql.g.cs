@@ -32,6 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 	public partial class GetStatusResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("completion_status")]
 		public int? CompletionStatus
 		{
@@ -43,6 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expiration_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? ExpirationTimeInMillis
 		{
@@ -54,6 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -65,6 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_partial")]
 		public bool IsPartial
 		{
@@ -76,6 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_running")]
 		public bool IsRunning
 		{
@@ -87,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? StartTimeInMillis
 		{

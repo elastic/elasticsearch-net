@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 {
 	public partial class IndexCapabilities
 	{
+		[JsonInclude]
 		[JsonPropertyName("rollup_jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps.RollupJobSummary> RollupJobs
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 
 	public partial class RollupJobSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps.RollupJobSummaryField>> Fields
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_pattern")]
 		public string IndexPattern
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rollup_index")]
 		public Elastic.Clients.Elasticsearch.IndexName RollupIndex
 		{
@@ -87,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 
 	public partial class RollupJobSummaryField
 	{
+		[JsonInclude]
 		[JsonPropertyName("agg")]
 		public string Agg
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
 		public Elastic.Clients.Elasticsearch.Time? CalendarInterval
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public string? TimeZone
 		{
