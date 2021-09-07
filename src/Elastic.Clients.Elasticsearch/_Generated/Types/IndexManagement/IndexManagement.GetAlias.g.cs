@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetAlias
 {
 	public partial class IndexAliases
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition> Aliases
 		{

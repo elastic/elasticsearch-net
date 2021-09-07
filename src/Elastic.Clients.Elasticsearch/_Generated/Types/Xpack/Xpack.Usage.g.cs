@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 {
 	public partial class Analytics : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.AnalyticsStatistics Stats
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class AnalyticsStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("boxplot_usage")]
 		public long BoxplotUsage
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cumulative_cardinality_usage")]
 		public long CumulativeCardinalityUsage
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("moving_percentiles_usage")]
 		public long MovingPercentilesUsage
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("multi_terms_usage")]
 		public long? MultiTermsUsage
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("normalize_usage")]
 		public long NormalizeUsage
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rate_usage")]
 		public long RateUsage
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("string_stats_usage")]
 		public long StringStatsUsage
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("top_metrics_usage")]
 		public long TopMetricsUsage
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("t_test_usage")]
 		public long TTestUsage
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Audit : Xpack.Usage.FeatureToggle
 	{
+		[JsonInclude]
 		[JsonPropertyName("outputs")]
 		public IReadOnlyCollection<string>? Outputs
 		{
@@ -156,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("available")]
 		public bool Available
 		{
@@ -167,6 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled
 		{
@@ -181,6 +194,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class BaseUrlConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("url_name")]
 		public string UrlName
 		{
@@ -192,6 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("url_value")]
 		public string UrlValue
 		{
@@ -206,6 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Ccr : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("auto_follow_patterns_count")]
 		public int AutoFollowPatternsCount
 		{
@@ -217,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_indices_count")]
 		public int FollowerIndicesCount
 		{
@@ -231,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Counter
 	{
+		[JsonInclude]
 		[JsonPropertyName("active")]
 		public long Active
 		{
@@ -242,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -256,6 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class DataStreams : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices_count")]
 		public long IndicesCount
 		{
@@ -270,6 +290,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class DataTierPhaseStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc_count")]
 		public long DocCount
 		{
@@ -281,6 +302,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public long IndexCount
 		{
@@ -292,6 +314,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_count")]
 		public long NodeCount
 		{
@@ -303,6 +326,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_shard_count")]
 		public long PrimaryShardCount
 		{
@@ -314,6 +338,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_shard_size_avg_bytes")]
 		public long PrimaryShardSizeAvgBytes
 		{
@@ -325,6 +350,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_shard_size_mad_bytes")]
 		public long PrimaryShardSizeMadBytes
 		{
@@ -336,6 +362,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_shard_size_median_bytes")]
 		public long PrimaryShardSizeMedianBytes
 		{
@@ -347,6 +374,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_size_bytes")]
 		public long PrimarySizeBytes
 		{
@@ -358,6 +386,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_shard_count")]
 		public long TotalShardCount
 		{
@@ -369,6 +398,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_size_bytes")]
 		public long TotalSizeBytes
 		{
@@ -383,6 +413,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class DataTiers : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("data_cold")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTierPhaseStatistics DataCold
 		{
@@ -394,6 +425,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_content")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTierPhaseStatistics DataContent
 		{
@@ -405,6 +437,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frozen")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTierPhaseStatistics? DataFrozen
 		{
@@ -416,6 +449,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_hot")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTierPhaseStatistics DataHot
 		{
@@ -427,6 +461,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_warm")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTierPhaseStatistics DataWarm
 		{
@@ -441,6 +476,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Datafeed
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -455,6 +491,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Eql : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("features")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeatures Features
 		{
@@ -466,6 +503,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("queries")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.Query> Queries
 		{
@@ -480,6 +518,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class EqlFeatures
 	{
+		[JsonInclude]
 		[JsonPropertyName("event")]
 		public uint Event
 		{
@@ -491,6 +530,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join")]
 		public uint Join
 		{
@@ -502,6 +542,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("joins")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesJoin Joins
 		{
@@ -513,6 +554,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keys")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesKeys Keys
 		{
@@ -524,6 +566,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pipes")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesPipes Pipes
 		{
@@ -535,6 +578,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequence")]
 		public uint Sequence
 		{
@@ -546,6 +590,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequences")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.EqlFeaturesSequences Sequences
 		{
@@ -560,6 +605,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class EqlFeaturesJoin
 	{
+		[JsonInclude]
 		[JsonPropertyName("join_queries_five_or_more")]
 		public uint JoinQueriesFiveOrMore
 		{
@@ -571,6 +617,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_queries_four")]
 		public uint JoinQueriesFour
 		{
@@ -582,6 +629,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_queries_three")]
 		public uint JoinQueriesThree
 		{
@@ -593,6 +641,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_queries_two")]
 		public uint JoinQueriesTwo
 		{
@@ -604,6 +653,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_until")]
 		public uint JoinUntil
 		{
@@ -618,6 +668,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class EqlFeaturesKeys
 	{
+		[JsonInclude]
 		[JsonPropertyName("join_keys_five_or_more")]
 		public uint JoinKeysFiveOrMore
 		{
@@ -629,6 +680,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_keys_four")]
 		public uint JoinKeysFour
 		{
@@ -640,6 +692,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_keys_one")]
 		public uint JoinKeysOne
 		{
@@ -651,6 +704,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_keys_three")]
 		public uint JoinKeysThree
 		{
@@ -662,6 +716,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_keys_two")]
 		public uint JoinKeysTwo
 		{
@@ -676,6 +731,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class EqlFeaturesPipes
 	{
+		[JsonInclude]
 		[JsonPropertyName("pipe_head")]
 		public uint PipeHead
 		{
@@ -687,6 +743,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pipe_tail")]
 		public uint PipeTail
 		{
@@ -701,6 +758,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class EqlFeaturesSequences
 	{
+		[JsonInclude]
 		[JsonPropertyName("sequence_maxspan")]
 		public uint SequenceMaxspan
 		{
@@ -712,6 +770,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequence_queries_five_or_more")]
 		public uint SequenceQueriesFiveOrMore
 		{
@@ -723,6 +782,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequence_queries_four")]
 		public uint SequenceQueriesFour
 		{
@@ -734,6 +794,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequence_queries_three")]
 		public uint SequenceQueriesThree
 		{
@@ -745,6 +806,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequence_queries_two")]
 		public uint SequenceQueriesTwo
 		{
@@ -756,6 +818,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequence_until")]
 		public uint SequenceUntil
 		{
@@ -770,6 +833,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class FeatureToggle
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled
 		{
@@ -784,6 +848,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Flattened : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_count")]
 		public int FieldCount
 		{
@@ -798,6 +863,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class FrozenIndices : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices_count")]
 		public long IndicesCount
 		{
@@ -812,6 +878,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Ilm
 	{
+		[JsonInclude]
 		[JsonPropertyName("policy_count")]
 		public int PolicyCount
 		{
@@ -823,6 +890,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policy_stats")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.Usage.IlmPolicyStatistics> PolicyStats
 		{
@@ -837,6 +905,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class IlmPolicyStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices_managed")]
 		public int IndicesManaged
 		{
@@ -848,6 +917,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("phases")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phases Phases
 		{
@@ -862,6 +932,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class IpFilter
 	{
+		[JsonInclude]
 		[JsonPropertyName("http")]
 		public bool Http
 		{
@@ -873,6 +944,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport")]
 		public bool Transport
 		{
@@ -887,6 +959,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class KibanaUrlConfig : Xpack.Usage.BaseUrlConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("time_range")]
 		public string? TimeRange
 		{
@@ -901,6 +974,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MachineLearning : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("datafeeds")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.Datafeed> Datafeeds
 		{
@@ -912,6 +986,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frame_analytics_jobs")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlDataFrameAnalyticsJobs DataFrameAnalyticsJobs
 		{
@@ -923,6 +998,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("inference")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInference Inference
 		{
@@ -934,6 +1010,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("jobs")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Ml.Job> Jobs
 		{
@@ -945,6 +1022,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_count")]
 		public int NodeCount
 		{
@@ -959,6 +1037,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlCounter
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -973,6 +1052,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlDataFrameAnalyticsJobs
 	{
+		[JsonInclude]
 		[JsonPropertyName("_all")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlDataFrameAnalyticsJobsCount All
 		{
@@ -984,6 +1064,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_counts")]
 		public Elastic.Clients.Elasticsearch.EmptyObject? AnalysisCounts
 		{
@@ -995,6 +1076,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_usage")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlDataFrameAnalyticsJobsMemory? MemoryUsage
 		{
@@ -1009,6 +1091,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlDataFrameAnalyticsJobsCount
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -1023,6 +1106,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlDataFrameAnalyticsJobsMemory
 	{
+		[JsonInclude]
 		[JsonPropertyName("peak_usage_bytes")]
 		public Elastic.Clients.Elasticsearch.Ml.JobStatistics PeakUsageBytes
 		{
@@ -1037,6 +1121,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlInference
 	{
+		[JsonInclude]
 		[JsonPropertyName("ingest_processors")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessor> IngestProcessors
 		{
@@ -1048,6 +1133,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trained_models")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceTrainedModels TrainedModels
 		{
@@ -1062,6 +1148,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlInferenceIngestProcessor
 	{
+		[JsonInclude]
 		[JsonPropertyName("num_docs_processed")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessorCount NumDocsProcessed
 		{
@@ -1073,6 +1160,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_failures")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessorCount NumFailures
 		{
@@ -1084,6 +1172,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pipelines")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlCounter Pipelines
 		{
@@ -1095,6 +1184,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_ms")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceIngestProcessorCount TimeMs
 		{
@@ -1109,6 +1199,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlInferenceIngestProcessorCount
 	{
+		[JsonInclude]
 		[JsonPropertyName("max")]
 		public long Max
 		{
@@ -1120,6 +1211,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min")]
 		public long Min
 		{
@@ -1131,6 +1223,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sum")]
 		public long Sum
 		{
@@ -1145,6 +1238,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlInferenceTrainedModels
 	{
+		[JsonInclude]
 		[JsonPropertyName("_all")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlCounter All
 		{
@@ -1156,6 +1250,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MlInferenceTrainedModelsCount? Count
 		{
@@ -1167,6 +1262,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("estimated_heap_memory_usage_bytes")]
 		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? EstimatedHeapMemoryUsageBytes
 		{
@@ -1178,6 +1274,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("estimated_operations")]
 		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? EstimatedOperations
 		{
@@ -1192,6 +1289,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class MlInferenceTrainedModelsCount
 	{
+		[JsonInclude]
 		[JsonPropertyName("classification")]
 		public long Classification
 		{
@@ -1203,6 +1301,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("other")]
 		public long Other
 		{
@@ -1214,6 +1313,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("prepackaged")]
 		public long Prepackaged
 		{
@@ -1225,6 +1325,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("regression")]
 		public long Regression
 		{
@@ -1236,6 +1337,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -1250,6 +1352,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Monitoring : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("collection_enabled")]
 		public bool CollectionEnabled
 		{
@@ -1261,6 +1364,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enabled_exporters")]
 		public Dictionary<string, long> EnabledExporters
 		{
@@ -1275,6 +1379,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Query
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int? Count
 		{
@@ -1286,6 +1391,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public int? Failed
 		{
@@ -1297,6 +1403,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("paging")]
 		public int? Paging
 		{
@@ -1308,6 +1415,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public int? Total
 		{
@@ -1322,6 +1430,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Realm : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("cache")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.Usage.RealmCache>? Cache
 		{
@@ -1333,6 +1442,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_authorization_realms")]
 		public IReadOnlyCollection<bool>? HasAuthorizationRealms
 		{
@@ -1344,6 +1454,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_default_username_pattern")]
 		public IReadOnlyCollection<bool>? HasDefaultUsernamePattern
 		{
@@ -1355,6 +1466,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_truststore")]
 		public IReadOnlyCollection<bool>? HasTruststore
 		{
@@ -1366,6 +1478,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_authentication_delegated")]
 		public IReadOnlyCollection<bool>? IsAuthenticationDelegated
 		{
@@ -1377,6 +1490,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public IReadOnlyCollection<string>? Name
 		{
@@ -1388,6 +1502,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public IReadOnlyCollection<long>? Order
 		{
@@ -1399,6 +1514,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public IReadOnlyCollection<long>? Size
 		{
@@ -1413,6 +1529,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class RealmCache
 	{
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public long Size
 		{
@@ -1427,6 +1544,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class RoleMapping
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public int Enabled
 		{
@@ -1438,6 +1556,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int Size
 		{
@@ -1452,6 +1571,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class RuntimeFieldTypes : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.Usage.RuntimeFieldsType> FieldTypes
 		{
@@ -1466,6 +1586,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class RuntimeFieldsType
 	{
+		[JsonInclude]
 		[JsonPropertyName("chars_max")]
 		public long CharsMax
 		{
@@ -1477,6 +1598,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("chars_total")]
 		public long CharsTotal
 		{
@@ -1488,6 +1610,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -1499,6 +1622,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("doc_max")]
 		public long DocMax
 		{
@@ -1510,6 +1634,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("doc_total")]
 		public long DocTotal
 		{
@@ -1521,6 +1646,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public long IndexCount
 		{
@@ -1532,6 +1658,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lang")]
 		public IReadOnlyCollection<string> Lang
 		{
@@ -1543,6 +1670,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lines_max")]
 		public long LinesMax
 		{
@@ -1554,6 +1682,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lines_total")]
 		public long LinesTotal
 		{
@@ -1565,6 +1694,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Field Name
 		{
@@ -1576,6 +1706,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("scriptless_count")]
 		public long ScriptlessCount
 		{
@@ -1587,6 +1718,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shadowed_count")]
 		public long ShadowedCount
 		{
@@ -1598,6 +1730,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source_max")]
 		public long SourceMax
 		{
@@ -1609,6 +1742,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source_total")]
 		public long SourceTotal
 		{
@@ -1623,6 +1757,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class SearchableSnapshots : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("full_copy_indices_count")]
 		public int? FullCopyIndicesCount
 		{
@@ -1634,6 +1769,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices_count")]
 		public int IndicesCount
 		{
@@ -1645,6 +1781,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shared_cache_indices_count")]
 		public int? SharedCacheIndicesCount
 		{
@@ -1659,6 +1796,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Security : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("anonymous")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle Anonymous
 		{
@@ -1670,6 +1808,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("api_key_service")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle ApiKeyService
 		{
@@ -1681,6 +1820,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("audit")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Audit Audit
 		{
@@ -1692,6 +1832,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fips_140")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle Fips140
 		{
@@ -1703,6 +1844,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ipfilter")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.IpFilter Ipfilter
 		{
@@ -1714,6 +1856,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("operator_privileges")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base OperatorPrivileges
 		{
@@ -1725,6 +1868,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("realms")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.Realm> Realms
 		{
@@ -1736,6 +1880,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("role_mapping")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.RoleMapping> RoleMapping
 		{
@@ -1747,6 +1892,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRoles Roles
 		{
@@ -1758,6 +1904,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ssl")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Ssl Ssl
 		{
@@ -1769,6 +1916,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("system_key")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle? SystemKey
 		{
@@ -1780,6 +1928,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token_service")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle TokenService
 		{
@@ -1794,6 +1943,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class SecurityRoles
 	{
+		[JsonInclude]
 		[JsonPropertyName("dls")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesDls Dls
 		{
@@ -1805,6 +1955,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("file")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesFile File
 		{
@@ -1816,6 +1967,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("native")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesNative Native
 		{
@@ -1830,6 +1982,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class SecurityRolesDls
 	{
+		[JsonInclude]
 		[JsonPropertyName("bit_set_cache")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SecurityRolesDlsBitSetCache BitSetCache
 		{
@@ -1844,6 +1997,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class SecurityRolesDlsBitSetCache
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -1855,6 +2009,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Memory
 		{
@@ -1866,6 +2021,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_in_bytes")]
 		public ulong MemoryInBytes
 		{
@@ -1880,6 +2036,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class SecurityRolesFile
 	{
+		[JsonInclude]
 		[JsonPropertyName("dls")]
 		public bool Dls
 		{
@@ -1891,6 +2048,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fls")]
 		public bool Fls
 		{
@@ -1902,6 +2060,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public long Size
 		{
@@ -1916,6 +2075,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class SecurityRolesNative
 	{
+		[JsonInclude]
 		[JsonPropertyName("dls")]
 		public bool Dls
 		{
@@ -1927,6 +2087,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fls")]
 		public bool Fls
 		{
@@ -1938,6 +2099,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public long Size
 		{
@@ -1952,6 +2114,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Slm : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("policy_count")]
 		public int? PolicyCount
 		{
@@ -1963,6 +2126,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("policy_stats")]
 		public Elastic.Clients.Elasticsearch.Slm.Statistics? PolicyStats
 		{
@@ -1977,6 +2141,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Sql : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("features")]
 		public Dictionary<string, int> Features
 		{
@@ -1988,6 +2153,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("queries")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Xpack.Usage.Query> Queries
 		{
@@ -2002,6 +2168,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Ssl
 	{
+		[JsonInclude]
 		[JsonPropertyName("http")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle Http
 		{
@@ -2013,6 +2180,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FeatureToggle Transport
 		{
@@ -2027,6 +2195,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Vector : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("dense_vector_dims_avg_count")]
 		public int DenseVectorDimsAvgCount
 		{
@@ -2038,6 +2207,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dense_vector_fields_count")]
 		public int DenseVectorFieldsCount
 		{
@@ -2049,6 +2219,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sparse_vector_fields_count")]
 		public int? SparseVectorFieldsCount
 		{
@@ -2063,6 +2234,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class Watcher : Xpack.Usage.Base
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter Count
 		{
@@ -2074,6 +2246,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("execution")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherActions Execution
 		{
@@ -2085,6 +2258,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherWatch Watch
 		{
@@ -2099,6 +2273,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class WatcherActionTotals
 	{
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -2110,6 +2285,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time_in_ms")]
 		public long TotalTimeInMs
 		{
@@ -2124,6 +2300,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class WatcherActions
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherActionTotals> Actions
 		{
@@ -2138,6 +2315,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class WatcherWatch
 	{
+		[JsonInclude]
 		[JsonPropertyName("action")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.Counter>? Action
 		{
@@ -2149,6 +2327,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("condition")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.Counter>? Condition
 		{
@@ -2160,6 +2339,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.Xpack.Usage.Counter> Input
 		{
@@ -2171,6 +2351,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trigger")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherWatchTrigger Trigger
 		{
@@ -2185,6 +2366,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class WatcherWatchTrigger
 	{
+		[JsonInclude]
 		[JsonPropertyName("_all")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter All
 		{
@@ -2196,6 +2378,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("schedule")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.WatcherWatchTriggerSchedule? Schedule
 		{
@@ -2210,6 +2393,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 	public partial class WatcherWatchTriggerSchedule : Xpack.Usage.Counter
 	{
+		[JsonInclude]
 		[JsonPropertyName("_all")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter All
 		{
@@ -2221,6 +2405,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cron")]
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Counter Cron
 		{

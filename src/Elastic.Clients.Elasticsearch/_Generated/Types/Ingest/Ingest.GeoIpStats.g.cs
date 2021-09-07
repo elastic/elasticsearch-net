@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 {
 	public partial class GeoIpDownloadStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("database_count")]
 		public int DatabaseCount
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_downloads")]
 		public int FailedDownloads
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("skipped_updates")]
 		public int SkippedUpdates
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("successful_downloads")]
 		public int SuccessfulDownloads
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_download_time")]
 		public int TotalDownloadTime
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 
 	public partial class GeoIpNodeDatabaseName
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 
 	public partial class GeoIpNodeDatabases
 	{
+		[JsonInclude]
 		[JsonPropertyName("databases")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpNodeDatabaseName> Databases
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("files_in_temp")]
 		public IReadOnlyCollection<string> FilesInTemp
 		{

@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 {
 	public partial class BulkResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("errors")]
 		public bool Errors
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ignored")]
 		public bool Ignored
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{

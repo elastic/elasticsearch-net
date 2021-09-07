@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 {
 	public partial class Overlapping
 	{
+		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
 		public IReadOnlyCollection<string> IndexPatterns
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 
 	public partial class Template
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("overlapping")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate.Overlapping> Overlapping
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object> Settings
 		{

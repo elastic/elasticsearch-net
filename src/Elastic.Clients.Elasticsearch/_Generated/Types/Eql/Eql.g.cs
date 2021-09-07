@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 {
 	public partial class EqlHits<TEvent>
 	{
+		[JsonInclude]
 		[JsonPropertyName("events")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? Events
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sequences")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? Sequences
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.Global.Search.TotalHits? Total
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 	public partial class HitsEvent<TEvent>
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public TEvent Source
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 
 	public partial class HitsSequence<TEvent>
 	{
+		[JsonInclude]
 		[JsonPropertyName("events")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> Events
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("join_keys")]
 		public IReadOnlyCollection<object> JoinKeys
 		{

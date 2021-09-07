@@ -26,18 +26,22 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 {
 	public partial class DocumentRating
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rating")]
 		public int Rating { get; set; }
 	}
 
 	public partial class RankEvalHit
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -49,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -60,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_score")]
 		public double Score
 		{
@@ -71,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -85,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 
 	public partial class RankEvalHitItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("hit")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalHit Hit
 		{
@@ -96,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rating")]
 		public double? Rating
 		{
@@ -110,30 +119,37 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 
 	public partial class RankEvalMetric
 	{
+		[JsonInclude]
 		[JsonPropertyName("dcg")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("expected_reciprocal_rank")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mean_reciprocal_rank")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricPrecision? Precision { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("recall")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricRecall? Recall { get; set; }
 	}
 
 	public partial class RankEvalMetricBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("k")]
 		public int? k { get; set; }
 	}
 
 	public partial class RankEvalMetricDetail
 	{
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalHitItem> Hits
 		{
@@ -145,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metric_details")]
 		public Dictionary<string, Dictionary<string, object>> MetricDetails
 		{
@@ -156,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metric_score")]
 		public double MetricScore
 		{
@@ -167,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unrated_docs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.RankEval.UnratedDocument> UnratedDocs
 		{
@@ -181,12 +200,14 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 
 	public partial class RankEvalMetricDiscountedCumulativeGain : Global.RankEval.RankEvalMetricBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("normalize")]
 		public bool? Normalize { get; set; }
 	}
 
 	public partial class RankEvalMetricExpectedReciprocalRank : Global.RankEval.RankEvalMetricBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("maximum_relevance")]
 		public int MaximumRelevance { get; set; }
 	}
@@ -197,12 +218,14 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 
 	public partial class RankEvalMetricPrecision : Global.RankEval.RankEvalMetricRatingTreshold
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unlabeled")]
 		public bool? IgnoreUnlabeled { get; set; }
 	}
 
 	public partial class RankEvalMetricRatingTreshold : Global.RankEval.RankEvalMetricBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("relevant_rating_threshold")]
 		public int? RelevantRatingThreshold { get; set; }
 	}
@@ -213,33 +236,41 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 
 	public partial class RankEvalQuery
 	{
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 	}
 
 	public partial class RankEvalRequestItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ratings")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.DocumentRating> Ratings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("request")]
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalQuery? Request { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("template_id")]
 		public Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
 	}
 
 	public partial class UnratedDocument
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -251,6 +282,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{

@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 	public partial class GetBasicStatusResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("eligible_to_start_basic")]
 		public bool EligibleToStartBasic
 		{
@@ -42,6 +43,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 	public partial class GetResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("license")]
 		public Elastic.Clients.Elasticsearch.License.Get.LicenseInformation License
 		{
@@ -56,6 +58,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 	public partial class GetTrialStatusResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("eligible_to_start_trial")]
 		public bool EligibleToStartTrial
 		{
@@ -70,6 +73,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 	public partial class PostResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("acknowledge")]
 		public Elastic.Clients.Elasticsearch.License.Post.Acknowledgement? Acknowledge
 		{
@@ -81,6 +85,7 @@ namespace Elastic.Clients.Elasticsearch.License
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("acknowledged")]
 		public bool Acknowledged
 		{
@@ -92,6 +97,7 @@ namespace Elastic.Clients.Elasticsearch.License
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("license_status")]
 		public Elastic.Clients.Elasticsearch.License.LicenseStatus LicenseStatus
 		{
@@ -106,6 +112,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 	public partial class PostStartBasicResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("acknowledge")]
 		public Dictionary<string, Union<string, IReadOnlyCollection<string>>> Acknowledge
 		{
@@ -117,6 +124,7 @@ namespace Elastic.Clients.Elasticsearch.License
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("basic_was_started")]
 		public bool BasicWasStarted
 		{
@@ -128,6 +136,7 @@ namespace Elastic.Clients.Elasticsearch.License
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("error_message")]
 		public string ErrorMessage
 		{
@@ -142,6 +151,7 @@ namespace Elastic.Clients.Elasticsearch.License
 
 	public partial class PostStartTrialResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("error_message")]
 		public string? ErrorMessage
 		{
@@ -153,6 +163,7 @@ namespace Elastic.Clients.Elasticsearch.License
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trial_was_started")]
 		public bool TrialWasStarted
 		{
@@ -164,6 +175,7 @@ namespace Elastic.Clients.Elasticsearch.License
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.License.LicenseType Type
 		{

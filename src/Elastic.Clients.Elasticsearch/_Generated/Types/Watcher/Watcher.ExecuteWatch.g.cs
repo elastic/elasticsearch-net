@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 {
 	public partial class WatchRecord
 	{
+		[JsonInclude]
 		[JsonPropertyName("condition")]
 		public Elastic.Clients.Elasticsearch.Watcher.ConditionContainer Condition
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Elastic.Clients.Elasticsearch.Watcher.InputContainer Input
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("messages")]
 		public IReadOnlyCollection<string> Messages
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public string Node
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionResult Result
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionStatus State
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trigger_event")]
 		public Elastic.Clients.Elasticsearch.Watcher.TriggerEventResult TriggerEvent
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("user")]
 		public Elastic.Clients.Elasticsearch.Username User
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch_id")]
 		public Elastic.Clients.Elasticsearch.Id WatchId
 		{

@@ -112,9 +112,11 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("geo_match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy? GeoMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.Enrich.Policy? Match { get; set; }
 	}

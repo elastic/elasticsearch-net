@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 {
 	public partial class LicenseInformation
 	{
+		[JsonInclude]
 		[JsonPropertyName("expiry_date")]
 		public Elastic.Clients.Elasticsearch.DateString ExpiryDate
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("issue_date")]
 		public Elastic.Clients.Elasticsearch.DateString IssueDate
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("issue_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillis
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("issued_to")]
 		public string IssuedTo
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("issuer")]
 		public string Issuer
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_nodes")]
 		public long MaxNodes
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_resource_units")]
 		public int? MaxResourceUnits
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StartDateInMillis
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.License.LicenseStatus Status
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.License.LicenseType Type
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("uid")]
 		public Elastic.Clients.Elasticsearch.Uuid Uid
 		{

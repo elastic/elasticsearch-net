@@ -104,7 +104,8 @@ namespace Tests.Serialization
 
 			var ms = new MemoryStream(responseJson.Utf8Bytes());
 
-			var serializer = new DefaultHighLevelSerializer();
+			var settings = new ElasticsearchClientSettings();
+			var serializer = new DefaultHighLevelSerializer(settings);
 
 			var response = serializer.Deserialize<HealthResponse>(ms);
 
@@ -177,7 +178,8 @@ namespace Tests.Serialization
 
 			var ms = new MemoryStream(responseJson.Utf8Bytes());
 
-			var serializer = new DefaultHighLevelSerializer();
+			var settings = new ElasticsearchClientSettings();
+			var serializer = new DefaultHighLevelSerializer(settings);
 
 			// TODO
 			//var response = serializer.Deserialize<ClusterAllocationExplainResponse>(ms);

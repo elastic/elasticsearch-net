@@ -26,60 +26,75 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 {
 	public partial class DateHistogramGrouping
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
 		public Elastic.Clients.Elasticsearch.Time? CalendarInterval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("delay")]
 		public Elastic.Clients.Elasticsearch.Time? Delay { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fixed_interval")]
 		public Elastic.Clients.Elasticsearch.Time? FixedInterval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("interval")]
 		public Elastic.Clients.Elasticsearch.Time? Interval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 	}
 
 	public partial class FieldMetric
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
 	}
 
 	public partial class Groupings
 	{
+		[JsonInclude]
 		[JsonPropertyName("date_histogram")]
 		public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogram { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("histogram")]
 		public Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? Histogram { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? Terms { get; set; }
 	}
 
 	public partial class HistogramGrouping
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("interval")]
 		public long Interval { get; set; }
 	}
 
 	public partial class TermsGrouping
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 	}

@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 {
 	public partial class DeleteJobResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("task_failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.DeleteJob.TaskFailure>? TaskFailures
 		{
@@ -38,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 	public partial class GetJobsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJob> Jobs
 		{
@@ -68,6 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 	public partial class RollupSearchResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<Elastic.Clients.Elasticsearch.AggregateName, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations
 		{
@@ -79,6 +82,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
@@ -90,6 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -101,6 +106,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("terminated_early")]
 		public bool? TerminatedEarly
 		{
@@ -112,6 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool TimedOut
 		{
@@ -123,6 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -137,6 +145,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 	public partial class StartJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("started")]
 		public bool Started
 		{
@@ -151,6 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 	public partial class StopJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("stopped")]
 		public bool Stopped
 		{

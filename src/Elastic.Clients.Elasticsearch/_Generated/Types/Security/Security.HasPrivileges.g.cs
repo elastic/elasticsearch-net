@@ -26,21 +26,26 @@ namespace Elastic.Clients.Elasticsearch.Security.HasPrivileges
 {
 	public partial class ApplicationPrivilegesCheck
 	{
+		[JsonInclude]
 		[JsonPropertyName("application")]
 		public string Application { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("privileges")]
 		public IEnumerable<string> Privileges { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("resources")]
 		public IEnumerable<string> Resources { get; set; }
 	}
 
 	public partial class IndexPrivilegesCheck
 	{
+		[JsonInclude]
 		[JsonPropertyName("names")]
 		public IEnumerable<string> Names { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("privileges")]
 		public IEnumerable<string> Privileges { get; set; }
 	}

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 {
 	public partial class BaseNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public Dictionary<string, string> Attributes
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("host")]
 		public Elastic.Clients.Elasticsearch.Host Host
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ip")]
 		public Elastic.Clients.Elasticsearch.Ip Ip
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public Elastic.Clients.Elasticsearch.NodeRoles? Roles
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{

@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class CloseJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("closed")]
 		public bool Closed
 		{
@@ -42,6 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DeleteCalendarJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
@@ -53,6 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -64,6 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_ids")]
 		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
@@ -90,6 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DeleteExpiredDataResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public bool Deleted
 		{
@@ -128,6 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class EstimateModelMemoryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("model_memory_estimate")]
 		public string ModelMemoryEstimate
 		{
@@ -142,6 +148,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class EvaluateDataFrameResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("classification")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummary? Classification
 		{
@@ -153,6 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("outlier_detection")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeOutlierDetectionSummary? OutlierDetection
 		{
@@ -164,6 +172,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("regression")]
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeRegressionSummary? Regression
 		{
@@ -178,6 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class ExplainDataFrameAnalyticsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_selection")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsFieldSelection> FieldSelection
 		{
@@ -189,6 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_estimation")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsMemoryEstimation MemoryEstimation
 		{
@@ -203,6 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class FlushJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("flushed")]
 		public bool Flushed
 		{
@@ -214,6 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_finalized_bucket_end")]
 		public int? LastFinalizedBucketEnd
 		{
@@ -228,6 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class ForecastResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("forecast_id")]
 		public Elastic.Clients.Elasticsearch.Id ForecastId
 		{
@@ -242,6 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetBucketsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("buckets")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.BucketSummary> Buckets
 		{
@@ -253,6 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -267,6 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetCalendarEventsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -278,6 +295,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("events")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events
 		{
@@ -292,6 +310,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetCalendarsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendars")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.GetCalendars.Calendar> Calendars
 		{
@@ -303,6 +322,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -317,6 +337,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetCategoriesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("categories")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Category> Categories
 		{
@@ -328,6 +349,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -342,6 +364,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetDatafeedsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -353,6 +376,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeeds")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Datafeed> Datafeeds
 		{
@@ -367,6 +391,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetDatafeedStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -378,6 +403,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeeds")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DatafeedStats> Datafeeds
 		{
@@ -392,6 +418,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetDataFrameAnalyticsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -403,6 +430,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frame_analytics")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSummary> DataFrameAnalytics
 		{
@@ -417,6 +445,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetDataFrameAnalyticsStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -428,6 +457,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frame_analytics")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalytics> DataFrameAnalytics
 		{
@@ -442,6 +472,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetFiltersResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -453,6 +484,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("filters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Filter> Filters
 		{
@@ -467,6 +499,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetInfluencersResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -478,6 +511,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.BucketInfluencer> Influencers
 		{
@@ -492,6 +526,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetJobsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -503,6 +538,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Job> Jobs
 		{
@@ -517,6 +553,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetJobStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -528,6 +565,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.JobStats> Jobs
 		{
@@ -542,6 +580,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetModelSnapshotsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -553,6 +592,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshots")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.ModelSnapshot> ModelSnapshots
 		{
@@ -567,6 +607,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetOverallBucketsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -578,6 +619,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("overall_buckets")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.OverallBucket> OverallBuckets
 		{
@@ -592,6 +634,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetRecordsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -603,6 +646,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("records")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Anomaly> Records
 		{
@@ -617,6 +661,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetTrainedModelsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -628,6 +673,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trained_model_configs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TrainedModelConfig> TrainedModelConfigs
 		{
@@ -642,6 +688,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class GetTrainedModelsStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -653,6 +700,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trained_model_stats")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TrainedModelStats> TrainedModelStats
 		{
@@ -667,6 +715,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class InfoResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("defaults")]
 		public Elastic.Clients.Elasticsearch.Ml.Info.Defaults Defaults
 		{
@@ -678,6 +727,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("limits")]
 		public Elastic.Clients.Elasticsearch.Ml.Info.Limits Limits
 		{
@@ -689,6 +739,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("native_code")]
 		public Elastic.Clients.Elasticsearch.Ml.Info.NativeCode NativeCode
 		{
@@ -700,6 +751,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("upgrade_mode")]
 		public bool UpgradeMode
 		{
@@ -714,6 +766,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class OpenJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("opened")]
 		public bool Opened
 		{
@@ -728,6 +781,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PostCalendarEventsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("events")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events
 		{
@@ -742,6 +796,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PostDataResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("bucket_count")]
 		public long BucketCount
 		{
@@ -753,6 +808,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("earliest_record_timestamp")]
 		public int EarliestRecordTimestamp
 		{
@@ -764,6 +820,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("empty_bucket_count")]
 		public long EmptyBucketCount
 		{
@@ -775,6 +832,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input_bytes")]
 		public long InputBytes
 		{
@@ -786,6 +844,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input_field_count")]
 		public long InputFieldCount
 		{
@@ -797,6 +856,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input_record_count")]
 		public long InputRecordCount
 		{
@@ -808,6 +868,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("invalid_date_count")]
 		public long InvalidDateCount
 		{
@@ -819,6 +880,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -830,6 +892,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_data_time")]
 		public int LastDataTime
 		{
@@ -841,6 +904,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_record_timestamp")]
 		public int LatestRecordTimestamp
 		{
@@ -852,6 +916,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("missing_field_count")]
 		public long MissingFieldCount
 		{
@@ -863,6 +928,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("out_of_order_timestamp_count")]
 		public long OutOfOrderTimestampCount
 		{
@@ -874,6 +940,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processed_field_count")]
 		public long ProcessedFieldCount
 		{
@@ -885,6 +952,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processed_record_count")]
 		public long ProcessedRecordCount
 		{
@@ -896,6 +964,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sparse_bucket_count")]
 		public long SparseBucketCount
 		{
@@ -910,6 +979,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PreviewDatafeedResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("data")]
 		public IReadOnlyCollection<TDocument> Data
 		{
@@ -924,6 +994,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PreviewDataFrameAnalyticsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("feature_values")]
 		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, string>> FeatureValues
 		{
@@ -938,6 +1009,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PutCalendarJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
@@ -949,6 +1021,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -960,6 +1033,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_ids")]
 		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
@@ -974,6 +1048,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PutCalendarResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
@@ -985,6 +1060,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -996,6 +1072,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_ids")]
 		public Elastic.Clients.Elasticsearch.Ids JobIds
 		{
@@ -1010,6 +1087,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PutDatafeedResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer> Aggregations
 		{
@@ -1021,6 +1099,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig ChunkingConfig
 		{
@@ -1032,6 +1111,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_id")]
 		public Elastic.Clients.Elasticsearch.Id DatafeedId
 		{
@@ -1043,6 +1123,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig
 		{
@@ -1054,6 +1135,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Time Frequency
 		{
@@ -1065,6 +1147,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<string> Indices
 		{
@@ -1076,6 +1159,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices_options")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions
 		{
@@ -1087,6 +1171,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -1098,6 +1183,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_empty_searches")]
 		public int MaxEmptySearches
 		{
@@ -1109,6 +1195,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query
 		{
@@ -1120,6 +1207,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query_delay")]
 		public Elastic.Clients.Elasticsearch.Time QueryDelay
 		{
@@ -1131,6 +1219,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings
 		{
@@ -1142,6 +1231,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields
 		{
@@ -1153,6 +1243,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
 		public int ScrollSize
 		{
@@ -1167,6 +1258,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PutDataFrameAnalyticsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
 		public bool AllowLazyStart
 		{
@@ -1178,6 +1270,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
 		{
@@ -1189,6 +1282,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
 		{
@@ -1200,6 +1294,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long CreateTime
 		{
@@ -1211,6 +1306,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -1222,6 +1318,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
 		{
@@ -1233,6 +1330,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -1244,6 +1342,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int MaxNumThreads
 		{
@@ -1255,6 +1354,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string ModelMemoryLimit
 		{
@@ -1266,6 +1366,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
 		{
@@ -1277,6 +1378,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
@@ -1291,6 +1393,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PutFilterResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -1302,6 +1405,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("filter_id")]
 		public Elastic.Clients.Elasticsearch.Id FilterId
 		{
@@ -1313,6 +1417,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("items")]
 		public IReadOnlyCollection<string> Items
 		{
@@ -1327,6 +1432,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PutJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
 		public bool AllowLazyOpen
 		{
@@ -1338,6 +1444,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
 		{
@@ -1349,6 +1456,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits AnalysisLimits
 		{
@@ -1360,6 +1468,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
 		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval
 		{
@@ -1371,6 +1480,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public Elastic.Clients.Elasticsearch.DateString CreateTime
 		{
@@ -1382,6 +1492,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
 		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings
 		{
@@ -1393,6 +1504,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public long DailyModelSnapshotRetentionAfterDays
 		{
@@ -1404,6 +1516,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_description")]
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
 		{
@@ -1415,6 +1528,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
 		public Elastic.Clients.Elasticsearch.Ml.Datafeed? DatafeedConfig
 		{
@@ -1426,6 +1540,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -1437,6 +1552,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public IReadOnlyCollection<string>? Groups
 		{
@@ -1448,6 +1564,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -1459,6 +1576,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_type")]
 		public string JobType
 		{
@@ -1470,6 +1588,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_version")]
 		public string JobVersion
 		{
@@ -1481,6 +1600,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
 		{
@@ -1492,6 +1612,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_id")]
 		public Elastic.Clients.Elasticsearch.Id? ModelSnapshotId
 		{
@@ -1503,6 +1624,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long ModelSnapshotRetentionDays
 		{
@@ -1514,6 +1636,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("renormalization_window_days")]
 		public long? RenormalizationWindowDays
 		{
@@ -1525,6 +1648,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("results_index_name")]
 		public string ResultsIndexName
 		{
@@ -1536,6 +1660,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("results_retention_days")]
 		public long? ResultsRetentionDays
 		{
@@ -1562,6 +1687,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class RevertModelSnapshotResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("model")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelSnapshot Model
 		{
@@ -1580,6 +1706,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class StartDatafeedResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.NodeIds Node
 		{
@@ -1591,6 +1718,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("started")]
 		public bool Started
 		{
@@ -1605,6 +1733,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class StartDataFrameAnalyticsResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.NodeId Node
 		{
@@ -1619,6 +1748,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class StopDatafeedResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("stopped")]
 		public bool Stopped
 		{
@@ -1633,6 +1763,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class StopDataFrameAnalyticsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("stopped")]
 		public bool Stopped
 		{
@@ -1647,6 +1778,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class UpdateDataFrameAnalyticsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
 		public bool AllowLazyStart
 		{
@@ -1658,6 +1790,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
 		{
@@ -1669,6 +1802,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
 		{
@@ -1680,6 +1814,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long CreateTime
 		{
@@ -1691,6 +1826,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -1702,6 +1838,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
 		{
@@ -1713,6 +1850,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -1724,6 +1862,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int MaxNumThreads
 		{
@@ -1735,6 +1874,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string ModelMemoryLimit
 		{
@@ -1746,6 +1886,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
 		{
@@ -1757,6 +1898,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
@@ -1771,6 +1913,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class UpdateFilterResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -1782,6 +1925,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("filter_id")]
 		public Elastic.Clients.Elasticsearch.Id FilterId
 		{
@@ -1793,6 +1937,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("items")]
 		public IReadOnlyCollection<string> Items
 		{
@@ -1807,6 +1952,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class UpdateJobResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
 		public bool AllowLazyOpen
 		{
@@ -1818,6 +1964,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
 		{
@@ -1829,6 +1976,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits AnalysisLimits
 		{
@@ -1840,6 +1988,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
 		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval
 		{
@@ -1851,6 +2000,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public Elastic.Clients.Elasticsearch.EpochMillis CreateTime
 		{
@@ -1862,6 +2012,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
 		public Dictionary<string, string>? CustomSettings
 		{
@@ -1873,6 +2024,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public long DailyModelSnapshotRetentionAfterDays
 		{
@@ -1884,6 +2036,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_description")]
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
 		{
@@ -1895,6 +2048,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
 		public Elastic.Clients.Elasticsearch.Ml.Datafeed? DatafeedConfig
 		{
@@ -1906,6 +2060,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -1917,6 +2072,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("finished_time")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? FinishedTime
 		{
@@ -1928,6 +2084,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public IReadOnlyCollection<string>? Groups
 		{
@@ -1939,6 +2096,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -1950,6 +2108,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_type")]
 		public string JobType
 		{
@@ -1961,6 +2120,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_version")]
 		public Elastic.Clients.Elasticsearch.VersionString JobVersion
 		{
@@ -1972,6 +2132,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
 		{
@@ -1983,6 +2144,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_id")]
 		public Elastic.Clients.Elasticsearch.Id? ModelSnapshotId
 		{
@@ -1994,6 +2156,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long ModelSnapshotRetentionDays
 		{
@@ -2005,6 +2168,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("renormalization_window_days")]
 		public long? RenormalizationWindowDays
 		{
@@ -2016,6 +2180,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("results_index_name")]
 		public Elastic.Clients.Elasticsearch.IndexName ResultsIndexName
 		{
@@ -2027,6 +2192,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("results_retention_days")]
 		public long? ResultsRetentionDays
 		{
@@ -2041,6 +2207,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class UpdateModelSnapshotResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("model")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelSnapshot Model
 		{
@@ -2055,6 +2222,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class UpgradeJobSnapshotResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("completed")]
 		public bool Completed
 		{
@@ -2066,6 +2234,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.NodeId Node
 		{

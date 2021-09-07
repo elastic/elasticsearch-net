@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 {
 	public partial class ReindexNode : SpecUtils.BaseNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("tasks")]
 		public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Global.ReindexRethrottle.ReindexTask> Tasks
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 
 	public partial class ReindexStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("batches")]
 		public long Batches
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public long Created
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public long Deleted
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("noops")]
 		public long Noops
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("requests_per_second")]
 		public float RequestsPerSecond
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retries")]
 		public Elastic.Clients.Elasticsearch.Retries Retries
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
 		public long ThrottledMillis
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
 		public long ThrottledUntilMillis
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("updated")]
 		public long Updated
 		{
@@ -150,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_conflicts")]
 		public long VersionConflicts
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 
 	public partial class ReindexTask
 	{
+		[JsonInclude]
 		[JsonPropertyName("action")]
 		public string Action
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cancellable")]
 		public bool Cancellable
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("headers")]
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public long Id
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.Name Node
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("running_time_in_nanos")]
 		public long RunningTimeInNanos
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public long StartTimeInMillis
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Global.ReindexRethrottle.ReindexStatus Status
 		{
@@ -263,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{

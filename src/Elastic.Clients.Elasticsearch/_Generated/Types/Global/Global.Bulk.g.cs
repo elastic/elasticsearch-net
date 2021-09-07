@@ -38,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 
 	public partial class ResponseItemBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("error")]
 		public Elastic.Clients.Elasticsearch.ErrorCause? Error
 		{
@@ -49,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]
 		public bool? ForcedRefresh
 		{
@@ -60,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("get")]
 		public Elastic.Clients.Elasticsearch.InlineGet<Dictionary<string, object>>? Get
 		{
@@ -71,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public string Index
 		{
@@ -82,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long? PrimaryTerm
 		{
@@ -93,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result")]
 		public string? Result
 		{
@@ -104,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
@@ -115,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
@@ -126,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public int Status
 		{
@@ -137,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public string? Type
 		{
@@ -148,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -162,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 
 	public partial class ResponseItemContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("create")]
 		public Elastic.Clients.Elasticsearch.Global.Bulk.CreateResponseItem? Create
 		{
@@ -173,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delete")]
 		public Elastic.Clients.Elasticsearch.Global.Bulk.DeleteResponseItem? Delete
 		{
@@ -184,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Global.Bulk.IndexResponseItem? Index
 		{
@@ -195,6 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("update")]
 		public Elastic.Clients.Elasticsearch.Global.Bulk.UpdateResponseItem? Update
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 {
 	public partial class Context
 	{
+		[JsonInclude]
 		[JsonPropertyName("methods")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.GetScriptContext.ContextMethod> Methods
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 
 	public partial class ContextMethod
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.GetScriptContext.ContextMethodParam> Params
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("return_type")]
 		public string ReturnType
 		{
@@ -87,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 
 	public partial class ContextMethodParam
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptContext
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceCredentials
 {
 	public partial class NodesCredentials
 	{
+		[JsonInclude]
 		[JsonPropertyName("file_tokens")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.GetServiceCredentials.NodesCredentialsFileToken> FileTokens
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceCredentials
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics Nodes
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceCredentials
 
 	public partial class NodesCredentialsFileToken
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public IReadOnlyCollection<string> Nodes
 		{

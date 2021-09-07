@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 {
 	public partial class FieldStat
 	{
+		[JsonInclude]
 		[JsonPropertyName("cardinality")]
 		public int Cardinality
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("earliest")]
 		public string? Earliest
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest")]
 		public string? Latest
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_value")]
 		public int? MaxValue
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mean_value")]
 		public int? MeanValue
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("median_value")]
 		public int? MedianValue
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_value")]
 		public int? MinValue
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("top_hits")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.FindStructure.TopHit> TopHits
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 
 	public partial class TopHit
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.FindStructure
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public object Value
 		{

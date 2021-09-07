@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 {
 	public partial class HotThread
 	{
+		[JsonInclude]
 		[JsonPropertyName("hosts")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Host> Hosts
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_name")]
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("threads")]
 		public IReadOnlyCollection<string> Threads
 		{

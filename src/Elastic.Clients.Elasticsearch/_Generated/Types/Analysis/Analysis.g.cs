@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 {
 	public partial class AsciiFoldingTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class CharFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -65,6 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class CharGroupTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("tokenize_on_chars")]
 		public IReadOnlyCollection<string> TokenizeOnChars
 		{
@@ -79,6 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("common_words")]
 		public IReadOnlyCollection<string> CommonWords
 		{
@@ -90,6 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("common_words_path")]
 		public string CommonWordsPath
 		{
@@ -101,6 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
 		public bool IgnoreCase
 		{
@@ -112,6 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query_mode")]
 		public bool QueryMode
 		{
@@ -126,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class CompoundWordTokenFilterBase : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("hyphenation_patterns_path")]
 		public string HyphenationPatternsPath
 		{
@@ -137,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_subword_size")]
 		public int MaxSubwordSize
 		{
@@ -148,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_subword_size")]
 		public int MinSubwordSize
 		{
@@ -159,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_word_size")]
 		public int MinWordSize
 		{
@@ -170,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("only_longest_match")]
 		public bool OnlyLongestMatch
 		{
@@ -181,6 +194,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("word_list")]
 		public IReadOnlyCollection<string> WordList
 		{
@@ -192,6 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("word_list_path")]
 		public string WordListPath
 		{
@@ -206,6 +221,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class ConditionTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IReadOnlyCollection<string> Filter
 		{
@@ -217,6 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script
 		{
@@ -231,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("delimiter")]
 		public string Delimiter
 		{
@@ -242,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("encoding")]
 		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Encoding
 		{
@@ -256,6 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class EdgeNGramTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_gram")]
 		public int MaxGram
 		{
@@ -267,6 +287,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_gram")]
 		public int MinGram
 		{
@@ -278,6 +299,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("side")]
 		public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide Side
 		{
@@ -292,6 +314,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("custom_token_chars")]
 		public string CustomTokenChars
 		{
@@ -303,6 +326,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_gram")]
 		public int MaxGram
 		{
@@ -314,6 +338,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_gram")]
 		public int MinGram
 		{
@@ -325,6 +350,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token_chars")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars
 		{
@@ -339,6 +365,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class ElisionTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("articles")]
 		public IReadOnlyCollection<string> Articles
 		{
@@ -350,6 +377,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("articles_case")]
 		public bool ArticlesCase
 		{
@@ -364,6 +392,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class FingerprintTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_output_size")]
 		public int MaxOutputSize
 		{
@@ -375,6 +404,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("separator")]
 		public string Separator
 		{
@@ -393,6 +423,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class HunspellTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("dedup")]
 		public bool Dedup
 		{
@@ -404,6 +435,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dictionary")]
 		public string Dictionary
 		{
@@ -415,6 +447,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("locale")]
 		public string Locale
 		{
@@ -426,6 +459,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("longest_only")]
 		public bool LongestOnly
 		{
@@ -448,6 +482,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode Mode
 		{
@@ -459,6 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("types")]
 		public IReadOnlyCollection<string> Types
 		{
@@ -473,6 +509,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class KeepWordsTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("keep_words")]
 		public IReadOnlyCollection<string> KeepWords
 		{
@@ -484,6 +521,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keep_words_case")]
 		public bool KeepWordsCase
 		{
@@ -495,6 +533,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keep_words_path")]
 		public string KeepWordsPath
 		{
@@ -509,6 +548,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class KeywordMarkerTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
 		public bool IgnoreCase
 		{
@@ -520,6 +560,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keywords")]
 		public IReadOnlyCollection<string> Keywords
 		{
@@ -531,6 +572,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keywords_path")]
 		public string KeywordsPath
 		{
@@ -542,6 +584,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keywords_pattern")]
 		public string KeywordsPattern
 		{
@@ -556,6 +599,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class KeywordTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
 		public int BufferSize
 		{
@@ -570,6 +614,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class LengthTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max")]
 		public int Max
 		{
@@ -581,6 +626,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min")]
 		public int Min
 		{
@@ -599,6 +645,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("consume_all_tokens")]
 		public bool ConsumeAllTokens
 		{
@@ -610,6 +657,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_token_count")]
 		public int MaxTokenCount
 		{
@@ -624,6 +672,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class LowercaseTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("language")]
 		public string Language
 		{
@@ -642,6 +691,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class MappingCharFilter : Analysis.CharFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public IReadOnlyCollection<string> Mappings
 		{
@@ -653,6 +703,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings_path")]
 		public string MappingsPath
 		{
@@ -667,6 +718,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class MultiplexerTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("filters")]
 		public IReadOnlyCollection<string> Filters
 		{
@@ -678,6 +730,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal
 		{
@@ -692,6 +745,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class NGramTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_gram")]
 		public int MaxGram
 		{
@@ -703,6 +757,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_gram")]
 		public int MinGram
 		{
@@ -717,6 +772,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class NGramTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("custom_token_chars")]
 		public string CustomTokenChars
 		{
@@ -728,6 +784,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_gram")]
 		public int MaxGram
 		{
@@ -739,6 +796,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_gram")]
 		public int MinGram
 		{
@@ -750,6 +808,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token_chars")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars
 		{
@@ -764,6 +823,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class NoriPartOfSpeechTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("stoptags")]
 		public IReadOnlyCollection<string> Stoptags
 		{
@@ -778,6 +838,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class NoriTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("decompound_mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode DecompoundMode
 		{
@@ -789,6 +850,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("discard_punctuation")]
 		public bool DiscardPunctuation
 		{
@@ -800,6 +862,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
 		public string UserDictionary
 		{
@@ -811,6 +874,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("user_dictionary_rules")]
 		public IReadOnlyCollection<string> UserDictionaryRules
 		{
@@ -825,6 +889,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class PathHierarchyTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
 		public int BufferSize
 		{
@@ -836,6 +901,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delimiter")]
 		public string Delimiter
 		{
@@ -847,6 +913,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("replacement")]
 		public string Replacement
 		{
@@ -858,6 +925,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reverse")]
 		public bool Reverse
 		{
@@ -869,6 +937,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("skip")]
 		public int Skip
 		{
@@ -883,6 +952,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class PatternCaptureTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("patterns")]
 		public IReadOnlyCollection<string> Patterns
 		{
@@ -894,6 +964,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal
 		{
@@ -908,6 +979,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class PatternReplaceTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("flags")]
 		public string Flags
 		{
@@ -919,6 +991,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pattern")]
 		public string Pattern
 		{
@@ -930,6 +1003,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("replacement")]
 		public string Replacement
 		{
@@ -948,6 +1022,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class PredicateTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script
 		{
@@ -970,6 +1045,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class ShingleTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("filler_token")]
 		public string FillerToken
 		{
@@ -981,6 +1057,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_shingle_size")]
 		public int MaxShingleSize
 		{
@@ -992,6 +1069,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_shingle_size")]
 		public int MinShingleSize
 		{
@@ -1003,6 +1081,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("output_unigrams")]
 		public bool OutputUnigrams
 		{
@@ -1014,6 +1093,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("output_unigrams_if_no_shingles")]
 		public bool OutputUnigramsIfNoShingles
 		{
@@ -1025,6 +1105,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token_separator")]
 		public string TokenSeparator
 		{
@@ -1039,6 +1120,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class SnowballTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("language")]
 		public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language
 		{
@@ -1053,6 +1135,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class StandardTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int MaxTokenLength
 		{
@@ -1067,6 +1150,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("rules")]
 		public IReadOnlyCollection<string> Rules
 		{
@@ -1078,6 +1162,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rules_path")]
 		public string RulesPath
 		{
@@ -1092,6 +1177,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class StemmerTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("language")]
 		public string Language
 		{
@@ -1106,6 +1192,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class StopTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
 		public bool? IgnoreCase
 		{
@@ -1117,6 +1204,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remove_trailing")]
 		public bool? RemoveTrailing
 		{
@@ -1128,6 +1216,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
 		{
@@ -1139,6 +1228,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath
 		{
@@ -1153,6 +1243,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("expand")]
 		public bool Expand
 		{
@@ -1164,6 +1255,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat Format
 		{
@@ -1175,6 +1267,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool Lenient
 		{
@@ -1186,6 +1279,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("synonyms")]
 		public IReadOnlyCollection<string> Synonyms
 		{
@@ -1197,6 +1291,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("synonyms_path")]
 		public string SynonymsPath
 		{
@@ -1208,6 +1303,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
 		public string Tokenizer
 		{
@@ -1219,6 +1315,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("updateable")]
 		public bool Updateable
 		{
@@ -1233,6 +1330,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class SynonymTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("expand")]
 		public bool Expand
 		{
@@ -1244,6 +1342,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat Format
 		{
@@ -1255,6 +1354,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool Lenient
 		{
@@ -1266,6 +1366,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("synonyms")]
 		public IReadOnlyCollection<string> Synonyms
 		{
@@ -1277,6 +1378,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("synonyms_path")]
 		public string SynonymsPath
 		{
@@ -1288,6 +1390,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
 		public string Tokenizer
 		{
@@ -1299,6 +1402,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("updateable")]
 		public bool Updateable
 		{
@@ -1313,6 +1417,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -1324,6 +1429,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -1338,6 +1444,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -1349,6 +1456,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -1367,6 +1475,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class TruncateTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("length")]
 		public int Length
 		{
@@ -1381,6 +1490,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int MaxTokenLength
 		{
@@ -1395,6 +1505,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class UniqueTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("only_on_same_position")]
 		public bool OnlyOnSamePosition
 		{
@@ -1413,6 +1524,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class WhitespaceTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int MaxTokenLength
 		{
@@ -1427,6 +1539,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("adjust_offsets")]
 		public bool AdjustOffsets
 		{
@@ -1438,6 +1551,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("catenate_all")]
 		public bool CatenateAll
 		{
@@ -1449,6 +1563,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("catenate_numbers")]
 		public bool CatenateNumbers
 		{
@@ -1460,6 +1575,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("catenate_words")]
 		public bool CatenateWords
 		{
@@ -1471,6 +1587,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("generate_number_parts")]
 		public bool GenerateNumberParts
 		{
@@ -1482,6 +1599,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("generate_word_parts")]
 		public bool GenerateWordParts
 		{
@@ -1493,6 +1611,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal
 		{
@@ -1504,6 +1623,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("protected_words")]
 		public IReadOnlyCollection<string> ProtectedWords
 		{
@@ -1515,6 +1635,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("protected_words_path")]
 		public string ProtectedWordsPath
 		{
@@ -1526,6 +1647,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("split_on_case_change")]
 		public bool SplitOnCaseChange
 		{
@@ -1537,6 +1659,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("split_on_numerics")]
 		public bool SplitOnNumerics
 		{
@@ -1548,6 +1671,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stem_english_possessive")]
 		public bool StemEnglishPossessive
 		{
@@ -1559,6 +1683,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type_table")]
 		public IReadOnlyCollection<string> TypeTable
 		{
@@ -1570,6 +1695,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type_table_path")]
 		public string TypeTablePath
 		{
@@ -1584,6 +1710,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class WordDelimiterTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("catenate_all")]
 		public bool CatenateAll
 		{
@@ -1595,6 +1722,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("catenate_numbers")]
 		public bool CatenateNumbers
 		{
@@ -1606,6 +1734,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("catenate_words")]
 		public bool CatenateWords
 		{
@@ -1617,6 +1746,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("generate_number_parts")]
 		public bool GenerateNumberParts
 		{
@@ -1628,6 +1758,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("generate_word_parts")]
 		public bool GenerateWordParts
 		{
@@ -1639,6 +1770,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal
 		{
@@ -1650,6 +1782,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("protected_words")]
 		public IReadOnlyCollection<string> ProtectedWords
 		{
@@ -1661,6 +1794,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("protected_words_path")]
 		public string ProtectedWordsPath
 		{
@@ -1672,6 +1806,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("split_on_case_change")]
 		public bool SplitOnCaseChange
 		{
@@ -1683,6 +1818,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("split_on_numerics")]
 		public bool SplitOnNumerics
 		{
@@ -1694,6 +1830,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stem_english_possessive")]
 		public bool StemEnglishPossessive
 		{
@@ -1705,6 +1842,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type_table")]
 		public IReadOnlyCollection<string> TypeTable
 		{
@@ -1716,6 +1854,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type_table_path")]
 		public string TypeTablePath
 		{

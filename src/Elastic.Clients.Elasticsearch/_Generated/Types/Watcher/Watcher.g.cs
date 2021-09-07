@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 {
 	public partial class AcknowledgeState
 	{
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Watcher.AcknowledgementOptions State
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
@@ -51,42 +53,54 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class Action
 	{
+		[JsonInclude]
 		[JsonPropertyName("action_type")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionType? ActionType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("condition")]
 		public Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? Condition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("foreach")]
 		public string? Foreach { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Watcher.Index? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("logging")]
 		public Elastic.Clients.Elasticsearch.Watcher.Logging? Logging { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_iterations")]
 		public int? MaxIterations { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("throttle_period")]
 		public Elastic.Clients.Elasticsearch.Time? ThrottlePeriod { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("throttle_period_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottlePeriodInMillis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public Elastic.Clients.Elasticsearch.TransformContainer? Transform { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("webhook")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionWebhook? Webhook { get; set; }
 	}
 
 	public partial class ActionStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("ack")]
 		public Elastic.Clients.Elasticsearch.Watcher.AcknowledgeState Ack
 		{
@@ -98,6 +112,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_execution")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionState? LastExecution
 		{
@@ -109,6 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_successful_execution")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionState? LastSuccessfulExecution
 		{
@@ -120,6 +136,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_throttle")]
 		public Elastic.Clients.Elasticsearch.Watcher.ThrottleState? LastThrottle
 		{
@@ -134,24 +151,29 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ActionWebhook
 	{
+		[JsonInclude]
 		[JsonPropertyName("host")]
 		public Elastic.Clients.Elasticsearch.Host Host { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("port")]
 		public int Port { get; set; }
 	}
 
 	public partial class ActivationState
 	{
+		[JsonInclude]
 		[JsonPropertyName("active")]
 		public bool Active { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.Timestamp Timestamp { get; set; }
 	}
 
 	public partial class ActivationStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public Elastic.Clients.Elasticsearch.Watcher.Actions Actions
 		{
@@ -163,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActivationState State
 		{
@@ -174,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -192,90 +216,113 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ArrayCompareCondition
 	{
+		[JsonInclude]
 		[JsonPropertyName("array_path")]
 		public string ArrayPath { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("comparison")]
 		public string Comparison { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string Path { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("quantifier")]
 		public Elastic.Clients.Elasticsearch.Watcher.Quantifier Quantifier { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public object Value { get; set; }
 	}
 
 	public partial class ChainInput
 	{
+		[JsonInclude]
 		[JsonPropertyName("inputs")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.InputContainer> Inputs { get; set; }
 	}
 
 	public partial class CompareCondition
 	{
+		[JsonInclude]
 		[JsonPropertyName("comparison")]
 		public string? Comparison { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ctx.payload.match")]
 		public Elastic.Clients.Elasticsearch.Watcher.CompareContextPayloadCondition? CtxPayloadMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ctx.payload.value")]
 		public Elastic.Clients.Elasticsearch.Watcher.CompareContextPayloadCondition? CtxPayloadValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string? Path { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public object? Value { get; set; }
 	}
 
 	public partial class CompareContextPayloadCondition
 	{
+		[JsonInclude]
 		[JsonPropertyName("eq")]
 		public object? Eq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("gt")]
 		public object? Gt { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("gte")]
 		public object? Gte { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lt")]
 		public object? Lt { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lte")]
 		public object? Lte { get; set; }
 	}
 
 	public partial class ConditionContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("always")]
 		public Elastic.Clients.Elasticsearch.Watcher.AlwaysCondition? Always { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("array_compare")]
 		public Elastic.Clients.Elasticsearch.Watcher.ArrayCompareCondition? ArrayCompare { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("compare")]
 		public Elastic.Clients.Elasticsearch.Watcher.CompareCondition? Compare { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("never")]
 		public Elastic.Clients.Elasticsearch.Watcher.NeverCondition? Never { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Watcher.ScriptCondition? Script { get; set; }
 	}
 
 	public partial class DailySchedule
 	{
+		[JsonInclude]
 		[JsonPropertyName("at")]
 		public Union<IEnumerable<string>, Elastic.Clients.Elasticsearch.Watcher.TimeOfDay> At { get; set; }
 	}
 
 	public partial class EmailResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("account")]
 		public string? Account
 		{
@@ -287,6 +334,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("message")]
 		public Elastic.Clients.Elasticsearch.Watcher.EmailResult Message
 		{
@@ -298,6 +346,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string? Reason
 		{
@@ -312,6 +361,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecutionResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.ExecutionResultAction> Actions
 		{
@@ -323,6 +373,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("condition")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionResultCondition Condition
 		{
@@ -334,6 +385,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("execution_duration")]
 		public int ExecutionDuration
 		{
@@ -345,6 +397,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("execution_time")]
 		public Elastic.Clients.Elasticsearch.DateString ExecutionTime
 		{
@@ -356,6 +409,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionResultInput Input
 		{
@@ -370,6 +424,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecutionResultAction
 	{
+		[JsonInclude]
 		[JsonPropertyName("email")]
 		public Elastic.Clients.Elasticsearch.Watcher.EmailResult? Email
 		{
@@ -381,6 +436,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -392,6 +448,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Watcher.IndexResult? Index
 		{
@@ -403,6 +460,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("logging")]
 		public Elastic.Clients.Elasticsearch.Watcher.LoggingResult? Logging
 		{
@@ -414,6 +472,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pagerduty")]
 		public Elastic.Clients.Elasticsearch.Watcher.PagerDutyResult? Pagerduty
 		{
@@ -425,6 +484,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string? Reason
 		{
@@ -436,6 +496,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("slack")]
 		public Elastic.Clients.Elasticsearch.Watcher.SlackResult? Slack
 		{
@@ -447,6 +508,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions Status
 		{
@@ -458,6 +520,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionType Type
 		{
@@ -469,6 +532,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("webhook")]
 		public Elastic.Clients.Elasticsearch.Watcher.WebhookResult? Webhook
 		{
@@ -483,6 +547,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecutionResultCondition
 	{
+		[JsonInclude]
 		[JsonPropertyName("met")]
 		public bool Met
 		{
@@ -494,6 +559,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions Status
 		{
@@ -505,6 +571,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Watcher.ConditionType Type
 		{
@@ -519,6 +586,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecutionResultInput
 	{
+		[JsonInclude]
 		[JsonPropertyName("payload")]
 		public Dictionary<string, object> Payload
 		{
@@ -530,6 +598,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions Status
 		{
@@ -541,6 +610,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Watcher.InputType Type
 		{
@@ -555,6 +625,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecutionState
 	{
+		[JsonInclude]
 		[JsonPropertyName("successful")]
 		public bool Successful
 		{
@@ -566,6 +637,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
@@ -580,6 +652,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ExecutionThreadPool
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_size")]
 		public long MaxSize
 		{
@@ -591,6 +664,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("queue_size")]
 		public long QueueSize
 		{
@@ -605,87 +679,110 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class HourlySchedule
 	{
+		[JsonInclude]
 		[JsonPropertyName("minute")]
 		public IEnumerable<int> Minute { get; set; }
 	}
 
 	public partial class HttpInput
 	{
+		[JsonInclude]
 		[JsonPropertyName("extract")]
 		public IEnumerable<string>? Extract { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("http")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInput? Http { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("request")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputRequestDefinition? Request { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("response_content_type")]
 		public Elastic.Clients.Elasticsearch.Watcher.ResponseContentType? ResponseContentType { get; set; }
 	}
 
 	public partial class HttpInputAuthentication
 	{
+		[JsonInclude]
 		[JsonPropertyName("basic")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputBasicAuthentication Basic { get; set; }
 	}
 
 	public partial class HttpInputBasicAuthentication
 	{
+		[JsonInclude]
 		[JsonPropertyName("password")]
 		public Elastic.Clients.Elasticsearch.Password Password { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username Username { get; set; }
 	}
 
 	public partial class HttpInputProxy
 	{
+		[JsonInclude]
 		[JsonPropertyName("host")]
 		public Elastic.Clients.Elasticsearch.Host Host { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("port")]
 		public uint Port { get; set; }
 	}
 
 	public partial class HttpInputRequestDefinition
 	{
+		[JsonInclude]
 		[JsonPropertyName("auth")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputAuthentication? Auth { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("body")]
 		public string? Body { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("connection_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? ConnectionTimeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("headers")]
 		public Dictionary<string, string>? Headers { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("host")]
 		public Elastic.Clients.Elasticsearch.Host? Host { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("method")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputMethod? Method { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, string>? Params { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string? Path { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("port")]
 		public uint? Port { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("proxy")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputProxy? Proxy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("read_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? ReadTimeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scheme")]
 		public Elastic.Clients.Elasticsearch.Watcher.ConnectionScheme? Scheme { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("url")]
 		public string? Url { get; set; }
 	}
@@ -696,6 +793,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class HttpInputResponseResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("body")]
 		public string Body
 		{
@@ -707,6 +805,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("headers")]
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
@@ -718,6 +817,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public int Status
 		{
@@ -732,15 +832,18 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class Index
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc_id")]
 		public Elastic.Clients.Elasticsearch.Id? DocId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("refresh")]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get; set; }
 	}
 
 	public partial class IndexResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("response")]
 		public Elastic.Clients.Elasticsearch.Watcher.IndexResultSummary Response
 		{
@@ -755,6 +858,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class IndexResultSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public bool Created
 		{
@@ -766,6 +870,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -777,6 +882,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -788,6 +894,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result")]
 		public Elastic.Clients.Elasticsearch.Result Result
 		{
@@ -799,6 +906,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -810,6 +918,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -824,48 +933,60 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class IndicesOptions
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_no_indices")]
 		public bool? AllowNoIndices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("expand_wildcards")]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_throttled")]
 		public bool? IgnoreThrottled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unavailable")]
 		public bool? IgnoreUnavailable { get; set; }
 	}
 
 	public partial class InputContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("chain")]
 		public Elastic.Clients.Elasticsearch.Watcher.ChainInput? Chain { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("http")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInput? Http { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search")]
 		public Elastic.Clients.Elasticsearch.Watcher.SearchInput? Search { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("simple")]
 		public Dictionary<string, object>? Simple { get; set; }
 	}
 
 	public partial class Logging
 	{
+		[JsonInclude]
 		[JsonPropertyName("category")]
 		public string? Category { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("level")]
 		public string? Level { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string Text { get; set; }
 	}
 
 	public partial class LoggingResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("logged_text")]
 		public string LoggedText
 		{
@@ -884,6 +1005,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class PagerDutyActionEventResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("event")]
 		public Elastic.Clients.Elasticsearch.Watcher.PagerDutyEvent Event
 		{
@@ -895,6 +1017,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -906,6 +1029,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("request")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputRequestResult Request
 		{
@@ -917,6 +1041,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("response")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputResponseResult Response
 		{
@@ -931,6 +1056,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class PagerDutyContext
 	{
+		[JsonInclude]
 		[JsonPropertyName("href")]
 		public string Href
 		{
@@ -942,6 +1068,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("src")]
 		public string Src
 		{
@@ -953,6 +1080,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Watcher.PagerDutyContextType Type
 		{
@@ -967,6 +1095,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class PagerDutyEvent
 	{
+		[JsonInclude]
 		[JsonPropertyName("account")]
 		public string Account
 		{
@@ -978,6 +1107,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("attach_payload")]
 		public bool AttachPayload
 		{
@@ -989,6 +1119,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("client")]
 		public string Client
 		{
@@ -1000,6 +1131,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("client_url")]
 		public string ClientUrl
 		{
@@ -1011,6 +1143,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("context")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.PagerDutyContext> Context
 		{
@@ -1022,6 +1155,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -1033,6 +1167,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("event_type")]
 		public Elastic.Clients.Elasticsearch.Watcher.PagerDutyEventType EventType
 		{
@@ -1044,6 +1179,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("incident_key")]
 		public string IncidentKey
 		{
@@ -1058,6 +1194,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class PagerDutyResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("sent_event")]
 		public Elastic.Clients.Elasticsearch.Watcher.PagerDutyActionEventResult SentEvent
 		{
@@ -1072,6 +1209,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class QueryWatch
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -1083,6 +1221,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public int? PrimaryTerm
 		{
@@ -1094,6 +1233,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
@@ -1105,6 +1245,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status
 		{
@@ -1116,6 +1257,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch")]
 		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch
 		{
@@ -1130,102 +1272,128 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ScheduleContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("cron")]
 		public Elastic.Clients.Elasticsearch.Watcher.CronExpression? Cron { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("daily")]
 		public Elastic.Clients.Elasticsearch.Watcher.DailySchedule? Daily { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("hourly")]
 		public Elastic.Clients.Elasticsearch.Watcher.HourlySchedule? Hourly { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("interval")]
 		public Elastic.Clients.Elasticsearch.Time? Interval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("monthly")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.TimeOfMonth>? Monthly { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("weekly")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.TimeOfWeek>? Weekly { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("yearly")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.TimeOfYear>? Yearly { get; set; }
 	}
 
 	public partial class ScheduleTriggerEvent
 	{
+		[JsonInclude]
 		[JsonPropertyName("scheduled_time")]
 		public Union<Elastic.Clients.Elasticsearch.DateString, string> ScheduledTime { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("triggered_time")]
 		public Union<Elastic.Clients.Elasticsearch.DateString, string>? TriggeredTime { get; set; }
 	}
 
 	public partial class ScriptCondition
 	{
+		[JsonInclude]
 		[JsonPropertyName("lang")]
 		public string Lang { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source { get; set; }
 	}
 
 	public partial class SearchInput
 	{
+		[JsonInclude]
 		[JsonPropertyName("extract")]
 		public IEnumerable<string>? Extract { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("request")]
 		public Elastic.Clients.Elasticsearch.Watcher.SearchInputRequestDefinition Request { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 	}
 
 	public partial class SearchInputRequestBody
 	{
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 	}
 
 	public partial class SearchInputRequestDefinition
 	{
+		[JsonInclude]
 		[JsonPropertyName("body")]
 		public Elastic.Clients.Elasticsearch.Watcher.SearchInputRequestBody? Body { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices_options")]
 		public Elastic.Clients.Elasticsearch.Watcher.IndicesOptions? IndicesOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rest_total_hits_as_int")]
 		public bool? RestTotalHitsAsInt { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_type")]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.SearchTemplateRequest? Template { get; set; }
 	}
 
 	public partial class SimulatedActions
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public IEnumerable<string> Actions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("all")]
 		public Elastic.Clients.Elasticsearch.Watcher.SimulatedActions All { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_all")]
 		public bool UseAll { get; set; }
 	}
 
 	public partial class SlackAttachment
 	{
+		[JsonInclude]
 		[JsonPropertyName("author_icon")]
 		public string? AuthorIcon
 		{
@@ -1237,6 +1405,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("author_link")]
 		public string? AuthorLink
 		{
@@ -1248,6 +1417,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("author_name")]
 		public string AuthorName
 		{
@@ -1259,6 +1429,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("color")]
 		public string? Color
 		{
@@ -1270,6 +1441,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fallback")]
 		public string? Fallback
 		{
@@ -1281,6 +1453,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.SlackAttachmentField>? Fields
 		{
@@ -1292,6 +1465,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("footer")]
 		public string? Footer
 		{
@@ -1303,6 +1477,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("footer_icon")]
 		public string? FooterIcon
 		{
@@ -1314,6 +1489,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("image_url")]
 		public string? ImageUrl
 		{
@@ -1325,6 +1501,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pretext")]
 		public string? Pretext
 		{
@@ -1336,6 +1513,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string? Text
 		{
@@ -1347,6 +1525,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("thumb_url")]
 		public string? ThumbUrl
 		{
@@ -1358,6 +1537,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("title")]
 		public string Title
 		{
@@ -1369,6 +1549,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("title_link")]
 		public string? TitleLink
 		{
@@ -1380,6 +1561,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ts")]
 		public Elastic.Clients.Elasticsearch.DateString? Ts
 		{
@@ -1394,6 +1576,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class SlackAttachmentField
 	{
+		[JsonInclude]
 		[JsonPropertyName("short")]
 		public bool Short
 		{
@@ -1405,6 +1588,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("title")]
 		public string Title
 		{
@@ -1416,6 +1600,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value
 		{
@@ -1430,6 +1615,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class SlackDynamicAttachment
 	{
+		[JsonInclude]
 		[JsonPropertyName("attachment_template")]
 		public Elastic.Clients.Elasticsearch.Watcher.SlackAttachment AttachmentTemplate
 		{
@@ -1441,6 +1627,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("list_path")]
 		public string ListPath
 		{
@@ -1455,6 +1642,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class SlackMessage
 	{
+		[JsonInclude]
 		[JsonPropertyName("attachments")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.SlackAttachment> Attachments
 		{
@@ -1466,6 +1654,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic_attachments")]
 		public Elastic.Clients.Elasticsearch.Watcher.SlackDynamicAttachment? DynamicAttachments
 		{
@@ -1477,6 +1666,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("from")]
 		public string From
 		{
@@ -1488,6 +1678,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("icon")]
 		public string? Icon
 		{
@@ -1499,6 +1690,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string Text
 		{
@@ -1510,6 +1702,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("to")]
 		public IReadOnlyCollection<string> To
 		{
@@ -1524,6 +1717,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class SlackResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("account")]
 		public string? Account
 		{
@@ -1535,6 +1729,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("message")]
 		public Elastic.Clients.Elasticsearch.Watcher.SlackMessage Message
 		{
@@ -1549,6 +1744,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class ThrottleState
 	{
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -1560,6 +1756,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
@@ -1574,51 +1771,62 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class TimeOfDay
 	{
+		[JsonInclude]
 		[JsonPropertyName("hour")]
 		public IEnumerable<int> Hour { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minute")]
 		public IEnumerable<int> Minute { get; set; }
 	}
 
 	public partial class TimeOfMonth
 	{
+		[JsonInclude]
 		[JsonPropertyName("at")]
 		public IEnumerable<string> At { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("on")]
 		public IEnumerable<int> On { get; set; }
 	}
 
 	public partial class TimeOfWeek
 	{
+		[JsonInclude]
 		[JsonPropertyName("at")]
 		public IEnumerable<string> At { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("on")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Day> On { get; set; }
 	}
 
 	public partial class TimeOfYear
 	{
+		[JsonInclude]
 		[JsonPropertyName("at")]
 		public IEnumerable<string> At { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("int")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Month> Int { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("on")]
 		public IEnumerable<int> On { get; set; }
 	}
 
 	public partial class TriggerContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("schedule")]
 		public Elastic.Clients.Elasticsearch.Watcher.ScheduleContainer Schedule { get; set; }
 	}
 
 	public partial class TriggerEventContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("schedule")]
 		public Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent Schedule
 		{
@@ -1633,6 +1841,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class TriggerEventResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("manual")]
 		public Elastic.Clients.Elasticsearch.Watcher.TriggerEventContainer Manual
 		{
@@ -1644,6 +1853,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("triggered_time")]
 		public Elastic.Clients.Elasticsearch.DateString TriggeredTime
 		{
@@ -1655,6 +1865,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -1669,57 +1880,73 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 	public partial class Watch
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Watcher.Action> Actions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("condition")]
 		public Elastic.Clients.Elasticsearch.Watcher.ConditionContainer Condition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Elastic.Clients.Elasticsearch.Watcher.InputContainer Input { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("throttle_period")]
 		public string? ThrottlePeriod { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("throttle_period_in_millis")]
 		public long? ThrottlePeriodInMillis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public Elastic.Clients.Elasticsearch.TransformContainer? Transform { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("trigger")]
 		public Elastic.Clients.Elasticsearch.Watcher.TriggerContainer Trigger { get; set; }
 	}
 
 	public partial class WatchStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public Elastic.Clients.Elasticsearch.Watcher.Actions Actions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("execution_state")]
 		public string? ExecutionState { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("last_checked")]
 		public Elastic.Clients.Elasticsearch.DateString? LastChecked { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("last_met_condition")]
 		public Elastic.Clients.Elasticsearch.DateString? LastMetCondition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActivationState State { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version { get; set; }
 	}
 
 	public partial class WebhookResult
 	{
+		[JsonInclude]
 		[JsonPropertyName("request")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputRequestResult Request
 		{
@@ -1731,6 +1958,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("response")]
 		public Elastic.Clients.Elasticsearch.Watcher.HttpInputResponseResult? Response
 		{

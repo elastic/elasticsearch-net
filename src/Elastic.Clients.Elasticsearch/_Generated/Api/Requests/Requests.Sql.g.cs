@@ -42,6 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cursor")]
 		public string Cursor { get; set; }
 	}
@@ -85,30 +86,39 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		[JsonIgnore]
 		public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("columnar")]
 		public bool? Columnar { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cursor")]
 		public string? Cursor { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fetch_size")]
 		public int? FetchSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("request_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? RequestTimeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("page_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? PageTimeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field_multi_value_leniency")]
 		public bool? FieldMultiValueLeniency { get; set; }
 	}
@@ -139,15 +149,19 @@ namespace Elastic.Clients.Elasticsearch.Sql
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fetch_size")]
 		public int? FetchSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
 	}

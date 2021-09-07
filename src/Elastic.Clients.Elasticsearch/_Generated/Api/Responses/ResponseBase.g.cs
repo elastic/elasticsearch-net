@@ -23,6 +23,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public abstract class AcknowledgedResponseBase : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("acknowledged")]
 		public bool Acknowledged
 		{
@@ -41,6 +42,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public abstract class ErrorResponseBase : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public int Status
 		{
@@ -55,6 +57,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public abstract class IndicesResponseBase : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
@@ -69,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public abstract class ShardsOperationResponseBase : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -83,6 +87,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public abstract class WriteResponseBase : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -94,6 +99,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -105,6 +111,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long PrimaryTerm
 		{
@@ -116,6 +123,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result")]
 		public Elastic.Clients.Elasticsearch.Result Result
 		{
@@ -127,6 +135,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber SeqNo
 		{
@@ -138,6 +147,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -149,6 +159,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -160,6 +171,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -171,6 +183,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]
 		public bool? ForcedRefresh
 		{

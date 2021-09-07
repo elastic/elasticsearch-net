@@ -23,6 +23,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
 	public abstract class AsyncSearchDocumentResponseBase<TDocument> : AsyncSearchResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("response")]
 		public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 	public abstract class AsyncSearchResponseBase : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_partial")]
 		public bool IsPartial
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_running")]
 		public bool IsRunning
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expiration_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ExpirationTimeInMillis
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StartTimeInMillis
 		{

@@ -23,6 +23,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public abstract class NodesResponseBase : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{

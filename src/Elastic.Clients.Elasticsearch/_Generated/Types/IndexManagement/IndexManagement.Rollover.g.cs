@@ -26,15 +26,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 {
 	public partial class RolloverConditions
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_age")]
 		public Elastic.Clients.Elasticsearch.Time? MaxAge { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_docs")]
 		public long? MaxDocs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_primary_shard_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_size")]
 		public string? MaxSize { get; set; }
 	}

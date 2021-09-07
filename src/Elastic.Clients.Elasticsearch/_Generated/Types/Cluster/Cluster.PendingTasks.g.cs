@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
 {
 	public partial class PendingTask
 	{
+		[JsonInclude]
 		[JsonPropertyName("insert_order")]
 		public int InsertOrder
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("priority")]
 		public string Priority
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_queue")]
 		public string TimeInQueue
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_queue_millis")]
 		public int TimeInQueueMillis
 		{

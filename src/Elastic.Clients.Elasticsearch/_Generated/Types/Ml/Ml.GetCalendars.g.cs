@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.GetCalendars
 {
 	public partial class Calendar
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.GetCalendars
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.GetCalendars
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_ids")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> JobIds
 		{

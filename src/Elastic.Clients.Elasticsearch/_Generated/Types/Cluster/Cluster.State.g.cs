@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.State
 {
 	public partial class ClusterStateBlocks
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ClusterStateBlockIndex>>? Indices
 		{

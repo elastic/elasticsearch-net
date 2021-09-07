@@ -26,108 +26,138 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class BoolQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>>? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("must")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>>? Must { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("must_not")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>>? MustNot { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("should")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>>? Should { get; set; }
 	}
 
 	public partial class BoostingQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("negative")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Negative { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("negative_boost")]
 		public double NegativeBoost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("positive")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Positive { get; set; }
 	}
 
 	public partial class BoundingBox
 	{
+		[JsonInclude]
 		[JsonPropertyName("bottom")]
 		public double? Bottom { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("bottom_left")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeft { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("bottom_right")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("left")]
 		public double? Left { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("right")]
 		public double? Right { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("top")]
 		public double? Top { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("top_left")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeft { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("top_right")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("wkt")]
 		public string? Wkt { get; set; }
 	}
 
 	public partial class CombinedFieldsQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field> Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mimimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MimimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class CommonTermsQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cutoff_frequency")]
 		public double? CutoffFrequency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("high_freq_operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? HighFreqOperator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("low_freq_operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? LowFreqOperator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 	}
 
 	public partial class ConstantScoreQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
 	}
@@ -142,6 +172,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class DateRangeQuery : QueryDsl.RangeQueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.DateFormat? Format
 		{
@@ -153,6 +184,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("gt")]
 		public Elastic.Clients.Elasticsearch.DateMath? Gt
 		{
@@ -164,6 +196,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("gte")]
 		public Elastic.Clients.Elasticsearch.DateMath? Gte
 		{
@@ -175,6 +208,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lt")]
 		public Elastic.Clients.Elasticsearch.DateMath? Lt
 		{
@@ -186,6 +220,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lte")]
 		public Elastic.Clients.Elasticsearch.DateMath? Lte
 		{
@@ -197,6 +232,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public Elastic.Clients.Elasticsearch.TimeZone? TimeZone
 		{
@@ -211,6 +247,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class DecayFunctionBase : QueryDsl.ScoreFunctionBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("multi_value_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode
 		{
@@ -225,15 +262,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class DisMaxQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("queries")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> Queries { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tie_breaker")]
 		public double? TieBreaker { get; set; }
 	}
 
 	public partial class DistanceFeatureQueryBase<TOrigin, TDistance> : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field
 		{
@@ -245,6 +285,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("origin")]
 		public TOrigin Origin
 		{
@@ -256,6 +297,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public TDistance Pivot
 		{
@@ -270,102 +312,130 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class ExistsQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public partial class FieldValueFactorScoreFunction : QueryDsl.ScoreFunctionBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("factor")]
 		public double? Factor { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("missing")]
 		public double? Missing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("modifier")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 	}
 
 	public partial class FunctionScoreContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("exp")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Exp { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field_value_factor")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? FieldValueFactor { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("gauss")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Gauss { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("linear")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Linear { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("random_score")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? RandomScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_score")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? ScriptScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("weight")]
 		public double? Weight { get; set; }
 	}
 
 	public partial class FunctionScoreQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("functions")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? Functions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_boost")]
 		public double? MaxBoost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public double? MinScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("score_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 	}
 
 	public partial class FuzzyQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? Rewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transpositions")]
 		public bool? Transpositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
 	public partial class GeoBoundingBoxQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? Type { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
@@ -380,243 +450,308 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class GeoDistanceQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("distance")]
 		public Elastic.Clients.Elasticsearch.Distance? Distance { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("distance_type")]
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
 	public partial class GeoPolygonQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}
 
 	public partial class GeoShapeQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
 	public partial class HasChildQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_children")]
 		public int? MaxChildren { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_children")]
 		public int? MinChildren { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("score_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.RelationName Type { get; set; }
 	}
 
 	public partial class HasParentQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("parent_type")]
 		public Elastic.Clients.Elasticsearch.RelationName ParentType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("score")]
 		public bool? Score { get; set; }
 	}
 
 	public partial class IdsQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("values")]
 		public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
 	}
 
 	public partial class IntervalsAllOf
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("intervals")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_gaps")]
 		public int? MaxGaps { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ordered")]
 		public bool? Ordered { get; set; }
 	}
 
 	public partial class IntervalsAnyOf
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("intervals")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
 	}
 
 	public partial class IntervalsContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("all_of")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("any_of")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("wildcard")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get; set; }
 	}
 
 	public partial class IntervalsFilter
 	{
+		[JsonInclude]
 		[JsonPropertyName("after")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? After { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("before")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? Before { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("contained_by")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? ContainedBy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("containing")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? Containing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("not_contained_by")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? NotContainedBy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("not_containing")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? NotContaining { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("not_overlapping")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? NotOverlapping { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("overlapping")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer? Overlapping { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public partial class IntervalsFuzzy
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public string Term { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transpositions")]
 		public bool? Transpositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_field")]
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
 	public partial class IntervalsMatch
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_gaps")]
 		public int? MaxGaps { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ordered")]
 		public bool? Ordered { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_field")]
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
 	public partial class IntervalsPrefix
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public string Prefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_field")]
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
 	public partial class IntervalsQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("all_of")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("any_of")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("wildcard")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get; set; }
 	}
 
 	public partial class IntervalsWildcard
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pattern")]
 		public string Pattern { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_field")]
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
 	public partial class LikeDocument
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc")]
 		public object? Doc
 		{
@@ -628,6 +763,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field>? Fields
 		{
@@ -639,6 +775,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id? Id
 		{
@@ -650,6 +787,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index
 		{
@@ -661,6 +799,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer
 		{
@@ -672,6 +811,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing
 		{
@@ -683,6 +823,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -694,6 +835,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -705,6 +847,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_type")]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType
 		{
@@ -723,30 +866,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class MatchBoolPrefixQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? FuzzyRewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 	}
@@ -757,213 +909,277 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class MatchPhrasePrefixQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class MatchPhraseQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class MatchQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cutoff_frequency")]
 		public double? CutoffFrequency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? FuzzyRewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool? Lenient { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public OneOf<string, float, bool> Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class MoreLikeThisQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boost_terms")]
 		public double? BoostTerms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fail_on_unsupported_field")]
 		public bool? FailOnUnsupportedField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include")]
 		public bool? Include { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("like")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.Like, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>> Like { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_doc_freq")]
 		public int? MaxDocFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_query_terms")]
 		public int? MaxQueryTerms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_word_length")]
 		public int? MaxWordLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_doc_freq")]
 		public int? MinDocFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_term_freq")]
 		public int? MinTermFreq { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_word_length")]
 		public int? MinWordLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stop_words")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWords { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("unlike")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.Like, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>>? Unlike { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version_type")]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 	}
 
 	public partial class MultiMatchQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cutoff_frequency")]
 		public double? CutoffFrequency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? FuzzyRewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool? Lenient { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_expansions")]
 		public int? MaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix_length")]
 		public int? PrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tie_breaker")]
 		public double? TieBreaker { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("zero_terms_query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
 	public partial class NestedQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("score_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreMode { get; set; }
 	}
 
 	public partial class NumberRangeQuery : QueryDsl.RangeQueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("gt")]
 		public double? Gt
 		{
@@ -975,6 +1191,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("gte")]
 		public double? Gte
 		{
@@ -986,6 +1203,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lt")]
 		public double? Lt
 		{
@@ -997,6 +1215,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lte")]
 		public double? Lte
 		{
@@ -1015,327 +1234,427 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class ParentIdQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.RelationName? Type { get; set; }
 	}
 
 	public partial class PercolateQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("document")]
 		public object? Document { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("documents")]
 		public IEnumerable<object>? Documents { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("preference")]
 		public string? Preference { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 	}
 
 	public partial class PinnedQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ids")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Id> Ids { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("organic")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Organic { get; set; }
 	}
 
 	public partial class PrefixQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? Rewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
 	public partial class QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public float? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_name")]
 		public string? query_name { get; set; }
 	}
 
 	public partial class QueryContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("bool")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? Bool { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boosting")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery? Boosting { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("combined_fields")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery? CombinedFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("common")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery>? Common { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("constant_score")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery? ConstantScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dis_max")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery? DisMax { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("distance_feature")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.DistanceFeatureQuery? DistanceFeature { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("exists")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? Exists { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field_masking_span")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("function_score")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery? FunctionScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery>? Fuzzy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("geo_bounding_box")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery? GeoBoundingBox { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("geo_distance")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery? GeoDistance { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("geo_polygon")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery? GeoPolygon { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("geo_shape")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery? GeoShape { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("has_child")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery? HasChild { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("has_parent")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery? HasParent { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ids")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? Ids { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("intervals")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>? Intervals { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>? Match { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_all")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? MatchAll { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_bool_prefix")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery>? MatchBoolPrefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_none")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery? MatchNone { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_phrase")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery>? MatchPhrase { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_phrase_prefix")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery>? MatchPhrasePrefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("more_like_this")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery? MoreLikeThis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("multi_match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery? MultiMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("nested")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery? Nested { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("parent_id")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery? ParentId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("percolate")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery? Percolate { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pinned")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery? Pinned { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prefix")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>? Prefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query_string")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery? QueryString { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("range")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery>? Range { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rank_feature")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery? RankFeature { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("regexp")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery>? Regexp { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery? Script { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_score")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery? ScriptScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("shape")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery? Shape { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("simple_query_string")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? SimpleQueryString { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_containing")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? SpanContaining { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_first")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? SpanFirst { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_multi")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? SpanMulti { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_near")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? SpanNear { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_not")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? SpanNot { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_or")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? SpanOr { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_term")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>? SpanTerm { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_within")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? SpanWithin { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>? Term { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? Terms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("terms_set")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery>? TermsSet { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery? Type { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("wildcard")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>? Wildcard { get; set; }
 	}
 
 	public partial class QueryStringQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_leading_wildcard")]
 		public bool? AllowLeadingWildcard { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("default_field")]
 		public Elastic.Clients.Elasticsearch.Field? DefaultField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("default_operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enable_position_increments")]
 		public bool? EnablePositionIncrements { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("escape")]
 		public bool? Escape { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
 		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_max_expansions")]
 		public int? FuzzyMaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_prefix_length")]
 		public int? FuzzyPrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? FuzzyRewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool? Lenient { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_determinized_states")]
 		public int? MaxDeterminizedStates { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("phrase_slop")]
 		public double? PhraseSlop { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("quote_analyzer")]
 		public string? QuoteAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("quote_field_suffix")]
 		public string? QuoteFieldSuffix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? Rewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tie_breaker")]
 		public double? TieBreaker { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public Elastic.Clients.Elasticsearch.TimeZone? TimeZone { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 	}
 
 	public partial class RandomScoreFunction : QueryDsl.ScoreFunctionBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("seed")]
 		public Union<long, string>? Seed { get; set; }
 	}
 
 	public partial class RangeQueryBase : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("relation")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation
 		{
@@ -1358,90 +1677,111 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class RankFeatureFunctionLogarithm : QueryDsl.RankFeatureFunction
 	{
+		[JsonInclude]
 		[JsonPropertyName("scaling_factor")]
 		public float ScalingFactor { get; set; }
 	}
 
 	public partial class RankFeatureFunctionSaturation : QueryDsl.RankFeatureFunction
 	{
+		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public float? Pivot { get; set; }
 	}
 
 	public partial class RankFeatureFunctionSigmoid : QueryDsl.RankFeatureFunction
 	{
+		[JsonInclude]
 		[JsonPropertyName("exponent")]
 		public float Exponent { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public float Pivot { get; set; }
 	}
 
 	public partial class RankFeatureQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("linear")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("log")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("saturation")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sigmoid")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
 	public partial class RegexpQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("flags")]
 		public string? Flags { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_determinized_states")]
 		public int? MaxDeterminizedStates { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? Rewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
 	public partial class ScoreFunctionBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("weight")]
 		public double? Weight { get; set; }
 	}
 
 	public partial class ScriptQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public partial class ScriptScoreFunction : QueryDsl.ScoreFunctionBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public partial class ScriptScoreQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public float? MinScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
@@ -1452,168 +1792,212 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class SimpleQueryStringQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
 		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("default_operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("flags")]
 		public Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags, string>? Flags { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_max_expansions")]
 		public int? FuzzyMaxExpansions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_prefix_length")]
 		public int? FuzzyPrefixLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fuzzy_transpositions")]
 		public bool? FuzzyTranspositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool? Lenient { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
 		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("quote_field_suffix")]
 		public string? QuoteFieldSuffix { get; set; }
 	}
 
 	public partial class SpanContainingQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("big")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("little")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	}
 
 	public partial class SpanFieldMaskingQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
 	}
 
 	public partial class SpanFirstQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("end")]
 		public int End { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
 	}
 
 	public partial class SpanMultiTermQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Match { get; set; }
 	}
 
 	public partial class SpanNearQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("clauses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("in_order")]
 		public bool? InOrder { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("slop")]
 		public int? Slop { get; set; }
 	}
 
 	public partial class SpanNotQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("dist")]
 		public int? Dist { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("exclude")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("post")]
 		public int? Post { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pre")]
 		public int? Pre { get; set; }
 	}
 
 	public partial class SpanOrQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("clauses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 	}
 
 	public partial class SpanQuery
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_masking_span")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_containing")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? SpanContaining { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_first")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? SpanFirst { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_gap")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, int>? SpanGap { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_multi")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? SpanMulti { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_near")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? SpanNear { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_not")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? SpanNot { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_or")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? SpanOr { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_term")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>? SpanTerm { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("span_within")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? SpanWithin { get; set; }
 	}
 
 	public partial class SpanTermQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
 	public partial class SpanWithinQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("big")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("little")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	}
 
 	public partial class TermQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public OneOf<string, float, bool> Value { get; set; }
 	}
@@ -1628,6 +2012,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class ThreeDimensionalPoint
 	{
+		[JsonInclude]
 		[JsonPropertyName("lat")]
 		public double Lat
 		{
@@ -1639,6 +2024,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lon")]
 		public double Lon
 		{
@@ -1650,6 +2036,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("z")]
 		public double? z
 		{
@@ -1664,6 +2051,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class TwoDimensionalPoint
 	{
+		[JsonInclude]
 		[JsonPropertyName("lat")]
 		public double Lat
 		{
@@ -1675,6 +2063,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lon")]
 		public double Lon
 		{
@@ -1689,18 +2078,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class TypeQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
 	public partial class WildcardQuery : QueryDsl.QueryBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rewrite")]
 		public Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? Rewrite { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}

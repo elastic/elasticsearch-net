@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.CreateServiceToken
 {
 	public partial class Token
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.CreateServiceToken
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value
 		{

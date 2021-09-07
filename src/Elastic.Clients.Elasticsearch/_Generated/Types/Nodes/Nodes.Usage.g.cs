@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 {
 	public partial class NodeUsage
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, object> Aggregations
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rest_actions")]
 		public Dictionary<string, int> RestActions
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("since")]
 		public Elastic.Clients.Elasticsearch.EpochMillis Since
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.EpochMillis Timestamp
 		{

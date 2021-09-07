@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 	public partial class GeoIpStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpNodeDatabases> Nodes
 		{
@@ -39,6 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpDownloadStatistics Stats
 		{
@@ -57,6 +59,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 	public partial class ProcessorGrokResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("patterns")]
 		public Dictionary<string, string> Patterns
 		{
@@ -75,6 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 	public partial class SimulateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Simulate.PipelineSimulation> Docs
 		{

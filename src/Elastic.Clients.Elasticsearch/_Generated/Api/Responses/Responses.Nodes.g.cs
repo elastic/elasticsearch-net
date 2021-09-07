@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class HotThreadsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("hot_threads")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.HotThreads.HotThread> HotThreads
 		{
@@ -38,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class InfoResponse : Nodes.NodesResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -49,6 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfo> Nodes
 		{
@@ -63,6 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class ReloadSecureSettingsResponse : Nodes.NodesResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -74,6 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Union<Elastic.Clients.Elasticsearch.Nodes.Stats, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings.NodeReloadException>> Nodes
 		{
@@ -88,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class StatsResponse : Nodes.NodesResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -99,6 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Stats> Nodes
 		{
@@ -113,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 	public partial class UsageResponse : Nodes.NodesResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -124,6 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Usage.NodeUsage> Nodes
 		{

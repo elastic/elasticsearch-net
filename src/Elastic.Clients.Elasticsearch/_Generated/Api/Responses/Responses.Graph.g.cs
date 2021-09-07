@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 {
 	public partial class ExploreResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("connections")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> Connections
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool TimedOut
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -68,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("vertices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> Vertices
 		{

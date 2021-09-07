@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Restore
 {
 	public partial class SnapshotRestore
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Restore
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Restore
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public string Snapshot
 		{

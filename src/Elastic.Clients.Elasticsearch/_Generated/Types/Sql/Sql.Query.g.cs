@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Sql.Query
 {
 	public partial class Column
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Sql.Query
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Msearch
 {
 	public partial class SearchResult<TDocument>
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public int Status
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 {
 	public partial class ApiKey
 	{
+		[JsonInclude]
 		[JsonPropertyName("creation")]
 		public long Creation
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expiration")]
 		public long? Expiration
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("invalidated")]
 		public bool Invalidated
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("realm")]
 		public string Realm
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username Username
 		{

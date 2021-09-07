@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 {
 	public partial class AnomalyDetectors
 	{
+		[JsonInclude]
 		[JsonPropertyName("categorization_analyzer")]
 		public Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer CategorizationAnalyzer
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("categorization_examples_limit")]
 		public int CategorizationExamplesLimit
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public int DailyModelSnapshotRetentionAfterDays
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string ModelMemoryLimit
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public int ModelSnapshotRetentionDays
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 
 	public partial class Datafeeds
 	{
+		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
 		public int ScrollSize
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 
 	public partial class Defaults
 	{
+		[JsonInclude]
 		[JsonPropertyName("anomaly_detectors")]
 		public Elastic.Clients.Elasticsearch.Ml.Info.AnomalyDetectors AnomalyDetectors
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeeds")]
 		public Elastic.Clients.Elasticsearch.Ml.Info.Datafeeds Datafeeds
 		{
@@ -123,6 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 
 	public partial class Limits
 	{
+		[JsonInclude]
 		[JsonPropertyName("effective_max_model_memory_limit")]
 		public string EffectiveMaxModelMemoryLimit
 		{
@@ -134,6 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_model_memory_limit")]
 		public string? MaxModelMemoryLimit
 		{
@@ -145,6 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_ml_memory")]
 		public string TotalMlMemory
 		{
@@ -159,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 
 	public partial class NativeCode
 	{
+		[JsonInclude]
 		[JsonPropertyName("build_hash")]
 		public string BuildHash
 		{
@@ -170,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{

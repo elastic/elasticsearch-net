@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 {
 	public partial class CheckpointStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("checkpoint")]
 		public long Checkpoint
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("checkpoint_progress")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.TransformProgress? CheckpointProgress
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString? Timestamp
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TimestampMillis
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_upper_bound")]
 		public Elastic.Clients.Elasticsearch.DateString? TimeUpperBound
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_upper_bound_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? TimeUpperBoundMillis
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 
 	public partial class Checkpointing
 	{
+		[JsonInclude]
 		[JsonPropertyName("changes_last_detected_at")]
 		public long ChangesLastDetectedAt
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("changes_last_detected_at_date_time")]
 		public Elastic.Clients.Elasticsearch.DateString? ChangesLastDetectedAtDateTime
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.CheckpointStats Last
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("next")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.CheckpointStats? Next
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("operations_behind")]
 		public long? OperationsBehind
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 
 	public partial class TransformIndexerStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("documents_indexed")]
 		public long DocumentsIndexed
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("documents_processed")]
 		public long DocumentsProcessed
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exponential_avg_checkpoint_duration_ms")]
 		public double ExponentialAvgCheckpointDurationMs
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exponential_avg_documents_indexed")]
 		public double ExponentialAvgDocumentsIndexed
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exponential_avg_documents_processed")]
 		public double ExponentialAvgDocumentsProcessed
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_failures")]
 		public long IndexFailures
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_time_in_ms")]
 		public long IndexTimeInMs
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_total")]
 		public long IndexTotal
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pages_processed")]
 		public long PagesProcessed
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processing_time_in_ms")]
 		public long ProcessingTimeInMs
 		{
@@ -263,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processing_total")]
 		public long ProcessingTotal
 		{
@@ -274,6 +296,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_failures")]
 		public long SearchFailures
 		{
@@ -285,6 +308,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_time_in_ms")]
 		public long SearchTimeInMs
 		{
@@ -296,6 +320,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_total")]
 		public long SearchTotal
 		{
@@ -307,6 +332,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("trigger_count")]
 		public long TriggerCount
 		{
@@ -321,6 +347,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 
 	public partial class TransformProgress
 	{
+		[JsonInclude]
 		[JsonPropertyName("docs_indexed")]
 		public long DocsIndexed
 		{
@@ -332,6 +359,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("docs_processed")]
 		public long DocsProcessed
 		{
@@ -343,6 +371,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("docs_remaining")]
 		public long DocsRemaining
 		{
@@ -354,6 +383,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("percent_complete")]
 		public double PercentComplete
 		{
@@ -365,6 +395,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_docs")]
 		public long TotalDocs
 		{
@@ -379,6 +410,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 
 	public partial class TransformStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("checkpointing")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.Checkpointing Checkpointing
 		{
@@ -390,6 +422,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -401,6 +434,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.NodeAttributes? Node
 		{
@@ -412,6 +446,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string? Reason
 		{
@@ -423,6 +458,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public string State
 		{
@@ -434,6 +470,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.TransformIndexerStats Stats
 		{

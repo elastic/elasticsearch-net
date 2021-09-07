@@ -26,18 +26,22 @@ namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 {
 	public partial class PainlessContextSetup
 	{
+		[JsonInclude]
 		[JsonPropertyName("document")]
 		public object Document { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 	}
 
 	public partial class PainlessExecutionPosition
 	{
+		[JsonInclude]
 		[JsonPropertyName("end")]
 		public int End
 		{
@@ -49,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("offset")]
 		public int Offset
 		{
@@ -60,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start")]
 		public int Start
 		{

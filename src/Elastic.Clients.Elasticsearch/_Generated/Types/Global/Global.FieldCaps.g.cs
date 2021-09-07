@@ -26,51 +26,62 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 {
 	public partial class FieldCapabilitiesBodyIndexFilter
 	{
+		[JsonInclude]
 		[JsonPropertyName("match_none")]
 		public Elastic.Clients.Elasticsearch.EmptyObject? MatchNone { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("range")]
 		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterRange? Range { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterTerm? Term { get; set; }
 	}
 
 	public partial class FieldCapabilitiesBodyIndexFilterRange
 	{
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterRangeTimestamp Timestamp { get; set; }
 	}
 
 	public partial class FieldCapabilitiesBodyIndexFilterRangeTimestamp
 	{
+		[JsonInclude]
 		[JsonPropertyName("gt")]
 		public int? Gt { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("gte")]
 		public int? Gte { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lt")]
 		public int? Lt { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lte")]
 		public int? Lte { get; set; }
 	}
 
 	public partial class FieldCapabilitiesBodyIndexFilterTerm
 	{
+		[JsonInclude]
 		[JsonPropertyName("versionControl")]
 		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterTermVersionControl Versioncontrol { get; set; }
 	}
 
 	public partial class FieldCapabilitiesBodyIndexFilterTermVersionControl
 	{
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
 	}
 
 	public partial class FieldCapability
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregatable")]
 		public bool Aggregatable
 		{
@@ -82,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices? Indices
 		{
@@ -93,6 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("meta")]
 		public Dictionary<string, IReadOnlyCollection<string>>? Meta
 		{
@@ -104,6 +117,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata_field")]
 		public bool? MetadataField
 		{
@@ -115,6 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("non_aggregatable_indices")]
 		public Elastic.Clients.Elasticsearch.Indices? NonAggregatableIndices
 		{
@@ -126,6 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("non_searchable_indices")]
 		public Elastic.Clients.Elasticsearch.Indices? NonSearchableIndices
 		{
@@ -137,6 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("searchable")]
 		public bool Searchable
 		{
@@ -148,6 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{

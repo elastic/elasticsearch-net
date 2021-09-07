@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptLanguages
 {
 	public partial class LanguageContext
 	{
+		[JsonInclude]
 		[JsonPropertyName("contexts")]
 		public IReadOnlyCollection<string> Contexts
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.GetScriptLanguages
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("language")]
 		public Elastic.Clients.Elasticsearch.ScriptLanguage Language
 		{

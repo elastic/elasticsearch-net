@@ -152,30 +152,39 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Time? Frequency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sync")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? Sync { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("retention_policy")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("latest")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 	}
@@ -202,6 +211,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		[JsonIgnore]
 		public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest
 		{
@@ -213,6 +223,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -224,6 +235,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Time? Frequency
 		{
@@ -235,6 +247,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot
 		{
@@ -246,6 +259,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source
 		{
@@ -257,6 +271,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings
 		{
@@ -268,6 +283,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sync")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? Sync
 		{
@@ -279,6 +295,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retention_policy")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy
 		{
@@ -290,6 +307,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest
 		{

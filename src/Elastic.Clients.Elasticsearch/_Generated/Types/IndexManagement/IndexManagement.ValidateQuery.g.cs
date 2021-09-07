@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 {
 	public partial class IndicesValidationExplanation
 	{
+		[JsonInclude]
 		[JsonPropertyName("error")]
 		public string? Error
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("explanation")]
 		public string? Explanation
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("valid")]
 		public bool Valid
 		{

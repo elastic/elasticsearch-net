@@ -70,6 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("password")]
 		public Elastic.Clients.Elasticsearch.Password? Password { get; set; }
 	}
@@ -206,15 +207,19 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("expiration")]
 		public Elastic.Clients.Elasticsearch.Time? Expiration { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("role_descriptors")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.RoleDescriptor>? RoleDescriptors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 	}
@@ -620,21 +625,27 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("grant_type")]
 		public Elastic.Clients.Elasticsearch.Security.GetToken.AccessTokenGrantType? GrantType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scope")]
 		public string? Scope { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("password")]
 		public Elastic.Clients.Elasticsearch.Password? Password { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("kerberos_ticket")]
 		public string? KerberosTicket { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("refresh_token")]
 		public string? RefreshToken { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 	}
@@ -713,18 +724,23 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("api_key")]
 		public Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKey ApiKey { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("grant_type")]
 		public Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKeyGrantType GrantType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("access_token")]
 		public string? AccessToken { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("password")]
 		public Elastic.Clients.Elasticsearch.Password? Password { get; set; }
 	}
@@ -758,12 +774,15 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("application")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationPrivilegesCheck>? Application { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IEnumerable<string>? Cluster { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IndexPrivilegesCheck>? Index { get; set; }
 	}
@@ -798,21 +817,27 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ids")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("owner")]
 		public bool? Owner { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("realm_name")]
 		public string? RealmName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 	}
@@ -843,15 +868,19 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token")]
 		public string? Token { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("refresh_token")]
 		public string? RefreshToken { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("realm_name")]
 		public Elastic.Clients.Elasticsearch.Name? RealmName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 	}
@@ -914,24 +943,31 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("applications")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IEnumerable<string>? Cluster { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("global")]
 		public Dictionary<string, object>? Global { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("run_as")]
 		public IEnumerable<string>? RunAs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transient_metadata")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata? TransientMetadata { get; set; }
 	}
@@ -967,18 +1003,23 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public IEnumerable<string>? Roles { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rules")]
 		public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase? Rules { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("run_as")]
 		public IEnumerable<string>? RunAs { get; set; }
 	}
@@ -1014,18 +1055,23 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("password")]
 		public Elastic.Clients.Elasticsearch.Password? Password { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("password_hash")]
 		public string? PasswordHash { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public IEnumerable<string>? Roles { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 	}

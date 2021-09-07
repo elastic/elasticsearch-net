@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 {
 	public partial class InlineRoleTemplate
 	{
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TemplateFormat? Format
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.InlineRoleTemplateSource Template
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 	public partial class InlineRoleTemplateSource
 	{
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source
 		{
@@ -65,6 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 	public partial class InvalidRoleTemplate
 	{
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TemplateFormat? Format
 		{
@@ -76,6 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public string Template
 		{
@@ -90,6 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 	public partial class Role
 	{
+		[JsonInclude]
 		[JsonPropertyName("applications")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications
 		{
@@ -101,6 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IReadOnlyCollection<string> Cluster
 		{
@@ -112,6 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
 		{
@@ -123,6 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
@@ -134,6 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("role_templates")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GetRole.RoleTemplate>? RoleTemplates
 		{
@@ -145,6 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("run_as")]
 		public IReadOnlyCollection<string> RunAs
 		{
@@ -156,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transient_metadata")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata TransientMetadata
 		{
@@ -170,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 	public partial class StoredRoleTemplate
 	{
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.TemplateFormat? Format
 		{
@@ -181,6 +194,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.Security.GetRole.StoredRoleTemplateId Template
 		{
@@ -195,6 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 	public partial class StoredRoleTemplateId
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public string Id
 		{
@@ -209,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 	public partial class TransientMetadata
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}

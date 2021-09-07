@@ -26,57 +26,72 @@ namespace Elastic.Clients.Elasticsearch.Ml
 {
 	public partial class AnalysisConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
 		public Elastic.Clients.Elasticsearch.TimeSpanTempReplacement BucketSpan { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("categorization_analyzer")]
 		public Union<Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer, string>? CategorizationAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("categorization_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? CategorizationFieldName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("categorization_filters")]
 		public IEnumerable<string>? CategorizationFilters { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("detectors")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector> Detectors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("influencers")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field> Influencers { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("latency")]
 		public Elastic.Clients.Elasticsearch.Time? Latency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_prune_window")]
 		public Elastic.Clients.Elasticsearch.Time? ModelPruneWindow { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("multivariate_by_fields")]
 		public bool? MultivariateByFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("per_partition_categorization")]
 		public Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("summary_count_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName { get; set; }
 	}
 
 	public partial class AnalysisLimits
 	{
+		[JsonInclude]
 		[JsonPropertyName("categorization_examples_limit")]
 		public long? CategorizationExamplesLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string? ModelMemoryLimit { get; set; }
 	}
 
 	public partial class AnalysisMemoryLimit
 	{
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string ModelMemoryLimit { get; set; }
 	}
 
 	public partial class Anomaly
 	{
+		[JsonInclude]
 		[JsonPropertyName("actual")]
 		public IReadOnlyCollection<double>? Actual
 		{
@@ -88,6 +103,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
 		public Elastic.Clients.Elasticsearch.Time BucketSpan
 		{
@@ -99,6 +115,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("by_field_name")]
 		public string? ByFieldName
 		{
@@ -110,6 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("by_field_value")]
 		public string? ByFieldValue
 		{
@@ -121,6 +139,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("causes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.AnomalyCause>? Causes
 		{
@@ -132,6 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("detector_index")]
 		public int DetectorIndex
 		{
@@ -143,6 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("field_name")]
 		public string? FieldName
 		{
@@ -154,6 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("function")]
 		public string? Function
 		{
@@ -165,6 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("function_description")]
 		public string? FunctionDescription
 		{
@@ -176,6 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Influence>? Influencers
 		{
@@ -187,6 +211,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initial_record_score")]
 		public double InitialRecordScore
 		{
@@ -198,6 +223,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_interim")]
 		public bool IsInterim
 		{
@@ -209,6 +235,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public string JobId
 		{
@@ -220,6 +247,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("over_field_name")]
 		public string? OverFieldName
 		{
@@ -231,6 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("over_field_value")]
 		public string? OverFieldValue
 		{
@@ -242,6 +271,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_name")]
 		public string? PartitionFieldName
 		{
@@ -253,6 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_value")]
 		public string? PartitionFieldValue
 		{
@@ -264,6 +295,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("probability")]
 		public double Probability
 		{
@@ -275,6 +307,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("record_score")]
 		public double RecordScore
 		{
@@ -286,6 +319,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result_type")]
 		public string ResultType
 		{
@@ -297,6 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.EpochMillis Timestamp
 		{
@@ -308,6 +343,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("typical")]
 		public IReadOnlyCollection<double>? Typical
 		{
@@ -322,6 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class AnomalyCause
 	{
+		[JsonInclude]
 		[JsonPropertyName("actual")]
 		public IReadOnlyCollection<double> Actual
 		{
@@ -333,6 +370,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("by_field_name")]
 		public Elastic.Clients.Elasticsearch.Name ByFieldName
 		{
@@ -344,6 +382,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("by_field_value")]
 		public string ByFieldValue
 		{
@@ -355,6 +394,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("correlated_by_field_value")]
 		public string CorrelatedByFieldValue
 		{
@@ -366,6 +406,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("field_name")]
 		public Elastic.Clients.Elasticsearch.Field FieldName
 		{
@@ -377,6 +418,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("function")]
 		public string Function
 		{
@@ -388,6 +430,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("function_description")]
 		public string FunctionDescription
 		{
@@ -399,6 +442,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Influence> Influencers
 		{
@@ -410,6 +454,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("over_field_name")]
 		public Elastic.Clients.Elasticsearch.Name OverFieldName
 		{
@@ -421,6 +466,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("over_field_value")]
 		public string OverFieldValue
 		{
@@ -432,6 +478,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_name")]
 		public string PartitionFieldName
 		{
@@ -443,6 +490,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_value")]
 		public string PartitionFieldValue
 		{
@@ -454,6 +502,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("probability")]
 		public double Probability
 		{
@@ -465,6 +514,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("typical")]
 		public IReadOnlyCollection<double> Typical
 		{
@@ -479,6 +529,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class BucketInfluencer
 	{
+		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
 		public long BucketSpan
 		{
@@ -490,6 +541,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("foo")]
 		public string? Foo
 		{
@@ -501,6 +553,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencer_field_name")]
 		public Elastic.Clients.Elasticsearch.Field InfluencerFieldName
 		{
@@ -512,6 +565,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencer_field_value")]
 		public string InfluencerFieldValue
 		{
@@ -523,6 +577,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencer_score")]
 		public double InfluencerScore
 		{
@@ -534,6 +589,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initial_influencer_score")]
 		public double InitialInfluencerScore
 		{
@@ -545,6 +601,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_interim")]
 		public bool IsInterim
 		{
@@ -556,6 +613,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -567,6 +625,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("probability")]
 		public double Probability
 		{
@@ -578,6 +637,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result_type")]
 		public string ResultType
 		{
@@ -589,6 +649,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.Time Timestamp
 		{
@@ -603,6 +664,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class BucketSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("anomaly_score")]
 		public double AnomalyScore
 		{
@@ -614,6 +676,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("bucket_influencers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.BucketInfluencer> BucketInfluencers
 		{
@@ -625,6 +688,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
 		public Elastic.Clients.Elasticsearch.Time BucketSpan
 		{
@@ -636,6 +700,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("event_count")]
 		public long EventCount
 		{
@@ -647,6 +712,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initial_anomaly_score")]
 		public double InitialAnomalyScore
 		{
@@ -658,6 +724,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_interim")]
 		public bool IsInterim
 		{
@@ -669,6 +736,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -680,6 +748,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_scores")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.PartitionScore>? PartitionScores
 		{
@@ -691,6 +760,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processing_time_ms")]
 		public double ProcessingTimeMs
 		{
@@ -702,6 +772,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result_type")]
 		public string ResultType
 		{
@@ -713,6 +784,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.Time Timestamp
 		{
@@ -727,36 +799,45 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class CalendarEvent
 	{
+		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
 		public Elastic.Clients.Elasticsearch.Id? CalendarId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("end_time")]
 		public Elastic.Clients.Elasticsearch.EpochMillis EndTime { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("event_id")]
 		public Elastic.Clients.Elasticsearch.Id? EventId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("start_time")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StartTime { get; set; }
 	}
 
 	public partial class CategorizationAnalyzer
 	{
+		[JsonInclude]
 		[JsonPropertyName("char_filter")]
 		public IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>>? CharFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>>? Filter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
 		public Union<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
 	}
 
 	public partial class Category
 	{
+		[JsonInclude]
 		[JsonPropertyName("category_id")]
 		public ulong CategoryId
 		{
@@ -768,6 +849,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("examples")]
 		public IReadOnlyCollection<string> Examples
 		{
@@ -779,6 +861,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("grok_pattern")]
 		public string? GrokPattern
 		{
@@ -790,6 +873,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -801,6 +885,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_matching_length")]
 		public ulong MaxMatchingLength
 		{
@@ -812,6 +897,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mlcategory")]
 		public string Mlcategory
 		{
@@ -823,6 +909,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_matches")]
 		public long? NumMatches
 		{
@@ -834,6 +921,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("p")]
 		public string? p
 		{
@@ -845,6 +933,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_name")]
 		public string? PartitionFieldName
 		{
@@ -856,6 +945,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_value")]
 		public string? PartitionFieldValue
 		{
@@ -867,6 +957,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("preferred_to_categories")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>? PreferredToCategories
 		{
@@ -878,6 +969,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("regex")]
 		public string Regex
 		{
@@ -889,6 +981,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result_type")]
 		public string ResultType
 		{
@@ -900,6 +993,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public string Terms
 		{
@@ -914,27 +1008,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class ChunkingConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingMode Mode { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_span")]
 		public Elastic.Clients.Elasticsearch.Time? TimeSpan { get; set; }
 	}
 
 	public partial class CustomSettings
 	{
+		[JsonInclude]
 		[JsonPropertyName("created_by")]
 		public string? CreatedBy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("custom_urls")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Xpack.Usage.UrlConfig>? CustomUrls { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("job_tags")]
 		public Dictionary<string, string>? JobTags { get; set; }
 	}
 
 	public partial class DataCounts
 	{
+		[JsonInclude]
 		[JsonPropertyName("bucket_count")]
 		public long BucketCount
 		{
@@ -946,6 +1046,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("earliest_record_timestamp")]
 		public long EarliestRecordTimestamp
 		{
@@ -957,6 +1058,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("empty_bucket_count")]
 		public long EmptyBucketCount
 		{
@@ -968,6 +1070,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input_bytes")]
 		public long InputBytes
 		{
@@ -979,6 +1082,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input_field_count")]
 		public long InputFieldCount
 		{
@@ -990,6 +1094,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input_record_count")]
 		public long InputRecordCount
 		{
@@ -1001,6 +1106,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("invalid_date_count")]
 		public long InvalidDateCount
 		{
@@ -1012,6 +1118,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -1023,6 +1130,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_data_time")]
 		public long LastDataTime
 		{
@@ -1034,6 +1142,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_bucket_timestamp")]
 		public long LatestBucketTimestamp
 		{
@@ -1045,6 +1154,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_empty_bucket_timestamp")]
 		public long LatestEmptyBucketTimestamp
 		{
@@ -1056,6 +1166,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_record_timestamp")]
 		public long LatestRecordTimestamp
 		{
@@ -1067,6 +1178,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_sparse_bucket_timestamp")]
 		public long LatestSparseBucketTimestamp
 		{
@@ -1078,6 +1190,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("missing_field_count")]
 		public long MissingFieldCount
 		{
@@ -1089,6 +1202,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("out_of_order_timestamp_count")]
 		public long OutOfOrderTimestampCount
 		{
@@ -1100,6 +1214,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processed_field_count")]
 		public long ProcessedFieldCount
 		{
@@ -1111,6 +1226,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processed_record_count")]
 		public long ProcessedRecordCount
 		{
@@ -1122,6 +1238,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sparse_bucket_count")]
 		public long SparseBucketCount
 		{
@@ -1136,21 +1253,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataDescription
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_delimiter")]
 		public string? FieldDelimiter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_field")]
 		public Elastic.Clients.Elasticsearch.Field TimeField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("time_format")]
 		public string? TimeFormat { get; set; }
 	}
 
 	public partial class Datafeed
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations
 		{
@@ -1162,6 +1284,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("aggs")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs
 		{
@@ -1173,6 +1296,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig
 		{
@@ -1184,6 +1308,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_id")]
 		public Elastic.Clients.Elasticsearch.Id DatafeedId
 		{
@@ -1195,6 +1320,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig DelayedDataCheckConfig
 		{
@@ -1206,6 +1332,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Timestamp? Frequency
 		{
@@ -1217,6 +1344,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indexes")]
 		public IReadOnlyCollection<string>? Indexes
 		{
@@ -1228,6 +1356,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<string> Indices
 		{
@@ -1239,6 +1368,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices_options")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions
 		{
@@ -1250,6 +1380,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -1261,6 +1392,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_empty_searches")]
 		public int? MaxEmptySearches
 		{
@@ -1272,6 +1404,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query
 		{
@@ -1283,6 +1416,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query_delay")]
 		public Elastic.Clients.Elasticsearch.Timestamp? QueryDelay
 		{
@@ -1294,6 +1428,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings
 		{
@@ -1305,6 +1440,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields
 		{
@@ -1316,6 +1452,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
 		public int? ScrollSize
 		{
@@ -1330,72 +1467,93 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DatafeedConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("aggs")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_id")]
 		public Elastic.Clients.Elasticsearch.Id? DatafeedId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Timestamp? Frequency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indexes")]
 		public IEnumerable<string>? Indexes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IEnumerable<string> Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices_options")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_empty_searches")]
 		public int? MaxEmptySearches { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query_delay")]
 		public Elastic.Clients.Elasticsearch.Timestamp? QueryDelay { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
 		public int? ScrollSize { get; set; }
 	}
 
 	public partial class DatafeedIndicesOptions
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_no_indices")]
 		public bool? AllowNoIndices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("expand_wildcards")]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_throttled")]
 		public bool? IgnoreThrottled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unavailable")]
 		public bool? IgnoreUnavailable { get; set; }
 	}
 
 	public partial class DatafeedStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("assignment_explanation")]
 		public string AssignmentExplanation
 		{
@@ -1407,6 +1565,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_id")]
 		public Elastic.Clients.Elasticsearch.Id DatafeedId
 		{
@@ -1418,6 +1577,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.Ml.DiscoveryNode Node
 		{
@@ -1429,6 +1589,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedState State
 		{
@@ -1440,6 +1601,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timing_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedTimingStats TimingStats
 		{
@@ -1454,6 +1616,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DatafeedTimingStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("bucket_count")]
 		public long BucketCount
 		{
@@ -1465,6 +1628,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exponential_average_search_time_per_hour_ms")]
 		public double ExponentialAverageSearchTimePerHourMs
 		{
@@ -1476,6 +1640,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -1487,6 +1652,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("search_count")]
 		public long SearchCount
 		{
@@ -1498,6 +1664,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_search_time_ms")]
 		public double TotalSearchTimeMs
 		{
@@ -1512,63 +1679,82 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalysis
 	{
+		[JsonInclude]
 		[JsonPropertyName("alpha")]
 		public double? Alpha { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dependent_variable")]
 		public string DependentVariable { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("downsample_factor")]
 		public double? DownsampleFactor { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("early_stopping_enabled")]
 		public bool? EarlyStoppingEnabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("eta")]
 		public double? Eta { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("eta_growth_rate_per_tree")]
 		public double? EtaGrowthRatePerTree { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("feature_bag_fraction")]
 		public double? FeatureBagFraction { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("feature_processors")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("gamma")]
 		public double? Gamma { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lambda")]
 		public double? Lambda { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_optimization_rounds_per_hyperparameter")]
 		public int? MaxOptimizationRoundsPerHyperparameter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_trees")]
 		public int? MaxTrees { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("num_top_feature_importance_values")]
 		public int? NumTopFeatureImportanceValues { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("prediction_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? PredictionFieldName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("randomize_seed")]
 		public double? RandomizeSeed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("soft_tree_depth_limit")]
 		public int? SoftTreeDepthLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("soft_tree_depth_tolerance")]
 		public double? SoftTreeDepthTolerance { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("training_percent")]
 		public Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
 	}
 
 	public partial class DataframeAnalysisAnalyzedFieldsIncludeExclude
 	{
+		[JsonInclude]
 		[JsonPropertyName("excludes")]
 		public IReadOnlyCollection<string> Excludes
 		{
@@ -1580,6 +1766,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("includes")]
 		public IReadOnlyCollection<string> Includes
 		{
@@ -1594,138 +1781,173 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalysisClassification : Ml.DataframeAnalysis
 	{
+		[JsonInclude]
 		[JsonPropertyName("class_assignment_objective")]
 		public string? ClassAssignmentObjective { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("num_top_classes")]
 		public int? NumTopClasses { get; set; }
 	}
 
 	public partial class DataframeAnalysisContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("classification")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification? Classification { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("outlier_detection")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection? OutlierDetection { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("regression")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression? Regression { get; set; }
 	}
 
 	public partial class DataframeAnalysisFeatureProcessor
 	{
+		[JsonInclude]
 		[JsonPropertyName("frequency_encoding")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding? FrequencyEncoding { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("multi_encoding")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding? MultiEncoding { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("n_gram_encoding")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding? NGramEncoding { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("one_hot_encoding")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding? OneHotEncoding { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("target_mean_encoding")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding? TargetMeanEncoding { get; set; }
 	}
 
 	public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 	{
+		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("frequency_map")]
 		public Dictionary<string, double> FrequencyMap { get; set; }
 	}
 
 	public partial class DataframeAnalysisFeatureProcessorMultiEncoding
 	{
+		[JsonInclude]
 		[JsonPropertyName("processors")]
 		public IEnumerable<int> Processors { get; set; }
 	}
 
 	public partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	{
+		[JsonInclude]
 		[JsonPropertyName("custom")]
 		public bool? Custom { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("feature_prefix")]
 		public string? FeaturePrefix { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("length")]
 		public int? Length { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("n_grams")]
 		public IEnumerable<int> NGrams { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("start")]
 		public int? Start { get; set; }
 	}
 
 	public partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("hot_map")]
 		public string HotMap { get; set; }
 	}
 
 	public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 	{
+		[JsonInclude]
 		[JsonPropertyName("default_value")]
 		public int DefaultValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("target_map")]
 		public Dictionary<string, object> TargetMap { get; set; }
 	}
 
 	public partial class DataframeAnalysisOutlierDetection
 	{
+		[JsonInclude]
 		[JsonPropertyName("compute_feature_influence")]
 		public bool? ComputeFeatureInfluence { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("feature_influence_threshold")]
 		public double? FeatureInfluenceThreshold { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("method")]
 		public string? Method { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("n_neighbors")]
 		public int? NNeighbors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("outlier_fraction")]
 		public double? OutlierFraction { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("standardization_enabled")]
 		public bool? StandardizationEnabled { get; set; }
 	}
 
 	public partial class DataframeAnalysisRegression : Ml.DataframeAnalysis
 	{
+		[JsonInclude]
 		[JsonPropertyName("loss_function")]
 		public string? LossFunction { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("loss_function_parameter")]
 		public double? LossFunctionParameter { get; set; }
 	}
 
 	public partial class DataframeAnalytics
 	{
+		[JsonInclude]
 		[JsonPropertyName("analysis_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsContainer? AnalysisStats
 		{
@@ -1737,6 +1959,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("assignment_explanation")]
 		public string? AssignmentExplanation
 		{
@@ -1748,6 +1971,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_counts")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsDataCounts DataCounts
 		{
@@ -1759,6 +1983,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -1770,6 +1995,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_usage")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsMemoryUsage MemoryUsage
 		{
@@ -1781,6 +2007,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.NodeAttributes? Node
 		{
@@ -1792,6 +2019,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("progress")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsProgress> Progress
 		{
@@ -1803,6 +2031,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeState State
 		{
@@ -1817,15 +2046,18 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsDestination
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_field")]
 		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 	}
 
 	public partial class DataframeAnalyticsFieldSelection
 	{
+		[JsonInclude]
 		[JsonPropertyName("feature_type")]
 		public string? FeatureType
 		{
@@ -1837,6 +2069,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_included")]
 		public bool IsIncluded
 		{
@@ -1848,6 +2081,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_required")]
 		public bool IsRequired
 		{
@@ -1859,6 +2093,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mapping_types")]
 		public IReadOnlyCollection<string> MappingTypes
 		{
@@ -1870,6 +2105,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Field Name
 		{
@@ -1881,6 +2117,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string? Reason
 		{
@@ -1895,6 +2132,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsMemoryEstimation
 	{
+		[JsonInclude]
 		[JsonPropertyName("expected_memory_with_disk")]
 		public string ExpectedMemoryWithDisk
 		{
@@ -1906,6 +2144,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expected_memory_without_disk")]
 		public string ExpectedMemoryWithoutDisk
 		{
@@ -1920,21 +2159,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsSource
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Indices Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? Source { get; set; }
 	}
 
 	public partial class DataframeAnalyticsStatsContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("classification_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsHyperparameters? ClassificationStats
 		{
@@ -1946,6 +2190,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("outlier_detection_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsOutlierDetection? OutlierDetectionStats
 		{
@@ -1957,6 +2202,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("regression_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsHyperparameters? RegressionStats
 		{
@@ -1971,6 +2217,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsStatsDataCounts
 	{
+		[JsonInclude]
 		[JsonPropertyName("skipped_docs_count")]
 		public int SkippedDocsCount
 		{
@@ -1982,6 +2229,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("test_docs_count")]
 		public int TestDocsCount
 		{
@@ -1993,6 +2241,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("training_docs_count")]
 		public int TrainingDocsCount
 		{
@@ -2007,6 +2256,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsStatsHyperparameters
 	{
+		[JsonInclude]
 		[JsonPropertyName("hyperparameters")]
 		public Elastic.Clients.Elasticsearch.Ml.Hyperparameters Hyperparameters
 		{
@@ -2018,6 +2268,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("iteration")]
 		public int Iteration
 		{
@@ -2029,6 +2280,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
@@ -2040,6 +2292,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timing_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.TimingStats TimingStats
 		{
@@ -2051,6 +2304,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("validation_loss")]
 		public Elastic.Clients.Elasticsearch.Ml.ValidationLoss ValidationLoss
 		{
@@ -2065,6 +2319,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsStatsMemoryUsage
 	{
+		[JsonInclude]
 		[JsonPropertyName("memory_reestimate_bytes")]
 		public long? MemoryReestimateBytes
 		{
@@ -2076,6 +2331,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("peak_usage_bytes")]
 		public long PeakUsageBytes
 		{
@@ -2087,6 +2343,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public string Status
 		{
@@ -2098,6 +2355,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString? Timestamp
 		{
@@ -2112,6 +2370,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsStatsOutlierDetection
 	{
+		[JsonInclude]
 		[JsonPropertyName("parameters")]
 		public Elastic.Clients.Elasticsearch.Ml.OutlierDetectionParameters Parameters
 		{
@@ -2123,6 +2382,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
@@ -2134,6 +2394,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timing_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.TimingStats TimingStats
 		{
@@ -2148,6 +2409,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsStatsProgress
 	{
+		[JsonInclude]
 		[JsonPropertyName("phase")]
 		public string Phase
 		{
@@ -2159,6 +2421,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("progress_percent")]
 		public int ProgressPercent
 		{
@@ -2173,6 +2436,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeAnalyticsSummary
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
 		public bool? AllowLazyStart
 		{
@@ -2184,6 +2448,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis
 		{
@@ -2195,6 +2460,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields
 		{
@@ -2206,6 +2472,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long? CreateTime
 		{
@@ -2217,6 +2484,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -2228,6 +2496,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
 		{
@@ -2239,6 +2508,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -2250,6 +2520,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int? MaxNumThreads
 		{
@@ -2261,6 +2532,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string? ModelMemoryLimit
 		{
@@ -2272,6 +2544,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
 		{
@@ -2283,6 +2556,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -2297,174 +2571,217 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class DataframeEvaluationClassification
 	{
+		[JsonInclude]
 		[JsonPropertyName("actual_field")]
 		public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassificationMetrics? Metrics { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("predicted_field")]
 		public Elastic.Clients.Elasticsearch.Field? PredictedField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("top_classes_field")]
 		public Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
 	}
 
 	public partial class DataframeEvaluationClassificationMetrics : Ml.DataframeEvaluationMetrics
 	{
+		[JsonInclude]
 		[JsonPropertyName("accuracy")]
 		public Dictionary<string, object>? Accuracy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("multiclass_confusion_matrix")]
 		public Dictionary<string, object>? MulticlassConfusionMatrix { get; set; }
 	}
 
 	public partial class DataframeEvaluationClassificationMetricsAucRoc
 	{
+		[JsonInclude]
 		[JsonPropertyName("class_name")]
 		public Elastic.Clients.Elasticsearch.Name? ClassName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_curve")]
 		public bool? IncludeCurve { get; set; }
 	}
 
 	public partial class DataframeEvaluationContainer
 	{
+		[JsonInclude]
 		[JsonPropertyName("classification")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassification? Classification { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("outlier_detection")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetection? OutlierDetection { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("regression")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegression? Regression { get; set; }
 	}
 
 	public partial class DataframeEvaluationMetrics
 	{
+		[JsonInclude]
 		[JsonPropertyName("auc_roc")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public Dictionary<string, object>? Precision { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("recall")]
 		public Dictionary<string, object>? Recall { get; set; }
 	}
 
 	public partial class DataframeEvaluationOutlierDetection
 	{
+		[JsonInclude]
 		[JsonPropertyName("actual_field")]
 		public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("predicted_probability_field")]
 		public Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
 	}
 
 	public partial class DataframeEvaluationOutlierDetectionMetrics : Ml.DataframeEvaluationMetrics
 	{
+		[JsonInclude]
 		[JsonPropertyName("confusion_matrix")]
 		public Dictionary<string, object>? ConfusionMatrix { get; set; }
 	}
 
 	public partial class DataframeEvaluationRegression
 	{
+		[JsonInclude]
 		[JsonPropertyName("actual_field")]
 		public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegressionMetrics? Metrics { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("predicted_field")]
 		public Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
 	}
 
 	public partial class DataframeEvaluationRegressionMetrics
 	{
+		[JsonInclude]
 		[JsonPropertyName("huber")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mse")]
 		public Dictionary<string, object>? Mse { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("msle")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("r_squared")]
 		public Dictionary<string, object>? RSquared { get; set; }
 	}
 
 	public partial class DataframeEvaluationRegressionMetricsHuber
 	{
+		[JsonInclude]
 		[JsonPropertyName("delta")]
 		public double? Delta { get; set; }
 	}
 
 	public partial class DataframeEvaluationRegressionMetricsMsle
 	{
+		[JsonInclude]
 		[JsonPropertyName("offset")]
 		public double? Offset { get; set; }
 	}
 
 	public partial class DelayedDataCheckConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("check_window")]
 		public Elastic.Clients.Elasticsearch.Time? CheckWindow { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}
 
 	public partial class DetectionRule
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleAction>? Actions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("conditions")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleCondition>? Conditions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scope")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.FilterRef>? Scope { get; set; }
 	}
 
 	public partial class Detector
 	{
+		[JsonInclude]
 		[JsonPropertyName("by_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? ByFieldName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("custom_rules")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.DetectionRule>? CustomRules { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("detector_description")]
 		public string? DetectorDescription { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("detector_index")]
 		public int? DetectorIndex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("exclude_frequent")]
 		public Elastic.Clients.Elasticsearch.Ml.ExcludeFrequent? ExcludeFrequent { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field_name")]
 		public Elastic.Clients.Elasticsearch.Field? FieldName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("function")]
 		public string Function { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("over_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? OverFieldName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? PartitionFieldName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_null")]
 		public bool? UseNull { get; set; }
 	}
 
 	public partial class DiscoveryNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public Dictionary<string, string> Attributes
 		{
@@ -2476,6 +2793,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ephemeral_id")]
 		public Elastic.Clients.Elasticsearch.Id EphemeralId
 		{
@@ -2487,6 +2805,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -2498,6 +2817,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -2509,6 +2829,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
@@ -2523,6 +2844,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class Filter
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -2534,6 +2856,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("filter_id")]
 		public Elastic.Clients.Elasticsearch.Id FilterId
 		{
@@ -2545,6 +2868,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("items")]
 		public IReadOnlyCollection<string> Items
 		{
@@ -2559,15 +2883,18 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class FilterRef
 	{
+		[JsonInclude]
 		[JsonPropertyName("filter_id")]
 		public Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("filter_type")]
 		public Elastic.Clients.Elasticsearch.Ml.FilterType? FilterType { get; set; }
 	}
 
 	public partial class Hyperparameter
 	{
+		[JsonInclude]
 		[JsonPropertyName("absolute_importance")]
 		public double? AbsoluteImportance
 		{
@@ -2579,6 +2906,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -2590,6 +2918,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("relative_importance")]
 		public double? RelativeImportance
 		{
@@ -2601,6 +2930,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("supplied")]
 		public bool Supplied
 		{
@@ -2612,6 +2942,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public double Value
 		{
@@ -2626,6 +2957,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class Hyperparameters
 	{
+		[JsonInclude]
 		[JsonPropertyName("alpha")]
 		public double? Alpha
 		{
@@ -2637,6 +2969,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("downsample_factor")]
 		public double? DownsampleFactor
 		{
@@ -2648,6 +2981,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("eta")]
 		public double? Eta
 		{
@@ -2659,6 +2993,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("eta_growth_rate_per_tree")]
 		public double? EtaGrowthRatePerTree
 		{
@@ -2670,6 +3005,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("feature_bag_fraction")]
 		public double? FeatureBagFraction
 		{
@@ -2681,6 +3017,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("gamma")]
 		public double? Gamma
 		{
@@ -2692,6 +3029,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lambda")]
 		public double? Lambda
 		{
@@ -2703,6 +3041,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_attempts_to_add_tree")]
 		public int? MaxAttemptsToAddTree
 		{
@@ -2714,6 +3053,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_optimization_rounds_per_hyperparameter")]
 		public int? MaxOptimizationRoundsPerHyperparameter
 		{
@@ -2725,6 +3065,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_trees")]
 		public int? MaxTrees
 		{
@@ -2736,6 +3077,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_folds")]
 		public int? NumFolds
 		{
@@ -2747,6 +3089,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_splits_per_feature")]
 		public int? NumSplitsPerFeature
 		{
@@ -2758,6 +3101,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("soft_tree_depth_limit")]
 		public int? SoftTreeDepthLimit
 		{
@@ -2769,6 +3113,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("soft_tree_depth_tolerance")]
 		public double? SoftTreeDepthTolerance
 		{
@@ -2783,6 +3128,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class Influence
 	{
+		[JsonInclude]
 		[JsonPropertyName("influencer_field_name")]
 		public string InfluencerFieldName
 		{
@@ -2794,6 +3140,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("influencer_field_values")]
 		public IReadOnlyCollection<string> InfluencerFieldValues
 		{
@@ -2808,6 +3155,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class Job
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
 		public bool AllowLazyOpen
 		{
@@ -2819,6 +3167,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
 		{
@@ -2830,6 +3179,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits
 		{
@@ -2841,6 +3191,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
 		public Elastic.Clients.Elasticsearch.Time BackgroundPersistInterval
 		{
@@ -2852,6 +3203,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("blocked")]
 		public Elastic.Clients.Elasticsearch.Ml.JobBlocked? Blocked
 		{
@@ -2863,6 +3215,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public int CreateTime
 		{
@@ -2874,6 +3227,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
 		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings
 		{
@@ -2885,6 +3239,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public long? DailyModelSnapshotRetentionAfterDays
 		{
@@ -2896,6 +3251,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_description")]
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
 		{
@@ -2907,6 +3263,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
 		public Elastic.Clients.Elasticsearch.Ml.Datafeed? DatafeedConfig
 		{
@@ -2918,6 +3275,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleting")]
 		public bool? Deleting
 		{
@@ -2929,6 +3287,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -2940,6 +3299,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("finished_time")]
 		public int? FinishedTime
 		{
@@ -2951,6 +3311,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public IReadOnlyCollection<string>? Groups
 		{
@@ -2962,6 +3323,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -2973,6 +3335,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_type")]
 		public string JobType
 		{
@@ -2984,6 +3347,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_version")]
 		public Elastic.Clients.Elasticsearch.VersionString JobVersion
 		{
@@ -2995,6 +3359,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
 		{
@@ -3006,6 +3371,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_id")]
 		public Elastic.Clients.Elasticsearch.Id? ModelSnapshotId
 		{
@@ -3017,6 +3383,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long ModelSnapshotRetentionDays
 		{
@@ -3028,6 +3395,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("renormalization_window_days")]
 		public long? RenormalizationWindowDays
 		{
@@ -3039,6 +3407,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("results_index_name")]
 		public Elastic.Clients.Elasticsearch.IndexName ResultsIndexName
 		{
@@ -3050,6 +3419,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("results_retention_days")]
 		public long? ResultsRetentionDays
 		{
@@ -3064,6 +3434,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class JobBlocked
 	{
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public Elastic.Clients.Elasticsearch.Ml.JobBlockedReason Reason
 		{
@@ -3075,6 +3446,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task_id")]
 		public Elastic.Clients.Elasticsearch.TaskId? TaskId
 		{
@@ -3089,60 +3461,78 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class JobConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
 		public bool? AllowLazyOpen { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
 		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
 		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("data_description")]
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public IEnumerable<string>? Groups { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("job_type")]
 		public string? JobType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long? ModelSnapshotRetentionDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("renormalization_window_days")]
 		public long? RenormalizationWindowDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_index_name")]
 		public Elastic.Clients.Elasticsearch.IndexName? ResultsIndexName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_retention_days")]
 		public long? ResultsRetentionDays { get; set; }
 	}
 
 	public partial class JobForecastStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("forecasted_jobs")]
 		public int ForecastedJobs
 		{
@@ -3154,6 +3544,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_bytes")]
 		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? MemoryBytes
 		{
@@ -3165,6 +3556,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processing_time_ms")]
 		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? ProcessingTimeMs
 		{
@@ -3176,6 +3568,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("records")]
 		public Elastic.Clients.Elasticsearch.Ml.JobStatistics? Records
 		{
@@ -3187,6 +3580,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Dictionary<string, long>? Status
 		{
@@ -3198,6 +3592,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -3212,6 +3607,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class JobStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("avg")]
 		public double Avg
 		{
@@ -3223,6 +3619,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max")]
 		public double Max
 		{
@@ -3234,6 +3631,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min")]
 		public double Min
 		{
@@ -3245,6 +3643,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public double Total
 		{
@@ -3259,6 +3658,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class JobStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("assignment_explanation")]
 		public string AssignmentExplanation
 		{
@@ -3270,6 +3670,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_counts")]
 		public Elastic.Clients.Elasticsearch.Ml.DataCounts DataCounts
 		{
@@ -3281,6 +3682,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleting")]
 		public bool? Deleting
 		{
@@ -3292,6 +3694,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("forecasts_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.JobForecastStatistics ForecastsStats
 		{
@@ -3303,6 +3706,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public string JobId
 		{
@@ -3314,6 +3718,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_size_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelSizeStats ModelSizeStats
 		{
@@ -3325,6 +3730,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node")]
 		public Elastic.Clients.Elasticsearch.Ml.DiscoveryNode Node
 		{
@@ -3336,6 +3742,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("open_time")]
 		public Elastic.Clients.Elasticsearch.DateString? OpenTime
 		{
@@ -3347,6 +3754,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Ml.JobState State
 		{
@@ -3358,6 +3766,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timing_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.JobTimingStats TimingStats
 		{
@@ -3372,6 +3781,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class JobTimingStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("average_bucket_processing_time_ms")]
 		public double AverageBucketProcessingTimeMs
 		{
@@ -3383,6 +3793,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("bucket_count")]
 		public long BucketCount
 		{
@@ -3394,6 +3805,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exponential_average_bucket_processing_time_ms")]
 		public double ExponentialAverageBucketProcessingTimeMs
 		{
@@ -3405,6 +3817,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("exponential_average_bucket_processing_time_per_hour_ms")]
 		public double ExponentialAverageBucketProcessingTimePerHourMs
 		{
@@ -3416,6 +3829,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -3427,6 +3841,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("maximum_bucket_processing_time_ms")]
 		public double MaximumBucketProcessingTimeMs
 		{
@@ -3438,6 +3853,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("minimum_bucket_processing_time_ms")]
 		public double MinimumBucketProcessingTimeMs
 		{
@@ -3449,6 +3865,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_bucket_processing_time_ms")]
 		public double TotalBucketProcessingTimeMs
 		{
@@ -3463,18 +3880,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class ModelPlotConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("annotations_enabled")]
 		public bool? AnnotationsEnabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public Elastic.Clients.Elasticsearch.Field? Terms { get; set; }
 	}
 
 	public partial class ModelSizeStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("assignment_memory_basis")]
 		public string? AssignmentMemoryBasis
 		{
@@ -3486,6 +3907,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("bucket_allocation_failures_count")]
 		public long BucketAllocationFailuresCount
 		{
@@ -3497,6 +3919,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("categorization_status")]
 		public Elastic.Clients.Elasticsearch.Ml.CategorizationStatus CategorizationStatus
 		{
@@ -3508,6 +3931,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("categorized_doc_count")]
 		public int CategorizedDocCount
 		{
@@ -3519,6 +3943,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dead_category_count")]
 		public int DeadCategoryCount
 		{
@@ -3530,6 +3955,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_category_count")]
 		public int FailedCategoryCount
 		{
@@ -3541,6 +3967,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frequent_category_count")]
 		public int FrequentCategoryCount
 		{
@@ -3552,6 +3979,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -3563,6 +3991,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("log_time")]
 		public Elastic.Clients.Elasticsearch.Time LogTime
 		{
@@ -3574,6 +4003,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("memory_status")]
 		public Elastic.Clients.Elasticsearch.Ml.MemoryStatus MemoryStatus
 		{
@@ -3585,6 +4015,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_bytes")]
 		public long ModelBytes
 		{
@@ -3596,6 +4027,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_bytes_exceeded")]
 		public long ModelBytesExceeded
 		{
@@ -3607,6 +4039,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_bytes_memory_limit")]
 		public long ModelBytesMemoryLimit
 		{
@@ -3618,6 +4051,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("peak_model_bytes")]
 		public long PeakModelBytes
 		{
@@ -3629,6 +4063,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rare_category_count")]
 		public int RareCategoryCount
 		{
@@ -3640,6 +4075,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result_type")]
 		public string ResultType
 		{
@@ -3651,6 +4087,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long? Timestamp
 		{
@@ -3662,6 +4099,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_by_field_count")]
 		public long TotalByFieldCount
 		{
@@ -3673,6 +4111,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_category_count")]
 		public int TotalCategoryCount
 		{
@@ -3684,6 +4123,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_over_field_count")]
 		public long TotalOverFieldCount
 		{
@@ -3695,6 +4135,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_partition_field_count")]
 		public long TotalPartitionFieldCount
 		{
@@ -3709,6 +4150,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class ModelSnapshot
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -3720,6 +4162,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -3731,6 +4174,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_record_time_stamp")]
 		public int LatestRecordTimeStamp
 		{
@@ -3742,6 +4186,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("latest_result_time_stamp")]
 		public int LatestResultTimeStamp
 		{
@@ -3753,6 +4198,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_version")]
 		public Elastic.Clients.Elasticsearch.VersionString MinVersion
 		{
@@ -3764,6 +4210,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_size_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelSizeStats ModelSizeStats
 		{
@@ -3775,6 +4222,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retain")]
 		public bool Retain
 		{
@@ -3786,6 +4234,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot_doc_count")]
 		public long SnapshotDocCount
 		{
@@ -3797,6 +4246,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot_id")]
 		public Elastic.Clients.Elasticsearch.Id SnapshotId
 		{
@@ -3808,6 +4258,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public int Timestamp
 		{
@@ -3822,6 +4273,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class OutlierDetectionParameters
 	{
+		[JsonInclude]
 		[JsonPropertyName("compute_feature_influence")]
 		public bool? ComputeFeatureInfluence
 		{
@@ -3833,6 +4285,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("feature_influence_threshold")]
 		public double? FeatureInfluenceThreshold
 		{
@@ -3844,6 +4297,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("method")]
 		public string? Method
 		{
@@ -3855,6 +4309,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("n_neighbors")]
 		public int? NNeighbors
 		{
@@ -3866,6 +4321,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("outlier_fraction")]
 		public double? OutlierFraction
 		{
@@ -3877,6 +4333,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("standardization_enabled")]
 		public bool? StandardizationEnabled
 		{
@@ -3891,6 +4348,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class OverallBucket
 	{
+		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
 		public long BucketSpan
 		{
@@ -3902,6 +4360,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("is_interim")]
 		public bool IsInterim
 		{
@@ -3913,6 +4372,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("jobs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.OverallBucketJob> Jobs
 		{
@@ -3924,6 +4384,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("overall_score")]
 		public double OverallScore
 		{
@@ -3935,6 +4396,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("result_type")]
 		public string ResultType
 		{
@@ -3946,6 +4408,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.Time Timestamp
 		{
@@ -3960,6 +4423,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class OverallBucketJob
 	{
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
@@ -3971,6 +4435,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_anomaly_score")]
 		public double MaxAnomalyScore
 		{
@@ -3985,15 +4450,18 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class Page
 	{
+		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 	}
 
 	public partial class PartitionScore
 	{
+		[JsonInclude]
 		[JsonPropertyName("initial_record_score")]
 		public double InitialRecordScore
 		{
@@ -4005,6 +4473,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_name")]
 		public Elastic.Clients.Elasticsearch.Field PartitionFieldName
 		{
@@ -4016,6 +4485,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("partition_field_value")]
 		public string PartitionFieldValue
 		{
@@ -4027,6 +4497,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("probability")]
 		public double Probability
 		{
@@ -4038,6 +4509,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("record_score")]
 		public double RecordScore
 		{
@@ -4052,27 +4524,33 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class PerPartitionCategorization
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stop_on_warn")]
 		public bool? StopOnWarn { get; set; }
 	}
 
 	public partial class RuleCondition
 	{
+		[JsonInclude]
 		[JsonPropertyName("applies_to")]
 		public Elastic.Clients.Elasticsearch.Ml.AppliesTo AppliesTo { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.Ml.ConditionOperator Operator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public double Value { get; set; }
 	}
 
 	public partial class TimingStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("elapsed_time")]
 		public int ElapsedTime
 		{
@@ -4084,6 +4562,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("iteration_time")]
 		public int? IterationTime
 		{
@@ -4098,6 +4577,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TotalFeatureImportance
 	{
+		[JsonInclude]
 		[JsonPropertyName("classes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TotalFeatureImportanceClass> Classes
 		{
@@ -4109,6 +4589,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("feature_name")]
 		public Elastic.Clients.Elasticsearch.Name FeatureName
 		{
@@ -4120,6 +4601,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("importance")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TotalFeatureImportanceStatistics> Importance
 		{
@@ -4134,6 +4616,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TotalFeatureImportanceClass
 	{
+		[JsonInclude]
 		[JsonPropertyName("class_name")]
 		public Elastic.Clients.Elasticsearch.Name ClassName
 		{
@@ -4145,6 +4628,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("importance")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TotalFeatureImportanceStatistics> Importance
 		{
@@ -4159,6 +4643,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TotalFeatureImportanceStatistics
 	{
+		[JsonInclude]
 		[JsonPropertyName("max")]
 		public int Max
 		{
@@ -4170,6 +4655,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mean_magnitude")]
 		public double MeanMagnitude
 		{
@@ -4181,6 +4667,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min")]
 		public int Min
 		{
@@ -4195,6 +4682,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TrainedModelConfig
 	{
+		[JsonInclude]
 		[JsonPropertyName("compressed_definition")]
 		public string? CompressedDefinition
 		{
@@ -4206,6 +4694,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("created_by")]
 		public string? CreatedBy
 		{
@@ -4217,6 +4706,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public Elastic.Clients.Elasticsearch.Time? CreateTime
 		{
@@ -4228,6 +4718,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("default_field_map")]
 		public Dictionary<string, string>? DefaultFieldMap
 		{
@@ -4239,6 +4730,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description
 		{
@@ -4250,6 +4742,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("estimated_heap_memory_usage_bytes")]
 		public int? EstimatedHeapMemoryUsageBytes
 		{
@@ -4261,6 +4754,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("estimated_operations")]
 		public int? EstimatedOperations
 		{
@@ -4272,6 +4766,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("inference_config")]
 		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig
 		{
@@ -4283,6 +4778,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModelConfigInput Input
 		{
@@ -4294,6 +4790,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("license_level")]
 		public string? LicenseLevel
 		{
@@ -4305,6 +4802,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModelConfigMetadata? Metadata
 		{
@@ -4316,6 +4814,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_id")]
 		public Elastic.Clients.Elasticsearch.Id ModelId
 		{
@@ -4327,6 +4826,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tags")]
 		public IReadOnlyCollection<string> Tags
 		{
@@ -4338,6 +4838,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -4352,6 +4853,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TrainedModelConfigInput
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_names")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field> FieldNames
 		{
@@ -4366,6 +4868,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TrainedModelConfigMetadata
 	{
+		[JsonInclude]
 		[JsonPropertyName("feature_importance_baseline")]
 		public Dictionary<string, string>? FeatureImportanceBaseline
 		{
@@ -4377,6 +4880,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hyperparameters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.Hyperparameter>? Hyperparameters
 		{
@@ -4388,6 +4892,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_aliases")]
 		public IReadOnlyCollection<string>? ModelAliases
 		{
@@ -4399,6 +4904,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_feature_importance")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.TotalFeatureImportance>? TotalFeatureImportance
 		{
@@ -4413,6 +4919,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TrainedModelInferenceStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("cache_miss_count")]
 		public long CacheMissCount
 		{
@@ -4424,6 +4931,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failure_count")]
 		public long FailureCount
 		{
@@ -4435,6 +4943,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("inference_count")]
 		public long InferenceCount
 		{
@@ -4446,6 +4955,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("missing_all_fields_count")]
 		public long MissingAllFieldsCount
 		{
@@ -4457,6 +4967,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.Time Timestamp
 		{
@@ -4471,6 +4982,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class TrainedModelStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("inference_stats")]
 		public Elastic.Clients.Elasticsearch.Ml.TrainedModelInferenceStats? InferenceStats
 		{
@@ -4482,6 +4994,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest")]
 		public Dictionary<string, object>? Ingest
 		{
@@ -4493,6 +5006,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("model_id")]
 		public Elastic.Clients.Elasticsearch.Id ModelId
 		{
@@ -4504,6 +5018,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pipeline_count")]
 		public int PipelineCount
 		{
@@ -4518,6 +5033,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 	public partial class ValidationLoss
 	{
+		[JsonInclude]
 		[JsonPropertyName("fold_values")]
 		public IReadOnlyCollection<string> FoldValues
 		{
@@ -4529,6 +5045,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("loss_type")]
 		public string LossType
 		{

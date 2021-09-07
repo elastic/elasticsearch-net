@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <IsTestProject>False</IsTestProject>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -352,12 +352,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? AnalysisConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_bucket_cardinality")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, long>? MaxBucketCardinality { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("overall_cardinality")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, long>? OverallCardinality { get; set; }
 	}
@@ -386,12 +389,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("evaluation")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationContainer Evaluation { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
@@ -435,27 +441,35 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource? Source { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? Dest { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string? ModelMemoryLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int? MaxNumThreads { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
 		public bool? AllowLazyStart { get; set; }
 	}
@@ -489,15 +503,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public string? SkipTime { get => Q<string?>("skip_time"); set => Q("skip_time", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("advance_time")]
 		public Elastic.Clients.Elasticsearch.DateString? AdvanceTime { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("calc_interim")]
 		public bool? CalcInterim { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("end")]
 		public Elastic.Clients.Elasticsearch.DateString? End { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("start")]
 		public Elastic.Clients.Elasticsearch.DateString? Start { get; set; }
 	}
@@ -524,9 +542,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("duration")]
 		public Elastic.Clients.Elasticsearch.Time? Duration { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("expires_in")]
 		public Elastic.Clients.Elasticsearch.Time? ExpiresIn { get; set; }
 	}
@@ -581,12 +601,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.DateString? End { get => Q<Elastic.Clients.Elasticsearch.DateString?>("end"); set => Q("end", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("anomaly_score")]
 		public double? AnomalyScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("expand")]
 		public bool? Expand { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("page")]
 		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
 	}
@@ -657,6 +680,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("page")]
 		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
 	}
@@ -695,6 +719,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("page")]
 		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
 	}
@@ -907,6 +932,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.DateString? Start { get => Q<Elastic.Clients.Elasticsearch.DateString?>("start"); set => Q("start", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("page")]
 		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
 	}
@@ -1057,6 +1083,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("allow_no_jobs")]
 		public bool? AllowNoJobs { get; set; }
 	}
@@ -1102,15 +1129,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.DateString? End { get => Q<Elastic.Clients.Elasticsearch.DateString?>("end"); set => Q("end", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("desc")]
 		public bool? Desc { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("page")]
 		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("record_score")]
 		public double? RecordScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 	}
@@ -1235,6 +1266,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 	}
@@ -1259,6 +1291,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("events")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events { get; set; }
 	}
@@ -1314,6 +1347,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("config")]
 		public Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? Config { get; set; }
 	}
@@ -1345,9 +1379,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_config")]
 		public Elastic.Clients.Elasticsearch.Ml.JobConfig? JobConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
 	}
@@ -1372,6 +1408,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 	}
@@ -1430,27 +1467,35 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
 		public bool? AllowLazyStart { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyzed_fields")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int? MaxNumThreads { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string? ModelMemoryLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; set; }
 	}
@@ -1513,45 +1558,59 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Time? Frequency { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IEnumerable<string>? Indices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indexes")]
 		public IEnumerable<string>? Indexes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices_options")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_empty_searches")]
 		public int? MaxEmptySearches { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query_delay")]
 		public Elastic.Clients.Elasticsearch.Time? QueryDelay { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
 		public int? ScrollSize { get; set; }
 	}
@@ -1578,9 +1637,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("items")]
 		public IEnumerable<string>? Items { get; set; }
 	}
@@ -1633,48 +1694,63 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
 		public bool? AllowLazyOpen { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
 		public Elastic.Clients.Elasticsearch.Time BackgroundPersistInterval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
 		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("data_description")]
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
 		public Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public IEnumerable<string>? Groups { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long? ModelSnapshotRetentionDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("renormalization_window_days")]
 		public long? RenormalizationWindowDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_index_name")]
 		public Elastic.Clients.Elasticsearch.IndexName? ResultsIndexName { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_retention_days")]
 		public long? ResultsRetentionDays { get; set; }
 	}
@@ -1711,24 +1787,31 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("compressed_definition")]
 		public string? CompressedDefinition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("definition")]
 		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Definition? Definition { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("inference_config")]
 		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("input")]
 		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Input Input { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public object? Metadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("tags")]
 		public IEnumerable<string>? Tags { get; set; }
 	}
@@ -1799,6 +1882,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delete_intervening_results")]
 		public bool? DeleteInterveningResults { get; set; }
 	}
@@ -1877,9 +1961,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Start { get => Q<Elastic.Clients.Elasticsearch.Time?>("start"); set => Q("start", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("end")]
 		public Elastic.Clients.Elasticsearch.Time? End { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 	}
@@ -1939,6 +2025,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonIgnore]
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 	}
@@ -1969,15 +2056,19 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
 		public string? ModelMemoryLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
 		public int? MaxNumThreads { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_start")]
 		public bool? AllowLazyStart { get; set; }
 	}
@@ -2006,12 +2097,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("add_items")]
 		public IEnumerable<string>? AddItems { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("remove_items")]
 		public IEnumerable<string>? RemoveItems { get; set; }
 	}
@@ -2062,45 +2156,59 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
 		public bool? AllowLazyOpen { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisMemoryLimit? AnalysisLimits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
 		public Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
 		public Dictionary<string, object>? CustomSettings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("categorization_filters")]
 		public IEnumerable<string>? CategorizationFilters { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
 		public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long? ModelSnapshotRetentionDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("renormalization_window_days")]
 		public long? RenormalizationWindowDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_retention_days")]
 		public long? ResultsRetentionDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("groups")]
 		public IEnumerable<string>? Groups { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("detectors")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? Detectors { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("per_partition_categorization")]
 		public Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 	}
@@ -2127,9 +2235,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("retain")]
 		public bool? Retain { get; set; }
 	}
@@ -2194,27 +2304,35 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("job_id")]
 		public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? AnalysisConfig { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
 		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("data_description")]
 		public Elastic.Clients.Elasticsearch.Ml.DataDescription? DataDescription { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string? Description { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_plot")]
 		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlot { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
 		public long? ModelSnapshotRetentionDays { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("results_index_name")]
 		public Elastic.Clients.Elasticsearch.IndexName? ResultsIndexName { get; set; }
 	}

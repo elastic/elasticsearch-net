@@ -32,6 +32,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 	public partial class StatusResponse<TDocument> : AsyncSearch.AsyncSearchResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("completion_status")]
 		public int CompletionStatus
 		{
@@ -43,6 +44,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{

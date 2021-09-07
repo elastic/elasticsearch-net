@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown
 
 	public partial class GetNodeResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Shutdown.GetNode.NodeShutdownStatus> Nodes
 		{

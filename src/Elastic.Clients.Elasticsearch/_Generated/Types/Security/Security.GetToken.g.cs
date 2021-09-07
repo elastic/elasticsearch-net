@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 {
 	public partial class AuthenticatedUser : Security.User
 	{
+		[JsonInclude]
 		[JsonPropertyName("authentication_provider")]
 		public Elastic.Clients.Elasticsearch.Security.GetToken.AuthenticationProvider? AuthenticationProvider
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("authentication_realm")]
 		public Elastic.Clients.Elasticsearch.Security.GetToken.UserRealm AuthenticationRealm
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("authentication_type")]
 		public string AuthenticationType
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lookup_realm")]
 		public Elastic.Clients.Elasticsearch.Security.GetToken.UserRealm LookupRealm
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 
 	public partial class AuthenticationProvider
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 
 	public partial class UserRealm
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetToken
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
