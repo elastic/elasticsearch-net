@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class AllocationExplainResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("allocate_explanation")]
 		public string? AllocateExplanation
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("allocation_delay")]
 		public string? AllocationDelay
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("allocation_delay_in_millis")]
 		public long? AllocationDelayInMillis
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_allocate")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanAllocate
 		{
@@ -68,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_move_to_other_node")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanMoveToOtherNode
 		{
@@ -79,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_rebalance_cluster")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRebalanceCluster
 		{
@@ -90,6 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_rebalance_cluster_decisions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision>? CanRebalanceClusterDecisions
 		{
@@ -101,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_rebalance_to_other_node")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRebalanceToOtherNode
 		{
@@ -112,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_remain_decisions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision>? CanRemainDecisions
 		{
@@ -123,6 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("can_remain_on_current_node")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision? CanRemainOnCurrentNode
 		{
@@ -134,6 +144,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_info")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ClusterInfo? ClusterInfo
 		{
@@ -145,6 +156,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("configured_delay")]
 		public string? ConfiguredDelay
 		{
@@ -156,6 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("configured_delay_in_millis")]
 		public long? ConfiguredDelayInMillis
 		{
@@ -167,6 +180,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("current_node")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.CurrentNode? CurrentNode
 		{
@@ -178,6 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("current_state")]
 		public string CurrentState
 		{
@@ -189,6 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -200,6 +216,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("move_explanation")]
 		public string? MoveExplanation
 		{
@@ -211,6 +228,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_allocation_decisions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeAllocationExplanation>? NodeAllocationDecisions
 		{
@@ -222,6 +240,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("note")]
 		public string? Note
 		{
@@ -233,6 +252,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary")]
 		public bool Primary
 		{
@@ -244,6 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rebalance_explanation")]
 		public string? RebalanceExplanation
 		{
@@ -255,6 +276,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remaining_delay")]
 		public string? RemainingDelay
 		{
@@ -266,6 +288,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remaining_delay_in_millis")]
 		public long? RemainingDelayInMillis
 		{
@@ -277,6 +300,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard")]
 		public int Shard
 		{
@@ -288,6 +312,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unassigned_info")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformation? UnassignedInfo
 		{
@@ -314,6 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class GetComponentTemplateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("component_templates")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> ComponentTemplates
 		{
@@ -328,6 +354,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class GetSettingsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("defaults")]
 		public Dictionary<string, object>? Defaults
 		{
@@ -339,6 +366,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("persistent")]
 		public Dictionary<string, object> Persistent
 		{
@@ -350,6 +378,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transient")]
 		public Dictionary<string, object> Transient
 		{
@@ -364,6 +393,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class HealthResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("active_primary_shards")]
 		public int ActivePrimaryShards
 		{
@@ -375,6 +405,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("active_shards")]
 		public int ActiveShards
 		{
@@ -386,6 +417,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("active_shards_percent_as_number")]
 		public Elastic.Clients.Elasticsearch.Percentage ActiveShardsPercentAsNumber
 		{
@@ -397,6 +429,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public string ClusterName
 		{
@@ -408,6 +441,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delayed_unassigned_shards")]
 		public int DelayedUnassignedShards
 		{
@@ -419,6 +453,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats>? Indices
 		{
@@ -430,6 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initializing_shards")]
 		public int InitializingShards
 		{
@@ -441,6 +477,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_data_nodes")]
 		public int NumberOfDataNodes
 		{
@@ -452,6 +489,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_in_flight_fetch")]
 		public int NumberOfInFlightFetch
 		{
@@ -463,6 +501,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_nodes")]
 		public int NumberOfNodes
 		{
@@ -474,6 +513,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_pending_tasks")]
 		public int NumberOfPendingTasks
 		{
@@ -485,6 +525,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("relocating_shards")]
 		public int RelocatingShards
 		{
@@ -496,6 +537,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Health Status
 		{
@@ -507,6 +549,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task_max_waiting_in_queue_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TaskMaxWaitingInQueueMillis
 		{
@@ -518,6 +561,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool TimedOut
 		{
@@ -529,6 +573,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unassigned_shards")]
 		public int UnassignedShards
 		{
@@ -543,6 +588,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class PendingTasksResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("tasks")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.PendingTasks.PendingTask> Tasks
 		{
@@ -565,6 +611,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class PutSettingsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("acknowledged")]
 		public bool Acknowledged
 		{
@@ -576,6 +623,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("persistent")]
 		public Dictionary<string, object> Persistent
 		{
@@ -587,6 +635,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transient")]
 		public Dictionary<string, object> Transient
 		{
@@ -605,6 +654,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class RerouteResponse : AcknowledgedResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("explanations")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteExplanation>? Explanations
 		{
@@ -616,6 +666,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteState State
 		{
@@ -630,6 +681,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class StateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("blocks")]
 		public Elastic.Clients.Elasticsearch.Cluster.State.ClusterStateBlocks? Blocks
 		{
@@ -641,6 +693,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -652,6 +705,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
@@ -663,6 +717,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("master_node")]
 		public string? MasterNode
 		{
@@ -674,6 +729,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateMetadata? Metadata
 		{
@@ -685,6 +741,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<Elastic.Clients.Elasticsearch.NodeName, Elastic.Clients.Elasticsearch.NodeAttributes>? Nodes
 		{
@@ -696,6 +753,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("routing_nodes")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateRoutingNodes? RoutingNodes
 		{
@@ -707,6 +765,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("routing_table")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.EmptyObject>? RoutingTable
 		{
@@ -718,6 +777,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot_deletions")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateDeletedSnapshots? SnapshotDeletions
 		{
@@ -729,6 +789,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshots")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStateSnapshots? Snapshots
 		{
@@ -740,6 +801,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state")]
 		public IReadOnlyCollection<string>? State
 		{
@@ -751,6 +813,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("state_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid? StateUuid
 		{
@@ -762,6 +825,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -776,6 +840,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class StatsResponse : Nodes.NodesResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -787,6 +852,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
@@ -798,6 +864,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIndices Indices
 		{
@@ -809,6 +876,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterNodes Nodes
 		{
@@ -820,6 +888,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Cluster.ClusterStatus Status
 		{
@@ -831,6 +900,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public long Timestamp
 		{

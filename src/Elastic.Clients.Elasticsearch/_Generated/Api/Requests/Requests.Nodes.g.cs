@@ -137,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("secure_settings_password")]
 		public Elastic.Clients.Elasticsearch.Password? SecureSettingsPassword { get; set; }
 	}

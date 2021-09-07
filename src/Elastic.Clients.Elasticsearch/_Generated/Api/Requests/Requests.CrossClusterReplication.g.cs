@@ -87,39 +87,51 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("leader_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? LeaderIndex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
 		public long? MaxOutstandingReadRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_write_requests")]
 		public long? MaxOutstandingWriteRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_operation_count")]
 		public long? MaxReadRequestOperationCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_size")]
 		public string? MaxReadRequestSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
 		public Elastic.Clients.Elasticsearch.Time? MaxRetryDelay { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
 		public long? MaxWriteBufferCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_size")]
 		public string? MaxWriteBufferSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_operation_count")]
 		public long? MaxWriteRequestOperationCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_size")]
 		public string? MaxWriteRequestSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? ReadPollTimeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("remote_cluster")]
 		public string? RemoteCluster { get; set; }
 	}
@@ -190,15 +202,19 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follower_cluster")]
 		public string? FollowerCluster { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("follower_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? FollowerIndex { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("follower_index_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid? FollowerIndexUuid { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("leader_remote_cluster")]
 		public string? LeaderRemoteCluster { get; set; }
 	}
@@ -314,45 +330,59 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_cluster")]
 		public string RemoteCluster { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("follow_index_pattern")]
 		public Elastic.Clients.Elasticsearch.IndexPattern? FollowIndexPattern { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("leader_index_patterns")]
 		public Elastic.Clients.Elasticsearch.IndexPatterns? LeaderIndexPatterns { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
 		public int? MaxOutstandingReadRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_write_requests")]
 		public int? MaxOutstandingWriteRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? ReadPollTimeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_operation_count")]
 		public int? MaxReadRequestOperationCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
 		public Elastic.Clients.Elasticsearch.Time? MaxRetryDelay { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
 		public int? MaxWriteBufferCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_operation_count")]
 		public int? MaxWriteRequestOperationCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 	}
@@ -415,33 +445,43 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		{
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
 		public long? MaxOutstandingReadRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_write_requests")]
 		public long? MaxOutstandingWriteRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_operation_count")]
 		public long? MaxReadRequestOperationCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_size")]
 		public string? MaxReadRequestSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
 		public Elastic.Clients.Elasticsearch.Time? MaxRetryDelay { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
 		public long? MaxWriteBufferCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_size")]
 		public string? MaxWriteBufferSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_operation_count")]
 		public long? MaxWriteRequestOperationCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_size")]
 		public string? MaxWriteRequestSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
 		public Elastic.Clients.Elasticsearch.Time? ReadPollTimeout { get; set; }
 	}

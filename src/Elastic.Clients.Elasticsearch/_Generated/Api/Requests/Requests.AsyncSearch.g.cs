@@ -226,153 +226,203 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("aggs")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("allow_no_indices")]
 		public bool? AllowNoIndices { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("allow_partial_search_results")]
 		public bool? AllowPartialSearchResults { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("collapse")]
 		public Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("default_operator")]
 		public Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("df")]
 		public string? Df { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("docvalue_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("expand_wildcards")]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("explain")]
 		public bool? Explain { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_throttled")]
 		public bool? IgnoreThrottled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_unavailable")]
 		public bool? IgnoreUnavailable { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("indices_boost")]
 		public IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
 		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("lenient")]
 		public bool? Lenient { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_concurrent_shard_requests")]
 		public long? MaxConcurrentShardRequests { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public double? MinScore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("post_filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("preference")]
 		public string? Preference { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("profile")]
 		public bool? Profile { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("pit")]
 		public Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query_on_query_string")]
 		public string? QueryOnQueryString { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("request_cache")]
 		public bool? RequestCache { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("rescore")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("routing")]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script_fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_after")]
 		public Elastic.Clients.Elasticsearch.Global.Search.SortResults? SearchAfter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_type")]
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sequence_number_primary_term")]
 		public bool? SequenceNumberPrimaryTerm { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? Source { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stats")]
 		public IEnumerable<string>? Stats { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("stored_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer>? Suggest { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest_field")]
 		public Elastic.Clients.Elasticsearch.Field? SuggestField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest_mode")]
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest_size")]
 		public long? SuggestSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("suggest_text")]
 		public string? SuggestText { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("terminate_after")]
 		public long? TerminateAfter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public string? Timeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("track_scores")]
 		public bool? TrackScores { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("track_total_hits")]
 		public bool? TrackTotalHits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public bool? Version { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 	}

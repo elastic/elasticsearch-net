@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 {
 	public partial class NodeShutdownStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.NodeId NodeId
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("persistent_tasks")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.PersistentTaskStatus PersistentTasks
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("plugins")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.PluginsStatus Plugins
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_migration")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShardMigrationStatus ShardMigration
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shutdown_startedmillis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ShutdownStartedmillis
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownType Type
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 
 	public partial class PersistentTaskStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 
 	public partial class PluginsStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
@@ -145,6 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 
 	public partial class ShardMigrationStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{

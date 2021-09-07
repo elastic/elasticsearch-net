@@ -27,17 +27,20 @@ namespace Elastic.Clients.Elasticsearch
 			var keyType = type.GetGenericArguments()[0];
 			var valueType = type.GetGenericArguments()[1];
 
-			var converter = (JsonConverter)Activator.CreateInstance(
+			if (keyType.IsClass)
+			{
+				return (JsonConverter)Activator.CreateInstance(
 				typeof(DictionaryConverterInner<,>).MakeGenericType(keyType, valueType),
 				BindingFlags.Instance | BindingFlags.Public,
 				null,
-				new object[] {options},
+				new object[] { options },
 				null);
+			}
 
-			return converter;
+			return null;
 		}
 
-		private class DictionaryConverterInner<TKey, TValue> : JsonConverter<Dictionary<TKey, TValue>>
+		private class DictionaryConverterInner<TKey, TValue> : JsonConverter<Dictionary<TKey, TValue>> where TKey : class
 		{
 			private readonly Type _keyType;
 			private readonly JsonConverter<TValue>? _valueConverter = null;
@@ -59,27 +62,35 @@ namespace Elastic.Clients.Elasticsearch
 				Type typeToConvert,
 				JsonSerializerOptions options)
 			{
-				if (reader.TokenType != JsonTokenType.StartObject) throw new JsonException();
+				if (reader.TokenType != JsonTokenType.StartObject)
+					throw new JsonException();
 				var dictionary = new Dictionary<TKey, TValue>();
 				while (reader.Read())
 				{
-					if (reader.TokenType == JsonTokenType.EndObject) return dictionary;
+					if (reader.TokenType == JsonTokenType.EndObject)
+						return dictionary;
 					// Get the key.
-					if (reader.TokenType != JsonTokenType.PropertyName) throw new JsonException();
+					if (reader.TokenType != JsonTokenType.PropertyName)
+						throw new JsonException();
 					var propertyName = reader.GetString();
 
 					if (propertyName is null)
 						throw new SerializationException("Oh no!"); // TODO handle this better
 
+					// TODO: This is all very basic
 					TKey key;
 					if (typeof(TKey) == typeof(string))
 						key = (TKey)Activator.CreateInstance(typeof(string), propertyName.ToCharArray());
+					else if (typeof(TKey) == typeof(IndexName))
+					{
+						key = IndexName.Parse(propertyName) as TKey;
+					}
 					else
 					{
 						key = (TKey)Activator.CreateInstance(typeof(TKey),
-							BindingFlags.Instance | BindingFlags.Public,
+							BindingFlags.Instance,
 							null,
-							new object[] {propertyName},
+							new object[] { propertyName },
 							null);
 					}
 

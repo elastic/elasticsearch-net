@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 {
 	public partial class GetFeaturesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("features")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features
 		{
@@ -38,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 
 	public partial class ResetFeaturesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("features")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features
 		{

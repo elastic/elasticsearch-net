@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 {
 	public partial class ResolveIndexAliasItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 
 	public partial class ResolveIndexDataStreamsItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("backing_indices")]
 		public Elastic.Clients.Elasticsearch.Indices BackingIndices
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.DataStreamName Name
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp_field")]
 		public Elastic.Clients.Elasticsearch.Field TimestampField
 		{
@@ -87,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 
 	public partial class ResolveIndexItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public IReadOnlyCollection<string>? Aliases
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public IReadOnlyCollection<string> Attributes
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_stream")]
 		public Elastic.Clients.Elasticsearch.DataStreamName? DataStream
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{

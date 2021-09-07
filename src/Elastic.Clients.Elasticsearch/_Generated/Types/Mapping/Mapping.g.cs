@@ -26,197 +26,250 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 {
 	public partial class AllField
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("omit_norms")]
 		public bool OmitNorms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
 		public string SearchAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("similarity")]
 		public string Similarity { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("store")]
 		public bool Store { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("store_term_vector_offsets")]
 		public bool StoreTermVectorOffsets { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("store_term_vector_payloads")]
 		public bool StoreTermVectorPayloads { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("store_term_vector_positions")]
 		public bool StoreTermVectorPositions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("store_term_vectors")]
 		public bool StoreTermVectors { get; set; }
 	}
 
 	public partial class BinaryProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "binary";
 	}
 
 	public partial class BooleanProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public bool? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "boolean";
 	}
 
 	public partial class CompletionProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("contexts")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_input_length")]
 		public int? MaxInputLength { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("preserve_position_increments")]
 		public bool? PreservePositionIncrements { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("preserve_separators")]
 		public bool? PreserveSeparators { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
 		public string? SearchAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "completion";
 	}
 
 	public partial class ConstantKeywordProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "constant_keyword";
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public object? Value { get; set; }
 	}
 
 	public partial class CorePropertyBase : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("copy_to")]
 		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("similarity")]
 		public string? Similarity { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("store")]
 		public bool? Store { get; set; }
 	}
 
 	public partial class DateNanosProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public Elastic.Clients.Elasticsearch.DateString? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("precision_step")]
 		public int? PrecisionStep { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "date_nanos";
 	}
 
 	public partial class DateProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public Elastic.Clients.Elasticsearch.DateString? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("precision_step")]
 		public int? PrecisionStep { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "date";
 	}
 
 	public partial class DateRangeProperty : Mapping.RangePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "date_range";
 	}
 
 	public partial class DocValuesPropertyBase : Mapping.CorePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc_values")]
 		public bool? DocValues { get; set; }
 	}
 
 	public partial class DoubleRangeProperty : Mapping.RangePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "double_range";
 	}
 
 	public partial class DynamicTemplate
 	{
+		[JsonInclude]
 		[JsonPropertyName("mapping")]
 		public Elastic.Clients.Elasticsearch.Mapping.PropertyBase? Mapping { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match")]
 		public string? Match { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_mapping_type")]
 		public string? MatchMappingType { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("match_pattern")]
 		public Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("path_match")]
 		public string? PathMatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("path_unmatch")]
 		public string? PathUnmatch { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("unmatch")]
 		public string? Unmatch { get; set; }
 	}
 
 	public partial class FieldAliasProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "alias";
 	}
@@ -227,414 +280,521 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public partial class FieldNamesField
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}
 
 	public partial class FlattenedProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("depth_limit")]
 		public int? DepthLimit { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("doc_values")]
 		public bool? DocValues { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
 		public bool? EagerGlobalOrdinals { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public string? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("similarity")]
 		public string? Similarity { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("split_queries_on_whitespace")]
 		public bool? SplitQueriesOnWhitespace { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "flattened";
 	}
 
 	public partial class FloatRangeProperty : Mapping.RangePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "float_range";
 	}
 
 	public partial class GenericProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddata Fielddata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions IndexOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("norms")]
 		public bool Norms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public string NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("position_increment_gap")]
 		public int PositionIncrementGap { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
 		public string SearchAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term_vector")]
 		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption TermVector { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type { get; set; }
 	}
 
 	public partial class GeoPointProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
 		public bool? IgnoreZValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "geo_point";
 	}
 
 	public partial class GeoShapeProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
 		public bool? IgnoreZValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("orientation")]
 		public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("strategy")]
 		public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "geo_shape";
 	}
 
 	public partial class HistogramProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "histogram";
 	}
 
 	public partial class IndexField
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}
 
 	public partial class IntegerRangeProperty : Mapping.RangePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "integer_range";
 	}
 
 	public partial class IpProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public string? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "ip";
 	}
 
 	public partial class IpRangeProperty : Mapping.RangePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "ip_range";
 	}
 
 	public partial class JoinProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("relations")]
 		public Dictionary<Elastic.Clients.Elasticsearch.RelationName, Union<Elastic.Clients.Elasticsearch.RelationName, IEnumerable<Elastic.Clients.Elasticsearch.RelationName>>>? Relations { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "join";
 	}
 
 	public partial class KeywordProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
 		public bool? EagerGlobalOrdinals { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("normalizer")]
 		public string? Normalizer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("norms")]
 		public bool? Norms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public string? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("split_queries_on_whitespace")]
 		public bool? SplitQueriesOnWhitespace { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "keyword";
 	}
 
 	public partial class LongRangeProperty : Mapping.RangePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "long_range";
 	}
 
 	public partial class Murmur3HashProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "murmur3";
 	}
 
 	public partial class NestedProperty : Mapping.CorePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_in_parent")]
 		public bool? IncludeInParent { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include_in_root")]
 		public bool? IncludeInRoot { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "nested";
 	}
 
 	public partial class NumberProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public double? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("scaling_factor")]
 		public double? ScalingFactor { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Mapping.NumberType Type { get; set; }
 	}
 
 	public partial class ObjectProperty : Mapping.CorePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "object";
 	}
 
 	public partial class PercolatorProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "percolator";
 	}
 
 	public partial class PointProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
 		public bool? IgnoreZValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public string? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "point";
 	}
 
 	public partial class PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("dynamic")]
 		public Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? Dynamic { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Fields { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_above")]
 		public int? IgnoreAbove { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public bool? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("local_metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata? LocalMetadata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("meta")]
 		public Dictionary<string, string>? Meta { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.PropertyName? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
 	}
 
 	public partial class RangePropertyBase : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 	}
 
 	public partial class RankFeatureProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("positive_score_impact")]
 		public bool? PositiveScoreImpact { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "rank_feature";
 	}
 
 	public partial class RankFeaturesProperty : Mapping.PropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "rank_features";
 	}
 
 	public partial class RoutingField
 	{
+		[JsonInclude]
 		[JsonPropertyName("required")]
 		public bool Required { get; set; }
 	}
 
 	public partial class RuntimeField
 	{
+		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 	}
 
 	public partial class SearchAsYouTypeProperty : Mapping.CorePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_shingle_size")]
 		public int? MaxShingleSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("norms")]
 		public bool? Norms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
 		public string? SearchAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
 		public string? SearchQuoteAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term_vector")]
 		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "search_as_you_type";
 	}
 
 	public partial class ShapeProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("coerce")]
 		public bool? Coerce { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
 		public bool? IgnoreZValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("orientation")]
 		public Elastic.Clients.Elasticsearch.Mapping.ShapeOrientation? Orientation { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "shape";
 	}
 
 	public partial class SizeField
 	{
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}
 
 	public partial class SourceField
 	{
+		[JsonInclude]
 		[JsonPropertyName("compress")]
 		public bool? Compress { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("compress_threshold")]
 		public string? CompressThreshold { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("excludes")]
 		public IEnumerable<string>? Excludes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("includes")]
 		public IEnumerable<string>? Includes { get; set; }
 	}
 
 	public partial class SuggestContext
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -646,6 +806,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public Elastic.Clients.Elasticsearch.Field? Path
 		{
@@ -657,6 +818,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public int? Precision
 		{
@@ -668,6 +830,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -682,6 +845,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public partial class TextIndexPrefixes
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_chars")]
 		public int MaxChars
 		{
@@ -693,6 +857,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_chars")]
 		public int MinChars
 		{
@@ -707,120 +872,155 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public partial class TextProperty : Mapping.CorePropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
 		public bool? EagerGlobalOrdinals { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public bool? Fielddata { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata_frequency_filter")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_options")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_phrases")]
 		public bool? IndexPhrases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_prefixes")]
 		public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("norms")]
 		public bool? Norms { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("position_increment_gap")]
 		public int? PositionIncrementGap { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
 		public string? SearchAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
 		public string? SearchQuoteAnalyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term_vector")]
 		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "text";
 	}
 
 	public partial class TokenCountProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double? Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("enable_position_increments")]
 		public bool? EnablePositionIncrements { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("null_value")]
 		public double? NullValue { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "token_count";
 	}
 
 	public partial class TypeMapping
 	{
+		[JsonInclude]
 		[JsonPropertyName("all_field")]
 		public Elastic.Clients.Elasticsearch.Mapping.AllField? AllField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("date_detection")]
 		public bool? DateDetection { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic")]
 		public Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? Dynamic { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic_date_formats")]
 		public IEnumerable<string>? DynamicDateFormats { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("dynamic_templates")]
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_field_names")]
 		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index_field")]
 		public Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexField { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("numeric_detection")]
 		public bool? NumericDetection { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("properties")]
 		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("runtime")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_size")]
 		public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 	}
 
 	public partial class VersionProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "version";
 	}
 
 	public partial class WildcardProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "wildcard";
 	}

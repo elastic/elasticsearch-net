@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 	public partial class Phase
 	{
+		[JsonInclude]
 		[JsonPropertyName("actions")]
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Ilm.Action>, IReadOnlyCollection<string>> Actions
 		{
@@ -41,6 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min_age")]
 		public Elastic.Clients.Elasticsearch.Time? MinAge
 		{
@@ -55,6 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 	public partial class Phases
 	{
+		[JsonInclude]
 		[JsonPropertyName("cold")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phase? Cold
 		{
@@ -66,6 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delete")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phase? Delete
 		{
@@ -77,6 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hot")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phase? Hot
 		{
@@ -88,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("warm")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phase? Warm
 		{
@@ -102,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 	public partial class Policy
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name
 		{
@@ -113,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("phases")]
 		public Elastic.Clients.Elasticsearch.Ilm.Phases Phases
 		{

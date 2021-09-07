@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers
 {
 	public partial class ReloadDetails
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public string Index
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reloaded_analyzers")]
 		public IReadOnlyCollection<string> ReloadedAnalyzers
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reloaded_node_ids")]
 		public IReadOnlyCollection<string> ReloadedNodeIds
 		{

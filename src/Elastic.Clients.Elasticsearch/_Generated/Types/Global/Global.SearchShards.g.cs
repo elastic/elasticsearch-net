@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.SearchShards
 {
 	public partial class ShardStoreIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? Aliases
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.SearchShards
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter
 		{

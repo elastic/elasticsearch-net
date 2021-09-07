@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling
 
 	public partial class GetAutoscalingCapacityResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("policies")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingDeciders> Policies
 		{

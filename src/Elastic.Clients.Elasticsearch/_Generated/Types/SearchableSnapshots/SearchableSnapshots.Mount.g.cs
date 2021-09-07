@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount
 {
 	public partial class MountedSnapshot
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public Elastic.Clients.Elasticsearch.Name Snapshot
 		{

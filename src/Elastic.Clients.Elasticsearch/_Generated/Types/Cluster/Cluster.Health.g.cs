@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 {
 	public partial class IndexHealthStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("active_primary_shards")]
 		public int ActivePrimaryShards
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("active_shards")]
 		public int ActiveShards
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initializing_shards")]
 		public int InitializingShards
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_replicas")]
 		public int NumberOfReplicas
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_shards")]
 		public int NumberOfShards
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("relocating_shards")]
 		public int RelocatingShards
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.Health.ShardHealthStats>? Shards
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Health Status
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unassigned_shards")]
 		public int UnassignedShards
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 
 	public partial class ShardHealthStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("active_shards")]
 		public int ActiveShards
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initializing_shards")]
 		public int InitializingShards
 		{
@@ -150,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_active")]
 		public bool PrimaryActive
 		{
@@ -161,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("relocating_shards")]
 		public int RelocatingShards
 		{
@@ -172,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Health Status
 		{
@@ -183,6 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("unassigned_shards")]
 		public int UnassignedShards
 		{

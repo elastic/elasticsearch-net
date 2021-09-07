@@ -6,9 +6,6 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-
-
-
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
@@ -65,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public Indices And(IndexName index) => new Indices(new[] { this, index });
 
-		private static IndexName Parse(string indexName)
+		internal static IndexName Parse(string indexName)
 		{
 			if (string.IsNullOrWhiteSpace(indexName))
 				return null;

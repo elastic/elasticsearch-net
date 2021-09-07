@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class FollowInfoResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("follower_indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndex> FollowerIndices
 		{
@@ -42,6 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class FollowResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("follow_index_created")]
 		public bool FollowIndexCreated
 		{
@@ -53,6 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follow_index_shards_acked")]
 		public bool FollowIndexShardsAcked
 		{
@@ -64,6 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_following_started")]
 		public bool IndexFollowingStarted
 		{
@@ -78,6 +82,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class FollowStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowIndexStats> Indices
 		{
@@ -92,6 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class ForgetFollowerResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -106,6 +112,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class GetAutoFollowPatternResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("patterns")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern.AutoFollowPattern> Patterns
 		{
@@ -140,6 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 	public partial class StatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("auto_follow_stats")]
 		public Elastic.Clients.Elasticsearch.Ccr.Stats.AutoFollowStats AutoFollowStats
 		{
@@ -151,6 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("follow_stats")]
 		public Elastic.Clients.Elasticsearch.Ccr.Stats.FollowStats FollowStats
 		{

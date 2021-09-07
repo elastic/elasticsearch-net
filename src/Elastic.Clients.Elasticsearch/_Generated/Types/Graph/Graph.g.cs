@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 {
 	public partial class Connection
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc_count")]
 		public long DocCount
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public long Source
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("target")]
 		public long Target
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("weight")]
 		public double Weight
 		{
@@ -73,42 +77,52 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 	public partial class ExploreControls
 	{
+		[JsonInclude]
 		[JsonPropertyName("sample_diversity")]
 		public Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversity { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("sample_size")]
 		public int? SampleSize { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("use_significance")]
 		public bool UseSignificance { get; set; }
 	}
 
 	public partial class Hop
 	{
+		[JsonInclude]
 		[JsonPropertyName("connections")]
 		public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("vertices")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
 	}
 
 	public partial class SampleDiversity
 	{
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_docs_per_value")]
 		public int MaxDocsPerValue { get; set; }
 	}
 
 	public partial class Vertex
 	{
+		[JsonInclude]
 		[JsonPropertyName("depth")]
 		public long Depth
 		{
@@ -120,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field
 		{
@@ -131,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public string Term
 		{
@@ -142,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("weight")]
 		public double Weight
 		{
@@ -156,30 +173,38 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 	public partial class VertexDefinition
 	{
+		[JsonInclude]
 		[JsonPropertyName("exclude")]
 		public IEnumerable<string>? Exclude { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("include")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? Include { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
 		public long? MinDocCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("shard_min_doc_count")]
 		public long? ShardMinDocCount { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 	}
 
 	public partial class VertexInclude
 	{
+		[JsonInclude]
 		[JsonPropertyName("boost")]
 		public double Boost { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("term")]
 		public string Term { get; set; }
 	}

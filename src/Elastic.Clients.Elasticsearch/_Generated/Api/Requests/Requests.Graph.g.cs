@@ -54,15 +54,19 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("connections")]
 		public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("controls")]
 		public Elastic.Clients.Elasticsearch.Graph.ExploreControls? Controls { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("vertices")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? Vertices { get; set; }
 	}

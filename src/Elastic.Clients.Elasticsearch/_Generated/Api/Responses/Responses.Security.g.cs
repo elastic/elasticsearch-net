@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 {
 	public partial class AuthenticateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("authentication_realm")]
 		public Elastic.Clients.Elasticsearch.Security.RealmInfo AuthenticationRealm
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("authentication_type")]
 		public string AuthenticationType
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("email")]
 		public string? Email
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled
 		{
@@ -68,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("full_name")]
 		public Elastic.Clients.Elasticsearch.Name? FullName
 		{
@@ -79,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lookup_realm")]
 		public Elastic.Clients.Elasticsearch.Security.RealmInfo LookupRealm
 		{
@@ -90,6 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metadata")]
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
@@ -101,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("roles")]
 		public IReadOnlyCollection<string> Roles
 		{
@@ -112,6 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token")]
 		public Elastic.Clients.Elasticsearch.Security.Authenticate.Token? Token
 		{
@@ -123,6 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username Username
 		{
@@ -141,6 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class ClearApiKeyCacheResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -152,6 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
@@ -163,6 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
@@ -177,6 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class ClearCachedPrivilegesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -188,6 +202,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
@@ -199,6 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
@@ -213,6 +229,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class ClearCachedRealmsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -224,6 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
@@ -235,6 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
@@ -249,6 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class ClearCachedRolesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -260,6 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
@@ -271,6 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
@@ -285,6 +307,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class ClearCachedServiceTokensResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -296,6 +319,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_nodes")]
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
@@ -307,6 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
@@ -321,6 +346,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class CreateApiKeyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("api_key")]
 		public string ApiKey
 		{
@@ -332,6 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expiration")]
 		public long? Expiration
 		{
@@ -343,6 +370,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -354,6 +382,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -368,6 +397,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class CreateServiceTokenResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public bool Created
 		{
@@ -379,6 +409,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token")]
 		public Elastic.Clients.Elasticsearch.Security.CreateServiceToken.Token Token
 		{
@@ -397,6 +428,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class DeleteRoleMappingResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -411,6 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class DeleteRoleResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -425,6 +458,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class DeleteServiceTokenResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -439,6 +473,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class DeleteUserResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -461,6 +496,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class GetApiKeyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("api_keys")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GetApiKey.ApiKey> ApiKeys
 		{
@@ -475,6 +511,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class GetBuiltinPrivilegesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IReadOnlyCollection<string> Cluster
 		{
@@ -486,6 +523,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Indices Index
 		{
@@ -516,6 +554,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class GetServiceCredentialsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -527,6 +566,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes_credentials")]
 		public Elastic.Clients.Elasticsearch.Security.GetServiceCredentials.NodesCredentials NodesCredentials
 		{
@@ -538,6 +578,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("service_account")]
 		public string ServiceAccount
 		{
@@ -549,6 +590,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokens")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Metadata> Tokens
 		{
@@ -563,6 +605,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class GetTokenResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("access_token")]
 		public string AccessToken
 		{
@@ -574,6 +617,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("authentication")]
 		public Elastic.Clients.Elasticsearch.Security.GetToken.AuthenticatedUser Authentication
 		{
@@ -585,6 +629,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expires_in")]
 		public long ExpiresIn
 		{
@@ -596,6 +641,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("kerberos_authentication_response_token")]
 		public string? KerberosAuthenticationResponseToken
 		{
@@ -607,6 +653,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("refresh_token")]
 		public string RefreshToken
 		{
@@ -618,6 +665,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("scope")]
 		public string? Scope
 		{
@@ -629,6 +677,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -643,6 +692,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class GetUserPrivilegesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("applications")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications
 		{
@@ -654,6 +704,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public IReadOnlyCollection<string> Cluster
 		{
@@ -665,6 +716,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("global")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> Global
 		{
@@ -676,6 +728,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
 		{
@@ -687,6 +740,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("run_as")]
 		public IReadOnlyCollection<string> RunAs
 		{
@@ -705,6 +759,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class GrantApiKeyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("api_key")]
 		public string ApiKey
 		{
@@ -716,6 +771,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("expiration")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? Expiration
 		{
@@ -727,6 +783,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -738,6 +795,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -752,6 +810,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class HasPrivilegesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("application")]
 		public Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationsPrivileges Application
 		{
@@ -763,6 +822,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster")]
 		public Dictionary<string, bool> Cluster
 		{
@@ -774,6 +834,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("has_all_requested")]
 		public bool HasAllRequested
 		{
@@ -785,6 +846,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Security.HasPrivileges.Privileges> Index
 		{
@@ -796,6 +858,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("username")]
 		public Elastic.Clients.Elasticsearch.Username Username
 		{
@@ -810,6 +873,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class InvalidateApiKeyResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("error_count")]
 		public int ErrorCount
 		{
@@ -821,6 +885,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("error_details")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails
 		{
@@ -832,6 +897,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("invalidated_api_keys")]
 		public IReadOnlyCollection<string> InvalidatedApiKeys
 		{
@@ -843,6 +909,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("previously_invalidated_api_keys")]
 		public IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys
 		{
@@ -857,6 +924,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class InvalidateTokenResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("error_count")]
 		public long ErrorCount
 		{
@@ -868,6 +936,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("error_details")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails
 		{
@@ -879,6 +948,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("invalidated_tokens")]
 		public long InvalidatedTokens
 		{
@@ -890,6 +960,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("previously_invalidated_tokens")]
 		public long PreviouslyInvalidatedTokens
 		{
@@ -908,6 +979,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class PutRoleMappingResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public bool? Created
 		{
@@ -919,6 +991,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("role_mapping")]
 		public Elastic.Clients.Elasticsearch.Security.CreatedStatus RoleMapping
 		{
@@ -933,6 +1006,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class PutRoleResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("role")]
 		public Elastic.Clients.Elasticsearch.Security.CreatedStatus Role
 		{
@@ -947,6 +1021,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 	public partial class PutUserResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public bool Created
 		{

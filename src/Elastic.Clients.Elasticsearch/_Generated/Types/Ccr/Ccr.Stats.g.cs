@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 {
 	public partial class AutoFollowStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("auto_followed_clusters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.Stats.AutoFollowedCluster> AutoFollowedClusters
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_failed_follow_indices")]
 		public long NumberOfFailedFollowIndices
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_failed_remote_cluster_state_requests")]
 		public long NumberOfFailedRemoteClusterStateRequests
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("number_of_successful_follow_indices")]
 		public long NumberOfSuccessfulFollowIndices
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recent_auto_follow_errors")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 
 	public partial class AutoFollowedCluster
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_seen_metadata_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber LastSeenMetadataVersion
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_since_last_check_millis")]
 		public Elastic.Clients.Elasticsearch.DateString TimeSinceLastCheckMillis
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 
 	public partial class FollowStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowIndexStats> Indices
 		{

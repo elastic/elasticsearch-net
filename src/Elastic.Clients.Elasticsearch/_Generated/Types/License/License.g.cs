@@ -26,33 +26,43 @@ namespace Elastic.Clients.Elasticsearch.License
 {
 	public partial class License
 	{
+		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("issue_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("issued_to")]
 		public string IssuedTo { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("issuer")]
 		public string Issuer { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_nodes")]
 		public long? MaxNodes { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("max_resource_units")]
 		public long? MaxResourceUnits { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("signature")]
 		public string Signature { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("start_date_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StartDateInMillis { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.License.LicenseType Type { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("uid")]
 		public string Uid { get; set; }
 	}

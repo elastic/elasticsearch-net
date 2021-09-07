@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 {
 	public partial class FileDetails
 	{
+		[JsonInclude]
 		[JsonPropertyName("length")]
 		public long Length
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered")]
 		public long Recovered
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class RecoveryBytes
 	{
+		[JsonInclude]
 		[JsonPropertyName("percent")]
 		public Elastic.Clients.Elasticsearch.Percentage Percent
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Recovered
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered_from_snapshot")]
 		public Elastic.Clients.Elasticsearch.ByteSize? RecoveredFromSnapshot
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered_from_snapshot_in_bytes")]
 		public Elastic.Clients.Elasticsearch.ByteSize? RecoveredFromSnapshotInBytes
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered_in_bytes")]
 		public Elastic.Clients.Elasticsearch.ByteSize RecoveredInBytes
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reused")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Reused
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reused_in_bytes")]
 		public Elastic.Clients.Elasticsearch.ByteSize ReusedInBytes
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Total
 		{
@@ -150,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
 		public Elastic.Clients.Elasticsearch.ByteSize TotalInBytes
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class RecoveryFiles
 	{
+		[JsonInclude]
 		[JsonPropertyName("details")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Recovery.FileDetails>? Details
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("percent")]
 		public Elastic.Clients.Elasticsearch.Percentage Percent
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered")]
 		public long Recovered
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reused")]
 		public long Reused
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -222,6 +239,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class RecoveryIndexStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("bytes")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryBytes? Bytes
 		{
@@ -233,6 +251,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("files")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryFiles Files
 		{
@@ -244,6 +263,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryBytes Size
 		{
@@ -255,6 +275,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source_throttle_time")]
 		public Elastic.Clients.Elasticsearch.Time? SourceThrottleTime
 		{
@@ -266,6 +287,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source_throttle_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis SourceThrottleTimeInMillis
 		{
@@ -277,6 +299,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("target_throttle_time")]
 		public Elastic.Clients.Elasticsearch.Time? TargetThrottleTime
 		{
@@ -288,6 +311,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("target_throttle_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TargetThrottleTimeInMillis
 		{
@@ -299,6 +323,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time")]
 		public Elastic.Clients.Elasticsearch.Time? TotalTime
 		{
@@ -310,6 +335,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
@@ -324,6 +350,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class RecoveryOrigin
 	{
+		[JsonInclude]
 		[JsonPropertyName("bootstrap_new_history_uuid")]
 		public bool? BootstrapNewHistoryUuid
 		{
@@ -335,6 +362,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("host")]
 		public Elastic.Clients.Elasticsearch.Host? Host
 		{
@@ -346,6 +374,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hostname")]
 		public string? Hostname
 		{
@@ -357,6 +386,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id? Id
 		{
@@ -368,6 +398,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index
 		{
@@ -379,6 +410,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ip")]
 		public Elastic.Clients.Elasticsearch.Ip? Ip
 		{
@@ -390,6 +422,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name
 		{
@@ -401,6 +434,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("repository")]
 		public Elastic.Clients.Elasticsearch.Name? Repository
 		{
@@ -412,6 +446,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("restoreUUID")]
 		public Elastic.Clients.Elasticsearch.Uuid? Restoreuuid
 		{
@@ -423,6 +458,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public Elastic.Clients.Elasticsearch.Name? Snapshot
 		{
@@ -434,6 +470,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress? TransportAddress
 		{
@@ -445,6 +482,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -459,6 +497,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class RecoveryStartStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("check_index_time")]
 		public long CheckIndexTime
 		{
@@ -470,6 +509,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public string TotalTimeInMillis
 		{
@@ -484,6 +524,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class RecoveryStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Recovery.ShardRecovery> Shards
 		{
@@ -498,6 +539,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class ShardRecovery
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public long Id
 		{
@@ -509,6 +551,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryIndexStatus Index
 		{
@@ -520,6 +563,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary")]
 		public bool Primary
 		{
@@ -531,6 +575,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryOrigin Source
 		{
@@ -542,6 +587,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stage")]
 		public string Stage
 		{
@@ -553,6 +599,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryStartStatus? Start
 		{
@@ -564,6 +611,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time")]
 		public Elastic.Clients.Elasticsearch.DateString? StartTime
 		{
@@ -575,6 +623,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StartTimeInMillis
 		{
@@ -586,6 +635,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stop_time")]
 		public Elastic.Clients.Elasticsearch.DateString? StopTime
 		{
@@ -597,6 +647,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("stop_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis StopTimeInMillis
 		{
@@ -608,6 +659,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("target")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryOrigin Target
 		{
@@ -619,6 +671,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time")]
 		public Elastic.Clients.Elasticsearch.DateString? TotalTime
 		{
@@ -630,6 +683,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
@@ -641,6 +695,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("translog")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.TranslogStatus Translog
 		{
@@ -652,6 +707,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.DocType Type
 		{
@@ -663,6 +719,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("verify_index")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.VerifyIndex VerifyIndex
 		{
@@ -677,6 +734,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class TranslogStatus
 	{
+		[JsonInclude]
 		[JsonPropertyName("percent")]
 		public Elastic.Clients.Elasticsearch.Percentage Percent
 		{
@@ -688,6 +746,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("recovered")]
 		public long Recovered
 		{
@@ -699,6 +758,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -710,6 +770,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_on_start")]
 		public long TotalOnStart
 		{
@@ -721,6 +782,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time")]
 		public string? TotalTime
 		{
@@ -732,6 +794,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
@@ -746,6 +809,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 	public partial class VerifyIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("check_index_time")]
 		public Elastic.Clients.Elasticsearch.Time? CheckIndexTime
 		{
@@ -757,6 +821,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("check_index_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis CheckIndexTimeInMillis
 		{
@@ -768,6 +833,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time")]
 		public Elastic.Clients.Elasticsearch.Time? TotalTime
 		{
@@ -779,6 +845,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{

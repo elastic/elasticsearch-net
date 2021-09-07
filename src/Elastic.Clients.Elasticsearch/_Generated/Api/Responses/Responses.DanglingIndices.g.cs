@@ -32,6 +32,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices
 
 	public partial class ListDanglingIndicesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("dangling_indices")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices.DanglingIndex> DanglingIndices
 		{

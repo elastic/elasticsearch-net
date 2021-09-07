@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 {
 	public partial class AllocationDecision
 	{
+		[JsonInclude]
 		[JsonPropertyName("decider")]
 		public string Decider
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("decision")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationExplainDecision Decision
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("explanation")]
 		public string Explanation
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class AllocationStore
 	{
+		[JsonInclude]
 		[JsonPropertyName("allocation_id")]
 		public string AllocationId
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("in_sync")]
 		public bool InSync
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("matching_size_in_bytes")]
 		public long MatchingSizeInBytes
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("matching_sync_id")]
 		public bool MatchingSyncId
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store_exception")]
 		public string StoreException
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class ClusterInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeDiskUsage> Nodes
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reserved_sizes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ReservedSize> ReservedSizes
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_data_set_sizes")]
 		public Dictionary<string, string>? ShardDataSetSizes
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_paths")]
 		public Dictionary<string, string> ShardPaths
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shard_sizes")]
 		public Dictionary<string, long> ShardSizes
 		{
@@ -189,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class CurrentNode
 	{
+		[JsonInclude]
 		[JsonPropertyName("attributes")]
 		public Dictionary<string, string> Attributes
 		{
@@ -200,6 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -211,6 +227,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -222,6 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
@@ -233,6 +251,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("weight_ranking")]
 		public int WeightRanking
 		{
@@ -247,6 +266,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class DiskUsage
 	{
+		[JsonInclude]
 		[JsonPropertyName("free_bytes")]
 		public long FreeBytes
 		{
@@ -258,6 +278,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free_disk_percent")]
 		public double FreeDiskPercent
 		{
@@ -269,6 +290,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string Path
 		{
@@ -280,6 +302,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_bytes")]
 		public long TotalBytes
 		{
@@ -291,6 +314,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_bytes")]
 		public long UsedBytes
 		{
@@ -302,6 +326,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_disk_percent")]
 		public double UsedDiskPercent
 		{
@@ -316,6 +341,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class NodeAllocationExplanation
 	{
+		[JsonInclude]
 		[JsonPropertyName("deciders")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision> Deciders
 		{
@@ -327,6 +353,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_attributes")]
 		public Dictionary<string, string> NodeAttributes
 		{
@@ -338,6 +365,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_decision")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision NodeDecision
 		{
@@ -349,6 +377,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -360,6 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_name")]
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{
@@ -371,6 +401,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationStore? Store
 		{
@@ -382,6 +413,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_address")]
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
@@ -393,6 +425,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("weight_ranking")]
 		public int WeightRanking
 		{
@@ -407,6 +440,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class NodeDiskUsage
 	{
+		[JsonInclude]
 		[JsonPropertyName("least_available")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage LeastAvailable
 		{
@@ -418,6 +452,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("most_available")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage MostAvailable
 		{
@@ -429,6 +464,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_name")]
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{
@@ -443,6 +479,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class ReservedSize
 	{
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -454,6 +491,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string Path
 		{
@@ -465,6 +503,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<string> Shards
 		{
@@ -476,6 +515,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long Total
 		{
@@ -490,6 +530,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 	public partial class UnassignedInformation
 	{
+		[JsonInclude]
 		[JsonPropertyName("allocation_status")]
 		public string? AllocationStatus
 		{
@@ -501,6 +542,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("at")]
 		public Elastic.Clients.Elasticsearch.DateString At
 		{
@@ -512,6 +554,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("delayed")]
 		public bool? Delayed
 		{
@@ -523,6 +566,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("details")]
 		public string? Details
 		{
@@ -534,6 +578,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed_allocation_attempts")]
 		public int? FailedAllocationAttempts
 		{
@@ -545,6 +590,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("last_allocation_status")]
 		public string? LastAllocationStatus
 		{
@@ -556,6 +602,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformationReason Reason
 		{

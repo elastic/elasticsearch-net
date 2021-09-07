@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 {
 	public partial class FollowerIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("leader_index")]
 		public Elastic.Clients.Elasticsearch.IndexName LeaderIndex
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("parameters")]
 		public Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndexParameters? Parameters
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_cluster")]
 		public Elastic.Clients.Elasticsearch.Name RemoteCluster
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndexStatus Status
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 
 	public partial class FollowerIndexParameters
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
 		public int MaxOutstandingReadRequests
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_outstanding_write_requests")]
 		public int MaxOutstandingWriteRequests
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_operation_count")]
 		public int MaxReadRequestOperationCount
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_read_request_size")]
 		public string MaxReadRequestSize
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_retry_delay")]
 		public Elastic.Clients.Elasticsearch.Time MaxRetryDelay
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_count")]
 		public int MaxWriteBufferCount
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_buffer_size")]
 		public string MaxWriteBufferSize
 		{
@@ -150,6 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_operation_count")]
 		public int MaxWriteRequestOperationCount
 		{
@@ -161,6 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_write_request_size")]
 		public string MaxWriteRequestSize
 		{
@@ -172,6 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("read_poll_timeout")]
 		public Elastic.Clients.Elasticsearch.Time ReadPollTimeout
 		{

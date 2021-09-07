@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.CleanupRepository
 {
 	public partial class CleanupRepositoryResults
 	{
+		[JsonInclude]
 		[JsonPropertyName("deleted_blobs")]
 		public long DeletedBlobs
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.CleanupRepository
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted_bytes")]
 		public long DeletedBytes
 		{

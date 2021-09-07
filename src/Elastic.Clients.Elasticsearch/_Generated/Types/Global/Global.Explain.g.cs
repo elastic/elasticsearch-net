@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Explain
 {
 	public partial class Explanation
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Explain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("details")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Explain.ExplanationDetail> Details
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Explain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public float Value
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Explain
 
 	public partial class ExplanationDetail
 	{
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Explain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("details")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Explain.ExplanationDetail>? Details
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Explain
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("value")]
 		public float Value
 		{

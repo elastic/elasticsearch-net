@@ -57,7 +57,7 @@ namespace Tests.Framework.EndpointTests
 
 		protected string U(string s) => Uri.EscapeDataString(s);
 
-		protected string Q(string s) => Uri.EscapeUriString(s);
+		protected string Q(string s) => Uri.EscapeDataString(s);
 
 		protected T ExtendedValue<T>(string key) where T : class => UniqueValues.ExtendedValue<T>(key);
 

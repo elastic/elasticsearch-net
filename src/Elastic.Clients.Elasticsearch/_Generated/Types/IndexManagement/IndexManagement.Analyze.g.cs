@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 {
 	public partial class AnalyzeDetail
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.AnalyzerDetail? Analyzer
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("charfilters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.CharFilterDetail>? Charfilters
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("custom_analyzer")]
 		public bool CustomAnalyzer
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokenfilters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TokenDetail>? Tokenfilters
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TokenDetail? Tokenizer
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 	public partial class AnalyzeToken
 	{
+		[JsonInclude]
 		[JsonPropertyName("end_offset")]
 		public long EndOffset
 		{
@@ -95,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("position")]
 		public long Position
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("position_length")]
 		public long? PositionLength
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_offset")]
 		public long StartOffset
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token")]
 		public string Token
 		{
@@ -139,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 	public partial class AnalyzerDetail
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokens")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.ExplainAnalyzeToken> Tokens
 		{
@@ -178,6 +191,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 	public partial class CharFilterDetail
 	{
+		[JsonInclude]
 		[JsonPropertyName("filtered_text")]
 		public IReadOnlyCollection<string> FilteredText
 		{
@@ -189,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name
 		{
@@ -203,6 +218,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 	public partial class ExplainAnalyzeToken
 	{
+		[JsonInclude]
 		[JsonPropertyName("bytes")]
 		public string Bytes
 		{
@@ -214,6 +230,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("end_offset")]
 		public long EndOffset
 		{
@@ -225,6 +242,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("keyword")]
 		public bool? Keyword
 		{
@@ -236,6 +254,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("position")]
 		public long Position
 		{
@@ -247,6 +266,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("positionLength")]
 		public long Positionlength
 		{
@@ -258,6 +278,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("start_offset")]
 		public long StartOffset
 		{
@@ -269,6 +290,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("termFrequency")]
 		public long Termfrequency
 		{
@@ -280,6 +302,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("token")]
 		public string Token
 		{
@@ -291,6 +314,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -305,6 +329,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 	public partial class TokenDetail
 	{
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name
 		{
@@ -316,6 +341,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokens")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.ExplainAnalyzeToken> Tokens
 		{

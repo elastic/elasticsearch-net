@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 {
 	public partial class CleanupRepositoryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("results")]
 		public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepository.CleanupRepositoryResults Results
 		{
@@ -46,6 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class CreateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("accepted")]
 		public bool? Accepted
 		{
@@ -57,6 +59,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo Snapshot
 		{
@@ -83,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class GetResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("remaining")]
 		public int Remaining
 		{
@@ -94,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("responses")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Get.SnapshotResponseItem>? Responses
 		{
@@ -105,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("snapshots")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots
 		{
@@ -116,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public int Total
 		{
@@ -130,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class RestoreResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("snapshot")]
 		public Elastic.Clients.Elasticsearch.Snapshot.Restore.SnapshotRestore Snapshot
 		{
@@ -144,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class StatusResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("snapshots")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> Snapshots
 		{
@@ -158,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 	public partial class VerifyRepositoryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepository.CompactNodeInfo> Nodes
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 {
 	public partial class CharFilterTypes
 	{
+		[JsonInclude]
 		[JsonPropertyName("analyzer_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> AnalyzerTypes
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("built_in_analyzers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInAnalyzers
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("built_in_char_filters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInCharFilters
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("built_in_filters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInFilters
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("built_in_tokenizers")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> BuiltInTokenizers
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("filter_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> FilterTypes
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tokenizer_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> TokenizerTypes
 		{
@@ -106,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterFileSystem
 	{
+		[JsonInclude]
 		[JsonPropertyName("available_in_bytes")]
 		public long AvailableInBytes
 		{
@@ -117,6 +125,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
 		public long FreeInBytes
 		{
@@ -128,6 +137,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
 		public long TotalInBytes
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterIndices
 	{
+		[JsonInclude]
 		[JsonPropertyName("analysis")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.CharFilterTypes Analysis
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("completion")]
 		public Elastic.Clients.Elasticsearch.CompletionStats Completion
 		{
@@ -164,6 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -175,6 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public Elastic.Clients.Elasticsearch.DocStats Docs
 		{
@@ -186,6 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fielddata")]
 		public Elastic.Clients.Elasticsearch.FielddataStats Fielddata
 		{
@@ -197,6 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypesMappings Mappings
 		{
@@ -208,6 +224,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("query_cache")]
 		public Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache
 		{
@@ -219,6 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("segments")]
 		public Elastic.Clients.Elasticsearch.SegmentsStats Segments
 		{
@@ -230,6 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIndicesShards Shards
 		{
@@ -241,6 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store")]
 		public Elastic.Clients.Elasticsearch.StoreStats Store
 		{
@@ -252,6 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("versions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.IndicesVersions>? Versions
 		{
@@ -266,6 +287,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterIndicesShards
 	{
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIndicesShardsIndex? Index
 		{
@@ -277,6 +299,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primaries")]
 		public double? Primaries
 		{
@@ -288,6 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("replication")]
 		public double? Replication
 		{
@@ -299,6 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public double? Total
 		{
@@ -313,6 +338,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterIndicesShardsIndex
 	{
+		[JsonInclude]
 		[JsonPropertyName("primaries")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterShardMetrics Primaries
 		{
@@ -324,6 +350,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("replication")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterShardMetrics Replication
 		{
@@ -335,6 +362,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterShardMetrics Shards
 		{
@@ -349,6 +377,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterIngest
 	{
+		[JsonInclude]
 		[JsonPropertyName("number_of_pipelines")]
 		public int NumberOfPipelines
 		{
@@ -360,6 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processor_stats")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcessor> ProcessorStats
 		{
@@ -374,6 +404,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterJvm
 	{
+		[JsonInclude]
 		[JsonPropertyName("max_uptime_in_millis")]
 		public long MaxUptimeInMillis
 		{
@@ -385,6 +416,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mem")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterJvmMemory Mem
 		{
@@ -396,6 +428,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("threads")]
 		public long Threads
 		{
@@ -407,6 +440,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("versions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterJvmVersion> Versions
 		{
@@ -421,6 +455,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterJvmMemory
 	{
+		[JsonInclude]
 		[JsonPropertyName("heap_max_in_bytes")]
 		public long HeapMaxInBytes
 		{
@@ -432,6 +467,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("heap_used_in_bytes")]
 		public long HeapUsedInBytes
 		{
@@ -446,6 +482,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterJvmVersion
 	{
+		[JsonInclude]
 		[JsonPropertyName("bundled_jdk")]
 		public bool BundledJdk
 		{
@@ -457,6 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -468,6 +506,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("using_bundled_jdk")]
 		public bool UsingBundledJdk
 		{
@@ -479,6 +518,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
@@ -490,6 +530,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("vm_name")]
 		public string VmName
 		{
@@ -501,6 +542,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("vm_vendor")]
 		public string VmVendor
 		{
@@ -512,6 +554,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("vm_version")]
 		public Elastic.Clients.Elasticsearch.VersionString VmVersion
 		{
@@ -526,6 +569,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterNetworkTypes
 	{
+		[JsonInclude]
 		[JsonPropertyName("http_types")]
 		public Dictionary<string, int> HttpTypes
 		{
@@ -537,6 +581,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transport_types")]
 		public Dictionary<string, int> TransportTypes
 		{
@@ -551,6 +596,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterNodeCount
 	{
+		[JsonInclude]
 		[JsonPropertyName("coordinating_only")]
 		public int CoordinatingOnly
 		{
@@ -562,6 +608,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data")]
 		public int Data
 		{
@@ -573,6 +620,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_cold")]
 		public int DataCold
 		{
@@ -584,6 +632,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_content")]
 		public int DataContent
 		{
@@ -595,6 +644,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_frozen")]
 		public int? DataFrozen
 		{
@@ -606,6 +656,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_hot")]
 		public int DataHot
 		{
@@ -617,6 +668,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_warm")]
 		public int DataWarm
 		{
@@ -628,6 +680,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest")]
 		public int Ingest
 		{
@@ -639,6 +692,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("master")]
 		public int Master
 		{
@@ -650,6 +704,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ml")]
 		public int Ml
 		{
@@ -661,6 +716,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("remote_cluster_client")]
 		public int RemoteClusterClient
 		{
@@ -672,6 +728,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public int Total
 		{
@@ -683,6 +740,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public int Transform
 		{
@@ -694,6 +752,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("voting_only")]
 		public int VotingOnly
 		{
@@ -708,6 +767,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterNodes
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterNodeCount Count
 		{
@@ -719,6 +779,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("discovery_types")]
 		public Dictionary<string, int> DiscoveryTypes
 		{
@@ -730,6 +791,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fs")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterFileSystem Fs
 		{
@@ -741,6 +803,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterIngest Ingest
 		{
@@ -752,6 +815,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("jvm")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterJvm Jvm
 		{
@@ -763,6 +827,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("network_types")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterNetworkTypes NetworkTypes
 		{
@@ -774,6 +839,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("os")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystem Os
 		{
@@ -785,6 +851,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("packaging_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.NodePackagingType> PackagingTypes
 		{
@@ -796,6 +863,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("plugins")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins
 		{
@@ -807,6 +875,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("process")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcess Process
 		{
@@ -818,6 +887,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("versions")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.VersionString> Versions
 		{
@@ -832,6 +902,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterOperatingSystem
 	{
+		[JsonInclude]
 		[JsonPropertyName("allocated_processors")]
 		public int AllocatedProcessors
 		{
@@ -843,6 +914,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("architectures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemArchitecture>? Architectures
 		{
@@ -854,6 +926,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("available_processors")]
 		public int AvailableProcessors
 		{
@@ -865,6 +938,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mem")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.OperatingSystemMemoryInfo Mem
 		{
@@ -876,6 +950,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("names")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemName> Names
 		{
@@ -887,6 +962,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pretty_names")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemName> PrettyNames
 		{
@@ -901,6 +977,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterOperatingSystemArchitecture
 	{
+		[JsonInclude]
 		[JsonPropertyName("arch")]
 		public string Arch
 		{
@@ -912,6 +989,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -926,6 +1004,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterOperatingSystemName
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -937,6 +1016,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -951,6 +1031,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterProcess
 	{
+		[JsonInclude]
 		[JsonPropertyName("cpu")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcessCpu Cpu
 		{
@@ -962,6 +1043,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("open_file_descriptors")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterProcessOpenFileDescriptors OpenFileDescriptors
 		{
@@ -976,6 +1058,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterProcessCpu
 	{
+		[JsonInclude]
 		[JsonPropertyName("percent")]
 		public int Percent
 		{
@@ -990,6 +1073,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterProcessOpenFileDescriptors
 	{
+		[JsonInclude]
 		[JsonPropertyName("avg")]
 		public long Avg
 		{
@@ -1001,6 +1085,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max")]
 		public long Max
 		{
@@ -1012,6 +1097,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min")]
 		public long Min
 		{
@@ -1026,6 +1112,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterProcessor
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -1037,6 +1124,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("current")]
 		public long Current
 		{
@@ -1048,6 +1136,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public long Failed
 		{
@@ -1059,6 +1148,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
 		public long TimeInMillis
 		{
@@ -1073,6 +1163,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class ClusterShardMetrics
 	{
+		[JsonInclude]
 		[JsonPropertyName("avg")]
 		public double Avg
 		{
@@ -1084,6 +1175,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max")]
 		public double Max
 		{
@@ -1095,6 +1187,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("min")]
 		public double Min
 		{
@@ -1109,6 +1202,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class FieldTypes
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -1120,6 +1214,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public int IndexCount
 		{
@@ -1131,6 +1226,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -1142,6 +1238,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script_count")]
 		public int? ScriptCount
 		{
@@ -1156,6 +1253,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class FieldTypesMappings
 	{
+		[JsonInclude]
 		[JsonPropertyName("field_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypes> FieldTypes
 		{
@@ -1167,6 +1265,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("runtime_field_types")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.RuntimeFieldTypes>? RuntimeFieldTypes
 		{
@@ -1181,6 +1280,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class IndicesVersions
 	{
+		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public int IndexCount
 		{
@@ -1192,6 +1292,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("primary_shard_count")]
 		public int PrimaryShardCount
 		{
@@ -1203,6 +1304,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_primary_bytes")]
 		public long TotalPrimaryBytes
 		{
@@ -1214,6 +1316,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
@@ -1228,6 +1331,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class NodePackagingType
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -1239,6 +1343,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("flavor")]
 		public string Flavor
 		{
@@ -1250,6 +1355,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type
 		{
@@ -1264,6 +1370,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class OperatingSystemMemoryInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
 		public long FreeInBytes
 		{
@@ -1275,6 +1382,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("free_percent")]
 		public int FreePercent
 		{
@@ -1286,6 +1394,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
 		public long TotalInBytes
 		{
@@ -1297,6 +1406,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_in_bytes")]
 		public long UsedInBytes
 		{
@@ -1308,6 +1418,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("used_percent")]
 		public int UsedPercent
 		{
@@ -1322,6 +1433,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 	public partial class RuntimeFieldTypes
 	{
+		[JsonInclude]
 		[JsonPropertyName("chars_max")]
 		public int CharsMax
 		{
@@ -1333,6 +1445,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("chars_total")]
 		public int CharsTotal
 		{
@@ -1344,6 +1457,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count
 		{
@@ -1355,6 +1469,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("doc_max")]
 		public int DocMax
 		{
@@ -1366,6 +1481,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("doc_total")]
 		public int DocTotal
 		{
@@ -1377,6 +1493,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public int IndexCount
 		{
@@ -1388,6 +1505,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lang")]
 		public IReadOnlyCollection<string> Lang
 		{
@@ -1399,6 +1517,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lines_max")]
 		public int LinesMax
 		{
@@ -1410,6 +1529,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("lines_total")]
 		public int LinesTotal
 		{
@@ -1421,6 +1541,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -1432,6 +1553,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("scriptless_count")]
 		public int ScriptlessCount
 		{
@@ -1443,6 +1565,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shadowed_count")]
 		public int ShadowedCount
 		{
@@ -1454,6 +1577,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source_max")]
 		public int SourceMax
 		{
@@ -1465,6 +1589,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source_total")]
 		public int SourceTotal
 		{

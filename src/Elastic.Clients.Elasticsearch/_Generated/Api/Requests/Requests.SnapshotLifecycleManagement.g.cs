@@ -181,18 +181,23 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("config")]
 		public Elastic.Clients.Elasticsearch.Slm.Configuration? Config { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("repository")]
 		public string? Repository { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("retention")]
 		public Elastic.Clients.Elasticsearch.Slm.Retention? Retention { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("schedule")]
 		public Elastic.Clients.Elasticsearch.Watcher.CronExpression? Schedule { get; set; }
 	}

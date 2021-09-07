@@ -133,9 +133,11 @@ namespace Elastic.Clients.Elasticsearch.License
 		[JsonIgnore]
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("license")]
 		public Elastic.Clients.Elasticsearch.License.License? License { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("licenses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.License.License>? Licenses { get; set; }
 	}

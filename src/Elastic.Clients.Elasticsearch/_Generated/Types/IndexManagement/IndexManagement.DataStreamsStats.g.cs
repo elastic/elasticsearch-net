@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats
 {
 	public partial class DataStreamsStatsItem
 	{
+		[JsonInclude]
 		[JsonPropertyName("backing_indices")]
 		public int BackingIndices
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("data_stream")]
 		public Elastic.Clients.Elasticsearch.Name DataStream
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("maximum_timestamp")]
 		public int MaximumTimestamp
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? StoreSize
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("store_size_bytes")]
 		public int StoreSizeBytes
 		{

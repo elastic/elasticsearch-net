@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 {
 	public partial class WatchRecordQueuedStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("execution_time")]
 		public Elastic.Clients.Elasticsearch.DateString ExecutionTime
 		{
@@ -40,6 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 
 	public partial class WatchRecordStats : Watcher.Stats.WatchRecordQueuedStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("executed_actions")]
 		public IReadOnlyCollection<string>? ExecutedActions
 		{
@@ -51,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("execution_phase")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionPhase ExecutionPhase
 		{
@@ -62,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("triggered_time")]
 		public Elastic.Clients.Elasticsearch.DateString TriggeredTime
 		{
@@ -73,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch_id")]
 		public Elastic.Clients.Elasticsearch.Id WatchId
 		{
@@ -84,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch_record_id")]
 		public Elastic.Clients.Elasticsearch.Id WatchRecordId
 		{
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 
 	public partial class WatcherNodeStats
 	{
+		[JsonInclude]
 		[JsonPropertyName("current_watches")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.Stats.WatchRecordStats>? CurrentWatches
 		{
@@ -109,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("execution_thread_pool")]
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionThreadPool ExecutionThreadPool
 		{
@@ -120,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("node_id")]
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
@@ -131,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("queued_watches")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.Stats.WatchRecordQueuedStats>? QueuedWatches
 		{
@@ -142,6 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watch_count")]
 		public long WatchCount
 		{
@@ -153,6 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("watcher_state")]
 		public Elastic.Clients.Elasticsearch.Watcher.Stats.WatcherState WatcherState
 		{

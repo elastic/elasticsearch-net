@@ -26,18 +26,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 {
 	public partial class Document
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public object Source { get; set; }
 	}
 
 	public partial class DocumentSimulation
 	{
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -49,6 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -60,6 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_ingest")]
 		public Elastic.Clients.Elasticsearch.Ingest.Simulate.Ingest Ingest
 		{
@@ -71,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_parent")]
 		public string? Parent
 		{
@@ -82,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public string? Routing
 		{
@@ -93,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Dictionary<string, object> Source
 		{
@@ -104,6 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -118,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 
 	public partial class Ingest
 	{
+		[JsonInclude]
 		[JsonPropertyName("pipeline")]
 		public Elastic.Clients.Elasticsearch.Name? Pipeline
 		{
@@ -129,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timestamp")]
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
@@ -143,6 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 
 	public partial class PipelineSimulation
 	{
+		[JsonInclude]
 		[JsonPropertyName("doc")]
 		public Elastic.Clients.Elasticsearch.Ingest.Simulate.DocumentSimulation? Doc
 		{
@@ -154,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processor_results")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Simulate.PipelineSimulation>? ProcessorResults
 		{
@@ -165,6 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("processor_type")]
 		public string? ProcessorType
 		{
@@ -176,6 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions? Status
 		{
@@ -187,6 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tag")]
 		public string? Tag
 		{

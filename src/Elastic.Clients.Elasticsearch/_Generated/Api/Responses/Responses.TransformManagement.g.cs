@@ -28,6 +28,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public partial class GetTransformResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -39,6 +40,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transforms")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Transform> Transforms
 		{
@@ -53,6 +55,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public partial class GetTransformStatsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -64,6 +67,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("transforms")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.TransformStats> Transforms
 		{
@@ -78,6 +82,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public partial class PreviewTransformResponse<TTransform> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("generated_dest_index")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexState GeneratedDestIndex
 		{
@@ -89,6 +94,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("preview")]
 		public IReadOnlyCollection<TTransform> Preview
 		{
@@ -115,6 +121,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public partial class UpdateTransformResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("create_time")]
 		public long CreateTime
 		{
@@ -126,6 +133,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description
 		{
@@ -137,6 +145,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("dest")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination Dest
 		{
@@ -148,6 +157,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("frequency")]
 		public Elastic.Clients.Elasticsearch.Time Frequency
 		{
@@ -159,6 +169,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -170,6 +181,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot Pivot
 		{
@@ -181,6 +193,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings
 		{
@@ -192,6 +205,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Source Source
 		{
@@ -203,6 +217,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sync")]
 		public Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? Sync
 		{
@@ -214,6 +229,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{

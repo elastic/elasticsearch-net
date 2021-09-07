@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
 	public partial class AsyncSearch<TDocument>
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_clusters")]
 		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -59,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
@@ -70,6 +74,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_score")]
 		public double? MaxScore
 		{
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_reduce_phases")]
 		public long? NumReducePhases
 		{
@@ -92,6 +98,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pit_id")]
 		public Elastic.Clients.Elasticsearch.Id? PitId
 		{
@@ -103,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("profile")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Profile? Profile
 		{
@@ -114,6 +122,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]
 		public Elastic.Clients.Elasticsearch.Id? ScrollId
 		{
@@ -125,6 +134,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -136,6 +146,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("suggest")]
 		public Dictionary<Elastic.Clients.Elasticsearch.SuggestionName, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Suggest<TDocument>>>? Suggest
 		{
@@ -147,6 +158,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("terminated_early")]
 		public bool? TerminatedEarly
 		{
@@ -158,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool TimedOut
 		{
@@ -169,6 +182,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{

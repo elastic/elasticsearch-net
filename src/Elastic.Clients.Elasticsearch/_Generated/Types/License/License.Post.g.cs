@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.License.Post
 {
 	public partial class Acknowledgement
 	{
+		[JsonInclude]
 		[JsonPropertyName("license")]
 		public IReadOnlyCollection<string> License
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.License.Post
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("message")]
 		public string Message
 		{

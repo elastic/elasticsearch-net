@@ -54,15 +54,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		[JsonIgnore]
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("current_node")]
 		public string? CurrentNode { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("primary")]
 		public bool? Primary { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("shard")]
 		public int? Shard { get; set; }
 	}
@@ -357,21 +361,27 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("template")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("_meta")]
 		public Elastic.Clients.Elasticsearch.Metadata? Meta { get; set; }
 	}
@@ -407,9 +417,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("persistent")]
 		public Dictionary<string, object>? Persistent { get; set; }
 
+		[JsonInclude]
 		[JsonPropertyName("transient")]
 		public Dictionary<string, object>? Transient { get; set; }
 	}
@@ -472,6 +484,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonInclude]
 		[JsonPropertyName("commands")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? Commands { get; set; }
 	}

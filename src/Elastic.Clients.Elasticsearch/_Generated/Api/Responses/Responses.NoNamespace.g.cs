@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class BulkResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("errors")]
 		public bool Errors
 		{
@@ -35,6 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("ingest_took")]
 		public long? IngestTook
 		{
@@ -46,6 +48,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("items")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Bulk.ResponseItemContainer> Items
 		{
@@ -57,6 +60,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -71,6 +75,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ClearScrollResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("num_freed")]
 		public int NumFreed
 		{
@@ -82,6 +87,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("succeeded")]
 		public bool Succeeded
 		{
@@ -96,6 +102,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ClosePointInTimeResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("num_freed")]
 		public int NumFreed
 		{
@@ -107,6 +114,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("succeeded")]
 		public bool Succeeded
 		{
@@ -121,6 +129,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class CountResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count
 		{
@@ -132,6 +141,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -150,6 +160,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class DeleteByQueryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("batches")]
 		public long? Batches
 		{
@@ -161,6 +172,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public long? Deleted
 		{
@@ -172,6 +184,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures
 		{
@@ -183,6 +196,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("noops")]
 		public long? Noops
 		{
@@ -194,6 +208,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("requests_per_second")]
 		public float? RequestsPerSecond
 		{
@@ -205,6 +220,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retries")]
 		public Elastic.Clients.Elasticsearch.Retries? Retries
 		{
@@ -216,6 +232,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("slice_id")]
 		public int? SliceId
 		{
@@ -227,6 +244,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task")]
 		public Elastic.Clients.Elasticsearch.TaskId? Task
 		{
@@ -238,6 +256,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
 		public long? ThrottledMillis
 		{
@@ -249,6 +268,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
 		public long? ThrottledUntilMillis
 		{
@@ -260,6 +280,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool? TimedOut
 		{
@@ -271,6 +292,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long? Took
 		{
@@ -282,6 +304,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long? Total
 		{
@@ -293,6 +316,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_conflicts")]
 		public long? VersionConflicts
 		{
@@ -327,6 +351,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ExplainResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("explanation")]
 		public Elastic.Clients.Elasticsearch.Global.Explain.ExplanationDetail? Explanation
 		{
@@ -338,6 +363,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("get")]
 		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get
 		{
@@ -349,6 +375,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -360,6 +387,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -371,6 +399,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("matched")]
 		public bool Matched
 		{
@@ -382,6 +411,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -396,6 +426,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class FieldCapsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapability>> Fields
 		{
@@ -407,6 +438,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
@@ -421,6 +453,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class GetResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -432,6 +465,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -443,6 +477,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -454,6 +489,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -465,6 +501,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long? PrimaryTerm
 		{
@@ -476,6 +513,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public string? Routing
 		{
@@ -487,6 +525,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
@@ -498,6 +537,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public TDocument? Source
 		{
@@ -509,6 +549,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -520,6 +561,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
@@ -534,6 +576,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class GetScriptContextResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("contexts")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.GetScriptContext.Context> Contexts
 		{
@@ -548,6 +591,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class GetScriptLanguagesResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("language_contexts")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.GetScriptLanguages.LanguageContext> LanguageContexts
 		{
@@ -559,6 +603,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("types_allowed")]
 		public IReadOnlyCollection<string> TypesAllowed
 		{
@@ -573,6 +618,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class GetScriptResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -584,6 +630,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -595,6 +642,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.StoredScript? Script
 		{
@@ -617,6 +665,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class InfoResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
@@ -628,6 +677,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cluster_uuid")]
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
@@ -639,6 +689,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
@@ -650,6 +701,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("tagline")]
 		public string Tagline
 		{
@@ -661,6 +713,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version
 		{
@@ -675,6 +728,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class MgetResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Mget.Hit<TDocument>> Docs
 		{
@@ -689,6 +743,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class MsearchResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("responses")]
 		public IReadOnlyCollection<Union<Elastic.Clients.Elasticsearch.Global.Msearch.SearchResult<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>> Responses
 		{
@@ -700,6 +755,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -714,6 +770,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class MsearchTemplateResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("responses")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> Responses
 		{
@@ -725,6 +782,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -739,6 +797,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class MtermvectorsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("docs")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Mtermvectors.TermVectorsResult> Docs
 		{
@@ -753,6 +812,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class OpenPointInTimeResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -775,6 +835,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class RankEvalResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("details")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricDetail> Details
 		{
@@ -786,6 +847,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public Dictionary<string, object> Failures
 		{
@@ -797,6 +859,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("metric_score")]
 		public double MetricScore
 		{
@@ -811,6 +874,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ReindexResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("batches")]
 		public long? Batches
 		{
@@ -822,6 +886,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("created")]
 		public long? Created
 		{
@@ -833,6 +898,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public long? Deleted
 		{
@@ -844,6 +910,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures
 		{
@@ -855,6 +922,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("noops")]
 		public long? Noops
 		{
@@ -866,6 +934,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("requests_per_second")]
 		public long? RequestsPerSecond
 		{
@@ -877,6 +946,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retries")]
 		public Elastic.Clients.Elasticsearch.Retries? Retries
 		{
@@ -888,6 +958,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("slice_id")]
 		public int? SliceId
 		{
@@ -899,6 +970,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task")]
 		public Elastic.Clients.Elasticsearch.TaskId? Task
 		{
@@ -910,6 +982,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottledMillis
 		{
@@ -921,6 +994,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
 		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottledUntilMillis
 		{
@@ -932,6 +1006,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool? TimedOut
 		{
@@ -943,6 +1018,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public Elastic.Clients.Elasticsearch.Time? Took
 		{
@@ -954,6 +1030,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long? Total
 		{
@@ -965,6 +1042,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("updated")]
 		public long? Updated
 		{
@@ -976,6 +1054,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_conflicts")]
 		public long? VersionConflicts
 		{
@@ -990,6 +1069,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ReindexRethrottleResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.ReindexRethrottle.ReindexNode> Nodes
 		{
@@ -1004,6 +1084,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class RenderSearchTemplateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("template_output")]
 		public Dictionary<string, object> TemplateOutput
 		{
@@ -1018,6 +1099,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ScriptsPainlessExecuteResponse<TResult> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("result")]
 		public TResult Result
 		{
@@ -1036,6 +1118,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class SearchResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("aggregations")]
 		public Dictionary<Elastic.Clients.Elasticsearch.AggregateName, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations
 		{
@@ -1047,6 +1130,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_clusters")]
 		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters
 		{
@@ -1058,6 +1142,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("documents")]
 		public IReadOnlyCollection<TDocument>? Documents
 		{
@@ -1069,6 +1154,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields
 		{
@@ -1080,6 +1166,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
@@ -1091,6 +1178,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_score")]
 		public double? MaxScore
 		{
@@ -1102,6 +1190,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("num_reduce_phases")]
 		public long? NumReducePhases
 		{
@@ -1113,6 +1202,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("pit_id")]
 		public Elastic.Clients.Elasticsearch.Id? PitId
 		{
@@ -1124,6 +1214,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("profile")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Profile? Profile
 		{
@@ -1135,6 +1226,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]
 		public Elastic.Clients.Elasticsearch.ScrollId? ScrollId
 		{
@@ -1146,6 +1238,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -1157,6 +1250,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("suggest")]
 		public Dictionary<Elastic.Clients.Elasticsearch.SuggestionName, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Suggest<TDocument>>>? Suggest
 		{
@@ -1168,6 +1262,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("terminated_early")]
 		public bool? TerminatedEarly
 		{
@@ -1179,6 +1274,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool TimedOut
 		{
@@ -1190,6 +1286,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -1204,6 +1301,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class SearchShardsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Global.SearchShards.ShardStoreIndex> Indices
 		{
@@ -1215,6 +1313,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes
 		{
@@ -1226,6 +1325,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards
 		{
@@ -1240,6 +1340,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class SearchTemplateResponse<TDocument> : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
@@ -1251,6 +1352,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -1262,6 +1364,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool TimedOut
 		{
@@ -1273,6 +1376,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public int Took
 		{
@@ -1287,6 +1391,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class TermsEnumResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("complete")]
 		public bool Complete
 		{
@@ -1298,6 +1403,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
@@ -1309,6 +1415,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public IReadOnlyCollection<string> Terms
 		{
@@ -1323,6 +1430,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class TermvectorsResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("found")]
 		public bool Found
 		{
@@ -1334,6 +1442,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
@@ -1345,6 +1454,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
@@ -1356,6 +1466,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("term_vectors")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Termvectors.TermVector>? TermVectors
 		{
@@ -1367,6 +1478,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took
 		{
@@ -1378,6 +1490,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_type")]
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
@@ -1389,6 +1502,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
@@ -1403,6 +1517,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class UpdateByQueryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("batches")]
 		public long? Batches
 		{
@@ -1414,6 +1529,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public long? Deleted
 		{
@@ -1425,6 +1541,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures
 		{
@@ -1436,6 +1553,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("noops")]
 		public long? Noops
 		{
@@ -1447,6 +1565,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("requests_per_second")]
 		public float? RequestsPerSecond
 		{
@@ -1458,6 +1577,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("retries")]
 		public Elastic.Clients.Elasticsearch.Retries? Retries
 		{
@@ -1469,6 +1589,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("task")]
 		public Elastic.Clients.Elasticsearch.TaskId? Task
 		{
@@ -1480,6 +1601,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_millis")]
 		public ulong? ThrottledMillis
 		{
@@ -1491,6 +1613,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("throttled_until_millis")]
 		public ulong? ThrottledUntilMillis
 		{
@@ -1502,6 +1625,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("timed_out")]
 		public bool? TimedOut
 		{
@@ -1513,6 +1637,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long? Took
 		{
@@ -1524,6 +1649,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("total")]
 		public long? Total
 		{
@@ -1535,6 +1661,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("updated")]
 		public long? Updated
 		{
@@ -1546,6 +1673,7 @@ namespace Elastic.Clients.Elasticsearch
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("version_conflicts")]
 		public long? VersionConflicts
 		{
@@ -1560,6 +1688,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class UpdateByQueryRethrottleResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("nodes")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes
 		{
@@ -1574,6 +1703,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class UpdateResponse<TDocument> : WriteResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("get")]
 		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get
 		{

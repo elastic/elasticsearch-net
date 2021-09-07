@@ -24,6 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 {
 	public partial class ClearCursorResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("succeeded")]
 		public bool Succeeded
 		{
@@ -38,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 	public partial class QueryResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("columns")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Query.Column>? Columns
 		{
@@ -49,6 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("cursor")]
 		public string? Cursor
 		{
@@ -60,6 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("rows")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Query.Row> Rows
 		{
@@ -74,6 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 
 	public partial class TranslateResponse : ResponseBase
 	{
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, string>> Fields
 		{
@@ -85,6 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("size")]
 		public long Size
 		{
@@ -96,6 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Global.Search.Sort Sort
 		{
@@ -107,6 +114,7 @@ namespace Elastic.Clients.Elasticsearch.Sql
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public OneOf<bool, Fields, Global.Search.SourceFilter> Source
 		{

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 {
 	public partial class ClusterRemoteProxyInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("connected")]
 		public bool Connected
 		{
@@ -37,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initial_connect_timeout")]
 		public Elastic.Clients.Elasticsearch.Time InitialConnectTimeout
 		{
@@ -48,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_proxy_socket_connections")]
 		public int MaxProxySocketConnections
 		{
@@ -59,8 +62,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public string Mode => "proxy";
+		[JsonInclude]
 		[JsonPropertyName("num_proxy_sockets_connected")]
 		public int NumProxySocketsConnected
 		{
@@ -72,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("proxy_address")]
 		public string ProxyAddress
 		{
@@ -83,6 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("server_name")]
 		public string ServerName
 		{
@@ -94,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("skip_unavailable")]
 		public bool SkipUnavailable
 		{
@@ -108,6 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 
 	public partial class ClusterRemoteSniffInfo
 	{
+		[JsonInclude]
 		[JsonPropertyName("connected")]
 		public bool Connected
 		{
@@ -119,6 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("initial_connect_timeout")]
 		public Elastic.Clients.Elasticsearch.Time InitialConnectTimeout
 		{
@@ -130,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("max_connections_per_cluster")]
 		public int MaxConnectionsPerCluster
 		{
@@ -141,8 +152,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public string Mode => "sniff";
+		[JsonInclude]
 		[JsonPropertyName("num_nodes_connected")]
 		public long NumNodesConnected
 		{
@@ -154,6 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("seeds")]
 		public IReadOnlyCollection<string> Seeds
 		{
@@ -165,6 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 #endif
 		}
 
+		[JsonInclude]
 		[JsonPropertyName("skip_unavailable")]
 		public bool SkipUnavailable
 		{
