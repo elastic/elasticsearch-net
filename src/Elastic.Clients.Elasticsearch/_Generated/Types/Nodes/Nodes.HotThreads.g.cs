@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Host> Hosts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
 		public IReadOnlyCollection<string> Threads
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

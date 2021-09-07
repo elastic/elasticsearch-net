@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Global.ReindexRethrottle.ReindexTask> Tasks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Batches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Deleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Noops
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public float RequestsPerSecond
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public Elastic.Clients.Elasticsearch.Retries Retries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long ThrottledMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long ThrottledUntilMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Updated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long VersionConflicts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public string Action
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public bool Cancellable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public string Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -223,7 +223,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public Elastic.Clients.Elasticsearch.Name Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -234,7 +234,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long RunningTimeInNanos
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public long StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -256,7 +256,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public Elastic.Clients.Elasticsearch.Global.ReindexRethrottle.ReindexStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ReindexRethrottle
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

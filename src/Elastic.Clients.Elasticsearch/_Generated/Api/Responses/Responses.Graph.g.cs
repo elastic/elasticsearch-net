@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> Connections
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public bool TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> Vertices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

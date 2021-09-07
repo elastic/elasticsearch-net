@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.DeleteJob.TaskFailure>? TaskFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetJobs.RollupJob> Jobs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public Dictionary<Elastic.Clients.Elasticsearch.AggregateName, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public bool? TerminatedEarly
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public bool TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public bool Started
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public bool Stopped
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

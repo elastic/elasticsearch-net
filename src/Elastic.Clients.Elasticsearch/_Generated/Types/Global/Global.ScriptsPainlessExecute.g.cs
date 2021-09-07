@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 		public int End
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 		public int Offset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 		public int Start
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

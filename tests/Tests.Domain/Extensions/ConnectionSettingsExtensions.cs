@@ -1,4 +1,4 @@
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Domain.Helpers;
 
 namespace Tests.Domain.Extensions

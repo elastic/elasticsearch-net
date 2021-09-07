@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public bool? AllowAutoCreate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> ComposedOf
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Dictionary<string, object>? DataStream
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> IndexPatterns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Elastic.Clients.Elasticsearch.Metadata? Meta
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public long? Priority
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate.IndexTemplateSummary Template
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate.IndexTemplate IndexTemplate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 		public Dictionary<string, object>? Settings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

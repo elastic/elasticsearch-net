@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.AnalyzerDetail? Analyzer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.CharFilterDetail>? Charfilters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public bool CustomAnalyzer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TokenDetail>? Tokenfilters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TokenDetail? Tokenizer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long EndOffset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long Position
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long? PositionLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long StartOffset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Token
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.ExplainAnalyzeToken> Tokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public IReadOnlyCollection<string> FilteredText
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Bytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long EndOffset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public bool? Keyword
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -240,7 +240,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long Position
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long Positionlength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -262,7 +262,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long StartOffset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public long Termfrequency
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Token
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -295,7 +295,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -309,7 +309,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public string Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -320,7 +320,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.ExplainAnalyzeToken> Tokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

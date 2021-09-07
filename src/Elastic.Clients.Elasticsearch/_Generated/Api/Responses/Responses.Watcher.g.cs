@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.ActivationStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.ActivationStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -106,7 +106,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch.WatchRecord WatchRecord
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -142,7 +142,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -153,7 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public int? PrimaryTerm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -164,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -186,7 +186,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -197,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -211,7 +211,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public bool Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -222,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -233,7 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public long PrimaryTerm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -244,7 +244,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.SequenceNumber SeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -255,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -269,7 +269,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -280,7 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.QueryWatch> Watches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -298,7 +298,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -309,7 +309,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public bool ManuallyStopped
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -320,7 +320,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.Stats.WatcherNodeStats> Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

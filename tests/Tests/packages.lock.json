@@ -1336,6 +1336,12 @@
           "xunit.abstractions": "2.0.1"
         }
       },
+      "elastic.clients.elasticsearch": {
+        "type": "Project",
+        "dependencies": {
+          "Elastic.Transport": "1.0.0"
+        }
+      },
       "elastic.transport": {
         "type": "Project",
         "dependencies": {
@@ -1343,12 +1349,6 @@
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.0",
           "System.Text.Json": "5.0.0"
-        }
-      },
-      "nest": {
-        "type": "Project",
-        "dependencies": {
-          "Elastic.Transport": "1.0.0"
         }
       },
       "tests.configuration": {
@@ -1376,8 +1376,8 @@
         "type": "Project",
         "dependencies": {
           "Bogus": "22.1.2",
+          "Elastic.Clients.Elasticsearch": "7.0.0",
           "Elastic.Elasticsearch.Managed": "0.2.6",
-          "NEST": "7.0.0",
           "Tests.Configuration": "7.0.0"
         }
       }

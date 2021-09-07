@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 
 namespace Tests.Core.ManagedElasticsearch.NodeSeeders

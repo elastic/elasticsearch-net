@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.Ingest.Simulate.Ingest Ingest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public string? Parent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public string? Routing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Dictionary<string, object> Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -122,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.Name? Pipeline
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.DateString Timestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.Ingest.Simulate.DocumentSimulation? Doc
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Simulate.PipelineSimulation>? ProcessorResults
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public string? ProcessorType
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -180,7 +180,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions? Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public string? Tag
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string Decider
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationExplainDecision Decision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string Explanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string AllocationId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public bool InSync
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public long MatchingSizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public bool MatchingSyncId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string StoreException
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeDiskUsage> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ReservedSize> ReservedSizes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, string>? ShardDataSetSizes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, string> ShardPaths
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, long> ShardSizes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, string> Attributes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public int WeightRanking
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public long FreeBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -262,7 +262,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public double FreeDiskPercent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string Path
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public long TotalBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -295,7 +295,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public long UsedBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -306,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public double UsedDiskPercent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -320,7 +320,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationDecision> Deciders
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, string> NodeAttributes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -342,7 +342,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.Decision NodeDecision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -353,7 +353,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -364,7 +364,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -375,7 +375,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.AllocationStore? Store
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -386,7 +386,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -397,7 +397,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public int WeightRanking
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -411,7 +411,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage LeastAvailable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -422,7 +422,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage MostAvailable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -433,7 +433,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Name NodeName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -447,7 +447,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -458,7 +458,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string Path
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -469,7 +469,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public IReadOnlyCollection<string> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -480,7 +480,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public long Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -494,7 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string? AllocationStatus
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -505,7 +505,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.DateString At
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -516,7 +516,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public bool? Delayed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -527,7 +527,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string? Details
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -538,7 +538,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public int? FailedAllocationAttempts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -549,7 +549,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string? LastAllocationStatus
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -560,7 +560,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformationReason Reason
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

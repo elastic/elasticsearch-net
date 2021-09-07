@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 		public Elastic.Clients.Elasticsearch.EpochMillis CreationDateMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 		public string IndexName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 		public string IndexUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices
 		public Elastic.Clients.Elasticsearch.Ids NodeIds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

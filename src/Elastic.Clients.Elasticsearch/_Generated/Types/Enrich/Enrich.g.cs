@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public Elastic.Clients.Elasticsearch.Enrich.Policy? GeoMatch
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public Elastic.Clients.Elasticsearch.Enrich.Policy Match
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		public Elastic.Clients.Elasticsearch.Enrich.Configuration Config
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

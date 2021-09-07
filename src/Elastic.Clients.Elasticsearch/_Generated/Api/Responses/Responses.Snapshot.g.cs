@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepository.CleanupRepositoryResults Results
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? Accepted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public int Remaining
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Get.SnapshotResponseItem>? Responses
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public int Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.Restore.SnapshotRestore Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.Status> Snapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepository.CompactNodeInfo> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

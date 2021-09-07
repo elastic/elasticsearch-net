@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.RealmInfo AuthenticationRealm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string AuthenticationType
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string? Email
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Enabled
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name? FullName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.RealmInfo LookupRealm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<string> Roles
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.Authenticate.Token? Token
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Username Username
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -203,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -275,7 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -289,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string ApiKey
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -336,7 +336,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public long? Expiration
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -347,7 +347,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -358,7 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -383,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.CreateServiceToken.Token Token
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -401,7 +401,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -415,7 +415,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -429,7 +429,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -443,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -465,7 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GetApiKey.ApiKey> ApiKeys
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -479,7 +479,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<string> Cluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -490,7 +490,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Indices Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -520,7 +520,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -531,7 +531,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.GetServiceCredentials.NodesCredentials NodesCredentials
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -542,7 +542,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string ServiceAccount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -553,7 +553,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Metadata> Tokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -567,7 +567,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string AccessToken
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -578,7 +578,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.GetToken.AuthenticatedUser Authentication
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -589,7 +589,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public long ExpiresIn
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -600,7 +600,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string? KerberosAuthenticationResponseToken
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -611,7 +611,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string RefreshToken
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -622,7 +622,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string? Scope
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -633,7 +633,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -647,7 +647,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -658,7 +658,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<string> Cluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -669,7 +669,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege> Global
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -680,7 +680,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -691,7 +691,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<string> RunAs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -709,7 +709,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public string ApiKey
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -720,7 +720,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.EpochMillis? Expiration
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -731,7 +731,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -742,7 +742,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -756,7 +756,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationsPrivileges Application
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -767,7 +767,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<string, bool> Cluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -778,7 +778,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool HasAllRequested
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -789,7 +789,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Security.HasPrivileges.Privileges> Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -800,7 +800,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Username Username
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -814,7 +814,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public int ErrorCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -825,7 +825,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -836,7 +836,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<string> InvalidatedApiKeys
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -847,7 +847,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -861,7 +861,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public long ErrorCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -872,7 +872,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -883,7 +883,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public long InvalidatedTokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -894,7 +894,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public long PreviouslyInvalidatedTokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -912,7 +912,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool? Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -923,7 +923,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.CreatedStatus RoleMapping
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -937,7 +937,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public Elastic.Clients.Elasticsearch.Security.CreatedStatus Role
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -951,7 +951,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 		public bool Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

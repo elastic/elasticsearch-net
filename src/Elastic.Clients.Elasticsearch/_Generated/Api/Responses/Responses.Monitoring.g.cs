@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 		public bool Errors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 		public bool Ignored
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

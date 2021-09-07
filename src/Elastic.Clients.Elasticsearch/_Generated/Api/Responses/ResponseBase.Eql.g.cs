@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public Elastic.Clients.Elasticsearch.Id? Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public bool? IsPartial
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public bool? IsRunning
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public int? Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public bool? TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

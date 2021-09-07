@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Watcher.ConditionContainer Condition
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Watcher.InputContainer Input
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public IReadOnlyCollection<string> Messages
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Metadata Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public string Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionResult Result
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionStatus State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Watcher.TriggerEventResult TriggerEvent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Username User
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.ExecuteWatch
 		public Elastic.Clients.Elasticsearch.Id WatchId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

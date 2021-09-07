@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.TaskExecutingNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public bool Completed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Tasks.Status? Response
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Tasks.Info Task
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.TaskExecutingNode>? Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.Info>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.Info>>? Tasks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

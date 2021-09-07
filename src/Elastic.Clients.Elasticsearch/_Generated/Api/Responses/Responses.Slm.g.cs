@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Name SnapshotName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public IReadOnlyCollection<string> PolicyStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public string RetentionDeletionTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.EpochMillis RetentionDeletionTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long RetentionFailed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long RetentionRuns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long RetentionTimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long TotalSnapshotDeletionFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long TotalSnapshotsDeleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -142,7 +142,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long TotalSnapshotsFailed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -153,7 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long TotalSnapshotsTaken
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

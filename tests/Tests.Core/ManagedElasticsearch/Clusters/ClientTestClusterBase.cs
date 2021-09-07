@@ -3,10 +3,10 @@ using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Ephemeral.Plugins;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Stack.ArtifactsApi.Products;
-using Nest;
-using Nest.Cluster;
-using Nest.Cluster.Health;
-using Nest.Core;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.Cluster.Health;
+using Elastic.Clients.Elasticsearch.Core;
 using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
@@ -15,7 +15,7 @@ using Tests.Domain.Extensions;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	public abstract class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
+	public abstract class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, ITestCluster
 	{
 		protected ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
 

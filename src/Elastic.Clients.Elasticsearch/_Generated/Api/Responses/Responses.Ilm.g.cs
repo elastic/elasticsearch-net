@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public Union<Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplain>, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainProject> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> FailedIndexes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		public bool HasFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

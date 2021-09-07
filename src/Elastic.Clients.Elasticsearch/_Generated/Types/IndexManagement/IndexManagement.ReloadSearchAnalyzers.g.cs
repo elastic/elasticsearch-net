@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers
 		public string Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers
 		public IReadOnlyCollection<string> ReloadedAnalyzers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers
 		public IReadOnlyCollection<string> ReloadedNodeIds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

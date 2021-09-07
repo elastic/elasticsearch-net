@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public Elastic.Clients.Elasticsearch.ErrorCause? Error
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public bool? Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Termvectors.TermVector>? TermVectors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public long? Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetAlias
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition> Aliases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

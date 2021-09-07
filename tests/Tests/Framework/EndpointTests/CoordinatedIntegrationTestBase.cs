@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
@@ -19,7 +19,7 @@ namespace Tests.Framework.EndpointTests
 {
 	public abstract class CoordinatedIntegrationTestBase<TCluster>
 			: IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
-			where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+			where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 	{
 		private readonly CoordinatedUsage _coordinatedUsage;
 

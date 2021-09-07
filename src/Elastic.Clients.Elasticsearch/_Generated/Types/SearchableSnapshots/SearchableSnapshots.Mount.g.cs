@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount
 		public Elastic.Clients.Elasticsearch.Name Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

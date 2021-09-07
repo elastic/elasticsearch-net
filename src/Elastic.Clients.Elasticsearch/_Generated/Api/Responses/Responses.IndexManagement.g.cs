@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AddBlock.IndicesBlockStatus> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.Analyze.AnalyzeDetail? Detail
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Analyze.AnalyzeToken>? Tokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseIndexResult> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int BackingIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -172,7 +172,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int DataStreamCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStats.DataStreamsStatsItem> DataStreams
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -194,7 +194,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -205,7 +205,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int TotalStoreSizeBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -216,7 +216,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ByteSize? TotalStoreSizes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -278,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItem> DataStreams
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -296,7 +296,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate.IndexTemplateItem> IndexTemplates
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -330,7 +330,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -376,7 +376,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzers.ReloadDetails> ReloadDetails
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -387,7 +387,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -401,7 +401,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex.ResolveIndexAliasItem> Aliases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -412,7 +412,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex.ResolveIndexDataStreamsItem> DataStreams
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -423,7 +423,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex.ResolveIndexItem> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -437,7 +437,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, bool> Conditions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -448,7 +448,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool DryRun
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -459,7 +459,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string NewIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -470,7 +470,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string OldIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -481,7 +481,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool RolledOver
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -492,7 +492,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -506,7 +506,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segments.IndexSegment> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -517,7 +517,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -531,7 +531,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.IndicesShardStores> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -545,7 +545,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -556,7 +556,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -574,7 +574,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate.Template Template
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -588,7 +588,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -599,7 +599,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool ShardsAcknowledged
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -613,7 +613,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats All
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -624,7 +624,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats>? Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -635,7 +635,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -653,7 +653,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery.IndicesValidationExplanation>? Explanations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -664,7 +664,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -675,7 +675,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool Valid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

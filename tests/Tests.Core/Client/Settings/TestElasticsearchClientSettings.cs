@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Transport;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.Xunit;

@@ -791,6 +791,14 @@
           "System.Runtime.Handles": "4.3.0"
         }
       },
+      "elastic.clients.elasticsearch": {
+        "type": "Project",
+        "dependencies": {
+          "Elastic.Transport": "1.0.0",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0"
+        }
+      },
       "elastic.transport": {
         "type": "Project",
         "dependencies": {
@@ -798,14 +806,6 @@
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.0",
           "System.Text.Json": "5.0.0"
-        }
-      },
-      "nest": {
-        "type": "Project",
-        "dependencies": {
-          "Elastic.Transport": "1.0.0",
-          "System.Reflection.Emit": "4.3.0",
-          "System.Reflection.Emit.Lightweight": "4.3.0"
         }
       },
       "tests.configuration": {

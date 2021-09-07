@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Name ActualClass
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int ActualClassDocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int OtherPredictedClassDocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.ConfusionMatrixPrediction> PredictedClasses
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Name PredictedClass
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int false_negative
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int false_positive
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int true_negative
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int true_positive
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryAccuracy? Accuracy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationSummaryAucRoc? AucRoc
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryMulticlassConfusionMatrix? MulticlassConfusionMatrix
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryPrecision? Precision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeClassificationSummaryRecall? Recall
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationClass> Classes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double OverallAccuracy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.ConfusionMatrixItem> ConfusionMatrix
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -243,7 +243,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public int OtherActualClassCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double AvgPrecision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -268,7 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationClass> Classes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -282,7 +282,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double AvgRecall
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -293,7 +293,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationClass> Classes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -307,7 +307,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Name ClassName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationSummaryAucRocCurveItem>? Curve
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -335,7 +335,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double Fpr
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -346,7 +346,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double Threshold
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -357,7 +357,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double Tpr
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -371,7 +371,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public double Value
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -385,7 +385,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationSummaryAucRoc? AucRoc
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -396,7 +396,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.ConfusionMatrixThreshold>? ConfusionMatrix
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -407,7 +407,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Dictionary<string, double>? Precision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -418,7 +418,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Dictionary<string, double>? Recall
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -432,7 +432,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? Huber
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -443,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? Mse
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -454,7 +454,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? Msle
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -465,7 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame
 		public Elastic.Clients.Elasticsearch.Ml.EvaluateDataFrame.DataframeEvaluationValue? RSquared
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

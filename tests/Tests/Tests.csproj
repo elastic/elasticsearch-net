@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
@@ -17,6 +17,8 @@
     <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="0.2.2" />
 
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
+
+    <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />

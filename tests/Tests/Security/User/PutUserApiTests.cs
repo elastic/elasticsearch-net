@@ -1,7 +1,7 @@
 ﻿//using System.Collections.Generic;
 //using Elastic.Transport;
 //using FluentAssertions;
-//using Nest;
+//using Elastic.Clients.Elasticsearch;
 //using Tests.Core.ManagedElasticsearch.Clusters;
 //using Tests.Domain.Helpers;
 //using Tests.Framework.EndpointTests;

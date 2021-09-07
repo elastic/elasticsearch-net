@@ -3,10 +3,10 @@ using System.IO;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit;
 using Elastic.Transport;
-using Nest;
-using Nest.Cluster;
-using Nest.Cluster.Health;
-using Nest.Core;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.Cluster.Health;
+using Elastic.Clients.Elasticsearch.Core;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Core.ManagedElasticsearch.Tasks;
@@ -15,7 +15,7 @@ using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>, INestTestCluster
+	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>, ITestCluster
 	{
 		public XPackCluster() : this(new XPackClusterConfiguration()) { }
 

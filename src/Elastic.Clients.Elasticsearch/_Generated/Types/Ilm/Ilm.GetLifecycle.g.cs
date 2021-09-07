@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.GetLifecycle
 		public Elastic.Clients.Elasticsearch.DateString ModifiedDate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.GetLifecycle
 		public Elastic.Clients.Elasticsearch.Ilm.Policy Policy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.GetLifecycle
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

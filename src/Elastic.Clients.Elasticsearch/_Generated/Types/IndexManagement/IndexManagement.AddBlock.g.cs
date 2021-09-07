@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.AddBlock
 		public bool Blocked
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.AddBlock
 		public Elastic.Clients.Elasticsearch.IndexName Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
