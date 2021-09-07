@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object>? Meta
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -293,7 +293,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.DateMathTime Interval
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -345,7 +345,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Max
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -356,7 +356,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Min
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -367,7 +367,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Q1
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -378,7 +378,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Q2
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -389,7 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Q3
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -409,7 +409,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object> AfterKey
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -420,7 +420,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long BgCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -431,7 +431,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -442,7 +442,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long DocCountErrorUpperBound
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -453,7 +453,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.DateMathTime Interval
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -464,7 +464,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.Bucket Items
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -475,7 +475,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long SumOtherDocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -596,7 +596,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object> AfterKey
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -734,7 +734,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public float? Alpha
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -757,7 +757,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? StdDeviation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -768,7 +768,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds StdDeviationBounds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -779,7 +779,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? StdDeviationPopulation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -790,7 +790,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? StdDeviationSampling
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -801,7 +801,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? SumOfSquares
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -812,7 +812,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Variance
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -823,7 +823,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? VariancePopulation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -834,7 +834,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? VarianceSampling
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -860,7 +860,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>, Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>> Buckets
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -889,7 +889,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -924,7 +924,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoBounds Bounds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -944,7 +944,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -955,7 +955,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation Location
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1014,7 +1014,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.LineStringGeoShape Geometry
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1025,7 +1025,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineProperties Properties
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1036,7 +1036,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1074,7 +1074,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool Complete
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1085,7 +1085,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<double> SortValues
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1139,7 +1139,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Key
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1150,7 +1150,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Value
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1164,7 +1164,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileItem> Values
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1223,7 +1223,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public float? Alpha
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1234,7 +1234,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public float? Beta
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1248,7 +1248,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public float? Alpha
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1259,7 +1259,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public float? Beta
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1270,7 +1270,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public float? Gamma
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1281,7 +1281,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Pad
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1292,7 +1292,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Period
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1303,7 +1303,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.HoltWintersType? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1360,7 +1360,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1371,7 +1371,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TKey Key
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1382,7 +1382,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string KeyAsString
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1396,7 +1396,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<string> Keys
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1410,7 +1410,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate> Coordinates
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1433,7 +1433,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, double> Correlation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1444,7 +1444,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1455,7 +1455,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, double> Covariance
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1466,7 +1466,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Kurtosis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1477,7 +1477,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Mean
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1488,7 +1488,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1499,7 +1499,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Skewness
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1510,7 +1510,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Variance
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1615,7 +1615,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<TBucket> Buckets
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1672,7 +1672,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Percentile
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1683,7 +1683,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Value
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1712,7 +1712,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentileItem> Items
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1842,7 +1842,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public object Value
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1880,7 +1880,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long BgCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1891,7 +1891,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2005,7 +2005,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2019,7 +2019,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Lower
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2030,7 +2030,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? LowerPopulation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2041,7 +2041,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? LowerSampling
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2052,7 +2052,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Upper
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2063,7 +2063,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? UpperPopulation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2074,7 +2074,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? UpperSampling
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2088,7 +2088,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Avg
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2099,7 +2099,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2110,7 +2110,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Max
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2121,7 +2121,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Min
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2132,7 +2132,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Sum
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2154,7 +2154,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double AvgLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2165,7 +2165,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2176,7 +2176,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, double>? Distribution
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2187,7 +2187,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Entropy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2198,7 +2198,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int MaxLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2209,7 +2209,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int MinLength
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2243,7 +2243,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, double> Values
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2269,7 +2269,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long DocCountErrorUpperBound
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2280,7 +2280,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long SumOtherDocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2360,7 +2360,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<Dictionary<string, object>> Hits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2413,7 +2413,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, Union<double, string>> Metrics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2424,7 +2424,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<Union<double, string>> Sort
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2438,7 +2438,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2470,7 +2470,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double Value
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -2481,7 +2481,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? ValueAsString
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

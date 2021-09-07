@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public long ExecutedSearchesTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public int QueueSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public int RemoteRequestsCurrent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public long RemoteRequestsTotal
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Stats
 		public Elastic.Clients.Elasticsearch.Tasks.Info Task
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

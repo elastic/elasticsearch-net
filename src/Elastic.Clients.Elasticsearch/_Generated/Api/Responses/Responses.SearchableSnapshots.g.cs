@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		public Elastic.Clients.Elasticsearch.SearchableSnapshots.Mount.MountedSnapshot Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		public object Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 		public object Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

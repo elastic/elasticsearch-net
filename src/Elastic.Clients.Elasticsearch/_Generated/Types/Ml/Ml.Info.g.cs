@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer CategorizationAnalyzer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public int CategorizationExamplesLimit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public int DailyModelSnapshotRetentionAfterDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public string ModelMemoryLimit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public int ModelSnapshotRetentionDays
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public int ScrollSize
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public Elastic.Clients.Elasticsearch.Ml.Info.AnomalyDetectors AnomalyDetectors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public Elastic.Clients.Elasticsearch.Ml.Info.Datafeeds Datafeeds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public string EffectiveMaxModelMemoryLimit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public string? MaxModelMemoryLimit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public string TotalMlMemory
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public string BuildHash
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

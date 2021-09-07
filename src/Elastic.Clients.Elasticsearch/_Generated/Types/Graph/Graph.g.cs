@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public long DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public long Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public long Target
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public double Weight
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public long Depth
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public Elastic.Clients.Elasticsearch.Field Field
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public string Term
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public double Weight
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

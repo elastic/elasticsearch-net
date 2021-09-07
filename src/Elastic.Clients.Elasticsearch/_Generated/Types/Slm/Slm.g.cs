@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.DateString StartTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public string State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Uuid Uuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Name SnapshotName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.DateString Time
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.Configuration Config
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public string Repository
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.Retention Retention
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Watcher.CronExpression Schedule
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.InProgress? InProgress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.Invocation? LastFailure
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.Invocation? LastSuccess
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.DateString? ModifiedDate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.EpochMillis ModifiedDateMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -248,7 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.DateString? NextExecution
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.EpochMillis NextExecutionMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.Policy Policy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Slm.Statistics Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -306,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.Id? Policy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.DateString? RetentionDeletionTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -328,7 +328,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public Elastic.Clients.Elasticsearch.EpochMillis? RetentionDeletionTimeMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -339,7 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? RetentionFailed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -350,7 +350,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? RetentionRuns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -361,7 +361,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? RetentionTimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? TotalSnapshotDeletionFailures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -383,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? TotalSnapshotsDeleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? TotalSnapshotsFailed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -405,7 +405,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		public long? TotalSnapshotsTaken
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

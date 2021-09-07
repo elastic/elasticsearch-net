@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 		public Dictionary<string, object> Aggregations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 		public Dictionary<string, int> RestActions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 		public Elastic.Clients.Elasticsearch.EpochMillis Since
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Usage
 		public Elastic.Clients.Elasticsearch.EpochMillis Timestamp
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

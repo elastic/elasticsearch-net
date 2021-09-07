@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 		public Dictionary<string, string> Attributes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 		public Elastic.Clients.Elasticsearch.Host Host
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 		public Elastic.Clients.Elasticsearch.Ip Ip
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 		public Elastic.Clients.Elasticsearch.NodeRoles? Roles
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.SpecUtils
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

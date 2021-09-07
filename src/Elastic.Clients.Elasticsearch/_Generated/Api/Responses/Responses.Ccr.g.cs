@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndex> FollowerIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public bool FollowIndexCreated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public bool FollowIndexShardsAcked
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public bool IndexFollowingStarted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowIndexStats> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern.AutoFollowPattern> Patterns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.Ccr.Stats.AutoFollowStats AutoFollowStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public Elastic.Clients.Elasticsearch.Ccr.Stats.FollowStats FollowStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Info.BuildInformation Build
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Info.Features Features
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Info.MinimalLicenseInformation License
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public string Tagline
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base AggregateMetric
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Analytics Analytics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Ccr Ccr
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base? DataFrame
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base? DataScience
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataStreams? DataStreams
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.DataTiers DataTiers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base? Enrich
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Eql Eql
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Flattened? Flattened
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.FrozenIndices FrozenIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Graph
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Ilm Ilm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Logstash
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.MachineLearning Ml
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -240,7 +240,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Monitoring Monitoring
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Rollup
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -262,7 +262,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.RuntimeFieldTypes? RuntimeFields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.SearchableSnapshots SearchableSnapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Security Security
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -295,7 +295,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Slm Slm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -306,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Spatial
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -317,7 +317,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Sql Sql
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -328,7 +328,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base Transform
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -339,7 +339,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Vector Vectors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -350,7 +350,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Base VotingOnly
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -361,7 +361,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack
 		public Elastic.Clients.Elasticsearch.Xpack.Usage.Watcher Watcher
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

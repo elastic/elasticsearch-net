@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Time? Frequency
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -250,7 +250,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? Sync
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -294,7 +294,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

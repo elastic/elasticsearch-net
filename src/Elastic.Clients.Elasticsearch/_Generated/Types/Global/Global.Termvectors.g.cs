@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int DocCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public long SumDocFreq
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public long SumTtf
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int? DocFreq
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public double? Score
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int TermFreq
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Termvectors.Token> Tokens
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int? Ttf
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public Elastic.Clients.Elasticsearch.Global.Termvectors.FieldStatistics FieldStatistics
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.Termvectors.Term> Terms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int? EndOffset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public string? Payload
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int Position
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		public int? StartOffset
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

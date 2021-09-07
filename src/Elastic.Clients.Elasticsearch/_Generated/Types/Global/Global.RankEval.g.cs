@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public double Score
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalHit Hit
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public double? Rating
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalHitItem> Hits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Dictionary<string, Dictionary<string, object>> MetricDetails
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public double MetricScore
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.RankEval.UnratedDocument> UnratedDocs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -244,7 +244,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -255,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

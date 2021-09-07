@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingResources Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingResources Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public object? ReasonDetails
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public string? ReasonSummary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingCapacity RequiredCapacity
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingCapacity CurrentCapacity
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingNode> CurrentNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingDecider> Deciders
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity.AutoscalingCapacity RequiredCapacity
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public Elastic.Clients.Elasticsearch.NodeName Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public int Memory
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Autoscaling.GetAutoscalingCapacity
 		public int Storage
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

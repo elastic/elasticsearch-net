@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public int Generation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public bool Hidden
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.Name? IlmPolicy
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItemIndex> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.Metadata? Meta
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.DataStreamName Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamHealthStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public bool? System
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.Name Template
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItemTimestampField TimestampField
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.IndexName IndexName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.Uuid IndexUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 		public Elastic.Clients.Elasticsearch.Field Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.Stats.AutoFollowedCluster> AutoFollowedClusters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public long NumberOfFailedFollowIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public long NumberOfFailedRemoteClusterStateRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public long NumberOfSuccessfulFollowIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public Elastic.Clients.Elasticsearch.VersionNumber LastSeenMetadataVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public Elastic.Clients.Elasticsearch.DateString TimeSinceLastCheckMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ccr.FollowIndexStats> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

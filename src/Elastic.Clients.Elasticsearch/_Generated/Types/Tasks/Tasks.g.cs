@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string Action
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public bool Cancellable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.Info>? Children
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Id? ParentTaskId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long RunningTimeInNanos
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Tasks.Status? Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string Action
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -176,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public bool Cancellable
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -198,7 +198,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.HttpHeaders Headers
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -209,7 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -231,7 +231,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -242,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long RunningTimeInNanos
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Tasks.Status? Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -275,7 +275,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -289,7 +289,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Batches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public string? Canceled
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -322,7 +322,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Deleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public IReadOnlyCollection<string>? Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -344,7 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Noops
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -355,7 +355,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public float RequestsPerSecond
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -366,7 +366,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Retries Retries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -377,7 +377,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Time? Throttled
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -388,7 +388,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long ThrottledMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -399,7 +399,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Elastic.Clients.Elasticsearch.Time? ThrottledUntil
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -410,7 +410,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long ThrottledUntilMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -421,7 +421,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public bool? TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -432,7 +432,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long? Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -443,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -454,7 +454,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long Updated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -465,7 +465,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public long VersionConflicts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -479,7 +479,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks
 		public Dictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.State> Tasks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

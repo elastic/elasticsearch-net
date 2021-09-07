@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.GetCalendars
 		public Elastic.Clients.Elasticsearch.Id CalendarId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.GetCalendars
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.GetCalendars
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> JobIds
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

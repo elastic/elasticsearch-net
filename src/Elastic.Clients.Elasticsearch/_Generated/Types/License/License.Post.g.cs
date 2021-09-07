@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.License.Post
 		public IReadOnlyCollection<string> License
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.License.Post
 		public string Message
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

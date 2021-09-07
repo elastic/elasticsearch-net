@@ -421,7 +421,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -432,7 +432,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer> Processors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -443,7 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

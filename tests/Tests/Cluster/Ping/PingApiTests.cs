@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using Elastic.Transport;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;

@@ -1,6 +1,6 @@
 using Elastic.Transport;
 using FluentAssertions;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 
 namespace Tests.Core.Extensions

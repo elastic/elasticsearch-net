@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Errors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? IngestTook
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Bulk.ResponseItemContainer> Items
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int NumFreed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Succeeded
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int NumFreed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Succeeded
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Batches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Deleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -176,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Noops
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -198,7 +198,7 @@ namespace Elastic.Clients.Elasticsearch
 		public float? RequestsPerSecond
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -209,7 +209,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Retries? Retries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -220,7 +220,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? SliceId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -231,7 +231,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.TaskId? Task
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -242,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? ThrottledMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -253,7 +253,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? ThrottledUntilMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -275,7 +275,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -286,7 +286,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -297,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? VersionConflicts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Global.Explain.ExplanationDetail? Explanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -342,7 +342,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -353,7 +353,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -364,7 +364,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -375,7 +375,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Matched
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -386,7 +386,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapability>> Fields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -411,7 +411,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -425,7 +425,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object>? Fields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -436,7 +436,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -447,7 +447,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -458,7 +458,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -469,7 +469,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? PrimaryTerm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -480,7 +480,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -491,7 +491,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SequenceNumber? SeqNo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -502,7 +502,7 @@ namespace Elastic.Clients.Elasticsearch
 		public TDocument? Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -513,7 +513,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -524,7 +524,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -538,7 +538,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.GetScriptContext.Context> Contexts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -552,7 +552,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.GetScriptLanguages.LanguageContext> LanguageContexts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -563,7 +563,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<string> TypesAllowed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -577,7 +577,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -588,7 +588,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -599,7 +599,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.StoredScript? Script
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -621,7 +621,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -632,7 +632,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Uuid ClusterUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -643,7 +643,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -654,7 +654,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string Tagline
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -665,7 +665,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -679,7 +679,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Mget.Hit<TDocument>> Docs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -693,7 +693,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Union<Elastic.Clients.Elasticsearch.Global.Msearch.SearchResult<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>> Responses
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -704,7 +704,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -718,7 +718,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> Responses
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -729,7 +729,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -743,7 +743,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Mtermvectors.TermVectorsResult> Docs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -757,7 +757,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -779,7 +779,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricDetail> Details
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -790,7 +790,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object> Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -801,7 +801,7 @@ namespace Elastic.Clients.Elasticsearch
 		public double MetricScore
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -815,7 +815,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Batches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -826,7 +826,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Created
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -837,7 +837,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Deleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -848,7 +848,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -859,7 +859,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Noops
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -870,7 +870,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? RequestsPerSecond
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -881,7 +881,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Retries? Retries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -892,7 +892,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? SliceId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -903,7 +903,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.TaskId? Task
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -914,7 +914,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottledMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -925,7 +925,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.EpochMillis? ThrottledUntilMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -936,7 +936,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -947,7 +947,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -958,7 +958,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -969,7 +969,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Updated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -980,7 +980,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? VersionConflicts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -994,7 +994,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.ReindexRethrottle.ReindexNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1008,7 +1008,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object> TemplateOutput
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1022,7 +1022,7 @@ namespace Elastic.Clients.Elasticsearch
 		public TResult Result
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1040,7 +1040,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<Elastic.Clients.Elasticsearch.AggregateName, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1051,7 +1051,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1062,7 +1062,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<TDocument>? Documents
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1073,7 +1073,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object>? Fields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1084,7 +1084,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1095,7 +1095,7 @@ namespace Elastic.Clients.Elasticsearch
 		public double? MaxScore
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1106,7 +1106,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? NumReducePhases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1117,7 +1117,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id? PitId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1128,7 +1128,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Global.Search.Profile? Profile
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1139,7 +1139,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ScrollId? ScrollId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1150,7 +1150,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1161,7 +1161,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<Elastic.Clients.Elasticsearch.SuggestionName, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Global.Search.Suggest<TDocument>>>? Suggest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1172,7 +1172,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TerminatedEarly
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1183,7 +1183,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1194,7 +1194,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1208,7 +1208,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Global.SearchShards.ShardStoreIndex> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1219,7 +1219,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, Elastic.Clients.Elasticsearch.NodeAttributes> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1230,7 +1230,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1244,7 +1244,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<TDocument> Hits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1255,7 +1255,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1266,7 +1266,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1277,7 +1277,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1291,7 +1291,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Complete
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1302,7 +1302,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1313,7 +1313,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<string> Terms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1327,7 +1327,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Found
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1338,7 +1338,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1349,7 +1349,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1360,7 +1360,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Termvectors.TermVector>? TermVectors
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1371,7 +1371,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1382,7 +1382,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.DocType? Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1393,7 +1393,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionNumber Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1407,7 +1407,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Batches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1418,7 +1418,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Deleted
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1429,7 +1429,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1440,7 +1440,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Noops
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1451,7 +1451,7 @@ namespace Elastic.Clients.Elasticsearch
 		public float? RequestsPerSecond
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1462,7 +1462,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Retries? Retries
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1473,7 +1473,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.TaskId? Task
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1484,7 +1484,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ulong? ThrottledMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1495,7 +1495,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ulong? ThrottledUntilMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1506,7 +1506,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? TimedOut
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1517,7 +1517,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Took
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1528,7 +1528,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1539,7 +1539,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Updated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1550,7 +1550,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? VersionConflicts
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1564,7 +1564,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Global.UpdateByQueryRethrottle.UpdateByQueryRethrottleNode> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -1578,7 +1578,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public long Creation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public long? Expiration
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public bool Invalidated
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public string Realm
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetApiKey
 		public Elastic.Clients.Elasticsearch.Username Username
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

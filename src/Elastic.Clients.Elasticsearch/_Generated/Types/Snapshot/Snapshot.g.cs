@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public int FileCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long SizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long MaxSegmentsPerShard
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public int ShardCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.ByteSize? Size
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long SizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string FeatureName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Indices Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings Settings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Uuid? Uuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long Done
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long Failed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -203,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long Finalizing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long Initializing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -225,7 +225,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long Started
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -236,7 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -250,7 +250,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Incremental
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long TimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -297,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long FileCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -308,7 +308,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long SizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -322,7 +322,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardsStatus> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -333,7 +333,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -344,7 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -358,7 +358,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<string> DataStreams
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -369,7 +369,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Time? Duration
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -380,7 +380,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.EpochMillis? DurationInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -391,7 +391,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Time? EndTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -402,7 +402,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.EpochMillis? EndTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -413,7 +413,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>? Failures
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -424,7 +424,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState>? FeatureStates
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -435,7 +435,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool? IncludeGlobalState
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -446,7 +446,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>? IndexDetails
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -457,7 +457,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -468,7 +468,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Metadata? Metadata
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -479,7 +479,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string? Reason
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -490,7 +490,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Name? Repository
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -501,7 +501,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -512,7 +512,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Name Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -523,7 +523,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Time? StartTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -534,7 +534,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.EpochMillis? StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -545,7 +545,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string? State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -556,7 +556,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Uuid Uuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -567,7 +567,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -578,7 +578,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.VersionNumber? VersionId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -592,7 +592,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -603,7 +603,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -614,7 +614,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string Reason
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -625,7 +625,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Id ShardId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -636,7 +636,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -650,7 +650,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage Stage
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -661,7 +661,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -675,7 +675,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Incremental
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -686,7 +686,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -697,7 +697,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public long TimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -708,7 +708,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -722,7 +722,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public bool IncludeGlobalState
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -733,7 +733,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats> Indices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -744,7 +744,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string Repository
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -755,7 +755,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -766,7 +766,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -777,7 +777,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public string State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -788,7 +788,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -799,7 +799,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		public Elastic.Clients.Elasticsearch.Uuid Uuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

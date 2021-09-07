@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStoreWrapper> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStoreAllocation Allocation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.Id AllocationId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Dictionary<string, object> Attributes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.VersionNumber LegacyVersion
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStoreException StoreException
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public Elastic.Clients.Elasticsearch.TransportAddress TransportAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public string Reason
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStore> Stores
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

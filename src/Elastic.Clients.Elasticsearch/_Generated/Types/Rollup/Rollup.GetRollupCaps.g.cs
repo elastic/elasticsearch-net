@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps.RollupCapabilitySummary> RollupJobs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, Dictionary<string, object>> Fields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 		public string IndexPattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 		public string JobId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupCaps
 		public string RollupIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

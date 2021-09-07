@@ -33,6 +33,6 @@ namespace Elastic.Clients.Elasticsearch.Monitoring
 
 		public BulkDescriptor<TSource> SystemId(string systemId) => Qs("system_id", systemId);
 		public BulkDescriptor<TSource> SystemApiVersion(string systemApiVersion) => Qs("system_api_version", systemApiVersion);
-		public BulkDescriptor<TSource> Interval(Elastic.Clients.Elasticsearch.Time interval) => Qs("interval", interval);
+		public BulkDescriptor<TSource> Interval(Elastic.Clients.Elasticsearch.TimeSpanTempReplacement interval) => Qs("interval", interval);
 	}
 }

@@ -95,9 +95,9 @@ namespace Elastic.Clients.Elasticsearch
 		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
-	//public partial class Time
-	//{
-	//}
+	public partial class Time
+	{
+	}
 
 	public partial class WaitForActiveShards
 	{

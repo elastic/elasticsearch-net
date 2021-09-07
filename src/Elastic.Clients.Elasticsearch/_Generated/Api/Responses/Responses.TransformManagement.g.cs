@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Transform> Transforms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public long Count
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStats.TransformStats> Transforms
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexState GeneratedDestIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public IReadOnlyCollection<TTransform> Preview
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public long CreateTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public string Description
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination Dest
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Time Frequency
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Id Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot Pivot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Global.Reindex.Source Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? Sync
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -218,7 +218,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

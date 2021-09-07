@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy
 		public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy.EnrichPolicyPhase Phase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -6,11 +6,11 @@ using System;
 using System.Diagnostics;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using FluentAssertions;
-using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -20,7 +20,7 @@ namespace Tests.Framework.EndpointTests
 {
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface

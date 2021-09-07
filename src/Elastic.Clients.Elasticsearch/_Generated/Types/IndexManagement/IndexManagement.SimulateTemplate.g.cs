@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 		public IReadOnlyCollection<string> IndexPatterns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate.Overlapping> Overlapping
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 		public Dictionary<string, object> Settings
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

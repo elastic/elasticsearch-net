@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Dictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpNodeDatabases> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpDownloadStatistics Stats
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Dictionary<string, string> Patterns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Simulate.PipelineSimulation> Docs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

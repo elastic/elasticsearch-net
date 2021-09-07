@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps.RollupJobSummary> RollupJobs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps.RollupJobSummaryField>> Fields
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public string IndexPattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public Elastic.Clients.Elasticsearch.Id JobId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public Elastic.Clients.Elasticsearch.IndexName RollupIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public string Agg
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public Elastic.Clients.Elasticsearch.Time? CalendarInterval
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCaps
 		public string? TimeZone
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.DateString ExpiryDate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.DateString IssueDate
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public string IssuedTo
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public string Issuer
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public long MaxNodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public int? MaxResourceUnits
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.EpochMillis StartDateInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.License.LicenseStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.License.LicenseType Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.License.Get
 		public Elastic.Clients.Elasticsearch.Uuid Uid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

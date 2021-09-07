@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Features
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

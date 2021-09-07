@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.NodeId NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.PersistentTaskStatus PersistentTasks
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.PluginsStatus Plugins
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public string Reason
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShardMigrationStatus ShardMigration
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.EpochMillis ShutdownStartedmillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownType Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Shutdown.GetNode
 		public Elastic.Clients.Elasticsearch.Shutdown.GetNode.ShutdownStatus Status
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

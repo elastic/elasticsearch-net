@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public Dictionary<string, Union<Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardsSegment, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardsSegment>>> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public Dictionary<string, string> Attributes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public bool Committed
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public bool Compound
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public long DeletedDocs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public int Generation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public double MemoryInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public long NumDocs
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public bool Search
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public double SizeInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public string Node
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public bool Primary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public string State
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -193,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public int NumCommittedSegments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public int NumSearchSegments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardSegmentRouting Routing
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segments.Segment> Segments
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

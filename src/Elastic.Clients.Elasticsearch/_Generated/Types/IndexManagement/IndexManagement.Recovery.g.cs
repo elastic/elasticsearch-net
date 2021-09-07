@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Length
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public string Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Recovered
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Percentage Percent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize? Recovered
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize? RecoveredFromSnapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize? RecoveredFromSnapshotInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize RecoveredInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize? Reused
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize ReusedInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize? Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.ByteSize TotalInBytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Recovery.FileDetails>? Details
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Percentage Percent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Recovered
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Reused
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -226,7 +226,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryBytes? Bytes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryFiles Files
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -248,7 +248,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryBytes Size
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Time? SourceThrottleTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -270,7 +270,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis SourceThrottleTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Time? TargetThrottleTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -292,7 +292,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis TargetThrottleTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Time? TotalTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -328,7 +328,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public bool? BootstrapNewHistoryUuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -339,7 +339,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Host? Host
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -350,7 +350,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public string? Hostname
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -361,7 +361,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Id? Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexName? Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -383,7 +383,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Ip? Ip
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Name? Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -405,7 +405,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Name? Repository
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -416,7 +416,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Uuid? Restoreuuid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -427,7 +427,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Name? Snapshot
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -438,7 +438,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.TransportAddress? TransportAddress
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -449,7 +449,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -463,7 +463,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long CheckIndexTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -474,7 +474,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public string TotalTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -488,7 +488,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Recovery.ShardRecovery> Shards
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -502,7 +502,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Id
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -513,7 +513,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryIndexStatus Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -524,7 +524,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public bool Primary
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -535,7 +535,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryOrigin Source
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -546,7 +546,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public string Stage
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -557,7 +557,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryStartStatus? Start
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -568,7 +568,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.DateString? StartTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -579,7 +579,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis StartTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -590,7 +590,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.DateString? StopTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -601,7 +601,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis StopTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -612,7 +612,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryOrigin Target
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -623,7 +623,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.DateString? TotalTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -634,7 +634,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -645,7 +645,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.TranslogStatus Translog
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -656,7 +656,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.DocType Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -667,7 +667,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.IndexManagement.Recovery.VerifyIndex VerifyIndex
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -681,7 +681,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Percentage Percent
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -692,7 +692,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Recovered
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -703,7 +703,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long Total
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -714,7 +714,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public long TotalOnStart
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -725,7 +725,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public string? TotalTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -736,7 +736,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -750,7 +750,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Time? CheckIndexTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -761,7 +761,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis CheckIndexTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -772,7 +772,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.Time? TotalTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -783,7 +783,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 		public Elastic.Clients.Elasticsearch.EpochMillis TotalTimeInMillis
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

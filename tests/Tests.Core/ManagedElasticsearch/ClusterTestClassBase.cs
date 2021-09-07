@@ -4,13 +4,13 @@
 
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Core.ManagedElasticsearch
 {
 	public abstract class ClusterTestClassBase<TCluster> : IClusterFixture<TCluster>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 	{
 		protected ClusterTestClassBase(TCluster cluster)
 		{

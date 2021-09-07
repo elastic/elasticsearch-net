@@ -639,7 +639,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -650,7 +650,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Field? Path
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -661,7 +661,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int? Precision
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -672,7 +672,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -686,7 +686,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int MaxChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -697,7 +697,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int MinChars
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 		public string? Error
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 		public string? Explanation
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 		public Elastic.Clients.Elasticsearch.IndexName Index
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ValidateQuery
 		public bool Valid
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

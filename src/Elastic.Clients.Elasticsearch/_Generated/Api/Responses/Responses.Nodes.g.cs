@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.HotThreads.HotThread> HotThreads
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfo> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Dictionary<string, Union<Elastic.Clients.Elasticsearch.Nodes.Stats, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettings.NodeReloadException>> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Stats> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Elastic.Clients.Elasticsearch.Name ClusterName
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Usage.NodeUsage> Nodes
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

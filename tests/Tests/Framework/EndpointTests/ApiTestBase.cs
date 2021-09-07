@@ -9,7 +9,7 @@ using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
 using FluentAssertions;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Extensions;
@@ -18,7 +18,7 @@ namespace Tests.Framework.EndpointTests
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface

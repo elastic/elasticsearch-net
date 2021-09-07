@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndices.DanglingIndex> DanglingIndices
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

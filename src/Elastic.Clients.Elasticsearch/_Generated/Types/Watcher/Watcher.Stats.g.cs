@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.DateString ExecutionTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public IReadOnlyCollection<string>? ExecutedActions
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionPhase ExecutionPhase
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.DateString TriggeredTime
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.Id WatchId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.Id WatchRecordId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.Stats.WatchRecordStats>? CurrentWatches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.Watcher.ExecutionThreadPool ExecutionThreadPool
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.Id NodeId
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Watcher.Stats.WatchRecordQueuedStats>? QueuedWatches
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public long WatchCount
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher.Stats
 		public Elastic.Clients.Elasticsearch.Watcher.Stats.WatcherState WatcherState
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

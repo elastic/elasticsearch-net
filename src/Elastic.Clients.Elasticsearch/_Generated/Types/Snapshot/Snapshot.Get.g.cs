@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Get
 		public Elastic.Clients.Elasticsearch.ErrorCause? Error
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Get
 		public Elastic.Clients.Elasticsearch.Name Repository
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Get
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;

@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public Elastic.Clients.Elasticsearch.Name Name
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern.AutoFollowPatternSummary Pattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public bool Active
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public Elastic.Clients.Elasticsearch.IndexPattern? FollowIndexPattern
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public Elastic.Clients.Elasticsearch.IndexPatterns LeaderIndexPatterns
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public int MaxOutstandingReadRequests
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		public string RemoteCluster
 		{
 			get;
-#if NET5_0
+#if NET5_0_OR_GREATER
 			init;
 #else
 			internal set;
