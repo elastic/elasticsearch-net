@@ -16,15 +16,22 @@
 // ------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using OneOf;
-using Elastic.Transport;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
-	public partial class TextToAnalyze
+	public abstract class NodesResponseBase : ResponseBase
 	{
-		private readonly List<string> _stringList = new();
+		[JsonPropertyName("_nodes")]
+		public Elastic.Clients.Elasticsearch.NodeStatistics node_stats
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }

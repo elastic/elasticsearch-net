@@ -1263,15 +1263,14 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events { get; set; }
 	}
 
-	[ConvertAs(typeof(PostDataRequest))]
-	public partial interface IPostDataRequest : IRequest<PostDataRequestParameters>
+	[ConvertAs(typeof(PostDataRequest<>))]
+	public partial interface IPostDataRequest<TData> : IRequest<PostDataRequestParameters>
 	{
-		IEnumerable<object>? Data { get; set; }
 	}
 
-	public partial class PostDataRequest : PlainRequestBase<PostDataRequestParameters>, IPostDataRequest
+	public partial class PostDataRequest<TData> : PlainRequestBase<PostDataRequestParameters>, IPostDataRequest<TData>
 	{
-		protected IPostDataRequest Self => this;
+		protected IPostDataRequest<TData> Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.MachineLearningPostData;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -1288,9 +1287,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.DateString? ResetStart { get => Q<Elastic.Clients.Elasticsearch.DateString?>("reset_start"); set => Q("reset_start", value); }
-
-		[JsonPropertyName("data")]
-		public IEnumerable<object>? Data { get; set; }
 	}
 
 	[ConvertAs(typeof(PreviewDataFrameAnalyticsRequest))]

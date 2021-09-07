@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Field>))]
-	public partial class Field : IComparable<Field>, IEquatable<Field>, IUrlParameter
+	public readonly partial struct Field : IComparable<Field>, IEquatable<Field>
 	{
 		public Field(string field) => Value = field;
 		public string Value { get; }
@@ -250,8 +250,6 @@ namespace Elastic.Clients.Elasticsearch
 			field = new Field(value.Trim());
 			return true;
 		}
-
-		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Host>))]
@@ -712,6 +710,31 @@ namespace Elastic.Clients.Elasticsearch
 			if (string.IsNullOrWhiteSpace(value))
 				return false;
 			suggestionName = new SuggestionName(value.Trim());
+			return true;
+		}
+	}
+
+	[JsonConverter(typeof(StringAliasConverter<Time>))]
+	public readonly partial struct Time : IComparable<Time>, IEquatable<Time>
+	{
+		public Time(string time) => Value = time;
+		public string Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value;
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is Time other && Equals(other);
+		public bool Equals(Time other) => this.Value.Equals(other.Value);
+		public int CompareTo(Time other) => Value.CompareTo(other.Value);
+		public static bool operator ==(Time a, Time b) => a.CompareTo(b) == 0;
+		public static bool operator !=(Time a, Time b) => !(a == b);
+		public static implicit operator string(Time time) => time.Value;
+		public static implicit operator Time(string time) => new(time);
+		public static bool TryParse(string value, out Time time)
+		{
+			time = default;
+			if (string.IsNullOrWhiteSpace(value))
+				return false;
+			time = new Time(value.Trim());
 			return true;
 		}
 	}

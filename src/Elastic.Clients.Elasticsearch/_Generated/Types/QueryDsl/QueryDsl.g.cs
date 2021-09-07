@@ -360,6 +360,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class GeoBoundingBoxQuery : QueryDsl.QueryBase
 	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
 		[JsonPropertyName("type")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? Type { get; set; }
 
@@ -389,6 +392,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public partial class GeoPolygonQuery : QueryDsl.QueryBase
 	{
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
+
 		[JsonPropertyName("validation_method")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 	}

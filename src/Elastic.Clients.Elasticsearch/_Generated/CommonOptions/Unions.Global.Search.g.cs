@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 	public partial class Sort
 	{
-		private readonly List<SortCombinations> _sortCombinationsList;
+		private readonly List<SortCombinations> _sortCombinationsList = new();
 	}
 
 	public partial class SortCombinations

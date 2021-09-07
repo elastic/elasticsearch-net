@@ -15,16 +15,14 @@
 //
 // ------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using OneOf;
-using Elastic.Transport;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
+namespace Elastic.Clients.Elasticsearch.Ssl
 {
-	public partial class TextToAnalyze
+	public partial class CertificatesResponse : ResponseBase
 	{
-		private readonly List<string> _stringList = new();
 	}
 }

@@ -12,6 +12,9 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class Ids
 	{
+		// This is temporary
+		public Ids(IEnumerable<Id> ids) => _idList.AddRange(ids);
+
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
 

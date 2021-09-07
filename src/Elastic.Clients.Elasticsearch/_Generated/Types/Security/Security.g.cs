@@ -193,6 +193,17 @@ namespace Elastic.Clients.Elasticsearch.Security
 #endif
 		}
 
+		[JsonPropertyName("role_templates")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.GetRole.RoleTemplate>? RoleTemplates
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonPropertyName("rules")]
 		public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase Rules
 		{

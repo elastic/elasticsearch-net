@@ -771,8 +771,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? IPutTemplateRequest.Mappings { get; set; }
 
-		int? IPutTemplateRequest.Order { get; set; }
-
 		Dictionary<string, object>? IPutTemplateRequest.Settings { get; set; }
 
 		Elastic.Clients.Elasticsearch.VersionNumber? IPutTemplateRequest.Version { get; set; }
@@ -782,10 +780,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutTemplateDescriptor IncludeTypeName(bool? includeTypeName = true) => Qs("include_type_name", includeTypeName);
 		public PutTemplateDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public PutTemplateDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public PutTemplateDescriptor Order(int? order) => Qs("order", order);
 		public PutTemplateDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
 		public PutTemplateDescriptor IndexPatterns(Union<string, IEnumerable<string>>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
 		public PutTemplateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public PutTemplateDescriptor Order(int? order) => Assign(order, (a, v) => a.Order = v);
 		public PutTemplateDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public PutTemplateDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
 	}

@@ -1354,8 +1354,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-		int? Order { get; set; }
-
 		Dictionary<string, object>? Settings { get; set; }
 
 		Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
@@ -1390,6 +1388,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
+		[JsonIgnore]
+		public int? Order { get => Q<int?>("order"); set => Q("order", value); }
+
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
@@ -1398,9 +1399,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-
-		[JsonPropertyName("order")]
-		public int? Order { get; set; }
 
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }

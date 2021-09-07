@@ -3,12 +3,16 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	public partial class Fields
 	{
+		// This is temporary
+		public Fields(IEnumerable<Field> fields) => _fieldList.AddRange(fields);
+
 		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	}
 

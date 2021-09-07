@@ -38,8 +38,8 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 		public FindStructureDescriptor<TJsonDocument> Format(string? format) => Qs("format", format);
 		public FindStructureDescriptor<TJsonDocument> GrokPattern(string? grokPattern) => Qs("grok_pattern", grokPattern);
 		public FindStructureDescriptor<TJsonDocument> HasHeaderRow(bool? hasHeaderRow = true) => Qs("has_header_row", hasHeaderRow);
-		public FindStructureDescriptor<TJsonDocument> LineMergeSizeLimit(uint? lineMergeSizeLimit) => Qs("line_merge_size_limit", lineMergeSizeLimit);
-		public FindStructureDescriptor<TJsonDocument> LinesToSample(uint? linesToSample) => Qs("lines_to_sample", linesToSample);
+		public FindStructureDescriptor<TJsonDocument> LineMergeSizeLimit(int? lineMergeSizeLimit) => Qs("line_merge_size_limit", lineMergeSizeLimit);
+		public FindStructureDescriptor<TJsonDocument> LinesToSample(int? linesToSample) => Qs("lines_to_sample", linesToSample);
 		public FindStructureDescriptor<TJsonDocument> Quote(string? quote) => Qs("quote", quote);
 		public FindStructureDescriptor<TJsonDocument> ShouldTrimFields(bool? shouldTrimFields = true) => Qs("should_trim_fields", shouldTrimFields);
 		public FindStructureDescriptor<TJsonDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);

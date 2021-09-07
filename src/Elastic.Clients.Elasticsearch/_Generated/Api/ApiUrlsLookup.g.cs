@@ -282,7 +282,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceScriptsPainlessExecute = new ApiUrls(new[] { "/_scripts/painless/_execute" });
 		internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
-		internal static ApiUrls NoNamespaceSearchMvt = new ApiUrls(new[] { "/{index}/_mvt/{field}/{zoom}/{x}/{y}" });
 		internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[] { "/_search_shards", "/{index}/_search_shards" });
 		internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[] { "/_search/template", "/{index}/_search/template" });
 		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });

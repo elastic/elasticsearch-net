@@ -838,24 +838,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Union<string, IEnumerable<string>>? Sort { get => Q<Union<string, IEnumerable<string>>?>("sort"); set => Q("sort", value); }
 	}
 
-	public class SearchMvtRequestParameters : RequestParameters<SearchMvtRequestParameters>
-	{
-		[JsonIgnore]
-		public bool? ExactBounds { get => Q<bool?>("exact_bounds"); set => Q("exact_bounds", value); }
-
-		[JsonIgnore]
-		public int? Extent { get => Q<int?>("extent"); set => Q("extent", value); }
-
-		[JsonIgnore]
-		public int? GridPrecision { get => Q<int?>("grid_precision"); set => Q("grid_precision", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Global.SearchMvt.GridType? GridType { get => Q<Elastic.Clients.Elasticsearch.Global.SearchMvt.GridType?>("grid_type"); set => Q("grid_type", value); }
-
-		[JsonIgnore]
-		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
-	}
-
 	public class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters>
 	{
 		[JsonIgnore]

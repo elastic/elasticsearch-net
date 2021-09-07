@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ssl
+namespace Elastic.Clients.Elasticsearch.Security
 {
 	public partial class AuthenticateResponse : ResponseBase
 	{
@@ -395,7 +395,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	{
 	}
 
-	public partial class DeleteRoleResponse : ResponseBase
+	public partial class DeleteRoleMappingResponse : ResponseBase
 	{
 		[JsonPropertyName("found")]
 		public bool Found
@@ -409,7 +409,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		}
 	}
 
-	public partial class DeleteRoleMappingResponse : ResponseBase
+	public partial class DeleteRoleResponse : ResponseBase
 	{
 		[JsonPropertyName("found")]
 		public bool Found
@@ -502,11 +502,11 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	{
 	}
 
-	public partial class GetRoleResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Security.GetRole.Role>
+	public partial class GetRoleMappingResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>
 	{
 	}
 
-	public partial class GetRoleMappingResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>
+	public partial class GetRoleResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Security.GetRole.Role>
 	{
 	}
 
@@ -641,10 +641,6 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		}
 	}
 
-	public partial class GetUserResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Security.User>
-	{
-	}
-
 	public partial class GetUserPrivilegesResponse : ResponseBase
 	{
 		[JsonPropertyName("applications")]
@@ -701,6 +697,10 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 			internal set;
 #endif
 		}
+	}
+
+	public partial class GetUserResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Security.User>
+	{
 	}
 
 	public partial class GrantApiKeyResponse : ResponseBase
@@ -906,20 +906,6 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	{
 	}
 
-	public partial class PutRoleResponse : ResponseBase
-	{
-		[JsonPropertyName("role")]
-		public Elastic.Clients.Elasticsearch.Security.CreatedStatus Role
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class PutRoleMappingResponse : ResponseBase
 	{
 		[JsonPropertyName("created")]
@@ -945,6 +931,20 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		}
 	}
 
+	public partial class PutRoleResponse : ResponseBase
+	{
+		[JsonPropertyName("role")]
+		public Elastic.Clients.Elasticsearch.Security.CreatedStatus Role
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
 	public partial class PutUserResponse : ResponseBase
 	{
 		[JsonPropertyName("created")]
@@ -957,9 +957,5 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 			internal set;
 #endif
 		}
-	}
-
-	public partial class CertificatesResponse : ResponseBase
-	{
 	}
 }

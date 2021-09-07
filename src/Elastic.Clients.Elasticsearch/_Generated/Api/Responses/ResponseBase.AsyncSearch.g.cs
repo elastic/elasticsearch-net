@@ -15,36 +15,16 @@
 //
 // ------------------------------------------------
 
-using OneOf;
-using System.Collections.Generic;
+using System;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public partial class DeleteResponse : AcknowledgedResponseBase
+	public abstract class AsyncSearchDocumentResponseBase<TDocument> : AsyncSearchResponseBase
 	{
-	}
-
-	public partial class GetResponse<TDocument> : AsyncSearchDocumentResponseBase<TDocument>
-	{
-	}
-
-	public partial class StatusResponse<TDocument> : AsyncSearch.AsyncSearchResponseBase
-	{
-		[JsonPropertyName("completion_status")]
-		public int CompletionStatus
-		{
-			get;
-#if NET5_0
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
+		[JsonPropertyName("response")]
+		public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response
 		{
 			get;
 #if NET5_0
@@ -55,7 +35,61 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		}
 	}
 
-	public partial class SubmitResponse<TDocument> : AsyncSearchDocumentResponseBase<TDocument>
+	public abstract class AsyncSearchResponseBase : ResponseBase
 	{
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id? Id
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_partial")]
+		public bool IsPartial
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("is_running")]
+		public bool IsRunning
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("expiration_time_in_millis")]
+		public Elastic.Clients.Elasticsearch.EpochMillis ExpirationTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonPropertyName("start_time_in_millis")]
+		public Elastic.Clients.Elasticsearch.EpochMillis StartTimeInMillis
+		{
+			get;
+#if NET5_0
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }
