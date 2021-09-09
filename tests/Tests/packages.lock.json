@@ -1337,13 +1337,13 @@
           "Elasticsearch.Net": "7.0.0"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
           "Elasticsearch.Net": "7.0.0"
         }
       },
-      "NEST.JsonNetSerializer": {
+      "nest.jsonnetserializer": {
         "type": "Project",
         "dependencies": {
           "NEST": "7.0.0",
