@@ -84,6 +84,6 @@ namespace Elastic.Clients.Elasticsearch
 		/// <summary>
 		///     The serializer use to serialize CLR types representing documents and other types related to documents.
 		/// </summary>
-		ITransportSerializer SourceSerializer { get; }
+		Serializer SourceSerializer { get; }
 	}
 }

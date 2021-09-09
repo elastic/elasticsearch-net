@@ -52,4 +52,19 @@ namespace Elastic.Clients.Elasticsearch
 		public static bool operator ==(GeoTilePrecision a, GeoTilePrecision b) => a.CompareTo(b) == 0;
 		public static bool operator !=(GeoTilePrecision a, GeoTilePrecision b) => !(a == b);
 	}
+
+	[JsonConverter(typeof(NumericAliasConverter<SequenceNumber>))]
+	public readonly partial struct SequenceNumber : IComparable<SequenceNumber>, IEquatable<SequenceNumber>
+	{
+		public SequenceNumber(long sequenceNumber) => Value = sequenceNumber;
+		public long Value { get; }
+
+		public override int GetHashCode() => Value.GetHashCode();
+		public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
+		public override bool Equals(object obj) => ReferenceEquals(null, obj) ? false : obj is SequenceNumber other && Equals(other);
+		public bool Equals(SequenceNumber other) => this.Value.Equals(other.Value);
+		public int CompareTo(SequenceNumber other) => Value.CompareTo(other.Value);
+		public static bool operator ==(SequenceNumber a, SequenceNumber b) => a.CompareTo(b) == 0;
+		public static bool operator !=(SequenceNumber a, SequenceNumber b) => !(a == b);
+	}
 }

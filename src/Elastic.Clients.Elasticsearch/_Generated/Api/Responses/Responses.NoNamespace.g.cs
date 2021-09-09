@@ -1116,6 +1116,10 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
+	public partial class SearchMvtResponse : ResponseBase
+	{
+	}
+
 	public partial class SearchResponse<TDocument> : ResponseBase
 	{
 		[JsonInclude]

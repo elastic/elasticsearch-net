@@ -66,8 +66,8 @@ public partial class ElasticClient : IElasticClient
 
 	public IElasticsearchClientSettings ElasticsearchClientSettings => _transport.Settings;
 	public Inferrer Infer => _transport.Settings.Inferrer;
-	public ITransportSerializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
-	public ITransportSerializer SourceSerializer => _transport.Settings.SourceSerializer;
+	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
+	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
 
 	private partial void SetupNamespaces();
 

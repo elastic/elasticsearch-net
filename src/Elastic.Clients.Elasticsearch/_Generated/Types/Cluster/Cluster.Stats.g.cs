@@ -964,7 +964,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("pretty_names")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemName> PrettyNames
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemPrettyName> PrettyNames
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1019,6 +1019,33 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ClusterOperatingSystemPrettyName
+	{
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("pretty_name")]
+		public Elastic.Clients.Elasticsearch.Name PrettyName
 		{
 			get;
 #if NET5_0_OR_GREATER

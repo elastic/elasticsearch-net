@@ -23,7 +23,14 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.Mget
 {
-	public partial class MultiGetId
+	public partial class MultiGetId : Union<string, int>
 	{
+		public MultiGetId(string item) : base(item)
+		{
+		}
+
+		public MultiGetId(int item) : base(item)
+		{
+		}
 	}
 }

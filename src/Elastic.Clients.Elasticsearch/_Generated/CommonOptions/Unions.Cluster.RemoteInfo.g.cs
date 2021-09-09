@@ -23,7 +23,14 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 {
-	public partial class ClusterRemoteInfo
+	public partial class ClusterRemoteInfo : Union<Elastic.Clients.Elasticsearch.Cluster.RemoteInfo.ClusterRemoteSniffInfo, Elastic.Clients.Elasticsearch.Cluster.RemoteInfo.ClusterRemoteProxyInfo>
 	{
+		public ClusterRemoteInfo(Elastic.Clients.Elasticsearch.Cluster.RemoteInfo.ClusterRemoteSniffInfo item) : base(item)
+		{
+		}
+
+		public ClusterRemoteInfo(Elastic.Clients.Elasticsearch.Cluster.RemoteInfo.ClusterRemoteProxyInfo item) : base(item)
+		{
+		}
 	}
 }

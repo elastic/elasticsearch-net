@@ -175,6 +175,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
+	public class DiskUsageRequestParameters : RequestParameters<DiskUsageRequestParameters>
+	{
+		[JsonIgnore]
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+		[JsonIgnore]
+		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+		[JsonIgnore]
+		public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
+
+		[JsonIgnore]
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+		[JsonIgnore]
+		public Elastic.Clients.Elasticsearch.TimeUnit? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.TimeUnit?>("master_timeout"); set => Q("master_timeout", value); }
+
+		[JsonIgnore]
+		public Elastic.Clients.Elasticsearch.TimeUnit? Timeout { get => Q<Elastic.Clients.Elasticsearch.TimeUnit?>("timeout"); set => Q("timeout", value); }
+
+		[JsonIgnore]
+		public bool? RunExpensiveTasks { get => Q<bool?>("run_expensive_tasks"); set => Q("run_expensive_tasks", value); }
+
+		[JsonIgnore]
+		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+
 	public class ExistsRequestParameters : RequestParameters<ExistsRequestParameters>
 	{
 		[JsonIgnore]

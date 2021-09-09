@@ -78,6 +78,18 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 		}
 
 		[JsonInclude]
+		[JsonPropertyName("leader_index_exclusion_patterns")]
+		public Elastic.Clients.Elasticsearch.IndexPatterns LeaderIndexExclusionPatterns
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
 		[JsonPropertyName("leader_index_patterns")]
 		public Elastic.Clients.Elasticsearch.IndexPatterns LeaderIndexPatterns
 		{

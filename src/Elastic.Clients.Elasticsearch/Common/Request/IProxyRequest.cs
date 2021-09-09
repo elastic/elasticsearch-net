@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch
 		// TODO: Temp
 		//void WriteJson(Stream stream, ITransportSerializer sourceSerializer, SerializationFormatting formatting);
 		
-		void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer);
+		void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer);
 	}
 
 
