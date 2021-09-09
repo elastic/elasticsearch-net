@@ -18,6 +18,12 @@
 # Version 1.2.0
 # - Added action.destructive_requires_name=false as the default will be true in v8
 
+# Version 1.4.0
+# - Added ingest.geoip.downloader.enabled=false as it causes false positives in testing
+
+# Version 1.5.0
+# - Moved ELASTIC_PASSWORD to the base arguments for "Security On by default"
+
 script_path=$(dirname $(realpath -s $0))
 source $script_path/functions/imports.sh
 set -euo pipefail
@@ -30,6 +36,7 @@ cluster_name=${moniker}${suffix}
 
 declare -a volumes
 environment=($(cat <<-END
+  --env ELASTIC_PASSWORD=$elastic_password
   --env node.name=$es_node_name
   --env cluster.name=$cluster_name
   --env cluster.initial_master_nodes=$master_node_name
@@ -45,7 +52,6 @@ END
 ))
 if [[ "$TEST_SUITE" == "platinum" ]]; then
   environment+=($(cat <<-END
-    --env ELASTIC_PASSWORD=$elastic_password
     --env xpack.license.self_generated.type=trial
     --env xpack.security.enabled=true
     --env xpack.security.http.ssl.enabled=true
