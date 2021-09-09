@@ -46,15 +46,6 @@
         "resolved": "1.0.0-preview.2",
         "contentHash": "m+pJPEO7HyXvrOna5Sr3s77ewXonjYWJTNL6drh8xACnMNxnlqUDKx9HfGeSE9wmfY0lQwppaeZpFTPGaH7kZg=="
       },
-      "NEST.v7": {
-        "type": "Direct",
-        "requested": "[7.13.0-ci20210301T140449, )",
-        "resolved": "7.13.0-ci20210301T140449",
-        "contentHash": "1y9pIH5QADisLjnpbK8ZS4ajbF6uFu5TA6LOfB4ECgI/mjipK4FbKvIydicp0nff4xWqmVzBMBVfZ33zauMYhg==",
-        "dependencies": {
-          "Elasticsearch.Net.v7": "7.13.0-ci20210301T140449"
-        }
-      },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
         "resolved": "0.12.0",
@@ -121,27 +112,6 @@
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
-        }
-      },
-      "Elastic.Transport": {
-        "type": "Transitive",
-        "resolved": "0.2.3",
-        "contentHash": "sSxPoisUMJsVO6EpsACBCmfjseZ2ESdFXqnA4Oo3V6+8O1DRjxXDNDrG1n6TQYgrI03FG18+SPSjuMZUvC48LQ==",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.0",
-          "System.Text.Json": "5.0.0"
-        }
-      },
-      "Elasticsearch.Net.v7": {
-        "type": "Transitive",
-        "resolved": "7.13.0-ci20210301T140449",
-        "contentHash": "/bijZdruoRaQLMy/7niRp8RiJpO95uP7Q8Vxwxxb4jjKSIXcRzgrLaMtWlkhCEQQ3nGZIkdxVEWpapv5pWfrXA==",
-        "dependencies": {
-          "Microsoft.CSharp": "4.6.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.0"
         }
       },
       "FluentAssertions": {
@@ -1419,7 +1389,7 @@
           "Elastic.Transport": "0.2.3"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
           "Elasticsearch.Net": "7.0.0",
@@ -1427,7 +1397,7 @@
           "System.Reflection.Emit.Lightweight": "4.3.0"
         }
       },
-      "NEST.JsonNetSerializer": {
+      "nest.jsonnetserializer": {
         "type": "Project",
         "dependencies": {
           "NEST": "7.0.0",
