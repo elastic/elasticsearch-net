@@ -31,6 +31,18 @@
           "Elasticsearch.Net": "7.5.0"
         }
       },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.2.3, )",
+        "resolved": "0.2.3",
+        "contentHash": "sSxPoisUMJsVO6EpsACBCmfjseZ2ESdFXqnA4Oo3V6+8O1DRjxXDNDrG1n6TQYgrI03FG18+SPSjuMZUvC48LQ==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.0",
+          "System.Text.Json": "5.0.0"
+        }
+      },
       "LibGit2Sharp": {
         "type": "Direct",
         "requested": "[0.26.0-preview-0062, )",

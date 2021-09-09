@@ -19,8 +19,8 @@ namespace Tests.Benchmarking
 		[GlobalSetup]
 		public void Setup() { }
 
-		[Benchmark(Description = "Descriptors.V8")]
-		public Nest7.BulkDescriptor CreateUsingDecriptorsV8() => new Nest7.BulkDescriptor().IndexMany(Projects);
+		//[Benchmark(Description = "Descriptors.V8")]
+		//public Nest7.BulkDescriptor CreateUsingDecriptorsV8() => new Nest7.BulkDescriptor().IndexMany(Projects);
 
 		[Benchmark(Description = "Descriptors")]
 		public BulkDescriptor CreateUsingDecriptors() => new BulkDescriptor().IndexMany(Projects);
