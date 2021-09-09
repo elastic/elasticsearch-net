@@ -148,7 +148,7 @@
           "Elastic.Transport": "0.2.3"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
           "Elasticsearch.Net": "7.0.0"
@@ -403,7 +403,7 @@
           "Elastic.Transport": "0.2.3"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
           "Elasticsearch.Net": "7.0.0",
