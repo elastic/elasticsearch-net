@@ -288,6 +288,24 @@ namespace Elastic.Clients.Elasticsearch
 		Block
 	}
 
+	public enum TimeUnit
+	{
+		[EnumMember(Value = "s")]
+		s,
+		[EnumMember(Value = "nanos")]
+		Nanos,
+		[EnumMember(Value = "ms")]
+		Ms,
+		[EnumMember(Value = "micros")]
+		Micros,
+		[EnumMember(Value = "m")]
+		m,
+		[EnumMember(Value = "h")]
+		h,
+		[EnumMember(Value = "d")]
+		d
+	}
+
 	public enum VersionType
 	{
 		[EnumMember(Value = "internal")]

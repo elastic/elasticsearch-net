@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch
 	// TODO: Merge into StringAliasConverter
 
 	/// <summary>The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.</summary>
-	internal class DefaultHighLevelSerializer : ITransportSerializer
+	internal class DefaultHighLevelSerializer : Serializer
 	{
 		private static readonly UTF8Encoding Encoding = new(false);
 
@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch
 		private JsonSerializerOptions Options { get; }
 
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - We should use a pooled byte array in the future
-		public T Deserialize<T>(Stream stream)
+		public override T Deserialize<T>(Stream stream)
 		{
 			//if (stream.Length == 0) // throws on some responses
 			//	return default;
@@ -61,11 +61,11 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		public object Deserialize(Type type, Stream stream) =>
+		public override object Deserialize(Type type, Stream stream) =>
 			throw new NotImplementedException();
 
 		// TODO - Return ValueTask?
-		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
+		public override Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
 			long length = 0;
 
@@ -85,11 +85,11 @@ namespace Elastic.Clients.Elasticsearch
 			//	: Task.FromResult(default(T));
 		}
 
-		public Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
+		public override Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
 
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - View GitHub for better solutions
-		public virtual void Serialize<T>(T data, Stream writableStream,
+		public override void Serialize<T>(T data, Stream writableStream,
 			SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			var json = JsonSerializer.Serialize(data, Options);
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch
 			writer.Write(json);
 		}
 
-		public Task SerializeAsync<T>(T data, Stream stream,
+		public override Task SerializeAsync<T>(T data, Stream stream,
 			SerializationFormatting formatting = SerializationFormatting.None,
 			CancellationToken cancellationToken = default
 		) => JsonSerializer.SerializeAsync(stream, data, Options, cancellationToken);

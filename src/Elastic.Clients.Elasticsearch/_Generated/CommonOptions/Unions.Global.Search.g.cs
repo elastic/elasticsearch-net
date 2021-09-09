@@ -23,8 +23,15 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.Search
 {
-	public partial class Context
+	public partial class Context : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation>
 	{
+		public Context(string item) : base(item)
+		{
+		}
+
+		public Context(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation item) : base(item)
+		{
+		}
 	}
 
 	public partial class Sort

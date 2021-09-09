@@ -181,6 +181,8 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		Elastic.Clients.Elasticsearch.IndexPatterns? IPutAutoFollowPatternRequest.LeaderIndexPatterns { get; set; }
 
+		Elastic.Clients.Elasticsearch.IndexPatterns? IPutAutoFollowPatternRequest.LeaderIndexExclusionPatterns { get; set; }
+
 		int? IPutAutoFollowPatternRequest.MaxOutstandingReadRequests { get; set; }
 
 		Dictionary<string, object>? IPutAutoFollowPatternRequest.Settings { get; set; }
@@ -206,6 +208,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		public PutAutoFollowPatternDescriptor RemoteCluster(string remoteCluster) => Assign(remoteCluster, (a, v) => a.RemoteCluster = v);
 		public PutAutoFollowPatternDescriptor FollowIndexPattern(Elastic.Clients.Elasticsearch.IndexPattern? followIndexPattern) => Assign(followIndexPattern, (a, v) => a.FollowIndexPattern = v);
 		public PutAutoFollowPatternDescriptor LeaderIndexPatterns(Elastic.Clients.Elasticsearch.IndexPatterns? leaderIndexPatterns) => Assign(leaderIndexPatterns, (a, v) => a.LeaderIndexPatterns = v);
+		public PutAutoFollowPatternDescriptor LeaderIndexExclusionPatterns(Elastic.Clients.Elasticsearch.IndexPatterns? leaderIndexExclusionPatterns) => Assign(leaderIndexExclusionPatterns, (a, v) => a.LeaderIndexExclusionPatterns = v);
 		public PutAutoFollowPatternDescriptor MaxOutstandingReadRequests(int? maxOutstandingReadRequests) => Assign(maxOutstandingReadRequests, (a, v) => a.MaxOutstandingReadRequests = v);
 		public PutAutoFollowPatternDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public PutAutoFollowPatternDescriptor MaxOutstandingWriteRequests(int? maxOutstandingWriteRequests) => Assign(maxOutstandingWriteRequests, (a, v) => a.MaxOutstandingWriteRequests = v);

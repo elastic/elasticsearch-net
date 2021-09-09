@@ -20,7 +20,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore] Id? IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 
-		void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer)
+		void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer)
 		{
 			// TODO: Review perf
 			using var ms = new MemoryStream();
@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class IndexDescriptor<TDocument>
 	{
-		public void WriteJson(Utf8JsonWriter writer, ITransportSerializer sourceSerializer) =>
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) =>
 			throw new NotImplementedException();
 
 		Id? IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");

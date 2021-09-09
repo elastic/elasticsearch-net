@@ -96,6 +96,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		DoubleRange,
 		[EnumMember(Value = "double")]
 		Double,
+		[EnumMember(Value = "dense_vector")]
+		DenseVector,
 		[EnumMember(Value = "date_range")]
 		DateRange,
 		[EnumMember(Value = "date_nanos")]
@@ -113,7 +115,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[EnumMember(Value = "binary")]
 		Binary,
 		[EnumMember(Value = "alias")]
-		Alias
+		Alias,
+		[EnumMember(Value = "aggregate_metric_double")]
+		AggregateMetricDouble
 	}
 
 	public enum GeoOrientation

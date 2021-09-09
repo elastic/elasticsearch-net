@@ -170,6 +170,19 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
+	// TODO: Dictionary Examples
+	public partial class IndexHealthStatsDictionary : Dictionary<IndexName, Cluster.Health.IndexHealthStats>
+	{
+		public Cluster.Health.IndexHealthStats GetStats(IndexName indexName) => base[indexName];
+	}
+
+	public partial class IndexHealthStatsDictionaryV2
+	{
+		private readonly Dictionary<IndexName, Cluster.Health.IndexHealthStats> _backingDictionary = new();
+
+		public Cluster.Health.IndexHealthStats GetStats(IndexName indexName) => _backingDictionary[indexName];
+	}
+
 	//public partial class Actions : Dictionary<IndexName, ActionStatus>
 	//{
 	//}
@@ -178,18 +191,12 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(UnionConverter<EpochMillis>))]
 	public partial class EpochMillis
 	{
-		public EpochMillis(string value) { }
-
-		public EpochMillis(int value) { }
 	}
 
 	// TODO: Implement properly
 	[JsonConverter(typeof(PercentageConverter))]
 	public partial class Percentage
-	{
-		public Percentage(string value) { }
-
-		public Percentage(float value) { }
+	{		
 	}
 
 
@@ -246,13 +253,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(NumericAliasConverter<SequenceNumber>))]
-	public class SequenceNumber
-	{
-		public SequenceNumber(long value) => Value = value;
-
-		internal long Value { get; }
-	}
+	
 
 
 	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]

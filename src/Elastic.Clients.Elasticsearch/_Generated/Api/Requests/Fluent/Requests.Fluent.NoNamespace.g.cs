@@ -841,6 +841,38 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 	}
 
+	public partial class SearchMvtDescriptor : RequestDescriptorBase<SearchMvtDescriptor, SearchMvtRequestParameters, ISearchMvtRequest>, ISearchMvtRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchMvt;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_mvt/{field}/{zoom}/{x}/{y}</summary>
+        public SearchMvtDescriptor(Elastic.Clients.Elasticsearch.Indices index, Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.Global.SearchMvt.ZoomLevel zoom, Elastic.Clients.Elasticsearch.Global.SearchMvt.Coordinate x, Elastic.Clients.Elasticsearch.Global.SearchMvt.Coordinate y) : base(r => r.Required("index", index).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
+		{
+		}
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? ISearchMvtRequest.Aggs { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? ISearchMvtRequest.Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ISearchMvtRequest.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? ISearchMvtRequest.RuntimeMappings { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.Sort? ISearchMvtRequest.Sort { get; set; }
+
+		public SearchMvtDescriptor ExactBounds(bool? exactBounds = true) => Qs("exact_bounds", exactBounds);
+		public SearchMvtDescriptor Extent(int? extent) => Qs("extent", extent);
+		public SearchMvtDescriptor GridPrecision(int? gridPrecision) => Qs("grid_precision", gridPrecision);
+		public SearchMvtDescriptor GridType(Elastic.Clients.Elasticsearch.Global.SearchMvt.GridType? gridType) => Qs("grid_type", gridType);
+		public SearchMvtDescriptor Size(int? size) => Qs("size", size);
+		public SearchMvtDescriptor Aggs(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
+		public SearchMvtDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.Fields = v);
+		public SearchMvtDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public SearchMvtDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
+		public SearchMvtDescriptor Sort(Elastic.Clients.Elasticsearch.Global.Search.Sort? sort) => Assign(sort, (a, v) => a.Sort = v);
+	}
+
 	public partial class SearchShardsDescriptor : RequestDescriptorBase<SearchShardsDescriptor, SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;

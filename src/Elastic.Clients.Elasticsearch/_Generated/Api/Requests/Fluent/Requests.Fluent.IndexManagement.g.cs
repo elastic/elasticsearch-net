@@ -268,6 +268,26 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public DeleteTemplateDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
+	public partial class DiskUsageDescriptor : RequestDescriptorBase<DiskUsageDescriptor, DiskUsageRequestParameters, IDiskUsageRequest>, IDiskUsageRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDiskUsage;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		///<summary>/{index}/_disk_usage</summary>
+        public DiskUsageDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
+		public DiskUsageDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public DiskUsageDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DiskUsageDescriptor Flush(bool? flush = true) => Qs("flush", flush);
+		public DiskUsageDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public DiskUsageDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.TimeUnit? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public DiskUsageDescriptor Timeout(Elastic.Clients.Elasticsearch.TimeUnit? timeout) => Qs("timeout", timeout);
+		public DiskUsageDescriptor RunExpensiveTasks(bool? runExpensiveTasks = true) => Qs("run_expensive_tasks", runExpensiveTasks);
+		public DiskUsageDescriptor WaitForActiveShards(string? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+	}
+
 	public partial class ExistsDescriptor : RequestDescriptorBase<ExistsDescriptor, ExistsRequestParameters, IExistsRequest>, IExistsRequest
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;

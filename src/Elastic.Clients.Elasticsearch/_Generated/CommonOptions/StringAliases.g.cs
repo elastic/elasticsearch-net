@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Field>))]
-	public readonly partial struct Field : IComparable<Field>, IEquatable<Field>
+	public partial class Field : IComparable<Field>, IEquatable<Field>, IUrlParameter
 	{
 		public Field(string field) => Value = field;
 		public string Value { get; }
@@ -250,6 +250,8 @@ namespace Elastic.Clients.Elasticsearch
 			field = new Field(value.Trim());
 			return true;
 		}
+
+		public string GetString(ITransportConfiguration settings) => Value;
 	}
 
 	[JsonConverter(typeof(StringAliasConverter<Host>))]

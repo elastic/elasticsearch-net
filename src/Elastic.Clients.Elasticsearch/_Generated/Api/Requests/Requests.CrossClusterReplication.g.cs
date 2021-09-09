@@ -293,6 +293,8 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 
 		Elastic.Clients.Elasticsearch.IndexPatterns? LeaderIndexPatterns { get; set; }
 
+		Elastic.Clients.Elasticsearch.IndexPatterns? LeaderIndexExclusionPatterns { get; set; }
+
 		int? MaxOutstandingReadRequests { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
@@ -341,6 +343,10 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 		[JsonInclude]
 		[JsonPropertyName("leader_index_patterns")]
 		public Elastic.Clients.Elasticsearch.IndexPatterns? LeaderIndexPatterns { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("leader_index_exclusion_patterns")]
+		public Elastic.Clients.Elasticsearch.IndexPatterns? LeaderIndexExclusionPatterns { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_outstanding_read_requests")]
