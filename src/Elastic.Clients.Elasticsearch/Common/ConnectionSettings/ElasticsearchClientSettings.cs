@@ -21,7 +21,7 @@ namespace Elastic.Clients.Elasticsearch
 		///     documents.
 		///     By default, the internal serializer will be used to serializer all types.
 		/// </summary>
-		public delegate ITransportSerializer SourceSerializerFactory(ITransportSerializer builtIn,
+		public delegate Serializer SourceSerializerFactory(Serializer builtIn,
 			IElasticsearchClientSettings values);
 
 		/// <summary> The default user agent for Elastic.Clients.Elasticsearch </summary>
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch
 		//private readonly IPropertyMappingProvider _propertyMappingProvider;
 		//private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
-		private readonly ITransportSerializer _sourceSerializer;
+		private readonly Serializer _sourceSerializer;
 
 		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch
 			UserAgent(ElasticsearchClientSettings.DefaultUserAgent);
 		}
 
-		public ITransportSerializer SourceSerializer { get; }
+		public Serializer SourceSerializer { get; }
 
 		bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch
 		//IPropertyMappingProvider IConnectionSettingsValues.PropertyMappingProvider => _propertyMappingProvider;
 		//FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 		FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
-		ITransportSerializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
+		Serializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
 
 		/// <summary>
 		///     The default index to use for a request when no index has been explicitly specified
@@ -362,13 +362,13 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, ITransportSerializer serializer) : this(
+		public ConnectionConfiguration(IConnectionPool connectionPool, Serializer serializer) : this(
 			connectionPool, null, serializer)
 		{
 		}
 
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection,
-			ITransportSerializer serializer)
+			Serializer serializer)
 			: base(connectionPool, connection, serializer)
 		{
 		}
@@ -386,7 +386,7 @@ namespace Elastic.Clients.Elasticsearch
 		private bool _includeServerStackTraceOnError;
 
 		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection,
-			ITransportSerializer? serializer,
+			Serializer? serializer,
 			IProductRegistration registration = null)
 			: base(connectionPool, connection, serializer, registration ?? ElasticsearchProductRegistration.Default) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);

@@ -348,7 +348,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 
 		[JsonInclude]
 		[JsonPropertyName("routing_table")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.EmptyObject>? RoutingTable
+		public Elastic.Clients.Elasticsearch.Cluster.Reroute.RoutingTable? RoutingTable
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -409,6 +409,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionNumber? Version
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RoutingTable
+	{
+		[JsonInclude]
+		[JsonPropertyName("indices")]
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.Reroute.RoutingTableIndex> Indices
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RoutingTableIndex
+	{
+		[JsonInclude]
+		[JsonPropertyName("shards")]
+		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards
 		{
 			get;
 #if NET5_0_OR_GREATER

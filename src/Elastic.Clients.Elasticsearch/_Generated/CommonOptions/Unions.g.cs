@@ -23,8 +23,15 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ByteSize
+	public partial class ByteSize : Union<long, string>
 	{
+		public ByteSize(long item) : base(item)
+		{
+		}
+
+		public ByteSize(string item) : base(item)
+		{
+		}
 	}
 
 	public partial class DataStreamNames : IUrlParameter
@@ -32,12 +39,26 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<DataStreamName> _dataStreamNameList = new();
 	}
 
-	public partial class EpochMillis
+	public partial class EpochMillis : Union<string, long>
 	{
+		public EpochMillis(string item) : base(item)
+		{
+		}
+
+		public EpochMillis(long item) : base(item)
+		{
+		}
 	}
 
-	public partial class ExpandWildcards
+	public partial class ExpandWildcards : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ExpandWildcardOptions>, string>
 	{
+		public ExpandWildcards(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ExpandWildcardOptions> item) : base(item)
+		{
+		}
+
+		public ExpandWildcards(string item) : base(item)
+		{
+		}
 	}
 
 	public partial class Fields : IUrlParameter
@@ -45,8 +66,15 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<Field> _fieldList = new();
 	}
 
-	public partial class Fuzziness
+	public partial class Fuzziness : Union<string, int>
 	{
+		public Fuzziness(string item) : base(item)
+		{
+		}
+
+		public Fuzziness(int item) : base(item)
+		{
+		}
 	}
 
 	public partial class Ids : IUrlParameter
@@ -64,8 +92,15 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<string> _stringList = new();
 	}
 
-	public partial class MinimumShouldMatch
+	public partial class MinimumShouldMatch : Union<int, string>
 	{
+		public MinimumShouldMatch(int item) : base(item)
+		{
+		}
+
+		public MinimumShouldMatch(string item) : base(item)
+		{
+		}
 	}
 
 	public partial class Names : IUrlParameter
@@ -78,28 +113,64 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<NodeId> _nodeIdList = new();
 	}
 
-	public partial class Percentage
+	public partial class Percentage : Union<string, float>
 	{
+		public Percentage(string item) : base(item)
+		{
+		}
+
+		public Percentage(float item) : base(item)
+		{
+		}
 	}
 
-	public partial class Refresh
+	public partial class Refresh : Union<bool, Elastic.Clients.Elasticsearch.RefreshOptions>
 	{
+		public Refresh(bool item) : base(item)
+		{
+		}
+
+		public Refresh(Elastic.Clients.Elasticsearch.RefreshOptions item) : base(item)
+		{
+		}
 	}
 
 	public partial class Script
 	{
 	}
 
-	public partial class TaskId : IUrlParameter
+	public partial class TaskId : Union<string, int>, IUrlParameter
 	{
+		public TaskId(string item) : base(item)
+		{
+		}
+
+		public TaskId(int item) : base(item)
+		{
+		}
+
 		public string GetString(ITransportConfiguration settings) =>  string . Empty ;
 	}
 
-	public partial class Time
+	public partial class Time : Union<string, int>
 	{
+		public Time(string item) : base(item)
+		{
+		}
+
+		public Time(int item) : base(item)
+		{
+		}
 	}
 
-	public partial class WaitForActiveShards
+	public partial class WaitForActiveShards : Union<int, Elastic.Clients.Elasticsearch.WaitForActiveShardOptions>
 	{
+		public WaitForActiveShards(int item) : base(item)
+		{
+		}
+
+		public WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShardOptions item) : base(item)
+		{
+		}
 	}
 }

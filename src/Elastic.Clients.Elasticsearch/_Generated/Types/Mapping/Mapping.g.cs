@@ -24,6 +24,37 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
+	public partial class AggregateMetricDoubleProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("default_metric")]
+		public string DefaultMetric
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("metrics")]
+		public IReadOnlyCollection<string> Metrics
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "aggregate_metric_double";
+	}
+
 	public partial class AllField
 	{
 		[JsonInclude]
@@ -78,15 +109,51 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fielddata")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public bool? NullValue { get; set; }
+		public bool? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -97,27 +164,75 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("contexts")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts { get; set; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("max_input_length")]
-		public int? MaxInputLength { get; set; }
+		public int? MaxInputLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_position_increments")]
-		public bool? PreservePositionIncrements { get; set; }
+		public bool? PreservePositionIncrements
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_separators")]
-		public bool? PreserveSeparators { get; set; }
+		public bool? PreserveSeparators
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
-		public string? SearchAnalyzer { get; set; }
+		public string? SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -131,45 +246,129 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "constant_keyword";
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public object? Value { get; set; }
+		public object? Value
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class CorePropertyBase : Mapping.PropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("copy_to")]
-		public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? CopyTo
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("similarity")]
-		public string? Similarity { get; set; }
+		public string? Similarity
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("store")]
-		public bool? Store { get; set; }
+		public bool? Store
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class DateNanosProperty : Mapping.DocValuesPropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		public string? Format
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public Elastic.Clients.Elasticsearch.DateString? NullValue { get; set; }
+		public Elastic.Clients.Elasticsearch.DateString? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("precision_step")]
-		public int? PrecisionStep { get; set; }
+		public int? PrecisionStep
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -180,27 +379,87 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fielddata")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		public string? Format
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public Elastic.Clients.Elasticsearch.DateString? NullValue { get; set; }
+		public Elastic.Clients.Elasticsearch.DateString? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("precision_step")]
-		public int? PrecisionStep { get; set; }
+		public int? PrecisionStep
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -211,18 +470,53 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		public string? Format
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "date_range";
 	}
 
+	public partial class DenseVectorProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("dims")]
+		public int Dims
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "dense_vector";
+	}
+
 	public partial class DocValuesPropertyBase : Mapping.CorePropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_values")]
-		public bool? DocValues { get; set; }
+		public bool? DocValues
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class DoubleRangeProperty : Mapping.RangePropertyBase
@@ -267,7 +561,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("path")]
-		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Path
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -289,35 +591,111 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("depth_limit")]
-		public int? DepthLimit { get; set; }
+		public int? DepthLimit
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("doc_values")]
-		public bool? DocValues { get; set; }
+		public bool? DocValues
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
-		public bool? EagerGlobalOrdinals { get; set; }
+		public bool? EagerGlobalOrdinals
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string? NullValue { get; set; }
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("similarity")]
-		public string? Similarity { get; set; }
+		public string? Similarity
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("split_queries_on_whitespace")]
-		public bool? SplitQueriesOnWhitespace { get; set; }
+		public bool? SplitQueriesOnWhitespace
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -335,62 +713,186 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
-		public string Analyzer { get; set; }
+		public string Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double Boost { get; set; }
+		public double Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fielddata")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddata Fielddata { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddata Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool IgnoreMalformed { get; set; }
+		public bool IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions IndexOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("norms")]
-		public bool Norms { get; set; }
+		public bool Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string NullValue { get; set; }
+		public string NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("position_increment_gap")]
-		public int PositionIncrementGap { get; set; }
+		public int PositionIncrementGap
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
-		public string SearchAnalyzer { get; set; }
+		public string SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("term_vector")]
-		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption TermVector { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption TermVector
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type { get; set; }
+		public string Type
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class GeoPointProperty : Mapping.DocValuesPropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
-		public bool? IgnoreZValue { get; set; }
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? NullValue { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -401,23 +903,63 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; set; }
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
-		public bool? IgnoreZValue { get; set; }
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("orientation")]
-		public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("strategy")]
-		public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.GeoStrategy? Strategy
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -428,7 +970,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -453,11 +1003,39 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string? NullValue { get; set; }
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -475,7 +1053,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("relations")]
-		public Dictionary<Elastic.Clients.Elasticsearch.RelationName, Union<Elastic.Clients.Elasticsearch.RelationName, IEnumerable<Elastic.Clients.Elasticsearch.RelationName>>>? Relations { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.RelationName, Union<Elastic.Clients.Elasticsearch.RelationName, IReadOnlyCollection<Elastic.Clients.Elasticsearch.RelationName>>>? Relations
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -486,31 +1072,99 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
-		public bool? EagerGlobalOrdinals { get; set; }
+		public bool? EagerGlobalOrdinals
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("normalizer")]
-		public string? Normalizer { get; set; }
+		public string? Normalizer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("norms")]
-		public bool? Norms { get; set; }
+		public bool? Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string? NullValue { get; set; }
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("split_queries_on_whitespace")]
-		public bool? SplitQueriesOnWhitespace { get; set; }
+		public bool? SplitQueriesOnWhitespace
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -535,15 +1189,39 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
-		public bool? Enabled { get; set; }
+		public bool? Enabled
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("include_in_parent")]
-		public bool? IncludeInParent { get; set; }
+		public bool? IncludeInParent
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("include_in_root")]
-		public bool? IncludeInRoot { get; set; }
+		public bool? IncludeInRoot
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -554,38 +1232,114 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; set; }
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fielddata")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public double? NullValue { get; set; }
+		public double? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("scaling_factor")]
-		public double? ScalingFactor { get; set; }
+		public double? ScalingFactor
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Mapping.NumberType Type { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.NumberType Type
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class ObjectProperty : Mapping.CorePropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
-		public bool? Enabled { get; set; }
+		public bool? Enabled
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -603,15 +1357,39 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
-		public bool? IgnoreZValue { get; set; }
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public string? NullValue { get; set; }
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -622,53 +1400,141 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]
-		public Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? Dynamic { get; set; }
+		public Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? Dynamic
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Fields { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Fields
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_above")]
-		public int? IgnoreAbove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public bool? Index { get; set; }
+		public int? IgnoreAbove
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("local_metadata")]
-		public Elastic.Clients.Elasticsearch.Metadata? LocalMetadata { get; set; }
+		public Elastic.Clients.Elasticsearch.Metadata? LocalMetadata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("meta")]
-		public Dictionary<string, string>? Meta { get; set; }
+		public Dictionary<string, string>? Meta
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.PropertyName? Name { get; set; }
+		public Elastic.Clients.Elasticsearch.PropertyName? Name
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class RangePropertyBase : Mapping.DocValuesPropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; set; }
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class RankFeatureProperty : Mapping.PropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("positive_score_impact")]
-		public bool? PositiveScoreImpact { get; set; }
+		public bool? PositiveScoreImpact
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -708,31 +1574,99 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("max_shingle_size")]
-		public int? MaxShingleSize { get; set; }
+		public int? MaxShingleSize
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("norms")]
-		public bool? Norms { get; set; }
+		public bool? Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
-		public string? SearchAnalyzer { get; set; }
+		public string? SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
-		public string? SearchQuoteAnalyzer { get; set; }
+		public string? SearchQuoteAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("term_vector")]
-		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -743,19 +1677,51 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("coerce")]
-		public bool? Coerce { get; set; }
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_z_value")]
-		public bool? IgnoreZValue { get; set; }
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("orientation")]
-		public Elastic.Clients.Elasticsearch.Mapping.ShapeOrientation? Orientation { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ShapeOrientation? Orientation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -781,7 +1747,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
-		public bool Enabled { get; set; }
+		public bool? Enabled { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("excludes")]
@@ -820,7 +1786,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("precision")]
-		public int? Precision
+		public Union<int, string>? Precision
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -874,55 +1840,171 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("eager_global_ordinals")]
-		public bool? EagerGlobalOrdinals { get; set; }
+		public bool? EagerGlobalOrdinals
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fielddata")]
-		public bool? Fielddata { get; set; }
+		public bool? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("fielddata_frequency_filter")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_options")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_phrases")]
-		public bool? IndexPhrases { get; set; }
+		public bool? IndexPhrases
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("index_prefixes")]
-		public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("norms")]
-		public bool? Norms { get; set; }
+		public bool? Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("position_increment_gap")]
-		public int? PositionIncrementGap { get; set; }
+		public int? PositionIncrementGap
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("search_analyzer")]
-		public string? SearchAnalyzer { get; set; }
+		public string? SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("search_quote_analyzer")]
-		public string? SearchQuoteAnalyzer { get; set; }
+		public string? SearchQuoteAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("term_vector")]
-		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -933,19 +2015,63 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("enable_position_increments")]
-		public bool? EnablePositionIncrements { get; set; }
+		public bool? EnablePositionIncrements
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public double? NullValue { get; set; }
+		public double? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1020,6 +2146,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public partial class WildcardProperty : Mapping.DocValuesPropertyBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "wildcard";

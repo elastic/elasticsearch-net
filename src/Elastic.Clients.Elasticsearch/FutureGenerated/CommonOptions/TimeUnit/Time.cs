@@ -11,30 +11,6 @@ using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public enum TimeUnit
-	{
-		[EnumMember(Value = "nanos")]
-		Nanoseconds,
-
-		[EnumMember(Value = "micros")]
-		Microseconds,
-
-		[EnumMember(Value = "ms")]
-		Millisecond,
-
-		[EnumMember(Value = "s")]
-		Second,
-
-		[EnumMember(Value = "m")]
-		Minute,
-
-		[EnumMember(Value = "h")]
-		Hour,
-
-		[EnumMember(Value = "d")]
-		Day
-	}
-
 	///// <summary>
 	///// Represents a time value
 	///// </summary>

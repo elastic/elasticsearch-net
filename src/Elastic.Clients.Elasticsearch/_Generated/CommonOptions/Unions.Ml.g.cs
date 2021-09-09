@@ -23,7 +23,14 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class DataframeAnalysisAnalyzedFields
+	public partial class DataframeAnalysisAnalyzedFields : Union<IReadOnlyCollection<string>, Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFieldsIncludeExclude>
 	{
+		public DataframeAnalysisAnalyzedFields(IReadOnlyCollection<string> item) : base(item)
+		{
+		}
+
+		public DataframeAnalysisAnalyzedFields(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFieldsIncludeExclude item) : base(item)
+		{
+		}
 	}
 }

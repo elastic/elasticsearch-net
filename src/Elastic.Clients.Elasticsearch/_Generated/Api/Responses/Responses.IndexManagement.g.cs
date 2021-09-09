@@ -260,6 +260,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
+	public partial class DiskUsageResponse : ResponseBase
+	{
+	}
+
 	public partial class ExistsAliasResponse : ResponseBase
 	{
 	}
