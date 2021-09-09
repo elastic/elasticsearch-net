@@ -1002,7 +1002,13 @@ namespace Nest
 					var keyToken = reader.GetCurrentJsonToken();
 
 					if (keyToken == JsonToken.String)
+					{
 						keyItem = reader.ReadString();
+					}
+					else if (keyToken == JsonToken.True || keyToken == JsonToken.False)
+					{
+						keyItem = reader.ReadBoolean();
+					}
 					else
 					{
 						var numberKey = reader.ReadNumberSegment();
