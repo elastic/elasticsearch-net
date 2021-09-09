@@ -27,15 +27,15 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Elasticsearch.Net.Specification.NodesApi
 {
-	///<summary>Request options for ClearMeteringArchive <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html</para></summary>
-	public class ClearMeteringArchiveRequestParameters : RequestParameters<ClearMeteringArchiveRequestParameters>
+	///<summary>Request options for ClearRepositoriesMeteringArchive <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html</para></summary>
+	public class ClearRepositoriesMeteringArchiveRequestParameters : RequestParameters<ClearRepositoriesMeteringArchiveRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		public override bool SupportsBody => false;
 	}
 
-	///<summary>Request options for GetMeteringInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html</para></summary>
-	public class GetMeteringInfoRequestParameters : RequestParameters<GetMeteringInfoRequestParameters>
+	///<summary>Request options for GetRepositoriesMeteringInfo <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html</para></summary>
+	public class GetRepositoriesMeteringInfoRequestParameters : RequestParameters<GetRepositoriesMeteringInfoRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
