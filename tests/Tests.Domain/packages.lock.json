@@ -808,7 +808,7 @@
           "System.Reflection.Emit.Lightweight": "4.3.0"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
           "Elasticsearch.Net": "7.0.0"
