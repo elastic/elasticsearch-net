@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		Elastic.Clients.Elasticsearch.Graph.ExploreControls? IExploreRequest.Controls { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IExploreRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IExploreRequest.Query { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? IExploreRequest.Vertices { get; set; }
 
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public ExploreDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public ExploreDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections) => Assign(connections, (a, v) => a.Connections = v);
 		public ExploreDescriptor Controls(Elastic.Clients.Elasticsearch.Graph.ExploreControls? controls) => Assign(controls, (a, v) => a.Controls = v);
-		public ExploreDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public ExploreDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public ExploreDescriptor Vertices(IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? vertices) => Assign(vertices, (a, v) => a.Vertices = v);
 	}
 }

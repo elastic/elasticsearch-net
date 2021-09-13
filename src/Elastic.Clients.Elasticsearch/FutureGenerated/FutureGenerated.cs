@@ -1,11 +1,151 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	//public class MyRequestWithFluent
+	//{
+	//	public string? Something { get; internal set; }
+	//	public MyRequest WrappedRequest { get; internal set; }
+
+	//	public MyRequestWithFluent WithSomething(string? something)
+	//	{
+	//		Something = something;
+	//		return this;
+	//	}
+
+	//	public MyRequestWithFluent WithWrappedRequest(MyRequest request)
+	//	{
+	//		WrappedRequest = request;
+	//		return this;
+	//	}
+	//}
+
+	public class MyRequest
+	{
+		public string? Something { get; set; }
+
+		public MyRequest WrappedRequest { get; set; }
+
+		public Thing Thing { get; set; }
+	}
+
+	public class Thing
+	{
+		public string Name {  get; set; }	
+	}
+
+	public class ThingDescriptor
+	{
+		internal Thing Thing { get; } = new();
+
+		public ThingDescriptor Name(string name)
+		{
+			Thing.Name = name;
+			return this;
+		}
+	}
+
+	public class MyRequestDescriptor
+	{
+		//// Could be lazily created - any value?
+		//internal MyRequestDescriptor() => _self = new MyRequest();
+
+		//[JsonIgnore]
+		//private readonly MyRequest _self;
+
+		internal MyRequest Request { get; } = new();
+
+		//internal MyRequest GetRequest() => _self;
+
+		public MyRequestDescriptor Something(string? something)
+		{
+			Request.Something = something;
+			return this;
+		}
+
+		public MyRequestDescriptor WrappedRequest(MyRequest anotherOne)
+		{
+			Request.WrappedRequest = anotherOne;
+			return this;
+		}
+
+		public MyRequestDescriptor WrappedRequest(Action<MyRequestDescriptor> anotherOne)
+		{
+			var descriptor = new MyRequestDescriptor();
+			anotherOne.Invoke(descriptor);
+			Request.WrappedRequest = descriptor.Request;
+			return this;
+		}
+
+		public MyRequestDescriptor Thing(Thing thing)
+		{
+			Request.Thing = thing;
+			return this;
+		}
+
+		public MyRequestDescriptor Thing(Action<ThingDescriptor> thing)
+		{
+			var descriptor = new ThingDescriptor();
+			thing.Invoke(descriptor);
+			Request.Thing = descriptor.Thing;
+			return this;
+		}
+
+		//public static implicit operator TRequest(MyRequestDescriptor<TRequest> d) => _self;
+
+		//[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		//protected MyRequestDescriptor Assign<TValue>(TValue value, Action<MyRequestDescriptor, TValue> assigner)
+		//{
+		//	assigner(this, value);
+		//	return this;
+		//}
+	}
+
+	public class MyClient
+	{
+		public void MakeRequest(IndexName index, Action<MyRequestDescriptor> selector)
+		{
+			var descriptor = new MyRequestDescriptor();
+			selector.Invoke(descriptor);
+			var request = descriptor.Request;
+
+			// SEND IT
+		}
+
+		public void MakeRequest(IndexName index, MyRequest request)
+		{
+			// SEND IT
+		}
+
+		public void MakeRequest(IndexName index, MyRequestDescriptor descriptor)
+		{
+			var request = descriptor.Request;
+
+			// SEND IT
+		}
+	}
+
+	public class Testing
+	{
+		public void DoStuff()
+		{
+			var client = new MyClient();
+
+			client.MakeRequest("index", new MyRequest { Something = "Thing" });
+
+			client.MakeRequest("index", a => a
+				.Something("MainSomething")
+				.WrappedRequest(r => r.Something("AnotherSomething"))
+				.Thing(t => t.Name("Name")));
+		}
+	}
+
 	public readonly partial struct PropertyName : IDictionaryKey
 	{
 		public string Key => Value;

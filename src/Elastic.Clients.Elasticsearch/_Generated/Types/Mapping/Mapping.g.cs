@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 	}
 
-	public partial class CorePropertyBase : Mapping.PropertyBase
+	public abstract partial class CorePropertyBase : Mapping.PropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("copy_to")]
@@ -504,7 +504,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "dense_vector";
 	}
 
-	public partial class DocValuesPropertyBase : Mapping.CorePropertyBase
+	public abstract partial class DocValuesPropertyBase : Mapping.CorePropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_values")]
@@ -1396,7 +1396,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "point";
 	}
 
-	public partial class PropertyBase
+	public abstract partial class PropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]
@@ -1483,7 +1483,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		}
 	}
 
-	public partial class RangePropertyBase : Mapping.DocValuesPropertyBase
+	public abstract partial class RangePropertyBase : Mapping.DocValuesPropertyBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]

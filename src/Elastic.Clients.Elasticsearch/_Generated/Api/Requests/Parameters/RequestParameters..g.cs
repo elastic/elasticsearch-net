@@ -102,9 +102,6 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
@@ -364,9 +361,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -701,9 +695,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-		[JsonIgnore]
-		public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
 	}
 
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
@@ -835,7 +826,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 		[JsonIgnore]
-		public Union<string, IEnumerable<string>>? Sort { get => Q<Union<string, IEnumerable<string>>?>("sort"); set => Q("sort", value); }
+		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 	}
 
 	public class SearchMvtRequestParameters : RequestParameters<SearchMvtRequestParameters>
@@ -913,7 +904,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
@@ -1035,9 +1026,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
 
 		[JsonIgnore]
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }

@@ -517,7 +517,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public Union<Elastic.Clients.Elasticsearch.Global.Search.InnerHits, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.InnerHits>>? InnerHits { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.InnerHits>? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_concurrent_group_searches")]
@@ -615,7 +615,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("highlight_query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQuery { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? HighlightQuery { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_analyzed_offset")]
@@ -698,7 +698,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("highlight_query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQuery { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? HighlightQuery { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("matched_fields")]
@@ -1651,7 +1651,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 	{
 		[JsonInclude]
 		[JsonPropertyName("rescore_query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query_weight")]
@@ -2026,7 +2026,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public bool UnicodeAware { get; set; }
 	}
 
-	public partial class SuggesterBase
+	public abstract partial class SuggesterBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]

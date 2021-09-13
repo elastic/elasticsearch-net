@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cat
 {
-	public partial class CatRequestBase : RequestBase
+	public abstract partial class CatRequestBase : RequestBase
 	{
 	}
 }

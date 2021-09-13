@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Elastic.Clients.Elasticsearch</PackageId>
     <Title>Elastic.Clients.Elasticsearch - Elasticsearch .NET high level client</Title>
@@ -28,6 +28,8 @@
     <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="OneOf\" />
+    <AssemblyAttribute Include="CLSCompliantAttribute">
+      <_Parameter1>true</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 </Project>
