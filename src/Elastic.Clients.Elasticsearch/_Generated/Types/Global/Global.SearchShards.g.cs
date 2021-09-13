@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Global.SearchShards
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter
 		{
 			get;
 #if NET5_0_OR_GREATER

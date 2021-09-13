@@ -625,7 +625,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public Union<string, IEnumerable<string>>? Status { get => Q<Union<string, IEnumerable<string>>?>("status"); set => Q("status", value); }
+		public IEnumerable<string>? Status { get => Q<IEnumerable<string>?>("status"); set => Q("status", value); }
 	}
 
 	public class ShrinkRequestParameters : RequestParameters<ShrinkRequestParameters>
@@ -683,7 +683,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 		[JsonIgnore]
-		public Union<string, IEnumerable<string>>? Groups { get => Q<Union<string, IEnumerable<string>>?>("groups"); set => Q("groups", value); }
+		public IEnumerable<string>? Groups { get => Q<IEnumerable<string>?>("groups"); set => Q("groups", value); }
 
 		[JsonIgnore]
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -735,9 +735,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-
-		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
 
 		[JsonIgnore]
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }

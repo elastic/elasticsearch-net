@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ICountRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ICountRequest.Query { get; set; }
 
 		public CountDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public CountDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -102,11 +102,10 @@ namespace Elastic.Clients.Elasticsearch
 		public CountDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public CountDescriptor MinScore(double? minScore) => Qs("min_score", minScore);
 		public CountDescriptor Preference(string? preference) => Qs("preference", preference);
-		public CountDescriptor QueryOnQueryString(string? queryOnQueryString) => Qs("query_on_query_string", queryOnQueryString);
 		public CountDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public CountDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		public CountDescriptor LuceneQueryString(string? luceneQueryString) => Qs("q", luceneQueryString);
-		public CountDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public CountDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 	}
 
 	public partial class CreateDescriptor<TDocument> : RequestDescriptorBase<CreateDescriptor<TDocument>, CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
@@ -158,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IDeleteByQueryRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IDeleteByQueryRequest.Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.SlicedScroll? IDeleteByQueryRequest.Slice { get; set; }
 
@@ -195,7 +194,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryDescriptor Version(bool? version = true) => Qs("version", version);
 		public DeleteByQueryDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public DeleteByQueryDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-		public DeleteByQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public DeleteByQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public DeleteByQueryDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
 	}
 
@@ -279,7 +278,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IExplainRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IExplainRequest.Query { get; set; }
 
 		public ExplainDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public ExplainDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
@@ -287,14 +286,13 @@ namespace Elastic.Clients.Elasticsearch
 		public ExplainDescriptor Df(string? df) => Qs("df", df);
 		public ExplainDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public ExplainDescriptor Preference(string? preference) => Qs("preference", preference);
-		public ExplainDescriptor QueryOnQueryString(string? queryOnQueryString) => Qs("query_on_query_string", queryOnQueryString);
 		public ExplainDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public ExplainDescriptor Source(Union<bool, Elastic.Clients.Elasticsearch.Fields>? source) => Qs("_source", source);
 		public ExplainDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public ExplainDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public ExplainDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
 		public ExplainDescriptor LuceneQueryString(string? luceneQueryString) => Qs("q", luceneQueryString);
-		public ExplainDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public ExplainDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 	}
 
 	public partial class FieldCapsDescriptor : RequestDescriptorBase<FieldCapsDescriptor, FieldCapsRequestParameters, IFieldCapsRequest>, IFieldCapsRequest
@@ -727,7 +725,6 @@ namespace Elastic.Clients.Elasticsearch
 		public ScrollDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public ScrollDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId? scrollId) => Qs("scroll_id", scrollId);
 		public ScrollDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		public ScrollDescriptor TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("total_hits_as_integer", totalHitsAsInteger);
 	}
 
 	public partial class SearchDescriptor : RequestDescriptorBase<SearchDescriptor, SearchRequestParameters, ISearchRequest>, ISearchRequest
@@ -757,13 +754,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		double? ISearchRequest.MinScore { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ISearchRequest.PostFilter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISearchRequest.PostFilter { get; set; }
 
 		bool? ISearchRequest.Profile { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ISearchRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISearchRequest.Query { get; set; }
 
-		Union<Elastic.Clients.Elasticsearch.Global.Search.Rescore, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>>? ISearchRequest.Rescore { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? ISearchRequest.Rescore { get; set; }
 
 		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ISearchRequest.ScriptFields { get; set; }
 
@@ -821,17 +818,17 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchDescriptor LuceneQueryString(string? luceneQueryString) => Qs("q", luceneQueryString);
 		public SearchDescriptor Size(int? size) => Qs("size", size);
 		public SearchDescriptor From(int? from) => Qs("from", from);
-		public SearchDescriptor Sort(Union<string, IEnumerable<string>>? sort) => Qs("sort", sort);
+		public SearchDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public SearchDescriptor Aggs(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
 		public SearchDescriptor Aggregations(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggregations) => Assign(aggregations, (a, v) => a.Aggregations = v);
 		public SearchDescriptor Collapse(Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
 		public SearchDescriptor Highlight(Elastic.Clients.Elasticsearch.Global.Search.Highlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
 		public SearchDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoost = v);
 		public SearchDescriptor MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
-		public SearchDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
+		public SearchDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
 		public SearchDescriptor Profile(bool? profile = true) => Assign(profile, (a, v) => a.Profile = v);
-		public SearchDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
-		public SearchDescriptor Rescore(Union<Elastic.Clients.Elasticsearch.Global.Search.Rescore, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
+		public SearchDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public SearchDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
 		public SearchDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
 		public SearchDescriptor SearchAfter(Elastic.Clients.Elasticsearch.Global.Search.SortResults? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 		public SearchDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
@@ -855,7 +852,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.Fields? ISearchMvtRequest.Fields { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ISearchMvtRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISearchMvtRequest.Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? ISearchMvtRequest.RuntimeMappings { get; set; }
 
@@ -868,7 +865,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchMvtDescriptor Size(int? size) => Qs("size", size);
 		public SearchMvtDescriptor Aggs(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
 		public SearchMvtDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.Fields = v);
-		public SearchMvtDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public SearchMvtDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public SearchMvtDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 		public SearchMvtDescriptor Sort(Elastic.Clients.Elasticsearch.Global.Search.Sort? sort) => Assign(sort, (a, v) => a.Sort = v);
 	}
@@ -928,7 +925,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchTemplateDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public SearchTemplateDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public SearchTemplateDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public SearchTemplateDescriptor TotalHitsAsInteger(bool? totalHitsAsInteger = true) => Qs("total_hits_as_integer", totalHitsAsInteger);
+		public SearchTemplateDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 		public SearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		public SearchTemplateDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.Id = v);
 		public SearchTemplateDescriptor Params(Dictionary<string, object>? parameters) => Assign(parameters, (a, v) => a.Params = v);
@@ -953,7 +950,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		bool? ITermsEnumRequest.CaseInsensitive { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ITermsEnumRequest.IndexFilter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ITermsEnumRequest.IndexFilter { get; set; }
 
 		string? ITermsEnumRequest.String { get; set; }
 
@@ -963,7 +960,7 @@ namespace Elastic.Clients.Elasticsearch
 		public TermsEnumDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 		public TermsEnumDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Assign(timeout, (a, v) => a.Timeout = v);
 		public TermsEnumDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitive = v);
-		public TermsEnumDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? indexFilter) => Assign(indexFilter, (a, v) => a.IndexFilter = v);
+		public TermsEnumDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? indexFilter) => Assign(indexFilter, (a, v) => a.IndexFilter = v);
 		public TermsEnumDescriptor String(string? value) => Assign(value, (a, v) => a.String = v);
 		public TermsEnumDescriptor SearchAfter(string? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 	}
@@ -1059,7 +1056,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		long? IUpdateByQueryRequest.MaxDocs { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IUpdateByQueryRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IUpdateByQueryRequest.Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.Script? IUpdateByQueryRequest.Script { get; set; }
 
@@ -1077,7 +1074,6 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public UpdateByQueryDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 		public UpdateByQueryDescriptor Preference(string? preference) => Qs("preference", preference);
-		public UpdateByQueryDescriptor QueryOnQueryString(string? queryOnQueryString) => Qs("query_on_query_string", queryOnQueryString);
 		public UpdateByQueryDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public UpdateByQueryDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		public UpdateByQueryDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -1100,7 +1096,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public UpdateByQueryDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		public UpdateByQueryDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocs = v);
-		public UpdateByQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public UpdateByQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public UpdateByQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.Script = v);
 		public UpdateByQueryDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
 	}

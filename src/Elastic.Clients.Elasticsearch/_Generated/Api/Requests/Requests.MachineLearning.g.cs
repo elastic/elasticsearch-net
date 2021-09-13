@@ -372,7 +372,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	public partial class EvaluateDataFrameRequest : PlainRequestBase<EvaluateDataFrameRequestParameters>, IEvaluateDataFrameRequest
@@ -399,7 +399,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	[ConvertAs(typeof(ExplainDataFrameAnalyticsRequest))]
@@ -1521,7 +1521,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		int? MaxEmptySearches { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? QueryDelay { get; set; }
 
@@ -1596,7 +1596,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query_delay")]

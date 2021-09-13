@@ -566,7 +566,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	public partial class ProcessorBase
+	public abstract partial class ProcessorBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("if")]

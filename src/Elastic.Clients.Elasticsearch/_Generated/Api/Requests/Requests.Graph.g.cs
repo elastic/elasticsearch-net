@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		Elastic.Clients.Elasticsearch.Graph.ExploreControls? Controls { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? Vertices { get; set; }
 	}
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("vertices")]

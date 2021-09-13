@@ -647,7 +647,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IPutAliasRequest.Filter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IPutAliasRequest.Filter { get; set; }
 
 		Elastic.Clients.Elasticsearch.Routing? IPutAliasRequest.IndexRouting { get; set; }
 
@@ -659,7 +659,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public PutAliasDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public PutAliasDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public PutAliasDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a.Filter = v);
+		public PutAliasDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? filter) => Assign(filter, (a, v) => a.Filter = v);
 		public PutAliasDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRouting = v);
 		public PutAliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndex = v);
 		public PutAliasDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.Routing = v);
@@ -787,7 +787,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? IPutTemplateRequest.Aliases { get; set; }
 
-		Union<string, IEnumerable<string>>? IPutTemplateRequest.IndexPatterns { get; set; }
+		IEnumerable<string>? IPutTemplateRequest.IndexPatterns { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? IPutTemplateRequest.Mappings { get; set; }
 
@@ -802,7 +802,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutTemplateDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public PutTemplateDescriptor Order(int? order) => Qs("order", order);
 		public PutTemplateDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
-		public PutTemplateDescriptor IndexPatterns(Union<string, IEnumerable<string>>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
+		public PutTemplateDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
 		public PutTemplateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
 		public PutTemplateDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public PutTemplateDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
@@ -948,7 +948,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ShardStoresDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public ShardStoresDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public ShardStoresDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-		public ShardStoresDescriptor Status(Union<string, IEnumerable<string>>? status) => Qs("status", status);
+		public ShardStoresDescriptor Status(IEnumerable<string>? status) => Qs("status", status);
 	}
 
 	public partial class ShrinkDescriptor : RequestDescriptorBase<ShrinkDescriptor, ShrinkRequestParameters, IShrinkRequest>, IShrinkRequest
@@ -1066,7 +1066,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public StatsDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
 		public StatsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 		public StatsDescriptor ForbidClosedIndices(bool? forbidClosedIndices = true) => Qs("forbid_closed_indices", forbidClosedIndices);
-		public StatsDescriptor Groups(Union<string, IEnumerable<string>>? groups) => Qs("groups", groups);
+		public StatsDescriptor Groups(IEnumerable<string>? groups) => Qs("groups", groups);
 		public StatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 		public StatsDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 		public StatsDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
@@ -1104,7 +1104,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IValidateQueryRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IValidateQueryRequest.Query { get; set; }
 
 		public ValidateQueryDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public ValidateQueryDescriptor AllShards(bool? allShards = true) => Qs("all_shards", allShards);
@@ -1116,9 +1116,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ValidateQueryDescriptor Explain(bool? explain = true) => Qs("explain", explain);
 		public ValidateQueryDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ValidateQueryDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
-		public ValidateQueryDescriptor QueryOnQueryString(string? queryOnQueryString) => Qs("query_on_query_string", queryOnQueryString);
 		public ValidateQueryDescriptor Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
 		public ValidateQueryDescriptor LuceneQueryString(string? luceneQueryString) => Qs("q", luceneQueryString);
-		public ValidateQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public ValidateQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 	}
 }

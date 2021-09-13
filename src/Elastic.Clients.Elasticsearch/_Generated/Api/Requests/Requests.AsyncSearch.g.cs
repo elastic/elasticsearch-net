@@ -134,7 +134,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		double? MinScore { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? PostFilter { get; set; }
 
 		string? Preference { get; set; }
 
@@ -142,9 +142,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
-
-		string? QueryOnQueryString { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		bool? RequestCache { get; set; }
 
@@ -202,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Aggs is null && AllowNoIndices is null && AllowPartialSearchResults is null && Analyzer is null && AnalyzeWildcard is null && Collapse is null && DefaultOperator is null && Df is null && DocvalueFields is null && Explain is null && From is null && Highlight is null && IgnoreThrottled is null && IgnoreUnavailable is null && IndicesBoost is null && KeepAlive is null && Lenient is null && MaxConcurrentShardRequests is null && MinScore is null && PostFilter is null && Preference is null && Profile is null && Pit is null && Query is null && QueryOnQueryString is null && RequestCache is null && Rescore is null && ScriptFields is null && SearchAfter is null && SearchType is null && SequenceNumberPrimaryTerm is null && Size is null && Source is null && Stats is null && StoredFields is null && Suggest is null && SuggestField is null && SuggestMode is null && SuggestSize is null && SuggestText is null && TerminateAfter is null && Timeout is null && TrackScores is null && TrackTotalHits is null && Version is null && RuntimeMappings is null;
+		protected override bool IsEmpty => Aggs is null && AllowNoIndices is null && AllowPartialSearchResults is null && Analyzer is null && AnalyzeWildcard is null && Collapse is null && DefaultOperator is null && Df is null && DocvalueFields is null && Explain is null && From is null && Highlight is null && IgnoreThrottled is null && IgnoreUnavailable is null && IndicesBoost is null && KeepAlive is null && Lenient is null && MaxConcurrentShardRequests is null && MinScore is null && PostFilter is null && Preference is null && Profile is null && Pit is null && Query is null && RequestCache is null && Rescore is null && ScriptFields is null && SearchAfter is null && SearchType is null && SequenceNumberPrimaryTerm is null && Size is null && Source is null && Stats is null && StoredFields is null && Suggest is null && SuggestField is null && SuggestMode is null && SuggestSize is null && SuggestText is null && TerminateAfter is null && Timeout is null && TrackScores is null && TrackTotalHits is null && Version is null && RuntimeMappings is null;
 
 		///<summary>/_async_search</summary>
         public SubmitRequest() : base()
@@ -308,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("post_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? PostFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("preference")]
@@ -324,11 +322,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query_on_query_string")]
-		public string? QueryOnQueryString { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("request_cache")]
