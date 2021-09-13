@@ -27,9 +27,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [Elasti
 
 ## Compatibility Matrix
 
-Language clients are forward compatible; meaning that clients support communicating with greater minor versions of Elasticsearch.
-
-Elastic language clients are also backwards compatible with lesser supported minor Elasticsearch versions.
+Language clients are forward compatible; meaning that clients support communicating with greater or equal minor versions of Elasticsearch. Elasticsearch language clients are only backwards compatible with default distributions and without guarantees made.
 
 | .NET Clients      | Elasticsearch | Supported          | Windows/Linux CI   | Tests              |
 | ----------------- | ------------- | ------------------ | ------------------ | ------------------ |
