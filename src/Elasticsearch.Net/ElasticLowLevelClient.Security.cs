@@ -588,6 +588,17 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		[MapsApi("security.put_user", "username, body")]
 		public Task<TResponse> PutUserAsync<TResponse>(string username, PostData body, PutUserRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/user/{username:username}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_security/_query/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html</para></summary>
+		///<param name = "body">From, size, query, sort and search_after</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse QueryApiKeys<TResponse>(PostData body, QueryApiKeysRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_security/_query/api_key", body, RequestParams(requestParameters));
+		///<summary>POST on /_security/_query/api_key <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html</para></summary>
+		///<param name = "body">From, size, query, sort and search_after</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("security.query_api_keys", "body")]
+		public Task<TResponse> QueryApiKeysAsync<TResponse>(PostData body, QueryApiKeysRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_security/_query/api_key", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_security/saml/authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html</para></summary>
 		///<param name = "body">The SAML response to authenticate</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

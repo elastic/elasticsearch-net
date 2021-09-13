@@ -395,6 +395,17 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
+	public enum WaitFor
+	{
+		[EnumMember(Value = "starting")]
+		Starting,
+		[EnumMember(Value = "started")]
+		Started,
+		[EnumMember(Value = "fully_allocated")]
+		FullyAllocated
+	}
+
+	[StringEnum]
 	public enum ThreadType
 	{
 		[EnumMember(Value = "cpu")]
@@ -465,6 +476,7 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(Conflicts), (e) => GetStringValue((Conflicts)e));
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
 			EnumStringResolvers.TryAdd(typeof(IndicesShardStoresStatus), (e) => GetStringValue((IndicesShardStoresStatus)e));
+			EnumStringResolvers.TryAdd(typeof(WaitFor), (e) => GetStringValue((WaitFor)e));
 			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
 			EnumStringResolvers.TryAdd(typeof(GridType), (e) => GetStringValue((GridType)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
@@ -899,6 +911,21 @@ namespace Elasticsearch.Net
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'IndicesShardStoresStatus'");
+		}
+
+		public static string GetStringValue(this WaitFor enumValue)
+		{
+			switch (enumValue)
+			{
+				case WaitFor.Starting:
+					return "starting";
+				case WaitFor.Started:
+					return "started";
+				case WaitFor.FullyAllocated:
+					return "fully_allocated";
+			}
+
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitFor'");
 		}
 
 		public static string GetStringValue(this ThreadType enumValue)
