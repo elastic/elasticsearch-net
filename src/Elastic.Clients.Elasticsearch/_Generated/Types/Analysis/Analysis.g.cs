@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 	}
 
-	public partial class CharFilterBase
+	public abstract partial class CharFilterBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 	}
 
-	public partial class CompoundWordTokenFilterBase : Analysis.TokenFilterBase
+	public abstract partial class CompoundWordTokenFilterBase : Analysis.TokenFilterBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("hyphenation_patterns_path")]
@@ -1415,7 +1415,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 	}
 
-	public partial class TokenFilterBase
+	public abstract partial class TokenFilterBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1442,7 +1442,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 	}
 
-	public partial class TokenizerBase
+	public abstract partial class TokenizerBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]

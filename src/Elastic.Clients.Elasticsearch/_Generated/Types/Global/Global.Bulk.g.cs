@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 	{
 	}
 
-	public partial class ResponseItemBase
+	public abstract partial class ResponseItemBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("error")]

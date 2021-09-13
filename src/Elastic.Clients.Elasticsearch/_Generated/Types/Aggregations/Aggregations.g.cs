@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("filters")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>? Filters { get; set; }
 	}
 
-	public partial class AggregateBase
+	public abstract partial class AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("meta")]
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filters")]
@@ -586,7 +586,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class BucketAggregationBase : Aggregations.Aggregation
+	public abstract partial class BucketAggregationBase : Aggregations.Aggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
@@ -1045,7 +1045,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("filters")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>>? Filters { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>>? Filters { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("keyed")]
@@ -1075,7 +1075,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class FormatMetricAggregationBase : Aggregations.MetricAggregationBase
+	public abstract partial class FormatMetricAggregationBase : Aggregations.MetricAggregationBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -1805,7 +1805,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public partial class MetricAggregationBase
+	public abstract partial class MetricAggregationBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -2044,7 +2044,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<double>? Percents { get; set; }
 	}
 
-	public partial class PipelineAggregationBase : Aggregations.Aggregation
+	public abstract partial class PipelineAggregationBase : Aggregations.Aggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets_path")]
@@ -2086,7 +2086,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
-		public Union<string, IEnumerable<string>>? Exclude { get; set; }
+		public IEnumerable<string>? Exclude { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -2236,7 +2236,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("background_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? BackgroundFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("chi_square")]
@@ -2244,7 +2244,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
-		public Union<string, IEnumerable<string>>? Exclude { get; set; }
+		public IEnumerable<string>? Exclude { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
@@ -2260,7 +2260,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("include")]
-		public Union<string, IEnumerable<string>>? Include { get; set; }
+		public IEnumerable<string>? Include { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -2299,7 +2299,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("background_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? BackgroundFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("chi_square")]
@@ -2307,7 +2307,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
-		public Union<string, IEnumerable<string>>? Exclude { get; set; }
+		public IEnumerable<string>? Exclude { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
@@ -2327,7 +2327,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("include")]
-		public Union<string, IEnumerable<string>>? Include { get; set; }
+		public IEnumerable<string>? Include { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -2685,7 +2685,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
-		public Union<string, IEnumerable<string>>? Exclude { get; set; }
+		public IEnumerable<string>? Exclude { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
@@ -2755,7 +2755,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -2874,7 +2874,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue, IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>>? Metrics { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]

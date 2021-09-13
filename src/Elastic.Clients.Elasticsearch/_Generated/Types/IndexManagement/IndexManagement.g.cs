@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]

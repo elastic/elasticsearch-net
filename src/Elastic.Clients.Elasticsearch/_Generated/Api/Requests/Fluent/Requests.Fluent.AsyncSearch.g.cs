@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		double? ISubmitRequest.MinScore { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ISubmitRequest.PostFilter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISubmitRequest.PostFilter { get; set; }
 
 		string? ISubmitRequest.Preference { get; set; }
 
@@ -121,9 +121,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? ISubmitRequest.Pit { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ISubmitRequest.Query { get; set; }
-
-		string? ISubmitRequest.QueryOnQueryString { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISubmitRequest.Query { get; set; }
 
 		bool? ISubmitRequest.RequestCache { get; set; }
 
@@ -197,12 +195,11 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public SubmitDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.Lenient = v);
 		public SubmitDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Assign(maxConcurrentShardRequests, (a, v) => a.MaxConcurrentShardRequests = v);
 		public SubmitDescriptor MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
-		public SubmitDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
+		public SubmitDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
 		public SubmitDescriptor Preference(string? preference) => Assign(preference, (a, v) => a.Preference = v);
 		public SubmitDescriptor Profile(bool? profile = true) => Assign(profile, (a, v) => a.Profile = v);
 		public SubmitDescriptor Pit(Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? pit) => Assign(pit, (a, v) => a.Pit = v);
-		public SubmitDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
-		public SubmitDescriptor QueryOnQueryString(string? queryOnQueryString) => Assign(queryOnQueryString, (a, v) => a.QueryOnQueryString = v);
+		public SubmitDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public SubmitDescriptor RequestCache(bool? requestCache = true) => Assign(requestCache, (a, v) => a.RequestCache = v);
 		public SubmitDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
 		public SubmitDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.Routing = v);

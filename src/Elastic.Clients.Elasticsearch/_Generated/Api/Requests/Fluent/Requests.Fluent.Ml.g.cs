@@ -227,11 +227,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		Elastic.Clients.Elasticsearch.IndexName IEvaluateDataFrameRequest.Index { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IEvaluateDataFrameRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IEvaluateDataFrameRequest.Query { get; set; }
 
 		public EvaluateDataFrameDescriptor Evaluation(Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationContainer evaluation) => Assign(evaluation, (a, v) => a.Evaluation = v);
 		public EvaluateDataFrameDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a.Index = v);
-		public EvaluateDataFrameDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public EvaluateDataFrameDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 	}
 
 	public partial class ExplainDataFrameAnalyticsDescriptor : RequestDescriptorBase<ExplainDataFrameAnalyticsDescriptor, ExplainDataFrameAnalyticsRequestParameters, IExplainDataFrameAnalyticsRequest>, IExplainDataFrameAnalyticsRequest
@@ -878,7 +878,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		int? IPutDatafeedRequest.MaxEmptySearches { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IPutDatafeedRequest.Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IPutDatafeedRequest.Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? IPutDatafeedRequest.QueryDelay { get; set; }
 
@@ -901,7 +901,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public PutDatafeedDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? indicesOptions) => Assign(indicesOptions, (a, v) => a.IndicesOptions = v);
 		public PutDatafeedDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId) => Assign(jobId, (a, v) => a.JobId = v);
 		public PutDatafeedDescriptor MaxEmptySearches(int? maxEmptySearches) => Assign(maxEmptySearches, (a, v) => a.MaxEmptySearches = v);
-		public PutDatafeedDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public PutDatafeedDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public PutDatafeedDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Time? queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
 		public PutDatafeedDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 		public PutDatafeedDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);

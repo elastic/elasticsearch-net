@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricRecall? Recall { get; set; }
 	}
 
-	public partial class RankEvalMetricBase
+	public abstract partial class RankEvalMetricBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("k")]
@@ -238,7 +238,7 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 	{
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]

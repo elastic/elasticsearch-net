@@ -1197,7 +1197,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query
 		{
 			get;
 #if NET5_0_OR_GREATER

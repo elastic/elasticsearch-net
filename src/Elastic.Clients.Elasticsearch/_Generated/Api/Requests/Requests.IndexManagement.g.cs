@@ -1164,7 +1164,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(PutAliasRequest))]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
 		Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
@@ -1197,7 +1197,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]
@@ -1434,7 +1434,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-		Union<string, IEnumerable<string>>? IndexPatterns { get; set; }
+		IEnumerable<string>? IndexPatterns { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
@@ -1481,7 +1481,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
-		public Union<string, IEnumerable<string>>? IndexPatterns { get; set; }
+		public IEnumerable<string>? IndexPatterns { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
@@ -1747,7 +1747,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public Union<string, IEnumerable<string>>? Status { get => Q<Union<string, IEnumerable<string>>?>("status"); set => Q("status", value); }
+		public IEnumerable<string>? Status { get => Q<IEnumerable<string>?>("status"); set => Q("status", value); }
 	}
 
 	[ConvertAs(typeof(ShrinkRequest))]
@@ -1954,7 +1954,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 		[JsonIgnore]
-		public Union<string, IEnumerable<string>>? Groups { get => Q<Union<string, IEnumerable<string>>?>("groups"); set => Q("groups", value); }
+		public IEnumerable<string>? Groups { get => Q<IEnumerable<string>?>("groups"); set => Q("groups", value); }
 
 		[JsonIgnore]
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -2000,7 +2000,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(ValidateQueryRequest))]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
@@ -2053,9 +2053,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
-
-		[JsonIgnore]
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 		[JsonIgnore]
@@ -2063,6 +2060,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 }

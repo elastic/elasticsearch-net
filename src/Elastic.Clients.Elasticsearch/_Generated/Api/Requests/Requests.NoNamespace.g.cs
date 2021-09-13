@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(CountRequest))]
 	public partial interface ICountRequest : IRequest<CountRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
@@ -181,9 +181,6 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
@@ -194,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	[ConvertAs(typeof(CreateRequest<>))]
@@ -285,7 +282,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(DeleteByQueryRequest))]
 	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	}
@@ -405,7 +402,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
@@ -561,7 +558,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(ExplainRequest))]
 	public partial interface IExplainRequest : IRequest<ExplainRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	public partial class ExplainRequest : PlainRequestBase<ExplainRequestParameters>, IExplainRequest
@@ -597,9 +594,6 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
@@ -619,7 +613,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
 	[ConvertAs(typeof(FieldCapsRequest))]
@@ -1466,9 +1460,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-		[JsonIgnore]
-		public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
 	}
 
 	[ConvertAs(typeof(SearchRequest))]
@@ -1486,13 +1477,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		double? MinScore { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? PostFilter { get; set; }
 
 		bool? Profile { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
-		Union<Elastic.Clients.Elasticsearch.Global.Search.Rescore, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>>? Rescore { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
 
 		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
@@ -1655,7 +1646,7 @@ namespace Elastic.Clients.Elasticsearch
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 		[JsonIgnore]
-		public Union<string, IEnumerable<string>>? Sort { get => Q<Union<string, IEnumerable<string>>?>("sort"); set => Q("sort", value); }
+		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("aggs")]
@@ -1683,7 +1674,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("post_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? PostFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]
@@ -1691,11 +1682,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("rescore")]
-		public Union<Elastic.Clients.Elasticsearch.Global.Search.Rescore, IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>>? Rescore { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
@@ -1733,7 +1724,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 
@@ -1779,7 +1770,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
@@ -1896,7 +1887,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public bool? TotalHitsAsInteger { get => Q<bool?>("total_hits_as_integer"); set => Q("total_hits_as_integer", value); }
+		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
@@ -1925,7 +1916,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		bool? CaseInsensitive { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilter { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IndexFilter { get; set; }
 
 		string? String { get; set; }
 
@@ -1964,7 +1955,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("index_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? IndexFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IndexFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("string")]
@@ -2146,7 +2137,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		long? MaxDocs { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
@@ -2202,9 +2193,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-		[JsonIgnore]
-		public string? QueryOnQueryString { get => Q<string?>("query_on_query_string"); set => Q("query_on_query_string", value); }
 
 		[JsonIgnore]
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
@@ -2275,7 +2263,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]

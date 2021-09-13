@@ -2120,7 +2120,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class RequestBase
+	public abstract partial class RequestBase
 	{
 	}
 
@@ -2214,7 +2214,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class ScriptBase
+	public abstract partial class ScriptBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]

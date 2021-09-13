@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Reindex
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("remote")]

@@ -15,39 +15,28 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch.Failures;
-using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.GetMapping
+namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class IndexMappingRecord
+	[ConvertAs(typeof(ConstantScoreQuery))]
+	public partial interface IConstantScoreQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Filter { get; set; }
+	}
+
+	public partial class ConstantScoreQuery : QueryBase, IConstantScoreQuery
 	{
 		[JsonInclude]
-		[JsonPropertyName("item")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		[JsonPropertyName("filter")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Filter { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+	public partial class ConstantScoreQueryDescriptor : QueryDescriptorBase<ConstantScoreQueryDescriptor, IConstantScoreQuery>, IConstantScoreQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer IConstantScoreQuery.Filter { get; set; }
 	}
 }

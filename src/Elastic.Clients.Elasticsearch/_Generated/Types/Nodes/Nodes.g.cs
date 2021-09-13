@@ -1387,7 +1387,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("ip")]
-		public Union<Elastic.Clients.Elasticsearch.Ip, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ip>> Ip
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ip> Ip
 		{
 			get;
 #if NET5_0_OR_GREATER

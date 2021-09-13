@@ -1,8 +1,20 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	// TODO: FieldNameQueryConvertor (see FieldNameQueryFormatter)
+	public interface IFieldNameQuery : IQuery
+	{
+		[JsonIgnore]
+		Field Field { get; set; }
+	}
+
+	public abstract class FieldNameQueryBase : QueryBase, IFieldNameQuery
+	{
+		public Field Field { get; set; }
+	}
+
 	public interface IQuery
 	{
 		/// <summary>
@@ -11,7 +23,7 @@ namespace Elastic.Clients.Elasticsearch
 		///     although the actual boost value that is applied undergoes normalization and internal optimization.
 		/// </summary>
 		[DataMember(Name = "boost")]
-		double? Boost { get; set; }
+		float? Boost { get; set; } // Was defined as a double before the code gen work
 
 		///// <summary>
 		/////     Whether the query is conditionless. A conditionless query is not serialized as part of the request
@@ -48,16 +60,46 @@ namespace Elastic.Clients.Elasticsearch
 		string Name { get; set; }
 	}
 
-	public abstract class QueryBase : IQuery
+	public abstract class QueryDescriptorBase<TDescriptor, TInterface>
+		: DescriptorBase<TDescriptor, TInterface>, IQuery
+		where TDescriptor : QueryDescriptorBase<TDescriptor, TInterface>, TInterface
+		where TInterface : class, IQuery
+	{
+		///// <inheritdoc cref="IQuery.Conditionless"/>
+		//protected abstract bool Conditionless { get; }
+
+		double? IQuery.Boost { get; set; }
+
+		//bool IQuery.Conditionless => Conditionless;
+
+		//bool IQuery.IsStrict { get; set; }
+
+		//bool IQuery.IsVerbatim { get; set; }
+
+		bool IQuery.IsWritable => true; // Self.IsVerbatim || !Self.Conditionless;
+
+		string IQuery.Name { get; set; }
+
+		/// <inheritdoc cref="IQuery.Name"/>
+		public TDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
+
+		/// <inheritdoc cref="IQuery.Boost"/>
+		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
+
+		///// <inheritdoc cref="IQuery.IsVerbatim"/>
+		//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
+
+		///// <inheritdoc cref="IQuery.IsStrict"/>
+		//public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
+	}
+
+	public abstract partial class QueryBase : IQuery
 	{
 		//protected abstract bool Conditionless { get; }
 		public bool IsStrict { get; set; }
 		public bool IsVerbatim { get; set; }
-		public double? Boost { get; set; }
+		
 		public bool IsWritable => IsVerbatim; //|| !Conditionless;
-
-		/// <inheritdoc />
-		public string Name { get; set; }
 
 		//bool IQuery.Conditionless => Conditionless;
 
