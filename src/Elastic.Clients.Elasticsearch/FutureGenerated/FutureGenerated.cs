@@ -8,24 +8,6 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	//public class MyRequestWithFluent
-	//{
-	//	public string? Something { get; internal set; }
-	//	public MyRequest WrappedRequest { get; internal set; }
-
-	//	public MyRequestWithFluent WithSomething(string? something)
-	//	{
-	//		Something = something;
-	//		return this;
-	//	}
-
-	//	public MyRequestWithFluent WithWrappedRequest(MyRequest request)
-	//	{
-	//		WrappedRequest = request;
-	//		return this;
-	//	}
-	//}
-
 	public class MyRequest
 	{
 		public string? Something { get; set; }
@@ -40,52 +22,30 @@ namespace Elastic.Clients.Elasticsearch
 		public string Name {  get; set; }	
 	}
 
-	public class ThingDescriptor
+	// Main downside is we always allocate a MyRequest per descriptor instead of relying on casting the descriptor to
+	// the interface.
+	public class MyRequestDescriptor : TestDescriptorBase<MyRequestDescriptor, MyRequest>
 	{
-		internal Thing Thing { get; } = new();
+		public MyRequestDescriptor() : base(new MyRequest()) { }
 
-		public ThingDescriptor Name(string name)
-		{
-			Thing.Name = name;
-			return this;
-		}
-	}
+		public MyRequest Request => Target;
 
-	public class MyRequestDescriptor
-	{
-		//// Could be lazily created - any value?
-		//internal MyRequestDescriptor() => _self = new MyRequest();
+		public MyRequestDescriptor Something(string? something) => Assign(something, (r, v) => r.Something = v);
 
-		//[JsonIgnore]
-		//private readonly MyRequest _self;
+		public MyRequestDescriptor WrappedRequest(MyRequest request) => Assign(request, (r, v) => r.WrappedRequest = v);
 
-		internal MyRequest Request { get; } = new();
-
-		//internal MyRequest GetRequest() => _self;
-
-		public MyRequestDescriptor Something(string? something)
-		{
-			Request.Something = something;
-			return this;
-		}
-
-		public MyRequestDescriptor WrappedRequest(MyRequest anotherOne)
-		{
-			Request.WrappedRequest = anotherOne;
-			return this;
-		}
-
+		// Could be added to the partial class by hand at a later date if we then determine a descriptor is needed.
 		public MyRequestDescriptor WrappedRequest(Action<MyRequestDescriptor> anotherOne)
 		{
 			var descriptor = new MyRequestDescriptor();
 			anotherOne.Invoke(descriptor);
-			Request.WrappedRequest = descriptor.Request;
+			Target.WrappedRequest = descriptor.Request;
 			return this;
 		}
 
 		public MyRequestDescriptor Thing(Thing thing)
 		{
-			Request.Thing = thing;
+			Target.Thing = thing;
 			return this;
 		}
 
@@ -93,23 +53,51 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new ThingDescriptor();
 			thing.Invoke(descriptor);
-			Request.Thing = descriptor.Thing;
+			Target.Thing = descriptor.Thing;
 			return this;
 		}
-
-		//public static implicit operator TRequest(MyRequestDescriptor<TRequest> d) => _self;
-
-		//[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		//protected MyRequestDescriptor Assign<TValue>(TValue value, Action<MyRequestDescriptor, TValue> assigner)
-		//{
-		//	assigner(this, value);
-		//	return this;
-		//}
 	}
+
+	public class ThingDescriptor : TestDescriptorBase<ThingDescriptor, Thing>
+	{
+		public ThingDescriptor() : base(new Thing()) { }
+
+		public Thing Thing => Target;
+
+		public ThingDescriptor Something(string name) => Assign(name, (r, v) => r.Name = v);
+
+		// We could prefer no base class to optimise which avoids the extra field required for _self.
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		protected ThingDescriptor LocalAssign<TValue>(TValue value, Action<Thing, TValue> assigner)
+		{
+			assigner(Target, value);
+			return this;
+		}
+	}
+
+	public abstract class TestDescriptorBase<TDescriptor, TTarget> where TDescriptor : TestDescriptorBase<TDescriptor, TTarget>
+	{
+		private readonly TDescriptor _self;
+
+		protected TestDescriptorBase(TTarget target)
+		{
+			Target = target;
+			_self = (TDescriptor)this;
+		}
+
+		protected TTarget Target { get; }
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		protected TDescriptor Assign<TValue>(TValue value, Action<TTarget, TValue> assigner)
+		{
+			assigner(Target, value);
+			return _self;
+		}
+	}	
 
 	public class MyClient
 	{
-		public void MakeRequest(IndexName index, Action<MyRequestDescriptor> selector)
+		public void DoRequest(IndexName index, Action<MyRequestDescriptor> selector)
 		{
 			var descriptor = new MyRequestDescriptor();
 			selector.Invoke(descriptor);
@@ -118,12 +106,12 @@ namespace Elastic.Clients.Elasticsearch
 			// SEND IT
 		}
 
-		public void MakeRequest(IndexName index, MyRequest request)
+		public void DoRequest(IndexName index, MyRequest request)
 		{
 			// SEND IT
 		}
 
-		public void MakeRequest(IndexName index, MyRequestDescriptor descriptor)
+		public void DoRequest(IndexName index, MyRequestDescriptor descriptor)
 		{
 			var request = descriptor.Request;
 
@@ -137,12 +125,12 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var client = new MyClient();
 
-			client.MakeRequest("index", new MyRequest { Something = "Thing" });
+			client.DoRequest("index", new MyRequest { Something = "Thing" });
 
-			client.MakeRequest("index", a => a
+			client.DoRequest("index", a => a
 				.Something("MainSomething")
 				.WrappedRequest(r => r.Something("AnotherSomething"))
-				.Thing(t => t.Name("Name")));
+				.Thing(t => t.Something("Name")));
 		}
 	}
 
