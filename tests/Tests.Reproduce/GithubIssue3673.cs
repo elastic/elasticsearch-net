@@ -26,7 +26,7 @@ namespace Tests.Reproduce
 				.Aggregations(a => a
 					.DateHistogram("publication_year", st => st
 						.Field(o => o.StartedOn)
-						.Interval(DateInterval.Year)
+						.CalendarInterval(DateInterval.Year)
 						.Format("yyyy")
 						.MinimumDocumentCount(0)
 					)

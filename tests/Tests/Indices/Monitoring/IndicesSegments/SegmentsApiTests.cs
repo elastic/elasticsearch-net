@@ -48,7 +48,7 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 					var segmentValue = segment.Value;
 
 					segmentValue.Should().NotBeNull();
-					segmentValue.MemoryInBytes.Should().BeGreaterThan(0);
+					segmentValue.MemoryInBytes.Should().BeGreaterOrEqualTo(0);
 					segmentValue.SizeInBytes.Should().BeGreaterThan(0);
 					segmentValue.Version.Should().NotBeNullOrEmpty();
 

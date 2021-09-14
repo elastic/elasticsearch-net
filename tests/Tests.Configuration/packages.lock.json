@@ -4,11 +4,11 @@
     ".NETStandard,Version=v2.0": {
       "Elastic.Elasticsearch.Managed": {
         "type": "Direct",
-        "requested": "[0.2.6, )",
-        "resolved": "0.2.6",
-        "contentHash": "JvAFjwwQ7lsPHA3AfDoKgwxs40gd8NrU9troMpKuqW5Ah9vi30wq6AzSYc6fXJ7g3KL9P2gLRyc8XnMjxJj2iw==",
+        "requested": "[0.2.8, )",
+        "resolved": "0.2.8",
+        "contentHash": "PQeanB+O0UUhyC5xqJTfSqWIWRf4oKw0SxznytcORACsMiRIsRTsYRBS7A3uMKfLNR8R2dzSxDXQ3UsA8SQfoA==",
         "dependencies": {
-          "Elastic.Stack.ArtifactsApi": "0.2.6",
+          "Elastic.Stack.ArtifactsApi": "0.2.8",
           "Proc": "0.6.1",
           "System.Net.Http": "4.3.1"
         }
@@ -30,8 +30,8 @@
       },
       "Elastic.Stack.ArtifactsApi": {
         "type": "Transitive",
-        "resolved": "0.2.6",
-        "contentHash": "3ewZWhWQcQLCu/vAifxbKNCr+h1eXTyNcS7FqAJ2wupaZZ0yjsNf+YGHcOFI7P+hEByYW9kIyEFoOTUwa0/oaQ==",
+        "resolved": "0.2.8",
+        "contentHash": "XZZzljcvqodj1n+qw5Llj+CHzHYU0urV67Vd246vIG874KyflnIAtsDnEdbCuJ4cnyPqCb7m9AaLJh4KWPFVtw==",
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"

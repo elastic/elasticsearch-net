@@ -14,12 +14,6 @@ namespace Tests.Search.PointInTime
 	{
 		[U] public async Task Urls()
 		{
-			await POST("/_pit")
-				.Fluent(c => c.OpenPointInTime())
-				.Request(c => c.OpenPointInTime(new OpenPointInTimeRequest()))
-				.FluentAsync(c => c.OpenPointInTimeAsync())
-				.RequestAsync(c => c.OpenPointInTimeAsync(new OpenPointInTimeRequest()));
-
 			const string index = "devs";
 
 			await POST($"/{index}/_pit")

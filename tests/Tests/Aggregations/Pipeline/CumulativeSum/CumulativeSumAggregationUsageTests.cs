@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month",
+					calendar_interval = "month",
 				},
 				aggs = new
 				{
@@ -49,7 +49,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
-				.Interval(DateInterval.Month)
+				.CalendarInterval(DateInterval.Month)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
@@ -64,7 +64,7 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
-				Interval = DateInterval.Month,
+				CalendarInterval = DateInterval.Month,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new CumulativeSumAggregation("cumulative_commits", "commits")
