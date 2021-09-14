@@ -231,7 +231,7 @@ namespace Nest
 		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[]{"_nodes/reload_secure_settings", "_nodes/{node_id}/reload_secure_settings"});
 		internal static ApiUrls NodesStats = new ApiUrls(new[]{"_nodes/stats", "_nodes/{node_id}/stats", "_nodes/stats/{metric}", "_nodes/{node_id}/stats/{metric}", "_nodes/stats/{metric}/{index_metric}", "_nodes/{node_id}/stats/{metric}/{index_metric}"});
 		internal static ApiUrls NodesUsage = new ApiUrls(new[]{"_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}"});
-		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[]{"_pit", "{index}/_pit"});
+		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[]{"{index}/_pit"});
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[]{""});
 		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[]{"_scripts/{id}", "_scripts/{id}/{context}"});
 		internal static ApiUrls NoNamespaceReindexOnServer = new ApiUrls(new[]{"_reindex"});
