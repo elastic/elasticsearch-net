@@ -1653,7 +1653,7 @@
           "System.Diagnostics.DiagnosticSource": "5.0.0"
         }
       },
-      "NEST": {
+      "nest": {
         "type": "Project",
         "dependencies": {
           "Elasticsearch.Net": "7.0.0"
