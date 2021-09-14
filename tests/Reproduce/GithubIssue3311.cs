@@ -47,7 +47,7 @@ namespace Tests.Reproduce
 					.Aggregations(agg => agg
 						.DateHistogram("hist", dh => dh
 							.Field(ff => ff.Time)
-							.Interval(new Time(TimeSpan.FromMinutes(1)))
+							.FixedInterval(new Time(TimeSpan.FromMinutes(1)))
 						)
 						.MaxBucket("max", mb => mb
 							.BucketsPath("hist>_count")

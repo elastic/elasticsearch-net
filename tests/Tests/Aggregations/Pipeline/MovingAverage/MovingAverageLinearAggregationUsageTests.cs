@@ -26,7 +26,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				date_histogram = new
 				{
 					field = "startedOn",
-					interval = "month",
+					calendar_interval = "month",
 					min_doc_count = 0
 				},
 				aggs = new
@@ -56,7 +56,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
-				.Interval(DateInterval.Month)
+				.CalendarInterval(DateInterval.Month)
 				.MinimumDocumentCount(0)
 				.Aggregations(aa => aa
 					.Sum("commits", sm => sm
@@ -76,7 +76,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			new DateHistogramAggregation("projects_started_per_month")
 			{
 				Field = "startedOn",
-				Interval = DateInterval.Month,
+				CalendarInterval = DateInterval.Month,
 				MinimumDocumentCount = 0,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
