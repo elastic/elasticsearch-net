@@ -31,12 +31,12 @@ namespace Tests.Benchmarking
 				.EnableHttpCompression(false)
 			);
 
-		private static readonly Nest7.IElasticClient ClientV7 =
-			new Nest7.ElasticClient(new Nest7.ConnectionSettings(
-					new Elasticsearch.Net7.InMemoryConnection(Response, 200, null, null))
-				.DefaultIndex("index")
-				.EnableHttpCompression(false)
-			);
+		// private static readonly Nest7.IElasticClient ClientV7 =
+		// 	new Nest7.ElasticClient(new Nest7.ConnectionSettings(
+		// 			new Elasticsearch.Net7.InMemoryConnection(Response, 200, null, null))
+		// 		.DefaultIndex("index")
+		// 		.EnableHttpCompression(false)
+		// 	);
 
 		[GlobalSetup]
 		public void Setup() { }
@@ -47,8 +47,8 @@ namespace Tests.Benchmarking
 		[Benchmark(Description = "PR no recyclable")]
 		public BulkResponse NoRecyclableMemory() => ClientNoRecyclableMemory.Bulk(b => b.IndexMany(Projects));
 
-		[Benchmark(Description = "7.x")]
-		public Nest7.BulkResponse NestCurrentBulk() => ClientV7.Bulk(b => b.IndexMany(Projects));
+		// [Benchmark(Description = "7.x")]
+		// public Nest7.BulkResponse NestCurrentBulk() => ClientV7.Bulk(b => b.IndexMany(Projects));
 
 		private static object BulkItemResponse(Project project) => new
 		{
