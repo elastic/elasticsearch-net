@@ -15,8 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch.Failures;
-using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -24,18 +22,57 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class AdjacencyMatrixAggregation : Aggregations.BucketAggregationBase
+	public partial class HdrPercentilesAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("filters")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>? Filters { get; set; }
+		[JsonPropertyName("values")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileItem> Values
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class HdrPercentileItem
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public double Key
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public double Value
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public abstract partial class AggregateBase
 	{
+	}
+
+	public partial class TDigestPercentilesAggregate
+	{
 		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta
+		[JsonPropertyName("values")]
+		public Dictionary<string, double> Values
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -46,914 +83,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class Aggregation
+	public partial class ExtendedStatsAggregate
 	{
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string? Name { get; set; }
-	}
-
-	public partial class AggregationContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("adjacency_matrix")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation? AdjacencyMatrix { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("aggs")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("auto_date_histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation? AutoDateHistogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("avg")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation? Avg { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("avg_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation? AvgBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("boxplot")]
-		public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation? Boxplot { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bucket_script")]
-		public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation? BucketScript { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bucket_selector")]
-		public Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation? BucketSelector { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bucket_sort")]
-		public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation? BucketSort { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("cardinality")]
-		public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? Cardinality { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("children")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation? Children { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("composite")]
-		public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? Composite { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("cumulative_cardinality")]
-		public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation? CumulativeCardinality { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("cumulative_sum")]
-		public Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation? CumulativeSum { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("date_histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("date_range")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? DateRange { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("derivative")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation? Derivative { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("diversified_sampler")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation? DiversifiedSampler { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("extended_stats")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation? ExtendedStats { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("extended_stats_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation? ExtendedStatsBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filters")]
-		public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation? Filters { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geo_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation? GeoBounds { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geo_centroid")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation? GeoCentroid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geo_distance")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation? GeoDistance { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geohash_grid")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregation? GeohashGrid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geo_line")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation? GeoLine { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geotile_grid")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation? GeotileGrid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("global")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation? Global { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("inference")]
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation? Inference { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ip_range")]
-		public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation? IpRange { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("line")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation? Line { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("matrix_stats")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation? MatrixStats { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation? Max { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation? MaxBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("median_absolute_deviation")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation? MedianAbsoluteDeviation { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MinAggregation? Min { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation? MinBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("moving_avg")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregation? MovingAvg { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("moving_fn")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation? MovingFn { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("moving_percentiles")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation? MovingPercentiles { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("multi_terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation? MultiTerms { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("nested")]
-		public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation? Nested { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("normalize")]
-		public Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation? Normalize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("parent")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation? Parent { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("percentile_ranks")]
-		public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation? PercentileRanks { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("percentiles")]
-		public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation? Percentiles { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("percentiles_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation? PercentilesBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("range")]
-		public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? Range { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("rare_terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation? RareTerms { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("rate")]
-		public Elastic.Clients.Elasticsearch.Aggregations.RateAggregation? Rate { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("reverse_nested")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation? ReverseNested { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sampler")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation? Sampler { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("scripted_metric")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation? ScriptedMetric { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("serial_diff")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation? SerialDiff { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("significant_terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation? SignificantTerms { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("significant_text")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation? SignificantText { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stats")]
-		public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation? Stats { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stats_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation? StatsBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("string_stats")]
-		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation? StringStats { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sum")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SumAggregation? Sum { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sum_bucket")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation? SumBucket { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("top_hits")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation? TopHits { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("top_metrics")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation? TopMetrics { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("t_test")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation? TTest { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("value_count")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? ValueCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("variable_width_histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation? VariableWidthHistogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("weighted_avg")]
-		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation? WeightedAvg { get; set; }
-	}
-
-	public partial class AggregationRange
-	{
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public Union<double, string>? From { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public string? Key { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public Union<double, string>? To { get; set; }
-	}
-
-	public partial class AutoDateHistogramAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
-	{
-		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public Elastic.Clients.Elasticsearch.DateMathTime Interval
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class AutoDateHistogramAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
-		public int? Buckets { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("minimum_interval")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.DateString? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("offset")]
-		public string? Offset { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; set; }
-	}
-
-	public partial class AverageAggregation : Aggregations.FormatMetricAggregationBase
-	{
-	}
-
-	public partial class AverageBucketAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class BoxPlotAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("max")]
-		public double Max
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("min")]
-		public double Min
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("q1")]
-		public double Q1
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("q2")]
-		public double Q2
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("q3")]
-		public double Q3
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class BoxplotAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("compression")]
-		public double? Compression { get; set; }
-	}
-
-	public partial class BucketAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("after_key")]
-		public Dictionary<string, object> AfterKey
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("bg_count")]
-		public long BgCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count_error_upper_bound")]
-		public long DocCountErrorUpperBound
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public Elastic.Clients.Elasticsearch.DateMathTime Interval
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("items")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Bucket Items
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("sum_other_doc_count")]
-		public long SumOtherDocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public abstract partial class BucketAggregationBase : Aggregations.Aggregation
-	{
-		[JsonInclude]
-		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
-	}
-
-	public partial class BucketScriptAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	}
-
-	public partial class BucketSelectorAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	}
-
-	public partial class BucketSortAggregation : Aggregations.Aggregation
-	{
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public int? From { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gap_policy")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
-	}
-
-	public partial class BucketsPath
-	{
-	}
-
-	public partial class CardinalityAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("precision_threshold")]
-		public int? PrecisionThreshold { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("rehash")]
-		public bool? Rehash { get; set; }
-	}
-
-	public partial class ChiSquareHeuristic
-	{
-		[JsonInclude]
-		[JsonPropertyName("background_is_superset")]
-		public bool BackgroundIsSuperset { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include_negatives")]
-		public bool IncludeNegatives { get; set; }
-	}
-
-	public partial class ChildrenAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.RelationName? Type { get; set; }
-	}
-
-	public partial class ClassificationInferenceOptions
-	{
-		[JsonInclude]
-		[JsonPropertyName("num_top_classes")]
-		public int? NumTopClasses { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("num_top_feature_importance_values")]
-		public int? NumTopFeatureImportanceValues { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prediction_field_type")]
-		public string? PredictionFieldType { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("top_classes_results_field")]
-		public string? TopClassesResultsField { get; set; }
-	}
-
-	public partial class CompositeAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sources")]
-		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
-	}
-
-	public partial class CompositeAggregationSource
-	{
-		[JsonInclude]
-		[JsonPropertyName("date_histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geotile_grid")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation? GeotileGrid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
-	}
-
-	public partial class CompositeBucket
-	{
-	}
-
-	public partial class CompositeBucketAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
-	{
-		[JsonInclude]
-		[JsonPropertyName("after_key")]
-		public Dictionary<string, object> AfterKey
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class CumulativeCardinalityAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class CumulativeSumAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class DateHistogramAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("calendar_interval")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval, Elastic.Clients.Elasticsearch.Time>? CalendarInterval { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("extended_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Union<Elastic.Clients.Elasticsearch.DateMath, long>>? ExtendedBounds { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fixed_interval")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval, Elastic.Clients.Elasticsearch.Time>? FixedInterval { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("hard_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Union<Elastic.Clients.Elasticsearch.DateMath, long>>? HardBounds { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval, Elastic.Clients.Elasticsearch.Time>? Interval { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
-		public int? MinDocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.DateString? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("offset")]
-		public Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? Order { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; set; }
-	}
-
-	public partial class DateHistogramBucket
-	{
-	}
-
-	public partial class DateRangeAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ranges")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; set; }
-	}
-
-	public partial class DateRangeExpression
-	{
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long? DocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public Union<Elastic.Clients.Elasticsearch.DateMath, float>? From { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("from_as_string")]
-		public string? FromAsString { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public string? Key { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public Union<Elastic.Clients.Elasticsearch.DateMath, float>? To { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("to_as_string")]
-		public string? ToAsString { get; set; }
-	}
-
-	public partial class DerivativeAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class DiversifiedSamplerAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("execution_hint")]
-		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_docs_per_value")]
-		public int? MaxDocsPerValue { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-	}
-
-	public partial class EwmaModelSettings
-	{
-		[JsonInclude]
-		[JsonPropertyName("alpha")]
-		public float? Alpha
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class ExtendedBounds<T>
-	{
-		[JsonInclude]
-		[JsonPropertyName("max")]
-		public T Max { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min")]
-		public T Min { get; set; }
-	}
-
-	public partial class ExtendedStatsAggregate : Aggregations.StatsAggregate
-	{
-		[JsonInclude]
-		[JsonPropertyName("std_deviation")]
-		public double? StdDeviation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonInclude]
 		[JsonPropertyName("std_deviation_bounds")]
 		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds StdDeviationBounds
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("std_deviation_population")]
-		public double? StdDeviationPopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("std_deviation_sampling")]
-		public double? StdDeviationSampling
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1010,27 +144,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			internal set;
 #endif
 		}
-	}
 
-	public partial class ExtendedStatsAggregation : Aggregations.FormatMetricAggregationBase
-	{
 		[JsonInclude]
-		[JsonPropertyName("sigma")]
-		public double? Sigma { get; set; }
-	}
+		[JsonPropertyName("std_deviation")]
+		public double? StdDeviation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
-	public partial class ExtendedStatsBucketAggregation : Aggregations.PipelineAggregationBase
-	{
 		[JsonInclude]
-		[JsonPropertyName("sigma")]
-		public double? Sigma { get; set; }
-	}
+		[JsonPropertyName("std_deviation_population")]
+		public double? StdDeviationPopulation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
-	public partial class FiltersAggregate : Aggregations.AggregateBase
-	{
 		[JsonInclude]
-		[JsonPropertyName("buckets")]
-		public Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>, Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>> Buckets
+		[JsonPropertyName("std_deviation_sampling")]
+		public double? StdDeviationSampling
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1041,30 +182,71 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class FiltersAggregation : Aggregations.BucketAggregationBase
+	public partial class StandardDeviationBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("filters")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>>? Filters { get; set; }
+		[JsonPropertyName("lower")]
+		public double? Lower
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
+		[JsonPropertyName("upper")]
+		public double? Upper
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
-		[JsonPropertyName("other_bucket")]
-		public bool? OtherBucket { get; set; }
+		[JsonPropertyName("lower_population")]
+		public double? LowerPopulation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
-		[JsonPropertyName("other_bucket_key")]
-		public string? OtherBucketKey { get; set; }
-	}
+		[JsonPropertyName("upper_population")]
+		public double? UpperPopulation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
-	public partial class FiltersBucketItem
-	{
 		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount
+		[JsonPropertyName("lower_sampling")]
+		public double? LowerSampling
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("upper_sampling")]
+		public double? UpperSampling
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1075,36 +257,59 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public abstract partial class FormatMetricAggregationBase : Aggregations.MetricAggregationBase
+	public partial class StatsAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-	}
-
-	public partial class FormattableMetricAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-	}
-
-	public partial class GeoBounds
-	{
-		[JsonInclude]
-		[JsonPropertyName("bottom_right")]
-		public Elastic.Clients.Elasticsearch.LatLon BottomRight { get; set; }
+		[JsonPropertyName("count")]
+		public double Count
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
-		[JsonPropertyName("top_left")]
-		public Elastic.Clients.Elasticsearch.LatLon TopLeft { get; set; }
-	}
+		[JsonPropertyName("sum")]
+		public double Sum
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
-	public partial class GeoBoundsAggregate : Aggregations.AggregateBase
-	{
 		[JsonInclude]
-		[JsonPropertyName("bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoBounds Bounds
+		[JsonPropertyName("avg")]
+		public double? Avg
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("max")]
+		public double? Max
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("min")]
+		public double? Min
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1115,14 +320,232 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class GeoBoundsAggregation : Aggregations.MetricAggregationBase
+	public partial class TopMetricsAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("wrap_longitude")]
-		public bool? WrapLongitude { get; set; }
+		[JsonPropertyName("top")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
-	public partial class GeoCentroidAggregate : Aggregations.AggregateBase
+	public partial class TopMetrics
+	{
+	}
+
+	public partial class TopHitsAggregate
+	{
+	}
+
+	public partial class StringStatsAggregate
+	{
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public long Count
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("min_length")]
+		public int MinLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("max_length")]
+		public int MaxLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("avg_length")]
+		public double AvgLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("entropy")]
+		public double Entropy
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("distribution")]
+		public Dictionary<string, double>? Distribution
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ScriptedMetricAggregate
+	{
+	}
+
+	public partial class PercentilesAggregate
+	{
+		[JsonInclude]
+		[JsonPropertyName("items")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentileItem> Items
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PercentileItem
+	{
+		[JsonInclude]
+		[JsonPropertyName("percentile")]
+		public double Percentile
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public double Value
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GeoLineAggregate
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("geometry")]
+		public Elastic.Clients.Elasticsearch.Aggregations.LineStringGeoShape Geometry
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineProperties Properties
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GeoLineProperties
+	{
+		[JsonInclude]
+		[JsonPropertyName("complete")]
+		public string Complete
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("sort_values")]
+		public IReadOnlyCollection<double> SortValues
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LineStringGeoShape
+	{
+		[JsonInclude]
+		[JsonPropertyName("coordinates")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate> Coordinates
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GeoCentroidAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
@@ -1149,92 +572,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class GeoCentroidAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("count")]
-		public long? Count { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("location")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; set; }
-	}
-
-	public partial class GeoDistanceAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("distance_type")]
-		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("origin")]
-		public Union<Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation, string>? Origin { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ranges")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("unit")]
-		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
-	}
-
-	public partial class GeoHashGridAggregation : Aggregations.BucketAggregationBase
+	public partial class GeoBoundsAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("bounds")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.BoundingBox? Bounds { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("precision")]
-		public Elastic.Clients.Elasticsearch.GeoHashPrecision? Precision { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-	}
-
-	public partial class GeoLineAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("geometry")]
-		public Elastic.Clients.Elasticsearch.Aggregations.LineStringGeoShape Geometry
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineProperties Properties
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type
+		public Aggregations.IGeoBounds Bounds
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1245,41 +587,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class GeoLineAggregation
+	[ConvertAs(typeof(GeoBounds))]
+	public partial interface IGeoBounds
 	{
-		[JsonInclude]
-		[JsonPropertyName("include_sort")]
-		public bool? IncludeSort { get; set; }
+		ILatLon BottomRight { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("point")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Sort { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sort_order")]
-		public Elastic.Clients.Elasticsearch.Global.Search.SortOrder? SortOrder { get; set; }
+		ILatLon TopLeft { get; set; }
 	}
 
-	public partial class GeoLinePoint
+	public partial class GeoBounds : IGeoBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+		[JsonPropertyName("bottom_right")]
+		public ILatLon BottomRight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_left")]
+		public ILatLon TopLeft { get; set; }
 	}
 
-	public partial class GeoLineProperties
+	public partial class GeoBoundsDescriptor
+	{
+	}
+
+	public partial class BoxPlotAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("complete")]
-		public bool Complete
+		[JsonPropertyName("min")]
+		public double Min
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1290,8 +625,44 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("sort_values")]
-		public IReadOnlyCollection<double> SortValues
+		[JsonPropertyName("max")]
+		public double Max
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("q1")]
+		public double Q1
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("q2")]
+		public double Q2
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("q3")]
+		public double Q3
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1302,68 +673,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class GeoLineSort
+	public partial class ValueAggregate
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public partial class GeoTileGridAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoBounds? Bounds { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("precision")]
-		public Elastic.Clients.Elasticsearch.GeoTilePrecision? Precision { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-	}
-
-	public partial class GlobalAggregation : Aggregations.BucketAggregationBase
-	{
-	}
-
-	public partial class GoogleNormalizedDistanceHeuristic
-	{
-		[JsonInclude]
-		[JsonPropertyName("background_is_superset")]
-		public bool BackgroundIsSuperset { get; set; }
-	}
-
-	public partial class HdrMethod
-	{
-		[JsonInclude]
-		[JsonPropertyName("number_of_significant_value_digits")]
-		public int? NumberOfSignificantValueDigits { get; set; }
-	}
-
-	public partial class HdrPercentileItem
-	{
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public double Key
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonInclude]
 		[JsonPropertyName("value")]
 		public double Value
@@ -1375,13 +686,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			internal set;
 #endif
 		}
-	}
 
-	public partial class HdrPercentilesAggregate : Aggregations.AggregateBase
-	{
 		[JsonInclude]
-		[JsonPropertyName("values")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileItem> Values
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1392,31 +700,1174 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class HistogramAggregation : Aggregations.BucketAggregationBase
+	public partial class KeyedValueAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("extended_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double>? ExtendedBounds { get; set; }
+		[JsonPropertyName("keys")]
+		public IReadOnlyCollection<string> Keys
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MatrixStatsAggregate
+	{
+		[JsonInclude]
+		[JsonPropertyName("correlation")]
+		public Dictionary<string, double> Correlation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		[JsonPropertyName("covariance")]
+		public Dictionary<string, double> Covariance
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public int Count
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("kurtosis")]
+		public double Kurtosis
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("mean")]
+		public double Mean
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("skewness")]
+		public double Skewness
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("variance")]
+		public double Variance
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string Name
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class MultiBucketAggregate<TBucket>
+	{
+	}
+
+	public partial class CompositeBucketAggregate<TBucket>
+	{
+	}
+
+	public partial class BucketAggregate
+	{
+		[JsonInclude]
+		[JsonPropertyName("bg_count")]
+		public long BgCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count_error_upper_bound")]
+		public long DocCountErrorUpperBound
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("sum_other_doc_count")]
+		public long SumOtherDocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("interval")]
+		public string Interval
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("items")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Bucket Items
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class KeyedBucket<TKey>
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string KeyAsString
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SignificantTermsBucket<TKey>
+	{
+	}
+
+	public partial class RareTermsBucket<TKey>
+	{
+	}
+
+	public partial class RangeBucket
+	{
+	}
+
+	public partial class IpRangeBucket
+	{
+	}
+
+	public partial class FiltersBucketItem
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateHistogramBucket
+	{
+	}
+
+	public partial class CompositeBucket
+	{
+	}
+
+	public partial class TermsAggregate<TBucket, TKey>
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_count_error_upper_bound")]
+		public long DocCountErrorUpperBound
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("sum_other_doc_count")]
+		public long SumOtherDocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SignificantTermsAggregate<TBucket, TKey>
+	{
+		[JsonInclude]
+		[JsonPropertyName("bg_count")]
+		public long BgCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FiltersAggregate
+	{
+	}
+
+	public partial class AutoDateHistogramAggregate<TBucket>
+	{
+		[JsonInclude]
+		[JsonPropertyName("interval")]
+		public string Interval
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class SingleBucketAggregate
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public double DocCount
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(AggregationContainer))]
+	public partial interface IAggregationContainer
+	{
+		Dictionary<string, Aggregations.IAggregationContainer>? Aggs { get; set; }
+
+		Aggregations.IAdjacencyMatrixAggregation? AdjacencyMatrix { get; set; }
+
+		Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
+
+		Aggregations.IAutoDateHistogramAggregation? AutoDateHistogram { get; set; }
+
+		Aggregations.IAverageAggregation? Avg { get; set; }
+
+		Aggregations.IAverageBucketAggregation? AvgBucket { get; set; }
+
+		Aggregations.IBoxplotAggregation? Boxplot { get; set; }
+
+		Aggregations.IBucketScriptAggregation? BucketScript { get; set; }
+
+		Aggregations.IBucketSelectorAggregation? BucketSelector { get; set; }
+
+		Aggregations.IBucketSortAggregation? BucketSort { get; set; }
+
+		Aggregations.ICardinalityAggregation? Cardinality { get; set; }
+
+		Aggregations.IChildrenAggregation? Children { get; set; }
+
+		Aggregations.ICompositeAggregation? Composite { get; set; }
+
+		Aggregations.ICumulativeCardinalityAggregation? CumulativeCardinality { get; set; }
+
+		Aggregations.ICumulativeSumAggregation? CumulativeSum { get; set; }
+
+		Aggregations.IDateHistogramAggregation? DateHistogram { get; set; }
+
+		Aggregations.IDateRangeAggregation? DateRange { get; set; }
+
+		Aggregations.IDerivativeAggregation? Derivative { get; set; }
+
+		Aggregations.IDiversifiedSamplerAggregation? DiversifiedSampler { get; set; }
+
+		Aggregations.IExtendedStatsAggregation? ExtendedStats { get; set; }
+
+		Aggregations.IExtendedStatsBucketAggregation? ExtendedStatsBucket { get; set; }
+
+		QueryDsl.IQueryContainer? Filter { get; set; }
+
+		Aggregations.IFiltersAggregation? Filters { get; set; }
+
+		Aggregations.IGeoBoundsAggregation? GeoBounds { get; set; }
+
+		Aggregations.IGeoCentroidAggregation? GeoCentroid { get; set; }
+
+		Aggregations.IGeoDistanceAggregation? GeoDistance { get; set; }
+
+		Aggregations.IGeoHashGridAggregation? GeohashGrid { get; set; }
+
+		Aggregations.IGeoLineAggregation? GeoLine { get; set; }
+
+		Aggregations.IGeoTileGridAggregation? GeotileGrid { get; set; }
+
+		Aggregations.IGlobalAggregation? Global { get; set; }
+
+		Aggregations.IHistogramAggregation? Histogram { get; set; }
+
+		Aggregations.IIpRangeAggregation? IpRange { get; set; }
+
+		Aggregations.IInferenceAggregation? Inference { get; set; }
+
+		Aggregations.IGeoLineAggregation? Line { get; set; }
+
+		Aggregations.IMatrixStatsAggregation? MatrixStats { get; set; }
+
+		Aggregations.IMaxAggregation? Max { get; set; }
+
+		Aggregations.IMaxBucketAggregation? MaxBucket { get; set; }
+
+		Aggregations.IMedianAbsoluteDeviationAggregation? MedianAbsoluteDeviation { get; set; }
+
+		Aggregations.IMinAggregation? Min { get; set; }
+
+		Aggregations.IMinBucketAggregation? MinBucket { get; set; }
+
+		Aggregations.IMissingAggregation? Missing { get; set; }
+
+		Aggregations.IMovingAverageAggregation? MovingAvg { get; set; }
+
+		Aggregations.IMovingPercentilesAggregation? MovingPercentiles { get; set; }
+
+		Aggregations.IMovingFunctionAggregation? MovingFn { get; set; }
+
+		Aggregations.IMultiTermsAggregation? MultiTerms { get; set; }
+
+		Aggregations.INestedAggregation? Nested { get; set; }
+
+		Aggregations.INormalizeAggregation? Normalize { get; set; }
+
+		Aggregations.IParentAggregation? Parent { get; set; }
+
+		Aggregations.IPercentileRanksAggregation? PercentileRanks { get; set; }
+
+		Aggregations.IPercentilesAggregation? Percentiles { get; set; }
+
+		Aggregations.IPercentilesBucketAggregation? PercentilesBucket { get; set; }
+
+		Aggregations.IRangeAggregation? Range { get; set; }
+
+		Aggregations.IRareTermsAggregation? RareTerms { get; set; }
+
+		Aggregations.IRateAggregation? Rate { get; set; }
+
+		Aggregations.IReverseNestedAggregation? ReverseNested { get; set; }
+
+		Aggregations.ISamplerAggregation? Sampler { get; set; }
+
+		Aggregations.IScriptedMetricAggregation? ScriptedMetric { get; set; }
+
+		Aggregations.ISerialDifferencingAggregation? SerialDiff { get; set; }
+
+		Aggregations.ISignificantTermsAggregation? SignificantTerms { get; set; }
+
+		Aggregations.ISignificantTextAggregation? SignificantText { get; set; }
+
+		Aggregations.IStatsAggregation? Stats { get; set; }
+
+		Aggregations.IStatsBucketAggregation? StatsBucket { get; set; }
+
+		Aggregations.IStringStatsAggregation? StringStats { get; set; }
+
+		Aggregations.ISumAggregation? Sum { get; set; }
+
+		Aggregations.ISumBucketAggregation? SumBucket { get; set; }
+
+		Aggregations.ITermsAggregation? Terms { get; set; }
+
+		Aggregations.ITopHitsAggregation? TopHits { get; set; }
+
+		Aggregations.ITTestAggregation? TTest { get; set; }
+
+		Aggregations.ITopMetricsAggregation? TopMetrics { get; set; }
+
+		Aggregations.IValueCountAggregation? ValueCount { get; set; }
+
+		Aggregations.IWeightedAverageAggregation? WeightedAvg { get; set; }
+
+		Aggregations.IVariableWidthHistogramAggregation? VariableWidthHistogram { get; set; }
+	}
+
+	public partial class AggregationContainer : IAggregationContainer
+	{
+		[JsonInclude]
+		[JsonPropertyName("aggs")]
+		public Dictionary<string, Aggregations.IAggregationContainer>? Aggs { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("adjacency_matrix")]
+		public Aggregations.IAdjacencyMatrixAggregation? AdjacencyMatrix { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("aggregations")]
+		public Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_date_histogram")]
+		public Aggregations.IAutoDateHistogramAggregation? AutoDateHistogram { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("avg")]
+		public Aggregations.IAverageAggregation? Avg { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("avg_bucket")]
+		public Aggregations.IAverageBucketAggregation? AvgBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boxplot")]
+		public Aggregations.IBoxplotAggregation? Boxplot { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("bucket_script")]
+		public Aggregations.IBucketScriptAggregation? BucketScript { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("bucket_selector")]
+		public Aggregations.IBucketSelectorAggregation? BucketSelector { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("bucket_sort")]
+		public Aggregations.IBucketSortAggregation? BucketSort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("cardinality")]
+		public Aggregations.ICardinalityAggregation? Cardinality { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("children")]
+		public Aggregations.IChildrenAggregation? Children { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("composite")]
+		public Aggregations.ICompositeAggregation? Composite { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("cumulative_cardinality")]
+		public Aggregations.ICumulativeCardinalityAggregation? CumulativeCardinality { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("cumulative_sum")]
+		public Aggregations.ICumulativeSumAggregation? CumulativeSum { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("date_histogram")]
+		public Aggregations.IDateHistogramAggregation? DateHistogram { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("date_range")]
+		public Aggregations.IDateRangeAggregation? DateRange { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("derivative")]
+		public Aggregations.IDerivativeAggregation? Derivative { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("diversified_sampler")]
+		public Aggregations.IDiversifiedSamplerAggregation? DiversifiedSampler { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("extended_stats")]
+		public Aggregations.IExtendedStatsAggregation? ExtendedStats { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("extended_stats_bucket")]
+		public Aggregations.IExtendedStatsBucketAggregation? ExtendedStatsBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public QueryDsl.IQueryContainer? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filters")]
+		public Aggregations.IFiltersAggregation? Filters { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geo_bounds")]
+		public Aggregations.IGeoBoundsAggregation? GeoBounds { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geo_centroid")]
+		public Aggregations.IGeoCentroidAggregation? GeoCentroid { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geo_distance")]
+		public Aggregations.IGeoDistanceAggregation? GeoDistance { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geohash_grid")]
+		public Aggregations.IGeoHashGridAggregation? GeohashGrid { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geo_line")]
+		public Aggregations.IGeoLineAggregation? GeoLine { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geotile_grid")]
+		public Aggregations.IGeoTileGridAggregation? GeotileGrid { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("global")]
+		public Aggregations.IGlobalAggregation? Global { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("histogram")]
+		public Aggregations.IHistogramAggregation? Histogram { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ip_range")]
+		public Aggregations.IIpRangeAggregation? IpRange { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("inference")]
+		public Aggregations.IInferenceAggregation? Inference { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("line")]
+		public Aggregations.IGeoLineAggregation? Line { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("matrix_stats")]
+		public Aggregations.IMatrixStatsAggregation? MatrixStats { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max")]
+		public Aggregations.IMaxAggregation? Max { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_bucket")]
+		public Aggregations.IMaxBucketAggregation? MaxBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("median_absolute_deviation")]
+		public Aggregations.IMedianAbsoluteDeviationAggregation? MedianAbsoluteDeviation { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min")]
+		public Aggregations.IMinAggregation? Min { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_bucket")]
+		public Aggregations.IMinBucketAggregation? MinBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public Aggregations.IMissingAggregation? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("moving_avg")]
+		public Aggregations.IMovingAverageAggregation? MovingAvg { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("moving_percentiles")]
+		public Aggregations.IMovingPercentilesAggregation? MovingPercentiles { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("moving_fn")]
+		public Aggregations.IMovingFunctionAggregation? MovingFn { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("multi_terms")]
+		public Aggregations.IMultiTermsAggregation? MultiTerms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("nested")]
+		public Aggregations.INestedAggregation? Nested { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("normalize")]
+		public Aggregations.INormalizeAggregation? Normalize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("parent")]
+		public Aggregations.IParentAggregation? Parent { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("percentile_ranks")]
+		public Aggregations.IPercentileRanksAggregation? PercentileRanks { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("percentiles")]
+		public Aggregations.IPercentilesAggregation? Percentiles { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("percentiles_bucket")]
+		public Aggregations.IPercentilesBucketAggregation? PercentilesBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("range")]
+		public Aggregations.IRangeAggregation? Range { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rare_terms")]
+		public Aggregations.IRareTermsAggregation? RareTerms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rate")]
+		public Aggregations.IRateAggregation? Rate { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("reverse_nested")]
+		public Aggregations.IReverseNestedAggregation? ReverseNested { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sampler")]
+		public Aggregations.ISamplerAggregation? Sampler { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("scripted_metric")]
+		public Aggregations.IScriptedMetricAggregation? ScriptedMetric { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("serial_diff")]
+		public Aggregations.ISerialDifferencingAggregation? SerialDiff { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("significant_terms")]
+		public Aggregations.ISignificantTermsAggregation? SignificantTerms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("significant_text")]
+		public Aggregations.ISignificantTextAggregation? SignificantText { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("stats")]
+		public Aggregations.IStatsAggregation? Stats { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("stats_bucket")]
+		public Aggregations.IStatsBucketAggregation? StatsBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("string_stats")]
+		public Aggregations.IStringStatsAggregation? StringStats { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sum")]
+		public Aggregations.ISumAggregation? Sum { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sum_bucket")]
+		public Aggregations.ISumBucketAggregation? SumBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("terms")]
+		public Aggregations.ITermsAggregation? Terms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_hits")]
+		public Aggregations.ITopHitsAggregation? TopHits { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("t_test")]
+		public Aggregations.ITTestAggregation? TTest { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_metrics")]
+		public Aggregations.ITopMetricsAggregation? TopMetrics { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_count")]
+		public Aggregations.IValueCountAggregation? ValueCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("weighted_avg")]
+		public Aggregations.IWeightedAverageAggregation? WeightedAvg { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("variable_width_histogram")]
+		public Aggregations.IVariableWidthHistogramAggregation? VariableWidthHistogram { get; set; }
+	}
+
+	public partial class AggregationContainerDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(VariableWidthHistogramAggregation))]
+	public partial interface IVariableWidthHistogramAggregation
+	{
+		string? Field { get; set; }
+
+		int? Buckets { get; set; }
+
+		int? ShardSize { get; set; }
+
+		int? InitialBuffer { get; set; }
+	}
+
+	public partial class VariableWidthHistogramAggregation : IVariableWidthHistogramAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("buckets")]
+		public int? Buckets { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("initial_buffer")]
+		public int? InitialBuffer { get; set; }
+	}
+
+	public partial class VariableWidthHistogramAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(WeightedAverageAggregation))]
+	public partial interface IWeightedAverageAggregation
+	{
+		string? Format { get; set; }
+
+		Aggregations.IWeightedAverageValue? Value { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
+
+		Aggregations.IWeightedAverageValue? Weight { get; set; }
+	}
+
+	public partial class WeightedAverageAggregation : IWeightedAverageAggregation
+	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("hard_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double>? HardBounds { get; set; }
+		[JsonPropertyName("value")]
+		public Aggregations.IWeightedAverageValue? Value { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public double? Interval { get; set; }
+		[JsonPropertyName("value_type")]
+		public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
+		[JsonPropertyName("weight")]
+		public Aggregations.IWeightedAverageValue? Weight { get; set; }
+	}
+
+	public partial class WeightedAverageAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(WeightedAverageValue))]
+	public partial interface IWeightedAverageValue
+	{
+		string? Field { get; set; }
+
+		double? Missing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class WeightedAverageValue : IWeightedAverageValue
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public double? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class WeightedAverageValueDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(Aggregation))]
+	public partial interface IAggregation
+	{
+		string? Name { get; set; }
+	}
+
+	public partial class Aggregation : IAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string? Name { get; set; }
+	}
+
+	public partial class AggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ValueCountAggregation))]
+	public partial interface IValueCountAggregation
+	{
+	}
+
+	public partial class ValueCountAggregation : IValueCountAggregation
+	{
+	}
+
+	public partial class ValueCountAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(FormattableMetricAggregation))]
+	public partial interface IFormattableMetricAggregation
+	{
+		string? Format { get; set; }
+	}
+
+	public partial class FormattableMetricAggregation : IFormattableMetricAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+	}
+
+	public partial class FormattableMetricAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MetricAggregationBase))]
+	public partial interface IMetricAggregationBase
+	{
+		string? Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public abstract partial class MetricAggregationBase : IMetricAggregationBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class MetricAggregationBaseDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(TopMetricsAggregation))]
+	public partial interface ITopMetricsAggregation
+	{
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+	}
+
+	public partial class TopMetricsAggregation : ITopMetricsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+	}
+
+	public partial class TopMetricsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(TTestAggregation))]
+	public partial interface ITTestAggregation
+	{
+		Aggregations.ITestPopulation? a { get; set; }
+
+		Aggregations.ITestPopulation? b { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
+	}
+
+	public partial class TTestAggregation : ITTestAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("a")]
+		public Aggregations.ITestPopulation? a { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("b")]
+		public Aggregations.ITestPopulation? b { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
+	}
+
+	public partial class TTestAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(TestPopulation))]
+	public partial interface ITestPopulation
+	{
+		string Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		QueryDsl.IQueryContainer? Filter { get; set; }
+	}
+
+	public partial class TestPopulation : ITestPopulation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public QueryDsl.IQueryContainer? Filter { get; set; }
+	}
+
+	public partial class TestPopulationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(TopHitsAggregation))]
+	public partial interface ITopHitsAggregation
+	{
+		Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
+
+		string? Explain { get; set; }
+
+		int? From { get; set; }
+
+		IHighlight? Highlight { get; set; }
+
+		Dictionary<string, IScriptField>? ScriptFields { get; set; }
+
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
+
+		string? TrackScores { get; set; }
+
+		string? Version { get; set; }
+
+		string? SeqNoPrimaryTerm { get; set; }
+	}
+
+	public partial class TopHitsAggregation : ITopHitsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("docvalue_fields")]
+		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("explain")]
+		public string? Explain { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("highlight")]
+		public IHighlight? Highlight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script_fields")]
+		public Dictionary<string, IScriptField>? ScriptFields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("stored_fields")]
+		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("track_scores")]
+		public string? TrackScores { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("seq_no_primary_term")]
+		public string? SeqNoPrimaryTerm { get; set; }
+	}
+
+	public partial class TopHitsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(TermsAggregation))]
+	public partial interface ITermsAggregation
+	{
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		string? Field { get; set; }
+
+		int? MinDocCount { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		string? MissingBucket { get; set; }
+
+		string? ValueType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? Order { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		int? ShardSize { get; set; }
+
+		string? ShowTermDocCountError { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class TermsAggregation : ITermsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("collect_mode")]
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("execution_hint")]
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -1424,57 +1875,962 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public double? Missing { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("offset")]
-		public double? Offset { get; set; }
+		[JsonPropertyName("missing_bucket")]
+		public string? MissingBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_type")]
+		public string? ValueType { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? Order { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("show_term_doc_count_error")]
+		public string? ShowTermDocCountError { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
 	}
 
-	public partial class HistogramOrder
+	public partial class TermsAggregationDescriptor
 	{
-		[JsonInclude]
-		[JsonPropertyName("_count")]
-		public Elastic.Clients.Elasticsearch.Global.Search.SortOrder? Count { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_key")]
-		public Elastic.Clients.Elasticsearch.Global.Search.SortOrder? Key { get; set; }
 	}
 
-	public partial class HoltLinearModelSettings
+	[ConvertAs(typeof(BucketAggregationBase))]
+	public partial interface IBucketAggregationBase
+	{
+		Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
+	}
+
+	public abstract partial class BucketAggregationBase : IBucketAggregationBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("alpha")]
-		public float? Alpha
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		[JsonPropertyName("aggregations")]
+		public Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
+	}
+
+	public partial class BucketAggregationBaseDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SumBucketAggregation))]
+	public partial interface ISumBucketAggregation
+	{
+	}
+
+	public partial class SumBucketAggregation : ISumBucketAggregation
+	{
+	}
+
+	public partial class SumBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(PipelineAggregationBase))]
+	public partial interface IPipelineAggregationBase
+	{
+		Aggregations.IBucketsPath? BucketsPath { get; set; }
+
+		string? Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+	}
+
+	public abstract partial class PipelineAggregationBase : IPipelineAggregationBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("buckets_path")]
+		public Aggregations.IBucketsPath? BucketsPath { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("beta")]
-		public float? Beta
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gap_policy")]
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+	}
+
+	public partial class PipelineAggregationBaseDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(BucketsPath))]
+	public partial interface IBucketsPath
+	{
+	}
+
+	public partial class BucketsPath : IBucketsPath
+	{
+	}
+
+	public partial class BucketsPathDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SumAggregation))]
+	public partial interface ISumAggregation
+	{
+	}
+
+	public partial class SumAggregation : ISumAggregation
+	{
+	}
+
+	public partial class SumAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(FormatMetricAggregationBase))]
+	public partial interface IFormatMetricAggregationBase
+	{
+		string? Format { get; set; }
+	}
+
+	public abstract partial class FormatMetricAggregationBase : IFormatMetricAggregationBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+	}
+
+	public partial class FormatMetricAggregationBaseDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(StringStatsAggregation))]
+	public partial interface IStringStatsAggregation
+	{
+		string? ShowDistribution { get; set; }
+	}
+
+	public partial class StringStatsAggregation : IStringStatsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("show_distribution")]
+		public string? ShowDistribution { get; set; }
+	}
+
+	public partial class StringStatsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(StatsBucketAggregation))]
+	public partial interface IStatsBucketAggregation
+	{
+	}
+
+	public partial class StatsBucketAggregation : IStatsBucketAggregation
+	{
+	}
+
+	public partial class StatsBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(StatsAggregation))]
+	public partial interface IStatsAggregation
+	{
+	}
+
+	public partial class StatsAggregation : IStatsAggregation
+	{
+	}
+
+	public partial class StatsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SignificantTextAggregation))]
+	public partial interface ISignificantTextAggregation
+	{
+		QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
+
+		Aggregations.IChiSquareHeuristic? ChiSquare { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		string? Field { get; set; }
+
+		string? FilterDuplicateText { get; set; }
+
+		Aggregations.IGoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+		long? MinDocCount { get; set; }
+
+		Aggregations.IMutualInformationHeuristic? MutualInformation { get; set; }
+
+		Aggregations.IPercentageScoreHeuristic? Percentage { get; set; }
+
+		Aggregations.IScriptedHeuristic? ScriptHeuristic { get; set; }
+
+		long? ShardMinDocCount { get; set; }
+
+		int? ShardSize { get; set; }
+
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
+	}
+
+	public partial class SignificantTextAggregation : ISignificantTextAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("background_filter")]
+		public QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("chi_square")]
+		public Aggregations.IChiSquareHeuristic? ChiSquare { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("execution_hint")]
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filter_duplicate_text")]
+		public string? FilterDuplicateText { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gnd")]
+		public Aggregations.IGoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_doc_count")]
+		public long? MinDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mutual_information")]
+		public Aggregations.IMutualInformationHeuristic? MutualInformation { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("percentage")]
+		public Aggregations.IPercentageScoreHeuristic? Percentage { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script_heuristic")]
+		public Aggregations.IScriptedHeuristic? ScriptHeuristic { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_min_doc_count")]
+		public long? ShardMinDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("source_fields")]
+		public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
+	}
+
+	public partial class SignificantTextAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ScriptedHeuristic))]
+	public partial interface IScriptedHeuristic
+	{
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptedHeuristic : IScriptedHeuristic
+	{
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptedHeuristicDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(PercentageScoreHeuristic))]
+	public partial interface IPercentageScoreHeuristic
+	{
+	}
+
+	public partial class PercentageScoreHeuristic : IPercentageScoreHeuristic
+	{
+	}
+
+	public partial class PercentageScoreHeuristicDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MutualInformationHeuristic))]
+	public partial interface IMutualInformationHeuristic
+	{
+		string BackgroundIsSuperset { get; set; }
+
+		string IncludeNegatives { get; set; }
+	}
+
+	public partial class MutualInformationHeuristic : IMutualInformationHeuristic
+	{
+		[JsonInclude]
+		[JsonPropertyName("background_is_superset")]
+		public string BackgroundIsSuperset { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include_negatives")]
+		public string IncludeNegatives { get; set; }
+	}
+
+	public partial class MutualInformationHeuristicDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GoogleNormalizedDistanceHeuristic))]
+	public partial interface IGoogleNormalizedDistanceHeuristic
+	{
+		string BackgroundIsSuperset { get; set; }
+	}
+
+	public partial class GoogleNormalizedDistanceHeuristic : IGoogleNormalizedDistanceHeuristic
+	{
+		[JsonInclude]
+		[JsonPropertyName("background_is_superset")]
+		public string BackgroundIsSuperset { get; set; }
+	}
+
+	public partial class GoogleNormalizedDistanceHeuristicDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ChiSquareHeuristic))]
+	public partial interface IChiSquareHeuristic
+	{
+		string BackgroundIsSuperset { get; set; }
+
+		string IncludeNegatives { get; set; }
+	}
+
+	public partial class ChiSquareHeuristic : IChiSquareHeuristic
+	{
+		[JsonInclude]
+		[JsonPropertyName("background_is_superset")]
+		public string BackgroundIsSuperset { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include_negatives")]
+		public string IncludeNegatives { get; set; }
+	}
+
+	public partial class ChiSquareHeuristicDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SignificantTermsAggregation))]
+	public partial interface ISignificantTermsAggregation
+	{
+		QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
+
+		Aggregations.IChiSquareHeuristic? ChiSquare { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		string? Field { get; set; }
+
+		Aggregations.IGoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+		long? MinDocCount { get; set; }
+
+		Aggregations.IMutualInformationHeuristic? MutualInformation { get; set; }
+
+		Aggregations.IPercentageScoreHeuristic? Percentage { get; set; }
+
+		Aggregations.IScriptedHeuristic? ScriptHeuristic { get; set; }
+
+		long? ShardMinDocCount { get; set; }
+
+		int? ShardSize { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class SignificantTermsAggregation : ISignificantTermsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("background_filter")]
+		public QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("chi_square")]
+		public Aggregations.IChiSquareHeuristic? ChiSquare { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("execution_hint")]
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gnd")]
+		public Aggregations.IGoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_doc_count")]
+		public long? MinDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mutual_information")]
+		public Aggregations.IMutualInformationHeuristic? MutualInformation { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("percentage")]
+		public Aggregations.IPercentageScoreHeuristic? Percentage { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script_heuristic")]
+		public Aggregations.IScriptedHeuristic? ScriptHeuristic { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_min_doc_count")]
+		public long? ShardMinDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
+	public partial class SignificantTermsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SerialDifferencingAggregation))]
+	public partial interface ISerialDifferencingAggregation
+	{
+		int? Lag { get; set; }
+	}
+
+	public partial class SerialDifferencingAggregation : ISerialDifferencingAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("lag")]
+		public int? Lag { get; set; }
+	}
+
+	public partial class SerialDifferencingAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ScriptedMetricAggregation))]
+	public partial interface IScriptedMetricAggregation
+	{
+		Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
+	}
+
+	public partial class ScriptedMetricAggregation : IScriptedMetricAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("combine_script")]
+		public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("init_script")]
+		public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("map_script")]
+		public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("reduce_script")]
+		public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
+	}
+
+	public partial class ScriptedMetricAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SamplerAggregation))]
+	public partial interface ISamplerAggregation
+	{
+		int? ShardSize { get; set; }
+	}
+
+	public partial class SamplerAggregation : ISamplerAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+	}
+
+	public partial class SamplerAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ReverseNestedAggregation))]
+	public partial interface IReverseNestedAggregation
+	{
+		string? Path { get; set; }
+	}
+
+	public partial class ReverseNestedAggregation : IReverseNestedAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string? Path { get; set; }
+	}
+
+	public partial class ReverseNestedAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RateAggregation))]
+	public partial interface IRateAggregation
+	{
+		Elastic.Clients.Elasticsearch.Aggregations.DateInterval? Unit { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
+	}
+
+	public partial class RateAggregation : IRateAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("unit")]
+		public Elastic.Clients.Elasticsearch.Aggregations.DateInterval? Unit { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
+	}
+
+	public partial class RateAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RareTermsAggregation))]
+	public partial interface IRareTermsAggregation
+	{
+		string? Field { get; set; }
+
+		long? MaxDocCount { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		double? Precision { get; set; }
+
+		string? ValueType { get; set; }
+	}
+
+	public partial class RareTermsAggregation : IRareTermsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_doc_count")]
+		public long? MaxDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("precision")]
+		public double? Precision { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_type")]
+		public string? ValueType { get; set; }
+	}
+
+	public partial class RareTermsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RangeAggregation))]
+	public partial interface IRangeAggregation
+	{
+		string? Field { get; set; }
+
+		IEnumerable<Aggregations.IAggregationRange>? Ranges { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		string? Keyed { get; set; }
+	}
+
+	public partial class RangeAggregation : IRangeAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ranges")]
+		public IEnumerable<Aggregations.IAggregationRange>? Ranges { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+	}
+
+	public partial class RangeAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(AggregationRange))]
+	public partial interface IAggregationRange
+	{
+		string? Key { get; set; }
+	}
+
+	public partial class AggregationRange : IAggregationRange
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string? Key { get; set; }
+	}
+
+	public partial class AggregationRangeDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(PercentilesBucketAggregation))]
+	public partial interface IPercentilesBucketAggregation
+	{
+		IEnumerable<double>? Percents { get; set; }
+	}
+
+	public partial class PercentilesBucketAggregation : IPercentilesBucketAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("percents")]
+		public IEnumerable<double>? Percents { get; set; }
+	}
+
+	public partial class PercentilesBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(PercentilesAggregation))]
+	public partial interface IPercentilesAggregation
+	{
+		string? Keyed { get; set; }
+
+		IEnumerable<double>? Percents { get; set; }
+
+		Aggregations.IHdrMethod? Hdr { get; set; }
+
+		Aggregations.ITDigest? Tdigest { get; set; }
+	}
+
+	public partial class PercentilesAggregation : IPercentilesAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("percents")]
+		public IEnumerable<double>? Percents { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("hdr")]
+		public Aggregations.IHdrMethod? Hdr { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tdigest")]
+		public Aggregations.ITDigest? Tdigest { get; set; }
+	}
+
+	public partial class PercentilesAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(TDigest))]
+	public partial interface ITDigest
+	{
+		int? Compression { get; set; }
+	}
+
+	public partial class TDigest : ITDigest
+	{
+		[JsonInclude]
+		[JsonPropertyName("compression")]
+		public int? Compression { get; set; }
+	}
+
+	public partial class TDigestDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(HdrMethod))]
+	public partial interface IHdrMethod
+	{
+		int? NumberOfSignificantValueDigits { get; set; }
+	}
+
+	public partial class HdrMethod : IHdrMethod
+	{
+		[JsonInclude]
+		[JsonPropertyName("number_of_significant_value_digits")]
+		public int? NumberOfSignificantValueDigits { get; set; }
+	}
+
+	public partial class HdrMethodDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(PercentileRanksAggregation))]
+	public partial interface IPercentileRanksAggregation
+	{
+		string? Keyed { get; set; }
+
+		IEnumerable<double>? Values { get; set; }
+
+		Aggregations.IHdrMethod? Hdr { get; set; }
+
+		Aggregations.ITDigest? Tdigest { get; set; }
+	}
+
+	public partial class PercentileRanksAggregation : IPercentileRanksAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("values")]
+		public IEnumerable<double>? Values { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("hdr")]
+		public Aggregations.IHdrMethod? Hdr { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tdigest")]
+		public Aggregations.ITDigest? Tdigest { get; set; }
+	}
+
+	public partial class PercentileRanksAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ParentAggregation))]
+	public partial interface IParentAggregation
+	{
+		string? Type { get; set; }
+	}
+
+	public partial class ParentAggregation : IParentAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string? Type { get; set; }
+	}
+
+	public partial class ParentAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(NormalizeAggregation))]
+	public partial interface INormalizeAggregation
+	{
+		Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
+	}
+
+	public partial class NormalizeAggregation : INormalizeAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("method")]
+		public Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
+	}
+
+	public partial class NormalizeAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(NestedAggregation))]
+	public partial interface INestedAggregation
+	{
+		string? Path { get; set; }
+	}
+
+	public partial class NestedAggregation : INestedAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string? Path { get; set; }
+	}
+
+	public partial class NestedAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MultiTermsAggregation))]
+	public partial interface IMultiTermsAggregation
+	{
+		IEnumerable<Aggregations.IMultiTermLookup> Terms { get; set; }
+	}
+
+	public partial class MultiTermsAggregation : IMultiTermsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("terms")]
+		public IEnumerable<Aggregations.IMultiTermLookup> Terms { get; set; }
+	}
+
+	public partial class MultiTermsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MultiTermLookup))]
+	public partial interface IMultiTermLookup
+	{
+		string Field { get; set; }
+	}
+
+	public partial class MultiTermLookup : IMultiTermLookup
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+	}
+
+	public partial class MultiTermLookupDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MovingFunctionAggregation))]
+	public partial interface IMovingFunctionAggregation
+	{
+		string? Script { get; set; }
+
+		int? Shift { get; set; }
+
+		int? Window { get; set; }
+	}
+
+	public partial class MovingFunctionAggregation : IMovingFunctionAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public string? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shift")]
+		public int? Shift { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
+	}
+
+	public partial class MovingFunctionAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MovingPercentilesAggregation))]
+	public partial interface IMovingPercentilesAggregation
+	{
+		int? Window { get; set; }
+
+		int? Shift { get; set; }
+
+		string? Keyed { get; set; }
+	}
+
+	public partial class MovingPercentilesAggregation : IMovingPercentilesAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shift")]
+		public int? Shift { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+	}
+
+	public partial class MovingPercentilesAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MovingAverageAggregation))]
+	public partial interface IMovingAverageAggregation
+	{
+		string? Minimize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.MovingAverageModel? Model { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.MovingAverageSettings Settings { get; set; }
+
+		int? Predict { get; set; }
+
+		int? Window { get; set; }
+	}
+
+	public partial class MovingAverageAggregation : IMovingAverageAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("minimize")]
+		public string? Minimize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("model")]
+		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageModel? Model { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("settings")]
+		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageSettings Settings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("predict")]
+		public int? Predict { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
+	}
+
+	public partial class MovingAverageAggregationDescriptor
+	{
 	}
 
 	public partial class HoltWintersModelSettings
@@ -1517,7 +2873,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("pad")]
-		public bool? Pad
+		public string? Pad
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1552,40 +2908,399 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class InferenceAggregation : Aggregations.PipelineAggregationBase
+	public partial class HoltLinearModelSettings
 	{
 		[JsonInclude]
-		[JsonPropertyName("inference_config")]
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
+		[JsonPropertyName("alpha")]
+		public float? Alpha
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 
 		[JsonInclude]
-		[JsonPropertyName("model_id")]
-		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
+		[JsonPropertyName("beta")]
+		public float? Beta
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
-	public partial class InferenceConfigContainer
+	public partial class EwmaModelSettings
 	{
 		[JsonInclude]
-		[JsonPropertyName("classification")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? Classification { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("regression")]
-		public Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? Regression { get; set; }
+		[JsonPropertyName("alpha")]
+		public float? Alpha
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
-	public partial class IpRangeAggregation : Aggregations.BucketAggregationBase
+	[ConvertAs(typeof(MissingAggregation))]
+	public partial interface IMissingAggregation
+	{
+		string? Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+	}
+
+	public partial class MissingAggregation : IMissingAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+	}
+
+	public partial class MissingAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MinBucketAggregation))]
+	public partial interface IMinBucketAggregation
+	{
+	}
+
+	public partial class MinBucketAggregation : IMinBucketAggregation
+	{
+	}
+
+	public partial class MinBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MinAggregation))]
+	public partial interface IMinAggregation
+	{
+	}
+
+	public partial class MinAggregation : IMinAggregation
+	{
+	}
+
+	public partial class MinAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MedianAbsoluteDeviationAggregation))]
+	public partial interface IMedianAbsoluteDeviationAggregation
+	{
+		double? Compression { get; set; }
+	}
+
+	public partial class MedianAbsoluteDeviationAggregation : IMedianAbsoluteDeviationAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("compression")]
+		public double? Compression { get; set; }
+	}
+
+	public partial class MedianAbsoluteDeviationAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MaxBucketAggregation))]
+	public partial interface IMaxBucketAggregation
+	{
+	}
+
+	public partial class MaxBucketAggregation : IMaxBucketAggregation
+	{
+	}
+
+	public partial class MaxBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MaxAggregation))]
+	public partial interface IMaxAggregation
+	{
+	}
+
+	public partial class MaxAggregation : IMaxAggregation
+	{
+	}
+
+	public partial class MaxAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MatrixStatsAggregation))]
+	public partial interface IMatrixStatsAggregation
+	{
+		Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
+	}
+
+	public partial class MatrixStatsAggregation : IMatrixStatsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
+	}
+
+	public partial class MatrixStatsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(MatrixAggregation))]
+	public partial interface IMatrixAggregation
+	{
+		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		Dictionary<string, double>? Missing { get; set; }
+	}
+
+	public partial class MatrixAggregation : IMatrixAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public Dictionary<string, double>? Missing { get; set; }
+	}
+
+	public partial class MatrixAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoLineAggregation))]
+	public partial interface IGeoLineAggregation
+	{
+		Aggregations.IGeoLinePoint Point { get; set; }
+
+		Aggregations.IGeoLineSort Sort { get; set; }
+
+		string? IncludeSort { get; set; }
+
+		Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class GeoLineAggregation : IGeoLineAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("point")]
+		public Aggregations.IGeoLinePoint Point { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public Aggregations.IGeoLineSort Sort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include_sort")]
+		public string? IncludeSort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort_order")]
+		public Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
+	public partial class GeoLineAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoLineSort))]
+	public partial interface IGeoLineSort
+	{
+		string Field { get; set; }
+	}
+
+	public partial class GeoLineSort : IGeoLineSort
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+	}
+
+	public partial class GeoLineSortDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoLinePoint))]
+	public partial interface IGeoLinePoint
+	{
+		string Field { get; set; }
+	}
+
+	public partial class GeoLinePoint : IGeoLinePoint
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+	}
+
+	public partial class GeoLinePointDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(InferenceAggregation))]
+	public partial interface IInferenceAggregation
+	{
+		string ModelId { get; set; }
+
+		Aggregations.IInferenceConfigContainer? InferenceConfig { get; set; }
+	}
+
+	public partial class InferenceAggregation : IInferenceAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("model_id")]
+		public string ModelId { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("inference_config")]
+		public Aggregations.IInferenceConfigContainer? InferenceConfig { get; set; }
+	}
+
+	public partial class InferenceAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(InferenceConfigContainer))]
+	public partial interface IInferenceConfigContainer
+	{
+		Aggregations.IRegressionInferenceOptions? Regression { get; set; }
+
+		Aggregations.IClassificationInferenceOptions? Classification { get; set; }
+	}
+
+	public partial class InferenceConfigContainer : IInferenceConfigContainer
+	{
+		[JsonInclude]
+		[JsonPropertyName("regression")]
+		public Aggregations.IRegressionInferenceOptions? Regression { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("classification")]
+		public Aggregations.IClassificationInferenceOptions? Classification { get; set; }
+	}
+
+	public partial class InferenceConfigContainerDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ClassificationInferenceOptions))]
+	public partial interface IClassificationInferenceOptions
+	{
+		int? NumTopClasses { get; set; }
+
+		int? NumTopFeatureImportanceValues { get; set; }
+
+		string? PredictionFieldType { get; set; }
+
+		string? ResultsField { get; set; }
+
+		string? TopClassesResultsField { get; set; }
+	}
+
+	public partial class ClassificationInferenceOptions : IClassificationInferenceOptions
+	{
+		[JsonInclude]
+		[JsonPropertyName("num_top_classes")]
+		public int? NumTopClasses { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("num_top_feature_importance_values")]
+		public int? NumTopFeatureImportanceValues { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prediction_field_type")]
+		public string? PredictionFieldType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("results_field")]
+		public string? ResultsField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_classes_results_field")]
+		public string? TopClassesResultsField { get; set; }
+	}
+
+	public partial class ClassificationInferenceOptionsDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RegressionInferenceOptions))]
+	public partial interface IRegressionInferenceOptions
+	{
+		string? ResultsField { get; set; }
+
+		int? NumTopFeatureImportanceValues { get; set; }
+	}
+
+	public partial class RegressionInferenceOptions : IRegressionInferenceOptions
+	{
+		[JsonInclude]
+		[JsonPropertyName("results_field")]
+		public string? ResultsField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("num_top_feature_importance_values")]
+		public int? NumTopFeatureImportanceValues { get; set; }
+	}
+
+	public partial class RegressionInferenceOptionsDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(IpRangeAggregation))]
+	public partial interface IIpRangeAggregation
+	{
+		string? Field { get; set; }
+
+		IEnumerable<Aggregations.IIpRangeAggregationRange>? Ranges { get; set; }
+	}
+
+	public partial class IpRangeAggregation : IIpRangeAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ranges")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
+		public IEnumerable<Aggregations.IIpRangeAggregationRange>? Ranges { get; set; }
 	}
 
-	public partial class IpRangeAggregationRange
+	public partial class IpRangeAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(IpRangeAggregationRange))]
+	public partial interface IIpRangeAggregationRange
+	{
+		string? From { get; set; }
+
+		string? Mask { get; set; }
+
+		string? To { get; set; }
+	}
+
+	public partial class IpRangeAggregationRange : IIpRangeAggregationRange
 	{
 		[JsonInclude]
 		[JsonPropertyName("from")]
@@ -1600,1104 +3315,41 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? To { get; set; }
 	}
 
-	public partial class IpRangeBucket
+	public partial class IpRangeAggregationRangeDescriptor
 	{
 	}
 
-	public partial class KeyedBucket<TKey>
+	[ConvertAs(typeof(HistogramAggregation))]
+	public partial interface IHistogramAggregation
 	{
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		string? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public TKey Key
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		double? Interval { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("key_as_string")]
-		public string KeyAsString
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		int? MinDocCount { get; set; }
+
+		double? Missing { get; set; }
+
+		double? Offset { get; set; }
+
+		Aggregations.IHistogramOrder? Order { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		string? Format { get; set; }
+
+		string? Keyed { get; set; }
 	}
 
-	public partial class KeyedValueAggregate : Aggregations.ValueAggregate
-	{
-		[JsonInclude]
-		[JsonPropertyName("keys")]
-		public IReadOnlyCollection<string> Keys
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class LineStringGeoShape
-	{
-		[JsonInclude]
-		[JsonPropertyName("coordinates")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate> Coordinates
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class MatrixAggregation : Aggregations.Aggregation
-	{
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
-	}
-
-	public partial class MatrixStatsAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("correlation")]
-		public Dictionary<string, double> Correlation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("count")]
-		public int Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("covariance")]
-		public Dictionary<string, double> Covariance
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("kurtosis")]
-		public double Kurtosis
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("mean")]
-		public double Mean
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("skewness")]
-		public double Skewness
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("variance")]
-		public double Variance
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class MatrixStatsAggregation : Aggregations.MatrixAggregation
-	{
-		[JsonInclude]
-		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
-	}
-
-	public partial class MaxAggregation : Aggregations.FormatMetricAggregationBase
-	{
-	}
-
-	public partial class MaxBucketAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class MedianAbsoluteDeviationAggregation : Aggregations.FormatMetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("compression")]
-		public double? Compression { get; set; }
-	}
-
-	public abstract partial class MetricAggregationBase
+	public partial class HistogramAggregation : IHistogramAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public string? Field { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	}
-
-	public partial class MinAggregation : Aggregations.FormatMetricAggregationBase
-	{
-	}
-
-	public partial class MinBucketAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class MissingAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-	}
-
-	public partial class MovingAverageAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("minimize")]
-		public bool? Minimize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("model")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageModel? Model { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("predict")]
-		public int? Predict { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageSettings Settings { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("window")]
-		public int? Window { get; set; }
-	}
-
-	public partial class MovingFunctionAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public string? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shift")]
-		public int? Shift { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("window")]
-		public int? Window { get; set; }
-	}
-
-	public partial class MovingPercentilesAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shift")]
-		public int? Shift { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("window")]
-		public int? Window { get; set; }
-	}
-
-	public partial class MultiBucketAggregate<TBucket> : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
-		public IReadOnlyCollection<TBucket> Buckets
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class MultiTermLookup
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public partial class MultiTermsAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
-	}
-
-	public partial class MutualInformationHeuristic
-	{
-		[JsonInclude]
-		[JsonPropertyName("background_is_superset")]
-		public bool BackgroundIsSuperset { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include_negatives")]
-		public bool IncludeNegatives { get; set; }
-	}
-
-	public partial class NestedAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("path")]
-		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
-	}
-
-	public partial class NormalizeAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("method")]
-		public Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
-	}
-
-	public partial class ParentAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.RelationName? Type { get; set; }
-	}
-
-	public partial class PercentageScoreHeuristic
-	{
-	}
-
-	public partial class PercentileItem
-	{
-		[JsonInclude]
-		[JsonPropertyName("percentile")]
-		public double Percentile
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public double Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class PercentileRanksAggregation : Aggregations.FormatMetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("hdr")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tdigest")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? Tdigest { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("values")]
-		public IEnumerable<double>? Values { get; set; }
-	}
-
-	public partial class PercentilesAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("items")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentileItem> Items
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class PercentilesAggregation : Aggregations.FormatMetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("hdr")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("percents")]
-		public IEnumerable<double>? Percents { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("tdigest")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? Tdigest { get; set; }
-	}
-
-	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("percents")]
-		public IEnumerable<double>? Percents { get; set; }
-	}
-
-	public abstract partial class PipelineAggregationBase : Aggregations.Aggregation
-	{
-		[JsonInclude]
-		[JsonPropertyName("buckets_path")]
-		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gap_policy")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-	}
-
-	public partial class RangeAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ranges")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	}
-
-	public partial class RangeBucket
-	{
-	}
-
-	public partial class RareTermsAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("exclude")]
-		public IEnumerable<string>? Exclude { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include")]
-		public OneOf<string, IReadOnlyCollection<string>, Aggregations.TermsInclude>? Include { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_doc_count")]
-		public long? MaxDocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("precision")]
-		public double? Precision { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("value_type")]
-		public string? ValueType { get; set; }
-	}
-
-	public partial class RareTermsBucket<TKey>
-	{
-	}
-
-	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("unit")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DateInterval? Unit { get; set; }
-	}
-
-	public partial class RegressionInferenceOptions
-	{
-		[JsonInclude]
-		[JsonPropertyName("num_top_feature_importance_values")]
-		public int? NumTopFeatureImportanceValues { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
-	}
-
-	public partial class ReverseNestedAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("path")]
-		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
-	}
-
-	public partial class SamplerAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-	}
-
-	public partial class ScriptedHeuristic
-	{
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
-	}
-
-	public partial class ScriptedMetricAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public object Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("combine_script")]
-		public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("init_script")]
-		public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("map_script")]
-		public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("reduce_script")]
-		public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
-	}
-
-	public partial class SerialDifferencingAggregation : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("lag")]
-		public int? Lag { get; set; }
-	}
-
-	public partial class SignificantTermsAggregate<TKey, TBucket> : Aggregations.MultiBucketAggregate<TBucket>
-	{
-		[JsonInclude]
-		[JsonPropertyName("bg_count")]
-		public long BgCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class SignificantTermsAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("background_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("chi_square")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("exclude")]
-		public IEnumerable<string>? Exclude { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("execution_hint")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gnd")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include")]
-		public IEnumerable<string>? Include { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
-		public long? MinDocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("mutual_information")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("percentage")]
-		public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script_heuristic")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_min_doc_count")]
-		public long? ShardMinDocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-	}
-
-	public partial class SignificantTermsBucket<TKey>
-	{
-	}
-
-	public partial class SignificantTextAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("background_filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("chi_square")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("exclude")]
-		public IEnumerable<string>? Exclude { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("execution_hint")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter_duplicate_text")]
-		public bool? FilterDuplicateText { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gnd")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include")]
-		public IEnumerable<string>? Include { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_doc_count")]
-		public long? MinDocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("mutual_information")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("percentage")]
-		public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script_heuristic")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_min_doc_count")]
-		public long? ShardMinDocCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("source_fields")]
-		public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
-	}
-
-	public partial class SingleBucketAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public double DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class StandardDeviationBounds
-	{
-		[JsonInclude]
-		[JsonPropertyName("lower")]
-		public double? Lower
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("lower_population")]
-		public double? LowerPopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("lower_sampling")]
-		public double? LowerSampling
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("upper")]
-		public double? Upper
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("upper_population")]
-		public double? UpperPopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("upper_sampling")]
-		public double? UpperSampling
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class StatsAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("avg")]
-		public double? Avg
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("count")]
-		public double Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("max")]
-		public double? Max
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("min")]
-		public double? Min
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("sum")]
-		public double Sum
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class StatsAggregation : Aggregations.FormatMetricAggregationBase
-	{
-	}
-
-	public partial class StatsBucketAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class StringStatsAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("avg_length")]
-		public double AvgLength
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("count")]
-		public long Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("distribution")]
-		public Dictionary<string, double>? Distribution
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("entropy")]
-		public double Entropy
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("max_length")]
-		public int MaxLength
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("min_length")]
-		public int MinLength
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class StringStatsAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("show_distribution")]
-		public bool? ShowDistribution { get; set; }
-	}
-
-	public partial class SumAggregation : Aggregations.FormatMetricAggregationBase
-	{
-	}
-
-	public partial class SumBucketAggregation : Aggregations.PipelineAggregationBase
-	{
-	}
-
-	public partial class TDigest
-	{
-		[JsonInclude]
-		[JsonPropertyName("compression")]
-		public int? Compression { get; set; }
-	}
-
-	public partial class TDigestPercentilesAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("values")]
-		public Dictionary<string, double> Values
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class TTestAggregation : Aggregations.Aggregation
-	{
-		[JsonInclude]
-		[JsonPropertyName("a")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("b")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
-	}
-
-	public partial class TermsAggregate<TKey, TBucket> : Aggregations.MultiBucketAggregate<TBucket>
-	{
-		[JsonInclude]
-		[JsonPropertyName("doc_count_error_upper_bound")]
-		public long DocCountErrorUpperBound
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("sum_other_doc_count")]
-		public long SumOtherDocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class TermsAggregation : Aggregations.BucketAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("collect_mode")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("exclude")]
-		public IEnumerable<string>? Exclude { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("execution_hint")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include")]
-		public OneOf<string, IReadOnlyCollection<string>, Aggregations.TermsInclude>? Include { get; set; }
+		[JsonPropertyName("interval")]
+		public double? Interval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -2705,15 +3357,313 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+		public double? Missing { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing_bucket")]
-		public bool? MissingBucket { get; set; }
+		[JsonPropertyName("offset")]
+		public double? Offset { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? Order { get; set; }
+		public Aggregations.IHistogramOrder? Order { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+	}
+
+	public partial class HistogramAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(HistogramOrder))]
+	public partial interface IHistogramOrder
+	{
+		Elastic.Clients.Elasticsearch.SortOrder? Count { get; set; }
+
+		Elastic.Clients.Elasticsearch.SortOrder? Key { get; set; }
+	}
+
+	public partial class HistogramOrder : IHistogramOrder
+	{
+		[JsonInclude]
+		[JsonPropertyName("_count")]
+		public Elastic.Clients.Elasticsearch.SortOrder? Count { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_key")]
+		public Elastic.Clients.Elasticsearch.SortOrder? Key { get; set; }
+	}
+
+	public partial class HistogramOrderDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ExtendedBounds<>))]
+	public partial interface IExtendedBounds
+	{
+	}
+
+	public partial class ExtendedBounds<T> : IExtendedBounds
+	{
+	}
+
+	public partial class ExtendedBoundsDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GlobalAggregation))]
+	public partial interface IGlobalAggregation
+	{
+	}
+
+	public partial class GlobalAggregation : IGlobalAggregation
+	{
+	}
+
+	public partial class GlobalAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoTileGridAggregation))]
+	public partial interface IGeoTileGridAggregation
+	{
+		string? Field { get; set; }
+
+		int? ShardSize { get; set; }
+
+		int? Size { get; set; }
+
+		Aggregations.IGeoBounds? Bounds { get; set; }
+	}
+
+	public partial class GeoTileGridAggregation : IGeoTileGridAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("bounds")]
+		public Aggregations.IGeoBounds? Bounds { get; set; }
+	}
+
+	public partial class GeoTileGridAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoHashGridAggregation))]
+	public partial interface IGeoHashGridAggregation
+	{
+		QueryDsl.IBoundingBox? Bounds { get; set; }
+
+		string? Field { get; set; }
+
+		int? ShardSize { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class GeoHashGridAggregation : IGeoHashGridAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("bounds")]
+		public QueryDsl.IBoundingBox? Bounds { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
+	public partial class GeoHashGridAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoDistanceAggregation))]
+	public partial interface IGeoDistanceAggregation
+	{
+		Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+
+		string? Field { get; set; }
+
+		IEnumerable<Aggregations.IAggregationRange>? Ranges { get; set; }
+
+		Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
+	}
+
+	public partial class GeoDistanceAggregation : IGeoDistanceAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("distance_type")]
+		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ranges")]
+		public IEnumerable<Aggregations.IAggregationRange>? Ranges { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("unit")]
+		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
+	}
+
+	public partial class GeoDistanceAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoCentroidAggregation))]
+	public partial interface IGeoCentroidAggregation
+	{
+		long? Count { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; set; }
+	}
+
+	public partial class GeoCentroidAggregation : IGeoCentroidAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public long? Count { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("location")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; set; }
+	}
+
+	public partial class GeoCentroidAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(GeoBoundsAggregation))]
+	public partial interface IGeoBoundsAggregation
+	{
+		string? WrapLongitude { get; set; }
+	}
+
+	public partial class GeoBoundsAggregation : IGeoBoundsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("wrap_longitude")]
+		public string? WrapLongitude { get; set; }
+	}
+
+	public partial class GeoBoundsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(FiltersAggregation))]
+	public partial interface IFiltersAggregation
+	{
+		string? OtherBucket { get; set; }
+
+		string? OtherBucketKey { get; set; }
+
+		string? Keyed { get; set; }
+	}
+
+	public partial class FiltersAggregation : IFiltersAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("other_bucket")]
+		public string? OtherBucket { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("other_bucket_key")]
+		public string? OtherBucketKey { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+	}
+
+	public partial class FiltersAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ExtendedStatsBucketAggregation))]
+	public partial interface IExtendedStatsBucketAggregation
+	{
+		double? Sigma { get; set; }
+	}
+
+	public partial class ExtendedStatsBucketAggregation : IExtendedStatsBucketAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("sigma")]
+		public double? Sigma { get; set; }
+	}
+
+	public partial class ExtendedStatsBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ExtendedStatsAggregation))]
+	public partial interface IExtendedStatsAggregation
+	{
+		double? Sigma { get; set; }
+	}
+
+	public partial class ExtendedStatsAggregation : IExtendedStatsAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("sigma")]
+		public double? Sigma { get; set; }
+	}
+
+	public partial class ExtendedStatsAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(DiversifiedSamplerAggregation))]
+	public partial interface IDiversifiedSamplerAggregation
+	{
+		Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+
+		int? MaxDocsPerValue { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		int? ShardSize { get; set; }
+
+		string? Field { get; set; }
+	}
+
+	public partial class DiversifiedSamplerAggregation : IDiversifiedSamplerAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("execution_hint")]
+		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_docs_per_value")]
+		public int? MaxDocsPerValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -2724,84 +3674,319 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? ShardSize { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("show_term_doc_count_error")]
-		public bool? ShowTermDocCountError { get; set; }
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+	}
 
+	public partial class DiversifiedSamplerAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(DerivativeAggregation))]
+	public partial interface IDerivativeAggregation
+	{
+	}
+
+	public partial class DerivativeAggregation : IDerivativeAggregation
+	{
+	}
+
+	public partial class DerivativeAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(DateRangeAggregation))]
+	public partial interface IDateRangeAggregation
+	{
+		string? Field { get; set; }
+
+		string? Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		IEnumerable<Aggregations.IDateRangeExpression>? Ranges { get; set; }
+
+		string? TimeZone { get; set; }
+
+		string? Keyed { get; set; }
+	}
+
+	public partial class DateRangeAggregation : IDateRangeAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ranges")]
+		public IEnumerable<Aggregations.IDateRangeExpression>? Ranges { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+	}
+
+	public partial class DateRangeAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(DateRangeExpression))]
+	public partial interface IDateRangeExpression
+	{
+		string? FromAsString { get; set; }
+
+		string? ToAsString { get; set; }
+
+		string? Key { get; set; }
+
+		long? DocCount { get; set; }
+	}
+
+	public partial class DateRangeExpression : IDateRangeExpression
+	{
+		[JsonInclude]
+		[JsonPropertyName("from_as_string")]
+		public string? FromAsString { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("to_as_string")]
+		public string? ToAsString { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string? Key { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long? DocCount { get; set; }
+	}
+
+	public partial class DateRangeExpressionDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(DateHistogramAggregation))]
+	public partial interface IDateHistogramAggregation
+	{
+		string? Field { get; set; }
+
+		string? Format { get; set; }
+
+		int? MinDocCount { get; set; }
+
+		string? Missing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
+
+		Aggregations.IHistogramOrder? Order { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		string? TimeZone { get; set; }
+
+		string? Keyed { get; set; }
+	}
+
+	public partial class DateHistogramAggregation : IDateHistogramAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_doc_count")]
+		public int? MinDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public string? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("offset")]
+		public Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("order")]
+		public Aggregations.IHistogramOrder? Order { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public string? Keyed { get; set; }
+	}
+
+	public partial class DateHistogramAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(CumulativeSumAggregation))]
+	public partial interface ICumulativeSumAggregation
+	{
+	}
+
+	public partial class CumulativeSumAggregation : ICumulativeSumAggregation
+	{
+	}
+
+	public partial class CumulativeSumAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(CumulativeCardinalityAggregation))]
+	public partial interface ICumulativeCardinalityAggregation
+	{
+	}
+
+	public partial class CumulativeCardinalityAggregation : ICumulativeCardinalityAggregation
+	{
+	}
+
+	public partial class CumulativeCardinalityAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(CompositeAggregation))]
+	public partial interface ICompositeAggregation
+	{
+		int? Size { get; set; }
+
+		IEnumerable<Dictionary<string, Aggregations.ICompositeAggregationSource>>? Sources { get; set; }
+	}
+
+	public partial class CompositeAggregation : ICompositeAggregation
+	{
 		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("value_type")]
-		public string? ValueType { get; set; }
+		[JsonPropertyName("sources")]
+		public IEnumerable<Dictionary<string, Aggregations.ICompositeAggregationSource>>? Sources { get; set; }
 	}
 
-	public partial class TermsInclude
+	public partial class CompositeAggregationDescriptor
 	{
-		[JsonInclude]
-		[JsonPropertyName("num_partitions")]
-		public long NumPartitions { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("partition")]
-		public long Partition { get; set; }
 	}
 
-	public partial class TestPopulation
+	[ConvertAs(typeof(CompositeAggregationSource))]
+	public partial interface ICompositeAggregationSource
 	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+		Aggregations.ITermsAggregation? Terms { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
+		Aggregations.IHistogramAggregation? Histogram { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		Aggregations.IDateHistogramAggregation? DateHistogram { get; set; }
+
+		Aggregations.IGeoTileGridAggregation? GeotileGrid { get; set; }
 	}
 
-	public partial class TopHitsAggregate : Aggregations.AggregateBase
+	public partial class CompositeAggregationSource : ICompositeAggregationSource
 	{
 		[JsonInclude]
-		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.Global.Search.HitsMetadata<Dictionary<string, object>> Hits
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		[JsonPropertyName("terms")]
+		public Aggregations.ITermsAggregation? Terms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("histogram")]
+		public Aggregations.IHistogramAggregation? Histogram { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("date_histogram")]
+		public Aggregations.IDateHistogramAggregation? DateHistogram { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("geotile_grid")]
+		public Aggregations.IGeoTileGridAggregation? GeotileGrid { get; set; }
 	}
 
-	public partial class TopHitsAggregation : Aggregations.MetricAggregationBase
+	public partial class CompositeAggregationSourceDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ChildrenAggregation))]
+	public partial interface IChildrenAggregation
+	{
+		string? Type { get; set; }
+	}
+
+	public partial class ChildrenAggregation : IChildrenAggregation
 	{
 		[JsonInclude]
-		[JsonPropertyName("docvalue_fields")]
-		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
+		[JsonPropertyName("type")]
+		public string? Type { get; set; }
+	}
+
+	public partial class ChildrenAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(CardinalityAggregation))]
+	public partial interface ICardinalityAggregation
+	{
+		int? PrecisionThreshold { get; set; }
+
+		string? Rehash { get; set; }
+	}
+
+	public partial class CardinalityAggregation : ICardinalityAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("precision_threshold")]
+		public int? PrecisionThreshold { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("explain")]
-		public bool? Explain { get; set; }
+		[JsonPropertyName("rehash")]
+		public string? Rehash { get; set; }
+	}
 
+	public partial class CardinalityAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(BucketSortAggregation))]
+	public partial interface IBucketSortAggregation
+	{
+		int? From { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+	}
+
+	public partial class BucketSortAggregation : IBucketSortAggregation
+	{
 		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("seq_no_primary_term")]
-		public bool? SeqNoPrimaryTerm { get; set; }
+		[JsonPropertyName("gap_policy")]
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -2809,121 +3994,111 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_source")]
-		public OneOf<bool, Global.Search.SourceFilter, Fields>? Source { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stored_fields")]
-		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("track_scores")]
-		public bool? TrackScores { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public bool? Version { get; set; }
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 	}
 
-	public partial class TopMetrics
-	{
-		[JsonInclude]
-		[JsonPropertyName("metrics")]
-		public Dictionary<string, Union<double, string>> Metrics
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public IReadOnlyCollection<Union<double, string>> Sort
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class TopMetricsAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("top")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("metrics")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
-	}
-
-	public partial class TopMetricsValue
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	}
-
-	public partial class ValueAggregate : Aggregations.AggregateBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public double Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("value_as_string")]
-		public string? ValueAsString
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class ValueCountAggregation : Aggregations.FormattableMetricAggregation
+	public partial class BucketSortAggregationDescriptor
 	{
 	}
 
-	public partial class VariableWidthHistogramAggregation
+	[ConvertAs(typeof(BucketSelectorAggregation))]
+	public partial interface IBucketSelectorAggregation
+	{
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class BucketSelectorAggregation : IBucketSelectorAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class BucketSelectorAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(BucketScriptAggregation))]
+	public partial interface IBucketScriptAggregation
+	{
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class BucketScriptAggregation : IBucketScriptAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	public partial class BucketScriptAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(BoxplotAggregation))]
+	public partial interface IBoxplotAggregation
+	{
+		double? Compression { get; set; }
+	}
+
+	public partial class BoxplotAggregation : IBoxplotAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("compression")]
+		public double? Compression { get; set; }
+	}
+
+	public partial class BoxplotAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(AverageBucketAggregation))]
+	public partial interface IAverageBucketAggregation
+	{
+	}
+
+	public partial class AverageBucketAggregation : IAverageBucketAggregation
+	{
+	}
+
+	public partial class AverageBucketAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(AverageAggregation))]
+	public partial interface IAverageAggregation
+	{
+	}
+
+	public partial class AverageAggregation : IAverageAggregation
+	{
+	}
+
+	public partial class AverageAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(AutoDateHistogramAggregation))]
+	public partial interface IAutoDateHistogramAggregation
+	{
+		int? Buckets { get; set; }
+
+		string? Field { get; set; }
+
+		string? Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
+
+		string? Missing { get; set; }
+
+		string? Offset { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		string? TimeZone { get; set; }
+	}
+
+	public partial class AutoDateHistogramAggregation : IAutoDateHistogramAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
@@ -2931,48 +4106,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		public string? Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("initial_buffer")]
-		public int? InitialBuffer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-	}
-
-	public partial class WeightedAverageAggregation : Aggregations.Aggregation
-	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("value")]
-		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("value_type")]
-		public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("weight")]
-		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
-	}
-
-	public partial class WeightedAverageValue
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+		[JsonPropertyName("minimum_interval")]
+		public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public double? Missing { get; set; }
+		public string? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("offset")]
+		public string? Offset { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+	}
+
+	public partial class AutoDateHistogramAggregationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(AdjacencyMatrixAggregation))]
+	public partial interface IAdjacencyMatrixAggregation
+	{
+		Dictionary<string, QueryDsl.IQueryContainer>? Filters { get; set; }
+	}
+
+	public partial class AdjacencyMatrixAggregation : IAdjacencyMatrixAggregation
+	{
+		[JsonInclude]
+		[JsonPropertyName("filters")]
+		public Dictionary<string, QueryDsl.IQueryContainer>? Filters { get; set; }
+	}
+
+	public partial class AdjacencyMatrixAggregationDescriptor
+	{
 	}
 }

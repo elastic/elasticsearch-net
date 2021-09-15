@@ -8,13 +8,13 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Names
-	{
-		// This is temporary
-		public Names(IEnumerable<Name> names) => _nameList.AddRange(names);
+	//public partial class Names
+	//{
+	//	// This is temporary
+	//	public Names(IEnumerable<Name> names) => _nameList.AddRange(names);
 
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	//}
 
 	//[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	//public class Names : IEquatable<Names>, IUrlParameter

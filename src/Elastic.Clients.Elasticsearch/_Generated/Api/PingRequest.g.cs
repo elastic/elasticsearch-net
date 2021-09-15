@@ -15,13 +15,38 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
+#nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	internal static class ApiUrlsLookups
+	public class PingRequestParameters : RequestParameters<PingRequestParameters>
 	{
-		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
-		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
-		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
-		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
+	}
+
+	[ConvertAs(typeof(PingRequest))]
+	public partial interface IPingRequest : IRequest<PingRequestParameters>
+	{
+	}
+
+	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+	}
+
+	public partial class PingRequestDescriptor : RequestDescriptorBase<PingRequestDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
+	{
+		///<summary>/</summary>
+        public PingRequestDescriptor() : base()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
 	}
 }

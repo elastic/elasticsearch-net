@@ -15,13 +15,13 @@
 //
 // ------------------------------------------------
 
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
+#nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	internal static class ApiUrlsLookups
+	public partial class PingResponse : ResponseBase
 	{
-		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
-		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
-		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
-		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
 	}
 }

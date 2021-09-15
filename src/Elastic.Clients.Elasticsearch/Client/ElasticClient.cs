@@ -6,7 +6,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <inheritdoc />
-public partial class ElasticClient : IElasticClient
+public partial class ElasticClient
 {
 	private readonly ITransport<IElasticsearchClientSettings> _transport;
 
@@ -127,7 +127,7 @@ public partial class ElasticClient : IElasticClient
 		//}
 
 		var postData =
-			request.CanBeEmpty && request.IsEmpty || request.HttpMethod == HttpMethod.GET ||
+			/*request.CanBeEmpty && request.IsEmpty || */request.HttpMethod == HttpMethod.GET ||
 			request.HttpMethod == HttpMethod.HEAD || !request.SupportsBody
 				? null
 				: PostData.Serializable(request);

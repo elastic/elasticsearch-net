@@ -22,6 +22,52 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	public enum Operator
+	{
+		[EnumMember(Value = "or")]
+		Or,
+		[EnumMember(Value = "and")]
+		And
+	}
+
+	public enum TextQueryType
+	{
+		[EnumMember(Value = "phrase_prefix")]
+		PhrasePrefix,
+		[EnumMember(Value = "phrase")]
+		Phrase,
+		[EnumMember(Value = "most_fields")]
+		MostFields,
+		[EnumMember(Value = "cross_fields")]
+		CrossFields,
+		[EnumMember(Value = "bool_prefix")]
+		BoolPrefix,
+		[EnumMember(Value = "best_fields")]
+		BestFields
+	}
+
+	public enum NestedScoreMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum ZeroTermsQuery
+	{
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
+	}
+
 	public enum ChildScoreMode
 	{
 		[EnumMember(Value = "sum")]
@@ -36,20 +82,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Avg
 	}
 
-	public enum CombinedFieldsOperator
+	public enum GeoValidationMethod
 	{
-		[EnumMember(Value = "or")]
-		Or,
-		[EnumMember(Value = "and")]
-		And
+		[EnumMember(Value = "strict")]
+		Strict,
+		[EnumMember(Value = "ignore_malformed")]
+		IgnoreMalformed,
+		[EnumMember(Value = "coerce")]
+		Coerce
 	}
 
-	public enum CombinedFieldsZeroTerms
+	public enum FunctionScoreMode
 	{
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "all")]
-		All
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "multiply")]
+		Multiply,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "first")]
+		First,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
 	public enum FieldValueFactorModifier
@@ -76,6 +132,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Ln
 	}
 
+	public enum MultiValueMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
 	public enum FunctionBoostMode
 	{
 		[EnumMember(Value = "sum")]
@@ -92,135 +160,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Avg
 	}
 
-	public enum FunctionScoreMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "multiply")]
-		Multiply,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "first")]
-		First,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum GeoExecution
-	{
-		[EnumMember(Value = "memory")]
-		Memory,
-		[EnumMember(Value = "indexed")]
-		Indexed
-	}
-
-	public enum GeoValidationMethod
-	{
-		[EnumMember(Value = "strict")]
-		Strict,
-		[EnumMember(Value = "ignore_malformed")]
-		IgnoreMalformed,
-		[EnumMember(Value = "coerce")]
-		Coerce
-	}
-
-	public enum MultiValueMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum NestedScoreMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum Operator
-	{
-		[EnumMember(Value = "or")]
-		Or,
-		[EnumMember(Value = "and")]
-		And
-	}
-
-	public enum RangeRelation
-	{
-		[EnumMember(Value = "within")]
-		Within,
-		[EnumMember(Value = "intersects")]
-		Intersects,
-		[EnumMember(Value = "contains")]
-		Contains
-	}
-
-	public enum SimpleQueryStringFlags
-	{
-		[EnumMember(Value = "WHITESPACE")]
-		Whitespace,
-		[EnumMember(Value = "SLOP")]
-		Slop,
-		[EnumMember(Value = "PREFIX")]
-		Prefix,
-		[EnumMember(Value = "PRECEDENCE")]
-		Precedence,
-		[EnumMember(Value = "PHRASE")]
-		Phrase,
-		[EnumMember(Value = "OR")]
-		Or,
-		[EnumMember(Value = "NOT")]
-		Not,
-		[EnumMember(Value = "NONE")]
-		None,
-		[EnumMember(Value = "NEAR")]
-		Near,
-		[EnumMember(Value = "FUZZY")]
-		Fuzzy,
-		[EnumMember(Value = "ESCAPE")]
-		Escape,
-		[EnumMember(Value = "AND")]
-		And,
-		[EnumMember(Value = "ALL")]
-		All
-	}
-
-	public enum TextQueryType
-	{
-		[EnumMember(Value = "phrase_prefix")]
-		PhrasePrefix,
-		[EnumMember(Value = "phrase")]
-		Phrase,
-		[EnumMember(Value = "most_fields")]
-		MostFields,
-		[EnumMember(Value = "cross_fields")]
-		CrossFields,
-		[EnumMember(Value = "bool_prefix")]
-		BoolPrefix,
-		[EnumMember(Value = "best_fields")]
-		BestFields
-	}
-
-	public enum ZeroTermsQuery
+	public enum CombinedFieldsZeroTerms
 	{
 		[EnumMember(Value = "none")]
 		None,
 		[EnumMember(Value = "all")]
 		All
+	}
+
+	public enum CombinedFieldsOperator
+	{
+		[EnumMember(Value = "or")]
+		Or,
+		[EnumMember(Value = "and")]
+		And
 	}
 }

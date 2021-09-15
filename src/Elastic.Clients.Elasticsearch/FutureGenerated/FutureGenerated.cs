@@ -134,10 +134,10 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public readonly partial struct PropertyName : IDictionaryKey
-	{
-		public string Key => Value;
-	}
+	//public readonly partial struct PropertyName : IDictionaryKey
+	//{
+	//	public string Key => Value;
+	//}
 
 	// This is an incomplete stub implementation and should really be a struct
 	public partial class Indices : IUrlParameter

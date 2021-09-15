@@ -15,13 +15,16 @@
 //
 // ------------------------------------------------
 
-namespace Elastic.Clients.Elasticsearch
+using System;
+using System.Collections.Generic;
+using OneOf;
+using Elastic.Transport;
+
+#nullable restore
+namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	internal static class ApiUrlsLookups
+	public partial class StopWords
 	{
-		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
-		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
-		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
-		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
+		private readonly List<string> _stringList = new();
 	}
 }

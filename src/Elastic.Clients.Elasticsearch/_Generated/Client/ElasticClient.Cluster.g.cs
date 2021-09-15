@@ -15,13 +15,22 @@
 //
 // ------------------------------------------------
 
-namespace Elastic.Clients.Elasticsearch
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+#nullable restore
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	internal static class ApiUrlsLookups
+	public class ClusterNamespace : NamespacedClientProxy
 	{
-		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
-		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
-		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
-		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
+		internal ClusterNamespace(ElasticClient client) : base(client)
+		{
+		}
+
+		public ClusterHealthResponse Health(IClusterHealthRequest request) => DoRequest<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters);
+		public Task<ClusterHealthResponse> HealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters, cancellationToken);
+		public ClusterHealthResponse Health(Func<ClusterHealthRequestDescriptor, IClusterHealthRequest> selector = null) => Health(selector.InvokeOrDefault(new ClusterHealthRequestDescriptor()));
+		public Task<ClusterHealthResponse> HealthAsync(Func<ClusterHealthRequestDescriptor, IClusterHealthRequest> selector = null, CancellationToken cancellationToken = default) => HealthAsync(selector.InvokeOrDefault(new ClusterHealthRequestDescriptor()), cancellationToken);
 	}
 }
