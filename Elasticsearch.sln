@@ -29,7 +29,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Profiling", "benchmarks\Pro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9FFF81B-26F3-4A26-9605-E3D22382E9A5}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		build.bat = build.bat
+		build.sh = build.sh
+		contributing.md = contributing.md
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		dotnet-tools.json = dotnet-tools.json
 		global.json = global.json
+		issue_template.md = issue_template.md
+		license.txt = license.txt
+		nuget.config = nuget.config
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic.Clients.Elasticsearch", "src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj", "{F8A7E60C-0C48-4D76-AF7F-7881DF5A263D}"

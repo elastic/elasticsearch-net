@@ -9,8 +9,12 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
-			var client = new ElasticClient();
+			var matchQueryOne = Query<Person>.Match(m => m.Field(f => f.FirstName).Query("Steve"));
+			var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = Infer.Field<Person>(f => f.FirstName), Query = "Steve" });
+			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));
 
+			var client = new ElasticClient();
+			
 			var indexName = Guid.NewGuid().ToString();
 
 			// Create an index
@@ -31,6 +35,18 @@ namespace PlaygroundV7x
 					}
 				}
 			});
+
+			//var intervalsQuery = new IntervalsQuery()
+			//{
+			//	Match = new IntervalsMatch()
+			//	{
+
+			//	},
+			//	AllOf = new IntervalsAllOf()
+			//	{
+
+			//	}
+			//}
 		}
-    }
+	}
 }

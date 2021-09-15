@@ -8,13 +8,13 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class NodeIds
-	{
-		// This is temporary
-		public NodeIds(IEnumerable<NodeId> nodeIds) => _nodeIdList.AddRange(nodeIds);
+	//public partial class NodeIds
+	//{
+	//	// This is temporary
+	//	public NodeIds(IEnumerable<NodeId> nodeIds) => _nodeIdList.AddRange(nodeIds);
 
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	//}
 
 
 	//[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]

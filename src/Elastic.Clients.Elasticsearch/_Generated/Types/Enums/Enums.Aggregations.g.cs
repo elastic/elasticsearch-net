@@ -22,150 +22,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public enum DateInterval
-	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "week")]
-		Week,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "quarter")]
-		Quarter,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
-	}
-
-	public enum GapPolicy
-	{
-		[EnumMember(Value = "skip")]
-		Skip,
-		[EnumMember(Value = "insert_zeros")]
-		InsertZeros
-	}
-
-	public enum HoltWintersType
-	{
-		[EnumMember(Value = "mult")]
-		Multiplicative,
-		[EnumMember(Value = "add")]
-		Additive
-	}
-
-	public enum MatrixStatsMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "median")]
-		Median,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum MinimumInterval
-	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
-	}
-
-	public enum MovingAverageModel
-	{
-		[EnumMember(Value = "simple")]
-		Simple,
-		[EnumMember(Value = "linear")]
-		Linear,
-		[EnumMember(Value = "holt_winters")]
-		HoltWinters,
-		[EnumMember(Value = "holt")]
-		Holt,
-		[EnumMember(Value = "ewma")]
-		Ewma
-	}
-
-	public enum NormalizeMethod
-	{
-		[EnumMember(Value = "zscore")]
-		Zscore,
-		[EnumMember(Value = "softmax")]
-		Softmax,
-		[EnumMember(Value = "rescale_0_100")]
-		Rescale0100,
-		[EnumMember(Value = "rescale_0_1")]
-		Rescale01,
-		[EnumMember(Value = "percent_of_sum")]
-		PercentOfSum,
-		[EnumMember(Value = "mean")]
-		Mean
-	}
-
-	public enum RateMode
-	{
-		[EnumMember(Value = "value_count")]
-		ValueCount,
-		[EnumMember(Value = "sum")]
-		Sum
-	}
-
-	public enum SamplerAggregationExecutionHint
-	{
-		[EnumMember(Value = "map")]
-		Map,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals,
-		[EnumMember(Value = "bytes_hash")]
-		BytesHash
-	}
-
-	public enum TermsAggregationCollectMode
-	{
-		[EnumMember(Value = "depth_first")]
-		DepthFirst,
-		[EnumMember(Value = "breadth_first")]
-		BreadthFirst
-	}
-
-	public enum TermsAggregationExecutionHint
-	{
-		[EnumMember(Value = "map")]
-		Map,
-		[EnumMember(Value = "global_ordinals_low_cardinality")]
-		GlobalOrdinalsLowCardinality,
-		[EnumMember(Value = "global_ordinals_hash")]
-		GlobalOrdinalsHash,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals
-	}
-
-	public enum TTestType
-	{
-		[EnumMember(Value = "paired")]
-		Paired,
-		[EnumMember(Value = "homoscedastic")]
-		Homoscedastic,
-		[EnumMember(Value = "heteroscedastic")]
-		Heteroscedastic
-	}
-
 	public enum ValueType
 	{
 		[EnumMember(Value = "string")]
@@ -188,5 +44,149 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Date,
 		[EnumMember(Value = "boolean")]
 		Boolean
+	}
+
+	public enum TTestType
+	{
+		[EnumMember(Value = "paired")]
+		Paired,
+		[EnumMember(Value = "homoscedastic")]
+		Homoscedastic,
+		[EnumMember(Value = "heteroscedastic")]
+		Heteroscedastic
+	}
+
+	public enum TermsAggregationExecutionHint
+	{
+		[EnumMember(Value = "map")]
+		Map,
+		[EnumMember(Value = "global_ordinals_low_cardinality")]
+		GlobalOrdinalsLowCardinality,
+		[EnumMember(Value = "global_ordinals_hash")]
+		GlobalOrdinalsHash,
+		[EnumMember(Value = "global_ordinals")]
+		GlobalOrdinals
+	}
+
+	public enum TermsAggregationCollectMode
+	{
+		[EnumMember(Value = "depth_first")]
+		DepthFirst,
+		[EnumMember(Value = "breadth_first")]
+		BreadthFirst
+	}
+
+	public enum GapPolicy
+	{
+		[EnumMember(Value = "skip")]
+		Skip,
+		[EnumMember(Value = "insert_zeros")]
+		InsertZeros
+	}
+
+	public enum RateMode
+	{
+		[EnumMember(Value = "value_count")]
+		ValueCount,
+		[EnumMember(Value = "sum")]
+		Sum
+	}
+
+	public enum DateInterval
+	{
+		[EnumMember(Value = "year")]
+		Year,
+		[EnumMember(Value = "week")]
+		Week,
+		[EnumMember(Value = "second")]
+		Second,
+		[EnumMember(Value = "quarter")]
+		Quarter,
+		[EnumMember(Value = "month")]
+		Month,
+		[EnumMember(Value = "minute")]
+		Minute,
+		[EnumMember(Value = "hour")]
+		Hour,
+		[EnumMember(Value = "day")]
+		Day
+	}
+
+	public enum NormalizeMethod
+	{
+		[EnumMember(Value = "z-score")]
+		ZScore,
+		[EnumMember(Value = "softmax")]
+		Softmax,
+		[EnumMember(Value = "rescale_0_100")]
+		Rescale0100,
+		[EnumMember(Value = "rescale_0_1")]
+		Rescale01,
+		[EnumMember(Value = "percent_of_sum")]
+		PercentOfSum,
+		[EnumMember(Value = "mean")]
+		Mean
+	}
+
+	public enum HoltWintersType
+	{
+		[EnumMember(Value = "mult")]
+		Multiplicative,
+		[EnumMember(Value = "add")]
+		Additive
+	}
+
+	public enum MovingAverageModel
+	{
+		[EnumMember(Value = "simple")]
+		Simple,
+		[EnumMember(Value = "linear")]
+		Linear,
+		[EnumMember(Value = "holt_winters")]
+		HoltWinters,
+		[EnumMember(Value = "holt")]
+		Holt,
+		[EnumMember(Value = "ewma")]
+		Ewma
+	}
+
+	public enum MatrixStatsMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "median")]
+		Median,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum SamplerAggregationExecutionHint
+	{
+		[EnumMember(Value = "map")]
+		Map,
+		[EnumMember(Value = "global_ordinals")]
+		GlobalOrdinals,
+		[EnumMember(Value = "bytes_hash")]
+		BytesHash
+	}
+
+	public enum MinimumInterval
+	{
+		[EnumMember(Value = "year")]
+		Year,
+		[EnumMember(Value = "second")]
+		Second,
+		[EnumMember(Value = "month")]
+		Month,
+		[EnumMember(Value = "minute")]
+		Minute,
+		[EnumMember(Value = "hour")]
+		Hour,
+		[EnumMember(Value = "day")]
+		Day
 	}
 }

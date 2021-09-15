@@ -1,3 +1,5 @@
+using System;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -13,6 +15,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public abstract class FieldNameQueryBase : QueryBase, IFieldNameQuery
 	{
 		public Field Field { get; set; }
+	}
+
+	public abstract class FieldNameQueryDescriptorBase<TDescriptor, TInterface>
+		: QueryDescriptorBase<TDescriptor, TInterface>, IFieldNameQuery
+		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface>, TInterface
+		where TInterface : class, IFieldNameQuery
+	{
+		Field IFieldNameQuery.Field { get; set; }
+
+		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
+
+		//public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
+		//	Assign(objectPath, (a, v) => a.Field = v);
 	}
 
 	public interface IQuery
@@ -51,13 +66,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		///     Whether the query should be treated as writable. Used when determining how to combine queries.
 		/// </summary>
 		[JsonIgnore]
-		bool IsWritable { get; }
+		bool IsWritable { get; } 
 
 		/// <summary>
 		///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
 		/// </summary>
 		[DataMember(Name = "_name")]
-		string Name { get; set; }
+		string QueryName { get; set; }
 	}
 
 	public abstract class QueryDescriptorBase<TDescriptor, TInterface>
@@ -68,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		///// <inheritdoc cref="IQuery.Conditionless"/>
 		//protected abstract bool Conditionless { get; }
 
-		double? IQuery.Boost { get; set; }
+		float? IQuery.Boost { get; set; }
 
 		//bool IQuery.Conditionless => Conditionless;
 
@@ -78,13 +93,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		bool IQuery.IsWritable => true; // Self.IsVerbatim || !Self.Conditionless;
 
-		string IQuery.Name { get; set; }
+		string IQuery.QueryName { get; set; }
 
-		/// <inheritdoc cref="IQuery.Name"/>
-		public TDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
+		/// <inheritdoc cref="IQuery.QueryName"/>
+		public TDescriptor QueryName(string name) => Assign(name, (a, v) => a.QueryName = v);
 
 		/// <inheritdoc cref="IQuery.Boost"/>
-		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
+		public TDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		///// <inheritdoc cref="IQuery.IsVerbatim"/>
 		//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
@@ -95,11 +110,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public abstract partial class QueryBase : IQuery
 	{
+		public string QueryName { get; set; }
+
 		//protected abstract bool Conditionless { get; }
 		public bool IsStrict { get; set; }
 		public bool IsVerbatim { get; set; }
-		
-		public bool IsWritable => IsVerbatim; //|| !Conditionless;
+
+		public bool IsWritable => true; //IsVerbatim || !Conditionless;
 
 		//bool IQuery.Conditionless => Conditionless;
 
@@ -158,13 +175,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		//public static implicit operator QueryContainer(QueryBase query) =>
 		//	query == null ? null : new QueryContainer(query);
 
-		//internal void WrapInContainer(IQueryContainer container)
-		//{
-		//	container.IsVerbatim = IsVerbatim;
-		//	container.IsStrict = IsStrict;
-		//	InternalWrapInContainer(container);
-		//}
+		internal void WrapInContainer(IQueryContainer container) => InternalWrapInContainer(container);
+		//container.IsVerbatim = IsVerbatim;
+		//container.IsStrict = IsStrict;
 
-		//internal abstract void InternalWrapInContainer(IQueryContainer container);
+		internal abstract void InternalWrapInContainer(IQueryContainer container);
 	}
 }
