@@ -24,7 +24,42 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Rollup
 {
-	public partial class DateHistogramGrouping
+	[ConvertAs(typeof(DateHistogramGrouping))]
+	public partial interface IDateHistogramGrouping
+	{
+		Elastic.Clients.Elasticsearch.Time? CalendarInterval { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? Delay { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? FixedInterval { get; set; }
+
+		string? Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? Interval { get; set; }
+
+		string? TimeZone { get; set; }
+	}
+
+	public partial class DateHistogramGroupingDescriptor : DescriptorBase<DateHistogramGroupingDescriptor, IDateHistogramGrouping>, IDateHistogramGrouping
+	{
+		Elastic.Clients.Elasticsearch.Time? IDateHistogramGrouping.Delay { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDateHistogramGrouping.Field { get; set; }
+
+		string? IDateHistogramGrouping.Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IDateHistogramGrouping.Interval { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IDateHistogramGrouping.CalendarInterval { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IDateHistogramGrouping.FixedInterval { get; set; }
+
+		string? IDateHistogramGrouping.TimeZone { get; set; }
+	}
+
+	public partial class DateHistogramGrouping : IDateHistogramGrouping
 	{
 		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
@@ -55,7 +90,22 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public string? TimeZone { get; set; }
 	}
 
-	public partial class FieldMetric
+	[ConvertAs(typeof(FieldMetric))]
+	public partial interface IFieldMetric
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
+	}
+
+	public partial class FieldMetricDescriptor : DescriptorBase<FieldMetricDescriptor, IFieldMetric>, IFieldMetric
+	{
+		Elastic.Clients.Elasticsearch.Field IFieldMetric.Field { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Rollup.Metric> IFieldMetric.Metrics { get; set; }
+	}
+
+	public partial class FieldMetric : IFieldMetric
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -66,22 +116,56 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public IEnumerable<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
 	}
 
-	public partial class Groupings
+	[ConvertAs(typeof(Groupings))]
+	public partial interface IGroupings
+	{
+		Elastic.Clients.Elasticsearch.Rollup.IDateHistogramGrouping? DateHistogram { get; set; }
+
+		Elastic.Clients.Elasticsearch.Rollup.IHistogramGrouping? Histogram { get; set; }
+
+		Elastic.Clients.Elasticsearch.Rollup.ITermsGrouping? Terms { get; set; }
+	}
+
+	public partial class GroupingsDescriptor : DescriptorBase<GroupingsDescriptor, IGroupings>, IGroupings
+	{
+		Elastic.Clients.Elasticsearch.Rollup.IDateHistogramGrouping? IGroupings.DateHistogram { get; set; }
+
+		Elastic.Clients.Elasticsearch.Rollup.IHistogramGrouping? IGroupings.Histogram { get; set; }
+
+		Elastic.Clients.Elasticsearch.Rollup.ITermsGrouping? IGroupings.Terms { get; set; }
+	}
+
+	public partial class Groupings : IGroupings
 	{
 		[JsonInclude]
 		[JsonPropertyName("date_histogram")]
-		public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogram { get; set; }
+		public Elastic.Clients.Elasticsearch.Rollup.IDateHistogramGrouping? DateHistogram { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("histogram")]
-		public Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? Histogram { get; set; }
+		public Elastic.Clients.Elasticsearch.Rollup.IHistogramGrouping? Histogram { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("terms")]
-		public Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? Terms { get; set; }
+		public Elastic.Clients.Elasticsearch.Rollup.ITermsGrouping? Terms { get; set; }
 	}
 
-	public partial class HistogramGrouping
+	[ConvertAs(typeof(HistogramGrouping))]
+	public partial interface IHistogramGrouping
+	{
+		Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+
+		long Interval { get; set; }
+	}
+
+	public partial class HistogramGroupingDescriptor : DescriptorBase<HistogramGroupingDescriptor, IHistogramGrouping>, IHistogramGrouping
+	{
+		Elastic.Clients.Elasticsearch.Fields IHistogramGrouping.Fields { get; set; }
+
+		long IHistogramGrouping.Interval { get; set; }
+	}
+
+	public partial class HistogramGrouping : IHistogramGrouping
 	{
 		[JsonInclude]
 		[JsonPropertyName("fields")]
@@ -92,7 +176,18 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 		public long Interval { get; set; }
 	}
 
-	public partial class TermsGrouping
+	[ConvertAs(typeof(TermsGrouping))]
+	public partial interface ITermsGrouping
+	{
+		Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	}
+
+	public partial class TermsGroupingDescriptor : DescriptorBase<TermsGroupingDescriptor, ITermsGrouping>, ITermsGrouping
+	{
+		Elastic.Clients.Elasticsearch.Fields ITermsGrouping.Fields { get; set; }
+	}
+
+	public partial class TermsGrouping : ITermsGrouping
 	{
 		[JsonInclude]
 		[JsonPropertyName("fields")]

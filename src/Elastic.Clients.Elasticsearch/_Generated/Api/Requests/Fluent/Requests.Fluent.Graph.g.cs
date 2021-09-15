@@ -31,19 +31,19 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Graph.Hop? IExploreRequest.Connections { get; set; }
+		Elastic.Clients.Elasticsearch.Graph.IHop? IExploreRequest.Connections { get; set; }
 
-		Elastic.Clients.Elasticsearch.Graph.ExploreControls? IExploreRequest.Controls { get; set; }
+		Elastic.Clients.Elasticsearch.Graph.IExploreControls? IExploreRequest.Controls { get; set; }
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IExploreRequest.Query { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? IExploreRequest.Vertices { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition>? IExploreRequest.Vertices { get; set; }
 
 		public ExploreDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public ExploreDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public ExploreDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections) => Assign(connections, (a, v) => a.Connections = v);
-		public ExploreDescriptor Controls(Elastic.Clients.Elasticsearch.Graph.ExploreControls? controls) => Assign(controls, (a, v) => a.Controls = v);
+		public ExploreDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.IHop? connections) => Assign(connections, (a, v) => a.Connections = v);
+		public ExploreDescriptor Controls(Elastic.Clients.Elasticsearch.Graph.IExploreControls? controls) => Assign(controls, (a, v) => a.Controls = v);
 		public ExploreDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
-		public ExploreDescriptor Vertices(IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? vertices) => Assign(vertices, (a, v) => a.Vertices = v);
+		public ExploreDescriptor Vertices(IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition>? vertices) => Assign(vertices, (a, v) => a.Vertices = v);
 	}
 }

@@ -1066,7 +1066,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Usage
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_counts")]
-		public Elastic.Clients.Elasticsearch.EmptyObject? AnalysisCounts
+		public Elastic.Clients.Elasticsearch.IEmptyObject? AnalysisCounts
 		{
 			get;
 #if NET5_0_OR_GREATER

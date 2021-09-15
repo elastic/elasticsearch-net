@@ -24,7 +24,50 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class BoundingBox
+	[ConvertAs(typeof(BoundingBox))]
+	public partial interface IBoundingBox
+	{
+		double? Bottom { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeft { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRight { get; set; }
+
+		double? Left { get; set; }
+
+		double? Right { get; set; }
+
+		double? Top { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeft { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRight { get; set; }
+
+		string? Wkt { get; set; }
+	}
+
+	public partial class BoundingBoxDescriptor : DescriptorBase<BoundingBoxDescriptor, IBoundingBox>, IBoundingBox
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.BottomRight { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.TopLeft { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.TopRight { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.BottomLeft { get; set; }
+
+		double? IBoundingBox.Top { get; set; }
+
+		double? IBoundingBox.Left { get; set; }
+
+		double? IBoundingBox.Right { get; set; }
+
+		double? IBoundingBox.Bottom { get; set; }
+
+		string? IBoundingBox.Wkt { get; set; }
+	}
+
+	public partial class BoundingBox : IBoundingBox
 	{
 		[JsonInclude]
 		[JsonPropertyName("bottom")]
@@ -63,7 +106,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Wkt { get; set; }
 	}
 
-	public partial class CommonTermsQuery : QueryDsl.QueryBase
+	[ConvertAs(typeof(CommonTermsQuery))]
+	public partial interface ICommonTermsQuery
+	{
+		string? Analyzer { get; set; }
+
+		double? CutoffFrequency { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? HighFreqOperator { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? LowFreqOperator { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		string Query { get; set; }
+	}
+
+	public partial class CommonTermsQueryDescriptor : DescriptorBase<CommonTermsQueryDescriptor, ICommonTermsQuery>, ICommonTermsQuery
+	{
+		string? ICommonTermsQuery.Analyzer { get; set; }
+
+		double? ICommonTermsQuery.CutoffFrequency { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? ICommonTermsQuery.HighFreqOperator { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? ICommonTermsQuery.LowFreqOperator { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? ICommonTermsQuery.MinimumShouldMatch { get; set; }
+
+		string ICommonTermsQuery.Query { get; set; }
+	}
+
+	public partial class CommonTermsQuery : QueryDsl.QueryBase, ICommonTermsQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -227,7 +301,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public partial class FieldValueFactorScoreFunction : QueryDsl.ScoreFunctionBase
+	[ConvertAs(typeof(FieldValueFactorScoreFunction))]
+	public partial interface IFieldValueFactorScoreFunction
+	{
+		double? Factor { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		double? Missing { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
+	}
+
+	public partial class FieldValueFactorScoreFunctionDescriptor : DescriptorBase<FieldValueFactorScoreFunctionDescriptor, IFieldValueFactorScoreFunction>, IFieldValueFactorScoreFunction
+	{
+		Elastic.Clients.Elasticsearch.Field IFieldValueFactorScoreFunction.Field { get; set; }
+
+		double? IFieldValueFactorScoreFunction.Factor { get; set; }
+
+		double? IFieldValueFactorScoreFunction.Missing { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? IFieldValueFactorScoreFunction.Modifier { get; set; }
+	}
+
+	public partial class FieldValueFactorScoreFunction : QueryDsl.ScoreFunctionBase, IFieldValueFactorScoreFunction
 	{
 		[JsonInclude]
 		[JsonPropertyName("factor")]
@@ -254,7 +351,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 	}
 
-	public partial class IntervalsAllOf
+	[ConvertAs(typeof(IntervalsAllOf))]
+	public partial interface IIntervalsAllOf
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
+
+		int? MaxGaps { get; set; }
+
+		bool? Ordered { get; set; }
+	}
+
+	public partial class IntervalsAllOfDescriptor : DescriptorBase<IntervalsAllOfDescriptor, IIntervalsAllOf>, IIntervalsAllOf
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> IIntervalsAllOf.Intervals { get; set; }
+
+		int? IIntervalsAllOf.MaxGaps { get; set; }
+
+		bool? IIntervalsAllOf.Ordered { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? IIntervalsAllOf.Filter { get; set; }
+	}
+
+	public partial class IntervalsAllOf : IIntervalsAllOf
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -273,7 +393,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? Ordered { get; set; }
 	}
 
-	public partial class IntervalsAnyOf
+	[ConvertAs(typeof(IntervalsAnyOf))]
+	public partial interface IIntervalsAnyOf
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
+	}
+
+	public partial class IntervalsAnyOfDescriptor : DescriptorBase<IntervalsAnyOfDescriptor, IIntervalsAnyOf>, IIntervalsAnyOf
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> IIntervalsAnyOf.Intervals { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? IIntervalsAnyOf.Filter { get; set; }
+	}
+
+	public partial class IntervalsAnyOf : IIntervalsAnyOf
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -284,7 +419,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
 	}
 
-	public partial class IntervalsFuzzy
+	[ConvertAs(typeof(IntervalsFuzzy))]
+	public partial interface IIntervalsFuzzy
+	{
+		string? Analyzer { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+		int? PrefixLength { get; set; }
+
+		string Term { get; set; }
+
+		bool? Transpositions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsFuzzyDescriptor : DescriptorBase<IntervalsFuzzyDescriptor, IIntervalsFuzzy>, IIntervalsFuzzy
+	{
+		string? IIntervalsFuzzy.Analyzer { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fuzziness? IIntervalsFuzzy.Fuzziness { get; set; }
+
+		int? IIntervalsFuzzy.PrefixLength { get; set; }
+
+		string IIntervalsFuzzy.Term { get; set; }
+
+		bool? IIntervalsFuzzy.Transpositions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IIntervalsFuzzy.UseField { get; set; }
+	}
+
+	public partial class IntervalsFuzzy : IIntervalsFuzzy
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -311,7 +477,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public partial class IntervalsMatch
+	[ConvertAs(typeof(IntervalsMatch))]
+	public partial interface IIntervalsMatch
+	{
+		string? Analyzer { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
+
+		int? MaxGaps { get; set; }
+
+		bool? Ordered { get; set; }
+
+		string Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsMatchDescriptor : DescriptorBase<IntervalsMatchDescriptor, IIntervalsMatch>, IIntervalsMatch
+	{
+		string? IIntervalsMatch.Analyzer { get; set; }
+
+		int? IIntervalsMatch.MaxGaps { get; set; }
+
+		bool? IIntervalsMatch.Ordered { get; set; }
+
+		string IIntervalsMatch.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IIntervalsMatch.UseField { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? IIntervalsMatch.Filter { get; set; }
+	}
+
+	public partial class IntervalsMatch : IIntervalsMatch
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -338,7 +535,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public partial class IntervalsPrefix
+	[ConvertAs(typeof(IntervalsPrefix))]
+	public partial interface IIntervalsPrefix
+	{
+		string? Analyzer { get; set; }
+
+		string Prefix { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsPrefixDescriptor : DescriptorBase<IntervalsPrefixDescriptor, IIntervalsPrefix>, IIntervalsPrefix
+	{
+		string? IIntervalsPrefix.Analyzer { get; set; }
+
+		string IIntervalsPrefix.Prefix { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IIntervalsPrefix.UseField { get; set; }
+	}
+
+	public partial class IntervalsPrefix : IIntervalsPrefix
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -353,7 +569,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public partial class IntervalsWildcard
+	[ConvertAs(typeof(IntervalsWildcard))]
+	public partial interface IIntervalsWildcard
+	{
+		string? Analyzer { get; set; }
+
+		string Pattern { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+	}
+
+	public partial class IntervalsWildcardDescriptor : DescriptorBase<IntervalsWildcardDescriptor, IIntervalsWildcard>, IIntervalsWildcard
+	{
+		string? IIntervalsWildcard.Analyzer { get; set; }
+
+		string IIntervalsWildcard.Pattern { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IIntervalsWildcard.UseField { get; set; }
+	}
+
+	public partial class IntervalsWildcard : IIntervalsWildcard
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -534,7 +769,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 	}
 
-	public abstract partial class QueryBase
+	[ConvertAs(typeof(QueryBase))]
+	public partial interface IQueryBase
+	{
+		float? Boost { get; set; }
+
+		string? query_name { get; set; }
+	}
+
+	public partial class QueryBaseDescriptor : DescriptorBase<QueryBaseDescriptor, IQueryBase>, IQueryBase
+	{
+		float? IQueryBase.Boost { get; set; }
+
+		string? IQueryBase.query_name { get; set; }
+	}
+
+	public abstract partial class QueryBase : IQueryBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
@@ -545,7 +795,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? query_name { get; set; }
 	}
 
-	public partial class RandomScoreFunction : QueryDsl.ScoreFunctionBase
+	[ConvertAs(typeof(RandomScoreFunction))]
+	public partial interface IRandomScoreFunction
+	{
+		Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		Union<long, string>? Seed { get; set; }
+	}
+
+	public partial class RandomScoreFunctionDescriptor : DescriptorBase<RandomScoreFunctionDescriptor, IRandomScoreFunction>, IRandomScoreFunction
+	{
+		Elastic.Clients.Elasticsearch.Field? IRandomScoreFunction.Field { get; set; }
+
+		Union<long, string>? IRandomScoreFunction.Seed { get; set; }
+	}
+
+	public partial class RandomScoreFunction : QueryDsl.ScoreFunctionBase, IRandomScoreFunction
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -571,29 +836,84 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public partial class RankFeatureFunction
+	[ConvertAs(typeof(RankFeatureFunction))]
+	public partial interface IRankFeatureFunction
 	{
 	}
 
-	public partial class RankFeatureFunctionLinear : QueryDsl.RankFeatureFunction
+	public partial class RankFeatureFunctionDescriptor : DescriptorBase<RankFeatureFunctionDescriptor, IRankFeatureFunction>, IRankFeatureFunction
 	{
 	}
 
-	public partial class RankFeatureFunctionLogarithm : QueryDsl.RankFeatureFunction
+	public partial class RankFeatureFunction : IRankFeatureFunction
+	{
+	}
+
+	[ConvertAs(typeof(RankFeatureFunctionLinear))]
+	public partial interface IRankFeatureFunctionLinear
+	{
+	}
+
+	public partial class RankFeatureFunctionLinearDescriptor : DescriptorBase<RankFeatureFunctionLinearDescriptor, IRankFeatureFunctionLinear>, IRankFeatureFunctionLinear
+	{
+	}
+
+	public partial class RankFeatureFunctionLinear : QueryDsl.RankFeatureFunction, IRankFeatureFunctionLinear
+	{
+	}
+
+	[ConvertAs(typeof(RankFeatureFunctionLogarithm))]
+	public partial interface IRankFeatureFunctionLogarithm
+	{
+		float ScalingFactor { get; set; }
+	}
+
+	public partial class RankFeatureFunctionLogarithmDescriptor : DescriptorBase<RankFeatureFunctionLogarithmDescriptor, IRankFeatureFunctionLogarithm>, IRankFeatureFunctionLogarithm
+	{
+		float IRankFeatureFunctionLogarithm.ScalingFactor { get; set; }
+	}
+
+	public partial class RankFeatureFunctionLogarithm : QueryDsl.RankFeatureFunction, IRankFeatureFunctionLogarithm
 	{
 		[JsonInclude]
 		[JsonPropertyName("scaling_factor")]
 		public float ScalingFactor { get; set; }
 	}
 
-	public partial class RankFeatureFunctionSaturation : QueryDsl.RankFeatureFunction
+	[ConvertAs(typeof(RankFeatureFunctionSaturation))]
+	public partial interface IRankFeatureFunctionSaturation
+	{
+		float? Pivot { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSaturationDescriptor : DescriptorBase<RankFeatureFunctionSaturationDescriptor, IRankFeatureFunctionSaturation>, IRankFeatureFunctionSaturation
+	{
+		float? IRankFeatureFunctionSaturation.Pivot { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSaturation : QueryDsl.RankFeatureFunction, IRankFeatureFunctionSaturation
 	{
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
 		public float? Pivot { get; set; }
 	}
 
-	public partial class RankFeatureFunctionSigmoid : QueryDsl.RankFeatureFunction
+	[ConvertAs(typeof(RankFeatureFunctionSigmoid))]
+	public partial interface IRankFeatureFunctionSigmoid
+	{
+		float Exponent { get; set; }
+
+		float Pivot { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSigmoidDescriptor : DescriptorBase<RankFeatureFunctionSigmoidDescriptor, IRankFeatureFunctionSigmoid>, IRankFeatureFunctionSigmoid
+	{
+		float IRankFeatureFunctionSigmoid.Pivot { get; set; }
+
+		float IRankFeatureFunctionSigmoid.Exponent { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSigmoid : QueryDsl.RankFeatureFunction, IRankFeatureFunctionSigmoid
 	{
 		[JsonInclude]
 		[JsonPropertyName("exponent")]
@@ -604,7 +924,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public float Pivot { get; set; }
 	}
 
-	public abstract partial class ScoreFunctionBase
+	[ConvertAs(typeof(ScoreFunctionBase))]
+	public partial interface IScoreFunctionBase
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
+
+		double? Weight { get; set; }
+	}
+
+	public partial class ScoreFunctionBaseDescriptor : DescriptorBase<ScoreFunctionBaseDescriptor, IScoreFunctionBase>, IScoreFunctionBase
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IScoreFunctionBase.Filter { get; set; }
+
+		double? IScoreFunctionBase.Weight { get; set; }
+	}
+
+	public abstract partial class ScoreFunctionBase : IScoreFunctionBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -615,7 +950,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public double? Weight { get; set; }
 	}
 
-	public partial class ScriptScoreFunction : QueryDsl.ScoreFunctionBase
+	[ConvertAs(typeof(ScriptScoreFunction))]
+	public partial interface IScriptScoreFunction
+	{
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptScoreFunctionDescriptor : DescriptorBase<ScriptScoreFunctionDescriptor, IScriptScoreFunction>, IScriptScoreFunction
+	{
+		Elastic.Clients.Elasticsearch.Script IScriptScoreFunction.Script { get; set; }
+	}
+
+	public partial class ScriptScoreFunction : QueryDsl.ScoreFunctionBase, IScriptScoreFunction
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -688,7 +1034,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public partial class TypeQuery : QueryDsl.QueryBase
+	[ConvertAs(typeof(TypeQuery))]
+	public partial interface ITypeQuery
+	{
+		string Value { get; set; }
+	}
+
+	public partial class TypeQueryDescriptor : DescriptorBase<TypeQueryDescriptor, ITypeQuery>, ITypeQuery
+	{
+		string ITypeQuery.Value { get; set; }
+	}
+
+	public partial class TypeQuery : QueryDsl.QueryBase, ITypeQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]

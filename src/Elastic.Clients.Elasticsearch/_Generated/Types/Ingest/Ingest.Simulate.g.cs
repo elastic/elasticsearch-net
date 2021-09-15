@@ -24,7 +24,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 {
-	public partial class Document
+	[ConvertAs(typeof(Document))]
+	public partial interface IDocument
+	{
+		Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+		object Source { get; set; }
+	}
+
+	public partial class DocumentDescriptor : DescriptorBase<DocumentDescriptor, IDocument>, IDocument
+	{
+		Elastic.Clients.Elasticsearch.Id? IDocument.Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? IDocument.Index { get; set; }
+
+		object IDocument.Source { get; set; }
+	}
+
+	public partial class Document : IDocument
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]

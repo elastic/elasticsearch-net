@@ -24,7 +24,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security.HasPrivileges
 {
-	public partial class ApplicationPrivilegesCheck
+	[ConvertAs(typeof(ApplicationPrivilegesCheck))]
+	public partial interface IApplicationPrivilegesCheck
+	{
+		string Application { get; set; }
+
+		IEnumerable<string> Privileges { get; set; }
+
+		IEnumerable<string> Resources { get; set; }
+	}
+
+	public partial class ApplicationPrivilegesCheckDescriptor : DescriptorBase<ApplicationPrivilegesCheckDescriptor, IApplicationPrivilegesCheck>, IApplicationPrivilegesCheck
+	{
+		string IApplicationPrivilegesCheck.Application { get; set; }
+
+		IEnumerable<string> IApplicationPrivilegesCheck.Privileges { get; set; }
+
+		IEnumerable<string> IApplicationPrivilegesCheck.Resources { get; set; }
+	}
+
+	public partial class ApplicationPrivilegesCheck : IApplicationPrivilegesCheck
 	{
 		[JsonInclude]
 		[JsonPropertyName("application")]
@@ -39,7 +58,22 @@ namespace Elastic.Clients.Elasticsearch.Security.HasPrivileges
 		public IEnumerable<string> Resources { get; set; }
 	}
 
-	public partial class IndexPrivilegesCheck
+	[ConvertAs(typeof(IndexPrivilegesCheck))]
+	public partial interface IIndexPrivilegesCheck
+	{
+		Elastic.Clients.Elasticsearch.Indices Names { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+	}
+
+	public partial class IndexPrivilegesCheckDescriptor : DescriptorBase<IndexPrivilegesCheckDescriptor, IIndexPrivilegesCheck>, IIndexPrivilegesCheck
+	{
+		Elastic.Clients.Elasticsearch.Indices IIndexPrivilegesCheck.Names { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> IIndexPrivilegesCheck.Privileges { get; set; }
+	}
+
+	public partial class IndexPrivilegesCheck : IIndexPrivilegesCheck
 	{
 		[JsonInclude]
 		[JsonPropertyName("names")]

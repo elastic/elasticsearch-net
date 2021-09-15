@@ -85,33 +85,33 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Destination? IPreviewTransformRequest.Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? IPreviewTransformRequest.Dest { get; set; }
 
 		string? IPreviewTransformRequest.Description { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? IPreviewTransformRequest.Frequency { get; set; }
 
-		Elastic.Clients.Elasticsearch.TransformManagement.Pivot? IPreviewTransformRequest.Pivot { get; set; }
+		Elastic.Clients.Elasticsearch.TransformManagement.IPivot? IPreviewTransformRequest.Pivot { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Source? IPreviewTransformRequest.Source { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.ISource? IPreviewTransformRequest.Source { get; set; }
 
-		Elastic.Clients.Elasticsearch.TransformManagement.Settings? IPreviewTransformRequest.Settings { get; set; }
+		Elastic.Clients.Elasticsearch.TransformManagement.ISettings? IPreviewTransformRequest.Settings { get; set; }
 
 		Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? IPreviewTransformRequest.Sync { get; set; }
 
 		Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? IPreviewTransformRequest.RetentionPolicy { get; set; }
 
-		Elastic.Clients.Elasticsearch.TransformManagement.Latest? IPreviewTransformRequest.Latest { get; set; }
+		Elastic.Clients.Elasticsearch.TransformManagement.ILatest? IPreviewTransformRequest.Latest { get; set; }
 
-		public PreviewTransformDescriptor Dest(Elastic.Clients.Elasticsearch.Global.Reindex.Destination? dest) => Assign(dest, (a, v) => a.Dest = v);
+		public PreviewTransformDescriptor Dest(Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? dest) => Assign(dest, (a, v) => a.Dest = v);
 		public PreviewTransformDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
 		public PreviewTransformDescriptor Frequency(Elastic.Clients.Elasticsearch.Time? frequency) => Assign(frequency, (a, v) => a.Frequency = v);
-		public PreviewTransformDescriptor Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? pivot) => Assign(pivot, (a, v) => a.Pivot = v);
-		public PreviewTransformDescriptor Source(Elastic.Clients.Elasticsearch.Global.Reindex.Source? source) => Assign(source, (a, v) => a.Source = v);
-		public PreviewTransformDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? settings) => Assign(settings, (a, v) => a.Settings = v);
+		public PreviewTransformDescriptor Pivot(Elastic.Clients.Elasticsearch.TransformManagement.IPivot? pivot) => Assign(pivot, (a, v) => a.Pivot = v);
+		public PreviewTransformDescriptor Source(Elastic.Clients.Elasticsearch.Global.Reindex.ISource? source) => Assign(source, (a, v) => a.Source = v);
+		public PreviewTransformDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.ISettings? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public PreviewTransformDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? sync) => Assign(sync, (a, v) => a.Sync = v);
 		public PreviewTransformDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? retentionPolicy) => Assign(retentionPolicy, (a, v) => a.RetentionPolicy = v);
-		public PreviewTransformDescriptor Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? latest) => Assign(latest, (a, v) => a.Latest = v);
+		public PreviewTransformDescriptor Latest(Elastic.Clients.Elasticsearch.TransformManagement.ILatest? latest) => Assign(latest, (a, v) => a.Latest = v);
 	}
 
 	public partial class PutTransformDescriptor : RequestDescriptorBase<PutTransformDescriptor, PutTransformRequestParameters, IPutTransformRequest>, IPutTransformRequest

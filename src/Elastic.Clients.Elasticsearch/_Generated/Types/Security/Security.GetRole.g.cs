@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 	{
 		[JsonInclude]
 		[JsonPropertyName("applications")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges> Applications
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IIndicesPrivileges> Indices
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 
 		[JsonInclude]
 		[JsonPropertyName("transient_metadata")]
-		public Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata TransientMetadata
+		public Elastic.Clients.Elasticsearch.Security.GetRole.ITransientMetadata TransientMetadata
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -222,7 +222,18 @@ namespace Elastic.Clients.Elasticsearch.Security.GetRole
 		}
 	}
 
-	public partial class TransientMetadata
+	[ConvertAs(typeof(TransientMetadata))]
+	public partial interface ITransientMetadata
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class TransientMetadataDescriptor : DescriptorBase<TransientMetadataDescriptor, ITransientMetadata>, ITransientMetadata
+	{
+		bool ITransientMetadata.Enabled { get; set; }
+	}
+
+	public partial class TransientMetadata : ITransientMetadata
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]

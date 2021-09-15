@@ -63,7 +63,42 @@ namespace Elastic.Clients.Elasticsearch.Global.Termvectors
 		}
 	}
 
-	public partial class Filter
+	[ConvertAs(typeof(Filter))]
+	public partial interface IFilter
+	{
+		int? MaxDocFreq { get; set; }
+
+		int? MaxNumTerms { get; set; }
+
+		int? MaxTermFreq { get; set; }
+
+		int? MaxWordLength { get; set; }
+
+		int? MinDocFreq { get; set; }
+
+		int? MinTermFreq { get; set; }
+
+		int? MinWordLength { get; set; }
+	}
+
+	public partial class FilterDescriptor : DescriptorBase<FilterDescriptor, IFilter>, IFilter
+	{
+		int? IFilter.MaxDocFreq { get; set; }
+
+		int? IFilter.MaxNumTerms { get; set; }
+
+		int? IFilter.MaxTermFreq { get; set; }
+
+		int? IFilter.MaxWordLength { get; set; }
+
+		int? IFilter.MinDocFreq { get; set; }
+
+		int? IFilter.MinTermFreq { get; set; }
+
+		int? IFilter.MinWordLength { get; set; }
+	}
+
+	public partial class Filter : IFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_doc_freq")]

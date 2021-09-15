@@ -24,7 +24,54 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.License
 {
-	public partial class License
+	[ConvertAs(typeof(License))]
+	public partial interface ILicense
+	{
+		Elastic.Clients.Elasticsearch.EpochMillis ExpiryDateInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis IssueDateInMillis { get; set; }
+
+		string IssuedTo { get; set; }
+
+		string Issuer { get; set; }
+
+		long? MaxNodes { get; set; }
+
+		long? MaxResourceUnits { get; set; }
+
+		string Signature { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis StartDateInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.License.LicenseType Type { get; set; }
+
+		string Uid { get; set; }
+	}
+
+	public partial class LicenseDescriptor : DescriptorBase<LicenseDescriptor, ILicense>, ILicense
+	{
+		Elastic.Clients.Elasticsearch.EpochMillis ILicense.ExpiryDateInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis ILicense.IssueDateInMillis { get; set; }
+
+		string ILicense.IssuedTo { get; set; }
+
+		string ILicense.Issuer { get; set; }
+
+		long? ILicense.MaxNodes { get; set; }
+
+		long? ILicense.MaxResourceUnits { get; set; }
+
+		string ILicense.Signature { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis ILicense.StartDateInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.License.LicenseType ILicense.Type { get; set; }
+
+		string ILicense.Uid { get; set; }
+	}
+
+	public partial class License : ILicense
 	{
 		[JsonInclude]
 		[JsonPropertyName("expiry_date_in_millis")]

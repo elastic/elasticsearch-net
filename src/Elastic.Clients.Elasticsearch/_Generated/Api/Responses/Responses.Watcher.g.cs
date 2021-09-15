@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 	{
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus Status
+		public Elastic.Clients.Elasticsearch.Watcher.IWatchStatus Status
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status
+		public Elastic.Clients.Elasticsearch.Watcher.IWatchStatus? Status
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -209,7 +209,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("watch")]
-		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch
+		public Elastic.Clients.Elasticsearch.Watcher.IWatch? Watch
 		{
 			get;
 #if NET5_0_OR_GREATER

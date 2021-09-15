@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public partial class SpanTermQueryDescriptor : ISpanTermQuery
+	public partial class SpanTermQueryDescriptor : FieldNameQueryDescriptorBase<SpanTermQueryDescriptor, ISpanTermQuery>, ISpanTermQuery
 	{
 		string ISpanTermQuery.Value { get; set; }
 	}

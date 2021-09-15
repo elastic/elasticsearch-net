@@ -24,7 +24,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute
 {
-	public partial class PainlessContextSetup
+	[ConvertAs(typeof(PainlessContextSetup))]
+	public partial interface IPainlessContextSetup
+	{
+		object Document { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
+	}
+
+	public partial class PainlessContextSetupDescriptor : DescriptorBase<PainlessContextSetupDescriptor, IPainlessContextSetup>, IPainlessContextSetup
+	{
+		object IPainlessContextSetup.Document { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName IPainlessContextSetup.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer IPainlessContextSetup.Query { get; set; }
+	}
+
+	public partial class PainlessContextSetup : IPainlessContextSetup
 	{
 		[JsonInclude]
 		[JsonPropertyName("document")]

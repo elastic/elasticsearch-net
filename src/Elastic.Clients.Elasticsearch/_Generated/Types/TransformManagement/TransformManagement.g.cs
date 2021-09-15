@@ -24,7 +24,22 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
-	public partial class Latest
+	[ConvertAs(typeof(Latest))]
+	public partial interface ILatest
+	{
+		Elastic.Clients.Elasticsearch.Field Sort { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Field> UniqueKey { get; set; }
+	}
+
+	public partial class LatestDescriptor : DescriptorBase<LatestDescriptor, ILatest>, ILatest
+	{
+		Elastic.Clients.Elasticsearch.Field ILatest.Sort { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Field> ILatest.UniqueKey { get; set; }
+	}
+
+	public partial class Latest : ILatest
 	{
 		[JsonInclude]
 		[JsonPropertyName("sort")]
@@ -35,7 +50,26 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field> UniqueKey { get; set; }
 	}
 
-	public partial class Pivot
+	[ConvertAs(typeof(Pivot))]
+	public partial interface IPivot
+	{
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer>? GroupBy { get; set; }
+
+		int? MaxPageSearchSize { get; set; }
+	}
+
+	public partial class PivotDescriptor : DescriptorBase<PivotDescriptor, IPivot>, IPivot
+	{
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? IPivot.Aggregations { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByContainer>? IPivot.GroupBy { get; set; }
+
+		int? IPivot.MaxPageSearchSize { get; set; }
+	}
+
+	public partial class Pivot : IPivot
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
@@ -50,26 +84,22 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public int? MaxPageSearchSize { get; set; }
 	}
 
-	public partial class PivotGroupByContainer
+	[ConvertAs(typeof(RetentionPolicy))]
+	public partial interface IRetentionPolicy
 	{
-		[JsonInclude]
-		[JsonPropertyName("date_histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("geotile_grid")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation? GeotileGrid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("histogram")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
+		Elastic.Clients.Elasticsearch.Time MaxAge { get; set; }
 	}
 
-	public partial class RetentionPolicy
+	public partial class RetentionPolicyDescriptor : DescriptorBase<RetentionPolicyDescriptor, IRetentionPolicy>, IRetentionPolicy
+	{
+		Elastic.Clients.Elasticsearch.Field IRetentionPolicy.Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time IRetentionPolicy.MaxAge { get; set; }
+	}
+
+	public partial class RetentionPolicy : IRetentionPolicy
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -80,14 +110,26 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public Elastic.Clients.Elasticsearch.Time MaxAge { get; set; }
 	}
 
-	public partial class RetentionPolicyContainer
+	[ConvertAs(typeof(Settings))]
+	public partial interface ISettings
 	{
-		[JsonInclude]
-		[JsonPropertyName("time")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy Time { get; set; }
+		bool? DatesAsEpochMillis { get; set; }
+
+		float? DocsPerSecond { get; set; }
+
+		int? MaxPageSearchSize { get; set; }
 	}
 
-	public partial class Settings
+	public partial class SettingsDescriptor : DescriptorBase<SettingsDescriptor, ISettings>, ISettings
+	{
+		bool? ISettings.DatesAsEpochMillis { get; set; }
+
+		float? ISettings.DocsPerSecond { get; set; }
+
+		int? ISettings.MaxPageSearchSize { get; set; }
+	}
+
+	public partial class Settings : ISettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("dates_as_epoch_millis")]
@@ -102,14 +144,22 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public int? MaxPageSearchSize { get; set; }
 	}
 
-	public partial class SyncContainer
+	[ConvertAs(typeof(TimeSync))]
+	public partial interface ITimeSync
 	{
-		[JsonInclude]
-		[JsonPropertyName("time")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Time { get; set; }
+		Elastic.Clients.Elasticsearch.Time? Delay { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public partial class TimeSync
+	public partial class TimeSyncDescriptor : DescriptorBase<TimeSyncDescriptor, ITimeSync>, ITimeSync
+	{
+		Elastic.Clients.Elasticsearch.Time? ITimeSync.Delay { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field ITimeSync.Field { get; set; }
+	}
+
+	public partial class TimeSync : ITimeSync
 	{
 		[JsonInclude]
 		[JsonPropertyName("delay")]

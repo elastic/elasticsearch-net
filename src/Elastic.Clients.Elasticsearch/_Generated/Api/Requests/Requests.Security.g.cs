@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.RoleDescriptor>? RoleDescriptors { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.IRoleDescriptor>? RoleDescriptors { get; set; }
 
 		Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 	}
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("role_descriptors")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.RoleDescriptor>? RoleDescriptors { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.IRoleDescriptor>? RoleDescriptors { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("metadata")]
@@ -699,7 +699,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	[ConvertAs(typeof(GrantApiKeyRequest))]
 	public partial interface IGrantApiKeyRequest : IRequest<GrantApiKeyRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKey ApiKey { get; set; }
+		Elastic.Clients.Elasticsearch.Security.GrantApiKey.IApiKey ApiKey { get; set; }
 
 		Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKeyGrantType GrantType { get; set; }
 
@@ -726,7 +726,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("api_key")]
-		public Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKey ApiKey { get; set; }
+		public Elastic.Clients.Elasticsearch.Security.GrantApiKey.IApiKey ApiKey { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("grant_type")]
@@ -748,11 +748,11 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	[ConvertAs(typeof(HasPrivilegesRequest))]
 	public partial interface IHasPrivilegesRequest : IRequest<HasPrivilegesRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationPrivilegesCheck>? Application { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IApplicationPrivilegesCheck>? Application { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IndexPrivilegesCheck>? Index { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IIndexPrivilegesCheck>? Index { get; set; }
 	}
 
 	public partial class HasPrivilegesRequest : PlainRequestBase<HasPrivilegesRequestParameters>, IHasPrivilegesRequest
@@ -776,7 +776,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("application")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationPrivilegesCheck>? Application { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IApplicationPrivilegesCheck>? Application { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("cluster")]
@@ -784,7 +784,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IndexPrivilegesCheck>? Index { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IIndexPrivilegesCheck>? Index { get; set; }
 	}
 
 	[ConvertAs(typeof(InvalidateApiKeyRequest))]
@@ -911,19 +911,19 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 	[ConvertAs(typeof(PutRoleRequest))]
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? Applications { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 
 		Dictionary<string, object>? Global { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IIndicesPrivileges>? Indices { get; set; }
 
 		Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
 
 		IEnumerable<string>? RunAs { get; set; }
 
-		Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata? TransientMetadata { get; set; }
+		Elastic.Clients.Elasticsearch.Security.GetRole.ITransientMetadata? TransientMetadata { get; set; }
 	}
 
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
@@ -945,7 +945,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("applications")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? Applications { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("cluster")]
@@ -957,7 +957,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IIndicesPrivileges>? Indices { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("metadata")]
@@ -969,7 +969,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("transient_metadata")]
-		public Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata? TransientMetadata { get; set; }
+		public Elastic.Clients.Elasticsearch.Security.GetRole.ITransientMetadata? TransientMetadata { get; set; }
 	}
 
 	[ConvertAs(typeof(PutRoleMappingRequest))]
@@ -981,7 +981,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		IEnumerable<string>? Roles { get; set; }
 
-		Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase? Rules { get; set; }
+		Elastic.Clients.Elasticsearch.Security.RoleMappingRule? Rules { get; set; }
 
 		IEnumerable<string>? RunAs { get; set; }
 	}
@@ -1017,7 +1017,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		[JsonInclude]
 		[JsonPropertyName("rules")]
-		public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase? Rules { get; set; }
+		public Elastic.Clients.Elasticsearch.Security.RoleMappingRule? Rules { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("run_as")]

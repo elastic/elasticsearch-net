@@ -15,16 +15,22 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text.Json.Serialization;
+using OneOf;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 {
-	public partial class StopWords : List<string>
+	public partial class LifecycleExplain : Union<Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainManaged, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainUnmanaged>
 	{
+		public LifecycleExplain(Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainManaged item) : base(item)
+		{
+		}
+
+		public LifecycleExplain(Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainUnmanaged item) : base(item)
+		{
+		}
 	}
 }

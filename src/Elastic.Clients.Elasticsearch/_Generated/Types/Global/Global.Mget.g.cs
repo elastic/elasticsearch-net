@@ -159,7 +159,42 @@ namespace Elastic.Clients.Elasticsearch.Global.Mget
 		}
 	}
 
-	public partial class Operation
+	[ConvertAs(typeof(Operation))]
+	public partial interface IOperation
+	{
+		Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
+
+		Elastic.Clients.Elasticsearch.DocType? Type { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+	}
+
+	public partial class OperationDescriptor : DescriptorBase<OperationDescriptor, IOperation>, IOperation
+	{
+		Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId IOperation.Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? IOperation.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Routing? IOperation.Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? IOperation.StoredFields { get; set; }
+
+		Elastic.Clients.Elasticsearch.DocType? IOperation.Type { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber? IOperation.Version { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? IOperation.VersionType { get; set; }
+	}
+
+	public partial class Operation : IOperation
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]

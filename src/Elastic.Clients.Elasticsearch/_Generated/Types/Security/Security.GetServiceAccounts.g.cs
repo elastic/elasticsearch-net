@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 	{
 		[JsonInclude]
 		[JsonPropertyName("applications")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? Applications
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Security.GetServiceAccounts
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IIndicesPrivileges> Indices
 		{
 			get;
 #if NET5_0_OR_GREATER

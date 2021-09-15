@@ -120,12 +120,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? ISimulateRequest.Docs { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.IDocument>? ISimulateRequest.Docs { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ingest.Pipeline? ISimulateRequest.Pipeline { get; set; }
+		Elastic.Clients.Elasticsearch.Ingest.IPipeline? ISimulateRequest.Pipeline { get; set; }
 
 		public SimulateDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		public SimulateDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? docs) => Assign(docs, (a, v) => a.Docs = v);
-		public SimulateDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
+		public SimulateDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.IDocument>? docs) => Assign(docs, (a, v) => a.Docs = v);
+		public SimulateDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.IPipeline? pipeline) => Assign(pipeline, (a, v) => a.Pipeline = v);
 	}
 }

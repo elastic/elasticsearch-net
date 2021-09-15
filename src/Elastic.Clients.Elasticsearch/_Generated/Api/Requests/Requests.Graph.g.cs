@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Graph
 	[ConvertAs(typeof(ExploreRequest))]
 	public partial interface IExploreRequest : IRequest<ExploreRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
+		Elastic.Clients.Elasticsearch.Graph.IHop? Connections { get; set; }
 
-		Elastic.Clients.Elasticsearch.Graph.ExploreControls? Controls { get; set; }
+		Elastic.Clients.Elasticsearch.Graph.IExploreControls? Controls { get; set; }
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? Vertices { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition>? Vertices { get; set; }
 	}
 
 	public partial class ExploreRequest : PlainRequestBase<ExploreRequestParameters>, IExploreRequest
@@ -56,11 +56,11 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		[JsonInclude]
 		[JsonPropertyName("connections")]
-		public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
+		public Elastic.Clients.Elasticsearch.Graph.IHop? Connections { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("controls")]
-		public Elastic.Clients.Elasticsearch.Graph.ExploreControls? Controls { get; set; }
+		public Elastic.Clients.Elasticsearch.Graph.IExploreControls? Controls { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
@@ -68,6 +68,6 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		[JsonInclude]
 		[JsonPropertyName("vertices")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? Vertices { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition>? Vertices { get; set; }
 	}
 }

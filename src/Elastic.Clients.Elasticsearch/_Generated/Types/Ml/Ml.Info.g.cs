@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Ml.Info
 	{
 		[JsonInclude]
 		[JsonPropertyName("categorization_analyzer")]
-		public Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer CategorizationAnalyzer
+		public Elastic.Clients.Elasticsearch.Ml.ICategorizationAnalyzer CategorizationAnalyzer
 		{
 			get;
 #if NET5_0_OR_GREATER

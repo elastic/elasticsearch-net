@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		bool? IgnoreUnmapped { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? InnerHits { get; set; }
 
 		int? MaxChildren { get; set; }
 
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_children")]
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.InnerHits? IHasChildQuery.InnerHits { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? IHasChildQuery.InnerHits { get; set; }
 
 		int? IHasChildQuery.MaxChildren { get; set; }
 

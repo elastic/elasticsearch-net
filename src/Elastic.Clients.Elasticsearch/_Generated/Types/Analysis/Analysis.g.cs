@@ -37,22 +37,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "asciifolding";
 	}
 
 	public abstract partial class CharFilterBase
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
@@ -79,6 +71,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "char_group";
 	}
 
 	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase
@@ -130,6 +126,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "common_grams";
 	}
 
 	public abstract partial class CompoundWordTokenFilterBase : Analysis.TokenFilterBase
@@ -244,6 +244,107 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "condition";
+	}
+
+	public partial class CustomAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("char_filter")]
+		public IReadOnlyCollection<string>? CharFilter
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public IReadOnlyCollection<string>? Filter
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("position_increment_gap")]
+		public int? PositionIncrementGap
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("position_offset_gap")]
+		public int? PositionOffsetGap
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("tokenizer")]
+		public string Tokenizer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "custom";
+	}
+
+	[ConvertAs(typeof(CustomNormalizer))]
+	public partial interface ICustomNormalizer
+	{
+		IEnumerable<string>? CharFilter { get; set; }
+
+		IEnumerable<string>? Filter { get; set; }
+	}
+
+	public partial class CustomNormalizerDescriptor : DescriptorBase<CustomNormalizerDescriptor, ICustomNormalizer>, ICustomNormalizer
+	{
+		IEnumerable<string>? ICustomNormalizer.CharFilter { get; set; }
+
+		IEnumerable<string>? ICustomNormalizer.Filter { get; set; }
+	}
+
+	public partial class CustomNormalizer : ICustomNormalizer
+	{
+		[JsonInclude]
+		[JsonPropertyName("char_filter")]
+		public IEnumerable<string>? CharFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public IEnumerable<string>? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "custom";
 	}
 
 	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase
@@ -271,6 +372,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "delimited_payload";
 	}
 
 	public partial class EdgeNGramTokenFilter : Analysis.TokenFilterBase
@@ -310,6 +415,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "edge_ngram";
 	}
 
 	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase
@@ -361,6 +470,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "edge_ngram";
 	}
 
 	public partial class ElisionTokenFilter : Analysis.TokenFilterBase
@@ -380,6 +493,88 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("articles_case")]
 		public bool ArticlesCase
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "elision";
+	}
+
+	public partial class FingerprintAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("max_output_size")]
+		public int MaxOutputSize
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("preserve_original")]
+		public bool PreserveOriginal
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("separator")]
+		public string Separator
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords")]
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords_path")]
+		public string StopwordsPath
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "fingerprint";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -415,10 +610,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "fingerprint";
 	}
 
 	public partial class HtmlStripCharFilter : Analysis.CharFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "html_strip";
 	}
 
 	public partial class HunspellTokenFilter : Analysis.TokenFilterBase
@@ -470,14 +672,55 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "hunspell";
 	}
 
 	public partial class HyphenationDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "hyphenation_decompounder";
+	}
+
+	public partial class IcuAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("method")]
+		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_analyzer";
 	}
 
 	public partial class KStemTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kstem";
 	}
 
 	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase
@@ -494,6 +737,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keep_types";
 		[JsonInclude]
 		[JsonPropertyName("types")]
 		public IReadOnlyCollection<string> Types
@@ -536,6 +782,28 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("keep_words_path")]
 		public string KeepWordsPath
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keep";
+	}
+
+	public partial class KeywordAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keyword";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -595,6 +863,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keyword_marker";
 	}
 
 	public partial class KeywordTokenizer : Analysis.TokenizerBase
@@ -602,6 +874,240 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
 		public int BufferSize
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keyword";
+	}
+
+	public partial class KuromojiAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji";
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary")]
+		public string UserDictionary
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class KuromojiPartOfSpeechTokenFilter : Analysis.TokenFilterBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("stoptags")]
+		public IReadOnlyCollection<string> Stoptags
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_part_of_speech";
+	}
+
+	public partial class KuromojiReadingFormTokenFilter : Analysis.TokenFilterBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_readingform";
+		[JsonInclude]
+		[JsonPropertyName("use_romaji")]
+		public bool UseRomaji
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class KuromojiStemmerTokenFilter : Analysis.TokenFilterBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("minimum_length")]
+		public int MinimumLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_stemmer";
+	}
+
+	public partial class KuromojiTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("discard_punctuation")]
+		public bool DiscardPunctuation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("nbest_cost")]
+		public int NbestCost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("nbest_examples")]
+		public string NbestExamples
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_tokenizer";
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary")]
+		public string UserDictionary
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary_rules")]
+		public IReadOnlyCollection<string> UserDictionaryRules
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LanguageAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("language")]
+		public Elastic.Clients.Elasticsearch.Analysis.Language Language
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stem_exclusion")]
+		public IReadOnlyCollection<string> StemExclusion
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords")]
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords_path")]
+		public string StopwordsPath
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "language";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -637,10 +1143,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "length";
 	}
 
 	public partial class LetterTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "letter";
 	}
 
 	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase
@@ -668,6 +1181,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "limit";
 	}
 
 	public partial class LowercaseTokenFilter : Analysis.TokenFilterBase
@@ -683,10 +1200,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "lowercase";
 	}
 
 	public partial class LowercaseTokenizer : Analysis.TokenizerBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "lowercase";
 	}
 
 	public partial class MappingCharFilter : Analysis.CharFilterBase
@@ -714,6 +1238,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "mapping";
 	}
 
 	public partial class MultiplexerTokenFilter : Analysis.TokenFilterBase
@@ -741,6 +1269,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "multiplexer";
 	}
 
 	public partial class NGramTokenFilter : Analysis.TokenFilterBase
@@ -768,6 +1300,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "ngram";
 	}
 
 	public partial class NGramTokenizer : Analysis.TokenizerBase
@@ -819,6 +1355,64 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "ngram";
+	}
+
+	public partial class NoriAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("decompound_mode")]
+		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode DecompoundMode
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stoptags")]
+		public IReadOnlyCollection<string> Stoptags
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "nori";
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary")]
+		public string UserDictionary
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class NoriPartOfSpeechTokenFilter : Analysis.TokenFilterBase
@@ -834,6 +1428,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "nori_part_of_speech";
 	}
 
 	public partial class NoriTokenizer : Analysis.TokenizerBase
@@ -862,6 +1460,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "nori_tokenizer";
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
 		public string UserDictionary
@@ -948,6 +1549,76 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "path_hierarchy";
+	}
+
+	public partial class PatternAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("flags")]
+		public string Flags
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("lowercase")]
+		public bool Lowercase
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("pattern")]
+		public string Pattern
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords")]
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class PatternCaptureTokenFilter : Analysis.TokenFilterBase
@@ -975,6 +1646,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern_capture";
 	}
 
 	public partial class PatternReplaceTokenFilter : Analysis.TokenFilterBase
@@ -1014,10 +1689,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern_replace";
 	}
 
 	public partial class PorterStemTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "porter_stem";
 	}
 
 	public partial class PredicateTokenFilter : Analysis.TokenFilterBase
@@ -1033,14 +1715,24 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "predicate_token_filter";
 	}
 
 	public partial class RemoveDuplicatesTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "remove_duplicates";
 	}
 
 	public partial class ReverseTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "reverse";
 	}
 
 	public partial class ShingleTokenFilter : Analysis.TokenFilterBase
@@ -1116,6 +1808,28 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "shingle";
+	}
+
+	public partial class SimpleAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "simple";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class SnowballTokenFilter : Analysis.TokenFilterBase
@@ -1131,6 +1845,41 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "snowball";
+	}
+
+	public partial class StandardAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("max_token_length")]
+		public int MaxTokenLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords")]
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "standard";
 	}
 
 	public partial class StandardTokenizer : Analysis.TokenizerBase
@@ -1146,6 +1895,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "standard";
 	}
 
 	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase
@@ -1173,6 +1926,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stemmer_override";
 	}
 
 	public partial class StemmerTokenFilter : Analysis.TokenFilterBase
@@ -1180,6 +1937,52 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("language")]
 		public string Language
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stemmer";
+	}
+
+	public partial class StopAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("stopwords")]
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("stopwords_path")]
+		public string StopwordsPath
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stop";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1239,6 +2042,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stop";
 	}
 
 	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase
@@ -1315,6 +2122,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "synonym_graph";
 		[JsonInclude]
 		[JsonPropertyName("updateable")]
 		public bool Updateable
@@ -1403,6 +2213,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 
 		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "synonym";
+		[JsonInclude]
 		[JsonPropertyName("updateable")]
 		public bool Updateable
 		{
@@ -1417,18 +2230,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public abstract partial class TokenFilterBase
 	{
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
@@ -1445,18 +2246,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public abstract partial class TokenizerBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
 		[JsonPropertyName("version")]
 		public Elastic.Clients.Elasticsearch.VersionString? Version
 		{
@@ -1471,6 +2260,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 	public partial class TrimTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "trim";
 	}
 
 	public partial class TruncateTokenFilter : Analysis.TokenFilterBase
@@ -1486,6 +2278,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "truncate";
 	}
 
 	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase
@@ -1501,6 +2297,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "uax_url_email";
 	}
 
 	public partial class UniqueTokenFilter : Analysis.TokenFilterBase
@@ -1516,10 +2316,35 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "unique";
 	}
 
 	public partial class UppercaseTokenFilter : Analysis.TokenFilterBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "uppercase";
+	}
+
+	public partial class WhitespaceAnalyzer
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "whitespace";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.VersionString Version
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 
 	public partial class WhitespaceTokenizer : Analysis.TokenizerBase
@@ -1535,6 +2360,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			internal set;
 #endif
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "whitespace";
 	}
 
 	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase
@@ -1683,6 +2512,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "word_delimiter_graph";
 		[JsonInclude]
 		[JsonPropertyName("type_table")]
 		public IReadOnlyCollection<string> TypeTable
@@ -1842,6 +2674,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 #endif
 		}
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "word_delimiter";
 		[JsonInclude]
 		[JsonPropertyName("type_table")]
 		public IReadOnlyCollection<string> TypeTable

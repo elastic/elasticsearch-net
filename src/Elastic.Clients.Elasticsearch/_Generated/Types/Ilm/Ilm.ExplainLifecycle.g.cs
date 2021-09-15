@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 {
-	public partial class LifecycleExplain
+	public partial class LifecycleExplainManaged
 	{
 		[JsonInclude]
 		[JsonPropertyName("action")]
@@ -124,16 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 
 		[JsonInclude]
 		[JsonPropertyName("managed")]
-		public bool Managed
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
+		public string Managed => "True";
 		[JsonInclude]
 		[JsonPropertyName("phase")]
 		public Elastic.Clients.Elasticsearch.Name Phase
@@ -258,22 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 		}
 	}
 
-	public partial class LifecycleExplainProject
-	{
-		[JsonInclude]
-		[JsonPropertyName("project")]
-		public Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainProjectSummary Project
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class LifecycleExplainProjectSummary
+	public partial class LifecycleExplainUnmanaged
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -289,14 +265,6 @@ namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 
 		[JsonInclude]
 		[JsonPropertyName("managed")]
-		public bool Managed
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Managed => "False";
 	}
 }

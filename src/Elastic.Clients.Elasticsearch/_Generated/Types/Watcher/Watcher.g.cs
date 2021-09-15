@@ -51,7 +51,58 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class Action
+	[ConvertAs(typeof(Action))]
+	public partial interface IAction
+	{
+		Elastic.Clients.Elasticsearch.Watcher.ActionType? ActionType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? Condition { get; set; }
+
+		string? Foreach { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IIndex? Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ILogging? Logging { get; set; }
+
+		int? MaxIterations { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? Name { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? ThrottlePeriod { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis? ThrottlePeriodInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.TransformContainer? Transform { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IActionWebhook? Webhook { get; set; }
+	}
+
+	public partial class ActionDescriptor : DescriptorBase<ActionDescriptor, IAction>, IAction
+	{
+		Elastic.Clients.Elasticsearch.Watcher.ActionType? IAction.ActionType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? IAction.Condition { get; set; }
+
+		string? IAction.Foreach { get; set; }
+
+		int? IAction.MaxIterations { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? IAction.Name { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IAction.ThrottlePeriod { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis? IAction.ThrottlePeriodInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.TransformContainer? IAction.Transform { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IIndex? IAction.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ILogging? IAction.Logging { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IActionWebhook? IAction.Webhook { get; set; }
+	}
+
+	public partial class Action : IAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("action_type")]
@@ -67,11 +118,11 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.Watcher.Index? Index { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IIndex? Index { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("logging")]
-		public Elastic.Clients.Elasticsearch.Watcher.Logging? Logging { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ILogging? Logging { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_iterations")]
@@ -95,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("webhook")]
-		public Elastic.Clients.Elasticsearch.Watcher.ActionWebhook? Webhook { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IActionWebhook? Webhook { get; set; }
 	}
 
 	public partial class ActionStatus
@@ -149,7 +200,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class ActionWebhook
+	[ConvertAs(typeof(ActionWebhook))]
+	public partial interface IActionWebhook
+	{
+		Elastic.Clients.Elasticsearch.Host Host { get; set; }
+
+		int Port { get; set; }
+	}
+
+	public partial class ActionWebhookDescriptor : DescriptorBase<ActionWebhookDescriptor, IActionWebhook>, IActionWebhook
+	{
+		Elastic.Clients.Elasticsearch.Host IActionWebhook.Host { get; set; }
+
+		int IActionWebhook.Port { get; set; }
+	}
+
+	public partial class ActionWebhook : IActionWebhook
 	{
 		[JsonInclude]
 		[JsonPropertyName("host")]
@@ -160,7 +226,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public int Port { get; set; }
 	}
 
-	public partial class ActivationState
+	[ConvertAs(typeof(ActivationState))]
+	public partial interface IActivationState
+	{
+		bool Active { get; set; }
+
+		Elastic.Clients.Elasticsearch.Timestamp Timestamp { get; set; }
+	}
+
+	public partial class ActivationStateDescriptor : DescriptorBase<ActivationStateDescriptor, IActivationState>, IActivationState
+	{
+		bool IActivationState.Active { get; set; }
+
+		Elastic.Clients.Elasticsearch.Timestamp IActivationState.Timestamp { get; set; }
+	}
+
+	public partial class ActivationState : IActivationState
 	{
 		[JsonInclude]
 		[JsonPropertyName("active")]
@@ -187,7 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("state")]
-		public Elastic.Clients.Elasticsearch.Watcher.ActivationState State
+		public Elastic.Clients.Elasticsearch.Watcher.IActivationState State
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -210,11 +291,47 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class AlwaysCondition
+	[ConvertAs(typeof(AlwaysCondition))]
+	public partial interface IAlwaysCondition
 	{
 	}
 
-	public partial class ArrayCompareCondition
+	public partial class AlwaysConditionDescriptor : DescriptorBase<AlwaysConditionDescriptor, IAlwaysCondition>, IAlwaysCondition
+	{
+	}
+
+	public partial class AlwaysCondition : IAlwaysCondition
+	{
+	}
+
+	[ConvertAs(typeof(ArrayCompareCondition))]
+	public partial interface IArrayCompareCondition
+	{
+		string ArrayPath { get; set; }
+
+		string Comparison { get; set; }
+
+		string Path { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.Quantifier Quantifier { get; set; }
+
+		object Value { get; set; }
+	}
+
+	public partial class ArrayCompareConditionDescriptor : DescriptorBase<ArrayCompareConditionDescriptor, IArrayCompareCondition>, IArrayCompareCondition
+	{
+		string IArrayCompareCondition.ArrayPath { get; set; }
+
+		string IArrayCompareCondition.Comparison { get; set; }
+
+		string IArrayCompareCondition.Path { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.Quantifier IArrayCompareCondition.Quantifier { get; set; }
+
+		object IArrayCompareCondition.Value { get; set; }
+	}
+
+	public partial class ArrayCompareCondition : IArrayCompareCondition
 	{
 		[JsonInclude]
 		[JsonPropertyName("array_path")]
@@ -237,14 +354,52 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public object Value { get; set; }
 	}
 
-	public partial class ChainInput
+	[ConvertAs(typeof(ChainInput))]
+	public partial interface IChainInput
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Watcher.InputContainer> Inputs { get; set; }
+	}
+
+	public partial class ChainInputDescriptor : DescriptorBase<ChainInputDescriptor, IChainInput>, IChainInput
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Watcher.InputContainer> IChainInput.Inputs { get; set; }
+	}
+
+	public partial class ChainInput : IChainInput
 	{
 		[JsonInclude]
 		[JsonPropertyName("inputs")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.InputContainer> Inputs { get; set; }
 	}
 
-	public partial class CompareCondition
+	[ConvertAs(typeof(CompareCondition))]
+	public partial interface ICompareCondition
+	{
+		string? Comparison { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ICompareContextPayloadCondition? CtxPayloadMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ICompareContextPayloadCondition? CtxPayloadValue { get; set; }
+
+		string? Path { get; set; }
+
+		object? Value { get; set; }
+	}
+
+	public partial class CompareConditionDescriptor : DescriptorBase<CompareConditionDescriptor, ICompareCondition>, ICompareCondition
+	{
+		string? ICompareCondition.Comparison { get; set; }
+
+		string? ICompareCondition.Path { get; set; }
+
+		object? ICompareCondition.Value { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ICompareContextPayloadCondition? ICompareCondition.CtxPayloadMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ICompareContextPayloadCondition? ICompareCondition.CtxPayloadValue { get; set; }
+	}
+
+	public partial class CompareCondition : ICompareCondition
 	{
 		[JsonInclude]
 		[JsonPropertyName("comparison")]
@@ -252,11 +407,11 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("ctx.payload.match")]
-		public Elastic.Clients.Elasticsearch.Watcher.CompareContextPayloadCondition? CtxPayloadMatch { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ICompareContextPayloadCondition? CtxPayloadMatch { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ctx.payload.value")]
-		public Elastic.Clients.Elasticsearch.Watcher.CompareContextPayloadCondition? CtxPayloadValue { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ICompareContextPayloadCondition? CtxPayloadValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("path")]
@@ -267,7 +422,34 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public object? Value { get; set; }
 	}
 
-	public partial class CompareContextPayloadCondition
+	[ConvertAs(typeof(CompareContextPayloadCondition))]
+	public partial interface ICompareContextPayloadCondition
+	{
+		object? Eq { get; set; }
+
+		object? Gt { get; set; }
+
+		object? Gte { get; set; }
+
+		object? Lt { get; set; }
+
+		object? Lte { get; set; }
+	}
+
+	public partial class CompareContextPayloadConditionDescriptor : DescriptorBase<CompareContextPayloadConditionDescriptor, ICompareContextPayloadCondition>, ICompareContextPayloadCondition
+	{
+		object? ICompareContextPayloadCondition.Eq { get; set; }
+
+		object? ICompareContextPayloadCondition.Lt { get; set; }
+
+		object? ICompareContextPayloadCondition.Gt { get; set; }
+
+		object? ICompareContextPayloadCondition.Lte { get; set; }
+
+		object? ICompareContextPayloadCondition.Gte { get; set; }
+	}
+
+	public partial class CompareContextPayloadCondition : ICompareContextPayloadCondition
 	{
 		[JsonInclude]
 		[JsonPropertyName("eq")]
@@ -290,34 +472,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public object? Lte { get; set; }
 	}
 
-	public partial class ConditionContainer
+	[ConvertAs(typeof(DailySchedule))]
+	public partial interface IDailySchedule
 	{
-		[JsonInclude]
-		[JsonPropertyName("always")]
-		public Elastic.Clients.Elasticsearch.Watcher.AlwaysCondition? Always { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("array_compare")]
-		public Elastic.Clients.Elasticsearch.Watcher.ArrayCompareCondition? ArrayCompare { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("compare")]
-		public Elastic.Clients.Elasticsearch.Watcher.CompareCondition? Compare { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("never")]
-		public Elastic.Clients.Elasticsearch.Watcher.NeverCondition? Never { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Watcher.ScriptCondition? Script { get; set; }
+		Union<IEnumerable<string>, Elastic.Clients.Elasticsearch.Watcher.ITimeOfDay> At { get; set; }
 	}
 
-	public partial class DailySchedule
+	public partial class DailyScheduleDescriptor : DescriptorBase<DailyScheduleDescriptor, IDailySchedule>, IDailySchedule
+	{
+		Union<IEnumerable<string>, Elastic.Clients.Elasticsearch.Watcher.ITimeOfDay> IDailySchedule.At { get; set; }
+	}
+
+	public partial class DailySchedule : IDailySchedule
 	{
 		[JsonInclude]
 		[JsonPropertyName("at")]
-		public Union<IEnumerable<string>, Elastic.Clients.Elasticsearch.Watcher.TimeOfDay> At { get; set; }
+		public Union<IEnumerable<string>, Elastic.Clients.Elasticsearch.Watcher.ITimeOfDay> At { get; set; }
 	}
 
 	public partial class EmailResult
@@ -677,14 +847,48 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class HourlySchedule
+	[ConvertAs(typeof(HourlySchedule))]
+	public partial interface IHourlySchedule
+	{
+		IEnumerable<int> Minute { get; set; }
+	}
+
+	public partial class HourlyScheduleDescriptor : DescriptorBase<HourlyScheduleDescriptor, IHourlySchedule>, IHourlySchedule
+	{
+		IEnumerable<int> IHourlySchedule.Minute { get; set; }
+	}
+
+	public partial class HourlySchedule : IHourlySchedule
 	{
 		[JsonInclude]
 		[JsonPropertyName("minute")]
 		public IEnumerable<int> Minute { get; set; }
 	}
 
-	public partial class HttpInput
+	[ConvertAs(typeof(HttpInput))]
+	public partial interface IHttpInput
+	{
+		IEnumerable<string>? Extract { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInput? Http { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputRequestDefinition? Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ResponseContentType? ResponseContentType { get; set; }
+	}
+
+	public partial class HttpInputDescriptor : DescriptorBase<HttpInputDescriptor, IHttpInput>, IHttpInput
+	{
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInput? IHttpInput.Http { get; set; }
+
+		IEnumerable<string>? IHttpInput.Extract { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputRequestDefinition? IHttpInput.Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ResponseContentType? IHttpInput.ResponseContentType { get; set; }
+	}
+
+	public partial class HttpInput : IHttpInput
 	{
 		[JsonInclude]
 		[JsonPropertyName("extract")]
@@ -692,25 +896,51 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("http")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInput? Http { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInput? Http { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("request")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInputRequestDefinition? Request { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInputRequestDefinition? Request { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("response_content_type")]
 		public Elastic.Clients.Elasticsearch.Watcher.ResponseContentType? ResponseContentType { get; set; }
 	}
 
-	public partial class HttpInputAuthentication
+	[ConvertAs(typeof(HttpInputAuthentication))]
+	public partial interface IHttpInputAuthentication
+	{
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputBasicAuthentication Basic { get; set; }
+	}
+
+	public partial class HttpInputAuthenticationDescriptor : DescriptorBase<HttpInputAuthenticationDescriptor, IHttpInputAuthentication>, IHttpInputAuthentication
+	{
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputBasicAuthentication IHttpInputAuthentication.Basic { get; set; }
+	}
+
+	public partial class HttpInputAuthentication : IHttpInputAuthentication
 	{
 		[JsonInclude]
 		[JsonPropertyName("basic")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInputBasicAuthentication Basic { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInputBasicAuthentication Basic { get; set; }
 	}
 
-	public partial class HttpInputBasicAuthentication
+	[ConvertAs(typeof(HttpInputBasicAuthentication))]
+	public partial interface IHttpInputBasicAuthentication
+	{
+		Elastic.Clients.Elasticsearch.Password Password { get; set; }
+
+		Elastic.Clients.Elasticsearch.Username Username { get; set; }
+	}
+
+	public partial class HttpInputBasicAuthenticationDescriptor : DescriptorBase<HttpInputBasicAuthenticationDescriptor, IHttpInputBasicAuthentication>, IHttpInputBasicAuthentication
+	{
+		Elastic.Clients.Elasticsearch.Password IHttpInputBasicAuthentication.Password { get; set; }
+
+		Elastic.Clients.Elasticsearch.Username IHttpInputBasicAuthentication.Username { get; set; }
+	}
+
+	public partial class HttpInputBasicAuthentication : IHttpInputBasicAuthentication
 	{
 		[JsonInclude]
 		[JsonPropertyName("password")]
@@ -721,7 +951,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Username Username { get; set; }
 	}
 
-	public partial class HttpInputProxy
+	[ConvertAs(typeof(HttpInputProxy))]
+	public partial interface IHttpInputProxy
+	{
+		Elastic.Clients.Elasticsearch.Host Host { get; set; }
+
+		uint Port { get; set; }
+	}
+
+	public partial class HttpInputProxyDescriptor : DescriptorBase<HttpInputProxyDescriptor, IHttpInputProxy>, IHttpInputProxy
+	{
+		Elastic.Clients.Elasticsearch.Host IHttpInputProxy.Host { get; set; }
+
+		uint IHttpInputProxy.Port { get; set; }
+	}
+
+	public partial class HttpInputProxy : IHttpInputProxy
 	{
 		[JsonInclude]
 		[JsonPropertyName("host")]
@@ -732,11 +977,70 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public uint Port { get; set; }
 	}
 
-	public partial class HttpInputRequestDefinition
+	[ConvertAs(typeof(HttpInputRequestDefinition))]
+	public partial interface IHttpInputRequestDefinition
+	{
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputAuthentication? Auth { get; set; }
+
+		string? Body { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? ConnectionTimeout { get; set; }
+
+		Dictionary<string, string>? Headers { get; set; }
+
+		Elastic.Clients.Elasticsearch.Host? Host { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.HttpInputMethod? Method { get; set; }
+
+		Dictionary<string, string>? Params { get; set; }
+
+		string? Path { get; set; }
+
+		uint? Port { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputProxy? Proxy { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? ReadTimeout { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ConnectionScheme? Scheme { get; set; }
+
+		string? Url { get; set; }
+	}
+
+	public partial class HttpInputRequestDefinitionDescriptor : DescriptorBase<HttpInputRequestDefinitionDescriptor, IHttpInputRequestDefinition>, IHttpInputRequestDefinition
+	{
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputAuthentication? IHttpInputRequestDefinition.Auth { get; set; }
+
+		string? IHttpInputRequestDefinition.Body { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IHttpInputRequestDefinition.ConnectionTimeout { get; set; }
+
+		Dictionary<string, string>? IHttpInputRequestDefinition.Headers { get; set; }
+
+		Elastic.Clients.Elasticsearch.Host? IHttpInputRequestDefinition.Host { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.HttpInputMethod? IHttpInputRequestDefinition.Method { get; set; }
+
+		Dictionary<string, string>? IHttpInputRequestDefinition.Params { get; set; }
+
+		string? IHttpInputRequestDefinition.Path { get; set; }
+
+		uint? IHttpInputRequestDefinition.Port { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IHttpInputProxy? IHttpInputRequestDefinition.Proxy { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IHttpInputRequestDefinition.ReadTimeout { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ConnectionScheme? IHttpInputRequestDefinition.Scheme { get; set; }
+
+		string? IHttpInputRequestDefinition.Url { get; set; }
+	}
+
+	public partial class HttpInputRequestDefinition : IHttpInputRequestDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("auth")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInputAuthentication? Auth { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInputAuthentication? Auth { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("body")]
@@ -772,7 +1076,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("proxy")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInputProxy? Proxy { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInputProxy? Proxy { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("read_timeout")]
@@ -787,7 +1091,16 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public string? Url { get; set; }
 	}
 
-	public partial class HttpInputRequestResult : Watcher.HttpInputRequestDefinition
+	[ConvertAs(typeof(HttpInputRequestResult))]
+	public partial interface IHttpInputRequestResult
+	{
+	}
+
+	public partial class HttpInputRequestResultDescriptor : DescriptorBase<HttpInputRequestResultDescriptor, IHttpInputRequestResult>, IHttpInputRequestResult
+	{
+	}
+
+	public partial class HttpInputRequestResult : Watcher.HttpInputRequestDefinition, IHttpInputRequestResult
 	{
 	}
 
@@ -830,7 +1143,24 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class Index
+	[ConvertAs(typeof(Index))]
+	public partial interface IIndex
+	{
+		Elastic.Clients.Elasticsearch.Id? DocId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Refresh? Refresh { get; set; }
+	}
+
+	public partial class IndexDescriptor : DescriptorBase<IndexDescriptor, IIndex>, IIndex
+	{
+		Elastic.Clients.Elasticsearch.IndexName IIndex.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? IIndex.DocId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Refresh? IIndex.Refresh { get; set; }
+	}
+
+	public partial class Index : IIndex
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_id")]
@@ -931,7 +1261,30 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class IndicesOptions
+	[ConvertAs(typeof(IndicesOptions))]
+	public partial interface IIndicesOptions
+	{
+		bool? AllowNoIndices { get; set; }
+
+		Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; set; }
+
+		bool? IgnoreThrottled { get; set; }
+
+		bool? IgnoreUnavailable { get; set; }
+	}
+
+	public partial class IndicesOptionsDescriptor : DescriptorBase<IndicesOptionsDescriptor, IIndicesOptions>, IIndicesOptions
+	{
+		bool? IIndicesOptions.AllowNoIndices { get; set; }
+
+		Elastic.Clients.Elasticsearch.ExpandWildcards? IIndicesOptions.ExpandWildcards { get; set; }
+
+		bool? IIndicesOptions.IgnoreUnavailable { get; set; }
+
+		bool? IIndicesOptions.IgnoreThrottled { get; set; }
+	}
+
+	public partial class IndicesOptions : IIndicesOptions
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_no_indices")]
@@ -950,26 +1303,26 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public bool? IgnoreUnavailable { get; set; }
 	}
 
-	public partial class InputContainer
+	[ConvertAs(typeof(Logging))]
+	public partial interface ILogging
 	{
-		[JsonInclude]
-		[JsonPropertyName("chain")]
-		public Elastic.Clients.Elasticsearch.Watcher.ChainInput? Chain { get; set; }
+		string? Category { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("http")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInput? Http { get; set; }
+		string? Level { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("search")]
-		public Elastic.Clients.Elasticsearch.Watcher.SearchInput? Search { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("simple")]
-		public Dictionary<string, object>? Simple { get; set; }
+		string Text { get; set; }
 	}
 
-	public partial class Logging
+	public partial class LoggingDescriptor : DescriptorBase<LoggingDescriptor, ILogging>, ILogging
+	{
+		string? ILogging.Level { get; set; }
+
+		string ILogging.Text { get; set; }
+
+		string? ILogging.Category { get; set; }
+	}
+
+	public partial class Logging : ILogging
 	{
 		[JsonInclude]
 		[JsonPropertyName("category")]
@@ -999,7 +1352,16 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class NeverCondition
+	[ConvertAs(typeof(NeverCondition))]
+	public partial interface INeverCondition
+	{
+	}
+
+	public partial class NeverConditionDescriptor : DescriptorBase<NeverConditionDescriptor, INeverCondition>, INeverCondition
+	{
+	}
+
+	public partial class NeverCondition : INeverCondition
 	{
 	}
 
@@ -1031,7 +1393,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("request")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInputRequestResult Request
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInputRequestResult Request
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1247,7 +1609,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status
+		public Elastic.Clients.Elasticsearch.Watcher.IWatchStatus? Status
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1259,7 +1621,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("watch")]
-		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch
+		public Elastic.Clients.Elasticsearch.Watcher.IWatch? Watch
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1270,38 +1632,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class ScheduleContainer
+	[ConvertAs(typeof(ScheduleTriggerEvent))]
+	public partial interface IScheduleTriggerEvent
 	{
-		[JsonInclude]
-		[JsonPropertyName("cron")]
-		public Elastic.Clients.Elasticsearch.Watcher.CronExpression? Cron { get; set; }
+		Union<Elastic.Clients.Elasticsearch.DateString, string> ScheduledTime { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("daily")]
-		public Elastic.Clients.Elasticsearch.Watcher.DailySchedule? Daily { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("hourly")]
-		public Elastic.Clients.Elasticsearch.Watcher.HourlySchedule? Hourly { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public Elastic.Clients.Elasticsearch.Time? Interval { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("monthly")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.TimeOfMonth>? Monthly { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("weekly")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.TimeOfWeek>? Weekly { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("yearly")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.TimeOfYear>? Yearly { get; set; }
+		Union<Elastic.Clients.Elasticsearch.DateString, string>? TriggeredTime { get; set; }
 	}
 
-	public partial class ScheduleTriggerEvent
+	public partial class ScheduleTriggerEventDescriptor : DescriptorBase<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent>, IScheduleTriggerEvent
+	{
+		Union<Elastic.Clients.Elasticsearch.DateString, string> IScheduleTriggerEvent.ScheduledTime { get; set; }
+
+		Union<Elastic.Clients.Elasticsearch.DateString, string>? IScheduleTriggerEvent.TriggeredTime { get; set; }
+	}
+
+	public partial class ScheduleTriggerEvent : IScheduleTriggerEvent
 	{
 		[JsonInclude]
 		[JsonPropertyName("scheduled_time")]
@@ -1312,7 +1658,26 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Union<Elastic.Clients.Elasticsearch.DateString, string>? TriggeredTime { get; set; }
 	}
 
-	public partial class ScriptCondition
+	[ConvertAs(typeof(ScriptCondition))]
+	public partial interface IScriptCondition
+	{
+		string Lang { get; set; }
+
+		Dictionary<string, object>? Params { get; set; }
+
+		string Source { get; set; }
+	}
+
+	public partial class ScriptConditionDescriptor : DescriptorBase<ScriptConditionDescriptor, IScriptCondition>, IScriptCondition
+	{
+		string IScriptCondition.Lang { get; set; }
+
+		Dictionary<string, object>? IScriptCondition.Params { get; set; }
+
+		string IScriptCondition.Source { get; set; }
+	}
+
+	public partial class ScriptCondition : IScriptCondition
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -1327,7 +1692,26 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public string Source { get; set; }
 	}
 
-	public partial class SearchInput
+	[ConvertAs(typeof(SearchInput))]
+	public partial interface ISearchInput
+	{
+		IEnumerable<string>? Extract { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestDefinition Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+	}
+
+	public partial class SearchInputDescriptor : DescriptorBase<SearchInputDescriptor, ISearchInput>, ISearchInput
+	{
+		IEnumerable<string>? ISearchInput.Extract { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestDefinition ISearchInput.Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? ISearchInput.Timeout { get; set; }
+	}
+
+	public partial class SearchInput : ISearchInput
 	{
 		[JsonInclude]
 		[JsonPropertyName("extract")]
@@ -1335,25 +1719,67 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("request")]
-		public Elastic.Clients.Elasticsearch.Watcher.SearchInputRequestDefinition Request { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestDefinition Request { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
 	}
 
-	public partial class SearchInputRequestBody
+	[ConvertAs(typeof(SearchInputRequestBody))]
+	public partial interface ISearchInputRequestBody
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
+	}
+
+	public partial class SearchInputRequestBodyDescriptor : DescriptorBase<SearchInputRequestBodyDescriptor, ISearchInputRequestBody>, ISearchInputRequestBody
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer ISearchInputRequestBody.Query { get; set; }
+	}
+
+	public partial class SearchInputRequestBody : ISearchInputRequestBody
 	{
 		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
 	}
 
-	public partial class SearchInputRequestDefinition
+	[ConvertAs(typeof(SearchInputRequestDefinition))]
+	public partial interface ISearchInputRequestDefinition
+	{
+		Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestBody? Body { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IIndicesOptions? IndicesOptions { get; set; }
+
+		bool? RestTotalHitsAsInt { get; set; }
+
+		Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
+
+		Elastic.Clients.Elasticsearch.SearchTemplateRequest? Template { get; set; }
+	}
+
+	public partial class SearchInputRequestDefinitionDescriptor : DescriptorBase<SearchInputRequestDefinitionDescriptor, ISearchInputRequestDefinition>, ISearchInputRequestDefinition
+	{
+		Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestBody? ISearchInputRequestDefinition.Body { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? ISearchInputRequestDefinition.Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IIndicesOptions? ISearchInputRequestDefinition.IndicesOptions { get; set; }
+
+		Elastic.Clients.Elasticsearch.SearchType? ISearchInputRequestDefinition.SearchType { get; set; }
+
+		Elastic.Clients.Elasticsearch.SearchTemplateRequest? ISearchInputRequestDefinition.Template { get; set; }
+
+		bool? ISearchInputRequestDefinition.RestTotalHitsAsInt { get; set; }
+	}
+
+	public partial class SearchInputRequestDefinition : ISearchInputRequestDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("body")]
-		public Elastic.Clients.Elasticsearch.Watcher.SearchInputRequestBody? Body { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestBody? Body { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
@@ -1361,7 +1787,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("indices_options")]
-		public Elastic.Clients.Elasticsearch.Watcher.IndicesOptions? IndicesOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IIndicesOptions? IndicesOptions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("rest_total_hits_as_int")]
@@ -1376,7 +1802,26 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.SearchTemplateRequest? Template { get; set; }
 	}
 
-	public partial class SimulatedActions
+	[ConvertAs(typeof(SimulatedActions))]
+	public partial interface ISimulatedActions
+	{
+		IEnumerable<string> Actions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions All { get; set; }
+
+		bool UseAll { get; set; }
+	}
+
+	public partial class SimulatedActionsDescriptor : DescriptorBase<SimulatedActionsDescriptor, ISimulatedActions>, ISimulatedActions
+	{
+		IEnumerable<string> ISimulatedActions.Actions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions ISimulatedActions.All { get; set; }
+
+		bool ISimulatedActions.UseAll { get; set; }
+	}
+
+	public partial class SimulatedActions : ISimulatedActions
 	{
 		[JsonInclude]
 		[JsonPropertyName("actions")]
@@ -1384,7 +1829,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("all")]
-		public Elastic.Clients.Elasticsearch.Watcher.SimulatedActions All { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions All { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("use_all")]
@@ -1769,7 +2214,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class TimeOfDay
+	[ConvertAs(typeof(TimeOfDay))]
+	public partial interface ITimeOfDay
+	{
+		IEnumerable<int> Hour { get; set; }
+
+		IEnumerable<int> Minute { get; set; }
+	}
+
+	public partial class TimeOfDayDescriptor : DescriptorBase<TimeOfDayDescriptor, ITimeOfDay>, ITimeOfDay
+	{
+		IEnumerable<int> ITimeOfDay.Hour { get; set; }
+
+		IEnumerable<int> ITimeOfDay.Minute { get; set; }
+	}
+
+	public partial class TimeOfDay : ITimeOfDay
 	{
 		[JsonInclude]
 		[JsonPropertyName("hour")]
@@ -1780,7 +2240,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public IEnumerable<int> Minute { get; set; }
 	}
 
-	public partial class TimeOfMonth
+	[ConvertAs(typeof(TimeOfMonth))]
+	public partial interface ITimeOfMonth
+	{
+		IEnumerable<string> At { get; set; }
+
+		IEnumerable<int> On { get; set; }
+	}
+
+	public partial class TimeOfMonthDescriptor : DescriptorBase<TimeOfMonthDescriptor, ITimeOfMonth>, ITimeOfMonth
+	{
+		IEnumerable<string> ITimeOfMonth.At { get; set; }
+
+		IEnumerable<int> ITimeOfMonth.On { get; set; }
+	}
+
+	public partial class TimeOfMonth : ITimeOfMonth
 	{
 		[JsonInclude]
 		[JsonPropertyName("at")]
@@ -1791,7 +2266,22 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public IEnumerable<int> On { get; set; }
 	}
 
-	public partial class TimeOfWeek
+	[ConvertAs(typeof(TimeOfWeek))]
+	public partial interface ITimeOfWeek
+	{
+		IEnumerable<string> At { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Day> On { get; set; }
+	}
+
+	public partial class TimeOfWeekDescriptor : DescriptorBase<TimeOfWeekDescriptor, ITimeOfWeek>, ITimeOfWeek
+	{
+		IEnumerable<string> ITimeOfWeek.At { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Day> ITimeOfWeek.On { get; set; }
+	}
+
+	public partial class TimeOfWeek : ITimeOfWeek
 	{
 		[JsonInclude]
 		[JsonPropertyName("at")]
@@ -1802,7 +2292,26 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Day> On { get; set; }
 	}
 
-	public partial class TimeOfYear
+	[ConvertAs(typeof(TimeOfYear))]
+	public partial interface ITimeOfYear
+	{
+		IEnumerable<string> At { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Month> Int { get; set; }
+
+		IEnumerable<int> On { get; set; }
+	}
+
+	public partial class TimeOfYearDescriptor : DescriptorBase<TimeOfYearDescriptor, ITimeOfYear>, ITimeOfYear
+	{
+		IEnumerable<string> ITimeOfYear.At { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Watcher.Month> ITimeOfYear.Int { get; set; }
+
+		IEnumerable<int> ITimeOfYear.On { get; set; }
+	}
+
+	public partial class TimeOfYear : ITimeOfYear
 	{
 		[JsonInclude]
 		[JsonPropertyName("at")]
@@ -1815,28 +2324,6 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		[JsonInclude]
 		[JsonPropertyName("on")]
 		public IEnumerable<int> On { get; set; }
-	}
-
-	public partial class TriggerContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("schedule")]
-		public Elastic.Clients.Elasticsearch.Watcher.ScheduleContainer Schedule { get; set; }
-	}
-
-	public partial class TriggerEventContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("schedule")]
-		public Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent Schedule
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	public partial class TriggerEventResult
@@ -1878,11 +2365,54 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		}
 	}
 
-	public partial class Watch
+	[ConvertAs(typeof(Watch))]
+	public partial interface IWatch
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Watcher.IAction> Actions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ConditionContainer Condition { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.InputContainer Input { get; set; }
+
+		Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IWatchStatus? Status { get; set; }
+
+		string? ThrottlePeriod { get; set; }
+
+		long? ThrottlePeriodInMillis { get; set; }
+
+		Elastic.Clients.Elasticsearch.TransformContainer? Transform { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.TriggerContainer Trigger { get; set; }
+	}
+
+	public partial class WatchDescriptor : DescriptorBase<WatchDescriptor, IWatch>, IWatch
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Watcher.IAction> IWatch.Actions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.ConditionContainer IWatch.Condition { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.InputContainer IWatch.Input { get; set; }
+
+		Elastic.Clients.Elasticsearch.Metadata? IWatch.Metadata { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IWatchStatus? IWatch.Status { get; set; }
+
+		string? IWatch.ThrottlePeriod { get; set; }
+
+		Elastic.Clients.Elasticsearch.TransformContainer? IWatch.Transform { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.TriggerContainer IWatch.Trigger { get; set; }
+
+		long? IWatch.ThrottlePeriodInMillis { get; set; }
+	}
+
+	public partial class Watch : IWatch
 	{
 		[JsonInclude]
 		[JsonPropertyName("actions")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Watcher.Action> Actions { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Watcher.IAction> Actions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("condition")]
@@ -1898,7 +2428,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Watcher.WatchStatus? Status { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IWatchStatus? Status { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_period")]
@@ -1917,7 +2447,38 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public Elastic.Clients.Elasticsearch.Watcher.TriggerContainer Trigger { get; set; }
 	}
 
-	public partial class WatchStatus
+	[ConvertAs(typeof(WatchStatus))]
+	public partial interface IWatchStatus
+	{
+		Elastic.Clients.Elasticsearch.Watcher.Actions Actions { get; set; }
+
+		string? ExecutionState { get; set; }
+
+		Elastic.Clients.Elasticsearch.DateString? LastChecked { get; set; }
+
+		Elastic.Clients.Elasticsearch.DateString? LastMetCondition { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IActivationState State { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber Version { get; set; }
+	}
+
+	public partial class WatchStatusDescriptor : DescriptorBase<WatchStatusDescriptor, IWatchStatus>, IWatchStatus
+	{
+		Elastic.Clients.Elasticsearch.Watcher.Actions IWatchStatus.Actions { get; set; }
+
+		Elastic.Clients.Elasticsearch.DateString? IWatchStatus.LastChecked { get; set; }
+
+		Elastic.Clients.Elasticsearch.DateString? IWatchStatus.LastMetCondition { get; set; }
+
+		Elastic.Clients.Elasticsearch.Watcher.IActivationState IWatchStatus.State { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber IWatchStatus.Version { get; set; }
+
+		string? IWatchStatus.ExecutionState { get; set; }
+	}
+
+	public partial class WatchStatus : IWatchStatus
 	{
 		[JsonInclude]
 		[JsonPropertyName("actions")]
@@ -1937,7 +2498,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("state")]
-		public Elastic.Clients.Elasticsearch.Watcher.ActivationState State { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IActivationState State { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -1948,7 +2509,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 	{
 		[JsonInclude]
 		[JsonPropertyName("request")]
-		public Elastic.Clients.Elasticsearch.Watcher.HttpInputRequestResult Request
+		public Elastic.Clients.Elasticsearch.Watcher.IHttpInputRequestResult Request
 		{
 			get;
 #if NET5_0_OR_GREATER

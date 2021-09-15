@@ -328,13 +328,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[ConvertAs(typeof(PutComponentTemplateRequest))]
 	public partial interface IPutComponentTemplateRequest : IRequest<PutComponentTemplateRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexState Template { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IAliasDefinition>? Aliases { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? Settings { get; set; }
 
 		Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
 
@@ -363,19 +363,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IIndexState Template { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IAliasDefinition>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? Settings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -449,7 +449,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[ConvertAs(typeof(RerouteRequest))]
 	public partial interface IRerouteRequest : IRequest<RerouteRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? Commands { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommand>? Commands { get; set; }
 	}
 
 	public partial class RerouteRequest : PlainRequestBase<RerouteRequestParameters>, IRerouteRequest
@@ -486,7 +486,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("commands")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? Commands { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommand>? Commands { get; set; }
 	}
 
 	[ConvertAs(typeof(StateRequest))]

@@ -24,7 +24,58 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml
 {
-	public partial class AnalysisConfig
+	[ConvertAs(typeof(AnalysisConfig))]
+	public partial interface IAnalysisConfig
+	{
+		Elastic.Clients.Elasticsearch.TimeSpanTempReplacement BucketSpan { get; set; }
+
+		Union<Elastic.Clients.Elasticsearch.Ml.ICategorizationAnalyzer, string>? CategorizationAnalyzer { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? CategorizationFieldName { get; set; }
+
+		IEnumerable<string>? CategorizationFilters { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector> Detectors { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Field>? Influencers { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? Latency { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? ModelPruneWindow { get; set; }
+
+		bool? MultivariateByFields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? PerPartitionCategorization { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName { get; set; }
+	}
+
+	public partial class AnalysisConfigDescriptor : DescriptorBase<AnalysisConfigDescriptor, IAnalysisConfig>, IAnalysisConfig
+	{
+		Elastic.Clients.Elasticsearch.TimeSpanTempReplacement IAnalysisConfig.BucketSpan { get; set; }
+
+		Union<Elastic.Clients.Elasticsearch.Ml.ICategorizationAnalyzer, string>? IAnalysisConfig.CategorizationAnalyzer { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IAnalysisConfig.CategorizationFieldName { get; set; }
+
+		IEnumerable<string>? IAnalysisConfig.CategorizationFilters { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector> IAnalysisConfig.Detectors { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Field>? IAnalysisConfig.Influencers { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IAnalysisConfig.ModelPruneWindow { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IAnalysisConfig.Latency { get; set; }
+
+		bool? IAnalysisConfig.MultivariateByFields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? IAnalysisConfig.PerPartitionCategorization { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IAnalysisConfig.SummaryCountFieldName { get; set; }
+	}
+
+	public partial class AnalysisConfig : IAnalysisConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("bucket_span")]
@@ -32,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("categorization_analyzer")]
-		public Union<Elastic.Clients.Elasticsearch.Ml.CategorizationAnalyzer, string>? CategorizationAnalyzer { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Ml.ICategorizationAnalyzer, string>? CategorizationAnalyzer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("categorization_field_name")]
@@ -44,11 +95,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("detectors")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector> Detectors { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector> Detectors { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("influencers")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Field> Influencers { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Influencers { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("latency")]
@@ -64,14 +115,164 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("per_partition_categorization")]
-		public Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? PerPartitionCategorization { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("summary_count_field_name")]
 		public Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName { get; set; }
 	}
 
-	public partial class AnalysisLimits
+	public partial class AnalysisConfigRead
+	{
+		[JsonInclude]
+		[JsonPropertyName("bucket_span")]
+		public Elastic.Clients.Elasticsearch.TimeSpanTempReplacement BucketSpan
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("categorization_analyzer")]
+		public Union<Elastic.Clients.Elasticsearch.Ml.ICategorizationAnalyzer, string>? CategorizationAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("categorization_field_name")]
+		public Elastic.Clients.Elasticsearch.Field? CategorizationFieldName
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("categorization_filters")]
+		public IReadOnlyCollection<string>? CategorizationFilters
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("detectors")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.IDetector> Detectors
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("influencers")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field> Influencers
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("latency")]
+		public Elastic.Clients.Elasticsearch.Time? Latency
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("model_prune_window")]
+		public Elastic.Clients.Elasticsearch.Time? ModelPruneWindow
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("multivariate_by_fields")]
+		public bool? MultivariateByFields
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("per_partition_categorization")]
+		public Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? PerPartitionCategorization
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("summary_count_field_name")]
+		public Elastic.Clients.Elasticsearch.Field? SummaryCountFieldName
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(AnalysisLimits))]
+	public partial interface IAnalysisLimits
+	{
+		long? CategorizationExamplesLimit { get; set; }
+
+		string? ModelMemoryLimit { get; set; }
+	}
+
+	public partial class AnalysisLimitsDescriptor : DescriptorBase<AnalysisLimitsDescriptor, IAnalysisLimits>, IAnalysisLimits
+	{
+		long? IAnalysisLimits.CategorizationExamplesLimit { get; set; }
+
+		string? IAnalysisLimits.ModelMemoryLimit { get; set; }
+	}
+
+	public partial class AnalysisLimits : IAnalysisLimits
 	{
 		[JsonInclude]
 		[JsonPropertyName("categorization_examples_limit")]
@@ -82,7 +283,18 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string? ModelMemoryLimit { get; set; }
 	}
 
-	public partial class AnalysisMemoryLimit
+	[ConvertAs(typeof(AnalysisMemoryLimit))]
+	public partial interface IAnalysisMemoryLimit
+	{
+		string ModelMemoryLimit { get; set; }
+	}
+
+	public partial class AnalysisMemoryLimitDescriptor : DescriptorBase<AnalysisMemoryLimitDescriptor, IAnalysisMemoryLimit>, IAnalysisMemoryLimit
+	{
+		string IAnalysisMemoryLimit.ModelMemoryLimit { get; set; }
+	}
+
+	public partial class AnalysisMemoryLimit : IAnalysisMemoryLimit
 	{
 		[JsonInclude]
 		[JsonPropertyName("model_memory_limit")]
@@ -797,7 +1009,34 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class CalendarEvent
+	[ConvertAs(typeof(CalendarEvent))]
+	public partial interface ICalendarEvent
+	{
+		Elastic.Clients.Elasticsearch.Id? CalendarId { get; set; }
+
+		string Description { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis EndTime { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? EventId { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis StartTime { get; set; }
+	}
+
+	public partial class CalendarEventDescriptor : DescriptorBase<CalendarEventDescriptor, ICalendarEvent>, ICalendarEvent
+	{
+		Elastic.Clients.Elasticsearch.Id? ICalendarEvent.CalendarId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? ICalendarEvent.EventId { get; set; }
+
+		string ICalendarEvent.Description { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis ICalendarEvent.EndTime { get; set; }
+
+		Elastic.Clients.Elasticsearch.EpochMillis ICalendarEvent.StartTime { get; set; }
+	}
+
+	public partial class CalendarEvent : ICalendarEvent
 	{
 		[JsonInclude]
 		[JsonPropertyName("calendar_id")]
@@ -820,7 +1059,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.EpochMillis StartTime { get; set; }
 	}
 
-	public partial class CategorizationAnalyzer
+	[ConvertAs(typeof(CategorizationAnalyzer))]
+	public partial interface ICategorizationAnalyzer
+	{
+		IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>>? CharFilter { get; set; }
+
+		IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>>? Filter { get; set; }
+
+		Union<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? Tokenizer { get; set; }
+	}
+
+	public partial class CategorizationAnalyzerDescriptor : DescriptorBase<CategorizationAnalyzerDescriptor, ICategorizationAnalyzer>, ICategorizationAnalyzer
+	{
+		IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.CharFilter>>? ICategorizationAnalyzer.CharFilter { get; set; }
+
+		IEnumerable<Union<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilter>>? ICategorizationAnalyzer.Filter { get; set; }
+
+		Union<string, Elastic.Clients.Elasticsearch.Analysis.Tokenizer>? ICategorizationAnalyzer.Tokenizer { get; set; }
+	}
+
+	public partial class CategorizationAnalyzer : ICategorizationAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
@@ -1006,7 +1264,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class ChunkingConfig
+	[ConvertAs(typeof(ChunkingConfig))]
+	public partial interface IChunkingConfig
+	{
+		Elastic.Clients.Elasticsearch.Ml.ChunkingMode Mode { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? TimeSpan { get; set; }
+	}
+
+	public partial class ChunkingConfigDescriptor : DescriptorBase<ChunkingConfigDescriptor, IChunkingConfig>, IChunkingConfig
+	{
+		Elastic.Clients.Elasticsearch.Ml.ChunkingMode IChunkingConfig.Mode { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IChunkingConfig.TimeSpan { get; set; }
+	}
+
+	public partial class ChunkingConfig : IChunkingConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]
@@ -1017,7 +1290,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Time? TimeSpan { get; set; }
 	}
 
-	public partial class CustomSettings
+	[ConvertAs(typeof(CustomSettings))]
+	public partial interface ICustomSettings
+	{
+		string? CreatedBy { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Xpack.Usage.UrlConfig>? CustomUrls { get; set; }
+
+		Dictionary<string, string>? JobTags { get; set; }
+	}
+
+	public partial class CustomSettingsDescriptor : DescriptorBase<CustomSettingsDescriptor, ICustomSettings>, ICustomSettings
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Xpack.Usage.UrlConfig>? ICustomSettings.CustomUrls { get; set; }
+
+		string? ICustomSettings.CreatedBy { get; set; }
+
+		Dictionary<string, string>? ICustomSettings.JobTags { get; set; }
+	}
+
+	public partial class CustomSettings : ICustomSettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("created_by")]
@@ -1251,7 +1543,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DataDescription
+	[ConvertAs(typeof(DataDescription))]
+	public partial interface IDataDescription
+	{
+		string? FieldDelimiter { get; set; }
+
+		string? Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TimeField { get; set; }
+
+		string? TimeFormat { get; set; }
+	}
+
+	public partial class DataDescriptionDescriptor : DescriptorBase<DataDescriptionDescriptor, IDataDescription>, IDataDescription
+	{
+		string? IDataDescription.Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDataDescription.TimeField { get; set; }
+
+		string? IDataDescription.TimeFormat { get; set; }
+
+		string? IDataDescription.FieldDelimiter { get; set; }
+	}
+
+	public partial class DataDescription : IDataDescription
 	{
 		[JsonInclude]
 		[JsonPropertyName("field_delimiter")]
@@ -1298,7 +1613,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig
+		public Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? ChunkingConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1322,7 +1637,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig DelayedDataCheckConfig
+		public Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig DelayedDataCheckConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1370,7 +1685,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("indices_options")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IndicesOptions
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1442,7 +1757,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1465,7 +1780,78 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DatafeedConfig
+	[ConvertAs(typeof(DatafeedConfig))]
+	public partial interface IDatafeedConfig
+	{
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? ChunkingConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? DatafeedId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Timestamp? Frequency { get; set; }
+
+		IEnumerable<string>? Indexes { get; set; }
+
+		IEnumerable<string> Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IndicesOptions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
+
+		int? MaxEmptySearches { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Timestamp? QueryDelay { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
+
+		int? ScrollSize { get; set; }
+	}
+
+	public partial class DatafeedConfigDescriptor : DescriptorBase<DatafeedConfigDescriptor, IDatafeedConfig>, IDatafeedConfig
+	{
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? IDatafeedConfig.Aggregations { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? IDatafeedConfig.Aggs { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? IDatafeedConfig.ChunkingConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? IDatafeedConfig.DatafeedId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? IDatafeedConfig.DelayedDataCheckConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Timestamp? IDatafeedConfig.Frequency { get; set; }
+
+		IEnumerable<string>? IDatafeedConfig.Indexes { get; set; }
+
+		IEnumerable<string> IDatafeedConfig.Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IDatafeedConfig.IndicesOptions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? IDatafeedConfig.JobId { get; set; }
+
+		int? IDatafeedConfig.MaxEmptySearches { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer IDatafeedConfig.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Timestamp? IDatafeedConfig.QueryDelay { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? IDatafeedConfig.RuntimeMappings { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? IDatafeedConfig.ScriptFields { get; set; }
+
+		int? IDatafeedConfig.ScrollSize { get; set; }
+	}
+
+	public partial class DatafeedConfig : IDatafeedConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
@@ -1477,7 +1863,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? ChunkingConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("datafeed_id")]
@@ -1485,7 +1871,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
@@ -1501,7 +1887,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("indices_options")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IndicesOptions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("job_id")]
@@ -1525,14 +1911,37 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
 		public int? ScrollSize { get; set; }
 	}
 
-	public partial class DatafeedIndicesOptions
+	[ConvertAs(typeof(DatafeedIndicesOptions))]
+	public partial interface IDatafeedIndicesOptions
+	{
+		bool? AllowNoIndices { get; set; }
+
+		Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get; set; }
+
+		bool? IgnoreThrottled { get; set; }
+
+		bool? IgnoreUnavailable { get; set; }
+	}
+
+	public partial class DatafeedIndicesOptionsDescriptor : DescriptorBase<DatafeedIndicesOptionsDescriptor, IDatafeedIndicesOptions>, IDatafeedIndicesOptions
+	{
+		bool? IDatafeedIndicesOptions.AllowNoIndices { get; set; }
+
+		Elastic.Clients.Elasticsearch.ExpandWildcards? IDatafeedIndicesOptions.ExpandWildcards { get; set; }
+
+		bool? IDatafeedIndicesOptions.IgnoreUnavailable { get; set; }
+
+		bool? IDatafeedIndicesOptions.IgnoreThrottled { get; set; }
+	}
+
+	public partial class DatafeedIndicesOptions : IDatafeedIndicesOptions
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_no_indices")]
@@ -1677,7 +2086,86 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DataframeAnalysis
+	[ConvertAs(typeof(DataframeAnalysis))]
+	public partial interface IDataframeAnalysis
+	{
+		double? Alpha { get; set; }
+
+		string DependentVariable { get; set; }
+
+		double? DownsampleFactor { get; set; }
+
+		bool? EarlyStoppingEnabled { get; set; }
+
+		double? Eta { get; set; }
+
+		double? EtaGrowthRatePerTree { get; set; }
+
+		double? FeatureBagFraction { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
+
+		double? Gamma { get; set; }
+
+		double? Lambda { get; set; }
+
+		int? MaxOptimizationRoundsPerHyperparameter { get; set; }
+
+		int? MaxTrees { get; set; }
+
+		int? NumTopFeatureImportanceValues { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? PredictionFieldName { get; set; }
+
+		double? RandomizeSeed { get; set; }
+
+		int? SoftTreeDepthLimit { get; set; }
+
+		double? SoftTreeDepthTolerance { get; set; }
+
+		Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
+	}
+
+	public partial class DataframeAnalysisDescriptor : DescriptorBase<DataframeAnalysisDescriptor, IDataframeAnalysis>, IDataframeAnalysis
+	{
+		double? IDataframeAnalysis.Alpha { get; set; }
+
+		string IDataframeAnalysis.DependentVariable { get; set; }
+
+		double? IDataframeAnalysis.DownsampleFactor { get; set; }
+
+		bool? IDataframeAnalysis.EarlyStoppingEnabled { get; set; }
+
+		double? IDataframeAnalysis.Eta { get; set; }
+
+		double? IDataframeAnalysis.EtaGrowthRatePerTree { get; set; }
+
+		double? IDataframeAnalysis.FeatureBagFraction { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessor>? IDataframeAnalysis.FeatureProcessors { get; set; }
+
+		double? IDataframeAnalysis.Gamma { get; set; }
+
+		double? IDataframeAnalysis.Lambda { get; set; }
+
+		int? IDataframeAnalysis.MaxOptimizationRoundsPerHyperparameter { get; set; }
+
+		int? IDataframeAnalysis.MaxTrees { get; set; }
+
+		int? IDataframeAnalysis.NumTopFeatureImportanceValues { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDataframeAnalysis.PredictionFieldName { get; set; }
+
+		double? IDataframeAnalysis.RandomizeSeed { get; set; }
+
+		int? IDataframeAnalysis.SoftTreeDepthLimit { get; set; }
+
+		double? IDataframeAnalysis.SoftTreeDepthTolerance { get; set; }
+
+		Elastic.Clients.Elasticsearch.Percentage? IDataframeAnalysis.TrainingPercent { get; set; }
+	}
+
+	public partial class DataframeAnalysis : IDataframeAnalysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("alpha")]
@@ -1779,7 +2267,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DataframeAnalysisClassification : Ml.DataframeAnalysis
+	[ConvertAs(typeof(DataframeAnalysisClassification))]
+	public partial interface IDataframeAnalysisClassification
+	{
+		string? ClassAssignmentObjective { get; set; }
+
+		int? NumTopClasses { get; set; }
+	}
+
+	public partial class DataframeAnalysisClassificationDescriptor : DescriptorBase<DataframeAnalysisClassificationDescriptor, IDataframeAnalysisClassification>, IDataframeAnalysisClassification
+	{
+		string? IDataframeAnalysisClassification.ClassAssignmentObjective { get; set; }
+
+		int? IDataframeAnalysisClassification.NumTopClasses { get; set; }
+	}
+
+	public partial class DataframeAnalysisClassification : Ml.DataframeAnalysis, IDataframeAnalysisClassification
 	{
 		[JsonInclude]
 		[JsonPropertyName("class_assignment_objective")]
@@ -1790,45 +2293,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? NumTopClasses { get; set; }
 	}
 
-	public partial class DataframeAnalysisContainer
+	[ConvertAs(typeof(DataframeAnalysisFeatureProcessorFrequencyEncoding))]
+	public partial interface IDataframeAnalysisFeatureProcessorFrequencyEncoding
 	{
-		[JsonInclude]
-		[JsonPropertyName("classification")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisClassification? Classification { get; set; }
+		Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("outlier_detection")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisOutlierDetection? OutlierDetection { get; set; }
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("regression")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisRegression? Regression { get; set; }
+		Dictionary<string, double> FrequencyMap { get; set; }
 	}
 
-	public partial class DataframeAnalysisFeatureProcessor
+	public partial class DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor, IDataframeAnalysisFeatureProcessorFrequencyEncoding>, IDataframeAnalysisFeatureProcessorFrequencyEncoding
 	{
-		[JsonInclude]
-		[JsonPropertyName("frequency_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorFrequencyEncoding? FrequencyEncoding { get; set; }
+		Elastic.Clients.Elasticsearch.Name IDataframeAnalysisFeatureProcessorFrequencyEncoding.FeatureName { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("multi_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorMultiEncoding? MultiEncoding { get; set; }
+		Elastic.Clients.Elasticsearch.Field IDataframeAnalysisFeatureProcessorFrequencyEncoding.Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("n_gram_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorNGramEncoding? NGramEncoding { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("one_hot_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorOneHotEncoding? OneHotEncoding { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("target_mean_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisFeatureProcessorTargetMeanEncoding? TargetMeanEncoding { get; set; }
+		Dictionary<string, double> IDataframeAnalysisFeatureProcessorFrequencyEncoding.FrequencyMap { get; set; }
 	}
 
-	public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
+	public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : IDataframeAnalysisFeatureProcessorFrequencyEncoding
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]
@@ -1843,14 +2327,56 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, double> FrequencyMap { get; set; }
 	}
 
-	public partial class DataframeAnalysisFeatureProcessorMultiEncoding
+	[ConvertAs(typeof(DataframeAnalysisFeatureProcessorMultiEncoding))]
+	public partial interface IDataframeAnalysisFeatureProcessorMultiEncoding
+	{
+		IEnumerable<int> Processors { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorMultiEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorMultiEncodingDescriptor, IDataframeAnalysisFeatureProcessorMultiEncoding>, IDataframeAnalysisFeatureProcessorMultiEncoding
+	{
+		IEnumerable<int> IDataframeAnalysisFeatureProcessorMultiEncoding.Processors { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorMultiEncoding : IDataframeAnalysisFeatureProcessorMultiEncoding
 	{
 		[JsonInclude]
 		[JsonPropertyName("processors")]
 		public IEnumerable<int> Processors { get; set; }
 	}
 
-	public partial class DataframeAnalysisFeatureProcessorNGramEncoding
+	[ConvertAs(typeof(DataframeAnalysisFeatureProcessorNGramEncoding))]
+	public partial interface IDataframeAnalysisFeatureProcessorNGramEncoding
+	{
+		bool? Custom { get; set; }
+
+		string? FeaturePrefix { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		int? Length { get; set; }
+
+		IEnumerable<int> NGrams { get; set; }
+
+		int? Start { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorNGramEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorNGramEncodingDescriptor, IDataframeAnalysisFeatureProcessorNGramEncoding>, IDataframeAnalysisFeatureProcessorNGramEncoding
+	{
+		string? IDataframeAnalysisFeatureProcessorNGramEncoding.FeaturePrefix { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDataframeAnalysisFeatureProcessorNGramEncoding.Field { get; set; }
+
+		int? IDataframeAnalysisFeatureProcessorNGramEncoding.Length { get; set; }
+
+		IEnumerable<int> IDataframeAnalysisFeatureProcessorNGramEncoding.NGrams { get; set; }
+
+		int? IDataframeAnalysisFeatureProcessorNGramEncoding.Start { get; set; }
+
+		bool? IDataframeAnalysisFeatureProcessorNGramEncoding.Custom { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorNGramEncoding : IDataframeAnalysisFeatureProcessorNGramEncoding
 	{
 		[JsonInclude]
 		[JsonPropertyName("custom")]
@@ -1877,7 +2403,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public int? Start { get; set; }
 	}
 
-	public partial class DataframeAnalysisFeatureProcessorOneHotEncoding
+	[ConvertAs(typeof(DataframeAnalysisFeatureProcessorOneHotEncoding))]
+	public partial interface IDataframeAnalysisFeatureProcessorOneHotEncoding
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string HotMap { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor, IDataframeAnalysisFeatureProcessorOneHotEncoding>, IDataframeAnalysisFeatureProcessorOneHotEncoding
+	{
+		Elastic.Clients.Elasticsearch.Field IDataframeAnalysisFeatureProcessorOneHotEncoding.Field { get; set; }
+
+		string IDataframeAnalysisFeatureProcessorOneHotEncoding.HotMap { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorOneHotEncoding : IDataframeAnalysisFeatureProcessorOneHotEncoding
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -1888,7 +2429,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public string HotMap { get; set; }
 	}
 
-	public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
+	[ConvertAs(typeof(DataframeAnalysisFeatureProcessorTargetMeanEncoding))]
+	public partial interface IDataframeAnalysisFeatureProcessorTargetMeanEncoding
+	{
+		int DefaultValue { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		Dictionary<string, object> TargetMap { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor : DescriptorBase<DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor, IDataframeAnalysisFeatureProcessorTargetMeanEncoding>, IDataframeAnalysisFeatureProcessorTargetMeanEncoding
+	{
+		int IDataframeAnalysisFeatureProcessorTargetMeanEncoding.DefaultValue { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name IDataframeAnalysisFeatureProcessorTargetMeanEncoding.FeatureName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDataframeAnalysisFeatureProcessorTargetMeanEncoding.Field { get; set; }
+
+		Dictionary<string, object> IDataframeAnalysisFeatureProcessorTargetMeanEncoding.TargetMap { get; set; }
+	}
+
+	public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : IDataframeAnalysisFeatureProcessorTargetMeanEncoding
 	{
 		[JsonInclude]
 		[JsonPropertyName("default_value")]
@@ -1907,7 +2471,38 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object> TargetMap { get; set; }
 	}
 
-	public partial class DataframeAnalysisOutlierDetection
+	[ConvertAs(typeof(DataframeAnalysisOutlierDetection))]
+	public partial interface IDataframeAnalysisOutlierDetection
+	{
+		bool? ComputeFeatureInfluence { get; set; }
+
+		double? FeatureInfluenceThreshold { get; set; }
+
+		string? Method { get; set; }
+
+		int? NNeighbors { get; set; }
+
+		double? OutlierFraction { get; set; }
+
+		bool? StandardizationEnabled { get; set; }
+	}
+
+	public partial class DataframeAnalysisOutlierDetectionDescriptor : DescriptorBase<DataframeAnalysisOutlierDetectionDescriptor, IDataframeAnalysisOutlierDetection>, IDataframeAnalysisOutlierDetection
+	{
+		bool? IDataframeAnalysisOutlierDetection.ComputeFeatureInfluence { get; set; }
+
+		double? IDataframeAnalysisOutlierDetection.FeatureInfluenceThreshold { get; set; }
+
+		string? IDataframeAnalysisOutlierDetection.Method { get; set; }
+
+		int? IDataframeAnalysisOutlierDetection.NNeighbors { get; set; }
+
+		double? IDataframeAnalysisOutlierDetection.OutlierFraction { get; set; }
+
+		bool? IDataframeAnalysisOutlierDetection.StandardizationEnabled { get; set; }
+	}
+
+	public partial class DataframeAnalysisOutlierDetection : IDataframeAnalysisOutlierDetection
 	{
 		[JsonInclude]
 		[JsonPropertyName("compute_feature_influence")]
@@ -1934,7 +2529,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? StandardizationEnabled { get; set; }
 	}
 
-	public partial class DataframeAnalysisRegression : Ml.DataframeAnalysis
+	[ConvertAs(typeof(DataframeAnalysisRegression))]
+	public partial interface IDataframeAnalysisRegression
+	{
+		string? LossFunction { get; set; }
+
+		double? LossFunctionParameter { get; set; }
+	}
+
+	public partial class DataframeAnalysisRegressionDescriptor : DescriptorBase<DataframeAnalysisRegressionDescriptor, IDataframeAnalysisRegression>, IDataframeAnalysisRegression
+	{
+		string? IDataframeAnalysisRegression.LossFunction { get; set; }
+
+		double? IDataframeAnalysisRegression.LossFunctionParameter { get; set; }
+	}
+
+	public partial class DataframeAnalysisRegression : Ml.DataframeAnalysis, IDataframeAnalysisRegression
 	{
 		[JsonInclude]
 		[JsonPropertyName("loss_function")]
@@ -2044,7 +2654,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DataframeAnalyticsDestination
+	[ConvertAs(typeof(DataframeAnalyticsDestination))]
+	public partial interface IDataframeAnalyticsDestination
+	{
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
+	}
+
+	public partial class DataframeAnalyticsDestinationDescriptor : DescriptorBase<DataframeAnalyticsDestinationDescriptor, IDataframeAnalyticsDestination>, IDataframeAnalyticsDestination
+	{
+		Elastic.Clients.Elasticsearch.IndexName IDataframeAnalyticsDestination.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDataframeAnalyticsDestination.ResultsField { get; set; }
+	}
+
+	public partial class DataframeAnalyticsDestination : IDataframeAnalyticsDestination
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -2157,7 +2782,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DataframeAnalyticsSource
+	[ConvertAs(typeof(DataframeAnalyticsSource))]
+	public partial interface IDataframeAnalyticsSource
+	{
+		Elastic.Clients.Elasticsearch.Indices Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? Source { get; set; }
+	}
+
+	public partial class DataframeAnalyticsSourceDescriptor : DescriptorBase<DataframeAnalyticsSourceDescriptor, IDataframeAnalyticsSource>, IDataframeAnalyticsSource
+	{
+		Elastic.Clients.Elasticsearch.Indices IDataframeAnalyticsSource.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IDataframeAnalyticsSource.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? IDataframeAnalyticsSource.RuntimeMappings { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? IDataframeAnalyticsSource.Source { get; set; }
+	}
+
+	public partial class DataframeAnalyticsSource : IDataframeAnalyticsSource
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -2174,45 +2822,6 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? Source { get; set; }
-	}
-
-	public partial class DataframeAnalyticsStatsContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("classification_stats")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsHyperparameters? ClassificationStats
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("outlier_detection_stats")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsOutlierDetection? OutlierDetectionStats
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("regression_stats")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsStatsHyperparameters? RegressionStats
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
 	}
 
 	public partial class DataframeAnalyticsStatsDataCounts
@@ -2498,7 +3107,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination Dest
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -2546,7 +3155,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -2569,7 +3178,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class DataframeEvaluationClassification
+	[ConvertAs(typeof(DataframeEvaluationClassification))]
+	public partial interface IDataframeEvaluationClassification
+	{
+		Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationClassificationMetrics? Metrics { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? PredictedField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
+	}
+
+	public partial class DataframeEvaluationClassificationDescriptor : DescriptorBase<DataframeEvaluationClassificationDescriptor, IDataframeEvaluationClassification>, IDataframeEvaluationClassification
+	{
+		Elastic.Clients.Elasticsearch.Field IDataframeEvaluationClassification.ActualField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDataframeEvaluationClassification.PredictedField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDataframeEvaluationClassification.TopClassesField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationClassificationMetrics? IDataframeEvaluationClassification.Metrics { get; set; }
+	}
+
+	public partial class DataframeEvaluationClassification : IDataframeEvaluationClassification
 	{
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]
@@ -2577,7 +3209,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassificationMetrics? Metrics { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationClassificationMetrics? Metrics { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("predicted_field")]
@@ -2588,7 +3220,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
 	}
 
-	public partial class DataframeEvaluationClassificationMetrics : Ml.DataframeEvaluationMetrics
+	[ConvertAs(typeof(DataframeEvaluationClassificationMetrics))]
+	public partial interface IDataframeEvaluationClassificationMetrics
+	{
+		Dictionary<string, object>? Accuracy { get; set; }
+
+		Dictionary<string, object>? MulticlassConfusionMatrix { get; set; }
+	}
+
+	public partial class DataframeEvaluationClassificationMetricsDescriptor : DescriptorBase<DataframeEvaluationClassificationMetricsDescriptor, IDataframeEvaluationClassificationMetrics>, IDataframeEvaluationClassificationMetrics
+	{
+		Dictionary<string, object>? IDataframeEvaluationClassificationMetrics.Accuracy { get; set; }
+
+		Dictionary<string, object>? IDataframeEvaluationClassificationMetrics.MulticlassConfusionMatrix { get; set; }
+	}
+
+	public partial class DataframeEvaluationClassificationMetrics : Ml.DataframeEvaluationMetrics, IDataframeEvaluationClassificationMetrics
 	{
 		[JsonInclude]
 		[JsonPropertyName("accuracy")]
@@ -2599,7 +3246,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object>? MulticlassConfusionMatrix { get; set; }
 	}
 
-	public partial class DataframeEvaluationClassificationMetricsAucRoc
+	[ConvertAs(typeof(DataframeEvaluationClassificationMetricsAucRoc))]
+	public partial interface IDataframeEvaluationClassificationMetricsAucRoc
+	{
+		Elastic.Clients.Elasticsearch.Name? ClassName { get; set; }
+
+		bool? IncludeCurve { get; set; }
+	}
+
+	public partial class DataframeEvaluationClassificationMetricsAucRocDescriptor : DescriptorBase<DataframeEvaluationClassificationMetricsAucRocDescriptor, IDataframeEvaluationClassificationMetricsAucRoc>, IDataframeEvaluationClassificationMetricsAucRoc
+	{
+		Elastic.Clients.Elasticsearch.Name? IDataframeEvaluationClassificationMetricsAucRoc.ClassName { get; set; }
+
+		bool? IDataframeEvaluationClassificationMetricsAucRoc.IncludeCurve { get; set; }
+	}
+
+	public partial class DataframeEvaluationClassificationMetricsAucRoc : IDataframeEvaluationClassificationMetricsAucRoc
 	{
 		[JsonInclude]
 		[JsonPropertyName("class_name")]
@@ -2610,26 +3272,30 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? IncludeCurve { get; set; }
 	}
 
-	public partial class DataframeEvaluationContainer
+	[ConvertAs(typeof(DataframeEvaluationMetrics))]
+	public partial interface IDataframeEvaluationMetrics
 	{
-		[JsonInclude]
-		[JsonPropertyName("classification")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassification? Classification { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("outlier_detection")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetection? OutlierDetection { get; set; }
+		Dictionary<string, object>? Precision { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("regression")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegression? Regression { get; set; }
+		Dictionary<string, object>? Recall { get; set; }
 	}
 
-	public partial class DataframeEvaluationMetrics
+	public partial class DataframeEvaluationMetricsDescriptor : DescriptorBase<DataframeEvaluationMetricsDescriptor, IDataframeEvaluationMetrics>, IDataframeEvaluationMetrics
+	{
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationClassificationMetricsAucRoc? IDataframeEvaluationMetrics.AucRoc { get; set; }
+
+		Dictionary<string, object>? IDataframeEvaluationMetrics.Precision { get; set; }
+
+		Dictionary<string, object>? IDataframeEvaluationMetrics.Recall { get; set; }
+	}
+
+	public partial class DataframeEvaluationMetrics : IDataframeEvaluationMetrics
 	{
 		[JsonInclude]
 		[JsonPropertyName("auc_roc")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("precision")]
@@ -2640,7 +3306,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public Dictionary<string, object>? Recall { get; set; }
 	}
 
-	public partial class DataframeEvaluationOutlierDetection
+	[ConvertAs(typeof(DataframeEvaluationOutlierDetection))]
+	public partial interface IDataframeEvaluationOutlierDetection
+	{
+		Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
+	}
+
+	public partial class DataframeEvaluationOutlierDetectionDescriptor : DescriptorBase<DataframeEvaluationOutlierDetectionDescriptor, IDataframeEvaluationOutlierDetection>, IDataframeEvaluationOutlierDetection
+	{
+		Elastic.Clients.Elasticsearch.Field IDataframeEvaluationOutlierDetection.ActualField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDataframeEvaluationOutlierDetection.PredictedProbabilityField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationOutlierDetectionMetrics? IDataframeEvaluationOutlierDetection.Metrics { get; set; }
+	}
+
+	public partial class DataframeEvaluationOutlierDetection : IDataframeEvaluationOutlierDetection
 	{
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]
@@ -2648,21 +3333,51 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("predicted_probability_field")]
 		public Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
 	}
 
-	public partial class DataframeEvaluationOutlierDetectionMetrics : Ml.DataframeEvaluationMetrics
+	[ConvertAs(typeof(DataframeEvaluationOutlierDetectionMetrics))]
+	public partial interface IDataframeEvaluationOutlierDetectionMetrics
+	{
+		Dictionary<string, object>? ConfusionMatrix { get; set; }
+	}
+
+	public partial class DataframeEvaluationOutlierDetectionMetricsDescriptor : DescriptorBase<DataframeEvaluationOutlierDetectionMetricsDescriptor, IDataframeEvaluationOutlierDetectionMetrics>, IDataframeEvaluationOutlierDetectionMetrics
+	{
+		Dictionary<string, object>? IDataframeEvaluationOutlierDetectionMetrics.ConfusionMatrix { get; set; }
+	}
+
+	public partial class DataframeEvaluationOutlierDetectionMetrics : Ml.DataframeEvaluationMetrics, IDataframeEvaluationOutlierDetectionMetrics
 	{
 		[JsonInclude]
 		[JsonPropertyName("confusion_matrix")]
 		public Dictionary<string, object>? ConfusionMatrix { get; set; }
 	}
 
-	public partial class DataframeEvaluationRegression
+	[ConvertAs(typeof(DataframeEvaluationRegression))]
+	public partial interface IDataframeEvaluationRegression
+	{
+		Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetrics? Metrics { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionDescriptor : DescriptorBase<DataframeEvaluationRegressionDescriptor, IDataframeEvaluationRegression>, IDataframeEvaluationRegression
+	{
+		Elastic.Clients.Elasticsearch.Field IDataframeEvaluationRegression.ActualField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDataframeEvaluationRegression.PredictedField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetrics? IDataframeEvaluationRegression.Metrics { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegression : IDataframeEvaluationRegression
 	{
 		[JsonInclude]
 		[JsonPropertyName("actual_field")]
@@ -2670,18 +3385,41 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegressionMetrics? Metrics { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetrics? Metrics { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("predicted_field")]
 		public Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
 	}
 
-	public partial class DataframeEvaluationRegressionMetrics
+	[ConvertAs(typeof(DataframeEvaluationRegressionMetrics))]
+	public partial interface IDataframeEvaluationRegressionMetrics
+	{
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
+
+		Dictionary<string, object>? Mse { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
+
+		Dictionary<string, object>? RSquared { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionMetricsDescriptor : DescriptorBase<DataframeEvaluationRegressionMetricsDescriptor, IDataframeEvaluationRegressionMetrics>, IDataframeEvaluationRegressionMetrics
+	{
+		Dictionary<string, object>? IDataframeEvaluationRegressionMetrics.Mse { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetricsMsle? IDataframeEvaluationRegressionMetrics.Msle { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetricsHuber? IDataframeEvaluationRegressionMetrics.Huber { get; set; }
+
+		Dictionary<string, object>? IDataframeEvaluationRegressionMetrics.RSquared { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionMetrics : IDataframeEvaluationRegressionMetrics
 	{
 		[JsonInclude]
 		[JsonPropertyName("huber")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mse")]
@@ -2689,28 +3427,65 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("msle")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("r_squared")]
 		public Dictionary<string, object>? RSquared { get; set; }
 	}
 
-	public partial class DataframeEvaluationRegressionMetricsHuber
+	[ConvertAs(typeof(DataframeEvaluationRegressionMetricsHuber))]
+	public partial interface IDataframeEvaluationRegressionMetricsHuber
+	{
+		double? Delta { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionMetricsHuberDescriptor : DescriptorBase<DataframeEvaluationRegressionMetricsHuberDescriptor, IDataframeEvaluationRegressionMetricsHuber>, IDataframeEvaluationRegressionMetricsHuber
+	{
+		double? IDataframeEvaluationRegressionMetricsHuber.Delta { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionMetricsHuber : IDataframeEvaluationRegressionMetricsHuber
 	{
 		[JsonInclude]
 		[JsonPropertyName("delta")]
 		public double? Delta { get; set; }
 	}
 
-	public partial class DataframeEvaluationRegressionMetricsMsle
+	[ConvertAs(typeof(DataframeEvaluationRegressionMetricsMsle))]
+	public partial interface IDataframeEvaluationRegressionMetricsMsle
+	{
+		double? Offset { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionMetricsMsleDescriptor : DescriptorBase<DataframeEvaluationRegressionMetricsMsleDescriptor, IDataframeEvaluationRegressionMetricsMsle>, IDataframeEvaluationRegressionMetricsMsle
+	{
+		double? IDataframeEvaluationRegressionMetricsMsle.Offset { get; set; }
+	}
+
+	public partial class DataframeEvaluationRegressionMetricsMsle : IDataframeEvaluationRegressionMetricsMsle
 	{
 		[JsonInclude]
 		[JsonPropertyName("offset")]
 		public double? Offset { get; set; }
 	}
 
-	public partial class DelayedDataCheckConfig
+	[ConvertAs(typeof(DelayedDataCheckConfig))]
+	public partial interface IDelayedDataCheckConfig
+	{
+		Elastic.Clients.Elasticsearch.Time? CheckWindow { get; set; }
+
+		bool Enabled { get; set; }
+	}
+
+	public partial class DelayedDataCheckConfigDescriptor : DescriptorBase<DelayedDataCheckConfigDescriptor, IDelayedDataCheckConfig>, IDelayedDataCheckConfig
+	{
+		Elastic.Clients.Elasticsearch.Time? IDelayedDataCheckConfig.CheckWindow { get; set; }
+
+		bool IDelayedDataCheckConfig.Enabled { get; set; }
+	}
+
+	public partial class DelayedDataCheckConfig : IDelayedDataCheckConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("check_window")]
@@ -2721,7 +3496,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool Enabled { get; set; }
 	}
 
-	public partial class DetectionRule
+	[ConvertAs(typeof(DetectionRule))]
+	public partial interface IDetectionRule
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleAction>? Actions { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IRuleCondition>? Conditions { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.IFilterRef>? Scope { get; set; }
+	}
+
+	public partial class DetectionRuleDescriptor : DescriptorBase<DetectionRuleDescriptor, IDetectionRule>, IDetectionRule
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleAction>? IDetectionRule.Actions { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IRuleCondition>? IDetectionRule.Conditions { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.IFilterRef>? IDetectionRule.Scope { get; set; }
+	}
+
+	public partial class DetectionRule : IDetectionRule
 	{
 		[JsonInclude]
 		[JsonPropertyName("actions")]
@@ -2729,14 +3523,61 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("conditions")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.RuleCondition>? Conditions { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.IRuleCondition>? Conditions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("scope")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.FilterRef>? Scope { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Ml.IFilterRef>? Scope { get; set; }
 	}
 
-	public partial class Detector
+	[ConvertAs(typeof(Detector))]
+	public partial interface IDetector
+	{
+		Elastic.Clients.Elasticsearch.Field? ByFieldName { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetectionRule>? CustomRules { get; set; }
+
+		string? DetectorDescription { get; set; }
+
+		int? DetectorIndex { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.ExcludeFrequent? ExcludeFrequent { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? FieldName { get; set; }
+
+		string Function { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? OverFieldName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? PartitionFieldName { get; set; }
+
+		bool? UseNull { get; set; }
+	}
+
+	public partial class DetectorDescriptor : DescriptorBase<DetectorDescriptor, IDetector>, IDetector
+	{
+		Elastic.Clients.Elasticsearch.Field? IDetector.ByFieldName { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetectionRule>? IDetector.CustomRules { get; set; }
+
+		string? IDetector.DetectorDescription { get; set; }
+
+		int? IDetector.DetectorIndex { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.ExcludeFrequent? IDetector.ExcludeFrequent { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDetector.FieldName { get; set; }
+
+		string IDetector.Function { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDetector.OverFieldName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDetector.PartitionFieldName { get; set; }
+
+		bool? IDetector.UseNull { get; set; }
+	}
+
+	public partial class Detector : IDetector
 	{
 		[JsonInclude]
 		[JsonPropertyName("by_field_name")]
@@ -2744,7 +3585,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("custom_rules")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.DetectionRule>? CustomRules { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetectionRule>? CustomRules { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("detector_description")]
@@ -2881,7 +3722,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class FilterRef
+	[ConvertAs(typeof(FilterRef))]
+	public partial interface IFilterRef
+	{
+		Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.FilterType? FilterType { get; set; }
+	}
+
+	public partial class FilterRefDescriptor : DescriptorBase<FilterRefDescriptor, IFilterRef>, IFilterRef
+	{
+		Elastic.Clients.Elasticsearch.Id IFilterRef.FilterId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.FilterType? IFilterRef.FilterType { get; set; }
+	}
+
+	public partial class FilterRef : IFilterRef
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter_id")]
@@ -3169,7 +4025,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig AnalysisConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -3181,7 +4037,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -3229,7 +4085,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
-		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings
+		public Elastic.Clients.Elasticsearch.Ml.ICustomSettings? CustomSettings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -3253,7 +4109,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("data_description")]
-		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
+		public Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -3361,7 +4217,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -3459,7 +4315,82 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class JobConfig
+	[ConvertAs(typeof(JobConfig))]
+	public partial interface IJobConfig
+	{
+		bool? AllowLazyOpen { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig AnalysisConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.ICustomSettings? CustomSettings { get; set; }
+
+		long? DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? DatafeedConfig { get; set; }
+
+		string? Description { get; set; }
+
+		IEnumerable<string>? Groups { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
+
+		string? JobType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig { get; set; }
+
+		long? ModelSnapshotRetentionDays { get; set; }
+
+		long? RenormalizationWindowDays { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? ResultsIndexName { get; set; }
+
+		long? ResultsRetentionDays { get; set; }
+	}
+
+	public partial class JobConfigDescriptor : DescriptorBase<JobConfigDescriptor, IJobConfig>, IJobConfig
+	{
+		bool? IJobConfig.AllowLazyOpen { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig IJobConfig.AnalysisConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? IJobConfig.AnalysisLimits { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IJobConfig.BackgroundPersistInterval { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.ICustomSettings? IJobConfig.CustomSettings { get; set; }
+
+		long? IJobConfig.DailyModelSnapshotRetentionAfterDays { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataDescription IJobConfig.DataDescription { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? IJobConfig.DatafeedConfig { get; set; }
+
+		string? IJobConfig.Description { get; set; }
+
+		IEnumerable<string>? IJobConfig.Groups { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? IJobConfig.JobId { get; set; }
+
+		string? IJobConfig.JobType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? IJobConfig.ModelPlotConfig { get; set; }
+
+		long? IJobConfig.ModelSnapshotRetentionDays { get; set; }
+
+		long? IJobConfig.RenormalizationWindowDays { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? IJobConfig.ResultsIndexName { get; set; }
+
+		long? IJobConfig.ResultsRetentionDays { get; set; }
+	}
+
+	public partial class JobConfig : IJobConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_lazy_open")]
@@ -3467,11 +4398,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig AnalysisConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
@@ -3479,7 +4410,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
-		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.ICustomSettings? CustomSettings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
@@ -3487,11 +4418,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("data_description")]
-		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? DatafeedConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -3511,7 +4442,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
@@ -3878,7 +4809,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class ModelPlotConfig
+	[ConvertAs(typeof(ModelPlotConfig))]
+	public partial interface IModelPlotConfig
+	{
+		bool? AnnotationsEnabled { get; set; }
+
+		bool? Enabled { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? Terms { get; set; }
+	}
+
+	public partial class ModelPlotConfigDescriptor : DescriptorBase<ModelPlotConfigDescriptor, IModelPlotConfig>, IModelPlotConfig
+	{
+		bool? IModelPlotConfig.AnnotationsEnabled { get; set; }
+
+		bool? IModelPlotConfig.Enabled { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IModelPlotConfig.Terms { get; set; }
+	}
+
+	public partial class ModelPlotConfig : IModelPlotConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("annotations_enabled")]
@@ -4448,7 +5398,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class Page
+	[ConvertAs(typeof(Page))]
+	public partial interface IPage
+	{
+		int? From { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class PageDescriptor : DescriptorBase<PageDescriptor, IPage>, IPage
+	{
+		int? IPage.From { get; set; }
+
+		int? IPage.Size { get; set; }
+	}
+
+	public partial class Page : IPage
 	{
 		[JsonInclude]
 		[JsonPropertyName("from")]
@@ -4522,7 +5487,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		}
 	}
 
-	public partial class PerPartitionCategorization
+	[ConvertAs(typeof(PerPartitionCategorization))]
+	public partial interface IPerPartitionCategorization
+	{
+		bool? Enabled { get; set; }
+
+		bool? StopOnWarn { get; set; }
+	}
+
+	public partial class PerPartitionCategorizationDescriptor : DescriptorBase<PerPartitionCategorizationDescriptor, IPerPartitionCategorization>, IPerPartitionCategorization
+	{
+		bool? IPerPartitionCategorization.Enabled { get; set; }
+
+		bool? IPerPartitionCategorization.StopOnWarn { get; set; }
+	}
+
+	public partial class PerPartitionCategorization : IPerPartitionCategorization
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -4533,7 +5513,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public bool? StopOnWarn { get; set; }
 	}
 
-	public partial class RuleCondition
+	[ConvertAs(typeof(RuleCondition))]
+	public partial interface IRuleCondition
+	{
+		Elastic.Clients.Elasticsearch.Ml.AppliesTo AppliesTo { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.ConditionOperator Operator { get; set; }
+
+		double Value { get; set; }
+	}
+
+	public partial class RuleConditionDescriptor : DescriptorBase<RuleConditionDescriptor, IRuleCondition>, IRuleCondition
+	{
+		Elastic.Clients.Elasticsearch.Ml.AppliesTo IRuleCondition.AppliesTo { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.ConditionOperator IRuleCondition.Operator { get; set; }
+
+		double IRuleCondition.Value { get; set; }
+	}
+
+	public partial class RuleCondition : IRuleCondition
 	{
 		[JsonInclude]
 		[JsonPropertyName("applies_to")]
@@ -4768,7 +5767,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig
+		public Elastic.Clients.Elasticsearch.Aggregations.IInferenceConfigContainer InferenceConfig
 		{
 			get;
 #if NET5_0_OR_GREATER

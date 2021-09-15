@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public partial class FuzzyQueryDescriptor : IFuzzyQuery
+	public partial class FuzzyQueryDescriptor : FieldNameQueryDescriptorBase<FuzzyQueryDescriptor, IFuzzyQuery>, IFuzzyQuery
 	{
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 

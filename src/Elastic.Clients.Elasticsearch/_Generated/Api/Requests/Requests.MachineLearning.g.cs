@@ -331,7 +331,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[ConvertAs(typeof(EstimateModelMemoryRequest))]
 	public partial interface IEstimateModelMemoryRequest : IRequest<EstimateModelMemoryRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? AnalysisConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? AnalysisConfig { get; set; }
 
 		Dictionary<Elastic.Clients.Elasticsearch.Field, long>? MaxBucketCardinality { get; set; }
 
@@ -354,7 +354,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? AnalysisConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? AnalysisConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_bucket_cardinality")]
@@ -405,9 +405,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[ConvertAs(typeof(ExplainDataFrameAnalyticsRequest))]
 	public partial interface IExplainDataFrameAnalyticsRequest : IRequest<ExplainDataFrameAnalyticsRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource? Source { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource? Source { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination? Dest { get; set; }
 
 		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis { get; set; }
 
@@ -443,11 +443,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? Dest { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination? Dest { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("analysis")]
@@ -558,7 +558,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		bool? Expand { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
@@ -611,7 +611,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
-		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetCalendarEventsRequest))]
@@ -652,7 +652,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[ConvertAs(typeof(GetCalendarsRequest))]
 	public partial interface IGetCalendarsRequest : IRequest<GetCalendarsRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	public partial class GetCalendarsRequest : PlainRequestBase<GetCalendarsRequestParameters>, IGetCalendarsRequest
@@ -682,13 +682,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
-		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetCategoriesRequest))]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
@@ -721,7 +721,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
-		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetDataFrameAnalyticsRequest))]
@@ -891,7 +891,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[ConvertAs(typeof(GetInfluencersRequest))]
 	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
@@ -934,7 +934,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
-		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 	}
 
 	[ConvertAs(typeof(GetJobStatsRequest))]
@@ -1093,7 +1093,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		bool? Desc { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 
 		double? RecordScore { get; set; }
 
@@ -1135,7 +1135,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("page")]
-		public Elastic.Clients.Elasticsearch.Ml.Page? Page { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPage? Page { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("record_score")]
@@ -1274,7 +1274,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[ConvertAs(typeof(PostCalendarEventsRequest))]
 	public partial interface IPostCalendarEventsRequest : IRequest<PostCalendarEventsRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.ICalendarEvent> Events { get; set; }
 	}
 
 	public partial class PostCalendarEventsRequest : PlainRequestBase<PostCalendarEventsRequestParameters>, IPostCalendarEventsRequest
@@ -1293,7 +1293,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("events")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.ICalendarEvent> Events { get; set; }
 	}
 
 	[ConvertAs(typeof(PostDataRequest<>))]
@@ -1325,7 +1325,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	[ConvertAs(typeof(PreviewDataFrameAnalyticsRequest))]
 	public partial interface IPreviewDataFrameAnalyticsRequest : IRequest<PreviewDataFrameAnalyticsRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? Config { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.IDataframePreviewConfig? Config { get; set; }
 	}
 
 	public partial class PreviewDataFrameAnalyticsRequest : PlainRequestBase<PreviewDataFrameAnalyticsRequestParameters>, IPreviewDataFrameAnalyticsRequest
@@ -1349,15 +1349,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("config")]
-		public Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? Config { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.IDataframePreviewConfig? Config { get; set; }
 	}
 
 	[ConvertAs(typeof(PreviewDatafeedRequest))]
 	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ml.JobConfig? JobConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IJobConfig? JobConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? DatafeedConfig { get; set; }
 	}
 
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
@@ -1381,11 +1381,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("job_config")]
-		public Elastic.Clients.Elasticsearch.Ml.JobConfig? JobConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IJobConfig? JobConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? DatafeedConfig { get; set; }
 	}
 
 	[ConvertAs(typeof(PutCalendarRequest))]
@@ -1444,13 +1444,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		string? Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination Dest { get; set; }
 
 		int? MaxNumThreads { get; set; }
 
 		string? ModelMemoryLimit { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source { get; set; }
 	}
 
 	public partial class PutDataFrameAnalyticsRequest : PlainRequestBase<PutDataFrameAnalyticsRequestParameters>, IPutDataFrameAnalyticsRequest
@@ -1485,7 +1485,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination Dest { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_num_threads")]
@@ -1497,7 +1497,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source { get; set; }
 	}
 
 	[ConvertAs(typeof(PutDatafeedRequest))]
@@ -1505,9 +1505,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? ChunkingConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? Frequency { get; set; }
 
@@ -1515,7 +1515,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		IEnumerable<string>? Indexes { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IndicesOptions { get; set; }
 
 		Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
@@ -1527,7 +1527,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		int? ScrollSize { get; set; }
 	}
@@ -1564,11 +1564,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? ChunkingConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? ChunkingConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("frequency")]
@@ -1584,7 +1584,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("indices_options")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IndicesOptions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("job_id")]
@@ -1608,7 +1608,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("scroll_size")]
@@ -1651,25 +1651,25 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		bool? AllowLazyOpen { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig AnalysisConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time BackgroundPersistInterval { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.ICustomSettings? CustomSettings { get; set; }
 
 		long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? DatafeedConfig { get; set; }
 
 		string? Description { get; set; }
 
 		IEnumerable<string>? Groups { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig { get; set; }
 
 		long? ModelSnapshotRetentionDays { get; set; }
 
@@ -1700,11 +1700,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig AnalysisConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
@@ -1712,7 +1712,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
-		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.ICustomSettings? CustomSettings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
@@ -1720,11 +1720,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("data_description")]
-		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("datafeed_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? DatafeedConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? DatafeedConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -1736,7 +1736,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]
@@ -1760,13 +1760,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		string? CompressedDefinition { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Definition? Definition { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IDefinition? Definition { get; set; }
 
 		string? Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.IInferenceConfigContainer InferenceConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Input Input { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IInput Input { get; set; }
 
 		object? Metadata { get; set; }
 
@@ -1793,7 +1793,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("definition")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Definition? Definition { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IDefinition? Definition { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -1801,11 +1801,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
-		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer InferenceConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.IInferenceConfigContainer InferenceConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("input")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Input Input { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IInput Input { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("metadata")]
@@ -2115,7 +2115,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		bool? AllowLazyOpen { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisMemoryLimit? AnalysisLimits { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisMemoryLimit? AnalysisLimits { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? BackgroundPersistInterval { get; set; }
 
@@ -2125,7 +2125,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		string? Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig { get; set; }
 
 		long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
@@ -2137,9 +2137,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		IEnumerable<string>? Groups { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? Detectors { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector>? Detectors { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? PerPartitionCategorization { get; set; }
 	}
 
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
@@ -2162,7 +2162,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisMemoryLimit? AnalysisLimits { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisMemoryLimit? AnalysisLimits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("background_persist_interval")]
@@ -2182,7 +2182,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("daily_model_snapshot_retention_after_days")]
@@ -2206,11 +2206,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("detectors")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? Detectors { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector>? Detectors { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("per_partition_categorization")]
-		public Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? PerPartitionCategorization { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? PerPartitionCategorization { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateModelSnapshotRequest))]
@@ -2275,15 +2275,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? AnalysisConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? AnalysisConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataDescription? DataDescription { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataDescription? DataDescription { get; set; }
 
 		string? Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlot { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlot { get; set; }
 
 		long? ModelSnapshotRetentionDays { get; set; }
 
@@ -2310,15 +2310,15 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? AnalysisConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? AnalysisConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? AnalysisLimits { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? AnalysisLimits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("data_description")]
-		public Elastic.Clients.Elasticsearch.Ml.DataDescription? DataDescription { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataDescription? DataDescription { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -2326,7 +2326,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlot { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlot { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("model_snapshot_retention_days")]

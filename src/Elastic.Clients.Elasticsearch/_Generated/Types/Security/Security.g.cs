@@ -39,7 +39,26 @@ namespace Elastic.Clients.Elasticsearch.Security
 		}
 	}
 
-	public partial class ApplicationPrivileges
+	[ConvertAs(typeof(ApplicationPrivileges))]
+	public partial interface IApplicationPrivileges
+	{
+		string Application { get; set; }
+
+		IEnumerable<string> Privileges { get; set; }
+
+		IEnumerable<string> Resources { get; set; }
+	}
+
+	public partial class ApplicationPrivilegesDescriptor : DescriptorBase<ApplicationPrivilegesDescriptor, IApplicationPrivileges>, IApplicationPrivileges
+	{
+		string IApplicationPrivileges.Application { get; set; }
+
+		IEnumerable<string> IApplicationPrivileges.Privileges { get; set; }
+
+		IEnumerable<string> IApplicationPrivileges.Resources { get; set; }
+	}
+
+	public partial class ApplicationPrivileges : IApplicationPrivileges
 	{
 		[JsonInclude]
 		[JsonPropertyName("application")]
@@ -84,7 +103,22 @@ namespace Elastic.Clients.Elasticsearch.Security
 		}
 	}
 
-	public partial class FieldSecurity
+	[ConvertAs(typeof(FieldSecurity))]
+	public partial interface IFieldSecurity
+	{
+		Elastic.Clients.Elasticsearch.Fields? Except { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields Grant { get; set; }
+	}
+
+	public partial class FieldSecurityDescriptor : DescriptorBase<FieldSecurityDescriptor, IFieldSecurity>, IFieldSecurity
+	{
+		Elastic.Clients.Elasticsearch.Fields? IFieldSecurity.Except { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields IFieldSecurity.Grant { get; set; }
+	}
+
+	public partial class FieldSecurity : IFieldSecurity
 	{
 		[JsonInclude]
 		[JsonPropertyName("except")]
@@ -110,7 +144,34 @@ namespace Elastic.Clients.Elasticsearch.Security
 		}
 	}
 
-	public partial class IndicesPrivileges
+	[ConvertAs(typeof(IndicesPrivileges))]
+	public partial interface IIndicesPrivileges
+	{
+		bool? AllowRestrictedIndices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Security.IFieldSecurity? FieldSecurity { get; set; }
+
+		Elastic.Clients.Elasticsearch.Indices Names { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+
+		Union<string, Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>? Query { get; set; }
+	}
+
+	public partial class IndicesPrivilegesDescriptor : DescriptorBase<IndicesPrivilegesDescriptor, IIndicesPrivileges>, IIndicesPrivileges
+	{
+		Elastic.Clients.Elasticsearch.Security.IFieldSecurity? IIndicesPrivileges.FieldSecurity { get; set; }
+
+		Elastic.Clients.Elasticsearch.Indices IIndicesPrivileges.Names { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> IIndicesPrivileges.Privileges { get; set; }
+
+		Union<string, Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer>? IIndicesPrivileges.Query { get; set; }
+
+		bool? IIndicesPrivileges.AllowRestrictedIndices { get; set; }
+	}
+
+	public partial class IndicesPrivileges : IIndicesPrivileges
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_restricted_indices")]
@@ -118,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("field_security")]
-		public Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurity { get; set; }
+		public Elastic.Clients.Elasticsearch.Security.IFieldSecurity? FieldSecurity { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("names")]
@@ -146,6 +207,24 @@ namespace Elastic.Clients.Elasticsearch.Security
 			internal set;
 #endif
 		}
+	}
+
+	[ConvertAs(typeof(Realm))]
+	public partial interface IRealm
+	{
+		Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	}
+
+	public partial class RealmDescriptor : DescriptorBase<RealmDescriptor, IRealm>, IRealm
+	{
+		Elastic.Clients.Elasticsearch.Name IRealm.Name { get; set; }
+	}
+
+	public partial class Realm : IRealm
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
 	public partial class RealmInfo
@@ -227,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.Security
 
 		[JsonInclude]
 		[JsonPropertyName("rules")]
-		public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase Rules
+		public Elastic.Clients.Elasticsearch.Security.RoleMappingRule Rules
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -236,10 +315,6 @@ namespace Elastic.Clients.Elasticsearch.Security
 			internal set;
 #endif
 		}
-	}
-
-	public abstract partial class RoleMappingRuleBase
-	{
 	}
 
 	public partial class User

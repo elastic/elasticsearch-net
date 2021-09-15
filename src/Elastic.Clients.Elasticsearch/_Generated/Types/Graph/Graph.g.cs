@@ -75,11 +75,34 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		}
 	}
 
-	public partial class ExploreControls
+	[ConvertAs(typeof(ExploreControls))]
+	public partial interface IExploreControls
+	{
+		Elastic.Clients.Elasticsearch.Graph.ISampleDiversity? SampleDiversity { get; set; }
+
+		int? SampleSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? Timeout { get; set; }
+
+		bool UseSignificance { get; set; }
+	}
+
+	public partial class ExploreControlsDescriptor : DescriptorBase<ExploreControlsDescriptor, IExploreControls>, IExploreControls
+	{
+		Elastic.Clients.Elasticsearch.Graph.ISampleDiversity? IExploreControls.SampleDiversity { get; set; }
+
+		int? IExploreControls.SampleSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IExploreControls.Timeout { get; set; }
+
+		bool IExploreControls.UseSignificance { get; set; }
+	}
+
+	public partial class ExploreControls : IExploreControls
 	{
 		[JsonInclude]
 		[JsonPropertyName("sample_diversity")]
-		public Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversity { get; set; }
+		public Elastic.Clients.Elasticsearch.Graph.ISampleDiversity? SampleDiversity { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("sample_size")]
@@ -94,11 +117,30 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public bool UseSignificance { get; set; }
 	}
 
-	public partial class Hop
+	[ConvertAs(typeof(Hop))]
+	public partial interface IHop
+	{
+		Elastic.Clients.Elasticsearch.Graph.IHop? Connections { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition> Vertices { get; set; }
+	}
+
+	public partial class HopDescriptor : DescriptorBase<HopDescriptor, IHop>, IHop
+	{
+		Elastic.Clients.Elasticsearch.Graph.IHop? IHop.Connections { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer IHop.Query { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition> IHop.Vertices { get; set; }
+	}
+
+	public partial class Hop : IHop
 	{
 		[JsonInclude]
 		[JsonPropertyName("connections")]
-		public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
+		public Elastic.Clients.Elasticsearch.Graph.IHop? Connections { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
@@ -106,10 +148,25 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		[JsonInclude]
 		[JsonPropertyName("vertices")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexDefinition> Vertices { get; set; }
 	}
 
-	public partial class SampleDiversity
+	[ConvertAs(typeof(SampleDiversity))]
+	public partial interface ISampleDiversity
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		int MaxDocsPerValue { get; set; }
+	}
+
+	public partial class SampleDiversityDescriptor : DescriptorBase<SampleDiversityDescriptor, ISampleDiversity>, ISampleDiversity
+	{
+		Elastic.Clients.Elasticsearch.Field ISampleDiversity.Field { get; set; }
+
+		int ISampleDiversity.MaxDocsPerValue { get; set; }
+	}
+
+	public partial class SampleDiversity : ISampleDiversity
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -171,7 +228,38 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		}
 	}
 
-	public partial class VertexDefinition
+	[ConvertAs(typeof(VertexDefinition))]
+	public partial interface IVertexDefinition
+	{
+		IEnumerable<string>? Exclude { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexInclude>? Include { get; set; }
+
+		long? MinDocCount { get; set; }
+
+		long? ShardMinDocCount { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class VertexDefinitionDescriptor : DescriptorBase<VertexDefinitionDescriptor, IVertexDefinition>, IVertexDefinition
+	{
+		IEnumerable<string>? IVertexDefinition.Exclude { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IVertexDefinition.Field { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexInclude>? IVertexDefinition.Include { get; set; }
+
+		long? IVertexDefinition.MinDocCount { get; set; }
+
+		long? IVertexDefinition.ShardMinDocCount { get; set; }
+
+		int? IVertexDefinition.Size { get; set; }
+	}
+
+	public partial class VertexDefinition : IVertexDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
@@ -183,7 +271,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 
 		[JsonInclude]
 		[JsonPropertyName("include")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? Include { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Graph.IVertexInclude>? Include { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -198,7 +286,22 @@ namespace Elastic.Clients.Elasticsearch.Graph
 		public int? Size { get; set; }
 	}
 
-	public partial class VertexInclude
+	[ConvertAs(typeof(VertexInclude))]
+	public partial interface IVertexInclude
+	{
+		double Boost { get; set; }
+
+		string Term { get; set; }
+	}
+
+	public partial class VertexIncludeDescriptor : DescriptorBase<VertexIncludeDescriptor, IVertexInclude>, IVertexInclude
+	{
+		double IVertexInclude.Boost { get; set; }
+
+		string IVertexInclude.Term { get; set; }
+	}
+
+	public partial class VertexInclude : IVertexInclude
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]

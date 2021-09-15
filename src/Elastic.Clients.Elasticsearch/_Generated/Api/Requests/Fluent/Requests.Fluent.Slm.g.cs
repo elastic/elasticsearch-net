@@ -102,22 +102,22 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Slm.Configuration? IPutLifecycleRequest.Config { get; set; }
+		Elastic.Clients.Elasticsearch.Slm.IConfiguration? IPutLifecycleRequest.Config { get; set; }
 
 		Elastic.Clients.Elasticsearch.Name? IPutLifecycleRequest.Name { get; set; }
 
 		string? IPutLifecycleRequest.Repository { get; set; }
 
-		Elastic.Clients.Elasticsearch.Slm.Retention? IPutLifecycleRequest.Retention { get; set; }
+		Elastic.Clients.Elasticsearch.Slm.IRetention? IPutLifecycleRequest.Retention { get; set; }
 
 		Elastic.Clients.Elasticsearch.Watcher.CronExpression? IPutLifecycleRequest.Schedule { get; set; }
 
 		public PutLifecycleDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public PutLifecycleDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public PutLifecycleDescriptor Config(Elastic.Clients.Elasticsearch.Slm.Configuration? config) => Assign(config, (a, v) => a.Config = v);
+		public PutLifecycleDescriptor Config(Elastic.Clients.Elasticsearch.Slm.IConfiguration? config) => Assign(config, (a, v) => a.Config = v);
 		public PutLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a.Name = v);
 		public PutLifecycleDescriptor Repository(string? repository) => Assign(repository, (a, v) => a.Repository = v);
-		public PutLifecycleDescriptor Retention(Elastic.Clients.Elasticsearch.Slm.Retention? retention) => Assign(retention, (a, v) => a.Retention = v);
+		public PutLifecycleDescriptor Retention(Elastic.Clients.Elasticsearch.Slm.IRetention? retention) => Assign(retention, (a, v) => a.Retention = v);
 		public PutLifecycleDescriptor Schedule(Elastic.Clients.Elasticsearch.Watcher.CronExpression? schedule) => Assign(schedule, (a, v) => a.Schedule = v);
 	}
 

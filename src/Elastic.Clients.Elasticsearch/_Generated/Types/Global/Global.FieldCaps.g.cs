@@ -24,29 +24,82 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 {
-	public partial class FieldCapabilitiesBodyIndexFilter
+	[ConvertAs(typeof(FieldCapabilitiesBodyIndexFilter))]
+	public partial interface IFieldCapabilitiesBodyIndexFilter
+	{
+		Elastic.Clients.Elasticsearch.IEmptyObject? MatchNone { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterRange? Range { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterTerm? Term { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterDescriptor : DescriptorBase<FieldCapabilitiesBodyIndexFilterDescriptor, IFieldCapabilitiesBodyIndexFilter>, IFieldCapabilitiesBodyIndexFilter
+	{
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterRange? IFieldCapabilitiesBodyIndexFilter.Range { get; set; }
+
+		Elastic.Clients.Elasticsearch.IEmptyObject? IFieldCapabilitiesBodyIndexFilter.MatchNone { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterTerm? IFieldCapabilitiesBodyIndexFilter.Term { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilter : IFieldCapabilitiesBodyIndexFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("match_none")]
-		public Elastic.Clients.Elasticsearch.EmptyObject? MatchNone { get; set; }
+		public Elastic.Clients.Elasticsearch.IEmptyObject? MatchNone { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("range")]
-		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterRange? Range { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterRange? Range { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("term")]
-		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterTerm? Term { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterTerm? Term { get; set; }
 	}
 
-	public partial class FieldCapabilitiesBodyIndexFilterRange
+	[ConvertAs(typeof(FieldCapabilitiesBodyIndexFilterRange))]
+	public partial interface IFieldCapabilitiesBodyIndexFilterRange
+	{
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterRangeTimestamp Timestamp { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterRangeDescriptor : DescriptorBase<FieldCapabilitiesBodyIndexFilterRangeDescriptor, IFieldCapabilitiesBodyIndexFilterRange>, IFieldCapabilitiesBodyIndexFilterRange
+	{
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterRangeTimestamp IFieldCapabilitiesBodyIndexFilterRange.Timestamp { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterRange : IFieldCapabilitiesBodyIndexFilterRange
 	{
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterRangeTimestamp Timestamp { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterRangeTimestamp Timestamp { get; set; }
 	}
 
-	public partial class FieldCapabilitiesBodyIndexFilterRangeTimestamp
+	[ConvertAs(typeof(FieldCapabilitiesBodyIndexFilterRangeTimestamp))]
+	public partial interface IFieldCapabilitiesBodyIndexFilterRangeTimestamp
+	{
+		int? Gt { get; set; }
+
+		int? Gte { get; set; }
+
+		int? Lt { get; set; }
+
+		int? Lte { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterRangeTimestampDescriptor : DescriptorBase<FieldCapabilitiesBodyIndexFilterRangeTimestampDescriptor, IFieldCapabilitiesBodyIndexFilterRangeTimestamp>, IFieldCapabilitiesBodyIndexFilterRangeTimestamp
+	{
+		int? IFieldCapabilitiesBodyIndexFilterRangeTimestamp.Gte { get; set; }
+
+		int? IFieldCapabilitiesBodyIndexFilterRangeTimestamp.Gt { get; set; }
+
+		int? IFieldCapabilitiesBodyIndexFilterRangeTimestamp.Lte { get; set; }
+
+		int? IFieldCapabilitiesBodyIndexFilterRangeTimestamp.Lt { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterRangeTimestamp : IFieldCapabilitiesBodyIndexFilterRangeTimestamp
 	{
 		[JsonInclude]
 		[JsonPropertyName("gt")]
@@ -65,14 +118,36 @@ namespace Elastic.Clients.Elasticsearch.Global.FieldCaps
 		public int? Lte { get; set; }
 	}
 
-	public partial class FieldCapabilitiesBodyIndexFilterTerm
+	[ConvertAs(typeof(FieldCapabilitiesBodyIndexFilterTerm))]
+	public partial interface IFieldCapabilitiesBodyIndexFilterTerm
+	{
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterTermVersionControl Versioncontrol { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterTermDescriptor : DescriptorBase<FieldCapabilitiesBodyIndexFilterTermDescriptor, IFieldCapabilitiesBodyIndexFilterTerm>, IFieldCapabilitiesBodyIndexFilterTerm
+	{
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterTermVersionControl IFieldCapabilitiesBodyIndexFilterTerm.Versioncontrol { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterTerm : IFieldCapabilitiesBodyIndexFilterTerm
 	{
 		[JsonInclude]
 		[JsonPropertyName("versionControl")]
-		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilterTermVersionControl Versioncontrol { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilterTermVersionControl Versioncontrol { get; set; }
 	}
 
-	public partial class FieldCapabilitiesBodyIndexFilterTermVersionControl
+	[ConvertAs(typeof(FieldCapabilitiesBodyIndexFilterTermVersionControl))]
+	public partial interface IFieldCapabilitiesBodyIndexFilterTermVersionControl
+	{
+		string Value { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterTermVersionControlDescriptor : DescriptorBase<FieldCapabilitiesBodyIndexFilterTermVersionControlDescriptor, IFieldCapabilitiesBodyIndexFilterTermVersionControl>, IFieldCapabilitiesBodyIndexFilterTermVersionControl
+	{
+		string IFieldCapabilitiesBodyIndexFilterTermVersionControl.Value { get; set; }
+	}
+
+	public partial class FieldCapabilitiesBodyIndexFilterTermVersionControl : IFieldCapabilitiesBodyIndexFilterTermVersionControl
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]

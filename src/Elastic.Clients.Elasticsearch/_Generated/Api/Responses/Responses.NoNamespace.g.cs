@@ -644,7 +644,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.StoredScript? Script
+		public Elastic.Clients.Elasticsearch.IStoredScript? Script
 		{
 			get;
 #if NET5_0_OR_GREATER

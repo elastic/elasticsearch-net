@@ -15,46 +15,28 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch.Failures;
-using OneOf;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Security.GrantApiKey
+namespace Elastic.Clients.Elasticsearch.Security
 {
-	[ConvertAs(typeof(ApiKey))]
-	public partial interface IApiKey
+	[ConvertAs(typeof(FieldRule))]
+	public partial interface IFieldRule
 	{
-		Elastic.Clients.Elasticsearch.Time? Expiration { get; set; }
-
-		Elastic.Clients.Elasticsearch.Name Name { get; set; }
-
-		IEnumerable<Dictionary<string, object>>? RoleDescriptors { get; set; }
 	}
 
-	public partial class ApiKeyDescriptor : DescriptorBase<ApiKeyDescriptor, IApiKey>, IApiKey
+	public partial class FieldRule : IFieldRule
 	{
-		Elastic.Clients.Elasticsearch.Name IApiKey.Name { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? IApiKey.Expiration { get; set; }
-
-		IEnumerable<Dictionary<string, object>>? IApiKey.RoleDescriptors { get; set; }
 	}
 
-	public partial class ApiKey : IApiKey
+	[ConvertAs(typeof(RoleMappingRule))]
+	public partial interface IRoleMappingRule
 	{
-		[JsonInclude]
-		[JsonPropertyName("expiration")]
-		public Elastic.Clients.Elasticsearch.Time? Expiration { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("role_descriptors")]
-		public IEnumerable<Dictionary<string, object>>? RoleDescriptors { get; set; }
+	public partial class RoleMappingRule : IRoleMappingRule
+	{
 	}
 }

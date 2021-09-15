@@ -117,11 +117,11 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 	{
 		string? Cron { get; set; }
 
-		Elastic.Clients.Elasticsearch.Rollup.Groupings? Groups { get; set; }
+		Elastic.Clients.Elasticsearch.Rollup.IGroupings? Groups { get; set; }
 
 		string? IndexPattern { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? Metrics { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Rollup.IFieldMetric>? Metrics { get; set; }
 
 		long? PageSize { get; set; }
 
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 		[JsonInclude]
 		[JsonPropertyName("groups")]
-		public Elastic.Clients.Elasticsearch.Rollup.Groupings? Groups { get; set; }
+		public Elastic.Clients.Elasticsearch.Rollup.IGroupings? Groups { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_pattern")]
@@ -156,7 +156,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? Metrics { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Rollup.IFieldMetric>? Metrics { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("page_size")]

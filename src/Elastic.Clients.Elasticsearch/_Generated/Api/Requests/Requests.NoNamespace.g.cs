@@ -284,7 +284,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
-		Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 	}
 
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
@@ -406,7 +406,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
-		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		public Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 	}
 
 	[ConvertAs(typeof(DeleteByQueryRethrottleRequest))]
@@ -619,7 +619,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(FieldCapsRequest))]
 	public partial interface IFieldCapsRequest : IRequest<FieldCapsRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
 	}
 
 	public partial class FieldCapsRequest : PlainRequestBase<FieldCapsRequestParameters>, IFieldCapsRequest
@@ -658,7 +658,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("index_filter")]
-		public Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilter? IndexFilter { get; set; }
 	}
 
 	[ConvertAs(typeof(GetRequest))]
@@ -899,7 +899,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(MgetRequest))]
 	public partial interface IMgetRequest : IRequest<MgetRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.Operation>? Docs { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.IOperation>? Docs { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId>? Ids { get; set; }
 	}
@@ -949,7 +949,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.Operation>? Docs { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.IOperation>? Docs { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ids")]
@@ -1057,7 +1057,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(MtermvectorsRequest))]
 	public partial interface IMtermvectorsRequest : IRequest<MtermvectorsRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.Operation>? Docs { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.IOperation>? Docs { get; set; }
 	}
 
 	public partial class MtermvectorsRequest : PlainRequestBase<MtermvectorsRequestParameters>, IMtermvectorsRequest
@@ -1117,7 +1117,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.Operation>? Docs { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.IOperation>? Docs { get; set; }
 	}
 
 	[ConvertAs(typeof(OpenPointInTimeRequest))]
@@ -1133,11 +1133,6 @@ namespace Elastic.Clients.Elasticsearch
 		protected override bool SupportsBody => false;
 		protected override bool CanBeEmpty => false;
 		protected override bool IsEmpty => false;
-
-		///<summary>/_pit</summary>
-        public OpenPointInTimeRequest() : base()
-		{
-		}
 
 		///<summary>/{index}/_pit</summary>
         public OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Indices index) : base(r => r.Required("index", index))
@@ -1171,7 +1166,7 @@ namespace Elastic.Clients.Elasticsearch
 	[ConvertAs(typeof(PutScriptRequest))]
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.StoredScript? Script { get; set; }
+		Elastic.Clients.Elasticsearch.IStoredScript? Script { get; set; }
 	}
 
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
@@ -1201,15 +1196,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.StoredScript? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.IStoredScript? Script { get; set; }
 	}
 
 	[ConvertAs(typeof(RankEvalRequest))]
 	public partial interface IRankEvalRequest : IRequest<RankEvalRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalRequestItem> Requests { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalRequestItem> Requests { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetric? Metric { get; set; }
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetric? Metric { get; set; }
 	}
 
 	public partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>, IRankEvalRequest
@@ -1245,11 +1240,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("requests")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalRequestItem> Requests { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalRequestItem> Requests { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("metric")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetric? Metric { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetric? Metric { get; set; }
 	}
 
 	[ConvertAs(typeof(ReindexRequest))]
@@ -1257,7 +1252,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? Dest { get; set; }
 
 		long? MaxDocs { get; set; }
 
@@ -1265,7 +1260,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		long? Size { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.ISource? Source { get; set; }
 	}
 
 	public partial class ReindexRequest : PlainRequestBase<ReindexRequestParameters>, IReindexRequest
@@ -1312,7 +1307,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? Dest { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs")]
@@ -1328,7 +1323,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Reindex.ISource? Source { get; set; }
 	}
 
 	[ConvertAs(typeof(ReindexRethrottleRequest))]
@@ -1401,9 +1396,9 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		string? Context { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
+		Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.IPainlessContextSetup? ContextSetup { get; set; }
 
-		Elastic.Clients.Elasticsearch.InlineScript? Script { get; set; }
+		Elastic.Clients.Elasticsearch.IInlineScript? Script { get; set; }
 	}
 
 	public partial class ScriptsPainlessExecuteRequest : PlainRequestBase<ScriptsPainlessExecuteRequestParameters>, IScriptsPainlessExecuteRequest
@@ -1426,11 +1421,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("context_setup")]
-		public Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.IPainlessContextSetup? ContextSetup { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.InlineScript? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.IInlineScript? Script { get; set; }
 	}
 
 	[ConvertAs(typeof(ScrollRequest))]
@@ -1469,9 +1464,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? Collapse { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IHighlight? Highlight { get; set; }
 
 		IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
@@ -1483,19 +1478,19 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? Rescore { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		Elastic.Clients.Elasticsearch.Global.Search.SortResults? SearchAfter { get; set; }
 
-		Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 
-		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? Fields { get; set; }
+		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? Fields { get; set; }
 
 		Union<Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer, Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer>>? Suggest { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? Pit { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 	}
@@ -1658,11 +1653,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
-		public Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? Collapse { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IHighlight? Highlight { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("indices_boost")]
@@ -1686,11 +1681,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("rescore")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? Rescore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search_after")]
@@ -1698,11 +1693,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
-		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		public Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? Fields { get; set; }
+		public IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("suggest")]
@@ -1710,7 +1705,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("pit")]
-		public Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? Pit { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
@@ -1971,7 +1966,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		TDocument? Doc { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? Filter { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? Filter { get; set; }
 
 		Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 	}
@@ -2034,7 +2029,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]
@@ -2141,7 +2136,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-		Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 	}
 
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
@@ -2271,7 +2266,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
-		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		public Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 	}
 
 	[ConvertAs(typeof(UpdateByQueryRethrottleRequest))]

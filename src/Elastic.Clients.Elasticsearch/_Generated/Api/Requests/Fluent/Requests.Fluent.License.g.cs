@@ -78,13 +78,13 @@ namespace Elastic.Clients.Elasticsearch.License
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.License.License? IPostRequest.License { get; set; }
+		Elastic.Clients.Elasticsearch.License.ILicense? IPostRequest.License { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.License.License>? IPostRequest.Licenses { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.License.ILicense>? IPostRequest.Licenses { get; set; }
 
 		public PostDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
-		public PostDescriptor License(Elastic.Clients.Elasticsearch.License.License? license) => Assign(license, (a, v) => a.License = v);
-		public PostDescriptor Licenses(IEnumerable<Elastic.Clients.Elasticsearch.License.License>? licenses) => Assign(licenses, (a, v) => a.Licenses = v);
+		public PostDescriptor License(Elastic.Clients.Elasticsearch.License.ILicense? license) => Assign(license, (a, v) => a.License = v);
+		public PostDescriptor Licenses(IEnumerable<Elastic.Clients.Elasticsearch.License.ILicense>? licenses) => Assign(licenses, (a, v) => a.Licenses = v);
 	}
 
 	public partial class PostStartBasicDescriptor : RequestDescriptorBase<PostStartBasicDescriptor, PostStartBasicRequestParameters, IPostStartBasicRequest>, IPostStartBasicRequest

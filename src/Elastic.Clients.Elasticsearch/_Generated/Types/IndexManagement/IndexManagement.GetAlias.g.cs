@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetAlias
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition> Aliases
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IAliasDefinition> Aliases
 		{
 			get;
 #if NET5_0_OR_GREATER

@@ -177,9 +177,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[ConvertAs(typeof(SimulateRequest))]
 	public partial interface ISimulateRequest : IRequest<SimulateRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? Docs { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.IDocument>? Docs { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
+		Elastic.Clients.Elasticsearch.Ingest.IPipeline? Pipeline { get; set; }
 	}
 
 	public partial class SimulateRequest : PlainRequestBase<SimulateRequestParameters>, ISimulateRequest
@@ -206,10 +206,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? Docs { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.IDocument>? Docs { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("pipeline")]
-		public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
+		public Elastic.Clients.Elasticsearch.Ingest.IPipeline? Pipeline { get; set; }
 	}
 }

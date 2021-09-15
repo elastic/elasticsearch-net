@@ -87,20 +87,20 @@ namespace Elastic.Clients.Elasticsearch.Rollup
 
 		string? IPutJobRequest.Cron { get; set; }
 
-		Elastic.Clients.Elasticsearch.Rollup.Groupings? IPutJobRequest.Groups { get; set; }
+		Elastic.Clients.Elasticsearch.Rollup.IGroupings? IPutJobRequest.Groups { get; set; }
 
 		string? IPutJobRequest.IndexPattern { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? IPutJobRequest.Metrics { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Rollup.IFieldMetric>? IPutJobRequest.Metrics { get; set; }
 
 		long? IPutJobRequest.PageSize { get; set; }
 
 		Elastic.Clients.Elasticsearch.IndexName? IPutJobRequest.RollupIndex { get; set; }
 
 		public PutJobDescriptor Cron(string? cron) => Assign(cron, (a, v) => a.Cron = v);
-		public PutJobDescriptor Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings? groups) => Assign(groups, (a, v) => a.Groups = v);
+		public PutJobDescriptor Groups(Elastic.Clients.Elasticsearch.Rollup.IGroupings? groups) => Assign(groups, (a, v) => a.Groups = v);
 		public PutJobDescriptor IndexPattern(string? indexPattern) => Assign(indexPattern, (a, v) => a.IndexPattern = v);
-		public PutJobDescriptor Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? metrics) => Assign(metrics, (a, v) => a.Metrics = v);
+		public PutJobDescriptor Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Rollup.IFieldMetric>? metrics) => Assign(metrics, (a, v) => a.Metrics = v);
 		public PutJobDescriptor PageSize(long? pageSize) => Assign(pageSize, (a, v) => a.PageSize = v);
 		public PutJobDescriptor RollupIndex(Elastic.Clients.Elasticsearch.IndexName? rollupIndex) => Assign(rollupIndex, (a, v) => a.RollupIndex = v);
 	}

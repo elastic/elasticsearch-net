@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? CaseInsensitive { get; set; }
 	}
 
-	public partial class TermQueryDescriptor : ITermQuery
+	public partial class TermQueryDescriptor : FieldNameQueryDescriptorBase<TermQueryDescriptor, ITermQuery>, ITermQuery
 	{
 		bool? ITermQuery.CaseInsensitive { get; set; }
 	}

@@ -93,20 +93,20 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
 
-		Elastic.Clients.Elasticsearch.Watcher.SimulatedActions? IExecuteWatchRequest.SimulatedActions { get; set; }
+		Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions? IExecuteWatchRequest.SimulatedActions { get; set; }
 
-		Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent? IExecuteWatchRequest.TriggerData { get; set; }
+		Elastic.Clients.Elasticsearch.Watcher.IScheduleTriggerEvent? IExecuteWatchRequest.TriggerData { get; set; }
 
-		Elastic.Clients.Elasticsearch.Watcher.Watch? IExecuteWatchRequest.Watch { get; set; }
+		Elastic.Clients.Elasticsearch.Watcher.IWatch? IExecuteWatchRequest.Watch { get; set; }
 
 		public ExecuteWatchDescriptor Debug(bool? debug = true) => Qs("debug", debug);
 		public ExecuteWatchDescriptor ActionModes(Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.ActionExecutionMode>? actionModes) => Assign(actionModes, (a, v) => a.ActionModes = v);
 		public ExecuteWatchDescriptor AlternativeInput(Dictionary<string, object>? alternativeInput) => Assign(alternativeInput, (a, v) => a.AlternativeInput = v);
 		public ExecuteWatchDescriptor IgnoreCondition(bool? ignoreCondition = true) => Assign(ignoreCondition, (a, v) => a.IgnoreCondition = v);
 		public ExecuteWatchDescriptor RecordExecution(bool? recordExecution = true) => Assign(recordExecution, (a, v) => a.RecordExecution = v);
-		public ExecuteWatchDescriptor SimulatedActions(Elastic.Clients.Elasticsearch.Watcher.SimulatedActions? simulatedActions) => Assign(simulatedActions, (a, v) => a.SimulatedActions = v);
-		public ExecuteWatchDescriptor TriggerData(Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent? triggerData) => Assign(triggerData, (a, v) => a.TriggerData = v);
-		public ExecuteWatchDescriptor Watch(Elastic.Clients.Elasticsearch.Watcher.Watch? watch) => Assign(watch, (a, v) => a.Watch = v);
+		public ExecuteWatchDescriptor SimulatedActions(Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions? simulatedActions) => Assign(simulatedActions, (a, v) => a.SimulatedActions = v);
+		public ExecuteWatchDescriptor TriggerData(Elastic.Clients.Elasticsearch.Watcher.IScheduleTriggerEvent? triggerData) => Assign(triggerData, (a, v) => a.TriggerData = v);
+		public ExecuteWatchDescriptor Watch(Elastic.Clients.Elasticsearch.Watcher.IWatch? watch) => Assign(watch, (a, v) => a.Watch = v);
 	}
 
 	public partial class GetWatchDescriptor : RequestDescriptorBase<GetWatchDescriptor, GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		{
 		}
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.Action>? IPutWatchRequest.Actions { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.IAction>? IPutWatchRequest.Actions { get; set; }
 
 		Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? IPutWatchRequest.Condition { get; set; }
 
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		public PutWatchDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		public PutWatchDescriptor IfSequenceNumber(long? ifSequenceNumber) => Qs("if_sequence_number", ifSequenceNumber);
 		public PutWatchDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Qs("version", version);
-		public PutWatchDescriptor Actions(Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.Action>? actions) => Assign(actions, (a, v) => a.Actions = v);
+		public PutWatchDescriptor Actions(Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.IAction>? actions) => Assign(actions, (a, v) => a.Actions = v);
 		public PutWatchDescriptor Condition(Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? condition) => Assign(condition, (a, v) => a.Condition = v);
 		public PutWatchDescriptor Input(Elastic.Clients.Elasticsearch.Watcher.InputContainer? input) => Assign(input, (a, v) => a.Input = v);
 		public PutWatchDescriptor Metadata(Elastic.Clients.Elasticsearch.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);

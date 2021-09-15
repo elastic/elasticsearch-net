@@ -40,12 +40,112 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Back
 	}
 
+	public enum IcuNormalizationMode
+	{
+		[EnumMember(Value = "decompose")]
+		Decompose,
+		[EnumMember(Value = "compose")]
+		Compose
+	}
+
+	public enum IcuNormalizationType
+	{
+		[EnumMember(Value = "nfkc_cf")]
+		NfkcCf,
+		[EnumMember(Value = "nfkc")]
+		Nfkc,
+		[EnumMember(Value = "nfc")]
+		Nfc
+	}
+
 	public enum KeepTypesMode
 	{
 		[EnumMember(Value = "include")]
 		Include,
 		[EnumMember(Value = "exclude")]
 		Exclude
+	}
+
+	public enum KuromojiTokenizationMode
+	{
+		[EnumMember(Value = "search")]
+		Search,
+		[EnumMember(Value = "normal")]
+		Normal,
+		[EnumMember(Value = "extended")]
+		Extended
+	}
+
+	public enum Language
+	{
+		[EnumMember(Value = "Turkish")]
+		Turkish,
+		[EnumMember(Value = "Thai")]
+		Thai,
+		[EnumMember(Value = "Swedish")]
+		Swedish,
+		[EnumMember(Value = "Spanish")]
+		Spanish,
+		[EnumMember(Value = "Sorani")]
+		Sorani,
+		[EnumMember(Value = "Russian")]
+		Russian,
+		[EnumMember(Value = "Romanian")]
+		Romanian,
+		[EnumMember(Value = "Portuguese")]
+		Portuguese,
+		[EnumMember(Value = "Persian")]
+		Persian,
+		[EnumMember(Value = "Norwegian")]
+		Norwegian,
+		[EnumMember(Value = "Latvian")]
+		Latvian,
+		[EnumMember(Value = "Italian")]
+		Italian,
+		[EnumMember(Value = "Irish")]
+		Irish,
+		[EnumMember(Value = "Indonesian")]
+		Indonesian,
+		[EnumMember(Value = "Hungarian")]
+		Hungarian,
+		[EnumMember(Value = "Hindi")]
+		Hindi,
+		[EnumMember(Value = "Greek")]
+		Greek,
+		[EnumMember(Value = "German")]
+		German,
+		[EnumMember(Value = "Galician")]
+		Galician,
+		[EnumMember(Value = "French")]
+		French,
+		[EnumMember(Value = "Finnish")]
+		Finnish,
+		[EnumMember(Value = "Estonian")]
+		Estonian,
+		[EnumMember(Value = "English")]
+		English,
+		[EnumMember(Value = "Dutch")]
+		Dutch,
+		[EnumMember(Value = "Danish")]
+		Danish,
+		[EnumMember(Value = "Czech")]
+		Czech,
+		[EnumMember(Value = "Cjk")]
+		Cjk,
+		[EnumMember(Value = "Chinese")]
+		Chinese,
+		[EnumMember(Value = "Catalan")]
+		Catalan,
+		[EnumMember(Value = "Bulgarian")]
+		Bulgarian,
+		[EnumMember(Value = "Brazilian")]
+		Brazilian,
+		[EnumMember(Value = "Basque")]
+		Basque,
+		[EnumMember(Value = "Armenian")]
+		Armenian,
+		[EnumMember(Value = "Arabic")]
+		Arabic
 	}
 
 	public enum NoriDecompoundMode

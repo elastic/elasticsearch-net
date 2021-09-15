@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public partial class GetPipelineResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>
+	public partial class GetPipelineResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Ingest.IPipeline>
 	{
 	}
 

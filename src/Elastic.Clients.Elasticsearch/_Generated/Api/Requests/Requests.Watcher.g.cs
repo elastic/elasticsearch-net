@@ -118,11 +118,11 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		bool? RecordExecution { get; set; }
 
-		Elastic.Clients.Elasticsearch.Watcher.SimulatedActions? SimulatedActions { get; set; }
+		Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions? SimulatedActions { get; set; }
 
-		Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent? TriggerData { get; set; }
+		Elastic.Clients.Elasticsearch.Watcher.IScheduleTriggerEvent? TriggerData { get; set; }
 
-		Elastic.Clients.Elasticsearch.Watcher.Watch? Watch { get; set; }
+		Elastic.Clients.Elasticsearch.Watcher.IWatch? Watch { get; set; }
 	}
 
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
@@ -165,15 +165,15 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("simulated_actions")]
-		public Elastic.Clients.Elasticsearch.Watcher.SimulatedActions? SimulatedActions { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ISimulatedActions? SimulatedActions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("trigger_data")]
-		public Elastic.Clients.Elasticsearch.Watcher.ScheduleTriggerEvent? TriggerData { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IScheduleTriggerEvent? TriggerData { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("watch")]
-		public Elastic.Clients.Elasticsearch.Watcher.Watch? Watch { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.IWatch? Watch { get; set; }
 	}
 
 	[ConvertAs(typeof(GetWatchRequest))]
@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 	[ConvertAs(typeof(PutWatchRequest))]
 	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 	{
-		Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.Action>? Actions { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.IAction>? Actions { get; set; }
 
 		Elastic.Clients.Elasticsearch.Watcher.ConditionContainer? Condition { get; set; }
 
@@ -242,7 +242,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 
 		[JsonInclude]
 		[JsonPropertyName("actions")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.Action>? Actions { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Watcher.IAction>? Actions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("condition")]

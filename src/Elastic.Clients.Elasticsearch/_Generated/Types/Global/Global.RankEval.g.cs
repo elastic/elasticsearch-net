@@ -24,7 +24,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.RankEval
 {
-	public partial class DocumentRating
+	[ConvertAs(typeof(DocumentRating))]
+	public partial interface IDocumentRating
+	{
+		Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		int Rating { get; set; }
+	}
+
+	public partial class DocumentRatingDescriptor : DescriptorBase<DocumentRatingDescriptor, IDocumentRating>, IDocumentRating
+	{
+		Elastic.Clients.Elasticsearch.Id IDocumentRating.Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName IDocumentRating.Index { get; set; }
+
+		int IDocumentRating.Rating { get; set; }
+	}
+
+	public partial class DocumentRating : IDocumentRating
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]
@@ -117,30 +136,68 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		}
 	}
 
-	public partial class RankEvalMetric
+	[ConvertAs(typeof(RankEvalMetric))]
+	public partial interface IRankEvalMetric
+	{
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricPrecision? Precision { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricRecall? Recall { get; set; }
+	}
+
+	public partial class RankEvalMetricDescriptor : DescriptorBase<RankEvalMetricDescriptor, IRankEvalMetric>, IRankEvalMetric
+	{
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricPrecision? IRankEvalMetric.Precision { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricRecall? IRankEvalMetric.Recall { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricMeanReciprocalRank? IRankEvalMetric.MeanReciprocalRank { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricDiscountedCumulativeGain? IRankEvalMetric.Dcg { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricExpectedReciprocalRank? IRankEvalMetric.ExpectedReciprocalRank { get; set; }
+	}
+
+	public partial class RankEvalMetric : IRankEvalMetric
 	{
 		[JsonInclude]
 		[JsonPropertyName("dcg")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("expected_reciprocal_rank")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mean_reciprocal_rank")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("precision")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricPrecision? Precision { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricPrecision? Precision { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("recall")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetricRecall? Recall { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetricRecall? Recall { get; set; }
 	}
 
-	public abstract partial class RankEvalMetricBase
+	[ConvertAs(typeof(RankEvalMetricBase))]
+	public partial interface IRankEvalMetricBase
+	{
+		int? k { get; set; }
+	}
+
+	public partial class RankEvalMetricBaseDescriptor : DescriptorBase<RankEvalMetricBaseDescriptor, IRankEvalMetricBase>, IRankEvalMetricBase
+	{
+		int? IRankEvalMetricBase.k { get; set; }
+	}
+
+	public abstract partial class RankEvalMetricBase : IRankEvalMetricBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("k")]
@@ -198,43 +255,120 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		}
 	}
 
-	public partial class RankEvalMetricDiscountedCumulativeGain : Global.RankEval.RankEvalMetricBase
+	[ConvertAs(typeof(RankEvalMetricDiscountedCumulativeGain))]
+	public partial interface IRankEvalMetricDiscountedCumulativeGain
+	{
+		bool? Normalize { get; set; }
+	}
+
+	public partial class RankEvalMetricDiscountedCumulativeGainDescriptor : DescriptorBase<RankEvalMetricDiscountedCumulativeGainDescriptor, IRankEvalMetricDiscountedCumulativeGain>, IRankEvalMetricDiscountedCumulativeGain
+	{
+		bool? IRankEvalMetricDiscountedCumulativeGain.Normalize { get; set; }
+	}
+
+	public partial class RankEvalMetricDiscountedCumulativeGain : Global.RankEval.RankEvalMetricBase, IRankEvalMetricDiscountedCumulativeGain
 	{
 		[JsonInclude]
 		[JsonPropertyName("normalize")]
 		public bool? Normalize { get; set; }
 	}
 
-	public partial class RankEvalMetricExpectedReciprocalRank : Global.RankEval.RankEvalMetricBase
+	[ConvertAs(typeof(RankEvalMetricExpectedReciprocalRank))]
+	public partial interface IRankEvalMetricExpectedReciprocalRank
+	{
+		int MaximumRelevance { get; set; }
+	}
+
+	public partial class RankEvalMetricExpectedReciprocalRankDescriptor : DescriptorBase<RankEvalMetricExpectedReciprocalRankDescriptor, IRankEvalMetricExpectedReciprocalRank>, IRankEvalMetricExpectedReciprocalRank
+	{
+		int IRankEvalMetricExpectedReciprocalRank.MaximumRelevance { get; set; }
+	}
+
+	public partial class RankEvalMetricExpectedReciprocalRank : Global.RankEval.RankEvalMetricBase, IRankEvalMetricExpectedReciprocalRank
 	{
 		[JsonInclude]
 		[JsonPropertyName("maximum_relevance")]
 		public int MaximumRelevance { get; set; }
 	}
 
-	public partial class RankEvalMetricMeanReciprocalRank : Global.RankEval.RankEvalMetricRatingTreshold
+	[ConvertAs(typeof(RankEvalMetricMeanReciprocalRank))]
+	public partial interface IRankEvalMetricMeanReciprocalRank
 	{
 	}
 
-	public partial class RankEvalMetricPrecision : Global.RankEval.RankEvalMetricRatingTreshold
+	public partial class RankEvalMetricMeanReciprocalRankDescriptor : DescriptorBase<RankEvalMetricMeanReciprocalRankDescriptor, IRankEvalMetricMeanReciprocalRank>, IRankEvalMetricMeanReciprocalRank
+	{
+	}
+
+	public partial class RankEvalMetricMeanReciprocalRank : Global.RankEval.RankEvalMetricRatingTreshold, IRankEvalMetricMeanReciprocalRank
+	{
+	}
+
+	[ConvertAs(typeof(RankEvalMetricPrecision))]
+	public partial interface IRankEvalMetricPrecision
+	{
+		bool? IgnoreUnlabeled { get; set; }
+	}
+
+	public partial class RankEvalMetricPrecisionDescriptor : DescriptorBase<RankEvalMetricPrecisionDescriptor, IRankEvalMetricPrecision>, IRankEvalMetricPrecision
+	{
+		bool? IRankEvalMetricPrecision.IgnoreUnlabeled { get; set; }
+	}
+
+	public partial class RankEvalMetricPrecision : Global.RankEval.RankEvalMetricRatingTreshold, IRankEvalMetricPrecision
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_unlabeled")]
 		public bool? IgnoreUnlabeled { get; set; }
 	}
 
-	public partial class RankEvalMetricRatingTreshold : Global.RankEval.RankEvalMetricBase
+	[ConvertAs(typeof(RankEvalMetricRatingTreshold))]
+	public partial interface IRankEvalMetricRatingTreshold
+	{
+		int? RelevantRatingThreshold { get; set; }
+	}
+
+	public partial class RankEvalMetricRatingTresholdDescriptor : DescriptorBase<RankEvalMetricRatingTresholdDescriptor, IRankEvalMetricRatingTreshold>, IRankEvalMetricRatingTreshold
+	{
+		int? IRankEvalMetricRatingTreshold.RelevantRatingThreshold { get; set; }
+	}
+
+	public partial class RankEvalMetricRatingTreshold : Global.RankEval.RankEvalMetricBase, IRankEvalMetricRatingTreshold
 	{
 		[JsonInclude]
 		[JsonPropertyName("relevant_rating_threshold")]
 		public int? RelevantRatingThreshold { get; set; }
 	}
 
-	public partial class RankEvalMetricRecall : Global.RankEval.RankEvalMetricRatingTreshold
+	[ConvertAs(typeof(RankEvalMetricRecall))]
+	public partial interface IRankEvalMetricRecall
 	{
 	}
 
-	public partial class RankEvalQuery
+	public partial class RankEvalMetricRecallDescriptor : DescriptorBase<RankEvalMetricRecallDescriptor, IRankEvalMetricRecall>, IRankEvalMetricRecall
+	{
+	}
+
+	public partial class RankEvalMetricRecall : Global.RankEval.RankEvalMetricRatingTreshold, IRankEvalMetricRecall
+	{
+	}
+
+	[ConvertAs(typeof(RankEvalQuery))]
+	public partial interface IRankEvalQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class RankEvalQueryDescriptor : DescriptorBase<RankEvalQueryDescriptor, IRankEvalQuery>, IRankEvalQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer IRankEvalQuery.Query { get; set; }
+
+		int? IRankEvalQuery.Size { get; set; }
+	}
+
+	public partial class RankEvalQuery : IRankEvalQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("query")]
@@ -245,7 +379,34 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 		public int? Size { get; set; }
 	}
 
-	public partial class RankEvalRequestItem
+	[ConvertAs(typeof(RankEvalRequestItem))]
+	public partial interface IRankEvalRequestItem
+	{
+		Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+		Dictionary<string, object>? Params { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IDocumentRating> Ratings { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalQuery? Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
+	}
+
+	public partial class RankEvalRequestItemDescriptor : DescriptorBase<RankEvalRequestItemDescriptor, IRankEvalRequestItem>, IRankEvalRequestItem
+	{
+		Elastic.Clients.Elasticsearch.Id IRankEvalRequestItem.Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalQuery? IRankEvalRequestItem.Request { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IDocumentRating> IRankEvalRequestItem.Ratings { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id? IRankEvalRequestItem.TemplateId { get; set; }
+
+		Dictionary<string, object>? IRankEvalRequestItem.Params { get; set; }
+	}
+
+	public partial class RankEvalRequestItem : IRankEvalRequestItem
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -257,11 +418,11 @@ namespace Elastic.Clients.Elasticsearch.Global.RankEval
 
 		[JsonInclude]
 		[JsonPropertyName("ratings")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.DocumentRating> Ratings { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IDocumentRating> Ratings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("request")]
-		public Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalQuery? Request { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalQuery? Request { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("template_id")]

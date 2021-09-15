@@ -71,12 +71,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Enrich.Policy? IPutPolicyRequest.GeoMatch { get; set; }
+		Elastic.Clients.Elasticsearch.Enrich.IPolicy? IPutPolicyRequest.GeoMatch { get; set; }
 
-		Elastic.Clients.Elasticsearch.Enrich.Policy? IPutPolicyRequest.Match { get; set; }
+		Elastic.Clients.Elasticsearch.Enrich.IPolicy? IPutPolicyRequest.Match { get; set; }
 
-		public PutPolicyDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.Policy? geoMatch) => Assign(geoMatch, (a, v) => a.GeoMatch = v);
-		public PutPolicyDescriptor Match(Elastic.Clients.Elasticsearch.Enrich.Policy? match) => Assign(match, (a, v) => a.Match = v);
+		public PutPolicyDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.IPolicy? geoMatch) => Assign(geoMatch, (a, v) => a.GeoMatch = v);
+		public PutPolicyDescriptor Match(Elastic.Clients.Elasticsearch.Enrich.IPolicy? match) => Assign(match, (a, v) => a.Match = v);
 	}
 
 	public partial class StatsDescriptor : RequestDescriptorBase<StatsDescriptor, StatsRequestParameters, IStatsRequest>, IStatsRequest

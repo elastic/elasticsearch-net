@@ -27,13 +27,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionSaturation? Saturation { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionLogarithm? Log { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionLinear? Linear { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
 	public partial class RankFeatureQuery : QueryBase, IRankFeatureQuery
@@ -44,31 +44,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("saturation")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionSaturation? Saturation { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("log")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionLogarithm? Log { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("linear")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionLinear? Linear { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("sigmoid")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
 	public partial class RankFeatureQueryDescriptor : QueryDescriptorBase<RankFeatureQueryDescriptor, IRankFeatureQuery>, IRankFeatureQuery
 	{
 		Elastic.Clients.Elasticsearch.Field IRankFeatureQuery.Field { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? IRankFeatureQuery.Saturation { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionSaturation? IRankFeatureQuery.Saturation { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? IRankFeatureQuery.Log { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionLogarithm? IRankFeatureQuery.Log { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? IRankFeatureQuery.Linear { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionLinear? IRankFeatureQuery.Linear { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? IRankFeatureQuery.Sigmoid { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRankFeatureFunctionSigmoid? IRankFeatureQuery.Sigmoid { get; set; }
 	}
 }

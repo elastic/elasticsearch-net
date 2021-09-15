@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
+		public Elastic.Clients.Elasticsearch.Mapping.ITypeMapping Mappings
 		{
 			get;
 #if NET5_0_OR_GREATER

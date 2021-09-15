@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	{
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings Settings
+		public Elastic.Clients.Elasticsearch.Snapshot.IRepositorySettings Settings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -168,7 +168,34 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 		}
 	}
 
-	public partial class RepositorySettings
+	[ConvertAs(typeof(RepositorySettings))]
+	public partial interface IRepositorySettings
+	{
+		string? ChunkSize { get; set; }
+
+		Union<string, bool>? Compress { get; set; }
+
+		Union<string, int>? ConcurrentStreams { get; set; }
+
+		string Location { get; set; }
+
+		Union<string, bool>? ReadOnly { get; set; }
+	}
+
+	public partial class RepositorySettingsDescriptor : DescriptorBase<RepositorySettingsDescriptor, IRepositorySettings>, IRepositorySettings
+	{
+		string? IRepositorySettings.ChunkSize { get; set; }
+
+		Union<string, bool>? IRepositorySettings.Compress { get; set; }
+
+		Union<string, int>? IRepositorySettings.ConcurrentStreams { get; set; }
+
+		string IRepositorySettings.Location { get; set; }
+
+		Union<string, bool>? IRepositorySettings.ReadOnly { get; set; }
+	}
+
+	public partial class RepositorySettings : IRepositorySettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("chunk_size")]

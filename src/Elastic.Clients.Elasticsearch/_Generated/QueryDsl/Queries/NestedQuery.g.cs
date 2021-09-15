@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		bool? IgnoreUnmapped { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? InnerHits { get; set; }
 
 		Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("path")]
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		bool? INestedQuery.IgnoreUnmapped { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.InnerHits? INestedQuery.InnerHits { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? INestedQuery.InnerHits { get; set; }
 
 		Elastic.Clients.Elasticsearch.Field INestedQuery.Path { get; set; }
 

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 		[JsonInclude]
 		[JsonPropertyName("geo_match")]
-		public Elastic.Clients.Elasticsearch.Enrich.Policy? GeoMatch
+		public Elastic.Clients.Elasticsearch.Enrich.IPolicy? GeoMatch
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 
 		[JsonInclude]
 		[JsonPropertyName("match")]
-		public Elastic.Clients.Elasticsearch.Enrich.Policy Match
+		public Elastic.Clients.Elasticsearch.Enrich.IPolicy Match
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -51,7 +51,34 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 		}
 	}
 
-	public partial class Policy
+	[ConvertAs(typeof(Policy))]
+	public partial interface IPolicy
+	{
+		Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field MatchField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? Name { get; set; }
+
+		string? Query { get; set; }
+	}
+
+	public partial class PolicyDescriptor : DescriptorBase<PolicyDescriptor, IPolicy>, IPolicy
+	{
+		Elastic.Clients.Elasticsearch.Fields IPolicy.EnrichFields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Indices IPolicy.Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IPolicy.MatchField { get; set; }
+
+		string? IPolicy.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? IPolicy.Name { get; set; }
+	}
+
+	public partial class Policy : IPolicy
 	{
 		[JsonInclude]
 		[JsonPropertyName("enrich_fields")]

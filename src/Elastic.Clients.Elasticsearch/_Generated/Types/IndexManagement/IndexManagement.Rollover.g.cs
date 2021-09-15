@@ -24,7 +24,30 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 {
-	public partial class RolloverConditions
+	[ConvertAs(typeof(RolloverConditions))]
+	public partial interface IRolloverConditions
+	{
+		Elastic.Clients.Elasticsearch.Time? MaxAge { get; set; }
+
+		long? MaxDocs { get; set; }
+
+		Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
+
+		string? MaxSize { get; set; }
+	}
+
+	public partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor, IRolloverConditions>, IRolloverConditions
+	{
+		Elastic.Clients.Elasticsearch.Time? IRolloverConditions.MaxAge { get; set; }
+
+		long? IRolloverConditions.MaxDocs { get; set; }
+
+		string? IRolloverConditions.MaxSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.ByteSize? IRolloverConditions.MaxPrimaryShardSize { get; set; }
+	}
+
+	public partial class RolloverConditions : IRolloverConditions
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_age")]

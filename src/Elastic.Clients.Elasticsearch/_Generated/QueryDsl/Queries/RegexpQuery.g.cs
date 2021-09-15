@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public partial class RegexpQueryDescriptor : IRegexpQuery
+	public partial class RegexpQueryDescriptor : FieldNameQueryDescriptorBase<RegexpQueryDescriptor, IRegexpQuery>, IRegexpQuery
 	{
 		bool? IRegexpQuery.CaseInsensitive { get; set; }
 

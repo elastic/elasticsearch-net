@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 	{
 		string Type { get; set; }
 
-		Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings Settings { get; set; }
+		Elastic.Clients.Elasticsearch.Snapshot.IRepositorySettings Settings { get; set; }
 	}
 
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.Snapshot.IRepositorySettings Settings { get; set; }
 	}
 
 	[ConvertAs(typeof(DeleteRequest))]

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Exp { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? FieldValueFactor { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IFieldValueFactorScoreFunction? FieldValueFactor { get; set; }
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
 
@@ -36,9 +36,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Linear { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? RandomScore { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IRandomScoreFunction? RandomScore { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? ScriptScore { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IScriptScoreFunction? ScriptScore { get; set; }
 
 		double? Weight { get; set; }
 	}
@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("field_value_factor")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? FieldValueFactor { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IFieldValueFactorScoreFunction? FieldValueFactor { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -67,11 +67,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("random_score")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? RandomScore { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IRandomScoreFunction? RandomScore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_score")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? ScriptScore { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IScriptScoreFunction? ScriptScore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("weight")]
@@ -81,44 +81,44 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[ConvertAs(typeof(IntervalsContainer))]
 	public partial interface IIntervalsContainer
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAllOf? AllOf { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAnyOf? AnyOf { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFuzzy? Fuzzy { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsMatch? Match { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsPrefix? Prefix { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsWildcard? Wildcard { get; set; }
 	}
 
 	public partial class IntervalsContainer : IIntervalsContainer
 	{
 		[JsonInclude]
 		[JsonPropertyName("all_of")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAllOf? AllOf { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("any_of")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAnyOf? AnyOf { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFuzzy? Fuzzy { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("match")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsMatch? Match { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("prefix")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsPrefix? Prefix { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("wildcard")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsWildcard? Wildcard { get; set; }
 	}
 
 	[ConvertAs(typeof(IntervalsFilter))]
@@ -185,44 +185,44 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[ConvertAs(typeof(IntervalsQuery))]
 	public partial interface IIntervalsQuery
 	{
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAllOf? AllOf { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAnyOf? AnyOf { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFuzzy? Fuzzy { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsMatch? Match { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsPrefix? Prefix { get; set; }
 
-		Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsWildcard? Wildcard { get; set; }
 	}
 
 	public partial class IntervalsQuery : IIntervalsQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("all_of")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAllOf? AllOf { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("any_of")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsAnyOf? AnyOf { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFuzzy? Fuzzy { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("match")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsMatch? Match { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("prefix")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsPrefix? Prefix { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("wildcard")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsWildcard? Wildcard { get; set; }
 	}
 
 	[ConvertAs(typeof(QueryContainer))]

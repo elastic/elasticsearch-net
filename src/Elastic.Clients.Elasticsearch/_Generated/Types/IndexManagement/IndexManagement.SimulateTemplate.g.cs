@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias> Aliases
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings
+		public Elastic.Clients.Elasticsearch.Mapping.ITypeMapping Mappings
 		{
 			get;
 #if NET5_0_OR_GREATER

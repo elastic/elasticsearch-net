@@ -171,57 +171,6 @@ namespace Elastic.Clients.Elasticsearch.Global.Bulk
 		}
 	}
 
-	public partial class ResponseItemContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("create")]
-		public Elastic.Clients.Elasticsearch.Global.Bulk.CreateResponseItem? Create
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("delete")]
-		public Elastic.Clients.Elasticsearch.Global.Bulk.DeleteResponseItem? Delete
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.Global.Bulk.IndexResponseItem? Index
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("update")]
-		public Elastic.Clients.Elasticsearch.Global.Bulk.UpdateResponseItem? Update
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
 	public partial class UpdateResponseItem : Global.Bulk.ResponseItemBase
 	{
 	}

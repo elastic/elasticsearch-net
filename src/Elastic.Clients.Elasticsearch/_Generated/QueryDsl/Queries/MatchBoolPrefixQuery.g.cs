@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Query { get; set; }
 	}
 
-	public partial class MatchBoolPrefixQueryDescriptor : IMatchBoolPrefixQuery
+	public partial class MatchBoolPrefixQueryDescriptor : FieldNameQueryDescriptorBase<MatchBoolPrefixQueryDescriptor, IMatchBoolPrefixQuery>, IMatchBoolPrefixQuery
 	{
 		string? IMatchBoolPrefixQuery.Analyzer { get; set; }
 

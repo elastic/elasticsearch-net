@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public partial class WildcardQueryDescriptor : IWildcardQuery
+	public partial class WildcardQueryDescriptor : FieldNameQueryDescriptorBase<WildcardQueryDescriptor, IWildcardQuery>, IWildcardQuery
 	{
 		bool? IWildcardQuery.CaseInsensitive { get; set; }
 

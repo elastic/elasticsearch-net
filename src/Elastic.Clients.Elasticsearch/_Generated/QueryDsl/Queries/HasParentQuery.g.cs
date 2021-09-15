@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		bool? IgnoreUnmapped { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? InnerHits { get; set; }
 
 		Elastic.Clients.Elasticsearch.RelationName ParentType { get; set; }
 
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public Elastic.Clients.Elasticsearch.Global.Search.InnerHits? InnerHits { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("parent_type")]
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		bool? IHasParentQuery.IgnoreUnmapped { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.InnerHits? IHasParentQuery.InnerHits { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IInnerHits? IHasParentQuery.InnerHits { get; set; }
 
 		Elastic.Clients.Elasticsearch.RelationName IHasParentQuery.ParentType { get; set; }
 

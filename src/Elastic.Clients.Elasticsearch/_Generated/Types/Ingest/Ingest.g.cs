@@ -24,7 +24,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class AppendProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(AppendProcessor))]
+	public partial interface IAppendProcessor
+	{
+		bool? AllowDuplicates { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		IEnumerable<object> Value { get; set; }
+	}
+
+	public partial class AppendProcessorDescriptor : DescriptorBase<AppendProcessorDescriptor, IAppendProcessor>, IAppendProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IAppendProcessor.Field { get; set; }
+
+		IEnumerable<object> IAppendProcessor.Value { get; set; }
+
+		bool? IAppendProcessor.AllowDuplicates { get; set; }
+	}
+
+	public partial class AppendProcessor : Ingest.ProcessorBase, IAppendProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_duplicates")]
@@ -39,7 +58,42 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<object> Value { get; set; }
 	}
 
-	public partial class AttachmentProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(AttachmentProcessor))]
+	public partial interface IAttachmentProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		long? IndexedChars { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IndexedCharsField { get; set; }
+
+		IEnumerable<string>? Properties { get; set; }
+
+		string? ResourceName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class AttachmentProcessorDescriptor : DescriptorBase<AttachmentProcessorDescriptor, IAttachmentProcessor>, IAttachmentProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IAttachmentProcessor.Field { get; set; }
+
+		bool? IAttachmentProcessor.IgnoreMissing { get; set; }
+
+		long? IAttachmentProcessor.IndexedChars { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IAttachmentProcessor.IndexedCharsField { get; set; }
+
+		IEnumerable<string>? IAttachmentProcessor.Properties { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IAttachmentProcessor.TargetField { get; set; }
+
+		string? IAttachmentProcessor.ResourceName { get; set; }
+	}
+
+	public partial class AttachmentProcessor : Ingest.ProcessorBase, IAttachmentProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -70,7 +124,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class BytesProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(BytesProcessor))]
+	public partial interface IBytesProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class BytesProcessorDescriptor : DescriptorBase<BytesProcessorDescriptor, IBytesProcessor>, IBytesProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IBytesProcessor.Field { get; set; }
+
+		bool? IBytesProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IBytesProcessor.TargetField { get; set; }
+	}
+
+	public partial class BytesProcessor : Ingest.ProcessorBase, IBytesProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -85,7 +158,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class CircleProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(CircleProcessor))]
+	public partial interface ICircleProcessor
+	{
+		double ErrorDistance { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class CircleProcessorDescriptor : DescriptorBase<CircleProcessorDescriptor, ICircleProcessor>, ICircleProcessor
+	{
+		double ICircleProcessor.ErrorDistance { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field ICircleProcessor.Field { get; set; }
+
+		bool ICircleProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.ShapeType ICircleProcessor.ShapeType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field ICircleProcessor.TargetField { get; set; }
+	}
+
+	public partial class CircleProcessor : Ingest.ProcessorBase, ICircleProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("error_distance")]
@@ -108,7 +208,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class ConvertProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(ConvertProcessor))]
+	public partial interface IConvertProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
+	}
+
+	public partial class ConvertProcessorDescriptor : DescriptorBase<ConvertProcessorDescriptor, IConvertProcessor>, IConvertProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IConvertProcessor.Field { get; set; }
+
+		bool? IConvertProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IConvertProcessor.TargetField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.ConvertType IConvertProcessor.Type { get; set; }
+	}
+
+	public partial class ConvertProcessor : Ingest.ProcessorBase, IConvertProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -127,7 +250,46 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
 	}
 
-	public partial class CsvProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(CsvProcessor))]
+	public partial interface ICsvProcessor
+	{
+		string? Description { get; set; }
+
+		object EmptyValue { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		string? Quote { get; set; }
+
+		string? Separator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
+
+		bool Trim { get; set; }
+	}
+
+	public partial class CsvProcessorDescriptor : DescriptorBase<CsvProcessorDescriptor, ICsvProcessor>, ICsvProcessor
+	{
+		object ICsvProcessor.EmptyValue { get; set; }
+
+		string? ICsvProcessor.Description { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field ICsvProcessor.Field { get; set; }
+
+		bool? ICsvProcessor.IgnoreMissing { get; set; }
+
+		string? ICsvProcessor.Quote { get; set; }
+
+		string? ICsvProcessor.Separator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields ICsvProcessor.TargetFields { get; set; }
+
+		bool ICsvProcessor.Trim { get; set; }
+	}
+
+	public partial class CsvProcessor : Ingest.ProcessorBase, ICsvProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -162,7 +324,42 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool Trim { get; set; }
 	}
 
-	public partial class DateIndexNameProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(DateIndexNameProcessor))]
+	public partial interface IDateIndexNameProcessor
+	{
+		IEnumerable<string> DateFormats { get; set; }
+
+		Union<string, Elastic.Clients.Elasticsearch.Ingest.DateRounding> DateRounding { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string IndexNameFormat { get; set; }
+
+		string IndexNamePrefix { get; set; }
+
+		string Locale { get; set; }
+
+		string Timezone { get; set; }
+	}
+
+	public partial class DateIndexNameProcessorDescriptor : DescriptorBase<DateIndexNameProcessorDescriptor, IDateIndexNameProcessor>, IDateIndexNameProcessor
+	{
+		IEnumerable<string> IDateIndexNameProcessor.DateFormats { get; set; }
+
+		Union<string, Elastic.Clients.Elasticsearch.Ingest.DateRounding> IDateIndexNameProcessor.DateRounding { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDateIndexNameProcessor.Field { get; set; }
+
+		string IDateIndexNameProcessor.IndexNameFormat { get; set; }
+
+		string IDateIndexNameProcessor.IndexNamePrefix { get; set; }
+
+		string IDateIndexNameProcessor.Locale { get; set; }
+
+		string IDateIndexNameProcessor.Timezone { get; set; }
+	}
+
+	public partial class DateIndexNameProcessor : Ingest.ProcessorBase, IDateIndexNameProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("date_formats")]
@@ -193,7 +390,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Timezone { get; set; }
 	}
 
-	public partial class DateProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(DateProcessor))]
+	public partial interface IDateProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		IEnumerable<string> Formats { get; set; }
+
+		string? Locale { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+
+		string? Timezone { get; set; }
+	}
+
+	public partial class DateProcessorDescriptor : DescriptorBase<DateProcessorDescriptor, IDateProcessor>, IDateProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IDateProcessor.Field { get; set; }
+
+		IEnumerable<string> IDateProcessor.Formats { get; set; }
+
+		string? IDateProcessor.Locale { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IDateProcessor.TargetField { get; set; }
+
+		string? IDateProcessor.Timezone { get; set; }
+	}
+
+	public partial class DateProcessor : Ingest.ProcessorBase, IDateProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -216,7 +440,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Timezone { get; set; }
 	}
 
-	public partial class DissectProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(DissectProcessor))]
+	public partial interface IDissectProcessor
+	{
+		string AppendSeparator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool IgnoreMissing { get; set; }
+
+		string Pattern { get; set; }
+	}
+
+	public partial class DissectProcessorDescriptor : DescriptorBase<DissectProcessorDescriptor, IDissectProcessor>, IDissectProcessor
+	{
+		string IDissectProcessor.AppendSeparator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IDissectProcessor.Field { get; set; }
+
+		bool IDissectProcessor.IgnoreMissing { get; set; }
+
+		string IDissectProcessor.Pattern { get; set; }
+	}
+
+	public partial class DissectProcessor : Ingest.ProcessorBase, IDissectProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("append_separator")]
@@ -235,7 +482,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Pattern { get; set; }
 	}
 
-	public partial class DotExpanderProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(DotExpanderProcessor))]
+	public partial interface IDotExpanderProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string? Path { get; set; }
+	}
+
+	public partial class DotExpanderProcessorDescriptor : DescriptorBase<DotExpanderProcessorDescriptor, IDotExpanderProcessor>, IDotExpanderProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IDotExpanderProcessor.Field { get; set; }
+
+		string? IDotExpanderProcessor.Path { get; set; }
+	}
+
+	public partial class DotExpanderProcessor : Ingest.ProcessorBase, IDotExpanderProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -246,11 +508,55 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Path { get; set; }
 	}
 
-	public partial class DropProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(DropProcessor))]
+	public partial interface IDropProcessor
 	{
 	}
 
-	public partial class EnrichProcessor : Ingest.ProcessorBase
+	public partial class DropProcessorDescriptor : DescriptorBase<DropProcessorDescriptor, IDropProcessor>, IDropProcessor
+	{
+	}
+
+	public partial class DropProcessor : Ingest.ProcessorBase, IDropProcessor
+	{
+	}
+
+	[ConvertAs(typeof(EnrichProcessor))]
+	public partial interface IEnrichProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		int? MaxMatches { get; set; }
+
+		bool? Override { get; set; }
+
+		string PolicyName { get; set; }
+
+		Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelation { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class EnrichProcessorDescriptor : DescriptorBase<EnrichProcessorDescriptor, IEnrichProcessor>, IEnrichProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IEnrichProcessor.Field { get; set; }
+
+		bool? IEnrichProcessor.IgnoreMissing { get; set; }
+
+		int? IEnrichProcessor.MaxMatches { get; set; }
+
+		bool? IEnrichProcessor.Override { get; set; }
+
+		string IEnrichProcessor.PolicyName { get; set; }
+
+		Elastic.Clients.Elasticsearch.GeoShapeRelation? IEnrichProcessor.ShapeRelation { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IEnrichProcessor.TargetField { get; set; }
+	}
+
+	public partial class EnrichProcessor : Ingest.ProcessorBase, IEnrichProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -281,14 +587,44 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class FailProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(FailProcessor))]
+	public partial interface IFailProcessor
+	{
+		string Message { get; set; }
+	}
+
+	public partial class FailProcessorDescriptor : DescriptorBase<FailProcessorDescriptor, IFailProcessor>, IFailProcessor
+	{
+		string IFailProcessor.Message { get; set; }
+	}
+
+	public partial class FailProcessor : Ingest.ProcessorBase, IFailProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("message")]
 		public string Message { get; set; }
 	}
 
-	public partial class ForeachProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(ForeachProcessor))]
+	public partial interface IForeachProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer Processor { get; set; }
+	}
+
+	public partial class ForeachProcessorDescriptor : DescriptorBase<ForeachProcessorDescriptor, IForeachProcessor>, IForeachProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IForeachProcessor.Field { get; set; }
+
+		bool? IForeachProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer IForeachProcessor.Processor { get; set; }
+	}
+
+	public partial class ForeachProcessor : Ingest.ProcessorBase, IForeachProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -303,7 +639,38 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer Processor { get; set; }
 	}
 
-	public partial class GeoIpProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(GeoIpProcessor))]
+	public partial interface IGeoIpProcessor
+	{
+		string DatabaseFile { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool FirstOnly { get; set; }
+
+		bool IgnoreMissing { get; set; }
+
+		IEnumerable<string> Properties { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class GeoIpProcessorDescriptor : DescriptorBase<GeoIpProcessorDescriptor, IGeoIpProcessor>, IGeoIpProcessor
+	{
+		string IGeoIpProcessor.DatabaseFile { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IGeoIpProcessor.Field { get; set; }
+
+		bool IGeoIpProcessor.FirstOnly { get; set; }
+
+		bool IGeoIpProcessor.IgnoreMissing { get; set; }
+
+		IEnumerable<string> IGeoIpProcessor.Properties { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IGeoIpProcessor.TargetField { get; set; }
+	}
+
+	public partial class GeoIpProcessor : Ingest.ProcessorBase, IGeoIpProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("database_file")]
@@ -330,7 +697,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class GrokProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(GrokProcessor))]
+	public partial interface IGrokProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Dictionary<string, string> PatternDefinitions { get; set; }
+
+		IEnumerable<string> Patterns { get; set; }
+
+		bool? TraceMatch { get; set; }
+	}
+
+	public partial class GrokProcessorDescriptor : DescriptorBase<GrokProcessorDescriptor, IGrokProcessor>, IGrokProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IGrokProcessor.Field { get; set; }
+
+		bool? IGrokProcessor.IgnoreMissing { get; set; }
+
+		Dictionary<string, string> IGrokProcessor.PatternDefinitions { get; set; }
+
+		IEnumerable<string> IGrokProcessor.Patterns { get; set; }
+
+		bool? IGrokProcessor.TraceMatch { get; set; }
+	}
+
+	public partial class GrokProcessor : Ingest.ProcessorBase, IGrokProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -353,7 +747,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? TraceMatch { get; set; }
 	}
 
-	public partial class GsubProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(GsubProcessor))]
+	public partial interface IGsubProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		string Pattern { get; set; }
+
+		string Replacement { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class GsubProcessorDescriptor : DescriptorBase<GsubProcessorDescriptor, IGsubProcessor>, IGsubProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IGsubProcessor.Field { get; set; }
+
+		bool? IGsubProcessor.IgnoreMissing { get; set; }
+
+		string IGsubProcessor.Pattern { get; set; }
+
+		string IGsubProcessor.Replacement { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IGsubProcessor.TargetField { get; set; }
+	}
+
+	public partial class GsubProcessor : Ingest.ProcessorBase, IGsubProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -376,21 +797,66 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class InferenceConfig
+	[ConvertAs(typeof(InferenceConfig))]
+	public partial interface IInferenceConfig
+	{
+		Elastic.Clients.Elasticsearch.Ingest.IInferenceConfigRegression? Regression { get; set; }
+	}
+
+	public partial class InferenceConfigDescriptor : DescriptorBase<InferenceConfigDescriptor, IInferenceConfig>, IInferenceConfig
+	{
+		Elastic.Clients.Elasticsearch.Ingest.IInferenceConfigRegression? IInferenceConfig.Regression { get; set; }
+	}
+
+	public partial class InferenceConfig : IInferenceConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("regression")]
-		public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression? Regression { get; set; }
+		public Elastic.Clients.Elasticsearch.Ingest.IInferenceConfigRegression? Regression { get; set; }
 	}
 
-	public partial class InferenceConfigRegression
+	[ConvertAs(typeof(InferenceConfigRegression))]
+	public partial interface IInferenceConfigRegression
+	{
+		string ResultsField { get; set; }
+	}
+
+	public partial class InferenceConfigRegressionDescriptor : DescriptorBase<InferenceConfigRegressionDescriptor, IInferenceConfigRegression>, IInferenceConfigRegression
+	{
+		string IInferenceConfigRegression.ResultsField { get; set; }
+	}
+
+	public partial class InferenceConfigRegression : IInferenceConfigRegression
 	{
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
 		public string ResultsField { get; set; }
 	}
 
-	public partial class InferenceProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(InferenceProcessor))]
+	public partial interface IInferenceProcessor
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.IInferenceConfig? InferenceConfig { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class InferenceProcessorDescriptor : DescriptorBase<InferenceProcessorDescriptor, IInferenceProcessor>, IInferenceProcessor
+	{
+		Elastic.Clients.Elasticsearch.Id IInferenceProcessor.ModelId { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IInferenceProcessor.TargetField { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.Field, object>? IInferenceProcessor.FieldMap { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ingest.IInferenceConfig? IInferenceProcessor.InferenceConfig { get; set; }
+	}
+
+	public partial class InferenceProcessor : Ingest.ProcessorBase, IInferenceProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field_map")]
@@ -398,7 +864,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
-		public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
+		public Elastic.Clients.Elasticsearch.Ingest.IInferenceConfig? InferenceConfig { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("model_id")]
@@ -409,7 +875,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class JoinProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(JoinProcessor))]
+	public partial interface IJoinProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string Separator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class JoinProcessorDescriptor : DescriptorBase<JoinProcessorDescriptor, IJoinProcessor>, IJoinProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IJoinProcessor.Field { get; set; }
+
+		string IJoinProcessor.Separator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IJoinProcessor.TargetField { get; set; }
+	}
+
+	public partial class JoinProcessor : Ingest.ProcessorBase, IJoinProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -424,7 +909,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class JsonProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(JsonProcessor))]
+	public partial interface IJsonProcessor
+	{
+		bool AddToRoot { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class JsonProcessorDescriptor : DescriptorBase<JsonProcessorDescriptor, IJsonProcessor>, IJsonProcessor
+	{
+		bool IJsonProcessor.AddToRoot { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IJsonProcessor.Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IJsonProcessor.TargetField { get; set; }
+	}
+
+	public partial class JsonProcessor : Ingest.ProcessorBase, IJsonProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("add_to_root")]
@@ -439,7 +943,58 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class KeyValueProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(KeyValueProcessor))]
+	public partial interface IKeyValueProcessor
+	{
+		IEnumerable<string>? ExcludeKeys { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string FieldSplit { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		IEnumerable<string>? IncludeKeys { get; set; }
+
+		string? Prefix { get; set; }
+
+		bool? StripBrackets { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+
+		string? TrimKey { get; set; }
+
+		string? TrimValue { get; set; }
+
+		string ValueSplit { get; set; }
+	}
+
+	public partial class KeyValueProcessorDescriptor : DescriptorBase<KeyValueProcessorDescriptor, IKeyValueProcessor>, IKeyValueProcessor
+	{
+		IEnumerable<string>? IKeyValueProcessor.ExcludeKeys { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IKeyValueProcessor.Field { get; set; }
+
+		string IKeyValueProcessor.FieldSplit { get; set; }
+
+		bool? IKeyValueProcessor.IgnoreMissing { get; set; }
+
+		IEnumerable<string>? IKeyValueProcessor.IncludeKeys { get; set; }
+
+		string? IKeyValueProcessor.Prefix { get; set; }
+
+		bool? IKeyValueProcessor.StripBrackets { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IKeyValueProcessor.TargetField { get; set; }
+
+		string? IKeyValueProcessor.TrimKey { get; set; }
+
+		string? IKeyValueProcessor.TrimValue { get; set; }
+
+		string IKeyValueProcessor.ValueSplit { get; set; }
+	}
+
+	public partial class KeyValueProcessor : Ingest.ProcessorBase, IKeyValueProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("exclude_keys")]
@@ -486,7 +1041,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string ValueSplit { get; set; }
 	}
 
-	public partial class LowercaseProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(LowercaseProcessor))]
+	public partial interface ILowercaseProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class LowercaseProcessorDescriptor : DescriptorBase<LowercaseProcessorDescriptor, ILowercaseProcessor>, ILowercaseProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field ILowercaseProcessor.Field { get; set; }
+
+		bool? ILowercaseProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? ILowercaseProcessor.TargetField { get; set; }
+	}
+
+	public partial class LowercaseProcessor : Ingest.ProcessorBase, ILowercaseProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -501,7 +1075,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class Pipeline
+	[ConvertAs(typeof(Pipeline))]
+	public partial interface IPipeline
+	{
+		string? Description { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? Processors { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
+	}
+
+	public partial class PipelineDescriptor : DescriptorBase<PipelineDescriptor, IPipeline>, IPipeline
+	{
+		string? IPipeline.Description { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? IPipeline.OnFailure { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? IPipeline.Processors { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber? IPipeline.Version { get; set; }
+	}
+
+	public partial class Pipeline : IPipeline
 	{
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -559,14 +1156,48 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public partial class PipelineProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(PipelineProcessor))]
+	public partial interface IPipelineProcessor
+	{
+		Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	}
+
+	public partial class PipelineProcessorDescriptor : DescriptorBase<PipelineProcessorDescriptor, IPipelineProcessor>, IPipelineProcessor
+	{
+		Elastic.Clients.Elasticsearch.Name IPipelineProcessor.Name { get; set; }
+	}
+
+	public partial class PipelineProcessor : Ingest.ProcessorBase, IPipelineProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	public abstract partial class ProcessorBase
+	[ConvertAs(typeof(ProcessorBase))]
+	public partial interface IProcessorBase
+	{
+		string? If { get; set; }
+
+		bool? IgnoreFailure { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailure { get; set; }
+
+		string? Tag { get; set; }
+	}
+
+	public partial class ProcessorBaseDescriptor : DescriptorBase<ProcessorBaseDescriptor, IProcessorBase>, IProcessorBase
+	{
+		string? IProcessorBase.If { get; set; }
+
+		bool? IProcessorBase.IgnoreFailure { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? IProcessorBase.OnFailure { get; set; }
+
+		string? IProcessorBase.Tag { get; set; }
+	}
+
+	public abstract partial class ProcessorBase : IProcessorBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("if")]
@@ -585,146 +1216,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Tag { get; set; }
 	}
 
-	public partial class ProcessorContainer
+	[ConvertAs(typeof(RemoveProcessor))]
+	public partial interface IRemoveProcessor
 	{
-		[JsonInclude]
-		[JsonPropertyName("append")]
-		public Elastic.Clients.Elasticsearch.Ingest.AppendProcessor? Append { get; set; }
+		Elastic.Clients.Elasticsearch.Fields Field { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("attachment")]
-		public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor? Attachment { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bytes")]
-		public Elastic.Clients.Elasticsearch.Ingest.BytesProcessor? Bytes { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("circle")]
-		public Elastic.Clients.Elasticsearch.Ingest.CircleProcessor? Circle { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("convert")]
-		public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor? Convert { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("csv")]
-		public Elastic.Clients.Elasticsearch.Ingest.CsvProcessor? Csv { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("date")]
-		public Elastic.Clients.Elasticsearch.Ingest.DateProcessor? Date { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("date_index_name")]
-		public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor? DateIndexName { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dissect")]
-		public Elastic.Clients.Elasticsearch.Ingest.DissectProcessor? Dissect { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("dot_expander")]
-		public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor? DotExpander { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("drop")]
-		public Elastic.Clients.Elasticsearch.Ingest.DropProcessor? Drop { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("enrich")]
-		public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor? Enrich { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fail")]
-		public Elastic.Clients.Elasticsearch.Ingest.FailProcessor? Fail { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("foreach")]
-		public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor? Foreach { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geoip")]
-		public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor? Geoip { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("grok")]
-		public Elastic.Clients.Elasticsearch.Ingest.GrokProcessor? Grok { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gsub")]
-		public Elastic.Clients.Elasticsearch.Ingest.GsubProcessor? Gsub { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("inference")]
-		public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor? Inference { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("join")]
-		public Elastic.Clients.Elasticsearch.Ingest.JoinProcessor? Join { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("json")]
-		public Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? Json { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("kv")]
-		public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor? Kv { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("lowercase")]
-		public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor? Lowercase { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("pipeline")]
-		public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? Pipeline { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("remove")]
-		public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor? Remove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("rename")]
-		public Elastic.Clients.Elasticsearch.Ingest.RenameProcessor? Rename { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("set")]
-		public Elastic.Clients.Elasticsearch.Ingest.SetProcessor? Set { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("set_security_user")]
-		public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor? SetSecurityUser { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Ingest.SortProcessor? Sort { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("split")]
-		public Elastic.Clients.Elasticsearch.Ingest.SplitProcessor? Split { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("trim")]
-		public Elastic.Clients.Elasticsearch.Ingest.TrimProcessor? Trim { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("uppercase")]
-		public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor? Uppercase { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("urldecode")]
-		public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor? Urldecode { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("user_agent")]
-		public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor? UserAgent { get; set; }
+		bool? IgnoreMissing { get; set; }
 	}
 
-	public partial class RemoveProcessor : Ingest.ProcessorBase
+	public partial class RemoveProcessorDescriptor : DescriptorBase<RemoveProcessorDescriptor, IRemoveProcessor>, IRemoveProcessor
+	{
+		Elastic.Clients.Elasticsearch.Fields IRemoveProcessor.Field { get; set; }
+
+		bool? IRemoveProcessor.IgnoreMissing { get; set; }
+	}
+
+	public partial class RemoveProcessor : Ingest.ProcessorBase, IRemoveProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -735,7 +1242,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? IgnoreMissing { get; set; }
 	}
 
-	public partial class RenameProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(RenameProcessor))]
+	public partial interface IRenameProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class RenameProcessorDescriptor : DescriptorBase<RenameProcessorDescriptor, IRenameProcessor>, IRenameProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IRenameProcessor.Field { get; set; }
+
+		bool? IRenameProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IRenameProcessor.TargetField { get; set; }
+	}
+
+	public partial class RenameProcessor : Ingest.ProcessorBase, IRenameProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -750,7 +1276,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class SetProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(SetProcessor))]
+	public partial interface ISetProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? Override { get; set; }
+
+		object Value { get; set; }
+	}
+
+	public partial class SetProcessorDescriptor : DescriptorBase<SetProcessorDescriptor, ISetProcessor>, ISetProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field ISetProcessor.Field { get; set; }
+
+		bool? ISetProcessor.Override { get; set; }
+
+		object ISetProcessor.Value { get; set; }
+	}
+
+	public partial class SetProcessor : Ingest.ProcessorBase, ISetProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -765,7 +1310,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public object Value { get; set; }
 	}
 
-	public partial class SetSecurityUserProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(SetSecurityUserProcessor))]
+	public partial interface ISetSecurityUserProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		IEnumerable<string>? Properties { get; set; }
+	}
+
+	public partial class SetSecurityUserProcessorDescriptor : DescriptorBase<SetSecurityUserProcessorDescriptor, ISetSecurityUserProcessor>, ISetSecurityUserProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field ISetSecurityUserProcessor.Field { get; set; }
+
+		IEnumerable<string>? ISetSecurityUserProcessor.Properties { get; set; }
+	}
+
+	public partial class SetSecurityUserProcessor : Ingest.ProcessorBase, ISetSecurityUserProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -776,7 +1336,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<string>? Properties { get; set; }
 	}
 
-	public partial class SortProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(SortProcessor))]
+	public partial interface ISortProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.SortOrder Order { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class SortProcessorDescriptor : DescriptorBase<SortProcessorDescriptor, ISortProcessor>, ISortProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field ISortProcessor.Field { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.SortOrder ISortProcessor.Order { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field ISortProcessor.TargetField { get; set; }
+	}
+
+	public partial class SortProcessor : Ingest.ProcessorBase, ISortProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -791,7 +1370,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public partial class SplitProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(SplitProcessor))]
+	public partial interface ISplitProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		bool? PreserveTrailing { get; set; }
+
+		string Separator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class SplitProcessorDescriptor : DescriptorBase<SplitProcessorDescriptor, ISplitProcessor>, ISplitProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field ISplitProcessor.Field { get; set; }
+
+		bool? ISplitProcessor.IgnoreMissing { get; set; }
+
+		bool? ISplitProcessor.PreserveTrailing { get; set; }
+
+		string ISplitProcessor.Separator { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? ISplitProcessor.TargetField { get; set; }
+	}
+
+	public partial class SplitProcessor : Ingest.ProcessorBase, ISplitProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -814,7 +1420,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class TrimProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(TrimProcessor))]
+	public partial interface ITrimProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class TrimProcessorDescriptor : DescriptorBase<TrimProcessorDescriptor, ITrimProcessor>, ITrimProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field ITrimProcessor.Field { get; set; }
+
+		bool? ITrimProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? ITrimProcessor.TargetField { get; set; }
+	}
+
+	public partial class TrimProcessor : Ingest.ProcessorBase, ITrimProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -829,7 +1454,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class UppercaseProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(UppercaseProcessor))]
+	public partial interface IUppercaseProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class UppercaseProcessorDescriptor : DescriptorBase<UppercaseProcessorDescriptor, IUppercaseProcessor>, IUppercaseProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IUppercaseProcessor.Field { get; set; }
+
+		bool? IUppercaseProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IUppercaseProcessor.TargetField { get; set; }
+	}
+
+	public partial class UppercaseProcessor : Ingest.ProcessorBase, IUppercaseProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -844,7 +1488,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class UrlDecodeProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(UrlDecodeProcessor))]
+	public partial interface IUrlDecodeProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool? IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+	}
+
+	public partial class UrlDecodeProcessorDescriptor : DescriptorBase<UrlDecodeProcessorDescriptor, IUrlDecodeProcessor>, IUrlDecodeProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IUrlDecodeProcessor.Field { get; set; }
+
+		bool? IUrlDecodeProcessor.IgnoreMissing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IUrlDecodeProcessor.TargetField { get; set; }
+	}
+
+	public partial class UrlDecodeProcessor : Ingest.ProcessorBase, IUrlDecodeProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -859,7 +1522,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 	}
 
-	public partial class UserAgentProcessor : Ingest.ProcessorBase
+	[ConvertAs(typeof(UserAgentProcessor))]
+	public partial interface IUserAgentProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		bool IgnoreMissing { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty> Options { get; set; }
+
+		string RegexFile { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	}
+
+	public partial class UserAgentProcessorDescriptor : DescriptorBase<UserAgentProcessorDescriptor, IUserAgentProcessor>, IUserAgentProcessor
+	{
+		Elastic.Clients.Elasticsearch.Field IUserAgentProcessor.Field { get; set; }
+
+		bool IUserAgentProcessor.IgnoreMissing { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty> IUserAgentProcessor.Options { get; set; }
+
+		string IUserAgentProcessor.RegexFile { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field IUserAgentProcessor.TargetField { get; set; }
+	}
+
+	public partial class UserAgentProcessor : Ingest.ProcessorBase, IUserAgentProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]

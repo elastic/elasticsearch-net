@@ -111,9 +111,9 @@ namespace Elastic.Clients.Elasticsearch.License
 	[ConvertAs(typeof(PostRequest))]
 	public partial interface IPostRequest : IRequest<PostRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.License.License? License { get; set; }
+		Elastic.Clients.Elasticsearch.License.ILicense? License { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.License.License>? Licenses { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.License.ILicense>? Licenses { get; set; }
 	}
 
 	public partial class PostRequest : PlainRequestBase<PostRequestParameters>, IPostRequest
@@ -135,11 +135,11 @@ namespace Elastic.Clients.Elasticsearch.License
 
 		[JsonInclude]
 		[JsonPropertyName("license")]
-		public Elastic.Clients.Elasticsearch.License.License? License { get; set; }
+		public Elastic.Clients.Elasticsearch.License.ILicense? License { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("licenses")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.License.License>? Licenses { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.License.ILicense>? Licenses { get; set; }
 	}
 
 	[ConvertAs(typeof(PostStartBasicRequest))]

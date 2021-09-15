@@ -24,7 +24,26 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm.MoveToStep
 {
-	public partial class StepKey
+	[ConvertAs(typeof(StepKey))]
+	public partial interface IStepKey
+	{
+		string Action { get; set; }
+
+		string Name { get; set; }
+
+		string Phase { get; set; }
+	}
+
+	public partial class StepKeyDescriptor : DescriptorBase<StepKeyDescriptor, IStepKey>, IStepKey
+	{
+		string IStepKey.Action { get; set; }
+
+		string IStepKey.Name { get; set; }
+
+		string IStepKey.Phase { get; set; }
+	}
+
+	public partial class StepKey : IStepKey
 	{
 		[JsonInclude]
 		[JsonPropertyName("action")]

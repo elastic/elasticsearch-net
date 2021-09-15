@@ -116,9 +116,9 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	[ConvertAs(typeof(MoveToStepRequest))]
 	public partial interface IMoveToStepRequest : IRequest<MoveToStepRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? CurrentStep { get; set; }
+		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? CurrentStep { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? NextStep { get; set; }
+		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? NextStep { get; set; }
 	}
 
 	public partial class MoveToStepRequest : PlainRequestBase<MoveToStepRequestParameters>, IMoveToStepRequest
@@ -137,11 +137,11 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 
 		[JsonInclude]
 		[JsonPropertyName("current_step")]
-		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? CurrentStep { get; set; }
+		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? CurrentStep { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("next_step")]
-		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? NextStep { get; set; }
+		public Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? NextStep { get; set; }
 	}
 
 	[ConvertAs(typeof(PutLifecycleRequest))]

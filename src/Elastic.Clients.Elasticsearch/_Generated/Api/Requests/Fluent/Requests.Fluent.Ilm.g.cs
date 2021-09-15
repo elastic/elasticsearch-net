@@ -83,12 +83,12 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? IMoveToStepRequest.CurrentStep { get; set; }
+		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? IMoveToStepRequest.CurrentStep { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? IMoveToStepRequest.NextStep { get; set; }
+		Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? IMoveToStepRequest.NextStep { get; set; }
 
-		public MoveToStepDescriptor CurrentStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? currentStep) => Assign(currentStep, (a, v) => a.CurrentStep = v);
-		public MoveToStepDescriptor NextStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.StepKey? nextStep) => Assign(nextStep, (a, v) => a.NextStep = v);
+		public MoveToStepDescriptor CurrentStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? currentStep) => Assign(currentStep, (a, v) => a.CurrentStep = v);
+		public MoveToStepDescriptor NextStep(Elastic.Clients.Elasticsearch.Ilm.MoveToStep.IStepKey? nextStep) => Assign(nextStep, (a, v) => a.NextStep = v);
 	}
 
 	public partial class PutLifecycleDescriptor : RequestDescriptorBase<PutLifecycleDescriptor, PutLifecycleRequestParameters, IPutLifecycleRequest>, IPutLifecycleRequest

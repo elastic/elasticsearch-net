@@ -24,7 +24,38 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Slm
 {
-	public partial class Configuration
+	[ConvertAs(typeof(Configuration))]
+	public partial interface IConfiguration
+	{
+		IEnumerable<string>? FeatureStates { get; set; }
+
+		bool? IgnoreUnavailable { get; set; }
+
+		bool? IncludeGlobalState { get; set; }
+
+		Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
+
+		Elastic.Clients.Elasticsearch.Metadata? Metadata { get; set; }
+
+		bool? Partial { get; set; }
+	}
+
+	public partial class ConfigurationDescriptor : DescriptorBase<ConfigurationDescriptor, IConfiguration>, IConfiguration
+	{
+		bool? IConfiguration.IgnoreUnavailable { get; set; }
+
+		Elastic.Clients.Elasticsearch.Indices IConfiguration.Indices { get; set; }
+
+		bool? IConfiguration.IncludeGlobalState { get; set; }
+
+		IEnumerable<string>? IConfiguration.FeatureStates { get; set; }
+
+		Elastic.Clients.Elasticsearch.Metadata? IConfiguration.Metadata { get; set; }
+
+		bool? IConfiguration.Partial { get; set; }
+	}
+
+	public partial class Configuration : IConfiguration
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_states")]
@@ -133,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	{
 		[JsonInclude]
 		[JsonPropertyName("config")]
-		public Elastic.Clients.Elasticsearch.Slm.Configuration Config
+		public Elastic.Clients.Elasticsearch.Slm.IConfiguration Config
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -169,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 		[JsonInclude]
 		[JsonPropertyName("retention")]
-		public Elastic.Clients.Elasticsearch.Slm.Retention Retention
+		public Elastic.Clients.Elasticsearch.Slm.IRetention Retention
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -192,7 +223,26 @@ namespace Elastic.Clients.Elasticsearch.Slm
 		}
 	}
 
-	public partial class Retention
+	[ConvertAs(typeof(Retention))]
+	public partial interface IRetention
+	{
+		Elastic.Clients.Elasticsearch.Time ExpireAfter { get; set; }
+
+		int MaxCount { get; set; }
+
+		int MinCount { get; set; }
+	}
+
+	public partial class RetentionDescriptor : DescriptorBase<RetentionDescriptor, IRetention>, IRetention
+	{
+		Elastic.Clients.Elasticsearch.Time IRetention.ExpireAfter { get; set; }
+
+		int IRetention.MaxCount { get; set; }
+
+		int IRetention.MinCount { get; set; }
+	}
+
+	public partial class Retention : IRetention
 	{
 		[JsonInclude]
 		[JsonPropertyName("expire_after")]

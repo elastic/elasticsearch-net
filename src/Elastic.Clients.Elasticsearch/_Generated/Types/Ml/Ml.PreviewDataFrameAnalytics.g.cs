@@ -24,7 +24,34 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics
 {
-	public partial class DataframePreviewConfig
+	[ConvertAs(typeof(DataframePreviewConfig))]
+	public partial interface IDataframePreviewConfig
+	{
+		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer Analysis { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
+
+		int? MaxNumThreads { get; set; }
+
+		string? ModelMemoryLimit { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source { get; set; }
+	}
+
+	public partial class DataframePreviewConfigDescriptor : DescriptorBase<DataframePreviewConfigDescriptor, IDataframePreviewConfig>, IDataframePreviewConfig
+	{
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource IDataframePreviewConfig.Source { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer IDataframePreviewConfig.Analysis { get; set; }
+
+		string? IDataframePreviewConfig.ModelMemoryLimit { get; set; }
+
+		int? IDataframePreviewConfig.MaxNumThreads { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? IDataframePreviewConfig.AnalyzedFields { get; set; }
+	}
+
+	public partial class DataframePreviewConfig : IDataframePreviewConfig
 	{
 		[JsonInclude]
 		[JsonPropertyName("analysis")]
@@ -44,6 +71,6 @@ namespace Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source { get; set; }
 	}
 }

@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public partial class MatchPhrasePrefixQueryDescriptor : IMatchPhrasePrefixQuery
+	public partial class MatchPhrasePrefixQueryDescriptor : FieldNameQueryDescriptorBase<MatchPhrasePrefixQueryDescriptor, IMatchPhrasePrefixQuery>, IMatchPhrasePrefixQuery
 	{
 		string? IMatchPhrasePrefixQuery.Analyzer { get; set; }
 

@@ -114,23 +114,23 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	[ConvertAs(typeof(PreviewTransformRequest))]
 	public partial interface IPreviewTransformRequest : IRequest<PreviewTransformRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? Dest { get; set; }
 
 		string? Description { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? Frequency { get; set; }
 
-		Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
+		Elastic.Clients.Elasticsearch.TransformManagement.IPivot? Pivot { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.ISource? Source { get; set; }
 
-		Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
+		Elastic.Clients.Elasticsearch.TransformManagement.ISettings? Settings { get; set; }
 
 		Elastic.Clients.Elasticsearch.TransformManagement.SyncContainer? Sync { get; set; }
 
 		Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyContainer? RetentionPolicy { get; set; }
 
-		Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
+		Elastic.Clients.Elasticsearch.TransformManagement.ILatest? Latest { get; set; }
 	}
 
 	public partial class PreviewTransformRequest : PlainRequestBase<PreviewTransformRequestParameters>, IPreviewTransformRequest
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? Dest { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -166,15 +166,15 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
+		public Elastic.Clients.Elasticsearch.TransformManagement.IPivot? Pivot { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Reindex.ISource? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.TransformManagement.ISettings? Settings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("sync")]
@@ -186,7 +186,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("latest")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
+		public Elastic.Clients.Elasticsearch.TransformManagement.ILatest? Latest { get; set; }
 	}
 
 	[ConvertAs(typeof(PutTransformRequest))]
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination? Dest
+		public Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? Dest
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot
+		public Elastic.Clients.Elasticsearch.TransformManagement.IPivot? Pivot
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Source? Source
+		public Elastic.Clients.Elasticsearch.Global.Reindex.ISource? Source
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings
+		public Elastic.Clients.Elasticsearch.TransformManagement.ISettings? Settings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -309,7 +309,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("latest")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest
+		public Elastic.Clients.Elasticsearch.TransformManagement.ILatest? Latest
 		{
 			get;
 #if NET5_0_OR_GREATER

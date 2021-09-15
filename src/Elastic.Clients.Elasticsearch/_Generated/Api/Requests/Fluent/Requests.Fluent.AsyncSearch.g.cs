@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		bool? ISubmitRequest.AnalyzeWildcard { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? ISubmitRequest.Collapse { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? ISubmitRequest.Collapse { get; set; }
 
 		Elastic.Clients.Elasticsearch.DefaultOperator? ISubmitRequest.DefaultOperator { get; set; }
 
@@ -97,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		int? ISubmitRequest.From { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.Highlight? ISubmitRequest.Highlight { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IHighlight? ISubmitRequest.Highlight { get; set; }
 
 		bool? ISubmitRequest.IgnoreThrottled { get; set; }
 
@@ -119,17 +119,17 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		bool? ISubmitRequest.Profile { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? ISubmitRequest.Pit { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? ISubmitRequest.Pit { get; set; }
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISubmitRequest.Query { get; set; }
 
 		bool? ISubmitRequest.RequestCache { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? ISubmitRequest.Rescore { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? ISubmitRequest.Rescore { get; set; }
 
 		Elastic.Clients.Elasticsearch.Routing? ISubmitRequest.Routing { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ISubmitRequest.ScriptFields { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ISubmitRequest.ScriptFields { get; set; }
 
 		Elastic.Clients.Elasticsearch.Global.Search.SortResults? ISubmitRequest.SearchAfter { get; set; }
 
@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		Elastic.Clients.Elasticsearch.Global.Search.Sort? ISubmitRequest.Sort { get; set; }
 
-		Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? ISubmitRequest.Source { get; set; }
+		Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? ISubmitRequest.Source { get; set; }
 
 		IEnumerable<string>? ISubmitRequest.Stats { get; set; }
 
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		bool? ISubmitRequest.Version { get; set; }
 
-		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? ISubmitRequest.Fields { get; set; }
+		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? ISubmitRequest.Fields { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? ISubmitRequest.RuntimeMappings { get; set; }
 
@@ -180,14 +180,14 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public SubmitDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Assign(allowPartialSearchResults, (a, v) => a.AllowPartialSearchResults = v);
 		public SubmitDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.Analyzer = v);
 		public SubmitDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcard = v);
-		public SubmitDescriptor Collapse(Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
+		public SubmitDescriptor Collapse(Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
 		public SubmitDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperator = v);
 		public SubmitDescriptor Df(string? df) => Assign(df, (a, v) => a.Df = v);
 		public SubmitDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.Fields? docvalueFields) => Assign(docvalueFields, (a, v) => a.DocvalueFields = v);
 		public SubmitDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Assign(expandWildcards, (a, v) => a.ExpandWildcards = v);
 		public SubmitDescriptor Explain(bool? explain = true) => Assign(explain, (a, v) => a.Explain = v);
 		public SubmitDescriptor From(int? from) => Assign(from, (a, v) => a.From = v);
-		public SubmitDescriptor Highlight(Elastic.Clients.Elasticsearch.Global.Search.Highlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
+		public SubmitDescriptor Highlight(Elastic.Clients.Elasticsearch.Global.Search.IHighlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
 		public SubmitDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Assign(ignoreThrottled, (a, v) => a.IgnoreThrottled = v);
 		public SubmitDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(ignoreUnavailable, (a, v) => a.IgnoreUnavailable = v);
 		public SubmitDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoost = v);
@@ -198,18 +198,18 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public SubmitDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
 		public SubmitDescriptor Preference(string? preference) => Assign(preference, (a, v) => a.Preference = v);
 		public SubmitDescriptor Profile(bool? profile = true) => Assign(profile, (a, v) => a.Profile = v);
-		public SubmitDescriptor Pit(Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? pit) => Assign(pit, (a, v) => a.Pit = v);
+		public SubmitDescriptor Pit(Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? pit) => Assign(pit, (a, v) => a.Pit = v);
 		public SubmitDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public SubmitDescriptor RequestCache(bool? requestCache = true) => Assign(requestCache, (a, v) => a.RequestCache = v);
-		public SubmitDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
+		public SubmitDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
 		public SubmitDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.Routing = v);
-		public SubmitDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
+		public SubmitDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
 		public SubmitDescriptor SearchAfter(Elastic.Clients.Elasticsearch.Global.Search.SortResults? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 		public SubmitDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Assign(searchType, (a, v) => a.SearchType = v);
 		public SubmitDescriptor SequenceNumberPrimaryTerm(bool? sequenceNumberPrimaryTerm = true) => Assign(sequenceNumberPrimaryTerm, (a, v) => a.SequenceNumberPrimaryTerm = v);
 		public SubmitDescriptor Size(int? size) => Assign(size, (a, v) => a.Size = v);
 		public SubmitDescriptor Sort(Elastic.Clients.Elasticsearch.Global.Search.Sort? sort) => Assign(sort, (a, v) => a.Sort = v);
-		public SubmitDescriptor Source(Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? source) => Assign(source, (a, v) => a.Source = v);
+		public SubmitDescriptor Source(Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? source) => Assign(source, (a, v) => a.Source = v);
 		public SubmitDescriptor Stats(IEnumerable<string>? stats) => Assign(stats, (a, v) => a.Stats = v);
 		public SubmitDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Assign(storedFields, (a, v) => a.StoredFields = v);
 		public SubmitDescriptor Suggest(Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer>? suggest) => Assign(suggest, (a, v) => a.Suggest = v);
@@ -222,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public SubmitDescriptor TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScores = v);
 		public SubmitDescriptor TrackTotalHits(bool? trackTotalHits = true) => Assign(trackTotalHits, (a, v) => a.TrackTotalHits = v);
 		public SubmitDescriptor Version(bool? version = true) => Assign(version, (a, v) => a.Version = v);
-		public SubmitDescriptor Fields(IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? fields) => Assign(fields, (a, v) => a.Fields = v);
+		public SubmitDescriptor Fields(IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? fields) => Assign(fields, (a, v) => a.Fields = v);
 		public SubmitDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 	}
 }

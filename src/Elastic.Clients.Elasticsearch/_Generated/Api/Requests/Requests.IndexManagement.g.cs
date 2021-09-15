@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Analyzer is null && Attributes is null && Explain is null && Filter is null && Normalizer is null && Text is null;
+		protected override bool IsEmpty => Attributes is null && Explain is null && Filter is null && Normalizer is null && Text is null;
 
 		///<summary>/_analyze</summary>
         public AnalyzeRequest() : base()
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(CloneRequest))]
 	public partial interface ICloneRequest : IRequest<CloneRequestParameters>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
 	}
@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -262,9 +262,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(CreateRequest))]
 	public partial interface ICreateRequest : IRequest<CreateRequestParameters>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
-		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings { get; set; }
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? Mappings { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
 	}
@@ -297,11 +297,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -1223,9 +1223,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IIndexTemplateMapping? Template { get; set; }
 
-		Elastic.Clients.Elasticsearch.EmptyObject? DataStream { get; set; }
+		Elastic.Clients.Elasticsearch.IEmptyObject? DataStream { get; set; }
 
 		int? Priority { get; set; }
 
@@ -1258,11 +1258,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IIndexTemplateMapping? Template { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("data_stream")]
-		public Elastic.Clients.Elasticsearch.EmptyObject? DataStream { get; set; }
+		public Elastic.Clients.Elasticsearch.IEmptyObject? DataStream { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("priority")]
@@ -1286,19 +1286,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		IEnumerable<string>? DynamicDateFormats { get; set; }
 
-		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? DynamicTemplates { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? FieldNames { get; set; }
 
 		Dictionary<string, object>? Meta { get; set; }
 
 		bool? NumericDetection { get; set; }
 
-		Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? Properties { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.IRoutingField? Routing { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.ISourceField? Source { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? Runtime { get; set; }
 	}
@@ -1352,11 +1352,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("dynamic_templates")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? DynamicTemplates { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_field_names")]
-		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? FieldNames { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -1368,15 +1368,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? Properties { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
-		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IRoutingField? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ISourceField? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime")]
@@ -1432,11 +1432,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(PutTemplateRequest))]
 	public partial interface IPutTemplateRequest : IRequest<PutTemplateRequestParameters>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		IEnumerable<string>? IndexPatterns { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
 
@@ -1477,7 +1477,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
@@ -1485,7 +1485,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -1616,11 +1616,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(RolloverRequest))]
 	public partial interface IRolloverRequest : IRequest<RolloverRequestParameters>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? Conditions { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IRolloverConditions? Conditions { get; set; }
 
-		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings { get; set; }
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? Mappings { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
 	}
@@ -1661,15 +1661,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("conditions")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? Conditions { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IRolloverConditions? Conditions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -1753,7 +1753,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(ShrinkRequest))]
 	public partial interface IShrinkRequest : IRequest<ShrinkRequestParameters>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
 	}
@@ -1783,7 +1783,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -1797,9 +1797,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? Overlapping { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.IOverlappingIndexTemplate>? Overlapping { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? Template { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.ITemplateMapping? Template { get; set; }
 	}
 
 	public partial class SimulateIndexTemplateRequest : PlainRequestBase<SimulateIndexTemplateRequestParameters>, ISimulateIndexTemplateRequest
@@ -1826,11 +1826,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("overlapping")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? Overlapping { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.IOverlappingIndexTemplate>? Overlapping { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? Template { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ITemplateMapping? Template { get; set; }
 	}
 
 	[ConvertAs(typeof(SimulateTemplateRequest))]
@@ -1867,7 +1867,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(SplitRequest))]
 	public partial interface ISplitRequest : IRequest<SplitRequestParameters>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		Dictionary<string, object>? Settings { get; set; }
 	}
@@ -1897,7 +1897,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -1969,7 +1969,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[ConvertAs(typeof(UpdateAliasesRequest))]
 	public partial interface IUpdateAliasesRequest : IRequest<UpdateAliasesRequestParameters>
 	{
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? Actions { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IIndicesUpdateAliasBulk>? Actions { get; set; }
 	}
 
 	public partial class UpdateAliasesRequest : PlainRequestBase<UpdateAliasesRequestParameters>, IUpdateAliasesRequest
@@ -1994,7 +1994,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("actions")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? Actions { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IIndicesUpdateAliasBulk>? Actions { get; set; }
 	}
 
 	[ConvertAs(typeof(ValidateQueryRequest))]

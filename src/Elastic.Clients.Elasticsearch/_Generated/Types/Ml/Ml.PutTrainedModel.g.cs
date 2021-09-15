@@ -24,26 +24,64 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 {
-	public partial class AggregateOutput
+	[ConvertAs(typeof(AggregateOutput))]
+	public partial interface IAggregateOutput
+	{
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? Exponent { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? LogisticRegression { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? WeightedMode { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? WeightedSum { get; set; }
+	}
+
+	public partial class AggregateOutputDescriptor : DescriptorBase<AggregateOutputDescriptor, IAggregateOutput>, IAggregateOutput
+	{
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? IAggregateOutput.LogisticRegression { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? IAggregateOutput.WeightedSum { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? IAggregateOutput.WeightedMode { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? IAggregateOutput.Exponent { get; set; }
+	}
+
+	public partial class AggregateOutput : IAggregateOutput
 	{
 		[JsonInclude]
 		[JsonPropertyName("exponent")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Weights? Exponent { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? Exponent { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("logistic_regression")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Weights? LogisticRegression { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? LogisticRegression { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("weighted_mode")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Weights? WeightedMode { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? WeightedMode { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("weighted_sum")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Weights? WeightedSum { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IWeights? WeightedSum { get; set; }
 	}
 
-	public partial class Definition
+	[ConvertAs(typeof(Definition))]
+	public partial interface IDefinition
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Preprocessor>? Preprocessors { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModel TrainedModel { get; set; }
+	}
+
+	public partial class DefinitionDescriptor : DescriptorBase<DefinitionDescriptor, IDefinition>, IDefinition
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Preprocessor>? IDefinition.Preprocessors { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModel IDefinition.TrainedModel { get; set; }
+	}
+
+	public partial class Definition : IDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("preprocessors")]
@@ -51,14 +89,41 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 
 		[JsonInclude]
 		[JsonPropertyName("trained_model")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.TrainedModel TrainedModel { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModel TrainedModel { get; set; }
 	}
 
-	public partial class Ensemble
+	[ConvertAs(typeof(Ensemble))]
+	public partial interface IEnsemble
+	{
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IAggregateOutput? AggregateOutput { get; set; }
+
+		IEnumerable<string>? ClassificationLabels { get; set; }
+
+		IEnumerable<string>? FeatureNames { get; set; }
+
+		string? TargetType { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModel> TrainedModels { get; set; }
+	}
+
+	public partial class EnsembleDescriptor : DescriptorBase<EnsembleDescriptor, IEnsemble>, IEnsemble
+	{
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IAggregateOutput? IEnsemble.AggregateOutput { get; set; }
+
+		IEnumerable<string>? IEnsemble.ClassificationLabels { get; set; }
+
+		IEnumerable<string>? IEnsemble.FeatureNames { get; set; }
+
+		string? IEnsemble.TargetType { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModel> IEnsemble.TrainedModels { get; set; }
+	}
+
+	public partial class Ensemble : IEnsemble
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregate_output")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.AggregateOutput? AggregateOutput { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IAggregateOutput? AggregateOutput { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]
@@ -74,10 +139,29 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 
 		[JsonInclude]
 		[JsonPropertyName("trained_models")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.TrainedModel> TrainedModels { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModel> TrainedModels { get; set; }
 	}
 
-	public partial class FrequencyEncodingPreprocessor
+	[ConvertAs(typeof(FrequencyEncodingPreprocessor))]
+	public partial interface IFrequencyEncodingPreprocessor
+	{
+		string FeatureName { get; set; }
+
+		string Field { get; set; }
+
+		Dictionary<string, double> FrequencyMap { get; set; }
+	}
+
+	public partial class FrequencyEncodingPreprocessorDescriptor : DescriptorBase<FrequencyEncodingPreprocessorDescriptor, IFrequencyEncodingPreprocessor>, IFrequencyEncodingPreprocessor
+	{
+		string IFrequencyEncodingPreprocessor.Field { get; set; }
+
+		string IFrequencyEncodingPreprocessor.FeatureName { get; set; }
+
+		Dictionary<string, double> IFrequencyEncodingPreprocessor.FrequencyMap { get; set; }
+	}
+
+	public partial class FrequencyEncodingPreprocessor : IFrequencyEncodingPreprocessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("feature_name")]
@@ -92,14 +176,40 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 		public Dictionary<string, double> FrequencyMap { get; set; }
 	}
 
-	public partial class Input
+	[ConvertAs(typeof(Input))]
+	public partial interface IInput
+	{
+		Elastic.Clients.Elasticsearch.Names FieldNames { get; set; }
+	}
+
+	public partial class InputDescriptor : DescriptorBase<InputDescriptor, IInput>, IInput
+	{
+		Elastic.Clients.Elasticsearch.Names IInput.FieldNames { get; set; }
+	}
+
+	public partial class Input : IInput
 	{
 		[JsonInclude]
 		[JsonPropertyName("field_names")]
 		public Elastic.Clients.Elasticsearch.Names FieldNames { get; set; }
 	}
 
-	public partial class OneHotEncodingPreprocessor
+	[ConvertAs(typeof(OneHotEncodingPreprocessor))]
+	public partial interface IOneHotEncodingPreprocessor
+	{
+		string Field { get; set; }
+
+		Dictionary<string, string> HotMap { get; set; }
+	}
+
+	public partial class OneHotEncodingPreprocessorDescriptor : DescriptorBase<OneHotEncodingPreprocessorDescriptor, IOneHotEncodingPreprocessor>, IOneHotEncodingPreprocessor
+	{
+		string IOneHotEncodingPreprocessor.Field { get; set; }
+
+		Dictionary<string, string> IOneHotEncodingPreprocessor.HotMap { get; set; }
+	}
+
+	public partial class OneHotEncodingPreprocessor : IOneHotEncodingPreprocessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -110,22 +220,30 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 		public Dictionary<string, string> HotMap { get; set; }
 	}
 
-	public partial class Preprocessor
+	[ConvertAs(typeof(TargetMeanEncodingPreprocessor))]
+	public partial interface ITargetMeanEncodingPreprocessor
 	{
-		[JsonInclude]
-		[JsonPropertyName("frequency_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.FrequencyEncodingPreprocessor? FrequencyEncoding { get; set; }
+		double DefaultValue { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("one_hot_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.OneHotEncodingPreprocessor? OneHotEncoding { get; set; }
+		string FeatureName { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("target_mean_encoding")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.TargetMeanEncodingPreprocessor? TargetMeanEncoding { get; set; }
+		string Field { get; set; }
+
+		Dictionary<string, double> TargetMap { get; set; }
 	}
 
-	public partial class TargetMeanEncodingPreprocessor
+	public partial class TargetMeanEncodingPreprocessorDescriptor : DescriptorBase<TargetMeanEncodingPreprocessorDescriptor, ITargetMeanEncodingPreprocessor>, ITargetMeanEncodingPreprocessor
+	{
+		string ITargetMeanEncodingPreprocessor.Field { get; set; }
+
+		string ITargetMeanEncodingPreprocessor.FeatureName { get; set; }
+
+		Dictionary<string, double> ITargetMeanEncodingPreprocessor.TargetMap { get; set; }
+
+		double ITargetMeanEncodingPreprocessor.DefaultValue { get; set; }
+	}
+
+	public partial class TargetMeanEncodingPreprocessor : ITargetMeanEncodingPreprocessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("default_value")]
@@ -144,22 +262,64 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 		public Dictionary<string, double> TargetMap { get; set; }
 	}
 
-	public partial class TrainedModel
+	[ConvertAs(typeof(TrainedModel))]
+	public partial interface ITrainedModel
+	{
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IEnsemble? Ensemble { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTree? Tree { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTreeNode? TreeNode { get; set; }
+	}
+
+	public partial class TrainedModelDescriptor : DescriptorBase<TrainedModelDescriptor, ITrainedModel>, ITrainedModel
+	{
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTree? ITrainedModel.Tree { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTreeNode? ITrainedModel.TreeNode { get; set; }
+
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IEnsemble? ITrainedModel.Ensemble { get; set; }
+	}
+
+	public partial class TrainedModel : ITrainedModel
 	{
 		[JsonInclude]
 		[JsonPropertyName("ensemble")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Ensemble? Ensemble { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IEnsemble? Ensemble { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("tree")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.TrainedModelTree? Tree { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTree? Tree { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("tree_node")]
-		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.TrainedModelTreeNode? TreeNode { get; set; }
+		public Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTreeNode? TreeNode { get; set; }
 	}
 
-	public partial class TrainedModelTree
+	[ConvertAs(typeof(TrainedModelTree))]
+	public partial interface ITrainedModelTree
+	{
+		IEnumerable<string>? ClassificationLabels { get; set; }
+
+		IEnumerable<string> FeatureNames { get; set; }
+
+		string? TargetType { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTreeNode> TreeStructure { get; set; }
+	}
+
+	public partial class TrainedModelTreeDescriptor : DescriptorBase<TrainedModelTreeDescriptor, ITrainedModelTree>, ITrainedModelTree
+	{
+		IEnumerable<string>? ITrainedModelTree.ClassificationLabels { get; set; }
+
+		IEnumerable<string> ITrainedModelTree.FeatureNames { get; set; }
+
+		string? ITrainedModelTree.TargetType { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTreeNode> ITrainedModelTree.TreeStructure { get; set; }
+	}
+
+	public partial class TrainedModelTree : ITrainedModelTree
 	{
 		[JsonInclude]
 		[JsonPropertyName("classification_labels")]
@@ -175,10 +335,53 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 
 		[JsonInclude]
 		[JsonPropertyName("tree_structure")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.TrainedModelTreeNode> TreeStructure { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.ITrainedModelTreeNode> TreeStructure { get; set; }
 	}
 
-	public partial class TrainedModelTreeNode
+	[ConvertAs(typeof(TrainedModelTreeNode))]
+	public partial interface ITrainedModelTreeNode
+	{
+		string? DecisionType { get; set; }
+
+		bool? DefaultLeft { get; set; }
+
+		double? LeafValue { get; set; }
+
+		int? LeftChild { get; set; }
+
+		int NodeIndex { get; set; }
+
+		int? RightChild { get; set; }
+
+		int? SplitFeature { get; set; }
+
+		int? SplitGain { get; set; }
+
+		double? Threshold { get; set; }
+	}
+
+	public partial class TrainedModelTreeNodeDescriptor : DescriptorBase<TrainedModelTreeNodeDescriptor, ITrainedModelTreeNode>, ITrainedModelTreeNode
+	{
+		string? ITrainedModelTreeNode.DecisionType { get; set; }
+
+		bool? ITrainedModelTreeNode.DefaultLeft { get; set; }
+
+		double? ITrainedModelTreeNode.LeafValue { get; set; }
+
+		int? ITrainedModelTreeNode.LeftChild { get; set; }
+
+		int ITrainedModelTreeNode.NodeIndex { get; set; }
+
+		int? ITrainedModelTreeNode.RightChild { get; set; }
+
+		int? ITrainedModelTreeNode.SplitFeature { get; set; }
+
+		int? ITrainedModelTreeNode.SplitGain { get; set; }
+
+		double? ITrainedModelTreeNode.Threshold { get; set; }
+	}
+
+	public partial class TrainedModelTreeNode : ITrainedModelTreeNode
 	{
 		[JsonInclude]
 		[JsonPropertyName("decision_type")]
@@ -217,7 +420,17 @@ namespace Elastic.Clients.Elasticsearch.Ml.PutTrainedModel
 		public double? Threshold { get; set; }
 	}
 
-	public partial class Weights
+	[ConvertAs(typeof(Weights))]
+	public partial interface IWeights
+	{
+	}
+
+	public partial class WeightsDescriptor : DescriptorBase<WeightsDescriptor, IWeights>, IWeights
+	{
+		double IWeights.Weights { get; set; }
+	}
+
+	public partial class Weights : IWeights
 	{
 	}
 }

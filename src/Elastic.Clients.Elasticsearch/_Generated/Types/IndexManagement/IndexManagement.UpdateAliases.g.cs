@@ -24,7 +24,16 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 {
-	public partial class IndicesUpdateAliasBulk
+	[ConvertAs(typeof(IndicesUpdateAliasBulk))]
+	public partial interface IIndicesUpdateAliasBulk
+	{
+	}
+
+	public partial class IndicesUpdateAliasBulkDescriptor : DescriptorBase<IndicesUpdateAliasBulkDescriptor, IIndicesUpdateAliasBulk>, IIndicesUpdateAliasBulk
+	{
+	}
+
+	public partial class IndicesUpdateAliasBulk : IIndicesUpdateAliasBulk
 	{
 	}
 }

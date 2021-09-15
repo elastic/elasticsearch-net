@@ -1135,7 +1135,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing
+		public Elastic.Clients.Elasticsearch.IndexManagement.IIndexRouting? Routing
 		{
 			get;
 #if NET5_0_OR_GREATER

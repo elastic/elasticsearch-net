@@ -297,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("events")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.ICalendarEvent> Events
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -783,7 +783,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 	{
 		[JsonInclude]
 		[JsonPropertyName("events")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> Events
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ml.ICalendarEvent> Events
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1101,7 +1101,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("chunking_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ChunkingConfig ChunkingConfig
+		public Elastic.Clients.Elasticsearch.Ml.IChunkingConfig ChunkingConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1125,7 +1125,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("delayed_data_check_config")]
-		public Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? DelayedDataCheckConfig
+		public Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? DelayedDataCheckConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1161,7 +1161,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("indices_options")]
-		public Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IndicesOptions
+		public Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IndicesOptions
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1233,7 +1233,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1320,7 +1320,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination Dest
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1368,7 +1368,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1446,7 +1446,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
+		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfigRead AnalysisConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1458,7 +1458,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits AnalysisLimits
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits AnalysisLimits
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1494,7 +1494,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("custom_settings")]
-		public Elastic.Clients.Elasticsearch.Ml.CustomSettings? CustomSettings
+		public Elastic.Clients.Elasticsearch.Ml.ICustomSettings? CustomSettings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1518,7 +1518,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("data_description")]
-		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
+		public Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1602,7 +1602,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1840,7 +1840,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination Dest
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination Dest
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1888,7 +1888,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource Source
+		public Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource Source
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1966,7 +1966,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_config")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfig AnalysisConfig
+		public Elastic.Clients.Elasticsearch.Ml.AnalysisConfigRead AnalysisConfig
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1978,7 +1978,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("analysis_limits")]
-		public Elastic.Clients.Elasticsearch.Ml.AnalysisLimits AnalysisLimits
+		public Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits AnalysisLimits
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -2038,7 +2038,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("data_description")]
-		public Elastic.Clients.Elasticsearch.Ml.DataDescription DataDescription
+		public Elastic.Clients.Elasticsearch.Ml.IDataDescription DataDescription
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -2134,7 +2134,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		[JsonInclude]
 		[JsonPropertyName("model_plot_config")]
-		public Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? ModelPlotConfig
+		public Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? ModelPlotConfig
 		{
 			get;
 #if NET5_0_OR_GREATER

@@ -124,14 +124,14 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		Elastic.Clients.Elasticsearch.Name? ICreateApiKeyRequest.Name { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.RoleDescriptor>? ICreateApiKeyRequest.RoleDescriptors { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.IRoleDescriptor>? ICreateApiKeyRequest.RoleDescriptors { get; set; }
 
 		Elastic.Clients.Elasticsearch.Metadata? ICreateApiKeyRequest.Metadata { get; set; }
 
 		public CreateApiKeyDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public CreateApiKeyDescriptor Expiration(Elastic.Clients.Elasticsearch.Time? expiration) => Assign(expiration, (a, v) => a.Expiration = v);
 		public CreateApiKeyDescriptor Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a.Name = v);
-		public CreateApiKeyDescriptor RoleDescriptors(Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.RoleDescriptor>? roleDescriptors) => Assign(roleDescriptors, (a, v) => a.RoleDescriptors = v);
+		public CreateApiKeyDescriptor RoleDescriptors(Dictionary<string, Elastic.Clients.Elasticsearch.Security.CreateApiKey.IRoleDescriptor>? roleDescriptors) => Assign(roleDescriptors, (a, v) => a.RoleDescriptors = v);
 		public CreateApiKeyDescriptor Metadata(Elastic.Clients.Elasticsearch.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 	}
 
@@ -420,7 +420,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKey IGrantApiKeyRequest.ApiKey { get; set; }
+		Elastic.Clients.Elasticsearch.Security.GrantApiKey.IApiKey IGrantApiKeyRequest.ApiKey { get; set; }
 
 		Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKeyGrantType IGrantApiKeyRequest.GrantType { get; set; }
 
@@ -430,7 +430,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		Elastic.Clients.Elasticsearch.Password? IGrantApiKeyRequest.Password { get; set; }
 
-		public GrantApiKeyDescriptor ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKey apiKey) => Assign(apiKey, (a, v) => a.ApiKey = v);
+		public GrantApiKeyDescriptor ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey.IApiKey apiKey) => Assign(apiKey, (a, v) => a.ApiKey = v);
 		public GrantApiKeyDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.GrantApiKey.ApiKeyGrantType grantType) => Assign(grantType, (a, v) => a.GrantType = v);
 		public GrantApiKeyDescriptor AccessToken(string? accessToken) => Assign(accessToken, (a, v) => a.AccessToken = v);
 		public GrantApiKeyDescriptor Username(Elastic.Clients.Elasticsearch.Username? username) => Assign(username, (a, v) => a.Username = v);
@@ -452,15 +452,15 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationPrivilegesCheck>? IHasPrivilegesRequest.Application { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IApplicationPrivilegesCheck>? IHasPrivilegesRequest.Application { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? IHasPrivilegesRequest.Cluster { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IndexPrivilegesCheck>? IHasPrivilegesRequest.Index { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IIndexPrivilegesCheck>? IHasPrivilegesRequest.Index { get; set; }
 
-		public HasPrivilegesDescriptor Application(IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.ApplicationPrivilegesCheck>? application) => Assign(application, (a, v) => a.Application = v);
+		public HasPrivilegesDescriptor Application(IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IApplicationPrivilegesCheck>? application) => Assign(application, (a, v) => a.Application = v);
 		public HasPrivilegesDescriptor Cluster(IEnumerable<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? cluster) => Assign(cluster, (a, v) => a.Cluster = v);
-		public HasPrivilegesDescriptor Index(IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IndexPrivilegesCheck>? index) => Assign(index, (a, v) => a.Index = v);
+		public HasPrivilegesDescriptor Index(IEnumerable<Elastic.Clients.Elasticsearch.Security.HasPrivileges.IIndexPrivilegesCheck>? index) => Assign(index, (a, v) => a.Index = v);
 	}
 
 	public partial class InvalidateApiKeyDescriptor : RequestDescriptorBase<InvalidateApiKeyDescriptor, InvalidateApiKeyRequestParameters, IInvalidateApiKeyRequest>, IInvalidateApiKeyRequest
@@ -540,28 +540,28 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? IPutRoleRequest.Applications { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? IPutRoleRequest.Applications { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? IPutRoleRequest.Cluster { get; set; }
 
 		Dictionary<string, object>? IPutRoleRequest.Global { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? IPutRoleRequest.Indices { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IIndicesPrivileges>? IPutRoleRequest.Indices { get; set; }
 
 		Elastic.Clients.Elasticsearch.Metadata? IPutRoleRequest.Metadata { get; set; }
 
 		IEnumerable<string>? IPutRoleRequest.RunAs { get; set; }
 
-		Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata? IPutRoleRequest.TransientMetadata { get; set; }
+		Elastic.Clients.Elasticsearch.Security.GetRole.ITransientMetadata? IPutRoleRequest.TransientMetadata { get; set; }
 
 		public PutRoleDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-		public PutRoleDescriptor Applications(IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? applications) => Assign(applications, (a, v) => a.Applications = v);
+		public PutRoleDescriptor Applications(IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? applications) => Assign(applications, (a, v) => a.Applications = v);
 		public PutRoleDescriptor Cluster(IEnumerable<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? cluster) => Assign(cluster, (a, v) => a.Cluster = v);
 		public PutRoleDescriptor Global(Dictionary<string, object>? global) => Assign(global, (a, v) => a.Global = v);
-		public PutRoleDescriptor Indices(IEnumerable<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? indices) => Assign(indices, (a, v) => a.Indices = v);
+		public PutRoleDescriptor Indices(IEnumerable<Elastic.Clients.Elasticsearch.Security.IIndicesPrivileges>? indices) => Assign(indices, (a, v) => a.Indices = v);
 		public PutRoleDescriptor Metadata(Elastic.Clients.Elasticsearch.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 		public PutRoleDescriptor RunAs(IEnumerable<string>? runAs) => Assign(runAs, (a, v) => a.RunAs = v);
-		public PutRoleDescriptor TransientMetadata(Elastic.Clients.Elasticsearch.Security.GetRole.TransientMetadata? transientMetadata) => Assign(transientMetadata, (a, v) => a.TransientMetadata = v);
+		public PutRoleDescriptor TransientMetadata(Elastic.Clients.Elasticsearch.Security.GetRole.ITransientMetadata? transientMetadata) => Assign(transientMetadata, (a, v) => a.TransientMetadata = v);
 	}
 
 	public partial class PutRoleMappingDescriptor : RequestDescriptorBase<PutRoleMappingDescriptor, PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
@@ -580,7 +580,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 
 		IEnumerable<string>? IPutRoleMappingRequest.Roles { get; set; }
 
-		Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase? IPutRoleMappingRequest.Rules { get; set; }
+		Elastic.Clients.Elasticsearch.Security.RoleMappingRule? IPutRoleMappingRequest.Rules { get; set; }
 
 		IEnumerable<string>? IPutRoleMappingRequest.RunAs { get; set; }
 
@@ -588,7 +588,7 @@ namespace Elastic.Clients.Elasticsearch.Ssl
 		public PutRoleMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.Enabled = v);
 		public PutRoleMappingDescriptor Metadata(Elastic.Clients.Elasticsearch.Metadata? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 		public PutRoleMappingDescriptor Roles(IEnumerable<string>? roles) => Assign(roles, (a, v) => a.Roles = v);
-		public PutRoleMappingDescriptor Rules(Elastic.Clients.Elasticsearch.Security.RoleMappingRuleBase? rules) => Assign(rules, (a, v) => a.Rules = v);
+		public PutRoleMappingDescriptor Rules(Elastic.Clients.Elasticsearch.Security.RoleMappingRule? rules) => Assign(rules, (a, v) => a.Rules = v);
 		public PutRoleMappingDescriptor RunAs(IEnumerable<string>? runAs) => Assign(runAs, (a, v) => a.RunAs = v);
 	}
 

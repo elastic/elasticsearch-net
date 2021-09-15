@@ -23,8 +23,17 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
+	public partial class Analyzer
+	{
+	}
+
 	public partial class CharFilter
 	{
+	}
+
+	public partial class StopWords
+	{
+		private readonly List<string> _stringList = new();
 	}
 
 	public partial class TokenFilter

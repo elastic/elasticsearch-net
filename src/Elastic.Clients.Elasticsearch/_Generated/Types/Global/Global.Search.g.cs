@@ -424,7 +424,30 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class CompletionSuggester : Global.Search.SuggesterBase
+	[ConvertAs(typeof(CompletionSuggester))]
+	public partial interface ICompletionSuggester
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.ISuggestFuzziness? Fuzzy { get; set; }
+
+		string? Prefix { get; set; }
+
+		string? Regex { get; set; }
+
+		bool? SkipDuplicates { get; set; }
+	}
+
+	public partial class CompletionSuggesterDescriptor : DescriptorBase<CompletionSuggesterDescriptor, ICompletionSuggester>, ICompletionSuggester
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.ISuggestFuzziness? ICompletionSuggester.Fuzzy { get; set; }
+
+		string? ICompletionSuggester.Prefix { get; set; }
+
+		string? ICompletionSuggester.Regex { get; set; }
+
+		bool? ICompletionSuggester.SkipDuplicates { get; set; }
+	}
+
+	public partial class CompletionSuggester : Global.Search.SuggesterBase, ICompletionSuggester
 	{
 		[JsonInclude]
 		[JsonPropertyName("contexts")]
@@ -432,7 +455,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("fuzzy")]
-		public Elastic.Clients.Elasticsearch.Global.Search.SuggestFuzziness? Fuzzy { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.ISuggestFuzziness? Fuzzy { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("prefix")]
@@ -447,7 +470,58 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public bool? SkipDuplicates { get; set; }
 	}
 
-	public partial class DirectGenerator
+	[ConvertAs(typeof(DirectGenerator))]
+	public partial interface IDirectGenerator
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		int? MaxEdits { get; set; }
+
+		float? MaxInspections { get; set; }
+
+		float? MaxTermFreq { get; set; }
+
+		float? MinDocFreq { get; set; }
+
+		int? MinWordLength { get; set; }
+
+		string? PostFilter { get; set; }
+
+		string? PreFilter { get; set; }
+
+		int? PrefixLength { get; set; }
+
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
+	}
+
+	public partial class DirectGeneratorDescriptor : DescriptorBase<DirectGeneratorDescriptor, IDirectGenerator>, IDirectGenerator
+	{
+		Elastic.Clients.Elasticsearch.Field IDirectGenerator.Field { get; set; }
+
+		int? IDirectGenerator.MaxEdits { get; set; }
+
+		float? IDirectGenerator.MaxInspections { get; set; }
+
+		float? IDirectGenerator.MaxTermFreq { get; set; }
+
+		float? IDirectGenerator.MinDocFreq { get; set; }
+
+		int? IDirectGenerator.MinWordLength { get; set; }
+
+		string? IDirectGenerator.PostFilter { get; set; }
+
+		string? IDirectGenerator.PreFilter { get; set; }
+
+		int? IDirectGenerator.PrefixLength { get; set; }
+
+		int? IDirectGenerator.Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.SuggestMode? IDirectGenerator.SuggestMode { get; set; }
+	}
+
+	public partial class DirectGenerator : IDirectGenerator
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -494,7 +568,26 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 	}
 
-	public partial class FieldAndFormat
+	[ConvertAs(typeof(FieldAndFormat))]
+	public partial interface IFieldAndFormat
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string? Format { get; set; }
+
+		bool? IncludeUnmapped { get; set; }
+	}
+
+	public partial class FieldAndFormatDescriptor : DescriptorBase<FieldAndFormatDescriptor, IFieldAndFormat>, IFieldAndFormat
+	{
+		Elastic.Clients.Elasticsearch.Field IFieldAndFormat.Field { get; set; }
+
+		string? IFieldAndFormat.Format { get; set; }
+
+		bool? IFieldAndFormat.IncludeUnmapped { get; set; }
+	}
+
+	public partial class FieldAndFormat : IFieldAndFormat
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -509,7 +602,26 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public bool? IncludeUnmapped { get; set; }
 	}
 
-	public partial class FieldCollapse
+	[ConvertAs(typeof(FieldCollapse))]
+	public partial interface IFieldCollapse
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IInnerHits>? InnerHits { get; set; }
+
+		int? MaxConcurrentGroupSearches { get; set; }
+	}
+
+	public partial class FieldCollapseDescriptor : DescriptorBase<FieldCollapseDescriptor, IFieldCollapse>, IFieldCollapse
+	{
+		Elastic.Clients.Elasticsearch.Field IFieldCollapse.Field { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IInnerHits>? IFieldCollapse.InnerHits { get; set; }
+
+		int? IFieldCollapse.MaxConcurrentGroupSearches { get; set; }
+	}
+
+	public partial class FieldCollapse : IFieldCollapse
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -517,7 +629,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.InnerHits>? InnerHits { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IInnerHits>? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_concurrent_group_searches")]
@@ -575,7 +687,94 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class Highlight
+	[ConvertAs(typeof(Highlight))]
+	public partial interface IHighlight
+	{
+		string? BoundaryChars { get; set; }
+
+		int? BoundaryMaxScan { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.BoundaryScanner? BoundaryScanner { get; set; }
+
+		string? BoundaryScannerLocale { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterEncoder? Encoder { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Search.IHighlightField> Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterFragmenter? Fragmenter { get; set; }
+
+		int? FragmentOffset { get; set; }
+
+		int? FragmentSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? HighlightQuery { get; set; }
+
+		Union<string, int>? MaxAnalyzedOffset { get; set; }
+
+		int? MaxFragmentLength { get; set; }
+
+		int? NoMatchSize { get; set; }
+
+		int? NumberOfFragments { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterOrder? Order { get; set; }
+
+		IEnumerable<string>? PostTags { get; set; }
+
+		IEnumerable<string>? PreTags { get; set; }
+
+		bool? RequireFieldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterTagsSchema? TagsSchema { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterType? Type { get; set; }
+	}
+
+	public partial class HighlightDescriptor : DescriptorBase<HighlightDescriptor, IHighlight>, IHighlight
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Search.IHighlightField> IHighlight.Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterType? IHighlight.Type { get; set; }
+
+		string? IHighlight.BoundaryChars { get; set; }
+
+		int? IHighlight.BoundaryMaxScan { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.BoundaryScanner? IHighlight.BoundaryScanner { get; set; }
+
+		string? IHighlight.BoundaryScannerLocale { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterEncoder? IHighlight.Encoder { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterFragmenter? IHighlight.Fragmenter { get; set; }
+
+		int? IHighlight.FragmentOffset { get; set; }
+
+		int? IHighlight.FragmentSize { get; set; }
+
+		int? IHighlight.MaxFragmentLength { get; set; }
+
+		int? IHighlight.NoMatchSize { get; set; }
+
+		int? IHighlight.NumberOfFragments { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterOrder? IHighlight.Order { get; set; }
+
+		IEnumerable<string>? IHighlight.PostTags { get; set; }
+
+		IEnumerable<string>? IHighlight.PreTags { get; set; }
+
+		bool? IHighlight.RequireFieldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterTagsSchema? IHighlight.TagsSchema { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IHighlight.HighlightQuery { get; set; }
+
+		Union<string, int>? IHighlight.MaxAnalyzedOffset { get; set; }
+	}
+
+	public partial class Highlight : IHighlight
 	{
 		[JsonInclude]
 		[JsonPropertyName("boundary_chars")]
@@ -599,7 +798,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Search.HighlightField> Fields { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Global.Search.IHighlightField> Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fragmenter")]
@@ -658,7 +857,98 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public Elastic.Clients.Elasticsearch.Global.Search.HighlighterType? Type { get; set; }
 	}
 
-	public partial class HighlightField
+	[ConvertAs(typeof(HighlightField))]
+	public partial interface IHighlightField
+	{
+		string? BoundaryChars { get; set; }
+
+		int? BoundaryMaxScan { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.BoundaryScanner? BoundaryScanner { get; set; }
+
+		string? BoundaryScannerLocale { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		bool? ForceSource { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterFragmenter? Fragmenter { get; set; }
+
+		int? FragmentOffset { get; set; }
+
+		int? FragmentSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? HighlightQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? MatchedFields { get; set; }
+
+		int? MaxFragmentLength { get; set; }
+
+		int? NoMatchSize { get; set; }
+
+		int? NumberOfFragments { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterOrder? Order { get; set; }
+
+		int? PhraseLimit { get; set; }
+
+		IEnumerable<string>? PostTags { get; set; }
+
+		IEnumerable<string>? PreTags { get; set; }
+
+		bool? RequireFieldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterTagsSchema? TagsSchema { get; set; }
+
+		Union<Elastic.Clients.Elasticsearch.Global.Search.HighlighterType, string>? Type { get; set; }
+	}
+
+	public partial class HighlightFieldDescriptor : DescriptorBase<HighlightFieldDescriptor, IHighlightField>, IHighlightField
+	{
+		string? IHighlightField.BoundaryChars { get; set; }
+
+		int? IHighlightField.BoundaryMaxScan { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.BoundaryScanner? IHighlightField.BoundaryScanner { get; set; }
+
+		string? IHighlightField.BoundaryScannerLocale { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field? IHighlightField.Field { get; set; }
+
+		bool? IHighlightField.ForceSource { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterFragmenter? IHighlightField.Fragmenter { get; set; }
+
+		int? IHighlightField.FragmentOffset { get; set; }
+
+		int? IHighlightField.FragmentSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IHighlightField.HighlightQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? IHighlightField.MatchedFields { get; set; }
+
+		int? IHighlightField.MaxFragmentLength { get; set; }
+
+		int? IHighlightField.NoMatchSize { get; set; }
+
+		int? IHighlightField.NumberOfFragments { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterOrder? IHighlightField.Order { get; set; }
+
+		int? IHighlightField.PhraseLimit { get; set; }
+
+		IEnumerable<string>? IHighlightField.PostTags { get; set; }
+
+		IEnumerable<string>? IHighlightField.PreTags { get; set; }
+
+		bool? IHighlightField.RequireFieldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.HighlighterTagsSchema? IHighlightField.TagsSchema { get; set; }
+
+		Union<Elastic.Clients.Elasticsearch.Global.Search.HighlighterType, string>? IHighlightField.Type { get; set; }
+	}
+
+	public partial class HighlightField : IHighlightField
 	{
 		[JsonInclude]
 		[JsonPropertyName("boundary_chars")]
@@ -1015,15 +1305,86 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class InnerHits
+	[ConvertAs(typeof(InnerHits))]
+	public partial interface IInnerHits
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? Collapse { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IFieldAndFormat>? DocvalueFields { get; set; }
+
+		bool? Explain { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		int? From { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IHighlight? Highlight { get; set; }
+
+		bool? IgnoreUnmapped { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? Name { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
+
+		bool? SeqNoPrimaryTerm { get; set; }
+
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
+
+		Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? Source { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? StoredField { get; set; }
+
+		bool? TrackScores { get; set; }
+
+		bool? Version { get; set; }
+	}
+
+	public partial class InnerHitsDescriptor : DescriptorBase<InnerHitsDescriptor, IInnerHits>, IInnerHits
+	{
+		Elastic.Clients.Elasticsearch.Name? IInnerHits.Name { get; set; }
+
+		int? IInnerHits.Size { get; set; }
+
+		int? IInnerHits.From { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? IInnerHits.Collapse { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IFieldAndFormat>? IInnerHits.DocvalueFields { get; set; }
+
+		bool? IInnerHits.Explain { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IHighlight? IInnerHits.Highlight { get; set; }
+
+		bool? IInnerHits.IgnoreUnmapped { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IScriptField>? IInnerHits.ScriptFields { get; set; }
+
+		bool? IInnerHits.SeqNoPrimaryTerm { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? IInnerHits.Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.Sort? IInnerHits.Sort { get; set; }
+
+		Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? IInnerHits.Source { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? IInnerHits.StoredField { get; set; }
+
+		bool? IInnerHits.TrackScores { get; set; }
+
+		bool? IInnerHits.Version { get; set; }
+	}
+
+	public partial class InnerHits : IInnerHits
 	{
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
-		public Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? Collapse { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("docvalue_fields")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.FieldAndFormat>? DocvalueFields { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IFieldAndFormat>? DocvalueFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("explain")]
@@ -1039,7 +1400,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IHighlight? Highlight { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
@@ -1051,7 +1412,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("seq_no_primary_term")]
@@ -1067,7 +1428,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? Source { get; set; }
+		public Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stored_field")]
@@ -1136,14 +1497,44 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class LaplaceSmoothingModel
+	[ConvertAs(typeof(LaplaceSmoothingModel))]
+	public partial interface ILaplaceSmoothingModel
+	{
+		double Alpha { get; set; }
+	}
+
+	public partial class LaplaceSmoothingModelDescriptor : DescriptorBase<LaplaceSmoothingModelDescriptor, ILaplaceSmoothingModel>, ILaplaceSmoothingModel
+	{
+		double ILaplaceSmoothingModel.Alpha { get; set; }
+	}
+
+	public partial class LaplaceSmoothingModel : ILaplaceSmoothingModel
 	{
 		[JsonInclude]
 		[JsonPropertyName("alpha")]
 		public double Alpha { get; set; }
 	}
 
-	public partial class LinearInterpolationSmoothingModel
+	[ConvertAs(typeof(LinearInterpolationSmoothingModel))]
+	public partial interface ILinearInterpolationSmoothingModel
+	{
+		double BigramLambda { get; set; }
+
+		double TrigramLambda { get; set; }
+
+		double UnigramLambda { get; set; }
+	}
+
+	public partial class LinearInterpolationSmoothingModelDescriptor : DescriptorBase<LinearInterpolationSmoothingModelDescriptor, ILinearInterpolationSmoothingModel>, ILinearInterpolationSmoothingModel
+	{
+		double ILinearInterpolationSmoothingModel.BigramLambda { get; set; }
+
+		double ILinearInterpolationSmoothingModel.TrigramLambda { get; set; }
+
+		double ILinearInterpolationSmoothingModel.UnigramLambda { get; set; }
+	}
+
+	public partial class LinearInterpolationSmoothingModel : ILinearInterpolationSmoothingModel
 	{
 		[JsonInclude]
 		[JsonPropertyName("bigram_lambda")]
@@ -1197,7 +1588,26 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class PhraseSuggestCollate
+	[ConvertAs(typeof(PhraseSuggestCollate))]
+	public partial interface IPhraseSuggestCollate
+	{
+		Dictionary<string, object>? Params { get; set; }
+
+		bool? Prune { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestCollateQuery Query { get; set; }
+	}
+
+	public partial class PhraseSuggestCollateDescriptor : DescriptorBase<PhraseSuggestCollateDescriptor, IPhraseSuggestCollate>, IPhraseSuggestCollate
+	{
+		Dictionary<string, object>? IPhraseSuggestCollate.Params { get; set; }
+
+		bool? IPhraseSuggestCollate.Prune { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestCollateQuery IPhraseSuggestCollate.Query { get; set; }
+	}
+
+	public partial class PhraseSuggestCollate : IPhraseSuggestCollate
 	{
 		[JsonInclude]
 		[JsonPropertyName("params")]
@@ -1209,10 +1619,25 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggestCollateQuery Query { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestCollateQuery Query { get; set; }
 	}
 
-	public partial class PhraseSuggestCollateQuery
+	[ConvertAs(typeof(PhraseSuggestCollateQuery))]
+	public partial interface IPhraseSuggestCollateQuery
+	{
+		Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+		string? Source { get; set; }
+	}
+
+	public partial class PhraseSuggestCollateQueryDescriptor : DescriptorBase<PhraseSuggestCollateQueryDescriptor, IPhraseSuggestCollateQuery>, IPhraseSuggestCollateQuery
+	{
+		Elastic.Clients.Elasticsearch.Id? IPhraseSuggestCollateQuery.Id { get; set; }
+
+		string? IPhraseSuggestCollateQuery.Source { get; set; }
+	}
+
+	public partial class PhraseSuggestCollateQuery : IPhraseSuggestCollateQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -1223,7 +1648,22 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public string? Source { get; set; }
 	}
 
-	public partial class PhraseSuggestHighlight
+	[ConvertAs(typeof(PhraseSuggestHighlight))]
+	public partial interface IPhraseSuggestHighlight
+	{
+		string PostTag { get; set; }
+
+		string PreTag { get; set; }
+	}
+
+	public partial class PhraseSuggestHighlightDescriptor : DescriptorBase<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight>, IPhraseSuggestHighlight
+	{
+		string IPhraseSuggestHighlight.PostTag { get; set; }
+
+		string IPhraseSuggestHighlight.PreTag { get; set; }
+	}
+
+	public partial class PhraseSuggestHighlight : IPhraseSuggestHighlight
 	{
 		[JsonInclude]
 		[JsonPropertyName("post_tag")]
@@ -1273,11 +1713,70 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class PhraseSuggester : Global.Search.SuggesterBase
+	[ConvertAs(typeof(PhraseSuggester))]
+	public partial interface IPhraseSuggester
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestCollate? Collate { get; set; }
+
+		double? Confidence { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IDirectGenerator>? DirectGenerator { get; set; }
+
+		bool? ForceUnigrams { get; set; }
+
+		int? GramSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestHighlight? Highlight { get; set; }
+
+		double? MaxErrors { get; set; }
+
+		double? RealWordErrorLikelihood { get; set; }
+
+		string? Separator { get; set; }
+
+		int? ShardSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.SmoothingModelContainer? Smoothing { get; set; }
+
+		string? Text { get; set; }
+
+		int? TokenLimit { get; set; }
+	}
+
+	public partial class PhraseSuggesterDescriptor : DescriptorBase<PhraseSuggesterDescriptor, IPhraseSuggester>, IPhraseSuggester
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestCollate? IPhraseSuggester.Collate { get; set; }
+
+		double? IPhraseSuggester.Confidence { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IDirectGenerator>? IPhraseSuggester.DirectGenerator { get; set; }
+
+		bool? IPhraseSuggester.ForceUnigrams { get; set; }
+
+		int? IPhraseSuggester.GramSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestHighlight? IPhraseSuggester.Highlight { get; set; }
+
+		double? IPhraseSuggester.MaxErrors { get; set; }
+
+		double? IPhraseSuggester.RealWordErrorLikelihood { get; set; }
+
+		string? IPhraseSuggester.Separator { get; set; }
+
+		int? IPhraseSuggester.ShardSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.SmoothingModelContainer? IPhraseSuggester.Smoothing { get; set; }
+
+		string? IPhraseSuggester.Text { get; set; }
+
+		int? IPhraseSuggester.TokenLimit { get; set; }
+	}
+
+	public partial class PhraseSuggester : Global.Search.SuggesterBase, IPhraseSuggester
 	{
 		[JsonInclude]
 		[JsonPropertyName("collate")]
-		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggestCollate? Collate { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestCollate? Collate { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("confidence")]
@@ -1285,7 +1784,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("direct_generator")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.DirectGenerator>? DirectGenerator { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IDirectGenerator>? DirectGenerator { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("force_unigrams")]
@@ -1297,7 +1796,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 
 		[JsonInclude]
 		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggestHighlight? Highlight { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IPhraseSuggestHighlight? Highlight { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_errors")]
@@ -1328,7 +1827,22 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public int? TokenLimit { get; set; }
 	}
 
-	public partial class PointInTimeReference
+	[ConvertAs(typeof(PointInTimeReference))]
+	public partial interface IPointInTimeReference
+	{
+		Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+	}
+
+	public partial class PointInTimeReferenceDescriptor : DescriptorBase<PointInTimeReferenceDescriptor, IPointInTimeReference>, IPointInTimeReference
+	{
+		Elastic.Clients.Elasticsearch.Id IPointInTimeReference.Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IPointInTimeReference.KeepAlive { get; set; }
+	}
+
+	public partial class PointInTimeReference : IPointInTimeReference
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -1636,18 +2150,56 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class Rescore
+	[ConvertAs(typeof(Rescore))]
+	public partial interface IRescore
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.IRescoreQuery Query { get; set; }
+
+		int? WindowSize { get; set; }
+	}
+
+	public partial class RescoreDescriptor : DescriptorBase<RescoreDescriptor, IRescore>, IRescore
+	{
+		Elastic.Clients.Elasticsearch.Global.Search.IRescoreQuery IRescore.Query { get; set; }
+
+		int? IRescore.WindowSize { get; set; }
+	}
+
+	public partial class Rescore : IRescore
 	{
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.Global.Search.RescoreQuery Query { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IRescoreQuery Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("window_size")]
 		public int? WindowSize { get; set; }
 	}
 
-	public partial class RescoreQuery
+	[ConvertAs(typeof(RescoreQuery))]
+	public partial interface IRescoreQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer Query { get; set; }
+
+		double? QueryWeight { get; set; }
+
+		double? RescoreQueryWeight { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.ScoreMode? ScoreMode { get; set; }
+	}
+
+	public partial class RescoreQueryDescriptor : DescriptorBase<RescoreQueryDescriptor, IRescoreQuery>, IRescoreQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer IRescoreQuery.Query { get; set; }
+
+		double? IRescoreQuery.QueryWeight { get; set; }
+
+		double? IRescoreQuery.RescoreQueryWeight { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.ScoreMode? IRescoreQuery.ScoreMode { get; set; }
+	}
+
+	public partial class RescoreQuery : IRescoreQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("rescore_query")]
@@ -1810,21 +2362,6 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class SmoothingModelContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("laplace")]
-		public Elastic.Clients.Elasticsearch.Global.Search.LaplaceSmoothingModel? Laplace { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("linear_interpolation")]
-		public Elastic.Clients.Elasticsearch.Global.Search.LinearInterpolationSmoothingModel? LinearInterpolation { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("stupid_backoff")]
-		public Elastic.Clients.Elasticsearch.Global.Search.StupidBackoffSmoothingModel? StupidBackoff { get; set; }
-	}
-
 	public partial class SortContainer
 	{
 		[JsonInclude]
@@ -1876,7 +2413,30 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class SourceFilter
+	[ConvertAs(typeof(SourceFilter))]
+	public partial interface ISourceFilter
+	{
+		Elastic.Clients.Elasticsearch.Fields? Exclude { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? Include { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
+	}
+
+	public partial class SourceFilterDescriptor : DescriptorBase<SourceFilterDescriptor, ISourceFilter>, ISourceFilter
+	{
+		Elastic.Clients.Elasticsearch.Fields? ISourceFilter.Excludes { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? ISourceFilter.Includes { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? ISourceFilter.Exclude { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? ISourceFilter.Include { get; set; }
+	}
+
+	public partial class SourceFilter : ISourceFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
@@ -1895,7 +2455,18 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 	}
 
-	public partial class StupidBackoffSmoothingModel
+	[ConvertAs(typeof(StupidBackoffSmoothingModel))]
+	public partial interface IStupidBackoffSmoothingModel
+	{
+		double Discount { get; set; }
+	}
+
+	public partial class StupidBackoffSmoothingModelDescriptor : DescriptorBase<StupidBackoffSmoothingModelDescriptor, IStupidBackoffSmoothingModel>, IStupidBackoffSmoothingModel
+	{
+		double IStupidBackoffSmoothingModel.Discount { get; set; }
+	}
+
+	public partial class StupidBackoffSmoothingModel : IStupidBackoffSmoothingModel
 	{
 		[JsonInclude]
 		[JsonPropertyName("discount")]
@@ -1953,34 +2524,34 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class SuggestContainer
+	[ConvertAs(typeof(SuggestContextQuery))]
+	public partial interface ISuggestContextQuery
 	{
-		[JsonInclude]
-		[JsonPropertyName("completion")]
-		public Elastic.Clients.Elasticsearch.Global.Search.CompletionSuggester? Completion { get; set; }
+		double? Boost { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("phrase")]
-		public Elastic.Clients.Elasticsearch.Global.Search.PhraseSuggester? Phrase { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.Context Context { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("prefix")]
-		public string? Prefix { get; set; }
+		Union<IEnumerable<Elastic.Clients.Elasticsearch.Distance>, IEnumerable<int>>? Neighbours { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("regex")]
-		public string? Regex { get; set; }
+		Union<Elastic.Clients.Elasticsearch.Distance, int>? Precision { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("term")]
-		public Elastic.Clients.Elasticsearch.Global.Search.TermSuggester? Term { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("text")]
-		public string? Text { get; set; }
+		bool? Prefix { get; set; }
 	}
 
-	public partial class SuggestContextQuery
+	public partial class SuggestContextQueryDescriptor : DescriptorBase<SuggestContextQueryDescriptor, ISuggestContextQuery>, ISuggestContextQuery
+	{
+		double? ISuggestContextQuery.Boost { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.Context ISuggestContextQuery.Context { get; set; }
+
+		Union<IEnumerable<Elastic.Clients.Elasticsearch.Distance>, IEnumerable<int>>? ISuggestContextQuery.Neighbours { get; set; }
+
+		Union<Elastic.Clients.Elasticsearch.Distance, int>? ISuggestContextQuery.Precision { get; set; }
+
+		bool? ISuggestContextQuery.Prefix { get; set; }
+	}
+
+	public partial class SuggestContextQuery : ISuggestContextQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("boost")]
@@ -2003,7 +2574,34 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public bool? Prefix { get; set; }
 	}
 
-	public partial class SuggestFuzziness
+	[ConvertAs(typeof(SuggestFuzziness))]
+	public partial interface ISuggestFuzziness
+	{
+		Elastic.Clients.Elasticsearch.Fuzziness Fuzziness { get; set; }
+
+		int MinLength { get; set; }
+
+		int PrefixLength { get; set; }
+
+		bool Transpositions { get; set; }
+
+		bool UnicodeAware { get; set; }
+	}
+
+	public partial class SuggestFuzzinessDescriptor : DescriptorBase<SuggestFuzzinessDescriptor, ISuggestFuzziness>, ISuggestFuzziness
+	{
+		Elastic.Clients.Elasticsearch.Fuzziness ISuggestFuzziness.Fuzziness { get; set; }
+
+		int ISuggestFuzziness.MinLength { get; set; }
+
+		int ISuggestFuzziness.PrefixLength { get; set; }
+
+		bool ISuggestFuzziness.Transpositions { get; set; }
+
+		bool ISuggestFuzziness.UnicodeAware { get; set; }
+	}
+
+	public partial class SuggestFuzziness : ISuggestFuzziness
 	{
 		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
@@ -2026,7 +2624,26 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		public bool UnicodeAware { get; set; }
 	}
 
-	public abstract partial class SuggesterBase
+	[ConvertAs(typeof(SuggesterBase))]
+	public partial interface ISuggesterBase
+	{
+		string? Analyzer { get; set; }
+
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		int? Size { get; set; }
+	}
+
+	public partial class SuggesterBaseDescriptor : DescriptorBase<SuggesterBaseDescriptor, ISuggesterBase>, ISuggesterBase
+	{
+		Elastic.Clients.Elasticsearch.Field ISuggesterBase.Field { get; set; }
+
+		string? ISuggesterBase.Analyzer { get; set; }
+
+		int? ISuggesterBase.Size { get; set; }
+	}
+
+	public abstract partial class SuggesterBase : ISuggesterBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -2080,7 +2697,62 @@ namespace Elastic.Clients.Elasticsearch.Global.Search
 		}
 	}
 
-	public partial class TermSuggester : Global.Search.SuggesterBase
+	[ConvertAs(typeof(TermSuggester))]
+	public partial interface ITermSuggester
+	{
+		bool? LowercaseTerms { get; set; }
+
+		int? MaxEdits { get; set; }
+
+		int? MaxInspections { get; set; }
+
+		float? MaxTermFreq { get; set; }
+
+		float? MinDocFreq { get; set; }
+
+		int? MinWordLength { get; set; }
+
+		int? PrefixLength { get; set; }
+
+		int? ShardSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.SuggestSort? Sort { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.StringDistance? StringDistance { get; set; }
+
+		Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
+
+		string? Text { get; set; }
+	}
+
+	public partial class TermSuggesterDescriptor : DescriptorBase<TermSuggesterDescriptor, ITermSuggester>, ITermSuggester
+	{
+		bool? ITermSuggester.LowercaseTerms { get; set; }
+
+		int? ITermSuggester.MaxEdits { get; set; }
+
+		int? ITermSuggester.MaxInspections { get; set; }
+
+		float? ITermSuggester.MaxTermFreq { get; set; }
+
+		float? ITermSuggester.MinDocFreq { get; set; }
+
+		int? ITermSuggester.MinWordLength { get; set; }
+
+		int? ITermSuggester.PrefixLength { get; set; }
+
+		int? ITermSuggester.ShardSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.SuggestSort? ITermSuggester.Sort { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.StringDistance? ITermSuggester.StringDistance { get; set; }
+
+		Elastic.Clients.Elasticsearch.SuggestMode? ITermSuggester.SuggestMode { get; set; }
+
+		string? ITermSuggester.Text { get; set; }
+	}
+
+	public partial class TermSuggester : Global.Search.SuggesterBase, ITermSuggester
 	{
 		[JsonInclude]
 		[JsonPropertyName("lowercase_terms")]

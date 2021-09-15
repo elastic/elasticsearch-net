@@ -24,7 +24,66 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 {
-	public partial class Operation
+	[ConvertAs(typeof(Operation))]
+	public partial interface IOperation
+	{
+		object? Doc { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		bool? FieldStatistics { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? Filter { get; set; }
+
+		Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+		bool? Offsets { get; set; }
+
+		bool? Payloads { get; set; }
+
+		bool? Positions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+		bool? TermStatistics { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber? Version { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+	}
+
+	public partial class OperationDescriptor : DescriptorBase<OperationDescriptor, IOperation>, IOperation
+	{
+		Elastic.Clients.Elasticsearch.Id IOperation.Id { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName? IOperation.Index { get; set; }
+
+		object? IOperation.Doc { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? IOperation.Fields { get; set; }
+
+		bool? IOperation.FieldStatistics { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? IOperation.Filter { get; set; }
+
+		bool? IOperation.Offsets { get; set; }
+
+		bool? IOperation.Payloads { get; set; }
+
+		bool? IOperation.Positions { get; set; }
+
+		Elastic.Clients.Elasticsearch.Routing? IOperation.Routing { get; set; }
+
+		bool? IOperation.TermStatistics { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionNumber? IOperation.Version { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? IOperation.VersionType { get; set; }
+	}
+
+	public partial class Operation : IOperation
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc")]
@@ -40,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Mtermvectors
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_id")]

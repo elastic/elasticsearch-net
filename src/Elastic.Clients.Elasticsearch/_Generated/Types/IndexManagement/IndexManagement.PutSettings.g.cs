@@ -24,10 +24,21 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement.PutSettings
 {
-	public partial class IndexSettingsBody : IndexManagement.IndexSettings
+	[ConvertAs(typeof(IndexSettingsBody))]
+	public partial interface IIndexSettingsBody
+	{
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? Settings { get; set; }
+	}
+
+	public partial class IndexSettingsBodyDescriptor : DescriptorBase<IndexSettingsBodyDescriptor, IIndexSettingsBody>, IIndexSettingsBody
+	{
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? IIndexSettingsBody.Settings { get; set; }
+	}
+
+	public partial class IndexSettingsBody : IndexManagement.IndexSettings, IIndexSettingsBody
 	{
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? Settings { get; set; }
 	}
 }

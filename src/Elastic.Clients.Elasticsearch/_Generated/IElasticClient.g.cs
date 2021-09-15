@@ -213,9 +213,7 @@ namespace Elastic.Clients.Elasticsearch
 		Task<MtermvectorsResponse> MtermvectorsAsync(Func<MtermvectorsDescriptor, IMtermvectorsRequest> selector = null, CancellationToken cancellationToken = default);
 		OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
 		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
-		OpenPointInTimeResponse OpenPointInTime(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null);
 		OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null);
-		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
 		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
 		PingResponse Ping(IPingRequest request);
 		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);

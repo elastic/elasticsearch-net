@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		bool? AnalyzeWildcard { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? Collapse { get; set; }
 
 		Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get; set; }
 
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		int? From { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IHighlight? Highlight { get; set; }
 
 		bool? IgnoreThrottled { get; set; }
 
@@ -140,17 +140,17 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		bool? Profile { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? Pit { get; set; }
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
 
 		bool? RequestCache { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? Rescore { get; set; }
 
 		Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		Elastic.Clients.Elasticsearch.Global.Search.SortResults? SearchAfter { get; set; }
 
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
 
-		Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? Source { get; set; }
+		Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? Source { get; set; }
 
 		IEnumerable<string>? Stats { get; set; }
 
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		bool? Version { get; set; }
 
-		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? Fields { get; set; }
+		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? Fields { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? RuntimeMappings { get; set; }
 	}
@@ -200,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		protected override bool CanBeEmpty => true;
-		protected override bool IsEmpty => Aggs is null && AllowNoIndices is null && AllowPartialSearchResults is null && Analyzer is null && AnalyzeWildcard is null && Collapse is null && DefaultOperator is null && Df is null && DocvalueFields is null && Explain is null && From is null && Highlight is null && IgnoreThrottled is null && IgnoreUnavailable is null && IndicesBoost is null && KeepAlive is null && Lenient is null && MaxConcurrentShardRequests is null && MinScore is null && PostFilter is null && Preference is null && Profile is null && Pit is null && Query is null && RequestCache is null && Rescore is null && ScriptFields is null && SearchAfter is null && SearchType is null && SequenceNumberPrimaryTerm is null && Size is null && Source is null && Stats is null && StoredFields is null && Suggest is null && SuggestField is null && SuggestMode is null && SuggestSize is null && SuggestText is null && TerminateAfter is null && Timeout is null && TrackScores is null && TrackTotalHits is null && Version is null && RuntimeMappings is null;
+		protected override bool IsEmpty => Aggs is null && AllowNoIndices is null && AllowPartialSearchResults is null && AnalyzeWildcard is null && Collapse is null && DefaultOperator is null && Df is null && DocvalueFields is null && Explain is null && From is null && Highlight is null && IgnoreThrottled is null && IgnoreUnavailable is null && IndicesBoost is null && KeepAlive is null && Lenient is null && MaxConcurrentShardRequests is null && MinScore is null && PostFilter is null && Preference is null && Profile is null && Pit is null && Query is null && RequestCache is null && Rescore is null && ScriptFields is null && SearchAfter is null && SearchType is null && SequenceNumberPrimaryTerm is null && Size is null && Source is null && Stats is null && StoredFields is null && Suggest is null && SuggestField is null && SuggestMode is null && SuggestSize is null && SuggestText is null && TerminateAfter is null && Timeout is null && TrackScores is null && TrackTotalHits is null && Version is null && RuntimeMappings is null;
 
 		///<summary>/_async_search</summary>
         public SubmitRequest() : base()
@@ -246,7 +246,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
-		public Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? Collapse { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? Collapse { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("default_operator")]
@@ -274,7 +274,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.Global.Search.Highlight? Highlight { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IHighlight? Highlight { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_throttled")]
@@ -318,7 +318,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("pit")]
-		public Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? Pit { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? Pit { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
@@ -330,7 +330,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("rescore")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? Rescore { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? Rescore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
@@ -338,7 +338,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ScriptFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search_after")]
@@ -362,7 +362,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Union<bool, Elastic.Clients.Elasticsearch.Global.Search.SourceFilter>? Source { get; set; }
+		public Union<bool, Elastic.Clients.Elasticsearch.Global.Search.ISourceFilter>? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
@@ -414,7 +414,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? Fields { get; set; }
+		public IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]

@@ -24,7 +24,22 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Security.CreateApiKey
 {
-	public partial class IndexPrivileges
+	[ConvertAs(typeof(IndexPrivileges))]
+	public partial interface IIndexPrivileges
+	{
+		Elastic.Clients.Elasticsearch.Indices Names { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+	}
+
+	public partial class IndexPrivilegesDescriptor : DescriptorBase<IndexPrivilegesDescriptor, IIndexPrivileges>, IIndexPrivileges
+	{
+		Elastic.Clients.Elasticsearch.Indices IIndexPrivileges.Names { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> IIndexPrivileges.Privileges { get; set; }
+	}
+
+	public partial class IndexPrivileges : IIndexPrivileges
 	{
 		[JsonInclude]
 		[JsonPropertyName("names")]
@@ -35,11 +50,30 @@ namespace Elastic.Clients.Elasticsearch.Security.CreateApiKey
 		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 	}
 
-	public partial class RoleDescriptor
+	[ConvertAs(typeof(RoleDescriptor))]
+	public partial interface IRoleDescriptor
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? Applications { get; set; }
+
+		IEnumerable<string> Cluster { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.CreateApiKey.IIndexPrivileges> Index { get; set; }
+	}
+
+	public partial class RoleDescriptorDescriptor : DescriptorBase<RoleDescriptorDescriptor, IRoleDescriptor>, IRoleDescriptor
+	{
+		IEnumerable<string> IRoleDescriptor.Cluster { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.CreateApiKey.IIndexPrivileges> IRoleDescriptor.Index { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? IRoleDescriptor.Applications { get; set; }
+	}
+
+	public partial class RoleDescriptor : IRoleDescriptor
 	{
 		[JsonInclude]
 		[JsonPropertyName("applications")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.IApplicationPrivileges>? Applications { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("cluster")]
@@ -47,6 +81,6 @@ namespace Elastic.Clients.Elasticsearch.Security.CreateApiKey
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.Security.CreateApiKey.IndexPrivileges> Index { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Security.CreateApiKey.IIndexPrivileges> Index { get; set; }
 	}
 }

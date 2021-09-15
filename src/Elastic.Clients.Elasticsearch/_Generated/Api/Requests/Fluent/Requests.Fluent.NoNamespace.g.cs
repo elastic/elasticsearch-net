@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IDeleteByQueryRequest.Query { get; set; }
 
-		Elastic.Clients.Elasticsearch.SlicedScroll? IDeleteByQueryRequest.Slice { get; set; }
+		Elastic.Clients.Elasticsearch.ISlicedScroll? IDeleteByQueryRequest.Slice { get; set; }
 
 		public DeleteByQueryDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public DeleteByQueryDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public DeleteByQueryDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		public DeleteByQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
-		public DeleteByQueryDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
+		public DeleteByQueryDescriptor Slice(Elastic.Clients.Elasticsearch.ISlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
 	}
 
 	public partial class DeleteByQueryRethrottleDescriptor : RequestDescriptorBase<DeleteByQueryRethrottleDescriptor, DeleteByQueryRethrottleRequestParameters, IDeleteByQueryRethrottleRequest>, IDeleteByQueryRethrottleRequest
@@ -310,14 +310,14 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? IFieldCapsRequest.IndexFilter { get; set; }
+		Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilter? IFieldCapsRequest.IndexFilter { get; set; }
 
 		public FieldCapsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public FieldCapsDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public FieldCapsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 		public FieldCapsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public FieldCapsDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Qs("include_unmapped", includeUnmapped);
-		public FieldCapsDescriptor IndexFilter(Elastic.Clients.Elasticsearch.Global.FieldCaps.FieldCapabilitiesBodyIndexFilter? indexFilter) => Assign(indexFilter, (a, v) => a.IndexFilter = v);
+		public FieldCapsDescriptor IndexFilter(Elastic.Clients.Elasticsearch.Global.FieldCaps.IFieldCapabilitiesBodyIndexFilter? indexFilter) => Assign(indexFilter, (a, v) => a.IndexFilter = v);
 	}
 
 	public partial class GetDescriptor : RequestDescriptorBase<GetDescriptor, GetRequestParameters, IGetRequest>, IGetRequest
@@ -438,7 +438,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.Operation>? IMgetRequest.Docs { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.IOperation>? IMgetRequest.Docs { get; set; }
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId>? IMgetRequest.Ids { get; set; }
 
@@ -450,7 +450,7 @@ namespace Elastic.Clients.Elasticsearch
 		public MgetDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public MgetDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public MgetDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-		public MgetDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.Operation>? docs) => Assign(docs, (a, v) => a.Docs = v);
+		public MgetDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.IOperation>? docs) => Assign(docs, (a, v) => a.Docs = v);
 		public MgetDescriptor Ids(IEnumerable<Elastic.Clients.Elasticsearch.Global.Mget.MultiGetId>? ids) => Assign(ids, (a, v) => a.Ids = v);
 	}
 
@@ -519,7 +519,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.Operation>? IMtermvectorsRequest.Docs { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.IOperation>? IMtermvectorsRequest.Docs { get; set; }
 
 		public MtermvectorsDescriptor Ids(IEnumerable<Elastic.Clients.Elasticsearch.Id>? ids) => Qs("ids", ids);
 		public MtermvectorsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
@@ -533,7 +533,7 @@ namespace Elastic.Clients.Elasticsearch
 		public MtermvectorsDescriptor TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
 		public MtermvectorsDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Qs("version", version);
 		public MtermvectorsDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-		public MtermvectorsDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.Operation>? docs) => Assign(docs, (a, v) => a.Docs = v);
+		public MtermvectorsDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Global.Mtermvectors.IOperation>? docs) => Assign(docs, (a, v) => a.Docs = v);
 	}
 
 	public partial class OpenPointInTimeDescriptor : RequestDescriptorBase<OpenPointInTimeDescriptor, OpenPointInTimeRequestParameters, IOpenPointInTimeRequest>, IOpenPointInTimeRequest
@@ -541,11 +541,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		///<summary>/_pit</summary>
-        public OpenPointInTimeDescriptor() : base()
-		{
-		}
-
 		///<summary>/{index}/_pit</summary>
         public OpenPointInTimeDescriptor(Elastic.Clients.Elasticsearch.Indices index) : base(r => r.Required("index", index))
 		{
@@ -580,11 +575,11 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.StoredScript? IPutScriptRequest.Script { get; set; }
+		Elastic.Clients.Elasticsearch.IStoredScript? IPutScriptRequest.Script { get; set; }
 
 		public PutScriptDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public PutScriptDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public PutScriptDescriptor Script(Elastic.Clients.Elasticsearch.StoredScript? script) => Assign(script, (a, v) => a.Script = v);
+		public PutScriptDescriptor Script(Elastic.Clients.Elasticsearch.IStoredScript? script) => Assign(script, (a, v) => a.Script = v);
 	}
 
 	public partial class RankEvalDescriptor : RequestDescriptorBase<RankEvalDescriptor, RankEvalRequestParameters, IRankEvalRequest>, IRankEvalRequest
@@ -602,16 +597,16 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalRequestItem> IRankEvalRequest.Requests { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalRequestItem> IRankEvalRequest.Requests { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetric? IRankEvalRequest.Metric { get; set; }
+		Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetric? IRankEvalRequest.Metric { get; set; }
 
 		public RankEvalDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public RankEvalDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public RankEvalDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public RankEvalDescriptor SearchType(string? searchType) => Qs("search_type", searchType);
-		public RankEvalDescriptor Requests(IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalRequestItem> requests) => Assign(requests, (a, v) => a.Requests = v);
-		public RankEvalDescriptor Metric(Elastic.Clients.Elasticsearch.Global.RankEval.RankEvalMetric? metric) => Assign(metric, (a, v) => a.Metric = v);
+		public RankEvalDescriptor Requests(IEnumerable<Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalRequestItem> requests) => Assign(requests, (a, v) => a.Requests = v);
+		public RankEvalDescriptor Metric(Elastic.Clients.Elasticsearch.Global.RankEval.IRankEvalMetric? metric) => Assign(metric, (a, v) => a.Metric = v);
 	}
 
 	public partial class ReindexDescriptor : RequestDescriptorBase<ReindexDescriptor, ReindexRequestParameters, IReindexRequest>, IReindexRequest
@@ -626,7 +621,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.Conflicts? IReindexRequest.Conflicts { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Destination? IReindexRequest.Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? IReindexRequest.Dest { get; set; }
 
 		long? IReindexRequest.MaxDocs { get; set; }
 
@@ -634,7 +629,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		long? IReindexRequest.Size { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Reindex.Source? IReindexRequest.Source { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Reindex.ISource? IReindexRequest.Source { get; set; }
 
 		public ReindexDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public ReindexDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -645,11 +640,11 @@ namespace Elastic.Clients.Elasticsearch
 		public ReindexDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		public ReindexDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 		public ReindexDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Assign(conflicts, (a, v) => a.Conflicts = v);
-		public ReindexDescriptor Dest(Elastic.Clients.Elasticsearch.Global.Reindex.Destination? dest) => Assign(dest, (a, v) => a.Dest = v);
+		public ReindexDescriptor Dest(Elastic.Clients.Elasticsearch.Global.Reindex.IDestination? dest) => Assign(dest, (a, v) => a.Dest = v);
 		public ReindexDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocs = v);
 		public ReindexDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.Script = v);
 		public ReindexDescriptor Size(long? size) => Assign(size, (a, v) => a.Size = v);
-		public ReindexDescriptor Source(Elastic.Clients.Elasticsearch.Global.Reindex.Source? source) => Assign(source, (a, v) => a.Source = v);
+		public ReindexDescriptor Source(Elastic.Clients.Elasticsearch.Global.Reindex.ISource? source) => Assign(source, (a, v) => a.Source = v);
 	}
 
 	public partial class ReindexRethrottleDescriptor : RequestDescriptorBase<ReindexRethrottleDescriptor, ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
@@ -703,13 +698,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		string? IScriptsPainlessExecuteRequest.Context { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.PainlessContextSetup? IScriptsPainlessExecuteRequest.ContextSetup { get; set; }
+		Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.IPainlessContextSetup? IScriptsPainlessExecuteRequest.ContextSetup { get; set; }
 
-		Elastic.Clients.Elasticsearch.InlineScript? IScriptsPainlessExecuteRequest.Script { get; set; }
+		Elastic.Clients.Elasticsearch.IInlineScript? IScriptsPainlessExecuteRequest.Script { get; set; }
 
 		public ScriptsPainlessExecuteDescriptor Context(string? context) => Assign(context, (a, v) => a.Context = v);
-		public ScriptsPainlessExecuteDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.PainlessContextSetup? contextSetup) => Assign(contextSetup, (a, v) => a.ContextSetup = v);
-		public ScriptsPainlessExecuteDescriptor Script(Elastic.Clients.Elasticsearch.InlineScript? script) => Assign(script, (a, v) => a.Script = v);
+		public ScriptsPainlessExecuteDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Global.ScriptsPainlessExecute.IPainlessContextSetup? contextSetup) => Assign(contextSetup, (a, v) => a.ContextSetup = v);
+		public ScriptsPainlessExecuteDescriptor Script(Elastic.Clients.Elasticsearch.IInlineScript? script) => Assign(script, (a, v) => a.Script = v);
 	}
 
 	public partial class ScrollDescriptor : RequestDescriptorBase<ScrollDescriptor, ScrollRequestParameters, IScrollRequest>, IScrollRequest
@@ -746,9 +741,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? ISearchRequest.Aggregations { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? ISearchRequest.Collapse { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? ISearchRequest.Collapse { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.Highlight? ISearchRequest.Highlight { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IHighlight? ISearchRequest.Highlight { get; set; }
 
 		IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? ISearchRequest.IndicesBoost { get; set; }
 
@@ -760,19 +755,19 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISearchRequest.Query { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? ISearchRequest.Rescore { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? ISearchRequest.Rescore { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ISearchRequest.ScriptFields { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? ISearchRequest.ScriptFields { get; set; }
 
 		Elastic.Clients.Elasticsearch.Global.Search.SortResults? ISearchRequest.SearchAfter { get; set; }
 
-		Elastic.Clients.Elasticsearch.SlicedScroll? ISearchRequest.Slice { get; set; }
+		Elastic.Clients.Elasticsearch.ISlicedScroll? ISearchRequest.Slice { get; set; }
 
-		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? ISearchRequest.Fields { get; set; }
+		IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? ISearchRequest.Fields { get; set; }
 
 		Union<Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer, Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer>>? ISearchRequest.Suggest { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? ISearchRequest.Pit { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? ISearchRequest.Pit { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? ISearchRequest.RuntimeMappings { get; set; }
 
@@ -821,20 +816,20 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public SearchDescriptor Aggs(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
 		public SearchDescriptor Aggregations(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggregations) => Assign(aggregations, (a, v) => a.Aggregations = v);
-		public SearchDescriptor Collapse(Elastic.Clients.Elasticsearch.Global.Search.FieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
-		public SearchDescriptor Highlight(Elastic.Clients.Elasticsearch.Global.Search.Highlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
+		public SearchDescriptor Collapse(Elastic.Clients.Elasticsearch.Global.Search.IFieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
+		public SearchDescriptor Highlight(Elastic.Clients.Elasticsearch.Global.Search.IHighlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
 		public SearchDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoost = v);
 		public SearchDescriptor MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
 		public SearchDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
 		public SearchDescriptor Profile(bool? profile = true) => Assign(profile, (a, v) => a.Profile = v);
 		public SearchDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
-		public SearchDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.Rescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
-		public SearchDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
+		public SearchDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Global.Search.IRescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
+		public SearchDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
 		public SearchDescriptor SearchAfter(Elastic.Clients.Elasticsearch.Global.Search.SortResults? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
-		public SearchDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
-		public SearchDescriptor Fields(IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.DateField>>? fields) => Assign(fields, (a, v) => a.Fields = v);
+		public SearchDescriptor Slice(Elastic.Clients.Elasticsearch.ISlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
+		public SearchDescriptor Fields(IEnumerable<Union<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.IDateField>>? fields) => Assign(fields, (a, v) => a.Fields = v);
 		public SearchDescriptor Suggest(Union<Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer, Dictionary<string, Elastic.Clients.Elasticsearch.Global.Search.SuggestContainer>>? suggest) => Assign(suggest, (a, v) => a.Suggest = v);
-		public SearchDescriptor Pit(Elastic.Clients.Elasticsearch.Global.Search.PointInTimeReference? pit) => Assign(pit, (a, v) => a.Pit = v);
+		public SearchDescriptor Pit(Elastic.Clients.Elasticsearch.Global.Search.IPointInTimeReference? pit) => Assign(pit, (a, v) => a.Pit = v);
 		public SearchDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 	}
 
@@ -982,7 +977,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		TDocument? ITermvectorsRequest<TDocument>.Doc { get; set; }
 
-		Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? ITermvectorsRequest<TDocument>.Filter { get; set; }
+		Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? ITermvectorsRequest<TDocument>.Filter { get; set; }
 
 		Dictionary<Elastic.Clients.Elasticsearch.Field, string>? ITermvectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
 
@@ -998,7 +993,7 @@ namespace Elastic.Clients.Elasticsearch
 		public TermvectorsDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Qs("version", version);
 		public TermvectorsDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public TermvectorsDescriptor<TDocument> Doc(TDocument? doc) => Assign(doc, (a, v) => a.Doc = v);
-		public TermvectorsDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Global.Termvectors.Filter? filter) => Assign(filter, (a, v) => a.Filter = v);
+		public TermvectorsDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Global.Termvectors.IFilter? filter) => Assign(filter, (a, v) => a.Filter = v);
 		public TermvectorsDescriptor<TDocument> PerFieldAnalyzer(Dictionary<Elastic.Clients.Elasticsearch.Field, string>? perFieldAnalyzer) => Assign(perFieldAnalyzer, (a, v) => a.PerFieldAnalyzer = v);
 	}
 
@@ -1060,7 +1055,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		Elastic.Clients.Elasticsearch.Script? IUpdateByQueryRequest.Script { get; set; }
 
-		Elastic.Clients.Elasticsearch.SlicedScroll? IUpdateByQueryRequest.Slice { get; set; }
+		Elastic.Clients.Elasticsearch.ISlicedScroll? IUpdateByQueryRequest.Slice { get; set; }
 
 		public UpdateByQueryDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public UpdateByQueryDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -1098,7 +1093,7 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateByQueryDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocs = v);
 		public UpdateByQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public UpdateByQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.Script = v);
-		public UpdateByQueryDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
+		public UpdateByQueryDescriptor Slice(Elastic.Clients.Elasticsearch.ISlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
 	}
 
 	public partial class UpdateByQueryRethrottleDescriptor : RequestDescriptorBase<UpdateByQueryRethrottleDescriptor, UpdateByQueryRethrottleRequestParameters, IUpdateByQueryRethrottleRequest>, IUpdateByQueryRethrottleRequest

@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("generated_dest_index")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexState GeneratedDestIndex
+		public Elastic.Clients.Elasticsearch.IndexManagement.IIndexState GeneratedDestIndex
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("dest")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Destination Dest
+		public Elastic.Clients.Elasticsearch.Global.Reindex.IDestination Dest
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("pivot")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Pivot Pivot
+		public Elastic.Clients.Elasticsearch.TransformManagement.IPivot Pivot
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings
+		public Elastic.Clients.Elasticsearch.TransformManagement.ISettings Settings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.Source Source
+		public Elastic.Clients.Elasticsearch.Global.Reindex.ISource Source
 		{
 			get;
 #if NET5_0_OR_GREATER

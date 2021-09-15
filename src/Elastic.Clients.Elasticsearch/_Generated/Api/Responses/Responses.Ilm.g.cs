@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ilm
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Union<Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplain>, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplainProject> Indices
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle.LifecycleExplain> Indices
 		{
 			get;
 #if NET5_0_OR_GREATER

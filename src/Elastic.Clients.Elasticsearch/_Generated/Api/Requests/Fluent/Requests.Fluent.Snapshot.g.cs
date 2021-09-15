@@ -96,13 +96,13 @@ namespace Elastic.Clients.Elasticsearch.Snapshot
 
 		string ICreateRepositoryRequest.Type { get; set; }
 
-		Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings ICreateRepositoryRequest.Settings { get; set; }
+		Elastic.Clients.Elasticsearch.Snapshot.IRepositorySettings ICreateRepositoryRequest.Settings { get; set; }
 
 		public CreateRepositoryDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public CreateRepositoryDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
 		public CreateRepositoryDescriptor Type(string type) => Assign(type, (a, v) => a.Type = v);
-		public CreateRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.RepositorySettings settings) => Assign(settings, (a, v) => a.Settings = v);
+		public CreateRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.IRepositorySettings settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
 	public partial class DeleteDescriptor : RequestDescriptorBase<DeleteDescriptor, DeleteRequestParameters, IDeleteRequest>, IDeleteRequest

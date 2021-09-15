@@ -116,14 +116,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? ICloneRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? ICloneRequest.Aliases { get; set; }
 
 		Dictionary<string, object>? ICloneRequest.Settings { get; set; }
 
 		public CloneDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public CloneDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public CloneDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public CloneDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public CloneDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
 		public CloneDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
@@ -155,9 +155,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? ICreateRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? ICreateRequest.Aliases { get; set; }
 
-		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? ICreateRequest.Mappings { get; set; }
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? ICreateRequest.Mappings { get; set; }
 
 		Dictionary<string, object>? ICreateRequest.Settings { get; set; }
 
@@ -165,8 +165,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public CreateDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public CreateDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public CreateDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public CreateDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
-		public CreateDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public CreateDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public CreateDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
 		public CreateDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
@@ -680,9 +680,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Name>? IPutIndexTemplateRequest.ComposedOf { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? IPutIndexTemplateRequest.Template { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IIndexTemplateMapping? IPutIndexTemplateRequest.Template { get; set; }
 
-		Elastic.Clients.Elasticsearch.EmptyObject? IPutIndexTemplateRequest.DataStream { get; set; }
+		Elastic.Clients.Elasticsearch.IEmptyObject? IPutIndexTemplateRequest.DataStream { get; set; }
 
 		int? IPutIndexTemplateRequest.Priority { get; set; }
 
@@ -692,8 +692,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public PutIndexTemplateDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
 		public PutIndexTemplateDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOf = v);
-		public PutIndexTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
-		public PutIndexTemplateDescriptor DataStream(Elastic.Clients.Elasticsearch.EmptyObject? dataStream) => Assign(dataStream, (a, v) => a.DataStream = v);
+		public PutIndexTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IIndexTemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
+		public PutIndexTemplateDescriptor DataStream(Elastic.Clients.Elasticsearch.IEmptyObject? dataStream) => Assign(dataStream, (a, v) => a.DataStream = v);
 		public PutIndexTemplateDescriptor Priority(int? priority) => Assign(priority, (a, v) => a.Priority = v);
 		public PutIndexTemplateDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
 		public PutIndexTemplateDescriptor Meta(Elastic.Clients.Elasticsearch.Metadata? meta) => Assign(meta, (a, v) => a.Meta = v);
@@ -715,19 +715,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		IEnumerable<string>? IPutMappingRequest.DynamicDateFormats { get; set; }
 
-		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? IPutMappingRequest.DynamicTemplates { get; set; }
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? IPutMappingRequest.DynamicTemplates { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? IPutMappingRequest.FieldNames { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? IPutMappingRequest.FieldNames { get; set; }
 
 		Dictionary<string, object>? IPutMappingRequest.Meta { get; set; }
 
 		bool? IPutMappingRequest.NumericDetection { get; set; }
 
-		Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? IPutMappingRequest.Properties { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? IPutMappingRequest.Properties { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.RoutingField? IPutMappingRequest.Routing { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.IRoutingField? IPutMappingRequest.Routing { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.SourceField? IPutMappingRequest.Source { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.ISourceField? IPutMappingRequest.Source { get; set; }
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? IPutMappingRequest.Runtime { get; set; }
 
@@ -741,13 +741,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutMappingDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a.DateDetection = v);
 		public PutMappingDescriptor Dynamic(Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? dynamic) => Assign(dynamic, (a, v) => a.Dynamic = v);
 		public PutMappingDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats) => Assign(dynamicDateFormats, (a, v) => a.DynamicDateFormats = v);
-		public PutMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a.DynamicTemplates = v);
-		public PutMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a.FieldNames = v);
+		public PutMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a.DynamicTemplates = v);
+		public PutMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a.FieldNames = v);
 		public PutMappingDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.Meta = v);
 		public PutMappingDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a.NumericDetection = v);
-		public PutMappingDescriptor Properties(Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? properties) => Assign(properties, (a, v) => a.Properties = v);
-		public PutMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing) => Assign(routing, (a, v) => a.Routing = v);
-		public PutMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source) => Assign(source, (a, v) => a.Source = v);
+		public PutMappingDescriptor Properties(Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? properties) => Assign(properties, (a, v) => a.Properties = v);
+		public PutMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.IRoutingField? routing) => Assign(routing, (a, v) => a.Routing = v);
+		public PutMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.ISourceField? source) => Assign(source, (a, v) => a.Source = v);
 		public PutMappingDescriptor Runtime(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtime) => Assign(runtime, (a, v) => a.Runtime = v);
 	}
 
@@ -785,11 +785,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? IPutTemplateRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? IPutTemplateRequest.Aliases { get; set; }
 
 		IEnumerable<string>? IPutTemplateRequest.IndexPatterns { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? IPutTemplateRequest.Mappings { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? IPutTemplateRequest.Mappings { get; set; }
 
 		Dictionary<string, object>? IPutTemplateRequest.Settings { get; set; }
 
@@ -801,9 +801,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public PutTemplateDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public PutTemplateDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public PutTemplateDescriptor Order(int? order) => Qs("order", order);
-		public PutTemplateDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public PutTemplateDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
 		public PutTemplateDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
-		public PutTemplateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public PutTemplateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
 		public PutTemplateDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public PutTemplateDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
 	}
@@ -890,11 +890,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? IRolloverRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? IRolloverRequest.Aliases { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? IRolloverRequest.Conditions { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IRolloverConditions? IRolloverRequest.Conditions { get; set; }
 
-		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? IRolloverRequest.Mappings { get; set; }
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? IRolloverRequest.Mappings { get; set; }
 
 		Dictionary<string, object>? IRolloverRequest.Settings { get; set; }
 
@@ -903,9 +903,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public RolloverDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public RolloverDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public RolloverDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public RolloverDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
-		public RolloverDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? conditions) => Assign(conditions, (a, v) => a.Conditions = v);
-		public RolloverDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public RolloverDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public RolloverDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IRolloverConditions? conditions) => Assign(conditions, (a, v) => a.Conditions = v);
+		public RolloverDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
 		public RolloverDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
@@ -961,14 +961,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? IShrinkRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? IShrinkRequest.Aliases { get; set; }
 
 		Dictionary<string, object>? IShrinkRequest.Settings { get; set; }
 
 		public ShrinkDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ShrinkDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public ShrinkDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public ShrinkDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public ShrinkDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
 		public ShrinkDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
@@ -986,14 +986,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		IEnumerable<Elastic.Clients.Elasticsearch.Name>? ISimulateIndexTemplateRequest.ComposedOf { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? ISimulateIndexTemplateRequest.Overlapping { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.IOverlappingIndexTemplate>? ISimulateIndexTemplateRequest.Overlapping { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? ISimulateIndexTemplateRequest.Template { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.ITemplateMapping? ISimulateIndexTemplateRequest.Template { get; set; }
 
 		public SimulateIndexTemplateDescriptor IndexPatterns(IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
 		public SimulateIndexTemplateDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOf = v);
-		public SimulateIndexTemplateDescriptor Overlapping(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a.Overlapping = v);
-		public SimulateIndexTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
+		public SimulateIndexTemplateDescriptor Overlapping(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.IOverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a.Overlapping = v);
+		public SimulateIndexTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.ITemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
 	}
 
 	public partial class SimulateTemplateDescriptor : RequestDescriptorBase<SimulateTemplateDescriptor, SimulateTemplateRequestParameters, ISimulateTemplateRequest>, ISimulateTemplateRequest
@@ -1025,14 +1025,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? ISplitRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? ISplitRequest.Aliases { get; set; }
 
 		Dictionary<string, object>? ISplitRequest.Settings { get; set; }
 
 		public SplitDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public SplitDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public SplitDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public SplitDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public SplitDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
 		public SplitDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
 	}
 
@@ -1082,11 +1082,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? IUpdateAliasesRequest.Actions { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IIndicesUpdateAliasBulk>? IUpdateAliasesRequest.Actions { get; set; }
 
 		public UpdateAliasesDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public UpdateAliasesDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public UpdateAliasesDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IndicesUpdateAliasBulk>? actions) => Assign(actions, (a, v) => a.Actions = v);
+		public UpdateAliasesDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.IIndicesUpdateAliasBulk>? actions) => Assign(actions, (a, v) => a.Actions = v);
 	}
 
 	public partial class ValidateQueryDescriptor : RequestDescriptorBase<ValidateQueryDescriptor, ValidateQueryRequestParameters, IValidateQueryRequest>, IValidateQueryRequest

@@ -93,9 +93,9 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	[ConvertAs(typeof(PutPolicyRequest))]
 	public partial interface IPutPolicyRequest : IRequest<PutPolicyRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Enrich.Policy? GeoMatch { get; set; }
+		Elastic.Clients.Elasticsearch.Enrich.IPolicy? GeoMatch { get; set; }
 
-		Elastic.Clients.Elasticsearch.Enrich.Policy? Match { get; set; }
+		Elastic.Clients.Elasticsearch.Enrich.IPolicy? Match { get; set; }
 	}
 
 	public partial class PutPolicyRequest : PlainRequestBase<PutPolicyRequestParameters>, IPutPolicyRequest
@@ -114,11 +114,11 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 
 		[JsonInclude]
 		[JsonPropertyName("geo_match")]
-		public Elastic.Clients.Elasticsearch.Enrich.Policy? GeoMatch { get; set; }
+		public Elastic.Clients.Elasticsearch.Enrich.IPolicy? GeoMatch { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("match")]
-		public Elastic.Clients.Elasticsearch.Enrich.Policy? Match { get; set; }
+		public Elastic.Clients.Elasticsearch.Enrich.IPolicy? Match { get; set; }
 	}
 
 	[ConvertAs(typeof(StatsRequest))]

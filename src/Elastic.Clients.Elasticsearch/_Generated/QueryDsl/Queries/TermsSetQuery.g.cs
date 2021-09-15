@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 	}
 
-	public partial class TermsSetQueryDescriptor : ITermsSetQuery
+	public partial class TermsSetQueryDescriptor : FieldNameQueryDescriptorBase<TermsSetQueryDescriptor, ITermsSetQuery>, ITermsSetQuery
 	{
 	}
 }

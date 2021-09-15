@@ -202,13 +202,13 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? IEstimateModelMemoryRequest.AnalysisConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? IEstimateModelMemoryRequest.AnalysisConfig { get; set; }
 
 		Dictionary<Elastic.Clients.Elasticsearch.Field, long>? IEstimateModelMemoryRequest.MaxBucketCardinality { get; set; }
 
 		Dictionary<Elastic.Clients.Elasticsearch.Field, long>? IEstimateModelMemoryRequest.OverallCardinality { get; set; }
 
-		public EstimateModelMemoryDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
+		public EstimateModelMemoryDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
 		public EstimateModelMemoryDescriptor MaxBucketCardinality(Dictionary<Elastic.Clients.Elasticsearch.Field, long>? maxBucketCardinality) => Assign(maxBucketCardinality, (a, v) => a.MaxBucketCardinality = v);
 		public EstimateModelMemoryDescriptor OverallCardinality(Dictionary<Elastic.Clients.Elasticsearch.Field, long>? overallCardinality) => Assign(overallCardinality, (a, v) => a.OverallCardinality = v);
 	}
@@ -249,9 +249,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource? IExplainDataFrameAnalyticsRequest.Source { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource? IExplainDataFrameAnalyticsRequest.Source { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? IExplainDataFrameAnalyticsRequest.Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination? IExplainDataFrameAnalyticsRequest.Dest { get; set; }
 
 		Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer IExplainDataFrameAnalyticsRequest.Analysis { get; set; }
 
@@ -265,8 +265,8 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		bool? IExplainDataFrameAnalyticsRequest.AllowLazyStart { get; set; }
 
-		public ExplainDataFrameAnalyticsDescriptor Source(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource? source) => Assign(source, (a, v) => a.Source = v);
-		public ExplainDataFrameAnalyticsDescriptor Dest(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination? dest) => Assign(dest, (a, v) => a.Dest = v);
+		public ExplainDataFrameAnalyticsDescriptor Source(Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource? source) => Assign(source, (a, v) => a.Source = v);
+		public ExplainDataFrameAnalyticsDescriptor Dest(Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination? dest) => Assign(dest, (a, v) => a.Dest = v);
 		public ExplainDataFrameAnalyticsDescriptor Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer analysis) => Assign(analysis, (a, v) => a.Analysis = v);
 		public ExplainDataFrameAnalyticsDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
 		public ExplainDataFrameAnalyticsDescriptor ModelMemoryLimit(string? modelMemoryLimit) => Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
@@ -337,7 +337,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		bool? IGetBucketsRequest.Expand { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.Page? IGetBucketsRequest.Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? IGetBucketsRequest.Page { get; set; }
 
 		public GetBucketsDescriptor From(int? from) => Qs("from", from);
 		public GetBucketsDescriptor Size(int? size) => Qs("size", size);
@@ -348,7 +348,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public GetBucketsDescriptor End(Elastic.Clients.Elasticsearch.DateString? end) => Qs("end", end);
 		public GetBucketsDescriptor AnomalyScore(double? anomalyScore) => Assign(anomalyScore, (a, v) => a.AnomalyScore = v);
 		public GetBucketsDescriptor Expand(bool? expand = true) => Assign(expand, (a, v) => a.Expand = v);
-		public GetBucketsDescriptor Page(Elastic.Clients.Elasticsearch.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
+		public GetBucketsDescriptor Page(Elastic.Clients.Elasticsearch.Ml.IPage? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetCalendarEventsDescriptor : RequestDescriptorBase<GetCalendarEventsDescriptor, GetCalendarEventsRequestParameters, IGetCalendarEventsRequest>, IGetCalendarEventsRequest
@@ -383,11 +383,11 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.Page? IGetCalendarsRequest.Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? IGetCalendarsRequest.Page { get; set; }
 
 		public GetCalendarsDescriptor From(int? from) => Qs("from", from);
 		public GetCalendarsDescriptor Size(int? size) => Qs("size", size);
-		public GetCalendarsDescriptor Page(Elastic.Clients.Elasticsearch.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
+		public GetCalendarsDescriptor Page(Elastic.Clients.Elasticsearch.Ml.IPage? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetCategoriesDescriptor : RequestDescriptorBase<GetCategoriesDescriptor, GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
@@ -405,12 +405,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.Page? IGetCategoriesRequest.Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? IGetCategoriesRequest.Page { get; set; }
 
 		public GetCategoriesDescriptor From(int? from) => Qs("from", from);
 		public GetCategoriesDescriptor Size(int? size) => Qs("size", size);
 		public GetCategoriesDescriptor PartitionFieldValue(string? partitionFieldValue) => Qs("partition_field_value", partitionFieldValue);
-		public GetCategoriesDescriptor Page(Elastic.Clients.Elasticsearch.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
+		public GetCategoriesDescriptor Page(Elastic.Clients.Elasticsearch.Ml.IPage? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetDataFrameAnalyticsDescriptor : RequestDescriptorBase<GetDataFrameAnalyticsDescriptor, GetDataFrameAnalyticsRequestParameters, IGetDataFrameAnalyticsRequest>, IGetDataFrameAnalyticsRequest
@@ -521,7 +521,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.Page? IGetInfluencersRequest.Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? IGetInfluencersRequest.Page { get; set; }
 
 		public GetInfluencersDescriptor Desc(bool? desc = true) => Qs("desc", desc);
 		public GetInfluencersDescriptor End(Elastic.Clients.Elasticsearch.DateString? end) => Qs("end", end);
@@ -531,7 +531,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public GetInfluencersDescriptor Size(int? size) => Qs("size", size);
 		public GetInfluencersDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort) => Qs("sort", sort);
 		public GetInfluencersDescriptor Start(Elastic.Clients.Elasticsearch.DateString? start) => Qs("start", start);
-		public GetInfluencersDescriptor Page(Elastic.Clients.Elasticsearch.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
+		public GetInfluencersDescriptor Page(Elastic.Clients.Elasticsearch.Ml.IPage? page) => Assign(page, (a, v) => a.Page = v);
 	}
 
 	public partial class GetJobStatsDescriptor : RequestDescriptorBase<GetJobStatsDescriptor, GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
@@ -629,7 +629,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		bool? IGetRecordsRequest.Desc { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.Page? IGetRecordsRequest.Page { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPage? IGetRecordsRequest.Page { get; set; }
 
 		double? IGetRecordsRequest.RecordScore { get; set; }
 
@@ -641,7 +641,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public GetRecordsDescriptor Start(Elastic.Clients.Elasticsearch.DateString? start) => Qs("start", start);
 		public GetRecordsDescriptor End(Elastic.Clients.Elasticsearch.DateString? end) => Qs("end", end);
 		public GetRecordsDescriptor Desc(bool? desc = true) => Assign(desc, (a, v) => a.Desc = v);
-		public GetRecordsDescriptor Page(Elastic.Clients.Elasticsearch.Ml.Page? page) => Assign(page, (a, v) => a.Page = v);
+		public GetRecordsDescriptor Page(Elastic.Clients.Elasticsearch.Ml.IPage? page) => Assign(page, (a, v) => a.Page = v);
 		public GetRecordsDescriptor RecordScore(double? recordScore) => Assign(recordScore, (a, v) => a.RecordScore = v);
 		public GetRecordsDescriptor Sort(Elastic.Clients.Elasticsearch.Field? sort) => Assign(sort, (a, v) => a.Sort = v);
 	}
@@ -726,9 +726,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> IPostCalendarEventsRequest.Events { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.ICalendarEvent> IPostCalendarEventsRequest.Events { get; set; }
 
-		public PostCalendarEventsDescriptor Events(IEnumerable<Elastic.Clients.Elasticsearch.Ml.CalendarEvent> events) => Assign(events, (a, v) => a.Events = v);
+		public PostCalendarEventsDescriptor Events(IEnumerable<Elastic.Clients.Elasticsearch.Ml.ICalendarEvent> events) => Assign(events, (a, v) => a.Events = v);
 	}
 
 	public partial class PostDataDescriptor<TData> : RequestDescriptorBase<PostDataDescriptor<TData>, PostDataRequestParameters, IPostDataRequest<TData>>, IPostDataRequest<TData>
@@ -760,9 +760,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? IPreviewDataFrameAnalyticsRequest.Config { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.IDataframePreviewConfig? IPreviewDataFrameAnalyticsRequest.Config { get; set; }
 
-		public PreviewDataFrameAnalyticsDescriptor Config(Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.DataframePreviewConfig? config) => Assign(config, (a, v) => a.Config = v);
+		public PreviewDataFrameAnalyticsDescriptor Config(Elastic.Clients.Elasticsearch.Ml.PreviewDataFrameAnalytics.IDataframePreviewConfig? config) => Assign(config, (a, v) => a.Config = v);
 	}
 
 	public partial class PreviewDatafeedDescriptor : RequestDescriptorBase<PreviewDatafeedDescriptor, PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
@@ -780,12 +780,12 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.Ml.JobConfig? IPreviewDatafeedRequest.JobConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IJobConfig? IPreviewDatafeedRequest.JobConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? IPreviewDatafeedRequest.DatafeedConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? IPreviewDatafeedRequest.DatafeedConfig { get; set; }
 
-		public PreviewDatafeedDescriptor JobConfig(Elastic.Clients.Elasticsearch.Ml.JobConfig? jobConfig) => Assign(jobConfig, (a, v) => a.JobConfig = v);
-		public PreviewDatafeedDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? datafeedConfig) => Assign(datafeedConfig, (a, v) => a.DatafeedConfig = v);
+		public PreviewDatafeedDescriptor JobConfig(Elastic.Clients.Elasticsearch.Ml.IJobConfig? jobConfig) => Assign(jobConfig, (a, v) => a.JobConfig = v);
+		public PreviewDatafeedDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? datafeedConfig) => Assign(datafeedConfig, (a, v) => a.DatafeedConfig = v);
 	}
 
 	public partial class PutCalendarDescriptor : RequestDescriptorBase<PutCalendarDescriptor, PutCalendarRequestParameters, IPutCalendarRequest>, IPutCalendarRequest
@@ -832,22 +832,22 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		string? IPutDataFrameAnalyticsRequest.Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination IPutDataFrameAnalyticsRequest.Dest { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination IPutDataFrameAnalyticsRequest.Dest { get; set; }
 
 		int? IPutDataFrameAnalyticsRequest.MaxNumThreads { get; set; }
 
 		string? IPutDataFrameAnalyticsRequest.ModelMemoryLimit { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource IPutDataFrameAnalyticsRequest.Source { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource IPutDataFrameAnalyticsRequest.Source { get; set; }
 
 		public PutDataFrameAnalyticsDescriptor AllowLazyStart(bool? allowLazyStart = true) => Assign(allowLazyStart, (a, v) => a.AllowLazyStart = v);
 		public PutDataFrameAnalyticsDescriptor Analysis(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisContainer analysis) => Assign(analysis, (a, v) => a.Analysis = v);
 		public PutDataFrameAnalyticsDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.Ml.DataframeAnalysisAnalyzedFields? analyzedFields) => Assign(analyzedFields, (a, v) => a.AnalyzedFields = v);
 		public PutDataFrameAnalyticsDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
-		public PutDataFrameAnalyticsDescriptor Dest(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsDestination dest) => Assign(dest, (a, v) => a.Dest = v);
+		public PutDataFrameAnalyticsDescriptor Dest(Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsDestination dest) => Assign(dest, (a, v) => a.Dest = v);
 		public PutDataFrameAnalyticsDescriptor MaxNumThreads(int? maxNumThreads) => Assign(maxNumThreads, (a, v) => a.MaxNumThreads = v);
 		public PutDataFrameAnalyticsDescriptor ModelMemoryLimit(string? modelMemoryLimit) => Assign(modelMemoryLimit, (a, v) => a.ModelMemoryLimit = v);
-		public PutDataFrameAnalyticsDescriptor Source(Elastic.Clients.Elasticsearch.Ml.DataframeAnalyticsSource source) => Assign(source, (a, v) => a.Source = v);
+		public PutDataFrameAnalyticsDescriptor Source(Elastic.Clients.Elasticsearch.Ml.IDataframeAnalyticsSource source) => Assign(source, (a, v) => a.Source = v);
 	}
 
 	public partial class PutDatafeedDescriptor : RequestDescriptorBase<PutDatafeedDescriptor, PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
@@ -862,9 +862,9 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? IPutDatafeedRequest.Aggregations { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? IPutDatafeedRequest.ChunkingConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? IPutDatafeedRequest.ChunkingConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? IPutDatafeedRequest.DelayedDataCheckConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? IPutDatafeedRequest.DelayedDataCheckConfig { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? IPutDatafeedRequest.Frequency { get; set; }
 
@@ -872,7 +872,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		IEnumerable<string>? IPutDatafeedRequest.Indexes { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? IPutDatafeedRequest.IndicesOptions { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? IPutDatafeedRequest.IndicesOptions { get; set; }
 
 		Elastic.Clients.Elasticsearch.Id? IPutDatafeedRequest.JobId { get; set; }
 
@@ -884,7 +884,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? IPutDatafeedRequest.RuntimeMappings { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? IPutDatafeedRequest.ScriptFields { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? IPutDatafeedRequest.ScriptFields { get; set; }
 
 		int? IPutDatafeedRequest.ScrollSize { get; set; }
 
@@ -893,18 +893,18 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		public PutDatafeedDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
 		public PutDatafeedDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public PutDatafeedDescriptor Aggregations(Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? aggregations) => Assign(aggregations, (a, v) => a.Aggregations = v);
-		public PutDatafeedDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.Ml.ChunkingConfig? chunkingConfig) => Assign(chunkingConfig, (a, v) => a.ChunkingConfig = v);
-		public PutDatafeedDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Ml.DelayedDataCheckConfig? delayedDataCheckConfig) => Assign(delayedDataCheckConfig, (a, v) => a.DelayedDataCheckConfig = v);
+		public PutDatafeedDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.Ml.IChunkingConfig? chunkingConfig) => Assign(chunkingConfig, (a, v) => a.ChunkingConfig = v);
+		public PutDatafeedDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.Ml.IDelayedDataCheckConfig? delayedDataCheckConfig) => Assign(delayedDataCheckConfig, (a, v) => a.DelayedDataCheckConfig = v);
 		public PutDatafeedDescriptor Frequency(Elastic.Clients.Elasticsearch.Time? frequency) => Assign(frequency, (a, v) => a.Frequency = v);
 		public PutDatafeedDescriptor Indices(IEnumerable<string>? indices) => Assign(indices, (a, v) => a.Indices = v);
 		public PutDatafeedDescriptor Indexes(IEnumerable<string>? indexes) => Assign(indexes, (a, v) => a.Indexes = v);
-		public PutDatafeedDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.Ml.DatafeedIndicesOptions? indicesOptions) => Assign(indicesOptions, (a, v) => a.IndicesOptions = v);
+		public PutDatafeedDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.Ml.IDatafeedIndicesOptions? indicesOptions) => Assign(indicesOptions, (a, v) => a.IndicesOptions = v);
 		public PutDatafeedDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId) => Assign(jobId, (a, v) => a.JobId = v);
 		public PutDatafeedDescriptor MaxEmptySearches(int? maxEmptySearches) => Assign(maxEmptySearches, (a, v) => a.MaxEmptySearches = v);
 		public PutDatafeedDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public PutDatafeedDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Time? queryDelay) => Assign(queryDelay, (a, v) => a.QueryDelay = v);
 		public PutDatafeedDescriptor RuntimeMappings(Elastic.Clients.Elasticsearch.Mapping.RuntimeFields? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
-		public PutDatafeedDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
+		public PutDatafeedDescriptor ScriptFields(Dictionary<string, Elastic.Clients.Elasticsearch.IScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
 		public PutDatafeedDescriptor ScrollSize(int? scrollSize) => Assign(scrollSize, (a, v) => a.ScrollSize = v);
 	}
 
@@ -938,25 +938,25 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		bool? IPutJobRequest.AllowLazyOpen { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisConfig IPutJobRequest.AnalysisConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig IPutJobRequest.AnalysisConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? IPutJobRequest.AnalysisLimits { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? IPutJobRequest.AnalysisLimits { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time IPutJobRequest.BackgroundPersistInterval { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.CustomSettings? IPutJobRequest.CustomSettings { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.ICustomSettings? IPutJobRequest.CustomSettings { get; set; }
 
 		long? IPutJobRequest.DailyModelSnapshotRetentionAfterDays { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataDescription IPutJobRequest.DataDescription { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataDescription IPutJobRequest.DataDescription { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? IPutJobRequest.DatafeedConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? IPutJobRequest.DatafeedConfig { get; set; }
 
 		string? IPutJobRequest.Description { get; set; }
 
 		IEnumerable<string>? IPutJobRequest.Groups { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? IPutJobRequest.ModelPlotConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? IPutJobRequest.ModelPlotConfig { get; set; }
 
 		long? IPutJobRequest.ModelSnapshotRetentionDays { get; set; }
 
@@ -967,16 +967,16 @@ namespace Elastic.Clients.Elasticsearch.Ml
 		long? IPutJobRequest.ResultsRetentionDays { get; set; }
 
 		public PutJobDescriptor AllowLazyOpen(bool? allowLazyOpen = true) => Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
-		public PutJobDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Ml.AnalysisConfig analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
-		public PutJobDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
+		public PutJobDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
+		public PutJobDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
 		public PutJobDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time backgroundPersistInterval) => Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
-		public PutJobDescriptor CustomSettings(Elastic.Clients.Elasticsearch.Ml.CustomSettings? customSettings) => Assign(customSettings, (a, v) => a.CustomSettings = v);
+		public PutJobDescriptor CustomSettings(Elastic.Clients.Elasticsearch.Ml.ICustomSettings? customSettings) => Assign(customSettings, (a, v) => a.CustomSettings = v);
 		public PutJobDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays) => Assign(dailyModelSnapshotRetentionAfterDays, (a, v) => a.DailyModelSnapshotRetentionAfterDays = v);
-		public PutJobDescriptor DataDescription(Elastic.Clients.Elasticsearch.Ml.DataDescription dataDescription) => Assign(dataDescription, (a, v) => a.DataDescription = v);
-		public PutJobDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.Ml.DatafeedConfig? datafeedConfig) => Assign(datafeedConfig, (a, v) => a.DatafeedConfig = v);
+		public PutJobDescriptor DataDescription(Elastic.Clients.Elasticsearch.Ml.IDataDescription dataDescription) => Assign(dataDescription, (a, v) => a.DataDescription = v);
+		public PutJobDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.Ml.IDatafeedConfig? datafeedConfig) => Assign(datafeedConfig, (a, v) => a.DatafeedConfig = v);
 		public PutJobDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
 		public PutJobDescriptor Groups(IEnumerable<string>? groups) => Assign(groups, (a, v) => a.Groups = v);
-		public PutJobDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? modelPlotConfig) => Assign(modelPlotConfig, (a, v) => a.ModelPlotConfig = v);
+		public PutJobDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? modelPlotConfig) => Assign(modelPlotConfig, (a, v) => a.ModelPlotConfig = v);
 		public PutJobDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 		public PutJobDescriptor RenormalizationWindowDays(long? renormalizationWindowDays) => Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
 		public PutJobDescriptor ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName? resultsIndexName) => Assign(resultsIndexName, (a, v) => a.ResultsIndexName = v);
@@ -995,23 +995,23 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		string? IPutTrainedModelRequest.CompressedDefinition { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Definition? IPutTrainedModelRequest.Definition { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IDefinition? IPutTrainedModelRequest.Definition { get; set; }
 
 		string? IPutTrainedModelRequest.Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer IPutTrainedModelRequest.InferenceConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.IInferenceConfigContainer IPutTrainedModelRequest.InferenceConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Input IPutTrainedModelRequest.Input { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IInput IPutTrainedModelRequest.Input { get; set; }
 
 		object? IPutTrainedModelRequest.Metadata { get; set; }
 
 		IEnumerable<string>? IPutTrainedModelRequest.Tags { get; set; }
 
 		public PutTrainedModelDescriptor CompressedDefinition(string? compressedDefinition) => Assign(compressedDefinition, (a, v) => a.CompressedDefinition = v);
-		public PutTrainedModelDescriptor Definition(Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Definition? definition) => Assign(definition, (a, v) => a.Definition = v);
+		public PutTrainedModelDescriptor Definition(Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IDefinition? definition) => Assign(definition, (a, v) => a.Definition = v);
 		public PutTrainedModelDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
-		public PutTrainedModelDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer inferenceConfig) => Assign(inferenceConfig, (a, v) => a.InferenceConfig = v);
-		public PutTrainedModelDescriptor Input(Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.Input input) => Assign(input, (a, v) => a.Input = v);
+		public PutTrainedModelDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.IInferenceConfigContainer inferenceConfig) => Assign(inferenceConfig, (a, v) => a.InferenceConfig = v);
+		public PutTrainedModelDescriptor Input(Elastic.Clients.Elasticsearch.Ml.PutTrainedModel.IInput input) => Assign(input, (a, v) => a.Input = v);
 		public PutTrainedModelDescriptor Metadata(object? metadata) => Assign(metadata, (a, v) => a.Metadata = v);
 		public PutTrainedModelDescriptor Tags(IEnumerable<string>? tags) => Assign(tags, (a, v) => a.Tags = v);
 	}
@@ -1192,7 +1192,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		bool? IUpdateJobRequest.AllowLazyOpen { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisMemoryLimit? IUpdateJobRequest.AnalysisLimits { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisMemoryLimit? IUpdateJobRequest.AnalysisLimits { get; set; }
 
 		Elastic.Clients.Elasticsearch.Time? IUpdateJobRequest.BackgroundPersistInterval { get; set; }
 
@@ -1202,7 +1202,7 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		string? IUpdateJobRequest.Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? IUpdateJobRequest.ModelPlotConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? IUpdateJobRequest.ModelPlotConfig { get; set; }
 
 		long? IUpdateJobRequest.DailyModelSnapshotRetentionAfterDays { get; set; }
 
@@ -1214,24 +1214,24 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		IEnumerable<string>? IUpdateJobRequest.Groups { get; set; }
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? IUpdateJobRequest.Detectors { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector>? IUpdateJobRequest.Detectors { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? IUpdateJobRequest.PerPartitionCategorization { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? IUpdateJobRequest.PerPartitionCategorization { get; set; }
 
 		public UpdateJobDescriptor AllowLazyOpen(bool? allowLazyOpen = true) => Assign(allowLazyOpen, (a, v) => a.AllowLazyOpen = v);
-		public UpdateJobDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Ml.AnalysisMemoryLimit? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
+		public UpdateJobDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Ml.IAnalysisMemoryLimit? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
 		public UpdateJobDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Time? backgroundPersistInterval) => Assign(backgroundPersistInterval, (a, v) => a.BackgroundPersistInterval = v);
 		public UpdateJobDescriptor CustomSettings(Dictionary<string, object>? customSettings) => Assign(customSettings, (a, v) => a.CustomSettings = v);
 		public UpdateJobDescriptor CategorizationFilters(IEnumerable<string>? categorizationFilters) => Assign(categorizationFilters, (a, v) => a.CategorizationFilters = v);
 		public UpdateJobDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
-		public UpdateJobDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? modelPlotConfig) => Assign(modelPlotConfig, (a, v) => a.ModelPlotConfig = v);
+		public UpdateJobDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? modelPlotConfig) => Assign(modelPlotConfig, (a, v) => a.ModelPlotConfig = v);
 		public UpdateJobDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays) => Assign(dailyModelSnapshotRetentionAfterDays, (a, v) => a.DailyModelSnapshotRetentionAfterDays = v);
 		public UpdateJobDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 		public UpdateJobDescriptor RenormalizationWindowDays(long? renormalizationWindowDays) => Assign(renormalizationWindowDays, (a, v) => a.RenormalizationWindowDays = v);
 		public UpdateJobDescriptor ResultsRetentionDays(long? resultsRetentionDays) => Assign(resultsRetentionDays, (a, v) => a.ResultsRetentionDays = v);
 		public UpdateJobDescriptor Groups(IEnumerable<string>? groups) => Assign(groups, (a, v) => a.Groups = v);
-		public UpdateJobDescriptor Detectors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.Detector>? detectors) => Assign(detectors, (a, v) => a.Detectors = v);
-		public UpdateJobDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.Ml.PerPartitionCategorization? perPartitionCategorization) => Assign(perPartitionCategorization, (a, v) => a.PerPartitionCategorization = v);
+		public UpdateJobDescriptor Detectors(IEnumerable<Elastic.Clients.Elasticsearch.Ml.IDetector>? detectors) => Assign(detectors, (a, v) => a.Detectors = v);
+		public UpdateJobDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.Ml.IPerPartitionCategorization? perPartitionCategorization) => Assign(perPartitionCategorization, (a, v) => a.PerPartitionCategorization = v);
 	}
 
 	public partial class UpdateModelSnapshotDescriptor : RequestDescriptorBase<UpdateModelSnapshotDescriptor, UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
@@ -1278,26 +1278,26 @@ namespace Elastic.Clients.Elasticsearch.Ml
 
 		Elastic.Clients.Elasticsearch.Id? IValidateRequest.JobId { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? IValidateRequest.AnalysisConfig { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? IValidateRequest.AnalysisConfig { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? IValidateRequest.AnalysisLimits { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? IValidateRequest.AnalysisLimits { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.DataDescription? IValidateRequest.DataDescription { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IDataDescription? IValidateRequest.DataDescription { get; set; }
 
 		string? IValidateRequest.Description { get; set; }
 
-		Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? IValidateRequest.ModelPlot { get; set; }
+		Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? IValidateRequest.ModelPlot { get; set; }
 
 		long? IValidateRequest.ModelSnapshotRetentionDays { get; set; }
 
 		Elastic.Clients.Elasticsearch.IndexName? IValidateRequest.ResultsIndexName { get; set; }
 
 		public ValidateDescriptor JobId(Elastic.Clients.Elasticsearch.Id? jobId) => Assign(jobId, (a, v) => a.JobId = v);
-		public ValidateDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Ml.AnalysisConfig? analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
-		public ValidateDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Ml.AnalysisLimits? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
-		public ValidateDescriptor DataDescription(Elastic.Clients.Elasticsearch.Ml.DataDescription? dataDescription) => Assign(dataDescription, (a, v) => a.DataDescription = v);
+		public ValidateDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.Ml.IAnalysisConfig? analysisConfig) => Assign(analysisConfig, (a, v) => a.AnalysisConfig = v);
+		public ValidateDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.Ml.IAnalysisLimits? analysisLimits) => Assign(analysisLimits, (a, v) => a.AnalysisLimits = v);
+		public ValidateDescriptor DataDescription(Elastic.Clients.Elasticsearch.Ml.IDataDescription? dataDescription) => Assign(dataDescription, (a, v) => a.DataDescription = v);
 		public ValidateDescriptor Description(string? description) => Assign(description, (a, v) => a.Description = v);
-		public ValidateDescriptor ModelPlot(Elastic.Clients.Elasticsearch.Ml.ModelPlotConfig? modelPlot) => Assign(modelPlot, (a, v) => a.ModelPlot = v);
+		public ValidateDescriptor ModelPlot(Elastic.Clients.Elasticsearch.Ml.IModelPlotConfig? modelPlot) => Assign(modelPlot, (a, v) => a.ModelPlot = v);
 		public ValidateDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(modelSnapshotRetentionDays, (a, v) => a.ModelSnapshotRetentionDays = v);
 		public ValidateDescriptor ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName? resultsIndexName) => Assign(resultsIndexName, (a, v) => a.ResultsIndexName = v);
 	}

@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? CaseInsensitive { get; set; }
 	}
 
-	public partial class PrefixQueryDescriptor : IPrefixQuery
+	public partial class PrefixQueryDescriptor : FieldNameQueryDescriptorBase<PrefixQueryDescriptor, IPrefixQuery>, IPrefixQuery
 	{
 		Elastic.Clients.Elasticsearch.MultiTermQueryRewrite? IPrefixQuery.Rewrite { get; set; }
 

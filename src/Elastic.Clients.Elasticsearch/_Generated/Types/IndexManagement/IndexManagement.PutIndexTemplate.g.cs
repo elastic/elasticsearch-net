@@ -24,18 +24,37 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 {
-	public partial class IndexTemplateMapping
+	[ConvertAs(typeof(IndexTemplateMapping))]
+	public partial interface IIndexTemplateMapping
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? Settings { get; set; }
+	}
+
+	public partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor, IIndexTemplateMapping>, IIndexTemplateMapping
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? IIndexTemplateMapping.Aliases { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? IIndexTemplateMapping.Mappings { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? IIndexTemplateMapping.Settings { get; set; }
+	}
+
+	public partial class IndexTemplateMapping : IIndexTemplateMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? Settings { get; set; }
 	}
 }

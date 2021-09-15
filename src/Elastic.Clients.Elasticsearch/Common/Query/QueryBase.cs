@@ -1,3 +1,5 @@
+using System;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -13,6 +15,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public abstract class FieldNameQueryBase : QueryBase, IFieldNameQuery
 	{
 		public Field Field { get; set; }
+	}
+
+	public abstract class FieldNameQueryDescriptorBase<TDescriptor, TInterface>
+		: QueryDescriptorBase<TDescriptor, TInterface>, IFieldNameQuery
+		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface>, TInterface
+		where TInterface : class, IFieldNameQuery
+	{
+		Field IFieldNameQuery.Field { get; set; }
+
+		public TDescriptor Field(Field field) => Assign(field, (a, v) => a.Field = v);
+
+		//public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
+		//	Assign(objectPath, (a, v) => a.Field = v);
 	}
 
 	public interface IQuery
@@ -68,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		///// <inheritdoc cref="IQuery.Conditionless"/>
 		//protected abstract bool Conditionless { get; }
 
-		double? IQuery.Boost { get; set; }
+		float? IQuery.Boost { get; set; }
 
 		//bool IQuery.Conditionless => Conditionless;
 
@@ -84,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public TDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
 
 		/// <inheritdoc cref="IQuery.Boost"/>
-		public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
+		public TDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.Boost = v);
 
 		///// <inheritdoc cref="IQuery.IsVerbatim"/>
 		//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
@@ -95,6 +110,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public abstract partial class QueryBase : IQuery
 	{
+		public float? Boost { get; set; }
+		public string Name { get; set; }
+
 		//protected abstract bool Conditionless { get; }
 		public bool IsStrict { get; set; }
 		public bool IsVerbatim { get; set; }

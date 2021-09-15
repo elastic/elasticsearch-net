@@ -198,7 +198,18 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class ChainTransform
+	[ConvertAs(typeof(ChainTransform))]
+	public partial interface IChainTransform
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.TransformContainer> Transforms { get; set; }
+	}
+
+	public partial class ChainTransformDescriptor : DescriptorBase<ChainTransformDescriptor, IChainTransform>, IChainTransform
+	{
+		IEnumerable<Elastic.Clients.Elasticsearch.TransformContainer> IChainTransform.Transforms { get; set; }
+	}
+
+	public partial class ChainTransform : IChainTransform
 	{
 		[JsonInclude]
 		[JsonPropertyName("transforms")]
@@ -283,7 +294,26 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class DateField
+	[ConvertAs(typeof(DateField))]
+	public partial interface IDateField
+	{
+		Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+		string? Format { get; set; }
+
+		bool? IncludeUnmapped { get; set; }
+	}
+
+	public partial class DateFieldDescriptor : DescriptorBase<DateFieldDescriptor, IDateField>, IDateField
+	{
+		Elastic.Clients.Elasticsearch.Field IDateField.Field { get; set; }
+
+		string? IDateField.Format { get; set; }
+
+		bool? IDateField.IncludeUnmapped { get; set; }
+	}
+
+	public partial class DateField : IDateField
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -436,7 +466,16 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class EmptyObject
+	[ConvertAs(typeof(EmptyObject))]
+	public partial interface IEmptyObject
+	{
+	}
+
+	public partial class EmptyObjectDescriptor : DescriptorBase<EmptyObjectDescriptor, IEmptyObject>, IEmptyObject
+	{
+	}
+
+	public partial class EmptyObject : IEmptyObject
 	{
 	}
 
@@ -1319,14 +1358,40 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class InlineScript : ScriptBase
+	[ConvertAs(typeof(InlineScript))]
+	public partial interface IInlineScript
+	{
+		string Source { get; set; }
+	}
+
+	public partial class InlineScriptDescriptor : DescriptorBase<InlineScriptDescriptor, IInlineScript>, IInlineScript
+	{
+		string IInlineScript.Source { get; set; }
+	}
+
+	public partial class InlineScript : ScriptBase, IInlineScript
 	{
 		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source { get; set; }
 	}
 
-	public partial class LatLon
+	[ConvertAs(typeof(LatLon))]
+	public partial interface ILatLon
+	{
+		double Lat { get; set; }
+
+		double Lon { get; set; }
+	}
+
+	public partial class LatLonDescriptor : DescriptorBase<LatLonDescriptor, ILatLon>, ILatLon
+	{
+		double ILatLon.Lat { get; set; }
+
+		double ILatLon.Lon { get; set; }
+	}
+
+	public partial class LatLon : ILatLon
 	{
 		[JsonInclude]
 		[JsonPropertyName("lat")]
@@ -2120,7 +2185,16 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public abstract partial class RequestBase
+	[ConvertAs(typeof(RequestBase))]
+	public partial interface IRequestBase
+	{
+	}
+
+	public partial class RequestBaseDescriptor : DescriptorBase<RequestBaseDescriptor, IRequestBase>, IRequestBase
+	{
+	}
+
+	public abstract partial class RequestBase : IRequestBase
 	{
 	}
 
@@ -2214,7 +2288,22 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public abstract partial class ScriptBase
+	[ConvertAs(typeof(ScriptBase))]
+	public partial interface IScriptBase
+	{
+		Union<Elastic.Clients.Elasticsearch.ScriptLanguage, string>? Lang { get; set; }
+
+		Dictionary<string, object>? Params { get; set; }
+	}
+
+	public partial class ScriptBaseDescriptor : DescriptorBase<ScriptBaseDescriptor, IScriptBase>, IScriptBase
+	{
+		Union<Elastic.Clients.Elasticsearch.ScriptLanguage, string>? IScriptBase.Lang { get; set; }
+
+		Dictionary<string, object>? IScriptBase.Params { get; set; }
+	}
+
+	public abstract partial class ScriptBase : IScriptBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -2225,7 +2314,22 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object>? Params { get; set; }
 	}
 
-	public partial class ScriptField
+	[ConvertAs(typeof(ScriptField))]
+	public partial interface IScriptField
+	{
+		bool? IgnoreFailure { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptFieldDescriptor : DescriptorBase<ScriptFieldDescriptor, IScriptField>, IScriptField
+	{
+		Elastic.Clients.Elasticsearch.Script IScriptField.Script { get; set; }
+
+		bool? IScriptField.IgnoreFailure { get; set; }
+	}
+
+	public partial class ScriptField : IScriptField
 	{
 		[JsonInclude]
 		[JsonPropertyName("ignore_failure")]
@@ -2236,7 +2340,22 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
-	public partial class ScriptTransform
+	[ConvertAs(typeof(ScriptTransform))]
+	public partial interface IScriptTransform
+	{
+		string Lang { get; set; }
+
+		Dictionary<string, object> Params { get; set; }
+	}
+
+	public partial class ScriptTransformDescriptor : DescriptorBase<ScriptTransformDescriptor, IScriptTransform>, IScriptTransform
+	{
+		string IScriptTransform.Lang { get; set; }
+
+		Dictionary<string, object> IScriptTransform.Params { get; set; }
+	}
+
+	public partial class ScriptTransform : IScriptTransform
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -2418,11 +2537,26 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class SearchTransform
+	[ConvertAs(typeof(SearchTransform))]
+	public partial interface ISearchTransform
+	{
+		Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestDefinition Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time Timeout { get; set; }
+	}
+
+	public partial class SearchTransformDescriptor : DescriptorBase<SearchTransformDescriptor, ISearchTransform>, ISearchTransform
+	{
+		Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestDefinition ISearchTransform.Request { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time ISearchTransform.Timeout { get; set; }
+	}
+
+	public partial class SearchTransform : ISearchTransform
 	{
 		[JsonInclude]
 		[JsonPropertyName("request")]
-		public Elastic.Clients.Elasticsearch.Watcher.SearchInputRequestDefinition Request { get; set; }
+		public Elastic.Clients.Elasticsearch.Watcher.ISearchInputRequestDefinition Request { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("timeout")]
@@ -2846,7 +2980,26 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class SlicedScroll
+	[ConvertAs(typeof(SlicedScroll))]
+	public partial interface ISlicedScroll
+	{
+		Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		int Id { get; set; }
+
+		int Max { get; set; }
+	}
+
+	public partial class SlicedScrollDescriptor : DescriptorBase<SlicedScrollDescriptor, ISlicedScroll>, ISlicedScroll
+	{
+		Elastic.Clients.Elasticsearch.Field? ISlicedScroll.Field { get; set; }
+
+		int ISlicedScroll.Id { get; set; }
+
+		int ISlicedScroll.Max { get; set; }
+	}
+
+	public partial class SlicedScroll : ISlicedScroll
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -2936,7 +3089,22 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class StoredScript
+	[ConvertAs(typeof(StoredScript))]
+	public partial interface IStoredScript
+	{
+		Union<Elastic.Clients.Elasticsearch.ScriptLanguage, string>? Lang { get; set; }
+
+		string Source { get; set; }
+	}
+
+	public partial class StoredScriptDescriptor : DescriptorBase<StoredScriptDescriptor, IStoredScript>, IStoredScript
+	{
+		Union<Elastic.Clients.Elasticsearch.ScriptLanguage, string>? IStoredScript.Lang { get; set; }
+
+		string IStoredScript.Source { get; set; }
+	}
+
+	public partial class StoredScript : IStoredScript
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -2949,21 +3117,6 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class Transform
 	{
-	}
-
-	public partial class TransformContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("chain")]
-		public Elastic.Clients.Elasticsearch.ChainTransform? Chain { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptTransform? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("search")]
-		public Elastic.Clients.Elasticsearch.SearchTransform? Search { get; set; }
 	}
 
 	public partial class TranslogStats

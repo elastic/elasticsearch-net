@@ -55,7 +55,54 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "aggregate_metric_double";
 	}
 
-	public partial class AllField
+	[ConvertAs(typeof(AllField))]
+	public partial interface IAllField
+	{
+		string Analyzer { get; set; }
+
+		bool Enabled { get; set; }
+
+		bool OmitNorms { get; set; }
+
+		string SearchAnalyzer { get; set; }
+
+		string Similarity { get; set; }
+
+		bool Store { get; set; }
+
+		bool StoreTermVectorOffsets { get; set; }
+
+		bool StoreTermVectorPayloads { get; set; }
+
+		bool StoreTermVectorPositions { get; set; }
+
+		bool StoreTermVectors { get; set; }
+	}
+
+	public partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
+	{
+		string IAllField.Analyzer { get; set; }
+
+		bool IAllField.Enabled { get; set; }
+
+		bool IAllField.OmitNorms { get; set; }
+
+		string IAllField.SearchAnalyzer { get; set; }
+
+		string IAllField.Similarity { get; set; }
+
+		bool IAllField.Store { get; set; }
+
+		bool IAllField.StoreTermVectorOffsets { get; set; }
+
+		bool IAllField.StoreTermVectorPayloads { get; set; }
+
+		bool IAllField.StoreTermVectorPositions { get; set; }
+
+		bool IAllField.StoreTermVectors { get; set; }
+	}
+
+	public partial class AllField : IAllField
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -526,11 +573,46 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "double_range";
 	}
 
-	public partial class DynamicTemplate
+	[ConvertAs(typeof(DynamicTemplate))]
+	public partial interface IDynamicTemplate
+	{
+		Elastic.Clients.Elasticsearch.Mapping.Property? Mapping { get; set; }
+
+		string? Match { get; set; }
+
+		string? MatchMappingType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
+
+		string? PathMatch { get; set; }
+
+		string? PathUnmatch { get; set; }
+
+		string? Unmatch { get; set; }
+	}
+
+	public partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor, IDynamicTemplate>, IDynamicTemplate
+	{
+		Elastic.Clients.Elasticsearch.Mapping.Property? IDynamicTemplate.Mapping { get; set; }
+
+		string? IDynamicTemplate.Match { get; set; }
+
+		string? IDynamicTemplate.MatchMappingType { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.MatchType? IDynamicTemplate.MatchPattern { get; set; }
+
+		string? IDynamicTemplate.PathMatch { get; set; }
+
+		string? IDynamicTemplate.PathUnmatch { get; set; }
+
+		string? IDynamicTemplate.Unmatch { get; set; }
+	}
+
+	public partial class DynamicTemplate : IDynamicTemplate
 	{
 		[JsonInclude]
 		[JsonPropertyName("mapping")]
-		public Elastic.Clients.Elasticsearch.Mapping.PropertyBase? Mapping { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.Property? Mapping { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("match")]
@@ -580,7 +662,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 	}
 
-	public partial class FieldNamesField
+	[ConvertAs(typeof(FieldNamesField))]
+	public partial interface IFieldNamesField
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class FieldNamesFieldDescriptor : DescriptorBase<FieldNamesFieldDescriptor, IFieldNamesField>, IFieldNamesField
+	{
+		bool IFieldNamesField.Enabled { get; set; }
+	}
+
+	public partial class FieldNamesField : IFieldNamesField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -985,7 +1078,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "histogram";
 	}
 
-	public partial class IndexField
+	[ConvertAs(typeof(IndexField))]
+	public partial interface IIndexField
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class IndexFieldDescriptor : DescriptorBase<IndexFieldDescriptor, IIndexField>, IIndexField
+	{
+		bool IIndexField.Enabled { get; set; }
+	}
+
+	public partial class IndexField : IIndexField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -1412,7 +1516,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Fields
+		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? Fields
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1472,7 +1576,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties
+		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? Properties
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -1548,14 +1652,44 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "rank_features";
 	}
 
-	public partial class RoutingField
+	[ConvertAs(typeof(RoutingField))]
+	public partial interface IRoutingField
+	{
+		bool Required { get; set; }
+	}
+
+	public partial class RoutingFieldDescriptor : DescriptorBase<RoutingFieldDescriptor, IRoutingField>, IRoutingField
+	{
+		bool IRoutingField.Required { get; set; }
+	}
+
+	public partial class RoutingField : IRoutingField
 	{
 		[JsonInclude]
 		[JsonPropertyName("required")]
 		public bool Required { get; set; }
 	}
 
-	public partial class RuntimeField
+	[ConvertAs(typeof(RuntimeField))]
+	public partial interface IRuntimeField
+	{
+		string? Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+	}
+
+	public partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor, IRuntimeField>, IRuntimeField
+	{
+		string? IRuntimeField.Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? IRuntimeField.Script { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType IRuntimeField.Type { get; set; }
+	}
+
+	public partial class RuntimeField : IRuntimeField
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -1728,14 +1862,52 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "shape";
 	}
 
-	public partial class SizeField
+	[ConvertAs(typeof(SizeField))]
+	public partial interface ISizeField
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class SizeFieldDescriptor : DescriptorBase<SizeFieldDescriptor, ISizeField>, ISizeField
+	{
+		bool ISizeField.Enabled { get; set; }
+	}
+
+	public partial class SizeField : ISizeField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}
 
-	public partial class SourceField
+	[ConvertAs(typeof(SourceField))]
+	public partial interface ISourceField
+	{
+		bool? Compress { get; set; }
+
+		string? CompressThreshold { get; set; }
+
+		bool? Enabled { get; set; }
+
+		IEnumerable<string>? Excludes { get; set; }
+
+		IEnumerable<string>? Includes { get; set; }
+	}
+
+	public partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor, ISourceField>, ISourceField
+	{
+		bool? ISourceField.Compress { get; set; }
+
+		string? ISourceField.CompressThreshold { get; set; }
+
+		bool? ISourceField.Enabled { get; set; }
+
+		IEnumerable<string>? ISourceField.Excludes { get; set; }
+
+		IEnumerable<string>? ISourceField.Includes { get; set; }
+	}
+
+	public partial class SourceField : ISourceField
 	{
 		[JsonInclude]
 		[JsonPropertyName("compress")]
@@ -2078,11 +2250,74 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "token_count";
 	}
 
-	public partial class TypeMapping
+	[ConvertAs(typeof(TypeMapping))]
+	public partial interface ITypeMapping
+	{
+		Elastic.Clients.Elasticsearch.Mapping.IAllField? AllField { get; set; }
+
+		bool? DateDetection { get; set; }
+
+		Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? Dynamic { get; set; }
+
+		IEnumerable<string>? DynamicDateFormats { get; set; }
+
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? DynamicTemplates { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? FieldNames { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.IIndexField? IndexField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Metadata? Meta { get; set; }
+
+		bool? NumericDetection { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? Properties { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.IRoutingField? Routing { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IRuntimeField>? Runtime { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.ISizeField? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.ISourceField? Source { get; set; }
+	}
+
+	public partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor, ITypeMapping>, ITypeMapping
+	{
+		Elastic.Clients.Elasticsearch.Mapping.IAllField? ITypeMapping.AllField { get; set; }
+
+		bool? ITypeMapping.DateDetection { get; set; }
+
+		Union<bool, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>? ITypeMapping.Dynamic { get; set; }
+
+		IEnumerable<string>? ITypeMapping.DynamicDateFormats { get; set; }
+
+		Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? ITypeMapping.DynamicTemplates { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? ITypeMapping.FieldNames { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.IIndexField? ITypeMapping.IndexField { get; set; }
+
+		Elastic.Clients.Elasticsearch.Metadata? ITypeMapping.Meta { get; set; }
+
+		bool? ITypeMapping.NumericDetection { get; set; }
+
+		Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? ITypeMapping.Properties { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.IRoutingField? ITypeMapping.Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.ISizeField? ITypeMapping.Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.ISourceField? ITypeMapping.Source { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IRuntimeField>? ITypeMapping.Runtime { get; set; }
+	}
+
+	public partial class TypeMapping : ITypeMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("all_field")]
-		public Elastic.Clients.Elasticsearch.Mapping.AllField? AllField { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IAllField? AllField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("date_detection")]
@@ -2098,15 +2333,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("dynamic_templates")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>>? DynamicTemplates { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IDynamicTemplate>>>? DynamicTemplates { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_field_names")]
-		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IFieldNamesField? FieldNames { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_field")]
-		public Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexField { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IIndexField? IndexField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -2118,23 +2353,23 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.PropertyBase>? Properties { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.Property>? Properties { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
-		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IRoutingField? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.IRuntimeField>? Runtime { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_size")]
-		public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ISizeField? Size { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.ISourceField? Source { get; set; }
 	}
 
 	public partial class VersionProperty : Mapping.DocValuesPropertyBase

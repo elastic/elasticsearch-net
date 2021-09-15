@@ -24,30 +24,80 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 {
-	public partial class Command
+	[ConvertAs(typeof(Command))]
+	public partial interface ICommand
+	{
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocatePrimaryAction? AllocateEmptyPrimary { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocateReplicaAction? AllocateReplica { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocatePrimaryAction? AllocateStalePrimary { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandCancelAction? Cancel { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandMoveAction? Move { get; set; }
+	}
+
+	public partial class CommandDescriptor : DescriptorBase<CommandDescriptor, ICommand>, ICommand
+	{
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandCancelAction? ICommand.Cancel { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandMoveAction? ICommand.Move { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocateReplicaAction? ICommand.AllocateReplica { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocatePrimaryAction? ICommand.AllocateStalePrimary { get; set; }
+
+		Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocatePrimaryAction? ICommand.AllocateEmptyPrimary { get; set; }
+	}
+
+	public partial class Command : ICommand
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocate_empty_primary")]
-		public Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? AllocateEmptyPrimary { get; set; }
+		public Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocatePrimaryAction? AllocateEmptyPrimary { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("allocate_replica")]
-		public Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaAction? AllocateReplica { get; set; }
+		public Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocateReplicaAction? AllocateReplica { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("allocate_stale_primary")]
-		public Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? AllocateStalePrimary { get; set; }
+		public Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandAllocatePrimaryAction? AllocateStalePrimary { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("cancel")]
-		public Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelAction? Cancel { get; set; }
+		public Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandCancelAction? Cancel { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("move")]
-		public Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveAction? Move { get; set; }
+		public Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommandMoveAction? Move { get; set; }
 	}
 
-	public partial class CommandAllocatePrimaryAction
+	[ConvertAs(typeof(CommandAllocatePrimaryAction))]
+	public partial interface ICommandAllocatePrimaryAction
+	{
+		bool AcceptDataLoss { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		string Node { get; set; }
+
+		int Shard { get; set; }
+	}
+
+	public partial class CommandAllocatePrimaryActionDescriptor : DescriptorBase<CommandAllocatePrimaryActionDescriptor, ICommandAllocatePrimaryAction>, ICommandAllocatePrimaryAction
+	{
+		Elastic.Clients.Elasticsearch.IndexName ICommandAllocatePrimaryAction.Index { get; set; }
+
+		int ICommandAllocatePrimaryAction.Shard { get; set; }
+
+		string ICommandAllocatePrimaryAction.Node { get; set; }
+
+		bool ICommandAllocatePrimaryAction.AcceptDataLoss { get; set; }
+	}
+
+	public partial class CommandAllocatePrimaryAction : ICommandAllocatePrimaryAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("accept_data_loss")]
@@ -66,7 +116,26 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public int Shard { get; set; }
 	}
 
-	public partial class CommandAllocateReplicaAction
+	[ConvertAs(typeof(CommandAllocateReplicaAction))]
+	public partial interface ICommandAllocateReplicaAction
+	{
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		string Node { get; set; }
+
+		int Shard { get; set; }
+	}
+
+	public partial class CommandAllocateReplicaActionDescriptor : DescriptorBase<CommandAllocateReplicaActionDescriptor, ICommandAllocateReplicaAction>, ICommandAllocateReplicaAction
+	{
+		Elastic.Clients.Elasticsearch.IndexName ICommandAllocateReplicaAction.Index { get; set; }
+
+		int ICommandAllocateReplicaAction.Shard { get; set; }
+
+		string ICommandAllocateReplicaAction.Node { get; set; }
+	}
+
+	public partial class CommandAllocateReplicaAction : ICommandAllocateReplicaAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -81,7 +150,30 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public int Shard { get; set; }
 	}
 
-	public partial class CommandCancelAction
+	[ConvertAs(typeof(CommandCancelAction))]
+	public partial interface ICommandCancelAction
+	{
+		bool? AllowPrimary { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		string Node { get; set; }
+
+		int Shard { get; set; }
+	}
+
+	public partial class CommandCancelActionDescriptor : DescriptorBase<CommandCancelActionDescriptor, ICommandCancelAction>, ICommandCancelAction
+	{
+		Elastic.Clients.Elasticsearch.IndexName ICommandCancelAction.Index { get; set; }
+
+		int ICommandCancelAction.Shard { get; set; }
+
+		string ICommandCancelAction.Node { get; set; }
+
+		bool? ICommandCancelAction.AllowPrimary { get; set; }
+	}
+
+	public partial class CommandCancelAction : ICommandCancelAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("allow_primary")]
@@ -100,7 +192,30 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public int Shard { get; set; }
 	}
 
-	public partial class CommandMoveAction
+	[ConvertAs(typeof(CommandMoveAction))]
+	public partial interface ICommandMoveAction
+	{
+		string FromNode { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		int Shard { get; set; }
+
+		string ToNode { get; set; }
+	}
+
+	public partial class CommandMoveActionDescriptor : DescriptorBase<CommandMoveActionDescriptor, ICommandMoveAction>, ICommandMoveAction
+	{
+		Elastic.Clients.Elasticsearch.IndexName ICommandMoveAction.Index { get; set; }
+
+		int ICommandMoveAction.Shard { get; set; }
+
+		string ICommandMoveAction.FromNode { get; set; }
+
+		string ICommandMoveAction.ToNode { get; set; }
+	}
+
+	public partial class CommandMoveAction : ICommandMoveAction
 	{
 		[JsonInclude]
 		[JsonPropertyName("from_node")]
@@ -276,7 +391,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	{
 		[JsonInclude]
 		[JsonPropertyName("blocks")]
-		public Elastic.Clients.Elasticsearch.EmptyObject? Blocks
+		public Elastic.Clients.Elasticsearch.IEmptyObject? Blocks
 		{
 			get;
 #if NET5_0_OR_GREATER

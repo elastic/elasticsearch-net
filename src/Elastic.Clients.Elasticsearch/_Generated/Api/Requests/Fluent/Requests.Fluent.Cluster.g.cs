@@ -191,13 +191,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexState IPutComponentTemplateRequest.Template { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexState IPutComponentTemplateRequest.Template { get; set; }
 
-		Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? IPutComponentTemplateRequest.Aliases { get; set; }
+		Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IAliasDefinition>? IPutComponentTemplateRequest.Aliases { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.TypeMapping? IPutComponentTemplateRequest.Mappings { get; set; }
+		Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? IPutComponentTemplateRequest.Mappings { get; set; }
 
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IPutComponentTemplateRequest.Settings { get; set; }
+		Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? IPutComponentTemplateRequest.Settings { get; set; }
 
 		Elastic.Clients.Elasticsearch.VersionNumber? IPutComponentTemplateRequest.Version { get; set; }
 
@@ -205,10 +205,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		public PutComponentTemplateDescriptor Create(bool? create = true) => Qs("create", create);
 		public PutComponentTemplateDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public PutComponentTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template) => Assign(template, (a, v) => a.Template = v);
-		public PutComponentTemplateDescriptor Aliases(Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
-		public PutComponentTemplateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public PutComponentTemplateDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a.Settings = v);
+		public PutComponentTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IIndexState template) => Assign(template, (a, v) => a.Template = v);
+		public PutComponentTemplateDescriptor Aliases(Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IAliasDefinition>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public PutComponentTemplateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public PutComponentTemplateDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public PutComponentTemplateDescriptor Version(Elastic.Clients.Elasticsearch.VersionNumber? version) => Assign(version, (a, v) => a.Version = v);
 		public PutComponentTemplateDescriptor Meta(Elastic.Clients.Elasticsearch.Metadata? meta) => Assign(meta, (a, v) => a.Meta = v);
 	}
@@ -255,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? IRerouteRequest.Commands { get; set; }
+		IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommand>? IRerouteRequest.Commands { get; set; }
 
 		public RerouteDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		public RerouteDescriptor Explain(bool? explain = true) => Qs("explain", explain);
@@ -263,7 +263,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public RerouteDescriptor RetryFailed(bool? retryFailed = true) => Qs("retry_failed", retryFailed);
 		public RerouteDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public RerouteDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public RerouteDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? commands) => Assign(commands, (a, v) => a.Commands = v);
+		public RerouteDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.ICommand>? commands) => Assign(commands, (a, v) => a.Commands = v);
 	}
 
 	public partial class StateDescriptor : RequestDescriptorBase<StateDescriptor, StateRequestParameters, IStateRequest>, IStateRequest

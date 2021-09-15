@@ -24,7 +24,34 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Global.Reindex
 {
-	public partial class Destination
+	[ConvertAs(typeof(Destination))]
+	public partial interface IDestination
+	{
+		Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.OpType? OpType { get; set; }
+
+		string? Pipeline { get; set; }
+
+		Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+	}
+
+	public partial class DestinationDescriptor : DescriptorBase<DestinationDescriptor, IDestination>, IDestination
+	{
+		Elastic.Clients.Elasticsearch.IndexName IDestination.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.OpType? IDestination.OpType { get; set; }
+
+		string? IDestination.Pipeline { get; set; }
+
+		Elastic.Clients.Elasticsearch.Routing? IDestination.Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? IDestination.VersionType { get; set; }
+	}
+
+	public partial class Destination : IDestination
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -47,7 +74,34 @@ namespace Elastic.Clients.Elasticsearch.Global.Reindex
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 	}
 
-	public partial class RemoteSource
+	[ConvertAs(typeof(RemoteSource))]
+	public partial interface IRemoteSource
+	{
+		Elastic.Clients.Elasticsearch.Time ConnectTimeout { get; set; }
+
+		Elastic.Clients.Elasticsearch.Host Host { get; set; }
+
+		Elastic.Clients.Elasticsearch.Password Password { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time SocketTimeout { get; set; }
+
+		Elastic.Clients.Elasticsearch.Username Username { get; set; }
+	}
+
+	public partial class RemoteSourceDescriptor : DescriptorBase<RemoteSourceDescriptor, IRemoteSource>, IRemoteSource
+	{
+		Elastic.Clients.Elasticsearch.Time IRemoteSource.ConnectTimeout { get; set; }
+
+		Elastic.Clients.Elasticsearch.Host IRemoteSource.Host { get; set; }
+
+		Elastic.Clients.Elasticsearch.Username IRemoteSource.Username { get; set; }
+
+		Elastic.Clients.Elasticsearch.Password IRemoteSource.Password { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time IRemoteSource.SocketTimeout { get; set; }
+	}
+
+	public partial class RemoteSource : IRemoteSource
 	{
 		[JsonInclude]
 		[JsonPropertyName("connect_timeout")]
@@ -70,7 +124,42 @@ namespace Elastic.Clients.Elasticsearch.Global.Reindex
 		public Elastic.Clients.Elasticsearch.Username Username { get; set; }
 	}
 
-	public partial class Source
+	[ConvertAs(typeof(Source))]
+	public partial interface ISource
+	{
+		Elastic.Clients.Elasticsearch.Indices Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Reindex.IRemoteSource? Remote { get; set; }
+
+		int? Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.Sort? Sort { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? source_fields { get; set; }
+	}
+
+	public partial class SourceDescriptor : DescriptorBase<SourceDescriptor, ISource>, ISource
+	{
+		Elastic.Clients.Elasticsearch.Indices ISource.Index { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? ISource.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Reindex.IRemoteSource? ISource.Remote { get; set; }
+
+		int? ISource.Size { get; set; }
+
+		Elastic.Clients.Elasticsearch.ISlicedScroll? ISource.Slice { get; set; }
+
+		Elastic.Clients.Elasticsearch.Global.Search.Sort? ISource.Sort { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? ISource.source_fields { get; set; }
+	}
+
+	public partial class Source : ISource
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -82,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Reindex
 
 		[JsonInclude]
 		[JsonPropertyName("remote")]
-		public Elastic.Clients.Elasticsearch.Global.Reindex.RemoteSource? Remote { get; set; }
+		public Elastic.Clients.Elasticsearch.Global.Reindex.IRemoteSource? Remote { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -90,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Global.Reindex
 
 		[JsonInclude]
 		[JsonPropertyName("slice")]
-		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+		public Elastic.Clients.Elasticsearch.ISlicedScroll? Slice { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]

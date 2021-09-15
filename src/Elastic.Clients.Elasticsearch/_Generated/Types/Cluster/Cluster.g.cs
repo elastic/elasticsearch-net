@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? Mappings
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.ITypeMapping>? Mappings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("rollover_info")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions>? RolloverInfo
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IRolloverConditions>? RolloverInfo
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? Settings
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings>? Settings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -737,7 +737,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IAliasDefinition>? Aliases
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -749,7 +749,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings
+		public Elastic.Clients.Elasticsearch.Mapping.ITypeMapping? Mappings
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -773,7 +773,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> Settings
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IIndexSettings> Settings
 		{
 			get;
 #if NET5_0_OR_GREATER

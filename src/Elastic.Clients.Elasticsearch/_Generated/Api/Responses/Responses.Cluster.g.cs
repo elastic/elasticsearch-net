@@ -767,7 +767,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("routing_table")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.EmptyObject>? RoutingTable
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IEmptyObject>? RoutingTable
 		{
 			get;
 #if NET5_0_OR_GREATER

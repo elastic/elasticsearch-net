@@ -330,15 +330,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	public partial class GetResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexState>
+	public partial class GetResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IIndexState>
 	{
 	}
 
-	public partial class GetSettingsResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexState>
+	public partial class GetSettingsResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IIndexState>
 	{
 	}
 
-	public partial class GetTemplateResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping>
+	public partial class GetTemplateResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.IndexManagement.ITemplateMapping>
 	{
 	}
 

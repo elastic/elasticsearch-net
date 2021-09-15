@@ -150,13 +150,13 @@ namespace Elastic.Clients.Elasticsearch.Slm
 	[ConvertAs(typeof(PutLifecycleRequest))]
 	public partial interface IPutLifecycleRequest : IRequest<PutLifecycleRequestParameters>
 	{
-		Elastic.Clients.Elasticsearch.Slm.Configuration? Config { get; set; }
+		Elastic.Clients.Elasticsearch.Slm.IConfiguration? Config { get; set; }
 
 		Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
 		string? Repository { get; set; }
 
-		Elastic.Clients.Elasticsearch.Slm.Retention? Retention { get; set; }
+		Elastic.Clients.Elasticsearch.Slm.IRetention? Retention { get; set; }
 
 		Elastic.Clients.Elasticsearch.Watcher.CronExpression? Schedule { get; set; }
 	}
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 		[JsonInclude]
 		[JsonPropertyName("config")]
-		public Elastic.Clients.Elasticsearch.Slm.Configuration? Config { get; set; }
+		public Elastic.Clients.Elasticsearch.Slm.IConfiguration? Config { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -195,7 +195,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 
 		[JsonInclude]
 		[JsonPropertyName("retention")]
-		public Elastic.Clients.Elasticsearch.Slm.Retention? Retention { get; set; }
+		public Elastic.Clients.Elasticsearch.Slm.IRetention? Retention { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("schedule")]

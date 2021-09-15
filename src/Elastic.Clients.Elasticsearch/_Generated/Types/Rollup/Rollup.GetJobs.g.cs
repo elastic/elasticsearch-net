@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 
 		[JsonInclude]
 		[JsonPropertyName("groups")]
-		public Elastic.Clients.Elasticsearch.Rollup.Groupings Groups
+		public Elastic.Clients.Elasticsearch.Rollup.IGroupings Groups
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.GetJobs
 
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric> Metrics
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.IFieldMetric> Metrics
 		{
 			get;
 #if NET5_0_OR_GREATER
