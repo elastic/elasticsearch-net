@@ -29,6 +29,12 @@ Please read the getting started guide for both
 <<elasticsearch-net,Elasticsearch.Net>> and <<nest,NEST>>.
 
 [discrete]
+=== {es} Version Compatibility
+
+Language clients are forward compatible; meaning that clients support communicating with greater or equal minor versions of {es}.
+{es} language clients are only backwards compatible with default distributions and without guarantees made.
+
+[discrete]
 === Questions, bugs, comments, feature requests
 
 Bug reports and feature requests are more than welcome on the 
