@@ -55,6 +55,10 @@ namespace Nest
 		[DataMember(Name ="num_reduce_phases")]
 		public long NumberOfReducePhases { get; internal set; }
 
+		/// <inheritdoc cref="ISearchResponse{TDocument}.PointInTimeId"/>
+		[DataMember(Name = "pit_id")]
+		public string PointInTimeId { get; internal set; }
+
 		/// <inheritdoc cref="ISearchResponse{TDocument}.Profile" />
 		[DataMember(Name ="profile")]
 		public Profile Profile { get; internal set; }
@@ -82,5 +86,9 @@ namespace Nest
 		/// <inheritdoc cref="ISearchResponse{TDocument}.Took" />
 		[DataMember(Name ="took")]
 		public long Took { get; internal set; }
+
+		/// <inheritdoc cref="ISearchResponse{TDocument}.Total" />
+		[IgnoreDataMember]
+		public long Total => HitsMetadata?.Total?.Value ?? -1;
 	}
 }
