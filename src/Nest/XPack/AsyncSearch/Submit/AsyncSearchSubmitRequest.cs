@@ -26,6 +26,10 @@ namespace Nest
 		[DataMember(Name = "explain")]
 		bool? Explain { get; set; }
 
+		/// <inheritdoc cref="ISearchRequest.Fields"/>
+		[DataMember(Name = "fields")]
+		Fields Fields { get; set; }
+
 		/// <inheritdoc cref="ISearchRequest.From"/>
 		[DataMember(Name = "from")]
 		int? From { get; set; }
@@ -98,6 +102,14 @@ namespace Nest
 		/// <inheritdoc cref="ISearchRequest.Version"/>
 		[DataMember(Name = "version")]
 		bool? Version { get; set; }
+
+		/// <inheritdoc cref="ISearchRequest.PointInTime"/>
+		[DataMember(Name = "pit")]
+		IPointInTime PointInTime { get; set; }
+
+		/// <inheritdoc cref="ISearchRequest.RuntimeFields"/>
+		[DataMember(Name = "runtime_mappings")]
+		IRuntimeFields RuntimeFields { get; set; }
 	}
 
 	[ReadAs(typeof(AsyncSearchSubmitRequest<>))]
@@ -117,6 +129,8 @@ namespace Nest
 		public Fields DocValueFields { get; set; }
 		/// <inheritdoc />
 		public bool? Explain { get; set; }
+		/// <inheritdoc />
+		public Fields Fields { get; set; }
 		/// <inheritdoc />
 		public int? From { get; set; }
 		/// <inheritdoc />
@@ -158,6 +172,10 @@ namespace Nest
 		public bool? TrackTotalHits { get; set; }
 		/// <inheritdoc />
 		public bool? Version { get; set; }
+		/// <inheritdoc />
+		public IPointInTime PointInTime { get; set; }
+		/// <inheritdoc />
+		public IRuntimeFields RuntimeFields { get; set; }
 
 		Type ITypedSearchRequest.ClrType => null;
 
@@ -179,6 +197,7 @@ namespace Nest
 		IFieldCollapse IAsyncSearchSubmitRequest.Collapse { get; set; }
 		Fields IAsyncSearchSubmitRequest.DocValueFields { get; set; }
 		bool? IAsyncSearchSubmitRequest.Explain { get; set; }
+		Fields IAsyncSearchSubmitRequest.Fields { get; set; }
 		int? IAsyncSearchSubmitRequest.From { get; set; }
 		IHighlight IAsyncSearchSubmitRequest.Highlight { get; set; }
 		IDictionary<IndexName, double> IAsyncSearchSubmitRequest.IndicesBoost { get; set; }
@@ -199,6 +218,8 @@ namespace Nest
 		bool? IAsyncSearchSubmitRequest.TrackScores { get; set; }
 		bool? IAsyncSearchSubmitRequest.TrackTotalHits { get; set; }
 		bool? IAsyncSearchSubmitRequest.Version { get; set; }
+		IPointInTime IAsyncSearchSubmitRequest.PointInTime { get; set; }
+		IRuntimeFields IAsyncSearchSubmitRequest.RuntimeFields { get; set; }
 
 		protected sealed override void RequestDefaults(AsyncSearchSubmitRequestParameters parameters) => TypedKeys();
 
@@ -224,6 +245,17 @@ namespace Nest
 
 		/// <inheritdoc cref="IAsyncSearchSubmitRequest.Size" />
 		public AsyncSearchSubmitDescriptor<TInferDocument> Take(int? take) => Size(take);
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.Fields" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> Fields(Func<FieldsDescriptor<TInferDocument>, IPromise<Fields>> fields) =>
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TInferDocument>())?.Value);
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.Fields" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> Fields<TSource>(Func<FieldsDescriptor<TSource>, IPromise<Fields>> fields) where TSource : class =>
+			Assign(fields, (a, v) => a.Fields = v?.Invoke(new FieldsDescriptor<TSource>())?.Value);
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.Fields" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> Fields(Fields fields) => Assign(fields, (a, v) => a.DocValueFields = v);
 
 		/// <inheritdoc cref="IAsyncSearchSubmitRequest.From" />
 		public AsyncSearchSubmitDescriptor<TInferDocument> From(int? from) => Assign(from, (a, v) => a.From = v);
@@ -324,5 +356,34 @@ namespace Nest
 
 		/// <inheritdoc cref="IAsyncSearchSubmitRequest.TrackTotalHits" />
 		public AsyncSearchSubmitDescriptor<TInferDocument> TrackTotalHits(bool? trackTotalHits = true) => Assign(trackTotalHits, (a, v) => a.TrackTotalHits = v);
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.PointInTime" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> PointInTime(string pitId)
+		{
+			Self.PointInTime = new PointInTime(pitId);
+			return this;
+		}
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.PointInTime" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> PointInTime(string pitId, Func<PointInTimeDescriptor, IPointInTime> pit) =>
+			Assign(pit, (a, v) => a.PointInTime = v?.Invoke(new PointInTimeDescriptor(pitId)));
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.RuntimeFields" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> RuntimeFields(Func<RuntimeFieldsDescriptor<TInferDocument>, IPromise<IRuntimeFields>> runtimeFieldsSelector) =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TInferDocument>())?.Value);
+
+		/// <inheritdoc cref="IAsyncSearchSubmitRequest.RuntimeFields" />
+		public AsyncSearchSubmitDescriptor<TInferDocument> RuntimeFields<TSource>(Func<RuntimeFieldsDescriptor<TSource>, IPromise<IRuntimeFields>> runtimeFieldsSelector) where TSource : class =>
+			Assign(runtimeFieldsSelector, (a, v) => a.RuntimeFields = v?.Invoke(new RuntimeFieldsDescriptor<TSource>())?.Value);
+
+		protected override string ResolveUrl(RouteValues routeValues, IConnectionSettingsValues settings)
+		{
+			if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
+		}
 	}
 }

@@ -39,8 +39,7 @@ namespace Nest
 		bool? Explain { get; set; }
 
 		/// <summary>
-		/// BETA: Allows for retrieving a list of document fields in the search response.
-		/// <para>This functionality is in beta and is subject to change. </para>
+		/// Allows for retrieving a list of document fields in the search response.
 		/// </summary>
 		[DataMember(Name = "fields")]
 		Fields Fields { get; set; }
