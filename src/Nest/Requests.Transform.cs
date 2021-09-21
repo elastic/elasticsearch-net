@@ -191,6 +191,11 @@ namespace Nest
 	[InterfaceDataContract]
 	public partial interface IPreviewTransformRequest : IRequest<PreviewTransformRequestParameters>
 	{
+		[IgnoreDataMember]
+		Id TransformId
+		{
+			get;
+		}
 	}
 
 	///<summary>Request for Preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</para></summary>
@@ -198,7 +203,20 @@ namespace Nest
 	{
 		protected IPreviewTransformRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformPreview;
-	// values part of the url path
+		///<summary>/_transform/{transform_id}/_preview</summary>
+		///<param name = "transformId">Optional, accepts null</param>
+		public PreviewTransformRequest(Id transformId): base(r => r.Optional("transform_id", transformId))
+		{
+		}
+
+		///<summary>/_transform/_preview</summary>
+		public PreviewTransformRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Id IPreviewTransformRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
 	// Request parameters
 	}
 

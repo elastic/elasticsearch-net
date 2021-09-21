@@ -2368,14 +2368,15 @@ namespace Nest
 	{
 		protected IOpenPointInTimeRequest Self => this;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
-		///<summary>/_pit</summary>
-		public OpenPointInTimeRequest(): base()
+		///<summary>/{index}/_pit</summary>
+		///<param name = "index">this parameter is required</param>
+		public OpenPointInTimeRequest(Indices index): base(r => r.Required("index", index))
 		{
 		}
 
-		///<summary>/{index}/_pit</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public OpenPointInTimeRequest(Indices index): base(r => r.Optional("index", index))
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected OpenPointInTimeRequest(): base()
 		{
 		}
 

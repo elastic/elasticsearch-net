@@ -533,7 +533,7 @@ namespace Nest
 			set => Q("allow_no_indices", value);
 		}
 
-		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		///<summary>Whether wildcard expressions should get expanded to open, closed, or hidden indices</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
 			get => Q<ExpandWildcards? >("expand_wildcards");
