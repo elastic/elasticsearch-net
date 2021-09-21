@@ -72,7 +72,10 @@ namespace Tests.XPack.Info
 			
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
-				r.Features.Vectors.Should().NotBeNull();
+				if (TestConfiguration.Instance.InRange("<7.15.0"))
+				{
+					r.Features.Vectors.Should().NotBeNull();
+				}
 
 				if (TestConfiguration.Instance.InRange("<7.5.0"))
 #pragma warning disable 618
@@ -122,7 +125,10 @@ namespace Tests.XPack.Info
 
 			if (TestConfiguration.Instance.InRange(">=7.3.0"))
 			{
-				r.Vectors.Should().NotBeNull();
+				if (TestConfiguration.Instance.InRange("<7.15.0"))
+				{
+					r.Vectors.Should().NotBeNull();
+				}
 				r.VotingOnly.Should().NotBeNull();
 
 				if (TestConfiguration.Instance.InRange("<7.5.0"))
