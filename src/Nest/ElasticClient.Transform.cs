@@ -116,14 +116,14 @@ namespace Nest.Specification.TransformApi
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</a>
 		/// </summary>
-		public PreviewTransformResponse<TTransform> Preview<TDocument, TTransform>(Func<PreviewTransformDescriptor<TDocument>, IPreviewTransformRequest> selector)
+		public PreviewTransformResponse<TTransform> Preview<TDocument, TTransform>(Func<PreviewTransformDescriptor<TDocument>, IPreviewTransformRequest> selector = null)
 			where TDocument : class => Preview<TTransform>(selector.InvokeOrDefault(new PreviewTransformDescriptor<TDocument>()));
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.preview_transform</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</a>
 		/// </summary>
-		public Task<PreviewTransformResponse<TTransform>> PreviewAsync<TDocument, TTransform>(Func<PreviewTransformDescriptor<TDocument>, IPreviewTransformRequest> selector, CancellationToken ct = default)
+		public Task<PreviewTransformResponse<TTransform>> PreviewAsync<TDocument, TTransform>(Func<PreviewTransformDescriptor<TDocument>, IPreviewTransformRequest> selector = null, CancellationToken ct = default)
 			where TDocument : class => PreviewAsync<TTransform>(selector.InvokeOrDefault(new PreviewTransformDescriptor<TDocument>()), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>transform.preview_transform</c> API, read more about this API online:

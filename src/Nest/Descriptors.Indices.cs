@@ -321,7 +321,7 @@ namespace Nest
 		// Request parameters
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public DeleteIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		///<summary>Whether wildcard expressions should get expanded to open, closed, or hidden indices</summary>
 		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public DeleteIndexDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);

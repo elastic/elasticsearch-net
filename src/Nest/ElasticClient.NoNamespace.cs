@@ -814,13 +814,13 @@ namespace Nest
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
 		/// </summary>
-		public OpenPointInTimeResponse OpenPointInTime(Indices index = null, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null) => OpenPointInTime(selector.InvokeOrDefault(new OpenPointInTimeDescriptor().Index(index: index)));
+		public OpenPointInTimeResponse OpenPointInTime(Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null) => OpenPointInTime(selector.InvokeOrDefault(new OpenPointInTimeDescriptor(index: index)));
 		/// <summary>
 		/// <c>POST</c> request to the <c>open_point_in_time</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html</a>
 		/// </summary>
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Indices index = null, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken ct = default) => OpenPointInTimeAsync(selector.InvokeOrDefault(new OpenPointInTimeDescriptor().Index(index: index)), ct);
+		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Indices index, Func<OpenPointInTimeDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken ct = default) => OpenPointInTimeAsync(selector.InvokeOrDefault(new OpenPointInTimeDescriptor(index: index)), ct);
 		/// <summary>
 		/// <c>POST</c> request to the <c>open_point_in_time</c> API, read more about this API online:
 		/// <para></para>
