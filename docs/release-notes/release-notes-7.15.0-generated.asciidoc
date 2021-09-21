@@ -1,5 +1,11 @@
 
 [float]
+[[uncategorized]]
+=== Uncategorized
+
+- * Support PIT, Fields and RuntimeFields on AsyncSearch https://github.com/elastic/elasticsearch-net/pull/5989[#5989]  (issue: https://github.com/elastic/elasticsearch-net/issues/5988[#5988])
+
+[float]
 [[bug]]
 === Bug Fixes
 
