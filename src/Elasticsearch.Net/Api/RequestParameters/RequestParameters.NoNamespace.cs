@@ -1938,6 +1938,16 @@ namespace Elasticsearch.Net
 			get => Q<int? >("size");
 			set => Q("size", value);
 		}
+
+		///<summary>
+		/// Indicate if the number of documents that match the query should be tracked. A number can also be specified, to accurately track the total
+		/// hit count up to the number.
+		///</summary>
+		public bool? TrackTotalHits
+		{
+			get => Q<bool? >("track_total_hits");
+			set => Q("track_total_hits", value);
+		}
 	}
 
 	///<summary>Request options for SearchShards <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para></summary>
