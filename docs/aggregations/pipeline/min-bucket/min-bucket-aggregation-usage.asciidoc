@@ -22,7 +22,7 @@ please modify the original csharp file found at the link and submit the PR with 
 a => a
 .DateHistogram("projects_started_per_month", dh => dh
     .Field(p => p.StartedOn)
-    .Interval(DateInterval.Month)
+    .CalendarInterval(DateInterval.Month)
     .Aggregations(aa => aa
         .Sum("commits", sm => sm
             .Field(p => p.NumberOfCommits)
@@ -41,7 +41,7 @@ a => a
 new DateHistogramAggregation("projects_started_per_month")
 {
     Field = "startedOn",
-    Interval = DateInterval.Month,
+    CalendarInterval = DateInterval.Month,
     Aggregations = new SumAggregation("commits", "numberOfCommits")
 }
 && new MinBucketAggregation("min_commits_per_month", "projects_started_per_month>commits")
@@ -54,7 +54,7 @@ new DateHistogramAggregation("projects_started_per_month")
   "projects_started_per_month": {
     "date_histogram": {
       "field": "startedOn",
-      "interval": "month"
+      "calendar_interval": "month"
     },
     "aggs": {
       "commits": {
