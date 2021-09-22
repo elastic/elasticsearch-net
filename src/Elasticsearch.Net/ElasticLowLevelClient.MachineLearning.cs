@@ -586,13 +586,11 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		///<summary>GET on /_ml/trained_models/{model_id}/deployment/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-trained-model-deployment-stats.html</para></summary>
 		///<param name = "modelId">The ID of the trained model deployment stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetTrainedModelDeploymentStats<TResponse>(string modelId, GetTrainedModelDeploymentStatsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stats"), null, RequestParams(requestParameters));
 		///<summary>GET on /_ml/trained_models/{model_id}/deployment/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-trained-model-deployment-stats.html</para></summary>
 		///<param name = "modelId">The ID of the trained model deployment stats to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("ml.get_trained_model_deployment_stats", "model_id")]
 		public Task<TResponse> GetTrainedModelDeploymentStatsAsync<TResponse>(string modelId, GetTrainedModelDeploymentStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stats"), ctx, null, RequestParams(requestParameters));
