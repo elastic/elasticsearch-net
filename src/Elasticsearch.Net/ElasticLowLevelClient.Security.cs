@@ -138,7 +138,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "name">A comma-separated list of service token names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse ClearCachedServiceTokens<TResponse>(string @namespace, string service, string name, ClearCachedServiceTokensRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token/{name:name}/_clear_cache"), null, RequestParams(requestParameters));
 		///<summary>POST on /_security/service/{namespace}/{service}/credential/token/{name}/_clear_cache <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html</para></summary>
@@ -146,7 +145,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "name">A comma-separated list of service token names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.clear_cached_service_tokens", "namespace, service, name")]
 		public Task<TResponse> ClearCachedServiceTokensAsync<TResponse>(string @namespace, string service, string name, ClearCachedServiceTokensRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token/{name:name}/_clear_cache"), ctx, null, RequestParams(requestParameters));
@@ -166,7 +164,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "name">An identifier for the token name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse CreateServiceToken<TResponse>(string @namespace, string service, string name, CreateServiceTokenRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_security/service/{namespace}/{service}/credential/token/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html</para></summary>
@@ -174,7 +171,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "name">An identifier for the token name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.create_service_token", "namespace, service, name")]
 		public Task<TResponse> CreateServiceTokenAsync<TResponse>(string @namespace, string service, string name, CreateServiceTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token/{name:name}"), ctx, null, RequestParams(requestParameters));
@@ -182,14 +178,12 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse CreateServiceToken<TResponse>(string @namespace, string service, CreateServiceTokenRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token"), null, RequestParams(requestParameters));
 		///<summary>PUT on /_security/service/{namespace}/{service}/credential/token <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html</para></summary>
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.create_service_token", "namespace, service")]
 		public Task<TResponse> CreateServiceTokenAsync<TResponse>(string @namespace, string service, CreateServiceTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token"), ctx, null, RequestParams(requestParameters));
@@ -233,7 +227,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "name">An identifier for the token name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse DeleteServiceToken<TResponse>(string @namespace, string service, string name, DeleteServiceTokenRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(DELETE, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_security/service/{namespace}/{service}/credential/token/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html</para></summary>
@@ -241,7 +234,6 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "name">An identifier for the token name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.delete_service_token", "namespace, service, name")]
 		public Task<TResponse> DeleteServiceTokenAsync<TResponse>(string @namespace, string service, string name, DeleteServiceTokenRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_security/service/{@namespace:namespace}/{service:service}/credential/token/{name:name}"), ctx, null, RequestParams(requestParameters));
@@ -391,38 +383,32 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetServiceAccounts<TResponse>(string @namespace, string service, GetServiceAccountsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_security/service/{@namespace:namespace}/{service:service}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_security/service/{namespace}/{service} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html</para></summary>
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.get_service_accounts", "namespace, service")]
 		public Task<TResponse> GetServiceAccountsAsync<TResponse>(string @namespace, string service, GetServiceAccountsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_security/service/{@namespace:namespace}/{service:service}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/service/{namespace} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html</para></summary>
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetServiceAccounts<TResponse>(string @namespace, GetServiceAccountsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_security/service/{@namespace:namespace}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_security/service/{namespace} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html</para></summary>
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.get_service_accounts", "namespace")]
 		public Task<TResponse> GetServiceAccountsAsync<TResponse>(string @namespace, GetServiceAccountsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_security/service/{@namespace:namespace}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_security/service <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetServiceAccounts<TResponse>(GetServiceAccountsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, "_security/service", null, RequestParams(requestParameters));
 		///<summary>GET on /_security/service <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.get_service_accounts", "")]
 		public Task<TResponse> GetServiceAccountsAsync<TResponse>(GetServiceAccountsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_security/service", ctx, null, RequestParams(requestParameters));
@@ -430,14 +416,12 @@ namespace Elasticsearch.Net.Specification.SecurityApi
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetServiceCredentials<TResponse>(string @namespace, string service, GetServiceCredentialsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_security/service/{@namespace:namespace}/{service:service}/credential"), null, RequestParams(requestParameters));
 		///<summary>GET on /_security/service/{namespace}/{service}/credential <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html</para></summary>
 		///<param name = "@namespace">An identifier for the namespace</param>
 		///<param name = "service">An identifier for the service name</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Beta within the Elasticsearch server, this functionality is in Beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("security.get_service_credentials", "namespace, service")]
 		public Task<TResponse> GetServiceCredentialsAsync<TResponse>(string @namespace, string service, GetServiceCredentialsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_security/service/{@namespace:namespace}/{service:service}/credential"), ctx, null, RequestParams(requestParameters));

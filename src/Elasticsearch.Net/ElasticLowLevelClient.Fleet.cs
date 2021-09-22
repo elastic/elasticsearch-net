@@ -47,16 +47,14 @@ namespace Elasticsearch.Net.Specification.FleetApi
 		{
 		}
 
-		///<summary>GET on /{index}/_fleet/global_checkpoints</summary>
+		///<summary>GET on /{index}/_fleet/global_checkpoints <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-global-checkpoints.html</para></summary>
 		///<param name = "index">The name of the index.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GlobalCheckpoints<TResponse>(string index, GlobalCheckpointsRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"{index:index}/_fleet/global_checkpoints"), null, RequestParams(requestParameters));
-		///<summary>GET on /{index}/_fleet/global_checkpoints</summary>
+		///<summary>GET on /{index}/_fleet/global_checkpoints <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-global-checkpoints.html</para></summary>
 		///<param name = "index">The name of the index.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("fleet.global_checkpoints", "index")]
 		public Task<TResponse> GlobalCheckpointsAsync<TResponse>(string index, GlobalCheckpointsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_fleet/global_checkpoints"), ctx, null, RequestParams(requestParameters));
