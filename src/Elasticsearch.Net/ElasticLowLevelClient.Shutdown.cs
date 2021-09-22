@@ -49,37 +49,31 @@ namespace Elasticsearch.Net.Specification.ShutdownApi
 		///<summary>DELETE on /_nodes/{node_id}/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "nodeId">The node id of node to be removed from the shutdown state</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse DeleteNode<TResponse>(string nodeId, DeleteNodeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(DELETE, Url($"_nodes/{nodeId:nodeId}/shutdown"), null, RequestParams(requestParameters));
 		///<summary>DELETE on /_nodes/{node_id}/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "nodeId">The node id of node to be removed from the shutdown state</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("shutdown.delete_node", "node_id")]
 		public Task<TResponse> DeleteNodeAsync<TResponse>(string nodeId, DeleteNodeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"_nodes/{nodeId:nodeId}/shutdown"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetNode<TResponse>(GetNodeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_nodes/shutdown", null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("shutdown.get_node", "")]
 		public Task<TResponse> GetNodeAsync<TResponse>(GetNodeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_nodes/shutdown", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/{node_id}/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "nodeId">Which node for which to retrieve the shutdown status</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse GetNode<TResponse>(string nodeId, GetNodeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_nodes/{nodeId:nodeId}/shutdown"), null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/{node_id}/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "nodeId">Which node for which to retrieve the shutdown status</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("shutdown.get_node", "node_id")]
 		public Task<TResponse> GetNodeAsync<TResponse>(string nodeId, GetNodeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_nodes/{nodeId:nodeId}/shutdown"), ctx, null, RequestParams(requestParameters));
@@ -87,14 +81,12 @@ namespace Elasticsearch.Net.Specification.ShutdownApi
 		///<param name = "nodeId">The node id of node to be shut down</param>
 		///<param name = "body">The shutdown type definition to register</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse PutNode<TResponse>(string nodeId, PostData body, PutNodeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(PUT, Url($"_nodes/{nodeId:nodeId}/shutdown"), body, RequestParams(requestParameters));
 		///<summary>PUT on /_nodes/{node_id}/shutdown <para>https://www.elastic.co/guide/en/elasticsearch/reference/current</para></summary>
 		///<param name = "nodeId">The node id of node to be shut down</param>
 		///<param name = "body">The shutdown type definition to register</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("shutdown.put_node", "node_id, body")]
 		public Task<TResponse> PutNodeAsync<TResponse>(string nodeId, PostData body, PutNodeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_nodes/{nodeId:nodeId}/shutdown"), ctx, body, RequestParams(requestParameters));
