@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		///     Whether the query should be treated as writable. Used when determining how to combine queries.
 		/// </summary>
 		[JsonIgnore]
-		bool IsWritable { get; }
+		bool IsWritable { get; } 
 
 		/// <summary>
 		///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
@@ -110,14 +110,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public abstract partial class QueryBase : IQuery
 	{
-		public float? Boost { get; set; }
 		public string Name { get; set; }
 
 		//protected abstract bool Conditionless { get; }
 		public bool IsStrict { get; set; }
 		public bool IsVerbatim { get; set; }
-		
-		public bool IsWritable => IsVerbatim; //|| !Conditionless;
+
+		public bool IsWritable => true; //IsVerbatim || !Conditionless;
 
 		//bool IQuery.Conditionless => Conditionless;
 
@@ -176,13 +175,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		//public static implicit operator QueryContainer(QueryBase query) =>
 		//	query == null ? null : new QueryContainer(query);
 
-		//internal void WrapInContainer(IQueryContainer container)
-		//{
-		//	container.IsVerbatim = IsVerbatim;
-		//	container.IsStrict = IsStrict;
-		//	InternalWrapInContainer(container);
-		//}
+		internal void WrapInContainer(IQueryContainer container) => InternalWrapInContainer(container);
+		//container.IsVerbatim = IsVerbatim;
+		//container.IsStrict = IsStrict;
 
-		//internal abstract void InternalWrapInContainer(IQueryContainer container);
+		internal abstract void InternalWrapInContainer(IQueryContainer container);
 	}
 }
