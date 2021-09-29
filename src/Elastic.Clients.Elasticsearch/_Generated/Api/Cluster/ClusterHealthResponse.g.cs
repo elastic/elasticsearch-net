@@ -15,14 +15,13 @@
 //
 // ------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.Health
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class IndexHealthStats
+	public partial class ClusterHealthResponse : ResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("active_primary_shards")]
@@ -49,8 +48,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("initializing_shards")]
-		public int InitializingShards
+		[JsonPropertyName("active_shards_percent_as_number")]
+		public Elastic.Clients.Elasticsearch.Percentage ActiveShardsPercentAsNumber
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -61,8 +60,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("number_of_replicas")]
-		public int NumberOfReplicas
+		[JsonPropertyName("cluster_name")]
+		public string ClusterName
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -73,8 +72,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("number_of_shards")]
-		public int NumberOfShards
+		[JsonPropertyName("delayed_unassigned_shards")]
+		public int DelayedUnassignedShards
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -85,59 +84,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("relocating_shards")]
-		public int RelocatingShards
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("shards")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.Health.ShardHealthStats>? Shards
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Health Status
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("unassigned_shards")]
-		public int UnassignedShards
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class ShardHealthStats
-	{
-		[JsonInclude]
-		[JsonPropertyName("active_shards")]
-		public int ActiveShards
+		[JsonPropertyName("indices")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats>? Indices
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -160,8 +108,44 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("primary_active")]
-		public string PrimaryActive
+		[JsonPropertyName("number_of_data_nodes")]
+		public int NumberOfDataNodes
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_in_flight_fetch")]
+		public int NumberOfInFlightFetch
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_nodes")]
+		public int NumberOfNodes
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_pending_tasks")]
+		public int NumberOfPendingTasks
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -186,6 +170,30 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 		[JsonInclude]
 		[JsonPropertyName("status")]
 		public Elastic.Clients.Elasticsearch.Health Status
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("task_max_waiting_in_queue_millis")]
+		public Elastic.Clients.Elasticsearch.EpochMillis TaskMaxWaitingInQueueMillis
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("timed_out")]
+		public string TimedOut
 		{
 			get;
 #if NET5_0_OR_GREATER

@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
 		/// </summary>
 		[DataMember(Name = "_name")]
-		string Name { get; set; }
+		string QueryName { get; set; }
 	}
 
 	public abstract class QueryDescriptorBase<TDescriptor, TInterface>
@@ -93,10 +93,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		bool IQuery.IsWritable => true; // Self.IsVerbatim || !Self.Conditionless;
 
-		string IQuery.Name { get; set; }
+		string IQuery.QueryName { get; set; }
 
-		/// <inheritdoc cref="IQuery.Name"/>
-		public TDescriptor Name(string name) => Assign(name, (a, v) => a.Name = v);
+		/// <inheritdoc cref="IQuery.QueryName"/>
+		public TDescriptor QueryName(string name) => Assign(name, (a, v) => a.QueryName = v);
 
 		/// <inheritdoc cref="IQuery.Boost"/>
 		public TDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.Boost = v);
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public abstract partial class QueryBase : IQuery
 	{
-		public string Name { get; set; }
+		public string QueryName { get; set; }
 
 		//protected abstract bool Conditionless { get; }
 		public bool IsStrict { get; set; }

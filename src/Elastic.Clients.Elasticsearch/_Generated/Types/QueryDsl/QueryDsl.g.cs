@@ -15,8 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch.Failures;
-using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -24,159 +22,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	[ConvertAs(typeof(BoundingBox))]
-	public partial interface IBoundingBox
-	{
-		double? Bottom { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeft { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRight { get; set; }
-
-		double? Left { get; set; }
-
-		double? Right { get; set; }
-
-		double? Top { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeft { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRight { get; set; }
-
-		string? Wkt { get; set; }
-	}
-
-	public partial class BoundingBoxDescriptor : DescriptorBase<BoundingBoxDescriptor, IBoundingBox>, IBoundingBox
-	{
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.BottomRight { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.TopLeft { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.TopRight { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? IBoundingBox.BottomLeft { get; set; }
-
-		double? IBoundingBox.Top { get; set; }
-
-		double? IBoundingBox.Left { get; set; }
-
-		double? IBoundingBox.Right { get; set; }
-
-		double? IBoundingBox.Bottom { get; set; }
-
-		string? IBoundingBox.Wkt { get; set; }
-	}
-
-	public partial class BoundingBox : IBoundingBox
+	public partial class TwoDimensionalPoint
 	{
 		[JsonInclude]
-		[JsonPropertyName("bottom")]
-		public double? Bottom { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bottom_left")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeft { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bottom_right")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRight { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("left")]
-		public double? Left { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("right")]
-		public double? Right { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("top")]
-		public double? Top { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("top_left")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeft { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("top_right")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRight { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("wkt")]
-		public string? Wkt { get; set; }
-	}
-
-	[ConvertAs(typeof(CommonTermsQuery))]
-	public partial interface ICommonTermsQuery
-	{
-		string? Analyzer { get; set; }
-
-		double? CutoffFrequency { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.Operator? HighFreqOperator { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.Operator? LowFreqOperator { get; set; }
-
-		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
-		string Query { get; set; }
-	}
-
-	public partial class CommonTermsQueryDescriptor : DescriptorBase<CommonTermsQueryDescriptor, ICommonTermsQuery>, ICommonTermsQuery
-	{
-		string? ICommonTermsQuery.Analyzer { get; set; }
-
-		double? ICommonTermsQuery.CutoffFrequency { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.Operator? ICommonTermsQuery.HighFreqOperator { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.Operator? ICommonTermsQuery.LowFreqOperator { get; set; }
-
-		Elastic.Clients.Elasticsearch.MinimumShouldMatch? ICommonTermsQuery.MinimumShouldMatch { get; set; }
-
-		string ICommonTermsQuery.Query { get; set; }
-	}
-
-	public partial class CommonTermsQuery : QueryDsl.QueryBase, ICommonTermsQuery
-	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("cutoff_frequency")]
-		public double? CutoffFrequency { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("high_freq_operator")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? HighFreqOperator { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("low_freq_operator")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? LowFreqOperator { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("minimum_should_match")]
-		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public string Query { get; set; }
-	}
-
-	public partial class DateDecayFunction : QueryDsl.DecayFunctionBase
-	{
-	}
-
-	public partial class DateDistanceFeatureQuery<TOrigin, TDistance> : QueryDsl.DistanceFeatureQueryBase<TOrigin, TDistance>
-	{
-	}
-
-	public partial class DateRangeQuery : QueryDsl.RangeQueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public Elastic.Clients.Elasticsearch.DateFormat? Format
+		[JsonPropertyName("lat")]
+		public double Lat
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -187,8 +37,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("gt")]
-		public Elastic.Clients.Elasticsearch.DateMath? Gt
+		[JsonPropertyName("lon")]
+		public double Lon
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -197,775 +47,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			internal set;
 #endif
 		}
-
-		[JsonInclude]
-		[JsonPropertyName("gte")]
-		public Elastic.Clients.Elasticsearch.DateMath? Gte
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("lt")]
-		public Elastic.Clients.Elasticsearch.DateMath? Lt
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("lte")]
-		public Elastic.Clients.Elasticsearch.DateMath? Lte
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
-		public Elastic.Clients.Elasticsearch.TimeZone? TimeZone
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public abstract partial class DecayFunctionBase : QueryDsl.ScoreFunctionBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("multi_value_mode")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public abstract partial class DistanceFeatureQueryBase<TOrigin, TDistance> : QueryDsl.QueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("origin")]
-		public TOrigin Origin
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public TDistance Pivot
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	[ConvertAs(typeof(FieldValueFactorScoreFunction))]
-	public partial interface IFieldValueFactorScoreFunction
-	{
-		double? Factor { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-		double? Missing { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
-	}
-
-	public partial class FieldValueFactorScoreFunctionDescriptor : DescriptorBase<FieldValueFactorScoreFunctionDescriptor, IFieldValueFactorScoreFunction>, IFieldValueFactorScoreFunction
-	{
-		Elastic.Clients.Elasticsearch.Field IFieldValueFactorScoreFunction.Field { get; set; }
-
-		double? IFieldValueFactorScoreFunction.Factor { get; set; }
-
-		double? IFieldValueFactorScoreFunction.Missing { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? IFieldValueFactorScoreFunction.Modifier { get; set; }
-	}
-
-	public partial class FieldValueFactorScoreFunction : QueryDsl.ScoreFunctionBase, IFieldValueFactorScoreFunction
-	{
-		[JsonInclude]
-		[JsonPropertyName("factor")]
-		public double? Factor { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public double? Missing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("modifier")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
-	}
-
-	public partial class GeoDecayFunction : QueryDsl.DecayFunctionBase
-	{
-	}
-
-	public partial class GeoDistanceFeatureQuery<TOrigin, TDistance> : QueryDsl.DistanceFeatureQueryBase<TOrigin, TDistance>
-	{
-	}
-
-	[ConvertAs(typeof(IntervalsAllOf))]
-	public partial interface IIntervalsAllOf
-	{
-		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
-
-		int? MaxGaps { get; set; }
-
-		bool? Ordered { get; set; }
-	}
-
-	public partial class IntervalsAllOfDescriptor : DescriptorBase<IntervalsAllOfDescriptor, IIntervalsAllOf>, IIntervalsAllOf
-	{
-		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> IIntervalsAllOf.Intervals { get; set; }
-
-		int? IIntervalsAllOf.MaxGaps { get; set; }
-
-		bool? IIntervalsAllOf.Ordered { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? IIntervalsAllOf.Filter { get; set; }
-	}
-
-	public partial class IntervalsAllOf : IIntervalsAllOf
-	{
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("intervals")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_gaps")]
-		public int? MaxGaps { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ordered")]
-		public bool? Ordered { get; set; }
-	}
-
-	[ConvertAs(typeof(IntervalsAnyOf))]
-	public partial interface IIntervalsAnyOf
-	{
-		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
-	}
-
-	public partial class IntervalsAnyOfDescriptor : DescriptorBase<IntervalsAnyOfDescriptor, IIntervalsAnyOf>, IIntervalsAnyOf
-	{
-		IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> IIntervalsAnyOf.Intervals { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? IIntervalsAnyOf.Filter { get; set; }
-	}
-
-	public partial class IntervalsAnyOf : IIntervalsAnyOf
-	{
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("intervals")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsContainer> Intervals { get; set; }
-	}
-
-	[ConvertAs(typeof(IntervalsFuzzy))]
-	public partial interface IIntervalsFuzzy
-	{
-		string? Analyzer { get; set; }
-
-		Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
-		int? PrefixLength { get; set; }
-
-		string Term { get; set; }
-
-		bool? Transpositions { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	public partial class IntervalsFuzzyDescriptor : DescriptorBase<IntervalsFuzzyDescriptor, IIntervalsFuzzy>, IIntervalsFuzzy
-	{
-		string? IIntervalsFuzzy.Analyzer { get; set; }
-
-		Elastic.Clients.Elasticsearch.Fuzziness? IIntervalsFuzzy.Fuzziness { get; set; }
-
-		int? IIntervalsFuzzy.PrefixLength { get; set; }
-
-		string IIntervalsFuzzy.Term { get; set; }
-
-		bool? IIntervalsFuzzy.Transpositions { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? IIntervalsFuzzy.UseField { get; set; }
-	}
-
-	public partial class IntervalsFuzzy : IIntervalsFuzzy
-	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
-		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
-		public int? PrefixLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("term")]
-		public string Term { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("transpositions")]
-		public bool? Transpositions { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	[ConvertAs(typeof(IntervalsMatch))]
-	public partial interface IIntervalsMatch
-	{
-		string? Analyzer { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
-
-		int? MaxGaps { get; set; }
-
-		bool? Ordered { get; set; }
-
-		string Query { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	public partial class IntervalsMatchDescriptor : DescriptorBase<IntervalsMatchDescriptor, IIntervalsMatch>, IIntervalsMatch
-	{
-		string? IIntervalsMatch.Analyzer { get; set; }
-
-		int? IIntervalsMatch.MaxGaps { get; set; }
-
-		bool? IIntervalsMatch.Ordered { get; set; }
-
-		string IIntervalsMatch.Query { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? IIntervalsMatch.UseField { get; set; }
-
-		Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? IIntervalsMatch.Filter { get; set; }
-	}
-
-	public partial class IntervalsMatch : IIntervalsMatch
-	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IIntervalsFilter? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_gaps")]
-		public int? MaxGaps { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("ordered")]
-		public bool? Ordered { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public string Query { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	[ConvertAs(typeof(IntervalsPrefix))]
-	public partial interface IIntervalsPrefix
-	{
-		string? Analyzer { get; set; }
-
-		string Prefix { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	public partial class IntervalsPrefixDescriptor : DescriptorBase<IntervalsPrefixDescriptor, IIntervalsPrefix>, IIntervalsPrefix
-	{
-		string? IIntervalsPrefix.Analyzer { get; set; }
-
-		string IIntervalsPrefix.Prefix { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? IIntervalsPrefix.UseField { get; set; }
-	}
-
-	public partial class IntervalsPrefix : IIntervalsPrefix
-	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix")]
-		public string Prefix { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	[ConvertAs(typeof(IntervalsWildcard))]
-	public partial interface IIntervalsWildcard
-	{
-		string? Analyzer { get; set; }
-
-		string Pattern { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	public partial class IntervalsWildcardDescriptor : DescriptorBase<IntervalsWildcardDescriptor, IIntervalsWildcard>, IIntervalsWildcard
-	{
-		string? IIntervalsWildcard.Analyzer { get; set; }
-
-		string IIntervalsWildcard.Pattern { get; set; }
-
-		Elastic.Clients.Elasticsearch.Field? IIntervalsWildcard.UseField { get; set; }
-	}
-
-	public partial class IntervalsWildcard : IIntervalsWildcard
-	{
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("use_field")]
-		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
-	}
-
-	public partial class LikeDocument
-	{
-		[JsonInclude]
-		[JsonPropertyName("doc")]
-		public object? Doc
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field>? Fields
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public Elastic.Clients.Elasticsearch.Id? Id
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName? Index
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("per_field_analyzer")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("routing")]
-		public Elastic.Clients.Elasticsearch.Routing? Routing
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public Elastic.Clients.Elasticsearch.DocType? Type
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public Elastic.Clients.Elasticsearch.VersionNumber? Version
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("version_type")]
-		public Elastic.Clients.Elasticsearch.VersionType? VersionType
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class NumberRangeQuery : QueryDsl.RangeQueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("gt")]
-		public double? Gt
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("gte")]
-		public double? Gte
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("lt")]
-		public double? Lt
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-
-		[JsonInclude]
-		[JsonPropertyName("lte")]
-		public double? Lte
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	public partial class NumericDecayFunction : QueryDsl.DecayFunctionBase
-	{
-	}
-
-	[ConvertAs(typeof(QueryBase))]
-	public partial interface IQueryBase
-	{
-		float? Boost { get; set; }
-
-		string? query_name { get; set; }
-	}
-
-	public partial class QueryBaseDescriptor : DescriptorBase<QueryBaseDescriptor, IQueryBase>, IQueryBase
-	{
-		float? IQueryBase.Boost { get; set; }
-
-		string? IQueryBase.query_name { get; set; }
-	}
-
-	public abstract partial class QueryBase : IQueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_name")]
-		public string? query_name { get; set; }
-	}
-
-	[ConvertAs(typeof(RandomScoreFunction))]
-	public partial interface IRandomScoreFunction
-	{
-		Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		Union<long, string>? Seed { get; set; }
-	}
-
-	public partial class RandomScoreFunctionDescriptor : DescriptorBase<RandomScoreFunctionDescriptor, IRandomScoreFunction>, IRandomScoreFunction
-	{
-		Elastic.Clients.Elasticsearch.Field? IRandomScoreFunction.Field { get; set; }
-
-		Union<long, string>? IRandomScoreFunction.Seed { get; set; }
-	}
-
-	public partial class RandomScoreFunction : QueryDsl.ScoreFunctionBase, IRandomScoreFunction
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("seed")]
-		public Union<long, string>? Seed { get; set; }
-	}
-
-	public abstract partial class RangeQueryBase : QueryDsl.QueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("relation")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
-	}
-
-	[ConvertAs(typeof(RankFeatureFunction))]
-	public partial interface IRankFeatureFunction
-	{
-	}
-
-	public partial class RankFeatureFunctionDescriptor : DescriptorBase<RankFeatureFunctionDescriptor, IRankFeatureFunction>, IRankFeatureFunction
-	{
-	}
-
-	public partial class RankFeatureFunction : IRankFeatureFunction
-	{
-	}
-
-	[ConvertAs(typeof(RankFeatureFunctionLinear))]
-	public partial interface IRankFeatureFunctionLinear
-	{
-	}
-
-	public partial class RankFeatureFunctionLinearDescriptor : DescriptorBase<RankFeatureFunctionLinearDescriptor, IRankFeatureFunctionLinear>, IRankFeatureFunctionLinear
-	{
-	}
-
-	public partial class RankFeatureFunctionLinear : QueryDsl.RankFeatureFunction, IRankFeatureFunctionLinear
-	{
-	}
-
-	[ConvertAs(typeof(RankFeatureFunctionLogarithm))]
-	public partial interface IRankFeatureFunctionLogarithm
-	{
-		float ScalingFactor { get; set; }
-	}
-
-	public partial class RankFeatureFunctionLogarithmDescriptor : DescriptorBase<RankFeatureFunctionLogarithmDescriptor, IRankFeatureFunctionLogarithm>, IRankFeatureFunctionLogarithm
-	{
-		float IRankFeatureFunctionLogarithm.ScalingFactor { get; set; }
-	}
-
-	public partial class RankFeatureFunctionLogarithm : QueryDsl.RankFeatureFunction, IRankFeatureFunctionLogarithm
-	{
-		[JsonInclude]
-		[JsonPropertyName("scaling_factor")]
-		public float ScalingFactor { get; set; }
-	}
-
-	[ConvertAs(typeof(RankFeatureFunctionSaturation))]
-	public partial interface IRankFeatureFunctionSaturation
-	{
-		float? Pivot { get; set; }
-	}
-
-	public partial class RankFeatureFunctionSaturationDescriptor : DescriptorBase<RankFeatureFunctionSaturationDescriptor, IRankFeatureFunctionSaturation>, IRankFeatureFunctionSaturation
-	{
-		float? IRankFeatureFunctionSaturation.Pivot { get; set; }
-	}
-
-	public partial class RankFeatureFunctionSaturation : QueryDsl.RankFeatureFunction, IRankFeatureFunctionSaturation
-	{
-		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public float? Pivot { get; set; }
-	}
-
-	[ConvertAs(typeof(RankFeatureFunctionSigmoid))]
-	public partial interface IRankFeatureFunctionSigmoid
-	{
-		float Exponent { get; set; }
-
-		float Pivot { get; set; }
-	}
-
-	public partial class RankFeatureFunctionSigmoidDescriptor : DescriptorBase<RankFeatureFunctionSigmoidDescriptor, IRankFeatureFunctionSigmoid>, IRankFeatureFunctionSigmoid
-	{
-		float IRankFeatureFunctionSigmoid.Pivot { get; set; }
-
-		float IRankFeatureFunctionSigmoid.Exponent { get; set; }
-	}
-
-	public partial class RankFeatureFunctionSigmoid : QueryDsl.RankFeatureFunction, IRankFeatureFunctionSigmoid
-	{
-		[JsonInclude]
-		[JsonPropertyName("exponent")]
-		public float Exponent { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public float Pivot { get; set; }
-	}
-
-	[ConvertAs(typeof(ScoreFunctionBase))]
-	public partial interface IScoreFunctionBase
-	{
-		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
-
-		double? Weight { get; set; }
-	}
-
-	public partial class ScoreFunctionBaseDescriptor : DescriptorBase<ScoreFunctionBaseDescriptor, IScoreFunctionBase>, IScoreFunctionBase
-	{
-		Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? IScoreFunctionBase.Filter { get; set; }
-
-		double? IScoreFunctionBase.Weight { get; set; }
-	}
-
-	public abstract partial class ScoreFunctionBase : IScoreFunctionBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IQueryContainer? Filter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("weight")]
-		public double? Weight { get; set; }
-	}
-
-	[ConvertAs(typeof(ScriptScoreFunction))]
-	public partial interface IScriptScoreFunction
-	{
-		Elastic.Clients.Elasticsearch.Script Script { get; set; }
-	}
-
-	public partial class ScriptScoreFunctionDescriptor : DescriptorBase<ScriptScoreFunctionDescriptor, IScriptScoreFunction>, IScriptScoreFunction
-	{
-		Elastic.Clients.Elasticsearch.Script IScriptScoreFunction.Script { get; set; }
-	}
-
-	public partial class ScriptScoreFunction : QueryDsl.ScoreFunctionBase, IScriptScoreFunction
-	{
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public partial class ThreeDimensionalPoint
@@ -1007,48 +88,2364 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public partial class TwoDimensionalPoint
+	public partial interface IQueryContainer
 	{
-		[JsonInclude]
-		[JsonPropertyName("lat")]
-		public double Lat
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		QueryDsl.IBoolQuery? Bool { get; set; }
 
-		[JsonInclude]
-		[JsonPropertyName("lon")]
-		public double Lon
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		QueryDsl.IBoostingQuery? Boosting { get; set; }
+
+		QueryDsl.ICombinedFieldsQuery? CombinedFields { get; set; }
+
+		QueryDsl.IConstantScoreQuery? ConstantScore { get; set; }
+
+		QueryDsl.IDisMaxQuery? DisMax { get; set; }
+
+		QueryDsl.IExistsQuery? Exists { get; set; }
+
+		QueryDsl.IFunctionScoreQuery? FunctionScore { get; set; }
+
+		QueryDsl.IGeoBoundingBoxQuery? GeoBoundingBox { get; set; }
+
+		QueryDsl.IGeoDistanceQuery? GeoDistance { get; set; }
+
+		QueryDsl.IGeoPolygonQuery? GeoPolygon { get; set; }
+
+		QueryDsl.IGeoShapeQuery? GeoShape { get; set; }
+
+		QueryDsl.IHasChildQuery? HasChild { get; set; }
+
+		QueryDsl.IHasParentQuery? HasParent { get; set; }
+
+		QueryDsl.IIdsQuery? Ids { get; set; }
+
+		QueryDsl.IMatchAllQuery? MatchAll { get; set; }
+
+		QueryDsl.IMatchNoneQuery? MatchNone { get; set; }
+
+		QueryDsl.IMoreLikeThisQuery? MoreLikeThis { get; set; }
+
+		QueryDsl.IMultiMatchQuery? MultiMatch { get; set; }
+
+		QueryDsl.INestedQuery? Nested { get; set; }
+
+		QueryDsl.IParentIdQuery? ParentId { get; set; }
+
+		QueryDsl.IPercolateQuery? Percolate { get; set; }
+
+		QueryDsl.IPinnedQuery? Pinned { get; set; }
+
+		QueryDsl.IQueryStringQuery? QueryString { get; set; }
+
+		QueryDsl.IRankFeatureQuery? RankFeature { get; set; }
+
+		QueryDsl.IScriptQuery? Script { get; set; }
+
+		QueryDsl.IScriptScoreQuery? ScriptScore { get; set; }
+
+		QueryDsl.IShapeQuery? Shape { get; set; }
+
+		QueryDsl.ISimpleQueryStringQuery? SimpleQueryString { get; set; }
+
+		QueryDsl.ISpanContainingQuery? SpanContaining { get; set; }
+
+		QueryDsl.ISpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
+
+		QueryDsl.ISpanFirstQuery? SpanFirst { get; set; }
+
+		QueryDsl.ISpanMultiTermQuery? SpanMulti { get; set; }
+
+		QueryDsl.ISpanNearQuery? SpanNear { get; set; }
+
+		QueryDsl.ISpanNotQuery? SpanNot { get; set; }
+
+		QueryDsl.ISpanOrQuery? SpanOr { get; set; }
+
+		QueryDsl.ISpanWithinQuery? SpanWithin { get; set; }
+
+		QueryDsl.ITermsQuery? Terms { get; set; }
 	}
 
-	[ConvertAs(typeof(TypeQuery))]
-	public partial interface ITypeQuery
+	public partial class QueryContainer : IQueryContainer
+	{
+		private QueryDsl.IBoolQuery? _bool;
+		private QueryDsl.IBoostingQuery? _boosting;
+		private QueryDsl.ICombinedFieldsQuery? _combinedFields;
+		private QueryDsl.IConstantScoreQuery? _constantScore;
+		private QueryDsl.IDisMaxQuery? _disMax;
+		private QueryDsl.IExistsQuery? _exists;
+		private QueryDsl.IFunctionScoreQuery? _functionScore;
+		private QueryDsl.IGeoBoundingBoxQuery? _geoBoundingBox;
+		private QueryDsl.IGeoDistanceQuery? _geoDistance;
+		private QueryDsl.IGeoPolygonQuery? _geoPolygon;
+		private QueryDsl.IGeoShapeQuery? _geoShape;
+		private QueryDsl.IHasChildQuery? _hasChild;
+		private QueryDsl.IHasParentQuery? _hasParent;
+		private QueryDsl.IIdsQuery? _ids;
+		private QueryDsl.IMatchAllQuery? _matchAll;
+		private QueryDsl.IMatchNoneQuery? _matchNone;
+		private QueryDsl.IMoreLikeThisQuery? _moreLikeThis;
+		private QueryDsl.IMultiMatchQuery? _multiMatch;
+		private QueryDsl.INestedQuery? _nested;
+		private QueryDsl.IParentIdQuery? _parentId;
+		private QueryDsl.IPercolateQuery? _percolate;
+		private QueryDsl.IPinnedQuery? _pinned;
+		private QueryDsl.IQueryStringQuery? _queryString;
+		private QueryDsl.IRankFeatureQuery? _rankFeature;
+		private QueryDsl.IScriptQuery? _script;
+		private QueryDsl.IScriptScoreQuery? _scriptScore;
+		private QueryDsl.IShapeQuery? _shape;
+		private QueryDsl.ISimpleQueryStringQuery? _simpleQueryString;
+		private QueryDsl.ISpanContainingQuery? _spanContaining;
+		private QueryDsl.ISpanFieldMaskingQuery? _fieldMaskingSpan;
+		private QueryDsl.ISpanFirstQuery? _spanFirst;
+		private QueryDsl.ISpanMultiTermQuery? _spanMulti;
+		private QueryDsl.ISpanNearQuery? _spanNear;
+		private QueryDsl.ISpanNotQuery? _spanNot;
+		private QueryDsl.ISpanOrQuery? _spanOr;
+		private QueryDsl.ISpanWithinQuery? _spanWithin;
+		private QueryDsl.ITermsQuery? _terms;
+		QueryDsl.IBoolQuery? IQueryContainer.Bool { get => _bool; set => _bool = Set(value); }
+
+		QueryDsl.IBoostingQuery? IQueryContainer.Boosting { get => _boosting; set => _boosting = Set(value); }
+
+		QueryDsl.ICombinedFieldsQuery? IQueryContainer.CombinedFields { get => _combinedFields; set => _combinedFields = Set(value); }
+
+		QueryDsl.IConstantScoreQuery? IQueryContainer.ConstantScore { get => _constantScore; set => _constantScore = Set(value); }
+
+		QueryDsl.IDisMaxQuery? IQueryContainer.DisMax { get => _disMax; set => _disMax = Set(value); }
+
+		QueryDsl.IExistsQuery? IQueryContainer.Exists { get => _exists; set => _exists = Set(value); }
+
+		QueryDsl.IFunctionScoreQuery? IQueryContainer.FunctionScore { get => _functionScore; set => _functionScore = Set(value); }
+
+		QueryDsl.IGeoBoundingBoxQuery? IQueryContainer.GeoBoundingBox { get => _geoBoundingBox; set => _geoBoundingBox = Set(value); }
+
+		QueryDsl.IGeoDistanceQuery? IQueryContainer.GeoDistance { get => _geoDistance; set => _geoDistance = Set(value); }
+
+		QueryDsl.IGeoPolygonQuery? IQueryContainer.GeoPolygon { get => _geoPolygon; set => _geoPolygon = Set(value); }
+
+		QueryDsl.IGeoShapeQuery? IQueryContainer.GeoShape { get => _geoShape; set => _geoShape = Set(value); }
+
+		QueryDsl.IHasChildQuery? IQueryContainer.HasChild { get => _hasChild; set => _hasChild = Set(value); }
+
+		QueryDsl.IHasParentQuery? IQueryContainer.HasParent { get => _hasParent; set => _hasParent = Set(value); }
+
+		QueryDsl.IIdsQuery? IQueryContainer.Ids { get => _ids; set => _ids = Set(value); }
+
+		QueryDsl.IMatchAllQuery? IQueryContainer.MatchAll { get => _matchAll; set => _matchAll = Set(value); }
+
+		QueryDsl.IMatchNoneQuery? IQueryContainer.MatchNone { get => _matchNone; set => _matchNone = Set(value); }
+
+		QueryDsl.IMoreLikeThisQuery? IQueryContainer.MoreLikeThis { get => _moreLikeThis; set => _moreLikeThis = Set(value); }
+
+		QueryDsl.IMultiMatchQuery? IQueryContainer.MultiMatch { get => _multiMatch; set => _multiMatch = Set(value); }
+
+		QueryDsl.INestedQuery? IQueryContainer.Nested { get => _nested; set => _nested = Set(value); }
+
+		QueryDsl.IParentIdQuery? IQueryContainer.ParentId { get => _parentId; set => _parentId = Set(value); }
+
+		QueryDsl.IPercolateQuery? IQueryContainer.Percolate { get => _percolate; set => _percolate = Set(value); }
+
+		QueryDsl.IPinnedQuery? IQueryContainer.Pinned { get => _pinned; set => _pinned = Set(value); }
+
+		QueryDsl.IQueryStringQuery? IQueryContainer.QueryString { get => _queryString; set => _queryString = Set(value); }
+
+		QueryDsl.IRankFeatureQuery? IQueryContainer.RankFeature { get => _rankFeature; set => _rankFeature = Set(value); }
+
+		QueryDsl.IScriptQuery? IQueryContainer.Script { get => _script; set => _script = Set(value); }
+
+		QueryDsl.IScriptScoreQuery? IQueryContainer.ScriptScore { get => _scriptScore; set => _scriptScore = Set(value); }
+
+		QueryDsl.IShapeQuery? IQueryContainer.Shape { get => _shape; set => _shape = Set(value); }
+
+		QueryDsl.ISimpleQueryStringQuery? IQueryContainer.SimpleQueryString { get => _simpleQueryString; set => _simpleQueryString = Set(value); }
+
+		QueryDsl.ISpanContainingQuery? IQueryContainer.SpanContaining { get => _spanContaining; set => _spanContaining = Set(value); }
+
+		QueryDsl.ISpanFieldMaskingQuery? IQueryContainer.FieldMaskingSpan { get => _fieldMaskingSpan; set => _fieldMaskingSpan = Set(value); }
+
+		QueryDsl.ISpanFirstQuery? IQueryContainer.SpanFirst { get => _spanFirst; set => _spanFirst = Set(value); }
+
+		QueryDsl.ISpanMultiTermQuery? IQueryContainer.SpanMulti { get => _spanMulti; set => _spanMulti = Set(value); }
+
+		QueryDsl.ISpanNearQuery? IQueryContainer.SpanNear { get => _spanNear; set => _spanNear = Set(value); }
+
+		QueryDsl.ISpanNotQuery? IQueryContainer.SpanNot { get => _spanNot; set => _spanNot = Set(value); }
+
+		QueryDsl.ISpanOrQuery? IQueryContainer.SpanOr { get => _spanOr; set => _spanOr = Set(value); }
+
+		QueryDsl.ISpanWithinQuery? IQueryContainer.SpanWithin { get => _spanWithin; set => _spanWithin = Set(value); }
+
+		QueryDsl.ITermsQuery? IQueryContainer.Terms { get => _terms; set => _terms = Set(value); }
+	}
+
+	public partial class QueryContainerDescriptor<T> : QueryContainer
+	{
+		public QueryContainer Bool(Func<BoolQueryDescriptor<T>, QueryDsl.IBoolQuery> selector) => WrapInContainer(selector, (query, container) => container.Bool = query);
+		public QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, QueryDsl.IBoostingQuery> selector) => WrapInContainer(selector, (query, container) => container.Boosting = query);
+		public QueryContainer CombinedFields(Func<CombinedFieldsQueryDescriptor<T>, QueryDsl.ICombinedFieldsQuery> selector) => WrapInContainer(selector, (query, container) => container.CombinedFields = query);
+		public QueryContainer ConstantScore(Func<ConstantScoreQueryDescriptor<T>, QueryDsl.IConstantScoreQuery> selector) => WrapInContainer(selector, (query, container) => container.ConstantScore = query);
+		public QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, QueryDsl.IDisMaxQuery> selector) => WrapInContainer(selector, (query, container) => container.DisMax = query);
+		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, QueryDsl.IExistsQuery> selector) => WrapInContainer(selector, (query, container) => container.Exists = query);
+		public QueryContainer FieldMaskingSpan(Func<SpanFieldMaskingQueryDescriptor<T>, QueryDsl.ISpanFieldMaskingQuery> selector) => WrapInContainer(selector, (query, container) => container.FieldMaskingSpan = query);
+		public QueryContainer FunctionScore(Func<FunctionScoreQueryDescriptor<T>, QueryDsl.IFunctionScoreQuery> selector) => WrapInContainer(selector, (query, container) => container.FunctionScore = query);
+		public QueryContainer GeoBoundingBox(Func<GeoBoundingBoxQueryDescriptor<T>, QueryDsl.IGeoBoundingBoxQuery> selector) => WrapInContainer(selector, (query, container) => container.GeoBoundingBox = query);
+		public QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, QueryDsl.IGeoDistanceQuery> selector) => WrapInContainer(selector, (query, container) => container.GeoDistance = query);
+		public QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, QueryDsl.IGeoPolygonQuery> selector) => WrapInContainer(selector, (query, container) => container.GeoPolygon = query);
+		public QueryContainer GeoShape(Func<GeoShapeQueryDescriptor<T>, QueryDsl.IGeoShapeQuery> selector) => WrapInContainer(selector, (query, container) => container.GeoShape = query);
+		public QueryContainer HasChild(Func<HasChildQueryDescriptor<T>, QueryDsl.IHasChildQuery> selector) => WrapInContainer(selector, (query, container) => container.HasChild = query);
+		public QueryContainer HasParent(Func<HasParentQueryDescriptor<T>, QueryDsl.IHasParentQuery> selector) => WrapInContainer(selector, (query, container) => container.HasParent = query);
+		public QueryContainer Ids(Func<IdsQueryDescriptor<T>, QueryDsl.IIdsQuery> selector) => WrapInContainer(selector, (query, container) => container.Ids = query);
+		public QueryContainer MatchAll(Func<MatchAllQueryDescriptor<T>, QueryDsl.IMatchAllQuery> selector) => WrapInContainer(selector, (query, container) => container.MatchAll = query);
+		public QueryContainer MatchNone(Func<MatchNoneQueryDescriptor<T>, QueryDsl.IMatchNoneQuery> selector) => WrapInContainer(selector, (query, container) => container.MatchNone = query);
+		public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, QueryDsl.IMoreLikeThisQuery> selector) => WrapInContainer(selector, (query, container) => container.MoreLikeThis = query);
+		public QueryContainer MultiMatch(Func<MultiMatchQueryDescriptor<T>, QueryDsl.IMultiMatchQuery> selector) => WrapInContainer(selector, (query, container) => container.MultiMatch = query);
+		public QueryContainer Nested(Func<NestedQueryDescriptor<T>, QueryDsl.INestedQuery> selector) => WrapInContainer(selector, (query, container) => container.Nested = query);
+		public QueryContainer ParentId(Func<ParentIdQueryDescriptor<T>, QueryDsl.IParentIdQuery> selector) => WrapInContainer(selector, (query, container) => container.ParentId = query);
+		public QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, QueryDsl.IPercolateQuery> selector) => WrapInContainer(selector, (query, container) => container.Percolate = query);
+		public QueryContainer Pinned(Func<PinnedQueryDescriptor<T>, QueryDsl.IPinnedQuery> selector) => WrapInContainer(selector, (query, container) => container.Pinned = query);
+		public QueryContainer QueryString(Func<QueryStringQueryDescriptor<T>, QueryDsl.IQueryStringQuery> selector) => WrapInContainer(selector, (query, container) => container.QueryString = query);
+		public QueryContainer RankFeature(Func<RankFeatureQueryDescriptor<T>, QueryDsl.IRankFeatureQuery> selector) => WrapInContainer(selector, (query, container) => container.RankFeature = query);
+		public QueryContainer Script(Func<ScriptQueryDescriptor<T>, QueryDsl.IScriptQuery> selector) => WrapInContainer(selector, (query, container) => container.Script = query);
+		public QueryContainer ScriptScore(Func<ScriptScoreQueryDescriptor<T>, QueryDsl.IScriptScoreQuery> selector) => WrapInContainer(selector, (query, container) => container.ScriptScore = query);
+		public QueryContainer Shape(Func<ShapeQueryDescriptor<T>, QueryDsl.IShapeQuery> selector) => WrapInContainer(selector, (query, container) => container.Shape = query);
+		public QueryContainer SimpleQueryString(Func<SimpleQueryStringQueryDescriptor<T>, QueryDsl.ISimpleQueryStringQuery> selector) => WrapInContainer(selector, (query, container) => container.SimpleQueryString = query);
+		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, QueryDsl.ISpanContainingQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanContaining = query);
+		public QueryContainer SpanFirst(Func<SpanFirstQueryDescriptor<T>, QueryDsl.ISpanFirstQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanFirst = query);
+		public QueryContainer SpanMulti(Func<SpanMultiTermQueryDescriptor<T>, QueryDsl.ISpanMultiTermQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanMulti = query);
+		public QueryContainer SpanNear(Func<SpanNearQueryDescriptor<T>, QueryDsl.ISpanNearQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanNear = query);
+		public QueryContainer SpanNot(Func<SpanNotQueryDescriptor<T>, QueryDsl.ISpanNotQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanNot = query);
+		public QueryContainer SpanOr(Func<SpanOrQueryDescriptor<T>, QueryDsl.ISpanOrQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanOr = query);
+		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, QueryDsl.ISpanWithinQuery> selector) => WrapInContainer(selector, (query, container) => container.SpanWithin = query);
+		public QueryContainer Terms(Func<TermsQueryDescriptor<T>, QueryDsl.ITermsQuery> selector) => WrapInContainer(selector, (query, container) => container.Terms = query);
+	}
+
+	[ConvertAs(typeof(TermsQuery))]
+	public partial interface ITermsQuery : IQuery
+	{
+	}
+
+	public partial class TermsQuery : QueryBase, ITermsQuery
+	{
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Terms = this;
+	}
+
+	public partial class TermsQueryDescriptor<T> : QueryDescriptorBase<TermsQueryDescriptor<T>, ITermsQuery>, ITermsQuery
+	{
+	}
+
+	[ConvertAs(typeof(QueryBase))]
+	public partial interface IQueryBase
+	{
+		float? Boost { get; set; }
+
+		string? query_name { get; set; }
+	}
+
+	public abstract partial class QueryBase : IQueryBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_name")]
+		public string? query_name { get; set; }
+	}
+
+	public partial class QueryBaseDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SpanWithinQuery))]
+	public partial interface ISpanWithinQuery : IQuery
+	{
+		QueryDsl.ISpanQuery Big { get; set; }
+
+		QueryDsl.ISpanQuery Little { get; set; }
+	}
+
+	public partial class SpanWithinQuery : QueryBase, ISpanWithinQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("big")]
+		public QueryDsl.ISpanQuery Big { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("little")]
+		public QueryDsl.ISpanQuery Little { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanWithin = this;
+	}
+
+	public partial class SpanWithinQueryDescriptor<T> : QueryDescriptorBase<SpanWithinQueryDescriptor<T>, ISpanWithinQuery>, ISpanWithinQuery
+	{
+		QueryDsl.ISpanQuery ISpanWithinQuery.Big { get; set; }
+
+		QueryDsl.ISpanQuery ISpanWithinQuery.Little { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanQuery))]
+	public partial interface ISpanQuery
+	{
+		QueryDsl.ISpanContainingQuery? SpanContaining { get; set; }
+
+		QueryDsl.ISpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
+
+		QueryDsl.ISpanFirstQuery? SpanFirst { get; set; }
+
+		Dictionary<string, int>? SpanGap { get; set; }
+
+		QueryDsl.ISpanMultiTermQuery? SpanMulti { get; set; }
+
+		QueryDsl.ISpanNearQuery? SpanNear { get; set; }
+
+		QueryDsl.ISpanNotQuery? SpanNot { get; set; }
+
+		QueryDsl.ISpanOrQuery? SpanOr { get; set; }
+
+		Dictionary<string, QueryDsl.ISpanTermQuery>? SpanTerm { get; set; }
+
+		QueryDsl.ISpanWithinQuery? SpanWithin { get; set; }
+	}
+
+	public partial class SpanQuery : ISpanQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("span_containing")]
+		public QueryDsl.ISpanContainingQuery? SpanContaining { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field_masking_span")]
+		public QueryDsl.ISpanFieldMaskingQuery? FieldMaskingSpan { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_first")]
+		public QueryDsl.ISpanFirstQuery? SpanFirst { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_gap")]
+		public Dictionary<string, int>? SpanGap { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_multi")]
+		public QueryDsl.ISpanMultiTermQuery? SpanMulti { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_near")]
+		public QueryDsl.ISpanNearQuery? SpanNear { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_not")]
+		public QueryDsl.ISpanNotQuery? SpanNot { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_or")]
+		public QueryDsl.ISpanOrQuery? SpanOr { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_term")]
+		public Dictionary<string, QueryDsl.ISpanTermQuery>? SpanTerm { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("span_within")]
+		public QueryDsl.ISpanWithinQuery? SpanWithin { get; set; }
+	}
+
+	public partial class SpanQueryDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SpanTermQuery))]
+	public partial interface ISpanTermQuery
 	{
 		string Value { get; set; }
 	}
 
-	public partial class TypeQueryDescriptor : DescriptorBase<TypeQueryDescriptor, ITypeQuery>, ITypeQuery
-	{
-		string ITypeQuery.Value { get; set; }
-	}
-
-	public partial class TypeQuery : QueryDsl.QueryBase, ITypeQuery
+	public partial class SpanTermQuery : ISpanTermQuery
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
+	}
+
+	public partial class SpanTermQueryDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(SpanOrQuery))]
+	public partial interface ISpanOrQuery : IQuery
+	{
+		IEnumerable<QueryDsl.ISpanQuery> Clauses { get; set; }
+	}
+
+	public partial class SpanOrQuery : QueryBase, ISpanOrQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("clauses")]
+		public IEnumerable<QueryDsl.ISpanQuery> Clauses { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanOr = this;
+	}
+
+	public partial class SpanOrQueryDescriptor<T> : QueryDescriptorBase<SpanOrQueryDescriptor<T>, ISpanOrQuery>, ISpanOrQuery
+	{
+		IEnumerable<QueryDsl.ISpanQuery> ISpanOrQuery.Clauses { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanNotQuery))]
+	public partial interface ISpanNotQuery : IQuery
+	{
+		int? Dist { get; set; }
+
+		QueryDsl.ISpanQuery Exclude { get; set; }
+
+		QueryDsl.ISpanQuery Include { get; set; }
+
+		int? Post { get; set; }
+
+		int? Pre { get; set; }
+	}
+
+	public partial class SpanNotQuery : QueryBase, ISpanNotQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("dist")]
+		public int? Dist { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("exclude")]
+		public QueryDsl.ISpanQuery Exclude { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include")]
+		public QueryDsl.ISpanQuery Include { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("post")]
+		public int? Post { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("pre")]
+		public int? Pre { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanNot = this;
+	}
+
+	public partial class SpanNotQueryDescriptor<T> : QueryDescriptorBase<SpanNotQueryDescriptor<T>, ISpanNotQuery>, ISpanNotQuery
+	{
+		int? ISpanNotQuery.Dist { get; set; }
+
+		QueryDsl.ISpanQuery ISpanNotQuery.Exclude { get; set; }
+
+		QueryDsl.ISpanQuery ISpanNotQuery.Include { get; set; }
+
+		int? ISpanNotQuery.Post { get; set; }
+
+		int? ISpanNotQuery.Pre { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanNearQuery))]
+	public partial interface ISpanNearQuery : IQuery
+	{
+		IEnumerable<QueryDsl.ISpanQuery> Clauses { get; set; }
+
+		string? InOrder { get; set; }
+
+		int? Slop { get; set; }
+	}
+
+	public partial class SpanNearQuery : QueryBase, ISpanNearQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("clauses")]
+		public IEnumerable<QueryDsl.ISpanQuery> Clauses { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("in_order")]
+		public string? InOrder { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("slop")]
+		public int? Slop { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanNear = this;
+	}
+
+	public partial class SpanNearQueryDescriptor<T> : QueryDescriptorBase<SpanNearQueryDescriptor<T>, ISpanNearQuery>, ISpanNearQuery
+	{
+		IEnumerable<QueryDsl.ISpanQuery> ISpanNearQuery.Clauses { get; set; }
+
+		string? ISpanNearQuery.InOrder { get; set; }
+
+		int? ISpanNearQuery.Slop { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanMultiTermQuery))]
+	public partial interface ISpanMultiTermQuery : IQuery
+	{
+		QueryDsl.IQueryContainer Match { get; set; }
+	}
+
+	public partial class SpanMultiTermQuery : QueryBase, ISpanMultiTermQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("match")]
+		public QueryDsl.IQueryContainer Match { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanMulti = this;
+	}
+
+	public partial class SpanMultiTermQueryDescriptor<T> : QueryDescriptorBase<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery>, ISpanMultiTermQuery
+	{
+		QueryDsl.IQueryContainer ISpanMultiTermQuery.Match { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanFirstQuery))]
+	public partial interface ISpanFirstQuery : IQuery
+	{
+		int End { get; set; }
+
+		QueryDsl.ISpanQuery Match { get; set; }
+	}
+
+	public partial class SpanFirstQuery : QueryBase, ISpanFirstQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("end")]
+		public int End { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("match")]
+		public QueryDsl.ISpanQuery Match { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanFirst = this;
+	}
+
+	public partial class SpanFirstQueryDescriptor<T> : QueryDescriptorBase<SpanFirstQueryDescriptor<T>, ISpanFirstQuery>, ISpanFirstQuery
+	{
+		int ISpanFirstQuery.End { get; set; }
+
+		QueryDsl.ISpanQuery ISpanFirstQuery.Match { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanFieldMaskingQuery))]
+	public partial interface ISpanFieldMaskingQuery : IQuery
+	{
+		string Field { get; set; }
+
+		QueryDsl.ISpanQuery Query { get; set; }
+	}
+
+	public partial class SpanFieldMaskingQuery : QueryBase, ISpanFieldMaskingQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryDsl.ISpanQuery Query { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.FieldMaskingSpan = this;
+	}
+
+	public partial class SpanFieldMaskingQueryDescriptor<T> : QueryDescriptorBase<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery>, ISpanFieldMaskingQuery
+	{
+		string ISpanFieldMaskingQuery.Field { get; set; }
+
+		QueryDsl.ISpanQuery ISpanFieldMaskingQuery.Query { get; set; }
+	}
+
+	[ConvertAs(typeof(SpanContainingQuery))]
+	public partial interface ISpanContainingQuery : IQuery
+	{
+		QueryDsl.ISpanQuery Big { get; set; }
+
+		QueryDsl.ISpanQuery Little { get; set; }
+	}
+
+	public partial class SpanContainingQuery : QueryBase, ISpanContainingQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("big")]
+		public QueryDsl.ISpanQuery Big { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("little")]
+		public QueryDsl.ISpanQuery Little { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SpanContaining = this;
+	}
+
+	public partial class SpanContainingQueryDescriptor<T> : QueryDescriptorBase<SpanContainingQueryDescriptor<T>, ISpanContainingQuery>, ISpanContainingQuery
+	{
+		QueryDsl.ISpanQuery ISpanContainingQuery.Big { get; set; }
+
+		QueryDsl.ISpanQuery ISpanContainingQuery.Little { get; set; }
+	}
+
+	[ConvertAs(typeof(SimpleQueryStringQuery))]
+	public partial interface ISimpleQueryStringQuery : IQuery
+	{
+		string? Analyzer { get; set; }
+
+		string? AnalyzeWildcard { get; set; }
+
+		string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
+
+		IEnumerable<string>? Fields { get; set; }
+
+		int? FuzzyMaxExpansions { get; set; }
+
+		int? FuzzyPrefixLength { get; set; }
+
+		string? FuzzyTranspositions { get; set; }
+
+		string? Lenient { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		string Query { get; set; }
+
+		string? QuoteFieldSuffix { get; set; }
+	}
+
+	public partial class SimpleQueryStringQuery : QueryBase, ISimpleQueryStringQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyze_wildcard")]
+		public string? AnalyzeWildcard { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("default_operator")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public IEnumerable<string>? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_max_expansions")]
+		public int? FuzzyMaxExpansions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_prefix_length")]
+		public int? FuzzyPrefixLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_transpositions")]
+		public string? FuzzyTranspositions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lenient")]
+		public string? Lenient { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public string Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("quote_field_suffix")]
+		public string? QuoteFieldSuffix { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.SimpleQueryString = this;
+	}
+
+	public partial class SimpleQueryStringQueryDescriptor<T> : QueryDescriptorBase<SimpleQueryStringQueryDescriptor<T>, ISimpleQueryStringQuery>, ISimpleQueryStringQuery
+	{
+		string? ISimpleQueryStringQuery.Analyzer { get; set; }
+
+		string? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
+
+		string? ISimpleQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
+
+		IEnumerable<string>? ISimpleQueryStringQuery.Fields { get; set; }
+
+		int? ISimpleQueryStringQuery.FuzzyMaxExpansions { get; set; }
+
+		int? ISimpleQueryStringQuery.FuzzyPrefixLength { get; set; }
+
+		string? ISimpleQueryStringQuery.FuzzyTranspositions { get; set; }
+
+		string? ISimpleQueryStringQuery.Lenient { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
+
+		string ISimpleQueryStringQuery.Query { get; set; }
+
+		string? ISimpleQueryStringQuery.QuoteFieldSuffix { get; set; }
+	}
+
+	[ConvertAs(typeof(ShapeQuery))]
+	public partial interface IShapeQuery : IQuery
+	{
+	}
+
+	public partial class ShapeQuery : QueryBase, IShapeQuery
+	{
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Shape = this;
+	}
+
+	public partial class ShapeQueryDescriptor<T> : QueryDescriptorBase<ShapeQueryDescriptor<T>, IShapeQuery>, IShapeQuery
+	{
+	}
+
+	[ConvertAs(typeof(ScriptScoreQuery))]
+	public partial interface IScriptScoreQuery : IQuery
+	{
+		float? MinScore { get; set; }
+
+		QueryDsl.IQueryContainer Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptScoreQuery : QueryBase, IScriptScoreQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("min_score")]
+		public float? MinScore { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryDsl.IQueryContainer Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.ScriptScore = this;
+	}
+
+	public partial class ScriptScoreQueryDescriptor<T> : QueryDescriptorBase<ScriptScoreQueryDescriptor<T>, IScriptScoreQuery>, IScriptScoreQuery
+	{
+		float? IScriptScoreQuery.MinScore { get; set; }
+
+		QueryDsl.IQueryContainer IScriptScoreQuery.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script IScriptScoreQuery.Script { get; set; }
+	}
+
+	[ConvertAs(typeof(ScriptQuery))]
+	public partial interface IScriptQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptQuery : QueryBase, IScriptQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Script = this;
+	}
+
+	public partial class ScriptQueryDescriptor<T> : QueryDescriptorBase<ScriptQueryDescriptor<T>, IScriptQuery>, IScriptQuery
+	{
+		Elastic.Clients.Elasticsearch.Script IScriptQuery.Script { get; set; }
+	}
+
+	[ConvertAs(typeof(RankFeatureQuery))]
+	public partial interface IRankFeatureQuery : IQuery
+	{
+		string Field { get; set; }
+
+		QueryDsl.IRankFeatureFunctionSaturation? Saturation { get; set; }
+
+		QueryDsl.IRankFeatureFunctionLogarithm? Log { get; set; }
+
+		QueryDsl.IRankFeatureFunctionLinear? Linear { get; set; }
+
+		QueryDsl.IRankFeatureFunctionSigmoid? Sigmoid { get; set; }
+	}
+
+	public partial class RankFeatureQuery : QueryBase, IRankFeatureQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("saturation")]
+		public QueryDsl.IRankFeatureFunctionSaturation? Saturation { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("log")]
+		public QueryDsl.IRankFeatureFunctionLogarithm? Log { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("linear")]
+		public QueryDsl.IRankFeatureFunctionLinear? Linear { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sigmoid")]
+		public QueryDsl.IRankFeatureFunctionSigmoid? Sigmoid { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.RankFeature = this;
+	}
+
+	public partial class RankFeatureQueryDescriptor<T> : QueryDescriptorBase<RankFeatureQueryDescriptor<T>, IRankFeatureQuery>, IRankFeatureQuery
+	{
+		string IRankFeatureQuery.Field { get; set; }
+
+		QueryDsl.IRankFeatureFunctionSaturation? IRankFeatureQuery.Saturation { get; set; }
+
+		QueryDsl.IRankFeatureFunctionLogarithm? IRankFeatureQuery.Log { get; set; }
+
+		QueryDsl.IRankFeatureFunctionLinear? IRankFeatureQuery.Linear { get; set; }
+
+		QueryDsl.IRankFeatureFunctionSigmoid? IRankFeatureQuery.Sigmoid { get; set; }
+	}
+
+	[ConvertAs(typeof(RankFeatureFunctionSigmoid))]
+	public partial interface IRankFeatureFunctionSigmoid
+	{
+		float Pivot { get; set; }
+
+		float Exponent { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSigmoid : IRankFeatureFunctionSigmoid
+	{
+		[JsonInclude]
+		[JsonPropertyName("pivot")]
+		public float Pivot { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("exponent")]
+		public float Exponent { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSigmoidDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RankFeatureFunction))]
+	public partial interface IRankFeatureFunction
+	{
+	}
+
+	public partial class RankFeatureFunction : IRankFeatureFunction
+	{
+	}
+
+	public partial class RankFeatureFunctionDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RankFeatureFunctionLinear))]
+	public partial interface IRankFeatureFunctionLinear
+	{
+	}
+
+	public partial class RankFeatureFunctionLinear : IRankFeatureFunctionLinear
+	{
+	}
+
+	public partial class RankFeatureFunctionLinearDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RankFeatureFunctionLogarithm))]
+	public partial interface IRankFeatureFunctionLogarithm
+	{
+		float ScalingFactor { get; set; }
+	}
+
+	public partial class RankFeatureFunctionLogarithm : IRankFeatureFunctionLogarithm
+	{
+		[JsonInclude]
+		[JsonPropertyName("scaling_factor")]
+		public float ScalingFactor { get; set; }
+	}
+
+	public partial class RankFeatureFunctionLogarithmDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RankFeatureFunctionSaturation))]
+	public partial interface IRankFeatureFunctionSaturation
+	{
+		float? Pivot { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSaturation : IRankFeatureFunctionSaturation
+	{
+		[JsonInclude]
+		[JsonPropertyName("pivot")]
+		public float? Pivot { get; set; }
+	}
+
+	public partial class RankFeatureFunctionSaturationDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(QueryStringQuery))]
+	public partial interface IQueryStringQuery : IQuery
+	{
+		string? AllowLeadingWildcard { get; set; }
+
+		string? Analyzer { get; set; }
+
+		string? AnalyzeWildcard { get; set; }
+
+		string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		string? DefaultField { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
+
+		string? EnablePositionIncrements { get; set; }
+
+		string? Escape { get; set; }
+
+		IEnumerable<string>? Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+		int? FuzzyMaxExpansions { get; set; }
+
+		int? FuzzyPrefixLength { get; set; }
+
+		string? FuzzyRewrite { get; set; }
+
+		string? FuzzyTranspositions { get; set; }
+
+		string? Lenient { get; set; }
+
+		int? MaxDeterminizedStates { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		double? PhraseSlop { get; set; }
+
+		string Query { get; set; }
+
+		string? QuoteAnalyzer { get; set; }
+
+		string? QuoteFieldSuffix { get; set; }
+
+		string? Rewrite { get; set; }
+
+		double? TieBreaker { get; set; }
+
+		string? TimeZone { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
+	}
+
+	public partial class QueryStringQuery : QueryBase, IQueryStringQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("allow_leading_wildcard")]
+		public string? AllowLeadingWildcard { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyze_wildcard")]
+		public string? AnalyzeWildcard { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("default_field")]
+		public string? DefaultField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("default_operator")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("enable_position_increments")]
+		public string? EnablePositionIncrements { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("escape")]
+		public string? Escape { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public IEnumerable<string>? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzziness")]
+		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_max_expansions")]
+		public int? FuzzyMaxExpansions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_prefix_length")]
+		public int? FuzzyPrefixLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_rewrite")]
+		public string? FuzzyRewrite { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_transpositions")]
+		public string? FuzzyTranspositions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lenient")]
+		public string? Lenient { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_determinized_states")]
+		public int? MaxDeterminizedStates { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("phrase_slop")]
+		public double? PhraseSlop { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public string Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("quote_analyzer")]
+		public string? QuoteAnalyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("quote_field_suffix")]
+		public string? QuoteFieldSuffix { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rewrite")]
+		public string? Rewrite { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tie_breaker")]
+		public double? TieBreaker { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_zone")]
+		public string? TimeZone { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.QueryString = this;
+	}
+
+	public partial class QueryStringQueryDescriptor<T> : QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>, IQueryStringQuery
+	{
+		string? IQueryStringQuery.AllowLeadingWildcard { get; set; }
+
+		string? IQueryStringQuery.Analyzer { get; set; }
+
+		string? IQueryStringQuery.AnalyzeWildcard { get; set; }
+
+		string? IQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		string? IQueryStringQuery.DefaultField { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? IQueryStringQuery.DefaultOperator { get; set; }
+
+		string? IQueryStringQuery.EnablePositionIncrements { get; set; }
+
+		string? IQueryStringQuery.Escape { get; set; }
+
+		IEnumerable<string>? IQueryStringQuery.Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fuzziness? IQueryStringQuery.Fuzziness { get; set; }
+
+		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
+
+		int? IQueryStringQuery.FuzzyPrefixLength { get; set; }
+
+		string? IQueryStringQuery.FuzzyRewrite { get; set; }
+
+		string? IQueryStringQuery.FuzzyTranspositions { get; set; }
+
+		string? IQueryStringQuery.Lenient { get; set; }
+
+		int? IQueryStringQuery.MaxDeterminizedStates { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? IQueryStringQuery.MinimumShouldMatch { get; set; }
+
+		double? IQueryStringQuery.PhraseSlop { get; set; }
+
+		string IQueryStringQuery.Query { get; set; }
+
+		string? IQueryStringQuery.QuoteAnalyzer { get; set; }
+
+		string? IQueryStringQuery.QuoteFieldSuffix { get; set; }
+
+		string? IQueryStringQuery.Rewrite { get; set; }
+
+		double? IQueryStringQuery.TieBreaker { get; set; }
+
+		string? IQueryStringQuery.TimeZone { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? IQueryStringQuery.Type { get; set; }
+	}
+
+	[ConvertAs(typeof(PinnedQuery))]
+	public partial interface IPinnedQuery : IQuery
+	{
+		IEnumerable<string> Ids { get; set; }
+
+		QueryDsl.IQueryContainer Organic { get; set; }
+	}
+
+	public partial class PinnedQuery : QueryBase, IPinnedQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("ids")]
+		public IEnumerable<string> Ids { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("organic")]
+		public QueryDsl.IQueryContainer Organic { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Pinned = this;
+	}
+
+	public partial class PinnedQueryDescriptor<T> : QueryDescriptorBase<PinnedQueryDescriptor<T>, IPinnedQuery>, IPinnedQuery
+	{
+		IEnumerable<string> IPinnedQuery.Ids { get; set; }
+
+		QueryDsl.IQueryContainer IPinnedQuery.Organic { get; set; }
+	}
+
+	[ConvertAs(typeof(PercolateQuery))]
+	public partial interface IPercolateQuery : IQuery
+	{
+		string Field { get; set; }
+
+		string? Id { get; set; }
+
+		string? Index { get; set; }
+
+		string? Name { get; set; }
+
+		string? Preference { get; set; }
+
+		string? Routing { get; set; }
+
+		long? Version { get; set; }
+	}
+
+	public partial class PercolateQuery : QueryBase, IPercolateQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public string? Id { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public string? Index { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string? Name { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("preference")]
+		public string? Preference { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public string? Routing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public long? Version { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Percolate = this;
+	}
+
+	public partial class PercolateQueryDescriptor<T> : QueryDescriptorBase<PercolateQueryDescriptor<T>, IPercolateQuery>, IPercolateQuery
+	{
+		string IPercolateQuery.Field { get; set; }
+
+		string? IPercolateQuery.Id { get; set; }
+
+		string? IPercolateQuery.Index { get; set; }
+
+		string? IPercolateQuery.Name { get; set; }
+
+		string? IPercolateQuery.Preference { get; set; }
+
+		string? IPercolateQuery.Routing { get; set; }
+
+		long? IPercolateQuery.Version { get; set; }
+	}
+
+	[ConvertAs(typeof(ParentIdQuery))]
+	public partial interface IParentIdQuery : IQuery
+	{
+		string? Id { get; set; }
+
+		string? IgnoreUnmapped { get; set; }
+
+		string? Type { get; set; }
+	}
+
+	public partial class ParentIdQuery : QueryBase, IParentIdQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public string? Id { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string? Type { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.ParentId = this;
+	}
+
+	public partial class ParentIdQueryDescriptor<T> : QueryDescriptorBase<ParentIdQueryDescriptor<T>, IParentIdQuery>, IParentIdQuery
+	{
+		string? IParentIdQuery.Id { get; set; }
+
+		string? IParentIdQuery.IgnoreUnmapped { get; set; }
+
+		string? IParentIdQuery.Type { get; set; }
+	}
+
+	[ConvertAs(typeof(NestedQuery))]
+	public partial interface INestedQuery : IQuery
+	{
+		string? IgnoreUnmapped { get; set; }
+
+		IInnerHits? InnerHits { get; set; }
+
+		string Path { get; set; }
+
+		QueryDsl.IQueryContainer Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreMode { get; set; }
+	}
+
+	public partial class NestedQuery : QueryBase, INestedQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("inner_hits")]
+		public IInnerHits? InnerHits { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string Path { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryDsl.IQueryContainer Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("score_mode")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreMode { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Nested = this;
+	}
+
+	public partial class NestedQueryDescriptor<T> : QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>, INestedQuery
+	{
+		string? INestedQuery.IgnoreUnmapped { get; set; }
+
+		IInnerHits? INestedQuery.InnerHits { get; set; }
+
+		string INestedQuery.Path { get; set; }
+
+		QueryDsl.IQueryContainer INestedQuery.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? INestedQuery.ScoreMode { get; set; }
+	}
+
+	[ConvertAs(typeof(MultiMatchQuery))]
+	public partial interface IMultiMatchQuery : IQuery
+	{
+		string? Analyzer { get; set; }
+
+		string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+		string? FuzzyRewrite { get; set; }
+
+		string? FuzzyTranspositions { get; set; }
+
+		string? Lenient { get; set; }
+
+		int? MaxExpansions { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
+
+		int? PrefixLength { get; set; }
+
+		string Query { get; set; }
+
+		int? Slop { get; set; }
+
+		double? TieBreaker { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
+	}
+
+	public partial class MultiMatchQuery : QueryBase, IMultiMatchQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzziness")]
+		public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_rewrite")]
+		public string? FuzzyRewrite { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy_transpositions")]
+		public string? FuzzyTranspositions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lenient")]
+		public string? Lenient { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_expansions")]
+		public int? MaxExpansions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("operator")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public string Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("slop")]
+		public int? Slop { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tie_breaker")]
+		public double? TieBreaker { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("zero_terms_query")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.MultiMatch = this;
+	}
+
+	public partial class MultiMatchQueryDescriptor<T> : QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery>, IMultiMatchQuery
+	{
+		string? IMultiMatchQuery.Analyzer { get; set; }
+
+		string? IMultiMatchQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? IMultiMatchQuery.Fields { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fuzziness? IMultiMatchQuery.Fuzziness { get; set; }
+
+		string? IMultiMatchQuery.FuzzyRewrite { get; set; }
+
+		string? IMultiMatchQuery.FuzzyTranspositions { get; set; }
+
+		string? IMultiMatchQuery.Lenient { get; set; }
+
+		int? IMultiMatchQuery.MaxExpansions { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? IMultiMatchQuery.MinimumShouldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.Operator? IMultiMatchQuery.Operator { get; set; }
+
+		int? IMultiMatchQuery.PrefixLength { get; set; }
+
+		string IMultiMatchQuery.Query { get; set; }
+
+		int? IMultiMatchQuery.Slop { get; set; }
+
+		double? IMultiMatchQuery.TieBreaker { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? IMultiMatchQuery.Type { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? IMultiMatchQuery.ZeroTermsQuery { get; set; }
+	}
+
+	[ConvertAs(typeof(MoreLikeThisQuery))]
+	public partial interface IMoreLikeThisQuery : IQuery
+	{
+		string? Analyzer { get; set; }
+
+		double? BoostTerms { get; set; }
+
+		string? FailOnUnsupportedField { get; set; }
+
+		IEnumerable<string>? Fields { get; set; }
+
+		string? Include { get; set; }
+
+		int? MaxDocFreq { get; set; }
+
+		int? MaxQueryTerms { get; set; }
+
+		int? MaxWordLength { get; set; }
+
+		int? MinDocFreq { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		int? MinTermFreq { get; set; }
+
+		int? MinWordLength { get; set; }
+
+		Dictionary<string, string>? PerFieldAnalyzer { get; set; }
+
+		string? Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWords { get; set; }
+
+		long? Version { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+	}
+
+	public partial class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost_terms")]
+		public double? BoostTerms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fail_on_unsupported_field")]
+		public string? FailOnUnsupportedField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public IEnumerable<string>? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include")]
+		public string? Include { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_doc_freq")]
+		public int? MaxDocFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_query_terms")]
+		public int? MaxQueryTerms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_word_length")]
+		public int? MaxWordLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_doc_freq")]
+		public int? MinDocFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_term_freq")]
+		public int? MinTermFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("per_field_analyzer")]
+		public Dictionary<string, string>? PerFieldAnalyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public string? Routing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("stop_words")]
+		public Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWords { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public long? Version { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version_type")]
+		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.MoreLikeThis = this;
+	}
+
+	public partial class MoreLikeThisQueryDescriptor<T> : QueryDescriptorBase<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery>, IMoreLikeThisQuery
+	{
+		string? IMoreLikeThisQuery.Analyzer { get; set; }
+
+		double? IMoreLikeThisQuery.BoostTerms { get; set; }
+
+		string? IMoreLikeThisQuery.FailOnUnsupportedField { get; set; }
+
+		IEnumerable<string>? IMoreLikeThisQuery.Fields { get; set; }
+
+		string? IMoreLikeThisQuery.Include { get; set; }
+
+		int? IMoreLikeThisQuery.MaxDocFreq { get; set; }
+
+		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
+
+		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
+
+		int? IMoreLikeThisQuery.MinDocFreq { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
+
+		int? IMoreLikeThisQuery.MinTermFreq { get; set; }
+
+		int? IMoreLikeThisQuery.MinWordLength { get; set; }
+
+		Dictionary<string, string>? IMoreLikeThisQuery.PerFieldAnalyzer { get; set; }
+
+		string? IMoreLikeThisQuery.Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Analysis.StopWords? IMoreLikeThisQuery.StopWords { get; set; }
+
+		long? IMoreLikeThisQuery.Version { get; set; }
+
+		Elastic.Clients.Elasticsearch.VersionType? IMoreLikeThisQuery.VersionType { get; set; }
+	}
+
+	[ConvertAs(typeof(MatchNoneQuery))]
+	public partial interface IMatchNoneQuery : IQuery
+	{
+	}
+
+	public partial class MatchNoneQuery : QueryBase, IMatchNoneQuery
+	{
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.MatchNone = this;
+	}
+
+	public partial class MatchNoneQueryDescriptor<T> : QueryDescriptorBase<MatchNoneQueryDescriptor<T>, IMatchNoneQuery>, IMatchNoneQuery
+	{
+	}
+
+	[ConvertAs(typeof(MatchAllQuery))]
+	public partial interface IMatchAllQuery : IQuery
+	{
+	}
+
+	public partial class MatchAllQuery : QueryBase, IMatchAllQuery
+	{
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.MatchAll = this;
+	}
+
+	public partial class MatchAllQueryDescriptor<T> : QueryDescriptorBase<MatchAllQueryDescriptor<T>, IMatchAllQuery>, IMatchAllQuery
+	{
+	}
+
+	[ConvertAs(typeof(IdsQuery))]
+	public partial interface IIdsQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
+	}
+
+	public partial class IdsQuery : QueryBase, IIdsQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("values")]
+		public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Ids = this;
+	}
+
+	public partial class IdsQueryDescriptor<T> : QueryDescriptorBase<IdsQueryDescriptor<T>, IIdsQuery>, IIdsQuery
+	{
+		Elastic.Clients.Elasticsearch.Ids? IIdsQuery.Values { get; set; }
+	}
+
+	[ConvertAs(typeof(HasParentQuery))]
+	public partial interface IHasParentQuery : IQuery
+	{
+		string? IgnoreUnmapped { get; set; }
+
+		IInnerHits? InnerHits { get; set; }
+
+		string ParentType { get; set; }
+
+		QueryDsl.IQueryContainer Query { get; set; }
+
+		string? Score { get; set; }
+	}
+
+	public partial class HasParentQuery : QueryBase, IHasParentQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("inner_hits")]
+		public IInnerHits? InnerHits { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("parent_type")]
+		public string ParentType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryDsl.IQueryContainer Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("score")]
+		public string? Score { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.HasParent = this;
+	}
+
+	public partial class HasParentQueryDescriptor<T> : QueryDescriptorBase<HasParentQueryDescriptor<T>, IHasParentQuery>, IHasParentQuery
+	{
+		string? IHasParentQuery.IgnoreUnmapped { get; set; }
+
+		IInnerHits? IHasParentQuery.InnerHits { get; set; }
+
+		string IHasParentQuery.ParentType { get; set; }
+
+		QueryDsl.IQueryContainer IHasParentQuery.Query { get; set; }
+
+		string? IHasParentQuery.Score { get; set; }
+	}
+
+	[ConvertAs(typeof(HasChildQuery))]
+	public partial interface IHasChildQuery : IQuery
+	{
+		string? IgnoreUnmapped { get; set; }
+
+		IInnerHits? InnerHits { get; set; }
+
+		int? MaxChildren { get; set; }
+
+		int? MinChildren { get; set; }
+
+		QueryDsl.IQueryContainer Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
+
+		string Type { get; set; }
+	}
+
+	public partial class HasChildQuery : QueryBase, IHasChildQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("inner_hits")]
+		public IInnerHits? InnerHits { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_children")]
+		public int? MaxChildren { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_children")]
+		public int? MinChildren { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryDsl.IQueryContainer Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("score_mode")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.HasChild = this;
+	}
+
+	public partial class HasChildQueryDescriptor<T> : QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>, IHasChildQuery
+	{
+		string? IHasChildQuery.IgnoreUnmapped { get; set; }
+
+		IInnerHits? IHasChildQuery.InnerHits { get; set; }
+
+		int? IHasChildQuery.MaxChildren { get; set; }
+
+		int? IHasChildQuery.MinChildren { get; set; }
+
+		QueryDsl.IQueryContainer IHasChildQuery.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
+
+		string IHasChildQuery.Type { get; set; }
+	}
+
+	[ConvertAs(typeof(GeoShapeQuery))]
+	public partial interface IGeoShapeQuery : IQuery
+	{
+		string? IgnoreUnmapped { get; set; }
+	}
+
+	public partial class GeoShapeQuery : QueryBase, IGeoShapeQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.GeoShape = this;
+	}
+
+	public partial class GeoShapeQueryDescriptor<T> : QueryDescriptorBase<GeoShapeQueryDescriptor<T>, IGeoShapeQuery>, IGeoShapeQuery
+	{
+		string? IGeoShapeQuery.IgnoreUnmapped { get; set; }
+	}
+
+	[ConvertAs(typeof(GeoPolygonQuery))]
+	public partial interface IGeoPolygonQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
+
+		string? IgnoreUnmapped { get; set; }
+	}
+
+	public partial class GeoPolygonQuery : QueryBase, IGeoPolygonQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("validation_method")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.GeoPolygon = this;
+	}
+
+	public partial class GeoPolygonQueryDescriptor<T> : QueryDescriptorBase<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery>, IGeoPolygonQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? IGeoPolygonQuery.ValidationMethod { get; set; }
+
+		string? IGeoPolygonQuery.IgnoreUnmapped { get; set; }
+	}
+
+	[ConvertAs(typeof(GeoDistanceQuery))]
+	public partial interface IGeoDistanceQuery : IQuery
+	{
+		string? Distance { get; set; }
+
+		Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
+	}
+
+	public partial class GeoDistanceQuery : QueryBase, IGeoDistanceQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("distance")]
+		public string? Distance { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("distance_type")]
+		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("validation_method")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.GeoDistance = this;
+	}
+
+	public partial class GeoDistanceQueryDescriptor<T> : QueryDescriptorBase<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery>, IGeoDistanceQuery
+	{
+		string? IGeoDistanceQuery.Distance { get; set; }
+
+		Elastic.Clients.Elasticsearch.GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? IGeoDistanceQuery.ValidationMethod { get; set; }
+	}
+
+	[ConvertAs(typeof(GeoBoundingBoxQuery))]
+	public partial interface IGeoBoundingBoxQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
+
+		string? IgnoreUnmapped { get; set; }
+	}
+
+	public partial class GeoBoundingBoxQuery : QueryBase, IGeoBoundingBoxQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("validation_method")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public string? IgnoreUnmapped { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.GeoBoundingBox = this;
+	}
+
+	public partial class GeoBoundingBoxQueryDescriptor<T> : QueryDescriptorBase<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery>, IGeoBoundingBoxQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? IGeoBoundingBoxQuery.ValidationMethod { get; set; }
+
+		string? IGeoBoundingBoxQuery.IgnoreUnmapped { get; set; }
+	}
+
+	[ConvertAs(typeof(FunctionScoreQuery))]
+	public partial interface IFunctionScoreQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
+
+		IEnumerable<QueryDsl.IFunctionScoreContainer>? Functions { get; set; }
+
+		double? MaxBoost { get; set; }
+
+		double? MinScore { get; set; }
+
+		QueryDsl.IQueryContainer? Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
+	}
+
+	public partial class FunctionScoreQuery : QueryBase, IFunctionScoreQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost_mode")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("functions")]
+		public IEnumerable<QueryDsl.IFunctionScoreContainer>? Functions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_boost")]
+		public double? MaxBoost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_score")]
+		public double? MinScore { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryDsl.IQueryContainer? Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("score_mode")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.FunctionScore = this;
+	}
+
+	public partial class FunctionScoreQueryDescriptor<T> : QueryDescriptorBase<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery>, IFunctionScoreQuery
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
+
+		IEnumerable<QueryDsl.IFunctionScoreContainer>? IFunctionScoreQuery.Functions { get; set; }
+
+		double? IFunctionScoreQuery.MaxBoost { get; set; }
+
+		double? IFunctionScoreQuery.MinScore { get; set; }
+
+		QueryDsl.IQueryContainer? IFunctionScoreQuery.Query { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
+	}
+
+	[ConvertAs(typeof(FunctionScoreContainer))]
+	public partial interface IFunctionScoreContainer
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Exp { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Gauss { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Linear { get; set; }
+
+		QueryDsl.IFieldValueFactorScoreFunction? FieldValueFactor { get; set; }
+
+		QueryDsl.IRandomScoreFunction? RandomScore { get; set; }
+
+		QueryDsl.IScriptScoreFunction? ScriptScore { get; set; }
+
+		QueryDsl.IQueryContainer? Filter { get; set; }
+
+		double? Weight { get; set; }
+	}
+
+	public partial class FunctionScoreContainer : IFunctionScoreContainer
+	{
+		[JsonInclude]
+		[JsonPropertyName("exp")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Exp { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gauss")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Gauss { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("linear")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction? Linear { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field_value_factor")]
+		public QueryDsl.IFieldValueFactorScoreFunction? FieldValueFactor { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("random_score")]
+		public QueryDsl.IRandomScoreFunction? RandomScore { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script_score")]
+		public QueryDsl.IScriptScoreFunction? ScriptScore { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public QueryDsl.IQueryContainer? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("weight")]
+		public double? Weight { get; set; }
+	}
+
+	public partial class FunctionScoreContainerDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ScriptScoreFunction))]
+	public partial interface IScriptScoreFunction
+	{
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptScoreFunction : IScriptScoreFunction
+	{
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	public partial class ScriptScoreFunctionDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(ScoreFunctionBase))]
+	public partial interface IScoreFunctionBase
+	{
+		QueryDsl.IQueryContainer? Filter { get; set; }
+
+		double? Weight { get; set; }
+	}
+
+	public abstract partial class ScoreFunctionBase : IScoreFunctionBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public QueryDsl.IQueryContainer? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("weight")]
+		public double? Weight { get; set; }
+	}
+
+	public partial class ScoreFunctionBaseDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(RandomScoreFunction))]
+	public partial interface IRandomScoreFunction
+	{
+		string? Field { get; set; }
+	}
+
+	public partial class RandomScoreFunction : IRandomScoreFunction
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+	}
+
+	public partial class RandomScoreFunctionDescriptor
+	{
+	}
+
+	[ConvertAs(typeof(FieldValueFactorScoreFunction))]
+	public partial interface IFieldValueFactorScoreFunction
+	{
+		string Field { get; set; }
+
+		double? Factor { get; set; }
+
+		double? Missing { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
+	}
+
+	public partial class FieldValueFactorScoreFunction : IFieldValueFactorScoreFunction
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("factor")]
+		public double? Factor { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public double? Missing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("modifier")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
+	}
+
+	public partial class FieldValueFactorScoreFunctionDescriptor
+	{
+	}
+
+	public partial class GeoDecayFunction
+	{
+	}
+
+	public abstract partial class DecayFunctionBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("multi_value_mode")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NumericDecayFunction
+	{
+	}
+
+	public partial class DateDecayFunction
+	{
+	}
+
+	[ConvertAs(typeof(ExistsQuery))]
+	public partial interface IExistsQuery : IQuery
+	{
+		string Field { get; set; }
+	}
+
+	public partial class ExistsQuery : QueryBase, IExistsQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Exists = this;
+	}
+
+	public partial class ExistsQueryDescriptor<T> : QueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery>, IExistsQuery
+	{
+		string IExistsQuery.Field { get; set; }
+	}
+
+	[ConvertAs(typeof(DisMaxQuery))]
+	public partial interface IDisMaxQuery : IQuery
+	{
+		IEnumerable<QueryDsl.IQueryContainer> Queries { get; set; }
+
+		double? TieBreaker { get; set; }
+	}
+
+	public partial class DisMaxQuery : QueryBase, IDisMaxQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("queries")]
+		public IEnumerable<QueryDsl.IQueryContainer> Queries { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tie_breaker")]
+		public double? TieBreaker { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.DisMax = this;
+	}
+
+	public partial class DisMaxQueryDescriptor<T> : QueryDescriptorBase<DisMaxQueryDescriptor<T>, IDisMaxQuery>, IDisMaxQuery
+	{
+		IEnumerable<QueryDsl.IQueryContainer> IDisMaxQuery.Queries { get; set; }
+
+		double? IDisMaxQuery.TieBreaker { get; set; }
+	}
+
+	[ConvertAs(typeof(ConstantScoreQuery))]
+	public partial interface IConstantScoreQuery : IQuery
+	{
+		QueryDsl.IQueryContainer Filter { get; set; }
+	}
+
+	public partial class ConstantScoreQuery : QueryBase, IConstantScoreQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public QueryDsl.IQueryContainer Filter { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.ConstantScore = this;
+	}
+
+	public partial class ConstantScoreQueryDescriptor<T> : QueryDescriptorBase<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery>, IConstantScoreQuery
+	{
+		QueryDsl.IQueryContainer IConstantScoreQuery.Filter { get; set; }
+	}
+
+	[ConvertAs(typeof(CombinedFieldsQuery))]
+	public partial interface ICombinedFieldsQuery : IQuery
+	{
+		IEnumerable<string> Fields { get; set; }
+
+		string Query { get; set; }
+
+		string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MimimumShouldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
+	}
+
+	public partial class CombinedFieldsQuery : QueryBase, ICombinedFieldsQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public IEnumerable<string> Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public string Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public string? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("operator")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mimimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MimimumShouldMatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("zero_terms_query")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.CombinedFields = this;
+	}
+
+	public partial class CombinedFieldsQueryDescriptor<T> : QueryDescriptorBase<CombinedFieldsQueryDescriptor<T>, ICombinedFieldsQuery>, ICombinedFieldsQuery
+	{
+		IEnumerable<string> ICombinedFieldsQuery.Fields { get; set; }
+
+		string ICombinedFieldsQuery.Query { get; set; }
+
+		string? ICombinedFieldsQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? ICombinedFieldsQuery.Operator { get; set; }
+
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? ICombinedFieldsQuery.MimimumShouldMatch { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ICombinedFieldsQuery.ZeroTermsQuery { get; set; }
+	}
+
+	[ConvertAs(typeof(BoostingQuery))]
+	public partial interface IBoostingQuery : IQuery
+	{
+		double NegativeBoost { get; set; }
+
+		QueryDsl.IQueryContainer Negative { get; set; }
+
+		QueryDsl.IQueryContainer Positive { get; set; }
+	}
+
+	public partial class BoostingQuery : QueryBase, IBoostingQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("negative_boost")]
+		public double NegativeBoost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("negative")]
+		public QueryDsl.IQueryContainer Negative { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("positive")]
+		public QueryDsl.IQueryContainer Positive { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Boosting = this;
+	}
+
+	public partial class BoostingQueryDescriptor<T> : QueryDescriptorBase<BoostingQueryDescriptor<T>, IBoostingQuery>, IBoostingQuery
+	{
+		double IBoostingQuery.NegativeBoost { get; set; }
+
+		QueryDsl.IQueryContainer IBoostingQuery.Negative { get; set; }
+
+		QueryDsl.IQueryContainer IBoostingQuery.Positive { get; set; }
+	}
+
+	[ConvertAs(typeof(BoolQuery))]
+	public partial interface IBoolQuery : IQuery
+	{
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+	}
+
+	public partial class BoolQuery : QueryBase, IBoolQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Bool = this;
+	}
+
+	public partial class BoolQueryDescriptor<T> : QueryDescriptorBase<BoolQueryDescriptor<T>, IBoolQuery>, IBoolQuery
+	{
+		Elastic.Clients.Elasticsearch.MinimumShouldMatch? IBoolQuery.MinimumShouldMatch { get; set; }
+	}
+
+	[ConvertAs(typeof(BoundingBox))]
+	public partial interface IBoundingBox
+	{
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRight { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeft { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRight { get; set; }
+
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeft { get; set; }
+
+		double? Top { get; set; }
+
+		double? Left { get; set; }
+
+		double? Right { get; set; }
+
+		double? Bottom { get; set; }
+
+		string? Wkt { get; set; }
+	}
+
+	public partial class BoundingBox : IBoundingBox
+	{
+		[JsonInclude]
+		[JsonPropertyName("bottom_right")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_left")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeft { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_right")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("bottom_left")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeft { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top")]
+		public double? Top { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("left")]
+		public double? Left { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("right")]
+		public double? Right { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("bottom")]
+		public double? Bottom { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("wkt")]
+		public string? Wkt { get; set; }
+	}
+
+	public partial class BoundingBoxDescriptor
+	{
 	}
 }

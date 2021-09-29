@@ -8,11 +8,11 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class DataStreamNames
-	{
-		// This is temporary
-		public DataStreamNames(IEnumerable<DataStreamName> names) => _dataStreamNameList.AddRange(names);
+	//public partial class DataStreamNames
+	//{
+	//	// This is temporary
+	//	public DataStreamNames(IEnumerable<DataStreamName> names) => _dataStreamNameList.AddRange(names);
 
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	//}
 }

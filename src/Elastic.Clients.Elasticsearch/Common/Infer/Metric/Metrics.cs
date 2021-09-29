@@ -8,11 +8,11 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Metrics
-	{
-		// This is temporary
-		public Metrics(IEnumerable<string> metrics) => _stringList.AddRange(metrics);
+	//public partial class Metrics
+	//{
+	//	// This is temporary
+	//	public Metrics(IEnumerable<string> metrics) => _stringList.AddRange(metrics);
 
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	//}
 }

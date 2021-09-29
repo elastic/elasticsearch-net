@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Aggregations;
-using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Playground
 {
 	internal class Program
 	{
-		private static async Task Main()
+		private static void Main()
 		{
 			//var matchQueryOne = Query<Person>.Match(m => m.Field(f => f.FirstName).Query("Steve"));
-			var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = "firstName"/*Infer.Field<Person>(f => f.FirstName)*/, Query = "Steve" });
-			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Query(SearchQuery.String("Steve")));
+			//var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = "firstName"/*Infer.Field<Person>(f => f.FirstName)*/, Query = "Steve" });
+			//var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Query(SearchQuery.String("Steve")));
 			//var matchQueryFour = new QueryContainerDescriptor<Person>().Match(m => m.Analyzer(""));
 
 			//var s = new ElasticsearchClientSettings();

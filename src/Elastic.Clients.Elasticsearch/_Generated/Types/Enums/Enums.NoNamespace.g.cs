@@ -22,68 +22,22 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public enum Bytes
+	public enum SuggestMode
 	{
-		[EnumMember(Value = "tb")]
-		Tb,
-		[EnumMember(Value = "t")]
-		t,
-		[EnumMember(Value = "pb")]
-		Pb,
-		[EnumMember(Value = "p")]
-		p,
-		[EnumMember(Value = "mb")]
-		Mb,
-		[EnumMember(Value = "m")]
-		m,
-		[EnumMember(Value = "kb")]
-		Kb,
-		[EnumMember(Value = "k")]
-		k,
-		[EnumMember(Value = "gb")]
-		Gb,
-		[EnumMember(Value = "g")]
-		g,
-		[EnumMember(Value = "b")]
-		b
+		[EnumMember(Value = "popular")]
+		Popular,
+		[EnumMember(Value = "missing")]
+		Missing,
+		[EnumMember(Value = "always")]
+		Always
 	}
 
-	public enum Conflicts
+	public enum SearchType
 	{
-		[EnumMember(Value = "proceed")]
-		Proceed,
-		[EnumMember(Value = "abort")]
-		Abort
-	}
-
-	public enum DefaultOperator
-	{
-		[EnumMember(Value = "OR")]
-		Or,
-		[EnumMember(Value = "AND")]
-		And
-	}
-
-	public enum DistanceUnit
-	{
-		[EnumMember(Value = "yd")]
-		Yd,
-		[EnumMember(Value = "nmi")]
-		Nmi,
-		[EnumMember(Value = "mm")]
-		Mm,
-		[EnumMember(Value = "mi")]
-		Mi,
-		[EnumMember(Value = "m")]
-		m,
-		[EnumMember(Value = "km")]
-		Km,
-		[EnumMember(Value = "in")]
-		In,
-		[EnumMember(Value = "ft")]
-		Ft,
-		[EnumMember(Value = "cm")]
-		Cm
+		[EnumMember(Value = "query_then_fetch")]
+		QueryThenFetch,
+		[EnumMember(Value = "dfs_query_then_fetch")]
+		DfsQueryThenFetch
 	}
 
 	public enum ExpandWildcardOptions
@@ -100,6 +54,46 @@ namespace Elastic.Clients.Elasticsearch
 		All
 	}
 
+	public enum DefaultOperator
+	{
+		[EnumMember(Value = "OR")]
+		Or,
+		[EnumMember(Value = "AND")]
+		And
+	}
+
+	public enum SortOrder
+	{
+		[EnumMember(Value = "desc")]
+		Desc,
+		[EnumMember(Value = "asc")]
+		Asc,
+		[EnumMember(Value = "_doc")]
+		Document
+	}
+
+	public enum DistanceUnit
+	{
+		[EnumMember(Value = "yd")]
+		Yards,
+		[EnumMember(Value = "nmi")]
+		NauticMiles,
+		[EnumMember(Value = "mm")]
+		Millimeters,
+		[EnumMember(Value = "mi")]
+		Miles,
+		[EnumMember(Value = "m")]
+		Meters,
+		[EnumMember(Value = "km")]
+		Kilometers,
+		[EnumMember(Value = "in")]
+		Inches,
+		[EnumMember(Value = "ft")]
+		Feet,
+		[EnumMember(Value = "cm")]
+		Centimeters
+	}
+
 	public enum GeoDistanceType
 	{
 		[EnumMember(Value = "plane")]
@@ -108,202 +102,66 @@ namespace Elastic.Clients.Elasticsearch
 		Arc
 	}
 
-	public enum GeoShapeRelation
+	public enum SortMode
 	{
-		[EnumMember(Value = "within")]
-		Within,
-		[EnumMember(Value = "intersects")]
-		Intersects,
-		[EnumMember(Value = "disjoint")]
-		Disjoint,
-		[EnumMember(Value = "contains")]
-		Contains
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "median")]
+		Median,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
-	public enum GroupBy
+	public enum HighlighterTagsSchema
 	{
-		[EnumMember(Value = "parents")]
-		Parents,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "nodes")]
-		Nodes
+		[EnumMember(Value = "styled")]
+		Styled
 	}
 
-	public enum Health
+	public enum HighlighterOrder
 	{
-		[EnumMember(Value = "yellow")]
-		Yellow,
-		[EnumMember(Value = "red")]
-		Red,
-		[EnumMember(Value = "green")]
-		Green
+		[EnumMember(Value = "score")]
+		Score
 	}
 
-	public enum Level
+	public enum HighlighterFragmenter
 	{
-		[EnumMember(Value = "shards")]
-		Shards,
-		[EnumMember(Value = "indices")]
-		Indices,
-		[EnumMember(Value = "cluster")]
-		Cluster
+		[EnumMember(Value = "span")]
+		Span,
+		[EnumMember(Value = "simple")]
+		Simple
 	}
 
-	public enum LifecycleOperationMode
+	public enum HighlighterEncoder
 	{
-		[EnumMember(Value = "STOPPING")]
-		Stopping,
-		[EnumMember(Value = "STOPPED")]
-		Stopped,
-		[EnumMember(Value = "RUNNING")]
-		Running
+		[EnumMember(Value = "html")]
+		Html,
+		[EnumMember(Value = "default")]
+		Default
 	}
 
-	public enum NodeRole
+	public enum BoundaryScanner
 	{
-		[EnumMember(Value = "voting_only")]
-		VotingOnly,
-		[EnumMember(Value = "transform")]
-		Transform,
-		[EnumMember(Value = "remote_cluster_client")]
-		RemoteClusterClient,
-		[EnumMember(Value = "ml")]
-		Ml,
-		[EnumMember(Value = "master")]
-		Master,
-		[EnumMember(Value = "ingest")]
-		Ingest,
-		[EnumMember(Value = "data_warm")]
-		DataWarm,
-		[EnumMember(Value = "data_hot")]
-		DataHot,
-		[EnumMember(Value = "data_frozen")]
-		DataFrozen,
-		[EnumMember(Value = "data_content")]
-		DataContent,
-		[EnumMember(Value = "data_cold")]
-		DataCold,
-		[EnumMember(Value = "data")]
-		Data,
-		[EnumMember(Value = "coordinating_only")]
-		CoordinatingOnly,
-		[EnumMember(Value = "client")]
-		Client
+		[EnumMember(Value = "word")]
+		Word,
+		[EnumMember(Value = "sentence")]
+		Sentence,
+		[EnumMember(Value = "chars")]
+		Chars
 	}
 
-	public enum OpType
+	public enum HighlighterType
 	{
-		[EnumMember(Value = "index")]
-		Index,
-		[EnumMember(Value = "create")]
-		Create
-	}
-
-	public enum RefreshOptions
-	{
-		[EnumMember(Value = "wait_for")]
-		WaitFor
-	}
-
-	public enum Result
-	{
-		[EnumMember(Value = "updated")]
-		Updated,
-		[EnumMember(Value = "not_found")]
-		NotFound,
-		[EnumMember(Value = "noop")]
-		Noop,
-		[EnumMember(Value = "deleted")]
-		Deleted,
-		[EnumMember(Value = "created")]
-		Created,
-		[EnumMember(Value = "Error")]
-		Error
-	}
-
-	public enum ScriptLanguage
-	{
-		[EnumMember(Value = "painless")]
-		Painless,
-		[EnumMember(Value = "mustache")]
-		Mustache,
-		[EnumMember(Value = "java")]
-		Java,
-		[EnumMember(Value = "expression")]
-		Expression
-	}
-
-	public enum SearchType
-	{
-		[EnumMember(Value = "query_then_fetch")]
-		QueryThenFetch,
-		[EnumMember(Value = "dfs_query_then_fetch")]
-		DfsQueryThenFetch
-	}
-
-	public enum ShapeRelation
-	{
-		[EnumMember(Value = "within")]
-		Within,
-		[EnumMember(Value = "intersects")]
-		Intersects,
-		[EnumMember(Value = "disjoint")]
-		Disjoint
-	}
-
-	public enum Size
-	{
-		[EnumMember(Value = "t")]
-		t,
-		[EnumMember(Value = "p")]
-		p,
-		[EnumMember(Value = "m")]
-		m,
-		[EnumMember(Value = "k")]
-		k,
-		[EnumMember(Value = "g")]
-		g,
-		[EnumMember(Value = "Raw")]
-		Raw
-	}
-
-	public enum SuggestMode
-	{
-		[EnumMember(Value = "popular")]
-		Popular,
-		[EnumMember(Value = "missing")]
-		Missing,
-		[EnumMember(Value = "always")]
-		Always
-	}
-
-	public enum ThreadType
-	{
-		[EnumMember(Value = "wait")]
-		Wait,
-		[EnumMember(Value = "cpu")]
-		Cpu,
-		[EnumMember(Value = "block")]
-		Block
-	}
-
-	public enum TimeUnit
-	{
-		[EnumMember(Value = "s")]
-		s,
-		[EnumMember(Value = "nanos")]
-		Nanos,
-		[EnumMember(Value = "ms")]
-		Ms,
-		[EnumMember(Value = "micros")]
-		Micros,
-		[EnumMember(Value = "m")]
-		m,
-		[EnumMember(Value = "h")]
-		h,
-		[EnumMember(Value = "d")]
-		d
+		[EnumMember(Value = "unified")]
+		Unified,
+		[EnumMember(Value = "plain")]
+		Plain,
+		[EnumMember(Value = "fvh")]
+		Fvh
 	}
 
 	public enum VersionType
@@ -318,10 +176,24 @@ namespace Elastic.Clients.Elasticsearch
 		External
 	}
 
-	public enum WaitForActiveShardOptions
+	public enum Health
 	{
-		[EnumMember(Value = "all")]
-		All
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
+	}
+
+	public enum WaitForStatus
+	{
+		[EnumMember(Value = "yellow")]
+		Yellow,
+		[EnumMember(Value = "red")]
+		Red,
+		[EnumMember(Value = "green")]
+		Green
 	}
 
 	public enum WaitForEvents
@@ -340,13 +212,19 @@ namespace Elastic.Clients.Elasticsearch
 		High
 	}
 
-	public enum WaitForStatus
+	public enum WaitForActiveShardOptions
 	{
-		[EnumMember(Value = "yellow")]
-		Yellow,
-		[EnumMember(Value = "red")]
-		Red,
-		[EnumMember(Value = "green")]
-		Green
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	public enum Level
+	{
+		[EnumMember(Value = "shards")]
+		Shards,
+		[EnumMember(Value = "indices")]
+		Indices,
+		[EnumMember(Value = "cluster")]
+		Cluster
 	}
 }

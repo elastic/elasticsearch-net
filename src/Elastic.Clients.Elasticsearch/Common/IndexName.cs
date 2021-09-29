@@ -10,20 +10,20 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private readonly int? _intValue;
 		private readonly string _stringValue;
-		private readonly bool? _boolValue;
+		//private readonly bool? _boolValue;
 
 		private SearchQuery(int value)
 		{
 			_intValue = value;
 			_stringValue = null;
-			_boolValue = null;
+			//_boolValue = null;
 		}
 
 		private SearchQuery(string value)
 		{
 			_intValue = null;
 			_stringValue = value;
-			_boolValue = null;
+			//_boolValue = null;
 		}
 
 		public static SearchQuery String(string value) => new SearchQuery(value);

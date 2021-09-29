@@ -36,17 +36,17 @@ namespace PlaygroundV7x
 				}
 			});
 
-			var intervalsQuery = new IntervalsQuery()
-			{
-				Match = new IntervalsMatch()
-				{
+			//var intervalsQuery = new IntervalsQuery()
+			//{
+			//	Match = new IntervalsMatch()
+			//	{
 
-				},
-				AllOf = new IntervalsAllOf()
-				{
+			//	},
+			//	AllOf = new IntervalsAllOf()
+			//	{
 
-				}
-			}
+			//	}
+			//}
 		}
 	}
 }

@@ -15,13 +15,35 @@
 //
 // ------------------------------------------------
 
-namespace Elastic.Clients.Elasticsearch
+using System;
+using System.Collections.Generic;
+using OneOf;
+using Elastic.Transport;
+
+#nullable restore
+namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	internal static class ApiUrlsLookups
+	public partial class Aggregate
 	{
-		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
-		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
-		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
-		internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
+	}
+
+	public partial class MetricAggregate
+	{
+	}
+
+	public partial class Bucket
+	{
+	}
+
+	public partial class Missing
+	{
+	}
+
+	public partial class TermsAggregationOrder
+	{
+	}
+
+	public partial class MovingAverageSettings
+	{
 	}
 }
