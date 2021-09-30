@@ -3,13 +3,13 @@
 
 [partintro]
 --
-Review important information about 7.15.x releases.
+Review important information about 7.16.x releases.
 
-* <<release-notes-7.15.0>>
+* <<release-notes-7.16.0>>
 --
 
 
 
-include::release-notes-7.15.0.asciidoc[]
+include::release-notes-7.16.0.asciidoc[]
 
 
