@@ -32,4 +32,14 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters>
 	{
 	}
+
+	///<summary>Request options for GetFeatureUpgradeStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+	public class GetFeatureUpgradeStatusRequestParameters : RequestParameters<GetFeatureUpgradeStatusRequestParameters>
+	{
+	}
+
+	///<summary>Request options for PostFeatureUpgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+	public class PostFeatureUpgradeRequestParameters : RequestParameters<PostFeatureUpgradeRequestParameters>
+	{
+	}
 }
