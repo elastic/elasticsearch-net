@@ -66,5 +66,23 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 		[MapsApi("migration.deprecations", "index")]
 		public Task<TResponse> DeprecationInfoAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_migration/deprecations"), ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_migration/system_features <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetFeatureUpgradeStatus<TResponse>(GetFeatureUpgradeStatusRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, "_migration/system_features", null, RequestParams(requestParameters));
+		///<summary>GET on /_migration/system_features <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("migration.get_feature_upgrade_status", "")]
+		public Task<TResponse> GetFeatureUpgradeStatusAsync<TResponse>(GetFeatureUpgradeStatusRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_migration/system_features", ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_migration/system_features <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse PostFeatureUpgrade<TResponse>(PostFeatureUpgradeRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_migration/system_features", null, RequestParams(requestParameters));
+		///<summary>POST on /_migration/system_features <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("migration.post_feature_upgrade", "")]
+		public Task<TResponse> PostFeatureUpgradeAsync<TResponse>(PostFeatureUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_migration/system_features", ctx, null, RequestParams(requestParameters));
 	}
 }

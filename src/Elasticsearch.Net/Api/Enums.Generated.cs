@@ -431,7 +431,9 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "grid")]
 		Grid,
 		[EnumMember(Value = "point")]
-		Point
+		Point,
+		[EnumMember(Value = "centroid")]
+		Centroid
 	}
 
 	[StringEnum]
@@ -983,6 +985,8 @@ namespace Elasticsearch.Net
 					return "grid";
 				case GridType.Point:
 					return "point";
+				case GridType.Centroid:
+					return "centroid";
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GridType'");

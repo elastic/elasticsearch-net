@@ -33,4 +33,18 @@ namespace Elasticsearch.Net.Specification.MigrationApi
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		public override bool SupportsBody => false;
 	}
+
+	///<summary>Request options for GetFeatureUpgradeStatus <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+	public class GetFeatureUpgradeStatusRequestParameters : RequestParameters<GetFeatureUpgradeStatusRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+	}
+
+	///<summary>Request options for PostFeatureUpgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-feature-upgrade.html</para></summary>
+	public class PostFeatureUpgradeRequestParameters : RequestParameters<PostFeatureUpgradeRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => false;
+	}
 }
