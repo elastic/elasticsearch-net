@@ -15,13 +15,28 @@
 //
 // ------------------------------------------------
 
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class PingResponse : ResponseBase
+	public enum RuntimeFieldType
 	{
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "keyword")]
+		Keyword,
+		[EnumMember(Value = "ip")]
+		Ip,
+		[EnumMember(Value = "geo_point")]
+		GeoPoint,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "date")]
+		Date,
+		[EnumMember(Value = "boolean")]
+		Boolean
 	}
 }

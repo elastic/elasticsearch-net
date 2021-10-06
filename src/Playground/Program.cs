@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
@@ -6,8 +8,35 @@ namespace Playground
 {
 	internal class Program
 	{
-		private static void Main()
+		private static async Task Main()
 		{
+			var client = new ElasticClient();
+
+			//var stream = new MemoryStream();
+			//IMatchQuery match = new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" };
+			//client.ElasticsearchClientSettings.SourceSerializer.Serialize(match, stream);
+			//stream.Position = 0;
+			//var json = Encoding.UTF8.GetString(stream.ToArray());
+
+			//var matchAll = new QueryContainer(new MatchAllQuery() { QueryName = "test_query" });
+			//var boolQuery = new QueryContainer(new BoolQuery() { Filter = new[] { new QueryContainer(new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" }) }});
+
+			var search = new SearchRequest()
+			{
+				Query = new BoolQuery { Boost = 1.2F }.ToQueryContainer()
+			};
+
+			var query = new QueryContainerDescriptor().QueryString(q => q.DefaultField("test"));
+			var stream = new MemoryStream();
+			//IMatchQuery match = new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" };
+			client.ElasticsearchClientSettings.SourceSerializer.Serialize(query, stream);
+			stream.Position = 0;
+			var json = Encoding.UTF8.GetString(stream.ToArray());
+
+			var response = await client.SearchAsync<Person>(search);
+
+			//var fluentResponse = client.SearchAsync<Person>(s => s.Query(matchAll));
+
 			//var matchQueryOne = Query<Person>.Match(m => m.Field(f => f.FirstName).Query("Steve"));
 			//var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = "firstName"/*Infer.Field<Person>(f => f.FirstName)*/, Query = "Steve" });
 			//var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Query(SearchQuery.String("Steve")));

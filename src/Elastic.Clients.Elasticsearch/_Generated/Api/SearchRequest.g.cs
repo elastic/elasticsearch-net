@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
 	{
 		[JsonIgnore]
-		public string? AllowNoIndices { get => Q<string?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 		[JsonIgnore]
-		public string? AllowPartialSearchResults { get => Q<string?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
+		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
 		[JsonIgnore]
 		public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 		[JsonIgnore]
-		public string? AnalyzeWildcard { get => Q<string?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 		[JsonIgnore]
-		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+		public object? BatchedReduceSize { get => Q<object?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 		[JsonIgnore]
-		public string? CcsMinimizeRoundtrips { get => Q<string?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
@@ -55,19 +55,19 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 		[JsonIgnore]
-		public string? Explain { get => Q<string?>("explain"); set => Q("explain", value); }
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 		[JsonIgnore]
-		public string? IgnoreThrottled { get => Q<string?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 		[JsonIgnore]
-		public string? IgnoreUnavailable { get => Q<string?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public string? Lenient { get => Q<string?>("lenient"); set => Q("lenient", value); }
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 		[JsonIgnore]
-		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		public object? MaxConcurrentShardRequests { get => Q<object?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 		[JsonIgnore]
 		public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
@@ -76,10 +76,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		public object? PreFilterShardSize { get => Q<object?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 		[JsonIgnore]
-		public string? RequestCache { get => Q<string?>("request_cache"); set => Q("request_cache", value); }
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
@@ -103,28 +103,34 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 		[JsonIgnore]
-		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
+		public object? SuggestSize { get => Q<object?>("suggest_size"); set => Q("suggest_size", value); }
 
 		[JsonIgnore]
 		public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 		[JsonIgnore]
-		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+		public object? TerminateAfter { get => Q<object?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public string? TrackScores { get => Q<string?>("track_scores"); set => Q("track_scores", value); }
+		public Union<bool?, int?>? TrackTotalHits { get => Q<Union<bool?, int?>?>("track_total_hits"); set => Q("track_total_hits", value); }
 
 		[JsonIgnore]
-		public string? TypedKeys { get => Q<string?>("typed_keys"); set => Q("typed_keys", value); }
+		public bool? TrackScores { get => Q<bool?>("track_scores"); set => Q("track_scores", value); }
 
 		[JsonIgnore]
-		public string? RestTotalHitsAsInt { get => Q<string?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonIgnore]
-		public string? Version { get => Q<string?>("version"); set => Q("version", value); }
+		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+		[JsonIgnore]
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
+
+		[JsonIgnore]
+		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -133,7 +139,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
-		public string? SeqNoPrimaryTerm { get => Q<string?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
+		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
 
 		[JsonIgnore]
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
@@ -143,6 +149,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+		[JsonIgnore]
+		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 	}
 
 	[ConvertAs(typeof(SearchRequest))]
@@ -162,17 +171,23 @@ namespace Elastic.Clients.Elasticsearch
 
 		QueryDsl.IQueryContainer? PostFilter { get; set; }
 
-		string? Profile { get; set; }
+		bool? Profile { get; set; }
 
 		QueryDsl.IQueryContainer? Query { get; set; }
+
+		IEnumerable<IRescore>? Rescore { get; set; }
 
 		Dictionary<string, IScriptField>? ScriptFields { get; set; }
 
 		ISlicedScroll? Slice { get; set; }
 
+		IEnumerable<Union<string?, IDateField?>>? Fields { get; set; }
+
+		Union<ISuggestContainer?, Dictionary<string, ISuggestContainer>?>? Suggest { get; set; }
+
 		IPointInTimeReference? Pit { get; set; }
 
-		//Dictionary<string, Mapping.IRuntimeField>? RuntimeMappings { get; set; }
+		Dictionary<string, Mapping.IRuntimeField>? RuntimeMappings { get; set; }
 	}
 
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
@@ -210,11 +225,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]
-		public string? Profile { get; set; }
+		public bool? Profile { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
 		public QueryDsl.IQueryContainer? Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rescore")]
+		public IEnumerable<IRescore>? Rescore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
@@ -225,12 +244,20 @@ namespace Elastic.Clients.Elasticsearch
 		public ISlicedScroll? Slice { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public IEnumerable<Union<string?, IDateField?>>? Fields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("suggest")]
+		public Union<ISuggestContainer?, Dictionary<string, ISuggestContainer>?>? Suggest { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("pit")]
 		public IPointInTimeReference? Pit { get; set; }
 
-		//[JsonInclude]
-		//[JsonPropertyName("runtime_mappings")]
-		//public Dictionary<string, Mapping.IRuntimeField>? RuntimeMappings { get; set; }
+		[JsonInclude]
+		[JsonPropertyName("runtime_mappings")]
+		public Dictionary<string, Mapping.IRuntimeField>? RuntimeMappings { get; set; }
 	}
 
 	public partial class SearchRequestDescriptor : RequestDescriptorBase<SearchRequestDescriptor, SearchRequestParameters, ISearchRequest>, ISearchRequest
@@ -262,16 +289,39 @@ namespace Elastic.Clients.Elasticsearch
 
 		QueryDsl.IQueryContainer? ISearchRequest.PostFilter { get; set; }
 
-		string? ISearchRequest.Profile { get; set; }
+		bool? ISearchRequest.Profile { get; set; }
 
 		QueryDsl.IQueryContainer? ISearchRequest.Query { get; set; }
+
+		IEnumerable<IRescore>? ISearchRequest.Rescore { get; set; }
 
 		Dictionary<string, IScriptField>? ISearchRequest.ScriptFields { get; set; }
 
 		ISlicedScroll? ISearchRequest.Slice { get; set; }
 
+		IEnumerable<Union<string?, IDateField?>>? ISearchRequest.Fields { get; set; }
+
+		Union<ISuggestContainer?, Dictionary<string, ISuggestContainer>?>? ISearchRequest.Suggest { get; set; }
+
 		IPointInTimeReference? ISearchRequest.Pit { get; set; }
 
-		//Dictionary<string, Mapping.IRuntimeField>? ISearchRequest.RuntimeMappings { get; set; }
+		Dictionary<string, Mapping.IRuntimeField>? ISearchRequest.RuntimeMappings { get; set; }
+
+		public SearchRequestDescriptor Aggs(Dictionary<string, Aggregations.IAggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
+		public SearchRequestDescriptor Aggregations(Dictionary<string, Aggregations.IAggregationContainer>? aggregations) => Assign(aggregations, (a, v) => a.Aggregations = v);
+		public SearchRequestDescriptor Collapse(IFieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
+		public SearchRequestDescriptor Highlight(IHighlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
+		public SearchRequestDescriptor IndicesBoost(IEnumerable<Dictionary<string, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoost = v);
+		public SearchRequestDescriptor MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
+		public SearchRequestDescriptor PostFilter(QueryDsl.IQueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
+		public SearchRequestDescriptor Profile(bool? profile) => Assign(profile, (a, v) => a.Profile = v);
+		public SearchRequestDescriptor Query(QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
+		public SearchRequestDescriptor Rescore(IEnumerable<IRescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
+		public SearchRequestDescriptor ScriptFields(Dictionary<string, IScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
+		public SearchRequestDescriptor Slice(ISlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
+		public SearchRequestDescriptor Fields(IEnumerable<Union<string?, IDateField?>>? fields) => Assign(fields, (a, v) => a.Fields = v);
+		public SearchRequestDescriptor Suggest(Union<ISuggestContainer?, Dictionary<string, ISuggestContainer>?>? suggest) => Assign(suggest, (a, v) => a.Suggest = v);
+		public SearchRequestDescriptor Pit(IPointInTimeReference? pit) => Assign(pit, (a, v) => a.Pit = v);
+		public SearchRequestDescriptor RuntimeMappings(Dictionary<string, Mapping.IRuntimeField>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappings = v);
 	}
 }

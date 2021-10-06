@@ -22,6 +22,14 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
+	public enum TotalHitsRelation
+	{
+		[EnumMember(Value = "gte")]
+		Gte,
+		[EnumMember(Value = "eq")]
+		Eq
+	}
+
 	public enum SuggestMode
 	{
 		[EnumMember(Value = "popular")]
@@ -60,6 +68,54 @@ namespace Elastic.Clients.Elasticsearch
 		Or,
 		[EnumMember(Value = "AND")]
 		And
+	}
+
+	public enum ScriptLanguage
+	{
+		[EnumMember(Value = "painless")]
+		Painless,
+		[EnumMember(Value = "mustache")]
+		Mustache,
+		[EnumMember(Value = "java")]
+		Java,
+		[EnumMember(Value = "expression")]
+		Expression
+	}
+
+	public enum StringDistance
+	{
+		[EnumMember(Value = "ngram")]
+		Ngram,
+		[EnumMember(Value = "levenshtein")]
+		Levenshtein,
+		[EnumMember(Value = "jaro_winkler")]
+		JaroWinkler,
+		[EnumMember(Value = "internal")]
+		Internal,
+		[EnumMember(Value = "damerau_levenshtein")]
+		DamerauLevenshtein
+	}
+
+	public enum SuggestSort
+	{
+		[EnumMember(Value = "score")]
+		Score,
+		[EnumMember(Value = "frequency")]
+		Frequency
+	}
+
+	public enum ScoreMode
+	{
+		[EnumMember(Value = "total")]
+		Total,
+		[EnumMember(Value = "multiply")]
+		Multiply,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
 	}
 
 	public enum SortOrder
@@ -174,57 +230,5 @@ namespace Elastic.Clients.Elasticsearch
 		ExternalGte,
 		[EnumMember(Value = "external")]
 		External
-	}
-
-	public enum Health
-	{
-		[EnumMember(Value = "yellow")]
-		Yellow,
-		[EnumMember(Value = "red")]
-		Red,
-		[EnumMember(Value = "green")]
-		Green
-	}
-
-	public enum WaitForStatus
-	{
-		[EnumMember(Value = "yellow")]
-		Yellow,
-		[EnumMember(Value = "red")]
-		Red,
-		[EnumMember(Value = "green")]
-		Green
-	}
-
-	public enum WaitForEvents
-	{
-		[EnumMember(Value = "urgent")]
-		Urgent,
-		[EnumMember(Value = "normal")]
-		Normal,
-		[EnumMember(Value = "low")]
-		Low,
-		[EnumMember(Value = "languid")]
-		Languid,
-		[EnumMember(Value = "immediate")]
-		Immediate,
-		[EnumMember(Value = "high")]
-		High
-	}
-
-	public enum WaitForActiveShardOptions
-	{
-		[EnumMember(Value = "all")]
-		All
-	}
-
-	public enum Level
-	{
-		[EnumMember(Value = "shards")]
-		Shards,
-		[EnumMember(Value = "indices")]
-		Indices,
-		[EnumMember(Value = "cluster")]
-		Cluster
 	}
 }

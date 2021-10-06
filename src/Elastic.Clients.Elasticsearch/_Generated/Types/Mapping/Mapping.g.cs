@@ -16,21 +16,42 @@
 // ------------------------------------------------
 
 using System;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster
+namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public class ClusterNamespace : NamespacedClientProxy
+	[ConvertAs(typeof(RuntimeField))]
+	public partial interface IRuntimeField
 	{
-		internal ClusterNamespace(ElasticClient client) : base(client)
-		{
-		}
+		string? Format { get; set; }
 
-		public ClusterHealthResponse Health(IClusterHealthRequest request) => DoRequest<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters);
-		public Task<ClusterHealthResponse> HealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterHealthResponse Health(Func<ClusterHealthRequestDescriptor, IClusterHealthRequest> selector = null) => Health(selector.InvokeOrDefault(new ClusterHealthRequestDescriptor()));
-		public Task<ClusterHealthResponse> HealthAsync(Func<ClusterHealthRequestDescriptor, IClusterHealthRequest> selector = null, CancellationToken cancellationToken = default) => HealthAsync(selector.InvokeOrDefault(new ClusterHealthRequestDescriptor()), cancellationToken);
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+	}
+
+	public partial class RuntimeField : Mapping.IRuntimeField
+	{
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("script")]
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+	}
+
+	public partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor, IRuntimeField>, IRuntimeField
+	{
+		string? IRuntimeField.Format { get; set; }
+
+		Elastic.Clients.Elasticsearch.Script? IRuntimeField.Script { get; set; }
+
+		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType IRuntimeField.Type { get; set; }
 	}
 }

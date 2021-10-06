@@ -21,7 +21,8 @@ namespace Elastic.Clients.Elasticsearch
 		public DefaultHighLevelSerializer(JsonSerializerOptions? options = null) => Options =
 			options ?? new JsonSerializerOptions
 			{
-				IgnoreNullValues = true, Converters = {new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)}
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+				Converters = {new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)}
 			};
 
 		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
@@ -32,10 +33,12 @@ namespace Elastic.Clients.Elasticsearch
 				IncludeFields= true,
 				Converters =
 				{
+					new ConvertAsConverterFactory(settings),
+					new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					//new FieldConverterFactory(settings),
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
-					new ConvertAsConverterFactory(settings),
+					
 					new DictionaryConverter(),
 					new UnionConverter()
 				},
