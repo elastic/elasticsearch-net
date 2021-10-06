@@ -269,6 +269,86 @@ namespace Elastic.Clients.Elasticsearch
 	}
 }
 
+namespace Elastic.Clients.Elasticsearch.QueryDsl
+{
+	//public partial class Like
+	//{
+
+	//}
+
+	//public partial class QueryContainerDescriptor : DescriptorBase<QueryContainerDescriptor, IQueryContainer>, IQueryContainer
+	//{
+	//	private QueryContainer WrapInContainer<TQuery, TQueryInterface>(
+	//		Func<TQuery, TQueryInterface> create
+	//	)
+	//		where TQuery : class, TQueryInterface, new()
+	//		where TQueryInterface : class
+	//	{
+	//		// Invoke the create delegate before assigning container; the create delegate
+	//		// may mutate the current QueryContainerDescriptor<T> instance such that it
+	//		// contains a query. See https://github.com/elastic/elasticsearch-net/issues/2875
+	//		var query = create.InvokeOrDefault(new TQuery());
+
+	//		if (query is not IQueryContainerVariant variant)
+	//		{
+	//			throw new Exception();
+	//		}
+
+	//		return variant.ToQueryContainer();
+
+	//		//var container = ContainedQuery == null
+	//		//	? this
+	//		//	: new QueryContainerDescriptor();
+
+	//		////c.IsVerbatim = query.IsVerbatim;
+	//		////c.IsStrict = query.IsStrict;
+
+	//		//assign(query, container);
+	//		//container.ContainedQuery = query;
+
+	//		//return container;
+
+	//		//if query is writable (not conditionless or verbatim): return a container that holds the query
+	//		//if (query.IsWritable)
+	//		//	return container;
+
+	//		//query is conditionless but marked as strict, throw exception
+	//		//if (query.IsStrict)
+	//		//	throw new ArgumentException("Query is conditionless but strict is turned on");
+
+	//		//query is conditionless return an empty container that can later be rewritten
+	//		//return null;
+	//	}
+
+	//	//[JsonIgnore]
+	//	//internal IQuery ContainedQuery { get; set; }
+
+	//	public QueryContainer QueryString(Func<QueryStringQueryDescriptor, IQueryStringQuery> selector) =>
+	//		WrapInContainer(selector);
+	//}
+
+	//public partial class QueryStringQueryDescriptor : IQueryContainerVariant
+	//{
+	//	string IUnionVariant.VariantType => "query_string";
+
+	//	public QueryContainer ToQueryContainer() => new(this);
+
+	//	public QueryStringQueryDescriptor DefaultField(string field) => Assign(field, (a, v) => a.DefaultField = v);
+	//}
+
+	public partial class DistanceFeatureQuery : IQueryContainerVariant
+	{ }
+
+	public partial class PinnedIdsQuery : IPinnedQueryVariant
+	{
+		public IEnumerable<string> Ids { get; set; }
+	}
+
+	public partial class PinnedDocsQuery : IPinnedQueryVariant
+	{
+		public IEnumerable<PinnedDoc> Docs { get; set; }
+	}
+}
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -298,18 +378,18 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	// TODO: Dictionary Examples
-	public partial class IndexHealthStatsDictionary : Dictionary<IndexName, Cluster.Health.IndexHealthStats>
-	{
-		public Cluster.Health.IndexHealthStats GetStats(IndexName indexName) => base[indexName];
-	}
+	//// TODO: Dictionary Examples
+	//public partial class IndexHealthStatsDictionary : Dictionary<IndexName, Cluster.Health.IndexHealthStats>
+	//{
+	//	public Cluster.Health.IndexHealthStats GetStats(IndexName indexName) => base[indexName];
+	//}
 
-	public partial class IndexHealthStatsDictionaryV2
-	{
-		private readonly Dictionary<IndexName, Cluster.Health.IndexHealthStats> _backingDictionary = new();
+	//public partial class IndexHealthStatsDictionaryV2
+	//{
+	//	private readonly Dictionary<IndexName, Cluster.Health.IndexHealthStats> _backingDictionary = new();
 
-		public Cluster.Health.IndexHealthStats GetStats(IndexName indexName) => _backingDictionary[indexName];
-	}
+	//	public Cluster.Health.IndexHealthStats GetStats(IndexName indexName) => _backingDictionary[indexName];
+	//}
 
 	//public partial class Actions : Dictionary<IndexName, ActionStatus>
 	//{

@@ -22,12 +22,52 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	public enum SimpleQueryStringFlags
+	{
+		[EnumMember(Value = "WHITESPACE")]
+		Whitespace,
+		[EnumMember(Value = "SLOP")]
+		Slop,
+		[EnumMember(Value = "PREFIX")]
+		Prefix,
+		[EnumMember(Value = "PRECEDENCE")]
+		Precedence,
+		[EnumMember(Value = "PHRASE")]
+		Phrase,
+		[EnumMember(Value = "OR")]
+		Or,
+		[EnumMember(Value = "NOT")]
+		Not,
+		[EnumMember(Value = "NONE")]
+		None,
+		[EnumMember(Value = "NEAR")]
+		Near,
+		[EnumMember(Value = "FUZZY")]
+		Fuzzy,
+		[EnumMember(Value = "ESCAPE")]
+		Escape,
+		[EnumMember(Value = "AND")]
+		And,
+		[EnumMember(Value = "ALL")]
+		All
+	}
+
 	public enum Operator
 	{
 		[EnumMember(Value = "or")]
 		Or,
 		[EnumMember(Value = "and")]
 		And
+	}
+
+	public enum RangeRelation
+	{
+		[EnumMember(Value = "within")]
+		Within,
+		[EnumMember(Value = "intersects")]
+		Intersects,
+		[EnumMember(Value = "contains")]
+		Contains
 	}
 
 	public enum TextQueryType

@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Core;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -34,4 +35,6 @@ namespace Elastic.Clients.Elasticsearch
 		public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options) =>
 			throw new NotImplementedException();
 	}
+
+	
 }

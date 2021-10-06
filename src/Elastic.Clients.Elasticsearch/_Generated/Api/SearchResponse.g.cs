@@ -48,6 +48,30 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		[JsonInclude]
+		[JsonPropertyName("documents")]
+		public IReadOnlyCollection<TDocument>? Documents
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> Hits
 		{
@@ -73,7 +97,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("num_reduce_phases")]
-		public long? NumReducePhases
+		public object? NumReducePhases
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -145,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("terminated_early")]
-		public string? TerminatedEarly
+		public bool? TerminatedEarly
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -157,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]
-		public string TimedOut
+		public bool TimedOut
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -169,7 +193,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("took")]
-		public long Took
+		public object Took
 		{
 			get;
 #if NET5_0_OR_GREATER

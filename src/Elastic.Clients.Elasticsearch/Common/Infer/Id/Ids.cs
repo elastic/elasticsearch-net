@@ -10,13 +10,13 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Ids
-	{
-		// This is temporary
-		public Ids(IEnumerable<Id> ids) => _idList.AddRange(ids);
+	//public partial class Ids
+	//{
+	//	// This is temporary
+	//	public Ids(IEnumerable<Id> ids) => _idList.AddRange(ids);
 
-		public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	}
+	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
+	//}
 
 	//[DebuggerDisplay("{DebugDisplay,nq}")]
 	//public partial class Ids : IUrlParameter, IEquatable<Ids>
