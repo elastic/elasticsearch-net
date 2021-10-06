@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Cluster;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,21 +24,10 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class ElasticClient : IElasticClient
 	{
-		public ClusterNamespace Cluster { get; private set; }
-
 		private partial void SetupNamespaces()
 		{
-			Cluster = new ClusterNamespace(this);
 		}
 
-		public OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request) => DoRequest<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters);
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IOpenPointInTimeRequest, OpenPointInTimeResponse>(request, request.RequestParameters, cancellationToken);
-		public OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Func<OpenPointInTimeRequestDescriptor, IOpenPointInTimeRequest> selector = null) => OpenPointInTime(selector.InvokeOrDefault(new OpenPointInTimeRequestDescriptor(indices)));
-		public Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<OpenPointInTimeRequestDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default) => OpenPointInTimeAsync(selector.InvokeOrDefault(new OpenPointInTimeRequestDescriptor(indices)), cancellationToken);
-		public PingResponse Ping(IPingRequest request) => DoRequest<IPingRequest, PingResponse>(request, request.RequestParameters);
-		public Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IPingRequest, PingResponse>(request, request.RequestParameters, cancellationToken);
-		public PingResponse Ping(Func<PingRequestDescriptor, IPingRequest> selector = null) => Ping(selector.InvokeOrDefault(new PingRequestDescriptor()));
-		public Task<PingResponse> PingAsync(Func<PingRequestDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default) => PingAsync(selector.InvokeOrDefault(new PingRequestDescriptor()), cancellationToken);
 		public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request) => DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);
 		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters, cancellationToken);
 		public SearchResponse<TDocument> Search<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null) => Search<TDocument>(selector.InvokeOrDefault(new SearchRequestDescriptor()));

@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Cluster;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,16 +24,6 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial interface IElasticClient
 	{
-		ClusterNamespace Cluster { get; }
-
-		OpenPointInTimeResponse OpenPointInTime(IOpenPointInTimeRequest request);
-		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(IOpenPointInTimeRequest request, CancellationToken cancellationToken = default);
-		OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Func<OpenPointInTimeRequestDescriptor, IOpenPointInTimeRequest> selector = null);
-		Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<OpenPointInTimeRequestDescriptor, IOpenPointInTimeRequest> selector = null, CancellationToken cancellationToken = default);
-		PingResponse Ping(IPingRequest request);
-		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
-		PingResponse Ping(Func<PingRequestDescriptor, IPingRequest> selector = null);
-		Task<PingResponse> PingAsync(Func<PingRequestDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
 		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null);

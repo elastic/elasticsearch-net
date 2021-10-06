@@ -56,6 +56,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Heteroscedastic
 	}
 
+	public enum MissingOrder
+	{
+		[EnumMember(Value = "last")]
+		Last,
+		[EnumMember(Value = "first")]
+		First,
+		[EnumMember(Value = "default")]
+		Default
+	}
+
 	public enum TermsAggregationExecutionHint
 	{
 		[EnumMember(Value = "map")]
@@ -76,22 +86,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		BreadthFirst
 	}
 
-	public enum GapPolicy
-	{
-		[EnumMember(Value = "skip")]
-		Skip,
-		[EnumMember(Value = "insert_zeros")]
-		InsertZeros
-	}
-
-	public enum RateMode
-	{
-		[EnumMember(Value = "value_count")]
-		ValueCount,
-		[EnumMember(Value = "sum")]
-		Sum
-	}
-
 	public enum DateInterval
 	{
 		[EnumMember(Value = "year")]
@@ -110,6 +104,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Hour,
 		[EnumMember(Value = "day")]
 		Day
+	}
+
+	public enum GapPolicy
+	{
+		[EnumMember(Value = "skip")]
+		Skip,
+		[EnumMember(Value = "insert_zeros")]
+		InsertZeros
+	}
+
+	public enum RateMode
+	{
+		[EnumMember(Value = "value_count")]
+		ValueCount,
+		[EnumMember(Value = "sum")]
+		Sum
 	}
 
 	public enum NormalizeMethod

@@ -72,17 +72,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class MinimumShouldMatch : Union<int?, string?>
-	{
-		public MinimumShouldMatch(int? item) : base(item)
-		{
-		}
-
-		public MinimumShouldMatch(string? item) : base(item)
-		{
-		}
-	}
-
 	public partial class Fuzziness : Union<string?, int?>
 	{
 		public Fuzziness(string? item) : base(item)
@@ -94,6 +83,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class MinimumShouldMatch : Union<int?, string?>
+	{
+		public MinimumShouldMatch(int? item) : base(item)
+		{
+		}
+
+		public MinimumShouldMatch(string? item) : base(item)
+		{
+		}
+	}
+
 	public partial class Sort
 	{
 		private readonly List<SortCombinations> _sortCombinationsList = new();
@@ -101,38 +101,5 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class SortCombinations
 	{
-	}
-
-	public partial class EpochMillis : Union<string?, long?>
-	{
-		public EpochMillis(string? item) : base(item)
-		{
-		}
-
-		public EpochMillis(long? item) : base(item)
-		{
-		}
-	}
-
-	public partial class Percentage : Union<string?, float?>
-	{
-		public Percentage(string? item) : base(item)
-		{
-		}
-
-		public Percentage(float? item) : base(item)
-		{
-		}
-	}
-
-	public partial class WaitForActiveShards : Union<int?, Elastic.Clients.Elasticsearch.WaitForActiveShardOptions?>
-	{
-		public WaitForActiveShards(int? item) : base(item)
-		{
-		}
-
-		public WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShardOptions? item) : base(item)
-		{
-		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
@@ -80,6 +81,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// </remarks>
 		public string? Format { get; set; }
 
+		[JsonIgnore]
 		public bool CachableExpression { get; }
 
 		/// <summary>

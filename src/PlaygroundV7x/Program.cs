@@ -14,27 +14,44 @@ namespace PlaygroundV7x
 			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));
 
 			var client = new ElasticClient();
-			
-			var indexName = Guid.NewGuid().ToString();
 
-			// Create an index
-			var createResponse = await client.Indices.CreateAsync(new CreateIndexRequest(indexName)
-			{
-				Mappings = new TypeMapping
-				{
-					DateDetection = false,
-					Properties = new Properties
-					{
-						{"age", new NumberProperty(NumberType.Integer)},
-						{"name", new TextProperty()},
-						{"email", new KeywordProperty()}
-					},
-					Meta = new Dictionary<string, object>()
-					{
-						{ "foo", "bar" }
-					}
-				}
-			});
+			var matchAll = new QueryContainer(new MatchAllQuery() { Name = "test_query", IsVerbatim = true });
+			//var filter = Query<Person>.Bool(b => b.Filter(f => f.Match(m => m.Field(fld => fld.FirstName).Query("Steve").Name("test_match"))));
+			var boolQuery = new QueryContainer(new BoolQuery() { Filter = new[] { new QueryContainer(new MatchQuery() { Name = "test_match", Field = "firstName", Query = "Steve" }) } });
+
+			var spanQuery = new QueryContainer(new SpanOrQuery() { });
+
+			var search = new SearchRequest()
+			{	
+				Query = boolQuery
+			};
+
+			var response = await client.SearchAsync<Person>(search);
+
+			var r = await client.Indices.CreateAsync("", c => c.Settings(s => s.Analysis(a => a.CharFilters(cf => cf
+				.HtmlStrip("name", h => h)
+				.PatternReplace("name-2", p => p)))));
+
+			//var indexName = Guid.NewGuid().ToString();
+
+			//// Create an index
+			//var createResponse = await client.Indices.CreateAsync(new CreateIndexRequest(indexName)
+			//{
+			//	Mappings = new TypeMapping
+			//	{
+			//		DateDetection = false,
+			//		Properties = new Properties
+			//		{
+			//			{"age", new NumberProperty(NumberType.Integer)},
+			//			{"name", new TextProperty()},
+			//			{"email", new KeywordProperty()}
+			//		},
+			//		Meta = new Dictionary<string, object>()
+			//		{
+			//			{ "foo", "bar" }
+			//		}
+			//	}
+			//});
 
 			//var intervalsQuery = new IntervalsQuery()
 			//{
