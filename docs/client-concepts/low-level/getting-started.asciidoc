@@ -111,7 +111,7 @@ string responseString = asyncIndexResponse.Body;
 NOTE: All available methods within Elasticsearch.Net are exposed as both synchronous and asynchronous versions,
 with the latter using the idiomatic *Async suffix for the method name.
 
-Both index requests will index the document to the endpoint `/people/person/1`.
+Both index requests will index the document to the endpoint `/people/_doc/1`.
 
 An https://msdn.microsoft.com/en-us/library/bb397696.aspx[anonymous type] can also be used to represent the document to index
 
@@ -144,11 +144,11 @@ If you need to index many documents, Elasticsearch has a {ref_current}/docs-bulk
 ----
 var people = new object[]
 {
-    new { index = new { _index = "people", _type = "person", _id = "1"  }},
+    new { index = new { _index = "people", _id = "1" }},
     new { FirstName = "Martijn", LastName = "Laarman" },
-    new { index = new { _index = "people", _type = "person", _id = "2"  }},
+    new { index = new { _index = "people", _id = "2" }},
     new { FirstName = "Greg", LastName = "Marzouka" },
-    new { index = new { _index = "people", _type = "person", _id = "3"  }},
+    new { index = new { _index = "people", _id = "3" }},
     new { FirstName = "Russ", LastName = "Cam" },
 };
 
@@ -189,7 +189,7 @@ var responseJson = searchResponse.Body;
 ----
 
 `responseJson` now holds a JSON string for the response. The search endpoint for this query is
-`/people/person/_search` and it's possible to search over multiple indices and types by changing the arguments
+`/people/_doc/_search` and it's possible to search over multiple indices and types by changing the arguments
 supplied in the request for `index` and `type`, respectively.
 
 Strings can also be used to express the request
