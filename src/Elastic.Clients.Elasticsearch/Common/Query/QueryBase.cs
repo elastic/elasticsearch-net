@@ -109,6 +109,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public abstract partial class QueryBase : IQuery
 	{
+		[JsonIgnore]
 		public bool IsWritable => throw new NotImplementedException();
 
 		////protected abstract bool Conditionless { get; }

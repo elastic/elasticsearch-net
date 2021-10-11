@@ -1,8 +1,10 @@
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Clients.Elasticsearch.Experimental;
 
 namespace Playground
 {
@@ -10,6 +12,24 @@ namespace Playground
 	{
 		private static void Main()
 		{
+			var ec = new Client();
+
+			ec.Send(new ClusterHealthRequest
+			{
+				Name = "Test",
+				Subtype = new ClusterSubtype
+				{
+					Identifier = "Test-ID"
+				}
+			});
+
+			ec.Send(c => c.Name("TestDescriptor").Subtype(s => s.Identifier("ID-Descriptor")));
+
+			ec.Send(c => c.Name("TestDescriptor").Subtype(new ClusterSubtype
+			{
+				Identifier = "Test-ID"
+			}));
+
 			var client = new ElasticClient();
 
 			//var stream = new MemoryStream();
@@ -30,6 +50,9 @@ namespace Playground
 			client.ElasticsearchClientSettings.SourceSerializer.Serialize(search, stream);
 			stream.Position = 0;
 			var json = Encoding.UTF8.GetString(stream.ToArray());
+
+			if (json.Length > 0)
+				Console.WriteLine(json);
 
 			//var response = await client.SearchAsync<Person>(search);
 
