@@ -25,10 +25,11 @@ namespace Playground
 
 			ec.Send(c => c.Name("TestDescriptor").Subtype(s => s.Identifier("ID-Descriptor")));
 
-			ec.Send(c => c.Name("TestDescriptor").Subtype(new ClusterSubtype
-			{
-				Identifier = "Test-ID"
-			}));
+			var descriptor = new ClusterSubtypeDescriptor().Identifier("testing");
+
+			ec.Send(c => c.Name("TestDescriptor").Subtype(descriptor));
+
+			ec.Send(c => c.Name("TestDescriptor").Subtype(new ClusterSubtype { Identifier = "Test-ID" }));
 
 			var client = new ElasticClient();
 
