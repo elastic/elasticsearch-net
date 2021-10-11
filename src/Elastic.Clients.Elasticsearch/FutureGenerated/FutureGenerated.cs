@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information.
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,158 +13,53 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Experimental
 {
-	public interface IClusterSubtype { }
+	#region Infrasrtucture
 
-	public interface IRequest { }
-
-	[JsonConverter(typeof(ClusterHealthConverter))]
-	public class ClusterHealthRequest : IRequest
+	internal static class Fluent
 	{
-		public string Name { get; set; }
-
-		public ClusterSubtype Subtype { get; set; }
-	}
-
-	[JsonConverter(typeof(ClusterSubtypeConverter))]
-	public class ClusterSubtype : IClusterSubtype
-	{
-		public string Identifier { get; set; }
-	}
-
-	public class ClusterHealthConverter : JsonConverter<ClusterHealthRequest>
-	{
-		public override ClusterHealthRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterHealthRequest value, JsonSerializerOptions options)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static TDescriptor Assign<TDescriptor, TValue>(TDescriptor self, TValue value, Action<TDescriptor, TValue> assign)
+		where TDescriptor : class
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(value.Name);
-			}
-
-			if (value.Subtype is not null)
-			{
-				writer.WritePropertyName("subtype");
-				JsonSerializer.Serialize(writer, value.Subtype, options);
-			}
-			writer.WriteEndObject();
+			assign(self, value);
+			return self;
 		}
 	}
 
-	public class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHealthRequestDescriptor>
+	public interface IRequestParameters { }
+
+	public interface IRequest
 	{
-		public override ClusterHealthRequestDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterHealthRequestDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-
-			if (value.TryGetName(out var name))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(name);
-			}
-
-			if (value.TryGetSubtypeDescriptor(out var subtypeDescriptor))
-			{
-				writer.WritePropertyName("subtype");
-				JsonSerializer.Serialize(writer, subtypeDescriptor, options);
-			}
-			else if (value.TryGetSubtype(out var subtype))
-			{
-				writer.WritePropertyName("subtype");
-				JsonSerializer.Serialize(writer, subtype, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		string ContentType { get; }
 	}
 
-	public class ClusterSubtypeConverter : JsonConverter<ClusterSubtype>
+	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
 	{
-		public override ClusterSubtype? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterSubtype value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Identifier))
-			{
-				writer.WritePropertyName("identifier");
-				writer.WriteStringValue(value.Identifier);
-			}
-			writer.WriteEndObject();
-		}
+		[JsonIgnore]
+		public string ContentType { get; set; }
 	}
 
-	public class ClusterSubtypeDescriptorConverter : JsonConverter<ClusterSubtypeDescriptor>
+	public interface IRequest<T> : IRequest { }
+
+	public abstract class ExperimentalRequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>
+		where TDescriptor : ExperimentalRequestDescriptorBase<TDescriptor, TParameters>
+		 where TParameters : class, IRequestParameters, new()
 	{
-		public override ClusterSubtypeDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterSubtypeDescriptor value, JsonSerializerOptions options)
+		private readonly TDescriptor _descriptor;
+
+		protected ExperimentalRequestDescriptorBase() => _descriptor = (TDescriptor)this;
+
+		protected TDescriptor Self => _descriptor;
+
+		protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
+
+		protected TDescriptor InvokeAndAssign<T>(Action<T> configure, Action<TDescriptor, T> assign) where T : new()
 		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.GetIdentifier))
-			{
-				writer.WritePropertyName("identifier");
-				writer.WriteStringValue(value.GetIdentifier);
-			}
-			writer.WriteEndObject();
-		}
-	}
+			var d = new T();
 
-	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
-	public class ClusterHealthRequestDescriptor : ExperimentalDescriptorBase<ClusterHealthRequestDescriptor>, IRequest
-	{
-		private string _name;
-		private IClusterSubtype _subtype;
+			configure(d);
 
-		public ClusterHealthRequestDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
-
-		public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype)
-		{
-			var descriptor = new ClusterSubtypeDescriptor();
-
-			return Assign(configureClusterSubtype, (a, v) =>
-			{
-				v.Invoke(descriptor);
-				_subtype = descriptor;
-			});
-		}
-
-		public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) => a._subtype = v);
-
-		internal bool TryGetName(out string name)
-		{
-			if (!string.IsNullOrEmpty(_name))
-			{
-				name = _name;
-				return true;
-			}
-
-			name = default;
-			return false;
-		}
-
-		internal bool TryGetSubtypeDescriptor(out ClusterSubtypeDescriptor subtype)
-		{
-			if (_subtype is not null && _subtype is ClusterSubtypeDescriptor descriptor)
-			{
-				subtype = descriptor;
-				return true;
-			}
-
-			subtype = default;
-			return false;
-		}
-
-		internal bool TryGetSubtype(out ClusterSubtype subtype)
-		{
-			if (_subtype is not null && _subtype is ClusterSubtype clusterSubtype)
-			{
-				subtype = clusterSubtype;
-				return true;
-			}
-
-			subtype = default;
-			return false;
+			return Fluent.Assign(_descriptor, d, assign);
 		}
 	}
 
@@ -176,14 +75,132 @@ namespace Elastic.Clients.Elasticsearch.Experimental
 		protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
 	}
 
+	#endregion
+
+	public class ClusterHealthRequestParameters : IRequestParameters { }
+
+	// We no longer need a common interface between the object representation and the descriptor.
+	// We no longer need the ConvertAs attribute to support (de)serialisation and can depend on default serialisation.
+	// Of course, a custom converter can always be registered.
+
+	public class ClusterHealthRequest : RequestBase<ClusterHealthRequestParameters>
+	{
+		public string Name { get; set; }
+		public ClusterSubtype Subtype { get; set; }
+	}
+
+	public class ClusterSubtype
+	{
+		public string Identifier { get; set; }
+	}
+
+	// Descriptors instead have an auto-generated one-way JSON converter
+
+	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
+	public class ClusterHealthRequestDescriptor : ExperimentalRequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>, IRequest<ClusterHealthRequestParameters>
+	{
+		private string _name;
+
+		// This increases field size vs. using a shared common interface but avoids type checks, casting and an unnecessary marker interface.
+		// It supports combination of descriptors and object initialiser syntax quite cleanly (see example).
+		//private ClusterSubtype _subtype;
+		//private ClusterSubtypeDescriptor _subtypeDescriptor;
+
+		private object _subType;
+
+		public ClusterHealthRequestDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
+
+		//public ClusterHealthRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor) => Assign(descriptor, (a, v) => _subtypeDescriptor = descriptor);
+
+		//public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype) => InvokeAndAssign(configureClusterSubtype, (a, v) => a._subtypeDescriptor = v);
+
+		//public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) => a._subtype = v);
+
+		public ClusterHealthRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor) => Assign(descriptor, (a, v) => _subType = descriptor);
+
+		public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype) => InvokeAndAssign(configureClusterSubtype, (a, v) => a._subType = v);
+
+		public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) => a._subType = v);
+
+		internal bool TryGetName(out string name)
+		{
+			if (!string.IsNullOrEmpty(_name))
+			{
+				name = _name;
+				return true;
+			}
+
+			name = default;
+			return false;
+		}
+
+		internal bool TryGetSubtypeDescriptor(out ClusterSubtypeDescriptor subtype)
+		{
+			if (_subType is ClusterSubtypeDescriptor descriptor)
+			{
+				subtype = descriptor;
+				return true;
+			}
+
+			subtype = default;
+			return false;
+		}
+
+		internal bool TryGetSubtype(out ClusterSubtype subtype)
+		{
+			if (_subType is ClusterSubtype clusterSubtype)
+			{
+				subtype = clusterSubtype;
+				return true;
+			}
+
+			subtype = default;
+			return false;
+		}
+
+		//internal bool TryGetSubtypeDescriptor(out ClusterSubtypeDescriptor subtype)
+		//{
+		//	if (_subtypeDescriptor is not null)
+		//	{
+		//		subtype = _subtypeDescriptor;
+		//		return true;
+		//	}
+
+		//	subtype = default;
+		//	return false;
+		//}
+
+		//internal bool TryGetSubtype(out ClusterSubtype subtype)
+		//{
+		//	if (_subtype is not null)
+		//	{
+		//		subtype = _subtype;
+		//		return true;
+		//	}
+
+		//	subtype = default;
+		//	return false;
+		//}
+	}
+
 	[JsonConverter(typeof(ClusterSubtypeDescriptorConverter))]
-	public class ClusterSubtypeDescriptor : ExperimentalDescriptorBase<ClusterSubtypeDescriptor>, IClusterSubtype
+	public class ClusterSubtypeDescriptor : ExperimentalDescriptorBase<ClusterSubtypeDescriptor>
 	{
 		private string _identifier;
 
 		public ClusterSubtypeDescriptor Identifier(string identifier) => Assign(identifier, (a, v) => a._identifier = v);
 
-		internal string GetIdentifier => _identifier;
+		internal bool TryGetIdentifier(out string identifier)
+		{
+			if (!string.IsNullOrEmpty(_identifier))
+			{
+				identifier = _identifier;
+				return true;
+			}
+
+			identifier = default;
+			return false;
+		}
 	}
 
 	public class Client
@@ -207,6 +224,60 @@ namespace Elastic.Clients.Elasticsearch.Experimental
 		public void Send<T>(T data) where T : IRequest
 		{
 			var json = JsonSerializer.Serialize(data);
+		}
+	}
+
+	// The converters can be generated
+
+	public class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHealthRequestDescriptor>
+	{
+		// Descriptors will only ever need to be serialised.
+		public override ClusterHealthRequestDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+
+		public override void Write(Utf8JsonWriter writer, ClusterHealthRequestDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			// For simple properties this is quite straight-forward
+			if (value.TryGetName(out var name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(name);
+			}
+
+			// When we support complex types which themselves can be defined using a descriptor, we may support setting them
+			// both with the descriptor directly, or with the object initialiser type.
+			if (value.TryGetSubtypeDescriptor(out var subtypeDescriptor))
+			{
+				writer.WritePropertyName("subtype");
+				JsonSerializer.Serialize(writer, subtypeDescriptor, options);
+			}
+			else if (value.TryGetSubtype(out var subtype))
+			{
+				writer.WritePropertyName("subtype");
+				JsonSerializer.Serialize(writer, subtype, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+	
+	public class ClusterSubtypeDescriptorConverter : JsonConverter<ClusterSubtypeDescriptor>
+	{
+		// Descriptors will only ever need to be serialised.
+		public override ClusterSubtypeDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+
+		public override void Write(Utf8JsonWriter writer, ClusterSubtypeDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			if (value.TryGetIdentifier(out var identifier))
+			{
+				writer.WritePropertyName("identifier");
+				writer.WriteStringValue(identifier);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 }
