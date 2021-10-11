@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 				Converters =
 				{
 					new ConvertAsConverterFactory(settings),
-					new FieldNameQueryConverterFactory(settings),
+					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					//new FieldConverterFactory(settings),
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
