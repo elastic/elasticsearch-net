@@ -3,8 +3,257 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+
+namespace Elastic.Clients.Elasticsearch.Experimental
+{
+	public interface IClusterSubtype { }
+
+	public interface IRequest { }
+
+	[JsonConverter(typeof(ClusterHealthConverter))]
+	public class ClusterHealthRequest : IRequest
+	{
+		public string Name { get; set; }
+
+		public ClusterSubtype Subtype { get; set; }
+	}
+
+	[JsonConverter(typeof(ClusterSubtypeConverter))]
+	public class ClusterSubtype : IClusterSubtype
+	{
+		public string Identifier { get; set; }
+	}
+
+	public class ClusterHealthConverter : JsonConverter<ClusterHealthRequest>
+	{
+		public override ClusterHealthRequest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterHealthRequest value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value.Name);
+			}
+
+			if (value.Subtype is not null)
+			{
+				writer.WritePropertyName("subtype");
+				JsonSerializer.Serialize(writer, value.Subtype, options);
+			}
+			writer.WriteEndObject();
+		}
+	}
+
+	public class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHealthRequestDescriptor>
+	{
+		public override ClusterHealthRequestDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterHealthRequestDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			if (value.TryGetName(out var name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(name);
+			}
+
+			if (value.TryGetSubtypeDescriptor(out var subtypeDescriptor))
+			{
+				writer.WritePropertyName("subtype");
+				JsonSerializer.Serialize(writer, subtypeDescriptor, options);
+			}
+			else if (value.TryGetSubtype(out var subtype))
+			{
+				writer.WritePropertyName("subtype");
+				JsonSerializer.Serialize(writer, subtype, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public class ClusterSubtypeConverter : JsonConverter<ClusterSubtype>
+	{
+		public override ClusterSubtype? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterSubtype value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Identifier))
+			{
+				writer.WritePropertyName("identifier");
+				writer.WriteStringValue(value.Identifier);
+			}
+			writer.WriteEndObject();
+		}
+	}
+
+	public class ClusterSubtypeDescriptorConverter : JsonConverter<ClusterSubtypeDescriptor>
+	{
+		public override ClusterSubtypeDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterSubtypeDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.GetIdentifier))
+			{
+				writer.WritePropertyName("identifier");
+				writer.WriteStringValue(value.GetIdentifier);
+			}
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
+	public class ClusterHealthRequestDescriptor : ExperimentalDescriptorBase<ClusterHealthRequestDescriptor>, IRequest
+	{
+		private string _name;
+		private IClusterSubtype _subtype;
+
+		public ClusterHealthRequestDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
+
+		public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype)
+		{
+			var descriptor = new ClusterSubtypeDescriptor();
+
+			return Assign(configureClusterSubtype, (a, v) =>
+			{
+				v.Invoke(descriptor);
+				_subtype = descriptor;
+			});
+		}
+
+		public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) => a._subtype = v);
+
+		internal bool TryGetName(out string name)
+		{
+			if (!string.IsNullOrEmpty(_name))
+			{
+				name = _name;
+				return true;
+			}
+
+			name = default;
+			return false;
+		}
+
+		internal bool TryGetSubtypeDescriptor(out ClusterSubtypeDescriptor subtype)
+		{
+			if (_subtype is not null && _subtype is ClusterSubtypeDescriptor descriptor)
+			{
+				subtype = descriptor;
+				return true;
+			}
+
+			subtype = default;
+			return false;
+		}
+
+		internal bool TryGetSubtype(out ClusterSubtype subtype)
+		{
+			if (_subtype is not null && _subtype is ClusterSubtype clusterSubtype)
+			{
+				subtype = clusterSubtype;
+				return true;
+			}
+
+			subtype = default;
+			return false;
+		}
+	}
+
+	public abstract class ExperimentalDescriptorBase<TDescriptor>
+		where TDescriptor : ExperimentalDescriptorBase<TDescriptor>
+	{
+		private readonly TDescriptor _descriptor;
+
+		protected ExperimentalDescriptorBase() => _descriptor = (TDescriptor)this;
+
+		protected TDescriptor Self => _descriptor;
+
+		protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
+	}
+
+	[JsonConverter(typeof(ClusterSubtypeDescriptorConverter))]
+	public class ClusterSubtypeDescriptor : ExperimentalDescriptorBase<ClusterSubtypeDescriptor>, IClusterSubtype
+	{
+		private string _identifier;
+
+		public ClusterSubtypeDescriptor Identifier(string identifier) => Assign(identifier, (a, v) => a._identifier = v);
+
+		internal string GetIdentifier => _identifier;
+	}
+
+	public class Client
+	{
+		private static readonly Transport Transport = new();
+
+		public void Send(ClusterHealthRequest request) => DoRequest(request);
+
+		public void Send(Action<ClusterHealthRequestDescriptor> configureClusterHealthRequest)
+		{
+			var descriptor = new ClusterHealthRequestDescriptor();
+			configureClusterHealthRequest.Invoke(descriptor);
+			DoRequest(descriptor);
+		}
+
+		private void DoRequest<T>(T request) where T : IRequest => Transport.Send(request);
+	}
+
+	public class Transport
+	{
+		public void Send<T>(T data) where T : IRequest
+		{
+			var json = JsonSerializer.Serialize(data);
+		}
+	}
+}
+
+namespace Elastic.Clients.Elasticsearch.QueryDsl
+{
+	[JsonConverter(typeof(QueryContainerConverter))]
+	public partial class QueryContainer
+	{
+	}
+
+	public partial class QueryContainerConverter : JsonConverter<QueryContainer>
+	{
+		public override QueryContainer? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+
+		public override void Write(Utf8JsonWriter writer, QueryContainer value, JsonSerializerOptions options)
+		{
+			//var variant = value.ContainedVariant;
+
+			//if (variant is null)
+			//	writer.WriteNullValue();
+
+			// TODO - Use serialiser from settings
+			//JsonSerializer.Serialize(writer, variant, options);
+
+			var container = value as IQueryContainer; // This gives us access to the properties
+
+			writer.WriteStartObject();
+
+			if (container.Bool is not null)
+			{
+				writer.WritePropertyName("bool");
+
+				// TODO - The options here are valid as they come for the initiating serialiser which is the DefaultRequestResponseSerialiser
+				// Arguably, we want to have access to the transport settings to access the registered serialiser to use for this.
+				// Considerations:
+				//   a) Requires a converter factory approach which has costs on the CanConvert method for each factory which is attempted.
+				//   b) The default serialiser for our types is known so we can be 'safe' in knowing we're using STJ.
+				//   c) We know this converter would only get called by STJ internally, so if it's called, we're using STJ.
+				JsonSerializer.Serialize(writer, container.Bool, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+}
+
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -19,7 +268,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public class Thing
 	{
-		public string Name {  get; set; }	
+		public string Name { get; set; }
 	}
 
 	// Main downside is we always allocate a MyRequest per descriptor instead of relying on casting the descriptor to
@@ -86,14 +335,14 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		protected TTarget Target { get; }
-		
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected TDescriptor Assign<TValue>(TValue value, Action<TTarget, TValue> assigner)
 		{
 			assigner(Target, value);
 			return _self;
 		}
-	}	
+	}
 
 	public class MyClient
 	{
@@ -420,7 +669,7 @@ namespace Elastic.Clients.Elasticsearch
 	// TODO: Implement properly
 	[JsonConverter(typeof(PercentageConverter))]
 	public partial class Percentage
-	{		
+	{
 	}
 
 
@@ -477,7 +726,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	
+
 
 
 	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]

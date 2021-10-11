@@ -2494,6 +2494,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		private QueryDsl.ITermsQuery? _terms;
 		private QueryDsl.ITermsSetQuery? _termsSet;
 		private QueryDsl.IWildcardQuery? _wildcard;
+
 		QueryDsl.IBoolQuery? IQueryContainer.Bool { get => _bool; set => _bool = Set(value); }
 
 		QueryDsl.IBoostingQuery? IQueryContainer.Boosting { get => _boosting; set => _boosting = Set(value); }
@@ -2530,6 +2531,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		QueryDsl.IMatchQuery? IQueryContainer.Match { get => _match; set => _match = Set(value); }
 
+		[JsonInclude]
+		[JsonPropertyName("match_all")]
 		QueryDsl.IMatchAllQuery? IQueryContainer.MatchAll { get => _matchAll; set => _matchAll = Set(value); }
 
 		QueryDsl.IMatchBoolPrefixQuery? IQueryContainer.MatchBoolPrefix { get => _matchBoolPrefix; set => _matchBoolPrefix = Set(value); }
