@@ -15,56 +15,48 @@
 //
 // ------------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using OneOf;
-using Elastic.Transport;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DecayFunction
+	public partial class IndexManagementCreateResponse : ResponseBase
 	{
-	}
-
-	public partial class DistanceFeatureQuery : Union<QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>?, QueryDsl.DateDistanceFeatureQuery<string, Time>?>
-	{
-		public DistanceFeatureQuery(QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>? item) : base(item)
+		[JsonInclude]
+		[JsonPropertyName("acknowledged")]
+		public bool? Acknowledged
 		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
 		}
 
-		public DistanceFeatureQuery(QueryDsl.DateDistanceFeatureQuery<string, Time>? item) : base(item)
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public IndexName Index
 		{
-		}
-	}
-
-	public partial class GeoCoordinate
-	{
-	}
-
-	public partial class GeoLocation
-	{
-	}
-
-	public partial class Like : Union<string?, QueryDsl.LikeDocument?>
-	{
-		public Like(string? item) : base(item)
-		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
 		}
 
-		public Like(QueryDsl.LikeDocument? item) : base(item)
+		[JsonInclude]
+		[JsonPropertyName("shards_acknowledged")]
+		public bool ShardsAcknowledged
 		{
-		}
-	}
-
-	public partial class RangeQuery : Union<QueryDsl.DateRangeQuery?, QueryDsl.NumberRangeQuery?>
-	{
-		public RangeQuery(QueryDsl.DateRangeQuery? item) : base(item)
-		{
-		}
-
-		public RangeQuery(QueryDsl.NumberRangeQuery? item) : base(item)
-		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
 		}
 	}
 }

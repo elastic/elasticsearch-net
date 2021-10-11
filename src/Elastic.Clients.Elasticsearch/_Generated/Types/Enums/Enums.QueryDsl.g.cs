@@ -22,6 +22,146 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	public enum ChildScoreMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum CombinedFieldsOperator
+	{
+		[EnumMember(Value = "or")]
+		Or,
+		[EnumMember(Value = "and")]
+		And
+	}
+
+	public enum CombinedFieldsZeroTerms
+	{
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
+	}
+
+	public enum FieldValueFactorModifier
+	{
+		[EnumMember(Value = "square")]
+		Square,
+		[EnumMember(Value = "sqrt")]
+		Sqrt,
+		[EnumMember(Value = "reciprocal")]
+		Reciprocal,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "log2p")]
+		Log2p,
+		[EnumMember(Value = "log1p")]
+		Log1p,
+		[EnumMember(Value = "log")]
+		Log,
+		[EnumMember(Value = "ln2p")]
+		Ln2p,
+		[EnumMember(Value = "ln1p")]
+		Ln1p,
+		[EnumMember(Value = "ln")]
+		Ln
+	}
+
+	public enum FunctionBoostMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "replace")]
+		Replace,
+		[EnumMember(Value = "multiply")]
+		Multiply,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum FunctionScoreMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "multiply")]
+		Multiply,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "first")]
+		First,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum GeoValidationMethod
+	{
+		[EnumMember(Value = "strict")]
+		Strict,
+		[EnumMember(Value = "ignore_malformed")]
+		IgnoreMalformed,
+		[EnumMember(Value = "coerce")]
+		Coerce
+	}
+
+	public enum MultiValueMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum NestedScoreMode
+	{
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum Operator
+	{
+		[EnumMember(Value = "or")]
+		Or,
+		[EnumMember(Value = "and")]
+		And
+	}
+
+	public enum RangeRelation
+	{
+		[EnumMember(Value = "within")]
+		Within,
+		[EnumMember(Value = "intersects")]
+		Intersects,
+		[EnumMember(Value = "contains")]
+		Contains
+	}
+
 	public enum SimpleQueryStringFlags
 	{
 		[EnumMember(Value = "WHITESPACE")]
@@ -52,24 +192,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		All
 	}
 
-	public enum Operator
-	{
-		[EnumMember(Value = "or")]
-		Or,
-		[EnumMember(Value = "and")]
-		And
-	}
-
-	public enum RangeRelation
-	{
-		[EnumMember(Value = "within")]
-		Within,
-		[EnumMember(Value = "intersects")]
-		Intersects,
-		[EnumMember(Value = "contains")]
-		Contains
-	}
-
 	public enum TextQueryType
 	{
 		[EnumMember(Value = "phrase_prefix")]
@@ -86,133 +208,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		BestFields
 	}
 
-	public enum NestedScoreMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
 	public enum ZeroTermsQuery
 	{
 		[EnumMember(Value = "none")]
 		None,
 		[EnumMember(Value = "all")]
 		All
-	}
-
-	public enum ChildScoreMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum GeoValidationMethod
-	{
-		[EnumMember(Value = "strict")]
-		Strict,
-		[EnumMember(Value = "ignore_malformed")]
-		IgnoreMalformed,
-		[EnumMember(Value = "coerce")]
-		Coerce
-	}
-
-	public enum FunctionScoreMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "multiply")]
-		Multiply,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "first")]
-		First,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum FieldValueFactorModifier
-	{
-		[EnumMember(Value = "square")]
-		Square,
-		[EnumMember(Value = "sqrt")]
-		Sqrt,
-		[EnumMember(Value = "reciprocal")]
-		Reciprocal,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "log2p")]
-		Log2p,
-		[EnumMember(Value = "log1p")]
-		Log1p,
-		[EnumMember(Value = "log")]
-		Log,
-		[EnumMember(Value = "ln2p")]
-		Ln2p,
-		[EnumMember(Value = "ln1p")]
-		Ln1p,
-		[EnumMember(Value = "ln")]
-		Ln
-	}
-
-	public enum MultiValueMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum FunctionBoostMode
-	{
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "replace")]
-		Replace,
-		[EnumMember(Value = "multiply")]
-		Multiply,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum CombinedFieldsZeroTerms
-	{
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "all")]
-		All
-	}
-
-	public enum CombinedFieldsOperator
-	{
-		[EnumMember(Value = "or")]
-		Or,
-		[EnumMember(Value = "and")]
-		And
 	}
 }

@@ -22,70 +22,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public enum ValueType
-	{
-		[EnumMember(Value = "string")]
-		String,
-		[EnumMember(Value = "numeric")]
-		Numeric,
-		[EnumMember(Value = "number")]
-		Number,
-		[EnumMember(Value = "long")]
-		Long,
-		[EnumMember(Value = "ip")]
-		Ip,
-		[EnumMember(Value = "geo_point")]
-		GeoPoint,
-		[EnumMember(Value = "double")]
-		Double,
-		[EnumMember(Value = "date_nanos")]
-		DateNanos,
-		[EnumMember(Value = "date")]
-		Date,
-		[EnumMember(Value = "boolean")]
-		Boolean
-	}
-
-	public enum TTestType
-	{
-		[EnumMember(Value = "paired")]
-		Paired,
-		[EnumMember(Value = "homoscedastic")]
-		Homoscedastic,
-		[EnumMember(Value = "heteroscedastic")]
-		Heteroscedastic
-	}
-
-	public enum MissingOrder
-	{
-		[EnumMember(Value = "last")]
-		Last,
-		[EnumMember(Value = "first")]
-		First,
-		[EnumMember(Value = "default")]
-		Default
-	}
-
-	public enum TermsAggregationExecutionHint
-	{
-		[EnumMember(Value = "map")]
-		Map,
-		[EnumMember(Value = "global_ordinals_low_cardinality")]
-		GlobalOrdinalsLowCardinality,
-		[EnumMember(Value = "global_ordinals_hash")]
-		GlobalOrdinalsHash,
-		[EnumMember(Value = "global_ordinals")]
-		GlobalOrdinals
-	}
-
-	public enum TermsAggregationCollectMode
-	{
-		[EnumMember(Value = "depth_first")]
-		DepthFirst,
-		[EnumMember(Value = "breadth_first")]
-		BreadthFirst
-	}
-
 	public enum DateInterval
 	{
 		[EnumMember(Value = "year")]
@@ -114,12 +50,66 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		InsertZeros
 	}
 
-	public enum RateMode
+	public enum HoltWintersType
 	{
-		[EnumMember(Value = "value_count")]
-		ValueCount,
+		[EnumMember(Value = "mult")]
+		Multiplicative,
+		[EnumMember(Value = "add")]
+		Additive
+	}
+
+	public enum MatrixStatsMode
+	{
 		[EnumMember(Value = "sum")]
-		Sum
+		Sum,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "median")]
+		Median,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum MinimumInterval
+	{
+		[EnumMember(Value = "year")]
+		Year,
+		[EnumMember(Value = "second")]
+		Second,
+		[EnumMember(Value = "month")]
+		Month,
+		[EnumMember(Value = "minute")]
+		Minute,
+		[EnumMember(Value = "hour")]
+		Hour,
+		[EnumMember(Value = "day")]
+		Day
+	}
+
+	public enum MissingOrder
+	{
+		[EnumMember(Value = "last")]
+		Last,
+		[EnumMember(Value = "first")]
+		First,
+		[EnumMember(Value = "default")]
+		Default
+	}
+
+	public enum MovingAverageModel
+	{
+		[EnumMember(Value = "simple")]
+		Simple,
+		[EnumMember(Value = "linear")]
+		Linear,
+		[EnumMember(Value = "holt_winters")]
+		HoltWinters,
+		[EnumMember(Value = "holt")]
+		Holt,
+		[EnumMember(Value = "ewma")]
+		Ewma
 	}
 
 	public enum NormalizeMethod
@@ -138,40 +128,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Mean
 	}
 
-	public enum HoltWintersType
+	public enum RateMode
 	{
-		[EnumMember(Value = "mult")]
-		Multiplicative,
-		[EnumMember(Value = "add")]
-		Additive
-	}
-
-	public enum MovingAverageModel
-	{
-		[EnumMember(Value = "simple")]
-		Simple,
-		[EnumMember(Value = "linear")]
-		Linear,
-		[EnumMember(Value = "holt_winters")]
-		HoltWinters,
-		[EnumMember(Value = "holt")]
-		Holt,
-		[EnumMember(Value = "ewma")]
-		Ewma
-	}
-
-	public enum MatrixStatsMode
-	{
+		[EnumMember(Value = "value_count")]
+		ValueCount,
 		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "median")]
-		Median,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
+		Sum
 	}
 
 	public enum SamplerAggregationExecutionHint
@@ -184,19 +146,57 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		BytesHash
 	}
 
-	public enum MinimumInterval
+	public enum TermsAggregationCollectMode
 	{
-		[EnumMember(Value = "year")]
-		Year,
-		[EnumMember(Value = "second")]
-		Second,
-		[EnumMember(Value = "month")]
-		Month,
-		[EnumMember(Value = "minute")]
-		Minute,
-		[EnumMember(Value = "hour")]
-		Hour,
-		[EnumMember(Value = "day")]
-		Day
+		[EnumMember(Value = "depth_first")]
+		DepthFirst,
+		[EnumMember(Value = "breadth_first")]
+		BreadthFirst
+	}
+
+	public enum TermsAggregationExecutionHint
+	{
+		[EnumMember(Value = "map")]
+		Map,
+		[EnumMember(Value = "global_ordinals_low_cardinality")]
+		GlobalOrdinalsLowCardinality,
+		[EnumMember(Value = "global_ordinals_hash")]
+		GlobalOrdinalsHash,
+		[EnumMember(Value = "global_ordinals")]
+		GlobalOrdinals
+	}
+
+	public enum TTestType
+	{
+		[EnumMember(Value = "paired")]
+		Paired,
+		[EnumMember(Value = "homoscedastic")]
+		Homoscedastic,
+		[EnumMember(Value = "heteroscedastic")]
+		Heteroscedastic
+	}
+
+	public enum ValueType
+	{
+		[EnumMember(Value = "string")]
+		String,
+		[EnumMember(Value = "numeric")]
+		Numeric,
+		[EnumMember(Value = "number")]
+		Number,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "ip")]
+		Ip,
+		[EnumMember(Value = "geo_point")]
+		GeoPoint,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "date_nanos")]
+		DateNanos,
+		[EnumMember(Value = "date")]
+		Date,
+		[EnumMember(Value = "boolean")]
+		Boolean
 	}
 }

@@ -22,6 +22,84 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
+	public enum DynamicMapping
+	{
+		[EnumMember(Value = "true")]
+		True,
+		[EnumMember(Value = "strict")]
+		Strict,
+		[EnumMember(Value = "runtime")]
+		Runtime,
+		[EnumMember(Value = "false")]
+		False
+	}
+
+	public enum GeoOrientation
+	{
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "left")]
+		Left,
+		[EnumMember(Value = "cw")]
+		Cw,
+		[EnumMember(Value = "counterclockwise")]
+		Counterclockwise,
+		[EnumMember(Value = "clockwise")]
+		Clockwise,
+		[EnumMember(Value = "ccw")]
+		Ccw
+	}
+
+	public enum GeoStrategy
+	{
+		[EnumMember(Value = "term")]
+		Term,
+		[EnumMember(Value = "recursive")]
+		Recursive
+	}
+
+	public enum IndexOptions
+	{
+		[EnumMember(Value = "positions")]
+		Positions,
+		[EnumMember(Value = "offsets")]
+		Offsets,
+		[EnumMember(Value = "freqs")]
+		Freqs,
+		[EnumMember(Value = "docs")]
+		Docs
+	}
+
+	public enum MatchType
+	{
+		[EnumMember(Value = "simple")]
+		Simple,
+		[EnumMember(Value = "regex")]
+		Regex
+	}
+
+	public enum NumberType
+	{
+		[EnumMember(Value = "unsigned_long")]
+		UnsignedLong,
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "scaled_float")]
+		ScaledFloat,
+		[EnumMember(Value = "long")]
+		Long,
+		[EnumMember(Value = "integer")]
+		Integer,
+		[EnumMember(Value = "half_float")]
+		HalfFloat,
+		[EnumMember(Value = "float")]
+		Float,
+		[EnumMember(Value = "double")]
+		Double,
+		[EnumMember(Value = "byte")]
+		Byte
+	}
+
 	public enum RuntimeFieldType
 	{
 		[EnumMember(Value = "long")]
@@ -38,5 +116,37 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Date,
 		[EnumMember(Value = "boolean")]
 		Boolean
+	}
+
+	public enum ShapeOrientation
+	{
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "left")]
+		Left,
+		[EnumMember(Value = "cw")]
+		Cw,
+		[EnumMember(Value = "counterclockwise")]
+		Counterclockwise,
+		[EnumMember(Value = "clockwise")]
+		Clockwise,
+		[EnumMember(Value = "ccw")]
+		Ccw
+	}
+
+	public enum TermVectorOption
+	{
+		[EnumMember(Value = "yes")]
+		Yes,
+		[EnumMember(Value = "with_positions_offsets_payloads")]
+		WithPositionsOffsetsPayloads,
+		[EnumMember(Value = "with_positions_offsets")]
+		WithPositionsOffsets,
+		[EnumMember(Value = "with_positions")]
+		WithPositions,
+		[EnumMember(Value = "with_offsets")]
+		WithOffsets,
+		[EnumMember(Value = "no")]
+		No
 	}
 }

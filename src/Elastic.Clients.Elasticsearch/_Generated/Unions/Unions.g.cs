@@ -23,38 +23,13 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SuggestOption<TDocument>
-	{
-	}
-
-	public partial class Context : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?>
+	public partial class Context : Union<string?, QueryDsl.GeoLocation?>
 	{
 		public Context(string? item) : base(item)
 		{
 		}
 
-		public Context(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? item) : base(item)
-		{
-		}
-	}
-
-	public partial class Ids
-	{
-		private readonly List<Id> _idList = new();
-	}
-
-	public partial class Fields
-	{
-		private readonly List<Field> _fieldList = new();
-	}
-
-	public partial class Time : Union<string?, int?>
-	{
-		public Time(string? item) : base(item)
-		{
-		}
-
-		public Time(int? item) : base(item)
+		public Context(QueryDsl.GeoLocation? item) : base(item)
 		{
 		}
 	}
@@ -63,13 +38,9 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class Indices
+	public partial class Fields
 	{
-		private readonly List<IndexName> _indexNameList = new();
-	}
-
-	public partial class Script
-	{
+		private readonly List<Field> _fieldList = new();
 	}
 
 	public partial class Fuzziness : Union<string?, int?>
@@ -83,6 +54,16 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class Ids
+	{
+		private readonly List<Id> _idList = new();
+	}
+
+	public partial class Indices
+	{
+		private readonly List<IndexName> _indexNameList = new();
+	}
+
 	public partial class MinimumShouldMatch : Union<int?, string?>
 	{
 		public MinimumShouldMatch(int? item) : base(item)
@@ -94,6 +75,10 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class Script
+	{
+	}
+
 	public partial class Sort
 	{
 		private readonly List<SortCombinations> _sortCombinationsList = new();
@@ -101,5 +86,31 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class SortCombinations
 	{
+	}
+
+	public partial class SuggestOption<TDocument>
+	{
+	}
+
+	public partial class Time : Union<string?, int?>
+	{
+		public Time(string? item) : base(item)
+		{
+		}
+
+		public Time(int? item) : base(item)
+		{
+		}
+	}
+
+	public partial class WaitForActiveShards : Union<int?, WaitForActiveShardOptions?>
+	{
+		public WaitForActiveShards(int? item) : base(item)
+		{
+		}
+
+		public WaitForActiveShards(WaitForActiveShardOptions? item) : base(item)
+		{
+		}
 	}
 }

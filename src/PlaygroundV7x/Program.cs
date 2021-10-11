@@ -19,11 +19,38 @@ namespace PlaygroundV7x
 			//var filter = Query<Person>.Bool(b => b.Filter(f => f.Match(m => m.Field(fld => fld.FirstName).Query("Steve").Name("test_match"))));
 			var boolQuery = new QueryContainer(new BoolQuery() { Filter = new[] { new QueryContainer(new MatchQuery() { Name = "test_match", Field = "firstName", Query = "Steve" }) } });
 
-			var spanQuery = new QueryContainer(new SpanOrQuery() { });
+			var spanQuery = new QueryContainer(new SpanContainingQuery()
+			{
+				Big = new SpanQuery()
+				{
+					//SpanTerm = new SpanTermQuery { Field = "test", Value = "foo", Name = "span_term_name" },
+					SpanNear = new SpanNearQuery
+					{
+						Slop = 5,
+						InOrder = true,
+						Clauses = new ISpanQuery[]
+						{
+							new SpanQuery() { SpanTerm = new SpanTermQuery { Field = "test", Value = "bar", Name = "span_term_inner_name_1" } },
+							new SpanQuery() { SpanTerm = new SpanTermQuery { Field = "test", Value = "baz", Name = "span_term_inner_name_2" } },
+						}
+					}
+				}
+			});
+
+			spanQuery = new QueryContainer(new SpanNearQuery()
+			{
+				Clauses = new [] { new SpanQuery() { SpanGap = new SpanGapQuery() { Field = "test", Width = 10 } } }
+			});
+
+			//var spanQueryRaw = new SpanQuery()
+			//{
+			//	SpanFirst = new SpanFirstQuery(),
+			//	SpanContaining = new SpanContainingQuery()
+			//};
 
 			var search = new SearchRequest()
-			{	
-				Query = boolQuery
+			{
+				Query = spanQuery
 			};
 
 			var response = await client.SearchAsync<Person>(search);

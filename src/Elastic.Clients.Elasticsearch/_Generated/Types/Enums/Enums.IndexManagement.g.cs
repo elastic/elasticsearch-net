@@ -15,56 +15,26 @@
 //
 // ------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using OneOf;
+using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DecayFunction
+	public enum NumericFielddataFormat
 	{
+		[EnumMember(Value = "disabled")]
+		Disabled,
+		[EnumMember(Value = "array")]
+		Array
 	}
 
-	public partial class DistanceFeatureQuery : Union<QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>?, QueryDsl.DateDistanceFeatureQuery<string, Time>?>
+	public enum StringFielddataFormat
 	{
-		public DistanceFeatureQuery(QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>? item) : base(item)
-		{
-		}
-
-		public DistanceFeatureQuery(QueryDsl.DateDistanceFeatureQuery<string, Time>? item) : base(item)
-		{
-		}
-	}
-
-	public partial class GeoCoordinate
-	{
-	}
-
-	public partial class GeoLocation
-	{
-	}
-
-	public partial class Like : Union<string?, QueryDsl.LikeDocument?>
-	{
-		public Like(string? item) : base(item)
-		{
-		}
-
-		public Like(QueryDsl.LikeDocument? item) : base(item)
-		{
-		}
-	}
-
-	public partial class RangeQuery : Union<QueryDsl.DateRangeQuery?, QueryDsl.NumberRangeQuery?>
-	{
-		public RangeQuery(QueryDsl.DateRangeQuery? item) : base(item)
-		{
-		}
-
-		public RangeQuery(QueryDsl.NumberRangeQuery? item) : base(item)
-		{
-		}
+		[EnumMember(Value = "paged_bytes")]
+		PagedBytes,
+		[EnumMember(Value = "disabled")]
+		Disabled
 	}
 }
