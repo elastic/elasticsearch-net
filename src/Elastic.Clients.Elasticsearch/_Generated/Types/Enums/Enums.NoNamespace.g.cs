@@ -22,44 +22,14 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public enum TotalHitsRelation
+	public enum BoundaryScanner
 	{
-		[EnumMember(Value = "gte")]
-		Gte,
-		[EnumMember(Value = "eq")]
-		Eq
-	}
-
-	public enum SuggestMode
-	{
-		[EnumMember(Value = "popular")]
-		Popular,
-		[EnumMember(Value = "missing")]
-		Missing,
-		[EnumMember(Value = "always")]
-		Always
-	}
-
-	public enum SearchType
-	{
-		[EnumMember(Value = "query_then_fetch")]
-		QueryThenFetch,
-		[EnumMember(Value = "dfs_query_then_fetch")]
-		DfsQueryThenFetch
-	}
-
-	public enum ExpandWildcardOptions
-	{
-		[EnumMember(Value = "open")]
-		Open,
-		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "hidden")]
-		Hidden,
-		[EnumMember(Value = "closed")]
-		Closed,
-		[EnumMember(Value = "all")]
-		All
+		[EnumMember(Value = "word")]
+		Word,
+		[EnumMember(Value = "sentence")]
+		Sentence,
+		[EnumMember(Value = "chars")]
+		Chars
 	}
 
 	public enum DefaultOperator
@@ -68,64 +38,6 @@ namespace Elastic.Clients.Elasticsearch
 		Or,
 		[EnumMember(Value = "AND")]
 		And
-	}
-
-	public enum ScriptLanguage
-	{
-		[EnumMember(Value = "painless")]
-		Painless,
-		[EnumMember(Value = "mustache")]
-		Mustache,
-		[EnumMember(Value = "java")]
-		Java,
-		[EnumMember(Value = "expression")]
-		Expression
-	}
-
-	public enum StringDistance
-	{
-		[EnumMember(Value = "ngram")]
-		Ngram,
-		[EnumMember(Value = "levenshtein")]
-		Levenshtein,
-		[EnumMember(Value = "jaro_winkler")]
-		JaroWinkler,
-		[EnumMember(Value = "internal")]
-		Internal,
-		[EnumMember(Value = "damerau_levenshtein")]
-		DamerauLevenshtein
-	}
-
-	public enum SuggestSort
-	{
-		[EnumMember(Value = "score")]
-		Score,
-		[EnumMember(Value = "frequency")]
-		Frequency
-	}
-
-	public enum ScoreMode
-	{
-		[EnumMember(Value = "total")]
-		Total,
-		[EnumMember(Value = "multiply")]
-		Multiply,
-		[EnumMember(Value = "min")]
-		Min,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "avg")]
-		Avg
-	}
-
-	public enum SortOrder
-	{
-		[EnumMember(Value = "desc")]
-		Desc,
-		[EnumMember(Value = "asc")]
-		Asc,
-		[EnumMember(Value = "_doc")]
-		Document
 	}
 
 	public enum DistanceUnit
@@ -150,12 +62,98 @@ namespace Elastic.Clients.Elasticsearch
 		Centimeters
 	}
 
+	public enum ExpandWildcardOptions
+	{
+		[EnumMember(Value = "open")]
+		Open,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "hidden")]
+		Hidden,
+		[EnumMember(Value = "closed")]
+		Closed,
+		[EnumMember(Value = "all")]
+		All
+	}
+
 	public enum GeoDistanceType
 	{
 		[EnumMember(Value = "plane")]
 		Plane,
 		[EnumMember(Value = "arc")]
 		Arc
+	}
+
+	public enum HighlighterEncoder
+	{
+		[EnumMember(Value = "html")]
+		Html,
+		[EnumMember(Value = "default")]
+		Default
+	}
+
+	public enum HighlighterFragmenter
+	{
+		[EnumMember(Value = "span")]
+		Span,
+		[EnumMember(Value = "simple")]
+		Simple
+	}
+
+	public enum HighlighterOrder
+	{
+		[EnumMember(Value = "score")]
+		Score
+	}
+
+	public enum HighlighterTagsSchema
+	{
+		[EnumMember(Value = "styled")]
+		Styled
+	}
+
+	public enum HighlighterType
+	{
+		[EnumMember(Value = "unified")]
+		Unified,
+		[EnumMember(Value = "plain")]
+		Plain,
+		[EnumMember(Value = "fvh")]
+		Fvh
+	}
+
+	public enum ScoreMode
+	{
+		[EnumMember(Value = "total")]
+		Total,
+		[EnumMember(Value = "multiply")]
+		Multiply,
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "avg")]
+		Avg
+	}
+
+	public enum ScriptLanguage
+	{
+		[EnumMember(Value = "painless")]
+		Painless,
+		[EnumMember(Value = "mustache")]
+		Mustache,
+		[EnumMember(Value = "java")]
+		Java,
+		[EnumMember(Value = "expression")]
+		Expression
+	}
+
+	public enum SearchType
+	{
+		[EnumMember(Value = "query_then_fetch")]
+		QueryThenFetch,
+		[EnumMember(Value = "dfs_query_then_fetch")]
+		DfsQueryThenFetch
 	}
 
 	public enum SortMode
@@ -172,52 +170,54 @@ namespace Elastic.Clients.Elasticsearch
 		Avg
 	}
 
-	public enum HighlighterTagsSchema
+	public enum SortOrder
 	{
-		[EnumMember(Value = "styled")]
-		Styled
+		[EnumMember(Value = "desc")]
+		Desc,
+		[EnumMember(Value = "asc")]
+		Asc,
+		[EnumMember(Value = "_doc")]
+		Document
 	}
 
-	public enum HighlighterOrder
+	public enum StringDistance
+	{
+		[EnumMember(Value = "ngram")]
+		Ngram,
+		[EnumMember(Value = "levenshtein")]
+		Levenshtein,
+		[EnumMember(Value = "jaro_winkler")]
+		JaroWinkler,
+		[EnumMember(Value = "internal")]
+		Internal,
+		[EnumMember(Value = "damerau_levenshtein")]
+		DamerauLevenshtein
+	}
+
+	public enum SuggestMode
+	{
+		[EnumMember(Value = "popular")]
+		Popular,
+		[EnumMember(Value = "missing")]
+		Missing,
+		[EnumMember(Value = "always")]
+		Always
+	}
+
+	public enum SuggestSort
 	{
 		[EnumMember(Value = "score")]
-		Score
+		Score,
+		[EnumMember(Value = "frequency")]
+		Frequency
 	}
 
-	public enum HighlighterFragmenter
+	public enum TotalHitsRelation
 	{
-		[EnumMember(Value = "span")]
-		Span,
-		[EnumMember(Value = "simple")]
-		Simple
-	}
-
-	public enum HighlighterEncoder
-	{
-		[EnumMember(Value = "html")]
-		Html,
-		[EnumMember(Value = "default")]
-		Default
-	}
-
-	public enum BoundaryScanner
-	{
-		[EnumMember(Value = "word")]
-		Word,
-		[EnumMember(Value = "sentence")]
-		Sentence,
-		[EnumMember(Value = "chars")]
-		Chars
-	}
-
-	public enum HighlighterType
-	{
-		[EnumMember(Value = "unified")]
-		Unified,
-		[EnumMember(Value = "plain")]
-		Plain,
-		[EnumMember(Value = "fvh")]
-		Fvh
+		[EnumMember(Value = "gte")]
+		Gte,
+		[EnumMember(Value = "eq")]
+		Eq
 	}
 
 	public enum VersionType
@@ -230,5 +230,11 @@ namespace Elastic.Clients.Elasticsearch
 		ExternalGte,
 		[EnumMember(Value = "external")]
 		External
+	}
+
+	public enum WaitForActiveShardOptions
+	{
+		[EnumMember(Value = "all")]
+		All
 	}
 }

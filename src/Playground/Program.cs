@@ -8,7 +8,7 @@ namespace Playground
 {
 	internal class Program
 	{
-		private static async Task Main()
+		private static void Main()
 		{
 			var client = new ElasticClient();
 
@@ -23,17 +23,15 @@ namespace Playground
 
 			var search = new SearchRequest()
 			{
-				Query = new BoolQuery { Boost = 1.2F }.ToQueryContainer()
+				Query = new QueryContainer(new BoolQuery { Boost = 1.2F })
 			};
 
-			var query = new QueryContainerDescriptor().QueryString(q => q.DefaultField("test"));
 			var stream = new MemoryStream();
-			//IMatchQuery match = new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" };
-			client.ElasticsearchClientSettings.SourceSerializer.Serialize(query, stream);
+			client.ElasticsearchClientSettings.SourceSerializer.Serialize(search, stream);
 			stream.Position = 0;
 			var json = Encoding.UTF8.GetString(stream.ToArray());
 
-			var response = await client.SearchAsync<Person>(search);
+			//var response = await client.SearchAsync<Person>(search);
 
 			//var fluentResponse = client.SearchAsync<Person>(s => s.Query(matchAll));
 

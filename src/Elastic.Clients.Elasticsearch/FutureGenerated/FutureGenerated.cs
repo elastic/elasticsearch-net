@@ -337,16 +337,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//}
 
 	public partial class DistanceFeatureQuery : IQueryContainerVariant
-	{ }
+	{
+		public void WrapInContainer(IQueryContainer container) => throw new NotImplementedException();
+	}
+
+	public partial interface ISpanGapQuery : QueryDsl.IQueryContainerVariant, QueryDsl.ISpanQueryVariant
+	{
+	}
+
+	public partial class SpanGapQuery : Dictionary<string, int>, ISpanGapQuery
+	{
+		public void WrapInContainer(IQueryContainer container) => throw new NotImplementedException();
+		public void WrapInContainer(ISpanQuery container) => throw new NotImplementedException();
+	}
 
 	public partial class PinnedIdsQuery : IPinnedQueryVariant
 	{
 		public IEnumerable<string> Ids { get; set; }
+
+		public void WrapInContainer(IPinnedQuery container) => throw new NotImplementedException();
 	}
 
 	public partial class PinnedDocsQuery : IPinnedQueryVariant
 	{
 		public IEnumerable<PinnedDoc> Docs { get; set; }
+
+		public void WrapInContainer(IPinnedQuery container) => throw new NotImplementedException();
 	}
 }
 
@@ -446,13 +462,13 @@ namespace Elastic.Clients.Elasticsearch
 
 
 
-	public class Aggregate
-	{
-	}
+	//public class Aggregate
+	//{
+	//}
 
-	public class Property
-	{
-	}
+	//public class Property
+	//{
+	//}
 
 	namespace Global.Search
 	{

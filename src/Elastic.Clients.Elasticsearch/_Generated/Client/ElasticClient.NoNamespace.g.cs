@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.IndexManagement;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,8 +25,11 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class ElasticClient : IElasticClient
 	{
+		public IndexManagementNamespace IndexManagement { get; private set; }
+
 		private partial void SetupNamespaces()
 		{
+			IndexManagement = new IndexManagementNamespace(this);
 		}
 
 		public SearchResponse<TDocument> Search<TDocument>(ISearchRequest request) => DoRequest<ISearchRequest, SearchResponse<TDocument>>(request, request.RequestParameters);

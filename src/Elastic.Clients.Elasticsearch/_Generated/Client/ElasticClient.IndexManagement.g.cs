@@ -15,21 +15,22 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.IndexManagement;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial interface IElasticClient
+	public class IndexManagementNamespace : NamespacedClientProxy
 	{
-		IndexManagementNamespace IndexManagement { get; }
+		internal IndexManagementNamespace(ElasticClient client) : base(client)
+		{
+		}
 
-		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
-		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
-		SearchResponse<TDocument> Search<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null);
-		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default);
+		public IndexManagementCreateResponse Create(IIndexManagementCreateRequest request) => DoRequest<IIndexManagementCreateRequest, IndexManagementCreateResponse>(request, request.RequestParameters);
+		public Task<IndexManagementCreateResponse> CreateAsync(IIndexManagementCreateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexManagementCreateRequest, IndexManagementCreateResponse>(request, request.RequestParameters, cancellationToken);
+		public IndexManagementCreateResponse Create(IndexName index, Func<IndexManagementCreateRequestDescriptor, IIndexManagementCreateRequest> selector = null) => Create(selector.InvokeOrDefault(new IndexManagementCreateRequestDescriptor(index)));
+		public Task<IndexManagementCreateResponse> CreateAsync(IndexName index, Func<IndexManagementCreateRequestDescriptor, IIndexManagementCreateRequest> selector = null, CancellationToken cancellationToken = default) => CreateAsync(selector.InvokeOrDefault(new IndexManagementCreateRequestDescriptor(index)), cancellationToken);
 	}
 }

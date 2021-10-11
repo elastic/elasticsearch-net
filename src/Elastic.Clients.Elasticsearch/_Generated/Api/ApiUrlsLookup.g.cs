@@ -19,6 +19,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	internal static class ApiUrlsLookups
 	{
+		internal static ApiUrls IndexManagementCreate = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 	}
 }

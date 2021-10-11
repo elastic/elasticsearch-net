@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations
+		public Dictionary<string, Aggregations.Aggregate>? Aggregations
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_clusters")]
-		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters
+		public ClusterStatistics? Clusters
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> Hits
+		public HitsMetadata<TDocument> Hits
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]
-		public Elastic.Clients.Elasticsearch.Profile? Profile
+		public Profile? Profile
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
-		public Elastic.Clients.Elasticsearch.ShardStatistics Shards
+		public ShardStatistics Shards
 		{
 			get;
 #if NET5_0_OR_GREATER
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("suggest")]
-		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Suggest<TDocument>>>? Suggest
+		public Dictionary<string, IReadOnlyCollection<Suggest<TDocument>>>? Suggest
 		{
 			get;
 #if NET5_0_OR_GREATER
