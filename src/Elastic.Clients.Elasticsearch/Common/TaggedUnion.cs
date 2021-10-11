@@ -34,3 +34,12 @@ public interface IUnionVariant
 	/// </summary>
 	string VariantType { get; }
 }
+
+//public interface IContainer { }
+
+//public abstract class ContainerBase : IContainer
+//{
+//	internal void WrapInContainer(IContainer container) => InternalWrapInContainer(container);
+
+//	internal abstract void InternalWrapInContainer(IContainer container);
+//}

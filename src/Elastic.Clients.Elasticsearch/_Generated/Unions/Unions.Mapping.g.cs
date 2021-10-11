@@ -21,50 +21,29 @@ using OneOf;
 using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.QueryDsl
+namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class DecayFunction
+	public partial class CoreProperty
 	{
 	}
 
-	public partial class DistanceFeatureQuery : Union<QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>?, QueryDsl.DateDistanceFeatureQuery<string, Time>?>
-	{
-		public DistanceFeatureQuery(QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>? item) : base(item)
-		{
-		}
-
-		public DistanceFeatureQuery(QueryDsl.DateDistanceFeatureQuery<string, Time>? item) : base(item)
-		{
-		}
-	}
-
-	public partial class GeoCoordinate
+	public partial class DocValuesProperty
 	{
 	}
 
-	public partial class GeoLocation
+	public interface IPropertiesVariant
 	{
 	}
 
-	public partial class Like : Union<string?, QueryDsl.LikeDocument?>
+	public interface IProperties : IIsADictionary<string, IPropertiesVariant>
 	{
-		public Like(string? item) : base(item)
-		{
-		}
-
-		public Like(QueryDsl.LikeDocument? item) : base(item)
-		{
-		}
 	}
 
-	public partial class RangeQuery : Union<QueryDsl.DateRangeQuery?, QueryDsl.NumberRangeQuery?>
+	public class Properties : IsADictionaryBase<string, IPropertiesVariant>, Mapping.IProperties
 	{
-		public RangeQuery(QueryDsl.DateRangeQuery? item) : base(item)
-		{
-		}
+	}
 
-		public RangeQuery(QueryDsl.NumberRangeQuery? item) : base(item)
-		{
-		}
+	public partial class RangeProperty
+	{
 	}
 }

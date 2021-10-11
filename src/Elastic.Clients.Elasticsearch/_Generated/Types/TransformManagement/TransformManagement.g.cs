@@ -23,9 +23,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
 	public interface IPivotGroupByContainerVariant
 	{
+		void WrapInContainer(IPivotGroupByContainer container);
 	}
 
-	;
 	[ConvertAs(typeof(PivotGroupByContainer))]
 	public partial interface IPivotGroupByContainer
 	{
@@ -48,6 +48,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public partial class PivotGroupByContainer : TransformManagement.IPivotGroupByContainer
 	{
+		public PivotGroupByContainer(IPivotGroupByContainerVariant query)
+		{
+			if (query == null)
+				return;
+			query.WrapInContainer(this);
+		}
+
 		private Aggregations.IDateHistogramAggregation? _dateHistogram;
 		private Aggregations.IGeoTileGridAggregation? _geotileGrid;
 		private Aggregations.IHistogramAggregation? _histogram;
@@ -73,7 +80,14 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public partial class PivotGroupByContainerDescriptor
+	public partial class PivotGroupByContainerDescriptor : IPivotGroupByContainer
 	{
+		Aggregations.IDateHistogramAggregation? IPivotGroupByContainer.DateHistogram { get; set; }
+
+		Aggregations.IGeoTileGridAggregation? IPivotGroupByContainer.GeotileGrid { get; set; }
+
+		Aggregations.IHistogramAggregation? IPivotGroupByContainer.Histogram { get; set; }
+
+		Aggregations.ITermsAggregation? IPivotGroupByContainer.Terms { get; set; }
 	}
 }

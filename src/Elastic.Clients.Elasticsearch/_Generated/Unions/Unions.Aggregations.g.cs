@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	public partial class MetricAggregate
+	public partial class Bucket
 	{
 	}
 
-	public partial class Bucket
+	public partial class MetricAggregate
 	{
 	}
 
@@ -39,11 +39,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	public partial class TermsAggregationOrder
+	public partial class MovingAverageSettings
 	{
 	}
 
-	public partial class MovingAverageSettings
+	public partial class TermsAggregationOrder
 	{
 	}
 }

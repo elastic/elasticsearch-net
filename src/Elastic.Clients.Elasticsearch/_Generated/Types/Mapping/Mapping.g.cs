@@ -16,19 +16,1553 @@
 // ------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
+	public partial class AggregateMetricDoubleProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("default_metric")]
+		public string DefaultMetric
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("metrics")]
+		public IReadOnlyCollection<string> Metrics
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(AllField))]
+	public partial interface IAllField
+	{
+		string Analyzer { get; set; }
+
+		bool Enabled { get; set; }
+
+		bool OmitNorms { get; set; }
+
+		string SearchAnalyzer { get; set; }
+
+		string Similarity { get; set; }
+
+		bool Store { get; set; }
+
+		bool StoreTermVectorOffsets { get; set; }
+
+		bool StoreTermVectorPayloads { get; set; }
+
+		bool StoreTermVectorPositions { get; set; }
+
+		bool StoreTermVectors { get; set; }
+	}
+
+	public partial class AllField : Mapping.IAllField
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("omit_norms")]
+		public bool OmitNorms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("search_analyzer")]
+		public string SearchAnalyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string Similarity { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool Store { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store_term_vector_offsets")]
+		public bool StoreTermVectorOffsets { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store_term_vector_payloads")]
+		public bool StoreTermVectorPayloads { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store_term_vector_positions")]
+		public bool StoreTermVectorPositions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("store_term_vectors")]
+		public bool StoreTermVectors { get; set; }
+	}
+
+	public partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
+	{
+		string IAllField.Analyzer { get; set; }
+
+		bool IAllField.Enabled { get; set; }
+
+		bool IAllField.OmitNorms { get; set; }
+
+		string IAllField.SearchAnalyzer { get; set; }
+
+		string IAllField.Similarity { get; set; }
+
+		bool IAllField.Store { get; set; }
+
+		bool IAllField.StoreTermVectorOffsets { get; set; }
+
+		bool IAllField.StoreTermVectorPayloads { get; set; }
+
+		bool IAllField.StoreTermVectorPositions { get; set; }
+
+		bool IAllField.StoreTermVectors { get; set; }
+	}
+
+	public partial class BinaryProperty : Mapping.DocValuesPropertyBase
+	{
+	}
+
+	public partial class BooleanProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fielddata")]
+		public IndexManagement.NumericFielddata? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public bool? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class CompletionProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("contexts")]
+		public IReadOnlyCollection<Mapping.SuggestContext>? Contexts
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("max_input_length")]
+		public int? MaxInputLength
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("preserve_position_increments")]
+		public bool? PreservePositionIncrements
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("preserve_separators")]
+		public bool? PreserveSeparators
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("search_analyzer")]
+		public string? SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ConstantKeywordProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object? Value
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public abstract partial class CorePropertyBase : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("copy_to")]
+		public Fields? CopyTo
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("store")]
+		public bool? Store
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateNanosProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("precision_step")]
+		public int? PrecisionStep
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fielddata")]
+		public IndexManagement.NumericFielddata? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("precision_step")]
+		public int? PrecisionStep
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DateRangeProperty : Mapping.RangePropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DenseVectorProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("dims")]
+		public int Dims
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public abstract partial class DocValuesPropertyBase : Mapping.CorePropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_values")]
+		public bool? DocValues
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class DoubleRangeProperty : Mapping.RangePropertyBase
+	{
+	}
+
+	[ConvertAs(typeof(DynamicTemplate))]
+	public partial interface IDynamicTemplate
+	{
+		Mapping.Properties? Mapping { get; set; }
+
+		string? Match { get; set; }
+
+		string? MatchMappingType { get; set; }
+
+		Mapping.MatchType? MatchPattern { get; set; }
+
+		string? PathMatch { get; set; }
+
+		string? PathUnmatch { get; set; }
+
+		string? Unmatch { get; set; }
+	}
+
+	public partial class DynamicTemplate : Mapping.IDynamicTemplate
+	{
+		[JsonInclude]
+		[JsonPropertyName("mapping")]
+		public Mapping.Properties? Mapping { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("match")]
+		public string? Match { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("match_mapping_type")]
+		public string? MatchMappingType { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("match_pattern")]
+		public Mapping.MatchType? MatchPattern { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("path_match")]
+		public string? PathMatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("path_unmatch")]
+		public string? PathUnmatch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("unmatch")]
+		public string? Unmatch { get; set; }
+	}
+
+	public partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor, IDynamicTemplate>, IDynamicTemplate
+	{
+		Mapping.Properties? IDynamicTemplate.Mapping { get; set; }
+
+		string? IDynamicTemplate.Match { get; set; }
+
+		string? IDynamicTemplate.MatchMappingType { get; set; }
+
+		Mapping.MatchType? IDynamicTemplate.MatchPattern { get; set; }
+
+		string? IDynamicTemplate.PathMatch { get; set; }
+
+		string? IDynamicTemplate.PathUnmatch { get; set; }
+
+		string? IDynamicTemplate.Unmatch { get; set; }
+	}
+
+	public partial class FieldAliasProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string? Path
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(FieldNamesField))]
+	public partial interface IFieldNamesField
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class FieldNamesField : Mapping.IFieldNamesField
+	{
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	public partial class FlattenedProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("depth_limit")]
+		public int? DepthLimit
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("doc_values")]
+		public bool? DocValues
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("eager_global_ordinals")]
+		public bool? EagerGlobalOrdinals
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_options")]
+		public Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("split_queries_on_whitespace")]
+		public bool? SplitQueriesOnWhitespace
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class FloatRangeProperty : Mapping.RangePropertyBase
+	{
+	}
+
+	public partial class GenericProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fielddata")]
+		public IndexManagement.StringFielddata Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_options")]
+		public Mapping.IndexOptions IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("norms")]
+		public bool Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("position_increment_gap")]
+		public int PositionIncrementGap
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("search_analyzer")]
+		public string SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("term_vector")]
+		public Mapping.TermVectorOption TermVector
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GeoPointProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_z_value")]
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public QueryDsl.GeoLocation? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class GeoShapeProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_z_value")]
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("orientation")]
+		public Mapping.GeoOrientation? Orientation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("strategy")]
+		public Mapping.GeoStrategy? Strategy
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class HistogramProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(IndexField))]
+	public partial interface IIndexField
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class IndexField : Mapping.IIndexField
+	{
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	public partial class IntegerRangeProperty : Mapping.RangePropertyBase
+	{
+	}
+
+	public partial class IpProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class IpRangeProperty : Mapping.RangePropertyBase
+	{
+	}
+
+	public partial class JoinProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("relations")]
+		public Dictionary<string, IReadOnlyCollection<string>>? Relations
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class KeywordProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("eager_global_ordinals")]
+		public bool? EagerGlobalOrdinals
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_options")]
+		public Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("normalizer")]
+		public string? Normalizer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("norms")]
+		public bool? Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("split_queries_on_whitespace")]
+		public bool? SplitQueriesOnWhitespace
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class LongRangeProperty : Mapping.RangePropertyBase
+	{
+	}
+
+	public partial class Murmur3HashProperty : Mapping.DocValuesPropertyBase
+	{
+	}
+
+	public partial class NestedProperty : Mapping.CorePropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool? Enabled
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("include_in_parent")]
+		public bool? IncludeInParent
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("include_in_root")]
+		public bool? IncludeInRoot
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class NumberProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fielddata")]
+		public IndexManagement.NumericFielddata? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public double? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("scaling_factor")]
+		public double? ScalingFactor
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public Mapping.NumberType Type
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ObjectProperty : Mapping.CorePropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool? Enabled
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class PercolatorProperty : Mapping.PropertyBase
+	{
+	}
+
+	public partial class PointProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_z_value")]
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public abstract partial class PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("local_metadata")]
+		public Dictionary<string, object>? LocalMetadata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, string>? Meta
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string? Name
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Dictionary<string, Mapping.Properties>? Properties
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_above")]
+		public int? IgnoreAbove
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Union<bool?, Mapping.DynamicMapping?>? Dynamic
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, Mapping.Properties>? Fields
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public abstract partial class RangePropertyBase : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RankFeatureProperty : Mapping.PropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("positive_score_impact")]
+		public bool? PositiveScoreImpact
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class RankFeaturesProperty : Mapping.PropertyBase
+	{
+	}
+
+	[ConvertAs(typeof(RoutingField))]
+	public partial interface IRoutingField
+	{
+		bool Required { get; set; }
+	}
+
+	public partial class RoutingField : Mapping.IRoutingField
+	{
+		[JsonInclude]
+		[JsonPropertyName("required")]
+		public bool Required { get; set; }
+	}
+
 	[ConvertAs(typeof(RuntimeField))]
 	public partial interface IRuntimeField
 	{
 		string? Format { get; set; }
 
-		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		Script? Script { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+		Mapping.RuntimeFieldType Type { get; set; }
 	}
 
 	public partial class RuntimeField : Mapping.IRuntimeField
@@ -39,19 +1573,693 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		public Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+		public Mapping.RuntimeFieldType Type { get; set; }
 	}
 
 	public partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor, IRuntimeField>, IRuntimeField
 	{
 		string? IRuntimeField.Format { get; set; }
 
-		Elastic.Clients.Elasticsearch.Script? IRuntimeField.Script { get; set; }
+		Script? IRuntimeField.Script { get; set; }
 
-		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType IRuntimeField.Type { get; set; }
+		Mapping.RuntimeFieldType IRuntimeField.Type { get; set; }
+	}
+
+	public partial class SearchAsYouTypeProperty : Mapping.CorePropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_options")]
+		public Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("max_shingle_size")]
+		public int? MaxShingleSize
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("norms")]
+		public bool? Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("search_analyzer")]
+		public string? SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("search_quote_analyzer")]
+		public string? SearchQuoteAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("term_vector")]
+		public Mapping.TermVectorOption? TermVector
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class ShapeProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("coerce")]
+		public bool? Coerce
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_malformed")]
+		public bool? IgnoreMalformed
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("ignore_z_value")]
+		public bool? IgnoreZValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("orientation")]
+		public Mapping.ShapeOrientation? Orientation
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(SizeField))]
+	public partial interface ISizeField
+	{
+		bool Enabled { get; set; }
+	}
+
+	public partial class SizeField : Mapping.ISizeField
+	{
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	[ConvertAs(typeof(SourceField))]
+	public partial interface ISourceField
+	{
+		bool? Compress { get; set; }
+
+		string? CompressThreshold { get; set; }
+
+		bool? Enabled { get; set; }
+
+		IEnumerable<string>? Excludes { get; set; }
+
+		IEnumerable<string>? Includes { get; set; }
+	}
+
+	public partial class SourceField : Mapping.ISourceField
+	{
+		[JsonInclude]
+		[JsonPropertyName("compress")]
+		public bool? Compress { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("compress_threshold")]
+		public string? CompressThreshold { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool? Enabled { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("excludes")]
+		public IEnumerable<string>? Excludes { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("includes")]
+		public IEnumerable<string>? Includes { get; set; }
+	}
+
+	public partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor, ISourceField>, ISourceField
+	{
+		bool? ISourceField.Compress { get; set; }
+
+		string? ISourceField.CompressThreshold { get; set; }
+
+		bool? ISourceField.Enabled { get; set; }
+
+		IEnumerable<string>? ISourceField.Excludes { get; set; }
+
+		IEnumerable<string>? ISourceField.Includes { get; set; }
+	}
+
+	public partial class SuggestContext
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string Name
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string? Path
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("precision")]
+		public Union<int?, string?>? Precision
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class TextIndexPrefixes
+	{
+		[JsonInclude]
+		[JsonPropertyName("max_chars")]
+		public int MaxChars
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("min_chars")]
+		public int MinChars
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class TextProperty : Mapping.CorePropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("eager_global_ordinals")]
+		public bool? EagerGlobalOrdinals
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fielddata")]
+		public bool? Fielddata
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("fielddata_frequency_filter")]
+		public IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_options")]
+		public Mapping.IndexOptions? IndexOptions
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_phrases")]
+		public bool? IndexPhrases
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index_prefixes")]
+		public Mapping.TextIndexPrefixes? IndexPrefixes
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("norms")]
+		public bool? Norms
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("position_increment_gap")]
+		public int? PositionIncrementGap
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("search_analyzer")]
+		public string? SearchAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("search_quote_analyzer")]
+		public string? SearchQuoteAnalyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("term_vector")]
+		public Mapping.TermVectorOption? TermVector
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	public partial class TokenCountProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public double? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+
+		[JsonInclude]
+		[JsonPropertyName("enable_position_increments")]
+		public bool? EnablePositionIncrements
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
+	}
+
+	[ConvertAs(typeof(TypeMapping))]
+	public partial interface ITypeMapping
+	{
+		Mapping.IAllField? AllField { get; set; }
+
+		bool? DateDetection { get; set; }
+
+		Union<bool?, Mapping.DynamicMapping?>? Dynamic { get; set; }
+
+		IEnumerable<string>? DynamicDateFormats { get; set; }
+
+		Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? DynamicTemplates { get; set; }
+
+		Mapping.IFieldNamesField? FieldNames { get; set; }
+
+		Mapping.IIndexField? IndexField { get; set; }
+
+		Dictionary<string, object>? Meta { get; set; }
+
+		bool? NumericDetection { get; set; }
+
+		Dictionary<string, Mapping.Properties>? Properties { get; set; }
+
+		Mapping.IRoutingField? Routing { get; set; }
+
+		Mapping.ISizeField? Size { get; set; }
+
+		Mapping.ISourceField? Source { get; set; }
+
+		Dictionary<string, Mapping.IRuntimeField>? Runtime { get; set; }
+
+		bool? Enabled { get; set; }
+	}
+
+	public partial class TypeMapping : Mapping.ITypeMapping
+	{
+		[JsonInclude]
+		[JsonPropertyName("all_field")]
+		public Mapping.IAllField? AllField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("date_detection")]
+		public bool? DateDetection { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic")]
+		public Union<bool?, Mapping.DynamicMapping?>? Dynamic { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic_date_formats")]
+		public IEnumerable<string>? DynamicDateFormats { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("dynamic_templates")]
+		public Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? DynamicTemplates { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_field_names")]
+		public Mapping.IFieldNamesField? FieldNames { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_field")]
+		public Mapping.IIndexField? IndexField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_meta")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("numeric_detection")]
+		public bool? NumericDetection { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("properties")]
+		public Dictionary<string, Mapping.Properties>? Properties { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public Mapping.IRoutingField? Routing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_size")]
+		public Mapping.ISizeField? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public Mapping.ISourceField? Source { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("runtime")]
+		public Dictionary<string, Mapping.IRuntimeField>? Runtime { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("enabled")]
+		public bool? Enabled { get; set; }
+	}
+
+	public partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor, ITypeMapping>, ITypeMapping
+	{
+		Mapping.IAllField? ITypeMapping.AllField { get; set; }
+
+		bool? ITypeMapping.DateDetection { get; set; }
+
+		Union<bool?, Mapping.DynamicMapping?>? ITypeMapping.Dynamic { get; set; }
+
+		IEnumerable<string>? ITypeMapping.DynamicDateFormats { get; set; }
+
+		Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? ITypeMapping.DynamicTemplates { get; set; }
+
+		Mapping.IFieldNamesField? ITypeMapping.FieldNames { get; set; }
+
+		Mapping.IIndexField? ITypeMapping.IndexField { get; set; }
+
+		Dictionary<string, object>? ITypeMapping.Meta { get; set; }
+
+		bool? ITypeMapping.NumericDetection { get; set; }
+
+		Dictionary<string, Mapping.Properties>? ITypeMapping.Properties { get; set; }
+
+		Mapping.IRoutingField? ITypeMapping.Routing { get; set; }
+
+		Mapping.ISizeField? ITypeMapping.Size { get; set; }
+
+		Mapping.ISourceField? ITypeMapping.Source { get; set; }
+
+		Dictionary<string, Mapping.IRuntimeField>? ITypeMapping.Runtime { get; set; }
+
+		bool? ITypeMapping.Enabled { get; set; }
+	}
+
+	public partial class VersionProperty : Mapping.DocValuesPropertyBase
+	{
+	}
+
+	public partial class WildcardProperty : Mapping.DocValuesPropertyBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("null_value")]
+		public string? NullValue
+		{
+			get;
+#if NET5_0_OR_GREATER
+			init;
+#else
+			internal set;
+#endif
+		}
 	}
 }
