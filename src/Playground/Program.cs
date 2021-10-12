@@ -16,20 +16,33 @@ namespace Playground
 
 			ec.Send(new ClusterHealthRequest
 			{
-				Name = "Test",
+				Name = "Object test",
 				Subtype = new ClusterSubtype
 				{
-					Identifier = "Test-ID"
-				}
+					Identifier = "AnID"
+				},
+				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
 			});
 
-			ec.Send(c => c.Name("TestDescriptor").Subtype(s => s.Identifier("ID-Descriptor")));
+			ec.Send(c => c
+				.Name("Descriptor test")
+				.Subtype(s => s.Identifier("AnID"))
+				.Container(c => c.Bool(v => v.Tag("some_tag"))));
 
-			var descriptor = new ClusterSubtypeDescriptor().Identifier("testing");
+			var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
 
-			ec.Send(c => c.Name("TestDescriptor").Subtype(descriptor));
+			ec.Send(c => c
+				.Name("Descriptor test")
+				.Subtype(descriptor)
+				.Container(c => c.Boosting(v => v.BoostAmount(10))));
 
-			ec.Send(c => c.Name("TestDescriptor").Subtype(new ClusterSubtype { Identifier = "Test-ID" }));
+			ec.Send(c => c
+				.Name("Mixed object and descriptor test")
+				.Subtype(new ClusterSubtype { Identifier = "AnID" }));
+
+			var requestDescriptor = new ClusterHealthRequestDescriptor().Name("descriptor_usage");
+
+			ec.Send(requestDescriptor);
 
 			var client = new ElasticClient();
 
@@ -44,7 +57,7 @@ namespace Playground
 
 			var search = new SearchRequest()
 			{
-				Query = new QueryContainer(new BoolQuery { Boost = 1.2F })
+				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F })
 			};
 
 			var stream = new MemoryStream();
