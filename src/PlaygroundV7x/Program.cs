@@ -9,6 +9,8 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
+			var thing = Query<Person>.Bool(b => b.Name("thing"));
+
 			var matchQueryOne = Query<Person>.Match(m => m.Field(f => f.FirstName).Query("Steve"));
 			var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = Infer.Field<Person>(f => f.FirstName), Query = "Steve" });
 			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));

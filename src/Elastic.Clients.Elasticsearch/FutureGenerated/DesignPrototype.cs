@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Experimental;
 // - Can add descriptors to types in the future without having to add an interface
 
 // Cons
+// - BREAKING: Migration path for those using Func<T,T> descriptor methods and storing parial queries could be painful and very breaking
 // - More verbose code (although its 100% generated)
 // - Sometimes requires more type-checking and casts, although we could optimise that further if profiling shows an issue
 // - Might be some cases not yet considered
@@ -137,118 +138,39 @@ public class ClusterSubtype
 [JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
 public class ClusterHealthRequestDescriptor : ExperimentalRequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
 {
-	private string _name;
-	private object _subType; // requires some type-checking and casting at serialisation time
-	private object _clusterContainer;
+	//private string _name;
+	//private object _subType; // requires some type-checking and casting at serialisation time
+	//private object _clusterContainer;
 
 	// This increases field size vs. using a shared common interface but avoids some type checks, casting and an unnecessary marker interface.
 	// It supports combination of descriptors and object initialiser syntax quite cleanly (see example).
-	//private ClusterSubtype _subtype;
-	//private ClusterSubtypeDescriptor _subtypeDescriptor;
+	// Could be properties but the names would need to not conflict with the descriptor methods
+	internal string _name;
+	internal ClusterSubtype _subtype;
+	internal ClusterSubtypeDescriptor _subtypeDescriptor;
+	internal QueryContainer _queryContainer;
+	internal QueryContainerDescriptor _queryContainerDescriptor;
 
-	public ClusterHealthRequestDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
+	public ClusterHealthRequestDescriptor Name(string name) => Assign(name, (a, v)
+		=> a._name = v);
 
-	public ClusterHealthRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor) => Assign(descriptor, (a, v) => _subType = descriptor);
+	public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v)
+	=> a._subtype = v);
 
-	public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype) => InvokeAndAssign(configureClusterSubtype, (a, v) => a._subType = v);
+	public ClusterHealthRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor)
+		=> Assign(descriptor, (a, v) => _subtypeDescriptor = descriptor);
 
-	public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) => a._subType = v);
+	public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype)
+		=> InvokeAndAssign(configureClusterSubtype, (a, v) => a._subtypeDescriptor = v);
 
-	public ClusterHealthRequestDescriptor Container(QueryContainer container) => Assign(container, (a, v) => _clusterContainer = container);
+	public ClusterHealthRequestDescriptor Container(QueryContainer container) => Assign(container, (a, v)
+		=> _queryContainer = container);
 
-	public ClusterHealthRequestDescriptor Container(Action<QueryContainerDescriptor> configureContainer) => InvokeAndAssign(configureContainer, (a, v) => a._clusterContainer = v);
+	public ClusterHealthRequestDescriptor Container(Action<QueryContainerDescriptor> configureContainer)
+		=> InvokeAndAssign(configureContainer, (a, v) => a._queryContainerDescriptor = v);
 
-	public ClusterHealthRequestDescriptor Container(QueryContainerDescriptor descriptor) => Assign(descriptor, (a, v) => a._clusterContainer = v);
-
-	//public ClusterHealthRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor) => Assign(descriptor, (a, v) => _subtypeDescriptor = descriptor);
-
-	//public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype) => InvokeAndAssign(configureClusterSubtype, (a, v) => a._subtypeDescriptor = v);
-
-	//public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) => a._subtype = v);
-
-	internal bool TryGetName(out string name)
-	{
-		if (!string.IsNullOrEmpty(_name))
-		{
-			name = _name;
-			return true;
-		}
-
-		name = default;
-		return false;
-	}
-
-	internal bool TryGetSubtypeDescriptor(out ClusterSubtypeDescriptor subtype)
-	{
-		if (_subType is ClusterSubtypeDescriptor descriptor)
-		{
-			subtype = descriptor;
-			return true;
-		}
-
-		subtype = default;
-		return false;
-	}
-
-	internal bool TryGetSubtype(out ClusterSubtype subtype)
-	{
-		if (_subType is ClusterSubtype clusterSubtype)
-		{
-			subtype = clusterSubtype;
-			return true;
-		}
-
-		subtype = default;
-		return false;
-	}
-
-	internal bool TryGetQueryContainerDescriptor(out QueryContainerDescriptor container)
-	{
-		if (_clusterContainer is QueryContainerDescriptor descriptor)
-		{
-			container = descriptor;
-			return true;
-		}
-
-		container = default;
-		return false;
-	}
-
-	internal bool TryGetQueryContainer(out QueryContainerVariant variant)
-	{
-		if (_subType is QueryContainerVariant clusterSubtype)
-		{
-			variant = clusterSubtype;
-			return true;
-		}
-
-		variant = default;
-		return false;
-	}
-
-	//internal bool TryGetSubtypeDescriptor(out ClusterSubtypeDescriptor subtype)
-	//{
-	//	if (_subtypeDescriptor is not null)
-	//	{
-	//		subtype = _subtypeDescriptor;
-	//		return true;
-	//	}
-
-	//	subtype = default;
-	//	return false;
-	//}
-
-	//internal bool TryGetSubtype(out ClusterSubtype subtype)
-	//{
-	//	if (_subtype is not null)
-	//	{
-	//		subtype = _subtype;
-	//		return true;
-	//	}
-
-	//	subtype = default;
-	//	return false;
-	//}
+	public ClusterHealthRequestDescriptor Container(QueryContainerDescriptor descriptor)
+		=> Assign(descriptor, (a, v) => a._queryContainerDescriptor = v);
 }
 
 [JsonConverter(typeof(ClusterSubtypeDescriptorConverter))]
@@ -258,6 +180,7 @@ public class ClusterSubtypeDescriptor : ExperimentalDescriptorBase<ClusterSubtyp
 
 	public ClusterSubtypeDescriptor Identifier(string identifier) => Assign(identifier, (a, v) => a._identifier = v);
 
+	// Alternative approach moving the checking into the type
 	internal bool TryGetIdentifier(out string identifier)
 	{
 		if (!string.IsNullOrEmpty(_identifier))
@@ -310,35 +233,34 @@ public class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHeal
 	{
 		writer.WriteStartObject();
 
-		// For simple properties this is quite straight-forward
-		if (value.TryGetName(out var name))
+		if (value._name is not null)
 		{
 			writer.WritePropertyName("name");
-			writer.WriteStringValue(name);
+			writer.WriteStringValue(value._name);
 		}
 
 		// When we support complex types which themselves can be defined using a descriptor, we may support setting them
 		// both with the descriptor directly, or with the object initialiser type.
-		if (value.TryGetSubtypeDescriptor(out var subtypeDescriptor))
+		if (value._subtypeDescriptor is not null)
 		{
 			writer.WritePropertyName("subtype");
-			JsonSerializer.Serialize(writer, subtypeDescriptor, options);
+			JsonSerializer.Serialize(writer, value._subtypeDescriptor, options);
 		}
-		else if (value.TryGetSubtype(out var subtype))
+		else if (value._subtype is not null)
 		{
 			writer.WritePropertyName("subtype");
-			JsonSerializer.Serialize(writer, subtype, options);
+			JsonSerializer.Serialize(writer, value._subtype, options);
 		}
 
-		if (value.TryGetQueryContainerDescriptor(out var queryContainerDescriptor))
+		if (value._queryContainerDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, queryContainerDescriptor, options);
+			JsonSerializer.Serialize(writer, value._queryContainerDescriptor, options);
 		}
-		else if (value.TryGetQueryContainer(out var queryContainer))
+		else if (value._queryContainer is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, queryContainer, options);
+			JsonSerializer.Serialize(writer, value._queryContainer, options);
 		}
 
 		writer.WriteEndObject();
@@ -388,6 +310,11 @@ public class BoostingQuery : QueryContainerVariant
 	public int Boost { get; set; }
 }
 
+public static class Query
+{
+	public static QueryContainer Bool(Action<BoolQueryDescriptor> configure) => new QueryContainerDescriptor().Bool(configure).ToQueryContainer();
+}
+
 [JsonConverter(typeof(QueryContainerConverter))]
 public class QueryContainer
 {
@@ -401,31 +328,35 @@ public class QueryContainer
 		_variant = variant;
 	}
 
-	internal bool TryGetBoolQuery(out BoolQuery variantOne)
-	{
-		if (_variant is BoolQuery variant)
-		{
-			variantOne = variant;
-			return true;
-		}
 
-		variantOne = default;
-		return false;
-	}
 
-	internal bool TryGetBoostingQuery(out BoostingQuery variantTwo)
-	{
-		if (_variant is BoostingQuery variant)
-		{
-			variantTwo = variant;
-			return true;
-		}
+	//internal bool TryGetBoolQuery(out BoolQuery variantOne)
+	//{
+	//	if (_variant is BoolQuery variant)
+	//	{
+	//		variantOne = variant;
+	//		return true;
+	//	}
 
-		variantTwo = default;
-		return false;
-	}
+	//	variantOne = default;
+	//	return false;
+	//}
+
+	//internal bool TryGetBoostingQuery(out BoostingQuery variantTwo)
+	//{
+	//	if (_variant is BoostingQuery variant)
+	//	{
+	//		variantTwo = variant;
+	//		return true;
+	//	}
+
+	//	variantTwo = default;
+	//	return false;
+	//}
 
 	internal string VariantName => _variant is not null ? _variant.VariantName : string.Empty;
+
+	internal QueryContainerVariant Variant => _variant;
 
 	internal bool HasVariant => !string.IsNullOrEmpty(_variant.VariantName) && _variant is not null;
 }
@@ -443,6 +374,23 @@ public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContaine
 	public QueryContainerDescriptor Bool(Action<BoolQueryDescriptor> configureVariant) => InvokeAndAssign(configureVariant, (a, v) => a._containerDescriptor = v);
 
 	public QueryContainerDescriptor Boosting(Action<BoostingQueryDescriptor> configureVariant) => InvokeAndAssign(configureVariant, (a, v) => a._containerDescriptor = v);
+
+	internal QueryContainer ToQueryContainer()
+	{
+		if (container is not null)
+			return container;
+
+		switch (_containerDescriptor)
+		{
+			case BoolQueryDescriptor boolQuery:
+				return new QueryContainer(boolQuery.ToBoolQuery());
+			case BoostingQueryDescriptor boostingQuery:
+				return new QueryContainer(boostingQuery.ToBoostingQuery());
+		}
+
+		return null;
+	}
+
 
 	internal bool TryGetContainer(out QueryContainer variantDescriptor)
 	{
@@ -490,7 +438,7 @@ public class BoolQueryDescriptor : ExperimentalDescriptorBase<BoolQueryDescripto
 
 	public BoolQueryDescriptor Tag(string tag) => Assign(tag, (a, v) => a._tag = v);
 
-	internal bool GetTag(out string stringValue)
+	internal bool TryGetTag(out string stringValue)
 	{
 		if (!string.IsNullOrEmpty(_tag))
 		{
@@ -500,6 +448,16 @@ public class BoolQueryDescriptor : ExperimentalDescriptorBase<BoolQueryDescripto
 
 		stringValue = default;
 		return false;
+	}
+
+	internal BoolQuery ToBoolQuery()
+	{
+		var query = new BoolQuery();
+
+		if (TryGetTag(out var tag))
+			query.Tag = tag;
+
+		return query;
 	}
 
 	internal string VariantName => "bool";
@@ -524,6 +482,16 @@ public class BoostingQueryDescriptor : ExperimentalDescriptorBase<BoostingQueryD
 		return false;
 	}
 
+	internal BoostingQuery ToBoostingQuery()
+	{
+		var query = new BoostingQuery();
+
+		if (TryGetBoost(out var boost))
+			query.Boost = boost;
+
+		return query;
+	}
+
 	internal string VariantName => "boosting";
 }
 
@@ -543,14 +511,24 @@ public class QueryContainerConverter : JsonConverter<QueryContainer>
 
 		writer.WritePropertyName(value.VariantName);
 
-		if (value.TryGetBoolQuery(out var variantOne))
+		switch (value.Variant)
 		{
-			JsonSerializer.Serialize(writer, variantOne, options);
+			case BoolQuery boolQuery:
+				JsonSerializer.Serialize(writer, boolQuery, options);
+				break;
+			case BoostingQuery boostingQuery:
+				JsonSerializer.Serialize(writer, boostingQuery, options);
+				break;
 		}
-		else if (value.TryGetBoostingQuery(out var variantTwo))
-		{
-			JsonSerializer.Serialize(writer, variantTwo, options);
-		}
+
+		//if (value.TryGetBoolQuery(out var variantOne))
+		//{
+		//	JsonSerializer.Serialize(writer, variantOne, options);
+		//}
+		//else if (value.TryGetBoostingQuery(out var variantTwo))
+		//{
+		//	JsonSerializer.Serialize(writer, variantTwo, options);
+		//}
 
 		writer.WriteEndObject();
 	}
@@ -594,7 +572,7 @@ public class BoolQueryDescriptorConverter : JsonConverter<BoolQueryDescriptor>
 	{
 		writer.WriteStartObject();
 
-		if (value.GetTag(out var tag))
+		if (value.TryGetTag(out var tag))
 		{
 			writer.WritePropertyName("tag");
 			writer.WriteStringValue(tag);
