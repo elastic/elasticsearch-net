@@ -24,6 +24,18 @@ namespace Playground
 				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
 			});
 
+			ec.Send(new ClusterHealthRequest
+			{
+				Name = "Object test",
+				Subtype = new ClusterSubtype
+				{
+					Identifier = "AnID"
+				},
+				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
+				// at the cost of an extra object allocation
+				Query = Query.Bool(b => b.Tag("using_query_helper"))
+			});
+
 			ec.Send(c => c
 				.Name("Descriptor test")
 				.Subtype(s => s.Identifier("AnID"))
