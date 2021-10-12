@@ -9,6 +9,32 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Experimental;
 
+// Core goals
+// - Support serialisation of containers and more complex concepts (tagged unions)
+// - Simplify the public API and remove "redundant" interfaces
+
+// Pros
+// - Removes interface requirement for descriptor use
+// - Simplifies the public API - For example, less Func<T, T> stuff!
+// - Avoids leaking implementation details into the public API
+// - Can be otimised and tweaked internally without breaking the public contract
+// - Types are easier to evolve
+// - Provides a cleaner serialisation implementation
+// - Containers are easier to support for serialisation
+// - Can be code-generated
+// - Public API can be considered alpha ready with implemenation evolving
+// - Can add descriptors to types in the future without having to add an interface
+
+// Cons
+// - More verbose code (although its 100% generated)
+// - Sometimes requires more type-checking and casts, although we could optimise that further if profiling shows an issue
+// - Might be some cases not yet considered
+
+// Further work
+// - Tagged unions
+// - In some serialisation cases we may be able to avoid the casting and serialise the `object` directly
+// - Compare to using the runtime type overload (performance)
+
 #region Infrastructure
 
 internal static class Fluent
@@ -404,17 +430,15 @@ public class QueryContainer
 	internal bool HasVariant => !string.IsNullOrEmpty(_variant.VariantName) && _variant is not null;
 }
 
-
 [JsonConverter(typeof(QueryContainerDescriptorConverter))]
 public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContainerDescriptor>
 {
-	private QueryContainer _containedVariant;
-
+	private QueryContainer container;
 	private object _containerDescriptor;
 
-	public QueryContainerDescriptor Bool(BoolQuery variant) => Assign(variant, (a, v) => a._containedVariant = new QueryContainer(v));
+	public QueryContainerDescriptor Bool(BoolQuery variant) => Assign(variant, (a, v) => a.container = new QueryContainer(v));
 
-	public QueryContainerDescriptor Boosting(BoostingQuery variant) => Assign(variant, (a, v) => a._containedVariant = new QueryContainer(v));
+	public QueryContainerDescriptor Boosting(BoostingQuery variant) => Assign(variant, (a, v) => a.container = new QueryContainer(v));
 
 	public QueryContainerDescriptor Bool(Action<BoolQueryDescriptor> configureVariant) => InvokeAndAssign(configureVariant, (a, v) => a._containerDescriptor = v);
 
@@ -422,9 +446,9 @@ public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContaine
 
 	internal bool TryGetContainer(out QueryContainer variantDescriptor)
 	{
-		if (_containedVariant is not null)
+		if (container is not null)
 		{
-			variantDescriptor = _containedVariant;
+			variantDescriptor = container;
 			return true;
 		}
 
