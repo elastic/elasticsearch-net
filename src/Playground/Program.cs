@@ -12,70 +12,71 @@ namespace Playground
 	{
 		private static void Main()
 		{
-			var ec = new Client();
+//			var ec = new Client();
 
-#pragma warning disable IDE0039 // Use local function
-			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
-			// Local variables change type
-			Action<ClusterHealthRequestDescriptor> test = b => b.Name("thing");
-#pragma warning restore IDE0039 // Use local function
+//#pragma warning disable IDE0039 // Use local function
+//			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
+//			// Local variables change type
+//			Action<ExampleRequestDescriptor> test = b => b.Name("thing");
+//#pragma warning restore IDE0039 // Use local function
 
-			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
-			// Local functions become void returning
-			static void TestBoolQuery(ClusterHealthRequestDescriptor b) => b.Name("thing");
+//			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
 
-			ec.Send(TestBoolQuery);
+//			// Local functions become void returning
+//			static void TestBoolQuery(ExampleRequestDescriptor b) => b.Name("thing");
 
-			ec.Send(new ClusterHealthRequest
-			{
-				Name = "Object test",
-				Subtype = new ClusterSubtype
-				{
-					Identifier = "AnID"
-				},
-				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
-			});
+//			ec.SomeEndpoint(TestBoolQuery);
 
-			ec.Send(new ClusterHealthRequest
-			{
-				Name = "Object test",
-				Subtype = new ClusterSubtype
-				{
-					Identifier = "AnID"
-				},
-				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
-				// at the cost of an extra object allocation
-				Query = Query.Bool(b => b.Tag("using_query_helper"))
-			});
+//			ec.SomeEndpoint(new ExampleRequest
+//			{
+//				Name = "Object test",
+//				Subtype = new ClusterSubtype
+//				{
+//					Identifier = "AnID"
+//				},
+//				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
+//			});
 
-			ec.Send(c => c
-				.Name("Descriptor test")
-				.Subtype(s => s.Identifier("AnID"))
-				.Container(c => c.Bool(v => v.Tag("some_tag"))));
+//			ec.SomeEndpoint(new ExampleRequest
+//			{
+//				Name = "Object test",
+//				Subtype = new ClusterSubtype
+//				{
+//					Identifier = "AnID"
+//				},
+//				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
+//				// at the cost of an extra object allocation
+//				Query = Query.Bool(b => b.Tag("using_query_helper"))
+//			});
 
-			var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
+//			ec.SomeEndpoint(c => c
+//				.Name("Descriptor test")
+//				.Subtype(s => s.Identifier("AnID"))
+//				.Container(c => c.Bool(v => v.Tag("some_tag"))));
 
-			ec.Send(c => c
-				.Name("Descriptor test")
-				.Subtype(descriptor)
-				.Container(c => c.Boosting(v => v.BoostAmount(10))));
+//			var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
 
-			ec.Send(c => c
-				.Name("Mixed object and descriptor test")
-				.Subtype(new ClusterSubtype { Identifier = "AnID" }));
+//			ec.SomeEndpoint(c => c
+//				.Name("Descriptor test")
+//				.Subtype(descriptor)
+//				.Container(c => c.Boosting(v => v.BoostAmount(10))));
 
-			var requestDescriptor = new ClusterHealthRequestDescriptor().Name("descriptor_usage");
+//			ec.SomeEndpoint(c => c
+//				.Name("Mixed object and descriptor test")
+//				.Subtype(new ClusterSubtype { Identifier = "AnID" }));
 
-			ec.Send(requestDescriptor);
+//			var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
 
-			var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
+//			ec.SomeEndpoint(requestDescriptor);
 
-			var container = boolQuery.WrapInContainer();
+//			var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
 
-			if (container.TryGetBoolQuery(out boolQuery))
-			{
-				Console.WriteLine(boolQuery.Tag);
-			}
+//			var container = boolQuery.WrapInContainer();
+
+//			if (container.TryGetBoolQuery(out boolQuery))
+//			{
+//				Console.WriteLine(boolQuery.Tag);
+//			}
 
 			var client = new ElasticClient();
 
@@ -90,8 +91,15 @@ namespace Playground
 
 			var search = new SearchRequest()
 			{
-				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F })
+				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
+				MinScore = 10.0,
+				Profile = true
 			};
+
+			var stream1 = new MemoryStream();
+			client.ElasticsearchClientSettings.SourceSerializer.Serialize(search, stream1);
+			stream1.Position = 0;
+			var json1 = Encoding.UTF8.GetString(stream1.ToArray());
 
 			ISearchRequest d = new SearchRequestDescriptor().MinScore(10.0).Profile(true);
 
@@ -102,6 +110,12 @@ namespace Playground
 
 			if (json.Length > 0)
 				Console.WriteLine(json);
+
+			var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+			var request = client.ElasticsearchClientSettings.SourceSerializer.Deserialize<ISearchRequest>(jsonStream);
+
+			if (request is not null)
+				Console.WriteLine("DONE");
 
 			//var response = await client.SearchAsync<Person>(search);
 
