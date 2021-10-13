@@ -219,6 +219,7 @@ public class Transport
 	public void Send<T>(T data) where T : IRequest
 	{
 		var json = JsonSerializer.Serialize(data, _options);
+		Console.WriteLine(json);
 	}
 }
 
@@ -294,6 +295,8 @@ public abstract class QueryContainerVariant
 {
 	[JsonIgnore]
 	internal abstract string VariantName { get; }
+
+	public QueryContainer WrapInContainer() => new(this);
 }
 
 public class BoolQuery : QueryContainerVariant
@@ -328,31 +331,20 @@ public class QueryContainer
 		_variant = variant;
 	}
 
+	// Similar to Sylvain's support for accessing the query from inside a container.
+	// Decide if this is useful to expose?
+	// Could also provide a more direct method which throws when the variant type is wrong.
+	public bool TryGetBoolQuery(out BoolQuery boolQuery)
+	{
+		if (_variant is BoolQuery query)
+		{
+			boolQuery = query;
+			return true;
+		}
 
-
-	//internal bool TryGetBoolQuery(out BoolQuery variantOne)
-	//{
-	//	if (_variant is BoolQuery variant)
-	//	{
-	//		variantOne = variant;
-	//		return true;
-	//	}
-
-	//	variantOne = default;
-	//	return false;
-	//}
-
-	//internal bool TryGetBoostingQuery(out BoostingQuery variantTwo)
-	//{
-	//	if (_variant is BoostingQuery variant)
-	//	{
-	//		variantTwo = variant;
-	//		return true;
-	//	}
-
-	//	variantTwo = default;
-	//	return false;
-	//}
+		boolQuery = default;
+		return false;
+	}
 
 	internal string VariantName => _variant is not null ? _variant.VariantName : string.Empty;
 

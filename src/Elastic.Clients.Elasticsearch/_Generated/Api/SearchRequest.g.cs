@@ -275,6 +275,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
+
 		Dictionary<string, Aggregations.IAggregationContainer>? ISearchRequest.Aggs { get; set; }
 
 		Dictionary<string, Aggregations.IAggregationContainer>? ISearchRequest.Aggregations { get; set; }
@@ -284,6 +285,9 @@ namespace Elastic.Clients.Elasticsearch
 		IHighlight? ISearchRequest.Highlight { get; set; }
 
 		IEnumerable<Dictionary<IndexName, double>>? ISearchRequest.IndicesBoost { get; set; }
+
+		[JsonInclude]
+		internal double? MinScoreValue => Self.MinScore;
 
 		double? ISearchRequest.MinScore { get; set; }
 

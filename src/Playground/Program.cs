@@ -14,6 +14,18 @@ namespace Playground
 		{
 			var ec = new Client();
 
+#pragma warning disable IDE0039 // Use local function
+			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
+			// Local variables change type
+			Action<ClusterHealthRequestDescriptor> test = b => b.Name("thing");
+#pragma warning restore IDE0039 // Use local function
+
+			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
+			// Local functions become void returning
+			static void TestBoolQuery(ClusterHealthRequestDescriptor b) => b.Name("thing");
+
+			ec.Send(TestBoolQuery);
+
 			ec.Send(new ClusterHealthRequest
 			{
 				Name = "Object test",
@@ -56,6 +68,15 @@ namespace Playground
 
 			ec.Send(requestDescriptor);
 
+			var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
+
+			var container = boolQuery.WrapInContainer();
+
+			if (container.TryGetBoolQuery(out boolQuery))
+			{
+				Console.WriteLine(boolQuery.Tag);
+			}
+
 			var client = new ElasticClient();
 
 			//var stream = new MemoryStream();
@@ -72,8 +93,10 @@ namespace Playground
 				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F })
 			};
 
+			ISearchRequest d = new SearchRequestDescriptor().MinScore(10.0).Profile(true);
+
 			var stream = new MemoryStream();
-			client.ElasticsearchClientSettings.SourceSerializer.Serialize(search, stream);
+			client.ElasticsearchClientSettings.SourceSerializer.Serialize(d, stream);
 			stream.Position = 0;
 			var json = Encoding.UTF8.GetString(stream.ToArray());
 
