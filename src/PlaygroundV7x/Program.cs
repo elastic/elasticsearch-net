@@ -9,7 +9,14 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
-			var thing = Query<Person>.Bool(b => b.Name("thing"));
+#pragma warning disable IDE0039 // Use local function
+			Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
+#pragma warning restore IDE0039 // Use local function
+
+			static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
+
+			var thing = Query<Person>.Bool(test);
+			thing = Query<Person>.Bool(TestBoolQuery);
 
 			var matchQueryOne = Query<Person>.Match(m => m.Field(f => f.FirstName).Query("Steve"));
 			var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = Infer.Field<Person>(f => f.FirstName), Query = "Steve" });
