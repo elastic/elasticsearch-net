@@ -11,6 +11,6 @@ namespace Elastic.Clients.Elasticsearch
 			JsonSerializer.Deserialize<TConcrete>(ref reader, options);
 
 		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) =>
-			JsonSerializer.Serialize(writer, value as TConcrete, options);
+			JsonSerializer.Serialize(writer, value, value.GetType(), options);
 	}
 }
