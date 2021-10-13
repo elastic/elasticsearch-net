@@ -124,11 +124,7 @@ namespace Elastic.Clients.Elasticsearch
 			else
 			{
 				return (JsonConverter)Activator.CreateInstance(
-					typeof(InterfaceConverter<,>).MakeGenericType(typeToConvert, att?.ConvertType),
-					BindingFlags.Instance | BindingFlags.Public,
-					args: null,
-					binder: null,
-					culture: null)!;
+					typeof(InterfaceConverter<,>).MakeGenericType(typeToConvert, att?.ConvertType))!;
 			}
 		}
 	}
