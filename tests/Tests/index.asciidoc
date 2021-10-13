@@ -1,7 +1,7 @@
 ﻿:title-separator: |
 
 [[elasticsearch-net-reference]]
-= Elasticsearch.Net and NEST: the .NET clients
+= Elasticsearch .NET Clients
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
