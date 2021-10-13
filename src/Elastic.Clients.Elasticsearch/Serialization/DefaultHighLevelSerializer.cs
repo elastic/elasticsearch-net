@@ -33,6 +33,7 @@ namespace Elastic.Clients.Elasticsearch
 				IncludeFields= true,
 				Converters =
 				{
+					new InterfaceConverterFactory(settings),
 					new ConvertAsConverterFactory(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),

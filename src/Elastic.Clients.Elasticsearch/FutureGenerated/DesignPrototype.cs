@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Experimental;
 // - Can add descriptors to types in the future without having to add an interface
 
 // Cons
-// - BREAKING: Migration path for those using Func<T,T> descriptor methods and storing parial queries could be painful and very breaking
+// - BREAKING: Migration path for those using Func<T,T> descriptor methods and storing parial queries could be painful and potentially very breaking
 // - More verbose code (although its 100% generated)
 // - Sometimes requires more type-checking and casts, although we could optimise that further if profiling shows an issue
 // - Might be some cases not yet considered
@@ -121,7 +121,7 @@ public class ClusterHealthRequestParameters : IRequestParameters { }
 // Alternatively, we could look at a factory method to convert from a descriptor into the object representation, with the added cost of one extra object.
 // However, that is likely okay since there are alternatives for high-performance optimisations we can provide.
 
-public class ClusterHealthRequest : RequestBase<ClusterHealthRequestParameters>
+public class ExampleRequest : RequestBase<ClusterHealthRequestParameters>
 {
 	public string Name { get; set; }
 	public ClusterSubtype Subtype { get; set; }
@@ -135,8 +135,8 @@ public class ClusterSubtype
 
 // Descriptors instead have an auto-generated one-way JSON converter
 
-[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
-public class ClusterHealthRequestDescriptor : ExperimentalRequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
+[JsonConverter(typeof(ExampleRequestDescriptorConverter))]
+public class ExampleRequestDescriptor : ExperimentalRequestDescriptorBase<ExampleRequestDescriptor, ClusterHealthRequestParameters>
 {
 	//private string _name;
 	//private object _subType; // requires some type-checking and casting at serialisation time
@@ -151,25 +151,25 @@ public class ClusterHealthRequestDescriptor : ExperimentalRequestDescriptorBase<
 	internal QueryContainer _queryContainer;
 	internal QueryContainerDescriptor _queryContainerDescriptor;
 
-	public ClusterHealthRequestDescriptor Name(string name) => Assign(name, (a, v)
+	public ExampleRequestDescriptor Name(string name) => Assign(name, (a, v)
 		=> a._name = v);
 
-	public ClusterHealthRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v)
+	public ExampleRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v)
 	=> a._subtype = v);
 
-	public ClusterHealthRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor)
+	public ExampleRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor)
 		=> Assign(descriptor, (a, v) => _subtypeDescriptor = descriptor);
 
-	public ClusterHealthRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype)
+	public ExampleRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype)
 		=> InvokeAndAssign(configureClusterSubtype, (a, v) => a._subtypeDescriptor = v);
 
-	public ClusterHealthRequestDescriptor Container(QueryContainer container) => Assign(container, (a, v)
+	public ExampleRequestDescriptor Container(QueryContainer container) => Assign(container, (a, v)
 		=> _queryContainer = container);
 
-	public ClusterHealthRequestDescriptor Container(Action<QueryContainerDescriptor> configureContainer)
+	public ExampleRequestDescriptor Container(Action<QueryContainerDescriptor> configureContainer)
 		=> InvokeAndAssign(configureContainer, (a, v) => a._queryContainerDescriptor = v);
 
-	public ClusterHealthRequestDescriptor Container(QueryContainerDescriptor descriptor)
+	public ExampleRequestDescriptor Container(QueryContainerDescriptor descriptor)
 		=> Assign(descriptor, (a, v) => a._queryContainerDescriptor = v);
 }
 
@@ -198,16 +198,20 @@ public class Client
 {
 	private static readonly Transport Transport = new();
 
-	public void Send(ClusterHealthRequest request) => DoRequest(request);
+	public void SomeEndpoint(ExampleRequest request) => DoRequest(request);
 
-	public void Send(Action<ClusterHealthRequestDescriptor> configureClusterHealthRequest)
+	/// <summary>
+	/// Send a request to an example endpoint.
+	/// </summary>
+	/// <param name="configureRequest">An <see cref="Action{T}"/> used to configure the <see cref="ExampleRequestDescriptor"/>.</param>
+	public void SomeEndpoint(Action<ExampleRequestDescriptor> configureRequest)
 	{
-		var descriptor = new ClusterHealthRequestDescriptor();
-		configureClusterHealthRequest.Invoke(descriptor);
+		var descriptor = new ExampleRequestDescriptor();
+		configureRequest.Invoke(descriptor);
 		DoRequest(descriptor);
 	}
 
-	public void Send(ClusterHealthRequestDescriptor requestDescriptor) => DoRequest(requestDescriptor);
+	public void SomeEndpoint(ExampleRequestDescriptor requestDescriptor) => DoRequest(requestDescriptor);
 
 	private void DoRequest<T>(T request) where T : IRequest => Transport.Send(request);
 }
@@ -225,12 +229,12 @@ public class Transport
 
 // The converters can be generated
 
-public class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHealthRequestDescriptor>
+public class ExampleRequestDescriptorConverter : JsonConverter<ExampleRequestDescriptor>
 {
 	// Descriptors will only ever need to be serialised.
-	public override ClusterHealthRequestDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override ExampleRequestDescriptor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
-	public override void Write(Utf8JsonWriter writer, ClusterHealthRequestDescriptor value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, ExampleRequestDescriptor value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 
@@ -357,6 +361,8 @@ public class QueryContainer
 public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContainerDescriptor>
 {
 	private QueryContainer container;
+
+	// We could have fields for each descriptor here instead, although this type only ever holds one instance
 	private object _containerDescriptor;
 
 	public QueryContainerDescriptor Bool(BoolQuery variant) => Assign(variant, (a, v) => a.container = new QueryContainer(v));
@@ -423,8 +429,14 @@ public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContaine
 	//internal bool HasVariant => !string.IsNullOrEmpty(_variant.VariantName) && _variant is not null;
 }
 
+public abstract class VariantDescriptor<T> : ExperimentalDescriptorBase<T> where T : ExperimentalDescriptorBase<T>
+{
+	[JsonIgnore]
+	internal abstract string VariantName { get; }
+}
+
 [JsonConverter(typeof(BoolQueryDescriptorConverter))]
-public class BoolQueryDescriptor : ExperimentalDescriptorBase<BoolQueryDescriptor>
+public class BoolQueryDescriptor : VariantDescriptor<BoolQueryDescriptor>
 {
 	private string _tag;
 
@@ -452,11 +464,11 @@ public class BoolQueryDescriptor : ExperimentalDescriptorBase<BoolQueryDescripto
 		return query;
 	}
 
-	internal string VariantName => "bool";
+	internal override string VariantName => "bool";
 }
 
 [JsonConverter(typeof(BoostingQueryDescriptorConverter))]
-public class BoostingQueryDescriptor : ExperimentalDescriptorBase<BoostingQueryDescriptor>
+public class BoostingQueryDescriptor : VariantDescriptor<BoostingQueryDescriptor>
 {
 	private int? _boost;
 
@@ -484,8 +496,25 @@ public class BoostingQueryDescriptor : ExperimentalDescriptorBase<BoostingQueryD
 		return query;
 	}
 
-	internal string VariantName => "boosting";
+	internal override string VariantName => "boosting";
 }
+
+// If we retain interfaces, we may need to make variants conform as those can be used elsewhere...
+
+//public interface IAnotherQuery
+//{
+//	public string Thing { get; set; }
+//}
+
+////[JsonConverter(typeof(BoostingQueryDescriptorConverter))]
+//public class AnotherQueryDescriptor : VariantDescriptor<BoostingQueryDescriptor>, IAnotherQuery
+//{
+//	string IAnotherQuery.Thing { get; set; }
+
+//	public BoostingQueryDescriptor Thing(string thing) => Assign(thing, (a, v) => a.Thing = v);
+
+//	internal override string VariantName => "another";
+//}
 
 public class QueryContainerConverter : JsonConverter<QueryContainer>
 {
@@ -512,15 +541,6 @@ public class QueryContainerConverter : JsonConverter<QueryContainer>
 				JsonSerializer.Serialize(writer, boostingQuery, options);
 				break;
 		}
-
-		//if (value.TryGetBoolQuery(out var variantOne))
-		//{
-		//	JsonSerializer.Serialize(writer, variantOne, options);
-		//}
-		//else if (value.TryGetBoostingQuery(out var variantTwo))
-		//{
-		//	JsonSerializer.Serialize(writer, variantTwo, options);
-		//}
 
 		writer.WriteEndObject();
 	}
