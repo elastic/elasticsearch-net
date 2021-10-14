@@ -6,29 +6,29 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public readonly struct SearchQuery
-	{
-		private readonly int? _intValue;
-		private readonly string _stringValue;
-		//private readonly bool? _boolValue;
+	//public readonly struct SearchQuery
+	//{
+	//	private readonly int? _intValue;
+	//	private readonly string _stringValue;
+	//	//private readonly bool? _boolValue;
 
-		private SearchQuery(int value)
-		{
-			_intValue = value;
-			_stringValue = null;
-			//_boolValue = null;
-		}
+	//	private SearchQuery(int value)
+	//	{
+	//		_intValue = value;
+	//		_stringValue = null;
+	//		//_boolValue = null;
+	//	}
 
-		private SearchQuery(string value)
-		{
-			_intValue = null;
-			_stringValue = value;
-			//_boolValue = null;
-		}
+	//	private SearchQuery(string value)
+	//	{
+	//		_intValue = null;
+	//		_stringValue = value;
+	//		//_boolValue = null;
+	//	}
 
-		public static SearchQuery String(string value) => new SearchQuery(value);
-		public static SearchQuery Integer(int value) => new SearchQuery(value);
-	}
+	//	public static SearchQuery String(string value) => new SearchQuery(value);
+	//	public static SearchQuery Integer(int value) => new SearchQuery(value);
+	//}
 
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
