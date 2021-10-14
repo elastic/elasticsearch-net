@@ -82,9 +82,9 @@ namespace Elastic.Clients.Elasticsearch
 
 	public class ConvertAsConverterFactory : JsonConverterFactory
 	{
-		private readonly IElasticsearchClientSettings _settings;
+		private readonly object[] _settings;
 
-		public ConvertAsConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+		public ConvertAsConverterFactory(IElasticsearchClientSettings settings) => _settings = new[] { settings };
 
 		public override bool CanConvert(Type typeToConvert)
 		{
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch
 					typeof(CustomJsonWriterConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ??
 																	elementType),
 					BindingFlags.Instance | BindingFlags.Public,
-					args: new object[] { _settings },
+					args: _settings,
 					binder: null,
 					culture: null)!;
 			}
