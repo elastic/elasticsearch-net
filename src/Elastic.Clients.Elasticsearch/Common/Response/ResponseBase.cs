@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
@@ -38,6 +39,23 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
+		/// <summary>
+		/// A collection of warnings returned from Elasticsearch.
+		/// <para>Used to provide server warnings, for example, when the request uses an API feature that is marked as deprecated.</para>
+		/// </summary>
+		[JsonIgnore]
+		public IEnumerable<string> Warnings
+		{
+			get
+			{
+				if (ApiCall.ParsedHeaders is not null && ApiCall.ParsedHeaders.TryGetValue("warning", out var warnings))
+				{
+					foreach (var warning in warnings)
+						yield return warning;
+				}
+			}
+		}
+
 		/// <inheritdoc />
 		public string DebugInformation
 		{
@@ -46,9 +64,18 @@ namespace Elastic.Clients.Elasticsearch
 				var sb = new StringBuilder();
 				sb.Append($"{(!IsValid ? "Inv" : "V")}alid Elastic.Clients.Elasticsearch response built from a ");
 				sb.AppendLine(ApiCall?.ToString().ToCamelCase() ??
-				              "null ApiCall which is highly exceptional, please open a bug if you see this");
+							"null ApiCall which is highly exceptional, please open a bug if you see this");
 				if (!IsValid)
 					DebugIsValid(sb);
+
+				if (ApiCall.ParsedHeaders is not null && ApiCall.ParsedHeaders.TryGetValue("warning", out var warnings))
+				{
+					sb.AppendLine($"# Server indicated warnings:");
+
+					foreach (var warning in warnings)
+						sb.AppendLine($"- {warning}");
+				}
+
 				if (ApiCall != null)
 					ResponseStatics.DebugInformationBuilder(ApiCall, sb);
 				return sb.ToString();

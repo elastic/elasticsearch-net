@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.IO;
 using System.Text;
@@ -55,14 +59,17 @@ namespace Elastic.Clients.Elasticsearch
 			//	return default;
 			using var reader = new StreamReader(stream);
 
-			try
-			{
-				return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
-			}
-			catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
-			{
-				return default;
-			}
+			// TODO: Remove - Just for testing
+			return default;
+
+			//try
+			//{
+			//	return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
+			//}
+			//catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
+			//{
+			//	return default;
+			//}
 		}
 
 		public override object Deserialize(Type type, Stream stream) =>
