@@ -13,10 +13,6 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	// TODO: Make this more general for all aliases by checking the token type (number or string etc)
-
-	// TODO: Merge into StringAliasConverter
-
 	/// <summary>The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.</summary>
 	internal class DefaultHighLevelSerializer : Serializer
 	{
@@ -26,7 +22,12 @@ namespace Elastic.Clients.Elasticsearch
 			options ?? new JsonSerializerOptions
 			{
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-				Converters = {new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)}
+				Converters =
+				{
+					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					new DictionaryConverter(),
+					new UnionConverter()
+				}
 			};
 
 		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
@@ -39,6 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 				{
 					new InterfaceConverterFactory(settings),
 					new ConvertAsConverterFactory(settings),
+					new CoreAliasesConverterFactory(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					//new FieldConverterFactory(settings),
