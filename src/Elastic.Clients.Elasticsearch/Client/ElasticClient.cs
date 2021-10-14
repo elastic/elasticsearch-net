@@ -1,4 +1,10 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
@@ -69,6 +75,15 @@ public partial class ElasticClient
 	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
 	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
 
+	private ProductCheckStatus _productCheckStatus;
+
+	private enum ProductCheckStatus
+	{
+		NotChecked,
+		Succeeded,
+		Failed
+	}
+
 	private partial void SetupNamespaces();
 
 	internal TResponse DoRequest<TRequest, TResponse>(
@@ -78,9 +93,14 @@ public partial class ElasticClient
 		where TRequest : class, IRequest
 		where TResponse : class, ITransportResponse, new()
 	{
+		if (_productCheckStatus == ProductCheckStatus.Failed)
+			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
-		return _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
-	}
+		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
+		PostRequestProductCheck<TRequest, TResponse>(request, response);
+		return response;
+	}	
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
 		TRequest request,
@@ -89,8 +109,22 @@ public partial class ElasticClient
 		where TRequest : class, IRequest
 		where TResponse : class, ITransportResponse, new()
 	{
+		if (_productCheckStatus == ProductCheckStatus.Failed)
+			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+
 		var (url, postData) = PrepareRequest(request, null);
-		return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
+
+		if (_productCheckStatus == ProductCheckStatus.Succeeded)
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
+
+		return SendRequest(request, parameters, url, postData);
+
+		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData)
+		{
+			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			PostRequestProductCheck<TRequest, TResponse>(request, response);
+			return response;
+		}
 	}
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse>(
@@ -101,8 +135,22 @@ public partial class ElasticClient
 		where TRequest : class, IRequest
 		where TResponse : class, ITransportResponse, new()
 	{
+		if (_productCheckStatus == ProductCheckStatus.Failed)
+			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
-		return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
+
+		if (_productCheckStatus == ProductCheckStatus.Succeeded)
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
+
+		return SendRequest(request, parameters, url, postData);
+
+		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData)
+		{
+			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			PostRequestProductCheck<TRequest, TResponse>(request, response);
+			return response;
+		}
 	}
 
 	private (string url, PostData data) PrepareRequest<TRequest>(TRequest request,
@@ -111,8 +159,13 @@ public partial class ElasticClient
 	{
 		request.ThrowIfNull(nameof(request), "A request is required.");
 
+		// If we have not yet checked the product name, add the product header to the list of headers to parse.
+		if (_productCheckStatus == ProductCheckStatus.NotChecked)
+			ElasticsearchClientSettings.ResponseHeadersToParse.TryAdd("x-elastic-product");
+
 		if (forceConfiguration is not null)
 			ForceConfiguration(request, forceConfiguration);
+
 		if (request.ContentType is not null)
 			ForceContentType(request, request.ContentType);
 
@@ -133,6 +186,25 @@ public partial class ElasticClient
 				: PostData.Serializable(request);
 
 		return (url, postData);
+	}
+
+	private void PostRequestProductCheck<TRequest, TResponse>(TRequest request, TResponse response)
+		where TRequest : class, IRequest
+		where TResponse : class, ITransportResponse, new()
+	{
+		if (_productCheckStatus == ProductCheckStatus.NotChecked)
+		{
+			if (!response.ApiCall.ParsedHeaders.TryGetValue("x-elastic-product", out var values) || values.Single().Equals("elasticsearch", StringComparison.Ordinal))
+			{
+				_productCheckStatus = ProductCheckStatus.Failed;
+				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+			}
+
+			// Once validated, remove the header so that subsequent requests do not need to attempt to parse it.
+			ElasticsearchClientSettings.ResponseHeadersToParse.Remove("x-elastic-product");
+
+			_productCheckStatus = ProductCheckStatus.Succeeded;
+		}
 	}
 
 	private static void ForceConfiguration(IRequest request, Action<IRequestConfiguration> forceConfiguration)
