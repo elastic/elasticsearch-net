@@ -14,17 +14,17 @@ namespace Playground
 	{
 		private static void Main()
 		{
-//			var ec = new Client();
+			var ec = new Client();
 
 //#pragma warning disable IDE0039 // Use local function
 //			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
-//			// Local variables change type
+//			//Local variables change type
 //			Action<ExampleRequestDescriptor> test = b => b.Name("thing");
 //#pragma warning restore IDE0039 // Use local function
 
 //			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
 
-//			// Local functions become void returning
+//			//Local functions become void returning
 //			static void TestBoolQuery(ExampleRequestDescriptor b) => b.Name("thing");
 
 //			ec.SomeEndpoint(TestBoolQuery);
@@ -51,34 +51,43 @@ namespace Playground
 //				Query = Query.Bool(b => b.Tag("using_query_helper"))
 //			});
 
-//			ec.SomeEndpoint(c => c
-//				.Name("Descriptor test")
-//				.Subtype(s => s.Identifier("AnID"))
-//				.Container(c => c.Bool(v => v.Tag("some_tag"))));
+			ec.SomeEndpoint(new ExampleRequest
+			{
+				Name = "Object test",
+				Subtype = new ClusterSubtypeDescriptor().Identifier("implictly-assigned"),
+				Query = Query.Bool(b => b.Tag("using_query_helper"))
+			});
 
-//			var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
+			//ec.SomeEndpoint(c => c
+			//	.Name("Descriptor test")
+			//	.Subtype(s => s.Identifier("AnID"))
+			//	.Query(c => c.Bool(v => v.Tag("some_tag"))));
 
-//			ec.SomeEndpoint(c => c
-//				.Name("Descriptor test")
-//				.Subtype(descriptor)
-//				.Container(c => c.Boosting(v => v.BoostAmount(10))));
+			//var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
 
-//			ec.SomeEndpoint(c => c
-//				.Name("Mixed object and descriptor test")
-//				.Subtype(new ClusterSubtype { Identifier = "AnID" }));
+			//ec.SomeEndpoint(c => c
+			//	.Name("Descriptor test")
+			//	.Subtype(descriptor)
+			//	.Query(c => c.Boosting(v => v.BoostAmount(10))));
 
-//			var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
+			//ec.SomeEndpoint(c => c
+			//	.Name("Mixed object and descriptor test")
+			//	.Subtype(new ClusterSubtype { Identifier = "AnID" }));
 
-//			ec.SomeEndpoint(requestDescriptor);
+			//var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
 
-//			var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
+			//ec.SomeEndpoint(requestDescriptor);
 
-//			var container = boolQuery.WrapInContainer();
+			//var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
 
-//			if (container.TryGetBoolQuery(out boolQuery))
-//			{
-//				Console.WriteLine(boolQuery.Tag);
-//			}
+			//var container = boolQuery.WrapInContainer();
+
+			//if (container.TryGetBoolQuery(out boolQuery))
+			//{
+			//	Console.WriteLine(boolQuery.Tag);
+			//}
+
+			ec.CombinedEndpoint(r => r.WithName("Steve").WithThing(t => t.WithTitle("Title")));
 
 			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://azure.es.eastus.azure.elastic-cloud.com:9243/"))
 				.CertificateFingerprint("1E69964DFF1259B9ADE47556144E501F381A84B07E5EEC84B81ECF7D4B850C1D")

@@ -62,6 +62,9 @@ namespace PlaygroundV7x
 				Query = spanQuery
 			};
 
+			_ = await client.SearchAsync<Person>(new SearchDescriptor<Person>());
+			_ = await client.CountAsync(new CountDescriptor<Person>());
+			
 			var response = await client.SearchAsync<Person>(search);
 
 			var r = await client.Indices.CreateAsync("", c => c.Settings(s => s.Analysis(a => a.CharFilters(cf => cf
