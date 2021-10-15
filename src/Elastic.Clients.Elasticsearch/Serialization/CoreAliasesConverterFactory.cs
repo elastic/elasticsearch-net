@@ -8,17 +8,17 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class CoreAliasesConverterFactory : JsonConverterFactory
-	{
-		private readonly object[] _settings;
+	//public class CoreAliasesConverterFactory : JsonConverterFactory
+	//{
+	//	private readonly object[] _settings;
 
-		public CoreAliasesConverterFactory(IElasticsearchClientSettings settings) => _settings = new[] { settings };
+	//	public CoreAliasesConverterFactory(IElasticsearchClientSettings settings) => _settings = new[] { settings };
 
-		// TODO: Support other common aliases
+	//	// TODO: Support other common aliases
 
-		public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(IndexNameConverter);
+	//	public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(IndexNameConverter);
 
-		public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options) =>
-			(JsonConverter)Activator.CreateInstance(typeof(IndexNameConverter), _settings);
-	}
+	//	public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options) =>
+	//		(JsonConverter)Activator.CreateInstance(typeof(IndexNameConverter), _settings);
+	//}
 }

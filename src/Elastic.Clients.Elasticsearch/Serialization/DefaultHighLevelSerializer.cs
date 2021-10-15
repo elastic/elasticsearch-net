@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 				{
 					new InterfaceConverterFactory(settings),
 					new ConvertAsConverterFactory(settings),
-					new CoreAliasesConverterFactory(settings),
+					new IndexNameConverter(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					//new FieldConverterFactory(settings),
