@@ -7,11 +7,15 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Playground
 {
 	internal class Program
 	{
+		
+
 		private static void Main()
 		{
 			var ec = new Client();
@@ -89,9 +93,20 @@ namespace Playground
 
 			ec.CombinedEndpoint(r => r.WithName("Steve").WithThing(t => t.WithTitle("Title")));
 
+
+
+
 			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://azure.es.eastus.azure.elastic-cloud.com:9243/"))
 				.CertificateFingerprint("1E69964DFF1259B9ADE47556144E501F381A84B07E5EEC84B81ECF7D4B850C1D")
 				.Authentication(new BasicAuthentication("elastic", "Z9vNfZN86RxHJ97Poi1BYhC6")));
+
+			IndexName index = "test";
+
+			var stream = new MemoryStream();
+			client.ElasticsearchClientSettings.RequestResponseSerializer.Serialize(index, stream);
+			stream.Position = 0;
+			var j1 = Encoding.UTF8.GetString(stream.ToArray());
+
 
 			// client.ElasticsearchClientSettings.ResponseHeadersToParse
 
@@ -136,8 +151,8 @@ namespace Playground
 
 			ISearchRequest d = new SearchRequestDescriptor().MinScore(10.0).Profile(true);
 
-			var stream = new MemoryStream();
-			client.ElasticsearchClientSettings.SourceSerializer.Serialize(d, stream);
+			var newStream = new MemoryStream();
+			client.ElasticsearchClientSettings.SourceSerializer.Serialize(d, newStream);
 			stream.Position = 0;
 			var json = Encoding.UTF8.GetString(stream.ToArray());
 

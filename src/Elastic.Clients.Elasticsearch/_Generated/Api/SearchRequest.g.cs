@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 	}
 
-	public class TestConverter { }
+	//public class TestConverter { }
 
 	[InterfaceConverterAttribute(typeof(SearchRequestInterfaceConverter<SearchRequest>))]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
