@@ -4,8 +4,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
@@ -14,7 +12,6 @@ namespace Elastic.Clients.Elasticsearch
 	/// Represents the name of an index, which may be inferred from a <see cref="Type"/>.
 	/// </summary>
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	[JsonConverter(typeof(IndexNameConverter))]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		private const char ClusterSeparator = ':';
