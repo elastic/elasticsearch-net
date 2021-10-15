@@ -13,29 +13,6 @@ namespace Elastic.Clients.Elasticsearch.Experimental;
 // - Support serialisation of containers and more complex concepts (tagged unions)
 // - Simplify the public API and remove "redundant" interfaces
 
-// Pros
-// - Removes interface requirement for descriptor use
-// - Simplifies the public API - For example, less Func<T, T> stuff!
-// - Avoids leaking implementation details into the public API
-// - Can be otimised and tweaked internally without breaking the public contract
-// - Types are easier to evolve
-// - Provides a cleaner serialisation implementation
-// - Containers are easier to support for serialisation
-// - Can be code-generated
-// - Public API can be considered alpha ready with implemenation evolving
-// - Can add descriptors to types in the future without having to add an interface
-
-// Cons
-// - BREAKING: Migration path for those using Func<T,T> descriptor methods and storing parial queries could be painful and potentially very breaking
-// - More verbose code (although its 100% generated)
-// - Sometimes requires more type-checking and casts, although we could optimise that further if profiling shows an issue
-// - Might be some cases not yet considered
-
-// Further work
-// - Tagged unions
-// - In some serialisation cases we may be able to avoid the casting and serialise the `object` directly
-// - Compare to using the runtime type overload (performance)
-
 #region Infrastructure
 
 internal static class Fluent
@@ -151,26 +128,51 @@ public class ExampleRequestDescriptor : ExperimentalRequestDescriptorBase<Exampl
 	internal QueryContainer _queryContainer;
 	internal QueryContainerDescriptor _queryContainerDescriptor;
 
-	public ExampleRequestDescriptor Name(string name) => Assign(name, (a, v)
-		=> a._name = v);
+	public ExampleRequestDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
 
-	public ExampleRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v)
-	=> a._subtype = v);
+	public ExampleRequestDescriptor Subtype(ClusterSubtype subtype) => Assign(subtype, (a, v) =>
+	{
+		a._subtype = v;
+		a._subtypeDescriptor = null;
+	});
 
 	public ExampleRequestDescriptor Subtype(ClusterSubtypeDescriptor descriptor)
-		=> Assign(descriptor, (a, v) => _subtypeDescriptor = descriptor);
+		=> Assign(descriptor, (a, v) =>
+		{
+			_subtypeDescriptor = descriptor;
+			_subtype = null;
+		});
 
 	public ExampleRequestDescriptor Subtype(Action<ClusterSubtypeDescriptor> configureClusterSubtype)
-		=> InvokeAndAssign(configureClusterSubtype, (a, v) => a._subtypeDescriptor = v);
+		=> InvokeAndAssign(configureClusterSubtype, (a, v) =>
+		{
+			a._subtypeDescriptor = v;
+			a._subtype = null;
+		});
 
-	public ExampleRequestDescriptor Container(QueryContainer container) => Assign(container, (a, v)
-		=> _queryContainer = container);
+	public ExampleRequestDescriptor Query(QueryContainer container) => Assign(container, (a, v) =>
+	{
+		_queryContainer = container;
+		_queryContainerDescriptor = null;
+	});
 
-	public ExampleRequestDescriptor Container(Action<QueryContainerDescriptor> configureContainer)
-		=> InvokeAndAssign(configureContainer, (a, v) => a._queryContainerDescriptor = v);
+	public ExampleRequestDescriptor Query(Action<QueryContainerDescriptor> configureContainer)
+		=> InvokeAndAssign(configureContainer, (a, v) =>
+		{
+			a._queryContainerDescriptor = v;
+			a._queryContainer = null;
+		});
 
-	public ExampleRequestDescriptor Container(QueryContainerDescriptor descriptor)
-		=> Assign(descriptor, (a, v) => a._queryContainerDescriptor = v);
+	public ExampleRequestDescriptor Query(QueryContainerDescriptor descriptor)
+		=> Assign(descriptor, (a, v) =>
+		{
+			a._queryContainerDescriptor = v;
+			a._queryContainer = null;
+		});
+
+	public static implicit operator ExampleRequest(ExampleRequestDescriptor d) => new ExampleRequest { Name = d._name, Query = d._queryContainer, Subtype = d._subtype };
+
+	public static implicit operator ExampleRequestDescriptor(ExampleRequest r) => new ExampleRequestDescriptor().Name(r.Name).Query(r.Query).Subtype(r.Subtype);
 }
 
 [JsonConverter(typeof(ClusterSubtypeDescriptorConverter))]
@@ -192,6 +194,10 @@ public class ClusterSubtypeDescriptor : ExperimentalDescriptorBase<ClusterSubtyp
 		identifier = default;
 		return false;
 	}
+
+	public static implicit operator ClusterSubtype(ClusterSubtypeDescriptor d) => new ClusterSubtype { Identifier = d._identifier };
+
+	public static implicit operator ClusterSubtypeDescriptor(ClusterSubtype r) => new ClusterSubtypeDescriptor().Identifier(r.Identifier);
 }
 
 public class Client
@@ -213,12 +219,21 @@ public class Client
 
 	public void SomeEndpoint(ExampleRequestDescriptor requestDescriptor) => DoRequest(requestDescriptor);
 
+	public void CombinedEndpoint(CombinedRequest request) => DoRequest(request);
+
+	public void CombinedEndpoint(Action<CombinedRequest> configureRequest)
+	{
+		var descriptor = new CombinedRequest();
+		configureRequest.Invoke(descriptor);
+		DoRequest(descriptor);
+	}
+
 	private void DoRequest<T>(T request) where T : IRequest => Transport.Send(request);
 }
 
 public class Transport
 {
-	private static readonly JsonSerializerOptions _options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+	private static readonly JsonSerializerOptions _options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
 	public void Send<T>(T data) where T : IRequest
 	{
@@ -614,3 +629,61 @@ public class BoostingQueryDescriptorConverter : JsonConverter<BoostingQueryDescr
 }
 
 #endregion
+
+#region CombinedTypeExperiment
+
+public class CombinedRequest : RequestBase<ClusterHealthRequestParameters>
+{
+	public string Name { get; set; }
+	public ComplexType Thing { get; set; }
+
+	public CombinedRequest WithName(string name) { Name = name; return this; }
+
+	public CombinedRequest WithName(int name) { Name = name.ToString("D"); return this; }
+
+	public CombinedRequest WithThing(ComplexType thing) { Thing = thing; return this; }
+
+	public CombinedRequest WithThing(Action<ComplexType> configureThing)
+	{
+		var d = new ComplexType();
+		configureThing.Invoke(d);
+		Thing = d;
+		return this;
+	}
+}
+
+public class ComplexType
+{
+	public int? Id { get; set; }
+
+	public string Title { get; set; }
+
+	public ComplexType WithId(int id) { Id = id; return this; }
+
+	public ComplexType WithTitle(string title) { Title = title; return this; }
+}
+
+#endregion
+
+// Pros
+// - Removes interface requirement for descriptor use
+// - Simplifies the public API - For example, less Func<T, T> stuff!
+// - Avoids leaking implementation details into the public API
+// - Can be otimised and tweaked internally without breaking the public contract
+// - Types are easier to evolve
+// - Provides a cleaner serialisation implementation
+// - Containers are easier to support for serialisation
+// - Can be code-generated
+// - Public API can be considered alpha ready with implemenation evolving
+// - Can add descriptors to types in the future without having to add an interface
+
+// Cons
+// - BREAKING: Migration path for those using Func<T,T> descriptor methods and storing parial queries could be painful and potentially very breaking
+// - More verbose code (although its 100% generated)
+// - Sometimes requires more type-checking and casts, although we could optimise that further if profiling shows an issue
+// - Might be some cases not yet considered
+
+// Further work
+// - Tagged unions
+// - In some serialisation cases we may be able to avoid the casting and serialise the `object` directly
+// - Compare to using the runtime type overload (performance)
