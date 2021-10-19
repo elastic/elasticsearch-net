@@ -5,11 +5,10 @@
 using FluentAssertions;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
-using System;
 
-namespace Tests.Serialization
+namespace Tests.Cluster.ClusterHealth
 {
-	public class ClusterHealthResponseSerialisationTests : SerialisationTestBase<ClusterHealthResponse>
+	public class ClusterHealthResponseDeserialisationTests : SerialisationTestBase<ClusterHealthResponse>
 	{
 		protected override string ResponseJson => @"{
   ""cluster_name"" : ""test-cluster"",

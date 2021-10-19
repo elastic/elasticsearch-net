@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.Cluster.AllocationExplain;
 
-namespace Tests.Cluster.Cluster.ClusterAllocationExplain;
+namespace Tests.Cluster.ClusterAllocationExplain;
 
 public class ClusterAllocationExplainApiTests
 	: ApiIntegrationTestBase<UnbalancedCluster, ClusterAllocationExplainResponse, IClusterAllocationExplainRequest,

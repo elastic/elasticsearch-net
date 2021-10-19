@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Buffers;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -59,46 +60,46 @@ namespace Elastic.Clients.Elasticsearch
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - We should use a pooled byte array in the future
 		public override T Deserialize<T>(Stream stream)
 		{
-			//if (stream.Length == 0) // throws on some responses
+			// TODO: Review this as buffer may be too small
+
+			using var ms = new MemoryStream();
+			var buffer = ArrayPool<byte>.Shared.Rent(1024);
+			var total = 0;
+			int read;
+			while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+			{
+				ms.Write(buffer, 0, read);
+				total += read;
+			}
+			var span = ms.TryGetBuffer(out var segment)
+				? new ReadOnlyMemory<byte>(segment.Array, segment.Offset, total).Span
+				: new ReadOnlyMemory<byte>(ms.ToArray()).Span;
+
+			return span.Length > 0 ? JsonSerializer.Deserialize<T>(span, Options) : default;
+
+			////if (stream.Length == 0) // throws on some responses
+			////	return default;
+			//using var reader = new StreamReader(stream);
+
+
+			//// TODO: Remove - Just for testing
+			////return default;
+
+			//try
+			//{
+			//	return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
+			//}
+			//catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
+			//{
 			//	return default;
-			using var reader = new StreamReader(stream);
-
-			// TODO: Remove - Just for testing
-			//return default;
-
-			try
-			{
-				return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
-			}
-			catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
-			{
-				return default;
-			}
+			//}
 		}
 
 		public override object Deserialize(Type type, Stream stream) =>
 			throw new NotImplementedException();
 
 		// TODO - Return ValueTask?
-		public override Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
-		{
-			long length = 0;
-
-			try
-			{
-				length = stream.Length;
-			}
-			catch (NotSupportedException)
-			{
-				// ignored
-			}
-
-			return JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
-
-			//return length > 0
-			//	? JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask()
-			//	: Task.FromResult(default(T));
-		}
+		public override Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) => JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
 
 		public override Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
