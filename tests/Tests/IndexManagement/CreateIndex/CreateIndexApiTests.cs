@@ -1,10 +1,10 @@
 namespace Tests.Indices.IndexManagement
 {
-	//public class CreateIndexApiTests
+	//public class CreateBasicIndexApiTests
 	//	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor,
 	//		CreateIndexRequest>
 	//{
-	//	public CreateIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	//	public CreateBasicIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	//	protected override bool ExpectIsValid => true;
 
