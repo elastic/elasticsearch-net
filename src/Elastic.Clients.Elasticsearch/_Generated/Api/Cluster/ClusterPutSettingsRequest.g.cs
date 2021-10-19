@@ -81,8 +81,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		Dictionary<string, object>? IClusterPutSettingsRequest.Transient { get; set; }
 
-		public ClusterPutSettingsRequestDescriptor Persistent(Dictionary<string, object>? persistent) => Assign(persistent, (a, v) => a.Persistent = v);
-		public ClusterPutSettingsRequestDescriptor Transient(Dictionary<string, object>? transient) => Assign(transient, (a, v) => a.Transient = v);
+		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Persistent = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Transient = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public ClusterPutSettingsRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public ClusterPutSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);

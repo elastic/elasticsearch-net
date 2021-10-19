@@ -620,7 +620,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("root_cause")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RootCause { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("suppressed")]
