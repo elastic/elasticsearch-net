@@ -95,9 +95,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		Dictionary<string, object>? IIndexManagementCreateRequest.Settings { get; set; }
 
-		public IndexManagementCreateRequestDescriptor Aliases(Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public IndexManagementCreateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
 		public IndexManagementCreateRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public IndexManagementCreateRequestDescriptor Settings(Dictionary<string, object>? settings) => Assign(settings, (a, v) => a.Settings = v);
+		public IndexManagementCreateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexManagementCreateRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public IndexManagementCreateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexManagementCreateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
