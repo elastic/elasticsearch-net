@@ -102,18 +102,17 @@ namespace Tests.Framework.EndpointTests
 			var dict = new Dictionary<ClientMethod, IResponse>();
 			var views = new[]
 			{
-				// TODO: Re-enable
-				// Api(ClientMethod.Fluent, () => new ValueTask<TResponse>(fluent(client, Fluent))),
-				// Api(ClientMethod.FluentAsync, async () => await fluentAsync(client, Fluent)),
 				Api(ClientMethod.Initializer, () => new ValueTask<TResponse>(request(client, Initializer))),
 				Api(ClientMethod.InitializerAsync, async () => await requestAsync(client, Initializer)),
+				Api(ClientMethod.Fluent, () => new ValueTask<TResponse>(fluent(client, Fluent))),
+				Api(ClientMethod.FluentAsync, async () => await fluentAsync(client, Fluent)),
 			};
 
-			foreach (var (v, m) in views.OrderBy(_ => Gimme.Random.Int()))
+			foreach (var (clientMethod, m) in views.OrderBy(_ => Gimme.Random.Int()))
 			{
-				UniqueValues.CurrentView = v;
+				UniqueValues.CurrentView = clientMethod;
 				IntegrateOnly(OnBeforeCall);
-				dict.Add(v, await m());
+				dict.Add(clientMethod, await m());
 				IntegrateOnly(OnAfterCall);
 				if (TestOnlyOne) break;
 			}

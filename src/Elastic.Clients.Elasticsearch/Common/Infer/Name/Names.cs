@@ -4,71 +4,60 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+[DebuggerDisplay("{DebugDisplay,nq}")]
+public class Names : IEquatable<Names>, IUrlParameter
 {
-	//public partial class Names
-	//{
-	//	// This is temporary
-	//	public Names(IEnumerable<Name> names) => _nameList.AddRange(names);
+	public Names(IEnumerable<string> names) : this(names?.Select(n => (Name)n).ToList()) { }
 
-	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
-	//}
+	public Names(IEnumerable<Name> names)
+	{
+		Value = names?.ToList();
+		if (!Value.HasAny())
+			throw new ArgumentException($"can not create {nameof(Names)} on an empty enumerable of ", nameof(names));
+	}
 
-	//[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-	//public class Names : IEquatable<Names>, IUrlParameter
-	//{
-	//	public Names(IEnumerable<string> names) : this(names?.Select(n => new Name(n)).ToList()) { }
+	internal IList<Name> Value { get; }
 
-	//	public Names(IEnumerable<Name> names)
-	//	{
-	//		Value = names?.ToList();
-	//		if (!Value.HasAny())
-	//		{
-	//			throw new ArgumentException($"can not create {nameof(Names)} on an empty enumerable of ",
-	//				nameof(names));
-	//		}
-	//	}
+	private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-	//	internal IList<Name> Value { get; }
+	public override string ToString() => DebugDisplay;
 
-	//	private string DebugDisplay => ((IUrlParameter)this).GetString(null);
+	public bool Equals(Names other) => EqualsAllIds(Value, other.Value);
 
-	//	public bool Equals(Names other) => EqualsAllIds(Value, other.Value);
+	string IUrlParameter.GetString(ITransportConfiguration settings) =>
+		string.Join(",", Value.Cast<IUrlParameter>().Select(n => n.GetString(settings)));
 
-	//	string IUrlParameter.GetString(ITransportConfiguration settings) =>
-	//		string.Join(",", Value.Cast<IUrlParameter>().Select(n => n.GetString(settings)));
+	public static Names Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Names(list);
 
-	//	public override string ToString() => DebugDisplay;
+	public static implicit operator Names(Name name) => name == null ? null : new Names(new[] { name });
 
-	//	public static Names Parse(string names) =>
-	//		names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Names(list);
+	public static implicit operator Names(string names) => Parse(names);
 
-	//	public static implicit operator Names(Name name) => new(new[] {name});
+	public static implicit operator Names(string[] names) => names.IsEmpty() ? null : new Names(names);
 
-	//	public static implicit operator Names(string names) => Parse(names);
+	public static bool operator ==(Names left, Names right) => Equals(left, right);
 
-	//	public static implicit operator Names(string[] names) => names.IsEmpty() ? null : new Names(names);
+	public static bool operator !=(Names left, Names right) => !Equals(left, right);
 
-	//	public static bool operator ==(Names left, Names right) => Equals(left, right);
+	private static bool EqualsAllIds(ICollection<Name> thisIds, ICollection<Name> otherIds)
+	{
+		if (thisIds == null && otherIds == null)
+			return true;
+		if (thisIds == null || otherIds == null)
+			return false;
+		if (thisIds.Count != otherIds.Count)
+			return false;
 
-	//	public static bool operator !=(Names left, Names right) => !Equals(left, right);
+		return thisIds.Count == otherIds.Count && !thisIds.Except(otherIds).Any();
+	}
 
-	//	private static bool EqualsAllIds(ICollection<Name> thisIds, ICollection<Name> otherIds)
-	//	{
-	//		if (thisIds == null && otherIds == null)
-	//			return true;
-	//		if (thisIds == null || otherIds == null)
-	//			return false;
-	//		if (thisIds.Count != otherIds.Count)
-	//			return false;
+	public override bool Equals(object obj) => obj is string s ? Equals(Parse(s)) : obj is Names i && Equals(i);
 
-	//		return thisIds.Count == otherIds.Count && !thisIds.Except(otherIds).Any();
-	//	}
-
-	//	public override bool Equals(object obj) => obj is string s ? Equals(Parse(s)) : obj is Names i && Equals(i);
-
-	//	public override int GetHashCode() => Value.GetHashCode();
-	//}
+	public override int GetHashCode() => Value.GetHashCode();
 }

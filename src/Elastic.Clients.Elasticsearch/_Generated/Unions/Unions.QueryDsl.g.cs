@@ -27,13 +27,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 	}
 
-	public partial class DistanceFeatureQuery : Union<QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>?, QueryDsl.DateDistanceFeatureQuery<string, Time>?>
+	public partial class DistanceFeatureQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate, string>?, Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery<string, Elastic.Clients.Elasticsearch.Time>?>
 	{
-		public DistanceFeatureQuery(QueryDsl.GeoDistanceFeatureQuery<QueryDsl.GeoCoordinate, string>? item) : base(item)
+		public DistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate, string>? item) : base(item)
 		{
 		}
 
-		public DistanceFeatureQuery(QueryDsl.DateDistanceFeatureQuery<string, Time>? item) : base(item)
+		public DistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery<string, Elastic.Clients.Elasticsearch.Time>? item) : base(item)
 		{
 		}
 	}
@@ -46,24 +46,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 	}
 
-	public partial class Like : Union<string?, QueryDsl.LikeDocument?>
+	public partial class Like : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument?>
 	{
 		public Like(string? item) : base(item)
 		{
 		}
 
-		public Like(QueryDsl.LikeDocument? item) : base(item)
+		public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument? item) : base(item)
 		{
 		}
 	}
 
-	public partial class RangeQuery : Union<QueryDsl.DateRangeQuery?, QueryDsl.NumberRangeQuery?>
+	public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery?, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery?>
 	{
-		public RangeQuery(QueryDsl.DateRangeQuery? item) : base(item)
+		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery? item) : base(item)
 		{
 		}
 
-		public RangeQuery(QueryDsl.NumberRangeQuery? item) : base(item)
+		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery? item) : base(item)
 		{
 		}
 	}

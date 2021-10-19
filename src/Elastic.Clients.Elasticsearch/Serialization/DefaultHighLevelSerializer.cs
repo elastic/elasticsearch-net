@@ -4,11 +4,13 @@
 
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Cluster.AllocationExplain;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
@@ -24,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 				Converters =
 				{
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new DictionaryConverter(),
 					new UnionConverter()
 				}
@@ -44,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					//new FieldConverterFactory(settings),
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					
 					new DictionaryConverter(),
 					new UnionConverter()
@@ -62,16 +64,16 @@ namespace Elastic.Clients.Elasticsearch
 			using var reader = new StreamReader(stream);
 
 			// TODO: Remove - Just for testing
-			return default;
+			//return default;
 
-			//try
-			//{
-			//	return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
-			//}
-			//catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
-			//{
-			//	return default;
-			//}
+			try
+			{
+				return JsonSerializer.Deserialize<T>(reader.ReadToEnd(), Options);
+			}
+			catch (JsonException ex) when (ex.Message.StartsWith("The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true."))
+			{
+				return default;
+			}
 		}
 
 		public override object Deserialize(Type type, Stream stream) =>
@@ -243,6 +245,50 @@ namespace Elastic.Clients.Elasticsearch
 	//			return Task.FromResult(deserialize);
 
 	//		return JsonSerializer.DeserializeAsync<T>(stream, _none.Value, cancellationToken).AsTask();
+	//	}
+	//}
+
+	internal class ThrowHelper
+	{
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		public static void ThrowJsonException(string? message = null) => throw new JsonException(message);
+	}
+
+	//// TODO: Generate these
+	//public class UnassignedInformationReasonConverter : JsonConverter<UnassignedInformationReason>
+	//{
+	//	public override UnassignedInformationReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	//	{
+	//		var enumString = reader.GetString();
+
+	//		switch (enumString)
+	//		{
+	//			case "REROUTE_CANCELLED":
+	//				return UnassignedInformationReason.RerouteCancelled;
+	//			case "REPLICA_ADDED":
+	//				return UnassignedInformationReason.ReplicaAdded;
+	//			case "INDEX_CREATED":
+	//				return UnassignedInformationReason.IndexCreated;
+	//		}
+
+	//		ThrowHelper.ThrowJsonException($"An unknown value for the enum {nameof(UnassignedInformationReason)} was found in the JSON.");
+
+	//		return default;
+	//	}
+
+	//	public override void Write(Utf8JsonWriter writer, UnassignedInformationReason value, JsonSerializerOptions options)
+	//	{
+	//		switch (value)
+	//		{
+	//			case UnassignedInformationReason.RerouteCancelled:
+	//				writer.WriteStringValue("REROUTE_CANCELLED");
+	//				return;
+	//			case UnassignedInformationReason.ReplicaAdded:
+	//				writer.WriteStringValue("REPLICA_ADDED");
+	//				return;
+	//		}
+
+	//		writer.WriteNullValue();
 	//	}
 	//}
 }

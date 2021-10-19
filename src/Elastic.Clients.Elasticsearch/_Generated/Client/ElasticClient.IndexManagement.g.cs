@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexManagementCreateResponse Create(IIndexManagementCreateRequest request) => DoRequest<IIndexManagementCreateRequest, IndexManagementCreateResponse>(request, request.RequestParameters);
 		public Task<IndexManagementCreateResponse> CreateAsync(IIndexManagementCreateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexManagementCreateRequest, IndexManagementCreateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexManagementCreateResponse Create(IndexName index, Func<IndexManagementCreateRequestDescriptor, IIndexManagementCreateRequest> selector = null) => Create(selector.InvokeOrDefault(new IndexManagementCreateRequestDescriptor(index)));
-		public Task<IndexManagementCreateResponse> CreateAsync(IndexName index, Func<IndexManagementCreateRequestDescriptor, IIndexManagementCreateRequest> selector = null, CancellationToken cancellationToken = default) => CreateAsync(selector.InvokeOrDefault(new IndexManagementCreateRequestDescriptor(index)), cancellationToken);
+		public IndexManagementCreateResponse Create(Elastic.Clients.Elasticsearch.IndexName index, Func<IndexManagementCreateRequestDescriptor, IIndexManagementCreateRequest> selector = null) => Create(selector.InvokeOrDefault(new IndexManagementCreateRequestDescriptor(index)));
+		public Task<IndexManagementCreateResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, Func<IndexManagementCreateRequestDescriptor, IIndexManagementCreateRequest> selector = null, CancellationToken cancellationToken = default) => CreateAsync(selector.InvokeOrDefault(new IndexManagementCreateRequestDescriptor(index)), cancellationToken);
 	}
 }

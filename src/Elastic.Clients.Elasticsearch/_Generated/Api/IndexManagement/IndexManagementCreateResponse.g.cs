@@ -25,38 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("acknowledged")]
-		public bool? Acknowledged
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Acknowledged { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public IndexName Index
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool ShardsAcknowledged { get; init; }
 	}
 }

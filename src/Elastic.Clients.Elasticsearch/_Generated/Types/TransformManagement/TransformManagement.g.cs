@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
@@ -26,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		void WrapInContainer(IPivotGroupByContainer container);
 	}
 
-	[ConvertAs(typeof(PivotGroupByContainer))]
+	[InterfaceConverterAttribute(typeof(PivotGroupByContainerDescriptorConverter<PivotGroupByContainer>))]
 	public partial interface IPivotGroupByContainer
 	{
 		[JsonInclude]
@@ -89,5 +90,39 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		Aggregations.IHistogramAggregation? IPivotGroupByContainer.Histogram { get; set; }
 
 		Aggregations.ITermsAggregation? IPivotGroupByContainer.Terms { get; set; }
+	}
+
+	public class PivotGroupByContainerDescriptorConverter<TReadAs> : JsonConverter<IPivotGroupByContainer> where TReadAs : class, IPivotGroupByContainer
+	{
+		public override IPivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IPivotGroupByContainer value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.DateHistogram is not null)
+			{
+				writer.WritePropertyName("date_histogram");
+				JsonSerializer.Serialize(writer, value.DateHistogram, options);
+			}
+
+			if (value.GeotileGrid is not null)
+			{
+				writer.WritePropertyName("geotile_grid");
+				JsonSerializer.Serialize(writer, value.GeotileGrid, options);
+			}
+
+			if (value.Histogram is not null)
+			{
+				writer.WritePropertyName("histogram");
+				JsonSerializer.Serialize(writer, value.Histogram, options);
+			}
+
+			if (value.Terms is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, value.Terms, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

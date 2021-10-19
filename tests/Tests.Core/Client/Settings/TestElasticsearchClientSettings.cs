@@ -45,14 +45,15 @@ namespace Tests.Core.Client.Settings
 				{
 					//r.HttpMethod;
 
-
-					if (!r.DeprecationWarnings.Any()) return;
+					// TODO - Replace this using the request, no longer on IApiCallDetails
+					//if (!r.DeprecationWarnings.Any()) return;
 
 					var q = r.Uri.Query;
 					//hack to prevent the deprecation warnings from the deprecation response test to be reported
 					if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
 
-					foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
+					// TODO: Replace this
+					//foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
 				});
 
 		private ElasticsearchClientSettings RerouteToProxyIfNeeded()

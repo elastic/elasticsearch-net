@@ -9,6 +9,12 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
+			//var c1 = new ElasticClient(new ConnectionSettings(new Uri("https://azure.es.eastus.azure.elastic-cloud.com:9243")).BasicAuthentication("a", "b").ThrowExceptions());
+
+			//var r1 = await c1.PingAsync();
+
+
+
 #pragma warning disable IDE0039 // Use local function
 			Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
 #pragma warning restore IDE0039 // Use local function

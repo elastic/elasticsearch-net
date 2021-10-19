@@ -16,12 +16,14 @@
 // ------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	[ConvertAs(typeof(Alias))]
+	[InterfaceConverterAttribute(typeof(AliasDescriptorConverter<Alias>))]
 	public partial interface IAlias
 	{
 		QueryDsl.IQueryContainer? Filter { get; set; }
@@ -79,72 +81,1308 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		string? IAlias.SearchRouting { get; set; }
 	}
 
+	public class AliasDescriptorConverter<TReadAs> : JsonConverter<IAlias> where TReadAs : class, IAlias
+	{
+		public override IAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IAlias value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.Filter, options);
+			}
+
+			if (value.IndexRouting is not null)
+			{
+				writer.WritePropertyName("index_routing");
+				JsonSerializer.Serialize(writer, value.IndexRouting, options);
+			}
+
+			if (value.IsHidden.HasValue)
+			{
+				writer.WritePropertyName("is_hidden");
+				writer.WriteBooleanValue(value.IsHidden.Value);
+			}
+
+			if (value.IsWriteIndex.HasValue)
+			{
+				writer.WritePropertyName("is_write_index");
+				writer.WriteBooleanValue(value.IsWriteIndex.Value);
+			}
+
+			if (value.Routing is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, value.Routing, options);
+			}
+
+			if (value.SearchRouting is not null)
+			{
+				writer.WritePropertyName("search_routing");
+				JsonSerializer.Serialize(writer, value.SearchRouting, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(AliasDefinitionDescriptorConverter<AliasDefinition>))]
+	public partial interface IAliasDefinition
+	{
+		QueryDsl.IQueryContainer? Filter { get; set; }
+
+		string? IndexRouting { get; set; }
+
+		bool? IsWriteIndex { get; set; }
+
+		string? Routing { get; set; }
+
+		string? SearchRouting { get; set; }
+	}
+
+	public partial class AliasDefinition : IndexManagement.IAliasDefinition
+	{
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public QueryDsl.IQueryContainer? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_routing")]
+		public string? IndexRouting { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("is_write_index")]
+		public bool? IsWriteIndex { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public string? Routing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("search_routing")]
+		public string? SearchRouting { get; set; }
+	}
+
+	public partial class AliasDefinitionDescriptor : DescriptorBase<AliasDefinitionDescriptor, IAliasDefinition>, IAliasDefinition
+	{
+		QueryDsl.IQueryContainer? IAliasDefinition.Filter { get; set; }
+
+		string? IAliasDefinition.IndexRouting { get; set; }
+
+		bool? IAliasDefinition.IsWriteIndex { get; set; }
+
+		string? IAliasDefinition.Routing { get; set; }
+
+		string? IAliasDefinition.SearchRouting { get; set; }
+	}
+
+	public class AliasDefinitionDescriptorConverter<TReadAs> : JsonConverter<IAliasDefinition> where TReadAs : class, IAliasDefinition
+	{
+		public override IAliasDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IAliasDefinition value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.Filter, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.IndexRouting))
+			{
+				writer.WritePropertyName("index_routing");
+				writer.WriteStringValue(value.IndexRouting);
+			}
+
+			if (value.IsWriteIndex.HasValue)
+			{
+				writer.WritePropertyName("is_write_index");
+				writer.WriteBooleanValue(value.IsWriteIndex.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.Routing))
+			{
+				writer.WritePropertyName("routing");
+				writer.WriteStringValue(value.Routing);
+			}
+
+			if (!string.IsNullOrEmpty(value.SearchRouting))
+			{
+				writer.WritePropertyName("search_routing");
+				writer.WriteStringValue(value.SearchRouting);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class FielddataFrequencyFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public double Max
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Max { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public double Min
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Min { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_segment_size")]
-		public int MinSegmentSize
+		public int MinSegmentSize { get; init; }
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRouting, IndexRouting>))]
+	public partial interface IIndexRouting
+	{
+		IndexManagement.IIndexRoutingAllocation? Allocation { get; set; }
+
+		IndexManagement.IIndexRoutingRebalance? Rebalance { get; set; }
+	}
+
+	public partial class IndexRouting : IndexManagement.IIndexRouting
+	{
+		[JsonInclude]
+		[JsonPropertyName("allocation")]
+		public IndexManagement.IIndexRoutingAllocation? Allocation { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rebalance")]
+		public IndexManagement.IIndexRoutingRebalance? Rebalance { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(IndexRoutingAllocationDescriptorConverter<IndexRoutingAllocation>))]
+	public partial interface IIndexRoutingAllocation
+	{
+		Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
+
+		IndexManagement.IIndexRoutingAllocationInclude? Include { get; set; }
+
+		IndexManagement.IIndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
+
+		IndexManagement.IIndexRoutingAllocationDisk? Disk { get; set; }
+	}
+
+	public partial class IndexRoutingAllocation : IndexManagement.IIndexRoutingAllocation
+	{
+		[JsonInclude]
+		[JsonPropertyName("enable")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include")]
+		public IndexManagement.IIndexRoutingAllocationInclude? Include { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("initial_recovery")]
+		public IndexManagement.IIndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("disk")]
+		public IndexManagement.IIndexRoutingAllocationDisk? Disk { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor, IIndexRoutingAllocation>, IIndexRoutingAllocation
+	{
+		Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? IIndexRoutingAllocation.Enable { get; set; }
+
+		IndexManagement.IIndexRoutingAllocationInclude? IIndexRoutingAllocation.Include { get; set; }
+
+		IndexManagement.IIndexRoutingAllocationInitialRecovery? IIndexRoutingAllocation.InitialRecovery { get; set; }
+
+		IndexManagement.IIndexRoutingAllocationDisk? IIndexRoutingAllocation.Disk { get; set; }
+	}
+
+	public class IndexRoutingAllocationDescriptorConverter<TReadAs> : JsonConverter<IIndexRoutingAllocation> where TReadAs : class, IIndexRoutingAllocation
+	{
+		public override IIndexRoutingAllocation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IIndexRoutingAllocation value, JsonSerializerOptions options)
 		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
+			writer.WriteStartObject();
+			if (value.Enable is not null)
+			{
+				writer.WritePropertyName("enable");
+				JsonSerializer.Serialize(writer, value.Enable, options);
+			}
+
+			if (value.Include is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value.Include, options);
+			}
+
+			if (value.InitialRecovery is not null)
+			{
+				writer.WritePropertyName("initial_recovery");
+				JsonSerializer.Serialize(writer, value.InitialRecovery, options);
+			}
+
+			if (value.Disk is not null)
+			{
+				writer.WritePropertyName("disk");
+				JsonSerializer.Serialize(writer, value.Disk, options);
+			}
+
+			writer.WriteEndObject();
 		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingAllocationDisk, IndexRoutingAllocationDisk>))]
+	public partial interface IIndexRoutingAllocationDisk
+	{
+		Union<bool, string> ThresholdEnabled { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationDisk : IndexManagement.IIndexRoutingAllocationDisk
+	{
+		[JsonInclude]
+		[JsonPropertyName("threshold_enabled")]
+		public Union<bool, string> ThresholdEnabled { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingAllocationInclude, IndexRoutingAllocationInclude>))]
+	public partial interface IIndexRoutingAllocationInclude
+	{
+		string? TierPreference { get; set; }
+
+		string? Id { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationInclude : IndexManagement.IIndexRoutingAllocationInclude
+	{
+		[JsonInclude]
+		[JsonPropertyName("_tier_preference")]
+		public string? TierPreference { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public string? Id { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingAllocationInitialRecovery, IndexRoutingAllocationInitialRecovery>))]
+	public partial interface IIndexRoutingAllocationInitialRecovery
+	{
+		string? Id { get; set; }
+	}
+
+	public partial class IndexRoutingAllocationInitialRecovery : IndexManagement.IIndexRoutingAllocationInitialRecovery
+	{
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public string? Id { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingRebalance, IndexRoutingRebalance>))]
+	public partial interface IIndexRoutingRebalance
+	{
+		Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
+	}
+
+	public partial class IndexRoutingRebalance : IndexManagement.IIndexRoutingRebalance
+	{
+		[JsonInclude]
+		[JsonPropertyName("enable")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(IndexSettingBlocksDescriptorConverter<IndexSettingBlocks>))]
+	public partial interface IIndexSettingBlocks
+	{
+		bool? ReadOnly { get; set; }
+
+		bool? ReadOnlyAllowDelete { get; set; }
+
+		bool? Read { get; set; }
+
+		Union<bool?, string?>? Write { get; set; }
+
+		bool? Metadata { get; set; }
+	}
+
+	public partial class IndexSettingBlocks : IndexManagement.IIndexSettingBlocks
+	{
+		[JsonInclude]
+		[JsonPropertyName("read_only")]
+		public bool? ReadOnly { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("read_only_allow_delete")]
+		public bool? ReadOnlyAllowDelete { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("read")]
+		public bool? Read { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("write")]
+		public Union<bool?, string?>? Write { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("metadata")]
+		public bool? Metadata { get; set; }
+	}
+
+	public partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor, IIndexSettingBlocks>, IIndexSettingBlocks
+	{
+		bool? IIndexSettingBlocks.ReadOnly { get; set; }
+
+		bool? IIndexSettingBlocks.ReadOnlyAllowDelete { get; set; }
+
+		bool? IIndexSettingBlocks.Read { get; set; }
+
+		Union<bool?, string?>? IIndexSettingBlocks.Write { get; set; }
+
+		bool? IIndexSettingBlocks.Metadata { get; set; }
+	}
+
+	public class IndexSettingBlocksDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingBlocks> where TReadAs : class, IIndexSettingBlocks
+	{
+		public override IIndexSettingBlocks Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IIndexSettingBlocks value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.ReadOnly.HasValue)
+			{
+				writer.WritePropertyName("read_only");
+				writer.WriteBooleanValue(value.ReadOnly.Value);
+			}
+
+			if (value.ReadOnlyAllowDelete.HasValue)
+			{
+				writer.WritePropertyName("read_only_allow_delete");
+				writer.WriteBooleanValue(value.ReadOnlyAllowDelete.Value);
+			}
+
+			if (value.Read.HasValue)
+			{
+				writer.WritePropertyName("read");
+				writer.WriteBooleanValue(value.Read.Value);
+			}
+
+			if (value.Write is not null)
+			{
+				writer.WritePropertyName("write");
+				JsonSerializer.Serialize(writer, value.Write, options);
+			}
+
+			if (value.Metadata.HasValue)
+			{
+				writer.WritePropertyName("metadata");
+				writer.WriteBooleanValue(value.Metadata.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(IndexSettingsDescriptorConverter<IndexSettings>))]
+	public partial interface IIndexSettings
+	{
+		Union<int?, string?>? NumberOfShards { get; set; }
+
+		Union<int?, string?>? NumberOfReplicas { get; set; }
+
+		int? NumberOfRoutingShards { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
+
+		string? Codec { get; set; }
+
+		Union<int?, string?>? RoutingPartitionSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriod { get; set; }
+
+		bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+		Union<bool?, string?>? Hidden { get; set; }
+
+		string? AutoExpandReplicas { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? SearchIdleAfter { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
+
+		int? MaxResultWindow { get; set; }
+
+		int? MaxInnerResultWindow { get; set; }
+
+		int? MaxRescoreWindow { get; set; }
+
+		int? MaxDocvalueFieldsSearch { get; set; }
+
+		int? MaxScriptFields { get; set; }
+
+		int? MaxNgramDiff { get; set; }
+
+		int? MaxShingleDiff { get; set; }
+
+		IndexManagement.IIndexSettingBlocks? Blocks { get; set; }
+
+		bool? BlocksReadOnly { get; set; }
+
+		bool? BlocksReadOnlyAllowDelete { get; set; }
+
+		bool? BlocksRead { get; set; }
+
+		Union<bool?, string?>? BlocksWrite { get; set; }
+
+		bool? BlocksMetadata { get; set; }
+
+		int? MaxRefreshListeners { get; set; }
+
+		int? AnalyzeMaxTokenCount { get; set; }
+
+		int? HighlightMaxAnalyzedOffset { get; set; }
+
+		int? MaxTermsCount { get; set; }
+
+		int? MaxRegexLength { get; set; }
+
+		IndexManagement.IIndexRouting? Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
+
+		string? DefaultPipeline { get; set; }
+
+		string? FinalPipeline { get; set; }
+
+		IndexManagement.IIndexSettingsLifecycle? Lifecycle { get; set; }
+
+		string? LifecycleName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
+
+		string? CreationDate { get; set; }
+
+		string? Uuid { get; set; }
+
+		IndexManagement.IIndexVersioning? Version { get; set; }
+
+		Union<bool?, string?>? VerifiedBeforeClose { get; set; }
+
+		Union<string?, int?>? Format { get; set; }
+
+		int? MaxSlicesPerScroll { get; set; }
+
+		string? TranslogDurability { get; set; }
+
+		Union<bool?, string?>? QueryStringLenient { get; set; }
+
+		Union<int?, string?>? Priority { get; set; }
+
+		int? TopMetricsMaxSize { get; set; }
+
+		IndexManagement.IIndexSettingsAnalysis? Analysis { get; set; }
+
+		IndexManagement.IIndexSettings? Settings { get; set; }
+	}
+
+	public partial class IndexSettings : IndexManagement.IIndexSettings
+	{
+		[JsonInclude]
+		[JsonPropertyName("number_of_shards")]
+		public Union<int?, string?>? NumberOfShards { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_replicas")]
+		public Union<int?, string?>? NumberOfReplicas { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_routing_shards")]
+		public int? NumberOfRoutingShards { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("check_on_startup")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("codec")]
+		public string? Codec { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing_partition_size")]
+		public Union<int?, string?>? RoutingPartitionSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("soft_deletes.retention_lease.period")]
+		public Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriod { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
+		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("hidden")]
+		public Union<bool?, string?>? Hidden { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_expand_replicas")]
+		public string? AutoExpandReplicas { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("search.idle.after")]
+		public Elastic.Clients.Elasticsearch.Time? SearchIdleAfter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("refresh_interval")]
+		public Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_result_window")]
+		public int? MaxResultWindow { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_inner_result_window")]
+		public int? MaxInnerResultWindow { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_rescore_window")]
+		public int? MaxRescoreWindow { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_docvalue_fields_search")]
+		public int? MaxDocvalueFieldsSearch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_script_fields")]
+		public int? MaxScriptFields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_ngram_diff")]
+		public int? MaxNgramDiff { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_shingle_diff")]
+		public int? MaxShingleDiff { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks")]
+		public IndexManagement.IIndexSettingBlocks? Blocks { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.read_only")]
+		public bool? BlocksReadOnly { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.read_only_allow_delete")]
+		public bool? BlocksReadOnlyAllowDelete { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.read")]
+		public bool? BlocksRead { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.write")]
+		public Union<bool?, string?>? BlocksWrite { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.metadata")]
+		public bool? BlocksMetadata { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_refresh_listeners")]
+		public int? MaxRefreshListeners { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyze.max_token_count")]
+		public int? AnalyzeMaxTokenCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("highlight.max_analyzed_offset")]
+		public int? HighlightMaxAnalyzedOffset { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_terms_count")]
+		public int? MaxTermsCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_regex_length")]
+		public int? MaxRegexLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public IndexManagement.IIndexRouting? Routing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gc_deletes")]
+		public Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("default_pipeline")]
+		public string? DefaultPipeline { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("final_pipeline")]
+		public string? FinalPipeline { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lifecycle")]
+		public IndexManagement.IIndexSettingsLifecycle? Lifecycle { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lifecycle.name")]
+		public string? LifecycleName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("provided_name")]
+		public Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("creation_date")]
+		public string? CreationDate { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("uuid")]
+		public string? Uuid { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public IndexManagement.IIndexVersioning? Version { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("verified_before_close")]
+		public Union<bool?, string?>? VerifiedBeforeClose { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public Union<string?, int?>? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_slices_per_scroll")]
+		public int? MaxSlicesPerScroll { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("translog.durability")]
+		public string? TranslogDurability { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query_string.lenient")]
+		public Union<bool?, string?>? QueryStringLenient { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("priority")]
+		public Union<int?, string?>? Priority { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_metrics_max_size")]
+		public int? TopMetricsMaxSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analysis")]
+		public IndexManagement.IIndexSettingsAnalysis? Analysis { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("settings")]
+		public IndexManagement.IIndexSettings? Settings { get; set; }
+	}
+
+	public partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor, IIndexSettings>, IIndexSettings
+	{
+		Union<int?, string?>? IIndexSettings.NumberOfShards { get; set; }
+
+		Union<int?, string?>? IIndexSettings.NumberOfReplicas { get; set; }
+
+		int? IIndexSettings.NumberOfRoutingShards { get; set; }
+
+		Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? IIndexSettings.CheckOnStartup { get; set; }
+
+		string? IIndexSettings.Codec { get; set; }
+
+		Union<int?, string?>? IIndexSettings.RoutingPartitionSize { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IIndexSettings.SoftDeletesRetentionLeasePeriod { get; set; }
+
+		bool? IIndexSettings.LoadFixedBitsetFiltersEagerly { get; set; }
+
+		Union<bool?, string?>? IIndexSettings.Hidden { get; set; }
+
+		string? IIndexSettings.AutoExpandReplicas { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IIndexSettings.SearchIdleAfter { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IIndexSettings.RefreshInterval { get; set; }
+
+		int? IIndexSettings.MaxResultWindow { get; set; }
+
+		int? IIndexSettings.MaxInnerResultWindow { get; set; }
+
+		int? IIndexSettings.MaxRescoreWindow { get; set; }
+
+		int? IIndexSettings.MaxDocvalueFieldsSearch { get; set; }
+
+		int? IIndexSettings.MaxScriptFields { get; set; }
+
+		int? IIndexSettings.MaxNgramDiff { get; set; }
+
+		int? IIndexSettings.MaxShingleDiff { get; set; }
+
+		IndexManagement.IIndexSettingBlocks? IIndexSettings.Blocks { get; set; }
+
+		bool? IIndexSettings.BlocksReadOnly { get; set; }
+
+		bool? IIndexSettings.BlocksReadOnlyAllowDelete { get; set; }
+
+		bool? IIndexSettings.BlocksRead { get; set; }
+
+		Union<bool?, string?>? IIndexSettings.BlocksWrite { get; set; }
+
+		bool? IIndexSettings.BlocksMetadata { get; set; }
+
+		int? IIndexSettings.MaxRefreshListeners { get; set; }
+
+		int? IIndexSettings.AnalyzeMaxTokenCount { get; set; }
+
+		int? IIndexSettings.HighlightMaxAnalyzedOffset { get; set; }
+
+		int? IIndexSettings.MaxTermsCount { get; set; }
+
+		int? IIndexSettings.MaxRegexLength { get; set; }
+
+		IndexManagement.IIndexRouting? IIndexSettings.Routing { get; set; }
+
+		Elastic.Clients.Elasticsearch.Time? IIndexSettings.GcDeletes { get; set; }
+
+		string? IIndexSettings.DefaultPipeline { get; set; }
+
+		string? IIndexSettings.FinalPipeline { get; set; }
+
+		IndexManagement.IIndexSettingsLifecycle? IIndexSettings.Lifecycle { get; set; }
+
+		string? IIndexSettings.LifecycleName { get; set; }
+
+		Elastic.Clients.Elasticsearch.Name? IIndexSettings.ProvidedName { get; set; }
+
+		string? IIndexSettings.CreationDate { get; set; }
+
+		string? IIndexSettings.Uuid { get; set; }
+
+		IndexManagement.IIndexVersioning? IIndexSettings.Version { get; set; }
+
+		Union<bool?, string?>? IIndexSettings.VerifiedBeforeClose { get; set; }
+
+		Union<string?, int?>? IIndexSettings.Format { get; set; }
+
+		int? IIndexSettings.MaxSlicesPerScroll { get; set; }
+
+		string? IIndexSettings.TranslogDurability { get; set; }
+
+		Union<bool?, string?>? IIndexSettings.QueryStringLenient { get; set; }
+
+		Union<int?, string?>? IIndexSettings.Priority { get; set; }
+
+		int? IIndexSettings.TopMetricsMaxSize { get; set; }
+
+		IndexManagement.IIndexSettingsAnalysis? IIndexSettings.Analysis { get; set; }
+
+		IndexManagement.IIndexSettings? IIndexSettings.Settings { get; set; }
+	}
+
+	public class IndexSettingsDescriptorConverter<TReadAs> : JsonConverter<IIndexSettings> where TReadAs : class, IIndexSettings
+	{
+		public override IIndexSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IIndexSettings value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.NumberOfShards is not null)
+			{
+				writer.WritePropertyName("number_of_shards");
+				JsonSerializer.Serialize(writer, value.NumberOfShards, options);
+			}
+
+			if (value.NumberOfReplicas is not null)
+			{
+				writer.WritePropertyName("number_of_replicas");
+				JsonSerializer.Serialize(writer, value.NumberOfReplicas, options);
+			}
+
+			if (value.NumberOfRoutingShards.HasValue)
+			{
+				writer.WritePropertyName("number_of_routing_shards");
+				writer.WriteNumberValue(value.NumberOfRoutingShards.Value);
+			}
+
+			if (value.CheckOnStartup is not null)
+			{
+				writer.WritePropertyName("check_on_startup");
+				JsonSerializer.Serialize(writer, value.CheckOnStartup, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Codec))
+			{
+				writer.WritePropertyName("codec");
+				writer.WriteStringValue(value.Codec);
+			}
+
+			if (value.RoutingPartitionSize is not null)
+			{
+				writer.WritePropertyName("routing_partition_size");
+				JsonSerializer.Serialize(writer, value.RoutingPartitionSize, options);
+			}
+
+			if (value.SoftDeletesRetentionLeasePeriod is not null)
+			{
+				writer.WritePropertyName("soft_deletes.retention_lease.period");
+				JsonSerializer.Serialize(writer, value.SoftDeletesRetentionLeasePeriod, options);
+			}
+
+			if (value.LoadFixedBitsetFiltersEagerly.HasValue)
+			{
+				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
+				writer.WriteBooleanValue(value.LoadFixedBitsetFiltersEagerly.Value);
+			}
+
+			if (value.Hidden is not null)
+			{
+				writer.WritePropertyName("hidden");
+				JsonSerializer.Serialize(writer, value.Hidden, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.AutoExpandReplicas))
+			{
+				writer.WritePropertyName("auto_expand_replicas");
+				writer.WriteStringValue(value.AutoExpandReplicas);
+			}
+
+			if (value.SearchIdleAfter is not null)
+			{
+				writer.WritePropertyName("search.idle.after");
+				JsonSerializer.Serialize(writer, value.SearchIdleAfter, options);
+			}
+
+			if (value.RefreshInterval is not null)
+			{
+				writer.WritePropertyName("refresh_interval");
+				JsonSerializer.Serialize(writer, value.RefreshInterval, options);
+			}
+
+			if (value.MaxResultWindow.HasValue)
+			{
+				writer.WritePropertyName("max_result_window");
+				writer.WriteNumberValue(value.MaxResultWindow.Value);
+			}
+
+			if (value.MaxInnerResultWindow.HasValue)
+			{
+				writer.WritePropertyName("max_inner_result_window");
+				writer.WriteNumberValue(value.MaxInnerResultWindow.Value);
+			}
+
+			if (value.MaxRescoreWindow.HasValue)
+			{
+				writer.WritePropertyName("max_rescore_window");
+				writer.WriteNumberValue(value.MaxRescoreWindow.Value);
+			}
+
+			if (value.MaxDocvalueFieldsSearch.HasValue)
+			{
+				writer.WritePropertyName("max_docvalue_fields_search");
+				writer.WriteNumberValue(value.MaxDocvalueFieldsSearch.Value);
+			}
+
+			if (value.MaxScriptFields.HasValue)
+			{
+				writer.WritePropertyName("max_script_fields");
+				writer.WriteNumberValue(value.MaxScriptFields.Value);
+			}
+
+			if (value.MaxNgramDiff.HasValue)
+			{
+				writer.WritePropertyName("max_ngram_diff");
+				writer.WriteNumberValue(value.MaxNgramDiff.Value);
+			}
+
+			if (value.MaxShingleDiff.HasValue)
+			{
+				writer.WritePropertyName("max_shingle_diff");
+				writer.WriteNumberValue(value.MaxShingleDiff.Value);
+			}
+
+			if (value.Blocks is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, value.Blocks, options);
+			}
+
+			if (value.BlocksReadOnly.HasValue)
+			{
+				writer.WritePropertyName("blocks.read_only");
+				writer.WriteBooleanValue(value.BlocksReadOnly.Value);
+			}
+
+			if (value.BlocksReadOnlyAllowDelete.HasValue)
+			{
+				writer.WritePropertyName("blocks.read_only_allow_delete");
+				writer.WriteBooleanValue(value.BlocksReadOnlyAllowDelete.Value);
+			}
+
+			if (value.BlocksRead.HasValue)
+			{
+				writer.WritePropertyName("blocks.read");
+				writer.WriteBooleanValue(value.BlocksRead.Value);
+			}
+
+			if (value.BlocksWrite is not null)
+			{
+				writer.WritePropertyName("blocks.write");
+				JsonSerializer.Serialize(writer, value.BlocksWrite, options);
+			}
+
+			if (value.BlocksMetadata.HasValue)
+			{
+				writer.WritePropertyName("blocks.metadata");
+				writer.WriteBooleanValue(value.BlocksMetadata.Value);
+			}
+
+			if (value.MaxRefreshListeners.HasValue)
+			{
+				writer.WritePropertyName("max_refresh_listeners");
+				writer.WriteNumberValue(value.MaxRefreshListeners.Value);
+			}
+
+			if (value.AnalyzeMaxTokenCount.HasValue)
+			{
+				writer.WritePropertyName("analyze.max_token_count");
+				writer.WriteNumberValue(value.AnalyzeMaxTokenCount.Value);
+			}
+
+			if (value.HighlightMaxAnalyzedOffset.HasValue)
+			{
+				writer.WritePropertyName("highlight.max_analyzed_offset");
+				writer.WriteNumberValue(value.HighlightMaxAnalyzedOffset.Value);
+			}
+
+			if (value.MaxTermsCount.HasValue)
+			{
+				writer.WritePropertyName("max_terms_count");
+				writer.WriteNumberValue(value.MaxTermsCount.Value);
+			}
+
+			if (value.MaxRegexLength.HasValue)
+			{
+				writer.WritePropertyName("max_regex_length");
+				writer.WriteNumberValue(value.MaxRegexLength.Value);
+			}
+
+			if (value.Routing is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, value.Routing, options);
+			}
+
+			if (value.GcDeletes is not null)
+			{
+				writer.WritePropertyName("gc_deletes");
+				JsonSerializer.Serialize(writer, value.GcDeletes, options);
+			}
+
+			if (value.DefaultPipeline is not null)
+			{
+				writer.WritePropertyName("default_pipeline");
+				JsonSerializer.Serialize(writer, value.DefaultPipeline, options);
+			}
+
+			if (value.FinalPipeline is not null)
+			{
+				writer.WritePropertyName("final_pipeline");
+				JsonSerializer.Serialize(writer, value.FinalPipeline, options);
+			}
+
+			if (value.Lifecycle is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, value.Lifecycle, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.LifecycleName))
+			{
+				writer.WritePropertyName("lifecycle.name");
+				writer.WriteStringValue(value.LifecycleName);
+			}
+
+			if (value.ProvidedName is not null)
+			{
+				writer.WritePropertyName("provided_name");
+				JsonSerializer.Serialize(writer, value.ProvidedName, options);
+			}
+
+			if (value.CreationDate is not null)
+			{
+				writer.WritePropertyName("creation_date");
+				JsonSerializer.Serialize(writer, value.CreationDate, options);
+			}
+
+			if (value.Uuid is not null)
+			{
+				writer.WritePropertyName("uuid");
+				JsonSerializer.Serialize(writer, value.Uuid, options);
+			}
+
+			if (value.Version is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, value.Version, options);
+			}
+
+			if (value.VerifiedBeforeClose is not null)
+			{
+				writer.WritePropertyName("verified_before_close");
+				JsonSerializer.Serialize(writer, value.VerifiedBeforeClose, options);
+			}
+
+			if (value.Format is not null)
+			{
+				writer.WritePropertyName("format");
+				JsonSerializer.Serialize(writer, value.Format, options);
+			}
+
+			if (value.MaxSlicesPerScroll.HasValue)
+			{
+				writer.WritePropertyName("max_slices_per_scroll");
+				writer.WriteNumberValue(value.MaxSlicesPerScroll.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.TranslogDurability))
+			{
+				writer.WritePropertyName("translog.durability");
+				writer.WriteStringValue(value.TranslogDurability);
+			}
+
+			if (value.QueryStringLenient is not null)
+			{
+				writer.WritePropertyName("query_string.lenient");
+				JsonSerializer.Serialize(writer, value.QueryStringLenient, options);
+			}
+
+			if (value.Priority is not null)
+			{
+				writer.WritePropertyName("priority");
+				JsonSerializer.Serialize(writer, value.Priority, options);
+			}
+
+			if (value.TopMetricsMaxSize.HasValue)
+			{
+				writer.WritePropertyName("top_metrics_max_size");
+				writer.WriteNumberValue(value.TopMetricsMaxSize.Value);
+			}
+
+			if (value.Analysis is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, value.Analysis, options);
+			}
+
+			if (value.Settings is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, value.Settings, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(IndexSettingsAnalysisDescriptorConverter<IndexSettingsAnalysis>))]
+	public partial interface IIndexSettingsAnalysis
+	{
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? Analyzer { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? CharFilter { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? Filter { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? Normalizer { get; set; }
+	}
+
+	public partial class IndexSettingsAnalysis : IndexManagement.IIndexSettingsAnalysis
+	{
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("char_filter")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? CharFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("normalizer")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? Normalizer { get; set; }
+	}
+
+	public partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor, IIndexSettingsAnalysis>, IIndexSettingsAnalysis
+	{
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? IIndexSettingsAnalysis.Analyzer { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? IIndexSettingsAnalysis.CharFilter { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? IIndexSettingsAnalysis.Filter { get; set; }
+
+		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? IIndexSettingsAnalysis.Normalizer { get; set; }
+	}
+
+	public class IndexSettingsAnalysisDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingsAnalysis> where TReadAs : class, IIndexSettingsAnalysis
+	{
+		public override IIndexSettingsAnalysis Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IIndexSettingsAnalysis value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Analyzer is not null)
+			{
+				writer.WritePropertyName("analyzer");
+				JsonSerializer.Serialize(writer, value.Analyzer, options);
+			}
+
+			if (value.CharFilter is not null)
+			{
+				writer.WritePropertyName("char_filter");
+				JsonSerializer.Serialize(writer, value.CharFilter, options);
+			}
+
+			if (value.Filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.Filter, options);
+			}
+
+			if (value.Normalizer is not null)
+			{
+				writer.WritePropertyName("normalizer");
+				JsonSerializer.Serialize(writer, value.Normalizer, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexSettingsLifecycle, IndexSettingsLifecycle>))]
+	public partial interface IIndexSettingsLifecycle
+	{
+		Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	}
+
+	public partial class IndexSettingsLifecycle : IndexManagement.IIndexSettingsLifecycle
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(IndexStateDescriptorConverter<IndexState>))]
+	public partial interface IIndexState
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
+
+		Mapping.ITypeMapping? Mappings { get; set; }
+
+		Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? Settings { get; set; }
+
+		string? DataStream { get; set; }
+	}
+
+	public partial class IndexState : IndexManagement.IIndexState
+	{
+		[JsonInclude]
+		[JsonPropertyName("aliases")]
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mappings")]
+		public Mapping.ITypeMapping? Mappings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("settings")]
+		public Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? Settings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("data_stream")]
+		public string? DataStream { get; set; }
+	}
+
+	public partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor, IIndexState>, IIndexState
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IIndexState.Aliases { get; set; }
+
+		Mapping.ITypeMapping? IIndexState.Mappings { get; set; }
+
+		Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? IIndexState.Settings { get; set; }
+
+		string? IIndexState.DataStream { get; set; }
+	}
+
+	public class IndexStateDescriptorConverter<TReadAs> : JsonConverter<IIndexState> where TReadAs : class, IIndexState
+	{
+		public override IIndexState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IIndexState value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Aliases is not null)
+			{
+				writer.WritePropertyName("aliases");
+				JsonSerializer.Serialize(writer, value.Aliases, options);
+			}
+
+			if (value.Mappings is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, value.Mappings, options);
+			}
+
+			if (value.Settings is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, value.Settings, options);
+			}
+
+			if (value.DataStream is not null)
+			{
+				writer.WritePropertyName("data_stream");
+				JsonSerializer.Serialize(writer, value.DataStream, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexStatePrefixedSettings, IndexStatePrefixedSettings>))]
+	public partial interface IIndexStatePrefixedSettings
+	{
+		IndexManagement.IIndexSettings Index { get; set; }
+	}
+
+	public partial class IndexStatePrefixedSettings : IndexManagement.IIndexStatePrefixedSettings
+	{
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public IndexManagement.IIndexSettings Index { get; set; }
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexVersioning, IndexVersioning>))]
+	public partial interface IIndexVersioning
+	{
+		string Created { get; set; }
+	}
+
+	public partial class IndexVersioning : IndexManagement.IIndexVersioning
+	{
+		[JsonInclude]
+		[JsonPropertyName("created")]
+		public string Created { get; set; }
 	}
 
 	public partial class NumericFielddata
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
-		public IndexManagement.NumericFielddataFormat Format
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; init; }
 	}
 
 	public partial class StringFielddata
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
-		public IndexManagement.StringFielddataFormat Format
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddataFormat Format { get; init; }
 	}
 }

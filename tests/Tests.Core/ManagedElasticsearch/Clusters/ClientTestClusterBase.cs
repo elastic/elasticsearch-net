@@ -5,8 +5,6 @@ using Elastic.Elasticsearch.Xunit;
 using Elastic.Stack.ArtifactsApi.Products;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Clients.Elasticsearch.Cluster.Health;
-using Elastic.Clients.Elasticsearch.Core;
 using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
@@ -32,9 +30,9 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected sealed override void SeedCluster()
 		{
-			Client.Cluster.Health(new HealthRequest {WaitForStatus = WaitForStatus.Green});
+			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
 			SeedNode();
-			Client.Cluster.Health(new HealthRequest {WaitForStatus = WaitForStatus.Green});
+			Client.Cluster.Health(new ClusterHealthRequest { WaitForStatus = WaitForStatus.Green });
 		}
 
 		protected virtual void SeedNode() { }
