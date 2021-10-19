@@ -25,6 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
 	public partial class PendingTask
 	{
 		[JsonInclude]
+		[JsonPropertyName("executing")]
+		public bool Executing { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("insert_order")]
 		public int InsertOrder { get; init; }
 

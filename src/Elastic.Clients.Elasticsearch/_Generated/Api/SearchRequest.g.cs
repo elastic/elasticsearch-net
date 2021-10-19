@@ -446,17 +446,17 @@ namespace Elastic.Clients.Elasticsearch
 
 		Dictionary<string, Mapping.IRuntimeField>? ISearchRequest.RuntimeMappings { get; set; }
 
-		public SearchRequestDescriptor Aggs(Dictionary<string, Aggregations.IAggregationContainer>? aggs) => Assign(aggs, (a, v) => a.Aggs = v);
-		public SearchRequestDescriptor Aggregations(Dictionary<string, Aggregations.IAggregationContainer>? aggregations) => Assign(aggregations, (a, v) => a.Aggregations = v);
+		public SearchRequestDescriptor Aggs(Func<FluentDictionary<string?, Aggregations.IAggregationContainer?>, FluentDictionary<string?, Aggregations.IAggregationContainer?>> selector) => Assign(selector, (a, v) => a.Aggs = v?.Invoke(new FluentDictionary<string?, Aggregations.IAggregationContainer?>()));
+		public SearchRequestDescriptor Aggregations(Func<FluentDictionary<string?, Aggregations.IAggregationContainer?>, FluentDictionary<string?, Aggregations.IAggregationContainer?>> selector) => Assign(selector, (a, v) => a.Aggregations = v?.Invoke(new FluentDictionary<string?, Aggregations.IAggregationContainer?>()));
 		public SearchRequestDescriptor Collapse(IFieldCollapse? collapse) => Assign(collapse, (a, v) => a.Collapse = v);
 		public SearchRequestDescriptor Highlight(IHighlight? highlight) => Assign(highlight, (a, v) => a.Highlight = v);
 		public SearchRequestDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoost = v);
 		public SearchRequestDescriptor MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScore = v);
 		public SearchRequestDescriptor PostFilter(QueryDsl.IQueryContainer? postFilter) => Assign(postFilter, (a, v) => a.PostFilter = v);
-		public SearchRequestDescriptor Profile(bool? profile) => Assign(profile, (a, v) => a.Profile = v);
+		public SearchRequestDescriptor Profile(bool? profile = true) => Assign(profile, (a, v) => a.Profile = v);
 		public SearchRequestDescriptor Query(QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public SearchRequestDescriptor Rescore(IEnumerable<IRescore>? rescore) => Assign(rescore, (a, v) => a.Rescore = v);
-		public SearchRequestDescriptor ScriptFields(Dictionary<string, IScriptField>? scriptFields) => Assign(scriptFields, (a, v) => a.ScriptFields = v);
+		public SearchRequestDescriptor ScriptFields(Func<FluentDictionary<string?, IScriptField?>, FluentDictionary<string?, IScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFields = v?.Invoke(new FluentDictionary<string?, IScriptField?>()));
 		public SearchRequestDescriptor SearchAfter(IEnumerable<object>? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfter = v);
 		public SearchRequestDescriptor Slice(ISlicedScroll? slice) => Assign(slice, (a, v) => a.Slice = v);
 		public SearchRequestDescriptor Fields(IEnumerable<Union<string?, IDateField?>>? fields) => Assign(fields, (a, v) => a.Fields = v);

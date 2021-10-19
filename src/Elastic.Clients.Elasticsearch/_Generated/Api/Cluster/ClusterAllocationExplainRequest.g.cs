@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		public ClusterAllocationExplainRequestDescriptor CurrentNode(string? currentNode) => Assign(currentNode, (a, v) => a.CurrentNode = v);
 		public ClusterAllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.Index = v);
-		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary) => Assign(primary, (a, v) => a.Primary = v);
+		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary = true) => Assign(primary, (a, v) => a.Primary = v);
 		public ClusterAllocationExplainRequestDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.Shard = v);
 		public ClusterAllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo) => Qs("include_disk_info", includeDiskInfo);
 		public ClusterAllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions) => Qs("include_yes_decisions", includeYesDecisions);

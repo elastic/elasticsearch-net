@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		Dictionary<string, object>? IClusterPutComponentTemplateRequest.Meta { get; set; }
 
 		public ClusterPutComponentTemplateRequestDescriptor Template(IndexManagement.IIndexState template) => Assign(template, (a, v) => a.Template = v);
-		public ClusterPutComponentTemplateRequestDescriptor Aliases(Dictionary<string, IndexManagement.IAliasDefinition>? aliases) => Assign(aliases, (a, v) => a.Aliases = v);
+		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, IndexManagement.IAliasDefinition?>, FluentDictionary<string?, IndexManagement.IAliasDefinition?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<string?, IndexManagement.IAliasDefinition?>()));
 		public ClusterPutComponentTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
 		public ClusterPutComponentTemplateRequestDescriptor Settings(IndexManagement.IIndexSettings? settings) => Assign(settings, (a, v) => a.Settings = v);
 		public ClusterPutComponentTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a.Version = v);

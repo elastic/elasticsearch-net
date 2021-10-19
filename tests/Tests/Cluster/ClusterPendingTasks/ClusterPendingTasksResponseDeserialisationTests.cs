@@ -41,8 +41,6 @@ namespace Tests.Cluster.ClusterPendingTasks
 
 		protected override void Validate(ClusterPendingTasksResponse response)
 		{
-			// TODO - Other properties
-
 			response.Tasks.Count.Should().Be(3);
 
 			var firstTask = response.Tasks.First();
@@ -50,7 +48,7 @@ namespace Tests.Cluster.ClusterPendingTasks
 			firstTask.InsertOrder.Should().Be(101);
 			firstTask.Priority.Should().Be("URGENT");
 			firstTask.Source.Should().Be("create-index [foo_9], cause [api]");
-			// TODO: Executing is missing
+			firstTask.Executing.Should().Be(true);
 			firstTask.TimeInQueueMillis.Should().Be(86);
 			firstTask.TimeInQueue.Should().Be("86ms");
 		}
