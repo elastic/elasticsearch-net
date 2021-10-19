@@ -23,8 +23,56 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
+	public interface IAnalyzersVariant
+	{
+	}
+
+	public interface IAnalyzers : IIsADictionary<string, IAnalyzersVariant>
+	{
+	}
+
+	public class Analyzers : IsADictionaryBase<string, IAnalyzersVariant>, Analysis.IAnalyzers
+	{
+	}
+
+	public interface ICharFiltersVariant
+	{
+	}
+
+	public interface ICharFilters : IIsADictionary<string, ICharFiltersVariant>
+	{
+	}
+
+	public class CharFilters : IsADictionaryBase<string, ICharFiltersVariant>, Analysis.ICharFilters
+	{
+	}
+
+	public interface INormalizersVariant
+	{
+	}
+
+	public interface INormalizers : IIsADictionary<string, INormalizersVariant>
+	{
+	}
+
+	public class Normalizers : IsADictionaryBase<string, INormalizersVariant>, Analysis.INormalizers
+	{
+	}
+
 	public partial class StopWords
 	{
 		private readonly List<string> _stringList = new();
+	}
+
+	public interface ITokenFiltersVariant
+	{
+	}
+
+	public interface ITokenFilters : IIsADictionary<string, ITokenFiltersVariant>
+	{
+	}
+
+	public class TokenFilters : IsADictionaryBase<string, ITokenFiltersVariant>, Analysis.ITokenFilters
+	{
 	}
 }

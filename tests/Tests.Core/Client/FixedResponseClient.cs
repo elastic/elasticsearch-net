@@ -3,6 +3,7 @@ using System.Text;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
 using Elastic.Clients.Elasticsearch;
+using System.Collections.Generic;
 
 namespace Tests.Core.Client
 {
@@ -40,16 +41,18 @@ namespace Tests.Core.Client
 					responseBytes = b;
 					break;
 				default:
-				{
-					responseBytes = contentType == RequestData.MimeType
-						? serializer.SerializeToBytes(response,
-							TestClient.Default.ElasticsearchClientSettings.MemoryStreamFactory)
-						: Encoding.UTF8.GetBytes(response.ToString());
-					break;
-				}
+					{
+						responseBytes = contentType == RequestData.MimeType
+							? serializer.SerializeToBytes(response,
+								TestClient.Default.ElasticsearchClientSettings.MemoryStreamFactory)
+							: Encoding.UTF8.GetBytes(response.ToString());
+						break;
+					}
 			}
 
-			var connection = new InMemoryConnection(responseBytes, statusCode, exception, contentType);
+			var headers = new Dictionary<string, IEnumerable<string>> { { "x-elastic-product", new[] { "Elasticsearch" } } };
+
+			var connection = new InMemoryConnection(responseBytes, statusCode, exception, contentType, headers);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ElasticsearchClientSettings(connectionPool, connection)
 				.DefaultIndex("default-index");

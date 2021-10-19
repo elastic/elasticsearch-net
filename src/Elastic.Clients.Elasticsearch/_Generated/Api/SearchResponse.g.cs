@@ -25,182 +25,62 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Aggregations.Aggregate>? Aggregations
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregate>? Aggregations { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_clusters")]
-		public ClusterStatistics? Clusters
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("documents")]
-		public IReadOnlyCollection<TDocument>? Documents
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<TDocument>? Documents { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Dictionary<string, object>? Fields
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]
-		public HitsMetadata<TDocument> Hits
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> Hits { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_score")]
-		public double? MaxScore
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? MaxScore { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("num_reduce_phases")]
-		public object? NumReducePhases
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object? NumReducePhases { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pit_id")]
-		public string? PitId
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? PitId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]
-		public Profile? Profile
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.Profile? Profile { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]
-		public string? ScrollId
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? ScrollId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
-		public ShardStatistics Shards
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("suggest")]
-		public Dictionary<string, IReadOnlyCollection<Suggest<TDocument>>>? Suggest
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Suggest<TDocument>>>? Suggest { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("terminated_early")]
-		public bool? TerminatedEarly
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? TerminatedEarly { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]
-		public bool TimedOut
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool TimedOut { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("took")]
-		public object Took
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object Took { get; init; }
 	}
 }

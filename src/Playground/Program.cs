@@ -14,156 +14,146 @@ namespace Playground
 {
 	internal class Program
 	{
-		
-
 		private static void Main()
 		{
-			var ec = new Client();
+			//			var ec = new Client();
 
-//#pragma warning disable IDE0039 // Use local function
-//			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
-//			//Local variables change type
-//			Action<ExampleRequestDescriptor> test = b => b.Name("thing");
-//#pragma warning restore IDE0039 // Use local function
+			////#pragma warning disable IDE0039 // Use local function
+			////			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
+			////			//Local variables change type
+			////			Action<ExampleRequestDescriptor> test = b => b.Name("thing");
+			////#pragma warning restore IDE0039 // Use local function
 
-//			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
+			////			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
 
-//			//Local functions become void returning
-//			static void TestBoolQuery(ExampleRequestDescriptor b) => b.Name("thing");
+			////			//Local functions become void returning
+			////			static void TestBoolQuery(ExampleRequestDescriptor b) => b.Name("thing");
 
-//			ec.SomeEndpoint(TestBoolQuery);
+			////			ec.SomeEndpoint(TestBoolQuery);
 
-//			ec.SomeEndpoint(new ExampleRequest
-//			{
-//				Name = "Object test",
-//				Subtype = new ClusterSubtype
-//				{
-//					Identifier = "AnID"
-//				},
-//				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
-//			});
+			////			ec.SomeEndpoint(new ExampleRequest
+			////			{
+			////				Name = "Object test",
+			////				Subtype = new ClusterSubtype
+			////				{
+			////					Identifier = "AnID"
+			////				},
+			////				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
+			////			});
 
-//			ec.SomeEndpoint(new ExampleRequest
-//			{
-//				Name = "Object test",
-//				Subtype = new ClusterSubtype
-//				{
-//					Identifier = "AnID"
-//				},
-//				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
-//				// at the cost of an extra object allocation
-//				Query = Query.Bool(b => b.Tag("using_query_helper"))
-//			});
+			////			ec.SomeEndpoint(new ExampleRequest
+			////			{
+			////				Name = "Object test",
+			////				Subtype = new ClusterSubtype
+			////				{
+			////					Identifier = "AnID"
+			////				},
+			////				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
+			////				// at the cost of an extra object allocation
+			////				Query = Query.Bool(b => b.Tag("using_query_helper"))
+			////			});
 
-			ec.SomeEndpoint(new ExampleRequest
-			{
-				Name = "Object test",
-				Subtype = new ClusterSubtypeDescriptor().Identifier("implictly-assigned"),
-				Query = Query.Bool(b => b.Tag("using_query_helper"))
-			});
+			//			ec.SomeEndpoint(new ExampleRequest
+			//			{
+			//				Name = "Object test",
+			//				Subtype = new ClusterSubtypeDescriptor().Identifier("implictly-assigned"),
+			//				Query = Query.Bool(b => b.Tag("using_query_helper"))
+			//			});
 
-			//ec.SomeEndpoint(c => c
-			//	.Name("Descriptor test")
-			//	.Subtype(s => s.Identifier("AnID"))
-			//	.Query(c => c.Bool(v => v.Tag("some_tag"))));
+			//			//ec.SomeEndpoint(c => c
+			//			//	.Name("Descriptor test")
+			//			//	.Subtype(s => s.Identifier("AnID"))
+			//			//	.Query(c => c.Bool(v => v.Tag("some_tag"))));
 
-			//var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
+			//			//var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
 
-			//ec.SomeEndpoint(c => c
-			//	.Name("Descriptor test")
-			//	.Subtype(descriptor)
-			//	.Query(c => c.Boosting(v => v.BoostAmount(10))));
+			//			//ec.SomeEndpoint(c => c
+			//			//	.Name("Descriptor test")
+			//			//	.Subtype(descriptor)
+			//			//	.Query(c => c.Boosting(v => v.BoostAmount(10))));
 
-			//ec.SomeEndpoint(c => c
-			//	.Name("Mixed object and descriptor test")
-			//	.Subtype(new ClusterSubtype { Identifier = "AnID" }));
+			//			//ec.SomeEndpoint(c => c
+			//			//	.Name("Mixed object and descriptor test")
+			//			//	.Subtype(new ClusterSubtype { Identifier = "AnID" }));
 
-			//var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
+			//			//var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
 
-			//ec.SomeEndpoint(requestDescriptor);
+			//			//ec.SomeEndpoint(requestDescriptor);
 
-			//var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
+			//			//var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
 
-			//var container = boolQuery.WrapInContainer();
+			//			//var container = boolQuery.WrapInContainer();
 
-			//if (container.TryGetBoolQuery(out boolQuery))
+			//			//if (container.TryGetBoolQuery(out boolQuery))
+			//			//{
+			//			//	Console.WriteLine(boolQuery.Tag);
+			//			//}
+
+			//			ec.CombinedEndpoint(r => r.WithName("Steve").WithThing(t => t.WithTitle("Title")));
+
+
+
+
+			//var client = new ElasticClient();
+
+			//var searchAgain = new SearchRequest()
 			//{
-			//	Console.WriteLine(boolQuery.Tag);
-			//}
+			//	Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
+			//	MinScore = 10.0,
+			//	Profile = true
+			//};
 
-			ec.CombinedEndpoint(r => r.WithName("Steve").WithThing(t => t.WithTitle("Title")));
+			//var jsonStream = new MemoryStream();
+			//client.ElasticsearchClientSettings.RequestResponseSerializer.Serialize(searchAgain, jsonStream);
+			//jsonStream.Position = 0;
+			//var json = Encoding.UTF8.GetString(jsonStream.ToArray());
 
+			//var response = client.Search<Person>(searchAgain);
 
+			//// TODO: The original search request includes header parsing as the config is cached - we should reset this on the product check flow?
 
+			//response = client.Search<Person>(searchAgain);
 
-			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://azure.es.eastus.azure.elastic-cloud.com:9243/"))
-				.CertificateFingerprint("1E69964DFF1259B9ADE47556144E501F381A84B07E5EEC84B81ECF7D4B850C1D")
-				.Authentication(new BasicAuthentication("elastic", "Z9vNfZN86RxHJ97Poi1BYhC6")));
-
-			IndexName index = "test";
-
-			var stream = new MemoryStream();
-			client.ElasticsearchClientSettings.RequestResponseSerializer.Serialize(index, stream);
-			stream.Position = 0;
-			var j1 = Encoding.UTF8.GetString(stream.ToArray());
-
-
-			// client.ElasticsearchClientSettings.ResponseHeadersToParse
-
-			var searchAgain = new SearchRequest()
-			{
-				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
-				MinScore = 10.0,
-				Profile = true,
-				RequestConfiguration = new RequestConfiguration() { ResponseHeadersToParse = new HeadersList("made-up") }
-			};
-
-			var response = client.Search<Person>(searchAgain);
-
-			// TODO: The original search request includes header parsing as the config is cached - we should reset this on the product check flow?
-
-			response = client.Search<Person>(searchAgain);
-
-			//var response = client.Transport.Request<BytesResponse>(HttpMethod.GET, "test");
+			////var response = client.Transport.Request<BytesResponse>(HttpMethod.GET, "test");
 
 
+
+			////var stream = new MemoryStream();
+			////IMatchQuery match = new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" };
+			////client.ElasticsearchClientSettings.SourceSerializer.Serialize(match, stream);
+			////stream.Position = 0;
+			////var json = Encoding.UTF8.GetString(stream.ToArray());
+
+			////var matchAll = new QueryContainer(new MatchAllQuery() { QueryName = "test_query" });
+			////var boolQuery = new QueryContainer(new BoolQuery() { Filter = new[] { new QueryContainer(new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" }) }});
+
+			//var search = new SearchRequest()
+			//{
+			//	Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
+			//	MinScore = 10.0,
+			//	Profile = true
+			//};
 
 			//var stream = new MemoryStream();
-			//IMatchQuery match = new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" };
-			//client.ElasticsearchClientSettings.SourceSerializer.Serialize(match, stream);
+			//client.ElasticsearchClientSettings.SourceSerializer.Serialize(search, stream);
+			//stream.Position = 0;
+			//var json1 = Encoding.UTF8.GetString(stream.ToArray());
+
+			//ISearchRequest d = new SearchRequestDescriptor().MinScore(10.0).Profile(true);
+
+			//var newStream = new MemoryStream();
+			//client.ElasticsearchClientSettings.SourceSerializer.Serialize(d, newStream);
 			//stream.Position = 0;
 			//var json = Encoding.UTF8.GetString(stream.ToArray());
 
-			//var matchAll = new QueryContainer(new MatchAllQuery() { QueryName = "test_query" });
-			//var boolQuery = new QueryContainer(new BoolQuery() { Filter = new[] { new QueryContainer(new MatchQuery() { QueryName = "test_match", Field = "firstName", Query = "Steve" }) }});
+			//if (json.Length > 0)
+			//	Console.WriteLine(json);
 
-			var search = new SearchRequest()
-			{
-				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
-				MinScore = 10.0,
-				Profile = true
-			};
+			//var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+			//var request = client.ElasticsearchClientSettings.SourceSerializer.Deserialize<ISearchRequest>(jsonStream);
 
-			var stream1 = new MemoryStream();
-			client.ElasticsearchClientSettings.SourceSerializer.Serialize(search, stream1);
-			stream1.Position = 0;
-			var json1 = Encoding.UTF8.GetString(stream1.ToArray());
-
-			ISearchRequest d = new SearchRequestDescriptor().MinScore(10.0).Profile(true);
-
-			var newStream = new MemoryStream();
-			client.ElasticsearchClientSettings.SourceSerializer.Serialize(d, newStream);
-			stream.Position = 0;
-			var json = Encoding.UTF8.GetString(stream.ToArray());
-
-			if (json.Length > 0)
-				Console.WriteLine(json);
-
-			var jsonStream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-			var request = client.ElasticsearchClientSettings.SourceSerializer.Deserialize<ISearchRequest>(jsonStream);
-
-			if (request is not null)
-				Console.WriteLine("DONE");
+			//if (request is not null)
+			//	Console.WriteLine("DONE");
 
 			//var response = await client.SearchAsync<Person>(search);
 

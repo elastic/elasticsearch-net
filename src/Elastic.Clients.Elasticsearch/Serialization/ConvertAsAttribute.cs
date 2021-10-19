@@ -21,31 +21,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Type ConverterType { get; }
 	}
 
-	// This would be generated per interface
-	// Add new attribute to interface: [InterfaceConverterAttribute(typeof(SearchRequestInterfaceConverter<SearchRequest>))]
-	public class SearchRequestInterfaceConverter<TReadAs> : JsonConverter<ISearchRequest> where TReadAs : class, ISearchRequest
+	public class SimpleInterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface> where TConcrete : class, TInterface
 	{
-		public override ISearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-			JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+			JsonSerializer.Deserialize<TConcrete>(ref reader, options);
 
-		public override void Write(Utf8JsonWriter writer, ISearchRequest value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-
-			if (value.MinScore.HasValue)
-			{
-				writer.WritePropertyName("min_score");
-				writer.WriteNumberValue(value.MinScore.Value);
-			}
-
-			if (value.Profile.HasValue)
-			{
-				writer.WritePropertyName("profile");
-				writer.WriteBooleanValue(value.Profile.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options)
+			=> JsonSerializer.Serialize(writer, value, typeof(TConcrete), options);
 	}
 
 	public class InterfaceConverterFactory : JsonConverterFactory

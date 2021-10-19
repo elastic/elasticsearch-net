@@ -44,9 +44,9 @@
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
-        "requested": "[16.5.0, )",
-        "resolved": "16.5.0",
-        "contentHash": "yHZOhVSPuGqgHi+KhHiAZqNY08avkQraXKvgKgDU8c/ztmGzw7gmukkv49EaTq6T3xmp4XroWk3gAlbJHMxl8w=="
+        "requested": "[16.11.0, )",
+        "resolved": "16.11.0",
+        "contentHash": "f4mbG1SUSkNWF5p7B3Y8ZxMsvKhxCmpZhdl+w6tMtLSUGE7Izi1syU6TkmKOvB2BV66pdbENConFAISOix4ohQ=="
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",

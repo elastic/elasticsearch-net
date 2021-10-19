@@ -1,6 +1,5 @@
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Transport;
 using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
@@ -10,7 +9,7 @@ using HttpMethod = Elastic.Transport.HttpMethod;
 namespace Tests.Cluster.ClusterHealth
 {
 	public class ClusterHealthApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, HealthResponse, IHealthRequest, HealthDescriptor,	HealthRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterHealthResponse, IClusterHealthRequest, ClusterHealthRequestDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -27,7 +26,7 @@ namespace Tests.Cluster.ClusterHealth
 		);
 
 		// TODO - Update these assertions once cluster is seeded
-		protected override void ExpectResponse(HealthResponse response)
+		protected override void ExpectResponse(ClusterHealthResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Status.Should().NotBe(Health.Red);
