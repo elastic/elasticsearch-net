@@ -1137,6 +1137,17 @@ namespace Elasticsearch.Net
 	{
 	}
 
+	///<summary>Request options for KnnSearch <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</para></summary>
+	public class KnnSearchRequestParameters : RequestParameters<KnnSearchRequestParameters>
+	{
+		///<summary>A comma-separated list of specific routing values</summary>
+		public string[] Routing
+		{
+			get => Q<string[]>("routing");
+			set => Q("routing", value);
+		}
+	}
+
 	///<summary>Request options for MultiGet <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</para></summary>
 	public class MultiGetRequestParameters : RequestParameters<MultiGetRequestParameters>
 	{

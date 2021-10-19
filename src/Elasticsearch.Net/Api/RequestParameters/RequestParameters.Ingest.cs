@@ -77,6 +77,13 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	///<summary>Request options for PutPipeline <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html</para></summary>
 	public class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters>
 	{
+		///<summary>Required version for optimistic concurrency control for pipeline updates</summary>
+		public int? IfVersion
+		{
+			get => Q<int? >("if_version");
+			set => Q("if_version", value);
+		}
+
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{

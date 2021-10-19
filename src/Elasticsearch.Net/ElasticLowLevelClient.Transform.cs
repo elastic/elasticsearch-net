@@ -161,5 +161,14 @@ namespace Elasticsearch.Net.Specification.TransformApi
 		[MapsApi("transform.update_transform", "transform_id, body")]
 		public Task<TResponse> UpdateAsync<TResponse>(string transformId, PostData body, UpdateTransformRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_transform/{transformId:transformId}/_update"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_transform/_upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Upgrades<TResponse>(UpgradeTransformsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, "_transform/_upgrade", null, RequestParams(requestParameters));
+		///<summary>POST on /_transform/_upgrade <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html</para></summary>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("transform.upgrade_transforms", "")]
+		public Task<TResponse> UpgradesAsync<TResponse>(UpgradeTransformsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, "_transform/_upgrade", ctx, null, RequestParams(requestParameters));
 	}
 }
