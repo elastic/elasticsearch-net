@@ -17,12 +17,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	[ConvertAs(typeof(AdjacencyMatrixAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IAdjacencyMatrixAggregation, AdjacencyMatrixAggregation>))]
 	public partial interface IAdjacencyMatrixAggregation : Aggregations.IAggregationContainerVariant
 	{
 		Dictionary<string, QueryDsl.IQueryContainer>? Filters { get; set; }
@@ -41,18 +42,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object>? Meta { get; init; }
 	}
 
-	[ConvertAs(typeof(Aggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IAggregation, Aggregation>))]
 	public partial interface IAggregation
 	{
 		Dictionary<string, object>? Meta { get; set; }
@@ -76,24 +69,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void WrapInContainer(IAggregationContainer container);
 	}
 
-	[ConvertAs(typeof(AggregationContainer))]
+	[InterfaceConverterAttribute(typeof(AggregationContainerDescriptorConverter<AggregationContainer>))]
 	public partial interface IAggregationContainer
 	{
 		[JsonInclude]
-		[JsonPropertyName("aggs")]
-		Dictionary<string, Aggregations.IAggregationContainer>? Aggs { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		Dictionary<string, object>? Meta { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("adjacency_matrix")]
 		Aggregations.IAdjacencyMatrixAggregation? AdjacencyMatrix { get; set; }
-
-		//[JsonInclude]
-		//[JsonPropertyName("aggregations")]
-		//Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("auto_date_histogram")]
@@ -370,6 +351,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("variable_width_histogram")]
 		Aggregations.IVariableWidthHistogramAggregation? VariableWidthHistogram { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("aggs")]
+		Dictionary<string, Aggregations.IAggregationContainer>? Aggs { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		Dictionary<string, object>? Meta { get; set; }
 	}
 
 	public partial class AggregationContainer : Aggregations.IAggregationContainer
@@ -382,7 +371,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		private Aggregations.IAdjacencyMatrixAggregation? _adjacencyMatrix;
-		//private Dictionary<string, Aggregations.IAggregationContainer>? _aggregations;
 		private Aggregations.IAutoDateHistogramAggregation? _autoDateHistogram;
 		private Aggregations.IAverageAggregation? _avg;
 		private Aggregations.IAverageBucketAggregation? _avgBucket;
@@ -453,8 +441,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		private Aggregations.IWeightedAverageAggregation? _weightedAvg;
 		private Aggregations.IVariableWidthHistogramAggregation? _variableWidthHistogram;
 		Aggregations.IAdjacencyMatrixAggregation? IAggregationContainer.AdjacencyMatrix { get => _adjacencyMatrix; set => _adjacencyMatrix = Set(value); }
-
-		//Dictionary<string, Aggregations.IAggregationContainer>? IAggregationContainer.Aggregations { get => _aggregations; set => _aggregations = Set(value); }
 
 		Aggregations.IAutoDateHistogramAggregation? IAggregationContainer.AutoDateHistogram { get => _autoDateHistogram; set => _autoDateHistogram = Set(value); }
 
@@ -617,13 +603,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public partial class AggregationContainerDescriptor : IAggregationContainer
 	{
-		Dictionary<string, Aggregations.IAggregationContainer>? IAggregationContainer.Aggs { get; set; }
-
-		Dictionary<string, object>? IAggregationContainer.Meta { get; set; }
-
 		Aggregations.IAdjacencyMatrixAggregation? IAggregationContainer.AdjacencyMatrix { get; set; }
-
-		//Dictionary<string, Aggregations.IAggregationContainer>? IAggregationContainer.Aggregations { get; set; }
 
 		Aggregations.IAutoDateHistogramAggregation? IAggregationContainer.AutoDateHistogram { get; set; }
 
@@ -762,9 +742,455 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Aggregations.IWeightedAverageAggregation? IAggregationContainer.WeightedAvg { get; set; }
 
 		Aggregations.IVariableWidthHistogramAggregation? IAggregationContainer.VariableWidthHistogram { get; set; }
+
+		Dictionary<string, Aggregations.IAggregationContainer>? IAggregationContainer.Aggs { get; set; }
+
+		Dictionary<string, object>? IAggregationContainer.Meta { get; set; }
 	}
 
-	[ConvertAs(typeof(AggregationRange))]
+	public class AggregationContainerDescriptorConverter<TReadAs> : JsonConverter<IAggregationContainer> where TReadAs : class, IAggregationContainer
+	{
+		public override IAggregationContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IAggregationContainer value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.AdjacencyMatrix is not null)
+			{
+				writer.WritePropertyName("adjacency_matrix");
+				JsonSerializer.Serialize(writer, value.AdjacencyMatrix, options);
+			}
+
+			if (value.AutoDateHistogram is not null)
+			{
+				writer.WritePropertyName("auto_date_histogram");
+				JsonSerializer.Serialize(writer, value.AutoDateHistogram, options);
+			}
+
+			if (value.Avg is not null)
+			{
+				writer.WritePropertyName("avg");
+				JsonSerializer.Serialize(writer, value.Avg, options);
+			}
+
+			if (value.AvgBucket is not null)
+			{
+				writer.WritePropertyName("avg_bucket");
+				JsonSerializer.Serialize(writer, value.AvgBucket, options);
+			}
+
+			if (value.Boxplot is not null)
+			{
+				writer.WritePropertyName("boxplot");
+				JsonSerializer.Serialize(writer, value.Boxplot, options);
+			}
+
+			if (value.BucketScript is not null)
+			{
+				writer.WritePropertyName("bucket_script");
+				JsonSerializer.Serialize(writer, value.BucketScript, options);
+			}
+
+			if (value.BucketSelector is not null)
+			{
+				writer.WritePropertyName("bucket_selector");
+				JsonSerializer.Serialize(writer, value.BucketSelector, options);
+			}
+
+			if (value.BucketSort is not null)
+			{
+				writer.WritePropertyName("bucket_sort");
+				JsonSerializer.Serialize(writer, value.BucketSort, options);
+			}
+
+			if (value.Cardinality is not null)
+			{
+				writer.WritePropertyName("cardinality");
+				JsonSerializer.Serialize(writer, value.Cardinality, options);
+			}
+
+			if (value.Children is not null)
+			{
+				writer.WritePropertyName("children");
+				JsonSerializer.Serialize(writer, value.Children, options);
+			}
+
+			if (value.Composite is not null)
+			{
+				writer.WritePropertyName("composite");
+				JsonSerializer.Serialize(writer, value.Composite, options);
+			}
+
+			if (value.CumulativeCardinality is not null)
+			{
+				writer.WritePropertyName("cumulative_cardinality");
+				JsonSerializer.Serialize(writer, value.CumulativeCardinality, options);
+			}
+
+			if (value.CumulativeSum is not null)
+			{
+				writer.WritePropertyName("cumulative_sum");
+				JsonSerializer.Serialize(writer, value.CumulativeSum, options);
+			}
+
+			if (value.DateHistogram is not null)
+			{
+				writer.WritePropertyName("date_histogram");
+				JsonSerializer.Serialize(writer, value.DateHistogram, options);
+			}
+
+			if (value.DateRange is not null)
+			{
+				writer.WritePropertyName("date_range");
+				JsonSerializer.Serialize(writer, value.DateRange, options);
+			}
+
+			if (value.Derivative is not null)
+			{
+				writer.WritePropertyName("derivative");
+				JsonSerializer.Serialize(writer, value.Derivative, options);
+			}
+
+			if (value.DiversifiedSampler is not null)
+			{
+				writer.WritePropertyName("diversified_sampler");
+				JsonSerializer.Serialize(writer, value.DiversifiedSampler, options);
+			}
+
+			if (value.ExtendedStats is not null)
+			{
+				writer.WritePropertyName("extended_stats");
+				JsonSerializer.Serialize(writer, value.ExtendedStats, options);
+			}
+
+			if (value.ExtendedStatsBucket is not null)
+			{
+				writer.WritePropertyName("extended_stats_bucket");
+				JsonSerializer.Serialize(writer, value.ExtendedStatsBucket, options);
+			}
+
+			if (value.Filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.Filter, options);
+			}
+
+			if (value.Filters is not null)
+			{
+				writer.WritePropertyName("filters");
+				JsonSerializer.Serialize(writer, value.Filters, options);
+			}
+
+			if (value.GeoBounds is not null)
+			{
+				writer.WritePropertyName("geo_bounds");
+				JsonSerializer.Serialize(writer, value.GeoBounds, options);
+			}
+
+			if (value.GeoCentroid is not null)
+			{
+				writer.WritePropertyName("geo_centroid");
+				JsonSerializer.Serialize(writer, value.GeoCentroid, options);
+			}
+
+			if (value.GeoDistance is not null)
+			{
+				writer.WritePropertyName("geo_distance");
+				JsonSerializer.Serialize(writer, value.GeoDistance, options);
+			}
+
+			if (value.GeohashGrid is not null)
+			{
+				writer.WritePropertyName("geohash_grid");
+				JsonSerializer.Serialize(writer, value.GeohashGrid, options);
+			}
+
+			if (value.GeoLine is not null)
+			{
+				writer.WritePropertyName("geo_line");
+				JsonSerializer.Serialize(writer, value.GeoLine, options);
+			}
+
+			if (value.GeotileGrid is not null)
+			{
+				writer.WritePropertyName("geotile_grid");
+				JsonSerializer.Serialize(writer, value.GeotileGrid, options);
+			}
+
+			if (value.Global is not null)
+			{
+				writer.WritePropertyName("global");
+				JsonSerializer.Serialize(writer, value.Global, options);
+			}
+
+			if (value.Histogram is not null)
+			{
+				writer.WritePropertyName("histogram");
+				JsonSerializer.Serialize(writer, value.Histogram, options);
+			}
+
+			if (value.IpRange is not null)
+			{
+				writer.WritePropertyName("ip_range");
+				JsonSerializer.Serialize(writer, value.IpRange, options);
+			}
+
+			if (value.Inference is not null)
+			{
+				writer.WritePropertyName("inference");
+				JsonSerializer.Serialize(writer, value.Inference, options);
+			}
+
+			if (value.Line is not null)
+			{
+				writer.WritePropertyName("line");
+				JsonSerializer.Serialize(writer, value.Line, options);
+			}
+
+			if (value.MatrixStats is not null)
+			{
+				writer.WritePropertyName("matrix_stats");
+				JsonSerializer.Serialize(writer, value.MatrixStats, options);
+			}
+
+			if (value.Max is not null)
+			{
+				writer.WritePropertyName("max");
+				JsonSerializer.Serialize(writer, value.Max, options);
+			}
+
+			if (value.MaxBucket is not null)
+			{
+				writer.WritePropertyName("max_bucket");
+				JsonSerializer.Serialize(writer, value.MaxBucket, options);
+			}
+
+			if (value.MedianAbsoluteDeviation is not null)
+			{
+				writer.WritePropertyName("median_absolute_deviation");
+				JsonSerializer.Serialize(writer, value.MedianAbsoluteDeviation, options);
+			}
+
+			if (value.Min is not null)
+			{
+				writer.WritePropertyName("min");
+				JsonSerializer.Serialize(writer, value.Min, options);
+			}
+
+			if (value.MinBucket is not null)
+			{
+				writer.WritePropertyName("min_bucket");
+				JsonSerializer.Serialize(writer, value.MinBucket, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.MovingAvg is not null)
+			{
+				writer.WritePropertyName("moving_avg");
+				JsonSerializer.Serialize(writer, value.MovingAvg, options);
+			}
+
+			if (value.MovingPercentiles is not null)
+			{
+				writer.WritePropertyName("moving_percentiles");
+				JsonSerializer.Serialize(writer, value.MovingPercentiles, options);
+			}
+
+			if (value.MovingFn is not null)
+			{
+				writer.WritePropertyName("moving_fn");
+				JsonSerializer.Serialize(writer, value.MovingFn, options);
+			}
+
+			if (value.MultiTerms is not null)
+			{
+				writer.WritePropertyName("multi_terms");
+				JsonSerializer.Serialize(writer, value.MultiTerms, options);
+			}
+
+			if (value.Nested is not null)
+			{
+				writer.WritePropertyName("nested");
+				JsonSerializer.Serialize(writer, value.Nested, options);
+			}
+
+			if (value.Normalize is not null)
+			{
+				writer.WritePropertyName("normalize");
+				JsonSerializer.Serialize(writer, value.Normalize, options);
+			}
+
+			if (value.Parent is not null)
+			{
+				writer.WritePropertyName("parent");
+				JsonSerializer.Serialize(writer, value.Parent, options);
+			}
+
+			if (value.PercentileRanks is not null)
+			{
+				writer.WritePropertyName("percentile_ranks");
+				JsonSerializer.Serialize(writer, value.PercentileRanks, options);
+			}
+
+			if (value.Percentiles is not null)
+			{
+				writer.WritePropertyName("percentiles");
+				JsonSerializer.Serialize(writer, value.Percentiles, options);
+			}
+
+			if (value.PercentilesBucket is not null)
+			{
+				writer.WritePropertyName("percentiles_bucket");
+				JsonSerializer.Serialize(writer, value.PercentilesBucket, options);
+			}
+
+			if (value.Range is not null)
+			{
+				writer.WritePropertyName("range");
+				JsonSerializer.Serialize(writer, value.Range, options);
+			}
+
+			if (value.RareTerms is not null)
+			{
+				writer.WritePropertyName("rare_terms");
+				JsonSerializer.Serialize(writer, value.RareTerms, options);
+			}
+
+			if (value.Rate is not null)
+			{
+				writer.WritePropertyName("rate");
+				JsonSerializer.Serialize(writer, value.Rate, options);
+			}
+
+			if (value.ReverseNested is not null)
+			{
+				writer.WritePropertyName("reverse_nested");
+				JsonSerializer.Serialize(writer, value.ReverseNested, options);
+			}
+
+			if (value.Sampler is not null)
+			{
+				writer.WritePropertyName("sampler");
+				JsonSerializer.Serialize(writer, value.Sampler, options);
+			}
+
+			if (value.ScriptedMetric is not null)
+			{
+				writer.WritePropertyName("scripted_metric");
+				JsonSerializer.Serialize(writer, value.ScriptedMetric, options);
+			}
+
+			if (value.SerialDiff is not null)
+			{
+				writer.WritePropertyName("serial_diff");
+				JsonSerializer.Serialize(writer, value.SerialDiff, options);
+			}
+
+			if (value.SignificantTerms is not null)
+			{
+				writer.WritePropertyName("significant_terms");
+				JsonSerializer.Serialize(writer, value.SignificantTerms, options);
+			}
+
+			if (value.SignificantText is not null)
+			{
+				writer.WritePropertyName("significant_text");
+				JsonSerializer.Serialize(writer, value.SignificantText, options);
+			}
+
+			if (value.Stats is not null)
+			{
+				writer.WritePropertyName("stats");
+				JsonSerializer.Serialize(writer, value.Stats, options);
+			}
+
+			if (value.StatsBucket is not null)
+			{
+				writer.WritePropertyName("stats_bucket");
+				JsonSerializer.Serialize(writer, value.StatsBucket, options);
+			}
+
+			if (value.StringStats is not null)
+			{
+				writer.WritePropertyName("string_stats");
+				JsonSerializer.Serialize(writer, value.StringStats, options);
+			}
+
+			if (value.Sum is not null)
+			{
+				writer.WritePropertyName("sum");
+				JsonSerializer.Serialize(writer, value.Sum, options);
+			}
+
+			if (value.SumBucket is not null)
+			{
+				writer.WritePropertyName("sum_bucket");
+				JsonSerializer.Serialize(writer, value.SumBucket, options);
+			}
+
+			if (value.Terms is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, value.Terms, options);
+			}
+
+			if (value.TopHits is not null)
+			{
+				writer.WritePropertyName("top_hits");
+				JsonSerializer.Serialize(writer, value.TopHits, options);
+			}
+
+			if (value.TTest is not null)
+			{
+				writer.WritePropertyName("t_test");
+				JsonSerializer.Serialize(writer, value.TTest, options);
+			}
+
+			if (value.TopMetrics is not null)
+			{
+				writer.WritePropertyName("top_metrics");
+				JsonSerializer.Serialize(writer, value.TopMetrics, options);
+			}
+
+			if (value.ValueCount is not null)
+			{
+				writer.WritePropertyName("value_count");
+				JsonSerializer.Serialize(writer, value.ValueCount, options);
+			}
+
+			if (value.WeightedAvg is not null)
+			{
+				writer.WritePropertyName("weighted_avg");
+				JsonSerializer.Serialize(writer, value.WeightedAvg, options);
+			}
+
+			if (value.VariableWidthHistogram is not null)
+			{
+				writer.WritePropertyName("variable_width_histogram");
+				JsonSerializer.Serialize(writer, value.VariableWidthHistogram, options);
+			}
+
+			if (value.Aggs is not null)
+			{
+				writer.WritePropertyName("aggs");
+				JsonSerializer.Serialize(writer, value.Aggs, options);
+			}
+
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(AggregationRangeDescriptorConverter<AggregationRange>))]
 	public partial interface IAggregationRange
 	{
 		Union<double?, string?>? From { get; set; }
@@ -798,22 +1224,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Union<double?, string?>? IAggregationRange.To { get; set; }
 	}
 
+	public class AggregationRangeDescriptorConverter<TReadAs> : JsonConverter<IAggregationRange> where TReadAs : class, IAggregationRange
+	{
+		public override IAggregationRange Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IAggregationRange value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.From is not null)
+			{
+				writer.WritePropertyName("from");
+				JsonSerializer.Serialize(writer, value.From, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Key))
+			{
+				writer.WritePropertyName("key");
+				writer.WriteStringValue(value.Key);
+			}
+
+			if (value.To is not null)
+			{
+				writer.WritePropertyName("to");
+				JsonSerializer.Serialize(writer, value.To, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class AutoDateHistogramAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
 	{
 		[JsonInclude]
 		[JsonPropertyName("interval")]
-		public string Interval
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Interval { get; init; }
 	}
 
-	[ConvertAs(typeof(AutoDateHistogramAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IAutoDateHistogramAggregation, AutoDateHistogramAggregation>))]
 	public partial interface IAutoDateHistogramAggregation : Aggregations.IAggregationContainerVariant
 	{
 		int? Buckets { get; set; }
@@ -822,7 +1268,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		string? Format { get; set; }
 
-		Aggregations.MinimumInterval? MinimumInterval { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
 		string? Missing { get; set; }
 
@@ -830,7 +1276,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		Dictionary<string, object>? Params { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		string? TimeZone { get; set; }
 	}
@@ -851,7 +1297,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("minimum_interval")]
-		public Aggregations.MinimumInterval? MinimumInterval { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
@@ -867,7 +1313,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_zone")]
@@ -876,7 +1322,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.AutoDateHistogram = this;
 	}
 
-	[ConvertAs(typeof(AverageAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IAverageAggregation, AverageAggregation>))]
 	public partial interface IAverageAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -886,7 +1332,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Avg = this;
 	}
 
-	[ConvertAs(typeof(AverageBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IAverageBucketAggregation, AverageBucketAggregation>))]
 	public partial interface IAverageBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -900,66 +1346,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public double Min
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Min { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public double Max
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Max { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("q1")]
-		public double Q1
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Q1 { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("q2")]
-		public double Q2
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Q2 { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("q3")]
-		public double Q3
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Q3 { get; init; }
 	}
 
-	[ConvertAs(typeof(BoxplotAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IBoxplotAggregation, BoxplotAggregation>))]
 	public partial interface IBoxplotAggregation : Aggregations.IAggregationContainerVariant
 	{
 		double? Compression { get; set; }
@@ -978,90 +1384,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("after_key")]
-		public Dictionary<string, object> AfterKey
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object> AfterKey { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("bg_count")]
-		public object BgCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object BgCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object DocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
-		public object DocCountErrorUpperBound
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object DocCountErrorUpperBound { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_other_doc_count")]
-		public object SumOtherDocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object SumOtherDocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("interval")]
-		public string Interval
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Interval { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("items")]
-		public Aggregations.Bucket Items
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.Aggregations.Bucket Items { get; init; }
 	}
 
-	[ConvertAs(typeof(BucketAggregationBase))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IBucketAggregationBase, BucketAggregationBase>))]
 	public partial interface IBucketAggregationBase
 	{
 		Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
@@ -1074,46 +1424,46 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, Aggregations.IAggregationContainer>? Aggregations { get; set; }
 	}
 
-	[ConvertAs(typeof(BucketScriptAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IBucketScriptAggregation, BucketScriptAggregation>))]
 	public partial interface IBucketScriptAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public partial class BucketScriptAggregation : Aggregations.PipelineAggregationBase, Aggregations.IBucketScriptAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.BucketScript = this;
 	}
 
-	[ConvertAs(typeof(BucketSelectorAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IBucketSelectorAggregation, BucketSelectorAggregation>))]
 	public partial interface IBucketSelectorAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public partial class BucketSelectorAggregation : Aggregations.PipelineAggregationBase, Aggregations.IBucketSelectorAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.BucketSelector = this;
 	}
 
-	[ConvertAs(typeof(BucketSortAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IBucketSortAggregation, BucketSortAggregation>))]
 	public partial interface IBucketSortAggregation : Aggregations.IAggregationContainerVariant
 	{
 		int? From { get; set; }
 
-		Aggregations.GapPolicy? GapPolicy { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 		int? Size { get; set; }
 
-		Sort? Sort { get; set; }
+		Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 	}
 
 	public partial class BucketSortAggregation : Aggregations.Aggregation, Aggregations.IBucketSortAggregation
@@ -1124,7 +1474,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("gap_policy")]
-		public Aggregations.GapPolicy? GapPolicy { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -1132,12 +1482,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Sort? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.BucketSort = this;
 	}
 
-	[ConvertAs(typeof(CardinalityAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ICardinalityAggregation, CardinalityAggregation>))]
 	public partial interface ICardinalityAggregation : Aggregations.IAggregationContainerVariant
 	{
 		int? PrecisionThreshold { get; set; }
@@ -1158,7 +1508,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Cardinality = this;
 	}
 
-	[ConvertAs(typeof(ChildrenAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IChildrenAggregation, ChildrenAggregation>))]
 	public partial interface IChildrenAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Type { get; set; }
@@ -1173,7 +1523,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Children = this;
 	}
 
-	[ConvertAs(typeof(ChiSquareHeuristic))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IChiSquareHeuristic, ChiSquareHeuristic>))]
 	public partial interface IChiSquareHeuristic
 	{
 		bool BackgroundIsSuperset { get; set; }
@@ -1192,7 +1542,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool IncludeNegatives { get; set; }
 	}
 
-	[ConvertAs(typeof(ClassificationInferenceOptions))]
+	[InterfaceConverterAttribute(typeof(ClassificationInferenceOptionsDescriptorConverter<ClassificationInferenceOptions>))]
 	public partial interface IClassificationInferenceOptions
 	{
 		int? NumTopClasses { get; set; }
@@ -1242,9 +1592,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string? IClassificationInferenceOptions.TopClassesResultsField { get; set; }
 	}
 
-	[ConvertAs(typeof(CompositeAggregation))]
+	public class ClassificationInferenceOptionsDescriptorConverter<TReadAs> : JsonConverter<IClassificationInferenceOptions> where TReadAs : class, IClassificationInferenceOptions
+	{
+		public override IClassificationInferenceOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IClassificationInferenceOptions value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.NumTopClasses.HasValue)
+			{
+				writer.WritePropertyName("num_top_classes");
+				writer.WriteNumberValue(value.NumTopClasses.Value);
+			}
+
+			if (value.NumTopFeatureImportanceValues.HasValue)
+			{
+				writer.WritePropertyName("num_top_feature_importance_values");
+				writer.WriteNumberValue(value.NumTopFeatureImportanceValues.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.PredictionFieldType))
+			{
+				writer.WritePropertyName("prediction_field_type");
+				writer.WriteStringValue(value.PredictionFieldType);
+			}
+
+			if (!string.IsNullOrEmpty(value.ResultsField))
+			{
+				writer.WritePropertyName("results_field");
+				writer.WriteStringValue(value.ResultsField);
+			}
+
+			if (!string.IsNullOrEmpty(value.TopClassesResultsField))
+			{
+				writer.WritePropertyName("top_classes_results_field");
+				writer.WriteStringValue(value.TopClassesResultsField);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ICompositeAggregation, CompositeAggregation>))]
 	public partial interface ICompositeAggregation : Aggregations.IAggregationContainerVariant
 	{
+		Dictionary<string, object>? After { get; set; }
+
 		int? Size { get; set; }
 
 		IEnumerable<Dictionary<string, Aggregations.ICompositeAggregationSource>>? Sources { get; set; }
@@ -1252,6 +1644,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public partial class CompositeAggregation : Aggregations.BucketAggregationBase, Aggregations.ICompositeAggregation
 	{
+		[JsonInclude]
+		[JsonPropertyName("after")]
+		public Dictionary<string, object>? After { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
@@ -1263,7 +1659,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Composite = this;
 	}
 
-	[ConvertAs(typeof(CompositeAggregationSource))]
+	[InterfaceConverterAttribute(typeof(CompositeAggregationSourceDescriptorConverter<CompositeAggregationSource>))]
 	public partial interface ICompositeAggregationSource
 	{
 		Aggregations.ITermsAggregation? Terms { get; set; }
@@ -1305,6 +1701,40 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Aggregations.IGeoTileGridAggregation? ICompositeAggregationSource.GeotileGrid { get; set; }
 	}
 
+	public class CompositeAggregationSourceDescriptorConverter<TReadAs> : JsonConverter<ICompositeAggregationSource> where TReadAs : class, ICompositeAggregationSource
+	{
+		public override ICompositeAggregationSource Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, ICompositeAggregationSource value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Terms is not null)
+			{
+				writer.WritePropertyName("terms");
+				JsonSerializer.Serialize(writer, value.Terms, options);
+			}
+
+			if (value.Histogram is not null)
+			{
+				writer.WritePropertyName("histogram");
+				JsonSerializer.Serialize(writer, value.Histogram, options);
+			}
+
+			if (value.DateHistogram is not null)
+			{
+				writer.WritePropertyName("date_histogram");
+				JsonSerializer.Serialize(writer, value.DateHistogram, options);
+			}
+
+			if (value.GeotileGrid is not null)
+			{
+				writer.WritePropertyName("geotile_grid");
+				JsonSerializer.Serialize(writer, value.GeotileGrid, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class CompositeBucket
 	{
 	}
@@ -1313,18 +1743,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("after_key")]
-		public Dictionary<string, object> AfterKey
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, object> AfterKey { get; init; }
 	}
 
-	[ConvertAs(typeof(CumulativeCardinalityAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ICumulativeCardinalityAggregation, CumulativeCardinalityAggregation>))]
 	public partial interface ICumulativeCardinalityAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -1334,7 +1756,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.CumulativeCardinality = this;
 	}
 
-	[ConvertAs(typeof(CumulativeSumAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ICumulativeSumAggregation, CumulativeSumAggregation>))]
 	public partial interface ICumulativeSumAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -1344,30 +1766,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.CumulativeSum = this;
 	}
 
-	[ConvertAs(typeof(DateHistogramAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IDateHistogramAggregation, DateHistogramAggregation>))]
 	public partial interface IDateHistogramAggregation : Aggregations.IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
 	{
-		Union<Aggregations.DateInterval?, Time?>? CalendarInterval { get; set; }
+		Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? CalendarInterval { get; set; }
 
 		string? Field { get; set; }
 
-		Union<Aggregations.DateInterval?, Time?>? FixedInterval { get; set; }
+		Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? FixedInterval { get; set; }
 
 		string? Format { get; set; }
 
-		Union<Aggregations.DateInterval?, Time?>? Interval { get; set; }
+		Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? Interval { get; set; }
 
 		int? MinDocCount { get; set; }
 
 		string? Missing { get; set; }
 
-		Time? Offset { get; set; }
+		Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
 
 		Aggregations.IHistogramOrder? Order { get; set; }
 
 		Dictionary<string, object>? Params { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		string? TimeZone { get; set; }
 
@@ -1378,7 +1800,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
-		public Union<Aggregations.DateInterval?, Time?>? CalendarInterval { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? CalendarInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -1386,7 +1808,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("fixed_interval")]
-		public Union<Aggregations.DateInterval?, Time?>? FixedInterval { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? FixedInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -1394,7 +1816,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("interval")]
-		public Union<Aggregations.DateInterval?, Time?>? Interval { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? Interval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -1406,7 +1828,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]
-		public Time? Offset { get; set; }
+		public Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
@@ -1418,7 +1840,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_zone")]
@@ -1436,14 +1858,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	[ConvertAs(typeof(DateRangeAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IDateRangeAggregation, DateRangeAggregation>))]
 	public partial interface IDateRangeAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Field { get; set; }
 
 		string? Format { get; set; }
 
-		Aggregations.Missing? Missing { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		IEnumerable<Aggregations.IDateRangeExpression>? Ranges { get; set; }
 
@@ -1464,7 +1886,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Aggregations.Missing? Missing { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ranges")]
@@ -1481,7 +1903,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.DateRange = this;
 	}
 
-	[ConvertAs(typeof(DateRangeExpression))]
+	[InterfaceConverterAttribute(typeof(DateRangeExpressionDescriptorConverter<DateRangeExpression>))]
 	public partial interface IDateRangeExpression
 	{
 		Union<string?, float?>? From { get; set; }
@@ -1539,7 +1961,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		object? IDateRangeExpression.DocCount { get; set; }
 	}
 
-	[ConvertAs(typeof(DerivativeAggregation))]
+	public class DateRangeExpressionDescriptorConverter<TReadAs> : JsonConverter<IDateRangeExpression> where TReadAs : class, IDateRangeExpression
+	{
+		public override IDateRangeExpression Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IDateRangeExpression value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.From is not null)
+			{
+				writer.WritePropertyName("from");
+				JsonSerializer.Serialize(writer, value.From, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.FromAsString))
+			{
+				writer.WritePropertyName("from_as_string");
+				writer.WriteStringValue(value.FromAsString);
+			}
+
+			if (!string.IsNullOrEmpty(value.ToAsString))
+			{
+				writer.WritePropertyName("to_as_string");
+				writer.WriteStringValue(value.ToAsString);
+			}
+
+			if (!string.IsNullOrEmpty(value.Key))
+			{
+				writer.WritePropertyName("key");
+				writer.WriteStringValue(value.Key);
+			}
+
+			if (value.To is not null)
+			{
+				writer.WritePropertyName("to");
+				JsonSerializer.Serialize(writer, value.To, options);
+			}
+
+			if (value.DocCount is not null)
+			{
+				writer.WritePropertyName("doc_count");
+				JsonSerializer.Serialize(writer, value.DocCount, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IDerivativeAggregation, DerivativeAggregation>))]
 	public partial interface IDerivativeAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -1549,14 +2017,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Derivative = this;
 	}
 
-	[ConvertAs(typeof(DiversifiedSamplerAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IDiversifiedSamplerAggregation, DiversifiedSamplerAggregation>))]
 	public partial interface IDiversifiedSamplerAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
 		int? MaxDocsPerValue { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		int? ShardSize { get; set; }
 
@@ -1567,7 +2035,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
-		public Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs_per_value")]
@@ -1575,7 +2043,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
@@ -1592,18 +2060,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("alpha")]
-		public float? Alpha
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public float? Alpha { get; init; }
 	}
 
-	[ConvertAs(typeof(ExtendedBounds<>))]
 	public partial interface IExtendedBounds<T>
 	{
 		T Max { get; set; }
@@ -1626,102 +2085,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("std_deviation_bounds")]
-		public Aggregations.StandardDeviationBounds StdDeviationBounds
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds StdDeviationBounds { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_of_squares")]
-		public double? SumOfSquares
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? SumOfSquares { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance")]
-		public double? Variance
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? Variance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance_population")]
-		public double? VariancePopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? VariancePopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance_sampling")]
-		public double? VarianceSampling
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? VarianceSampling { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation")]
-		public double? StdDeviation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? StdDeviation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation_population")]
-		public double? StdDeviationPopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? StdDeviationPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation_sampling")]
-		public double? StdDeviationSampling
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? StdDeviationSampling { get; init; }
 	}
 
-	[ConvertAs(typeof(ExtendedStatsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IExtendedStatsAggregation, ExtendedStatsAggregation>))]
 	public partial interface IExtendedStatsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		double? Sigma { get; set; }
@@ -1736,7 +2131,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.ExtendedStats = this;
 	}
 
-	[ConvertAs(typeof(ExtendedStatsBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IExtendedStatsBucketAggregation, ExtendedStatsBucketAggregation>))]
 	public partial interface IExtendedStatsBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 		double? Sigma { get; set; }
@@ -1755,18 +2150,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
-		public Union<IReadOnlyCollection<Aggregations.FiltersBucketItem>, Dictionary<string, Aggregations.FiltersBucketItem>> Buckets
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>, Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>> Buckets { get; init; }
 	}
 
-	[ConvertAs(typeof(FiltersAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IFiltersAggregation, FiltersAggregation>))]
 	public partial interface IFiltersAggregation : Aggregations.IAggregationContainerVariant
 	{
 		Union<Dictionary<string, QueryDsl.IQueryContainer>?, IEnumerable<QueryDsl.IQueryContainer>?>? Filters { get; set; }
@@ -1803,18 +2190,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object DocCount { get; init; }
 	}
 
-	[ConvertAs(typeof(FormatMetricAggregationBase))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IFormatMetricAggregationBase, FormatMetricAggregationBase>))]
 	public partial interface IFormatMetricAggregationBase
 	{
 		string? Format { get; set; }
@@ -1827,7 +2206,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 	}
 
-	[ConvertAs(typeof(FormattableMetricAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IFormattableMetricAggregation, FormattableMetricAggregation>))]
 	public partial interface IFormattableMetricAggregation
 	{
 		string? Format { get; set; }
@@ -1840,7 +2219,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 	}
 
-	[ConvertAs(typeof(GeoBounds))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoBounds, GeoBounds>))]
 	public partial interface IGeoBounds
 	{
 		ILatLon BottomRight { get; set; }
@@ -1863,18 +2242,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("bounds")]
-		public Aggregations.IGeoBounds Bounds
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Aggregations.IGeoBounds Bounds { get; init; }
 	}
 
-	[ConvertAs(typeof(GeoBoundsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoBoundsAggregation, GeoBoundsAggregation>))]
 	public partial interface IGeoBoundsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		bool? WrapLongitude { get; set; }
@@ -1893,35 +2264,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("location")]
-		public QueryDsl.GeoLocation Location
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation Location { get; init; }
 	}
 
-	[ConvertAs(typeof(GeoCentroidAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoCentroidAggregation, GeoCentroidAggregation>))]
 	public partial interface IGeoCentroidAggregation : Aggregations.IAggregationContainerVariant
 	{
 		object? Count { get; set; }
 
-		QueryDsl.GeoLocation? Location { get; set; }
+		Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; set; }
 	}
 
 	public partial class GeoCentroidAggregation : Aggregations.MetricAggregationBase, Aggregations.IGeoCentroidAggregation
@@ -1932,30 +2287,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("location")]
-		public QueryDsl.GeoLocation? Location { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.GeoCentroid = this;
 	}
 
-	[ConvertAs(typeof(GeoDistanceAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoDistanceAggregation, GeoDistanceAggregation>))]
 	public partial interface IGeoDistanceAggregation : Aggregations.IAggregationContainerVariant
 	{
-		GeoDistanceType? DistanceType { get; set; }
+		Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
 		string? Field { get; set; }
 
-		Union<QueryDsl.GeoLocation?, string?>? Origin { get; set; }
+		Union<Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?, string?>? Origin { get; set; }
 
 		IEnumerable<Aggregations.IAggregationRange>? Ranges { get; set; }
 
-		DistanceUnit? Unit { get; set; }
+		Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 	}
 
 	public partial class GeoDistanceAggregation : Aggregations.BucketAggregationBase, Aggregations.IGeoDistanceAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("distance_type")]
-		public GeoDistanceType? DistanceType { get; set; }
+		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -1963,7 +2318,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("origin")]
-		public Union<QueryDsl.GeoLocation?, string?>? Origin { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?, string?>? Origin { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ranges")]
@@ -1971,12 +2326,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("unit")]
-		public DistanceUnit? Unit { get; set; }
+		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.GeoDistance = this;
 	}
 
-	[ConvertAs(typeof(GeoHashGridAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoHashGridAggregation, GeoHashGridAggregation>))]
 	public partial interface IGeoHashGridAggregation : Aggregations.IAggregationContainerVariant
 	{
 		QueryDsl.IBoundingBox? Bounds { get; set; }
@@ -2019,42 +2374,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Type { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("geometry")]
-		public Aggregations.LineStringGeoShape Geometry
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.Aggregations.LineStringGeoShape Geometry { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Aggregations.GeoLineProperties Properties
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineProperties Properties { get; init; }
 	}
 
-	[ConvertAs(typeof(GeoLineAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoLineAggregation, GeoLineAggregation>))]
 	public partial interface IGeoLineAggregation : Aggregations.IAggregationContainerVariant
 	{
 		Aggregations.IGeoLinePoint Point { get; set; }
@@ -2063,7 +2394,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		bool? IncludeSort { get; set; }
 
-		SortOrder? SortOrder { get; set; }
+		Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
 
 		int? Size { get; set; }
 	}
@@ -2084,7 +2415,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort_order")]
-		public SortOrder? SortOrder { get; set; }
+		public Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -2093,7 +2424,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.GeoLine = this;
 	}
 
-	[ConvertAs(typeof(GeoLinePoint))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoLinePoint, GeoLinePoint>))]
 	public partial interface IGeoLinePoint
 	{
 		string Field { get; set; }
@@ -2110,30 +2441,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("complete")]
-		public bool Complete
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool Complete { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort_values")]
-		public IReadOnlyCollection<double> SortValues
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<double> SortValues { get; init; }
 	}
 
-	[ConvertAs(typeof(GeoLineSort))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoLineSort, GeoLineSort>))]
 	public partial interface IGeoLineSort
 	{
 		string Field { get; set; }
@@ -2146,7 +2461,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Field { get; set; }
 	}
 
-	[ConvertAs(typeof(GeoTileGridAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGeoTileGridAggregation, GeoTileGridAggregation>))]
 	public partial interface IGeoTileGridAggregation : Aggregations.IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
 	{
 		string? Field { get; set; }
@@ -2186,7 +2501,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void TransformManagement.IPivotGroupByContainerVariant.WrapInContainer(TransformManagement.IPivotGroupByContainer container) => container.GeotileGrid = this;
 	}
 
-	[ConvertAs(typeof(GlobalAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGlobalAggregation, GlobalAggregation>))]
 	public partial interface IGlobalAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -2196,7 +2511,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Global = this;
 	}
 
-	[ConvertAs(typeof(GoogleNormalizedDistanceHeuristic))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IGoogleNormalizedDistanceHeuristic, GoogleNormalizedDistanceHeuristic>))]
 	public partial interface IGoogleNormalizedDistanceHeuristic
 	{
 		bool? BackgroundIsSuperset { get; set; }
@@ -2209,7 +2524,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? BackgroundIsSuperset { get; set; }
 	}
 
-	[ConvertAs(typeof(HdrMethod))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IHdrMethod, HdrMethod>))]
 	public partial interface IHdrMethod
 	{
 		int? NumberOfSignificantValueDigits { get; set; }
@@ -2226,45 +2541,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("key")]
-		public double Key
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Key { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public double Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Value { get; init; }
 	}
 
 	public partial class HdrPercentilesAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("values")]
-		public IReadOnlyCollection<Aggregations.HdrPercentileItem> Values
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileItem> Values { get; init; }
 	}
 
-	[ConvertAs(typeof(HistogramAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IHistogramAggregation, HistogramAggregation>))]
 	public partial interface IHistogramAggregation : Aggregations.IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
 	{
 		string? Field { get; set; }
@@ -2279,7 +2570,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		Aggregations.IHistogramOrder? Order { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		string? Format { get; set; }
 
@@ -2314,7 +2605,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -2328,131 +2619,67 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void TransformManagement.IPivotGroupByContainerVariant.WrapInContainer(TransformManagement.IPivotGroupByContainer container) => container.Histogram = this;
 	}
 
-	[ConvertAs(typeof(HistogramOrder))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IHistogramOrder, HistogramOrder>))]
 	public partial interface IHistogramOrder
 	{
-		SortOrder? Count { get; set; }
+		Elastic.Clients.Elasticsearch.SortOrder? Count { get; set; }
 
-		SortOrder? Key { get; set; }
+		Elastic.Clients.Elasticsearch.SortOrder? Key { get; set; }
 	}
 
 	public partial class HistogramOrder : Aggregations.IHistogramOrder
 	{
 		[JsonInclude]
 		[JsonPropertyName("_count")]
-		public SortOrder? Count { get; set; }
+		public Elastic.Clients.Elasticsearch.SortOrder? Count { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_key")]
-		public SortOrder? Key { get; set; }
+		public Elastic.Clients.Elasticsearch.SortOrder? Key { get; set; }
 	}
 
 	public partial class HoltLinearModelSettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("alpha")]
-		public float? Alpha
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public float? Alpha { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("beta")]
-		public float? Beta
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public float? Beta { get; init; }
 	}
 
 	public partial class HoltWintersModelSettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("alpha")]
-		public float? Alpha
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public float? Alpha { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("beta")]
-		public float? Beta
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public float? Beta { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("gamma")]
-		public float? Gamma
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public float? Gamma { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pad")]
-		public bool? Pad
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public bool? Pad { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("period")]
-		public int? Period
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int? Period { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Aggregations.HoltWintersType? Type
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Elastic.Clients.Elasticsearch.Aggregations.HoltWintersType? Type { get; init; }
 	}
 
-	[ConvertAs(typeof(InferenceAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IInferenceAggregation, InferenceAggregation>))]
 	public partial interface IInferenceAggregation : Aggregations.IAggregationContainerVariant
 	{
-		string ModelId { get; set; }
+		Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 
 		Aggregations.IInferenceConfigContainer? InferenceConfig { get; set; }
 	}
@@ -2461,7 +2688,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("model_id")]
-		public string ModelId { get; set; }
+		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
@@ -2470,7 +2697,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Inference = this;
 	}
 
-	[ConvertAs(typeof(InferenceConfigContainer))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IInferenceConfigContainer, InferenceConfigContainer>))]
 	public partial interface IInferenceConfigContainer
 	{
 		Aggregations.IRegressionInferenceOptions? Regression { get; set; }
@@ -2489,7 +2716,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Aggregations.IClassificationInferenceOptions? Classification { get; set; }
 	}
 
-	[ConvertAs(typeof(IpRangeAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIpRangeAggregation, IpRangeAggregation>))]
 	public partial interface IIpRangeAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Field { get; set; }
@@ -2510,7 +2737,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.IpRange = this;
 	}
 
-	[ConvertAs(typeof(IpRangeAggregationRange))]
+	[InterfaceConverterAttribute(typeof(IpRangeAggregationRangeDescriptorConverter<IpRangeAggregationRange>))]
 	public partial interface IIpRangeAggregationRange
 	{
 		string? From { get; set; }
@@ -2544,6 +2771,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string? IIpRangeAggregationRange.To { get; set; }
 	}
 
+	public class IpRangeAggregationRangeDescriptorConverter<TReadAs> : JsonConverter<IIpRangeAggregationRange> where TReadAs : class, IIpRangeAggregationRange
+	{
+		public override IIpRangeAggregationRange Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IIpRangeAggregationRange value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.From))
+			{
+				writer.WritePropertyName("from");
+				writer.WriteStringValue(value.From);
+			}
+
+			if (!string.IsNullOrEmpty(value.Mask))
+			{
+				writer.WritePropertyName("mask");
+				writer.WriteStringValue(value.Mask);
+			}
+
+			if (!string.IsNullOrEmpty(value.To))
+			{
+				writer.WritePropertyName("to");
+				writer.WriteStringValue(value.To);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class IpRangeBucket
 	{
 	}
@@ -2552,75 +2807,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object DocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key")]
-		public TKey Key
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public TKey Key { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key_as_string")]
-		public string KeyAsString
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string KeyAsString { get; init; }
 	}
 
 	public partial class KeyedValueAggregate : Aggregations.ValueAggregate
 	{
 		[JsonInclude]
 		[JsonPropertyName("keys")]
-		public IReadOnlyCollection<string> Keys
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<string> Keys { get; init; }
 	}
 
 	public partial class LineStringGeoShape
 	{
 		[JsonInclude]
 		[JsonPropertyName("coordinates")]
-		public IReadOnlyCollection<QueryDsl.GeoCoordinate> Coordinates
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate> Coordinates { get; init; }
 	}
 
-	[ConvertAs(typeof(MatrixAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMatrixAggregation, MatrixAggregation>))]
 	public partial interface IMatrixAggregation
 	{
-		Fields? Fields { get; set; }
+		Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 		Dictionary<string, double>? Missing { get; set; }
 	}
@@ -2629,7 +2844,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Fields? Fields { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
@@ -2640,117 +2855,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("correlation")]
-		public Dictionary<string, double> Correlation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, double> Correlation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("covariance")]
-		public Dictionary<string, double> Covariance
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, double> Covariance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public int Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("kurtosis")]
-		public double Kurtosis
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Kurtosis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mean")]
-		public double Mean
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Mean { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("skewness")]
-		public double Skewness
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Skewness { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance")]
-		public double Variance
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Variance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
-		public string Name
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string Name { get; init; }
 	}
 
-	[ConvertAs(typeof(MatrixStatsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMatrixStatsAggregation, MatrixStatsAggregation>))]
 	public partial interface IMatrixStatsAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Aggregations.MatrixStatsMode? Mode { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
 	}
 
 	public partial class MatrixStatsAggregation : Aggregations.MatrixAggregation, Aggregations.IMatrixStatsAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]
-		public Aggregations.MatrixStatsMode? Mode { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MatrixStats = this;
 	}
 
-	[ConvertAs(typeof(MaxAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMaxAggregation, MaxAggregation>))]
 	public partial interface IMaxAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -2760,7 +2911,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Max = this;
 	}
 
-	[ConvertAs(typeof(MaxBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMaxBucketAggregation, MaxBucketAggregation>))]
 	public partial interface IMaxBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -2770,7 +2921,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MaxBucket = this;
 	}
 
-	[ConvertAs(typeof(MedianAbsoluteDeviationAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMedianAbsoluteDeviationAggregation, MedianAbsoluteDeviationAggregation>))]
 	public partial interface IMedianAbsoluteDeviationAggregation : Aggregations.IAggregationContainerVariant
 	{
 		double? Compression { get; set; }
@@ -2785,14 +2936,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MedianAbsoluteDeviation = this;
 	}
 
-	[ConvertAs(typeof(MetricAggregationBase))]
+	[InterfaceConverterAttribute(typeof(MetricAggregationBaseDescriptorConverter<MetricAggregationBase>))]
 	public partial interface IMetricAggregationBase
 	{
 		string? Field { get; set; }
 
-		Aggregations.Missing? Missing { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public abstract partial class MetricAggregationBase : Aggregations.IMetricAggregationBase
@@ -2803,23 +2954,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Aggregations.Missing? Missing { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public partial class MetricAggregationBaseDescriptor : DescriptorBase<MetricAggregationBaseDescriptor, IMetricAggregationBase>, IMetricAggregationBase
 	{
 		string? IMetricAggregationBase.Field { get; set; }
 
-		Aggregations.Missing? IMetricAggregationBase.Missing { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? IMetricAggregationBase.Missing { get; set; }
 
-		Script? IMetricAggregationBase.Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? IMetricAggregationBase.Script { get; set; }
 	}
 
-	[ConvertAs(typeof(MinAggregation))]
+	public class MetricAggregationBaseDescriptorConverter<TReadAs> : JsonConverter<IMetricAggregationBase> where TReadAs : class, IMetricAggregationBase
+	{
+		public override IMetricAggregationBase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IMetricAggregationBase value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMinAggregation, MinAggregation>))]
 	public partial interface IMinAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -2829,7 +3008,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Min = this;
 	}
 
-	[ConvertAs(typeof(MinBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMinBucketAggregation, MinBucketAggregation>))]
 	public partial interface IMinBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -2839,12 +3018,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MinBucket = this;
 	}
 
-	[ConvertAs(typeof(MissingAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMissingAggregation, MissingAggregation>))]
 	public partial interface IMissingAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Field { get; set; }
 
-		Aggregations.Missing? Missing { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 	}
 
 	public partial class MissingAggregation : Aggregations.BucketAggregationBase, Aggregations.IMissingAggregation
@@ -2855,19 +3034,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Aggregations.Missing? Missing { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Missing = this;
 	}
 
-	[ConvertAs(typeof(MovingAverageAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMovingAverageAggregation, MovingAverageAggregation>))]
 	public partial interface IMovingAverageAggregation : Aggregations.IAggregationContainerVariant
 	{
 		bool? Minimize { get; set; }
 
-		Aggregations.MovingAverageModel? Model { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.MovingAverageModel? Model { get; set; }
 
-		Aggregations.MovingAverageSettings Settings { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.MovingAverageSettings Settings { get; set; }
 
 		int? Predict { get; set; }
 
@@ -2882,11 +3061,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("model")]
-		public Aggregations.MovingAverageModel? Model { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageModel? Model { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Aggregations.MovingAverageSettings Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.MovingAverageSettings Settings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("predict")]
@@ -2899,7 +3078,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MovingAvg = this;
 	}
 
-	[ConvertAs(typeof(MovingFunctionAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMovingFunctionAggregation, MovingFunctionAggregation>))]
 	public partial interface IMovingFunctionAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Script { get; set; }
@@ -2926,7 +3105,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MovingFn = this;
 	}
 
-	[ConvertAs(typeof(MovingPercentilesAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMovingPercentilesAggregation, MovingPercentilesAggregation>))]
 	public partial interface IMovingPercentilesAggregation : Aggregations.IAggregationContainerVariant
 	{
 		int? Window { get; set; }
@@ -2957,18 +3136,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
-		public IReadOnlyCollection<TBucket> Buckets
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<TBucket> Buckets { get; init; }
 	}
 
-	[ConvertAs(typeof(MultiTermLookup))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMultiTermLookup, MultiTermLookup>))]
 	public partial interface IMultiTermLookup
 	{
 		string Field { get; set; }
@@ -2981,7 +3152,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Field { get; set; }
 	}
 
-	[ConvertAs(typeof(MultiTermsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMultiTermsAggregation, MultiTermsAggregation>))]
 	public partial interface IMultiTermsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		IEnumerable<Aggregations.IMultiTermLookup> Terms { get; set; }
@@ -2996,7 +3167,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.MultiTerms = this;
 	}
 
-	[ConvertAs(typeof(MutualInformationHeuristic))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IMutualInformationHeuristic, MutualInformationHeuristic>))]
 	public partial interface IMutualInformationHeuristic
 	{
 		bool? BackgroundIsSuperset { get; set; }
@@ -3015,7 +3186,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? IncludeNegatives { get; set; }
 	}
 
-	[ConvertAs(typeof(NestedAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<INestedAggregation, NestedAggregation>))]
 	public partial interface INestedAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Path { get; set; }
@@ -3030,22 +3201,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Nested = this;
 	}
 
-	[ConvertAs(typeof(NormalizeAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<INormalizeAggregation, NormalizeAggregation>))]
 	public partial interface INormalizeAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Aggregations.NormalizeMethod? Method { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
 	}
 
 	public partial class NormalizeAggregation : Aggregations.PipelineAggregationBase, Aggregations.INormalizeAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("method")]
-		public Aggregations.NormalizeMethod? Method { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Normalize = this;
 	}
 
-	[ConvertAs(typeof(ParentAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IParentAggregation, ParentAggregation>))]
 	public partial interface IParentAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Type { get; set; }
@@ -3060,7 +3231,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Parent = this;
 	}
 
-	[ConvertAs(typeof(PercentageScoreHeuristic))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IPercentageScoreHeuristic, PercentageScoreHeuristic>))]
 	public partial interface IPercentageScoreHeuristic
 	{
 	}
@@ -3073,30 +3244,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("percentile")]
-		public double Percentile
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Percentile { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public double Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Value { get; init; }
 	}
 
-	[ConvertAs(typeof(PercentileRanksAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IPercentileRanksAggregation, PercentileRanksAggregation>))]
 	public partial interface IPercentileRanksAggregation : Aggregations.IAggregationContainerVariant
 	{
 		bool? Keyed { get; set; }
@@ -3133,18 +3288,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("items")]
-		public IReadOnlyCollection<Aggregations.PercentileItem> Items
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentileItem> Items { get; init; }
 	}
 
-	[ConvertAs(typeof(PercentilesAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IPercentilesAggregation, PercentilesAggregation>))]
 	public partial interface IPercentilesAggregation : Aggregations.IAggregationContainerVariant
 	{
 		bool? Keyed { get; set; }
@@ -3177,7 +3324,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Percentiles = this;
 	}
 
-	[ConvertAs(typeof(PercentilesBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IPercentilesBucketAggregation, PercentilesBucketAggregation>))]
 	public partial interface IPercentilesBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 		IEnumerable<double>? Percents { get; set; }
@@ -3192,33 +3339,69 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.PercentilesBucket = this;
 	}
 
-	[ConvertAs(typeof(PipelineAggregationBase))]
+	[InterfaceConverterAttribute(typeof(PipelineAggregationBaseDescriptorConverter<PipelineAggregationBase>))]
 	public partial interface IPipelineAggregationBase
 	{
+		object? BucketsPath { get; set; }
+
 		string? Format { get; set; }
 
-		Aggregations.GapPolicy? GapPolicy { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	}
 
 	public abstract partial class PipelineAggregationBase : Aggregations.Aggregation, Aggregations.IPipelineAggregationBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("buckets_path")]
+		public object? BucketsPath { get; set; }
+
 		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("gap_policy")]
-		public Aggregations.GapPolicy? GapPolicy { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	}
 
 	public partial class PipelineAggregationBaseDescriptor : DescriptorBase<PipelineAggregationBaseDescriptor, IPipelineAggregationBase>, IPipelineAggregationBase
 	{
+		object? IPipelineAggregationBase.BucketsPath { get; set; }
+
 		string? IPipelineAggregationBase.Format { get; set; }
 
-		Aggregations.GapPolicy? IPipelineAggregationBase.GapPolicy { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? IPipelineAggregationBase.GapPolicy { get; set; }
 	}
 
-	[ConvertAs(typeof(RangeAggregation))]
+	public class PipelineAggregationBaseDescriptorConverter<TReadAs> : JsonConverter<IPipelineAggregationBase> where TReadAs : class, IPipelineAggregationBase
+	{
+		public override IPipelineAggregationBase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IPipelineAggregationBase value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.GapPolicy is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRangeAggregation, RangeAggregation>))]
 	public partial interface IRangeAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Field { get; set; }
@@ -3227,7 +3410,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		IEnumerable<Aggregations.IAggregationRange>? Ranges { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		bool? Keyed { get; set; }
 	}
@@ -3248,7 +3431,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("keyed")]
@@ -3261,16 +3444,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	[ConvertAs(typeof(RareTermsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRareTermsAggregation, RareTermsAggregation>))]
 	public partial interface IRareTermsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		IEnumerable<string>? Exclude { get; set; }
 
 		string? Field { get; set; }
 
+		object? Include { get; set; }
+
 		object? MaxDocCount { get; set; }
 
-		Aggregations.Missing? Missing { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		double? Precision { get; set; }
 
@@ -3288,12 +3473,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("include")]
+		public object? Include { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("max_doc_count")]
 		public object? MaxDocCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Aggregations.Missing? Missing { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("precision")]
@@ -3310,28 +3499,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	[ConvertAs(typeof(RateAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRateAggregation, RateAggregation>))]
 	public partial interface IRateAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Aggregations.DateInterval? Unit { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.DateInterval? Unit { get; set; }
 
-		Aggregations.RateMode? Mode { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 	}
 
 	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase, Aggregations.IRateAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("unit")]
-		public Aggregations.DateInterval? Unit { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.DateInterval? Unit { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]
-		public Aggregations.RateMode? Mode { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Rate = this;
 	}
 
-	[ConvertAs(typeof(RegressionInferenceOptions))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRegressionInferenceOptions, RegressionInferenceOptions>))]
 	public partial interface IRegressionInferenceOptions
 	{
 		string? ResultsField { get; set; }
@@ -3350,7 +3539,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? NumTopFeatureImportanceValues { get; set; }
 	}
 
-	[ConvertAs(typeof(ReverseNestedAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IReverseNestedAggregation, ReverseNestedAggregation>))]
 	public partial interface IReverseNestedAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Path { get; set; }
@@ -3365,7 +3554,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.ReverseNested = this;
 	}
 
-	[ConvertAs(typeof(SamplerAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISamplerAggregation, SamplerAggregation>))]
 	public partial interface ISamplerAggregation : Aggregations.IAggregationContainerVariant
 	{
 		int? ShardSize { get; set; }
@@ -3380,61 +3569,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Sampler = this;
 	}
 
-	[ConvertAs(typeof(ScriptedHeuristic))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IScriptedHeuristic, ScriptedHeuristic>))]
 	public partial interface IScriptedHeuristic
 	{
-		Script Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public partial class ScriptedHeuristic : Aggregations.IScriptedHeuristic
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
 	public partial class ScriptedMetricAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public object Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object Value { get; init; }
 	}
 
-	[ConvertAs(typeof(ScriptedMetricAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IScriptedMetricAggregation, ScriptedMetricAggregation>))]
 	public partial interface IScriptedMetricAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Script? CombineScript { get; set; }
+		Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
 
-		Script? InitScript { get; set; }
+		Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
 
-		Script? MapScript { get; set; }
+		Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
 
 		Dictionary<string, object>? Params { get; set; }
 
-		Script? ReduceScript { get; set; }
+		Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 	}
 
 	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase, Aggregations.IScriptedMetricAggregation
 	{
 		[JsonInclude]
 		[JsonPropertyName("combine_script")]
-		public Script? CombineScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("init_script")]
-		public Script? InitScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("map_script")]
-		public Script? MapScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("params")]
@@ -3442,12 +3623,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("reduce_script")]
-		public Script? ReduceScript { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.ScriptedMetric = this;
 	}
 
-	[ConvertAs(typeof(SerialDifferencingAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISerialDifferencingAggregation, SerialDifferencingAggregation>))]
 	public partial interface ISerialDifferencingAggregation : Aggregations.IAggregationContainerVariant
 	{
 		int? Lag { get; set; }
@@ -3466,30 +3647,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("bg_count")]
-		public object BgCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object BgCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object DocCount { get; init; }
 	}
 
-	[ConvertAs(typeof(SignificantTermsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISignificantTermsAggregation, SignificantTermsAggregation>))]
 	public partial interface ISignificantTermsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
@@ -3498,7 +3663,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		IEnumerable<string>? Exclude { get; set; }
 
-		Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		string? Field { get; set; }
 
@@ -3537,7 +3702,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
-		public Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -3586,7 +3751,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	[ConvertAs(typeof(SignificantTextAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISignificantTextAggregation, SignificantTextAggregation>))]
 	public partial interface ISignificantTextAggregation : Aggregations.IAggregationContainerVariant
 	{
 		QueryDsl.IQueryContainer? BackgroundFilter { get; set; }
@@ -3595,7 +3760,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		IEnumerable<string>? Exclude { get; set; }
 
-		Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		string? Field { get; set; }
 
@@ -3619,7 +3784,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		int? Size { get; set; }
 
-		Fields? SourceFields { get; set; }
+		Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
 	}
 
 	public partial class SignificantTextAggregation : Aggregations.BucketAggregationBase, Aggregations.ISignificantTextAggregation
@@ -3638,7 +3803,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
-		public Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -3686,7 +3851,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("source_fields")]
-		public Fields? SourceFields { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.SignificantText = this;
 	}
@@ -3695,156 +3860,60 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public double DocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double DocCount { get; init; }
 	}
 
 	public partial class StandardDeviationBounds
 	{
 		[JsonInclude]
 		[JsonPropertyName("lower")]
-		public double? Lower
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? Lower { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper")]
-		public double? Upper
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? Upper { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lower_population")]
-		public double? LowerPopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? LowerPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper_population")]
-		public double? UpperPopulation
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? UpperPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lower_sampling")]
-		public double? LowerSampling
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? LowerSampling { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper_sampling")]
-		public double? UpperSampling
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? UpperSampling { get; init; }
 	}
 
 	public partial class StatsAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public double Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum")]
-		public double Sum
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Sum { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg")]
-		public double? Avg
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? Avg { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public double? Max
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? Max { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public double? Min
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double? Min { get; init; }
 	}
 
-	[ConvertAs(typeof(StatsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IStatsAggregation, StatsAggregation>))]
 	public partial interface IStatsAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -3854,7 +3923,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Stats = this;
 	}
 
-	[ConvertAs(typeof(StatsBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IStatsBucketAggregation, StatsBucketAggregation>))]
 	public partial interface IStatsBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -3868,78 +3937,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_length")]
-		public int MinLength
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int MinLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_length")]
-		public int MaxLength
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public int MaxLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg_length")]
-		public double AvgLength
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double AvgLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("entropy")]
-		public double Entropy
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Entropy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("distribution")]
-		public Dictionary<string, double>? Distribution
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, double>? Distribution { get; init; }
 	}
 
-	[ConvertAs(typeof(StringStatsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IStringStatsAggregation, StringStatsAggregation>))]
 	public partial interface IStringStatsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		bool? ShowDistribution { get; set; }
@@ -3954,7 +3975,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.StringStats = this;
 	}
 
-	[ConvertAs(typeof(SumAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISumAggregation, SumAggregation>))]
 	public partial interface ISumAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -3964,7 +3985,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.Sum = this;
 	}
 
-	[ConvertAs(typeof(SumBucketAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISumBucketAggregation, SumBucketAggregation>))]
 	public partial interface ISumBucketAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -3974,7 +3995,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.SumBucket = this;
 	}
 
-	[ConvertAs(typeof(TDigest))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITDigest, TDigest>))]
 	public partial interface ITDigest
 	{
 		int? Compression { get; set; }
@@ -3991,68 +4012,46 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("values")]
-		public Dictionary<string, double> Values
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public Dictionary<string, double> Values { get; init; }
 	}
 
 	public partial class TermsAggregate<TBucket, TKey> : Aggregations.MultiBucketAggregate<TBucket>
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
-		public object DocCountErrorUpperBound
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object DocCountErrorUpperBound { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_other_doc_count")]
-		public object SumOtherDocCount
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public object SumOtherDocCount { get; init; }
 	}
 
-	[ConvertAs(typeof(TermsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITermsAggregation, TermsAggregation>))]
 	public partial interface ITermsAggregation : Aggregations.IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
 	{
-		Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 		IEnumerable<string>? Exclude { get; set; }
 
-		Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		string? Field { get; set; }
 
+		object? Include { get; set; }
+
 		int? MinDocCount { get; set; }
 
-		Aggregations.Missing? Missing { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
-		Aggregations.MissingOrder? MissingOrder { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
 		bool? MissingBucket { get; set; }
 
 		string? ValueType { get; set; }
 
-		Aggregations.TermsAggregationOrder? Order { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? Order { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		int? ShardSize { get; set; }
 
@@ -4065,7 +4064,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("collect_mode")]
-		public Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
@@ -4073,11 +4072,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("execution_hint")]
-		public Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include")]
+		public object? Include { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -4085,11 +4088,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Aggregations.Missing? Missing { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_order")]
-		public Aggregations.MissingOrder? MissingOrder { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_bucket")]
@@ -4101,11 +4104,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Aggregations.TermsAggregationOrder? Order { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
@@ -4123,7 +4126,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void TransformManagement.IPivotGroupByContainerVariant.WrapInContainer(TransformManagement.IPivotGroupByContainer container) => container.Terms = this;
 	}
 
-	[ConvertAs(typeof(TermsInclude))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITermsInclude, TermsInclude>))]
 	public partial interface ITermsInclude
 	{
 		object NumPartitions { get; set; }
@@ -4142,12 +4145,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public object Partition { get; set; }
 	}
 
-	[ConvertAs(typeof(TestPopulation))]
+	[InterfaceConverterAttribute(typeof(TestPopulationDescriptorConverter<TestPopulation>))]
 	public partial interface ITestPopulation
 	{
 		string Field { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		QueryDsl.IQueryContainer? Filter { get; set; }
 	}
@@ -4160,7 +4163,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -4171,19 +4174,43 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		string ITestPopulation.Field { get; set; }
 
-		Script? ITestPopulation.Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? ITestPopulation.Script { get; set; }
 
 		QueryDsl.IQueryContainer? ITestPopulation.Filter { get; set; }
+	}
+
+	public class TestPopulationDescriptorConverter<TReadAs> : JsonConverter<ITestPopulation> where TReadAs : class, ITestPopulation
+	{
+		public override ITestPopulation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, ITestPopulation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			if (value.Filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.Filter, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class TopHitsAggregate : Aggregations.AggregateBase
 	{
 	}
 
-	[ConvertAs(typeof(TopHitsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITopHitsAggregation, TopHitsAggregation>))]
 	public partial interface ITopHitsAggregation : Aggregations.IAggregationContainerVariant
 	{
-		Fields? DocvalueFields { get; set; }
+		Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
 
 		bool? Explain { get; set; }
 
@@ -4195,9 +4222,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		int? Size { get; set; }
 
-		Sort? Sort { get; set; }
+		Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 
-		Fields? StoredFields { get; set; }
+		object? Source { get; set; }
+
+		Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
 		bool? TrackScores { get; set; }
 
@@ -4210,7 +4239,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("docvalue_fields")]
-		public Fields? DocvalueFields { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("explain")]
@@ -4234,11 +4263,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Sort? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public object? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stored_fields")]
-		public Fields? StoredFields { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("track_scores")]
@@ -4257,31 +4290,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public partial class TopMetrics
 	{
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public IReadOnlyCollection<object> Sort { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("metrics")]
+		public Dictionary<string, object> Metrics { get; init; }
 	}
 
 	public partial class TopMetricsAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("top")]
-		public IReadOnlyCollection<Aggregations.TopMetrics> Top
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top { get; init; }
 	}
 
-	[ConvertAs(typeof(TopMetricsAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITopMetricsAggregation, TopMetricsAggregation>))]
 	public partial interface ITopMetricsAggregation : Aggregations.IAggregationContainerVariant
 	{
 		IEnumerable<Aggregations.ITopMetricsValue>? Metrics { get; set; }
 
 		int? Size { get; set; }
 
-		Sort? Sort { get; set; }
+		Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 	}
 
 	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase, Aggregations.ITopMetricsAggregation
@@ -4296,12 +4328,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Sort? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.TopMetrics = this;
 	}
 
-	[ConvertAs(typeof(TopMetricsValue))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITopMetricsValue, TopMetricsValue>))]
 	public partial interface ITopMetricsValue
 	{
 		string Field { get; set; }
@@ -4314,14 +4346,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Field { get; set; }
 	}
 
-	[ConvertAs(typeof(TTestAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ITTestAggregation, TTestAggregation>))]
 	public partial interface ITTestAggregation : Aggregations.IAggregationContainerVariant
 	{
 		Aggregations.ITestPopulation? a { get; set; }
 
 		Aggregations.ITestPopulation? b { get; set; }
 
-		Aggregations.TTestType? Type { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}
 
 	public partial class TTestAggregation : Aggregations.Aggregation, Aggregations.ITTestAggregation
@@ -4336,7 +4368,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Aggregations.TTestType? Type { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.TTest = this;
 	}
@@ -4345,30 +4377,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public double Value
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public double Value { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("value_as_string")]
-		public string? ValueAsString
-		{
-			get;
-#if NET5_0_OR_GREATER
-			init;
-#else
-			internal set;
-#endif
-		}
+		public string? ValueAsString { get; init; }
 	}
 
-	[ConvertAs(typeof(ValueCountAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IValueCountAggregation, ValueCountAggregation>))]
 	public partial interface IValueCountAggregation : Aggregations.IAggregationContainerVariant
 	{
 	}
@@ -4378,7 +4394,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.ValueCount = this;
 	}
 
-	[ConvertAs(typeof(VariableWidthHistogramAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IVariableWidthHistogramAggregation, VariableWidthHistogramAggregation>))]
 	public partial interface IVariableWidthHistogramAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Field { get; set; }
@@ -4411,14 +4427,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.VariableWidthHistogram = this;
 	}
 
-	[ConvertAs(typeof(WeightedAverageAggregation))]
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IWeightedAverageAggregation, WeightedAverageAggregation>))]
 	public partial interface IWeightedAverageAggregation : Aggregations.IAggregationContainerVariant
 	{
 		string? Format { get; set; }
 
 		Aggregations.IWeightedAverageValue? Value { get; set; }
 
-		Aggregations.ValueType? ValueType { get; set; }
+		Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 
 		Aggregations.IWeightedAverageValue? Weight { get; set; }
 	}
@@ -4435,7 +4451,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("value_type")]
-		public Aggregations.ValueType? ValueType { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("weight")]
@@ -4444,14 +4460,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		void Aggregations.IAggregationContainerVariant.WrapInContainer(Aggregations.IAggregationContainer container) => container.WeightedAvg = this;
 	}
 
-	[ConvertAs(typeof(WeightedAverageValue))]
+	[InterfaceConverterAttribute(typeof(WeightedAverageValueDescriptorConverter<WeightedAverageValue>))]
 	public partial interface IWeightedAverageValue
 	{
 		string? Field { get; set; }
 
 		double? Missing { get; set; }
 
-		Script? Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public partial class WeightedAverageValue : Aggregations.IWeightedAverageValue
@@ -4466,7 +4482,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
 	public partial class WeightedAverageValueDescriptor : DescriptorBase<WeightedAverageValueDescriptor, IWeightedAverageValue>, IWeightedAverageValue
@@ -4475,6 +4491,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		double? IWeightedAverageValue.Missing { get; set; }
 
-		Script? IWeightedAverageValue.Script { get; set; }
+		Elastic.Clients.Elasticsearch.Script? IWeightedAverageValue.Script { get; set; }
+	}
+
+	public class WeightedAverageValueDescriptorConverter<TReadAs> : JsonConverter<IWeightedAverageValue> where TReadAs : class, IWeightedAverageValue
+	{
+		public override IWeightedAverageValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, IWeightedAverageValue value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing.HasValue)
+			{
+				writer.WritePropertyName("missing");
+				writer.WriteNumberValue(value.Missing.Value);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

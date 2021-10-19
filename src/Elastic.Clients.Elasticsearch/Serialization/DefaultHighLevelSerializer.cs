@@ -3,12 +3,15 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Buffers;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Cluster.AllocationExplain;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
@@ -24,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 				Converters =
 				{
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					new DictionaryConverter(),
 					new UnionConverter()
 				}
@@ -44,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					//new FieldConverterFactory(settings),
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					
 					new DictionaryConverter(),
 					new UnionConverter()
@@ -57,12 +60,30 @@ namespace Elastic.Clients.Elasticsearch
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - We should use a pooled byte array in the future
 		public override T Deserialize<T>(Stream stream)
 		{
-			//if (stream.Length == 0) // throws on some responses
-			//	return default;
-			using var reader = new StreamReader(stream);
+			// TODO: Review this as buffer may be too small
 
-			// TODO: Remove - Just for testing
-			return default;
+			using var ms = new MemoryStream();
+			var buffer = ArrayPool<byte>.Shared.Rent(1024);
+			var total = 0;
+			int read;
+			while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+			{
+				ms.Write(buffer, 0, read);
+				total += read;
+			}
+			var span = ms.TryGetBuffer(out var segment)
+				? new ReadOnlyMemory<byte>(segment.Array, segment.Offset, total).Span
+				: new ReadOnlyMemory<byte>(ms.ToArray()).Span;
+
+			return span.Length > 0 ? JsonSerializer.Deserialize<T>(span, Options) : default;
+
+			////if (stream.Length == 0) // throws on some responses
+			////	return default;
+			//using var reader = new StreamReader(stream);
+
+
+			//// TODO: Remove - Just for testing
+			////return default;
 
 			//try
 			//{
@@ -78,25 +99,7 @@ namespace Elastic.Clients.Elasticsearch
 			throw new NotImplementedException();
 
 		// TODO - Return ValueTask?
-		public override Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
-		{
-			long length = 0;
-
-			try
-			{
-				length = stream.Length;
-			}
-			catch (NotSupportedException)
-			{
-				// ignored
-			}
-
-			return JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
-
-			//return length > 0
-			//	? JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask()
-			//	: Task.FromResult(default(T));
-		}
+		public override Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) => JsonSerializer.DeserializeAsync<T>(stream, Options, cancellationToken).AsTask();
 
 		public override Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default) =>
 			JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken).AsTask();
@@ -243,6 +246,50 @@ namespace Elastic.Clients.Elasticsearch
 	//			return Task.FromResult(deserialize);
 
 	//		return JsonSerializer.DeserializeAsync<T>(stream, _none.Value, cancellationToken).AsTask();
+	//	}
+	//}
+
+	internal class ThrowHelper
+	{
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		public static void ThrowJsonException(string? message = null) => throw new JsonException(message);
+	}
+
+	//// TODO: Generate these
+	//public class UnassignedInformationReasonConverter : JsonConverter<UnassignedInformationReason>
+	//{
+	//	public override UnassignedInformationReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	//	{
+	//		var enumString = reader.GetString();
+
+	//		switch (enumString)
+	//		{
+	//			case "REROUTE_CANCELLED":
+	//				return UnassignedInformationReason.RerouteCancelled;
+	//			case "REPLICA_ADDED":
+	//				return UnassignedInformationReason.ReplicaAdded;
+	//			case "INDEX_CREATED":
+	//				return UnassignedInformationReason.IndexCreated;
+	//		}
+
+	//		ThrowHelper.ThrowJsonException($"An unknown value for the enum {nameof(UnassignedInformationReason)} was found in the JSON.");
+
+	//		return default;
+	//	}
+
+	//	public override void Write(Utf8JsonWriter writer, UnassignedInformationReason value, JsonSerializerOptions options)
+	//	{
+	//		switch (value)
+	//		{
+	//			case UnassignedInformationReason.RerouteCancelled:
+	//				writer.WriteStringValue("REROUTE_CANCELLED");
+	//				return;
+	//			case UnassignedInformationReason.ReplicaAdded:
+	//				writer.WriteStringValue("REPLICA_ADDED");
+	//				return;
+	//		}
+
+	//		writer.WriteNullValue();
 	//	}
 	//}
 }

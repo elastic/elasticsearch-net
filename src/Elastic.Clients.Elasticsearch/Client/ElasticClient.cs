@@ -96,9 +96,53 @@ public partial class ElasticClient
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 
+		var requestModified = false;
+		var hadRequestConfig = false;
+		HeadersList? originalHeaders = null;
+
+		// If we have not yet checked the product name, add the product header to the list of headers to parse.
+		if (_productCheckStatus == ProductCheckStatus.NotChecked)
+		{
+			requestModified = true;
+			if (request.RequestParameters.RequestConfiguration is null)
+			{
+				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
+			}
+			else
+			{
+				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
+				hadRequestConfig = true;
+			}
+
+			if (request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0)
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList("x-elastic-product");
+			}
+			else
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
+			}
+		}
+
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
 		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
+
+		if (_productCheckStatus == ProductCheckStatus.Failed)
+			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+
+		if (requestModified)
+		{
+			if (!hadRequestConfig)
+			{
+				request.RequestParameters.RequestConfiguration = null;
+			}
+			else if (originalHeaders.HasValue && originalHeaders.Value.Count > 0)
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
+			}
+		}
+
 		return response;
 	}	
 
@@ -112,17 +156,62 @@ public partial class ElasticClient
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 
+		var requestModified = false;
+		var hadRequestConfig = false;
+		HeadersList? originalHeaders = null;
+
+		// If we have not yet checked the product name, add the product header to the list of headers to parse.
+		if (_productCheckStatus == ProductCheckStatus.NotChecked)
+		{
+			requestModified = true;
+
+			if (request.RequestParameters.RequestConfiguration is null)
+			{
+				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
+			}
+			else
+			{
+				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
+				hadRequestConfig = true;
+			}
+
+			if (request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0)
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList("x-elastic-product");
+			}
+			else
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
+			}
+		}
+
 		var (url, postData) = PrepareRequest(request, null);
 
-		if (_productCheckStatus == ProductCheckStatus.Succeeded)
+		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
 			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
 
-		return SendRequest(request, parameters, url, postData);
+		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
 
-		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData)
+		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
 			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
+
+			if (_productCheckStatus == ProductCheckStatus.Failed)
+				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+
+			if (request.RequestParameters.RequestConfiguration is not null)
+			{
+				if (!hadRequestConfig)
+				{
+					request.RequestParameters.RequestConfiguration = null;
+				}
+				else if (originalHeaders.HasValue && originalHeaders.Value.Count > 0)
+				{
+					request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
+				}
+			}
+
 			return response;
 		}
 	}
@@ -138,17 +227,62 @@ public partial class ElasticClient
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 
+		var requestModified = false;
+		var hadRequestConfig = false;
+		HeadersList? originalHeaders = null;
+
+		// If we have not yet checked the product name, add the product header to the list of headers to parse.
+		if (_productCheckStatus == ProductCheckStatus.NotChecked)
+		{
+			requestModified = true;
+
+			if (request.RequestParameters.RequestConfiguration is null)
+			{
+				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
+			}
+			else
+			{
+				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
+				hadRequestConfig = true;
+			}
+
+			if (request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0)
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList("x-elastic-product");
+			}
+			else
+			{
+				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
+			}
+		}
+
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
 
-		if (_productCheckStatus == ProductCheckStatus.Succeeded)
+		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
 			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
 
-		return SendRequest(request, parameters, url, postData);
+		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
 
-		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData)
+		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
 			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
+
+			if (_productCheckStatus == ProductCheckStatus.Failed)
+				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
+
+			if (request.RequestParameters.RequestConfiguration is not null)
+			{
+				if (!hadRequestConfig)
+				{
+					request.RequestParameters.RequestConfiguration = null;
+				}
+				else if (originalHeaders.HasValue && originalHeaders.Value.Count > 0)
+				{
+					request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
+				}
+			}
+
 			return response;
 		}
 	}
@@ -158,10 +292,6 @@ public partial class ElasticClient
 		where TRequest : class, IRequest
 	{
 		request.ThrowIfNull(nameof(request), "A request is required.");
-
-		// If we have not yet checked the product name, add the product header to the list of headers to parse.
-		if (_productCheckStatus == ProductCheckStatus.NotChecked)
-			ElasticsearchClientSettings.ResponseHeadersToParse.TryAdd("x-elastic-product");
 
 		if (forceConfiguration is not null)
 			ForceConfiguration(request, forceConfiguration);
@@ -194,14 +324,10 @@ public partial class ElasticClient
 	{
 		if (_productCheckStatus == ProductCheckStatus.NotChecked)
 		{
-			if (!response.ApiCall.ParsedHeaders.TryGetValue("x-elastic-product", out var values) || values.Single().Equals("elasticsearch", StringComparison.Ordinal))
+			if (response.ApiCall.ParsedHeaders is null || !response.ApiCall.ParsedHeaders.TryGetValue("x-elastic-product", out var values) || !values.Single().Equals("Elasticsearch", StringComparison.Ordinal))
 			{
 				_productCheckStatus = ProductCheckStatus.Failed;
-				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
 			}
-
-			// Once validated, remove the header so that subsequent requests do not need to attempt to parse it.
-			ElasticsearchClientSettings.ResponseHeadersToParse.Remove("x-elastic-product");
 
 			_productCheckStatus = ProductCheckStatus.Succeeded;
 		}

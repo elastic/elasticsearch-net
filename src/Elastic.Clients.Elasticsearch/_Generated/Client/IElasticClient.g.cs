@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using System;
 using System.Threading;
@@ -25,8 +26,14 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial interface IElasticClient
 	{
+		ClusterNamespace Cluster { get; }
+
 		IndexManagementNamespace IndexManagement { get; }
 
+		PingResponse Ping(IPingRequest request);
+		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
+		PingResponse Ping(Func<PingRequestDescriptor, IPingRequest> selector = null);
+		Task<PingResponse> PingAsync(Func<PingRequestDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
 		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
 		SearchResponse<TDocument> Search<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null);

@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 	}
 
+	public partial class NumberProperty
+	{
+	}
+
 	public interface IPropertiesVariant
 	{
 	}

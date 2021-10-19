@@ -23,13 +23,35 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Context : Union<string?, QueryDsl.GeoLocation?>
+	public partial class ByteSize : Union<object?, string?>
+	{
+		public ByteSize(object? item) : base(item)
+		{
+		}
+
+		public ByteSize(string? item) : base(item)
+		{
+		}
+	}
+
+	public partial class Context : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?>
 	{
 		public Context(string? item) : base(item)
 		{
 		}
 
-		public Context(QueryDsl.GeoLocation? item) : base(item)
+		public Context(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? item) : base(item)
+		{
+		}
+	}
+
+	public partial class EpochMillis : Union<string?, object?>
+	{
+		public EpochMillis(string? item) : base(item)
+		{
+		}
+
+		public EpochMillis(object? item) : base(item)
 		{
 		}
 	}
@@ -75,6 +97,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class Percentage : Union<string?, float?>
+	{
+		public Percentage(string? item) : base(item)
+		{
+		}
+
+		public Percentage(float? item) : base(item)
+		{
+		}
+	}
+
 	public partial class Script
 	{
 	}
@@ -103,13 +136,13 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class WaitForActiveShards : Union<int?, WaitForActiveShardOptions?>
+	public partial class WaitForActiveShards : Union<int?, Elastic.Clients.Elasticsearch.WaitForActiveShardOptions?>
 	{
 		public WaitForActiveShards(int? item) : base(item)
 		{
 		}
 
-		public WaitForActiveShards(WaitForActiveShardOptions? item) : base(item)
+		public WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShardOptions? item) : base(item)
 		{
 		}
 	}
