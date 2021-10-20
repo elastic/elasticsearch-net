@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -92,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		Aggregations.ITermsAggregation? IPivotGroupByContainer.Terms { get; set; }
 	}
 
-	public class PivotGroupByContainerDescriptorConverter<TReadAs> : JsonConverter<IPivotGroupByContainer> where TReadAs : class, IPivotGroupByContainer
+	internal sealed class PivotGroupByContainerDescriptorConverter<TReadAs> : JsonConverter<IPivotGroupByContainer> where TReadAs : class, IPivotGroupByContainer
 	{
 		public override IPivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IPivotGroupByContainer value, JsonSerializerOptions options)

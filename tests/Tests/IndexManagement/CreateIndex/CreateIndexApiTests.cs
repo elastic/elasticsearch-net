@@ -1,66 +1,49 @@
+using System;
+using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Transport;
+using FluentAssertions;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Framework.EndpointTests;
+using Tests.Framework.EndpointTests.TestState;
+
 namespace Tests.Indices.IndexManagement
 {
-	//public class CreateBasicIndexApiTests
-	//	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor,
-	//		CreateIndexRequest>
-	//{
-	//	public CreateBasicIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class CreateBasicIndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexRequestDescriptor,
+			CreateIndexRequest>
+	{
+		public CreateBasicIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => true;
 
-	//	protected override int ExpectStatusCode => 200;
+		protected override int ExpectStatusCode => 200;
 
-	//	protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d;
+		protected override Func<CreateIndexRequestDescriptor, ICreateIndexRequest> Fluent => d => d;
 
-	//	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-	//	protected override CreateIndexRequest Initializer => new(CallIsolatedValue);
+		protected override CreateIndexRequest Initializer => new(CallIsolatedValue);
 
-	//	protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}";
+		protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}";
 
-	//	protected override LazyResponses ClientUsage() => Calls(
-	//		//(client, f) => client.Indices.Create(CallIsolatedValue, f),
-	//		//(client, f) => client.Indices.CreateAsync(CallIsolatedValue, f),
-	//		(client, r) => client.Indices.CreateIndex(r),
-	//		(client, r) => client.Indices.CreateIndexAsync(r)
-	//	);
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.IndexManagement.CreateIndex(CallIsolatedValue, f),
+			(client, f) => client.IndexManagement.CreateIndexAsync(CallIsolatedValue, f),
+			(client, r) => client.IndexManagement.CreateIndex(r),
+			(client, r) => client.IndexManagement.CreateIndexAsync(r)
+		);
 
-	//	//protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
+		protected override CreateIndexRequestDescriptor NewDescriptor() => new(CallIsolatedValue);
 
-	//	protected override void ExpectResponse(CreateIndexResponse response)
-	//	{
-	//		response.ShouldBeValid();
-	//		response.Acknowledged.Should().BeTrue();
-	//		response.ShardsAcknowledged.Should().BeTrue();
-	//		//response.Index.Should().Be(CallIsolatedValue);
-
-	//		//var indexSettings = Client.Indices.GetSettings(CallIsolatedValue);
-
-	//		//indexSettings.ShouldBeValid();
-	//		//indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
-
-	//		//var settings = indexSettings.Indices[CallIsolatedValue];
-
-	//		//settings.Settings.NumberOfShards.Should().Be(1);
-	//		//settings.Settings.NumberOfReplicas.Should().Be(1);
-	//		//settings.Settings.Queries.Cache.Enabled.Should().Be(true);
-
-	//		//var similarities = settings.Settings.Similarity;
-
-	//		//similarities.Should().NotBeNull();
-	//		//similarities.Should().ContainKey("bm25").WhichValue.Should().BeOfType<BM25Similarity>();
-	//		//similarities.Should().ContainKey("dfi").WhichValue.Should().BeOfType<DFISimilarity>();
-	//		//similarities.Should().ContainKey("dfr").WhichValue.Should().BeOfType<DFRSimilarity>();
-	//		//similarities.Should().ContainKey("ib").WhichValue.Should().BeOfType<IBSimilarity>();
-	//		//similarities.Should().ContainKey("lmd").WhichValue.Should().BeOfType<LMDirichletSimilarity>();
-	//		//similarities.Should().ContainKey("lmj").WhichValue.Should().BeOfType<LMJelinekMercerSimilarity>();
-	//		//similarities.Should().ContainKey("scripted_tfidf").WhichValue.Should().BeOfType<ScriptedSimilarity>();
-
-	//		//var scriptedSimilarity = (ScriptedSimilarity)similarities["scripted_tfidf"];
-	//		//scriptedSimilarity.Script.Should().NotBeNull();
-	//		//((InlineScript)scriptedSimilarity.Script).Source.Should().NotBeNullOrEmpty();
-	//	}
-	//}
+		protected override void ExpectResponse(CreateIndexResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
+			response.Index.Should().Be(CallIsolatedValue);
+		}
+	}
 
 	//public class CreateIndexApiTests
 	//	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>

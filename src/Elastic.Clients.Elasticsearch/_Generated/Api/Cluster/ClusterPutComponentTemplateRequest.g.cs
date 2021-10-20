@@ -51,6 +51,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>, IClusterPutComponentTemplateRequest
 	{
+		public ClusterPutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -117,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	public class ClusterPutComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPutComponentTemplateRequest> where TReadAs : class, IClusterPutComponentTemplateRequest
+	internal sealed class ClusterPutComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPutComponentTemplateRequest> where TReadAs : class, IClusterPutComponentTemplateRequest
 	{
 		public override IClusterPutComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterPutComponentTemplateRequest value, JsonSerializerOptions options)

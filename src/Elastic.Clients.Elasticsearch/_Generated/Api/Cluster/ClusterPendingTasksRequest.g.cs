@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPendingTasksRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	public class ClusterPendingTasksRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPendingTasksRequest> where TReadAs : class, IClusterPendingTasksRequest
+	internal sealed class ClusterPendingTasksRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPendingTasksRequest> where TReadAs : class, IClusterPendingTasksRequest
 	{
 		public override IClusterPendingTasksRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterPendingTasksRequest value, JsonSerializerOptions options)

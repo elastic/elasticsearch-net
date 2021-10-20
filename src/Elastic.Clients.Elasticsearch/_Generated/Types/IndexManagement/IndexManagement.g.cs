@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		string? IAlias.SearchRouting { get; set; }
 	}
 
-	public class AliasDescriptorConverter<TReadAs> : JsonConverter<IAlias> where TReadAs : class, IAlias
+	internal sealed class AliasDescriptorConverter<TReadAs> : JsonConverter<IAlias> where TReadAs : class, IAlias
 	{
 		public override IAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IAlias value, JsonSerializerOptions options)
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		string? IAliasDefinition.SearchRouting { get; set; }
 	}
 
-	public class AliasDefinitionDescriptorConverter<TReadAs> : JsonConverter<IAliasDefinition> where TReadAs : class, IAliasDefinition
+	internal sealed class AliasDefinitionDescriptorConverter<TReadAs> : JsonConverter<IAliasDefinition> where TReadAs : class, IAliasDefinition
 	{
 		public override IAliasDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IAliasDefinition value, JsonSerializerOptions options)
@@ -215,6 +215,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 			writer.WriteEndObject();
 		}
+	}
+
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IDataStream, DataStream>))]
+	public partial interface IDataStream
+	{
+		bool? Hidden { get; set; }
+	}
+
+	public partial class DataStream : IndexManagement.IDataStream
+	{
+		[JsonInclude]
+		[JsonPropertyName("hidden")]
+		public bool? Hidden { get; set; }
 	}
 
 	public partial class FielddataFrequencyFilter
@@ -293,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		IndexManagement.IIndexRoutingAllocationDisk? IIndexRoutingAllocation.Disk { get; set; }
 	}
 
-	public class IndexRoutingAllocationDescriptorConverter<TReadAs> : JsonConverter<IIndexRoutingAllocation> where TReadAs : class, IIndexRoutingAllocation
+	internal sealed class IndexRoutingAllocationDescriptorConverter<TReadAs> : JsonConverter<IIndexRoutingAllocation> where TReadAs : class, IIndexRoutingAllocation
 	{
 		public override IIndexRoutingAllocation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IIndexRoutingAllocation value, JsonSerializerOptions options)
@@ -435,7 +448,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		bool? IIndexSettingBlocks.Metadata { get; set; }
 	}
 
-	public class IndexSettingBlocksDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingBlocks> where TReadAs : class, IIndexSettingBlocks
+	internal sealed class IndexSettingBlocksDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingBlocks> where TReadAs : class, IIndexSettingBlocks
 	{
 		public override IIndexSettingBlocks Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IIndexSettingBlocks value, JsonSerializerOptions options)
@@ -877,7 +890,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		IndexManagement.IIndexSettings? IIndexSettings.Settings { get; set; }
 	}
 
-	public class IndexSettingsDescriptorConverter<TReadAs> : JsonConverter<IIndexSettings> where TReadAs : class, IIndexSettings
+	internal sealed class IndexSettingsDescriptorConverter<TReadAs> : JsonConverter<IIndexSettings> where TReadAs : class, IIndexSettings
 	{
 		public override IIndexSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IIndexSettings value, JsonSerializerOptions options)
@@ -1223,7 +1236,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? IIndexSettingsAnalysis.Normalizer { get; set; }
 	}
 
-	public class IndexSettingsAnalysisDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingsAnalysis> where TReadAs : class, IIndexSettingsAnalysis
+	internal sealed class IndexSettingsAnalysisDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingsAnalysis> where TReadAs : class, IIndexSettingsAnalysis
 	{
 		public override IIndexSettingsAnalysis Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IIndexSettingsAnalysis value, JsonSerializerOptions options)
@@ -1279,7 +1292,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? Settings { get; set; }
 
-		string? DataStream { get; set; }
+		Elastic.Clients.Elasticsearch.DataStreamName? DataStream { get; set; }
 	}
 
 	public partial class IndexState : IndexManagement.IIndexState
@@ -1298,7 +1311,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("data_stream")]
-		public string? DataStream { get; set; }
+		public Elastic.Clients.Elasticsearch.DataStreamName? DataStream { get; set; }
 	}
 
 	public partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor, IIndexState>, IIndexState
@@ -1309,10 +1322,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? IIndexState.Settings { get; set; }
 
-		string? IIndexState.DataStream { get; set; }
+		Elastic.Clients.Elasticsearch.DataStreamName? IIndexState.DataStream { get; set; }
 	}
 
-	public class IndexStateDescriptorConverter<TReadAs> : JsonConverter<IIndexState> where TReadAs : class, IIndexState
+	internal sealed class IndexStateDescriptorConverter<TReadAs> : JsonConverter<IIndexState> where TReadAs : class, IIndexState
 	{
 		public override IIndexState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IIndexState value, JsonSerializerOptions options)
@@ -1379,10 +1392,113 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; init; }
 	}
 
+	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IOverlappingIndexTemplate, OverlappingIndexTemplate>))]
+	public partial interface IOverlappingIndexTemplate
+	{
+		Elastic.Clients.Elasticsearch.Name Name { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? IndexPatterns { get; set; }
+	}
+
+	public partial class OverlappingIndexTemplate : IndexManagement.IOverlappingIndexTemplate
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_patterns")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? IndexPatterns { get; set; }
+	}
+
 	public partial class StringFielddata
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddataFormat Format { get; init; }
+	}
+
+	[InterfaceConverterAttribute(typeof(TemplateMappingDescriptorConverter<TemplateMapping>))]
+	public partial interface ITemplateMapping
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> Aliases { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Name> IndexPatterns { get; set; }
+
+		Mapping.ITypeMapping Mappings { get; set; }
+
+		int Order { get; set; }
+
+		Dictionary<string, object> Settings { get; set; }
+
+		object? Version { get; set; }
+	}
+
+	public partial class TemplateMapping : IndexManagement.ITemplateMapping
+	{
+		[JsonInclude]
+		[JsonPropertyName("aliases")]
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> Aliases { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_patterns")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.Name> IndexPatterns { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("mappings")]
+		public Mapping.ITypeMapping Mappings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("order")]
+		public int Order { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("settings")]
+		public Dictionary<string, object> Settings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public object? Version { get; set; }
+	}
+
+	public partial class TemplateMappingDescriptor : DescriptorBase<TemplateMappingDescriptor, ITemplateMapping>, ITemplateMapping
+	{
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> ITemplateMapping.Aliases { get; set; }
+
+		IEnumerable<Elastic.Clients.Elasticsearch.Name> ITemplateMapping.IndexPatterns { get; set; }
+
+		Mapping.ITypeMapping ITemplateMapping.Mappings { get; set; }
+
+		int ITemplateMapping.Order { get; set; }
+
+		Dictionary<string, object> ITemplateMapping.Settings { get; set; }
+
+		object? ITemplateMapping.Version { get; set; }
+	}
+
+	internal sealed class TemplateMappingDescriptorConverter<TReadAs> : JsonConverter<ITemplateMapping> where TReadAs : class, ITemplateMapping
+	{
+		public override ITemplateMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, ITemplateMapping value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, value.Aliases, options);
+			writer.WritePropertyName("index_patterns");
+			JsonSerializer.Serialize(writer, value.IndexPatterns, options);
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, value.Mappings, options);
+			writer.WritePropertyName("order");
+			writer.WriteNumberValue(value.Order);
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, value.Settings, options);
+			if (value.Version is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, value.Version, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

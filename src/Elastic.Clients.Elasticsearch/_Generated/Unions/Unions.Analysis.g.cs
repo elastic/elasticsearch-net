@@ -75,4 +75,16 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public class TokenFilters : IsADictionaryBase<string, ITokenFiltersVariant>, Analysis.ITokenFilters
 	{
 	}
+
+	public interface ITokenizersVariant
+	{
+	}
+
+	public interface ITokenizers : IIsADictionary<string, ITokenizersVariant>
+	{
+	}
+
+	public class Tokenizers : IsADictionaryBase<string, ITokenizersVariant>, Analysis.ITokenizers
+	{
+	}
 }

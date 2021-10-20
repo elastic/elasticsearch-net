@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override bool SupportsBody => false;
 	}
 
-	public class PingRequestDescriptorConverter<TReadAs> : JsonConverter<IPingRequest> where TReadAs : class, IPingRequest
+	internal sealed class PingRequestDescriptorConverter<TReadAs> : JsonConverter<IPingRequest> where TReadAs : class, IPingRequest
 	{
 		public override IPingRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IPingRequest value, JsonSerializerOptions options)

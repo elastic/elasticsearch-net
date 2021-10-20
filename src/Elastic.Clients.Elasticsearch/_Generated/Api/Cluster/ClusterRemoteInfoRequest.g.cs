@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => false;
 	}
 
-	public class ClusterRemoteInfoRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterRemoteInfoRequest> where TReadAs : class, IClusterRemoteInfoRequest
+	internal sealed class ClusterRemoteInfoRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterRemoteInfoRequest> where TReadAs : class, IClusterRemoteInfoRequest
 	{
 		public override IClusterRemoteInfoRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterRemoteInfoRequest value, JsonSerializerOptions options)

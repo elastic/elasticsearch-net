@@ -15,24 +15,29 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 {
-	public partial class IndexManagementCreateResponse : ResponseBase
+	public partial class CloseIndexResult
 	{
 		[JsonInclude]
-		[JsonPropertyName("acknowledged")]
-		public bool? Acknowledged { get; init; }
+		[JsonPropertyName("closed")]
+		public bool Closed { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+		[JsonPropertyName("shards")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseShardResult>? Shards { get; init; }
+	}
 
+	public partial class CloseShardResult
+	{
 		[JsonInclude]
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged { get; init; }
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures { get; init; }
 	}
 }

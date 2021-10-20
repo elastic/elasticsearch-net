@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	public class ClusterPostVotingConfigExclusionsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPostVotingConfigExclusionsRequest> where TReadAs : class, IClusterPostVotingConfigExclusionsRequest
+	internal sealed class ClusterPostVotingConfigExclusionsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPostVotingConfigExclusionsRequest> where TReadAs : class, IClusterPostVotingConfigExclusionsRequest
 	{
 		public override IClusterPostVotingConfigExclusionsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterPostVotingConfigExclusionsRequest value, JsonSerializerOptions options)
