@@ -40,6 +40,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>, IClusterDeleteComponentTemplateRequest
 	{
+		public ClusterDeleteComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
@@ -64,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterDeleteComponentTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	public class ClusterDeleteComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterDeleteComponentTemplateRequest> where TReadAs : class, IClusterDeleteComponentTemplateRequest
+	internal sealed class ClusterDeleteComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterDeleteComponentTemplateRequest> where TReadAs : class, IClusterDeleteComponentTemplateRequest
 	{
 		public override IClusterDeleteComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterDeleteComponentTemplateRequest value, JsonSerializerOptions options)

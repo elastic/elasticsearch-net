@@ -24,6 +24,52 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
+	[JsonConverter(typeof(DataStreamHealthStatusConverter))]
+	public enum DataStreamHealthStatus
+	{
+		Yellow,
+		Red,
+		Green
+	}
+
+	public class DataStreamHealthStatusConverter : JsonConverter<DataStreamHealthStatus>
+	{
+		public override DataStreamHealthStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "yellow":
+					return DataStreamHealthStatus.Yellow;
+				case "red":
+					return DataStreamHealthStatus.Red;
+				case "green":
+					return DataStreamHealthStatus.Green;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DataStreamHealthStatus value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DataStreamHealthStatus.Yellow:
+					writer.WriteStringValue("yellow");
+					return;
+				case DataStreamHealthStatus.Red:
+					writer.WriteStringValue("red");
+					return;
+				case DataStreamHealthStatus.Green:
+					writer.WriteStringValue("green");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(IndexCheckOnStartupConverter))]
 	public enum IndexCheckOnStartup
 	{

@@ -9,59 +9,58 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Cluster.ClusterState
+namespace Tests.Cluster.ClusterState;
+
+public class ClusterStateApiTests
+	: ApiIntegrationTestBase<ReadOnlyCluster, ClusterStateResponse, IClusterStateRequest, ClusterStateRequestDescriptor, ClusterStateRequest>
 {
-	public class ClusterStateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ClusterStateResponse, IClusterStateRequest, ClusterStateRequestDescriptor, ClusterStateRequest>
+	public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+	protected override bool ExpectIsValid => true;
+	protected override int ExpectStatusCode => 200;
+	protected override HttpMethod HttpMethod => HttpMethod.GET;
+	protected override string ExpectedUrlPathAndQuery => "/_cluster/state";
+
+	protected override LazyResponses ClientUsage() => Calls(
+		(client, f) => client.Cluster.State(),
+		(client, f) => client.Cluster.StateAsync(),
+		(client, r) => client.Cluster.State(r),
+		(client, r) => client.Cluster.StateAsync(r)
+	);
+
+	protected override void ExpectResponse(ClusterStateResponse response)
 	{
-		public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		// TODO: Fix response
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string ExpectedUrlPathAndQuery => "/_cluster/state";
+		//response.ClusterName.Should().NotBeNullOrWhiteSpace();
+		//response.MasterNode.Should().NotBeNullOrWhiteSpace();
+		//response.StateUUID.Should().NotBeNullOrWhiteSpace();
+		//response.Version.Should().BeGreaterThan(0);
 
-		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Cluster.State(),
-			(client, f) => client.Cluster.StateAsync(),
-			(client, r) => client.Cluster.State(r),
-			(client, r) => client.Cluster.StateAsync(r)
-		);
+		//var masterNode = response.State["nodes"][response.MasterNode];
+		//var masterNodeName = masterNode["name"].Value as string;
+		//var transportAddress = masterNode["transport_address"].Value as string;
+		//masterNodeName.Should().NotBeNullOrWhiteSpace();
+		//transportAddress.Should().NotBeNullOrWhiteSpace();
 
-		protected override void ExpectResponse(ClusterStateResponse response)
-		{
-			// TODO: Fix response
+		//var getSyntax = response.Get<string>($"nodes.{response.MasterNode}.transport_address");
+		//getSyntax.Should().NotBeNullOrWhiteSpace().And.Be(transportAddress);
 
-			//response.ClusterName.Should().NotBeNullOrWhiteSpace();
-			//response.MasterNode.Should().NotBeNullOrWhiteSpace();
-			//response.StateUUID.Should().NotBeNullOrWhiteSpace();
-			//response.Version.Should().BeGreaterThan(0);
+		//var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
+		//badPath.Should().BeNull();
 
-			//var masterNode = response.State["nodes"][response.MasterNode];
-			//var masterNodeName = masterNode["name"].Value as string;
-			//var transportAddress = masterNode["transport_address"].Value as string;
-			//masterNodeName.Should().NotBeNullOrWhiteSpace();
-			//transportAddress.Should().NotBeNullOrWhiteSpace();
+		//var dict = response.Get<DynamicDictionary>($"nodes");
 
-			//var getSyntax = response.Get<string>($"nodes.{response.MasterNode}.transport_address");
-			//getSyntax.Should().NotBeNullOrWhiteSpace().And.Be(transportAddress);
+		//dict.Count.Should().BeGreaterThan(0);
+		//var node = dict[response.MasterNode].ToDictionary();
+		//node.Should().NotBeNull().And.ContainKey("name");
 
-			//var badPath = response.Get<string>($"this.is.not.a.path.into.the.response.structure");
-			//badPath.Should().BeNull();
+		//object dictDoesNotExist = response.Get<DynamicDictionary>("nodes2");
+		//dictDoesNotExist.Should().BeNull();
 
-			//var dict = response.Get<DynamicDictionary>($"nodes");
+		//dynamic r = response.State;
 
-			//dict.Count.Should().BeGreaterThan(0);
-			//var node = dict[response.MasterNode].ToDictionary();
-			//node.Should().NotBeNull().And.ContainKey("name");
-
-			//object dictDoesNotExist = response.Get<DynamicDictionary>("nodes2");
-			//dictDoesNotExist.Should().BeNull();
-
-			//dynamic r = response.State;
-
-			string lastCommittedConfig = r.metadata.cluster_coordination.last_committed_config[0];
-			lastCommittedConfig.Should().NotBeNullOrWhiteSpace();
-		}
+		//string lastCommittedConfig = r.metadata.cluster_coordination.last_committed_config[0];
+		//lastCommittedConfig.Should().NotBeNullOrWhiteSpace();
 	}
 }

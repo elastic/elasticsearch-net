@@ -23,18 +23,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class Aggregate
-	{
-	}
-
-	public partial class Bucket
-	{
-	}
-
-	public partial class MetricAggregate
-	{
-	}
-
 	public partial class Missing
 	{
 	}

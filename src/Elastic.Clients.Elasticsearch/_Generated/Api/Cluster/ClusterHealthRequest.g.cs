@@ -67,6 +67,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
+		public ClusterHealthRequest()
+		{
+		}
+
+		public ClusterHealthRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -132,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 	}
 
-	public class ClusterHealthRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterHealthRequest> where TReadAs : class, IClusterHealthRequest
+	internal sealed class ClusterHealthRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterHealthRequest> where TReadAs : class, IClusterHealthRequest
 	{
 		public override IClusterHealthRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterHealthRequest value, JsonSerializerOptions options)

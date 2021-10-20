@@ -759,4 +759,68 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 			writer.WriteNullValue();
 		}
 	}
+
+	[JsonConverter(typeof(TokenCharConverter))]
+	public enum TokenChar
+	{
+		Whitespace,
+		Symbol,
+		Punctuation,
+		Letter,
+		Digit,
+		Custom
+	}
+
+	public class TokenCharConverter : JsonConverter<TokenChar>
+	{
+		public override TokenChar Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "whitespace":
+					return TokenChar.Whitespace;
+				case "symbol":
+					return TokenChar.Symbol;
+				case "punctuation":
+					return TokenChar.Punctuation;
+				case "letter":
+					return TokenChar.Letter;
+				case "digit":
+					return TokenChar.Digit;
+				case "custom":
+					return TokenChar.Custom;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TokenChar value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TokenChar.Whitespace:
+					writer.WriteStringValue("whitespace");
+					return;
+				case TokenChar.Symbol:
+					writer.WriteStringValue("symbol");
+					return;
+				case TokenChar.Punctuation:
+					writer.WriteStringValue("punctuation");
+					return;
+				case TokenChar.Letter:
+					writer.WriteStringValue("letter");
+					return;
+				case TokenChar.Digit:
+					writer.WriteStringValue("digit");
+					return;
+				case TokenChar.Custom:
+					writer.WriteStringValue("custom");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
 }

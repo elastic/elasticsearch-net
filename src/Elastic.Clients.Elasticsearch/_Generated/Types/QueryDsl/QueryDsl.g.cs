@@ -171,7 +171,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string? IBoundingBox.Wkt { get; set; }
 	}
 
-	public class BoundingBoxDescriptorConverter<TReadAs> : JsonConverter<IBoundingBox> where TReadAs : class, IBoundingBox
+	internal sealed class BoundingBoxDescriptorConverter<TReadAs> : JsonConverter<IBoundingBox> where TReadAs : class, IBoundingBox
 	{
 		public override IBoundingBox Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IBoundingBox value, JsonSerializerOptions options)
@@ -510,7 +510,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		double? IFunctionScoreContainer.Weight { get; set; }
 	}
 
-	public class FunctionScoreContainerDescriptorConverter<TReadAs> : JsonConverter<IFunctionScoreContainer> where TReadAs : class, IFunctionScoreContainer
+	internal sealed class FunctionScoreContainerDescriptorConverter<TReadAs> : JsonConverter<IFunctionScoreContainer> where TReadAs : class, IFunctionScoreContainer
 	{
 		public override IFunctionScoreContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IFunctionScoreContainer value, JsonSerializerOptions options)
@@ -1074,7 +1074,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		QueryDsl.IIntervalsContainer? IIntervalsFilter.Overlapping { get; set; }
 	}
 
-	public class IntervalsFilterDescriptorConverter<TReadAs> : JsonConverter<IIntervalsFilter> where TReadAs : class, IIntervalsFilter
+	internal sealed class IntervalsFilterDescriptorConverter<TReadAs> : JsonConverter<IIntervalsFilter> where TReadAs : class, IIntervalsFilter
 	{
 		public override IIntervalsFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IIntervalsFilter value, JsonSerializerOptions options)
@@ -3282,7 +3282,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		QueryDsl.ISpanWithinQuery? ISpanQuery.SpanWithin { get; set; }
 	}
 
-	public class SpanQueryDescriptorConverter<TReadAs> : JsonConverter<ISpanQuery> where TReadAs : class, ISpanQuery
+	internal sealed class SpanQueryDescriptorConverter<TReadAs> : JsonConverter<ISpanQuery> where TReadAs : class, ISpanQuery
 	{
 		public override ISpanQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ISpanQuery value, JsonSerializerOptions options)

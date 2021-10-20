@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterDeleteVotingConfigExclusionsRequestDescriptor WaitForRemoval(bool? waitForRemoval) => Qs("wait_for_removal", waitForRemoval);
 	}
 
-	public class ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterDeleteVotingConfigExclusionsRequest> where TReadAs : class, IClusterDeleteVotingConfigExclusionsRequest
+	internal sealed class ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterDeleteVotingConfigExclusionsRequest> where TReadAs : class, IClusterDeleteVotingConfigExclusionsRequest
 	{
 		public override IClusterDeleteVotingConfigExclusionsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterDeleteVotingConfigExclusionsRequest value, JsonSerializerOptions options)

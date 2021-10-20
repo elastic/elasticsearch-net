@@ -34,9 +34,5 @@ namespace Elastic.Clients.Elasticsearch
 		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
 		PingResponse Ping(Func<PingRequestDescriptor, IPingRequest> selector = null);
 		Task<PingResponse> PingAsync(Func<PingRequestDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
-		SearchResponse<TDocument> Search<TDocument>(ISearchRequest request);
-		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(ISearchRequest request, CancellationToken cancellationToken = default);
-		SearchResponse<TDocument> Search<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null);
-		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Func<SearchRequestDescriptor, ISearchRequest> selector = null, CancellationToken cancellationToken = default);
 	}
 }

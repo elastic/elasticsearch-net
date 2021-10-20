@@ -73,6 +73,8 @@ namespace Tests.Framework.EndpointTests
 
 		protected virtual void OnAfterCall(IElasticClient client) { }
 
+		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
+
 		protected abstract LazyResponses ClientUsage();
 
 		protected LazyResponses Calls(

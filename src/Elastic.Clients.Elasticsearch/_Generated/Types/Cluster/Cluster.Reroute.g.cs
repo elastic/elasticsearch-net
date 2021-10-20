@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		Cluster.Reroute.ICommandAllocatePrimaryAction? ICommand.AllocateEmptyPrimary { get; set; }
 	}
 
-	public class CommandDescriptorConverter<TReadAs> : JsonConverter<ICommand> where TReadAs : class, ICommand
+	internal sealed class CommandDescriptorConverter<TReadAs> : JsonConverter<ICommand> where TReadAs : class, ICommand
 	{
 		public override ICommand Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ICommand value, JsonSerializerOptions options)
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		bool ICommandAllocatePrimaryAction.AcceptDataLoss { get; set; }
 	}
 
-	public class CommandAllocatePrimaryActionDescriptorConverter<TReadAs> : JsonConverter<ICommandAllocatePrimaryAction> where TReadAs : class, ICommandAllocatePrimaryAction
+	internal sealed class CommandAllocatePrimaryActionDescriptorConverter<TReadAs> : JsonConverter<ICommandAllocatePrimaryAction> where TReadAs : class, ICommandAllocatePrimaryAction
 	{
 		public override ICommandAllocatePrimaryAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ICommandAllocatePrimaryAction value, JsonSerializerOptions options)
@@ -207,7 +207,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		string ICommandAllocateReplicaAction.Node { get; set; }
 	}
 
-	public class CommandAllocateReplicaActionDescriptorConverter<TReadAs> : JsonConverter<ICommandAllocateReplicaAction> where TReadAs : class, ICommandAllocateReplicaAction
+	internal sealed class CommandAllocateReplicaActionDescriptorConverter<TReadAs> : JsonConverter<ICommandAllocateReplicaAction> where TReadAs : class, ICommandAllocateReplicaAction
 	{
 		public override ICommandAllocateReplicaAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ICommandAllocateReplicaAction value, JsonSerializerOptions options)
@@ -265,7 +265,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		bool? ICommandCancelAction.AllowPrimary { get; set; }
 	}
 
-	public class CommandCancelActionDescriptorConverter<TReadAs> : JsonConverter<ICommandCancelAction> where TReadAs : class, ICommandCancelAction
+	internal sealed class CommandCancelActionDescriptorConverter<TReadAs> : JsonConverter<ICommandCancelAction> where TReadAs : class, ICommandCancelAction
 	{
 		public override ICommandCancelAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ICommandCancelAction value, JsonSerializerOptions options)
@@ -329,7 +329,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		string ICommandMoveAction.ToNode { get; set; }
 	}
 
-	public class CommandMoveActionDescriptorConverter<TReadAs> : JsonConverter<ICommandMoveAction> where TReadAs : class, ICommandMoveAction
+	internal sealed class CommandMoveActionDescriptorConverter<TReadAs> : JsonConverter<ICommandMoveAction> where TReadAs : class, ICommandMoveAction
 	{
 		public override ICommandMoveAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ICommandMoveAction value, JsonSerializerOptions options)
