@@ -11,6 +11,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
+namespace Elastic.Clients.Elasticsearch
+{
+
+	public class DocType { }
+}
+
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	[JsonConverter(typeof(QueryContainerConverter))]

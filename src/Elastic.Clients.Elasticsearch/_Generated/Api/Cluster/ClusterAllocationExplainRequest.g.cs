@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterAllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions) => Qs("include_yes_decisions", includeYesDecisions);
 	}
 
-	public class ClusterAllocationExplainRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterAllocationExplainRequest> where TReadAs : class, IClusterAllocationExplainRequest
+	internal sealed class ClusterAllocationExplainRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterAllocationExplainRequest> where TReadAs : class, IClusterAllocationExplainRequest
 	{
 		public override IClusterAllocationExplainRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterAllocationExplainRequest value, JsonSerializerOptions options)

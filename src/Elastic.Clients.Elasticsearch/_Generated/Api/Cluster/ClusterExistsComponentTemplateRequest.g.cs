@@ -40,6 +40,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>, IClusterExistsComponentTemplateRequest
 	{
+		public ClusterExistsComponentTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
@@ -64,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterExistsComponentTemplateRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 
-	public class ClusterExistsComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterExistsComponentTemplateRequest> where TReadAs : class, IClusterExistsComponentTemplateRequest
+	internal sealed class ClusterExistsComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterExistsComponentTemplateRequest> where TReadAs : class, IClusterExistsComponentTemplateRequest
 	{
 		public override IClusterExistsComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterExistsComponentTemplateRequest value, JsonSerializerOptions options)

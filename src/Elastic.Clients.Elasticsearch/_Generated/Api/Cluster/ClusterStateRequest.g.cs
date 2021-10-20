@@ -58,6 +58,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
+		public ClusterStateRequest()
+		{
+		}
+
+		public ClusterStateRequest(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
+		{
+		}
+
+		public ClusterStateRequest(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("indices", indices))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -116,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 	}
 
-	public class ClusterStateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterStateRequest> where TReadAs : class, IClusterStateRequest
+	internal sealed class ClusterStateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterStateRequest> where TReadAs : class, IClusterStateRequest
 	{
 		public override IClusterStateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterStateRequest value, JsonSerializerOptions options)

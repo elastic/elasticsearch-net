@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		bool IAllField.StoreTermVectors { get; set; }
 	}
 
-	public class AllFieldDescriptorConverter<TReadAs> : JsonConverter<IAllField> where TReadAs : class, IAllField
+	internal sealed class AllFieldDescriptorConverter<TReadAs> : JsonConverter<IAllField> where TReadAs : class, IAllField
 	{
 		public override IAllField Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IAllField value, JsonSerializerOptions options)
@@ -389,7 +389,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		string? IDynamicTemplate.Unmatch { get; set; }
 	}
 
-	public class DynamicTemplateDescriptorConverter<TReadAs> : JsonConverter<IDynamicTemplate> where TReadAs : class, IDynamicTemplate
+	internal sealed class DynamicTemplateDescriptorConverter<TReadAs> : JsonConverter<IDynamicTemplate> where TReadAs : class, IDynamicTemplate
 	{
 		public override IDynamicTemplate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IDynamicTemplate value, JsonSerializerOptions options)
@@ -874,7 +874,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType IRuntimeField.Type { get; set; }
 	}
 
-	public class RuntimeFieldDescriptorConverter<TReadAs> : JsonConverter<IRuntimeField> where TReadAs : class, IRuntimeField
+	internal sealed class RuntimeFieldDescriptorConverter<TReadAs> : JsonConverter<IRuntimeField> where TReadAs : class, IRuntimeField
 	{
 		public override IRuntimeField Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IRuntimeField value, JsonSerializerOptions options)
@@ -1037,7 +1037,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		IEnumerable<string>? ISourceField.Includes { get; set; }
 	}
 
-	public class SourceFieldDescriptorConverter<TReadAs> : JsonConverter<ISourceField> where TReadAs : class, ISourceField
+	internal sealed class SourceFieldDescriptorConverter<TReadAs> : JsonConverter<ISourceField> where TReadAs : class, ISourceField
 	{
 		public override ISourceField Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ISourceField value, JsonSerializerOptions options)
@@ -1334,7 +1334,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		bool? ITypeMapping.Enabled { get; set; }
 	}
 
-	public class TypeMappingDescriptorConverter<TReadAs> : JsonConverter<ITypeMapping> where TReadAs : class, ITypeMapping
+	internal sealed class TypeMappingDescriptorConverter<TReadAs> : JsonConverter<ITypeMapping> where TReadAs : class, ITypeMapping
 	{
 		public override ITypeMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, ITypeMapping value, JsonSerializerOptions options)

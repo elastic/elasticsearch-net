@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterGetSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	public class ClusterGetSettingsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterGetSettingsRequest> where TReadAs : class, IClusterGetSettingsRequest
+	internal sealed class ClusterGetSettingsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterGetSettingsRequest> where TReadAs : class, IClusterGetSettingsRequest
 	{
 		public override IClusterGetSettingsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterGetSettingsRequest value, JsonSerializerOptions options)

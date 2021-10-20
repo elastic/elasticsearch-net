@@ -40,6 +40,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
+		public ClusterStatsRequest()
+		{
+		}
+
+		public ClusterStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -69,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	public class ClusterStatsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterStatsRequest> where TReadAs : class, IClusterStatsRequest
+	internal sealed class ClusterStatsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterStatsRequest> where TReadAs : class, IClusterStatsRequest
 	{
 		public override IClusterStatsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterStatsRequest value, JsonSerializerOptions options)

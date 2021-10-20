@@ -14,15 +14,15 @@ namespace PlaygroundFx
 
 			// client.ElasticsearchClientSettings.ResponseHeadersToParse
 
-			var searchAgain = new SearchRequest()
-			{
-				Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
-				MinScore = 10.0,
-				Profile = true,
-				RequestConfiguration = new RequestConfiguration() { ResponseHeadersToParse = new HeadersList("made-up") }
-			};
+			//var searchAgain = new SearchRequest()
+			//{
+			//	Query = new Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer(new Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery { Boost = 1.2F }),
+			//	MinScore = 10.0,
+			//	Profile = true,
+			//	RequestConfiguration = new RequestConfiguration() { ResponseHeadersToParse = new HeadersList("made-up") }
+			//};
 
-			var response = client.Search<Person>(searchAgain);
+			//var response = client.Search<Person>(searchAgain);
 		}
     }
 }

@@ -43,6 +43,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public partial class ClusterGetComponentTemplateRequest : PlainRequestBase<ClusterGetComponentTemplateRequestParameters>, IClusterGetComponentTemplateRequest
 	{
+		public ClusterGetComponentTemplateRequest()
+		{
+		}
+
+		public ClusterGetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -76,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterGetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	public class ClusterGetComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterGetComponentTemplateRequest> where TReadAs : class, IClusterGetComponentTemplateRequest
+	internal sealed class ClusterGetComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterGetComponentTemplateRequest> where TReadAs : class, IClusterGetComponentTemplateRequest
 	{
 		public override IClusterGetComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
 		public override void Write(Utf8JsonWriter writer, IClusterGetComponentTemplateRequest value, JsonSerializerOptions options)

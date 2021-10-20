@@ -37,6 +37,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
+	public partial class CharGroupTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("tokenize_on_chars")]
+		public IReadOnlyCollection<string> TokenizeOnChars { get; init; }
+	}
+
 	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase
 	{
 		[JsonInclude]
@@ -156,6 +163,25 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("side")]
 		public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide Side { get; init; }
+	}
+
+	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("custom_token_chars")]
+		public string CustomTokenChars { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_gram")]
+		public int MaxGram { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_gram")]
+		public int MinGram { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("token_chars")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; init; }
 	}
 
 	public partial class ElisionTokenFilter : Analysis.TokenFilterBase
@@ -297,6 +323,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string KeywordsPattern { get; init; }
 	}
 
+	public partial class KeywordTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("buffer_size")]
+		public int BufferSize { get; init; }
+	}
+
 	public partial class KStemTokenFilter : Analysis.TokenFilterBase
 	{
 	}
@@ -333,6 +366,33 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinimumLength { get; init; }
 	}
 
+	public partial class KuromojiTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("discard_punctuation")]
+		public bool DiscardPunctuation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("nbest_cost")]
+		public int NbestCost { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("nbest_examples")]
+		public string NbestExamples { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary")]
+		public string UserDictionary { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary_rules")]
+		public IReadOnlyCollection<string> UserDictionaryRules { get; init; }
+	}
+
 	public partial class LanguageAnalyzer
 	{
 		[JsonInclude]
@@ -367,6 +427,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Min { get; init; }
 	}
 
+	public partial class LetterTokenizer : Analysis.TokenizerBase
+	{
+	}
+
 	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase
 	{
 		[JsonInclude]
@@ -387,6 +451,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("language")]
 		public string Language { get; init; }
+	}
+
+	public partial class LowercaseTokenizer : Analysis.TokenizerBase
+	{
 	}
 
 	public partial class MappingCharFilter : Analysis.CharFilterBase
@@ -422,6 +490,25 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinGram { get; init; }
 	}
 
+	public partial class NGramTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("custom_token_chars")]
+		public string CustomTokenChars { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_gram")]
+		public int MaxGram { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_gram")]
+		public int MinGram { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("token_chars")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; init; }
+	}
+
 	public partial class NoriAnalyzer
 	{
 		[JsonInclude]
@@ -446,6 +533,48 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
 		public IReadOnlyCollection<string> Stoptags { get; init; }
+	}
+
+	public partial class NoriTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("decompound_mode")]
+		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode DecompoundMode { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("discard_punctuation")]
+		public bool DiscardPunctuation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary")]
+		public string UserDictionary { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("user_dictionary_rules")]
+		public IReadOnlyCollection<string> UserDictionaryRules { get; init; }
+	}
+
+	public partial class PathHierarchyTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("buffer_size")]
+		public int BufferSize { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("delimiter")]
+		public string Delimiter { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("replacement")]
+		public string Replacement { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("reverse")]
+		public bool Reverse { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("skip")]
+		public int Skip { get; init; }
 	}
 
 	public partial class PatternAnalyzer
@@ -566,6 +695,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords Stopwords { get; init; }
+	}
+
+	public partial class StandardTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("max_token_length")]
+		public int MaxTokenLength { get; init; }
 	}
 
 	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase
@@ -689,6 +825,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
+	public abstract partial class TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
+	}
+
 	public partial class TrimTokenFilter : Analysis.TokenFilterBase
 	{
 	}
@@ -698,6 +841,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("length")]
 		public int Length { get; init; }
+	}
+
+	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("max_token_length")]
+		public int MaxTokenLength { get; init; }
 	}
 
 	public partial class UniqueTokenFilter : Analysis.TokenFilterBase
@@ -716,6 +866,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public string Version { get; init; }
+	}
+
+	public partial class WhitespaceTokenizer : Analysis.TokenizerBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("max_token_length")]
+		public int MaxTokenLength { get; init; }
 	}
 
 	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public class IndexManagementCreateRequestParameters : RequestParameters<IndexManagementCreateRequestParameters>
+	public class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters>
 	{
 		[JsonIgnore]
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
@@ -39,8 +39,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexManagementCreateRequestDescriptorConverter<IndexManagementCreateRequest>))]
-	public partial interface IIndexManagementCreateRequest : IRequest<IndexManagementCreateRequestParameters>
+	[InterfaceConverterAttribute(typeof(CreateIndexRequestDescriptorConverter<CreateIndexRequest>))]
+	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
 	{
 		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
 
@@ -49,8 +49,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Dictionary<string, object>? Settings { get; set; }
 	}
 
-	public partial class IndexManagementCreateRequest : PlainRequestBase<IndexManagementCreateRequestParameters>, IIndexManagementCreateRequest
+	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
+		public CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -79,35 +83,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Settings { get; set; }
 	}
 
-	public partial class IndexManagementCreateRequestDescriptor : RequestDescriptorBase<IndexManagementCreateRequestDescriptor, IndexManagementCreateRequestParameters, IIndexManagementCreateRequest>, IIndexManagementCreateRequest
+	public partial class CreateIndexRequestDescriptor : RequestDescriptorBase<CreateIndexRequestDescriptor, CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{
 		///<summary>/{index}</summary>
-        public IndexManagementCreateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+        public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IIndexManagementCreateRequest.Aliases { get; set; }
+		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? ICreateIndexRequest.Aliases { get; set; }
 
-		Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? IIndexManagementCreateRequest.Mappings { get; set; }
+		Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? ICreateIndexRequest.Mappings { get; set; }
 
-		Dictionary<string, object>? IIndexManagementCreateRequest.Settings { get; set; }
+		Dictionary<string, object>? ICreateIndexRequest.Settings { get; set; }
 
-		public IndexManagementCreateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
-		public IndexManagementCreateRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public IndexManagementCreateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public IndexManagementCreateRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
-		public IndexManagementCreateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexManagementCreateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public IndexManagementCreateRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
+		public CreateIndexRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
+		public CreateIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public CreateIndexRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
+		public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public CreateIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	public class IndexManagementCreateRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexManagementCreateRequest> where TReadAs : class, IIndexManagementCreateRequest
+	internal sealed class CreateIndexRequestDescriptorConverter<TReadAs> : JsonConverter<ICreateIndexRequest> where TReadAs : class, ICreateIndexRequest
 	{
-		public override IIndexManagementCreateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexManagementCreateRequest value, JsonSerializerOptions options)
+		public override ICreateIndexRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
+		public override void Write(Utf8JsonWriter writer, ICreateIndexRequest value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			if (value.Aliases is not null)

@@ -105,11 +105,6 @@ public class ExampleRequest : RequestBase<ClusterHealthRequestParameters>
 	public QueryContainer Query { get; set; }
 }
 
-public class ClusterSubtype
-{
-	public string Identifier { get; set; }
-}
-
 // Descriptors instead have an auto-generated one-way JSON converter
 
 [JsonConverter(typeof(ExampleRequestDescriptorConverter))]
@@ -174,6 +169,13 @@ public class ExampleRequestDescriptor : ExperimentalRequestDescriptorBase<Exampl
 
 	public static implicit operator ExampleRequestDescriptor(ExampleRequest r) => new ExampleRequestDescriptor().Name(r.Name).Query(r.Query).Subtype(r.Subtype);
 }
+
+public class ClusterSubtype
+{
+	public string Identifier { get; set; }
+}
+
+
 
 [JsonConverter(typeof(ClusterSubtypeDescriptorConverter))]
 public class ClusterSubtypeDescriptor : ExperimentalDescriptorBase<ClusterSubtypeDescriptor>

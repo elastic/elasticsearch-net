@@ -37,7 +37,9 @@ namespace Tests.Framework.EndpointTests
 			await AssertOnAllResponses(r => r.ApiCall.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
 
 		[U] protected virtual void SerializesInitializer() => RoundTripsOrSerializes<TInterface>(Initializer);
-		
+
+		[U] protected virtual void SerializesFluent() => RoundTripsOrSerializes(Fluent?.Invoke(NewDescriptor()));
+
 		private void AssertUrl(Uri u) => u.PathEquals(ExpectedUrlPathAndQuery, UniqueValues.CurrentView.GetStringValue());
 	}
 }
