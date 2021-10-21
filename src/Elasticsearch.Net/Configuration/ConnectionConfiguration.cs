@@ -178,6 +178,7 @@ namespace Elasticsearch.Net
 		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
 		private bool _enableThreadPoolStats;
 		private bool _enableApiVersioningHeader;
+		private bool _unsafeDisableTls13;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private readonly Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -239,7 +240,6 @@ namespace Elasticsearch.Net
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
 		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
-
 		Func<Node, bool> IConnectionConfigurationValues.NodePredicate => _nodePredicate;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
 		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
@@ -252,10 +252,8 @@ namespace Elasticsearch.Net
 		IElasticsearchSerializer IConnectionConfigurationValues.RequestResponseSerializer => UseThisRequestResponseSerializer;
 		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
 		TimeSpan IConnectionConfigurationValues.DnsRefreshTimeout => _dnsRefreshTimeout;
-
 		Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> IConnectionConfigurationValues.ServerCertificateValidationCallback =>
 			_serverCertificateValidationCallback;
-
 		IReadOnlyCollection<int> IConnectionConfigurationValues.SkipDeserializationForStatusCodes => _skipDeserializationForStatusCodes;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan => _sniffLifeSpan;
 		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
@@ -267,9 +265,9 @@ namespace Elasticsearch.Net
 		bool IConnectionConfigurationValues.TransferEncodingChunked => _transferEncodingChunked;
 		bool IConnectionConfigurationValues.EnableTcpStats => _enableTcpStats;
 		bool IConnectionConfigurationValues.EnableThreadPoolStats => _enableThreadPoolStats;
-
 		MetaHeaderProvider IConnectionConfigurationValues.MetaHeaderProvider { get; } = new MetaHeaderProvider();
 		bool IConnectionConfigurationValues.EnableApiVersioningHeader => _enableApiVersioningHeader;
+		bool IConnectionConfigurationValues.UnsafeDisableTls13 => _unsafeDisableTls13;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -619,6 +617,10 @@ namespace Elasticsearch.Net
 		public T EnableTcpStats(bool enableTcpStats = true) => Assign(enableTcpStats, (a, v) => a._enableTcpStats = v);
 
 		public T EnableThreadPoolStats(bool enableThreadPoolStats = true) => Assign(enableThreadPoolStats, (a, v) => a._enableThreadPoolStats = v);
+
+		/// <inheritdoc cref="IConnectionConfigurationValues.UnsafeDisableTls13"/>
+		[Obsolete("This API is temporary, experiemental setting and will be removed in a future minor release.")]
+		public T UnsafeDisableTls13(bool disableTls13 = true) => Assign(disableTls13, (a, v) => a._unsafeDisableTls13 = v);
 
 		protected virtual void DisposeManagedResources()
 		{

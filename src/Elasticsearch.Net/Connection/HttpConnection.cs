@@ -208,6 +208,14 @@ namespace Elasticsearch.Net
 		{
 			var handler = new HttpClientHandler { AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None, };
 
+			// This supports a temporary workaround for https://github.com/elastic/cloud/issues/87734 which disables the use of TLS 1.3.
+#pragma warning disable CS0618 // Type or member is obsolete
+			if (requestData.ConnectionSettings.UnsafeDisableTls13)
+#pragma warning restore CS0618 // Type or member is obsolete
+			{
+				handler.SslProtocols = System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12;
+			}
+
 			// same limit as desktop clr
 			if (requestData.ConnectionSettings.ConnectionLimit > 0)
 				try
