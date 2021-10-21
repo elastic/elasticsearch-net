@@ -50,7 +50,8 @@ namespace Nest
 			{ "fingerprint", 34 },
 			{ "community_id", 35 },
 			{ "network_direction", 36 },
-			{ "registered_domain", 37 }
+			{ "registered_domain", 37 },
+			{ "inference", 38 }
 		};
 
 		public IProcessor Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -184,6 +185,9 @@ namespace Nest
 						break;
 					case 37:
 						processor = Deserialize<RegisteredDomainProcessor>(ref reader, formatterResolver);
+						break;
+					case 38:
+						processor = Deserialize<InferenceProcessor>(ref reader, formatterResolver);
 						break;
 				}
 			}
@@ -319,6 +323,9 @@ namespace Nest
 					break;
 				case "registered_domain":
 					Serialize<IRegisteredDomainProcessor>(ref writer, value, formatterResolver);
+					break;
+				case "inference":
+					Serialize<IInferenceProcessor>(ref writer, value, formatterResolver);
 					break;
 				default:
 					var formatter = DynamicObjectResolver.ExcludeNullCamelCase.GetFormatter<IProcessor>();

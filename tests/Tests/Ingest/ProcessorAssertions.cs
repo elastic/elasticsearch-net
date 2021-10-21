@@ -702,6 +702,58 @@ namespace Tests.Ingest
 			public override string Key => "pipeline";
 		}
 
+		[SkipVersion("<7.6.0", "Introduced in Elasticsearch 7.6.0+")]
+		public class Inference : ProcessorAssertion
+		{
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Inference<Project>(c => c
+					.TargetField(p => p.Name)
+					.ModelId("model_id")
+					.FieldMappings()
+					.InferenceConfig(i => i
+						.Classification(cc => cc
+							.ResultsField("results")
+							.NumTopClasses(10)
+							.TopClassesResultsField("topClasses")
+						)
+					)
+				);
+
+			public override IProcessor Initializer => new InferenceProcessor
+			{
+				TargetField = "name",
+				ModelId = "model_id",
+				FieldMappings = new Dictionary<Field, Field>(),
+				InferenceConfig = new InferenceConfig
+				{
+					Classification = new ClassificationInferenceConfig
+					{
+						ResultsField = "results",
+						NumTopClasses = 10,
+						TopClassesResultsField = "topClasses"
+					}
+				}
+			};
+
+			public override object Json => new
+			{
+				target_field = "name",
+				model_id = "model_id",
+				field_mappings = new {},
+				inference_config = new
+				{
+					classification = new
+					{
+						results_field = "results",
+						num_top_classes = 10,
+						top_classes_results_field = "topClasses"
+					}
+				}
+			};
+
+			public override string Key => "inference";
+		}
+
 		[SkipVersion("<7.11.0", "Uses URI parts which was introduced in 7.11.0")]
 		public class UriParts : ProcessorAssertion
 		{

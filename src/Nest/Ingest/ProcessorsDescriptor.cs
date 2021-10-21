@@ -197,5 +197,9 @@ namespace Nest
 		/// <inheritdoc cref="IRegisteredDomainProcessor"/>
 		public ProcessorsDescriptor RegisteredDomain<T>(Func<RegisteredDomainProcessorDescriptor<T>, IRegisteredDomainProcessor> selector) where T : class =>
 			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new RegisteredDomainProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IInferenceProcessor"/>
+		public ProcessorsDescriptor Inference<T>(Func<InferenceProcessorDescriptor<T>, IInferenceProcessor> selector) where T : class =>
+			Assign(selector, (a, v) => a.AddIfNotNull(v?.Invoke(new InferenceProcessorDescriptor<T>())));
 	}
 }
