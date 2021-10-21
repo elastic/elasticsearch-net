@@ -108,7 +108,15 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "plugins")]
 		Plugins = 1 << 7,
 		[EnumMember(Value = "ingest")]
-		Ingest = 1 << 8
+		Ingest = 1 << 8,
+		[EnumMember(Value = "indices")]
+		Indices = 1 << 9,
+		[EnumMember(Value = "aggregations")]
+		Aggregations = 1 << 10,
+		[EnumMember(Value = "_none")]
+		None = 1 << 11,
+		[EnumMember(Value = "_all")]
+		All = 1 << 12
 	}
 
 	[Flags, StringEnum]
@@ -549,6 +557,8 @@ namespace Elasticsearch.Net
 
 		public static string GetStringValue(this NodesInfoMetric enumValue)
 		{
+			if ((enumValue & NodesInfoMetric.All) != 0)
+				return "_all";
 			var list = new List<string>();
 			if ((enumValue & NodesInfoMetric.Settings) != 0)
 				list.Add("settings");
@@ -568,6 +578,12 @@ namespace Elasticsearch.Net
 				list.Add("plugins");
 			if ((enumValue & NodesInfoMetric.Ingest) != 0)
 				list.Add("ingest");
+			if ((enumValue & NodesInfoMetric.Indices) != 0)
+				list.Add("indices");
+			if ((enumValue & NodesInfoMetric.Aggregations) != 0)
+				list.Add("aggregations");
+			if ((enumValue & NodesInfoMetric.None) != 0)
+				list.Add("_none");
 			return string.Join(",", list);
 		}
 

@@ -175,4 +175,15 @@ namespace Elasticsearch.Net.Specification.TransformApi
 			set => Q("defer_validation", value);
 		}
 	}
+
+	///<summary>Request options for Upgrades <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html</para></summary>
+	public class UpgradeTransformsRequestParameters : RequestParameters<UpgradeTransformsRequestParameters>
+	{
+		///<summary>Whether to only check for updates but don't execute</summary>
+		public bool? DryRun
+		{
+			get => Q<bool? >("dry_run");
+			set => Q("dry_run", value);
+		}
+	}
 }

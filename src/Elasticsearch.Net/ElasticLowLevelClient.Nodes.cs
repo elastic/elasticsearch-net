@@ -116,25 +116,25 @@ namespace Elasticsearch.Net.Specification.NodesApi
 		public Task<TResponse> InfoAsync<TResponse>(string nodeId, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_nodes/{nodeId:nodeId}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/{metric} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
-		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
+		///<param name = "metric">A comma-separated list of metrics you wish returned. Use `_all` to retrieve all metrics and `_none` to retrieve the node identity without any additional metrics.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse InfoForAll<TResponse>(string metric, NodesInfoRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_nodes/{metric:metric}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/{metric} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
-		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
+		///<param name = "metric">A comma-separated list of metrics you wish returned. Use `_all` to retrieve all metrics and `_none` to retrieve the node identity without any additional metrics.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("nodes.info", "metric")]
 		public Task<TResponse> InfoForAllAsync<TResponse>(string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_nodes/{metric:metric}"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/{node_id}/{metric} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "nodeId">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
-		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
+		///<param name = "metric">A comma-separated list of metrics you wish returned. Use `_all` to retrieve all metrics and `_none` to retrieve the node identity without any additional metrics.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Info<TResponse>(string nodeId, string metric, NodesInfoRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_nodes/{nodeId:nodeId}/{metric:metric}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_nodes/{node_id}/{metric} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</para></summary>
 		///<param name = "nodeId">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#x27;re connecting to, leave empty to get information from all nodes</param>
-		///<param name = "metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
+		///<param name = "metric">A comma-separated list of metrics you wish returned. Use `_all` to retrieve all metrics and `_none` to retrieve the node identity without any additional metrics.</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("nodes.info", "node_id, metric")]
 		public Task<TResponse> InfoAsync<TResponse>(string nodeId, string metric, NodesInfoRequestParameters requestParameters = null, CancellationToken ctx = default)

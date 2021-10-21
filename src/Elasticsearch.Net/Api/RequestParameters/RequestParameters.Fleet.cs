@@ -59,4 +59,34 @@ namespace Elasticsearch.Net.Specification.FleetApi
 			set => Q("wait_for_index", value);
 		}
 	}
+
+	///<summary>Request options for Msearch</summary>
+	public class MsearchRequestParameters : RequestParameters<MsearchRequestParameters>
+	{
+	}
+
+	///<summary>Request options for Search</summary>
+	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
+	{
+		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
+		public bool? AllowPartialSearchResults
+		{
+			get => Q<bool? >("allow_partial_search_results");
+			set => Q("allow_partial_search_results", value);
+		}
+
+		///<summary>Comma separated list of checkpoints, one per shard</summary>
+		public string[] WaitForCheckpoints
+		{
+			get => Q<string[]>("wait_for_checkpoints");
+			set => Q("wait_for_checkpoints", value);
+		}
+
+		///<summary>Explicit wait_for_checkpoints timeout</summary>
+		public TimeSpan WaitForCheckpointsTimeout
+		{
+			get => Q<TimeSpan>("wait_for_checkpoints_timeout");
+			set => Q("wait_for_checkpoints_timeout", value);
+		}
+	}
 }

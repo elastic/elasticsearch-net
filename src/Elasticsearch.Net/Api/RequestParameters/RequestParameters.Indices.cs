@@ -1006,6 +1006,11 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 	{
 	}
 
+	///<summary>Request options for ModifyDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class ModifyDataStreamRequestParameters : RequestParameters<ModifyDataStreamRequestParameters>
+	{
+	}
+
 	///<summary>Request options for Open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters>
 	{
@@ -1371,6 +1376,7 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 
 		///<summary>Includes detailed memory usage by Lucene.</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: lucene no longer keeps track of segment memory overhead as it is largely off-heap")]
 		public bool? Verbose
 		{
 			get => Q<bool? >("verbose");
