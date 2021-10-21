@@ -1,2 +1,9 @@
 
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * Add experimental config to disable TLS1.3 https://github.com/elastic/elasticsearch-net/pull/6025[#6025] 
+- * Support params on SQL query & translate APIs https://github.com/elastic/elasticsearch-net/pull/6027[#6027]  (issue: https://github.com/elastic/elasticsearch-net/issues/6022[#6022])
+
 
