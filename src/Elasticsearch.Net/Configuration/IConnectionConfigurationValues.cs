@@ -292,5 +292,17 @@ namespace Elasticsearch.Net
 		/// <para> NOTE: You need at least Elasticsearch 7.11 and higher before you can enable this setting on the client</para>
 		/// </summary>
 		bool EnableApiVersioningHeader { get; }
+
+		/// <summary>
+		/// This is an EXPERIMENTAL configuration value which forces the use only of TLS 1.1 and 1.2 during the TLS negotiation. This is a
+		/// temporary workaround for an known TLS negotiation issue with some Cloud regions from Windows 11 for apps targetting .NET 5.0+.
+		/// It should not be used other than to avoid that specific limitation.
+		/// <para>
+		/// This is a temporary, experiemental configuration setting which is likely to be removed in a future release, once the TLS negotiation
+		/// issue is resolved.
+		/// </para>
+		/// </summary>
+		[Obsolete("This API is temporary, experiemental setting and will be removed in a future minor release.")]
+		bool UnsafeDisableTls13 { get; }
 	}
 }
