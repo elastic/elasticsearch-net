@@ -100,7 +100,7 @@ namespace Nest
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
-		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
+		///<summary>A comma-separated list of metrics you wish returned. Use `_all` to retrieve all metrics and `_none` to retrieve the node identity without any additional metrics.</summary>
 		public NodesInfoDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>

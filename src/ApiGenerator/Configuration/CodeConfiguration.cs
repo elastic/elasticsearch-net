@@ -80,10 +80,6 @@ namespace ApiGenerator.Configuration
 
 			"rank_eval.json", // 7.7 experimental
 			"scripts_painless_context.json", // 7.7 experimental
-			"cluster.delete_component_template.json", // 7.8 experimental
-			"cluster.get_component_template.json", // 7.8 experimental
-			"cluster.put_component_template.json", // 7.8 experimental
-			"cluster.exists_component_template.json", // 7.8 experimental
 		};
 
 		/// <summary>
