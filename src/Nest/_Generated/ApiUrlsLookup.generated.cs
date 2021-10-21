@@ -67,11 +67,15 @@ namespace Nest
 		internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[]{"_search/scroll"});
 		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[]{"_pit"});
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[]{"_cluster/allocation/explain"});
+		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[]{"_component_template/{name}"});
 		internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[]{"_cluster/voting_config_exclusions"});
+		internal static ApiUrls ClusterComponentTemplateExists = new ApiUrls(new[]{"_component_template/{name}"});
+		internal static ApiUrls ClusterGetComponentTemplate = new ApiUrls(new[]{"_component_template", "_component_template/{name}"});
 		internal static ApiUrls ClusterGetSettings = new ApiUrls(new[]{"_cluster/settings"});
 		internal static ApiUrls ClusterHealth = new ApiUrls(new[]{"_cluster/health", "_cluster/health/{index}"});
 		internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[]{"_cluster/pending_tasks"});
 		internal static ApiUrls ClusterPostVotingConfigExclusions = new ApiUrls(new[]{"_cluster/voting_config_exclusions"});
+		internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[]{"_component_template/{name}"});
 		internal static ApiUrls ClusterPutSettings = new ApiUrls(new[]{"_cluster/settings"});
 		internal static ApiUrls ClusterRemoteInfo = new ApiUrls(new[]{"_remote/info"});
 		internal static ApiUrls ClusterReroute = new ApiUrls(new[]{"_cluster/reroute"});

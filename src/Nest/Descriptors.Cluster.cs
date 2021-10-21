@@ -45,6 +45,31 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeyesdecisions = true) => Qs("include_yes_decisions", includeyesdecisions);
 	}
 
+	///<summary>Descriptor for DeleteComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class DeleteComponentTemplateDescriptor : RequestDescriptorBase<DeleteComponentTemplateDescriptor, DeleteComponentTemplateRequestParameters, IDeleteComponentTemplateRequest>, IDeleteComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteComponentTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteComponentTemplateDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IDeleteComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Explicit operation timeout</summary>
+		public DeleteComponentTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
 	///<summary>Descriptor for DeleteVotingConfigExclusions <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html</para></summary>
 	public partial class DeleteVotingConfigExclusionsDescriptor : RequestDescriptorBase<DeleteVotingConfigExclusionsDescriptor, DeleteVotingConfigExclusionsRequestParameters, IDeleteVotingConfigExclusionsRequest>, IDeleteVotingConfigExclusionsRequest
 	{
@@ -53,6 +78,57 @@ namespace Nest
 		// Request parameters
 		///<summary>Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list.</summary>
 		public DeleteVotingConfigExclusionsDescriptor WaitForRemoval(bool? waitforremoval = true) => Qs("wait_for_removal", waitforremoval);
+	}
+
+	///<summary>Descriptor for ComponentTemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class ComponentTemplateExistsDescriptor : RequestDescriptorBase<ComponentTemplateExistsDescriptor, ComponentTemplateExistsRequestParameters, IComponentTemplateExistsRequest>, IComponentTemplateExistsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterComponentTemplateExists;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public ComponentTemplateExistsDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected ComponentTemplateExistsDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IComponentTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public ComponentTemplateExistsDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ComponentTemplateExistsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+	}
+
+	///<summary>Descriptor for GetComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class GetComponentTemplateDescriptor : RequestDescriptorBase<GetComponentTemplateDescriptor, GetComponentTemplateRequestParameters, IGetComponentTemplateRequest>, IGetComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetComponentTemplate;
+		///<summary>/_component_template</summary>
+		public GetComponentTemplateDescriptor(): base()
+		{
+		}
+
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetComponentTemplateDescriptor(Names name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		Names IGetComponentTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>The comma separated names of the component templates</summary>
+		public GetComponentTemplateDescriptor Name(Names name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetComponentTemplateDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
 	///<summary>Descriptor for GetSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-get-settings.html</para></summary>
@@ -104,6 +180,8 @@ namespace Nest
 		public ClusterHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterHealthDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Whether to return HTTP 200 instead of 408 in case of a cluster health timeout from the server side</summary>
+		public ClusterHealthDescriptor Return200ForClusterHealthTimeout(bool? return200forclusterhealthtimeout = true) => Qs("return_200_for_cluster_health_timeout", return200forclusterhealthtimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Wait until the specified number of shards is active</summary>
@@ -144,6 +222,33 @@ namespace Nest
 		public PostVotingConfigExclusionsDescriptor NodeNames(string nodenames) => Qs("node_names", nodenames);
 		///<summary>Explicit operation timeout</summary>
 		public PostVotingConfigExclusionsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
+	///<summary>Descriptor for PutComponentTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html</para></summary>
+	public partial class PutComponentTemplateDescriptor : RequestDescriptorBase<PutComponentTemplateDescriptor, PutComponentTemplateRequestParameters, IPutComponentTemplateRequest>, IPutComponentTemplateRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
+		///<summary>/_component_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PutComponentTemplateDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PutComponentTemplateDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IPutComponentTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutComponentTemplateDescriptor Create(bool? create = true) => Qs("create", create);
+		///<summary>Specify timeout for connection to master</summary>
+		public PutComponentTemplateDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Explicit operation timeout</summary>
+		public PutComponentTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for PutSettings <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</para></summary>
