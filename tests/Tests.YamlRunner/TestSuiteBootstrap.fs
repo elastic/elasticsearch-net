@@ -48,6 +48,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | s when s.StartsWith(".data-frame") -> false
         | s when s.StartsWith(".ml-") -> false
         | s when s.StartsWith(".transform-") -> false
+        | s when s.StartsWith(".ds-.logs-deprecation") -> false
         | _ -> true
 
     let getAndDeleteFilter (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) filter = 
