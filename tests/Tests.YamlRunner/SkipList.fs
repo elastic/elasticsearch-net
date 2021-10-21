@@ -158,7 +158,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
 
     // Change from [] results in Unable to cast object of type 'System.Collections.Generic.List`1[System.Object]' to type 'System.Collections.Generic.Dictionary`2[System.Object,System.Object]'. 
-    SkipFile "cat.templates/20_matching.yml", Sections [ "Reject request containing comma"; ]
+    SkipFile "cat.templates/20_matching.yml", All
 
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
