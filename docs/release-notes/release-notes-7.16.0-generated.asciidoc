@@ -1,2 +1,9 @@
 
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * Add Component template APIs https://github.com/elastic/elasticsearch-net/pull/6023[#6023]  (issues: https://github.com/elastic/elasticsearch-net/issues/4748[#4748], https://github.com/elastic/elasticsearch-net/issues/4718[#4718])
+- * Support configuring a certificate fingerprint https://github.com/elastic/elasticsearch-net/pull/6024[#6024] 
+
 
