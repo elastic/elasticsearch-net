@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Nest
@@ -18,6 +19,12 @@ namespace Nest
 		/// <summary> Further filter the results returned by the SQL query provided on <see cref="Query" /> </summary>
 		[DataMember(Name ="filter")]
 		QueryContainer Filter { get; set; }
+
+		/// <summary>
+		/// Optional values for parameters in the query.
+		/// </summary>
+		[DataMember(Name = "params")]
+		IList<object> Params { get; set; }
 
 		/// <summary> The SQL query you want Elasticsearch to execute </summary>
 		[DataMember(Name ="query")]
