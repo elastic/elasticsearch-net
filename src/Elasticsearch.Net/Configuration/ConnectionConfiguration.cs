@@ -178,6 +178,7 @@ namespace Elasticsearch.Net
 		public static IMemoryStreamFactory DefaultMemoryStreamFactory { get; } = Elasticsearch.Net.MemoryStreamFactory.Default;
 		private bool _enableThreadPoolStats;
 		private bool _enableApiVersioningHeader;
+		private string _certificateFingerprint;
 
 		private string _userAgent = ConnectionConfiguration.DefaultUserAgent;
 		private readonly Func<HttpMethod, int, bool> _statusCodeToResponseSuccess;
@@ -270,6 +271,7 @@ namespace Elasticsearch.Net
 
 		MetaHeaderProvider IConnectionConfigurationValues.MetaHeaderProvider { get; } = new MetaHeaderProvider();
 		bool IConnectionConfigurationValues.EnableApiVersioningHeader => _enableApiVersioningHeader;
+		string IConnectionConfigurationValues.CertificateFingerprint => _certificateFingerprint;
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
@@ -303,6 +305,9 @@ namespace Elasticsearch.Net
 
 		/// <summary> The maximum number of retries for a given request </summary>
 		public T MaximumRetries(int maxRetries) => Assign(maxRetries, (a, v) => a._maxRetries = v);
+
+		/// <inheritdoc cref="IConnectionConfigurationValues.CertificateFingerprint"/>
+		public T CertificateFingerprint(string fingerprint) => Assign(fingerprint, (a, v) => a._certificateFingerprint = v);
 
 		/// <summary>
 		/// Limits the number of concurrent connections that can be opened to an endpoint. Defaults to <c>80</c> for all IConnection

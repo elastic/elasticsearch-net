@@ -34,6 +34,12 @@ namespace Elasticsearch.Net
 		SemaphoreSlim BootstrapLock { get; }
 
 		/// <summary>
+		/// During development, the server certificate fingerprint may be provided. When present, it is used to validate the
+		/// certificate sent by the server. The fingerprint is expected to be the hex string representing the SHA256 public key fingerprint.
+		/// </summary>
+		string CertificateFingerprint { get; }
+
+		/// <summary>
 		/// Use the following certificates to authenticate all HTTP requests. You can also set them on individual
 		/// request using <see cref="RequestConfiguration.ClientCertificates" />
 		/// </summary>

@@ -24,6 +24,8 @@ namespace Elasticsearch.Net
 #endif
 	public class HttpWebRequestConnection : IConnection
 	{
+		private string _expectedCertificateFingerprint;
+
 		static HttpWebRequestConnection()
 		{
 			//Not available under mono
@@ -211,10 +213,35 @@ namespace Elasticsearch.Net
 #if !__MonoCS__
 			//Only assign if one is defined on connection settings and a subclass has not already set one
 			if (callback != null && request.ServerCertificateValidationCallback == null)
+			{
 				request.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(callback);
+			}
+			else if (!string.IsNullOrEmpty(requestData.ConnectionSettings.CertificateFingerprint))
+			{
+				request.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((request, certificate, chain, policyErrors) =>
+				{
+					if (certificate is null && chain is null) return false;
+
+					// The "cleaned", expected fingerprint is cached to avoid repeated cost of converting it to a comparable form.
+					_expectedCertificateFingerprint  ??= CertificateHelpers.ComparableFingerprint(requestData.ConnectionSettings.CertificateFingerprint);
+
+					// If there is a chain, check each certificate up to the root
+					if (chain is not null)
+					{
+						foreach (var element in chain.ChainElements)
+						{
+							if (CertificateHelpers.ValidateCertificateFingerprint(element.Certificate, _expectedCertificateFingerprint))
+								return true;
+						}
+					}
+
+					// Otherwise, check the certificate
+					return CertificateHelpers.ValidateCertificateFingerprint(certificate, _expectedCertificateFingerprint);
+				});
+			}
 #else
-				if (callback != null)
-					throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
+			if (callback != null)
+				throw new Exception("Mono misses ServerCertificateValidationCallback on HttpWebRequest");
 #endif
 		}
 
