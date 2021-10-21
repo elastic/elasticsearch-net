@@ -40,6 +40,8 @@ namespace Elasticsearch.Net
 	/// <summary> The default IConnection implementation. Uses <see cref="HttpClient" />.</summary>
 	public class HttpConnection : IConnection
 	{
+		private string _expectedCertificateFingerprint;
+		
 		private static readonly string MissingConnectionLimitMethodError =
 			$"Your target platform does not support {nameof(ConnectionConfiguration.ConnectionLimit)}"
 			+ $" please set {nameof(ConnectionConfiguration.ConnectionLimit)} to -1 on your connection configuration/settings."
@@ -236,9 +238,35 @@ namespace Elasticsearch.Net
 			}
 			else if (requestData.DisableAutomaticProxyDetection) handler.UseProxy = false;
 
+			// Configure certificate validation
 			var callback = requestData.ConnectionSettings?.ServerCertificateValidationCallback;
 			if (callback != null && handler.ServerCertificateCustomValidationCallback == null)
+			{
 				handler.ServerCertificateCustomValidationCallback = callback;
+			}
+			else if (!string.IsNullOrEmpty(requestData.ConnectionSettings.CertificateFingerprint))
+			{
+				handler.ServerCertificateCustomValidationCallback = (request, certificate, chain, policyErrors) =>
+				{
+					if (certificate is null && chain is null) return false;
+
+					// The "cleaned", expected fingerprint is cached to avoid repeated cost of converting it to a comparable form.
+					_expectedCertificateFingerprint ??= CertificateHelpers.ComparableFingerprint(requestData.ConnectionSettings.CertificateFingerprint);
+
+					// If there is a chain, check each certificate up to the root
+					if (chain is not null)
+					{
+						foreach (var element in chain.ChainElements)
+						{
+							if (CertificateHelpers.ValidateCertificateFingerprint(element.Certificate, _expectedCertificateFingerprint))
+								return true;
+						}
+					}
+
+					// Otherwise, check the certificate
+					return CertificateHelpers.ValidateCertificateFingerprint(certificate, _expectedCertificateFingerprint);
+				};
+			}
 
 			if (requestData.ClientCertificates != null)
 			{
