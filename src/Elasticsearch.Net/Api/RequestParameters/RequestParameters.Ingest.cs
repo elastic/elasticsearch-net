@@ -86,6 +86,13 @@ namespace Elasticsearch.Net.Specification.IngestApi
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		public override bool SupportsBody => true;
+		///<summary>Required version for optimistic concurrency control for pipeline updates</summary>
+		public int? IfVersion
+		{
+			get => Q<int? >("if_version");
+			set => Q("if_version", value);
+		}
+
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{

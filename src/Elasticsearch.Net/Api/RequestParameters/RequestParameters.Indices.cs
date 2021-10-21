@@ -1172,6 +1172,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		public override bool SupportsBody => false;
 	}
 
+	///<summary>Request options for ModifyDataStream <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+	public class ModifyDataStreamRequestParameters : RequestParameters<ModifyDataStreamRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override bool SupportsBody => true;
+	}
+
 	///<summary>Request options for Open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters>
 	{

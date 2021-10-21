@@ -544,12 +544,12 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		public Task<TResponse> GetTemplateV2ForAllAsync<TResponse>(GetIndexTemplateV2RequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, "_index_template", ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-		///<param name = "name">The comma separated names of the index templates</param>
+		///<param name = "name">A pattern that returned template names must match</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		public TResponse GetTemplateV2ForAll<TResponse>(string name, GetIndexTemplateV2RequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(GET, Url($"_index_template/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>GET on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
-		///<param name = "name">The comma separated names of the index templates</param>
+		///<param name = "name">A pattern that returned template names must match</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("indices.get_index_template", "name")]
 		public Task<TResponse> GetTemplateV2ForAllAsync<TResponse>(string name, GetIndexTemplateV2RequestParameters requestParameters = null, CancellationToken ctx = default)
@@ -677,6 +677,17 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.migrate_to_data_stream", "name")]
 		public Task<TResponse> MigrateToDataStreamForAllAsync<TResponse>(string name, MigrateToDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_data_stream/_migrate/{name:name}"), ctx, null, RequestParams(requestParameters));
+		///<summary>POST on /_data_stream/_modify <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "body">The data stream modifications</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse ModifyDataStreamForAll<TResponse>(PostData body, ModifyDataStreamRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_data_stream/_modify", body, RequestParams(requestParameters));
+		///<summary>POST on /_data_stream/_modify <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html</para></summary>
+		///<param name = "body">The data stream modifications</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("indices.modify_data_stream", "body")]
+		public Task<TResponse> ModifyDataStreamForAllAsync<TResponse>(PostData body, ModifyDataStreamRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_data_stream/_modify", ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_open <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para></summary>
 		///<param name = "index">A comma separated list of indices to open</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

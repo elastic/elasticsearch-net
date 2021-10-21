@@ -187,6 +187,13 @@ namespace Elasticsearch.Net.Specification.ClusterApi
 			set => Q("master_timeout", value);
 		}
 
+		///<summary>Whether to return HTTP 200 instead of 408 in case of a cluster health timeout from the server side</summary>
+		public bool? Return200ForClusterHealthTimeout
+		{
+			get => Q<bool? >("return_200_for_cluster_health_timeout");
+			set => Q("return_200_for_cluster_health_timeout", value);
+		}
+
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout
 		{
