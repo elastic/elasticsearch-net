@@ -43,12 +43,12 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | ".deprecation-indexing-template" -> false
         | ".deprecation-indexing-mappings" -> false
         | ".deprecation-indexing-settings" -> false
+        | s when s.StartsWith(".deprecation") -> false
         | s when s.StartsWith(".monitoring") -> false
         | s when s.StartsWith(".watch") -> false
         | s when s.StartsWith(".data-frame") -> false
         | s when s.StartsWith(".ml-") -> false
         | s when s.StartsWith(".transform-") -> false
-        | s when s.StartsWith(".ds-.logs-deprecation") -> false
         | _ -> true
 
     let getAndDeleteFilter (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) filter = 
