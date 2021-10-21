@@ -108,7 +108,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let wipeAllIndices () =
         let dp = DeleteIndexRequestParameters()
         dp.SetQueryString("expand_wildcards", "all")
-        client.Indices.Delete<DynamicResponse>("*,-.ds-.watcher-history-*,-.ds-ilm-history-*", dp)
+        client.Indices.Delete<DynamicResponse>("*,-.ds-.watcher-history-*,-.ds-ilm-history-*,-.ds-.logs-deprecation.elasticsearch-default-*", dp)
         
     let deleteTemplates () =
         client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
