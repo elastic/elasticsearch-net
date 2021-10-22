@@ -34,12 +34,12 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | "logs-mappings"
         | "metrics"
         | "metrics-settings"
-        | "data-streams-mappings"
         | "metrics-mappings"
         | "synthetics"
         | "synthetics-settings"
         | "synthetics-mappings"
         | ".snapshot-blob-cache"
+        | "data-streams-mappings"
         | ".deprecation-indexing-template" -> false
         | ".deprecation-indexing-mappings" -> false
         | ".deprecation-indexing-settings" -> false
@@ -48,6 +48,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | s when s.StartsWith(".data-frame") -> false
         | s when s.StartsWith(".ml-") -> false
         | s when s.StartsWith(".transform-") -> false
+        | s when s.StartsWith(".deprecation-") -> false
         | _ -> true
 
     let getAndDeleteFilter (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) filter = 

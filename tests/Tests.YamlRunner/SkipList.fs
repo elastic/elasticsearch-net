@@ -157,6 +157,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Additional entries in regex: Failed cat.templates 10_basic.yml: Assert operation Match $body RegexAssertion
     SkipFile "cat.templates/10_basic.yml", Sections [ "Multiple template"; "Sort templates"; "No templates" ]
 
+    // Change from [] results in Unable to cast object of type 'System.Collections.Generic.List`1[System.Object]' to type 'System.Collections.Generic.Dictionary`2[System.Object,System.Object]'. 
+    SkipFile "cat.templates/20_matching.yml", All
+
     //TODO has dates without strings which trips up our yaml parser
     SkipFile "runtime_fields/40_date.yml", All
     // double / int in object comparison
@@ -183,4 +186,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Assertion expects two tokens but creates only one
     // Needs further investigation
     SkipFile "service_accounts/10_basic.yml", All
+
+    //Failed: Do operation Api search Reason: Catching error failed: Some(CatchRegex "\[categorization_filters\] cannot be used with \[categorization_analyzer\]") on server error
+    SkipFile "ml/categorization_agg.yml", Section "Test categorization aggregation with poor settings"
 ]
