@@ -37,7 +37,7 @@ environment=($(cat <<-END
   --env path.repo=/tmp
   --env repositories.url.allowed_urls=http://snapshot.test*
   --env ingest.geoip.downloader.enabled=false
-  --env logger.deprecation.level=error
+  --env cluster.deprecation_indexing.enabled=false
 END
 ))
 if [[ "$TEST_SUITE" == "platinum" ]]; then
