@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,25 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexPutIndexTemplateRequestDescriptorConverter<IndexPutIndexTemplateRequest>))]
-	public partial interface IIndexPutIndexTemplateRequest : IRequest<IndexPutIndexTemplateRequestParameters>
-	{
-		Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
-
-		IndexManagement.PutIndexTemplate.IIndexTemplateMapping? Template { get; set; }
-
-		IndexManagement.IDataStream? DataStream { get; set; }
-
-		int? Priority { get; set; }
-
-		object? Version { get; set; }
-
-		Dictionary<string, object>? Meta { get; set; }
-	}
-
-	public partial class IndexPutIndexTemplateRequest : PlainRequestBase<IndexPutIndexTemplateRequestParameters>, IIndexPutIndexTemplateRequest
+	public partial class IndexPutIndexTemplateRequest : PlainRequestBase<IndexPutIndexTemplateRequestParameters>
 	{
 		public IndexPutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -84,85 +67,78 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Meta { get; set; }
 	}
 
-	public partial class IndexPutIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexPutIndexTemplateRequestDescriptor, IndexPutIndexTemplateRequestParameters, IIndexPutIndexTemplateRequest>, IIndexPutIndexTemplateRequest
+	[JsonConverter(typeof(IndexPutIndexTemplateRequestDescriptorConverter))]
+	public partial class IndexPutIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexPutIndexTemplateRequestDescriptor, IndexPutIndexTemplateRequestParameters>
 	{
-		///<summary>/_index_template/{name}</summary>
-        public IndexPutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		public IndexPutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
+		internal Elastic.Clients.Elasticsearch.Indices? _indexPatterns;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Name>? _composedOf;
+		internal IndexManagement.PutIndexTemplate.IIndexTemplateMapping? _template;
+		internal IndexManagement.IDataStream? _dataStream;
+		internal int? _priority;
+		internal object? _version;
+		internal Dictionary<string, object>? _meta;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		Elastic.Clients.Elasticsearch.Indices? IIndexPutIndexTemplateRequest.IndexPatterns { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.Name>? IIndexPutIndexTemplateRequest.ComposedOf { get; set; }
-
-		IndexManagement.PutIndexTemplate.IIndexTemplateMapping? IIndexPutIndexTemplateRequest.Template { get; set; }
-
-		IndexManagement.IDataStream? IIndexPutIndexTemplateRequest.DataStream { get; set; }
-
-		int? IIndexPutIndexTemplateRequest.Priority { get; set; }
-
-		object? IIndexPutIndexTemplateRequest.Version { get; set; }
-
-		Dictionary<string, object>? IIndexPutIndexTemplateRequest.Meta { get; set; }
-
-		public IndexPutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
-		public IndexPutIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOf = v);
-		public IndexPutIndexTemplateRequestDescriptor Template(IndexManagement.PutIndexTemplate.IIndexTemplateMapping? template) => Assign(template, (a, v) => a.Template = v);
-		public IndexPutIndexTemplateRequestDescriptor DataStream(IndexManagement.IDataStream? dataStream) => Assign(dataStream, (a, v) => a.DataStream = v);
-		public IndexPutIndexTemplateRequestDescriptor Priority(int? priority) => Assign(priority, (a, v) => a.Priority = v);
-		public IndexPutIndexTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a.Version = v);
-		public IndexPutIndexTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.Meta = v);
+		public IndexPutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
+		public IndexPutIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a._composedOf = v);
+		public IndexPutIndexTemplateRequestDescriptor Template(IndexManagement.PutIndexTemplate.IIndexTemplateMapping? template) => Assign(template, (a, v) => a._template = v);
+		public IndexPutIndexTemplateRequestDescriptor DataStream(IndexManagement.IDataStream? dataStream) => Assign(dataStream, (a, v) => a._dataStream = v);
+		public IndexPutIndexTemplateRequestDescriptor Priority(int? priority) => Assign(priority, (a, v) => a._priority = v);
+		public IndexPutIndexTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
+		public IndexPutIndexTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
 	}
 
-	internal sealed class IndexPutIndexTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexPutIndexTemplateRequest> where TReadAs : class, IIndexPutIndexTemplateRequest
+	internal sealed class IndexPutIndexTemplateRequestDescriptorConverter : JsonConverter<IndexPutIndexTemplateRequestDescriptor>
 	{
-		public override IIndexPutIndexTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexPutIndexTemplateRequest value, JsonSerializerOptions options)
+		public override IndexPutIndexTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexPutIndexTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.IndexPatterns is not null)
+			if (value._indexPatterns is not null)
 			{
 				writer.WritePropertyName("index_patterns");
-				JsonSerializer.Serialize(writer, value.IndexPatterns, options);
+				JsonSerializer.Serialize(writer, value._indexPatterns, options);
 			}
 
-			if (value.ComposedOf is not null)
+			if (value._composedOf is not null)
 			{
 				writer.WritePropertyName("composed_of");
-				JsonSerializer.Serialize(writer, value.ComposedOf, options);
+				JsonSerializer.Serialize(writer, value._composedOf, options);
 			}
 
-			if (value.Template is not null)
+			if (value._template is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, value.Template, options);
+				JsonSerializer.Serialize(writer, value._template, options);
 			}
 
-			if (value.DataStream is not null)
+			if (value._dataStream is not null)
 			{
 				writer.WritePropertyName("data_stream");
-				JsonSerializer.Serialize(writer, value.DataStream, options);
+				JsonSerializer.Serialize(writer, value._dataStream, options);
 			}
 
-			if (value.Priority.HasValue)
+			if (value._priority.HasValue)
 			{
 				writer.WritePropertyName("priority");
-				writer.WriteNumberValue(value.Priority.Value);
+				writer.WriteNumberValue(value._priority.Value);
 			}
 
-			if (value.Version is not null)
+			if (value._version is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.Version, options);
+				JsonSerializer.Serialize(writer, value._version, options);
 			}
 
-			if (value.Meta is not null)
+			if (value._meta is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
+				JsonSerializer.Serialize(writer, value._meta, options);
 			}
 
 			writer.WriteEndObject();

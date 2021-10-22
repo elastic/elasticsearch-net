@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,34 +29,25 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterRemoteInfoRequestDescriptorConverter<ClusterRemoteInfoRequest>))]
-	public partial interface IClusterRemoteInfoRequest : IRequest<ClusterRemoteInfoRequestParameters>
-	{
-	}
-
-	public partial class ClusterRemoteInfoRequest : PlainRequestBase<ClusterRemoteInfoRequestParameters>, IClusterRemoteInfoRequest
+	public partial class ClusterRemoteInfoRequest : PlainRequestBase<ClusterRemoteInfoRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 	}
 
-	public partial class ClusterRemoteInfoRequestDescriptor : RequestDescriptorBase<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoRequestParameters, IClusterRemoteInfoRequest>, IClusterRemoteInfoRequest
+	[JsonConverter(typeof(ClusterRemoteInfoRequestDescriptorConverter))]
+	public partial class ClusterRemoteInfoRequestDescriptor : RequestDescriptorBase<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoRequestParameters>
 	{
-		///<summary>/_remote/info</summary>
-        public ClusterRemoteInfoRequestDescriptor() : base()
-		{
-		}
-
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 	}
 
-	internal sealed class ClusterRemoteInfoRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterRemoteInfoRequest> where TReadAs : class, IClusterRemoteInfoRequest
+	internal sealed class ClusterRemoteInfoRequestDescriptorConverter : JsonConverter<ClusterRemoteInfoRequestDescriptor>
 	{
-		public override IClusterRemoteInfoRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterRemoteInfoRequest value, JsonSerializerOptions options)
+		public override ClusterRemoteInfoRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterRemoteInfoRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

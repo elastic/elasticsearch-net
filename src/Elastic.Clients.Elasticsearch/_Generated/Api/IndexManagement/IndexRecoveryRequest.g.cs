@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexRecoveryRequestDescriptorConverter<IndexRecoveryRequest>))]
-	public partial interface IIndexRecoveryRequest : IRequest<IndexRecoveryRequestParameters>
-	{
-	}
-
-	public partial class IndexRecoveryRequest : PlainRequestBase<IndexRecoveryRequestParameters>, IIndexRecoveryRequest
+	public partial class IndexRecoveryRequest : PlainRequestBase<IndexRecoveryRequestParameters>
 	{
 		public IndexRecoveryRequest()
 		{
@@ -58,15 +54,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 	}
 
-	public partial class IndexRecoveryRequestDescriptor : RequestDescriptorBase<IndexRecoveryRequestDescriptor, IndexRecoveryRequestParameters, IIndexRecoveryRequest>, IIndexRecoveryRequest
+	[JsonConverter(typeof(IndexRecoveryRequestDescriptorConverter))]
+	public partial class IndexRecoveryRequestDescriptor : RequestDescriptorBase<IndexRecoveryRequestDescriptor, IndexRecoveryRequestParameters>
 	{
-		///<summary>/_recovery</summary>
-        public IndexRecoveryRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_recovery</summary>
-        public IndexRecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexRecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -77,10 +68,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRecoveryRequestDescriptor Detailed(bool? detailed) => Qs("detailed", detailed);
 	}
 
-	internal sealed class IndexRecoveryRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexRecoveryRequest> where TReadAs : class, IIndexRecoveryRequest
+	internal sealed class IndexRecoveryRequestDescriptorConverter : JsonConverter<IndexRecoveryRequestDescriptor>
 	{
-		public override IIndexRecoveryRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexRecoveryRequest value, JsonSerializerOptions options)
+		public override IndexRecoveryRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRecoveryRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

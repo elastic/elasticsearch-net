@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -42,19 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexRolloverRequestDescriptorConverter<IndexRolloverRequest>))]
-	public partial interface IIndexRolloverRequest : IRequest<IndexRolloverRequestParameters>
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
-
-		IndexManagement.Rollover.IRolloverConditions? Conditions { get; set; }
-
-		Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? Mappings { get; set; }
-
-		Dictionary<string, object>? Settings { get; set; }
-	}
-
-	public partial class IndexRolloverRequest : PlainRequestBase<IndexRolloverRequestParameters>, IIndexRolloverRequest
+	public partial class IndexRolloverRequest : PlainRequestBase<IndexRolloverRequestParameters>
 	{
 		public IndexRolloverRequest(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
 		{
@@ -99,68 +88,63 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Settings { get; set; }
 	}
 
-	public partial class IndexRolloverRequestDescriptor : RequestDescriptorBase<IndexRolloverRequestDescriptor, IndexRolloverRequestParameters, IIndexRolloverRequest>, IIndexRolloverRequest
+	[JsonConverter(typeof(IndexRolloverRequestDescriptorConverter))]
+	public partial class IndexRolloverRequestDescriptor : RequestDescriptorBase<IndexRolloverRequestDescriptor, IndexRolloverRequestParameters>
 	{
-		///<summary>/{alias}/_rollover</summary>
-        public IndexRolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
+		public IndexRolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
 		{
 		}
 
-		///<summary>/{alias}/_rollover/{new_index}</summary>
-        public IndexRolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? new_index) : base(r => r.Required("alias", alias).Optional("new_index", new_index))
+		public IndexRolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? new_index) : base(r => r.Required("alias", alias).Optional("new_index", new_index))
 		{
 		}
 
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? _aliases;
+		internal IndexManagement.Rollover.IRolloverConditions? _conditions;
+		internal Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? _mappings;
+		internal Dictionary<string, object>? _settings;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IIndexRolloverRequest.Aliases { get; set; }
-
-		IndexManagement.Rollover.IRolloverConditions? IIndexRolloverRequest.Conditions { get; set; }
-
-		Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? IIndexRolloverRequest.Mappings { get; set; }
-
-		Dictionary<string, object>? IIndexRolloverRequest.Settings { get; set; }
-
-		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
-		public IndexRolloverRequestDescriptor Conditions(IndexManagement.Rollover.IRolloverConditions? conditions) => Assign(conditions, (a, v) => a.Conditions = v);
-		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexRolloverRequestDescriptor DryRun(bool? dryRun) => Qs("dry_run", dryRun);
 		public IndexRolloverRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public IndexRolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexRolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexRolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
+		public IndexRolloverRequestDescriptor Conditions(IndexManagement.Rollover.IRolloverConditions? conditions) => Assign(conditions, (a, v) => a._conditions = v);
+		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 
-	internal sealed class IndexRolloverRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexRolloverRequest> where TReadAs : class, IIndexRolloverRequest
+	internal sealed class IndexRolloverRequestDescriptorConverter : JsonConverter<IndexRolloverRequestDescriptor>
 	{
-		public override IIndexRolloverRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexRolloverRequest value, JsonSerializerOptions options)
+		public override IndexRolloverRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRolloverRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Aliases is not null)
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.Conditions is not null)
+			if (value._conditions is not null)
 			{
 				writer.WritePropertyName("conditions");
-				JsonSerializer.Serialize(writer, value.Conditions, options);
+				JsonSerializer.Serialize(writer, value._conditions, options);
 			}
 
-			if (value.Mappings is not null)
+			if (value._mappings is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.Mappings, options);
+				JsonSerializer.Serialize(writer, value._mappings, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
 			writer.WriteEndObject();

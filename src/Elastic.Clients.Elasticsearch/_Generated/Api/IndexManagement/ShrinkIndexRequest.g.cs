@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -36,15 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ShrinkIndexRequestDescriptorConverter<ShrinkIndexRequest>))]
-	public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
-
-		Dictionary<string, object>? Settings { get; set; }
-	}
-
-	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
+	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>
 	{
 		public ShrinkIndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{
@@ -71,43 +64,41 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Settings { get; set; }
 	}
 
-	public partial class ShrinkIndexRequestDescriptor : RequestDescriptorBase<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
+	[JsonConverter(typeof(ShrinkIndexRequestDescriptorConverter))]
+	public partial class ShrinkIndexRequestDescriptor : RequestDescriptorBase<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters>
 	{
-		///<summary>/{index}/_shrink/{target}</summary>
-        public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
+		public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{
 		}
 
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? _aliases;
+		internal Dictionary<string, object>? _settings;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementShrink;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IShrinkIndexRequest.Aliases { get; set; }
-
-		Dictionary<string, object>? IShrinkIndexRequest.Settings { get; set; }
-
-		public ShrinkIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
-		public ShrinkIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public ShrinkIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ShrinkIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public ShrinkIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public ShrinkIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
+		public ShrinkIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 
-	internal sealed class ShrinkIndexRequestDescriptorConverter<TReadAs> : JsonConverter<IShrinkIndexRequest> where TReadAs : class, IShrinkIndexRequest
+	internal sealed class ShrinkIndexRequestDescriptorConverter : JsonConverter<ShrinkIndexRequestDescriptor>
 	{
-		public override IShrinkIndexRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IShrinkIndexRequest value, JsonSerializerOptions options)
+		public override ShrinkIndexRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ShrinkIndexRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Aliases is not null)
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
 			writer.WriteEndObject();

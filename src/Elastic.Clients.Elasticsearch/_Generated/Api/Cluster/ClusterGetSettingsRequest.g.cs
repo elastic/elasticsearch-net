@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterGetSettingsRequestDescriptorConverter<ClusterGetSettingsRequest>))]
-	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
-	{
-	}
-
-	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
+	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
@@ -62,13 +58,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterGetSettingsRequestDescriptor : RequestDescriptorBase<ClusterGetSettingsRequestDescriptor, ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
+	[JsonConverter(typeof(ClusterGetSettingsRequestDescriptorConverter))]
+	public partial class ClusterGetSettingsRequestDescriptor : RequestDescriptorBase<ClusterGetSettingsRequestDescriptor, ClusterGetSettingsRequestParameters>
 	{
-		///<summary>/_cluster/settings</summary>
-        public ClusterGetSettingsRequestDescriptor() : base()
-		{
-		}
-
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -78,10 +70,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterGetSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	internal sealed class ClusterGetSettingsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterGetSettingsRequest> where TReadAs : class, IClusterGetSettingsRequest
+	internal sealed class ClusterGetSettingsRequestDescriptorConverter : JsonConverter<ClusterGetSettingsRequestDescriptor>
 	{
-		public override IClusterGetSettingsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterGetSettingsRequest value, JsonSerializerOptions options)
+		public override ClusterGetSettingsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterGetSettingsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

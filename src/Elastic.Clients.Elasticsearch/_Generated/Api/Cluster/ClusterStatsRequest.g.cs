@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterStatsRequestDescriptorConverter<ClusterStatsRequest>))]
-	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
-	{
-	}
-
-	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
+	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>
 	{
 		public ClusterStatsRequest()
 		{
@@ -58,15 +54,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterStatsRequestDescriptor : RequestDescriptorBase<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
+	[JsonConverter(typeof(ClusterStatsRequestDescriptorConverter))]
+	public partial class ClusterStatsRequestDescriptor : RequestDescriptorBase<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
 	{
-		///<summary>/_cluster/stats</summary>
-        public ClusterStatsRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/_cluster/stats/nodes/{node_id}</summary>
-        public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
+		public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
 		{
 		}
 
@@ -77,10 +68,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	internal sealed class ClusterStatsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterStatsRequest> where TReadAs : class, IClusterStatsRequest
+	internal sealed class ClusterStatsRequestDescriptorConverter : JsonConverter<ClusterStatsRequestDescriptor>
 	{
-		public override IClusterStatsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterStatsRequest value, JsonSerializerOptions options)
+		public override ClusterStatsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterStatsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

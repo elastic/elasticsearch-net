@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterPostVotingConfigExclusionsRequestDescriptorConverter<ClusterPostVotingConfigExclusionsRequest>))]
-	public partial interface IClusterPostVotingConfigExclusionsRequest : IRequest<ClusterPostVotingConfigExclusionsRequestParameters>
-	{
-	}
-
-	public partial class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>, IClusterPostVotingConfigExclusionsRequest
+	public partial class ClusterPostVotingConfigExclusionsRequest : PlainRequestBase<ClusterPostVotingConfigExclusionsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -56,13 +52,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterPostVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterPostVotingConfigExclusionsRequestDescriptor, ClusterPostVotingConfigExclusionsRequestParameters, IClusterPostVotingConfigExclusionsRequest>, IClusterPostVotingConfigExclusionsRequest
+	[JsonConverter(typeof(ClusterPostVotingConfigExclusionsRequestDescriptorConverter))]
+	public partial class ClusterPostVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterPostVotingConfigExclusionsRequestDescriptor, ClusterPostVotingConfigExclusionsRequestParameters>
 	{
-		///<summary>/_cluster/voting_config_exclusions</summary>
-        public ClusterPostVotingConfigExclusionsRequestDescriptor() : base()
-		{
-		}
-
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPostVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
@@ -71,10 +63,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	internal sealed class ClusterPostVotingConfigExclusionsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPostVotingConfigExclusionsRequest> where TReadAs : class, IClusterPostVotingConfigExclusionsRequest
+	internal sealed class ClusterPostVotingConfigExclusionsRequestDescriptorConverter : JsonConverter<ClusterPostVotingConfigExclusionsRequestDescriptor>
 	{
-		public override IClusterPostVotingConfigExclusionsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterPostVotingConfigExclusionsRequest value, JsonSerializerOptions options)
+		public override ClusterPostVotingConfigExclusionsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterPostVotingConfigExclusionsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

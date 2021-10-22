@@ -28,201 +28,441 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public AnalyzeIndexResponse AnalyzeIndex(IAnalyzeIndexRequest request) => DoRequest<IAnalyzeIndexRequest, AnalyzeIndexResponse>(request, request.RequestParameters);
-		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync(IAnalyzeIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IAnalyzeIndexRequest, AnalyzeIndexResponse>(request, request.RequestParameters, cancellationToken);
-		public AnalyzeIndexResponse AnalyzeIndex(Func<AnalyzeIndexRequestDescriptor, IAnalyzeIndexRequest> selector = null) => AnalyzeIndex(selector.InvokeOrDefault(new AnalyzeIndexRequestDescriptor()));
-		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync(Func<AnalyzeIndexRequestDescriptor, IAnalyzeIndexRequest> selector = null, CancellationToken cancellationToken = default) => AnalyzeIndexAsync(selector.InvokeOrDefault(new AnalyzeIndexRequestDescriptor()), cancellationToken);
-		public CreateIndexResponse CreateIndex(ICreateIndexRequest request) => DoRequest<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters);
-		public Task<CreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ICreateIndexRequest, CreateIndexResponse>(request, request.RequestParameters, cancellationToken);
-		public CreateIndexResponse CreateIndex(Elastic.Clients.Elasticsearch.IndexName index, Func<CreateIndexRequestDescriptor, ICreateIndexRequest> selector = null) => CreateIndex(selector.InvokeOrDefault(new CreateIndexRequestDescriptor(index)));
-		public Task<CreateIndexResponse> CreateIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Func<CreateIndexRequestDescriptor, ICreateIndexRequest> selector = null, CancellationToken cancellationToken = default) => CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexRequestDescriptor(index)), cancellationToken);
-		public DeleteIndexResponse DeleteIndex(IDeleteIndexRequest request) => DoRequest<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters);
-		public Task<DeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IDeleteIndexRequest, DeleteIndexResponse>(request, request.RequestParameters, cancellationToken);
-		public DeleteIndexResponse DeleteIndex(Elastic.Clients.Elasticsearch.Indices indices, Func<DeleteIndexRequestDescriptor, IDeleteIndexRequest> selector = null) => DeleteIndex(selector.InvokeOrDefault(new DeleteIndexRequestDescriptor(indices)));
-		public Task<DeleteIndexResponse> DeleteIndexAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<DeleteIndexRequestDescriptor, IDeleteIndexRequest> selector = null, CancellationToken cancellationToken = default) => DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexRequestDescriptor(indices)), cancellationToken);
-		public GetIndexResponse<TKey, TValue> GetIndex<TKey, TValue>(IGetIndexRequest request) => DoRequest<IGetIndexRequest, GetIndexResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<GetIndexResponse<TKey, TValue>> GetIndexAsync<TKey, TValue>(IGetIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IGetIndexRequest, GetIndexResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public GetIndexResponse<TKey, TValue> GetIndex<TKey, TValue>(Elastic.Clients.Elasticsearch.Indices indices, Func<GetIndexRequestDescriptor, IGetIndexRequest> selector = null) => GetIndex<TKey, TValue>(selector.InvokeOrDefault(new GetIndexRequestDescriptor(indices)));
-		public Task<GetIndexResponse<TKey, TValue>> GetIndexAsync<TKey, TValue>(Elastic.Clients.Elasticsearch.Indices indices, Func<GetIndexRequestDescriptor, IGetIndexRequest> selector = null, CancellationToken cancellationToken = default) => GetIndexAsync<TKey, TValue>(selector.InvokeOrDefault(new GetIndexRequestDescriptor(indices)), cancellationToken);
-		public IndexClearCacheResponse IndexClearCache(IIndexClearCacheRequest request) => DoRequest<IIndexClearCacheRequest, IndexClearCacheResponse>(request, request.RequestParameters);
-		public Task<IndexClearCacheResponse> IndexClearCacheAsync(IIndexClearCacheRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexClearCacheRequest, IndexClearCacheResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexClearCacheResponse IndexClearCache(Func<IndexClearCacheRequestDescriptor, IIndexClearCacheRequest> selector = null) => IndexClearCache(selector.InvokeOrDefault(new IndexClearCacheRequestDescriptor()));
-		public Task<IndexClearCacheResponse> IndexClearCacheAsync(Func<IndexClearCacheRequestDescriptor, IIndexClearCacheRequest> selector = null, CancellationToken cancellationToken = default) => IndexClearCacheAsync(selector.InvokeOrDefault(new IndexClearCacheRequestDescriptor()), cancellationToken);
-		public IndexCloneResponse IndexClone(IIndexCloneRequest request) => DoRequest<IIndexCloneRequest, IndexCloneResponse>(request, request.RequestParameters);
-		public Task<IndexCloneResponse> IndexCloneAsync(IIndexCloneRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexCloneRequest, IndexCloneResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexCloneResponse IndexClone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Func<IndexCloneRequestDescriptor, IIndexCloneRequest> selector = null) => IndexClone(selector.InvokeOrDefault(new IndexCloneRequestDescriptor(index, target)));
-		public Task<IndexCloneResponse> IndexCloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Func<IndexCloneRequestDescriptor, IIndexCloneRequest> selector = null, CancellationToken cancellationToken = default) => IndexCloneAsync(selector.InvokeOrDefault(new IndexCloneRequestDescriptor(index, target)), cancellationToken);
-		public IndexCloseResponse IndexClose(IIndexCloseRequest request) => DoRequest<IIndexCloseRequest, IndexCloseResponse>(request, request.RequestParameters);
-		public Task<IndexCloseResponse> IndexCloseAsync(IIndexCloseRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexCloseRequest, IndexCloseResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexCloseResponse IndexClose(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexCloseRequestDescriptor, IIndexCloseRequest> selector = null) => IndexClose(selector.InvokeOrDefault(new IndexCloseRequestDescriptor(indices)));
-		public Task<IndexCloseResponse> IndexCloseAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexCloseRequestDescriptor, IIndexCloseRequest> selector = null, CancellationToken cancellationToken = default) => IndexCloseAsync(selector.InvokeOrDefault(new IndexCloseRequestDescriptor(indices)), cancellationToken);
-		public IndexCreateDataStreamResponse IndexCreateDataStream(IIndexCreateDataStreamRequest request) => DoRequest<IIndexCreateDataStreamRequest, IndexCreateDataStreamResponse>(request, request.RequestParameters);
-		public Task<IndexCreateDataStreamResponse> IndexCreateDataStreamAsync(IIndexCreateDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexCreateDataStreamRequest, IndexCreateDataStreamResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexCreateDataStreamResponse IndexCreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name, Func<IndexCreateDataStreamRequestDescriptor, IIndexCreateDataStreamRequest> selector = null) => IndexCreateDataStream(selector.InvokeOrDefault(new IndexCreateDataStreamRequestDescriptor(name)));
-		public Task<IndexCreateDataStreamResponse> IndexCreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, Func<IndexCreateDataStreamRequestDescriptor, IIndexCreateDataStreamRequest> selector = null, CancellationToken cancellationToken = default) => IndexCreateDataStreamAsync(selector.InvokeOrDefault(new IndexCreateDataStreamRequestDescriptor(name)), cancellationToken);
-		public IndexDataStreamsStatsResponse IndexDataStreamsStats(IIndexDataStreamsStatsRequest request) => DoRequest<IIndexDataStreamsStatsRequest, IndexDataStreamsStatsResponse>(request, request.RequestParameters);
-		public Task<IndexDataStreamsStatsResponse> IndexDataStreamsStatsAsync(IIndexDataStreamsStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexDataStreamsStatsRequest, IndexDataStreamsStatsResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexDataStreamsStatsResponse IndexDataStreamsStats(Func<IndexDataStreamsStatsRequestDescriptor, IIndexDataStreamsStatsRequest> selector = null) => IndexDataStreamsStats(selector.InvokeOrDefault(new IndexDataStreamsStatsRequestDescriptor()));
-		public Task<IndexDataStreamsStatsResponse> IndexDataStreamsStatsAsync(Func<IndexDataStreamsStatsRequestDescriptor, IIndexDataStreamsStatsRequest> selector = null, CancellationToken cancellationToken = default) => IndexDataStreamsStatsAsync(selector.InvokeOrDefault(new IndexDataStreamsStatsRequestDescriptor()), cancellationToken);
-		public IndexDeleteAliasResponse IndexDeleteAlias(IIndexDeleteAliasRequest request) => DoRequest<IIndexDeleteAliasRequest, IndexDeleteAliasResponse>(request, request.RequestParameters);
-		public Task<IndexDeleteAliasResponse> IndexDeleteAliasAsync(IIndexDeleteAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexDeleteAliasRequest, IndexDeleteAliasResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexDeleteAliasResponse IndexDeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Func<IndexDeleteAliasRequestDescriptor, IIndexDeleteAliasRequest> selector = null) => IndexDeleteAlias(selector.InvokeOrDefault(new IndexDeleteAliasRequestDescriptor(indices, name)));
-		public Task<IndexDeleteAliasResponse> IndexDeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Func<IndexDeleteAliasRequestDescriptor, IIndexDeleteAliasRequest> selector = null, CancellationToken cancellationToken = default) => IndexDeleteAliasAsync(selector.InvokeOrDefault(new IndexDeleteAliasRequestDescriptor(indices, name)), cancellationToken);
-		public IndexDeleteDataStreamResponse IndexDeleteDataStream(IIndexDeleteDataStreamRequest request) => DoRequest<IIndexDeleteDataStreamRequest, IndexDeleteDataStreamResponse>(request, request.RequestParameters);
-		public Task<IndexDeleteDataStreamResponse> IndexDeleteDataStreamAsync(IIndexDeleteDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexDeleteDataStreamRequest, IndexDeleteDataStreamResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexDeleteDataStreamResponse IndexDeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name, Func<IndexDeleteDataStreamRequestDescriptor, IIndexDeleteDataStreamRequest> selector = null) => IndexDeleteDataStream(selector.InvokeOrDefault(new IndexDeleteDataStreamRequestDescriptor(name)));
-		public Task<IndexDeleteDataStreamResponse> IndexDeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Func<IndexDeleteDataStreamRequestDescriptor, IIndexDeleteDataStreamRequest> selector = null, CancellationToken cancellationToken = default) => IndexDeleteDataStreamAsync(selector.InvokeOrDefault(new IndexDeleteDataStreamRequestDescriptor(name)), cancellationToken);
-		public IndexDeleteIndexTemplateResponse IndexDeleteIndexTemplate(IIndexDeleteIndexTemplateRequest request) => DoRequest<IIndexDeleteIndexTemplateRequest, IndexDeleteIndexTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexDeleteIndexTemplateResponse> IndexDeleteIndexTemplateAsync(IIndexDeleteIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexDeleteIndexTemplateRequest, IndexDeleteIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexDeleteIndexTemplateResponse IndexDeleteIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Func<IndexDeleteIndexTemplateRequestDescriptor, IIndexDeleteIndexTemplateRequest> selector = null) => IndexDeleteIndexTemplate(selector.InvokeOrDefault(new IndexDeleteIndexTemplateRequestDescriptor(name)));
-		public Task<IndexDeleteIndexTemplateResponse> IndexDeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<IndexDeleteIndexTemplateRequestDescriptor, IIndexDeleteIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexDeleteIndexTemplateAsync(selector.InvokeOrDefault(new IndexDeleteIndexTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexDeleteTemplateResponse IndexDeleteTemplate(IIndexDeleteTemplateRequest request) => DoRequest<IIndexDeleteTemplateRequest, IndexDeleteTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexDeleteTemplateResponse> IndexDeleteTemplateAsync(IIndexDeleteTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexDeleteTemplateRequest, IndexDeleteTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexDeleteTemplateResponse IndexDeleteTemplate(Elastic.Clients.Elasticsearch.Name name, Func<IndexDeleteTemplateRequestDescriptor, IIndexDeleteTemplateRequest> selector = null) => IndexDeleteTemplate(selector.InvokeOrDefault(new IndexDeleteTemplateRequestDescriptor(name)));
-		public Task<IndexDeleteTemplateResponse> IndexDeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<IndexDeleteTemplateRequestDescriptor, IIndexDeleteTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexDeleteTemplateAsync(selector.InvokeOrDefault(new IndexDeleteTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexDiskUsageResponse IndexDiskUsage(IIndexDiskUsageRequest request) => DoRequest<IIndexDiskUsageRequest, IndexDiskUsageResponse>(request, request.RequestParameters);
-		public Task<IndexDiskUsageResponse> IndexDiskUsageAsync(IIndexDiskUsageRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexDiskUsageRequest, IndexDiskUsageResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexDiskUsageResponse IndexDiskUsage(Elastic.Clients.Elasticsearch.IndexName index, Func<IndexDiskUsageRequestDescriptor, IIndexDiskUsageRequest> selector = null) => IndexDiskUsage(selector.InvokeOrDefault(new IndexDiskUsageRequestDescriptor(index)));
-		public Task<IndexDiskUsageResponse> IndexDiskUsageAsync(Elastic.Clients.Elasticsearch.IndexName index, Func<IndexDiskUsageRequestDescriptor, IIndexDiskUsageRequest> selector = null, CancellationToken cancellationToken = default) => IndexDiskUsageAsync(selector.InvokeOrDefault(new IndexDiskUsageRequestDescriptor(index)), cancellationToken);
-		public IndexExistsAliasResponse IndexExistsAlias(IIndexExistsAliasRequest request) => DoRequest<IIndexExistsAliasRequest, IndexExistsAliasResponse>(request, request.RequestParameters);
-		public Task<IndexExistsAliasResponse> IndexExistsAliasAsync(IIndexExistsAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexExistsAliasRequest, IndexExistsAliasResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexExistsAliasResponse IndexExistsAlias(Elastic.Clients.Elasticsearch.Names name, Func<IndexExistsAliasRequestDescriptor, IIndexExistsAliasRequest> selector = null) => IndexExistsAlias(selector.InvokeOrDefault(new IndexExistsAliasRequestDescriptor(name)));
-		public Task<IndexExistsAliasResponse> IndexExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, Func<IndexExistsAliasRequestDescriptor, IIndexExistsAliasRequest> selector = null, CancellationToken cancellationToken = default) => IndexExistsAliasAsync(selector.InvokeOrDefault(new IndexExistsAliasRequestDescriptor(name)), cancellationToken);
-		public IndexExistsIndexTemplateResponse IndexExistsIndexTemplate(IIndexExistsIndexTemplateRequest request) => DoRequest<IIndexExistsIndexTemplateRequest, IndexExistsIndexTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexExistsIndexTemplateResponse> IndexExistsIndexTemplateAsync(IIndexExistsIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexExistsIndexTemplateRequest, IndexExistsIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexExistsIndexTemplateResponse IndexExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Func<IndexExistsIndexTemplateRequestDescriptor, IIndexExistsIndexTemplateRequest> selector = null) => IndexExistsIndexTemplate(selector.InvokeOrDefault(new IndexExistsIndexTemplateRequestDescriptor(name)));
-		public Task<IndexExistsIndexTemplateResponse> IndexExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<IndexExistsIndexTemplateRequestDescriptor, IIndexExistsIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexExistsIndexTemplateAsync(selector.InvokeOrDefault(new IndexExistsIndexTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexExistsResponse IndexExists(IIndexExistsRequest request) => DoRequest<IIndexExistsRequest, IndexExistsResponse>(request, request.RequestParameters);
-		public Task<IndexExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexExistsRequest, IndexExistsResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexExistsResponse IndexExists(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexExistsRequestDescriptor, IIndexExistsRequest> selector = null) => IndexExists(selector.InvokeOrDefault(new IndexExistsRequestDescriptor(indices)));
-		public Task<IndexExistsResponse> IndexExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexExistsRequestDescriptor, IIndexExistsRequest> selector = null, CancellationToken cancellationToken = default) => IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsRequestDescriptor(indices)), cancellationToken);
-		public IndexExistsTemplateResponse IndexExistsTemplate(IIndexExistsTemplateRequest request) => DoRequest<IIndexExistsTemplateRequest, IndexExistsTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexExistsTemplateResponse> IndexExistsTemplateAsync(IIndexExistsTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexExistsTemplateRequest, IndexExistsTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexExistsTemplateResponse IndexExistsTemplate(Elastic.Clients.Elasticsearch.Names name, Func<IndexExistsTemplateRequestDescriptor, IIndexExistsTemplateRequest> selector = null) => IndexExistsTemplate(selector.InvokeOrDefault(new IndexExistsTemplateRequestDescriptor(name)));
-		public Task<IndexExistsTemplateResponse> IndexExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Func<IndexExistsTemplateRequestDescriptor, IIndexExistsTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexExistsTemplateAsync(selector.InvokeOrDefault(new IndexExistsTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexFlushResponse IndexFlush(IIndexFlushRequest request) => DoRequest<IIndexFlushRequest, IndexFlushResponse>(request, request.RequestParameters);
-		public Task<IndexFlushResponse> IndexFlushAsync(IIndexFlushRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexFlushRequest, IndexFlushResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexFlushResponse IndexFlush(Func<IndexFlushRequestDescriptor, IIndexFlushRequest> selector = null) => IndexFlush(selector.InvokeOrDefault(new IndexFlushRequestDescriptor()));
-		public Task<IndexFlushResponse> IndexFlushAsync(Func<IndexFlushRequestDescriptor, IIndexFlushRequest> selector = null, CancellationToken cancellationToken = default) => IndexFlushAsync(selector.InvokeOrDefault(new IndexFlushRequestDescriptor()), cancellationToken);
-		public IndexForcemergeResponse IndexForcemerge(IIndexForcemergeRequest request) => DoRequest<IIndexForcemergeRequest, IndexForcemergeResponse>(request, request.RequestParameters);
-		public Task<IndexForcemergeResponse> IndexForcemergeAsync(IIndexForcemergeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexForcemergeRequest, IndexForcemergeResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexForcemergeResponse IndexForcemerge(Func<IndexForcemergeRequestDescriptor, IIndexForcemergeRequest> selector = null) => IndexForcemerge(selector.InvokeOrDefault(new IndexForcemergeRequestDescriptor()));
-		public Task<IndexForcemergeResponse> IndexForcemergeAsync(Func<IndexForcemergeRequestDescriptor, IIndexForcemergeRequest> selector = null, CancellationToken cancellationToken = default) => IndexForcemergeAsync(selector.InvokeOrDefault(new IndexForcemergeRequestDescriptor()), cancellationToken);
-		public IndexGetAliasResponse<TKey, TValue> IndexGetAlias<TKey, TValue>(IIndexGetAliasRequest request) => DoRequest<IIndexGetAliasRequest, IndexGetAliasResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<IndexGetAliasResponse<TKey, TValue>> IndexGetAliasAsync<TKey, TValue>(IIndexGetAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetAliasRequest, IndexGetAliasResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public IndexGetAliasResponse<TKey, TValue> IndexGetAlias<TKey, TValue>(Func<IndexGetAliasRequestDescriptor, IIndexGetAliasRequest> selector = null) => IndexGetAlias<TKey, TValue>(selector.InvokeOrDefault(new IndexGetAliasRequestDescriptor()));
-		public Task<IndexGetAliasResponse<TKey, TValue>> IndexGetAliasAsync<TKey, TValue>(Func<IndexGetAliasRequestDescriptor, IIndexGetAliasRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetAliasAsync<TKey, TValue>(selector.InvokeOrDefault(new IndexGetAliasRequestDescriptor()), cancellationToken);
-		public IndexGetDataStreamResponse IndexGetDataStream(IIndexGetDataStreamRequest request) => DoRequest<IIndexGetDataStreamRequest, IndexGetDataStreamResponse>(request, request.RequestParameters);
-		public Task<IndexGetDataStreamResponse> IndexGetDataStreamAsync(IIndexGetDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetDataStreamRequest, IndexGetDataStreamResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexGetDataStreamResponse IndexGetDataStream(Func<IndexGetDataStreamRequestDescriptor, IIndexGetDataStreamRequest> selector = null) => IndexGetDataStream(selector.InvokeOrDefault(new IndexGetDataStreamRequestDescriptor()));
-		public Task<IndexGetDataStreamResponse> IndexGetDataStreamAsync(Func<IndexGetDataStreamRequestDescriptor, IIndexGetDataStreamRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetDataStreamAsync(selector.InvokeOrDefault(new IndexGetDataStreamRequestDescriptor()), cancellationToken);
-		public IndexGetFieldMappingResponse<TKey, TValue> IndexGetFieldMapping<TKey, TValue>(IIndexGetFieldMappingRequest request) => DoRequest<IIndexGetFieldMappingRequest, IndexGetFieldMappingResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<IndexGetFieldMappingResponse<TKey, TValue>> IndexGetFieldMappingAsync<TKey, TValue>(IIndexGetFieldMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetFieldMappingRequest, IndexGetFieldMappingResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public IndexGetFieldMappingResponse<TKey, TValue> IndexGetFieldMapping<TKey, TValue>(Elastic.Clients.Elasticsearch.Fields fields, Func<IndexGetFieldMappingRequestDescriptor, IIndexGetFieldMappingRequest> selector = null) => IndexGetFieldMapping<TKey, TValue>(selector.InvokeOrDefault(new IndexGetFieldMappingRequestDescriptor(fields)));
-		public Task<IndexGetFieldMappingResponse<TKey, TValue>> IndexGetFieldMappingAsync<TKey, TValue>(Elastic.Clients.Elasticsearch.Fields fields, Func<IndexGetFieldMappingRequestDescriptor, IIndexGetFieldMappingRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetFieldMappingAsync<TKey, TValue>(selector.InvokeOrDefault(new IndexGetFieldMappingRequestDescriptor(fields)), cancellationToken);
-		public IndexGetIndexTemplateResponse IndexGetIndexTemplate(IIndexGetIndexTemplateRequest request) => DoRequest<IIndexGetIndexTemplateRequest, IndexGetIndexTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexGetIndexTemplateResponse> IndexGetIndexTemplateAsync(IIndexGetIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetIndexTemplateRequest, IndexGetIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexGetIndexTemplateResponse IndexGetIndexTemplate(Func<IndexGetIndexTemplateRequestDescriptor, IIndexGetIndexTemplateRequest> selector = null) => IndexGetIndexTemplate(selector.InvokeOrDefault(new IndexGetIndexTemplateRequestDescriptor()));
-		public Task<IndexGetIndexTemplateResponse> IndexGetIndexTemplateAsync(Func<IndexGetIndexTemplateRequestDescriptor, IIndexGetIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetIndexTemplateAsync(selector.InvokeOrDefault(new IndexGetIndexTemplateRequestDescriptor()), cancellationToken);
-		public IndexGetMappingResponse<TKey, TValue> IndexGetMapping<TKey, TValue>(IIndexGetMappingRequest request) => DoRequest<IIndexGetMappingRequest, IndexGetMappingResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<IndexGetMappingResponse<TKey, TValue>> IndexGetMappingAsync<TKey, TValue>(IIndexGetMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetMappingRequest, IndexGetMappingResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public IndexGetMappingResponse<TKey, TValue> IndexGetMapping<TKey, TValue>(Func<IndexGetMappingRequestDescriptor, IIndexGetMappingRequest> selector = null) => IndexGetMapping<TKey, TValue>(selector.InvokeOrDefault(new IndexGetMappingRequestDescriptor()));
-		public Task<IndexGetMappingResponse<TKey, TValue>> IndexGetMappingAsync<TKey, TValue>(Func<IndexGetMappingRequestDescriptor, IIndexGetMappingRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetMappingAsync<TKey, TValue>(selector.InvokeOrDefault(new IndexGetMappingRequestDescriptor()), cancellationToken);
-		public IndexGetSettingsResponse<TKey, TValue> IndexGetSettings<TKey, TValue>(IIndexGetSettingsRequest request) => DoRequest<IIndexGetSettingsRequest, IndexGetSettingsResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<IndexGetSettingsResponse<TKey, TValue>> IndexGetSettingsAsync<TKey, TValue>(IIndexGetSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetSettingsRequest, IndexGetSettingsResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public IndexGetSettingsResponse<TKey, TValue> IndexGetSettings<TKey, TValue>(Func<IndexGetSettingsRequestDescriptor, IIndexGetSettingsRequest> selector = null) => IndexGetSettings<TKey, TValue>(selector.InvokeOrDefault(new IndexGetSettingsRequestDescriptor()));
-		public Task<IndexGetSettingsResponse<TKey, TValue>> IndexGetSettingsAsync<TKey, TValue>(Func<IndexGetSettingsRequestDescriptor, IIndexGetSettingsRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetSettingsAsync<TKey, TValue>(selector.InvokeOrDefault(new IndexGetSettingsRequestDescriptor()), cancellationToken);
-		public IndexGetTemplateResponse<TKey, TValue> IndexGetTemplate<TKey, TValue>(IIndexGetTemplateRequest request) => DoRequest<IIndexGetTemplateRequest, IndexGetTemplateResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<IndexGetTemplateResponse<TKey, TValue>> IndexGetTemplateAsync<TKey, TValue>(IIndexGetTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexGetTemplateRequest, IndexGetTemplateResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public IndexGetTemplateResponse<TKey, TValue> IndexGetTemplate<TKey, TValue>(Func<IndexGetTemplateRequestDescriptor, IIndexGetTemplateRequest> selector = null) => IndexGetTemplate<TKey, TValue>(selector.InvokeOrDefault(new IndexGetTemplateRequestDescriptor()));
-		public Task<IndexGetTemplateResponse<TKey, TValue>> IndexGetTemplateAsync<TKey, TValue>(Func<IndexGetTemplateRequestDescriptor, IIndexGetTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexGetTemplateAsync<TKey, TValue>(selector.InvokeOrDefault(new IndexGetTemplateRequestDescriptor()), cancellationToken);
-		public IndexMigrateToDataStreamResponse IndexMigrateToDataStream(IIndexMigrateToDataStreamRequest request) => DoRequest<IIndexMigrateToDataStreamRequest, IndexMigrateToDataStreamResponse>(request, request.RequestParameters);
-		public Task<IndexMigrateToDataStreamResponse> IndexMigrateToDataStreamAsync(IIndexMigrateToDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexMigrateToDataStreamRequest, IndexMigrateToDataStreamResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexMigrateToDataStreamResponse IndexMigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name, Func<IndexMigrateToDataStreamRequestDescriptor, IIndexMigrateToDataStreamRequest> selector = null) => IndexMigrateToDataStream(selector.InvokeOrDefault(new IndexMigrateToDataStreamRequestDescriptor(name)));
-		public Task<IndexMigrateToDataStreamResponse> IndexMigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Func<IndexMigrateToDataStreamRequestDescriptor, IIndexMigrateToDataStreamRequest> selector = null, CancellationToken cancellationToken = default) => IndexMigrateToDataStreamAsync(selector.InvokeOrDefault(new IndexMigrateToDataStreamRequestDescriptor(name)), cancellationToken);
-		public IndexOpenResponse IndexOpen(IIndexOpenRequest request) => DoRequest<IIndexOpenRequest, IndexOpenResponse>(request, request.RequestParameters);
-		public Task<IndexOpenResponse> IndexOpenAsync(IIndexOpenRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexOpenRequest, IndexOpenResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexOpenResponse IndexOpen(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexOpenRequestDescriptor, IIndexOpenRequest> selector = null) => IndexOpen(selector.InvokeOrDefault(new IndexOpenRequestDescriptor(indices)));
-		public Task<IndexOpenResponse> IndexOpenAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexOpenRequestDescriptor, IIndexOpenRequest> selector = null, CancellationToken cancellationToken = default) => IndexOpenAsync(selector.InvokeOrDefault(new IndexOpenRequestDescriptor(indices)), cancellationToken);
-		public IndexPromoteDataStreamResponse IndexPromoteDataStream(IIndexPromoteDataStreamRequest request) => DoRequest<IIndexPromoteDataStreamRequest, IndexPromoteDataStreamResponse>(request, request.RequestParameters);
-		public Task<IndexPromoteDataStreamResponse> IndexPromoteDataStreamAsync(IIndexPromoteDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexPromoteDataStreamRequest, IndexPromoteDataStreamResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexPromoteDataStreamResponse IndexPromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name, Func<IndexPromoteDataStreamRequestDescriptor, IIndexPromoteDataStreamRequest> selector = null) => IndexPromoteDataStream(selector.InvokeOrDefault(new IndexPromoteDataStreamRequestDescriptor(name)));
-		public Task<IndexPromoteDataStreamResponse> IndexPromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Func<IndexPromoteDataStreamRequestDescriptor, IIndexPromoteDataStreamRequest> selector = null, CancellationToken cancellationToken = default) => IndexPromoteDataStreamAsync(selector.InvokeOrDefault(new IndexPromoteDataStreamRequestDescriptor(name)), cancellationToken);
-		public IndexPutAliasResponse IndexPutAlias(IIndexPutAliasRequest request) => DoRequest<IIndexPutAliasRequest, IndexPutAliasResponse>(request, request.RequestParameters);
-		public Task<IndexPutAliasResponse> IndexPutAliasAsync(IIndexPutAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexPutAliasRequest, IndexPutAliasResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexPutAliasResponse IndexPutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Func<IndexPutAliasRequestDescriptor, IIndexPutAliasRequest> selector = null) => IndexPutAlias(selector.InvokeOrDefault(new IndexPutAliasRequestDescriptor(indices, name)));
-		public Task<IndexPutAliasResponse> IndexPutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Func<IndexPutAliasRequestDescriptor, IIndexPutAliasRequest> selector = null, CancellationToken cancellationToken = default) => IndexPutAliasAsync(selector.InvokeOrDefault(new IndexPutAliasRequestDescriptor(indices, name)), cancellationToken);
-		public IndexPutIndexTemplateResponse IndexPutIndexTemplate(IIndexPutIndexTemplateRequest request) => DoRequest<IIndexPutIndexTemplateRequest, IndexPutIndexTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync(IIndexPutIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexPutIndexTemplateRequest, IndexPutIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexPutIndexTemplateResponse IndexPutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Func<IndexPutIndexTemplateRequestDescriptor, IIndexPutIndexTemplateRequest> selector = null) => IndexPutIndexTemplate(selector.InvokeOrDefault(new IndexPutIndexTemplateRequestDescriptor(name)));
-		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<IndexPutIndexTemplateRequestDescriptor, IIndexPutIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexPutIndexTemplateAsync(selector.InvokeOrDefault(new IndexPutIndexTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexPutMappingResponse IndexPutMapping(IIndexPutMappingRequest request) => DoRequest<IIndexPutMappingRequest, IndexPutMappingResponse>(request, request.RequestParameters);
-		public Task<IndexPutMappingResponse> IndexPutMappingAsync(IIndexPutMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexPutMappingRequest, IndexPutMappingResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexPutMappingResponse IndexPutMapping(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexPutMappingRequestDescriptor, IIndexPutMappingRequest> selector = null) => IndexPutMapping(selector.InvokeOrDefault(new IndexPutMappingRequestDescriptor(indices)));
-		public Task<IndexPutMappingResponse> IndexPutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexPutMappingRequestDescriptor, IIndexPutMappingRequest> selector = null, CancellationToken cancellationToken = default) => IndexPutMappingAsync(selector.InvokeOrDefault(new IndexPutMappingRequestDescriptor(indices)), cancellationToken);
-		public IndexPutSettingsResponse IndexPutSettings(IIndexPutSettingsRequest request) => DoRequest<IIndexPutSettingsRequest, IndexPutSettingsResponse>(request, request.RequestParameters);
-		public Task<IndexPutSettingsResponse> IndexPutSettingsAsync(IIndexPutSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexPutSettingsRequest, IndexPutSettingsResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexPutSettingsResponse IndexPutSettings(Func<IndexPutSettingsRequestDescriptor, IIndexPutSettingsRequest> selector = null) => IndexPutSettings(selector.InvokeOrDefault(new IndexPutSettingsRequestDescriptor()));
-		public Task<IndexPutSettingsResponse> IndexPutSettingsAsync(Func<IndexPutSettingsRequestDescriptor, IIndexPutSettingsRequest> selector = null, CancellationToken cancellationToken = default) => IndexPutSettingsAsync(selector.InvokeOrDefault(new IndexPutSettingsRequestDescriptor()), cancellationToken);
-		public IndexPutTemplateResponse IndexPutTemplate(IIndexPutTemplateRequest request) => DoRequest<IIndexPutTemplateRequest, IndexPutTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexPutTemplateResponse> IndexPutTemplateAsync(IIndexPutTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexPutTemplateRequest, IndexPutTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexPutTemplateResponse IndexPutTemplate(Elastic.Clients.Elasticsearch.Name name, Func<IndexPutTemplateRequestDescriptor, IIndexPutTemplateRequest> selector = null) => IndexPutTemplate(selector.InvokeOrDefault(new IndexPutTemplateRequestDescriptor(name)));
-		public Task<IndexPutTemplateResponse> IndexPutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<IndexPutTemplateRequestDescriptor, IIndexPutTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexPutTemplateAsync(selector.InvokeOrDefault(new IndexPutTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexRecoveryResponse<TKey, TValue> IndexRecovery<TKey, TValue>(IIndexRecoveryRequest request) => DoRequest<IIndexRecoveryRequest, IndexRecoveryResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<IndexRecoveryResponse<TKey, TValue>> IndexRecoveryAsync<TKey, TValue>(IIndexRecoveryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexRecoveryRequest, IndexRecoveryResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public IndexRecoveryResponse<TKey, TValue> IndexRecovery<TKey, TValue>(Func<IndexRecoveryRequestDescriptor, IIndexRecoveryRequest> selector = null) => IndexRecovery<TKey, TValue>(selector.InvokeOrDefault(new IndexRecoveryRequestDescriptor()));
-		public Task<IndexRecoveryResponse<TKey, TValue>> IndexRecoveryAsync<TKey, TValue>(Func<IndexRecoveryRequestDescriptor, IIndexRecoveryRequest> selector = null, CancellationToken cancellationToken = default) => IndexRecoveryAsync<TKey, TValue>(selector.InvokeOrDefault(new IndexRecoveryRequestDescriptor()), cancellationToken);
-		public IndexRefreshResponse IndexRefresh(IIndexRefreshRequest request) => DoRequest<IIndexRefreshRequest, IndexRefreshResponse>(request, request.RequestParameters);
-		public Task<IndexRefreshResponse> IndexRefreshAsync(IIndexRefreshRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexRefreshRequest, IndexRefreshResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexRefreshResponse IndexRefresh(Func<IndexRefreshRequestDescriptor, IIndexRefreshRequest> selector = null) => IndexRefresh(selector.InvokeOrDefault(new IndexRefreshRequestDescriptor()));
-		public Task<IndexRefreshResponse> IndexRefreshAsync(Func<IndexRefreshRequestDescriptor, IIndexRefreshRequest> selector = null, CancellationToken cancellationToken = default) => IndexRefreshAsync(selector.InvokeOrDefault(new IndexRefreshRequestDescriptor()), cancellationToken);
-		public IndexReloadSearchAnalyzersResponse IndexReloadSearchAnalyzers(IIndexReloadSearchAnalyzersRequest request) => DoRequest<IIndexReloadSearchAnalyzersRequest, IndexReloadSearchAnalyzersResponse>(request, request.RequestParameters);
-		public Task<IndexReloadSearchAnalyzersResponse> IndexReloadSearchAnalyzersAsync(IIndexReloadSearchAnalyzersRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexReloadSearchAnalyzersRequest, IndexReloadSearchAnalyzersResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexReloadSearchAnalyzersResponse IndexReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexReloadSearchAnalyzersRequestDescriptor, IIndexReloadSearchAnalyzersRequest> selector = null) => IndexReloadSearchAnalyzers(selector.InvokeOrDefault(new IndexReloadSearchAnalyzersRequestDescriptor(indices)));
-		public Task<IndexReloadSearchAnalyzersResponse> IndexReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.Indices indices, Func<IndexReloadSearchAnalyzersRequestDescriptor, IIndexReloadSearchAnalyzersRequest> selector = null, CancellationToken cancellationToken = default) => IndexReloadSearchAnalyzersAsync(selector.InvokeOrDefault(new IndexReloadSearchAnalyzersRequestDescriptor(indices)), cancellationToken);
-		public IndexResolveIndexResponse IndexResolveIndex(IIndexResolveIndexRequest request) => DoRequest<IIndexResolveIndexRequest, IndexResolveIndexResponse>(request, request.RequestParameters);
-		public Task<IndexResolveIndexResponse> IndexResolveIndexAsync(IIndexResolveIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexResolveIndexRequest, IndexResolveIndexResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexResolveIndexResponse IndexResolveIndex(Elastic.Clients.Elasticsearch.Names name, Func<IndexResolveIndexRequestDescriptor, IIndexResolveIndexRequest> selector = null) => IndexResolveIndex(selector.InvokeOrDefault(new IndexResolveIndexRequestDescriptor(name)));
-		public Task<IndexResolveIndexResponse> IndexResolveIndexAsync(Elastic.Clients.Elasticsearch.Names name, Func<IndexResolveIndexRequestDescriptor, IIndexResolveIndexRequest> selector = null, CancellationToken cancellationToken = default) => IndexResolveIndexAsync(selector.InvokeOrDefault(new IndexResolveIndexRequestDescriptor(name)), cancellationToken);
-		public IndexRolloverResponse IndexRollover(IIndexRolloverRequest request) => DoRequest<IIndexRolloverRequest, IndexRolloverResponse>(request, request.RequestParameters);
-		public Task<IndexRolloverResponse> IndexRolloverAsync(IIndexRolloverRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexRolloverRequest, IndexRolloverResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexRolloverResponse IndexRollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Func<IndexRolloverRequestDescriptor, IIndexRolloverRequest> selector = null) => IndexRollover(selector.InvokeOrDefault(new IndexRolloverRequestDescriptor(alias)));
-		public Task<IndexRolloverResponse> IndexRolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Func<IndexRolloverRequestDescriptor, IIndexRolloverRequest> selector = null, CancellationToken cancellationToken = default) => IndexRolloverAsync(selector.InvokeOrDefault(new IndexRolloverRequestDescriptor(alias)), cancellationToken);
-		public IndexSegmentsResponse IndexSegments(IIndexSegmentsRequest request) => DoRequest<IIndexSegmentsRequest, IndexSegmentsResponse>(request, request.RequestParameters);
-		public Task<IndexSegmentsResponse> IndexSegmentsAsync(IIndexSegmentsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexSegmentsRequest, IndexSegmentsResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexSegmentsResponse IndexSegments(Func<IndexSegmentsRequestDescriptor, IIndexSegmentsRequest> selector = null) => IndexSegments(selector.InvokeOrDefault(new IndexSegmentsRequestDescriptor()));
-		public Task<IndexSegmentsResponse> IndexSegmentsAsync(Func<IndexSegmentsRequestDescriptor, IIndexSegmentsRequest> selector = null, CancellationToken cancellationToken = default) => IndexSegmentsAsync(selector.InvokeOrDefault(new IndexSegmentsRequestDescriptor()), cancellationToken);
-		public IndexShardStoresResponse IndexShardStores(IIndexShardStoresRequest request) => DoRequest<IIndexShardStoresRequest, IndexShardStoresResponse>(request, request.RequestParameters);
-		public Task<IndexShardStoresResponse> IndexShardStoresAsync(IIndexShardStoresRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexShardStoresRequest, IndexShardStoresResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexShardStoresResponse IndexShardStores(Func<IndexShardStoresRequestDescriptor, IIndexShardStoresRequest> selector = null) => IndexShardStores(selector.InvokeOrDefault(new IndexShardStoresRequestDescriptor()));
-		public Task<IndexShardStoresResponse> IndexShardStoresAsync(Func<IndexShardStoresRequestDescriptor, IIndexShardStoresRequest> selector = null, CancellationToken cancellationToken = default) => IndexShardStoresAsync(selector.InvokeOrDefault(new IndexShardStoresRequestDescriptor()), cancellationToken);
-		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate(IIndexSimulateIndexTemplateRequest request) => DoRequest<IIndexSimulateIndexTemplateRequest, IndexSimulateIndexTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync(IIndexSimulateIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexSimulateIndexTemplateRequest, IndexSimulateIndexTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Func<IndexSimulateIndexTemplateRequestDescriptor, IIndexSimulateIndexTemplateRequest> selector = null) => IndexSimulateIndexTemplate(selector.InvokeOrDefault(new IndexSimulateIndexTemplateRequestDescriptor(name)));
-		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<IndexSimulateIndexTemplateRequestDescriptor, IIndexSimulateIndexTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexSimulateIndexTemplateAsync(selector.InvokeOrDefault(new IndexSimulateIndexTemplateRequestDescriptor(name)), cancellationToken);
-		public IndexSimulateTemplateResponse IndexSimulateTemplate(IIndexSimulateTemplateRequest request) => DoRequest<IIndexSimulateTemplateRequest, IndexSimulateTemplateResponse>(request, request.RequestParameters);
-		public Task<IndexSimulateTemplateResponse> IndexSimulateTemplateAsync(IIndexSimulateTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexSimulateTemplateRequest, IndexSimulateTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexSimulateTemplateResponse IndexSimulateTemplate(Func<IndexSimulateTemplateRequestDescriptor, IIndexSimulateTemplateRequest> selector = null) => IndexSimulateTemplate(selector.InvokeOrDefault(new IndexSimulateTemplateRequestDescriptor()));
-		public Task<IndexSimulateTemplateResponse> IndexSimulateTemplateAsync(Func<IndexSimulateTemplateRequestDescriptor, IIndexSimulateTemplateRequest> selector = null, CancellationToken cancellationToken = default) => IndexSimulateTemplateAsync(selector.InvokeOrDefault(new IndexSimulateTemplateRequestDescriptor()), cancellationToken);
-		public IndexStatsResponse IndexStats(IIndexStatsRequest request) => DoRequest<IIndexStatsRequest, IndexStatsResponse>(request, request.RequestParameters);
-		public Task<IndexStatsResponse> IndexStatsAsync(IIndexStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexStatsRequest, IndexStatsResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexStatsResponse IndexStats(Func<IndexStatsRequestDescriptor, IIndexStatsRequest> selector = null) => IndexStats(selector.InvokeOrDefault(new IndexStatsRequestDescriptor()));
-		public Task<IndexStatsResponse> IndexStatsAsync(Func<IndexStatsRequestDescriptor, IIndexStatsRequest> selector = null, CancellationToken cancellationToken = default) => IndexStatsAsync(selector.InvokeOrDefault(new IndexStatsRequestDescriptor()), cancellationToken);
-		public IndexUpdateAliasesResponse IndexUpdateAliases(IIndexUpdateAliasesRequest request) => DoRequest<IIndexUpdateAliasesRequest, IndexUpdateAliasesResponse>(request, request.RequestParameters);
-		public Task<IndexUpdateAliasesResponse> IndexUpdateAliasesAsync(IIndexUpdateAliasesRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexUpdateAliasesRequest, IndexUpdateAliasesResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexUpdateAliasesResponse IndexUpdateAliases(Func<IndexUpdateAliasesRequestDescriptor, IIndexUpdateAliasesRequest> selector = null) => IndexUpdateAliases(selector.InvokeOrDefault(new IndexUpdateAliasesRequestDescriptor()));
-		public Task<IndexUpdateAliasesResponse> IndexUpdateAliasesAsync(Func<IndexUpdateAliasesRequestDescriptor, IIndexUpdateAliasesRequest> selector = null, CancellationToken cancellationToken = default) => IndexUpdateAliasesAsync(selector.InvokeOrDefault(new IndexUpdateAliasesRequestDescriptor()), cancellationToken);
-		public IndexValidateQueryResponse IndexValidateQuery(IIndexValidateQueryRequest request) => DoRequest<IIndexValidateQueryRequest, IndexValidateQueryResponse>(request, request.RequestParameters);
-		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync(IIndexValidateQueryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IIndexValidateQueryRequest, IndexValidateQueryResponse>(request, request.RequestParameters, cancellationToken);
-		public IndexValidateQueryResponse IndexValidateQuery(Func<IndexValidateQueryRequestDescriptor, IIndexValidateQueryRequest> selector = null) => IndexValidateQuery(selector.InvokeOrDefault(new IndexValidateQueryRequestDescriptor()));
-		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync(Func<IndexValidateQueryRequestDescriptor, IIndexValidateQueryRequest> selector = null, CancellationToken cancellationToken = default) => IndexValidateQueryAsync(selector.InvokeOrDefault(new IndexValidateQueryRequestDescriptor()), cancellationToken);
-		public ShrinkIndexResponse ShrinkIndex(IShrinkIndexRequest request) => DoRequest<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters);
-		public Task<ShrinkIndexResponse> ShrinkIndexAsync(IShrinkIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IShrinkIndexRequest, ShrinkIndexResponse>(request, request.RequestParameters, cancellationToken);
-		public ShrinkIndexResponse ShrinkIndex(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Func<ShrinkIndexRequestDescriptor, IShrinkIndexRequest> selector = null) => ShrinkIndex(selector.InvokeOrDefault(new ShrinkIndexRequestDescriptor(index, target)));
-		public Task<ShrinkIndexResponse> ShrinkIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Func<ShrinkIndexRequestDescriptor, IShrinkIndexRequest> selector = null, CancellationToken cancellationToken = default) => ShrinkIndexAsync(selector.InvokeOrDefault(new ShrinkIndexRequestDescriptor(index, target)), cancellationToken);
-		public SplitIndexResponse SplitIndex(ISplitIndexRequest request) => DoRequest<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters);
-		public Task<SplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ISplitIndexRequest, SplitIndexResponse>(request, request.RequestParameters, cancellationToken);
-		public SplitIndexResponse SplitIndex(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Func<SplitIndexRequestDescriptor, ISplitIndexRequest> selector = null) => SplitIndex(selector.InvokeOrDefault(new SplitIndexRequestDescriptor(index, target)));
-		public Task<SplitIndexResponse> SplitIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Func<SplitIndexRequestDescriptor, ISplitIndexRequest> selector = null, CancellationToken cancellationToken = default) => SplitIndexAsync(selector.InvokeOrDefault(new SplitIndexRequestDescriptor(index, target)), cancellationToken);
+		public AnalyzeIndexResponse AnalyzeIndex(AnalyzeIndexRequest request) => DoRequest<AnalyzeIndexRequest, AnalyzeIndexResponse>(request);
+		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync(AnalyzeIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<AnalyzeIndexRequest, AnalyzeIndexResponse>(request, cancellationToken);
+		public AnalyzeIndexResponse AnalyzeIndex(Action<AnalyzeIndexRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new AnalyzeIndexRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<AnalyzeIndexRequestDescriptor, AnalyzeIndexResponse>(descriptor);
+		}
+
+		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync(Action<AnalyzeIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new AnalyzeIndexRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<AnalyzeIndexRequestDescriptor, AnalyzeIndexResponse>(descriptor);
+		}
+
+		public CreateIndexResponse CreateIndex(CreateIndexRequest request) => DoRequest<CreateIndexRequest, CreateIndexResponse>(request);
+		public Task<CreateIndexResponse> CreateIndexAsync(CreateIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<CreateIndexRequest, CreateIndexResponse>(request, cancellationToken);
+		public CreateIndexResponse CreateIndex(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest = null) => CreateIndex(configureRequest.InvokeOrDefault(new CreateIndexRequestDescriptor(index)));
+		public Task<CreateIndexResponse> CreateIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => CreateIndexAsync(configureRequest.InvokeOrDefault(new CreateIndexRequestDescriptor(index)), cancellationToken);
+		public DeleteIndexResponse DeleteIndex(DeleteIndexRequest request) => DoRequest<DeleteIndexRequest, DeleteIndexResponse>(request);
+		public Task<DeleteIndexResponse> DeleteIndexAsync(DeleteIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<DeleteIndexRequest, DeleteIndexResponse>(request, cancellationToken);
+		public DeleteIndexResponse DeleteIndex(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor> configureRequest = null) => DeleteIndex(configureRequest.InvokeOrDefault(new DeleteIndexRequestDescriptor(indices)));
+		public Task<DeleteIndexResponse> DeleteIndexAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => DeleteIndexAsync(configureRequest.InvokeOrDefault(new DeleteIndexRequestDescriptor(indices)), cancellationToken);
+		public GetIndexResponse<TKey, TValue> GetIndex<TKey, TValue>(GetIndexRequest request) => DoRequest<GetIndexRequest, GetIndexResponse<TKey, TValue>>(request);
+		public Task<GetIndexResponse<TKey, TValue>> GetIndexAsync<TKey, TValue>(GetIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<GetIndexRequest, GetIndexResponse<TKey, TValue>>(request, cancellationToken);
+		public GetIndexResponse<TKey, TValue> GetIndex<TKey, TValue>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest = null) => GetIndex<TKey, TValue>(configureRequest.InvokeOrDefault(new GetIndexRequestDescriptor(indices)));
+		public Task<GetIndexResponse<TKey, TValue>> GetIndexAsync<TKey, TValue>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => GetIndexAsync<TKey, TValue>(configureRequest.InvokeOrDefault(new GetIndexRequestDescriptor(indices)), cancellationToken);
+		public IndexClearCacheResponse IndexClearCache(IndexClearCacheRequest request) => DoRequest<IndexClearCacheRequest, IndexClearCacheResponse>(request);
+		public Task<IndexClearCacheResponse> IndexClearCacheAsync(IndexClearCacheRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexClearCacheRequest, IndexClearCacheResponse>(request, cancellationToken);
+		public IndexClearCacheResponse IndexClearCache(Action<IndexClearCacheRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexClearCacheRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexClearCacheRequestDescriptor, IndexClearCacheResponse>(descriptor);
+		}
+
+		public Task<IndexClearCacheResponse> IndexClearCacheAsync(Action<IndexClearCacheRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexClearCacheRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexClearCacheRequestDescriptor, IndexClearCacheResponse>(descriptor);
+		}
+
+		public IndexCloneResponse IndexClone(IndexCloneRequest request) => DoRequest<IndexCloneRequest, IndexCloneResponse>(request);
+		public Task<IndexCloneResponse> IndexCloneAsync(IndexCloneRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexCloneRequest, IndexCloneResponse>(request, cancellationToken);
+		public IndexCloneResponse IndexClone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<IndexCloneRequestDescriptor> configureRequest = null) => IndexClone(configureRequest.InvokeOrDefault(new IndexCloneRequestDescriptor(index, target)));
+		public Task<IndexCloneResponse> IndexCloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<IndexCloneRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexCloneAsync(configureRequest.InvokeOrDefault(new IndexCloneRequestDescriptor(index, target)), cancellationToken);
+		public IndexCloseResponse IndexClose(IndexCloseRequest request) => DoRequest<IndexCloseRequest, IndexCloseResponse>(request);
+		public Task<IndexCloseResponse> IndexCloseAsync(IndexCloseRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexCloseRequest, IndexCloseResponse>(request, cancellationToken);
+		public IndexCloseResponse IndexClose(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexCloseRequestDescriptor> configureRequest = null) => IndexClose(configureRequest.InvokeOrDefault(new IndexCloseRequestDescriptor(indices)));
+		public Task<IndexCloseResponse> IndexCloseAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexCloseRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexCloseAsync(configureRequest.InvokeOrDefault(new IndexCloseRequestDescriptor(indices)), cancellationToken);
+		public IndexCreateDataStreamResponse IndexCreateDataStream(IndexCreateDataStreamRequest request) => DoRequest<IndexCreateDataStreamRequest, IndexCreateDataStreamResponse>(request);
+		public Task<IndexCreateDataStreamResponse> IndexCreateDataStreamAsync(IndexCreateDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexCreateDataStreamRequest, IndexCreateDataStreamResponse>(request, cancellationToken);
+		public IndexCreateDataStreamResponse IndexCreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name, Action<IndexCreateDataStreamRequestDescriptor> configureRequest = null) => IndexCreateDataStream(configureRequest.InvokeOrDefault(new IndexCreateDataStreamRequestDescriptor(name)));
+		public Task<IndexCreateDataStreamResponse> IndexCreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, Action<IndexCreateDataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexCreateDataStreamAsync(configureRequest.InvokeOrDefault(new IndexCreateDataStreamRequestDescriptor(name)), cancellationToken);
+		public IndexDataStreamsStatsResponse IndexDataStreamsStats(IndexDataStreamsStatsRequest request) => DoRequest<IndexDataStreamsStatsRequest, IndexDataStreamsStatsResponse>(request);
+		public Task<IndexDataStreamsStatsResponse> IndexDataStreamsStatsAsync(IndexDataStreamsStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexDataStreamsStatsRequest, IndexDataStreamsStatsResponse>(request, cancellationToken);
+		public IndexDataStreamsStatsResponse IndexDataStreamsStats(Action<IndexDataStreamsStatsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexDataStreamsStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexDataStreamsStatsRequestDescriptor, IndexDataStreamsStatsResponse>(descriptor);
+		}
+
+		public Task<IndexDataStreamsStatsResponse> IndexDataStreamsStatsAsync(Action<IndexDataStreamsStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexDataStreamsStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexDataStreamsStatsRequestDescriptor, IndexDataStreamsStatsResponse>(descriptor);
+		}
+
+		public IndexDeleteAliasResponse IndexDeleteAlias(IndexDeleteAliasRequest request) => DoRequest<IndexDeleteAliasRequest, IndexDeleteAliasResponse>(request);
+		public Task<IndexDeleteAliasResponse> IndexDeleteAliasAsync(IndexDeleteAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexDeleteAliasRequest, IndexDeleteAliasResponse>(request, cancellationToken);
+		public IndexDeleteAliasResponse IndexDeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<IndexDeleteAliasRequestDescriptor> configureRequest = null) => IndexDeleteAlias(configureRequest.InvokeOrDefault(new IndexDeleteAliasRequestDescriptor(indices, name)));
+		public Task<IndexDeleteAliasResponse> IndexDeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<IndexDeleteAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexDeleteAliasAsync(configureRequest.InvokeOrDefault(new IndexDeleteAliasRequestDescriptor(indices, name)), cancellationToken);
+		public IndexDeleteDataStreamResponse IndexDeleteDataStream(IndexDeleteDataStreamRequest request) => DoRequest<IndexDeleteDataStreamRequest, IndexDeleteDataStreamResponse>(request);
+		public Task<IndexDeleteDataStreamResponse> IndexDeleteDataStreamAsync(IndexDeleteDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexDeleteDataStreamRequest, IndexDeleteDataStreamResponse>(request, cancellationToken);
+		public IndexDeleteDataStreamResponse IndexDeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<IndexDeleteDataStreamRequestDescriptor> configureRequest = null) => IndexDeleteDataStream(configureRequest.InvokeOrDefault(new IndexDeleteDataStreamRequestDescriptor(name)));
+		public Task<IndexDeleteDataStreamResponse> IndexDeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<IndexDeleteDataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexDeleteDataStreamAsync(configureRequest.InvokeOrDefault(new IndexDeleteDataStreamRequestDescriptor(name)), cancellationToken);
+		public IndexDeleteIndexTemplateResponse IndexDeleteIndexTemplate(IndexDeleteIndexTemplateRequest request) => DoRequest<IndexDeleteIndexTemplateRequest, IndexDeleteIndexTemplateResponse>(request);
+		public Task<IndexDeleteIndexTemplateResponse> IndexDeleteIndexTemplateAsync(IndexDeleteIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexDeleteIndexTemplateRequest, IndexDeleteIndexTemplateResponse>(request, cancellationToken);
+		public IndexDeleteIndexTemplateResponse IndexDeleteIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexDeleteIndexTemplateRequestDescriptor> configureRequest = null) => IndexDeleteIndexTemplate(configureRequest.InvokeOrDefault(new IndexDeleteIndexTemplateRequestDescriptor(name)));
+		public Task<IndexDeleteIndexTemplateResponse> IndexDeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexDeleteIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexDeleteIndexTemplateAsync(configureRequest.InvokeOrDefault(new IndexDeleteIndexTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexDeleteTemplateResponse IndexDeleteTemplate(IndexDeleteTemplateRequest request) => DoRequest<IndexDeleteTemplateRequest, IndexDeleteTemplateResponse>(request);
+		public Task<IndexDeleteTemplateResponse> IndexDeleteTemplateAsync(IndexDeleteTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexDeleteTemplateRequest, IndexDeleteTemplateResponse>(request, cancellationToken);
+		public IndexDeleteTemplateResponse IndexDeleteTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexDeleteTemplateRequestDescriptor> configureRequest = null) => IndexDeleteTemplate(configureRequest.InvokeOrDefault(new IndexDeleteTemplateRequestDescriptor(name)));
+		public Task<IndexDeleteTemplateResponse> IndexDeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexDeleteTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexDeleteTemplateAsync(configureRequest.InvokeOrDefault(new IndexDeleteTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexDiskUsageResponse IndexDiskUsage(IndexDiskUsageRequest request) => DoRequest<IndexDiskUsageRequest, IndexDiskUsageResponse>(request);
+		public Task<IndexDiskUsageResponse> IndexDiskUsageAsync(IndexDiskUsageRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexDiskUsageRequest, IndexDiskUsageResponse>(request, cancellationToken);
+		public IndexDiskUsageResponse IndexDiskUsage(Elastic.Clients.Elasticsearch.IndexName index, Action<IndexDiskUsageRequestDescriptor> configureRequest = null) => IndexDiskUsage(configureRequest.InvokeOrDefault(new IndexDiskUsageRequestDescriptor(index)));
+		public Task<IndexDiskUsageResponse> IndexDiskUsageAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<IndexDiskUsageRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexDiskUsageAsync(configureRequest.InvokeOrDefault(new IndexDiskUsageRequestDescriptor(index)), cancellationToken);
+		public IndexExistsAliasResponse IndexExistsAlias(IndexExistsAliasRequest request) => DoRequest<IndexExistsAliasRequest, IndexExistsAliasResponse>(request);
+		public Task<IndexExistsAliasResponse> IndexExistsAliasAsync(IndexExistsAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexExistsAliasRequest, IndexExistsAliasResponse>(request, cancellationToken);
+		public IndexExistsAliasResponse IndexExistsAlias(Elastic.Clients.Elasticsearch.Names name, Action<IndexExistsAliasRequestDescriptor> configureRequest = null) => IndexExistsAlias(configureRequest.InvokeOrDefault(new IndexExistsAliasRequestDescriptor(name)));
+		public Task<IndexExistsAliasResponse> IndexExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, Action<IndexExistsAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexExistsAliasAsync(configureRequest.InvokeOrDefault(new IndexExistsAliasRequestDescriptor(name)), cancellationToken);
+		public IndexExistsIndexTemplateResponse IndexExistsIndexTemplate(IndexExistsIndexTemplateRequest request) => DoRequest<IndexExistsIndexTemplateRequest, IndexExistsIndexTemplateResponse>(request);
+		public Task<IndexExistsIndexTemplateResponse> IndexExistsIndexTemplateAsync(IndexExistsIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexExistsIndexTemplateRequest, IndexExistsIndexTemplateResponse>(request, cancellationToken);
+		public IndexExistsIndexTemplateResponse IndexExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexExistsIndexTemplateRequestDescriptor> configureRequest = null) => IndexExistsIndexTemplate(configureRequest.InvokeOrDefault(new IndexExistsIndexTemplateRequestDescriptor(name)));
+		public Task<IndexExistsIndexTemplateResponse> IndexExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexExistsIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexExistsIndexTemplateAsync(configureRequest.InvokeOrDefault(new IndexExistsIndexTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexExistsResponse IndexExists(IndexExistsRequest request) => DoRequest<IndexExistsRequest, IndexExistsResponse>(request);
+		public Task<IndexExistsResponse> IndexExistsAsync(IndexExistsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexExistsRequest, IndexExistsResponse>(request, cancellationToken);
+		public IndexExistsResponse IndexExists(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexExistsRequestDescriptor> configureRequest = null) => IndexExists(configureRequest.InvokeOrDefault(new IndexExistsRequestDescriptor(indices)));
+		public Task<IndexExistsResponse> IndexExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexExistsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexExistsAsync(configureRequest.InvokeOrDefault(new IndexExistsRequestDescriptor(indices)), cancellationToken);
+		public IndexExistsTemplateResponse IndexExistsTemplate(IndexExistsTemplateRequest request) => DoRequest<IndexExistsTemplateRequest, IndexExistsTemplateResponse>(request);
+		public Task<IndexExistsTemplateResponse> IndexExistsTemplateAsync(IndexExistsTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexExistsTemplateRequest, IndexExistsTemplateResponse>(request, cancellationToken);
+		public IndexExistsTemplateResponse IndexExistsTemplate(Elastic.Clients.Elasticsearch.Names name, Action<IndexExistsTemplateRequestDescriptor> configureRequest = null) => IndexExistsTemplate(configureRequest.InvokeOrDefault(new IndexExistsTemplateRequestDescriptor(name)));
+		public Task<IndexExistsTemplateResponse> IndexExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<IndexExistsTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexExistsTemplateAsync(configureRequest.InvokeOrDefault(new IndexExistsTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexFlushResponse IndexFlush(IndexFlushRequest request) => DoRequest<IndexFlushRequest, IndexFlushResponse>(request);
+		public Task<IndexFlushResponse> IndexFlushAsync(IndexFlushRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexFlushRequest, IndexFlushResponse>(request, cancellationToken);
+		public IndexFlushResponse IndexFlush(Action<IndexFlushRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexFlushRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexFlushRequestDescriptor, IndexFlushResponse>(descriptor);
+		}
+
+		public Task<IndexFlushResponse> IndexFlushAsync(Action<IndexFlushRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexFlushRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexFlushRequestDescriptor, IndexFlushResponse>(descriptor);
+		}
+
+		public IndexForcemergeResponse IndexForcemerge(IndexForcemergeRequest request) => DoRequest<IndexForcemergeRequest, IndexForcemergeResponse>(request);
+		public Task<IndexForcemergeResponse> IndexForcemergeAsync(IndexForcemergeRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexForcemergeRequest, IndexForcemergeResponse>(request, cancellationToken);
+		public IndexForcemergeResponse IndexForcemerge(Action<IndexForcemergeRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexForcemergeRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexForcemergeRequestDescriptor, IndexForcemergeResponse>(descriptor);
+		}
+
+		public Task<IndexForcemergeResponse> IndexForcemergeAsync(Action<IndexForcemergeRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexForcemergeRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexForcemergeRequestDescriptor, IndexForcemergeResponse>(descriptor);
+		}
+
+		public IndexGetAliasResponse<TKey, TValue> IndexGetAlias<TKey, TValue>(IndexGetAliasRequest request) => DoRequest<IndexGetAliasRequest, IndexGetAliasResponse<TKey, TValue>>(request);
+		public Task<IndexGetAliasResponse<TKey, TValue>> IndexGetAliasAsync<TKey, TValue>(IndexGetAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetAliasRequest, IndexGetAliasResponse<TKey, TValue>>(request, cancellationToken);
+		public IndexGetAliasResponse<TKey, TValue> IndexGetAlias<TKey, TValue>(Action<IndexGetAliasRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexGetAliasRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexGetAliasRequestDescriptor, IndexGetAliasResponse>(descriptor);
+		}
+
+		public Task<IndexGetAliasResponse<TKey, TValue>> IndexGetAliasAsync<TKey, TValue>(Action<IndexGetAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexGetAliasRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexGetAliasRequestDescriptor, IndexGetAliasResponse>(descriptor);
+		}
+
+		public IndexGetDataStreamResponse IndexGetDataStream(IndexGetDataStreamRequest request) => DoRequest<IndexGetDataStreamRequest, IndexGetDataStreamResponse>(request);
+		public Task<IndexGetDataStreamResponse> IndexGetDataStreamAsync(IndexGetDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetDataStreamRequest, IndexGetDataStreamResponse>(request, cancellationToken);
+		public IndexGetDataStreamResponse IndexGetDataStream(Action<IndexGetDataStreamRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexGetDataStreamRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexGetDataStreamRequestDescriptor, IndexGetDataStreamResponse>(descriptor);
+		}
+
+		public Task<IndexGetDataStreamResponse> IndexGetDataStreamAsync(Action<IndexGetDataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexGetDataStreamRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexGetDataStreamRequestDescriptor, IndexGetDataStreamResponse>(descriptor);
+		}
+
+		public IndexGetFieldMappingResponse<TKey, TValue> IndexGetFieldMapping<TKey, TValue>(IndexGetFieldMappingRequest request) => DoRequest<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse<TKey, TValue>>(request);
+		public Task<IndexGetFieldMappingResponse<TKey, TValue>> IndexGetFieldMappingAsync<TKey, TValue>(IndexGetFieldMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse<TKey, TValue>>(request, cancellationToken);
+		public IndexGetFieldMappingResponse<TKey, TValue> IndexGetFieldMapping<TKey, TValue>(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null) => IndexGetFieldMapping<TKey, TValue>(configureRequest.InvokeOrDefault(new IndexGetFieldMappingRequestDescriptor(fields)));
+		public Task<IndexGetFieldMappingResponse<TKey, TValue>> IndexGetFieldMappingAsync<TKey, TValue>(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexGetFieldMappingAsync<TKey, TValue>(configureRequest.InvokeOrDefault(new IndexGetFieldMappingRequestDescriptor(fields)), cancellationToken);
+		public IndexGetIndexTemplateResponse IndexGetIndexTemplate(IndexGetIndexTemplateRequest request) => DoRequest<IndexGetIndexTemplateRequest, IndexGetIndexTemplateResponse>(request);
+		public Task<IndexGetIndexTemplateResponse> IndexGetIndexTemplateAsync(IndexGetIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetIndexTemplateRequest, IndexGetIndexTemplateResponse>(request, cancellationToken);
+		public IndexGetIndexTemplateResponse IndexGetIndexTemplate(Action<IndexGetIndexTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexGetIndexTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexGetIndexTemplateRequestDescriptor, IndexGetIndexTemplateResponse>(descriptor);
+		}
+
+		public Task<IndexGetIndexTemplateResponse> IndexGetIndexTemplateAsync(Action<IndexGetIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexGetIndexTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexGetIndexTemplateRequestDescriptor, IndexGetIndexTemplateResponse>(descriptor);
+		}
+
+		public IndexGetMappingResponse<TKey, TValue> IndexGetMapping<TKey, TValue>(IndexGetMappingRequest request) => DoRequest<IndexGetMappingRequest, IndexGetMappingResponse<TKey, TValue>>(request);
+		public Task<IndexGetMappingResponse<TKey, TValue>> IndexGetMappingAsync<TKey, TValue>(IndexGetMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetMappingRequest, IndexGetMappingResponse<TKey, TValue>>(request, cancellationToken);
+		public IndexGetMappingResponse<TKey, TValue> IndexGetMapping<TKey, TValue>(Action<IndexGetMappingRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexGetMappingRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexGetMappingRequestDescriptor, IndexGetMappingResponse>(descriptor);
+		}
+
+		public Task<IndexGetMappingResponse<TKey, TValue>> IndexGetMappingAsync<TKey, TValue>(Action<IndexGetMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexGetMappingRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexGetMappingRequestDescriptor, IndexGetMappingResponse>(descriptor);
+		}
+
+		public IndexGetSettingsResponse<TKey, TValue> IndexGetSettings<TKey, TValue>(IndexGetSettingsRequest request) => DoRequest<IndexGetSettingsRequest, IndexGetSettingsResponse<TKey, TValue>>(request);
+		public Task<IndexGetSettingsResponse<TKey, TValue>> IndexGetSettingsAsync<TKey, TValue>(IndexGetSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetSettingsRequest, IndexGetSettingsResponse<TKey, TValue>>(request, cancellationToken);
+		public IndexGetSettingsResponse<TKey, TValue> IndexGetSettings<TKey, TValue>(Action<IndexGetSettingsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexGetSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexGetSettingsRequestDescriptor, IndexGetSettingsResponse>(descriptor);
+		}
+
+		public Task<IndexGetSettingsResponse<TKey, TValue>> IndexGetSettingsAsync<TKey, TValue>(Action<IndexGetSettingsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexGetSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexGetSettingsRequestDescriptor, IndexGetSettingsResponse>(descriptor);
+		}
+
+		public IndexGetTemplateResponse<TKey, TValue> IndexGetTemplate<TKey, TValue>(IndexGetTemplateRequest request) => DoRequest<IndexGetTemplateRequest, IndexGetTemplateResponse<TKey, TValue>>(request);
+		public Task<IndexGetTemplateResponse<TKey, TValue>> IndexGetTemplateAsync<TKey, TValue>(IndexGetTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetTemplateRequest, IndexGetTemplateResponse<TKey, TValue>>(request, cancellationToken);
+		public IndexGetTemplateResponse<TKey, TValue> IndexGetTemplate<TKey, TValue>(Action<IndexGetTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexGetTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexGetTemplateRequestDescriptor, IndexGetTemplateResponse>(descriptor);
+		}
+
+		public Task<IndexGetTemplateResponse<TKey, TValue>> IndexGetTemplateAsync<TKey, TValue>(Action<IndexGetTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexGetTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexGetTemplateRequestDescriptor, IndexGetTemplateResponse>(descriptor);
+		}
+
+		public IndexMigrateToDataStreamResponse IndexMigrateToDataStream(IndexMigrateToDataStreamRequest request) => DoRequest<IndexMigrateToDataStreamRequest, IndexMigrateToDataStreamResponse>(request);
+		public Task<IndexMigrateToDataStreamResponse> IndexMigrateToDataStreamAsync(IndexMigrateToDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexMigrateToDataStreamRequest, IndexMigrateToDataStreamResponse>(request, cancellationToken);
+		public IndexMigrateToDataStreamResponse IndexMigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name, Action<IndexMigrateToDataStreamRequestDescriptor> configureRequest = null) => IndexMigrateToDataStream(configureRequest.InvokeOrDefault(new IndexMigrateToDataStreamRequestDescriptor(name)));
+		public Task<IndexMigrateToDataStreamResponse> IndexMigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Action<IndexMigrateToDataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexMigrateToDataStreamAsync(configureRequest.InvokeOrDefault(new IndexMigrateToDataStreamRequestDescriptor(name)), cancellationToken);
+		public IndexOpenResponse IndexOpen(IndexOpenRequest request) => DoRequest<IndexOpenRequest, IndexOpenResponse>(request);
+		public Task<IndexOpenResponse> IndexOpenAsync(IndexOpenRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexOpenRequest, IndexOpenResponse>(request, cancellationToken);
+		public IndexOpenResponse IndexOpen(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexOpenRequestDescriptor> configureRequest = null) => IndexOpen(configureRequest.InvokeOrDefault(new IndexOpenRequestDescriptor(indices)));
+		public Task<IndexOpenResponse> IndexOpenAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexOpenRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexOpenAsync(configureRequest.InvokeOrDefault(new IndexOpenRequestDescriptor(indices)), cancellationToken);
+		public IndexPromoteDataStreamResponse IndexPromoteDataStream(IndexPromoteDataStreamRequest request) => DoRequest<IndexPromoteDataStreamRequest, IndexPromoteDataStreamResponse>(request);
+		public Task<IndexPromoteDataStreamResponse> IndexPromoteDataStreamAsync(IndexPromoteDataStreamRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPromoteDataStreamRequest, IndexPromoteDataStreamResponse>(request, cancellationToken);
+		public IndexPromoteDataStreamResponse IndexPromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name, Action<IndexPromoteDataStreamRequestDescriptor> configureRequest = null) => IndexPromoteDataStream(configureRequest.InvokeOrDefault(new IndexPromoteDataStreamRequestDescriptor(name)));
+		public Task<IndexPromoteDataStreamResponse> IndexPromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Action<IndexPromoteDataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexPromoteDataStreamAsync(configureRequest.InvokeOrDefault(new IndexPromoteDataStreamRequestDescriptor(name)), cancellationToken);
+		public IndexPutAliasResponse IndexPutAlias(IndexPutAliasRequest request) => DoRequest<IndexPutAliasRequest, IndexPutAliasResponse>(request);
+		public Task<IndexPutAliasResponse> IndexPutAliasAsync(IndexPutAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutAliasRequest, IndexPutAliasResponse>(request, cancellationToken);
+		public IndexPutAliasResponse IndexPutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<IndexPutAliasRequestDescriptor> configureRequest = null) => IndexPutAlias(configureRequest.InvokeOrDefault(new IndexPutAliasRequestDescriptor(indices, name)));
+		public Task<IndexPutAliasResponse> IndexPutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<IndexPutAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexPutAliasAsync(configureRequest.InvokeOrDefault(new IndexPutAliasRequestDescriptor(indices, name)), cancellationToken);
+		public IndexPutIndexTemplateResponse IndexPutIndexTemplate(IndexPutIndexTemplateRequest request) => DoRequest<IndexPutIndexTemplateRequest, IndexPutIndexTemplateResponse>(request);
+		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync(IndexPutIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutIndexTemplateRequest, IndexPutIndexTemplateResponse>(request, cancellationToken);
+		public IndexPutIndexTemplateResponse IndexPutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutIndexTemplateRequestDescriptor> configureRequest = null) => IndexPutIndexTemplate(configureRequest.InvokeOrDefault(new IndexPutIndexTemplateRequestDescriptor(name)));
+		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexPutIndexTemplateAsync(configureRequest.InvokeOrDefault(new IndexPutIndexTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexPutMappingResponse IndexPutMapping(IndexPutMappingRequest request) => DoRequest<IndexPutMappingRequest, IndexPutMappingResponse>(request);
+		public Task<IndexPutMappingResponse> IndexPutMappingAsync(IndexPutMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutMappingRequest, IndexPutMappingResponse>(request, cancellationToken);
+		public IndexPutMappingResponse IndexPutMapping(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexPutMappingRequestDescriptor> configureRequest = null) => IndexPutMapping(configureRequest.InvokeOrDefault(new IndexPutMappingRequestDescriptor(indices)));
+		public Task<IndexPutMappingResponse> IndexPutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexPutMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexPutMappingAsync(configureRequest.InvokeOrDefault(new IndexPutMappingRequestDescriptor(indices)), cancellationToken);
+		public IndexPutSettingsResponse IndexPutSettings(IndexPutSettingsRequest request) => DoRequest<IndexPutSettingsRequest, IndexPutSettingsResponse>(request);
+		public Task<IndexPutSettingsResponse> IndexPutSettingsAsync(IndexPutSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutSettingsRequest, IndexPutSettingsResponse>(request, cancellationToken);
+		public IndexPutSettingsResponse IndexPutSettings(Action<IndexPutSettingsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexPutSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexPutSettingsRequestDescriptor, IndexPutSettingsResponse>(descriptor);
+		}
+
+		public Task<IndexPutSettingsResponse> IndexPutSettingsAsync(Action<IndexPutSettingsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexPutSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexPutSettingsRequestDescriptor, IndexPutSettingsResponse>(descriptor);
+		}
+
+		public IndexPutTemplateResponse IndexPutTemplate(IndexPutTemplateRequest request) => DoRequest<IndexPutTemplateRequest, IndexPutTemplateResponse>(request);
+		public Task<IndexPutTemplateResponse> IndexPutTemplateAsync(IndexPutTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutTemplateRequest, IndexPutTemplateResponse>(request, cancellationToken);
+		public IndexPutTemplateResponse IndexPutTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutTemplateRequestDescriptor> configureRequest = null) => IndexPutTemplate(configureRequest.InvokeOrDefault(new IndexPutTemplateRequestDescriptor(name)));
+		public Task<IndexPutTemplateResponse> IndexPutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexPutTemplateAsync(configureRequest.InvokeOrDefault(new IndexPutTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexRecoveryResponse<TKey, TValue> IndexRecovery<TKey, TValue>(IndexRecoveryRequest request) => DoRequest<IndexRecoveryRequest, IndexRecoveryResponse<TKey, TValue>>(request);
+		public Task<IndexRecoveryResponse<TKey, TValue>> IndexRecoveryAsync<TKey, TValue>(IndexRecoveryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexRecoveryRequest, IndexRecoveryResponse<TKey, TValue>>(request, cancellationToken);
+		public IndexRecoveryResponse<TKey, TValue> IndexRecovery<TKey, TValue>(Action<IndexRecoveryRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexRecoveryRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexRecoveryRequestDescriptor, IndexRecoveryResponse>(descriptor);
+		}
+
+		public Task<IndexRecoveryResponse<TKey, TValue>> IndexRecoveryAsync<TKey, TValue>(Action<IndexRecoveryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexRecoveryRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexRecoveryRequestDescriptor, IndexRecoveryResponse>(descriptor);
+		}
+
+		public IndexRefreshResponse IndexRefresh(IndexRefreshRequest request) => DoRequest<IndexRefreshRequest, IndexRefreshResponse>(request);
+		public Task<IndexRefreshResponse> IndexRefreshAsync(IndexRefreshRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexRefreshRequest, IndexRefreshResponse>(request, cancellationToken);
+		public IndexRefreshResponse IndexRefresh(Action<IndexRefreshRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexRefreshRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexRefreshRequestDescriptor, IndexRefreshResponse>(descriptor);
+		}
+
+		public Task<IndexRefreshResponse> IndexRefreshAsync(Action<IndexRefreshRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexRefreshRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexRefreshRequestDescriptor, IndexRefreshResponse>(descriptor);
+		}
+
+		public IndexReloadSearchAnalyzersResponse IndexReloadSearchAnalyzers(IndexReloadSearchAnalyzersRequest request) => DoRequest<IndexReloadSearchAnalyzersRequest, IndexReloadSearchAnalyzersResponse>(request);
+		public Task<IndexReloadSearchAnalyzersResponse> IndexReloadSearchAnalyzersAsync(IndexReloadSearchAnalyzersRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexReloadSearchAnalyzersRequest, IndexReloadSearchAnalyzersResponse>(request, cancellationToken);
+		public IndexReloadSearchAnalyzersResponse IndexReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexReloadSearchAnalyzersRequestDescriptor> configureRequest = null) => IndexReloadSearchAnalyzers(configureRequest.InvokeOrDefault(new IndexReloadSearchAnalyzersRequestDescriptor(indices)));
+		public Task<IndexReloadSearchAnalyzersResponse> IndexReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<IndexReloadSearchAnalyzersRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexReloadSearchAnalyzersAsync(configureRequest.InvokeOrDefault(new IndexReloadSearchAnalyzersRequestDescriptor(indices)), cancellationToken);
+		public IndexResolveIndexResponse IndexResolveIndex(IndexResolveIndexRequest request) => DoRequest<IndexResolveIndexRequest, IndexResolveIndexResponse>(request);
+		public Task<IndexResolveIndexResponse> IndexResolveIndexAsync(IndexResolveIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexResolveIndexRequest, IndexResolveIndexResponse>(request, cancellationToken);
+		public IndexResolveIndexResponse IndexResolveIndex(Elastic.Clients.Elasticsearch.Names name, Action<IndexResolveIndexRequestDescriptor> configureRequest = null) => IndexResolveIndex(configureRequest.InvokeOrDefault(new IndexResolveIndexRequestDescriptor(name)));
+		public Task<IndexResolveIndexResponse> IndexResolveIndexAsync(Elastic.Clients.Elasticsearch.Names name, Action<IndexResolveIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexResolveIndexAsync(configureRequest.InvokeOrDefault(new IndexResolveIndexRequestDescriptor(name)), cancellationToken);
+		public IndexRolloverResponse IndexRollover(IndexRolloverRequest request) => DoRequest<IndexRolloverRequest, IndexRolloverResponse>(request);
+		public Task<IndexRolloverResponse> IndexRolloverAsync(IndexRolloverRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexRolloverRequest, IndexRolloverResponse>(request, cancellationToken);
+		public IndexRolloverResponse IndexRollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<IndexRolloverRequestDescriptor> configureRequest = null) => IndexRollover(configureRequest.InvokeOrDefault(new IndexRolloverRequestDescriptor(alias)));
+		public Task<IndexRolloverResponse> IndexRolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<IndexRolloverRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexRolloverAsync(configureRequest.InvokeOrDefault(new IndexRolloverRequestDescriptor(alias)), cancellationToken);
+		public IndexSegmentsResponse IndexSegments(IndexSegmentsRequest request) => DoRequest<IndexSegmentsRequest, IndexSegmentsResponse>(request);
+		public Task<IndexSegmentsResponse> IndexSegmentsAsync(IndexSegmentsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexSegmentsRequest, IndexSegmentsResponse>(request, cancellationToken);
+		public IndexSegmentsResponse IndexSegments(Action<IndexSegmentsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexSegmentsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexSegmentsRequestDescriptor, IndexSegmentsResponse>(descriptor);
+		}
+
+		public Task<IndexSegmentsResponse> IndexSegmentsAsync(Action<IndexSegmentsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexSegmentsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexSegmentsRequestDescriptor, IndexSegmentsResponse>(descriptor);
+		}
+
+		public IndexShardStoresResponse IndexShardStores(IndexShardStoresRequest request) => DoRequest<IndexShardStoresRequest, IndexShardStoresResponse>(request);
+		public Task<IndexShardStoresResponse> IndexShardStoresAsync(IndexShardStoresRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexShardStoresRequest, IndexShardStoresResponse>(request, cancellationToken);
+		public IndexShardStoresResponse IndexShardStores(Action<IndexShardStoresRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexShardStoresRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexShardStoresRequestDescriptor, IndexShardStoresResponse>(descriptor);
+		}
+
+		public Task<IndexShardStoresResponse> IndexShardStoresAsync(Action<IndexShardStoresRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexShardStoresRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexShardStoresRequestDescriptor, IndexShardStoresResponse>(descriptor);
+		}
+
+		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate(IndexSimulateIndexTemplateRequest request) => DoRequest<IndexSimulateIndexTemplateRequest, IndexSimulateIndexTemplateResponse>(request);
+		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync(IndexSimulateIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexSimulateIndexTemplateRequest, IndexSimulateIndexTemplateResponse>(request, cancellationToken);
+		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexSimulateIndexTemplateRequestDescriptor> configureRequest = null) => IndexSimulateIndexTemplate(configureRequest.InvokeOrDefault(new IndexSimulateIndexTemplateRequestDescriptor(name)));
+		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexSimulateIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => IndexSimulateIndexTemplateAsync(configureRequest.InvokeOrDefault(new IndexSimulateIndexTemplateRequestDescriptor(name)), cancellationToken);
+		public IndexSimulateTemplateResponse IndexSimulateTemplate(IndexSimulateTemplateRequest request) => DoRequest<IndexSimulateTemplateRequest, IndexSimulateTemplateResponse>(request);
+		public Task<IndexSimulateTemplateResponse> IndexSimulateTemplateAsync(IndexSimulateTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexSimulateTemplateRequest, IndexSimulateTemplateResponse>(request, cancellationToken);
+		public IndexSimulateTemplateResponse IndexSimulateTemplate(Action<IndexSimulateTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexSimulateTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexSimulateTemplateRequestDescriptor, IndexSimulateTemplateResponse>(descriptor);
+		}
+
+		public Task<IndexSimulateTemplateResponse> IndexSimulateTemplateAsync(Action<IndexSimulateTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexSimulateTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexSimulateTemplateRequestDescriptor, IndexSimulateTemplateResponse>(descriptor);
+		}
+
+		public IndexStatsResponse IndexStats(IndexStatsRequest request) => DoRequest<IndexStatsRequest, IndexStatsResponse>(request);
+		public Task<IndexStatsResponse> IndexStatsAsync(IndexStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexStatsRequest, IndexStatsResponse>(request, cancellationToken);
+		public IndexStatsResponse IndexStats(Action<IndexStatsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexStatsRequestDescriptor, IndexStatsResponse>(descriptor);
+		}
+
+		public Task<IndexStatsResponse> IndexStatsAsync(Action<IndexStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexStatsRequestDescriptor, IndexStatsResponse>(descriptor);
+		}
+
+		public IndexUpdateAliasesResponse IndexUpdateAliases(IndexUpdateAliasesRequest request) => DoRequest<IndexUpdateAliasesRequest, IndexUpdateAliasesResponse>(request);
+		public Task<IndexUpdateAliasesResponse> IndexUpdateAliasesAsync(IndexUpdateAliasesRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexUpdateAliasesRequest, IndexUpdateAliasesResponse>(request, cancellationToken);
+		public IndexUpdateAliasesResponse IndexUpdateAliases(Action<IndexUpdateAliasesRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexUpdateAliasesRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesResponse>(descriptor);
+		}
+
+		public Task<IndexUpdateAliasesResponse> IndexUpdateAliasesAsync(Action<IndexUpdateAliasesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexUpdateAliasesRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesResponse>(descriptor);
+		}
+
+		public IndexValidateQueryResponse IndexValidateQuery(IndexValidateQueryRequest request) => DoRequest<IndexValidateQueryRequest, IndexValidateQueryResponse>(request);
+		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync(IndexValidateQueryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexValidateQueryRequest, IndexValidateQueryResponse>(request, cancellationToken);
+		public IndexValidateQueryResponse IndexValidateQuery(Action<IndexValidateQueryRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new IndexValidateQueryRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexValidateQueryRequestDescriptor, IndexValidateQueryResponse>(descriptor);
+		}
+
+		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync(Action<IndexValidateQueryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexValidateQueryRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexValidateQueryRequestDescriptor, IndexValidateQueryResponse>(descriptor);
+		}
+
+		public ShrinkIndexResponse ShrinkIndex(ShrinkIndexRequest request) => DoRequest<ShrinkIndexRequest, ShrinkIndexResponse>(request);
+		public Task<ShrinkIndexResponse> ShrinkIndexAsync(ShrinkIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ShrinkIndexRequest, ShrinkIndexResponse>(request, cancellationToken);
+		public ShrinkIndexResponse ShrinkIndex(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkIndexRequestDescriptor> configureRequest = null) => ShrinkIndex(configureRequest.InvokeOrDefault(new ShrinkIndexRequestDescriptor(index, target)));
+		public Task<ShrinkIndexResponse> ShrinkIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => ShrinkIndexAsync(configureRequest.InvokeOrDefault(new ShrinkIndexRequestDescriptor(index, target)), cancellationToken);
+		public SplitIndexResponse SplitIndex(SplitIndexRequest request) => DoRequest<SplitIndexRequest, SplitIndexResponse>(request);
+		public Task<SplitIndexResponse> SplitIndexAsync(SplitIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<SplitIndexRequest, SplitIndexResponse>(request, cancellationToken);
+		public SplitIndexResponse SplitIndex(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitIndexRequestDescriptor> configureRequest = null) => SplitIndex(configureRequest.InvokeOrDefault(new SplitIndexRequestDescriptor(index, target)));
+		public Task<SplitIndexResponse> SplitIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => SplitIndexAsync(configureRequest.InvokeOrDefault(new SplitIndexRequestDescriptor(index, target)), cancellationToken);
 	}
 }

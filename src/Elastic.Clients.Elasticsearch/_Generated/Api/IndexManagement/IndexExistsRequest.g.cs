@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexExistsRequestDescriptorConverter<IndexExistsRequest>))]
-	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
-	{
-	}
-
-	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
+	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>
 	{
 		public IndexExistsRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -78,10 +74,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class IndexExistsRequestDescriptor : RequestDescriptorBase<IndexExistsRequestDescriptor, IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
+	[JsonConverter(typeof(IndexExistsRequestDescriptorConverter))]
+	public partial class IndexExistsRequestDescriptor : RequestDescriptorBase<IndexExistsRequestDescriptor, IndexExistsRequestParameters>
 	{
-		///<summary>/{index}</summary>
-        public IndexExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		public IndexExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -96,10 +92,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexExistsRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 
-	internal sealed class IndexExistsRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexExistsRequest> where TReadAs : class, IIndexExistsRequest
+	internal sealed class IndexExistsRequestDescriptorConverter : JsonConverter<IndexExistsRequestDescriptor>
 	{
-		public override IIndexExistsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexExistsRequest value, JsonSerializerOptions options)
+		public override IndexExistsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexExistsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

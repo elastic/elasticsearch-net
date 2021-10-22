@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexDeleteAliasRequestDescriptorConverter<IndexDeleteAliasRequest>))]
-	public partial interface IIndexDeleteAliasRequest : IRequest<IndexDeleteAliasRequestParameters>
-	{
-	}
-
-	public partial class IndexDeleteAliasRequest : PlainRequestBase<IndexDeleteAliasRequestParameters>, IIndexDeleteAliasRequest
+	public partial class IndexDeleteAliasRequest : PlainRequestBase<IndexDeleteAliasRequestParameters>
 	{
 		public IndexDeleteAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
 		{
@@ -54,10 +50,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class IndexDeleteAliasRequestDescriptor : RequestDescriptorBase<IndexDeleteAliasRequestDescriptor, IndexDeleteAliasRequestParameters, IIndexDeleteAliasRequest>, IIndexDeleteAliasRequest
+	[JsonConverter(typeof(IndexDeleteAliasRequestDescriptorConverter))]
+	public partial class IndexDeleteAliasRequestDescriptor : RequestDescriptorBase<IndexDeleteAliasRequestDescriptor, IndexDeleteAliasRequestParameters>
 	{
-		///<summary>/{index}/_alias/{name}</summary>
-        public IndexDeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
+		public IndexDeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
 		{
 		}
 
@@ -68,10 +64,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexDeleteAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	internal sealed class IndexDeleteAliasRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexDeleteAliasRequest> where TReadAs : class, IIndexDeleteAliasRequest
+	internal sealed class IndexDeleteAliasRequestDescriptorConverter : JsonConverter<IndexDeleteAliasRequestDescriptor>
 	{
-		public override IIndexDeleteAliasRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexDeleteAliasRequest value, JsonSerializerOptions options)
+		public override IndexDeleteAliasRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexDeleteAliasRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

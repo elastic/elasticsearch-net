@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -48,12 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexClearCacheRequestDescriptorConverter<IndexClearCacheRequest>))]
-	public partial interface IIndexClearCacheRequest : IRequest<IndexClearCacheRequestParameters>
-	{
-	}
-
-	public partial class IndexClearCacheRequest : PlainRequestBase<IndexClearCacheRequestParameters>, IIndexClearCacheRequest
+	public partial class IndexClearCacheRequest : PlainRequestBase<IndexClearCacheRequestParameters>
 	{
 		public IndexClearCacheRequest()
 		{
@@ -88,15 +84,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
 
-	public partial class IndexClearCacheRequestDescriptor : RequestDescriptorBase<IndexClearCacheRequestDescriptor, IndexClearCacheRequestParameters, IIndexClearCacheRequest>, IIndexClearCacheRequest
+	[JsonConverter(typeof(IndexClearCacheRequestDescriptorConverter))]
+	public partial class IndexClearCacheRequestDescriptor : RequestDescriptorBase<IndexClearCacheRequestDescriptor, IndexClearCacheRequestParameters>
 	{
-		///<summary>/_cache/clear</summary>
-        public IndexClearCacheRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_cache/clear</summary>
-        public IndexClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -112,10 +103,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexClearCacheRequestDescriptor Request(bool? request) => Qs("request", request);
 	}
 
-	internal sealed class IndexClearCacheRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexClearCacheRequest> where TReadAs : class, IIndexClearCacheRequest
+	internal sealed class IndexClearCacheRequestDescriptorConverter : JsonConverter<IndexClearCacheRequestDescriptor>
 	{
-		public override IIndexClearCacheRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexClearCacheRequest value, JsonSerializerOptions options)
+		public override IndexClearCacheRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexClearCacheRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

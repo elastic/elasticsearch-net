@@ -28,65 +28,208 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		public ClusterAllocationExplainResponse AllocationExplain(IClusterAllocationExplainRequest request) => DoRequest<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters);
-		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(IClusterAllocationExplainRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterAllocationExplainResponse AllocationExplain(Func<ClusterAllocationExplainRequestDescriptor, IClusterAllocationExplainRequest> selector = null) => AllocationExplain(selector.InvokeOrDefault(new ClusterAllocationExplainRequestDescriptor()));
-		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(Func<ClusterAllocationExplainRequestDescriptor, IClusterAllocationExplainRequest> selector = null, CancellationToken cancellationToken = default) => AllocationExplainAsync(selector.InvokeOrDefault(new ClusterAllocationExplainRequestDescriptor()), cancellationToken);
-		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(IClusterDeleteComponentTemplateRequest request) => DoRequest<IClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, request.RequestParameters);
-		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(IClusterDeleteComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Func<ClusterDeleteComponentTemplateRequestDescriptor, IClusterDeleteComponentTemplateRequest> selector = null) => DeleteComponentTemplate(selector.InvokeOrDefault(new ClusterDeleteComponentTemplateRequestDescriptor(name)));
-		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<ClusterDeleteComponentTemplateRequestDescriptor, IClusterDeleteComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default) => DeleteComponentTemplateAsync(selector.InvokeOrDefault(new ClusterDeleteComponentTemplateRequestDescriptor(name)), cancellationToken);
-		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(IClusterDeleteVotingConfigExclusionsRequest request) => DoRequest<IClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request, request.RequestParameters);
-		public Task<ClusterDeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(IClusterDeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Func<ClusterDeleteVotingConfigExclusionsRequestDescriptor, IClusterDeleteVotingConfigExclusionsRequest> selector = null) => DeleteVotingConfigExclusions(selector.InvokeOrDefault(new ClusterDeleteVotingConfigExclusionsRequestDescriptor()));
-		public Task<ClusterDeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Func<ClusterDeleteVotingConfigExclusionsRequestDescriptor, IClusterDeleteVotingConfigExclusionsRequest> selector = null, CancellationToken cancellationToken = default) => DeleteVotingConfigExclusionsAsync(selector.InvokeOrDefault(new ClusterDeleteVotingConfigExclusionsRequestDescriptor()), cancellationToken);
-		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(IClusterExistsComponentTemplateRequest request) => DoRequest<IClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request, request.RequestParameters);
-		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(IClusterExistsComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Func<ClusterExistsComponentTemplateRequestDescriptor, IClusterExistsComponentTemplateRequest> selector = null) => ExistsComponentTemplate(selector.InvokeOrDefault(new ClusterExistsComponentTemplateRequestDescriptor(name)));
-		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Func<ClusterExistsComponentTemplateRequestDescriptor, IClusterExistsComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default) => ExistsComponentTemplateAsync(selector.InvokeOrDefault(new ClusterExistsComponentTemplateRequestDescriptor(name)), cancellationToken);
-		public ClusterGetComponentTemplateResponse GetComponentTemplate(IClusterGetComponentTemplateRequest request) => DoRequest<IClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, request.RequestParameters);
-		public Task<ClusterGetComponentTemplateResponse> GetComponentTemplateAsync(IClusterGetComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterGetComponentTemplateResponse GetComponentTemplate(Func<ClusterGetComponentTemplateRequestDescriptor, IClusterGetComponentTemplateRequest> selector = null) => GetComponentTemplate(selector.InvokeOrDefault(new ClusterGetComponentTemplateRequestDescriptor()));
-		public Task<ClusterGetComponentTemplateResponse> GetComponentTemplateAsync(Func<ClusterGetComponentTemplateRequestDescriptor, IClusterGetComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default) => GetComponentTemplateAsync(selector.InvokeOrDefault(new ClusterGetComponentTemplateRequestDescriptor()), cancellationToken);
-		public ClusterGetSettingsResponse GetSettings(IClusterGetSettingsRequest request) => DoRequest<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters);
-		public Task<ClusterGetSettingsResponse> GetSettingsAsync(IClusterGetSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterGetSettingsResponse GetSettings(Func<ClusterGetSettingsRequestDescriptor, IClusterGetSettingsRequest> selector = null) => GetSettings(selector.InvokeOrDefault(new ClusterGetSettingsRequestDescriptor()));
-		public Task<ClusterGetSettingsResponse> GetSettingsAsync(Func<ClusterGetSettingsRequestDescriptor, IClusterGetSettingsRequest> selector = null, CancellationToken cancellationToken = default) => GetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsRequestDescriptor()), cancellationToken);
-		public ClusterHealthResponse Health(IClusterHealthRequest request) => DoRequest<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters);
-		public Task<ClusterHealthResponse> HealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterHealthRequest, ClusterHealthResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterHealthResponse Health(Func<ClusterHealthRequestDescriptor, IClusterHealthRequest> selector = null) => Health(selector.InvokeOrDefault(new ClusterHealthRequestDescriptor()));
-		public Task<ClusterHealthResponse> HealthAsync(Func<ClusterHealthRequestDescriptor, IClusterHealthRequest> selector = null, CancellationToken cancellationToken = default) => HealthAsync(selector.InvokeOrDefault(new ClusterHealthRequestDescriptor()), cancellationToken);
-		public ClusterPendingTasksResponse PendingTasks(IClusterPendingTasksRequest request) => DoRequest<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters);
-		public Task<ClusterPendingTasksResponse> PendingTasksAsync(IClusterPendingTasksRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterPendingTasksResponse PendingTasks(Func<ClusterPendingTasksRequestDescriptor, IClusterPendingTasksRequest> selector = null) => PendingTasks(selector.InvokeOrDefault(new ClusterPendingTasksRequestDescriptor()));
-		public Task<ClusterPendingTasksResponse> PendingTasksAsync(Func<ClusterPendingTasksRequestDescriptor, IClusterPendingTasksRequest> selector = null, CancellationToken cancellationToken = default) => PendingTasksAsync(selector.InvokeOrDefault(new ClusterPendingTasksRequestDescriptor()), cancellationToken);
-		public ClusterPostVotingConfigExclusionsResponse PostVotingConfigExclusions(IClusterPostVotingConfigExclusionsRequest request) => DoRequest<IClusterPostVotingConfigExclusionsRequest, ClusterPostVotingConfigExclusionsResponse>(request, request.RequestParameters);
-		public Task<ClusterPostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(IClusterPostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterPostVotingConfigExclusionsRequest, ClusterPostVotingConfigExclusionsResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterPostVotingConfigExclusionsResponse PostVotingConfigExclusions(Func<ClusterPostVotingConfigExclusionsRequestDescriptor, IClusterPostVotingConfigExclusionsRequest> selector = null) => PostVotingConfigExclusions(selector.InvokeOrDefault(new ClusterPostVotingConfigExclusionsRequestDescriptor()));
-		public Task<ClusterPostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Func<ClusterPostVotingConfigExclusionsRequestDescriptor, IClusterPostVotingConfigExclusionsRequest> selector = null, CancellationToken cancellationToken = default) => PostVotingConfigExclusionsAsync(selector.InvokeOrDefault(new ClusterPostVotingConfigExclusionsRequestDescriptor()), cancellationToken);
-		public ClusterPutComponentTemplateResponse PutComponentTemplate(IClusterPutComponentTemplateRequest request) => DoRequest<IClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, request.RequestParameters);
-		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(IClusterPutComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterPutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Func<ClusterPutComponentTemplateRequestDescriptor, IClusterPutComponentTemplateRequest> selector = null) => PutComponentTemplate(selector.InvokeOrDefault(new ClusterPutComponentTemplateRequestDescriptor(name)));
-		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Func<ClusterPutComponentTemplateRequestDescriptor, IClusterPutComponentTemplateRequest> selector = null, CancellationToken cancellationToken = default) => PutComponentTemplateAsync(selector.InvokeOrDefault(new ClusterPutComponentTemplateRequestDescriptor(name)), cancellationToken);
-		public ClusterPutSettingsResponse PutSettings(IClusterPutSettingsRequest request) => DoRequest<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters);
-		public Task<ClusterPutSettingsResponse> PutSettingsAsync(IClusterPutSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterPutSettingsResponse PutSettings(Func<ClusterPutSettingsRequestDescriptor, IClusterPutSettingsRequest> selector = null) => PutSettings(selector.InvokeOrDefault(new ClusterPutSettingsRequestDescriptor()));
-		public Task<ClusterPutSettingsResponse> PutSettingsAsync(Func<ClusterPutSettingsRequestDescriptor, IClusterPutSettingsRequest> selector = null, CancellationToken cancellationToken = default) => PutSettingsAsync(selector.InvokeOrDefault(new ClusterPutSettingsRequestDescriptor()), cancellationToken);
-		public ClusterRemoteInfoResponse<TKey, TValue> RemoteInfo<TKey, TValue>(IClusterRemoteInfoRequest request) => DoRequest<IClusterRemoteInfoRequest, ClusterRemoteInfoResponse<TKey, TValue>>(request, request.RequestParameters);
-		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(IClusterRemoteInfoRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterRemoteInfoRequest, ClusterRemoteInfoResponse<TKey, TValue>>(request, request.RequestParameters, cancellationToken);
-		public ClusterRemoteInfoResponse<TKey, TValue> RemoteInfo<TKey, TValue>(Func<ClusterRemoteInfoRequestDescriptor, IClusterRemoteInfoRequest> selector = null) => RemoteInfo<TKey, TValue>(selector.InvokeOrDefault(new ClusterRemoteInfoRequestDescriptor()));
-		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(Func<ClusterRemoteInfoRequestDescriptor, IClusterRemoteInfoRequest> selector = null, CancellationToken cancellationToken = default) => RemoteInfoAsync<TKey, TValue>(selector.InvokeOrDefault(new ClusterRemoteInfoRequestDescriptor()), cancellationToken);
-		public ClusterRerouteResponse Reroute(IClusterRerouteRequest request) => DoRequest<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters);
-		public Task<ClusterRerouteResponse> RerouteAsync(IClusterRerouteRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterRerouteRequest, ClusterRerouteResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterRerouteResponse Reroute(Func<ClusterRerouteRequestDescriptor, IClusterRerouteRequest> selector = null) => Reroute(selector.InvokeOrDefault(new ClusterRerouteRequestDescriptor()));
-		public Task<ClusterRerouteResponse> RerouteAsync(Func<ClusterRerouteRequestDescriptor, IClusterRerouteRequest> selector = null, CancellationToken cancellationToken = default) => RerouteAsync(selector.InvokeOrDefault(new ClusterRerouteRequestDescriptor()), cancellationToken);
-		public ClusterStateResponse State(IClusterStateRequest request) => DoRequest<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters);
-		public Task<ClusterStateResponse> StateAsync(IClusterStateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterStateRequest, ClusterStateResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterStateResponse State(Func<ClusterStateRequestDescriptor, IClusterStateRequest> selector = null) => State(selector.InvokeOrDefault(new ClusterStateRequestDescriptor()));
-		public Task<ClusterStateResponse> StateAsync(Func<ClusterStateRequestDescriptor, IClusterStateRequest> selector = null, CancellationToken cancellationToken = default) => StateAsync(selector.InvokeOrDefault(new ClusterStateRequestDescriptor()), cancellationToken);
-		public ClusterStatsResponse Stats(IClusterStatsRequest request) => DoRequest<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters);
-		public Task<ClusterStatsResponse> StatsAsync(IClusterStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IClusterStatsRequest, ClusterStatsResponse>(request, request.RequestParameters, cancellationToken);
-		public ClusterStatsResponse Stats(Func<ClusterStatsRequestDescriptor, IClusterStatsRequest> selector = null) => Stats(selector.InvokeOrDefault(new ClusterStatsRequestDescriptor()));
-		public Task<ClusterStatsResponse> StatsAsync(Func<ClusterStatsRequestDescriptor, IClusterStatsRequest> selector = null, CancellationToken cancellationToken = default) => StatsAsync(selector.InvokeOrDefault(new ClusterStatsRequestDescriptor()), cancellationToken);
+		public ClusterAllocationExplainResponse AllocationExplain(ClusterAllocationExplainRequest request) => DoRequest<ClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request);
+		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(ClusterAllocationExplainRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterAllocationExplainRequest, ClusterAllocationExplainResponse>(request, cancellationToken);
+		public ClusterAllocationExplainResponse AllocationExplain(Action<ClusterAllocationExplainRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterAllocationExplainRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainResponse>(descriptor);
+		}
+
+		public Task<ClusterAllocationExplainResponse> AllocationExplainAsync(Action<ClusterAllocationExplainRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterAllocationExplainRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainResponse>(descriptor);
+		}
+
+		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(ClusterDeleteComponentTemplateRequest request) => DoRequest<ClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request);
+		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(ClusterDeleteComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, cancellationToken);
+		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ClusterDeleteComponentTemplateRequestDescriptor> configureRequest = null) => DeleteComponentTemplate(configureRequest.InvokeOrDefault(new ClusterDeleteComponentTemplateRequestDescriptor(name)));
+		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterDeleteComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => DeleteComponentTemplateAsync(configureRequest.InvokeOrDefault(new ClusterDeleteComponentTemplateRequestDescriptor(name)), cancellationToken);
+		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(ClusterDeleteVotingConfigExclusionsRequest request) => DoRequest<ClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request);
+		public Task<ClusterDeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(ClusterDeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request, cancellationToken);
+		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Action<ClusterDeleteVotingConfigExclusionsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterDeleteVotingConfigExclusionsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsResponse>(descriptor);
+		}
+
+		public Task<ClusterDeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Action<ClusterDeleteVotingConfigExclusionsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterDeleteVotingConfigExclusionsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsResponse>(descriptor);
+		}
+
+		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(ClusterExistsComponentTemplateRequest request) => DoRequest<ClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request);
+		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ClusterExistsComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request, cancellationToken);
+		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ClusterExistsComponentTemplateRequestDescriptor> configureRequest = null) => ExistsComponentTemplate(configureRequest.InvokeOrDefault(new ClusterExistsComponentTemplateRequestDescriptor(name)));
+		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ClusterExistsComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => ExistsComponentTemplateAsync(configureRequest.InvokeOrDefault(new ClusterExistsComponentTemplateRequestDescriptor(name)), cancellationToken);
+		public ClusterGetComponentTemplateResponse GetComponentTemplate(ClusterGetComponentTemplateRequest request) => DoRequest<ClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request);
+		public Task<ClusterGetComponentTemplateResponse> GetComponentTemplateAsync(ClusterGetComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, cancellationToken);
+		public ClusterGetComponentTemplateResponse GetComponentTemplate(Action<ClusterGetComponentTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterGetComponentTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateResponse>(descriptor);
+		}
+
+		public Task<ClusterGetComponentTemplateResponse> GetComponentTemplateAsync(Action<ClusterGetComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterGetComponentTemplateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateResponse>(descriptor);
+		}
+
+		public ClusterGetSettingsResponse GetSettings(ClusterGetSettingsRequest request) => DoRequest<ClusterGetSettingsRequest, ClusterGetSettingsResponse>(request);
+		public Task<ClusterGetSettingsResponse> GetSettingsAsync(ClusterGetSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterGetSettingsRequest, ClusterGetSettingsResponse>(request, cancellationToken);
+		public ClusterGetSettingsResponse GetSettings(Action<ClusterGetSettingsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterGetSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterGetSettingsRequestDescriptor, ClusterGetSettingsResponse>(descriptor);
+		}
+
+		public Task<ClusterGetSettingsResponse> GetSettingsAsync(Action<ClusterGetSettingsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterGetSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterGetSettingsRequestDescriptor, ClusterGetSettingsResponse>(descriptor);
+		}
+
+		public ClusterHealthResponse Health(ClusterHealthRequest request) => DoRequest<ClusterHealthRequest, ClusterHealthResponse>(request);
+		public Task<ClusterHealthResponse> HealthAsync(ClusterHealthRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterHealthRequest, ClusterHealthResponse>(request, cancellationToken);
+		public ClusterHealthResponse Health(Action<ClusterHealthRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterHealthRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		}
+
+		public Task<ClusterHealthResponse> HealthAsync(Action<ClusterHealthRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterHealthRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterHealthRequestDescriptor, ClusterHealthResponse>(descriptor);
+		}
+
+		public ClusterPendingTasksResponse PendingTasks(ClusterPendingTasksRequest request) => DoRequest<ClusterPendingTasksRequest, ClusterPendingTasksResponse>(request);
+		public Task<ClusterPendingTasksResponse> PendingTasksAsync(ClusterPendingTasksRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterPendingTasksRequest, ClusterPendingTasksResponse>(request, cancellationToken);
+		public ClusterPendingTasksResponse PendingTasks(Action<ClusterPendingTasksRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterPendingTasksRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterPendingTasksRequestDescriptor, ClusterPendingTasksResponse>(descriptor);
+		}
+
+		public Task<ClusterPendingTasksResponse> PendingTasksAsync(Action<ClusterPendingTasksRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterPendingTasksRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterPendingTasksRequestDescriptor, ClusterPendingTasksResponse>(descriptor);
+		}
+
+		public ClusterPostVotingConfigExclusionsResponse PostVotingConfigExclusions(ClusterPostVotingConfigExclusionsRequest request) => DoRequest<ClusterPostVotingConfigExclusionsRequest, ClusterPostVotingConfigExclusionsResponse>(request);
+		public Task<ClusterPostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(ClusterPostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterPostVotingConfigExclusionsRequest, ClusterPostVotingConfigExclusionsResponse>(request, cancellationToken);
+		public ClusterPostVotingConfigExclusionsResponse PostVotingConfigExclusions(Action<ClusterPostVotingConfigExclusionsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterPostVotingConfigExclusionsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterPostVotingConfigExclusionsRequestDescriptor, ClusterPostVotingConfigExclusionsResponse>(descriptor);
+		}
+
+		public Task<ClusterPostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Action<ClusterPostVotingConfigExclusionsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterPostVotingConfigExclusionsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterPostVotingConfigExclusionsRequestDescriptor, ClusterPostVotingConfigExclusionsResponse>(descriptor);
+		}
+
+		public ClusterPutComponentTemplateResponse PutComponentTemplate(ClusterPutComponentTemplateRequest request) => DoRequest<ClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request);
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(ClusterPutComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, cancellationToken);
+		public ClusterPutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null) => PutComponentTemplate(configureRequest.InvokeOrDefault(new ClusterPutComponentTemplateRequestDescriptor(name)));
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => PutComponentTemplateAsync(configureRequest.InvokeOrDefault(new ClusterPutComponentTemplateRequestDescriptor(name)), cancellationToken);
+		public ClusterPutSettingsResponse PutSettings(ClusterPutSettingsRequest request) => DoRequest<ClusterPutSettingsRequest, ClusterPutSettingsResponse>(request);
+		public Task<ClusterPutSettingsResponse> PutSettingsAsync(ClusterPutSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, cancellationToken);
+		public ClusterPutSettingsResponse PutSettings(Action<ClusterPutSettingsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterPutSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsResponse>(descriptor);
+		}
+
+		public Task<ClusterPutSettingsResponse> PutSettingsAsync(Action<ClusterPutSettingsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterPutSettingsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsResponse>(descriptor);
+		}
+
+		public ClusterRemoteInfoResponse<TKey, TValue> RemoteInfo<TKey, TValue>(ClusterRemoteInfoRequest request) => DoRequest<ClusterRemoteInfoRequest, ClusterRemoteInfoResponse<TKey, TValue>>(request);
+		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(ClusterRemoteInfoRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterRemoteInfoRequest, ClusterRemoteInfoResponse<TKey, TValue>>(request, cancellationToken);
+		public ClusterRemoteInfoResponse<TKey, TValue> RemoteInfo<TKey, TValue>(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterRemoteInfoRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse>(descriptor);
+		}
+
+		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterRemoteInfoRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse>(descriptor);
+		}
+
+		public ClusterRerouteResponse Reroute(ClusterRerouteRequest request) => DoRequest<ClusterRerouteRequest, ClusterRerouteResponse>(request);
+		public Task<ClusterRerouteResponse> RerouteAsync(ClusterRerouteRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterRerouteRequest, ClusterRerouteResponse>(request, cancellationToken);
+		public ClusterRerouteResponse Reroute(Action<ClusterRerouteRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterRerouteRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterRerouteRequestDescriptor, ClusterRerouteResponse>(descriptor);
+		}
+
+		public Task<ClusterRerouteResponse> RerouteAsync(Action<ClusterRerouteRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterRerouteRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterRerouteRequestDescriptor, ClusterRerouteResponse>(descriptor);
+		}
+
+		public ClusterStateResponse State(ClusterStateRequest request) => DoRequest<ClusterStateRequest, ClusterStateResponse>(request);
+		public Task<ClusterStateResponse> StateAsync(ClusterStateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterStateRequest, ClusterStateResponse>(request, cancellationToken);
+		public ClusterStateResponse State(Action<ClusterStateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterStateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterStateRequestDescriptor, ClusterStateResponse>(descriptor);
+		}
+
+		public Task<ClusterStateResponse> StateAsync(Action<ClusterStateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterStateRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterStateRequestDescriptor, ClusterStateResponse>(descriptor);
+		}
+
+		public ClusterStatsResponse Stats(ClusterStatsRequest request) => DoRequest<ClusterStatsRequest, ClusterStatsResponse>(request);
+		public Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterStatsRequest, ClusterStatsResponse>(request, cancellationToken);
+		public ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse>(descriptor);
+		}
+
+		public Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterStatsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse>(descriptor);
+		}
 	}
 }

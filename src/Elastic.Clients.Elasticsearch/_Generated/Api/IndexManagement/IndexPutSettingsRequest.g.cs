@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -48,12 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexPutSettingsRequestDescriptorConverter<IndexPutSettingsRequest>))]
-	public partial interface IIndexPutSettingsRequest : IRequest<IndexPutSettingsRequestParameters>
-	{
-	}
-
-	public partial class IndexPutSettingsRequest : PlainRequestBase<IndexPutSettingsRequestParameters>, IIndexPutSettingsRequest
+	public partial class IndexPutSettingsRequest : PlainRequestBase<IndexPutSettingsRequestParameters>
 	{
 		public IndexPutSettingsRequest()
 		{
@@ -88,15 +84,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class IndexPutSettingsRequestDescriptor : RequestDescriptorBase<IndexPutSettingsRequestDescriptor, IndexPutSettingsRequestParameters, IIndexPutSettingsRequest>, IIndexPutSettingsRequest
+	[JsonConverter(typeof(IndexPutSettingsRequestDescriptorConverter))]
+	public partial class IndexPutSettingsRequestDescriptor : RequestDescriptorBase<IndexPutSettingsRequestDescriptor, IndexPutSettingsRequestParameters>
 	{
-		///<summary>/_settings</summary>
-        public IndexPutSettingsRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_settings</summary>
-        public IndexPutSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexPutSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -112,10 +103,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	internal sealed class IndexPutSettingsRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexPutSettingsRequest> where TReadAs : class, IIndexPutSettingsRequest
+	internal sealed class IndexPutSettingsRequestDescriptorConverter : JsonConverter<IndexPutSettingsRequestDescriptor>
 	{
-		public override IIndexPutSettingsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexPutSettingsRequest value, JsonSerializerOptions options)
+		public override IndexPutSettingsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexPutSettingsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

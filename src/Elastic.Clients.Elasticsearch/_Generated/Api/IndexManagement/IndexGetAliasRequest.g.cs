@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexGetAliasRequestDescriptorConverter<IndexGetAliasRequest>))]
-	public partial interface IIndexGetAliasRequest : IRequest<IndexGetAliasRequestParameters>
-	{
-	}
-
-	public partial class IndexGetAliasRequest : PlainRequestBase<IndexGetAliasRequestParameters>, IIndexGetAliasRequest
+	public partial class IndexGetAliasRequest : PlainRequestBase<IndexGetAliasRequestParameters>
 	{
 		public IndexGetAliasRequest()
 		{
@@ -78,25 +74,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class IndexGetAliasRequestDescriptor : RequestDescriptorBase<IndexGetAliasRequestDescriptor, IndexGetAliasRequestParameters, IIndexGetAliasRequest>, IIndexGetAliasRequest
+	[JsonConverter(typeof(IndexGetAliasRequestDescriptorConverter))]
+	public partial class IndexGetAliasRequestDescriptor : RequestDescriptorBase<IndexGetAliasRequestDescriptor, IndexGetAliasRequestParameters>
 	{
-		///<summary>/_alias</summary>
-        public IndexGetAliasRequestDescriptor() : base()
+		public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
 
-		///<summary>/_alias/{name}</summary>
-        public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+		public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
 		{
 		}
 
-		///<summary>/{index}/_alias/{name}</summary>
-        public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
-		{
-		}
-
-		///<summary>/{index}/_alias</summary>
-        public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -109,10 +98,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetAliasRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 
-	internal sealed class IndexGetAliasRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexGetAliasRequest> where TReadAs : class, IIndexGetAliasRequest
+	internal sealed class IndexGetAliasRequestDescriptorConverter : JsonConverter<IndexGetAliasRequestDescriptor>
 	{
-		public override IIndexGetAliasRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexGetAliasRequest value, JsonSerializerOptions options)
+		public override IndexGetAliasRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexGetAliasRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

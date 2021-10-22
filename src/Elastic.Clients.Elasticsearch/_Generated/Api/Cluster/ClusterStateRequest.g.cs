@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -51,12 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterStateRequestDescriptorConverter<ClusterStateRequest>))]
-	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
-	{
-	}
-
-	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
+	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>
 	{
 		public ClusterStateRequest()
 		{
@@ -98,20 +94,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
-	public partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
+	[JsonConverter(typeof(ClusterStateRequestDescriptorConverter))]
+	public partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
 	{
-		///<summary>/_cluster/state</summary>
-        public ClusterStateRequestDescriptor() : base()
+		public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
 		{
 		}
 
-		///<summary>/_cluster/state/{metric}</summary>
-        public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
-		{
-		}
-
-		///<summary>/_cluster/state/{metric}/{index}</summary>
-        public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("index", indices))
+		public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("index", indices))
 		{
 		}
 
@@ -128,10 +118,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 	}
 
-	internal sealed class ClusterStateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterStateRequest> where TReadAs : class, IClusterStateRequest
+	internal sealed class ClusterStateRequestDescriptorConverter : JsonConverter<ClusterStateRequestDescriptor>
 	{
-		public override IClusterStateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterStateRequest value, JsonSerializerOptions options)
+		public override ClusterStateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterStateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();
