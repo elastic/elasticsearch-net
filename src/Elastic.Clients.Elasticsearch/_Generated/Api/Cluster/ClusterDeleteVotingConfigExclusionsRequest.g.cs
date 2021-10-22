@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -30,12 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter<ClusterDeleteVotingConfigExclusionsRequest>))]
-	public partial interface IClusterDeleteVotingConfigExclusionsRequest : IRequest<ClusterDeleteVotingConfigExclusionsRequestParameters>
-	{
-	}
-
-	public partial class ClusterDeleteVotingConfigExclusionsRequest : PlainRequestBase<ClusterDeleteVotingConfigExclusionsRequestParameters>, IClusterDeleteVotingConfigExclusionsRequest
+	public partial class ClusterDeleteVotingConfigExclusionsRequest : PlainRequestBase<ClusterDeleteVotingConfigExclusionsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
@@ -44,23 +40,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 	}
 
-	public partial class ClusterDeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsRequestParameters, IClusterDeleteVotingConfigExclusionsRequest>, IClusterDeleteVotingConfigExclusionsRequest
+	[JsonConverter(typeof(ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter))]
+	public partial class ClusterDeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsRequestParameters>
 	{
-		///<summary>/_cluster/voting_config_exclusions</summary>
-        public ClusterDeleteVotingConfigExclusionsRequestDescriptor() : base()
-		{
-		}
-
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public ClusterDeleteVotingConfigExclusionsRequestDescriptor WaitForRemoval(bool? waitForRemoval) => Qs("wait_for_removal", waitForRemoval);
 	}
 
-	internal sealed class ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterDeleteVotingConfigExclusionsRequest> where TReadAs : class, IClusterDeleteVotingConfigExclusionsRequest
+	internal sealed class ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter : JsonConverter<ClusterDeleteVotingConfigExclusionsRequestDescriptor>
 	{
-		public override IClusterDeleteVotingConfigExclusionsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterDeleteVotingConfigExclusionsRequest value, JsonSerializerOptions options)
+		public override ClusterDeleteVotingConfigExclusionsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterDeleteVotingConfigExclusionsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

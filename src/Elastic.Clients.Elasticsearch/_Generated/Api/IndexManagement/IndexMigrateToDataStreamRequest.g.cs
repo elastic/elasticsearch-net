@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexMigrateToDataStreamRequestDescriptorConverter<IndexMigrateToDataStreamRequest>))]
-	public partial interface IIndexMigrateToDataStreamRequest : IRequest<IndexMigrateToDataStreamRequestParameters>
-	{
-	}
-
-	public partial class IndexMigrateToDataStreamRequest : PlainRequestBase<IndexMigrateToDataStreamRequestParameters>, IIndexMigrateToDataStreamRequest
+	public partial class IndexMigrateToDataStreamRequest : PlainRequestBase<IndexMigrateToDataStreamRequestParameters>
 	{
 		public IndexMigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 		{
@@ -44,10 +40,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	public partial class IndexMigrateToDataStreamRequestDescriptor : RequestDescriptorBase<IndexMigrateToDataStreamRequestDescriptor, IndexMigrateToDataStreamRequestParameters, IIndexMigrateToDataStreamRequest>, IIndexMigrateToDataStreamRequest
+	[JsonConverter(typeof(IndexMigrateToDataStreamRequestDescriptorConverter))]
+	public partial class IndexMigrateToDataStreamRequestDescriptor : RequestDescriptorBase<IndexMigrateToDataStreamRequestDescriptor, IndexMigrateToDataStreamRequestParameters>
 	{
-		///<summary>/_data_stream/_migrate/{name}</summary>
-        public IndexMigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
+		public IndexMigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -56,10 +52,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	internal sealed class IndexMigrateToDataStreamRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexMigrateToDataStreamRequest> where TReadAs : class, IIndexMigrateToDataStreamRequest
+	internal sealed class IndexMigrateToDataStreamRequestDescriptorConverter : JsonConverter<IndexMigrateToDataStreamRequestDescriptor>
 	{
-		public override IIndexMigrateToDataStreamRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexMigrateToDataStreamRequest value, JsonSerializerOptions options)
+		public override IndexMigrateToDataStreamRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexMigrateToDataStreamRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

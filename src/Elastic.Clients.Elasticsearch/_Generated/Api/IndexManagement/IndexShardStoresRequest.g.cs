@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>?>("status"); set => Q("status", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexShardStoresRequestDescriptorConverter<IndexShardStoresRequest>))]
-	public partial interface IIndexShardStoresRequest : IRequest<IndexShardStoresRequestParameters>
-	{
-	}
-
-	public partial class IndexShardStoresRequest : PlainRequestBase<IndexShardStoresRequestParameters>, IIndexShardStoresRequest
+	public partial class IndexShardStoresRequest : PlainRequestBase<IndexShardStoresRequestParameters>
 	{
 		public IndexShardStoresRequest()
 		{
@@ -70,15 +66,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>?>("status"); set => Q("status", value); }
 	}
 
-	public partial class IndexShardStoresRequestDescriptor : RequestDescriptorBase<IndexShardStoresRequestDescriptor, IndexShardStoresRequestParameters, IIndexShardStoresRequest>, IIndexShardStoresRequest
+	[JsonConverter(typeof(IndexShardStoresRequestDescriptorConverter))]
+	public partial class IndexShardStoresRequestDescriptor : RequestDescriptorBase<IndexShardStoresRequestDescriptor, IndexShardStoresRequestParameters>
 	{
-		///<summary>/_shard_stores</summary>
-        public IndexShardStoresRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_shard_stores</summary>
-        public IndexShardStoresRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexShardStoresRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -91,10 +82,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexShardStoresRequestDescriptor Status(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>? status) => Qs("status", status);
 	}
 
-	internal sealed class IndexShardStoresRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexShardStoresRequest> where TReadAs : class, IIndexShardStoresRequest
+	internal sealed class IndexShardStoresRequestDescriptorConverter : JsonConverter<IndexShardStoresRequestDescriptor>
 	{
-		public override IIndexShardStoresRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexShardStoresRequest value, JsonSerializerOptions options)
+		public override IndexShardStoresRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexShardStoresRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

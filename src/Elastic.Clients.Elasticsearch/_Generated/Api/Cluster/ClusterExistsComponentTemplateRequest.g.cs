@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterExistsComponentTemplateRequestDescriptorConverter<ClusterExistsComponentTemplateRequest>))]
-	public partial interface IClusterExistsComponentTemplateRequest : IRequest<ClusterExistsComponentTemplateRequestParameters>
-	{
-	}
-
-	public partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>, IClusterExistsComponentTemplateRequest
+	public partial class ClusterExistsComponentTemplateRequest : PlainRequestBase<ClusterExistsComponentTemplateRequestParameters>
 	{
 		public ClusterExistsComponentTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
@@ -54,10 +50,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class ClusterExistsComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterExistsComponentTemplateRequestDescriptor, ClusterExistsComponentTemplateRequestParameters, IClusterExistsComponentTemplateRequest>, IClusterExistsComponentTemplateRequest
+	[JsonConverter(typeof(ClusterExistsComponentTemplateRequestDescriptorConverter))]
+	public partial class ClusterExistsComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterExistsComponentTemplateRequestDescriptor, ClusterExistsComponentTemplateRequestParameters>
 	{
-		///<summary>/_component_template/{name}</summary>
-        public ClusterExistsComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+		public ClusterExistsComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -68,10 +64,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterExistsComponentTemplateRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 
-	internal sealed class ClusterExistsComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterExistsComponentTemplateRequest> where TReadAs : class, IClusterExistsComponentTemplateRequest
+	internal sealed class ClusterExistsComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterExistsComponentTemplateRequestDescriptor>
 	{
-		public override IClusterExistsComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterExistsComponentTemplateRequest value, JsonSerializerOptions options)
+		public override ClusterExistsComponentTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterExistsComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

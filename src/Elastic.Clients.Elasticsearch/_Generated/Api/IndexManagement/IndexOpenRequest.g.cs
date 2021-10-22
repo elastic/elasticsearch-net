@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexOpenRequestDescriptorConverter<IndexOpenRequest>))]
-	public partial interface IIndexOpenRequest : IRequest<IndexOpenRequestParameters>
-	{
-	}
-
-	public partial class IndexOpenRequest : PlainRequestBase<IndexOpenRequestParameters>, IIndexOpenRequest
+	public partial class IndexOpenRequest : PlainRequestBase<IndexOpenRequestParameters>
 	{
 		public IndexOpenRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -78,10 +74,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	public partial class IndexOpenRequestDescriptor : RequestDescriptorBase<IndexOpenRequestDescriptor, IndexOpenRequestParameters, IIndexOpenRequest>, IIndexOpenRequest
+	[JsonConverter(typeof(IndexOpenRequestDescriptorConverter))]
+	public partial class IndexOpenRequestDescriptor : RequestDescriptorBase<IndexOpenRequestDescriptor, IndexOpenRequestParameters>
 	{
-		///<summary>/{index}/_open</summary>
-        public IndexOpenRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		public IndexOpenRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -96,10 +92,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexOpenRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	internal sealed class IndexOpenRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexOpenRequest> where TReadAs : class, IIndexOpenRequest
+	internal sealed class IndexOpenRequestDescriptorConverter : JsonConverter<IndexOpenRequestDescriptor>
 	{
-		public override IIndexOpenRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexOpenRequest value, JsonSerializerOptions options)
+		public override IndexOpenRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexOpenRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

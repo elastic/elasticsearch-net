@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexGetMappingRequestDescriptorConverter<IndexGetMappingRequest>))]
-	public partial interface IIndexGetMappingRequest : IRequest<IndexGetMappingRequestParameters>
-	{
-	}
-
-	public partial class IndexGetMappingRequest : PlainRequestBase<IndexGetMappingRequestParameters>, IIndexGetMappingRequest
+	public partial class IndexGetMappingRequest : PlainRequestBase<IndexGetMappingRequestParameters>
 	{
 		public IndexGetMappingRequest()
 		{
@@ -82,15 +78,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class IndexGetMappingRequestDescriptor : RequestDescriptorBase<IndexGetMappingRequestDescriptor, IndexGetMappingRequestParameters, IIndexGetMappingRequest>, IIndexGetMappingRequest
+	[JsonConverter(typeof(IndexGetMappingRequestDescriptorConverter))]
+	public partial class IndexGetMappingRequestDescriptor : RequestDescriptorBase<IndexGetMappingRequestDescriptor, IndexGetMappingRequestParameters>
 	{
-		///<summary>/_mapping</summary>
-        public IndexGetMappingRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_mapping</summary>
-        public IndexGetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexGetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -105,10 +96,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	internal sealed class IndexGetMappingRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexGetMappingRequest> where TReadAs : class, IIndexGetMappingRequest
+	internal sealed class IndexGetMappingRequestDescriptorConverter : JsonConverter<IndexGetMappingRequestDescriptor>
 	{
-		public override IIndexGetMappingRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexGetMappingRequest value, JsonSerializerOptions options)
+		public override IndexGetMappingRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexGetMappingRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

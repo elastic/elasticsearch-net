@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -42,12 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexFlushRequestDescriptorConverter<IndexFlushRequest>))]
-	public partial interface IIndexFlushRequest : IRequest<IndexFlushRequestParameters>
-	{
-	}
-
-	public partial class IndexFlushRequest : PlainRequestBase<IndexFlushRequestParameters>, IIndexFlushRequest
+	public partial class IndexFlushRequest : PlainRequestBase<IndexFlushRequestParameters>
 	{
 		public IndexFlushRequest()
 		{
@@ -76,15 +72,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 	}
 
-	public partial class IndexFlushRequestDescriptor : RequestDescriptorBase<IndexFlushRequestDescriptor, IndexFlushRequestParameters, IIndexFlushRequest>, IIndexFlushRequest
+	[JsonConverter(typeof(IndexFlushRequestDescriptorConverter))]
+	public partial class IndexFlushRequestDescriptor : RequestDescriptorBase<IndexFlushRequestDescriptor, IndexFlushRequestParameters>
 	{
-		///<summary>/_flush</summary>
-        public IndexFlushRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_flush</summary>
-        public IndexFlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexFlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -98,10 +89,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexFlushRequestDescriptor WaitIfOngoing(bool? waitIfOngoing) => Qs("wait_if_ongoing", waitIfOngoing);
 	}
 
-	internal sealed class IndexFlushRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexFlushRequest> where TReadAs : class, IIndexFlushRequest
+	internal sealed class IndexFlushRequestDescriptorConverter : JsonConverter<IndexFlushRequestDescriptor>
 	{
-		public override IIndexFlushRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexFlushRequest value, JsonSerializerOptions options)
+		public override IndexFlushRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexFlushRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

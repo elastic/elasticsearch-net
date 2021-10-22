@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -60,12 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.WaitForStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterHealthRequestDescriptorConverter<ClusterHealthRequest>))]
-	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
-	{
-	}
-
-	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
+	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>
 	{
 		public ClusterHealthRequest()
 		{
@@ -112,15 +108,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.WaitForStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
-	public partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
+	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
+	public partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
 	{
-		///<summary>/_cluster/health</summary>
-        public ClusterHealthRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/_cluster/health/{index}</summary>
-        public ClusterHealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public ClusterHealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -140,10 +131,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 	}
 
-	internal sealed class ClusterHealthRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterHealthRequest> where TReadAs : class, IClusterHealthRequest
+	internal sealed class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHealthRequestDescriptor>
 	{
-		public override IClusterHealthRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterHealthRequest value, JsonSerializerOptions options)
+		public override ClusterHealthRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterHealthRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

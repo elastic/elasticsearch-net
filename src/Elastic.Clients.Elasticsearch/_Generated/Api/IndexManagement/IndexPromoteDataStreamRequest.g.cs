@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexPromoteDataStreamRequestDescriptorConverter<IndexPromoteDataStreamRequest>))]
-	public partial interface IIndexPromoteDataStreamRequest : IRequest<IndexPromoteDataStreamRequestParameters>
-	{
-	}
-
-	public partial class IndexPromoteDataStreamRequest : PlainRequestBase<IndexPromoteDataStreamRequestParameters>, IIndexPromoteDataStreamRequest
+	public partial class IndexPromoteDataStreamRequest : PlainRequestBase<IndexPromoteDataStreamRequestParameters>
 	{
 		public IndexPromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 		{
@@ -44,10 +40,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	public partial class IndexPromoteDataStreamRequestDescriptor : RequestDescriptorBase<IndexPromoteDataStreamRequestDescriptor, IndexPromoteDataStreamRequestParameters, IIndexPromoteDataStreamRequest>, IIndexPromoteDataStreamRequest
+	[JsonConverter(typeof(IndexPromoteDataStreamRequestDescriptorConverter))]
+	public partial class IndexPromoteDataStreamRequestDescriptor : RequestDescriptorBase<IndexPromoteDataStreamRequestDescriptor, IndexPromoteDataStreamRequestParameters>
 	{
-		///<summary>/_data_stream/_promote/{name}</summary>
-        public IndexPromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
+		public IndexPromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -56,10 +52,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	internal sealed class IndexPromoteDataStreamRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexPromoteDataStreamRequest> where TReadAs : class, IIndexPromoteDataStreamRequest
+	internal sealed class IndexPromoteDataStreamRequestDescriptorConverter : JsonConverter<IndexPromoteDataStreamRequestDescriptor>
 	{
-		public override IIndexPromoteDataStreamRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexPromoteDataStreamRequest value, JsonSerializerOptions options)
+		public override IndexPromoteDataStreamRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexPromoteDataStreamRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

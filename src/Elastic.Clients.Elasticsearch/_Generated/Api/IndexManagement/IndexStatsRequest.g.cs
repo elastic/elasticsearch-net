@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -57,12 +58,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Types? Types { get => Q<Elastic.Clients.Elasticsearch.Types?>("types"); set => Q("types", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexStatsRequestDescriptorConverter<IndexStatsRequest>))]
-	public partial interface IIndexStatsRequest : IRequest<IndexStatsRequestParameters>
-	{
-	}
-
-	public partial class IndexStatsRequest : PlainRequestBase<IndexStatsRequestParameters>, IIndexStatsRequest
+	public partial class IndexStatsRequest : PlainRequestBase<IndexStatsRequestParameters>
 	{
 		public IndexStatsRequest()
 		{
@@ -114,25 +110,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Types? Types { get => Q<Elastic.Clients.Elasticsearch.Types?>("types"); set => Q("types", value); }
 	}
 
-	public partial class IndexStatsRequestDescriptor : RequestDescriptorBase<IndexStatsRequestDescriptor, IndexStatsRequestParameters, IIndexStatsRequest>, IIndexStatsRequest
+	[JsonConverter(typeof(IndexStatsRequestDescriptorConverter))]
+	public partial class IndexStatsRequestDescriptor : RequestDescriptorBase<IndexStatsRequestDescriptor, IndexStatsRequestParameters>
 	{
-		///<summary>/_stats</summary>
-        public IndexStatsRequestDescriptor() : base()
+		public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
 		{
 		}
 
-		///<summary>/_stats/{metric}</summary>
-        public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
+		public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
-		///<summary>/{index}/_stats</summary>
-        public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
-		{
-		}
-
-		///<summary>/{index}/_stats/{metric}</summary>
-        public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
+		public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
 		{
 		}
 
@@ -151,10 +140,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexStatsRequestDescriptor Types(Elastic.Clients.Elasticsearch.Types? types) => Qs("types", types);
 	}
 
-	internal sealed class IndexStatsRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexStatsRequest> where TReadAs : class, IIndexStatsRequest
+	internal sealed class IndexStatsRequestDescriptorConverter : JsonConverter<IndexStatsRequestDescriptor>
 	{
-		public override IIndexStatsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexStatsRequest value, JsonSerializerOptions options)
+		public override IndexStatsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexStatsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

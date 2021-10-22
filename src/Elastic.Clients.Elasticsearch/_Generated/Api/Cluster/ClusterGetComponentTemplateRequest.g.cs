@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterGetComponentTemplateRequestDescriptorConverter<ClusterGetComponentTemplateRequest>))]
-	public partial interface IClusterGetComponentTemplateRequest : IRequest<ClusterGetComponentTemplateRequestParameters>
-	{
-	}
-
-	public partial class ClusterGetComponentTemplateRequest : PlainRequestBase<ClusterGetComponentTemplateRequestParameters>, IClusterGetComponentTemplateRequest
+	public partial class ClusterGetComponentTemplateRequest : PlainRequestBase<ClusterGetComponentTemplateRequestParameters>
 	{
 		public ClusterGetComponentTemplateRequest()
 		{
@@ -64,15 +60,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class ClusterGetComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateRequestParameters, IClusterGetComponentTemplateRequest>, IClusterGetComponentTemplateRequest
+	[JsonConverter(typeof(ClusterGetComponentTemplateRequestDescriptorConverter))]
+	public partial class ClusterGetComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateRequestParameters>
 	{
-		///<summary>/_component_template</summary>
-        public ClusterGetComponentTemplateRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/_component_template/{name}</summary>
-        public ClusterGetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+		public ClusterGetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 		{
 		}
 
@@ -84,10 +75,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterGetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	internal sealed class ClusterGetComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterGetComponentTemplateRequest> where TReadAs : class, IClusterGetComponentTemplateRequest
+	internal sealed class ClusterGetComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterGetComponentTemplateRequestDescriptor>
 	{
-		public override IClusterGetComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterGetComponentTemplateRequest value, JsonSerializerOptions options)
+		public override ClusterGetComponentTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterGetComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

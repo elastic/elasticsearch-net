@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -48,12 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexGetSettingsRequestDescriptorConverter<IndexGetSettingsRequest>))]
-	public partial interface IIndexGetSettingsRequest : IRequest<IndexGetSettingsRequestParameters>
-	{
-	}
-
-	public partial class IndexGetSettingsRequest : PlainRequestBase<IndexGetSettingsRequestParameters>, IIndexGetSettingsRequest
+	public partial class IndexGetSettingsRequest : PlainRequestBase<IndexGetSettingsRequestParameters>
 	{
 		public IndexGetSettingsRequest()
 		{
@@ -96,25 +92,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class IndexGetSettingsRequestDescriptor : RequestDescriptorBase<IndexGetSettingsRequestDescriptor, IndexGetSettingsRequestParameters, IIndexGetSettingsRequest>, IIndexGetSettingsRequest
+	[JsonConverter(typeof(IndexGetSettingsRequestDescriptorConverter))]
+	public partial class IndexGetSettingsRequestDescriptor : RequestDescriptorBase<IndexGetSettingsRequestDescriptor, IndexGetSettingsRequestParameters>
 	{
-		///<summary>/_settings</summary>
-        public IndexGetSettingsRequestDescriptor() : base()
+		public IndexGetSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
-		///<summary>/{index}/_settings</summary>
-        public IndexGetSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexGetSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
 		{
 		}
 
-		///<summary>/{index}/_settings/{name}</summary>
-        public IndexGetSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
-		{
-		}
-
-		///<summary>/_settings/{name}</summary>
-        public IndexGetSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+		public IndexGetSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
 
@@ -130,10 +119,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	internal sealed class IndexGetSettingsRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexGetSettingsRequest> where TReadAs : class, IIndexGetSettingsRequest
+	internal sealed class IndexGetSettingsRequestDescriptorConverter : JsonConverter<IndexGetSettingsRequestDescriptor>
 	{
-		public override IIndexGetSettingsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexGetSettingsRequest value, JsonSerializerOptions options)
+		public override IndexGetSettingsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexGetSettingsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,19 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterAllocationExplainRequestDescriptorConverter<ClusterAllocationExplainRequest>))]
-	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
-	{
-		string? CurrentNode { get; set; }
-
-		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
-		bool? Primary { get; set; }
-
-		int? Shard { get; set; }
-	}
-
-	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
+	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -73,60 +62,52 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int? Shard { get; set; }
 	}
 
-	public partial class ClusterAllocationExplainRequestDescriptor : RequestDescriptorBase<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
+	[JsonConverter(typeof(ClusterAllocationExplainRequestDescriptorConverter))]
+	public partial class ClusterAllocationExplainRequestDescriptor : RequestDescriptorBase<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainRequestParameters>
 	{
-		///<summary>/_cluster/allocation/explain</summary>
-        public ClusterAllocationExplainRequestDescriptor() : base()
-		{
-		}
-
+		internal string? _currentNode;
+		internal Elastic.Clients.Elasticsearch.IndexName? _index;
+		internal bool? _primary;
+		internal int? _shard;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		string? IClusterAllocationExplainRequest.CurrentNode { get; set; }
-
-		Elastic.Clients.Elasticsearch.IndexName? IClusterAllocationExplainRequest.Index { get; set; }
-
-		bool? IClusterAllocationExplainRequest.Primary { get; set; }
-
-		int? IClusterAllocationExplainRequest.Shard { get; set; }
-
-		public ClusterAllocationExplainRequestDescriptor CurrentNode(string? currentNode) => Assign(currentNode, (a, v) => a.CurrentNode = v);
-		public ClusterAllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.Index = v);
-		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary = true) => Assign(primary, (a, v) => a.Primary = v);
-		public ClusterAllocationExplainRequestDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.Shard = v);
 		public ClusterAllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo) => Qs("include_disk_info", includeDiskInfo);
 		public ClusterAllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions) => Qs("include_yes_decisions", includeYesDecisions);
+		public ClusterAllocationExplainRequestDescriptor CurrentNode(string? currentNode) => Assign(currentNode, (a, v) => a._currentNode = v);
+		public ClusterAllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a._index = v);
+		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary = true) => Assign(primary, (a, v) => a._primary = v);
+		public ClusterAllocationExplainRequestDescriptor Shard(int? shard) => Assign(shard, (a, v) => a._shard = v);
 	}
 
-	internal sealed class ClusterAllocationExplainRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterAllocationExplainRequest> where TReadAs : class, IClusterAllocationExplainRequest
+	internal sealed class ClusterAllocationExplainRequestDescriptorConverter : JsonConverter<ClusterAllocationExplainRequestDescriptor>
 	{
-		public override IClusterAllocationExplainRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterAllocationExplainRequest value, JsonSerializerOptions options)
+		public override ClusterAllocationExplainRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterAllocationExplainRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.CurrentNode))
+			if (!string.IsNullOrEmpty(value._currentNode))
 			{
 				writer.WritePropertyName("current_node");
-				writer.WriteStringValue(value.CurrentNode);
+				writer.WriteStringValue(value._currentNode);
 			}
 
-			if (value.Index is not null)
+			if (value._index is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, value.Index, options);
+				JsonSerializer.Serialize(writer, value._index, options);
 			}
 
-			if (value.Primary.HasValue)
+			if (value._primary.HasValue)
 			{
 				writer.WritePropertyName("primary");
-				writer.WriteBooleanValue(value.Primary.Value);
+				writer.WriteBooleanValue(value._primary.Value);
 			}
 
-			if (value.Shard.HasValue)
+			if (value._shard.HasValue)
 			{
 				writer.WritePropertyName("shard");
-				writer.WriteNumberValue(value.Shard.Value);
+				writer.WriteNumberValue(value._shard.Value);
 			}
 
 			writer.WriteEndObject();

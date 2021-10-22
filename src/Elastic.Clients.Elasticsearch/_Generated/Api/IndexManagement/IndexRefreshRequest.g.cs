@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexRefreshRequestDescriptorConverter<IndexRefreshRequest>))]
-	public partial interface IIndexRefreshRequest : IRequest<IndexRefreshRequestParameters>
-	{
-	}
-
-	public partial class IndexRefreshRequest : PlainRequestBase<IndexRefreshRequestParameters>, IIndexRefreshRequest
+	public partial class IndexRefreshRequest : PlainRequestBase<IndexRefreshRequestParameters>
 	{
 		public IndexRefreshRequest()
 		{
@@ -64,15 +60,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class IndexRefreshRequestDescriptor : RequestDescriptorBase<IndexRefreshRequestDescriptor, IndexRefreshRequestParameters, IIndexRefreshRequest>, IIndexRefreshRequest
+	[JsonConverter(typeof(IndexRefreshRequestDescriptorConverter))]
+	public partial class IndexRefreshRequestDescriptor : RequestDescriptorBase<IndexRefreshRequestDescriptor, IndexRefreshRequestParameters>
 	{
-		///<summary>/_refresh</summary>
-        public IndexRefreshRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_refresh</summary>
-        public IndexRefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexRefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -84,10 +75,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRefreshRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	internal sealed class IndexRefreshRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexRefreshRequest> where TReadAs : class, IIndexRefreshRequest
+	internal sealed class IndexRefreshRequestDescriptorConverter : JsonConverter<IndexRefreshRequestDescriptor>
 	{
-		public override IIndexRefreshRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexRefreshRequest value, JsonSerializerOptions options)
+		public override IndexRefreshRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRefreshRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

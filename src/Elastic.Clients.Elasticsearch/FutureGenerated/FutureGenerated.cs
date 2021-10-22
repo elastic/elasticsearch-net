@@ -194,44 +194,44 @@ namespace Elastic.Clients.Elasticsearch
 	//	public string Key => Value;
 	//}
 
-	// This is an incomplete stub implementation and should really be a struct
-	public partial class Indices : IUrlParameter
-	{
-		public static readonly Indices All = new("_all");
+	//// This is an incomplete stub implementation and should really be a struct
+	//public partial class Indices : IUrlParameter
+	//{
+	//	public static readonly Indices All = new("_all");
 
-		internal Indices(IndexName index) => _indexNameList.Add(index);
+	//	internal Indices(IndexName index) => _indexNameList.Add(index);
 
-		public Indices(IEnumerable<IndexName> indices)
-		{
-			indices.ThrowIfEmpty(nameof(indices));
-			_indexNameList.AddRange(indices);
-		}
+	//	public Indices(IEnumerable<IndexName> indices)
+	//	{
+	//		indices.ThrowIfEmpty(nameof(indices));
+	//		_indexNameList.AddRange(indices);
+	//	}
 
-		public Indices(IEnumerable<string> indices)
-		{
-			indices.ThrowIfEmpty(nameof(indices));
-			_indexNameList.AddRange(indices.Select(s => (IndexName)s));
-		}
+	//	public Indices(IEnumerable<string> indices)
+	//	{
+	//		indices.ThrowIfEmpty(nameof(indices));
+	//		_indexNameList.AddRange(indices.Select(s => (IndexName)s));
+	//	}
 
-		public IReadOnlyCollection<IndexName> Values => _indexNameList.ToArray();
+	//	public IReadOnlyCollection<IndexName> Values => _indexNameList.ToArray();
 
-		public static Indices Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Indices(list);
+	//	public static Indices Parse(string names) => names.IsNullOrEmptyCommaSeparatedList(out var list) ? null : new Indices(list);
 
-		public static Indices Single(string index) => new Indices((IndexName)index);
+	//	public static Indices Single(string index) => new Indices((IndexName)index);
 
-		public static implicit operator Indices(string names) => Parse(names);
+	//	public static implicit operator Indices(string names) => Parse(names);
 
-		string IUrlParameter.GetString(ITransportConfiguration settings)
-		{
-			if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
-				throw new Exception(
-					"Tried to pass index names on query sting but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");
+	//	string IUrlParameter.GetString(ITransportConfiguration settings)
+	//	{
+	//		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
+	//			throw new Exception(
+	//				"Tried to pass index names on query sting but it could not be resolved because no Elastic.Clients.Elasticsearch settings are available.");
 
-			var indices = _indexNameList.Select(i => i.GetString(settings)).Distinct();
+	//		var indices = _indexNameList.Select(i => i.GetString(settings)).Distinct();
 
-			return string.Join(",", indices);
-		}
-	}
+	//		return string.Join(",", indices);
+	//	}
+	//}
 
 	//public partial struct IndicesList : IUrlParameter
 	//{

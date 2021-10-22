@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexGetFieldMappingRequestDescriptorConverter<IndexGetFieldMappingRequest>))]
-	public partial interface IIndexGetFieldMappingRequest : IRequest<IndexGetFieldMappingRequestParameters>
-	{
-	}
-
-	public partial class IndexGetFieldMappingRequest : PlainRequestBase<IndexGetFieldMappingRequestParameters>, IIndexGetFieldMappingRequest
+	public partial class IndexGetFieldMappingRequest : PlainRequestBase<IndexGetFieldMappingRequestParameters>
 	{
 		public IndexGetFieldMappingRequest(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 		{
@@ -82,15 +78,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class IndexGetFieldMappingRequestDescriptor : RequestDescriptorBase<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingRequestParameters, IIndexGetFieldMappingRequest>, IIndexGetFieldMappingRequest
+	[JsonConverter(typeof(IndexGetFieldMappingRequestDescriptorConverter))]
+	public partial class IndexGetFieldMappingRequestDescriptor : RequestDescriptorBase<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingRequestParameters>
 	{
-		///<summary>/_mapping/field/{fields}</summary>
-        public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
+		public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 		{
 		}
 
-		///<summary>/{index}/_mapping/field/{fields}</summary>
-        public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("index", indices).Required("fields", fields))
+		public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("index", indices).Required("fields", fields))
 		{
 		}
 
@@ -105,10 +100,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetFieldMappingRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 
-	internal sealed class IndexGetFieldMappingRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexGetFieldMappingRequest> where TReadAs : class, IIndexGetFieldMappingRequest
+	internal sealed class IndexGetFieldMappingRequestDescriptorConverter : JsonConverter<IndexGetFieldMappingRequestDescriptor>
 	{
-		public override IIndexGetFieldMappingRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexGetFieldMappingRequest value, JsonSerializerOptions options)
+		public override IndexGetFieldMappingRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexGetFieldMappingRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

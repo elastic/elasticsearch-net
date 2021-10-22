@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -36,15 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterPutSettingsRequestDescriptorConverter<ClusterPutSettingsRequest>))]
-	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>
-	{
-		Dictionary<string, object>? Persistent { get; set; }
-
-		Dictionary<string, object>? Transient { get; set; }
-	}
-
-	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
+	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
@@ -67,43 +60,37 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object>? Transient { get; set; }
 	}
 
-	public partial class ClusterPutSettingsRequestDescriptor : RequestDescriptorBase<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
+	[JsonConverter(typeof(ClusterPutSettingsRequestDescriptorConverter))]
+	public partial class ClusterPutSettingsRequestDescriptor : RequestDescriptorBase<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsRequestParameters>
 	{
-		///<summary>/_cluster/settings</summary>
-        public ClusterPutSettingsRequestDescriptor() : base()
-		{
-		}
-
+		internal Dictionary<string, object>? _persistent;
+		internal Dictionary<string, object>? _transient;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		Dictionary<string, object>? IClusterPutSettingsRequest.Persistent { get; set; }
-
-		Dictionary<string, object>? IClusterPutSettingsRequest.Transient { get; set; }
-
-		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Persistent = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Transient = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public ClusterPutSettingsRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public ClusterPutSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._persistent = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._transient = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 
-	internal sealed class ClusterPutSettingsRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPutSettingsRequest> where TReadAs : class, IClusterPutSettingsRequest
+	internal sealed class ClusterPutSettingsRequestDescriptorConverter : JsonConverter<ClusterPutSettingsRequestDescriptor>
 	{
-		public override IClusterPutSettingsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterPutSettingsRequest value, JsonSerializerOptions options)
+		public override ClusterPutSettingsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterPutSettingsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Persistent is not null)
+			if (value._persistent is not null)
 			{
 				writer.WritePropertyName("persistent");
-				JsonSerializer.Serialize(writer, value.Persistent, options);
+				JsonSerializer.Serialize(writer, value._persistent, options);
 			}
 
-			if (value.Transient is not null)
+			if (value._transient is not null)
 			{
 				writer.WritePropertyName("transient");
-				JsonSerializer.Serialize(writer, value.Transient, options);
+				JsonSerializer.Serialize(writer, value._transient, options);
 			}
 
 			writer.WriteEndObject();

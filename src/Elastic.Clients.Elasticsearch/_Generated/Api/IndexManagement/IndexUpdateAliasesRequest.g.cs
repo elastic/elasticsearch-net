@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexUpdateAliasesRequestDescriptorConverter<IndexUpdateAliasesRequest>))]
-	public partial interface IIndexUpdateAliasesRequest : IRequest<IndexUpdateAliasesRequestParameters>
-	{
-		IEnumerable<IndexManagement.UpdateAliases.IAction>? Actions { get; set; }
-	}
-
-	public partial class IndexUpdateAliasesRequest : PlainRequestBase<IndexUpdateAliasesRequestParameters>, IIndexUpdateAliasesRequest
+	public partial class IndexUpdateAliasesRequest : PlainRequestBase<IndexUpdateAliasesRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -55,33 +50,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<IndexManagement.UpdateAliases.IAction>? Actions { get; set; }
 	}
 
-	public partial class IndexUpdateAliasesRequestDescriptor : RequestDescriptorBase<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesRequestParameters, IIndexUpdateAliasesRequest>, IIndexUpdateAliasesRequest
+	[JsonConverter(typeof(IndexUpdateAliasesRequestDescriptorConverter))]
+	public partial class IndexUpdateAliasesRequestDescriptor : RequestDescriptorBase<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesRequestParameters>
 	{
-		///<summary>/_aliases</summary>
-        public IndexUpdateAliasesRequestDescriptor() : base()
-		{
-		}
-
+		internal IEnumerable<IndexManagement.UpdateAliases.IAction>? _actions;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		IEnumerable<IndexManagement.UpdateAliases.IAction>? IIndexUpdateAliasesRequest.Actions { get; set; }
-
-		public IndexUpdateAliasesRequestDescriptor Actions(IEnumerable<IndexManagement.UpdateAliases.IAction>? actions) => Assign(actions, (a, v) => a.Actions = v);
 		public IndexUpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexUpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IndexUpdateAliasesRequestDescriptor Actions(IEnumerable<IndexManagement.UpdateAliases.IAction>? actions) => Assign(actions, (a, v) => a._actions = v);
 	}
 
-	internal sealed class IndexUpdateAliasesRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexUpdateAliasesRequest> where TReadAs : class, IIndexUpdateAliasesRequest
+	internal sealed class IndexUpdateAliasesRequestDescriptorConverter : JsonConverter<IndexUpdateAliasesRequestDescriptor>
 	{
-		public override IIndexUpdateAliasesRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexUpdateAliasesRequest value, JsonSerializerOptions options)
+		public override IndexUpdateAliasesRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexUpdateAliasesRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Actions is not null)
+			if (value._actions is not null)
 			{
 				writer.WritePropertyName("actions");
-				JsonSerializer.Serialize(writer, value.Actions, options);
+				JsonSerializer.Serialize(writer, value._actions, options);
 			}
 
 			writer.WriteEndObject();

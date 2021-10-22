@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexSegmentsRequestDescriptorConverter<IndexSegmentsRequest>))]
-	public partial interface IIndexSegmentsRequest : IRequest<IndexSegmentsRequestParameters>
-	{
-	}
-
-	public partial class IndexSegmentsRequest : PlainRequestBase<IndexSegmentsRequestParameters>, IIndexSegmentsRequest
+	public partial class IndexSegmentsRequest : PlainRequestBase<IndexSegmentsRequestParameters>
 	{
 		public IndexSegmentsRequest()
 		{
@@ -70,15 +66,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 
-	public partial class IndexSegmentsRequestDescriptor : RequestDescriptorBase<IndexSegmentsRequestDescriptor, IndexSegmentsRequestParameters, IIndexSegmentsRequest>, IIndexSegmentsRequest
+	[JsonConverter(typeof(IndexSegmentsRequestDescriptorConverter))]
+	public partial class IndexSegmentsRequestDescriptor : RequestDescriptorBase<IndexSegmentsRequestDescriptor, IndexSegmentsRequestParameters>
 	{
-		///<summary>/_segments</summary>
-        public IndexSegmentsRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_segments</summary>
-        public IndexSegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexSegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -91,10 +82,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSegmentsRequestDescriptor Verbose(bool? verbose) => Qs("verbose", verbose);
 	}
 
-	internal sealed class IndexSegmentsRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexSegmentsRequest> where TReadAs : class, IIndexSegmentsRequest
+	internal sealed class IndexSegmentsRequestDescriptorConverter : JsonConverter<IndexSegmentsRequestDescriptor>
 	{
-		public override IIndexSegmentsRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexSegmentsRequest value, JsonSerializerOptions options)
+		public override IndexSegmentsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexSegmentsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();
