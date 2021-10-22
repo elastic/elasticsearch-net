@@ -186,4 +186,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     // Assertion expects two tokens but creates only one
     // Needs further investigation
     SkipFile "service_accounts/10_basic.yml", All
+
+    //Failed: Do operation Api search Reason: Catching error failed: Some(CatchRegex "\[categorization_filters\] cannot be used with \[categorization_analyzer\]") on server error
+    SkipFile "ml/categorization_agg.yml", Section "Test categorization aggregation with poor settings"
 ]
