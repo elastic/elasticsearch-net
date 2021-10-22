@@ -34,21 +34,21 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
         | "logs-mappings"
         | "metrics"
         | "metrics-settings"
-        | "data-streams-mappings"
         | "metrics-mappings"
         | "synthetics"
         | "synthetics-settings"
         | "synthetics-mappings"
         | ".snapshot-blob-cache"
+        | "data-streams-mappings"
         | ".deprecation-indexing-template" -> false
         | ".deprecation-indexing-mappings" -> false
         | ".deprecation-indexing-settings" -> false
-        | s when s.StartsWith(".deprecation") -> false
         | s when s.StartsWith(".monitoring") -> false
         | s when s.StartsWith(".watch") -> false
         | s when s.StartsWith(".data-frame") -> false
         | s when s.StartsWith(".ml-") -> false
         | s when s.StartsWith(".transform-") -> false
+        | s when s.StartsWith(".deprecation-") -> false
         | _ -> true
 
     let getAndDeleteFilter (setup:_ -> DynamicResponse) (delete:(_ -> DynamicResponse)) filter = 
@@ -108,7 +108,7 @@ let DefaultSetup : Operation list = [Actions("Setup", fun (client, suite) ->
     let wipeAllIndices () =
         let dp = DeleteIndexRequestParameters()
         dp.SetQueryString("expand_wildcards", "all")
-        client.Indices.Delete<DynamicResponse>("*,-.ds-.watcher-history-*,-.ds-ilm-history-*,-.ds-.logs-deprecation.elasticsearch-default-*", dp)
+        client.Indices.Delete<DynamicResponse>("*,-.ds-.watcher-history-*,-.ds-ilm-history-*", dp)
         
     let deleteTemplates () =
         client.Cat.Templates<StringResponse>("*", CatTemplatesRequestParameters(Headers=["name"].ToArray()))
