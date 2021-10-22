@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexGetTemplateRequestDescriptorConverter<IndexGetTemplateRequest>))]
-	public partial interface IIndexGetTemplateRequest : IRequest<IndexGetTemplateRequestParameters>
-	{
-	}
-
-	public partial class IndexGetTemplateRequest : PlainRequestBase<IndexGetTemplateRequestParameters>, IIndexGetTemplateRequest
+	public partial class IndexGetTemplateRequest : PlainRequestBase<IndexGetTemplateRequestParameters>
 	{
 		public IndexGetTemplateRequest()
 		{
@@ -70,15 +66,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class IndexGetTemplateRequestDescriptor : RequestDescriptorBase<IndexGetTemplateRequestDescriptor, IndexGetTemplateRequestParameters, IIndexGetTemplateRequest>, IIndexGetTemplateRequest
+	[JsonConverter(typeof(IndexGetTemplateRequestDescriptorConverter))]
+	public partial class IndexGetTemplateRequestDescriptor : RequestDescriptorBase<IndexGetTemplateRequestDescriptor, IndexGetTemplateRequestParameters>
 	{
-		///<summary>/_template</summary>
-        public IndexGetTemplateRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/_template/{name}</summary>
-        public IndexGetTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+		public IndexGetTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
 
@@ -91,10 +82,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	internal sealed class IndexGetTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexGetTemplateRequest> where TReadAs : class, IIndexGetTemplateRequest
+	internal sealed class IndexGetTemplateRequestDescriptorConverter : JsonConverter<IndexGetTemplateRequestDescriptor>
 	{
-		public override IIndexGetTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexGetTemplateRequest value, JsonSerializerOptions options)
+		public override IndexGetTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexGetTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

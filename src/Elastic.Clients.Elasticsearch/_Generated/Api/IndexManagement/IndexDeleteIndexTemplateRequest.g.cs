@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexDeleteIndexTemplateRequestDescriptorConverter<IndexDeleteIndexTemplateRequest>))]
-	public partial interface IIndexDeleteIndexTemplateRequest : IRequest<IndexDeleteIndexTemplateRequestParameters>
-	{
-	}
-
-	public partial class IndexDeleteIndexTemplateRequest : PlainRequestBase<IndexDeleteIndexTemplateRequestParameters>, IIndexDeleteIndexTemplateRequest
+	public partial class IndexDeleteIndexTemplateRequest : PlainRequestBase<IndexDeleteIndexTemplateRequestParameters>
 	{
 		public IndexDeleteIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -44,10 +40,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	public partial class IndexDeleteIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexDeleteIndexTemplateRequestDescriptor, IndexDeleteIndexTemplateRequestParameters, IIndexDeleteIndexTemplateRequest>, IIndexDeleteIndexTemplateRequest
+	[JsonConverter(typeof(IndexDeleteIndexTemplateRequestDescriptorConverter))]
+	public partial class IndexDeleteIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexDeleteIndexTemplateRequestDescriptor, IndexDeleteIndexTemplateRequestParameters>
 	{
-		///<summary>/_index_template/{name}</summary>
-        public IndexDeleteIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		public IndexDeleteIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -56,10 +52,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	internal sealed class IndexDeleteIndexTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexDeleteIndexTemplateRequest> where TReadAs : class, IIndexDeleteIndexTemplateRequest
+	internal sealed class IndexDeleteIndexTemplateRequestDescriptorConverter : JsonConverter<IndexDeleteIndexTemplateRequestDescriptor>
 	{
-		public override IIndexDeleteIndexTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexDeleteIndexTemplateRequest value, JsonSerializerOptions options)
+		public override IndexDeleteIndexTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexDeleteIndexTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

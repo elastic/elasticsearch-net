@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexExistsAliasRequestDescriptorConverter<IndexExistsAliasRequest>))]
-	public partial interface IIndexExistsAliasRequest : IRequest<IndexExistsAliasRequestParameters>
-	{
-	}
-
-	public partial class IndexExistsAliasRequest : PlainRequestBase<IndexExistsAliasRequestParameters>, IIndexExistsAliasRequest
+	public partial class IndexExistsAliasRequest : PlainRequestBase<IndexExistsAliasRequestParameters>
 	{
 		public IndexExistsAliasRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
@@ -70,15 +66,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public partial class IndexExistsAliasRequestDescriptor : RequestDescriptorBase<IndexExistsAliasRequestDescriptor, IndexExistsAliasRequestParameters, IIndexExistsAliasRequest>, IIndexExistsAliasRequest
+	[JsonConverter(typeof(IndexExistsAliasRequestDescriptorConverter))]
+	public partial class IndexExistsAliasRequestDescriptor : RequestDescriptorBase<IndexExistsAliasRequestDescriptor, IndexExistsAliasRequestParameters>
 	{
-		///<summary>/_alias/{name}</summary>
-        public IndexExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+		public IndexExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
 		}
 
-		///<summary>/{index}/_alias/{name}</summary>
-        public IndexExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("index", indices).Required("name", name))
+		public IndexExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("index", indices).Required("name", name))
 		{
 		}
 
@@ -91,10 +86,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexExistsAliasRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 
-	internal sealed class IndexExistsAliasRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexExistsAliasRequest> where TReadAs : class, IIndexExistsAliasRequest
+	internal sealed class IndexExistsAliasRequestDescriptorConverter : JsonConverter<IndexExistsAliasRequestDescriptor>
 	{
-		public override IIndexExistsAliasRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexExistsAliasRequest value, JsonSerializerOptions options)
+		public override IndexExistsAliasRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexExistsAliasRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

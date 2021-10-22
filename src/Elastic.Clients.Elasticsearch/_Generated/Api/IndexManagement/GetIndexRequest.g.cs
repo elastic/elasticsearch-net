@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -51,12 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(GetIndexRequestDescriptorConverter<GetIndexRequest>))]
-	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
-	{
-	}
-
-	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
+	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>
 	{
 		public GetIndexRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -90,10 +86,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	public partial class GetIndexRequestDescriptor : RequestDescriptorBase<GetIndexRequestDescriptor, GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
+	[JsonConverter(typeof(GetIndexRequestDescriptorConverter))]
+	public partial class GetIndexRequestDescriptor : RequestDescriptorBase<GetIndexRequestDescriptor, GetIndexRequestParameters>
 	{
-		///<summary>/{index}</summary>
-        public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -110,10 +106,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public GetIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
-	internal sealed class GetIndexRequestDescriptorConverter<TReadAs> : JsonConverter<IGetIndexRequest> where TReadAs : class, IGetIndexRequest
+	internal sealed class GetIndexRequestDescriptorConverter : JsonConverter<GetIndexRequestDescriptor>
 	{
-		public override IGetIndexRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IGetIndexRequest value, JsonSerializerOptions options)
+		public override GetIndexRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GetIndexRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

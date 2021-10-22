@@ -21,7 +21,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterExistsComponentTemplateResponse : ResponseBase
+	public partial class ClusterExistsComponentTemplateResponse : ExistsResponseBase
 	{
 	}
 }

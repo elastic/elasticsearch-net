@@ -1,8 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
+using Tests.Configuration;
 using Tests.Core.Client;
+using Tests.Core.Extensions;
+using Tests.Domain;
 
 namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 {
@@ -18,23 +25,23 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		public const string PipelineName = "nest-pipeline";
 
-		//private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
-		//{
-		//	NumberOfShards = 2,
-		//	NumberOfReplicas = 0,
-		//};
+		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
+		{
+			NumberOfShards = 2,
+			NumberOfReplicas = 0,
+		};
 
-		//public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
-		//{
-		//	Client = client;
-		//	IndexSettings = indexSettings ?? _defaultIndexSettings;
-		//}
+		public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
+		{
+			Client = client;
+			IndexSettings = indexSettings ?? _defaultIndexSettings;
+		}
 
 		public DefaultSeeder(IElasticClient client) /*: this(client, null)*/ { }
 
 		private IElasticClient Client { get; }
 
-		//private IIndexSettings IndexSettings { get; }
+		private IIndexSettings IndexSettings { get; }
 
 		public void SeedNode()
 		{
@@ -67,12 +74,21 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
 
-		private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
-		//private bool AlreadySeeded() => Client.Indices.IndexTemplateExists(new IndexTemplateExistsRequest(TestsIndexTemplateName)).Exists;
+		// private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
+		private bool AlreadySeeded() => Client.IndexManagement.IndexExistsTemplate(new IndexExistsTemplateRequest(TestsIndexTemplateName)).Exists;
 
 		// Ensure a clean slate by deleting everything regardless of whether they may already exist
-		private async Task SeedNodeAsync(bool alreadySeeded) =>
+		private async Task SeedNodeAsync(bool alreadySeeded)
+		{
 			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+
+			await ClusterSettingsAsync().ConfigureAwait(false);
+
+			//await PutPipeline().ConfigureAwait(false);
+
+			await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
+		}
+
 		//	await ClusterSettingsAsync().ConfigureAwait(false);
 		//await PutPipeline().ConfigureAwait(false);
 		// and now recreate everything
@@ -86,29 +102,26 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//	await CreateIndicesAsync().ConfigureAwait(false);
 		//}
 
-		//public async Task ClusterSettingsAsync()
-		//{
-		//	if (TestConfiguration.Instance.InRange("<6.1.0"))
-		//		return;
+		public async Task ClusterSettingsAsync()
+		{
+			var clusterConfiguration = new Dictionary<string, object>()
+			{
+				{ "cluster.routing.use_adaptive_replica_selection", true }
+			};
 
-		//	var clusterConfiguration = new Dictionary<string, object>()
-		//	{
-		//		{ "cluster.routing.use_adaptive_replica_selection", true }
-		//	};
+			//if (TestConfiguration.Instance.InRange(">=6.5.0"))
+			//	clusterConfiguration += new RemoteClusterConfiguration
+			//	{
+			//		{ RemoteClusterName, "127.0.0.1:9300" }
+			//	};
 
-		//	if (TestConfiguration.Instance.InRange(">=6.5.0"))
-		//		clusterConfiguration += new RemoteClusterConfiguration
-		//		{
-		//			{ RemoteClusterName, "127.0.0.1:9300" }
-		//		};
+			var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
+			{
+				Transient = clusterConfiguration
+			}).ConfigureAwait(false);
 
-		//	var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
-		//	{
-		//		Transient = clusterConfiguration
-		//	}).ConfigureAwait(false);
-
-		//	putSettingsResponse.ShouldBeValid();
-		//}
+			putSettingsResponse.ShouldBeValid();
+		}
 
 		//public async Task PutPipeline()
 		//{
@@ -124,23 +137,81 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//	putProcessors.ShouldBeValid();
 		//}
 
-		public Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded) =>
-			//var tasks = new List<Task>
-			//{
-			//	Client.Indices.DeleteAsync(typeof(Project)),
-			//	//Client.Indices.DeleteAsync(typeof(Developer)),
-			//	//Client.Indices.DeleteAsync(typeof(ProjectPercolation))
-			//};
-			////if (alreadySeeded)
-			////	tasks.Add(Client.Indices.DeleteTemplateAsync(TestsIndexTemplateName));
-			//await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
-			Task.CompletedTask;
+		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
+		{
+			var tasks = new List<Task>
+			{
+				Client.IndexManagement.DeleteIndexAsync(typeof(Project)),
+				//Client.Indices.DeleteAsync(typeof(Developer)),
+				//Client.Indices.DeleteAsync(typeof(ProjectPercolation))
+			};
 
-		//private async Task CreateIndicesAndSeedIndexDataAsync()
+			if (alreadySeeded)
+				tasks.Add(Client.IndexManagement.IndexDeleteIndexTemplateAsync(TestsIndexTemplateName));
+
+			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
+		}
+
+		private async Task CreateIndicesAndSeedIndexDataAsync() => await CreateIndicesAsync().ConfigureAwait(false);//await SeedIndexDataAsync().ConfigureAwait(false);
+
+		public async Task CreateIndicesAsync()
+		{
+			var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
+			indexTemplateResponse.ShouldBeValid();
+		}
+
+		//private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync(typeof(Project), c => c
+		//			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
+		//			// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
+		//			// TODO 8.0 remove with once the overloads are gone too
+		//			.Mappings(ProjectMappings)
+		//			.Aliases(aliases => aliases
+		//				.Alias(ProjectsAliasName)
+		//				.Alias(ProjectsAliasFilter, a => a
+		//					.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
+		//				)
+		//				.Alias(CommitsAliasFilter, a => a
+		//					.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
+		//				)
+		//			)
+		//		);
+
+		//public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
+		//	.Map<Project>(ProjectTypeMappings);
+
+		//public static ITypeMapping ProjectTypeMappings(TypeMappingDescriptor<Project> mapping)
 		//{
-		//	await CreateIndicesAsync().ConfigureAwait(false);
-		//	await SeedIndexDataAsync().ConfigureAwait(false);
+		//	mapping
+		//		.RoutingField(r => r.Required())
+		//		.AutoMap()
+		//		.Properties(ProjectProperties)
+		//		.Properties<CommitActivity>(props => props
+		//			.Object<Developer>(o => o
+		//				.AutoMap()
+		//				.Name(p => p.Committer)
+		//				.Properties(DeveloperProperties)
+		//				.Dynamic()
+		//			)
+		//			.Text(t => t
+		//				.Name(p => p.ProjectName)
+		//				.Index(false)
+		//			)
+		//		)
+		//		.RuntimeFields<ProjectRuntimeFields>(rf => rf
+		//		.RuntimeField(r => r.StartedOnDayOfWeek, FieldType.Keyword, rtf => rtf
+		//			.Script("if (doc['startedOn'].size() != 0) {emit(doc['startedOn'].value.dayOfWeekEnum.getDisplayName(TextStyle.FULL, Locale.ROOT))}"))
+		//		.RuntimeField(r => r.ThirtyDaysFromStarted, FieldType.Date, rtf => rtf
+		//			.Script("if (doc['startedOn'].size() != 0) {emit(doc['startedOn'].value.plusDays(30).toEpochMilli())}")));
+
+		//	return mapping;
 		//}
+
+		private Task<IndexPutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.IndexManagement.IndexPutIndexTemplateAsync(
+			new IndexPutIndexTemplateRequest(TestsIndexTemplateName)
+			{
+				IndexPatterns = new[] { "*" },
+				// Settings = IndexSettings TODO
+			});
 
 		//public async Task CreateIndicesAsync()
 		//{

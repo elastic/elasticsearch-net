@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexReloadSearchAnalyzersRequestDescriptorConverter<IndexReloadSearchAnalyzersRequest>))]
-	public partial interface IIndexReloadSearchAnalyzersRequest : IRequest<IndexReloadSearchAnalyzersRequestParameters>
-	{
-	}
-
-	public partial class IndexReloadSearchAnalyzersRequest : PlainRequestBase<IndexReloadSearchAnalyzersRequestParameters>, IIndexReloadSearchAnalyzersRequest
+	public partial class IndexReloadSearchAnalyzersRequest : PlainRequestBase<IndexReloadSearchAnalyzersRequestParameters>
 	{
 		public IndexReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -60,10 +56,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public partial class IndexReloadSearchAnalyzersRequestDescriptor : RequestDescriptorBase<IndexReloadSearchAnalyzersRequestDescriptor, IndexReloadSearchAnalyzersRequestParameters, IIndexReloadSearchAnalyzersRequest>, IIndexReloadSearchAnalyzersRequest
+	[JsonConverter(typeof(IndexReloadSearchAnalyzersRequestDescriptorConverter))]
+	public partial class IndexReloadSearchAnalyzersRequestDescriptor : RequestDescriptorBase<IndexReloadSearchAnalyzersRequestDescriptor, IndexReloadSearchAnalyzersRequestParameters>
 	{
-		///<summary>/{index}/_reload_search_analyzers</summary>
-        public IndexReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		public IndexReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -75,10 +71,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexReloadSearchAnalyzersRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 	}
 
-	internal sealed class IndexReloadSearchAnalyzersRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexReloadSearchAnalyzersRequest> where TReadAs : class, IIndexReloadSearchAnalyzersRequest
+	internal sealed class IndexReloadSearchAnalyzersRequestDescriptorConverter : JsonConverter<IndexReloadSearchAnalyzersRequestDescriptor>
 	{
-		public override IIndexReloadSearchAnalyzersRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexReloadSearchAnalyzersRequest value, JsonSerializerOptions options)
+		public override IndexReloadSearchAnalyzersRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexReloadSearchAnalyzersRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

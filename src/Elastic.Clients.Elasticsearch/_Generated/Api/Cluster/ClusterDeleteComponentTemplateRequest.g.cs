@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterDeleteComponentTemplateRequestDescriptorConverter<ClusterDeleteComponentTemplateRequest>))]
-	public partial interface IClusterDeleteComponentTemplateRequest : IRequest<ClusterDeleteComponentTemplateRequestParameters>
-	{
-	}
-
-	public partial class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>, IClusterDeleteComponentTemplateRequest
+	public partial class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>
 	{
 		public ClusterDeleteComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -54,10 +50,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	public partial class ClusterDeleteComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterDeleteComponentTemplateRequestDescriptor, ClusterDeleteComponentTemplateRequestParameters, IClusterDeleteComponentTemplateRequest>, IClusterDeleteComponentTemplateRequest
+	[JsonConverter(typeof(ClusterDeleteComponentTemplateRequestDescriptorConverter))]
+	public partial class ClusterDeleteComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterDeleteComponentTemplateRequestDescriptor, ClusterDeleteComponentTemplateRequestParameters>
 	{
-		///<summary>/_component_template/{name}</summary>
-        public ClusterDeleteComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		public ClusterDeleteComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -68,10 +64,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterDeleteComponentTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
-	internal sealed class ClusterDeleteComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterDeleteComponentTemplateRequest> where TReadAs : class, IClusterDeleteComponentTemplateRequest
+	internal sealed class ClusterDeleteComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterDeleteComponentTemplateRequestDescriptor>
 	{
-		public override IClusterDeleteComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterDeleteComponentTemplateRequest value, JsonSerializerOptions options)
+		public override ClusterDeleteComponentTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterDeleteComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

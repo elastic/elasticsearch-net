@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -39,17 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(CreateIndexRequestDescriptorConverter<CreateIndexRequest>))]
-	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
-
-		Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? Mappings { get; set; }
-
-		Dictionary<string, object>? Settings { get; set; }
-	}
-
-	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>
 	{
 		public CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
@@ -83,53 +74,50 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Settings { get; set; }
 	}
 
-	public partial class CreateIndexRequestDescriptor : RequestDescriptorBase<CreateIndexRequestDescriptor, CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
+	[JsonConverter(typeof(CreateIndexRequestDescriptorConverter))]
+	public partial class CreateIndexRequestDescriptor : RequestDescriptorBase<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
 	{
-		///<summary>/{index}</summary>
-        public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? _aliases;
+		internal Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? _mappings;
+		internal Dictionary<string, object>? _settings;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? ICreateIndexRequest.Aliases { get; set; }
-
-		Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? ICreateIndexRequest.Mappings { get; set; }
-
-		Dictionary<string, object>? ICreateIndexRequest.Settings { get; set; }
-
-		public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
-		public CreateIndexRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public CreateIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public CreateIndexRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public CreateIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
+		public CreateIndexRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public CreateIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 
-	internal sealed class CreateIndexRequestDescriptorConverter<TReadAs> : JsonConverter<ICreateIndexRequest> where TReadAs : class, ICreateIndexRequest
+	internal sealed class CreateIndexRequestDescriptorConverter : JsonConverter<CreateIndexRequestDescriptor>
 	{
-		public override ICreateIndexRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, ICreateIndexRequest value, JsonSerializerOptions options)
+		public override CreateIndexRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, CreateIndexRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Aliases is not null)
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.Mappings is not null)
+			if (value._mappings is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.Mappings, options);
+				JsonSerializer.Serialize(writer, value._mappings, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
 			writer.WriteEndObject();

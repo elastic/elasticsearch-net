@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,21 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int? Order { get => Q<int?>("order"); set => Q("order", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexPutTemplateRequestDescriptorConverter<IndexPutTemplateRequest>))]
-	public partial interface IIndexPutTemplateRequest : IRequest<IndexPutTemplateRequestParameters>
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
-
-		IEnumerable<string>? IndexPatterns { get; set; }
-
-		Mapping.ITypeMapping? Mappings { get; set; }
-
-		Dictionary<string, object>? Settings { get; set; }
-
-		object? Version { get; set; }
-	}
-
-	public partial class IndexPutTemplateRequest : PlainRequestBase<IndexPutTemplateRequestParameters>, IIndexPutTemplateRequest
+	public partial class IndexPutTemplateRequest : PlainRequestBase<IndexPutTemplateRequestParameters>
 	{
 		public IndexPutTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -107,73 +94,68 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public object? Version { get; set; }
 	}
 
-	public partial class IndexPutTemplateRequestDescriptor : RequestDescriptorBase<IndexPutTemplateRequestDescriptor, IndexPutTemplateRequestParameters, IIndexPutTemplateRequest>, IIndexPutTemplateRequest
+	[JsonConverter(typeof(IndexPutTemplateRequestDescriptorConverter))]
+	public partial class IndexPutTemplateRequestDescriptor : RequestDescriptorBase<IndexPutTemplateRequestDescriptor, IndexPutTemplateRequestParameters>
 	{
-		///<summary>/_template/{name}</summary>
-        public IndexPutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		public IndexPutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? _aliases;
+		internal IEnumerable<string>? _indexPatterns;
+		internal Mapping.ITypeMapping? _mappings;
+		internal Dictionary<string, object>? _settings;
+		internal object? _version;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IIndexPutTemplateRequest.Aliases { get; set; }
-
-		IEnumerable<string>? IIndexPutTemplateRequest.IndexPatterns { get; set; }
-
-		Mapping.ITypeMapping? IIndexPutTemplateRequest.Mappings { get; set; }
-
-		Dictionary<string, object>? IIndexPutTemplateRequest.Settings { get; set; }
-
-		object? IIndexPutTemplateRequest.Version { get; set; }
-
-		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
-		public IndexPutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatterns = v);
-		public IndexPutTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.Settings = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public IndexPutTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a.Version = v);
 		public IndexPutTemplateRequestDescriptor Create(bool? create) => Qs("create", create);
 		public IndexPutTemplateRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public IndexPutTemplateRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public IndexPutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexPutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexPutTemplateRequestDescriptor Order(int? order) => Qs("order", order);
+		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
+		public IndexPutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
+		public IndexPutTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public IndexPutTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
 	}
 
-	internal sealed class IndexPutTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexPutTemplateRequest> where TReadAs : class, IIndexPutTemplateRequest
+	internal sealed class IndexPutTemplateRequestDescriptorConverter : JsonConverter<IndexPutTemplateRequestDescriptor>
 	{
-		public override IIndexPutTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexPutTemplateRequest value, JsonSerializerOptions options)
+		public override IndexPutTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexPutTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Aliases is not null)
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.IndexPatterns is not null)
+			if (value._indexPatterns is not null)
 			{
 				writer.WritePropertyName("index_patterns");
-				JsonSerializer.Serialize(writer, value.IndexPatterns, options);
+				JsonSerializer.Serialize(writer, value._indexPatterns, options);
 			}
 
-			if (value.Mappings is not null)
+			if (value._mappings is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.Mappings, options);
+				JsonSerializer.Serialize(writer, value._mappings, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
-			if (value.Version is not null)
+			if (value._version is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.Version, options);
+				JsonSerializer.Serialize(writer, value._version, options);
 			}
 
 			writer.WriteEndObject();

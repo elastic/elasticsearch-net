@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,34 +29,25 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(PingRequestDescriptorConverter<PingRequest>))]
-	public partial interface IPingRequest : IRequest<PingRequestParameters>
-	{
-	}
-
-	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
+	public partial class PingRequest : PlainRequestBase<PingRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 	}
 
-	public partial class PingRequestDescriptor : RequestDescriptorBase<PingRequestDescriptor, PingRequestParameters, IPingRequest>, IPingRequest
+	[JsonConverter(typeof(PingRequestDescriptorConverter))]
+	public partial class PingRequestDescriptor : RequestDescriptorBase<PingRequestDescriptor, PingRequestParameters>
 	{
-		///<summary>/</summary>
-        public PingRequestDescriptor() : base()
-		{
-		}
-
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 	}
 
-	internal sealed class PingRequestDescriptorConverter<TReadAs> : JsonConverter<IPingRequest> where TReadAs : class, IPingRequest
+	internal sealed class PingRequestDescriptorConverter : JsonConverter<PingRequestDescriptor>
 	{
-		public override IPingRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IPingRequest value, JsonSerializerOptions options)
+		public override PingRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PingRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -33,23 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(ClusterPutComponentTemplateRequestDescriptorConverter<ClusterPutComponentTemplateRequest>))]
-	public partial interface IClusterPutComponentTemplateRequest : IRequest<ClusterPutComponentTemplateRequestParameters>
-	{
-		IndexManagement.IIndexState Template { get; set; }
-
-		Dictionary<string, IndexManagement.IAliasDefinition>? Aliases { get; set; }
-
-		Mapping.ITypeMapping? Mappings { get; set; }
-
-		IndexManagement.IIndexSettings? Settings { get; set; }
-
-		object? Version { get; set; }
-
-		Dictionary<string, object>? Meta { get; set; }
-	}
-
-	public partial class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>, IClusterPutComponentTemplateRequest
+	public partial class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>
 	{
 		public ClusterPutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -89,74 +74,68 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object>? Meta { get; set; }
 	}
 
-	public partial class ClusterPutComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateRequestParameters, IClusterPutComponentTemplateRequest>, IClusterPutComponentTemplateRequest
+	[JsonConverter(typeof(ClusterPutComponentTemplateRequestDescriptorConverter))]
+	public partial class ClusterPutComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateRequestParameters>
 	{
-		///<summary>/_component_template/{name}</summary>
-        public ClusterPutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+		public ClusterPutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
+		internal IndexManagement.IIndexState _template;
+		internal Dictionary<string, IndexManagement.IAliasDefinition>? _aliases;
+		internal Mapping.ITypeMapping? _mappings;
+		internal IndexManagement.IIndexSettings? _settings;
+		internal object? _version;
+		internal Dictionary<string, object>? _meta;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		IndexManagement.IIndexState IClusterPutComponentTemplateRequest.Template { get; set; }
-
-		Dictionary<string, IndexManagement.IAliasDefinition>? IClusterPutComponentTemplateRequest.Aliases { get; set; }
-
-		Mapping.ITypeMapping? IClusterPutComponentTemplateRequest.Mappings { get; set; }
-
-		IndexManagement.IIndexSettings? IClusterPutComponentTemplateRequest.Settings { get; set; }
-
-		object? IClusterPutComponentTemplateRequest.Version { get; set; }
-
-		Dictionary<string, object>? IClusterPutComponentTemplateRequest.Meta { get; set; }
-
-		public ClusterPutComponentTemplateRequestDescriptor Template(IndexManagement.IIndexState template) => Assign(template, (a, v) => a.Template = v);
-		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, IndexManagement.IAliasDefinition?>, FluentDictionary<string?, IndexManagement.IAliasDefinition?>> selector) => Assign(selector, (a, v) => a.Aliases = v?.Invoke(new FluentDictionary<string?, IndexManagement.IAliasDefinition?>()));
-		public ClusterPutComponentTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a.Mappings = v);
-		public ClusterPutComponentTemplateRequestDescriptor Settings(IndexManagement.IIndexSettings? settings) => Assign(settings, (a, v) => a.Settings = v);
-		public ClusterPutComponentTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a.Version = v);
-		public ClusterPutComponentTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.Meta = v);
 		public ClusterPutComponentTemplateRequestDescriptor Create(bool? create) => Qs("create", create);
 		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutComponentTemplateRequestDescriptor Template(IndexManagement.IIndexState template) => Assign(template, (a, v) => a._template = v);
+		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, IndexManagement.IAliasDefinition?>, FluentDictionary<string?, IndexManagement.IAliasDefinition?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<string?, IndexManagement.IAliasDefinition?>()));
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public ClusterPutComponentTemplateRequestDescriptor Settings(IndexManagement.IIndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
+		public ClusterPutComponentTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
+		public ClusterPutComponentTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
 	}
 
-	internal sealed class ClusterPutComponentTemplateRequestDescriptorConverter<TReadAs> : JsonConverter<IClusterPutComponentTemplateRequest> where TReadAs : class, IClusterPutComponentTemplateRequest
+	internal sealed class ClusterPutComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterPutComponentTemplateRequestDescriptor>
 	{
-		public override IClusterPutComponentTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IClusterPutComponentTemplateRequest value, JsonSerializerOptions options)
+		public override ClusterPutComponentTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterPutComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, value.Template, options);
-			if (value.Aliases is not null)
+			JsonSerializer.Serialize(writer, value._template, options);
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.Mappings is not null)
+			if (value._mappings is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.Mappings, options);
+				JsonSerializer.Serialize(writer, value._mappings, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
-			if (value.Version is not null)
+			if (value._version is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.Version, options);
+				JsonSerializer.Serialize(writer, value._version, options);
 			}
 
-			if (value.Meta is not null)
+			if (value._meta is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
+				JsonSerializer.Serialize(writer, value._meta, options);
 			}
 
 			writer.WriteEndObject();

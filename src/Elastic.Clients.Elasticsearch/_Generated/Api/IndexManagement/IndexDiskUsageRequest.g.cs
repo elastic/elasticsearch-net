@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -51,12 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexDiskUsageRequestDescriptorConverter<IndexDiskUsageRequest>))]
-	public partial interface IIndexDiskUsageRequest : IRequest<IndexDiskUsageRequestParameters>
-	{
-	}
-
-	public partial class IndexDiskUsageRequest : PlainRequestBase<IndexDiskUsageRequestParameters>, IIndexDiskUsageRequest
+	public partial class IndexDiskUsageRequest : PlainRequestBase<IndexDiskUsageRequestParameters>
 	{
 		public IndexDiskUsageRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
@@ -90,10 +86,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	public partial class IndexDiskUsageRequestDescriptor : RequestDescriptorBase<IndexDiskUsageRequestDescriptor, IndexDiskUsageRequestParameters, IIndexDiskUsageRequest>, IIndexDiskUsageRequest
+	[JsonConverter(typeof(IndexDiskUsageRequestDescriptorConverter))]
+	public partial class IndexDiskUsageRequestDescriptor : RequestDescriptorBase<IndexDiskUsageRequestDescriptor, IndexDiskUsageRequestParameters>
 	{
-		///<summary>/{index}/_disk_usage</summary>
-        public IndexDiskUsageRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		public IndexDiskUsageRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 
@@ -110,10 +106,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexDiskUsageRequestDescriptor WaitForActiveShards(string? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	internal sealed class IndexDiskUsageRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexDiskUsageRequest> where TReadAs : class, IIndexDiskUsageRequest
+	internal sealed class IndexDiskUsageRequestDescriptorConverter : JsonConverter<IndexDiskUsageRequestDescriptor>
 	{
-		public override IIndexDiskUsageRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexDiskUsageRequest value, JsonSerializerOptions options)
+		public override IndexDiskUsageRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexDiskUsageRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

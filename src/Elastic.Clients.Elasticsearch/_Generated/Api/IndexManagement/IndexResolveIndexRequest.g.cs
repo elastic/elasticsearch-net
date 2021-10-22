@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -30,12 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexResolveIndexRequestDescriptorConverter<IndexResolveIndexRequest>))]
-	public partial interface IIndexResolveIndexRequest : IRequest<IndexResolveIndexRequestParameters>
-	{
-	}
-
-	public partial class IndexResolveIndexRequest : PlainRequestBase<IndexResolveIndexRequestParameters>, IIndexResolveIndexRequest
+	public partial class IndexResolveIndexRequest : PlainRequestBase<IndexResolveIndexRequestParameters>
 	{
 		public IndexResolveIndexRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
@@ -48,10 +44,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public partial class IndexResolveIndexRequestDescriptor : RequestDescriptorBase<IndexResolveIndexRequestDescriptor, IndexResolveIndexRequestParameters, IIndexResolveIndexRequest>, IIndexResolveIndexRequest
+	[JsonConverter(typeof(IndexResolveIndexRequestDescriptorConverter))]
+	public partial class IndexResolveIndexRequestDescriptor : RequestDescriptorBase<IndexResolveIndexRequestDescriptor, IndexResolveIndexRequestParameters>
 	{
-		///<summary>/_resolve/index/{name}</summary>
-        public IndexResolveIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+		public IndexResolveIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -61,10 +57,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexResolveIndexRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	}
 
-	internal sealed class IndexResolveIndexRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexResolveIndexRequest> where TReadAs : class, IIndexResolveIndexRequest
+	internal sealed class IndexResolveIndexRequestDescriptorConverter : JsonConverter<IndexResolveIndexRequestDescriptor>
 	{
-		public override IIndexResolveIndexRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexResolveIndexRequest value, JsonSerializerOptions options)
+		public override IndexResolveIndexRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexResolveIndexRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

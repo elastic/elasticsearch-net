@@ -65,11 +65,6 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<Id> _idList = new();
 	}
 
-	public partial class Indices
-	{
-		private readonly List<IndexName> _indexNameList = new();
-	}
-
 	public partial class MinimumShouldMatch : Union<int?, string?>
 	{
 		public MinimumShouldMatch(int? item) : base(item)

@@ -132,9 +132,9 @@ namespace Elastic.Clients.Elasticsearch
 	///     Base class for all Request descriptor types
 	/// </summary>
 	public abstract partial class
-		RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
-		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
-		where TParameters : RequestParameters<TParameters>, new()
+		RequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IDescriptor
+			where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>
+			where TParameters : RequestParameters<TParameters>, new()
 	{
 		private readonly TDescriptor _descriptor;
 
@@ -143,10 +143,16 @@ namespace Elastic.Clients.Elasticsearch
 		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) =>
 			_descriptor = (TDescriptor)this;
 
-		protected TInterface Self => _descriptor;
+		protected TDescriptor Self => _descriptor;
 
-		protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assign) =>
-			Fluent.Assign(_descriptor, value, assign);
+		protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
+
+		protected TDescriptor InvokeAndAssign<T>(Action<T> configure, Action<TDescriptor, T> assign) where T : new()
+		{
+			var d = new T();
+			configure(d);
+			return Fluent.Assign(_descriptor, d, assign);
+		}
 
 		protected TDescriptor Qs(string name, object value)
 		{
@@ -190,4 +196,68 @@ namespace Elastic.Clients.Elasticsearch
 		public override int GetHashCode() => base.GetHashCode();
 		// ReSharper restore BaseObjectEqualsIsObjectEquals
 	}
+
+	/// *** THIS IS THE ORIGINAL FORMAT
+	///// <summary>
+	/////     Base class for all Request descriptor types
+	///// </summary>
+	//public abstract partial class
+	//	RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
+	//	where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
+	//	where TParameters : RequestParameters<TParameters>, new()
+	//{
+	//	private readonly TDescriptor _descriptor;
+
+	//	protected RequestDescriptorBase() => _descriptor = (TDescriptor)this;
+
+	//	protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) =>
+	//		_descriptor = (TDescriptor)this;
+
+	//	protected TInterface Self => _descriptor;
+
+	//	protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assign) =>
+	//		Fluent.Assign(_descriptor, value, assign);
+
+	//	protected TDescriptor Qs(string name, object value)
+	//	{
+	//		Q(name, value);
+	//		return _descriptor;
+	//	}
+
+	//	/// <summary>
+	//	///     Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
+	//	/// </summary>
+	//	public TDescriptor RequestConfiguration(
+	//		Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
+	//	{
+	//		var rc = RequestState.RequestParameters.RequestConfiguration;
+	//		RequestState.RequestParameters.RequestConfiguration =
+	//			configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
+	//		return _descriptor;
+	//	}
+
+	//	/// <summary>
+	//	///     Hides the <see cref="ToString" /> method.
+	//	/// </summary>
+	//	[Browsable(false)]
+	//	[EditorBrowsable(EditorBrowsableState.Never)]
+	//	public override string ToString() => base.ToString();
+
+	//	/// <summary>
+	//	///     Hides the <see cref="Equals" /> method.
+	//	/// </summary>
+	//	[Browsable(false)]
+	//	[EditorBrowsable(EditorBrowsableState.Never)]
+	//	// ReSharper disable BaseObjectEqualsIsObjectEquals
+	//	public override bool Equals(object obj) => base.Equals(obj);
+
+	//	/// <summary>
+	//	///     Hides the <see cref="GetHashCode" /> method.
+	//	/// </summary>
+	//	[Browsable(false)]
+	//	[EditorBrowsable(EditorBrowsableState.Never)]
+	//	// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
+	//	public override int GetHashCode() => base.GetHashCode();
+	//	// ReSharper restore BaseObjectEqualsIsObjectEquals
+	//}
 }

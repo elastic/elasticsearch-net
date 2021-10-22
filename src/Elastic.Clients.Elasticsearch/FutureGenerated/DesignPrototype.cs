@@ -33,7 +33,7 @@ public interface IRequest
 	string ContentType { get; }
 }
 
-public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
+public abstract class ExperimentalRequestBase<TParameters> : IRequest<TParameters> where TParameters : class, IRequestParameters, new()
 {
 	[JsonIgnore]
 	public string ContentType { get; set; }
@@ -41,7 +41,7 @@ public abstract class RequestBase<TParameters> : IRequest<TParameters> where TPa
 
 public interface IRequest<T> : IRequest { }
 
-public abstract class ExperimentalRequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IRequest<TParameters>
+public abstract class ExperimentalRequestDescriptorBase<TDescriptor, TParameters> : ExperimentalRequestBase<TParameters>, IRequest<TParameters>
 	where TDescriptor : ExperimentalRequestDescriptorBase<TDescriptor, TParameters>
 	 where TParameters : class, IRequestParameters, new()
 {
@@ -98,7 +98,7 @@ public class ClusterHealthRequestParameters : IRequestParameters { }
 // Alternatively, we could look at a factory method to convert from a descriptor into the object representation, with the added cost of one extra object.
 // However, that is likely okay since there are alternatives for high-performance optimisations we can provide.
 
-public class ExampleRequest : RequestBase<ClusterHealthRequestParameters>
+public class ExampleRequest : ExperimentalRequestBase<ClusterHealthRequestParameters>
 {
 	public string Name { get; set; }
 	public ClusterSubtype Subtype { get; set; }
@@ -634,7 +634,7 @@ public class BoostingQueryDescriptorConverter : JsonConverter<BoostingQueryDescr
 
 #region CombinedTypeExperiment
 
-public class CombinedRequest : RequestBase<ClusterHealthRequestParameters>
+public class CombinedRequest : ExperimentalRequestBase<ClusterHealthRequestParameters>
 {
 	public string Name { get; set; }
 	public ComplexType Thing { get; set; }

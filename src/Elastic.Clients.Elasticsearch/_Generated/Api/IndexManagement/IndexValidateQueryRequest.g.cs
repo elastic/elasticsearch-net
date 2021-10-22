@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -63,13 +64,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexValidateQueryRequestDescriptorConverter<IndexValidateQueryRequest>))]
-	public partial interface IIndexValidateQueryRequest : IRequest<IndexValidateQueryRequestParameters>
-	{
-		QueryDsl.IQueryContainer? Query { get; set; }
-	}
-
-	public partial class IndexValidateQueryRequest : PlainRequestBase<IndexValidateQueryRequestParameters>, IIndexValidateQueryRequest
+	public partial class IndexValidateQueryRequest : PlainRequestBase<IndexValidateQueryRequestParameters>
 	{
 		public IndexValidateQueryRequest()
 		{
@@ -123,24 +118,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public QueryDsl.IQueryContainer? Query { get; set; }
 	}
 
-	public partial class IndexValidateQueryRequestDescriptor : RequestDescriptorBase<IndexValidateQueryRequestDescriptor, IndexValidateQueryRequestParameters, IIndexValidateQueryRequest>, IIndexValidateQueryRequest
+	[JsonConverter(typeof(IndexValidateQueryRequestDescriptorConverter))]
+	public partial class IndexValidateQueryRequestDescriptor : RequestDescriptorBase<IndexValidateQueryRequestDescriptor, IndexValidateQueryRequestParameters>
 	{
-		///<summary>/_validate/query</summary>
-        public IndexValidateQueryRequestDescriptor() : base()
+		public IndexValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
-		///<summary>/{index}/_validate/query</summary>
-        public IndexValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
-		{
-		}
-
+		internal QueryDsl.IQueryContainer? _query;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementValidateQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		QueryDsl.IQueryContainer? IIndexValidateQueryRequest.Query { get; set; }
-
-		public IndexValidateQueryRequestDescriptor Query(QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a.Query = v);
 		public IndexValidateQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
 		public IndexValidateQueryRequestDescriptor AllShards(bool? allShards) => Qs("all_shards", allShards);
 		public IndexValidateQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -153,18 +141,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexValidateQueryRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
 		public IndexValidateQueryRequestDescriptor Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
 		public IndexValidateQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+		public IndexValidateQueryRequestDescriptor Query(QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a._query = v);
 	}
 
-	internal sealed class IndexValidateQueryRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexValidateQueryRequest> where TReadAs : class, IIndexValidateQueryRequest
+	internal sealed class IndexValidateQueryRequestDescriptorConverter : JsonConverter<IndexValidateQueryRequestDescriptor>
 	{
-		public override IIndexValidateQueryRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexValidateQueryRequest value, JsonSerializerOptions options)
+		public override IndexValidateQueryRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexValidateQueryRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Query is not null)
+			if (value._query is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.Query, options);
+				JsonSerializer.Serialize(writer, value._query, options);
 			}
 
 			writer.WriteEndObject();

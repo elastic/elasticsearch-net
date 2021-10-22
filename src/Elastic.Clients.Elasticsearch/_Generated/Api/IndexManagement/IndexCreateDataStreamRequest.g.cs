@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexCreateDataStreamRequestDescriptorConverter<IndexCreateDataStreamRequest>))]
-	public partial interface IIndexCreateDataStreamRequest : IRequest<IndexCreateDataStreamRequestParameters>
-	{
-	}
-
-	public partial class IndexCreateDataStreamRequest : PlainRequestBase<IndexCreateDataStreamRequestParameters>, IIndexCreateDataStreamRequest
+	public partial class IndexCreateDataStreamRequest : PlainRequestBase<IndexCreateDataStreamRequestParameters>
 	{
 		public IndexCreateDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 		{
@@ -44,10 +40,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	public partial class IndexCreateDataStreamRequestDescriptor : RequestDescriptorBase<IndexCreateDataStreamRequestDescriptor, IndexCreateDataStreamRequestParameters, IIndexCreateDataStreamRequest>, IIndexCreateDataStreamRequest
+	[JsonConverter(typeof(IndexCreateDataStreamRequestDescriptorConverter))]
+	public partial class IndexCreateDataStreamRequestDescriptor : RequestDescriptorBase<IndexCreateDataStreamRequestDescriptor, IndexCreateDataStreamRequestParameters>
 	{
-		///<summary>/_data_stream/{name}</summary>
-        public IndexCreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
+		public IndexCreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -56,10 +52,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	internal sealed class IndexCreateDataStreamRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexCreateDataStreamRequest> where TReadAs : class, IIndexCreateDataStreamRequest
+	internal sealed class IndexCreateDataStreamRequestDescriptorConverter : JsonConverter<IndexCreateDataStreamRequestDescriptor>
 	{
-		public override IIndexCreateDataStreamRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexCreateDataStreamRequest value, JsonSerializerOptions options)
+		public override IndexCreateDataStreamRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexCreateDataStreamRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

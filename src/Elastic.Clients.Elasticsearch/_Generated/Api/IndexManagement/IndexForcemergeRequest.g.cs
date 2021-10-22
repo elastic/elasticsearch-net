@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexForcemergeRequestDescriptorConverter<IndexForcemergeRequest>))]
-	public partial interface IIndexForcemergeRequest : IRequest<IndexForcemergeRequestParameters>
-	{
-	}
-
-	public partial class IndexForcemergeRequest : PlainRequestBase<IndexForcemergeRequestParameters>, IIndexForcemergeRequest
+	public partial class IndexForcemergeRequest : PlainRequestBase<IndexForcemergeRequestParameters>
 	{
 		public IndexForcemergeRequest()
 		{
@@ -82,15 +78,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 	}
 
-	public partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters, IIndexForcemergeRequest>, IIndexForcemergeRequest
+	[JsonConverter(typeof(IndexForcemergeRequestDescriptorConverter))]
+	public partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters>
 	{
-		///<summary>/_forcemerge</summary>
-        public IndexForcemergeRequestDescriptor() : base()
-		{
-		}
-
-		///<summary>/{index}/_forcemerge</summary>
-        public IndexForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public IndexForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -105,10 +96,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexForcemergeRequestDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes) => Qs("only_expunge_deletes", onlyExpungeDeletes);
 	}
 
-	internal sealed class IndexForcemergeRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexForcemergeRequest> where TReadAs : class, IIndexForcemergeRequest
+	internal sealed class IndexForcemergeRequestDescriptorConverter : JsonConverter<IndexForcemergeRequestDescriptor>
 	{
-		public override IIndexForcemergeRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexForcemergeRequest value, JsonSerializerOptions options)
+		public override IndexForcemergeRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexForcemergeRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

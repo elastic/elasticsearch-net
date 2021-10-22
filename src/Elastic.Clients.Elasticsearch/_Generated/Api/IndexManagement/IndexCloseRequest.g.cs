@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexCloseRequestDescriptorConverter<IndexCloseRequest>))]
-	public partial interface IIndexCloseRequest : IRequest<IndexCloseRequestParameters>
-	{
-	}
-
-	public partial class IndexCloseRequest : PlainRequestBase<IndexCloseRequestParameters>, IIndexCloseRequest
+	public partial class IndexCloseRequest : PlainRequestBase<IndexCloseRequestParameters>
 	{
 		public IndexCloseRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -78,10 +74,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	public partial class IndexCloseRequestDescriptor : RequestDescriptorBase<IndexCloseRequestDescriptor, IndexCloseRequestParameters, IIndexCloseRequest>, IIndexCloseRequest
+	[JsonConverter(typeof(IndexCloseRequestDescriptorConverter))]
+	public partial class IndexCloseRequestDescriptor : RequestDescriptorBase<IndexCloseRequestDescriptor, IndexCloseRequestParameters>
 	{
-		///<summary>/{index}/_close</summary>
-        public IndexCloseRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		public IndexCloseRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -96,10 +92,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexCloseRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
-	internal sealed class IndexCloseRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexCloseRequest> where TReadAs : class, IIndexCloseRequest
+	internal sealed class IndexCloseRequestDescriptorConverter : JsonConverter<IndexCloseRequestDescriptor>
 	{
-		public override IIndexCloseRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexCloseRequest value, JsonSerializerOptions options)
+		public override IndexCloseRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexCloseRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

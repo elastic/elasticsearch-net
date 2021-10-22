@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -30,12 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexDeleteDataStreamRequestDescriptorConverter<IndexDeleteDataStreamRequest>))]
-	public partial interface IIndexDeleteDataStreamRequest : IRequest<IndexDeleteDataStreamRequestParameters>
-	{
-	}
-
-	public partial class IndexDeleteDataStreamRequest : PlainRequestBase<IndexDeleteDataStreamRequestParameters>, IIndexDeleteDataStreamRequest
+	public partial class IndexDeleteDataStreamRequest : PlainRequestBase<IndexDeleteDataStreamRequestParameters>
 	{
 		public IndexDeleteDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 		{
@@ -48,10 +44,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	public partial class IndexDeleteDataStreamRequestDescriptor : RequestDescriptorBase<IndexDeleteDataStreamRequestDescriptor, IndexDeleteDataStreamRequestParameters, IIndexDeleteDataStreamRequest>, IIndexDeleteDataStreamRequest
+	[JsonConverter(typeof(IndexDeleteDataStreamRequestDescriptorConverter))]
+	public partial class IndexDeleteDataStreamRequestDescriptor : RequestDescriptorBase<IndexDeleteDataStreamRequestDescriptor, IndexDeleteDataStreamRequestParameters>
 	{
-		///<summary>/_data_stream/{name}</summary>
-        public IndexDeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
+		public IndexDeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 		{
 		}
 
@@ -61,10 +57,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexDeleteDataStreamRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	}
 
-	internal sealed class IndexDeleteDataStreamRequestDescriptorConverter<TReadAs> : JsonConverter<IIndexDeleteDataStreamRequest> where TReadAs : class, IIndexDeleteDataStreamRequest
+	internal sealed class IndexDeleteDataStreamRequestDescriptorConverter : JsonConverter<IndexDeleteDataStreamRequestDescriptor>
 	{
-		public override IIndexDeleteDataStreamRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexDeleteDataStreamRequest value, JsonSerializerOptions options)
+		public override IndexDeleteDataStreamRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexDeleteDataStreamRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();
