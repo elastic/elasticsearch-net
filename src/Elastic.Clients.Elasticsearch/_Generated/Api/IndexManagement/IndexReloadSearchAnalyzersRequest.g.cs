@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexReloadSearchAnalyzersRequest : PlainRequestBase<IndexReloadSearchAnalyzersRequestParameters>, IIndexReloadSearchAnalyzersRequest
 	{
-		public IndexReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+		public IndexReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexReloadSearchAnalyzersRequestDescriptor : RequestDescriptorBase<IndexReloadSearchAnalyzersRequestDescriptor, IndexReloadSearchAnalyzersRequestParameters, IIndexReloadSearchAnalyzersRequest>, IIndexReloadSearchAnalyzersRequest
 	{
 		///<summary>/{index}/_reload_search_analyzers</summary>
-        public IndexReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+        public IndexReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 

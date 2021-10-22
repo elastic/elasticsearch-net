@@ -44,6 +44,7 @@ module Versioning =
         let doc_current =
             match globalJson.doc_current with
             | "master" -> "master"
+            | s when s.EndsWith(".x") -> sprintf "%i.x" version.Major
             | _ -> sprintf "%i.%i" version.Major version.Minor
         let doc_branch =
             match globalJson.doc_current with
@@ -92,21 +93,24 @@ module Versioning =
         | None -> NoChange(Current = AnchoredVersion currentVersion)
         | Some v -> Update(New = AnchoredVersion v, Old = AnchoredVersion currentVersion)
         
+    let WriteVersion version =
+        match version with
+        | NoChange _ -> failwithf "cannot run update versions because no explicit version number was passed on the command line"
+        | Update (newVersion, currentVersion) ->
+            match newVersion.Full.PreRelease with
+            | Some v when v.Name.StartsWith("SNAPSHOT", StringComparison.OrdinalIgnoreCase) ->
+                printfn "Building snapshot, foregoing persisting version information"
+            | _ ->
+                // fail if current is greater than the new version
+                if (currentVersion > newVersion) then
+                    failwithf "Can not release %O as it's lower then current %O" newVersion.Full currentVersion.Full
+                writeVersionIntoGlobalJson newVersion.Full
+                writeVersionIntoAutoLabel (currentVersion.Full.ToString()) (newVersion.Full.ToString())
+    
     let Validate target version = 
         match (target, version) with
         | ("release", version) ->
-            match version with
-            | NoChange _ -> failwithf "cannot run release because no explicit version number was passed on the command line"
-            | Update (newVersion, currentVersion) ->
-                match newVersion.Full.PreRelease with
-                | Some v when v.Name.StartsWith("SNAPSHOT", StringComparison.OrdinalIgnoreCase) ->
-                    printfn "Building snapshot, foregoing persisting version information"
-                | _ ->
-                    // fail if current is greater than the new version
-                    if (currentVersion > newVersion) then
-                        failwithf "Can not release %O as it's lower then current %O" newVersion.Full currentVersion.Full
-                    writeVersionIntoGlobalJson newVersion.Full
-                    writeVersionIntoAutoLabel (currentVersion.Full.ToString()) (newVersion.Full.ToString())
+            WriteVersion version
         | _ -> ignore()
     
     let ArtifactsVersion buildVersions =

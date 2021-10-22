@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexFlushRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		public IndexFlushRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_flush</summary>
-        public IndexFlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+        public IndexFlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 

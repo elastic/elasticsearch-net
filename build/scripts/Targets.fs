@@ -81,7 +81,8 @@ module Main =
 
         conditional "nuget-pack-versioned" (isCanary) <| fun _ -> Build.VersionedPack artifactsVersion
 
-        conditional "generate-release-notes" (not isCanary)  <| fun _ -> ReleaseNotes.GenerateNotes buildVersions
+        conditional "generate-release-notes" (not isCanary && not parsed.SkipReleaseNotes) <| fun _ ->
+            ReleaseNotes.GenerateNotes buildVersions
         
         target "validate-artifacts" <| fun _ -> Versioning.ValidateArtifacts artifactsVersion
         
@@ -109,7 +110,10 @@ module Main =
         command "cluster" [ "restore"; "full-build" ] <| fun _ ->
             ReposTooling.LaunchCluster parsed
         
-        command "codegen" [ ] ReposTooling.GenerateApi
+        command "codegen" [ ] <| fun _ -> ReposTooling.GenerateApi parsed
+        
+        target "set-version" <| fun _ -> Versioning.WriteVersion buildVersions
+        
         
         command "rest-spec-tests" [ ] <| fun _ ->
             ReposTooling.RestSpecTests parsed.RemainingArguments

@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexExistsAliasRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("indices", indices).Required("name", name))
+		public IndexExistsAliasRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("index", indices).Required("name", name))
 		{
 		}
 
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_alias/{name}</summary>
-        public IndexExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("indices", indices).Required("name", name))
+        public IndexExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("index", indices).Required("name", name))
 		{
 		}
 

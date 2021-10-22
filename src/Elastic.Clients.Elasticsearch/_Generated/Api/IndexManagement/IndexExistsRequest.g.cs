@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
-		public IndexExistsRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+		public IndexExistsRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexExistsRequestDescriptor : RequestDescriptorBase<IndexExistsRequestDescriptor, IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{
 		///<summary>/{index}</summary>
-        public IndexExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+        public IndexExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 

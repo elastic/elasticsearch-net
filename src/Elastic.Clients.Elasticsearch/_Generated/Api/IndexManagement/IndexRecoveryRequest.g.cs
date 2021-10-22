@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexRecoveryRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		public IndexRecoveryRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_recovery</summary>
-        public IndexRecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+        public IndexRecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 

@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexRefreshRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		public IndexRefreshRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_refresh</summary>
-        public IndexRefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+        public IndexRefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 

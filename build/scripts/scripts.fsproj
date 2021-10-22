@@ -28,9 +28,10 @@
     <Content Include="..\..\.github\workflows\test-jobs.yml"><Link>test-jobs.yml</Link></Content>
     <Content Include="..\..\.github\workflows\stale-jobs.yml"><Link>stale-jobs.yml</Link></Content>
     <Content Include="..\..\.github\workflows\integration-jobs.yml"><Link>integration-jobs.yml</Link></Content>
-    <Content Include="..\..\.github\workflows\unified-release.yml">
-      <Link>unified-release.yml</Link>
-    </Content>
+    <Content Include="..\..\.github\workflows\unified-release.yml"><Link>unified-release.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\make-codegen.yml"><Link>make-codegen.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\make-bump.yml"><Link>make-bump.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\make-release-notes.yml"><Link>make-release-notes.yml</Link></Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="5.0.0" />

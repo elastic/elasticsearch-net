@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexOpenRequest : PlainRequestBase<IndexOpenRequestParameters>, IIndexOpenRequest
 	{
-		public IndexOpenRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+		public IndexOpenRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexOpenRequestDescriptor : RequestDescriptorBase<IndexOpenRequestDescriptor, IndexOpenRequestParameters, IIndexOpenRequest>, IIndexOpenRequest
 	{
 		///<summary>/{index}/_open</summary>
-        public IndexOpenRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+        public IndexOpenRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 

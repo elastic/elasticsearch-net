@@ -25,6 +25,7 @@ module InheritDoc =
         match n with 
         | n when n.Contains("PutMapping") -> n.Replace("PutMapping", "TypeMapping")
         | _ -> n
+
     let private relatedApiLookups = [
         relatedInterface;
         relatedInterfaceAsync;
@@ -32,7 +33,7 @@ module InheritDoc =
         relatedInterfaceDescriptorRequest;
         relatedInterfaceDescriptorGeneric;
         manualMapping
-    ];
+    ]
     
     let private documentedApis (file:string) =
         use reader = XmlReader.Create file

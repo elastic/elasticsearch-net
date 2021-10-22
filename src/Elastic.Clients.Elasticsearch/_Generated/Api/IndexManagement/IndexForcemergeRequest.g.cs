@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexForcemergeRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		public IndexForcemergeRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_forcemerge</summary>
-        public IndexForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+        public IndexForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 

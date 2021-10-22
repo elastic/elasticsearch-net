@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexSegmentsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		public IndexSegmentsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_segments</summary>
-        public IndexSegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+        public IndexSegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 

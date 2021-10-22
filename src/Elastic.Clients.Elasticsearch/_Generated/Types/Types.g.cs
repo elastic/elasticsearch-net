@@ -23,6 +23,13 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
+	public abstract partial class AcknowledgedResponseBase : ResponseBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged { get; init; }
+	}
+
 	public partial class BulkStats
 	{
 		[JsonInclude]
@@ -75,6 +82,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
+	}
+
+	public abstract partial class DictionaryResponseBase<TKey, TValue> : ResponseBase
+	{
 	}
 
 	public partial class DocStats
@@ -1029,6 +1040,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; init; }
 	}
 
+	public abstract partial class IndicesResponseBase : AcknowledgedResponseBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
+	}
+
 	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IInlineScript, InlineScript>))]
 	public partial interface IInlineScript
 	{
@@ -1370,6 +1388,25 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public object TotalTimeInMillis { get; init; }
+	}
+
+	public partial class NodeStatistics
+	{
+		[JsonInclude]
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public int Total { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("successful")]
+		public int Successful { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("failed")]
+		public int Failed { get; init; }
 	}
 
 	public partial class PluginStats
@@ -1771,6 +1808,13 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("status")]
 		public string? Status { get; init; }
+	}
+
+	public abstract partial class ShardsOperationResponseBase : ResponseBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 	}
 
 	public partial class ShardStatistics

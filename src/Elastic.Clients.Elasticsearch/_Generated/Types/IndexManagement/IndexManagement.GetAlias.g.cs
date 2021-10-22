@@ -15,20 +15,18 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement.GetAlias
 {
-	public partial class ShrinkIndexResponse : AcknowledgedResponseBase
+	public partial class IndexAliases
 	{
 		[JsonInclude]
-		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged { get; init; }
+		[JsonPropertyName("aliases")]
+		public Dictionary<string, IndexManagement.IAliasDefinition> Aliases { get; init; }
 	}
 }
