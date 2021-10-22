@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		public ClusterHealthRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+		public ClusterHealthRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		}
 
 		///<summary>/_cluster/health/{index}</summary>
-        public ClusterHealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("indices", indices))
+        public ClusterHealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 

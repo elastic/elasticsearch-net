@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexGetFieldMappingRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("indices", indices).Required("fields", fields))
+		public IndexGetFieldMappingRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("index", indices).Required("fields", fields))
 		{
 		}
 
@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		///<summary>/{index}/_mapping/field/{fields}</summary>
-        public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("indices", indices).Required("fields", fields))
+        public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("index", indices).Required("fields", fields))
 		{
 		}
 

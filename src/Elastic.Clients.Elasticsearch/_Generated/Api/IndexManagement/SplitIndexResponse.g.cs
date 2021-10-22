@@ -21,7 +21,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class SplitIndexResponse : ResponseBase
+	public partial class SplitIndexResponse : AcknowledgedResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]

@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		public ClusterStateRequest(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("indices", indices))
+		public ClusterStateRequest(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("index", indices))
 		{
 		}
 
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		}
 
 		///<summary>/_cluster/state/{metric}/{index}</summary>
-        public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("indices", indices))
+        public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("index", indices))
 		{
 		}
 

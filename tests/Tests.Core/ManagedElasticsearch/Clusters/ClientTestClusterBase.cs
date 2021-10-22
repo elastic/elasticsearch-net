@@ -60,6 +60,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			Add(AttributeKey("testingcluster"), "true");
 			Add(AttributeKey("gateway"), "true");
 			Add("search.remote.connect", "true", "<8.0.0");
+			//Add("node.remote_cluster_client", "true", ">=8.0.0-SNAPSHOT");
 
 			Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
 			Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1 <7.9.0-SNAPSHOT");
@@ -69,6 +70,8 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			Add($"script.stored", "true", ">5.0.0-alpha1 <5.5.0");
 			Add($"script.indexed", "true", "<5.0.0-alpha1");
 			Add($"script.allowed_types", "inline,stored", ">=5.5.0");
+
+			Add($"xpack.security.http.ssl.enabled", "false", ">=7.99.99");
 
 			AdditionalBeforeNodeStartedTasks.Add(new WriteAnalysisFiles());
 		}

@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexPutAliasRequest : PlainRequestBase<IndexPutAliasRequestParameters>, IIndexPutAliasRequest
 	{
-		public IndexPutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("indices", indices).Required("name", name))
+		public IndexPutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 		{
 		}
 
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexPutAliasRequestDescriptor : RequestDescriptorBase<IndexPutAliasRequestDescriptor, IndexPutAliasRequestParameters, IIndexPutAliasRequest>, IIndexPutAliasRequest
 	{
 		///<summary>/{index}/_alias/{name}</summary>
-        public IndexPutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("indices", indices).Required("name", name))
+        public IndexPutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 		{
 		}
 

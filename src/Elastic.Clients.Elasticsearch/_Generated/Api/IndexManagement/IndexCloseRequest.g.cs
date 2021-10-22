@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexCloseRequest : PlainRequestBase<IndexCloseRequestParameters>, IIndexCloseRequest
 	{
-		public IndexCloseRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+		public IndexCloseRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexCloseRequestDescriptor : RequestDescriptorBase<IndexCloseRequestDescriptor, IndexCloseRequestParameters, IIndexCloseRequest>, IIndexCloseRequest
 	{
 		///<summary>/{index}/_close</summary>
-        public IndexCloseRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+        public IndexCloseRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
