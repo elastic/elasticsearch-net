@@ -21,7 +21,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexCloneResponse : ResponseBase
+	public partial class IndexCloneResponse : AcknowledgedResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]

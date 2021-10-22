@@ -53,7 +53,7 @@ module ReleaseNotes =
             ("Uncategorized", "Uncategorized")
         ]
         uncategorized = "Uncategorized"
-    };
+    }
         
     let groupByLabel (config: Config) (items: List<GitHubItem>) =
         let dict = Dictionary<string, GitHubItem list>()     
@@ -71,10 +71,10 @@ module ReleaseNotes =
             if categorized = false then
                 let exists,list = dict.TryGetValue(config.uncategorized)
                 match exists with 
-                | true ->                  
+                | true ->
                     match List.tryFind(fun (i:GitHubItem)-> i.Number = item.Number) list with 
                     | Some _ -> ()
-                    | None -> dict.[config.uncategorized] <- item :: list                         
+                    | None -> dict.[config.uncategorized] <- item :: list
                 | false -> dict.Add(config.uncategorized, [item])
         dict
         

@@ -15,20 +15,18 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMapping
 {
-	public partial class ShrinkIndexResponse : AcknowledgedResponseBase
+	public partial class TypeFieldMappings
 	{
 		[JsonInclude]
-		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged { get; init; }
+		[JsonPropertyName("mappings")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.FieldMapping> Mappings { get; init; }
 	}
 }

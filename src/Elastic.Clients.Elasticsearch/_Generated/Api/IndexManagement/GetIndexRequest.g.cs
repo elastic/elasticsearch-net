@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
-		public GetIndexRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+		public GetIndexRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class GetIndexRequestDescriptor : RequestDescriptorBase<GetIndexRequestDescriptor, GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{
 		///<summary>/{index}</summary>
-        public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+        public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 

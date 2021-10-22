@@ -15,20 +15,23 @@
 //
 // ------------------------------------------------
 
+using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using OneOf;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 {
-	public partial class ShrinkIndexResponse : AcknowledgedResponseBase
+	public interface IClusterRemoteInfosVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("shards_acknowledged")]
-		public bool ShardsAcknowledged { get; init; }
+	public interface IClusterRemoteInfos : IIsADictionary<string, IClusterRemoteInfosVariant>
+	{
+	}
+
+	public class ClusterRemoteInfos : IsADictionaryBase<string, IClusterRemoteInfosVariant>, Cluster.RemoteInfo.IClusterRemoteInfos
+	{
 	}
 }

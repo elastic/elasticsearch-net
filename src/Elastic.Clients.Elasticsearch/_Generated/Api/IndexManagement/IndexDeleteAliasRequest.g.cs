@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexDeleteAliasRequest : PlainRequestBase<IndexDeleteAliasRequestParameters>, IIndexDeleteAliasRequest
 	{
-		public IndexDeleteAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("indices", indices).Required("name", name))
+		public IndexDeleteAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
 		{
 		}
 
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexDeleteAliasRequestDescriptor : RequestDescriptorBase<IndexDeleteAliasRequestDescriptor, IndexDeleteAliasRequestParameters, IIndexDeleteAliasRequest>, IIndexDeleteAliasRequest
 	{
 		///<summary>/{index}/_alias/{name}</summary>
-        public IndexDeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("indices", indices).Required("name", name))
+        public IndexDeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
 		{
 		}
 

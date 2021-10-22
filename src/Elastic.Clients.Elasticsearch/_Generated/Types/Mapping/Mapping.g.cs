@@ -448,6 +448,17 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string? Path { get; init; }
 	}
 
+	public partial class FieldMapping
+	{
+		[JsonInclude]
+		[JsonPropertyName("full_name")]
+		public string FullName { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("mapping")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties> Mapping { get; init; }
+	}
+
 	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IFieldNamesField, FieldNamesField>))]
 	public partial interface IFieldNamesField
 	{

@@ -76,9 +76,9 @@ namespace Tests.Framework.EndpointTests
 
 		public Func<string, LazyResponses> Calls<TDescriptor, TInitializer, TInterface, TResponse>(
 			Func<string, TInitializer> initializerBody,
-			//Func<string, TDescriptor, TInterface> fluentBody,
-			//Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
-			//Func<string, IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
+			Func<string, TDescriptor, TInterface> fluentBody,
+			Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
+			Func<string, IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
 			Func<string, IElasticClient, TInitializer, TResponse> request,
 			Func<string, IElasticClient, TInitializer, Task<TResponse>> requestAsync,
 			Action<TResponse, CallUniqueValues> onResponse = null,
@@ -92,9 +92,9 @@ namespace Tests.Framework.EndpointTests
 			var client = Client;
 			return k => Usage.CallOnce(
 				() => new LazyResponses(k,
-					async () => await CallAllClientMethodsOverloads<TDescriptor, TInitializer, TInterface, TResponse>(
+					async () => await CallAllClientMethodsOverloads(
 						Usage,
-						initializerBody, /*, fluentBody, fluent, fluentAsync*/
+						initializerBody, fluentBody, fluent, fluentAsync,
 						request,
 						requestAsync,
 						onResponse,
@@ -136,9 +136,9 @@ namespace Tests.Framework.EndpointTests
 		private async ValueTask<Dictionary<ClientMethod, IResponse>> CallAllClientMethodsOverloads<TDescriptor, TInitializer, TInterface, TResponse>(
 			EndpointUsage usage,
 			Func<string, TInitializer> initializerBody,
-			//Func<string, TDescriptor, TInterface> fluentBody,
-			//Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
-			//Func<string, IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
+			Func<string, TDescriptor, TInterface> fluentBody,
+			Func<string, IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
+			Func<string, IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
 			Func<string, IElasticClient, TInitializer, TResponse> request,
 			Func<string, IElasticClient, TInitializer, Task<TResponse>> requestAsync,
 			Action<TResponse, CallUniqueValues> onResponse,
@@ -163,12 +163,12 @@ namespace Tests.Framework.EndpointTests
 				onResponse?.Invoke(response, usage.CallUniqueValues);
 			}
 
-			//await InvokeApiCall(ClientMethod.Fluent, (s, r) => new ValueTask<TResponse>(fluent(s, client, f => fluentBody(s, f))));
+			await InvokeApiCall(ClientMethod.Fluent, (s, r) => new ValueTask<TResponse>(fluent(s, client, f => fluentBody(s, f))));
 
 			if (_testOnlyOne)
 				return dict;
 
-			//await InvokeApiCall(ClientMethod.FluentAsync, async (s, r) => await fluentAsync(s, client, f => fluentBody(s, f)));
+			await InvokeApiCall(ClientMethod.FluentAsync, async (s, r) => await fluentAsync(s, client, f => fluentBody(s, f)));
 
 			await InvokeApiCall(ClientMethod.Initializer, (s, r) => new ValueTask<TResponse>(request(s, client, initializerBody(s))));
 

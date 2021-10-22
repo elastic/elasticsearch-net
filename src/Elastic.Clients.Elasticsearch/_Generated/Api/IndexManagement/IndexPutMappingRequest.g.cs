@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public partial class IndexPutMappingRequest : PlainRequestBase<IndexPutMappingRequestParameters>, IIndexPutMappingRequest
 	{
-		public IndexPutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+		public IndexPutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
@@ -152,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexPutMappingRequestDescriptor : RequestDescriptorBase<IndexPutMappingRequestDescriptor, IndexPutMappingRequestParameters, IIndexPutMappingRequest>, IIndexPutMappingRequest
 	{
 		///<summary>/{index}/_mapping</summary>
-        public IndexPutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("indices", indices))
+        public IndexPutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
