@@ -15,6 +15,9 @@ namespace Nest
 	{
 		[DataMember(Name = "rewrite")]
 		MultiTermQueryRewrite Rewrite { get; set; }
+
+		[DataMember(Name = "wildcard")]
+		object Wildcard { get; set; }
 	}
 
 	public class WildcardQuery<T, TValue> : WildcardQuery
@@ -28,7 +31,9 @@ namespace Nest
 		public MultiTermQueryRewrite Rewrite { get; set; }
 		public object Value { get; set; }
 		public bool? CaseInsensitive { get; set; }
-		protected override bool Conditionless => TermQuery.IsConditionless(this);
+		public object Wildcard { get; set; }
+
+		protected override bool Conditionless => Wildcard is null && TermQuery.IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
@@ -39,7 +44,10 @@ namespace Nest
 		where T : class
 	{
 		MultiTermQueryRewrite IWildcardQuery.Rewrite { get; set; }
+		object IWildcardQuery.Wildcard { get; set; }
 
 		public WildcardQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.Rewrite = v);
+
+		public WildcardQueryDescriptor<T> Wildcard(object value) => Assign(value, (a, v) => a.Wildcard = v);
 	}
 }
