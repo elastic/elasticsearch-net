@@ -126,7 +126,21 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.TransformPreview;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-	// values part of the url path
+		///<summary>/_transform/{transform_id}/_preview</summary>
+		///<param name = "transformId">Optional, accepts null</param>
+		public PreviewTransformDescriptor(Id transformId): base(r => r.Optional("transform_id", transformId))
+		{
+		}
+
+		///<summary>/_transform/_preview</summary>
+		public PreviewTransformDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Id IPreviewTransformRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
+		///<summary>The id of the transform to preview.</summary>
+		public PreviewTransformDescriptor<TDocument> TransformId(Id transformId) => Assign(transformId, (a, v) => a.RouteValues.Optional("transform_id", v));
 	// Request parameters
 	}
 

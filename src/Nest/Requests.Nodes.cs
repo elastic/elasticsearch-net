@@ -88,6 +88,13 @@ namespace Nest
 			set => Q("snapshots", value);
 		}
 
+		///<summary>The sort order for 'cpu' type (default: total)</summary>
+		public Sort? Sort
+		{
+			get => Q<Sort? >("sort");
+			set => Q("sort", value);
+		}
+
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType? ThreadType
 		{

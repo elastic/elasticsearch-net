@@ -113,6 +113,8 @@ namespace Nest
 		public ClusterHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterHealthDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Whether to return HTTP 200 instead of 408 in case of a cluster health timeout from the server side</summary>
+		public ClusterHealthDescriptor Return200ForClusterHealthTimeout(bool? return200forclusterhealthtimeout = true) => Qs("return_200_for_cluster_health_timeout", return200forclusterhealthtimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Wait until the specified number of shards is active</summary>
