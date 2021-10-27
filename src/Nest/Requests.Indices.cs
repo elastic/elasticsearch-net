@@ -542,7 +542,7 @@ namespace Nest
 			set => Q("allow_no_indices", value);
 		}
 
-		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		///<summary>Whether wildcard expressions should get expanded to open, closed, or hidden indices</summary>
 		public ExpandWildcards? ExpandWildcards
 		{
 			get => Q<ExpandWildcards? >("expand_wildcards");
@@ -1080,85 +1080,6 @@ namespace Nest
 		{
 			get => Q<bool? >("only_expunge_deletes");
 			set => Q("only_expunge_deletes", value);
-		}
-	}
-
-	[InterfaceDataContract]
-	public partial interface IFreezeIndexRequest : IRequest<FreezeIndexRequestParameters>
-	{
-		[IgnoreDataMember]
-		IndexName Index
-		{
-			get;
-		}
-	}
-
-	///<summary>Request for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
-	public partial class FreezeIndexRequest : PlainRequestBase<FreezeIndexRequestParameters>, IFreezeIndexRequest
-	{
-		protected IFreezeIndexRequest Self => this;
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		///<summary>/{index}/_freeze</summary>
-		///<param name = "index">this parameter is required</param>
-		public FreezeIndexRequest(IndexName index): base(r => r.Required("index", index))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected FreezeIndexRequest(): base()
-		{
-		}
-
-		// values part of the url path
-		[IgnoreDataMember]
-		IndexName IFreezeIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout
-		{
-			get => Q<Time>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout
-		{
-			get => Q<Time>("timeout");
-			set => Q("timeout", value);
-		}
-
-		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
-		public string WaitForActiveShards
-		{
-			get => Q<string>("wait_for_active_shards");
-			set => Q("wait_for_active_shards", value);
 		}
 	}
 
@@ -2299,7 +2220,6 @@ namespace Nest
 	}
 
 	///<summary>Request for Resolve <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html</para></summary>
-	///<remarks>Note: Experimental within the Elasticsearch server, this functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.</remarks>
 	public partial class ResolveIndexRequest : PlainRequestBase<ResolveIndexRequestParameters>, IResolveIndexRequest
 	{
 		protected IResolveIndexRequest Self => this;
@@ -2464,6 +2384,7 @@ namespace Nest
 		}
 
 		///<summary>Includes detailed memory usage by Lucene.</summary>
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: lucene no longer keeps track of segment memory overhead as it is largely off-heap")]
 		public bool? Verbose
 		{
 			get => Q<bool? >("verbose");
