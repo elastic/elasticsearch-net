@@ -23,6 +23,12 @@ namespace Nest
 		[DataMember(Name ="lte")]
 		long? LessThanOrEqualTo { get; set; }
 
+		[DataMember(Name = "from")]
+		long? From { get; set; }
+
+		[DataMember(Name = "to")]
+		long? To { get; set; }
+
 		[DataMember(Name ="relation")]
 		RangeRelation? Relation { get; set; }
 	}
@@ -33,6 +39,8 @@ namespace Nest
 		public long? GreaterThanOrEqualTo { get; set; }
 		public long? LessThan { get; set; }
 		public long? LessThanOrEqualTo { get; set; }
+		public long? From { get; set; }
+		public long? To { get; set; }
 
 		public RangeRelation? Relation { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
@@ -43,29 +51,30 @@ namespace Nest
 			|| q.GreaterThanOrEqualTo == null
 			&& q.LessThanOrEqualTo == null
 			&& q.GreaterThan == null
-			&& q.LessThan == null;
+			&& q.LessThan == null
+			&& q.From == null
+			&& q.To == null;
 	}
 
 	[DataContract]
 	public class LongRangeQueryDescriptor<T>
-		: FieldNameQueryDescriptorBase<LongRangeQueryDescriptor<T>, ILongRangeQuery, T>
-			, ILongRangeQuery where T : class
+		: FieldNameQueryDescriptorBase<LongRangeQueryDescriptor<T>, ILongRangeQuery, T>, ILongRangeQuery where T : class
 	{
 		protected override bool Conditionless => LongRangeQuery.IsConditionless(this);
 		long? ILongRangeQuery.GreaterThan { get; set; }
 		long? ILongRangeQuery.GreaterThanOrEqualTo { get; set; }
 		long? ILongRangeQuery.LessThan { get; set; }
 		long? ILongRangeQuery.LessThanOrEqualTo { get; set; }
+		long? ILongRangeQuery.From { get; set; }
+		long? ILongRangeQuery.To { get; set; }
 		RangeRelation? ILongRangeQuery.Relation { get; set; }
 
 		public LongRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
-
 		public LongRangeQueryDescriptor<T> GreaterThan(long? from) => Assign(from, (a, v) => a.GreaterThan = v);
-
 		public LongRangeQueryDescriptor<T> GreaterThanOrEquals(long? from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
-
 		public LongRangeQueryDescriptor<T> LessThan(long? to) => Assign(to, (a, v) => a.LessThan = v);
-
 		public LongRangeQueryDescriptor<T> LessThanOrEquals(long? to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
+		public LongRangeQueryDescriptor<T> From(long? from) => Assign(from, (a, v) => a.From = v);
+		public LongRangeQueryDescriptor<T> To(long? to) => Assign(to, (a, v) => a.To = v);
 	}
 }

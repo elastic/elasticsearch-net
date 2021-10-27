@@ -26,6 +26,12 @@ namespace Nest
 		[DataMember(Name = "lte")]
 		DateMath LessThanOrEqualTo { get; set; }
 
+		[DataMember(Name = "from")]
+		DateMath From { get; set; }
+
+		[DataMember(Name = "to")]
+		DateMath To { get; set; }
+
 		[DataMember(Name = "relation")]
 		RangeRelation? Relation { get; set; }
 
@@ -41,6 +47,8 @@ namespace Nest
 		public DateMath GreaterThanOrEqualTo { get; set; }
 		public DateMath LessThan { get; set; }
 		public DateMath LessThanOrEqualTo { get; set; }
+		public DateMath From { get; set; }
+		public DateMath To { get; set; }
 		public RangeRelation? Relation { get; set; }
 		public string TimeZone { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
@@ -51,13 +59,14 @@ namespace Nest
 			|| ((q.GreaterThanOrEqualTo == null || !q.GreaterThanOrEqualTo.IsValid)
 			&& (q.LessThanOrEqualTo == null || !q.LessThanOrEqualTo.IsValid)
 			&& (q.GreaterThan == null || !q.GreaterThan.IsValid)
-			&& (q.LessThan == null || !q.LessThan.IsValid));
+			&& (q.LessThan == null || !q.LessThan.IsValid)
+			&& (q.From == null || !q.From.IsValid)
+			&& (q.To == null || !q.To.IsValid));
 	}
 
 	[DataContract]
 	public class DateRangeQueryDescriptor<T>
-		: FieldNameQueryDescriptorBase<DateRangeQueryDescriptor<T>, IDateRangeQuery, T>
-			, IDateRangeQuery where T : class
+		: FieldNameQueryDescriptorBase<DateRangeQueryDescriptor<T>, IDateRangeQuery, T>, IDateRangeQuery where T : class
 	{
 		protected override bool Conditionless => DateRangeQuery.IsConditionless(this);
 		string IDateRangeQuery.Format { get; set; }
@@ -65,21 +74,19 @@ namespace Nest
 		DateMath IDateRangeQuery.GreaterThanOrEqualTo { get; set; }
 		DateMath IDateRangeQuery.LessThan { get; set; }
 		DateMath IDateRangeQuery.LessThanOrEqualTo { get; set; }
+		DateMath IDateRangeQuery.From { get; set; }
+		DateMath IDateRangeQuery.To { get; set; }
 		RangeRelation? IDateRangeQuery.Relation { get; set; }
 		string IDateRangeQuery.TimeZone { get; set; }
 
 		public DateRangeQueryDescriptor<T> GreaterThan(DateMath from) => Assign(from, (a, v) => a.GreaterThan = v);
-
 		public DateRangeQueryDescriptor<T> GreaterThanOrEquals(DateMath from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
-
 		public DateRangeQueryDescriptor<T> LessThan(DateMath to) => Assign(to, (a, v) => a.LessThan = v);
-
 		public DateRangeQueryDescriptor<T> LessThanOrEquals(DateMath to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
-
+		public DateRangeQueryDescriptor<T> From(DateMath from) => Assign(from, (a, v) => a.From = v);
+		public DateRangeQueryDescriptor<T> To(DateMath to) => Assign(to, (a, v) => a.To = v);
 		public DateRangeQueryDescriptor<T> TimeZone(string timeZone) => Assign(timeZone, (a, v) => a.TimeZone = v);
-
 		public DateRangeQueryDescriptor<T> Format(string format) => Assign(format, (a, v) => a.Format = v);
-
 		public DateRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
 	}
 }

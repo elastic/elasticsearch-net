@@ -23,6 +23,12 @@ namespace Nest
 		[DataMember(Name = "lte")]
 		double? LessThanOrEqualTo { get; set; }
 
+		[DataMember(Name = "from")]
+		double? From { get; set; }
+
+		[DataMember(Name = "to")]
+		double? To { get; set; }
+
 		[DataMember(Name = "relation")]
 		RangeRelation? Relation { get; set; }
 	}
@@ -33,6 +39,8 @@ namespace Nest
 		public double? GreaterThanOrEqualTo { get; set; }
 		public double? LessThan { get; set; }
 		public double? LessThanOrEqualTo { get; set; }
+		public double? From { get; set; }
+		public double? To { get; set; }
 
 		public RangeRelation? Relation { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
@@ -43,30 +51,31 @@ namespace Nest
 			|| q.GreaterThanOrEqualTo == null
 			&& q.LessThanOrEqualTo == null
 			&& q.GreaterThan == null
-			&& q.LessThan == null;
+			&& q.LessThan == null
+			&& q.From == null
+			&& q.To == null;
 	}
 
 	[DataContract]
 	public class NumericRangeQueryDescriptor<T>
-		: FieldNameQueryDescriptorBase<NumericRangeQueryDescriptor<T>, INumericRangeQuery, T>
-			, INumericRangeQuery where T : class
+		: FieldNameQueryDescriptorBase<NumericRangeQueryDescriptor<T>, INumericRangeQuery, T>, INumericRangeQuery where T : class
 	{
 		protected override bool Conditionless => NumericRangeQuery.IsConditionless(this);
 		double? INumericRangeQuery.GreaterThan { get; set; }
 		double? INumericRangeQuery.GreaterThanOrEqualTo { get; set; }
 		double? INumericRangeQuery.LessThan { get; set; }
 		double? INumericRangeQuery.LessThanOrEqualTo { get; set; }
+		double? INumericRangeQuery.From { get; set; }
+		double? INumericRangeQuery.To { get; set; }
 
 		RangeRelation? INumericRangeQuery.Relation { get; set; }
 
 		public NumericRangeQueryDescriptor<T> GreaterThan(double? from) => Assign(from, (a, v) => a.GreaterThan = v);
-
 		public NumericRangeQueryDescriptor<T> GreaterThanOrEquals(double? from) => Assign(from, (a, v) => a.GreaterThanOrEqualTo = v);
-
 		public NumericRangeQueryDescriptor<T> LessThan(double? to) => Assign(to, (a, v) => a.LessThan = v);
-
 		public NumericRangeQueryDescriptor<T> LessThanOrEquals(double? to) => Assign(to, (a, v) => a.LessThanOrEqualTo = v);
-
 		public NumericRangeQueryDescriptor<T> Relation(RangeRelation? relation) => Assign(relation, (a, v) => a.Relation = v);
+		public NumericRangeQueryDescriptor<T> From(double? from) => Assign(from, (a, v) => a.From = v);
+		public NumericRangeQueryDescriptor<T> To(double? to) => Assign(to, (a, v) => a.To = v);
 	}
 }

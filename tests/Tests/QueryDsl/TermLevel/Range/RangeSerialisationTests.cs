@@ -13,7 +13,7 @@ using Nest;
 
 namespace Tests.QueryDsl.TermLevel.Wildcard
 {
-	public class WildcardSerialisationTests
+	public class RangeSerialisationTests
 	{
 		[U]
 		public void DeserialisesAndSerialises()
@@ -21,7 +21,7 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 			// This test validates that a response from SQL translate can be used in the seubsequent query
 			// The WildcardQueryBuilder prefers the `wildcard` field over the `value` field.
 
-			var translateResponse = @"{""size"":1000,""query"":{""bool"":{""must"":[{""wildcard"":{""customer.keyword"":{""wildcard"":""*B*"",""boost"":1}}}],""adjust_pure_negative"":true,""boost"":1}}}";
+			var translateResponse = @"{""size"":1000,""query"":{""bool"":{""must"":[{""range"":{""customer_id"":{""from"":""1"",""to"":null,""include_lower"":false,""include_upper"":false,""boost"":1}}}],""adjust_pure_negative"":true,""boost"":1}}}";
 
 			var pool = new SingleNodeConnectionPool(new Uri($"http://localhost:9200"));
 			var settings = new ConnectionSettings(pool, new InMemoryConnection(Encoding.UTF8.GetBytes(translateResponse)));
@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 			queryContainer.Bool.Should().NotBeNull();
 			var clauses = queryContainer.Bool.Must.ToList();
 			queryContainer = clauses.Single();
-			queryContainer.Wildcard.Wildcard.Should().Be("*B*");
+			queryContainer.Range.From
 
 			var stream = new MemoryStream();
 			client.ConnectionSettings.RequestResponseSerializer.Serialize(response.Result, stream);
@@ -43,7 +43,7 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 			var json = reader.ReadToEnd();
 
 			// note: adjust_pure_negative is not recommended
-			json.Should().Be(@"{""query"":{""bool"":{""must"":[{""wildcard"":{""customer.keyword"":{""wildcard"":""*B*"",""boost"":1.0}}}],""boost"":1.0}},""size"":1000}");
+			json.Should().Be(@"{""query"":{""bool"":{""must"":[{""wildcard"":{""customershortnm.keyword"":{""wildcard"":""*B*"",""boost"":1.0}}}],""boost"":1.0}},""size"":1000}");
 		}
 	}
 }
