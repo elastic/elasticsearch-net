@@ -29,10 +29,5 @@ namespace Elastic.Clients.Elasticsearch
 		ClusterNamespace Cluster { get; }
 
 		IndexManagementNamespace IndexManagement { get; }
-
-		PingResponse Ping(IPingRequest request);
-		Task<PingResponse> PingAsync(IPingRequest request, CancellationToken cancellationToken = default);
-		PingResponse Ping(Func<PingRequestDescriptor, IPingRequest> selector = null);
-		Task<PingResponse> PingAsync(Func<PingRequestDescriptor, IPingRequest> selector = null, CancellationToken cancellationToken = default);
 	}
 }

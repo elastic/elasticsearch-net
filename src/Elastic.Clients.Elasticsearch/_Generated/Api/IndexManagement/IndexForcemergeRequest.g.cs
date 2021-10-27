@@ -81,6 +81,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexForcemergeRequestDescriptorConverter))]
 	public partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters>
 	{
+		public IndexForcemergeRequestDescriptor()
+		{
+		}
+
 		public IndexForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}

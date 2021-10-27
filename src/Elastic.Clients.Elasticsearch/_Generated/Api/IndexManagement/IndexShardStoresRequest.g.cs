@@ -69,6 +69,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexShardStoresRequestDescriptorConverter))]
 	public partial class IndexShardStoresRequestDescriptor : RequestDescriptorBase<IndexShardStoresRequestDescriptor, IndexShardStoresRequestParameters>
 	{
+		public IndexShardStoresRequestDescriptor()
+		{
+		}
+
 		public IndexShardStoresRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}

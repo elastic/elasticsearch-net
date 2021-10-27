@@ -57,6 +57,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexSimulateTemplateRequestDescriptorConverter))]
 	public partial class IndexSimulateTemplateRequestDescriptor : RequestDescriptorBase<IndexSimulateTemplateRequestDescriptor, IndexSimulateTemplateRequestParameters>
 	{
+		public IndexSimulateTemplateRequestDescriptor()
+		{
+		}
+
 		public IndexSimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 		{
 		}

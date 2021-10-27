@@ -46,8 +46,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(ClusterDeleteComponentTemplateRequest request) => DoRequest<ClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request);
 		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(ClusterDeleteComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterDeleteComponentTemplateRequest, ClusterDeleteComponentTemplateResponse>(request, cancellationToken);
-		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ClusterDeleteComponentTemplateRequestDescriptor> configureRequest = null) => DeleteComponentTemplate(configureRequest.InvokeOrDefault(new ClusterDeleteComponentTemplateRequestDescriptor(name)));
-		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterDeleteComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => DeleteComponentTemplateAsync(configureRequest.InvokeOrDefault(new ClusterDeleteComponentTemplateRequestDescriptor(name)), cancellationToken);
+		public ClusterDeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ClusterDeleteComponentTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterDeleteComponentTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterDeleteComponentTemplateRequestDescriptor, ClusterDeleteComponentTemplateResponse>(descriptor);
+		}
+
+		public Task<ClusterDeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterDeleteComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterDeleteComponentTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterDeleteComponentTemplateRequestDescriptor, ClusterDeleteComponentTemplateResponse>(descriptor);
+		}
+
 		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(ClusterDeleteVotingConfigExclusionsRequest request) => DoRequest<ClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request);
 		public Task<ClusterDeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(ClusterDeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterDeleteVotingConfigExclusionsRequest, ClusterDeleteVotingConfigExclusionsResponse>(request, cancellationToken);
 		public ClusterDeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Action<ClusterDeleteVotingConfigExclusionsRequestDescriptor> configureRequest = null)
@@ -66,8 +78,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(ClusterExistsComponentTemplateRequest request) => DoRequest<ClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request);
 		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ClusterExistsComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterExistsComponentTemplateRequest, ClusterExistsComponentTemplateResponse>(request, cancellationToken);
-		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ClusterExistsComponentTemplateRequestDescriptor> configureRequest = null) => ExistsComponentTemplate(configureRequest.InvokeOrDefault(new ClusterExistsComponentTemplateRequestDescriptor(name)));
-		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ClusterExistsComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => ExistsComponentTemplateAsync(configureRequest.InvokeOrDefault(new ClusterExistsComponentTemplateRequestDescriptor(name)), cancellationToken);
+		public ClusterExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ClusterExistsComponentTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterExistsComponentTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterExistsComponentTemplateRequestDescriptor, ClusterExistsComponentTemplateResponse>(descriptor);
+		}
+
+		public Task<ClusterExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ClusterExistsComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterExistsComponentTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterExistsComponentTemplateRequestDescriptor, ClusterExistsComponentTemplateResponse>(descriptor);
+		}
+
 		public ClusterGetComponentTemplateResponse GetComponentTemplate(ClusterGetComponentTemplateRequest request) => DoRequest<ClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request);
 		public Task<ClusterGetComponentTemplateResponse> GetComponentTemplateAsync(ClusterGetComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterGetComponentTemplateRequest, ClusterGetComponentTemplateResponse>(request, cancellationToken);
 		public ClusterGetComponentTemplateResponse GetComponentTemplate(Action<ClusterGetComponentTemplateRequestDescriptor> configureRequest = null)
@@ -150,8 +174,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		public ClusterPutComponentTemplateResponse PutComponentTemplate(ClusterPutComponentTemplateRequest request) => DoRequest<ClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request);
 		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(ClusterPutComponentTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, cancellationToken);
-		public ClusterPutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null) => PutComponentTemplate(configureRequest.InvokeOrDefault(new ClusterPutComponentTemplateRequestDescriptor(name)));
-		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default) => PutComponentTemplateAsync(configureRequest.InvokeOrDefault(new ClusterPutComponentTemplateRequestDescriptor(name)), cancellationToken);
+		public ClusterPutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ClusterPutComponentTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateResponse>(descriptor);
+		}
+
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ClusterPutComponentTemplateRequestDescriptor(name);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateResponse>(descriptor);
+		}
+
 		public ClusterPutSettingsResponse PutSettings(ClusterPutSettingsRequest request) => DoRequest<ClusterPutSettingsRequest, ClusterPutSettingsResponse>(request);
 		public Task<ClusterPutSettingsResponse> PutSettingsAsync(ClusterPutSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterPutSettingsRequest, ClusterPutSettingsResponse>(request, cancellationToken);
 		public ClusterPutSettingsResponse PutSettings(Action<ClusterPutSettingsRequestDescriptor> configureRequest = null)
@@ -174,14 +210,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 			var descriptor = new ClusterRemoteInfoRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse>(descriptor);
+			return DoRequest<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse<TKey, TValue>>(descriptor);
 		}
 
 		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ClusterRemoteInfoRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse>(descriptor);
+			return DoRequestAsync<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse<TKey, TValue>>(descriptor);
 		}
 
 		public ClusterRerouteResponse Reroute(ClusterRerouteRequest request) => DoRequest<ClusterRerouteRequest, ClusterRerouteResponse>(request);
