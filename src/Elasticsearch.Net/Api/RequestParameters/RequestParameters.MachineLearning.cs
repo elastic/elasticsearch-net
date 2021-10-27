@@ -172,6 +172,12 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	///<summary>Request options for DeleteTrainedModel <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html</para></summary>
 	public class DeleteTrainedModelRequestParameters : RequestParameters<DeleteTrainedModelRequestParameters>
 	{
+		///<summary>Controls the amount of time to wait for the model to be deleted.</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for DeleteTrainedModelAlias <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html</para></summary>

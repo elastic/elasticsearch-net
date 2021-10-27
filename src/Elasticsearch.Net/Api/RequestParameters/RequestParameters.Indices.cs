@@ -662,55 +662,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		}
 	}
 
-	///<summary>Request options for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
-	public class FreezeIndexRequestParameters : RequestParameters<FreezeIndexRequestParameters>
-	{
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices
-		{
-			get => Q<bool? >("allow_no_indices");
-			set => Q("allow_no_indices", value);
-		}
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards
-		{
-			get => Q<ExpandWildcards? >("expand_wildcards");
-			set => Q("expand_wildcards", value);
-		}
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable
-		{
-			get => Q<bool? >("ignore_unavailable");
-			set => Q("ignore_unavailable", value);
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout
-		{
-			get => Q<TimeSpan>("master_timeout");
-			set => Q("master_timeout", value);
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout
-		{
-			get => Q<TimeSpan>("timeout");
-			set => Q("timeout", value);
-		}
-
-		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
-		public string WaitForActiveShards
-		{
-			get => Q<string>("wait_for_active_shards");
-			set => Q("wait_for_active_shards", value);
-		}
-	}
-
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 	public class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters>
 	{

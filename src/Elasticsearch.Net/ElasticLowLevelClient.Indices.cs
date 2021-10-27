@@ -354,19 +354,6 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.forcemerge", "index")]
 		public Task<TResponse> ForceMergeAsync<TResponse>(string index, ForceMergeRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_forcemerge"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
-		///<param name = "index">The name of the index to freeze</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.14.0: Frozen indices are deprecated because they provide no benefit given improvements in heap memory utilization. They will be removed in a future release.")]
-		public TResponse Freeze<TResponse>(string index, FreezeIndexRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_freeze"), null, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
-		///<param name = "index">The name of the index to freeze</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.14.0: Frozen indices are deprecated because they provide no benefit given improvements in heap memory utilization. They will be removed in a future release.")]
-		[MapsApi("indices.freeze", "index")]
-		public Task<TResponse> FreezeAsync<TResponse>(string index, FreezeIndexRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_freeze"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
 		///<param name = "index">A comma-separated list of index names</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

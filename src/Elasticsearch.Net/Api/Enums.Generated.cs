@@ -414,6 +414,15 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
+	public enum Sort
+	{
+		[EnumMember(Value = "cpu")]
+		Cpu,
+		[EnumMember(Value = "total")]
+		Total
+	}
+
+	[StringEnum]
 	public enum ThreadType
 	{
 		[EnumMember(Value = "cpu")]
@@ -421,7 +430,9 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "wait")]
 		Wait,
 		[EnumMember(Value = "block")]
-		Block
+		Block,
+		[EnumMember(Value = "mem")]
+		Mem
 	}
 
 	[StringEnum]
@@ -487,6 +498,7 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
 			EnumStringResolvers.TryAdd(typeof(IndicesShardStoresStatus), (e) => GetStringValue((IndicesShardStoresStatus)e));
 			EnumStringResolvers.TryAdd(typeof(WaitFor), (e) => GetStringValue((WaitFor)e));
+			EnumStringResolvers.TryAdd(typeof(Sort), (e) => GetStringValue((Sort)e));
 			EnumStringResolvers.TryAdd(typeof(ThreadType), (e) => GetStringValue((ThreadType)e));
 			EnumStringResolvers.TryAdd(typeof(GridType), (e) => GetStringValue((GridType)e));
 			EnumStringResolvers.TryAdd(typeof(GroupBy), (e) => GetStringValue((GroupBy)e));
@@ -946,6 +958,19 @@ namespace Elasticsearch.Net
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'WaitFor'");
 		}
 
+		public static string GetStringValue(this Sort enumValue)
+		{
+			switch (enumValue)
+			{
+				case Sort.Cpu:
+					return "cpu";
+				case Sort.Total:
+					return "total";
+			}
+
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Sort'");
+		}
+
 		public static string GetStringValue(this ThreadType enumValue)
 		{
 			switch (enumValue)
@@ -956,6 +981,8 @@ namespace Elasticsearch.Net
 					return "wait";
 				case ThreadType.Block:
 					return "block";
+				case ThreadType.Mem:
+					return "mem";
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'ThreadType'");

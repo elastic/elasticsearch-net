@@ -132,7 +132,6 @@ namespace Nest
 		internal static ApiUrls IndicesTemplateExists = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesFlush = new ApiUrls(new[]{"_flush", "{index}/_flush"});
 		internal static ApiUrls IndicesForceMerge = new ApiUrls(new[]{"_forcemerge", "{index}/_forcemerge"});
-		internal static ApiUrls IndicesFreeze = new ApiUrls(new[]{"{index}/_freeze"});
 		internal static ApiUrls IndicesGet = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesGetAlias = new ApiUrls(new[]{"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
 		internal static ApiUrls IndicesGetDataStream = new ApiUrls(new[]{"_data_stream", "_data_stream/{name}"});
