@@ -338,7 +338,7 @@ namespace Nest
 		// Request parameters
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public DeleteIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		///<summary>Whether wildcard expressions should get expanded to open, closed, or hidden indices</summary>
 		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public DeleteIndexDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
@@ -631,46 +631,6 @@ namespace Nest
 		public ForceMergeDescriptor MaxNumSegments(long? maxnumsegments) => Qs("max_num_segments", maxnumsegments);
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyexpungedeletes = true) => Qs("only_expunge_deletes", onlyexpungedeletes);
-	}
-
-	///<summary>Descriptor for Freeze <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html</para></summary>
-	public partial class FreezeIndexDescriptor : RequestDescriptorBase<FreezeIndexDescriptor, FreezeIndexRequestParameters, IFreezeIndexRequest>, IFreezeIndexRequest
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesFreeze;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override bool SupportsBody => false;
-		///<summary>/{index}/_freeze</summary>
-		///<param name = "index">this parameter is required</param>
-		public FreezeIndexDescriptor(IndexName index): base(r => r.Required("index", index))
-		{
-		}
-
-		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
-		[SerializationConstructor]
-		protected FreezeIndexDescriptor(): base()
-		{
-		}
-
-		// values part of the url path
-		IndexName IFreezeIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		///<summary>The name of the index to freeze</summary>
-		public FreezeIndexDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public FreezeIndexDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
-		// Request parameters
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FreezeIndexDescriptor AllowNoIndices(bool? allownoindices = true) => Qs("allow_no_indices", allownoindices);
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FreezeIndexDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FreezeIndexDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>Specify timeout for connection to master</summary>
-		public FreezeIndexDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
-		///<summary>Explicit operation timeout</summary>
-		public FreezeIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
-		public FreezeIndexDescriptor WaitForActiveShards(string waitforactiveshards) => Qs("wait_for_active_shards", waitforactiveshards);
 	}
 
 	///<summary>Descriptor for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</para></summary>
@@ -1411,7 +1371,8 @@ namespace Nest
 		public SegmentsDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SegmentsDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
-		///<summary>Includes detailed memory usage by Lucene.</summary>
+		///<summary>Includes detailed memory usage by Lucene.</summary>		
+		[Obsolete("Scheduled to be removed in 8.0, Deprecated as of: 8.0.0, reason: lucene no longer keeps track of segment memory overhead as it is largely off-heap")]
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	}
 

@@ -62,6 +62,8 @@ namespace Nest
 		public NodesHotThreadsDescriptor Interval(Time interval) => Qs("interval", interval);
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public NodesHotThreadsDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
+		///<summary>The sort order for 'cpu' type (default: total)</summary>
+		public NodesHotThreadsDescriptor Sort(Sort? sort) => Qs("sort", sort);
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsDescriptor ThreadType(ThreadType? threadtype) => Qs("type", threadtype);
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
@@ -105,7 +107,7 @@ namespace Nest
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(nodeId, (a, v) => a.RouteValues.Optional("node_id", v));
-		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
+		///<summary>A comma-separated list of metrics you wish returned. Use `_all` to retrieve all metrics and `_none` to retrieve the node identity without any additional metrics.</summary>
 		public NodesInfoDescriptor Metric(Metrics metric) => Assign(metric, (a, v) => a.RouteValues.Optional("metric", v));
 		// Request parameters
 		///<summary>Return settings in flat format (default: false)</summary>

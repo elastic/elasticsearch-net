@@ -1161,24 +1161,25 @@ namespace Nest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		///<summary>/_pit</summary>
-		public OpenPointInTimeDescriptor(): base()
+		///<summary>/{index}/_pit</summary>
+		///<param name = "index">this parameter is required</param>
+		public OpenPointInTimeDescriptor(Indices index): base(r => r.Required("index", index))
 		{
 		}
 
-		///<summary>/{index}/_pit</summary>
-		///<param name = "index">Optional, accepts null</param>
-		public OpenPointInTimeDescriptor(Indices index): base(r => r.Optional("index", index))
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected OpenPointInTimeDescriptor(): base()
 		{
 		}
 
 		// values part of the url path
 		Indices IOpenPointInTimeRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names to open point in time; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public OpenPointInTimeDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public OpenPointInTimeDescriptor Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public OpenPointInTimeDescriptor Index<TOther>()
-			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Optional("index", (Indices)v));
+			where TOther : class => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (Indices)v));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public OpenPointInTimeDescriptor AllIndices() => Index(Indices.All);
 		// Request parameters

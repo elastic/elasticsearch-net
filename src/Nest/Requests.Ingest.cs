@@ -179,6 +179,13 @@ namespace Nest
 		[IgnoreDataMember]
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 		// Request parameters
+		///<summary>Required version for optimistic concurrency control for pipeline updates</summary>
+		public int? IfVersion
+		{
+			get => Q<int? >("if_version");
+			set => Q("if_version", value);
+		}
+
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout
 		{
