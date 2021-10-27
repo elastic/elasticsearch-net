@@ -63,6 +63,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[JsonConverter(typeof(ClusterGetComponentTemplateRequestDescriptorConverter))]
 	public partial class ClusterGetComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateRequestParameters>
 	{
+		public ClusterGetComponentTemplateRequestDescriptor()
+		{
+		}
+
 		public ClusterGetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 		{
 		}

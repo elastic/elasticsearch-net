@@ -81,6 +81,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexGetMappingRequestDescriptorConverter))]
 	public partial class IndexGetMappingRequestDescriptor : RequestDescriptorBase<IndexGetMappingRequestDescriptor, IndexGetMappingRequestParameters>
 	{
+		public IndexGetMappingRequestDescriptor()
+		{
+		}
+
 		public IndexGetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}

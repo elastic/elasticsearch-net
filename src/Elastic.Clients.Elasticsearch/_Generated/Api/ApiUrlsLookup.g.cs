@@ -83,6 +83,5 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "/_validate/query", "/{index}/_validate/query" });
 		internal static ApiUrls IndexManagementShrink = new ApiUrls(new[] { "/{index}/_shrink/{target}" });
 		internal static ApiUrls IndexManagementSplit = new ApiUrls(new[] { "/{index}/_split/{target}" });
-		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 	}
 }

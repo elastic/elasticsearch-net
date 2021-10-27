@@ -97,6 +97,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[JsonConverter(typeof(ClusterStateRequestDescriptorConverter))]
 	public partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
 	{
+		public ClusterStateRequestDescriptor()
+		{
+		}
+
 		public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
 		{
 		}

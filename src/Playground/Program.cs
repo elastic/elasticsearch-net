@@ -9,6 +9,7 @@ using Elastic.Transport;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.IndexManagement;
 
 namespace Playground
 {
@@ -94,16 +95,19 @@ namespace Playground
 
 
 
-			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
+			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
 				.Authentication(new BasicAuthentication("elastic", "-5qxtEZQ=NWx1v+PUjCJ"))
 				.CertificateFingerprint("bdbbcebde100130339ec62f7f4ff7008ae81ddaa0586178090d2a41ba5a6e6a1"));
 
-			var response = client.Ping();
+			var response = client.IndexManagement.CreateIndex("testing", i => i
+				.Settings(s => s.Add("thing", 10)));
 
-			if (response.IsValid)
-			{
+			//var response = client.Ping();
 
-			}
+			//if (response.IsValid)
+			//{
+
+			//}
 
 			//var searchAgain = new SearchRequest()
 			//{

@@ -77,6 +77,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexGetAliasRequestDescriptorConverter))]
 	public partial class IndexGetAliasRequestDescriptor : RequestDescriptorBase<IndexGetAliasRequestDescriptor, IndexGetAliasRequestParameters>
 	{
+		public IndexGetAliasRequestDescriptor()
+		{
+		}
+
 		public IndexGetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 		{
 		}
