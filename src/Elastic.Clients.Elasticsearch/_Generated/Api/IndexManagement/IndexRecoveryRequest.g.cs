@@ -57,6 +57,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexRecoveryRequestDescriptorConverter))]
 	public partial class IndexRecoveryRequestDescriptor : RequestDescriptorBase<IndexRecoveryRequestDescriptor, IndexRecoveryRequestParameters>
 	{
+		public IndexRecoveryRequestDescriptor()
+		{
+		}
+
 		public IndexRecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}

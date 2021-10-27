@@ -18,11 +18,11 @@ public class IndexCoordinatedTests : CoordinatedIntegrationTestBase<WritableClus
 	private const string DeleteIndexStep = nameof(DeleteIndexStep);
 
 	public IndexCoordinatedTests(WritableCluster cluster, EndpointUsage usage) : base(
-		new CoordinatedUsageV2(cluster, usage)
+		new CoordinatedUsage(cluster, usage)
 		{
 				{
 					CreateIndexStep, u =>
-						u.Calls<CreateIndexRequestDescriptor, CreateIndexRequest, CreateIndexResponse>(
+						u.Calls<CreateIndexRequestDescriptor, CreateIndexRequest, ICreateIndexRequest, CreateIndexResponse>(
 							v => new CreateIndexRequest(v),
 							(v, d) => d,
 							(v, c, f) => c.IndexManagement.CreateIndex(v, f),
@@ -33,7 +33,7 @@ public class IndexCoordinatedTests : CoordinatedIntegrationTestBase<WritableClus
 				},
 				{
 					DeleteIndexStep, u =>
-						u.Calls<DeleteIndexRequestDescriptor, DeleteIndexRequest, DeleteIndexResponse>(
+						u.Calls<DeleteIndexRequestDescriptor, DeleteIndexRequest, IDeleteIndexRequest, DeleteIndexResponse>(
 							v => new DeleteIndexRequest(v),
 							(v, d) => d,
 							(v, c, f) => c.IndexManagement.DeleteIndex(v, f),

@@ -87,6 +87,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexPutSettingsRequestDescriptorConverter))]
 	public partial class IndexPutSettingsRequestDescriptor : RequestDescriptorBase<IndexPutSettingsRequestDescriptor, IndexPutSettingsRequestParameters>
 	{
+		public IndexPutSettingsRequestDescriptor()
+		{
+		}
+
 		public IndexPutSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}

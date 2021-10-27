@@ -113,6 +113,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexStatsRequestDescriptorConverter))]
 	public partial class IndexStatsRequestDescriptor : RequestDescriptorBase<IndexStatsRequestDescriptor, IndexStatsRequestParameters>
 	{
+		public IndexStatsRequestDescriptor()
+		{
+		}
+
 		public IndexStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
 		{
 		}

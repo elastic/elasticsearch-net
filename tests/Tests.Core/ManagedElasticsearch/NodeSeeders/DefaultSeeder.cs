@@ -37,7 +37,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
-		public DefaultSeeder(IElasticClient client) /*: this(client, null)*/ { }
+		public DefaultSeeder(IElasticClient client) : this(client, null) { }
 
 		private IElasticClient Client { get; }
 
@@ -49,10 +49,6 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded()))
 				return;
-
-			// TODO: VERY TEMP UNTIL WE CAN PUT AN INDEX THROUGH THE CLIENT!!
-			var client = new HttpClient();
-			client.PutAsync("http://127.0.0.1:9200/project", new StringContent(string.Empty)).GetAwaiter().GetResult();
 
 			var t = Task.Run(async () => await SeedNodeAsync(alreadySeeded).ConfigureAwait(false));
 
@@ -75,7 +71,11 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// If raw_fields exists assume this cluster is already seeded.
 
 		// private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
-		private bool AlreadySeeded() => Client.IndexManagement.IndexExistsTemplate(new IndexExistsTemplateRequest(TestsIndexTemplateName)).Exists;
+		private bool AlreadySeeded()
+		{
+			var response = Client.IndexManagement.IndexExistsTemplate(new IndexExistsTemplateRequest(TestsIndexTemplateName));
+			return response.Exists;
+		}
 
 		// Ensure a clean slate by deleting everything regardless of whether they may already exist
 		private async Task SeedNodeAsync(bool alreadySeeded)
@@ -158,23 +158,34 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
 			indexTemplateResponse.ShouldBeValid();
+
+			var tasks = new[]
+			{
+				CreateProjectIndexAsync()
+			};
+			await Task.WhenAll(tasks)
+				.ContinueWith(t =>
+				{
+					foreach (var r in t.Result)
+						r.ShouldBeValid();
+				}).ConfigureAwait(false);
 		}
 
-		//private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync(typeof(Project), c => c
-		//			.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
-		//			// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
-		//			// TODO 8.0 remove with once the overloads are gone too
-		//			.Mappings(ProjectMappings)
-		//			.Aliases(aliases => aliases
-		//				.Alias(ProjectsAliasName)
-		//				.Alias(ProjectsAliasFilter, a => a
-		//					.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
-		//				)
-		//				.Alias(CommitsAliasFilter, a => a
-		//					.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
-		//				)
-		//			)
-		//		);
+		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync(typeof(Project));
+					//.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
+					// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
+					// TODO 8.0 remove with once the overloads are gone too
+					//.Mappings(ProjectMappings)
+					//.Aliases(aliases => aliases
+					//	.Alias(ProjectsAliasName)
+					//	.Alias(ProjectsAliasFilter, a => a
+					//		.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
+					//	)
+					//	.Alias(CommitsAliasFilter, a => a
+					//		.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
+					//	)
+					//)
+				//);
 
 		//public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
 		//	.Map<Project>(ProjectTypeMappings);
@@ -322,30 +333,30 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//			return mapping;
 		//		}
 
-		//		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
-		//		{
-		//			analysis
-		//				.TokenFilters(tokenFilters => tokenFilters
-		//					.Shingle("shingle", shingle => shingle
-		//						.MinShingleSize(2)
-		//						.MaxShingleSize(4)
-		//					)
-		//				)
-		//				.Analyzers(analyzers => analyzers
-		//					.Custom("shingle", shingle => shingle
-		//						.Filters("shingle")
-		//						.Tokenizer("standard")
-		//					)
-		//				);
-		//			//normalizers are a new feature since 5.2.0
-		//			if (TestConfiguration.Instance.InRange(">=5.2.0"))
-		//				analysis.Normalizers(analyzers => analyzers
-		//					.Custom("my_normalizer", n => n
-		//						.Filters("lowercase", "asciifolding")
-		//					)
-		//				);
-		//			return analysis;
-		//		}
+		//public static IIndexSettingsAnalysis ProjectAnalysisSettings(IndexSettingsAnalysisDescriptor analysis)
+		//{
+		//	//analysis
+		//	//	.TokenFilters(tokenFilters => tokenFilters
+		//	//		.Shingle("shingle", shingle => shingle
+		//	//			.MinShingleSize(2)
+		//	//			.MaxShingleSize(4)
+		//	//		)
+		//	//	)
+		//	//	.Analyzers(analyzers => analyzers
+		//	//		.Custom("shingle", shingle => shingle
+		//	//			.Filters("shingle")
+		//	//			.Tokenizer("standard")
+		//	//		)
+		//	//	);
+		//	////normalizers are a new feature since 5.2.0
+		//	//if (TestConfiguration.Instance.InRange(">=5.2.0"))
+		//	//	analysis.Normalizers(analyzers => analyzers
+		//	//		.Custom("my_normalizer", n => n
+		//	//			.Filters("lowercase", "asciifolding")
+		//	//		)
+		//	//	);
+		//	return analysis;
+		//}
 
 
 		//		private Task<CreateIndexResponse> CreatePercolatorIndexAsync() => Client.Indices.CreateAsync(typeof(ProjectPercolation), c => c

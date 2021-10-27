@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public string Type { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reason")]

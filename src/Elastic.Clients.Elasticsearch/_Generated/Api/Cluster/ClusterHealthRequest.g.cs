@@ -111,6 +111,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
 	public partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
 	{
+		public ClusterHealthRequestDescriptor()
+		{
+		}
+
 		public ClusterHealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
