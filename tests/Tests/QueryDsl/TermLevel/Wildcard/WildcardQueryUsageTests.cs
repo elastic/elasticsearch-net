@@ -52,4 +52,48 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 				.Rewrite(MultiTermQueryRewrite.TopTermsBoost(10))
 			);
 	}
+
+	public class WildcardQueryUsingWildcardFieldUsageTests : QueryDslUsageTestsBase
+	{
+		public WildcardQueryUsingWildcardFieldUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IWildcardQuery>(a => a.Wildcard)
+		{
+			q => q.Field = null,
+			q => { q.Value = null; q.Wildcard = null; },
+			q => { q.Value = string.Empty; q.Wildcard = string.Empty; }
+		};
+
+		protected override QueryContainer QueryInitializer => new WildcardQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Wildcard = "p*oj",
+			Rewrite = MultiTermQueryRewrite.TopTermsBoost(10)
+		};
+
+		protected override object QueryJson => new
+		{
+			wildcard = new
+			{
+				description = new
+				{
+					_name = "named_query",
+					boost = 1.1,
+					rewrite = "top_terms_boost_10",
+					wildcard = "p*oj"
+				}
+			}
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Wildcard(c => c
+				.Name("named_query")
+				.Boost(1.1)
+				.Field(p => p.Description)
+				.Wildcard("p*oj")
+				.Rewrite(MultiTermQueryRewrite.TopTermsBoost(10))
+			);
+	}
 }
