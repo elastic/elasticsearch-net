@@ -120,6 +120,8 @@ namespace Nest
 		// values part of the url path
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 		// Request parameters
+		///<summary>Required version for optimistic concurrency control for pipeline updates</summary>
+		public PutPipelineDescriptor IfVersion(int? ifversion) => Qs("if_version", ifversion);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public PutPipelineDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit operation timeout</summary>
