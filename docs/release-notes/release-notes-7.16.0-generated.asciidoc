@@ -1,5 +1,11 @@
 
 [float]
+[[bug]]
+=== Bug Fixes
+
+- * Support `wildcard` field in `WildcardQuery` https://github.com/elastic/elasticsearch-net/pull/6038[#6038]  (issue: https://github.com/elastic/elasticsearch-net/issues/6033[#6033])
+
+[float]
 [[enhancement]]
 === New Features
 
