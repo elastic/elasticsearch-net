@@ -17,11 +17,10 @@ namespace Nest
 		MultiTermQueryRewrite Rewrite { get; set; }
 
 		[DataMember(Name = "wildcard")]
-		object Wildcard { get; set; }
+		string Wildcard { get; set; }
 	}
 
-	public class WildcardQuery<T, TValue> : WildcardQuery
-		where T : class
+	public class WildcardQuery<T, TValue> : WildcardQuery where T : class
 	{
 		public WildcardQuery(Expression<Func<T, TValue>> field) => Field = field;
 	}
@@ -31,23 +30,29 @@ namespace Nest
 		public MultiTermQueryRewrite Rewrite { get; set; }
 		public object Value { get; set; }
 		public bool? CaseInsensitive { get; set; }
-		public object Wildcard { get; set; }
+		public string Wildcard { get; set; }
 
-		protected override bool Conditionless => Wildcard is null && TermQuery.IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Wildcard = this;
+
+		// Wildcard queries must include the `field` and either a `value` OR a `wildcard` to match
+		internal static bool IsConditionless(IWildcardQuery q) => (q.Value == null && q.Wildcard == null)
+			|| ((q.Value?.ToString().IsNullOrEmpty() ?? true) && (q.Wildcard?.ToString().IsNullOrEmpty() ?? true))
+			|| q.Field.IsConditionless();
 	}
 
 	public class WildcardQueryDescriptor<T>
-		: TermQueryDescriptorBase<WildcardQueryDescriptor<T>, IWildcardQuery, T>,
-			IWildcardQuery
-		where T : class
+		: TermQueryDescriptorBase<WildcardQueryDescriptor<T>, IWildcardQuery, T>, IWildcardQuery
+			where T : class
 	{
 		MultiTermQueryRewrite IWildcardQuery.Rewrite { get; set; }
-		object IWildcardQuery.Wildcard { get; set; }
+		string IWildcardQuery.Wildcard { get; set; }
+
+		protected override bool Conditionless => WildcardQuery.IsConditionless(this);
 
 		public WildcardQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(rewrite, (a, v) => a.Rewrite = v);
 
-		public WildcardQueryDescriptor<T> Wildcard(object value) => Assign(value, (a, v) => a.Wildcard = v);
+		public WildcardQueryDescriptor<T> Wildcard(string value) => Assign(value, (a, v) => a.Wildcard = v);
 	}
 }
