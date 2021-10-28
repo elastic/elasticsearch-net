@@ -121,6 +121,15 @@ namespace Tests.CodeStandards
 			selectorMethods.Should().BeEmpty();
 		}
 
+		private readonly Dictionary<string, IEnumerable<string>> _descriptorPropertySkipList = new()
+		{
+			// Range queries opt to not expose some legacy properties via assignment methods on the descriptor
+			{ "DateRangeQueryDescriptor`1", new[] { "IncludeLower", "IncludeUpper" } },
+			{ "LongRangeQueryDescriptor`1", new[] { "IncludeLower", "IncludeUpper" } },
+			{ "NumericRangeQueryDescriptor`1", new[] { "IncludeLower", "IncludeUpper" } },
+			{ "TermRangeQueryDescriptor`1", new[] { "IncludeLower", "IncludeUpper" } }
+		};
+
 		/**
 		 * Descriptor methods that assign to a nullable bool property should accept
 		 * a nullable bool with a default value
@@ -147,6 +156,12 @@ namespace Tests.CodeStandards
 				var descriptor = descriptors.First(d => query.IsAssignableFrom(d));
 				foreach (var boolProperty in query.GetProperties().Where(p => p.PropertyType == typeof(bool?)))
 				{
+					if (_descriptorPropertySkipList.TryGetValue(descriptor.Name, out var skips))
+					{
+						if (skips.Contains(boolProperty.Name))
+							continue;
+					}
+
 					var descriptorMethod = descriptor.GetMethod(boolProperty.Name);
 					if (descriptorMethod == null)
 						throw new Exception($"No method for property {boolProperty.Name} on {descriptor.Name}");

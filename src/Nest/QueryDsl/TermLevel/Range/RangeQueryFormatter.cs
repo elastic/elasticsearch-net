@@ -18,7 +18,11 @@ namespace Nest
 			{ "gt", 2 },
 			{ "gte", 3 },
 			{ "lte", 4 },
-			{ "lt", 5 }
+			{ "lt", 5 },
+			{ "from", 6 },
+			{ "to", 7 },
+			{ "include_lower", 8 },
+			{ "include_upper", 9 }
 		};
 
 		public IRangeQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -53,11 +57,12 @@ namespace Nest
 							case 3:
 							case 4:
 							case 5:
+							case 6:
+							case 7:
 								var token = segmentReader.GetCurrentJsonToken();
 								switch (token)
 								{
 									case JsonToken.String:
-									case JsonToken.Null:
 										if (!isDate)
 										{
 											var valueSegment = segmentReader.ReadStringSegmentUnsafe();
@@ -75,7 +80,14 @@ namespace Nest
 												isLong = true;
 										}
 										break;
+									case JsonToken.Null:
+										segmentReader.ReadIsNull();
+										break;
 								}
+								break;
+							case 8:
+							case 9:
+								segmentReader.ReadBoolean();
 								break;
 						}
 					}
