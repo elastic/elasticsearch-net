@@ -5,8 +5,13 @@
 --
 Review important information about 7.15.x releases.
 
-* <<release-notes-7.15.2>>
+* <<release-notes-7.15.3>>
 --
+
+
+
+include::release-notes-7.15.3.asciidoc[]
+
 
 
 
