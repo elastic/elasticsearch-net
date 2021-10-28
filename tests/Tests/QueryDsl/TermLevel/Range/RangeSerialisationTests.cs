@@ -19,7 +19,8 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 		public void DeserialisesAndSerialises()
 		{
 			// This test validates that a response from SQL translate can be used in the seubsequent query
-			// The WildcardQueryBuilder prefers the `wildcard` field over the `value` field.
+			// The RangeQueryBuilder currently returns from, to, include_lower and include_upper which are considered deprecated internally, but we have to handle them until the builder is revised.
+			// See: https://github.com/elastic/elasticsearch/issues/48538
 
 			var translateResponse = @"{""size"":1000,""query"":{""bool"":{""must"":[{""range"":{""customer_id"":{""from"":""1"",""to"":null,""include_lower"":false,""include_upper"":false,""boost"":1}}}],""adjust_pure_negative"":true,""boost"":1}}}";
 
@@ -34,7 +35,14 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 			queryContainer.Bool.Should().NotBeNull();
 			var clauses = queryContainer.Bool.Must.ToList();
 			queryContainer = clauses.Single();
-			queryContainer.Range.From
+			var rangeQuery = queryContainer.Range.Should().BeOfType<TermRangeQuery>().Subject; // Expecting term query since the `from` value is provided within quotes.
+
+#pragma warning disable CS0618 // Type or member is obsolete
+			rangeQuery.From.Should().Be("1");
+			rangeQuery.To.Should().BeNull();
+			rangeQuery.IncludeLower.Should().Be(false);
+			rangeQuery.IncludeUpper.Should().Be(false);
+#pragma warning restore CS0618 // Type or member is obsolete
 
 			var stream = new MemoryStream();
 			client.ConnectionSettings.RequestResponseSerializer.Serialize(response.Result, stream);
@@ -43,7 +51,7 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 			var json = reader.ReadToEnd();
 
 			// note: adjust_pure_negative is not recommended
-			json.Should().Be(@"{""query"":{""bool"":{""must"":[{""wildcard"":{""customershortnm.keyword"":{""wildcard"":""*B*"",""boost"":1.0}}}],""boost"":1.0}},""size"":1000}");
+			json.Should().Be(@"{""query"":{""bool"":{""must"":[{""range"":{""customer_id"":{""from"":""1"",""include_lower"":false,""include_upper"":false,""boost"":1.0}}}],""boost"":1.0}},""size"":1000}");
 		}
 	}
 }
