@@ -103,7 +103,7 @@ namespace Elasticsearch.Net.Extensions
 			dateTime = default;
 
 			// TODO: Nicer way to do this
-			var reader = new JsonReader(arraySegment.Array, arraySegment.Offset - 1); // include opening quote "
+			var reader = new JsonReader(arraySegment.Array, arraySegment.Offset > 0 ? arraySegment.Offset - 1: arraySegment.Offset); // try to include opening quote "
 			try
 			{
 				dateTime = ISO8601DateTimeFormatter.Default.Deserialize(ref reader, formatterResolver);
