@@ -61,14 +61,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IIndexSettings> Settings { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> Settings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping? Mappings { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<string, IndexManagement.IAliasDefinition>? Aliases { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; init; }
 	}
 }

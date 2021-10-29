@@ -23,19 +23,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 {
-	[InterfaceConverterAttribute(typeof(RolloverConditionsDescriptorConverter<RolloverConditions>))]
-	public partial interface IRolloverConditions
-	{
-		Elastic.Clients.Elasticsearch.Time? MaxAge { get; set; }
-
-		object? MaxDocs { get; set; }
-
-		string? MaxSize { get; set; }
-
-		Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
-	}
-
-	public partial class RolloverConditions : IndexManagement.Rollover.IRolloverConditions
+	public partial class RolloverConditions
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_age")]
@@ -54,45 +42,47 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
 	}
 
-	public partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor, IRolloverConditions>, IRolloverConditions
+	[JsonConverter(typeof(RolloverConditionsDescriptorConverter))]
+	public partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
 	{
-		Elastic.Clients.Elasticsearch.Time? IRolloverConditions.MaxAge { get; set; }
-
-		object? IRolloverConditions.MaxDocs { get; set; }
-
-		string? IRolloverConditions.MaxSize { get; set; }
-
-		Elastic.Clients.Elasticsearch.ByteSize? IRolloverConditions.MaxPrimaryShardSize { get; set; }
+		internal Elastic.Clients.Elasticsearch.Time? _maxAge;
+		internal object? _maxDocs;
+		internal string? _maxSize;
+		internal Elastic.Clients.Elasticsearch.ByteSize? _maxPrimaryShardSize;
+		public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Time? maxAge) => Assign(maxAge, (a, v) => a._maxAge = v);
+		public RolloverConditionsDescriptor MaxDocs(object? maxDocs) => Assign(maxDocs, (a, v) => a._maxDocs = v);
+		public RolloverConditionsDescriptor MaxSize(string? maxSize) => Assign(maxSize, (a, v) => a._maxSize = v);
+		public RolloverConditionsDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize) => Assign(maxPrimaryShardSize, (a, v) => a._maxPrimaryShardSize = v);
 	}
 
-	internal sealed class RolloverConditionsDescriptorConverter<TReadAs> : JsonConverter<IRolloverConditions> where TReadAs : class, IRolloverConditions
+	internal sealed class RolloverConditionsDescriptorConverter : JsonConverter<RolloverConditionsDescriptor>
 	{
-		public override IRolloverConditions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IRolloverConditions value, JsonSerializerOptions options)
+		public override RolloverConditionsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RolloverConditionsDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.MaxAge is not null)
+			if (value._maxAge is not null)
 			{
 				writer.WritePropertyName("max_age");
-				JsonSerializer.Serialize(writer, value.MaxAge, options);
+				JsonSerializer.Serialize(writer, value._maxAge, options);
 			}
 
-			if (value.MaxDocs is not null)
+			if (value._maxDocs is not null)
 			{
 				writer.WritePropertyName("max_docs");
-				JsonSerializer.Serialize(writer, value.MaxDocs, options);
+				JsonSerializer.Serialize(writer, value._maxDocs, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.MaxSize))
+			if (!string.IsNullOrEmpty(value._maxSize))
 			{
 				writer.WritePropertyName("max_size");
-				writer.WriteStringValue(value.MaxSize);
+				writer.WriteStringValue(value._maxSize);
 			}
 
-			if (value.MaxPrimaryShardSize is not null)
+			if (value._maxPrimaryShardSize is not null)
 			{
 				writer.WritePropertyName("max_primary_shard_size");
-				JsonSerializer.Serialize(writer, value.MaxPrimaryShardSize, options);
+				JsonSerializer.Serialize(writer, value._maxPrimaryShardSize, options);
 			}
 
 			writer.WriteEndObject();

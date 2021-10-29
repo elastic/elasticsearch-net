@@ -23,62 +23,54 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 {
-	[InterfaceConverterAttribute(typeof(IndexTemplateMappingDescriptorConverter<IndexTemplateMapping>))]
-	public partial interface IIndexTemplateMapping
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
-
-		Mapping.ITypeMapping? Mappings { get; set; }
-
-		IndexManagement.IIndexSettings? Settings { get; set; }
-	}
-
-	public partial class IndexTemplateMapping : IndexManagement.PutIndexTemplate.IIndexTemplateMapping
+	public partial class IndexTemplateMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public IndexManagement.IIndexSettings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor, IIndexTemplateMapping>, IIndexTemplateMapping
+	[JsonConverter(typeof(IndexTemplateMappingDescriptorConverter))]
+	public partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IIndexTemplateMapping.Aliases { get; set; }
-
-		Mapping.ITypeMapping? IIndexTemplateMapping.Mappings { get; set; }
-
-		IndexManagement.IIndexSettings? IIndexTemplateMapping.Settings { get; set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
+		public IndexTemplateMappingDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public IndexTemplateMappingDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
 	}
 
-	internal sealed class IndexTemplateMappingDescriptorConverter<TReadAs> : JsonConverter<IIndexTemplateMapping> where TReadAs : class, IIndexTemplateMapping
+	internal sealed class IndexTemplateMappingDescriptorConverter : JsonConverter<IndexTemplateMappingDescriptor>
 	{
-		public override IIndexTemplateMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexTemplateMapping value, JsonSerializerOptions options)
+		public override IndexTemplateMappingDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexTemplateMappingDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Aliases is not null)
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.Mappings is not null)
+			if (value._mappings is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.Mappings, options);
+				JsonSerializer.Serialize(writer, value._mappings, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
 			writer.WriteEndObject();

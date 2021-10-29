@@ -47,19 +47,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("actions")]
-		public IEnumerable<IndexManagement.UpdateAliases.IAction>? Actions { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? Actions { get; set; }
 	}
 
 	[JsonConverter(typeof(IndexUpdateAliasesRequestDescriptorConverter))]
 	public partial class IndexUpdateAliasesRequestDescriptor : RequestDescriptorBase<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesRequestParameters>
 	{
-		internal IEnumerable<IndexManagement.UpdateAliases.IAction>? _actions;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? _actions;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public IndexUpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexUpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public IndexUpdateAliasesRequestDescriptor Actions(IEnumerable<IndexManagement.UpdateAliases.IAction>? actions) => Assign(actions, (a, v) => a._actions = v);
+		public IndexUpdateAliasesRequestDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? actions) => Assign(actions, (a, v) => a._actions = v);
 	}
 
 	internal sealed class IndexUpdateAliasesRequestDescriptorConverter : JsonConverter<IndexUpdateAliasesRequestDescriptor>

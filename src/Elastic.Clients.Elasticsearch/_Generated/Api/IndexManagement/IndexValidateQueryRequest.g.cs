@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
-		public QueryDsl.IQueryContainer? Query { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
 	[JsonConverter(typeof(IndexValidateQueryRequestDescriptorConverter))]
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal QueryDsl.IQueryContainer? _query;
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _query;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementValidateQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -145,7 +145,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexValidateQueryRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
 		public IndexValidateQueryRequestDescriptor Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
 		public IndexValidateQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
-		public IndexValidateQueryRequestDescriptor Query(QueryDsl.IQueryContainer? query) => Assign(query, (a, v) => a._query = v);
+		public IndexValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a._query = v);
 	}
 
 	internal sealed class IndexValidateQueryRequestDescriptorConverter : JsonConverter<IndexValidateQueryRequestDescriptor>

@@ -34,31 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public IReadOnlyCollection<string> Metrics { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(AllFieldDescriptorConverter<AllField>))]
-	public partial interface IAllField
-	{
-		string Analyzer { get; set; }
-
-		bool Enabled { get; set; }
-
-		bool OmitNorms { get; set; }
-
-		string SearchAnalyzer { get; set; }
-
-		string Similarity { get; set; }
-
-		bool Store { get; set; }
-
-		bool StoreTermVectorOffsets { get; set; }
-
-		bool StoreTermVectorPayloads { get; set; }
-
-		bool StoreTermVectorPositions { get; set; }
-
-		bool StoreTermVectors { get; set; }
-	}
-
-	public partial class AllField : Mapping.IAllField
+	public partial class AllField
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -101,55 +77,57 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool StoreTermVectors { get; set; }
 	}
 
-	public partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
+	[JsonConverter(typeof(AllFieldDescriptorConverter))]
+	public partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor>
 	{
-		string IAllField.Analyzer { get; set; }
-
-		bool IAllField.Enabled { get; set; }
-
-		bool IAllField.OmitNorms { get; set; }
-
-		string IAllField.SearchAnalyzer { get; set; }
-
-		string IAllField.Similarity { get; set; }
-
-		bool IAllField.Store { get; set; }
-
-		bool IAllField.StoreTermVectorOffsets { get; set; }
-
-		bool IAllField.StoreTermVectorPayloads { get; set; }
-
-		bool IAllField.StoreTermVectorPositions { get; set; }
-
-		bool IAllField.StoreTermVectors { get; set; }
+		internal string _analyzer;
+		internal bool _enabled;
+		internal bool _omitNorms;
+		internal string _searchAnalyzer;
+		internal string _similarity;
+		internal bool _store;
+		internal bool _storeTermVectorOffsets;
+		internal bool _storeTermVectorPayloads;
+		internal bool _storeTermVectorPositions;
+		internal bool _storeTermVectors;
+		public AllFieldDescriptor Analyzer(string analyzer) => Assign(analyzer, (a, v) => a._analyzer = v);
+		public AllFieldDescriptor Enabled(bool enabled = true) => Assign(enabled, (a, v) => a._enabled = v);
+		public AllFieldDescriptor OmitNorms(bool omitNorms = true) => Assign(omitNorms, (a, v) => a._omitNorms = v);
+		public AllFieldDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a._searchAnalyzer = v);
+		public AllFieldDescriptor Similarity(string similarity) => Assign(similarity, (a, v) => a._similarity = v);
+		public AllFieldDescriptor Store(bool store = true) => Assign(store, (a, v) => a._store = v);
+		public AllFieldDescriptor StoreTermVectorOffsets(bool storeTermVectorOffsets = true) => Assign(storeTermVectorOffsets, (a, v) => a._storeTermVectorOffsets = v);
+		public AllFieldDescriptor StoreTermVectorPayloads(bool storeTermVectorPayloads = true) => Assign(storeTermVectorPayloads, (a, v) => a._storeTermVectorPayloads = v);
+		public AllFieldDescriptor StoreTermVectorPositions(bool storeTermVectorPositions = true) => Assign(storeTermVectorPositions, (a, v) => a._storeTermVectorPositions = v);
+		public AllFieldDescriptor StoreTermVectors(bool storeTermVectors = true) => Assign(storeTermVectors, (a, v) => a._storeTermVectors = v);
 	}
 
-	internal sealed class AllFieldDescriptorConverter<TReadAs> : JsonConverter<IAllField> where TReadAs : class, IAllField
+	internal sealed class AllFieldDescriptorConverter : JsonConverter<AllFieldDescriptor>
 	{
-		public override IAllField Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IAllField value, JsonSerializerOptions options)
+		public override AllFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AllFieldDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(value.Analyzer);
+			writer.WriteStringValue(value._analyzer);
 			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(value.Enabled);
+			writer.WriteBooleanValue(value._enabled);
 			writer.WritePropertyName("omit_norms");
-			writer.WriteBooleanValue(value.OmitNorms);
+			writer.WriteBooleanValue(value._omitNorms);
 			writer.WritePropertyName("search_analyzer");
-			writer.WriteStringValue(value.SearchAnalyzer);
+			writer.WriteStringValue(value._searchAnalyzer);
 			writer.WritePropertyName("similarity");
-			writer.WriteStringValue(value.Similarity);
+			writer.WriteStringValue(value._similarity);
 			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(value.Store);
+			writer.WriteBooleanValue(value._store);
 			writer.WritePropertyName("store_term_vector_offsets");
-			writer.WriteBooleanValue(value.StoreTermVectorOffsets);
+			writer.WriteBooleanValue(value._storeTermVectorOffsets);
 			writer.WritePropertyName("store_term_vector_payloads");
-			writer.WriteBooleanValue(value.StoreTermVectorPayloads);
+			writer.WriteBooleanValue(value._storeTermVectorPayloads);
 			writer.WritePropertyName("store_term_vector_positions");
-			writer.WriteBooleanValue(value.StoreTermVectorPositions);
+			writer.WriteBooleanValue(value._storeTermVectorPositions);
 			writer.WritePropertyName("store_term_vectors");
-			writer.WriteBooleanValue(value.StoreTermVectors);
+			writer.WriteBooleanValue(value._storeTermVectors);
 			writer.WriteEndObject();
 		}
 	}
@@ -323,25 +301,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(DynamicTemplateDescriptorConverter<DynamicTemplate>))]
-	public partial interface IDynamicTemplate
-	{
-		Elastic.Clients.Elasticsearch.Mapping.Properties? Mapping { get; set; }
-
-		string? Match { get; set; }
-
-		string? MatchMappingType { get; set; }
-
-		Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
-
-		string? PathMatch { get; set; }
-
-		string? PathUnmatch { get; set; }
-
-		string? Unmatch { get; set; }
-	}
-
-	public partial class DynamicTemplate : Mapping.IDynamicTemplate
+	public partial class DynamicTemplate
 	{
 		[JsonInclude]
 		[JsonPropertyName("mapping")]
@@ -372,69 +332,71 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string? Unmatch { get; set; }
 	}
 
-	public partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor, IDynamicTemplate>, IDynamicTemplate
+	[JsonConverter(typeof(DynamicTemplateDescriptorConverter))]
+	public partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor>
 	{
-		Elastic.Clients.Elasticsearch.Mapping.Properties? IDynamicTemplate.Mapping { get; set; }
-
-		string? IDynamicTemplate.Match { get; set; }
-
-		string? IDynamicTemplate.MatchMappingType { get; set; }
-
-		Elastic.Clients.Elasticsearch.Mapping.MatchType? IDynamicTemplate.MatchPattern { get; set; }
-
-		string? IDynamicTemplate.PathMatch { get; set; }
-
-		string? IDynamicTemplate.PathUnmatch { get; set; }
-
-		string? IDynamicTemplate.Unmatch { get; set; }
+		internal Elastic.Clients.Elasticsearch.Mapping.Properties? _mapping;
+		internal string? _match;
+		internal string? _matchMappingType;
+		internal Elastic.Clients.Elasticsearch.Mapping.MatchType? _matchPattern;
+		internal string? _pathMatch;
+		internal string? _pathUnmatch;
+		internal string? _unmatch;
+		public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.Properties? mapping) => Assign(mapping, (a, v) => a._mapping = v);
+		public DynamicTemplateDescriptor Match(string? match) => Assign(match, (a, v) => a._match = v);
+		public DynamicTemplateDescriptor MatchMappingType(string? matchMappingType) => Assign(matchMappingType, (a, v) => a._matchMappingType = v);
+		public DynamicTemplateDescriptor MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? matchPattern) => Assign(matchPattern, (a, v) => a._matchPattern = v);
+		public DynamicTemplateDescriptor PathMatch(string? pathMatch) => Assign(pathMatch, (a, v) => a._pathMatch = v);
+		public DynamicTemplateDescriptor PathUnmatch(string? pathUnmatch) => Assign(pathUnmatch, (a, v) => a._pathUnmatch = v);
+		public DynamicTemplateDescriptor Unmatch(string? unmatch) => Assign(unmatch, (a, v) => a._unmatch = v);
 	}
 
-	internal sealed class DynamicTemplateDescriptorConverter<TReadAs> : JsonConverter<IDynamicTemplate> where TReadAs : class, IDynamicTemplate
+	internal sealed class DynamicTemplateDescriptorConverter : JsonConverter<DynamicTemplateDescriptor>
 	{
-		public override IDynamicTemplate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IDynamicTemplate value, JsonSerializerOptions options)
+		public override DynamicTemplateDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DynamicTemplateDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Mapping is not null)
+			if (value._mapping is not null)
 			{
 				writer.WritePropertyName("mapping");
-				JsonSerializer.Serialize(writer, value.Mapping, options);
+				JsonSerializer.Serialize(writer, value._mapping, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Match))
+			if (!string.IsNullOrEmpty(value._match))
 			{
 				writer.WritePropertyName("match");
-				writer.WriteStringValue(value.Match);
+				writer.WriteStringValue(value._match);
 			}
 
-			if (!string.IsNullOrEmpty(value.MatchMappingType))
+			if (!string.IsNullOrEmpty(value._matchMappingType))
 			{
 				writer.WritePropertyName("match_mapping_type");
-				writer.WriteStringValue(value.MatchMappingType);
+				writer.WriteStringValue(value._matchMappingType);
 			}
 
-			if (value.MatchPattern is not null)
+			if (value._matchPattern is not null)
 			{
 				writer.WritePropertyName("match_pattern");
-				JsonSerializer.Serialize(writer, value.MatchPattern, options);
+				JsonSerializer.Serialize(writer, value._matchPattern, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.PathMatch))
+			if (!string.IsNullOrEmpty(value._pathMatch))
 			{
 				writer.WritePropertyName("path_match");
-				writer.WriteStringValue(value.PathMatch);
+				writer.WriteStringValue(value._pathMatch);
 			}
 
-			if (!string.IsNullOrEmpty(value.PathUnmatch))
+			if (!string.IsNullOrEmpty(value._pathUnmatch))
 			{
 				writer.WritePropertyName("path_unmatch");
-				writer.WriteStringValue(value.PathUnmatch);
+				writer.WriteStringValue(value._pathUnmatch);
 			}
 
-			if (!string.IsNullOrEmpty(value.Unmatch))
+			if (!string.IsNullOrEmpty(value._unmatch))
 			{
 				writer.WritePropertyName("unmatch");
-				writer.WriteStringValue(value.Unmatch);
+				writer.WriteStringValue(value._unmatch);
 			}
 
 			writer.WriteEndObject();
@@ -459,13 +421,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties> Mapping { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IFieldNamesField, FieldNamesField>))]
-	public partial interface IFieldNamesField
-	{
-		bool Enabled { get; set; }
-	}
-
-	public partial class FieldNamesField : Mapping.IFieldNamesField
+	public partial class FieldNamesField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -625,13 +581,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? IgnoreMalformed { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexField, IndexField>))]
-	public partial interface IIndexField
-	{
-		bool Enabled { get; set; }
-	}
-
-	public partial class IndexField : Mapping.IIndexField
+	public partial class IndexField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
@@ -838,30 +788,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRoutingField, RoutingField>))]
-	public partial interface IRoutingField
-	{
-		bool Required { get; set; }
-	}
-
-	public partial class RoutingField : Mapping.IRoutingField
+	public partial class RoutingField
 	{
 		[JsonInclude]
 		[JsonPropertyName("required")]
 		public bool Required { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(RuntimeFieldDescriptorConverter<RuntimeField>))]
-	public partial interface IRuntimeField
-	{
-		string? Format { get; set; }
-
-		Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
-		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
-	}
-
-	public partial class RuntimeField : Mapping.IRuntimeField
+	public partial class RuntimeField
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -876,35 +810,37 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 	}
 
-	public partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor, IRuntimeField>, IRuntimeField
+	[JsonConverter(typeof(RuntimeFieldDescriptorConverter))]
+	public partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor>
 	{
-		string? IRuntimeField.Format { get; set; }
-
-		Elastic.Clients.Elasticsearch.Script? IRuntimeField.Script { get; set; }
-
-		Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType IRuntimeField.Type { get; set; }
+		internal string? _format;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType _type;
+		public RuntimeFieldDescriptor Format(string? format) => Assign(format, (a, v) => a._format = v);
+		public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a._script = v);
+		public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type) => Assign(type, (a, v) => a._type = v);
 	}
 
-	internal sealed class RuntimeFieldDescriptorConverter<TReadAs> : JsonConverter<IRuntimeField> where TReadAs : class, IRuntimeField
+	internal sealed class RuntimeFieldDescriptorConverter : JsonConverter<RuntimeFieldDescriptor>
 	{
-		public override IRuntimeField Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IRuntimeField value, JsonSerializerOptions options)
+		public override RuntimeFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RuntimeFieldDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Format))
+			if (!string.IsNullOrEmpty(value._format))
 			{
 				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
+				writer.WriteStringValue(value._format);
 			}
 
-			if (value.Script is not null)
+			if (value._script is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, value.Script, options);
+				JsonSerializer.Serialize(writer, value._script, options);
 			}
 
 			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, value.Type, options);
+			JsonSerializer.Serialize(writer, value._type, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -985,34 +921,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public double? NullValue { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<ISizeField, SizeField>))]
-	public partial interface ISizeField
-	{
-		bool Enabled { get; set; }
-	}
-
-	public partial class SizeField : Mapping.ISizeField
+	public partial class SizeField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SourceFieldDescriptorConverter<SourceField>))]
-	public partial interface ISourceField
-	{
-		bool? Compress { get; set; }
-
-		string? CompressThreshold { get; set; }
-
-		bool? Enabled { get; set; }
-
-		IEnumerable<string>? Excludes { get; set; }
-
-		IEnumerable<string>? Includes { get; set; }
-	}
-
-	public partial class SourceField : Mapping.ISourceField
+	public partial class SourceField
 	{
 		[JsonInclude]
 		[JsonPropertyName("compress")]
@@ -1035,53 +951,55 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public IEnumerable<string>? Includes { get; set; }
 	}
 
-	public partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor, ISourceField>, ISourceField
+	[JsonConverter(typeof(SourceFieldDescriptorConverter))]
+	public partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor>
 	{
-		bool? ISourceField.Compress { get; set; }
-
-		string? ISourceField.CompressThreshold { get; set; }
-
-		bool? ISourceField.Enabled { get; set; }
-
-		IEnumerable<string>? ISourceField.Excludes { get; set; }
-
-		IEnumerable<string>? ISourceField.Includes { get; set; }
+		internal bool? _compress;
+		internal string? _compressThreshold;
+		internal bool? _enabled;
+		internal IEnumerable<string>? _excludes;
+		internal IEnumerable<string>? _includes;
+		public SourceFieldDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a._compress = v);
+		public SourceFieldDescriptor CompressThreshold(string? compressThreshold) => Assign(compressThreshold, (a, v) => a._compressThreshold = v);
+		public SourceFieldDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a._enabled = v);
+		public SourceFieldDescriptor Excludes(IEnumerable<string>? excludes) => Assign(excludes, (a, v) => a._excludes = v);
+		public SourceFieldDescriptor Includes(IEnumerable<string>? includes) => Assign(includes, (a, v) => a._includes = v);
 	}
 
-	internal sealed class SourceFieldDescriptorConverter<TReadAs> : JsonConverter<ISourceField> where TReadAs : class, ISourceField
+	internal sealed class SourceFieldDescriptorConverter : JsonConverter<SourceFieldDescriptor>
 	{
-		public override ISourceField Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, ISourceField value, JsonSerializerOptions options)
+		public override SourceFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SourceFieldDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Compress.HasValue)
+			if (value._compress.HasValue)
 			{
 				writer.WritePropertyName("compress");
-				writer.WriteBooleanValue(value.Compress.Value);
+				writer.WriteBooleanValue(value._compress.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.CompressThreshold))
+			if (!string.IsNullOrEmpty(value._compressThreshold))
 			{
 				writer.WritePropertyName("compress_threshold");
-				writer.WriteStringValue(value.CompressThreshold);
+				writer.WriteStringValue(value._compressThreshold);
 			}
 
-			if (value.Enabled.HasValue)
+			if (value._enabled.HasValue)
 			{
 				writer.WritePropertyName("enabled");
-				writer.WriteBooleanValue(value.Enabled.Value);
+				writer.WriteBooleanValue(value._enabled.Value);
 			}
 
-			if (value.Excludes is not null)
+			if (value._excludes is not null)
 			{
 				writer.WritePropertyName("excludes");
-				JsonSerializer.Serialize(writer, value.Excludes, options);
+				JsonSerializer.Serialize(writer, value._excludes, options);
 			}
 
-			if (value.Includes is not null)
+			if (value._includes is not null)
 			{
 				writer.WritePropertyName("includes");
-				JsonSerializer.Serialize(writer, value.Includes, options);
+				JsonSerializer.Serialize(writer, value._includes, options);
 			}
 
 			writer.WriteEndObject();
@@ -1215,45 +1133,11 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public bool? EnablePositionIncrements { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(TypeMappingDescriptorConverter<TypeMapping>))]
-	public partial interface ITypeMapping
-	{
-		Mapping.IAllField? AllField { get; set; }
-
-		bool? DateDetection { get; set; }
-
-		Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? Dynamic { get; set; }
-
-		IEnumerable<string>? DynamicDateFormats { get; set; }
-
-		Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? DynamicTemplates { get; set; }
-
-		Mapping.IFieldNamesField? FieldNames { get; set; }
-
-		Mapping.IIndexField? IndexField { get; set; }
-
-		Dictionary<string, object>? Meta { get; set; }
-
-		bool? NumericDetection { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties>? Properties { get; set; }
-
-		Mapping.IRoutingField? Routing { get; set; }
-
-		Mapping.ISizeField? Size { get; set; }
-
-		Mapping.ISourceField? Source { get; set; }
-
-		Dictionary<string, Mapping.IRuntimeField>? Runtime { get; set; }
-
-		bool? Enabled { get; set; }
-	}
-
-	public partial class TypeMapping : Mapping.ITypeMapping
+	public partial class TypeMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("all_field")]
-		public Mapping.IAllField? AllField { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.AllField? AllField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("date_detection")]
@@ -1269,15 +1153,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("dynamic_templates")]
-		public Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? DynamicTemplates { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_field_names")]
-		public Mapping.IFieldNamesField? FieldNames { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_field")]
-		public Mapping.IIndexField? IndexField { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -1293,152 +1177,154 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
-		public Mapping.IRoutingField? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_size")]
-		public Mapping.ISizeField? Size { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Mapping.ISourceField? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime")]
-		public Dictionary<string, Mapping.IRuntimeField>? Runtime { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
 	}
 
-	public partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor, ITypeMapping>, ITypeMapping
+	[JsonConverter(typeof(TypeMappingDescriptorConverter))]
+	public partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor>
 	{
-		Mapping.IAllField? ITypeMapping.AllField { get; set; }
-
-		bool? ITypeMapping.DateDetection { get; set; }
-
-		Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? ITypeMapping.Dynamic { get; set; }
-
-		IEnumerable<string>? ITypeMapping.DynamicDateFormats { get; set; }
-
-		Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? ITypeMapping.DynamicTemplates { get; set; }
-
-		Mapping.IFieldNamesField? ITypeMapping.FieldNames { get; set; }
-
-		Mapping.IIndexField? ITypeMapping.IndexField { get; set; }
-
-		Dictionary<string, object>? ITypeMapping.Meta { get; set; }
-
-		bool? ITypeMapping.NumericDetection { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties>? ITypeMapping.Properties { get; set; }
-
-		Mapping.IRoutingField? ITypeMapping.Routing { get; set; }
-
-		Mapping.ISizeField? ITypeMapping.Size { get; set; }
-
-		Mapping.ISourceField? ITypeMapping.Source { get; set; }
-
-		Dictionary<string, Mapping.IRuntimeField>? ITypeMapping.Runtime { get; set; }
-
-		bool? ITypeMapping.Enabled { get; set; }
+		internal Elastic.Clients.Elasticsearch.Mapping.AllField? _allField;
+		internal bool? _dateDetection;
+		internal Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? _dynamic;
+		internal IEnumerable<string>? _dynamicDateFormats;
+		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? _dynamicTemplates;
+		internal Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? _fieldNames;
+		internal Elastic.Clients.Elasticsearch.Mapping.IndexField? _indexField;
+		internal Dictionary<string, object>? _meta;
+		internal bool? _numericDetection;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties>? _properties;
+		internal Elastic.Clients.Elasticsearch.Mapping.RoutingField? _routing;
+		internal Elastic.Clients.Elasticsearch.Mapping.SizeField? _size;
+		internal Elastic.Clients.Elasticsearch.Mapping.SourceField? _source;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? _runtime;
+		internal bool? _enabled;
+		public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField) => Assign(allField, (a, v) => a._allField = v);
+		public TypeMappingDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a._dateDetection = v);
+		public TypeMappingDescriptor Dynamic(Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? dynamic) => Assign(dynamic, (a, v) => a._dynamic = v);
+		public TypeMappingDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats) => Assign(dynamicDateFormats, (a, v) => a._dynamicDateFormats = v);
+		public TypeMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a._dynamicTemplates = v);
+		public TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a._fieldNames = v);
+		public TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField? indexField) => Assign(indexField, (a, v) => a._indexField = v);
+		public TypeMappingDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
+		public TypeMappingDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a._numericDetection = v);
+		public TypeMappingDescriptor Properties(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>> selector) => Assign(selector, (a, v) => a._properties = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>()));
+		public TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing) => Assign(routing, (a, v) => a._routing = v);
+		public TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeField? size) => Assign(size, (a, v) => a._size = v);
+		public TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source) => Assign(source, (a, v) => a._source = v);
+		public TypeMappingDescriptor Runtime(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>> selector) => Assign(selector, (a, v) => a._runtime = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>()));
+		public TypeMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a._enabled = v);
 	}
 
-	internal sealed class TypeMappingDescriptorConverter<TReadAs> : JsonConverter<ITypeMapping> where TReadAs : class, ITypeMapping
+	internal sealed class TypeMappingDescriptorConverter : JsonConverter<TypeMappingDescriptor>
 	{
-		public override ITypeMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, ITypeMapping value, JsonSerializerOptions options)
+		public override TypeMappingDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TypeMappingDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.AllField is not null)
+			if (value._allField is not null)
 			{
 				writer.WritePropertyName("all_field");
-				JsonSerializer.Serialize(writer, value.AllField, options);
+				JsonSerializer.Serialize(writer, value._allField, options);
 			}
 
-			if (value.DateDetection.HasValue)
+			if (value._dateDetection.HasValue)
 			{
 				writer.WritePropertyName("date_detection");
-				writer.WriteBooleanValue(value.DateDetection.Value);
+				writer.WriteBooleanValue(value._dateDetection.Value);
 			}
 
-			if (value.Dynamic is not null)
+			if (value._dynamic is not null)
 			{
 				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, value.Dynamic, options);
+				JsonSerializer.Serialize(writer, value._dynamic, options);
 			}
 
-			if (value.DynamicDateFormats is not null)
+			if (value._dynamicDateFormats is not null)
 			{
 				writer.WritePropertyName("dynamic_date_formats");
-				JsonSerializer.Serialize(writer, value.DynamicDateFormats, options);
+				JsonSerializer.Serialize(writer, value._dynamicDateFormats, options);
 			}
 
-			if (value.DynamicTemplates is not null)
+			if (value._dynamicTemplates is not null)
 			{
 				writer.WritePropertyName("dynamic_templates");
-				JsonSerializer.Serialize(writer, value.DynamicTemplates, options);
+				JsonSerializer.Serialize(writer, value._dynamicTemplates, options);
 			}
 
-			if (value.FieldNames is not null)
+			if (value._fieldNames is not null)
 			{
 				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, value.FieldNames, options);
+				JsonSerializer.Serialize(writer, value._fieldNames, options);
 			}
 
-			if (value.IndexField is not null)
+			if (value._indexField is not null)
 			{
 				writer.WritePropertyName("index_field");
-				JsonSerializer.Serialize(writer, value.IndexField, options);
+				JsonSerializer.Serialize(writer, value._indexField, options);
 			}
 
-			if (value.Meta is not null)
+			if (value._meta is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
+				JsonSerializer.Serialize(writer, value._meta, options);
 			}
 
-			if (value.NumericDetection.HasValue)
+			if (value._numericDetection.HasValue)
 			{
 				writer.WritePropertyName("numeric_detection");
-				writer.WriteBooleanValue(value.NumericDetection.Value);
+				writer.WriteBooleanValue(value._numericDetection.Value);
 			}
 
-			if (value.Properties is not null)
+			if (value._properties is not null)
 			{
 				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, value.Properties, options);
+				JsonSerializer.Serialize(writer, value._properties, options);
 			}
 
-			if (value.Routing is not null)
+			if (value._routing is not null)
 			{
 				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, value.Routing, options);
+				JsonSerializer.Serialize(writer, value._routing, options);
 			}
 
-			if (value.Size is not null)
+			if (value._size is not null)
 			{
 				writer.WritePropertyName("_size");
-				JsonSerializer.Serialize(writer, value.Size, options);
+				JsonSerializer.Serialize(writer, value._size, options);
 			}
 
-			if (value.Source is not null)
+			if (value._source is not null)
 			{
 				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, value.Source, options);
+				JsonSerializer.Serialize(writer, value._source, options);
 			}
 
-			if (value.Runtime is not null)
+			if (value._runtime is not null)
 			{
 				writer.WritePropertyName("runtime");
-				JsonSerializer.Serialize(writer, value.Runtime, options);
+				JsonSerializer.Serialize(writer, value._runtime, options);
 			}
 
-			if (value.Enabled.HasValue)
+			if (value._enabled.HasValue)
 			{
 				writer.WritePropertyName("enabled");
-				writer.WriteBooleanValue(value.Enabled.Value);
+				writer.WriteBooleanValue(value._enabled.Value);
 			}
 
 			writer.WriteEndObject();
