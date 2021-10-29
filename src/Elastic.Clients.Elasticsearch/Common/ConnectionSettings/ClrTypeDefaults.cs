@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Expression<Func<TDocument, object>> RoutingProperty { get; set; }
 	}
 
-	public class ClrTypeMappingDescriptor : DescriptorBase<ClrTypeMappingDescriptor, IClrTypeMapping>, IClrTypeMapping
+	public class ClrTypeMappingDescriptor : OldDescriptorBase<ClrTypeMappingDescriptor, IClrTypeMapping>, IClrTypeMapping
 	{
 		private readonly Type _type;
 
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	public class ClrTypeMappingDescriptor<TDocument>
-		: DescriptorBase<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>, IClrTypeMapping<TDocument>
+		: OldDescriptorBase<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>, IClrTypeMapping<TDocument>
 		where TDocument : class
 	{
 		Type IClrTypeMapping.ClrType { get; } = typeof(TDocument);

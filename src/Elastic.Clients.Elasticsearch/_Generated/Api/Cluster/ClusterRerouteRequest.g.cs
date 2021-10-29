@@ -71,13 +71,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("commands")]
-		public IEnumerable<Cluster.Reroute.ICommand>? Commands { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? Commands { get; set; }
 	}
 
 	[JsonConverter(typeof(ClusterRerouteRequestDescriptorConverter))]
 	public partial class ClusterRerouteRequestDescriptor : RequestDescriptorBase<ClusterRerouteRequestDescriptor, ClusterRerouteRequestParameters>
 	{
-		internal IEnumerable<Cluster.Reroute.ICommand>? _commands;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? _commands;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterRerouteRequestDescriptor RetryFailed(bool? retryFailed) => Qs("retry_failed", retryFailed);
 		public ClusterRerouteRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterRerouteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Cluster.Reroute.ICommand>? commands) => Assign(commands, (a, v) => a._commands = v);
+		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? commands) => Assign(commands, (a, v) => a._commands = v);
 	}
 
 	internal sealed class ClusterRerouteRequestDescriptorConverter : JsonConverter<ClusterRerouteRequestDescriptor>

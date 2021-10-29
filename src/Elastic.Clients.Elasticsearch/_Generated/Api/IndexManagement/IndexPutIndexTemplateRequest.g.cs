@@ -48,11 +48,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
-		public IndexManagement.PutIndexTemplate.IIndexTemplateMapping? Template { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? Template { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("data_stream")]
-		public IndexManagement.IDataStream? DataStream { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.DataStream? DataStream { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("priority")]
@@ -76,8 +76,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.Indices? _indexPatterns;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Name>? _composedOf;
-		internal IndexManagement.PutIndexTemplate.IIndexTemplateMapping? _template;
-		internal IndexManagement.IDataStream? _dataStream;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? _template;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.DataStream? _dataStream;
 		internal int? _priority;
 		internal object? _version;
 		internal Dictionary<string, object>? _meta;
@@ -86,8 +86,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => true;
 		public IndexPutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
 		public IndexPutIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a._composedOf = v);
-		public IndexPutIndexTemplateRequestDescriptor Template(IndexManagement.PutIndexTemplate.IIndexTemplateMapping? template) => Assign(template, (a, v) => a._template = v);
-		public IndexPutIndexTemplateRequestDescriptor DataStream(IndexManagement.IDataStream? dataStream) => Assign(dataStream, (a, v) => a._dataStream = v);
+		public IndexPutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? template) => Assign(template, (a, v) => a._template = v);
+		public IndexPutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStream? dataStream) => Assign(dataStream, (a, v) => a._dataStream = v);
 		public IndexPutIndexTemplateRequestDescriptor Priority(int? priority) => Assign(priority, (a, v) => a._priority = v);
 		public IndexPutIndexTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
 		public IndexPutIndexTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);

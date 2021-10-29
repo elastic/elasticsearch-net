@@ -25,102 +25,76 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 {
 	public interface IPivotGroupByContainerVariant
 	{
-		void WrapInContainer(IPivotGroupByContainer container);
+		string PivotGroupByContainerVariantName { get; }
 	}
 
-	[InterfaceConverterAttribute(typeof(PivotGroupByContainerDescriptorConverter<PivotGroupByContainer>))]
-	public partial interface IPivotGroupByContainer
+	[JsonConverter(typeof(PivotGroupByContainerConverter))]
+	public partial class PivotGroupByContainer : IContainer
 	{
-		[JsonInclude]
-		[JsonPropertyName("date_histogram")]
-		Aggregations.IDateHistogramAggregation? DateHistogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("geotile_grid")]
-		Aggregations.IGeoTileGridAggregation? GeotileGrid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("histogram")]
-		Aggregations.IHistogramAggregation? Histogram { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("terms")]
-		Aggregations.ITermsAggregation? Terms { get; set; }
+		public PivotGroupByContainer(IPivotGroupByContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IPivotGroupByContainerVariant Variant { get; }
 	}
 
-	public partial class PivotGroupByContainer : TransformManagement.IPivotGroupByContainer
+	public class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
 	{
-		public PivotGroupByContainer(IPivotGroupByContainerVariant query)
+		public override PivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (query == null)
-				return;
-			query.WrapInContainer(this);
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException();
+			}
+
+			var propertyName = reader.GetString();
+			if (propertyName == "date_histogram")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
+				reader.Read();
+				return new PivotGroupByContainer(variant);
+			}
+
+			if (propertyName == "geotile_grid")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation?>(ref reader, options);
+				reader.Read();
+				return new PivotGroupByContainer(variant);
+			}
+
+			if (propertyName == "histogram")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
+				reader.Read();
+				return new PivotGroupByContainer(variant);
+			}
+
+			if (propertyName == "terms")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
+				reader.Read();
+				return new PivotGroupByContainer(variant);
+			}
+
+			throw new JsonException();
 		}
 
-		private Aggregations.IDateHistogramAggregation? _dateHistogram;
-		private Aggregations.IGeoTileGridAggregation? _geotileGrid;
-		private Aggregations.IHistogramAggregation? _histogram;
-		private Aggregations.ITermsAggregation? _terms;
-		Aggregations.IDateHistogramAggregation? IPivotGroupByContainer.DateHistogram { get => _dateHistogram; set => _dateHistogram = Set(value); }
-
-		Aggregations.IGeoTileGridAggregation? IPivotGroupByContainer.GeotileGrid { get => _geotileGrid; set => _geotileGrid = Set(value); }
-
-		Aggregations.IHistogramAggregation? IPivotGroupByContainer.Histogram { get => _histogram; set => _histogram = Set(value); }
-
-		Aggregations.ITermsAggregation? IPivotGroupByContainer.Terms { get => _terms; set => _terms = Set(value); }
-
-		[JsonIgnore]
-		internal IPivotGroupByContainerVariant ContainedVariant { get; set; }
-
-		private T Set<T>(T value)
-			where T : IPivotGroupByContainerVariant
-		{
-			if (ContainedVariant != null)
-				throw new Exception("TODO");
-			ContainedVariant = value;
-			return value;
-		}
-	}
-
-	public partial class PivotGroupByContainerDescriptor : IPivotGroupByContainer
-	{
-		Aggregations.IDateHistogramAggregation? IPivotGroupByContainer.DateHistogram { get; set; }
-
-		Aggregations.IGeoTileGridAggregation? IPivotGroupByContainer.GeotileGrid { get; set; }
-
-		Aggregations.IHistogramAggregation? IPivotGroupByContainer.Histogram { get; set; }
-
-		Aggregations.ITermsAggregation? IPivotGroupByContainer.Terms { get; set; }
-	}
-
-	internal sealed class PivotGroupByContainerDescriptorConverter<TReadAs> : JsonConverter<IPivotGroupByContainer> where TReadAs : class, IPivotGroupByContainer
-	{
-		public override IPivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IPivotGroupByContainer value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, PivotGroupByContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.DateHistogram is not null)
+			writer.WritePropertyName(value.Variant.PivotGroupByContainerVariantName);
+			switch (value.Variant)
 			{
-				writer.WritePropertyName("date_histogram");
-				JsonSerializer.Serialize(writer, value.DateHistogram, options);
-			}
-
-			if (value.GeotileGrid is not null)
-			{
-				writer.WritePropertyName("geotile_grid");
-				JsonSerializer.Serialize(writer, value.GeotileGrid, options);
-			}
-
-			if (value.Histogram is not null)
-			{
-				writer.WritePropertyName("histogram");
-				JsonSerializer.Serialize(writer, value.Histogram, options);
-			}
-
-			if (value.Terms is not null)
-			{
-				writer.WritePropertyName("terms");
-				JsonSerializer.Serialize(writer, value.Terms, options);
+				case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
 			}
 
 			writer.WriteEndObject();

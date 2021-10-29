@@ -38,11 +38,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplate
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> Aliases { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping Mappings { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]

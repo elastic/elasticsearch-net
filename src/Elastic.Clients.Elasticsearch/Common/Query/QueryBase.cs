@@ -107,6 +107,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	//public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
 	//}
 
+	//public abstract class QueryContainerVariantBase 
+
 	public abstract partial class QueryBase : IQuery
 	{
 		[JsonIgnore]

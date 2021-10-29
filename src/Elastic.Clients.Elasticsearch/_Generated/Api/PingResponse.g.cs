@@ -15,25 +15,13 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Clients.Elasticsearch.IndexManagement;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ElasticClient : IElasticClient
+	public partial class PingResponse : ResponseBase
 	{
-		public ClusterNamespace Cluster { get; private set; }
-
-		public IndexManagementNamespace IndexManagement { get; private set; }
-
-		private partial void SetupNamespaces()
-		{
-			Cluster = new ClusterNamespace(this);
-			IndexManagement = new IndexManagementNamespace(this);
-		}
 	}
 }

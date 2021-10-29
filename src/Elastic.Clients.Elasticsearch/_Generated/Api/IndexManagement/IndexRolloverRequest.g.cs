@@ -73,15 +73,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("conditions")]
-		public IndexManagement.Rollover.IRolloverConditions? Conditions { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? Conditions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? Mappings { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -99,9 +99,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? _aliases;
-		internal IndexManagement.Rollover.IRolloverConditions? _conditions;
-		internal Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? _mappings;
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? _conditions;
+		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? _mappings;
 		internal Dictionary<string, object>? _settings;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -111,9 +111,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexRolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexRolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
-		public IndexRolloverRequestDescriptor Conditions(IndexManagement.Rollover.IRolloverConditions? conditions) => Assign(conditions, (a, v) => a._conditions = v);
-		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Mapping.ITypeMapping>?, Mapping.ITypeMapping?>? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? conditions) => Assign(conditions, (a, v) => a._conditions = v);
+		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? mappings) => Assign(mappings, (a, v) => a._mappings = v);
 		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 

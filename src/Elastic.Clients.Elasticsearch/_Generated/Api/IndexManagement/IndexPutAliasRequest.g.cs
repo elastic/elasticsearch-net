@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public QueryDsl.IQueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal QueryDsl.IQueryContainer? _filter;
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
 		internal string? _indexRouting;
 		internal bool? _isWriteIndex;
 		internal string? _routing;
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => true;
 		public IndexPutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexPutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public IndexPutAliasRequestDescriptor Filter(QueryDsl.IQueryContainer? filter) => Assign(filter, (a, v) => a._filter = v);
+		public IndexPutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a._filter = v);
 		public IndexPutAliasRequestDescriptor IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a._indexRouting = v);
 		public IndexPutAliasRequestDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a._isWriteIndex = v);
 		public IndexPutAliasRequestDescriptor Routing(string? routing) => Assign(routing, (a, v) => a._routing = v);

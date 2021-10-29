@@ -48,11 +48,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("overlapping")]
-		public IEnumerable<IndexManagement.IOverlappingIndexTemplate>? Overlapping { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? Overlapping { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
-		public IndexManagement.ITemplateMapping? Template { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? Template { get; set; }
 	}
 
 	[JsonConverter(typeof(IndexSimulateIndexTemplateRequestDescriptorConverter))]
@@ -64,15 +64,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? _indexPatterns;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Name>? _composedOf;
-		internal IEnumerable<IndexManagement.IOverlappingIndexTemplate>? _overlapping;
-		internal IndexManagement.ITemplateMapping? _template;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? _overlapping;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? _template;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public IndexSimulateIndexTemplateRequestDescriptor IndexPatterns(IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
 		public IndexSimulateIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a._composedOf = v);
-		public IndexSimulateIndexTemplateRequestDescriptor Overlapping(IEnumerable<IndexManagement.IOverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a._overlapping = v);
-		public IndexSimulateIndexTemplateRequestDescriptor Template(IndexManagement.ITemplateMapping? template) => Assign(template, (a, v) => a._template = v);
+		public IndexSimulateIndexTemplateRequestDescriptor Overlapping(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a._overlapping = v);
+		public IndexSimulateIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? template) => Assign(template, (a, v) => a._template = v);
 	}
 
 	internal sealed class IndexSimulateIndexTemplateRequestDescriptorConverter : JsonConverter<IndexSimulateIndexTemplateRequestDescriptor>

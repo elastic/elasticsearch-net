@@ -25,119 +25,76 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 {
 	public interface IActionVariant
 	{
-		void WrapInContainer(IAction container);
+		string ActionVariantName { get; }
 	}
 
-	[InterfaceConverterAttribute(typeof(ActionDescriptorConverter<Action>))]
-	public partial interface IAction
+	[JsonConverter(typeof(ActionConverter))]
+	public partial class Action : IContainer
 	{
-		[JsonInclude]
-		[JsonPropertyName("add")]
-		IndexManagement.UpdateAliases.IAddAction? Add { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("remove")]
-		IndexManagement.UpdateAliases.IRemoveAction? Remove { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("remove_index")]
-		IndexManagement.UpdateAliases.IRemoveIndexAction? RemoveIndex { get; set; }
+		public Action(IActionVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal IActionVariant Variant { get; }
 	}
 
-	public partial class Action : IndexManagement.UpdateAliases.IAction
+	public class ActionConverter : JsonConverter<Action>
 	{
-		public Action(IActionVariant query)
+		public override Action Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (query == null)
-				return;
-			query.WrapInContainer(this);
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException();
+			}
+
+			var propertyName = reader.GetString();
+			if (propertyName == "add")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.AddAction?>(ref reader, options);
+				reader.Read();
+				return new Action(variant);
+			}
+
+			if (propertyName == "remove")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveAction?>(ref reader, options);
+				reader.Read();
+				return new Action(variant);
+			}
+
+			if (propertyName == "remove_index")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveIndexAction?>(ref reader, options);
+				reader.Read();
+				return new Action(variant);
+			}
+
+			throw new JsonException();
 		}
 
-		private IndexManagement.UpdateAliases.IAddAction? _add;
-		private IndexManagement.UpdateAliases.IRemoveAction? _remove;
-		private IndexManagement.UpdateAliases.IRemoveIndexAction? _removeIndex;
-		IndexManagement.UpdateAliases.IAddAction? IAction.Add { get => _add; set => _add = Set(value); }
-
-		IndexManagement.UpdateAliases.IRemoveAction? IAction.Remove { get => _remove; set => _remove = Set(value); }
-
-		IndexManagement.UpdateAliases.IRemoveIndexAction? IAction.RemoveIndex { get => _removeIndex; set => _removeIndex = Set(value); }
-
-		[JsonIgnore]
-		internal IActionVariant ContainedVariant { get; set; }
-
-		private T Set<T>(T value)
-			where T : IActionVariant
-		{
-			if (ContainedVariant != null)
-				throw new Exception("TODO");
-			ContainedVariant = value;
-			return value;
-		}
-	}
-
-	public partial class ActionDescriptor : IAction
-	{
-		IndexManagement.UpdateAliases.IAddAction? IAction.Add { get; set; }
-
-		IndexManagement.UpdateAliases.IRemoveAction? IAction.Remove { get; set; }
-
-		IndexManagement.UpdateAliases.IRemoveIndexAction? IAction.RemoveIndex { get; set; }
-	}
-
-	internal sealed class ActionDescriptorConverter<TReadAs> : JsonConverter<IAction> where TReadAs : class, IAction
-	{
-		public override IAction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IAction value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, Action value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Add is not null)
+			writer.WritePropertyName(value.Variant.ActionVariantName);
+			switch (value.Variant)
 			{
-				writer.WritePropertyName("add");
-				JsonSerializer.Serialize(writer, value.Add, options);
-			}
-
-			if (value.Remove is not null)
-			{
-				writer.WritePropertyName("remove");
-				JsonSerializer.Serialize(writer, value.Remove, options);
-			}
-
-			if (value.RemoveIndex is not null)
-			{
-				writer.WritePropertyName("remove_index");
-				JsonSerializer.Serialize(writer, value.RemoveIndex, options);
+				case Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.AddAction variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveAction variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveIndexAction variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IAddAction, AddAction>))]
-	public partial interface IAddAction : IndexManagement.UpdateAliases.IActionVariant
+	public partial class AddAction : IActionVariant
 	{
-		Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
-
-		QueryDsl.IQueryContainer? Filter { get; set; }
-
-		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
-		Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-
-		string? IndexRouting { get; set; }
-
-		bool? IsHidden { get; set; }
-
-		bool? IsWriteIndex { get; set; }
-
-		string? Routing { get; set; }
-
-		string? SearchRouting { get; set; }
-	}
-
-	public partial class AddAction : IndexManagement.UpdateAliases.IAddAction
-	{
+		[JsonIgnore]
+		string IndexManagement.UpdateAliases.IActionVariant.ActionVariantName => "add";
 		[JsonInclude]
 		[JsonPropertyName("alias")]
 		public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
@@ -148,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public QueryDsl.IQueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -177,26 +134,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		[JsonInclude]
 		[JsonPropertyName("search_routing")]
 		public string? SearchRouting { get; set; }
-
-		void IndexManagement.UpdateAliases.IActionVariant.WrapInContainer(IndexManagement.UpdateAliases.IAction container) => container.Add = this;
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRemoveAction, RemoveAction>))]
-	public partial interface IRemoveAction : IndexManagement.UpdateAliases.IActionVariant
+	public partial class RemoveAction : IActionVariant
 	{
-		Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
-
-		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
-		Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-
-		bool? MustExist { get; set; }
-	}
-
-	public partial class RemoveAction : IndexManagement.UpdateAliases.IRemoveAction
-	{
+		[JsonIgnore]
+		string IndexManagement.UpdateAliases.IActionVariant.ActionVariantName => "remove";
 		[JsonInclude]
 		[JsonPropertyName("alias")]
 		public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
@@ -216,20 +159,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		[JsonInclude]
 		[JsonPropertyName("must_exist")]
 		public bool? MustExist { get; set; }
-
-		void IndexManagement.UpdateAliases.IActionVariant.WrapInContainer(IndexManagement.UpdateAliases.IAction container) => container.Remove = this;
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IRemoveIndexAction, RemoveIndexAction>))]
-	public partial interface IRemoveIndexAction : IndexManagement.UpdateAliases.IActionVariant
+	public partial class RemoveIndexAction : IActionVariant
 	{
-		Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
-		Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-	}
-
-	public partial class RemoveIndexAction : IndexManagement.UpdateAliases.IRemoveIndexAction
-	{
+		[JsonIgnore]
+		string IndexManagement.UpdateAliases.IActionVariant.ActionVariantName => "remove_index";
 		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
@@ -237,7 +172,5 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-
-		void IndexManagement.UpdateAliases.IActionVariant.WrapInContainer(IndexManagement.UpdateAliases.IAction container) => container.RemoveIndex = this;
 	}
 }
