@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -101,9 +101,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? _aliases;
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
 		internal IEnumerable<string>? _indexPatterns;
-		internal Mapping.ITypeMapping? _mappings;
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
 		internal Dictionary<string, object>? _settings;
 		internal object? _version;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
@@ -115,9 +115,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexPutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexPutTemplateRequestDescriptor Order(int? order) => Qs("order", order);
-		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, IndexManagement.IAlias?>()));
+		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
 		public IndexPutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
-		public IndexPutTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public IndexPutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
 		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexPutTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
 	}

@@ -312,22 +312,43 @@ public class ClusterSubtypeDescriptorConverter : JsonConverter<ClusterSubtypeDes
 
 #region ContainterPrototypes
 
-public abstract class QueryContainerVariant
+//public abstract class QueryContainerVariant
+//{
+//	[JsonIgnore]
+//	internal abstract string VariantName { get; }
+
+//	public QueryContainer WrapInContainer() => new(this);
+//}
+
+
+public abstract class ContainerVariantBase
 {
 	[JsonIgnore]
 	internal abstract string VariantName { get; }
-
-	public QueryContainer WrapInContainer() => new(this);
 }
 
-public class BoolQuery : QueryContainerVariant
+public abstract class ContainerVariantBase<TContainer> : ContainerVariantBase where TContainer : ContainerBase
+{
+	public TContainer WrapInContainer() => (TContainer)Activator.CreateInstance(typeof(TContainer), this);
+}
+
+public abstract class ContainerVariantBase<TContainer, TContainer2> : ContainerVariantBase where TContainer : ContainerBase where TContainer2 : ContainerBase
+{
+	public TContainer WrapInContainer() => (TContainer)Activator.CreateInstance(typeof(TContainer), this);
+	//public TContainer2 WrapInContainer() => (TContainer2)Activator.CreateInstance(typeof(TContainer2), this);
+}
+
+
+public abstract class QueryBase : ContainerVariantBase<QueryContainer> { }
+
+public class BoolQuery : QueryBase
 {
 	internal override string VariantName => "bool";
 
 	public string Tag { get; set; }
 }
 
-public class BoostingQuery : QueryContainerVariant
+public class BoostingQuery : QueryBase
 {
 	internal override string VariantName => "boosting";
 
@@ -339,17 +360,35 @@ public static class Query
 	public static QueryContainer Bool(Action<BoolQueryDescriptor> configure) => new QueryContainerDescriptor().Bool(configure).ToQueryContainer();
 }
 
-[JsonConverter(typeof(QueryContainerConverter))]
-public class QueryContainer
+public abstract class ContainerBase
 {
-	private readonly QueryContainerVariant _variant;
+	internal ContainerVariantBase Variant { get; }
 
-	public QueryContainer(QueryContainerVariant variant)
+	public ContainerBase(ContainerVariantBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+}
+
+
+public abstract class ContainerAndVariantBase<TVariantContainer> : ContainerVariantBase<TVariantContainer> where TVariantContainer : ContainerBase
+{
+	internal ContainerVariantBase Variant { get; }
+
+	public ContainerAndVariantBase(ContainerVariantBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+}
+
+public class AnotherContainer : ContainerAndVariantBase<QueryContainer>
+{
+	public AnotherContainer(ContainerVariantBase variant) : base(variant)
 	{
-		if (variant == null)
-			return;
+	}
 
-		_variant = variant;
+	internal override string VariantName => "Something";
+}
+
+[JsonConverter(typeof(QueryContainerConverter))]
+public class QueryContainer : ContainerBase
+{
+	public QueryContainer(QueryBase variant) : base(variant)
+	{
 	}
 
 	// Similar to Sylvain's support for accessing the query from inside a container.
@@ -357,7 +396,7 @@ public class QueryContainer
 	// Could also provide a more direct method which throws when the variant type is wrong.
 	public bool TryGetBoolQuery(out BoolQuery boolQuery)
 	{
-		if (_variant is BoolQuery query)
+		if (Variant is BoolQuery query)
 		{
 			boolQuery = query;
 			return true;
@@ -367,24 +406,46 @@ public class QueryContainer
 		return false;
 	}
 
-	internal string VariantName => _variant is not null ? _variant.VariantName : string.Empty;
+	private string _variantName;
 
-	internal QueryContainerVariant Variant => _variant;
+	//internal string VariantName => Variant is not null ? Variant.VariantName : string.Empty;
 
-	internal bool HasVariant => !string.IsNullOrEmpty(_variant.VariantName) && _variant is not null;
+	internal string VariantName
+	{
+		get
+		{
+			if (!string.IsNullOrEmpty(_variantName))
+				return _variantName;
+
+			_variantName = Variant.VariantName;
+
+			return _variantName;
+		}
+	}
+
+	//internal QueryContainerVariant Variant => base.Variant;
+
+	internal bool HasVariant => !string.IsNullOrEmpty(Variant.VariantName) && Variant is not null;
+}
+
+public class VariantDescriptorBase<T> : ExperimentalDescriptorBase<T> where T : ExperimentalDescriptorBase<T>
+{
+	internal string VariantName { get; private set; }
+
+	protected void SetVariantName(string name) => VariantName = name;
 }
 
 [JsonConverter(typeof(QueryContainerDescriptorConverter))]
-public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContainerDescriptor>
+public class QueryContainerDescriptor : VariantDescriptorBase<QueryContainerDescriptor>
 {
-	private QueryContainer container;
+	private QueryContainer _container;
 
 	// We could have fields for each descriptor here instead, although this type only ever holds one instance
-	private object _containerDescriptor;
+	private IQueryVariantDescriptor _containerDescriptor;
 
-	public QueryContainerDescriptor Bool(BoolQuery variant) => Assign(variant, (a, v) => a.container = new QueryContainer(v));
+	public QueryContainerDescriptor Bool(BoolQuery variant) => Assign(variant, (a, v) => { a._container = new QueryContainer(v); SetVariantName("bool"); });
 
-	public QueryContainerDescriptor Boosting(BoostingQuery variant) => Assign(variant, (a, v) => a.container = new QueryContainer(v));
+	public QueryContainerDescriptor Boosting(BoostingQuery variant) => Assign(variant, (a, v) => a._container = new QueryContainer(v));
 
 	public QueryContainerDescriptor Bool(Action<BoolQueryDescriptor> configureVariant) => InvokeAndAssign(configureVariant, (a, v) => a._containerDescriptor = v);
 
@@ -392,8 +453,8 @@ public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContaine
 
 	internal QueryContainer ToQueryContainer()
 	{
-		if (container is not null)
-			return container;
+		if (_container is not null)
+			return _container;
 
 		switch (_containerDescriptor)
 		{
@@ -409,9 +470,9 @@ public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContaine
 
 	internal bool TryGetContainer(out QueryContainer variantDescriptor)
 	{
-		if (container is not null)
+		if (_container is not null)
 		{
-			variantDescriptor = container;
+			variantDescriptor = _container;
 			return true;
 		}
 
@@ -421,7 +482,7 @@ public class QueryContainerDescriptor : ExperimentalDescriptorBase<QueryContaine
 
 	internal bool TryGetBoolQueryDescriptor(out BoolQueryDescriptor variantDescriptor)
 	{
-		if (_containerDescriptor is BoolQueryDescriptor containerVariant)
+		if (VariantName == "bool" && _containerDescriptor is BoolQueryDescriptor containerVariant)
 		{
 			variantDescriptor = containerVariant;
 			return true;
@@ -452,8 +513,10 @@ public abstract class VariantDescriptor<T> : ExperimentalDescriptorBase<T> where
 	internal abstract string VariantName { get; }
 }
 
+public interface IQueryVariantDescriptor { }
+
 [JsonConverter(typeof(BoolQueryDescriptorConverter))]
-public class BoolQueryDescriptor : VariantDescriptor<BoolQueryDescriptor>
+public class BoolQueryDescriptor : VariantDescriptor<BoolQueryDescriptor>, IQueryVariantDescriptor
 {
 	private string _tag;
 
@@ -485,7 +548,7 @@ public class BoolQueryDescriptor : VariantDescriptor<BoolQueryDescriptor>
 }
 
 [JsonConverter(typeof(BoostingQueryDescriptorConverter))]
-public class BoostingQueryDescriptor : VariantDescriptor<BoostingQueryDescriptor>
+public class BoostingQueryDescriptor : VariantDescriptor<BoostingQueryDescriptor>, IQueryVariantDescriptor
 {
 	private int? _boost;
 

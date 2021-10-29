@@ -51,19 +51,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
-		public IndexManagement.IIndexState Template { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<string, IndexManagement.IAliasDefinition>? Aliases { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public IndexManagement.IIndexSettings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -81,10 +81,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		internal IndexManagement.IIndexState _template;
-		internal Dictionary<string, IndexManagement.IAliasDefinition>? _aliases;
-		internal Mapping.ITypeMapping? _mappings;
-		internal IndexManagement.IIndexSettings? _settings;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexState _template;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? _aliases;
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
 		internal object? _version;
 		internal Dictionary<string, object>? _meta;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
@@ -92,10 +92,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => true;
 		public ClusterPutComponentTemplateRequestDescriptor Create(bool? create) => Qs("create", create);
 		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterPutComponentTemplateRequestDescriptor Template(IndexManagement.IIndexState template) => Assign(template, (a, v) => a._template = v);
-		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, IndexManagement.IAliasDefinition?>, FluentDictionary<string?, IndexManagement.IAliasDefinition?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<string?, IndexManagement.IAliasDefinition?>()));
-		public ClusterPutComponentTemplateRequestDescriptor Mappings(Mapping.ITypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
-		public ClusterPutComponentTemplateRequestDescriptor Settings(IndexManagement.IIndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
+		public ClusterPutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template) => Assign(template, (a, v) => a._template = v);
+		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>()));
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public ClusterPutComponentTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
 		public ClusterPutComponentTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
 		public ClusterPutComponentTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
 	}

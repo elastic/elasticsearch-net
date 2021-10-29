@@ -24,15 +24,32 @@ using System.Threading.Tasks;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial interface IElasticClient
+	public partial class ElasticClient : IElasticClient
 	{
-		ClusterNamespace Cluster { get; }
+		public ClusterNamespace Cluster { get; private set; }
 
-		IndexManagementNamespace IndexManagement { get; }
+		public IndexManagementNamespace IndexManagement { get; private set; }
 
-		PingResponse Ping(PingRequest request);
-		Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default);
-		PingResponse Ping(Action<PingRequestDescriptor> configureRequest = null);
-		Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
+		private partial void SetupNamespaces()
+		{
+			Cluster = new ClusterNamespace(this);
+			IndexManagement = new IndexManagementNamespace(this);
+		}
+
+		public PingResponse Ping(PingRequest request) => DoRequest<PingRequest, PingResponse>(request);
+		public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<PingRequest, PingResponse>(request, cancellationToken);
+		public PingResponse Ping(Action<PingRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new PingRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<PingRequestDescriptor, PingResponse>(descriptor);
+		}
+
+		public Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new PingRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
+		}
 	}
 }

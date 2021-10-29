@@ -27,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("item")]
-		public Mapping.ITypeMapping? Item { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping Mappings { get; init; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 	}
 }

@@ -93,11 +93,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("dynamic_templates")]
-		public Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? DynamicTemplates { get; set; }
+		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? DynamicTemplates { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_field_names")]
-		public Mapping.IFieldNamesField? FieldNames { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -113,15 +113,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
-		public Mapping.IRoutingField? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Mapping.ISourceField? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime")]
-		public Dictionary<string, Mapping.IRuntimeField>? Runtime { get; set; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 	}
 
 	[JsonConverter(typeof(IndexPutMappingRequestDescriptorConverter))]
@@ -134,14 +134,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal bool? _dateDetection;
 		internal Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? _dynamic;
 		internal IEnumerable<string>? _dynamicDateFormats;
-		internal Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? _dynamicTemplates;
-		internal Mapping.IFieldNamesField? _fieldNames;
+		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? _dynamicTemplates;
+		internal Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? _fieldNames;
 		internal Dictionary<string, object>? _meta;
 		internal bool? _numericDetection;
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties>? _properties;
-		internal Mapping.IRoutingField? _routing;
-		internal Mapping.ISourceField? _source;
-		internal Dictionary<string, Mapping.IRuntimeField>? _runtime;
+		internal Elastic.Clients.Elasticsearch.Mapping.RoutingField? _routing;
+		internal Elastic.Clients.Elasticsearch.Mapping.SourceField? _source;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? _runtime;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -155,14 +155,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutMappingRequestDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a._dateDetection = v);
 		public IndexPutMappingRequestDescriptor Dynamic(Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? dynamic) => Assign(dynamic, (a, v) => a._dynamic = v);
 		public IndexPutMappingRequestDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats) => Assign(dynamicDateFormats, (a, v) => a._dynamicDateFormats = v);
-		public IndexPutMappingRequestDescriptor DynamicTemplates(Union<Dictionary<string, Mapping.IDynamicTemplate>?, IEnumerable<Dictionary<string, Mapping.IDynamicTemplate>>?>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a._dynamicTemplates = v);
-		public IndexPutMappingRequestDescriptor FieldNames(Mapping.IFieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a._fieldNames = v);
+		public IndexPutMappingRequestDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a._dynamicTemplates = v);
+		public IndexPutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a._fieldNames = v);
 		public IndexPutMappingRequestDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._meta = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexPutMappingRequestDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a._numericDetection = v);
 		public IndexPutMappingRequestDescriptor Properties(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>> selector) => Assign(selector, (a, v) => a._properties = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>()));
-		public IndexPutMappingRequestDescriptor Routing(Mapping.IRoutingField? routing) => Assign(routing, (a, v) => a._routing = v);
-		public IndexPutMappingRequestDescriptor Source(Mapping.ISourceField? source) => Assign(source, (a, v) => a._source = v);
-		public IndexPutMappingRequestDescriptor Runtime(Dictionary<string, Mapping.IRuntimeField>? runtime) => Assign(runtime, (a, v) => a._runtime = v);
+		public IndexPutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing) => Assign(routing, (a, v) => a._routing = v);
+		public IndexPutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source) => Assign(source, (a, v) => a._source = v);
+		public IndexPutMappingRequestDescriptor Runtime(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtime) => Assign(runtime, (a, v) => a._runtime = v);
 	}
 
 	internal sealed class IndexPutMappingRequestDescriptorConverter : JsonConverter<IndexPutMappingRequestDescriptor>

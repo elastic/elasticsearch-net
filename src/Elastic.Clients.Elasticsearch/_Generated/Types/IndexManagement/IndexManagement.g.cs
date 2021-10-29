@@ -23,27 +23,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	[InterfaceConverterAttribute(typeof(AliasDescriptorConverter<Alias>))]
-	public partial interface IAlias
-	{
-		QueryDsl.IQueryContainer? Filter { get; set; }
-
-		string? IndexRouting { get; set; }
-
-		bool? IsHidden { get; set; }
-
-		bool? IsWriteIndex { get; set; }
-
-		string? Routing { get; set; }
-
-		string? SearchRouting { get; set; }
-	}
-
-	public partial class Alias : IndexManagement.IAlias
+	public partial class Alias
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public QueryDsl.IQueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]
@@ -66,86 +50,74 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? SearchRouting { get; set; }
 	}
 
-	public partial class AliasDescriptor : DescriptorBase<AliasDescriptor, IAlias>, IAlias
+	[JsonConverter(typeof(AliasDescriptorConverter))]
+	public partial class AliasDescriptor : DescriptorBase<AliasDescriptor>
 	{
-		QueryDsl.IQueryContainer? IAlias.Filter { get; set; }
-
-		string? IAlias.IndexRouting { get; set; }
-
-		bool? IAlias.IsHidden { get; set; }
-
-		bool? IAlias.IsWriteIndex { get; set; }
-
-		string? IAlias.Routing { get; set; }
-
-		string? IAlias.SearchRouting { get; set; }
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
+		internal string? _indexRouting;
+		internal bool? _isHidden;
+		internal bool? _isWriteIndex;
+		internal string? _routing;
+		internal string? _searchRouting;
+		public AliasDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a._filter = v);
+		public AliasDescriptor IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a._indexRouting = v);
+		public AliasDescriptor IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a._isHidden = v);
+		public AliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a._isWriteIndex = v);
+		public AliasDescriptor Routing(string? routing) => Assign(routing, (a, v) => a._routing = v);
+		public AliasDescriptor SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a._searchRouting = v);
 	}
 
-	internal sealed class AliasDescriptorConverter<TReadAs> : JsonConverter<IAlias> where TReadAs : class, IAlias
+	internal sealed class AliasDescriptorConverter : JsonConverter<AliasDescriptor>
 	{
-		public override IAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IAlias value, JsonSerializerOptions options)
+		public override AliasDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AliasDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Filter is not null)
+			if (value._filter is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.Filter, options);
+				JsonSerializer.Serialize(writer, value._filter, options);
 			}
 
-			if (value.IndexRouting is not null)
+			if (value._indexRouting is not null)
 			{
 				writer.WritePropertyName("index_routing");
-				JsonSerializer.Serialize(writer, value.IndexRouting, options);
+				JsonSerializer.Serialize(writer, value._indexRouting, options);
 			}
 
-			if (value.IsHidden.HasValue)
+			if (value._isHidden.HasValue)
 			{
 				writer.WritePropertyName("is_hidden");
-				writer.WriteBooleanValue(value.IsHidden.Value);
+				writer.WriteBooleanValue(value._isHidden.Value);
 			}
 
-			if (value.IsWriteIndex.HasValue)
+			if (value._isWriteIndex.HasValue)
 			{
 				writer.WritePropertyName("is_write_index");
-				writer.WriteBooleanValue(value.IsWriteIndex.Value);
+				writer.WriteBooleanValue(value._isWriteIndex.Value);
 			}
 
-			if (value.Routing is not null)
+			if (value._routing is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, value.Routing, options);
+				JsonSerializer.Serialize(writer, value._routing, options);
 			}
 
-			if (value.SearchRouting is not null)
+			if (value._searchRouting is not null)
 			{
 				writer.WritePropertyName("search_routing");
-				JsonSerializer.Serialize(writer, value.SearchRouting, options);
+				JsonSerializer.Serialize(writer, value._searchRouting, options);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(AliasDefinitionDescriptorConverter<AliasDefinition>))]
-	public partial interface IAliasDefinition
-	{
-		QueryDsl.IQueryContainer? Filter { get; set; }
-
-		string? IndexRouting { get; set; }
-
-		bool? IsWriteIndex { get; set; }
-
-		string? Routing { get; set; }
-
-		string? SearchRouting { get; set; }
-	}
-
-	public partial class AliasDefinition : IndexManagement.IAliasDefinition
+	public partial class AliasDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public QueryDsl.IQueryContainer? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]
@@ -164,66 +136,62 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? SearchRouting { get; set; }
 	}
 
-	public partial class AliasDefinitionDescriptor : DescriptorBase<AliasDefinitionDescriptor, IAliasDefinition>, IAliasDefinition
+	[JsonConverter(typeof(AliasDefinitionDescriptorConverter))]
+	public partial class AliasDefinitionDescriptor : DescriptorBase<AliasDefinitionDescriptor>
 	{
-		QueryDsl.IQueryContainer? IAliasDefinition.Filter { get; set; }
-
-		string? IAliasDefinition.IndexRouting { get; set; }
-
-		bool? IAliasDefinition.IsWriteIndex { get; set; }
-
-		string? IAliasDefinition.Routing { get; set; }
-
-		string? IAliasDefinition.SearchRouting { get; set; }
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
+		internal string? _indexRouting;
+		internal bool? _isWriteIndex;
+		internal string? _routing;
+		internal string? _searchRouting;
+		public AliasDefinitionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a._filter = v);
+		public AliasDefinitionDescriptor IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a._indexRouting = v);
+		public AliasDefinitionDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a._isWriteIndex = v);
+		public AliasDefinitionDescriptor Routing(string? routing) => Assign(routing, (a, v) => a._routing = v);
+		public AliasDefinitionDescriptor SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a._searchRouting = v);
 	}
 
-	internal sealed class AliasDefinitionDescriptorConverter<TReadAs> : JsonConverter<IAliasDefinition> where TReadAs : class, IAliasDefinition
+	internal sealed class AliasDefinitionDescriptorConverter : JsonConverter<AliasDefinitionDescriptor>
 	{
-		public override IAliasDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IAliasDefinition value, JsonSerializerOptions options)
+		public override AliasDefinitionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AliasDefinitionDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Filter is not null)
+			if (value._filter is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.Filter, options);
+				JsonSerializer.Serialize(writer, value._filter, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.IndexRouting))
+			if (!string.IsNullOrEmpty(value._indexRouting))
 			{
 				writer.WritePropertyName("index_routing");
-				writer.WriteStringValue(value.IndexRouting);
+				writer.WriteStringValue(value._indexRouting);
 			}
 
-			if (value.IsWriteIndex.HasValue)
+			if (value._isWriteIndex.HasValue)
 			{
 				writer.WritePropertyName("is_write_index");
-				writer.WriteBooleanValue(value.IsWriteIndex.Value);
+				writer.WriteBooleanValue(value._isWriteIndex.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.Routing))
+			if (!string.IsNullOrEmpty(value._routing))
 			{
 				writer.WritePropertyName("routing");
-				writer.WriteStringValue(value.Routing);
+				writer.WriteStringValue(value._routing);
 			}
 
-			if (!string.IsNullOrEmpty(value.SearchRouting))
+			if (!string.IsNullOrEmpty(value._searchRouting))
 			{
 				writer.WritePropertyName("search_routing");
-				writer.WriteStringValue(value.SearchRouting);
+				writer.WriteStringValue(value._searchRouting);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IDataStream, DataStream>))]
-	public partial interface IDataStream
-	{
-		bool? Hidden { get; set; }
-	}
-
-	public partial class DataStream : IndexManagement.IDataStream
+	public partial class DataStream
 	{
 		[JsonInclude]
 		[JsonPropertyName("hidden")]
@@ -245,38 +213,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int MinSegmentSize { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRouting, IndexRouting>))]
-	public partial interface IIndexRouting
-	{
-		IndexManagement.IIndexRoutingAllocation? Allocation { get; set; }
-
-		IndexManagement.IIndexRoutingRebalance? Rebalance { get; set; }
-	}
-
-	public partial class IndexRouting : IndexManagement.IIndexRouting
+	public partial class IndexRouting
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocation")]
-		public IndexManagement.IIndexRoutingAllocation? Allocation { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("rebalance")]
-		public IndexManagement.IIndexRoutingRebalance? Rebalance { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexRoutingAllocationDescriptorConverter<IndexRoutingAllocation>))]
-	public partial interface IIndexRoutingAllocation
-	{
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
-
-		IndexManagement.IIndexRoutingAllocationInclude? Include { get; set; }
-
-		IndexManagement.IIndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
-
-		IndexManagement.IIndexRoutingAllocationDisk? Disk { get; set; }
-	}
-
-	public partial class IndexRoutingAllocation : IndexManagement.IIndexRoutingAllocation
+	public partial class IndexRoutingAllocation
 	{
 		[JsonInclude]
 		[JsonPropertyName("enable")]
@@ -284,84 +232,72 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("include")]
-		public IndexManagement.IIndexRoutingAllocationInclude? Include { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? Include { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("initial_recovery")]
-		public IndexManagement.IIndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("disk")]
-		public IndexManagement.IIndexRoutingAllocationDisk? Disk { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? Disk { get; set; }
 	}
 
-	public partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor, IIndexRoutingAllocation>, IIndexRoutingAllocation
+	[JsonConverter(typeof(IndexRoutingAllocationDescriptorConverter))]
+	public partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor>
 	{
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? IIndexRoutingAllocation.Enable { get; set; }
-
-		IndexManagement.IIndexRoutingAllocationInclude? IIndexRoutingAllocation.Include { get; set; }
-
-		IndexManagement.IIndexRoutingAllocationInitialRecovery? IIndexRoutingAllocation.InitialRecovery { get; set; }
-
-		IndexManagement.IIndexRoutingAllocationDisk? IIndexRoutingAllocation.Disk { get; set; }
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? _enable;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? _include;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? _initialRecovery;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? _disk;
+		public IndexRoutingAllocationDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? enable) => Assign(enable, (a, v) => a._enable = v);
+		public IndexRoutingAllocationDescriptor Include(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? include) => Assign(include, (a, v) => a._include = v);
+		public IndexRoutingAllocationDescriptor InitialRecovery(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? initialRecovery) => Assign(initialRecovery, (a, v) => a._initialRecovery = v);
+		public IndexRoutingAllocationDescriptor Disk(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? disk) => Assign(disk, (a, v) => a._disk = v);
 	}
 
-	internal sealed class IndexRoutingAllocationDescriptorConverter<TReadAs> : JsonConverter<IIndexRoutingAllocation> where TReadAs : class, IIndexRoutingAllocation
+	internal sealed class IndexRoutingAllocationDescriptorConverter : JsonConverter<IndexRoutingAllocationDescriptor>
 	{
-		public override IIndexRoutingAllocation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexRoutingAllocation value, JsonSerializerOptions options)
+		public override IndexRoutingAllocationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRoutingAllocationDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Enable is not null)
+			if (value._enable is not null)
 			{
 				writer.WritePropertyName("enable");
-				JsonSerializer.Serialize(writer, value.Enable, options);
+				JsonSerializer.Serialize(writer, value._enable, options);
 			}
 
-			if (value.Include is not null)
+			if (value._include is not null)
 			{
 				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, value.Include, options);
+				JsonSerializer.Serialize(writer, value._include, options);
 			}
 
-			if (value.InitialRecovery is not null)
+			if (value._initialRecovery is not null)
 			{
 				writer.WritePropertyName("initial_recovery");
-				JsonSerializer.Serialize(writer, value.InitialRecovery, options);
+				JsonSerializer.Serialize(writer, value._initialRecovery, options);
 			}
 
-			if (value.Disk is not null)
+			if (value._disk is not null)
 			{
 				writer.WritePropertyName("disk");
-				JsonSerializer.Serialize(writer, value.Disk, options);
+				JsonSerializer.Serialize(writer, value._disk, options);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingAllocationDisk, IndexRoutingAllocationDisk>))]
-	public partial interface IIndexRoutingAllocationDisk
-	{
-		Union<bool, string> ThresholdEnabled { get; set; }
-	}
-
-	public partial class IndexRoutingAllocationDisk : IndexManagement.IIndexRoutingAllocationDisk
+	public partial class IndexRoutingAllocationDisk
 	{
 		[JsonInclude]
 		[JsonPropertyName("threshold_enabled")]
 		public Union<bool, string> ThresholdEnabled { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingAllocationInclude, IndexRoutingAllocationInclude>))]
-	public partial interface IIndexRoutingAllocationInclude
-	{
-		string? TierPreference { get; set; }
-
-		string? Id { get; set; }
-	}
-
-	public partial class IndexRoutingAllocationInclude : IndexManagement.IIndexRoutingAllocationInclude
+	public partial class IndexRoutingAllocationInclude
 	{
 		[JsonInclude]
 		[JsonPropertyName("_tier_preference")]
@@ -372,47 +308,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? Id { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingAllocationInitialRecovery, IndexRoutingAllocationInitialRecovery>))]
-	public partial interface IIndexRoutingAllocationInitialRecovery
-	{
-		string? Id { get; set; }
-	}
-
-	public partial class IndexRoutingAllocationInitialRecovery : IndexManagement.IIndexRoutingAllocationInitialRecovery
+	public partial class IndexRoutingAllocationInitialRecovery
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public string? Id { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexRoutingRebalance, IndexRoutingRebalance>))]
-	public partial interface IIndexRoutingRebalance
-	{
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
-	}
-
-	public partial class IndexRoutingRebalance : IndexManagement.IIndexRoutingRebalance
+	public partial class IndexRoutingRebalance
 	{
 		[JsonInclude]
 		[JsonPropertyName("enable")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexSettingBlocksDescriptorConverter<IndexSettingBlocks>))]
-	public partial interface IIndexSettingBlocks
-	{
-		bool? ReadOnly { get; set; }
-
-		bool? ReadOnlyAllowDelete { get; set; }
-
-		bool? Read { get; set; }
-
-		Union<bool?, string?>? Write { get; set; }
-
-		bool? Metadata { get; set; }
-	}
-
-	public partial class IndexSettingBlocks : IndexManagement.IIndexSettingBlocks
+	public partial class IndexSettingBlocks
 	{
 		[JsonInclude]
 		[JsonPropertyName("read_only")]
@@ -435,162 +345,62 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Metadata { get; set; }
 	}
 
-	public partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor, IIndexSettingBlocks>, IIndexSettingBlocks
+	[JsonConverter(typeof(IndexSettingBlocksDescriptorConverter))]
+	public partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor>
 	{
-		bool? IIndexSettingBlocks.ReadOnly { get; set; }
-
-		bool? IIndexSettingBlocks.ReadOnlyAllowDelete { get; set; }
-
-		bool? IIndexSettingBlocks.Read { get; set; }
-
-		Union<bool?, string?>? IIndexSettingBlocks.Write { get; set; }
-
-		bool? IIndexSettingBlocks.Metadata { get; set; }
+		internal bool? _readOnly;
+		internal bool? _readOnlyAllowDelete;
+		internal bool? _read;
+		internal Union<bool?, string?>? _write;
+		internal bool? _metadata;
+		public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true) => Assign(readOnly, (a, v) => a._readOnly = v);
+		public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true) => Assign(readOnlyAllowDelete, (a, v) => a._readOnlyAllowDelete = v);
+		public IndexSettingBlocksDescriptor Read(bool? read = true) => Assign(read, (a, v) => a._read = v);
+		public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write) => Assign(write, (a, v) => a._write = v);
+		public IndexSettingBlocksDescriptor Metadata(bool? metadata = true) => Assign(metadata, (a, v) => a._metadata = v);
 	}
 
-	internal sealed class IndexSettingBlocksDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingBlocks> where TReadAs : class, IIndexSettingBlocks
+	internal sealed class IndexSettingBlocksDescriptorConverter : JsonConverter<IndexSettingBlocksDescriptor>
 	{
-		public override IIndexSettingBlocks Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexSettingBlocks value, JsonSerializerOptions options)
+		public override IndexSettingBlocksDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexSettingBlocksDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.ReadOnly.HasValue)
+			if (value._readOnly.HasValue)
 			{
 				writer.WritePropertyName("read_only");
-				writer.WriteBooleanValue(value.ReadOnly.Value);
+				writer.WriteBooleanValue(value._readOnly.Value);
 			}
 
-			if (value.ReadOnlyAllowDelete.HasValue)
+			if (value._readOnlyAllowDelete.HasValue)
 			{
 				writer.WritePropertyName("read_only_allow_delete");
-				writer.WriteBooleanValue(value.ReadOnlyAllowDelete.Value);
+				writer.WriteBooleanValue(value._readOnlyAllowDelete.Value);
 			}
 
-			if (value.Read.HasValue)
+			if (value._read.HasValue)
 			{
 				writer.WritePropertyName("read");
-				writer.WriteBooleanValue(value.Read.Value);
+				writer.WriteBooleanValue(value._read.Value);
 			}
 
-			if (value.Write is not null)
+			if (value._write is not null)
 			{
 				writer.WritePropertyName("write");
-				JsonSerializer.Serialize(writer, value.Write, options);
+				JsonSerializer.Serialize(writer, value._write, options);
 			}
 
-			if (value.Metadata.HasValue)
+			if (value._metadata.HasValue)
 			{
 				writer.WritePropertyName("metadata");
-				writer.WriteBooleanValue(value.Metadata.Value);
+				writer.WriteBooleanValue(value._metadata.Value);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexSettingsDescriptorConverter<IndexSettings>))]
-	public partial interface IIndexSettings
-	{
-		Union<int?, string?>? NumberOfShards { get; set; }
-
-		Union<int?, string?>? NumberOfReplicas { get; set; }
-
-		int? NumberOfRoutingShards { get; set; }
-
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
-
-		string? Codec { get; set; }
-
-		Union<int?, string?>? RoutingPartitionSize { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriod { get; set; }
-
-		bool? LoadFixedBitsetFiltersEagerly { get; set; }
-
-		Union<bool?, string?>? Hidden { get; set; }
-
-		string? AutoExpandReplicas { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? SearchIdleAfter { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
-
-		int? MaxResultWindow { get; set; }
-
-		int? MaxInnerResultWindow { get; set; }
-
-		int? MaxRescoreWindow { get; set; }
-
-		int? MaxDocvalueFieldsSearch { get; set; }
-
-		int? MaxScriptFields { get; set; }
-
-		int? MaxNgramDiff { get; set; }
-
-		int? MaxShingleDiff { get; set; }
-
-		IndexManagement.IIndexSettingBlocks? Blocks { get; set; }
-
-		bool? BlocksReadOnly { get; set; }
-
-		bool? BlocksReadOnlyAllowDelete { get; set; }
-
-		bool? BlocksRead { get; set; }
-
-		Union<bool?, string?>? BlocksWrite { get; set; }
-
-		bool? BlocksMetadata { get; set; }
-
-		int? MaxRefreshListeners { get; set; }
-
-		int? AnalyzeMaxTokenCount { get; set; }
-
-		int? HighlightMaxAnalyzedOffset { get; set; }
-
-		int? MaxTermsCount { get; set; }
-
-		int? MaxRegexLength { get; set; }
-
-		IndexManagement.IIndexRouting? Routing { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
-
-		string? DefaultPipeline { get; set; }
-
-		string? FinalPipeline { get; set; }
-
-		IndexManagement.IIndexSettingsLifecycle? Lifecycle { get; set; }
-
-		string? LifecycleName { get; set; }
-
-		Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
-
-		string? CreationDate { get; set; }
-
-		string? Uuid { get; set; }
-
-		IndexManagement.IIndexVersioning? Version { get; set; }
-
-		Union<bool?, string?>? VerifiedBeforeClose { get; set; }
-
-		Union<string?, int?>? Format { get; set; }
-
-		int? MaxSlicesPerScroll { get; set; }
-
-		string? TranslogDurability { get; set; }
-
-		Union<bool?, string?>? QueryStringLenient { get; set; }
-
-		Union<int?, string?>? Priority { get; set; }
-
-		int? TopMetricsMaxSize { get; set; }
-
-		IndexManagement.IIndexSettingsAnalysis? Analysis { get; set; }
-
-		IndexManagement.IIndexSettings? Settings { get; set; }
-	}
-
-	public partial class IndexSettings : IndexManagement.IIndexSettings
+	public partial class IndexSettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("number_of_shards")]
@@ -670,7 +480,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("blocks")]
-		public IndexManagement.IIndexSettingBlocks? Blocks { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("blocks.read_only")]
@@ -714,7 +524,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public IndexManagement.IIndexRouting? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("gc_deletes")]
@@ -730,7 +540,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("lifecycle")]
-		public IndexManagement.IIndexSettingsLifecycle? Lifecycle { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("lifecycle.name")]
@@ -750,7 +560,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public IndexManagement.IIndexVersioning? Version { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("verified_before_close")]
@@ -782,431 +592,421 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("analysis")]
-		public IndexManagement.IIndexSettingsAnalysis? Analysis { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public IndexManagement.IIndexSettings? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor, IIndexSettings>, IIndexSettings
+	[JsonConverter(typeof(IndexSettingsDescriptorConverter))]
+	public partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor>
 	{
-		Union<int?, string?>? IIndexSettings.NumberOfShards { get; set; }
-
-		Union<int?, string?>? IIndexSettings.NumberOfReplicas { get; set; }
-
-		int? IIndexSettings.NumberOfRoutingShards { get; set; }
-
-		Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? IIndexSettings.CheckOnStartup { get; set; }
-
-		string? IIndexSettings.Codec { get; set; }
-
-		Union<int?, string?>? IIndexSettings.RoutingPartitionSize { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? IIndexSettings.SoftDeletesRetentionLeasePeriod { get; set; }
-
-		bool? IIndexSettings.LoadFixedBitsetFiltersEagerly { get; set; }
-
-		Union<bool?, string?>? IIndexSettings.Hidden { get; set; }
-
-		string? IIndexSettings.AutoExpandReplicas { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? IIndexSettings.SearchIdleAfter { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? IIndexSettings.RefreshInterval { get; set; }
-
-		int? IIndexSettings.MaxResultWindow { get; set; }
-
-		int? IIndexSettings.MaxInnerResultWindow { get; set; }
-
-		int? IIndexSettings.MaxRescoreWindow { get; set; }
-
-		int? IIndexSettings.MaxDocvalueFieldsSearch { get; set; }
-
-		int? IIndexSettings.MaxScriptFields { get; set; }
-
-		int? IIndexSettings.MaxNgramDiff { get; set; }
-
-		int? IIndexSettings.MaxShingleDiff { get; set; }
-
-		IndexManagement.IIndexSettingBlocks? IIndexSettings.Blocks { get; set; }
-
-		bool? IIndexSettings.BlocksReadOnly { get; set; }
-
-		bool? IIndexSettings.BlocksReadOnlyAllowDelete { get; set; }
-
-		bool? IIndexSettings.BlocksRead { get; set; }
-
-		Union<bool?, string?>? IIndexSettings.BlocksWrite { get; set; }
-
-		bool? IIndexSettings.BlocksMetadata { get; set; }
-
-		int? IIndexSettings.MaxRefreshListeners { get; set; }
-
-		int? IIndexSettings.AnalyzeMaxTokenCount { get; set; }
-
-		int? IIndexSettings.HighlightMaxAnalyzedOffset { get; set; }
-
-		int? IIndexSettings.MaxTermsCount { get; set; }
-
-		int? IIndexSettings.MaxRegexLength { get; set; }
-
-		IndexManagement.IIndexRouting? IIndexSettings.Routing { get; set; }
-
-		Elastic.Clients.Elasticsearch.Time? IIndexSettings.GcDeletes { get; set; }
-
-		string? IIndexSettings.DefaultPipeline { get; set; }
-
-		string? IIndexSettings.FinalPipeline { get; set; }
-
-		IndexManagement.IIndexSettingsLifecycle? IIndexSettings.Lifecycle { get; set; }
-
-		string? IIndexSettings.LifecycleName { get; set; }
-
-		Elastic.Clients.Elasticsearch.Name? IIndexSettings.ProvidedName { get; set; }
-
-		string? IIndexSettings.CreationDate { get; set; }
-
-		string? IIndexSettings.Uuid { get; set; }
-
-		IndexManagement.IIndexVersioning? IIndexSettings.Version { get; set; }
-
-		Union<bool?, string?>? IIndexSettings.VerifiedBeforeClose { get; set; }
-
-		Union<string?, int?>? IIndexSettings.Format { get; set; }
-
-		int? IIndexSettings.MaxSlicesPerScroll { get; set; }
-
-		string? IIndexSettings.TranslogDurability { get; set; }
-
-		Union<bool?, string?>? IIndexSettings.QueryStringLenient { get; set; }
-
-		Union<int?, string?>? IIndexSettings.Priority { get; set; }
-
-		int? IIndexSettings.TopMetricsMaxSize { get; set; }
-
-		IndexManagement.IIndexSettingsAnalysis? IIndexSettings.Analysis { get; set; }
-
-		IndexManagement.IIndexSettings? IIndexSettings.Settings { get; set; }
+		internal Union<int?, string?>? _numberOfShards;
+		internal Union<int?, string?>? _numberOfReplicas;
+		internal int? _numberOfRoutingShards;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? _checkOnStartup;
+		internal string? _codec;
+		internal Union<int?, string?>? _routingPartitionSize;
+		internal Elastic.Clients.Elasticsearch.Time? _softDeletesRetentionLeasePeriod;
+		internal bool? _loadFixedBitsetFiltersEagerly;
+		internal Union<bool?, string?>? _hidden;
+		internal string? _autoExpandReplicas;
+		internal Elastic.Clients.Elasticsearch.Time? _searchIdleAfter;
+		internal Elastic.Clients.Elasticsearch.Time? _refreshInterval;
+		internal int? _maxResultWindow;
+		internal int? _maxInnerResultWindow;
+		internal int? _maxRescoreWindow;
+		internal int? _maxDocvalueFieldsSearch;
+		internal int? _maxScriptFields;
+		internal int? _maxNgramDiff;
+		internal int? _maxShingleDiff;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? _blocks;
+		internal bool? _blocksReadOnly;
+		internal bool? _blocksReadOnlyAllowDelete;
+		internal bool? _blocksRead;
+		internal Union<bool?, string?>? _blocksWrite;
+		internal bool? _blocksMetadata;
+		internal int? _maxRefreshListeners;
+		internal int? _analyzeMaxTokenCount;
+		internal int? _highlightMaxAnalyzedOffset;
+		internal int? _maxTermsCount;
+		internal int? _maxRegexLength;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? _routing;
+		internal Elastic.Clients.Elasticsearch.Time? _gcDeletes;
+		internal string? _defaultPipeline;
+		internal string? _finalPipeline;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? _lifecycle;
+		internal string? _lifecycleName;
+		internal Elastic.Clients.Elasticsearch.Name? _providedName;
+		internal string? _creationDate;
+		internal string? _uuid;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? _version;
+		internal Union<bool?, string?>? _verifiedBeforeClose;
+		internal Union<string?, int?>? _format;
+		internal int? _maxSlicesPerScroll;
+		internal string? _translogDurability;
+		internal Union<bool?, string?>? _queryStringLenient;
+		internal Union<int?, string?>? _priority;
+		internal int? _topMetricsMaxSize;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? _analysis;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
+		public IndexSettingsDescriptor NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a._numberOfShards = v);
+		public IndexSettingsDescriptor NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a._numberOfReplicas = v);
+		public IndexSettingsDescriptor NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a._numberOfRoutingShards = v);
+		public IndexSettingsDescriptor CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a._checkOnStartup = v);
+		public IndexSettingsDescriptor Codec(string? codec) => Assign(codec, (a, v) => a._codec = v);
+		public IndexSettingsDescriptor RoutingPartitionSize(Union<int?, string?>? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a._routingPartitionSize = v);
+		public IndexSettingsDescriptor SoftDeletesRetentionLeasePeriod(Elastic.Clients.Elasticsearch.Time? softDeletesRetentionLeasePeriod) => Assign(softDeletesRetentionLeasePeriod, (a, v) => a._softDeletesRetentionLeasePeriod = v);
+		public IndexSettingsDescriptor LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a._loadFixedBitsetFiltersEagerly = v);
+		public IndexSettingsDescriptor Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a._hidden = v);
+		public IndexSettingsDescriptor AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a._autoExpandReplicas = v);
+		public IndexSettingsDescriptor SearchIdleAfter(Elastic.Clients.Elasticsearch.Time? searchIdleAfter) => Assign(searchIdleAfter, (a, v) => a._searchIdleAfter = v);
+		public IndexSettingsDescriptor RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a._refreshInterval = v);
+		public IndexSettingsDescriptor MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a._maxResultWindow = v);
+		public IndexSettingsDescriptor MaxInnerResultWindow(int? maxInnerResultWindow) => Assign(maxInnerResultWindow, (a, v) => a._maxInnerResultWindow = v);
+		public IndexSettingsDescriptor MaxRescoreWindow(int? maxRescoreWindow) => Assign(maxRescoreWindow, (a, v) => a._maxRescoreWindow = v);
+		public IndexSettingsDescriptor MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch) => Assign(maxDocvalueFieldsSearch, (a, v) => a._maxDocvalueFieldsSearch = v);
+		public IndexSettingsDescriptor MaxScriptFields(int? maxScriptFields) => Assign(maxScriptFields, (a, v) => a._maxScriptFields = v);
+		public IndexSettingsDescriptor MaxNgramDiff(int? maxNgramDiff) => Assign(maxNgramDiff, (a, v) => a._maxNgramDiff = v);
+		public IndexSettingsDescriptor MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a._maxShingleDiff = v);
+		public IndexSettingsDescriptor Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks) => Assign(blocks, (a, v) => a._blocks = v);
+		public IndexSettingsDescriptor BlocksReadOnly(bool? blocksReadOnly = true) => Assign(blocksReadOnly, (a, v) => a._blocksReadOnly = v);
+		public IndexSettingsDescriptor BlocksReadOnlyAllowDelete(bool? blocksReadOnlyAllowDelete = true) => Assign(blocksReadOnlyAllowDelete, (a, v) => a._blocksReadOnlyAllowDelete = v);
+		public IndexSettingsDescriptor BlocksRead(bool? blocksRead = true) => Assign(blocksRead, (a, v) => a._blocksRead = v);
+		public IndexSettingsDescriptor BlocksWrite(Union<bool?, string?>? blocksWrite) => Assign(blocksWrite, (a, v) => a._blocksWrite = v);
+		public IndexSettingsDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a._blocksMetadata = v);
+		public IndexSettingsDescriptor MaxRefreshListeners(int? maxRefreshListeners) => Assign(maxRefreshListeners, (a, v) => a._maxRefreshListeners = v);
+		public IndexSettingsDescriptor AnalyzeMaxTokenCount(int? analyzeMaxTokenCount) => Assign(analyzeMaxTokenCount, (a, v) => a._analyzeMaxTokenCount = v);
+		public IndexSettingsDescriptor HighlightMaxAnalyzedOffset(int? highlightMaxAnalyzedOffset) => Assign(highlightMaxAnalyzedOffset, (a, v) => a._highlightMaxAnalyzedOffset = v);
+		public IndexSettingsDescriptor MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a._maxTermsCount = v);
+		public IndexSettingsDescriptor MaxRegexLength(int? maxRegexLength) => Assign(maxRegexLength, (a, v) => a._maxRegexLength = v);
+		public IndexSettingsDescriptor Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing) => Assign(routing, (a, v) => a._routing = v);
+		public IndexSettingsDescriptor GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes) => Assign(gcDeletes, (a, v) => a._gcDeletes = v);
+		public IndexSettingsDescriptor DefaultPipeline(string? defaultPipeline) => Assign(defaultPipeline, (a, v) => a._defaultPipeline = v);
+		public IndexSettingsDescriptor FinalPipeline(string? finalPipeline) => Assign(finalPipeline, (a, v) => a._finalPipeline = v);
+		public IndexSettingsDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle) => Assign(lifecycle, (a, v) => a._lifecycle = v);
+		public IndexSettingsDescriptor LifecycleName(string? lifecycleName) => Assign(lifecycleName, (a, v) => a._lifecycleName = v);
+		public IndexSettingsDescriptor ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a._providedName = v);
+		public IndexSettingsDescriptor CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a._creationDate = v);
+		public IndexSettingsDescriptor Uuid(string? uuid) => Assign(uuid, (a, v) => a._uuid = v);
+		public IndexSettingsDescriptor Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version) => Assign(version, (a, v) => a._version = v);
+		public IndexSettingsDescriptor VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose) => Assign(verifiedBeforeClose, (a, v) => a._verifiedBeforeClose = v);
+		public IndexSettingsDescriptor Format(Union<string?, int?>? format) => Assign(format, (a, v) => a._format = v);
+		public IndexSettingsDescriptor MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a._maxSlicesPerScroll = v);
+		public IndexSettingsDescriptor TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a._translogDurability = v);
+		public IndexSettingsDescriptor QueryStringLenient(Union<bool?, string?>? queryStringLenient) => Assign(queryStringLenient, (a, v) => a._queryStringLenient = v);
+		public IndexSettingsDescriptor Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a._priority = v);
+		public IndexSettingsDescriptor TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a._topMetricsMaxSize = v);
+		public IndexSettingsDescriptor Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis) => Assign(analysis, (a, v) => a._analysis = v);
+		public IndexSettingsDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
 	}
 
-	internal sealed class IndexSettingsDescriptorConverter<TReadAs> : JsonConverter<IIndexSettings> where TReadAs : class, IIndexSettings
+	internal sealed class IndexSettingsDescriptorConverter : JsonConverter<IndexSettingsDescriptor>
 	{
-		public override IIndexSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexSettings value, JsonSerializerOptions options)
+		public override IndexSettingsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexSettingsDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.NumberOfShards is not null)
+			if (value._numberOfShards is not null)
 			{
 				writer.WritePropertyName("number_of_shards");
-				JsonSerializer.Serialize(writer, value.NumberOfShards, options);
+				JsonSerializer.Serialize(writer, value._numberOfShards, options);
 			}
 
-			if (value.NumberOfReplicas is not null)
+			if (value._numberOfReplicas is not null)
 			{
 				writer.WritePropertyName("number_of_replicas");
-				JsonSerializer.Serialize(writer, value.NumberOfReplicas, options);
+				JsonSerializer.Serialize(writer, value._numberOfReplicas, options);
 			}
 
-			if (value.NumberOfRoutingShards.HasValue)
+			if (value._numberOfRoutingShards.HasValue)
 			{
 				writer.WritePropertyName("number_of_routing_shards");
-				writer.WriteNumberValue(value.NumberOfRoutingShards.Value);
+				writer.WriteNumberValue(value._numberOfRoutingShards.Value);
 			}
 
-			if (value.CheckOnStartup is not null)
+			if (value._checkOnStartup is not null)
 			{
 				writer.WritePropertyName("check_on_startup");
-				JsonSerializer.Serialize(writer, value.CheckOnStartup, options);
+				JsonSerializer.Serialize(writer, value._checkOnStartup, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Codec))
+			if (!string.IsNullOrEmpty(value._codec))
 			{
 				writer.WritePropertyName("codec");
-				writer.WriteStringValue(value.Codec);
+				writer.WriteStringValue(value._codec);
 			}
 
-			if (value.RoutingPartitionSize is not null)
+			if (value._routingPartitionSize is not null)
 			{
 				writer.WritePropertyName("routing_partition_size");
-				JsonSerializer.Serialize(writer, value.RoutingPartitionSize, options);
+				JsonSerializer.Serialize(writer, value._routingPartitionSize, options);
 			}
 
-			if (value.SoftDeletesRetentionLeasePeriod is not null)
+			if (value._softDeletesRetentionLeasePeriod is not null)
 			{
 				writer.WritePropertyName("soft_deletes.retention_lease.period");
-				JsonSerializer.Serialize(writer, value.SoftDeletesRetentionLeasePeriod, options);
+				JsonSerializer.Serialize(writer, value._softDeletesRetentionLeasePeriod, options);
 			}
 
-			if (value.LoadFixedBitsetFiltersEagerly.HasValue)
+			if (value._loadFixedBitsetFiltersEagerly.HasValue)
 			{
 				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
-				writer.WriteBooleanValue(value.LoadFixedBitsetFiltersEagerly.Value);
+				writer.WriteBooleanValue(value._loadFixedBitsetFiltersEagerly.Value);
 			}
 
-			if (value.Hidden is not null)
+			if (value._hidden is not null)
 			{
 				writer.WritePropertyName("hidden");
-				JsonSerializer.Serialize(writer, value.Hidden, options);
+				JsonSerializer.Serialize(writer, value._hidden, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.AutoExpandReplicas))
+			if (!string.IsNullOrEmpty(value._autoExpandReplicas))
 			{
 				writer.WritePropertyName("auto_expand_replicas");
-				writer.WriteStringValue(value.AutoExpandReplicas);
+				writer.WriteStringValue(value._autoExpandReplicas);
 			}
 
-			if (value.SearchIdleAfter is not null)
+			if (value._searchIdleAfter is not null)
 			{
 				writer.WritePropertyName("search.idle.after");
-				JsonSerializer.Serialize(writer, value.SearchIdleAfter, options);
+				JsonSerializer.Serialize(writer, value._searchIdleAfter, options);
 			}
 
-			if (value.RefreshInterval is not null)
+			if (value._refreshInterval is not null)
 			{
 				writer.WritePropertyName("refresh_interval");
-				JsonSerializer.Serialize(writer, value.RefreshInterval, options);
+				JsonSerializer.Serialize(writer, value._refreshInterval, options);
 			}
 
-			if (value.MaxResultWindow.HasValue)
+			if (value._maxResultWindow.HasValue)
 			{
 				writer.WritePropertyName("max_result_window");
-				writer.WriteNumberValue(value.MaxResultWindow.Value);
+				writer.WriteNumberValue(value._maxResultWindow.Value);
 			}
 
-			if (value.MaxInnerResultWindow.HasValue)
+			if (value._maxInnerResultWindow.HasValue)
 			{
 				writer.WritePropertyName("max_inner_result_window");
-				writer.WriteNumberValue(value.MaxInnerResultWindow.Value);
+				writer.WriteNumberValue(value._maxInnerResultWindow.Value);
 			}
 
-			if (value.MaxRescoreWindow.HasValue)
+			if (value._maxRescoreWindow.HasValue)
 			{
 				writer.WritePropertyName("max_rescore_window");
-				writer.WriteNumberValue(value.MaxRescoreWindow.Value);
+				writer.WriteNumberValue(value._maxRescoreWindow.Value);
 			}
 
-			if (value.MaxDocvalueFieldsSearch.HasValue)
+			if (value._maxDocvalueFieldsSearch.HasValue)
 			{
 				writer.WritePropertyName("max_docvalue_fields_search");
-				writer.WriteNumberValue(value.MaxDocvalueFieldsSearch.Value);
+				writer.WriteNumberValue(value._maxDocvalueFieldsSearch.Value);
 			}
 
-			if (value.MaxScriptFields.HasValue)
+			if (value._maxScriptFields.HasValue)
 			{
 				writer.WritePropertyName("max_script_fields");
-				writer.WriteNumberValue(value.MaxScriptFields.Value);
+				writer.WriteNumberValue(value._maxScriptFields.Value);
 			}
 
-			if (value.MaxNgramDiff.HasValue)
+			if (value._maxNgramDiff.HasValue)
 			{
 				writer.WritePropertyName("max_ngram_diff");
-				writer.WriteNumberValue(value.MaxNgramDiff.Value);
+				writer.WriteNumberValue(value._maxNgramDiff.Value);
 			}
 
-			if (value.MaxShingleDiff.HasValue)
+			if (value._maxShingleDiff.HasValue)
 			{
 				writer.WritePropertyName("max_shingle_diff");
-				writer.WriteNumberValue(value.MaxShingleDiff.Value);
+				writer.WriteNumberValue(value._maxShingleDiff.Value);
 			}
 
-			if (value.Blocks is not null)
+			if (value._blocks is not null)
 			{
 				writer.WritePropertyName("blocks");
-				JsonSerializer.Serialize(writer, value.Blocks, options);
+				JsonSerializer.Serialize(writer, value._blocks, options);
 			}
 
-			if (value.BlocksReadOnly.HasValue)
+			if (value._blocksReadOnly.HasValue)
 			{
 				writer.WritePropertyName("blocks.read_only");
-				writer.WriteBooleanValue(value.BlocksReadOnly.Value);
+				writer.WriteBooleanValue(value._blocksReadOnly.Value);
 			}
 
-			if (value.BlocksReadOnlyAllowDelete.HasValue)
+			if (value._blocksReadOnlyAllowDelete.HasValue)
 			{
 				writer.WritePropertyName("blocks.read_only_allow_delete");
-				writer.WriteBooleanValue(value.BlocksReadOnlyAllowDelete.Value);
+				writer.WriteBooleanValue(value._blocksReadOnlyAllowDelete.Value);
 			}
 
-			if (value.BlocksRead.HasValue)
+			if (value._blocksRead.HasValue)
 			{
 				writer.WritePropertyName("blocks.read");
-				writer.WriteBooleanValue(value.BlocksRead.Value);
+				writer.WriteBooleanValue(value._blocksRead.Value);
 			}
 
-			if (value.BlocksWrite is not null)
+			if (value._blocksWrite is not null)
 			{
 				writer.WritePropertyName("blocks.write");
-				JsonSerializer.Serialize(writer, value.BlocksWrite, options);
+				JsonSerializer.Serialize(writer, value._blocksWrite, options);
 			}
 
-			if (value.BlocksMetadata.HasValue)
+			if (value._blocksMetadata.HasValue)
 			{
 				writer.WritePropertyName("blocks.metadata");
-				writer.WriteBooleanValue(value.BlocksMetadata.Value);
+				writer.WriteBooleanValue(value._blocksMetadata.Value);
 			}
 
-			if (value.MaxRefreshListeners.HasValue)
+			if (value._maxRefreshListeners.HasValue)
 			{
 				writer.WritePropertyName("max_refresh_listeners");
-				writer.WriteNumberValue(value.MaxRefreshListeners.Value);
+				writer.WriteNumberValue(value._maxRefreshListeners.Value);
 			}
 
-			if (value.AnalyzeMaxTokenCount.HasValue)
+			if (value._analyzeMaxTokenCount.HasValue)
 			{
 				writer.WritePropertyName("analyze.max_token_count");
-				writer.WriteNumberValue(value.AnalyzeMaxTokenCount.Value);
+				writer.WriteNumberValue(value._analyzeMaxTokenCount.Value);
 			}
 
-			if (value.HighlightMaxAnalyzedOffset.HasValue)
+			if (value._highlightMaxAnalyzedOffset.HasValue)
 			{
 				writer.WritePropertyName("highlight.max_analyzed_offset");
-				writer.WriteNumberValue(value.HighlightMaxAnalyzedOffset.Value);
+				writer.WriteNumberValue(value._highlightMaxAnalyzedOffset.Value);
 			}
 
-			if (value.MaxTermsCount.HasValue)
+			if (value._maxTermsCount.HasValue)
 			{
 				writer.WritePropertyName("max_terms_count");
-				writer.WriteNumberValue(value.MaxTermsCount.Value);
+				writer.WriteNumberValue(value._maxTermsCount.Value);
 			}
 
-			if (value.MaxRegexLength.HasValue)
+			if (value._maxRegexLength.HasValue)
 			{
 				writer.WritePropertyName("max_regex_length");
-				writer.WriteNumberValue(value.MaxRegexLength.Value);
+				writer.WriteNumberValue(value._maxRegexLength.Value);
 			}
 
-			if (value.Routing is not null)
+			if (value._routing is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, value.Routing, options);
+				JsonSerializer.Serialize(writer, value._routing, options);
 			}
 
-			if (value.GcDeletes is not null)
+			if (value._gcDeletes is not null)
 			{
 				writer.WritePropertyName("gc_deletes");
-				JsonSerializer.Serialize(writer, value.GcDeletes, options);
+				JsonSerializer.Serialize(writer, value._gcDeletes, options);
 			}
 
-			if (value.DefaultPipeline is not null)
+			if (value._defaultPipeline is not null)
 			{
 				writer.WritePropertyName("default_pipeline");
-				JsonSerializer.Serialize(writer, value.DefaultPipeline, options);
+				JsonSerializer.Serialize(writer, value._defaultPipeline, options);
 			}
 
-			if (value.FinalPipeline is not null)
+			if (value._finalPipeline is not null)
 			{
 				writer.WritePropertyName("final_pipeline");
-				JsonSerializer.Serialize(writer, value.FinalPipeline, options);
+				JsonSerializer.Serialize(writer, value._finalPipeline, options);
 			}
 
-			if (value.Lifecycle is not null)
+			if (value._lifecycle is not null)
 			{
 				writer.WritePropertyName("lifecycle");
-				JsonSerializer.Serialize(writer, value.Lifecycle, options);
+				JsonSerializer.Serialize(writer, value._lifecycle, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.LifecycleName))
+			if (!string.IsNullOrEmpty(value._lifecycleName))
 			{
 				writer.WritePropertyName("lifecycle.name");
-				writer.WriteStringValue(value.LifecycleName);
+				writer.WriteStringValue(value._lifecycleName);
 			}
 
-			if (value.ProvidedName is not null)
+			if (value._providedName is not null)
 			{
 				writer.WritePropertyName("provided_name");
-				JsonSerializer.Serialize(writer, value.ProvidedName, options);
+				JsonSerializer.Serialize(writer, value._providedName, options);
 			}
 
-			if (value.CreationDate is not null)
+			if (value._creationDate is not null)
 			{
 				writer.WritePropertyName("creation_date");
-				JsonSerializer.Serialize(writer, value.CreationDate, options);
+				JsonSerializer.Serialize(writer, value._creationDate, options);
 			}
 
-			if (value.Uuid is not null)
+			if (value._uuid is not null)
 			{
 				writer.WritePropertyName("uuid");
-				JsonSerializer.Serialize(writer, value.Uuid, options);
+				JsonSerializer.Serialize(writer, value._uuid, options);
 			}
 
-			if (value.Version is not null)
+			if (value._version is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.Version, options);
+				JsonSerializer.Serialize(writer, value._version, options);
 			}
 
-			if (value.VerifiedBeforeClose is not null)
+			if (value._verifiedBeforeClose is not null)
 			{
 				writer.WritePropertyName("verified_before_close");
-				JsonSerializer.Serialize(writer, value.VerifiedBeforeClose, options);
+				JsonSerializer.Serialize(writer, value._verifiedBeforeClose, options);
 			}
 
-			if (value.Format is not null)
+			if (value._format is not null)
 			{
 				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, value.Format, options);
+				JsonSerializer.Serialize(writer, value._format, options);
 			}
 
-			if (value.MaxSlicesPerScroll.HasValue)
+			if (value._maxSlicesPerScroll.HasValue)
 			{
 				writer.WritePropertyName("max_slices_per_scroll");
-				writer.WriteNumberValue(value.MaxSlicesPerScroll.Value);
+				writer.WriteNumberValue(value._maxSlicesPerScroll.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.TranslogDurability))
+			if (!string.IsNullOrEmpty(value._translogDurability))
 			{
 				writer.WritePropertyName("translog.durability");
-				writer.WriteStringValue(value.TranslogDurability);
+				writer.WriteStringValue(value._translogDurability);
 			}
 
-			if (value.QueryStringLenient is not null)
+			if (value._queryStringLenient is not null)
 			{
 				writer.WritePropertyName("query_string.lenient");
-				JsonSerializer.Serialize(writer, value.QueryStringLenient, options);
+				JsonSerializer.Serialize(writer, value._queryStringLenient, options);
 			}
 
-			if (value.Priority is not null)
+			if (value._priority is not null)
 			{
 				writer.WritePropertyName("priority");
-				JsonSerializer.Serialize(writer, value.Priority, options);
+				JsonSerializer.Serialize(writer, value._priority, options);
 			}
 
-			if (value.TopMetricsMaxSize.HasValue)
+			if (value._topMetricsMaxSize.HasValue)
 			{
 				writer.WritePropertyName("top_metrics_max_size");
-				writer.WriteNumberValue(value.TopMetricsMaxSize.Value);
+				writer.WriteNumberValue(value._topMetricsMaxSize.Value);
 			}
 
-			if (value.Analysis is not null)
+			if (value._analysis is not null)
 			{
 				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, value.Analysis, options);
+				JsonSerializer.Serialize(writer, value._analysis, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexSettingsAnalysisDescriptorConverter<IndexSettingsAnalysis>))]
-	public partial interface IIndexSettingsAnalysis
-	{
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? Analyzer { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? CharFilter { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? Filter { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? Normalizer { get; set; }
-	}
-
-	public partial class IndexSettingsAnalysis : IndexManagement.IIndexSettingsAnalysis
+	public partial class IndexSettingsAnalysis
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
@@ -1225,160 +1025,134 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? Normalizer { get; set; }
 	}
 
-	public partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor, IIndexSettingsAnalysis>, IIndexSettingsAnalysis
+	[JsonConverter(typeof(IndexSettingsAnalysisDescriptorConverter))]
+	public partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor>
 	{
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? IIndexSettingsAnalysis.Analyzer { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? IIndexSettingsAnalysis.CharFilter { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? IIndexSettingsAnalysis.Filter { get; set; }
-
-		Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? IIndexSettingsAnalysis.Normalizer { get; set; }
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? _analyzer;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? _charFilter;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? _filter;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? _normalizer;
+		public IndexSettingsAnalysisDescriptor Analyzer(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Analyzers?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Analyzers?>> selector) => Assign(selector, (a, v) => a._analyzer = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Analyzers?>()));
+		public IndexSettingsAnalysisDescriptor CharFilter(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>> selector) => Assign(selector, (a, v) => a._charFilter = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>()));
+		public IndexSettingsAnalysisDescriptor Filter(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>> selector) => Assign(selector, (a, v) => a._filter = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>()));
+		public IndexSettingsAnalysisDescriptor Normalizer(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Normalizers?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Normalizers?>> selector) => Assign(selector, (a, v) => a._normalizer = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Normalizers?>()));
 	}
 
-	internal sealed class IndexSettingsAnalysisDescriptorConverter<TReadAs> : JsonConverter<IIndexSettingsAnalysis> where TReadAs : class, IIndexSettingsAnalysis
+	internal sealed class IndexSettingsAnalysisDescriptorConverter : JsonConverter<IndexSettingsAnalysisDescriptor>
 	{
-		public override IIndexSettingsAnalysis Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexSettingsAnalysis value, JsonSerializerOptions options)
+		public override IndexSettingsAnalysisDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexSettingsAnalysisDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Analyzer is not null)
+			if (value._analyzer is not null)
 			{
 				writer.WritePropertyName("analyzer");
-				JsonSerializer.Serialize(writer, value.Analyzer, options);
+				JsonSerializer.Serialize(writer, value._analyzer, options);
 			}
 
-			if (value.CharFilter is not null)
+			if (value._charFilter is not null)
 			{
 				writer.WritePropertyName("char_filter");
-				JsonSerializer.Serialize(writer, value.CharFilter, options);
+				JsonSerializer.Serialize(writer, value._charFilter, options);
 			}
 
-			if (value.Filter is not null)
+			if (value._filter is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.Filter, options);
+				JsonSerializer.Serialize(writer, value._filter, options);
 			}
 
-			if (value.Normalizer is not null)
+			if (value._normalizer is not null)
 			{
 				writer.WritePropertyName("normalizer");
-				JsonSerializer.Serialize(writer, value.Normalizer, options);
+				JsonSerializer.Serialize(writer, value._normalizer, options);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexSettingsLifecycle, IndexSettingsLifecycle>))]
-	public partial interface IIndexSettingsLifecycle
-	{
-		Elastic.Clients.Elasticsearch.Name Name { get; set; }
-	}
-
-	public partial class IndexSettingsLifecycle : IndexManagement.IIndexSettingsLifecycle
+	public partial class IndexSettingsLifecycle
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(IndexStateDescriptorConverter<IndexState>))]
-	public partial interface IIndexState
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
-
-		Mapping.ITypeMapping? Mappings { get; set; }
-
-		Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? Settings { get; set; }
-
-		Elastic.Clients.Elasticsearch.DataStreamName? DataStream { get; set; }
-	}
-
-	public partial class IndexState : IndexManagement.IIndexState
+	public partial class IndexState
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? Settings { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?, Elastic.Clients.Elasticsearch.IndexManagement.IndexStatePrefixedSettings?>? Settings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("data_stream")]
 		public Elastic.Clients.Elasticsearch.DataStreamName? DataStream { get; set; }
 	}
 
-	public partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor, IIndexState>, IIndexState
+	[JsonConverter(typeof(IndexStateDescriptorConverter))]
+	public partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias>? IIndexState.Aliases { get; set; }
-
-		Mapping.ITypeMapping? IIndexState.Mappings { get; set; }
-
-		Union<IndexManagement.IIndexSettings?, IndexManagement.IIndexStatePrefixedSettings?>? IIndexState.Settings { get; set; }
-
-		Elastic.Clients.Elasticsearch.DataStreamName? IIndexState.DataStream { get; set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
+		internal Union<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?, Elastic.Clients.Elasticsearch.IndexManagement.IndexStatePrefixedSettings?>? _settings;
+		internal Elastic.Clients.Elasticsearch.DataStreamName? _dataStream;
+		public IndexStateDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexStateDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public IndexStateDescriptor Settings(Union<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?, Elastic.Clients.Elasticsearch.IndexManagement.IndexStatePrefixedSettings?>? settings) => Assign(settings, (a, v) => a._settings = v);
+		public IndexStateDescriptor DataStream(Elastic.Clients.Elasticsearch.DataStreamName? dataStream) => Assign(dataStream, (a, v) => a._dataStream = v);
 	}
 
-	internal sealed class IndexStateDescriptorConverter<TReadAs> : JsonConverter<IIndexState> where TReadAs : class, IIndexState
+	internal sealed class IndexStateDescriptorConverter : JsonConverter<IndexStateDescriptor>
 	{
-		public override IIndexState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, IIndexState value, JsonSerializerOptions options)
+		public override IndexStateDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexStateDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value.Aliases is not null)
+			if (value._aliases is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.Aliases, options);
+				JsonSerializer.Serialize(writer, value._aliases, options);
 			}
 
-			if (value.Mappings is not null)
+			if (value._mappings is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.Mappings, options);
+				JsonSerializer.Serialize(writer, value._mappings, options);
 			}
 
-			if (value.Settings is not null)
+			if (value._settings is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.Settings, options);
+				JsonSerializer.Serialize(writer, value._settings, options);
 			}
 
-			if (value.DataStream is not null)
+			if (value._dataStream is not null)
 			{
 				writer.WritePropertyName("data_stream");
-				JsonSerializer.Serialize(writer, value.DataStream, options);
+				JsonSerializer.Serialize(writer, value._dataStream, options);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexStatePrefixedSettings, IndexStatePrefixedSettings>))]
-	public partial interface IIndexStatePrefixedSettings
-	{
-		IndexManagement.IIndexSettings Index { get; set; }
-	}
-
-	public partial class IndexStatePrefixedSettings : IndexManagement.IIndexStatePrefixedSettings
+	public partial class IndexStatePrefixedSettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public IndexManagement.IIndexSettings Index { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Index { get; set; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IIndexVersioning, IndexVersioning>))]
-	public partial interface IIndexVersioning
-	{
-		string Created { get; set; }
-	}
-
-	public partial class IndexVersioning : IndexManagement.IIndexVersioning
+	public partial class IndexVersioning
 	{
 		[JsonInclude]
 		[JsonPropertyName("created")]
@@ -1392,15 +1166,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(SimpleInterfaceConverter<IOverlappingIndexTemplate, OverlappingIndexTemplate>))]
-	public partial interface IOverlappingIndexTemplate
-	{
-		Elastic.Clients.Elasticsearch.Name Name { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? IndexPatterns { get; set; }
-	}
-
-	public partial class OverlappingIndexTemplate : IndexManagement.IOverlappingIndexTemplate
+	public partial class OverlappingIndexTemplate
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -1418,27 +1184,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddataFormat Format { get; init; }
 	}
 
-	[InterfaceConverterAttribute(typeof(TemplateMappingDescriptorConverter<TemplateMapping>))]
-	public partial interface ITemplateMapping
-	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> Aliases { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.Name> IndexPatterns { get; set; }
-
-		Mapping.ITypeMapping Mappings { get; set; }
-
-		int Order { get; set; }
-
-		Dictionary<string, object> Settings { get; set; }
-
-		object? Version { get; set; }
-	}
-
-	public partial class TemplateMapping : IndexManagement.ITemplateMapping
+	public partial class TemplateMapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
@@ -1446,7 +1196,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Mapping.ITypeMapping Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
@@ -1461,41 +1211,43 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public object? Version { get; set; }
 	}
 
-	public partial class TemplateMappingDescriptor : DescriptorBase<TemplateMappingDescriptor, ITemplateMapping>, ITemplateMapping
+	[JsonConverter(typeof(TemplateMappingDescriptorConverter))]
+	public partial class TemplateMappingDescriptor : DescriptorBase<TemplateMappingDescriptor>
 	{
-		Dictionary<Elastic.Clients.Elasticsearch.IndexName, IndexManagement.IAlias> ITemplateMapping.Aliases { get; set; }
-
-		IEnumerable<Elastic.Clients.Elasticsearch.Name> ITemplateMapping.IndexPatterns { get; set; }
-
-		Mapping.ITypeMapping ITemplateMapping.Mappings { get; set; }
-
-		int ITemplateMapping.Order { get; set; }
-
-		Dictionary<string, object> ITemplateMapping.Settings { get; set; }
-
-		object? ITemplateMapping.Version { get; set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> _aliases;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Name> _indexPatterns;
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping _mappings;
+		internal int _order;
+		internal Dictionary<string, object> _settings;
+		internal object? _version;
+		public TemplateMappingDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
+		public TemplateMappingDescriptor IndexPatterns(IEnumerable<Elastic.Clients.Elasticsearch.Name> indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
+		public TemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public TemplateMappingDescriptor Order(int order) => Assign(order, (a, v) => a._order = v);
+		public TemplateMappingDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string, object>()));
+		public TemplateMappingDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
 	}
 
-	internal sealed class TemplateMappingDescriptorConverter<TReadAs> : JsonConverter<ITemplateMapping> where TReadAs : class, ITemplateMapping
+	internal sealed class TemplateMappingDescriptorConverter : JsonConverter<TemplateMappingDescriptor>
 	{
-		public override ITemplateMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => JsonSerializer.Deserialize<TReadAs>(ref reader, options);
-		public override void Write(Utf8JsonWriter writer, ITemplateMapping value, JsonSerializerOptions options)
+		public override TemplateMappingDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TemplateMappingDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, value.Aliases, options);
+			JsonSerializer.Serialize(writer, value._aliases, options);
 			writer.WritePropertyName("index_patterns");
-			JsonSerializer.Serialize(writer, value.IndexPatterns, options);
+			JsonSerializer.Serialize(writer, value._indexPatterns, options);
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, value.Mappings, options);
+			JsonSerializer.Serialize(writer, value._mappings, options);
 			writer.WritePropertyName("order");
-			writer.WriteNumberValue(value.Order);
+			writer.WriteNumberValue(value._order);
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, value.Settings, options);
-			if (value.Version is not null)
+			JsonSerializer.Serialize(writer, value._settings, options);
+			if (value._version is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.Version, options);
+				JsonSerializer.Serialize(writer, value._version, options);
 			}
 
 			writer.WriteEndObject();

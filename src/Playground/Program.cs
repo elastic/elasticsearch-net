@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -15,82 +14,87 @@ namespace Playground
 {
 	internal class Program
 	{
+		public class Thing
+		{
+			public QueryContainer? Query { get; set; }
+		}
+
 		private static void Main()
 		{
-			var ec = new Client();
+			//var ec = new Client();
 
-			//#pragma warning disable IDE0039 // Use local function
-			//			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
-			//			//Local variables change type
-			//			Action<ExampleRequestDescriptor> test = b => b.Name("thing");
-			//#pragma warning restore IDE0039 // Use local function
+			////#pragma warning disable IDE0039 // Use local function
+			////			//Func<BoolQueryDescriptor<Person>, IBoolQuery> test = b => b.Name("thing");
+			////			//Local variables change type
+			////			Action<ExampleRequestDescriptor> test = b => b.Name("thing");
+			////#pragma warning restore IDE0039 // Use local function
 
-			//			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
+			////			//static IBoolQuery TestBoolQuery(BoolQueryDescriptor<Person> b) => b.Name("thing");
 
-			//			//Local functions become void returning
-			//			static void TestBoolQuery(ExampleRequestDescriptor b) => b.Name("thing");
+			////			//Local functions become void returning
+			////			static void TestBoolQuery(ExampleRequestDescriptor b) => b.Name("thing");
 
-			//			ec.SomeEndpoint(TestBoolQuery);
+			////			ec.SomeEndpoint(TestBoolQuery);
 
-			//			ec.SomeEndpoint(new ExampleRequest
-			//			{
-			//				Name = "Object test",
-			//				Subtype = new ClusterSubtype
-			//				{
-			//					Identifier = "AnID"
-			//				},
-			//				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
-			//			});
+			////			ec.SomeEndpoint(new ExampleRequest
+			////			{
+			////				Name = "Object test",
+			////				Subtype = new ClusterSubtype
+			////				{
+			////					Identifier = "AnID"
+			////				},
+			////				Query = new Elastic.Clients.Elasticsearch.Experimental.QueryContainer(new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "variant_string" })
+			////			});
 
-			//			ec.SomeEndpoint(new ExampleRequest
-			//			{
-			//				Name = "Object test",
-			//				Subtype = new ClusterSubtype
-			//				{
-			//					Identifier = "AnID"
-			//				},
-			//				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
-			//				// at the cost of an extra object allocation
-			//				Query = Query.Bool(b => b.Tag("using_query_helper"))
-			//			});
+			////			ec.SomeEndpoint(new ExampleRequest
+			////			{
+			////				Name = "Object test",
+			////				Subtype = new ClusterSubtype
+			////				{
+			////					Identifier = "AnID"
+			////				},
+			////				// Static query "helper" provides a way to use the fluent syntax that can be combined with object initialiser code
+			////				// at the cost of an extra object allocation
+			////				Query = Query.Bool(b => b.Tag("using_query_helper"))
+			////			});
 
-			ec.SomeEndpoint(new ExampleRequest
-			{
-				Name = "Object test",
-				Subtype = new ClusterSubtypeDescriptor().Identifier("implictly-assigned"),
-				Query = Query.Bool(b => b.Tag("using_query_helper"))
-			});
-
-			ec.SomeEndpoint(c => c
-				.Name("Descriptor test")
-				.Subtype(s => s.Identifier("AnID"))
-				.Query(c => c.Bool(v => v.Tag("some_tag"))));
-
-			//var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
+			//ec.SomeEndpoint(new ExampleRequest
+			//{
+			//	Name = "Object test",
+			//	Subtype = new ClusterSubtypeDescriptor().Identifier("implictly-assigned"),
+			//	Query = Query.Bool(b => b.Tag("using_query_helper"))
+			//});
 
 			//ec.SomeEndpoint(c => c
 			//	.Name("Descriptor test")
-			//	.Subtype(descriptor)
-			//	.Query(c => c.Boosting(v => v.BoostAmount(10))));
+			//	.Subtype(s => s.Identifier("AnID"))
+			//	.Query(c => c.Bool(v => v.Tag("some_tag"))));
 
-			//ec.SomeEndpoint(c => c
-			//	.Name("Mixed object and descriptor test")
-			//	.Subtype(new ClusterSubtype { Identifier = "AnID" }));
+			////var descriptor = new ClusterSubtypeDescriptor().Identifier("AnID");
 
-			//var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
+			////ec.SomeEndpoint(c => c
+			////	.Name("Descriptor test")
+			////	.Subtype(descriptor)
+			////	.Query(c => c.Boosting(v => v.BoostAmount(10))));
 
-			//ec.SomeEndpoint(requestDescriptor);
+			////ec.SomeEndpoint(c => c
+			////	.Name("Mixed object and descriptor test")
+			////	.Subtype(new ClusterSubtype { Identifier = "AnID" }));
 
-			//var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
+			////var requestDescriptor = new ExampleRequestDescriptor().Name("descriptor_usage");
 
-			//var container = boolQuery.WrapInContainer();
+			////ec.SomeEndpoint(requestDescriptor);
 
-			//if (container.TryGetBoolQuery(out boolQuery))
-			//{
-			//	Console.WriteLine(boolQuery.Tag);
-			//}
+			////var boolQuery = new Elastic.Clients.Elasticsearch.Experimental.BoolQuery { Tag = "TEST" };
 
-			ec.CombinedEndpoint(r => r.WithName("Steve").WithThing(t => t.WithTitle("Title")));
+			////var container = boolQuery.WrapInContainer();
+
+			////if (container.TryGetBoolQuery(out boolQuery))
+			////{
+			////	Console.WriteLine(boolQuery.Tag);
+			////}
+
+			//ec.CombinedEndpoint(r => r.WithName("Steve").WithThing(t => t.WithTitle("Title")));
 
 
 
@@ -99,8 +103,26 @@ namespace Playground
 				.Authentication(new BasicAuthentication("elastic", "-5qxtEZQ=NWx1v+PUjCJ"))
 				.CertificateFingerprint("bdbbcebde100130339ec62f7f4ff7008ae81ddaa0586178090d2a41ba5a6e6a1"));
 
-			var response = client.IndexManagement.CreateIndex("testing", i => i
-				.Settings(s => s.Add("thing", 10)));
+			var serialiser = client.RequestResponseSerializer;
+
+			//var response = client.IndexManagement.CreateIndex("testing", i => i
+			//	.Settings(s => s.Add("thing", 10)));
+
+			var qc = new QueryContainer(new BoolQuery { QueryName = "a_bool_query", Must = new[] { new QueryContainer(new TermQuery { Boost = 0.5f, Field = "the_field", Value = "the_value", CaseInsensitive = true }) } });
+
+			var thing = new Thing { Query = qc };
+
+			var stream = new MemoryStream();
+			serialiser.Serialize(thing, stream);
+			stream.Position = 0;
+			var json = Encoding.UTF8.GetString(stream.ToArray());
+
+			stream.Position = 0;
+
+			if (json.Length > 0)
+			{
+				var deserialised = serialiser.Deserialize<Thing>(stream);
+			}
 
 			//var response = client.Ping();
 

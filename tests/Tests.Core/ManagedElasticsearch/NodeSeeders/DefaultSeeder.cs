@@ -25,13 +25,13 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		public const string PipelineName = "nest-pipeline";
 
-		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings()
+		private readonly IndexSettings _defaultIndexSettings = new IndexSettings()
 		{
 			NumberOfShards = 2,
 			NumberOfReplicas = 0,
 		};
 
-		public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
+		public DefaultSeeder(IElasticClient client, IndexSettings indexSettings)
 		{
 			Client = client;
 			IndexSettings = indexSettings ?? _defaultIndexSettings;
@@ -41,7 +41,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		private IElasticClient Client { get; }
 
-		private IIndexSettings IndexSettings { get; }
+		private IndexSettings IndexSettings { get; }
 
 		public void SeedNode()
 		{

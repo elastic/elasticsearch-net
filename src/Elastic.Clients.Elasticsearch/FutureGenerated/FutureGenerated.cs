@@ -19,45 +19,45 @@ namespace Elastic.Clients.Elasticsearch
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	[JsonConverter(typeof(QueryContainerConverter))]
-	public partial class QueryContainer
-	{
-	}
+	//[JsonConverter(typeof(QueryContainerConverter))]
+	//public partial class QueryContainer
+	//{
+	//}
 
-	public partial class QueryContainerConverter : JsonConverter<QueryContainer>
-	{
-		public override QueryContainer? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	//public partial class QueryContainerConverter : JsonConverter<QueryContainer>
+	//{
+	//	public override QueryContainer? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
-		public override void Write(Utf8JsonWriter writer, QueryContainer value, JsonSerializerOptions options)
-		{
-			//var variant = value.ContainedVariant;
+	//	public override void Write(Utf8JsonWriter writer, QueryContainer value, JsonSerializerOptions options)
+	//	{
+	//		//var variant = value.ContainedVariant;
 
-			//if (variant is null)
-			//	writer.WriteNullValue();
+	//		//if (variant is null)
+	//		//	writer.WriteNullValue();
 
-			// TODO - Use serialiser from settings
-			//JsonSerializer.Serialize(writer, variant, options);
+	//		// TODO - Use serialiser from settings
+	//		//JsonSerializer.Serialize(writer, variant, options);
 
-			var container = value as IQueryContainer; // This gives us access to the properties
+	//		var container = value as QueryContainer; // This gives us access to the properties
 
-			writer.WriteStartObject();
+	//		writer.WriteStartObject();
 
-			if (container.Bool is not null)
-			{
-				writer.WritePropertyName("bool");
+	//		if (container.Bool is not null)
+	//		{
+	//			writer.WritePropertyName("bool");
 
-				// TODO - The options here are valid as they come for the initiating serialiser which is the DefaultRequestResponseSerialiser
-				// Arguably, we want to have access to the transport settings to access the registered serialiser to use for this.
-				// Considerations:
-				//   a) Requires a converter factory approach which has costs on the CanConvert method for each factory which is attempted.
-				//   b) The default serialiser for our types is known so we can be 'safe' in knowing we're using STJ.
-				//   c) We know this converter would only get called by STJ internally, so if it's called, we're using STJ.
-				JsonSerializer.Serialize(writer, container.Bool, options);
-			}
+	//			// TODO - The options here are valid as they come for the initiating serialiser which is the DefaultRequestResponseSerialiser
+	//			// Arguably, we want to have access to the transport settings to access the registered serialiser to use for this.
+	//			// Considerations:
+	//			//   a) Requires a converter factory approach which has costs on the CanConvert method for each factory which is attempted.
+	//			//   b) The default serialiser for our types is known so we can be 'safe' in knowing we're using STJ.
+	//			//   c) We know this converter would only get called by STJ internally, so if it's called, we're using STJ.
+	//			JsonSerializer.Serialize(writer, container.Bool, options);
+	//		}
 
-			writer.WriteEndObject();
-		}
-	}
+	//		writer.WriteEndObject();
+	//	}
+	//}
 }
 
 
@@ -391,34 +391,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	public QueryStringQueryDescriptor DefaultField(string field) => Assign(field, (a, v) => a.DefaultField = v);
 	//}
 
-	public partial class DistanceFeatureQuery : IQueryContainerVariant
-	{
-		public void WrapInContainer(IQueryContainer container) => throw new NotImplementedException();
-	}
+	//public partial class DistanceFeatureQuery : IQueryContainerVariant
+	//{
+	//	public void WrapInContainer(IQueryContainer container) => throw new NotImplementedException();
+	//}
 
-	public partial interface ISpanGapQuery : QueryDsl.IQueryContainerVariant, QueryDsl.ISpanQueryVariant
-	{
-	}
+	//public partial interface ISpanGapQuery : QueryDsl.IQueryContainerVariant, QueryDsl.ISpanQueryVariant
+	//{
+	//}
 
-	public partial class SpanGapQuery : Dictionary<string, int>, ISpanGapQuery
-	{
-		public void WrapInContainer(IQueryContainer container) => throw new NotImplementedException();
-		public void WrapInContainer(ISpanQuery container) => throw new NotImplementedException();
-	}
+	//public partial class SpanGapQuery : Dictionary<string, int>, ISpanGapQuery
+	//{
+	//	public void WrapInContainer(IQueryContainer container) => throw new NotImplementedException();
+	//	public void WrapInContainer(ISpanQuery container) => throw new NotImplementedException();
+	//}
 
-	public partial class PinnedIdsQuery : IPinnedQueryVariant
-	{
-		public IEnumerable<string> Ids { get; set; }
+	//public partial class PinnedIdsQuery : IPinnedQueryVariant
+	//{
+	//	public IEnumerable<string> Ids { get; set; }
 
-		public void WrapInContainer(IPinnedQuery container) => throw new NotImplementedException();
-	}
+	//	public void WrapInContainer(IPinnedQuery container) => throw new NotImplementedException();
+	//}
 
-	public partial class PinnedDocsQuery : IPinnedQueryVariant
-	{
-		public IEnumerable<PinnedDoc> Docs { get; set; }
+	//public partial class PinnedDocsQuery : IPinnedQueryVariant
+	//{
+	//	public IEnumerable<PinnedDoc> Docs { get; set; }
 
-		public void WrapInContainer(IPinnedQuery container) => throw new NotImplementedException();
-	}
+	//	public void WrapInContainer(IPinnedQuery container) => throw new NotImplementedException();
+	//}
 }
 
 namespace Elastic.Clients.Elasticsearch
