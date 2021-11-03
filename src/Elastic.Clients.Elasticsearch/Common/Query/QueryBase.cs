@@ -30,7 +30,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	//	Assign(objectPath, (a, v) => a.Field = v);
 	//}
 
-	[ConvertAs(typeof(QueryBase))]
 	public interface IQuery
 	{
 		/// <summary>

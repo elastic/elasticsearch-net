@@ -45,36 +45,36 @@ public class CreateBasicIndexApiTests
 	}
 }
 
-public class CreateIndexWithSettingsApiTests
-	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, CreateIndexRequestDescriptor,
-		CreateIndexRequest>
-{
-	public CreateIndexWithSettingsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+//public class CreateIndexWithSettingsApiTests
+//	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, CreateIndexRequestDescriptor,
+//		CreateIndexRequest>
+//{
+//	public CreateIndexWithSettingsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	protected override bool ExpectIsValid => true;
-	protected override int ExpectStatusCode => 200;
-	protected override HttpMethod HttpMethod => HttpMethod.PUT;
+//	protected override bool ExpectIsValid => true;
+//	protected override int ExpectStatusCode => 200;
+//	protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-	protected override CreateIndexRequest Initializer => new(CallIsolatedValue);
+//	protected override CreateIndexRequest Initializer => new(CallIsolatedValue);
 
-	protected override Action<CreateIndexRequestDescriptor> Fluent => f => f.Settings(s => s.Add("analysis", new IndexSettingsAnalysisDescriptor().TokenFilters(tf => tf.Shingle("my-shingle", s=> s.MinShingleSize(2)))));
+//	protected override Action<CreateIndexRequestDescriptor> Fluent => f => f.Settings(s => s.Add("analysis", new IndexSettingsAnalysisDescriptor().TokenFilters(tf => tf.Shingle("my-shingle", s=> s.MinShingleSize(2)))));
 
-	protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}";
+//	protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}";
 
-	protected override LazyResponses ClientUsage() => Calls(
-		(client, f) => client.IndexManagement.CreateIndex(CallIsolatedValue, f),
-		(client, f) => client.IndexManagement.CreateIndexAsync(CallIsolatedValue, f),
-		(client, r) => client.IndexManagement.CreateIndex(r),
-		(client, r) => client.IndexManagement.CreateIndexAsync(r)
-	);
+//	protected override LazyResponses ClientUsage() => Calls(
+//		(client, f) => client.IndexManagement.CreateIndex(CallIsolatedValue, f),
+//		(client, f) => client.IndexManagement.CreateIndexAsync(CallIsolatedValue, f),
+//		(client, r) => client.IndexManagement.CreateIndex(r),
+//		(client, r) => client.IndexManagement.CreateIndexAsync(r)
+//	);
 
-	protected override CreateIndexRequestDescriptor NewDescriptor() => new(CallIsolatedValue);
+//	protected override CreateIndexRequestDescriptor NewDescriptor() => new(CallIsolatedValue);
 
-	protected override void ExpectResponse(CreateIndexResponse response)
-	{
-		response.ShouldBeValid();
-		response.Acknowledged.Should().BeTrue();
-		response.ShardsAcknowledged.Should().BeTrue();
-		response.Index.Should().Be(CallIsolatedValue);
-	}
-}
+//	protected override void ExpectResponse(CreateIndexResponse response)
+//	{
+//		response.ShouldBeValid();
+//		response.Acknowledged.Should().BeTrue();
+//		response.ShardsAcknowledged.Should().BeTrue();
+//		response.Index.Should().Be(CallIsolatedValue);
+//	}
+//}

@@ -414,9 +414,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal string _field;
 		internal string? _format;
 		internal bool? _includeUnmapped;
-		public DateFieldDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
-		public DateFieldDescriptor Format(string? format) => Assign(format, (a, v) => a._format = v);
-		public DateFieldDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a._includeUnmapped = v);
 	}
 
 	internal sealed class DateFieldDescriptorConverter : JsonConverter<DateFieldDescriptor>
@@ -508,17 +505,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal int? _prefixLength;
 		internal int? _size;
 		internal Elastic.Clients.Elasticsearch.SuggestMode? _suggestMode;
-		public DirectGeneratorDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
-		public DirectGeneratorDescriptor MaxEdits(int? maxEdits) => Assign(maxEdits, (a, v) => a._maxEdits = v);
-		public DirectGeneratorDescriptor MaxInspections(float? maxInspections) => Assign(maxInspections, (a, v) => a._maxInspections = v);
-		public DirectGeneratorDescriptor MaxTermFreq(float? maxTermFreq) => Assign(maxTermFreq, (a, v) => a._maxTermFreq = v);
-		public DirectGeneratorDescriptor MinDocFreq(float? minDocFreq) => Assign(minDocFreq, (a, v) => a._minDocFreq = v);
-		public DirectGeneratorDescriptor MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a._minWordLength = v);
-		public DirectGeneratorDescriptor PostFilter(string? postFilter) => Assign(postFilter, (a, v) => a._postFilter = v);
-		public DirectGeneratorDescriptor PreFilter(string? preFilter) => Assign(preFilter, (a, v) => a._preFilter = v);
-		public DirectGeneratorDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a._prefixLength = v);
-		public DirectGeneratorDescriptor Size(int? size) => Assign(size, (a, v) => a._size = v);
-		public DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Assign(suggestMode, (a, v) => a._suggestMode = v);
 	}
 
 	internal sealed class DirectGeneratorDescriptorConverter : JsonConverter<DirectGeneratorDescriptor>
@@ -747,9 +733,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal string _field;
 		internal string? _format;
 		internal bool? _includeUnmapped;
-		public FieldAndFormatDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
-		public FieldAndFormatDescriptor Format(string? format) => Assign(format, (a, v) => a._format = v);
-		public FieldAndFormatDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a._includeUnmapped = v);
 	}
 
 	internal sealed class FieldAndFormatDescriptorConverter : JsonConverter<FieldAndFormatDescriptor>
@@ -797,9 +780,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal string _field;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? _innerHits;
 		internal int? _maxConcurrentGroupSearches;
-		public FieldCollapseDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
-		public FieldCollapseDescriptor InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits) => Assign(innerHits, (a, v) => a._innerHits = v);
-		public FieldCollapseDescriptor MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a._maxConcurrentGroupSearches = v);
 	}
 
 	internal sealed class FieldCollapseDescriptorConverter : JsonConverter<FieldCollapseDescriptor>
@@ -1054,26 +1034,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal Elastic.Clients.Elasticsearch.HighlighterTagsSchema? _tagsSchema;
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _highlightQuery;
 		internal Union<string?, int?>? _maxAnalyzedOffset;
-		public HighlightDescriptor Fields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>> selector) => Assign(selector, (a, v) => a._fields = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>()));
-		public HighlightDescriptor Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a._type = v);
-		public HighlightDescriptor BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a._boundaryChars = v);
-		public HighlightDescriptor BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a._boundaryMaxScan = v);
-		public HighlightDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a._boundaryScanner = v);
-		public HighlightDescriptor BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a._boundaryScannerLocale = v);
-		public HighlightDescriptor Encoder(Elastic.Clients.Elasticsearch.HighlighterEncoder? encoder) => Assign(encoder, (a, v) => a._encoder = v);
-		public HighlightDescriptor Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a._fragmenter = v);
-		public HighlightDescriptor FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a._fragmentOffset = v);
-		public HighlightDescriptor FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a._fragmentSize = v);
-		public HighlightDescriptor MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a._maxFragmentLength = v);
-		public HighlightDescriptor NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a._noMatchSize = v);
-		public HighlightDescriptor NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a._numberOfFragments = v);
-		public HighlightDescriptor Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a._order = v);
-		public HighlightDescriptor PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a._postTags = v);
-		public HighlightDescriptor PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a._preTags = v);
-		public HighlightDescriptor RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a._requireFieldMatch = v);
-		public HighlightDescriptor TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a._tagsSchema = v);
-		public HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery) => Assign(highlightQuery, (a, v) => a._highlightQuery = v);
-		public HighlightDescriptor MaxAnalyzedOffset(Union<string?, int?>? maxAnalyzedOffset) => Assign(maxAnalyzedOffset, (a, v) => a._maxAnalyzedOffset = v);
 	}
 
 	internal sealed class HighlightDescriptorConverter : JsonConverter<HighlightDescriptor>
@@ -1313,27 +1273,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal bool? _requireFieldMatch;
 		internal Elastic.Clients.Elasticsearch.HighlighterTagsSchema? _tagsSchema;
 		internal Union<Elastic.Clients.Elasticsearch.HighlighterType?, string?>? _type;
-		public HighlightFieldDescriptor BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a._boundaryChars = v);
-		public HighlightFieldDescriptor BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a._boundaryMaxScan = v);
-		public HighlightFieldDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a._boundaryScanner = v);
-		public HighlightFieldDescriptor BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a._boundaryScannerLocale = v);
-		public HighlightFieldDescriptor Field(string? field) => Assign(field, (a, v) => a._field = v);
-		public HighlightFieldDescriptor ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a._forceSource = v);
-		public HighlightFieldDescriptor Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a._fragmenter = v);
-		public HighlightFieldDescriptor FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a._fragmentOffset = v);
-		public HighlightFieldDescriptor FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a._fragmentSize = v);
-		public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery) => Assign(highlightQuery, (a, v) => a._highlightQuery = v);
-		public HighlightFieldDescriptor MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields) => Assign(matchedFields, (a, v) => a._matchedFields = v);
-		public HighlightFieldDescriptor MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a._maxFragmentLength = v);
-		public HighlightFieldDescriptor NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a._noMatchSize = v);
-		public HighlightFieldDescriptor NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a._numberOfFragments = v);
-		public HighlightFieldDescriptor Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a._order = v);
-		public HighlightFieldDescriptor PhraseLimit(int? phraseLimit) => Assign(phraseLimit, (a, v) => a._phraseLimit = v);
-		public HighlightFieldDescriptor PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a._postTags = v);
-		public HighlightFieldDescriptor PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a._preTags = v);
-		public HighlightFieldDescriptor RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a._requireFieldMatch = v);
-		public HighlightFieldDescriptor TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a._tagsSchema = v);
-		public HighlightFieldDescriptor Type(Union<Elastic.Clients.Elasticsearch.HighlighterType?, string?>? type) => Assign(type, (a, v) => a._type = v);
 	}
 
 	internal sealed class HighlightFieldDescriptorConverter : JsonConverter<HighlightFieldDescriptor>
@@ -1732,22 +1671,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal Elastic.Clients.Elasticsearch.Fields? _storedField;
 		internal bool? _trackScores;
 		internal bool? _version;
-		public InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a._name = v);
-		public InnerHitsDescriptor Size(int? size) => Assign(size, (a, v) => a._size = v);
-		public InnerHitsDescriptor From(int? from) => Assign(from, (a, v) => a._from = v);
-		public InnerHitsDescriptor Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse) => Assign(collapse, (a, v) => a._collapse = v);
-		public InnerHitsDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.FieldAndFormat>? docvalueFields) => Assign(docvalueFields, (a, v) => a._docvalueFields = v);
-		public InnerHitsDescriptor Explain(bool? explain = true) => Assign(explain, (a, v) => a._explain = v);
-		public InnerHitsDescriptor Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight) => Assign(highlight, (a, v) => a._highlight = v);
-		public InnerHitsDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a._ignoreUnmapped = v);
-		public InnerHitsDescriptor ScriptFields(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a._scriptFields = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>()));
-		public InnerHitsDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a._seqNoPrimaryTerm = v);
-		public InnerHitsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a._fields = v);
-		public InnerHitsDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a._sort = v);
-		public InnerHitsDescriptor Source(Union<bool?, Elastic.Clients.Elasticsearch.SourceFilter?>? source) => Assign(source, (a, v) => a._source = v);
-		public InnerHitsDescriptor StoredField(Elastic.Clients.Elasticsearch.Fields? storedField) => Assign(storedField, (a, v) => a._storedField = v);
-		public InnerHitsDescriptor TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a._trackScores = v);
-		public InnerHitsDescriptor Version(bool? version = true) => Assign(version, (a, v) => a._version = v);
 	}
 
 	internal sealed class InnerHitsDescriptorConverter : JsonConverter<InnerHitsDescriptor>
@@ -2033,9 +1956,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal Dictionary<string, object>? _params;
 		internal bool? _prune;
 		internal Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery _query;
-		public PhraseSuggestCollateDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._params = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public PhraseSuggestCollateDescriptor Prune(bool? prune = true) => Assign(prune, (a, v) => a._prune = v);
-		public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery query) => Assign(query, (a, v) => a._query = v);
 	}
 
 	internal sealed class PhraseSuggestCollateDescriptorConverter : JsonConverter<PhraseSuggestCollateDescriptor>
@@ -2460,10 +2380,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal double? _queryWeight;
 		internal double? _rescoreQueryWeight;
 		internal Elastic.Clients.Elasticsearch.ScoreMode? _scoreMode;
-		public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query) => Assign(query, (a, v) => a._query = v);
-		public RescoreQueryDescriptor QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a._queryWeight = v);
-		public RescoreQueryDescriptor RescoreQueryWeight(double? rescoreQueryWeight) => Assign(rescoreQueryWeight, (a, v) => a._rescoreQueryWeight = v);
-		public RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.ScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a._scoreMode = v);
 	}
 
 	internal sealed class RescoreQueryDescriptorConverter : JsonConverter<RescoreQueryDescriptor>
@@ -2810,9 +2726,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal string? _field;
 		internal int _id;
 		internal int _max;
-		public SlicedScrollDescriptor Field(string? field) => Assign(field, (a, v) => a._field = v);
-		public SlicedScrollDescriptor Id(int id) => Assign(id, (a, v) => a._id = v);
-		public SlicedScrollDescriptor Max(int max) => Assign(max, (a, v) => a._max = v);
 	}
 
 	internal sealed class SlicedScrollDescriptorConverter : JsonConverter<SlicedScrollDescriptor>
@@ -2948,10 +2861,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal Elastic.Clients.Elasticsearch.Fields? _includes;
 		internal Elastic.Clients.Elasticsearch.Fields? _exclude;
 		internal Elastic.Clients.Elasticsearch.Fields? _include;
-		public SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? excludes) => Assign(excludes, (a, v) => a._excludes = v);
-		public SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? includes) => Assign(includes, (a, v) => a._includes = v);
-		public SourceFilterDescriptor Exclude(Elastic.Clients.Elasticsearch.Fields? exclude) => Assign(exclude, (a, v) => a._exclude = v);
-		public SourceFilterDescriptor Include(Elastic.Clients.Elasticsearch.Fields? include) => Assign(include, (a, v) => a._include = v);
 	}
 
 	internal sealed class SourceFilterDescriptorConverter : JsonConverter<SourceFilterDescriptor>
@@ -3142,11 +3051,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal Union<IEnumerable<string>?, IEnumerable<int>?>? _neighbours;
 		internal Union<string?, int?>? _precision;
 		internal bool? _prefix;
-		public SuggestContextQueryDescriptor Boost(double? boost) => Assign(boost, (a, v) => a._boost = v);
-		public SuggestContextQueryDescriptor Context(Elastic.Clients.Elasticsearch.Context context) => Assign(context, (a, v) => a._context = v);
-		public SuggestContextQueryDescriptor Neighbours(Union<IEnumerable<string>?, IEnumerable<int>?>? neighbours) => Assign(neighbours, (a, v) => a._neighbours = v);
-		public SuggestContextQueryDescriptor Precision(Union<string?, int?>? precision) => Assign(precision, (a, v) => a._precision = v);
-		public SuggestContextQueryDescriptor Prefix(bool? prefix = true) => Assign(prefix, (a, v) => a._prefix = v);
 	}
 
 	internal sealed class SuggestContextQueryDescriptorConverter : JsonConverter<SuggestContextQueryDescriptor>
@@ -3206,9 +3110,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal string _field;
 		internal string? _analyzer;
 		internal int? _size;
-		public SuggesterBaseDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
-		public SuggesterBaseDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a._analyzer = v);
-		public SuggesterBaseDescriptor Size(int? size) => Assign(size, (a, v) => a._size = v);
 	}
 
 	internal sealed class SuggesterBaseDescriptorConverter : JsonConverter<SuggesterBaseDescriptor>
@@ -3266,11 +3167,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal int _prefixLength;
 		internal bool _transpositions;
 		internal bool _unicodeAware;
-		public SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a._fuzziness = v);
-		public SuggestFuzzinessDescriptor MinLength(int minLength) => Assign(minLength, (a, v) => a._minLength = v);
-		public SuggestFuzzinessDescriptor PrefixLength(int prefixLength) => Assign(prefixLength, (a, v) => a._prefixLength = v);
-		public SuggestFuzzinessDescriptor Transpositions(bool transpositions = true) => Assign(transpositions, (a, v) => a._transpositions = v);
-		public SuggestFuzzinessDescriptor UnicodeAware(bool unicodeAware = true) => Assign(unicodeAware, (a, v) => a._unicodeAware = v);
 	}
 
 	internal sealed class SuggestFuzzinessDescriptorConverter : JsonConverter<SuggestFuzzinessDescriptor>
@@ -3420,5 +3316,44 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public object TotalTimeInMillis { get; init; }
+	}
+
+	public abstract partial class WriteResponseBase : ResponseBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public object PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("result")]
+		public Elastic.Clients.Elasticsearch.Result Result { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public object SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_type")]
+		public string? Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_version")]
+		public object Version { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("forced_refresh")]
+		public bool? ForcedRefresh { get; init; }
 	}
 }

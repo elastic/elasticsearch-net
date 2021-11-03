@@ -63,15 +63,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
-		public Dictionary<string, object>? Settings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
 	[JsonConverter(typeof(CreateIndexRequestDescriptorConverter))]
@@ -81,9 +81,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
-		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? _mappings;
-		internal Dictionary<string, object>? _settings;
+		internal Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -91,9 +91,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public CreateIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
-		public CreateIndexRequestDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? mappings) => Assign(mappings, (a, v) => a._mappings = v);
-		public CreateIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.Name?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
+		public CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
 	}
 
 	internal sealed class CreateIndexRequestDescriptorConverter : JsonConverter<CreateIndexRequestDescriptor>

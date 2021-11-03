@@ -44,9 +44,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		internal Elastic.Clients.Elasticsearch.Id? _id;
 		internal Elastic.Clients.Elasticsearch.IndexName? _index;
 		internal object _source;
-		public DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a._id = v);
-		public DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a._index = v);
-		public DocumentDescriptor Source(object source) => Assign(source, (a, v) => a._source = v);
 	}
 
 	internal sealed class DocumentDescriptorConverter : JsonConverter<DocumentDescriptor>

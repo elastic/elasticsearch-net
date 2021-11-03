@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 	}
 
-	
+	// TODO: IndexRequestDescriptorConverter - As per https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-5-0#sample-factory-pattern-converter
 }
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement

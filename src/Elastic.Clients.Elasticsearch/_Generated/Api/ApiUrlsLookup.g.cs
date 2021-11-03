@@ -34,6 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls ClusterReroute = new ApiUrls(new[] { "/_cluster/reroute" });
 		internal static ApiUrls ClusterState = new ApiUrls(new[] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" });
 		internal static ApiUrls ClusterStats = new ApiUrls(new[] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" });
+		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls IndexManagementAnalyze = new ApiUrls(new[] { "/_analyze", "/{index}/_analyze" });
 		internal static ApiUrls IndexManagementCreate = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
@@ -83,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "/_validate/query", "/{index}/_validate/query" });
 		internal static ApiUrls IndexManagementShrink = new ApiUrls(new[] { "/{index}/_shrink/{target}" });
 		internal static ApiUrls IndexManagementSplit = new ApiUrls(new[] { "/{index}/_split/{target}" });
+		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
 		internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
 		internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "/_ingest/geoip/stats" });
 		internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "/_ingest/pipeline", "/_ingest/pipeline/{id}" });

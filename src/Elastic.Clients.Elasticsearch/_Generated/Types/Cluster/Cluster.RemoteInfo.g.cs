@@ -67,13 +67,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		internal string _serverName;
 		internal int _numProxySocketsConnected;
 		internal int _maxProxySocketConnections;
-		public ClusterRemoteProxyInfoDescriptor Connected(bool connected = true) => Assign(connected, (a, v) => a._connected = v);
-		public ClusterRemoteProxyInfoDescriptor InitialConnectTimeout(Elastic.Clients.Elasticsearch.Time initialConnectTimeout) => Assign(initialConnectTimeout, (a, v) => a._initialConnectTimeout = v);
-		public ClusterRemoteProxyInfoDescriptor SkipUnavailable(bool skipUnavailable = true) => Assign(skipUnavailable, (a, v) => a._skipUnavailable = v);
-		public ClusterRemoteProxyInfoDescriptor ProxyAddress(string proxyAddress) => Assign(proxyAddress, (a, v) => a._proxyAddress = v);
-		public ClusterRemoteProxyInfoDescriptor ServerName(string serverName) => Assign(serverName, (a, v) => a._serverName = v);
-		public ClusterRemoteProxyInfoDescriptor NumProxySocketsConnected(int numProxySocketsConnected) => Assign(numProxySocketsConnected, (a, v) => a._numProxySocketsConnected = v);
-		public ClusterRemoteProxyInfoDescriptor MaxProxySocketConnections(int maxProxySocketConnections) => Assign(maxProxySocketConnections, (a, v) => a._maxProxySocketConnections = v);
 	}
 
 	internal sealed class ClusterRemoteProxyInfoDescriptorConverter : JsonConverter<ClusterRemoteProxyInfoDescriptor>
@@ -141,12 +134,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		internal Elastic.Clients.Elasticsearch.Time _initialConnectTimeout;
 		internal bool _skipUnavailable;
 		internal IReadOnlyCollection<string> _seeds;
-		public ClusterRemoteSniffInfoDescriptor Connected(bool connected = true) => Assign(connected, (a, v) => a._connected = v);
-		public ClusterRemoteSniffInfoDescriptor MaxConnectionsPerCluster(int maxConnectionsPerCluster) => Assign(maxConnectionsPerCluster, (a, v) => a._maxConnectionsPerCluster = v);
-		public ClusterRemoteSniffInfoDescriptor NumNodesConnected(object numNodesConnected) => Assign(numNodesConnected, (a, v) => a._numNodesConnected = v);
-		public ClusterRemoteSniffInfoDescriptor InitialConnectTimeout(Elastic.Clients.Elasticsearch.Time initialConnectTimeout) => Assign(initialConnectTimeout, (a, v) => a._initialConnectTimeout = v);
-		public ClusterRemoteSniffInfoDescriptor SkipUnavailable(bool skipUnavailable = true) => Assign(skipUnavailable, (a, v) => a._skipUnavailable = v);
-		public ClusterRemoteSniffInfoDescriptor Seeds(IReadOnlyCollection<string> seeds) => Assign(seeds, (a, v) => a._seeds = v);
 	}
 
 	internal sealed class ClusterRemoteSniffInfoDescriptorConverter : JsonConverter<ClusterRemoteSniffInfoDescriptor>

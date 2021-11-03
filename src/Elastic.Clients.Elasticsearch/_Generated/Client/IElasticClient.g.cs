@@ -33,6 +33,14 @@ namespace Elastic.Clients.Elasticsearch
 
 		IngestNamespace Ingest { get; }
 
+		DeleteResponse Delete(DeleteRequest request);
+		Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default);
+		DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null);
+		Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
+		IndexResponse Index<TDocument>(IndexRequest<TDocument> request);
+		Task<IndexResponse> IndexAsync<TDocument>(IndexRequest<TDocument> request, CancellationToken cancellationToken = default);
+		IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest = null);
+		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
 		PingResponse Ping(PingRequest request);
 		Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default);
 		PingResponse Ping(Action<PingRequestDescriptor> configureRequest = null);

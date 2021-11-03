@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch
 	/// </summary>
 	public abstract partial class
 		RequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IDescriptor
-			where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>
+			where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>, IRequest<TParameters>
 			where TParameters : RequestParameters<TParameters>, new()
 	{
 		private readonly TDescriptor _descriptor;
@@ -144,6 +144,8 @@ namespace Elastic.Clients.Elasticsearch
 			_descriptor = (TDescriptor)this;
 
 		protected TDescriptor Self => _descriptor;
+
+		protected RouteValues RouteValues => ((IRequest<TParameters>)this).RouteValues;
 
 		protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
 
