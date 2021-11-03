@@ -30,6 +30,213 @@ namespace Elastic.Clients.Elasticsearch
 		public bool Acknowledged { get; init; }
 	}
 
+	public partial class AggregationBreakdown
+	{
+		[JsonInclude]
+		[JsonPropertyName("build_aggregation")]
+		public object BuildAggregation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("build_aggregation_count")]
+		public object BuildAggregationCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("build_leaf_collector")]
+		public object BuildLeafCollector { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("build_leaf_collector_count")]
+		public object BuildLeafCollectorCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("collect")]
+		public object Collect { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("collect_count")]
+		public object CollectCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("initialize")]
+		public object Initialize { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("initialize_count")]
+		public object InitializeCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("post_collection")]
+		public object? PostCollection { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("post_collection_count")]
+		public object? PostCollectionCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("reduce")]
+		public object Reduce { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("reduce_count")]
+		public object ReduceCount { get; init; }
+	}
+
+	public partial class AggregationProfile
+	{
+		[JsonInclude]
+		[JsonPropertyName("breakdown")]
+		public Elastic.Clients.Elasticsearch.AggregationBreakdown Breakdown { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_in_nanos")]
+		public object TimeInNanos { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("debug")]
+		public Elastic.Clients.Elasticsearch.AggregationProfileDebug? Debug { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfile>? Children { get; init; }
+	}
+
+	public partial class AggregationProfileDebug
+	{
+		[JsonInclude]
+		[JsonPropertyName("segments_with_multi_valued_ords")]
+		public int? SegmentsWithMultiValuedOrds { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("collection_strategy")]
+		public string? CollectionStrategy { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_with_single_valued_ords")]
+		public int? SegmentsWithSingleValuedOrds { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total_buckets")]
+		public int? TotalBuckets { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("built_buckets")]
+		public int? BuiltBuckets { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("result_strategy")]
+		public string? ResultStrategy { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("has_filter")]
+		public bool? HasFilter { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("delegate")]
+		public string? Delegate { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("delegate_debug")]
+		public Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebug? DelegateDebug { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("chars_fetched")]
+		public int? CharsFetched { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("extract_count")]
+		public int? ExtractCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("extract_ns")]
+		public int? ExtractNs { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("values_fetched")]
+		public int? ValuesFetched { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("collect_analyzed_ns")]
+		public int? CollectAnalyzedNs { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("collect_analyzed_count")]
+		public int? CollectAnalyzedCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("surviving_buckets")]
+		public int? SurvivingBuckets { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ordinals_collectors_used")]
+		public int? OrdinalsCollectorsUsed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ordinals_collectors_overhead_too_high")]
+		public int? OrdinalsCollectorsOverheadTooHigh { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("string_hashing_collectors_used")]
+		public int? StringHashingCollectorsUsed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("numeric_collectors_used")]
+		public int? NumericCollectorsUsed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("empty_collectors_used")]
+		public int? EmptyCollectorsUsed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("deferred_aggregators")]
+		public IReadOnlyCollection<string>? DeferredAggregators { get; init; }
+	}
+
+	public partial class AggregationProfileDelegateDebug
+	{
+		[JsonInclude]
+		[JsonPropertyName("segments_with_doc_count_field")]
+		public int? SegmentsWithDocCountField { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_with_deleted_docs")]
+		public int? SegmentsWithDeletedDocs { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("filters")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebugFilter>? Filters { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_counted")]
+		public int? SegmentsCounted { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_collected")]
+		public int? SegmentsCollected { get; init; }
+	}
+
+	public partial class AggregationProfileDelegateDebugFilter
+	{
+		[JsonInclude]
+		[JsonPropertyName("results_from_metadata")]
+		public int? ResultsFromMetadata { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public string? Query { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("specialized_for")]
+		public string? SpecializedFor { get; init; }
+	}
+
 	public partial class BulkStats
 	{
 		[JsonInclude]
@@ -69,6 +276,40 @@ namespace Elastic.Clients.Elasticsearch
 		public object AvgSizeInBytes { get; init; }
 	}
 
+	public partial class ClusterStatistics
+	{
+		[JsonInclude]
+		[JsonPropertyName("skipped")]
+		public int Skipped { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("successful")]
+		public int Successful { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public int Total { get; init; }
+	}
+
+	public partial class Collector
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string Name { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("reason")]
+		public string Reason { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_in_nanos")]
+		public object TimeInNanos { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Collector>? Children { get; init; }
+	}
+
 	public partial class CompletionStats
 	{
 		[JsonInclude]
@@ -84,8 +325,272 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
 	}
 
+	public partial class CompletionSuggester : SuggesterBase, ISuggestContainerVariant
+	{
+		[JsonIgnore]
+		string ISuggestContainerVariant.SuggestContainerVariantName => "completion";
+		[JsonInclude]
+		[JsonPropertyName("contexts")]
+		public Dictionary<string, object>? Contexts { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fuzzy")]
+		public Elastic.Clients.Elasticsearch.SuggestFuzziness? Fuzzy { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prefix")]
+		public string? Prefix { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("regex")]
+		public string? Regex { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("skip_duplicates")]
+		public bool? SkipDuplicates { get; set; }
+	}
+
+	public partial class CompletionSuggestOption<TDocument>
+	{
+		[JsonInclude]
+		[JsonPropertyName("collate_match")]
+		public bool? CollateMatch { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("contexts")]
+		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Context>>? Contexts { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public string Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_type")]
+		public string? Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_score")]
+		public double Score { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public TDocument Source { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string Text { get; init; }
+	}
+
+	public partial class DateField
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("include_unmapped")]
+		public bool? IncludeUnmapped { get; set; }
+	}
+
+	[JsonConverter(typeof(DateFieldDescriptorConverter))]
+	public partial class DateFieldDescriptor : DescriptorBase<DateFieldDescriptor>
+	{
+		internal string _field;
+		internal string? _format;
+		internal bool? _includeUnmapped;
+		public DateFieldDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
+		public DateFieldDescriptor Format(string? format) => Assign(format, (a, v) => a._format = v);
+		public DateFieldDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a._includeUnmapped = v);
+	}
+
+	internal sealed class DateFieldDescriptorConverter : JsonConverter<DateFieldDescriptor>
+	{
+		public override DateFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DateFieldDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			if (value._includeUnmapped.HasValue)
+			{
+				writer.WritePropertyName("include_unmapped");
+				writer.WriteBooleanValue(value._includeUnmapped.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public abstract partial class DictionaryResponseBase<TKey, TValue> : ResponseBase
 	{
+	}
+
+	public partial class DirectGenerator
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_edits")]
+		public int? MaxEdits { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_inspections")]
+		public float? MaxInspections { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_term_freq")]
+		public float? MaxTermFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_doc_freq")]
+		public float? MinDocFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("post_filter")]
+		public string? PostFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("pre_filter")]
+		public string? PreFilter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("suggest_mode")]
+		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
+	}
+
+	[JsonConverter(typeof(DirectGeneratorDescriptorConverter))]
+	public partial class DirectGeneratorDescriptor : DescriptorBase<DirectGeneratorDescriptor>
+	{
+		internal string _field;
+		internal int? _maxEdits;
+		internal float? _maxInspections;
+		internal float? _maxTermFreq;
+		internal float? _minDocFreq;
+		internal int? _minWordLength;
+		internal string? _postFilter;
+		internal string? _preFilter;
+		internal int? _prefixLength;
+		internal int? _size;
+		internal Elastic.Clients.Elasticsearch.SuggestMode? _suggestMode;
+		public DirectGeneratorDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
+		public DirectGeneratorDescriptor MaxEdits(int? maxEdits) => Assign(maxEdits, (a, v) => a._maxEdits = v);
+		public DirectGeneratorDescriptor MaxInspections(float? maxInspections) => Assign(maxInspections, (a, v) => a._maxInspections = v);
+		public DirectGeneratorDescriptor MaxTermFreq(float? maxTermFreq) => Assign(maxTermFreq, (a, v) => a._maxTermFreq = v);
+		public DirectGeneratorDescriptor MinDocFreq(float? minDocFreq) => Assign(minDocFreq, (a, v) => a._minDocFreq = v);
+		public DirectGeneratorDescriptor MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a._minWordLength = v);
+		public DirectGeneratorDescriptor PostFilter(string? postFilter) => Assign(postFilter, (a, v) => a._postFilter = v);
+		public DirectGeneratorDescriptor PreFilter(string? preFilter) => Assign(preFilter, (a, v) => a._preFilter = v);
+		public DirectGeneratorDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a._prefixLength = v);
+		public DirectGeneratorDescriptor Size(int? size) => Assign(size, (a, v) => a._size = v);
+		public DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Assign(suggestMode, (a, v) => a._suggestMode = v);
+	}
+
+	internal sealed class DirectGeneratorDescriptorConverter : JsonConverter<DirectGeneratorDescriptor>
+	{
+		public override DirectGeneratorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DirectGeneratorDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			if (value._maxEdits.HasValue)
+			{
+				writer.WritePropertyName("max_edits");
+				writer.WriteNumberValue(value._maxEdits.Value);
+			}
+
+			if (value._maxInspections.HasValue)
+			{
+				writer.WritePropertyName("max_inspections");
+				writer.WriteNumberValue(value._maxInspections.Value);
+			}
+
+			if (value._maxTermFreq.HasValue)
+			{
+				writer.WritePropertyName("max_term_freq");
+				writer.WriteNumberValue(value._maxTermFreq.Value);
+			}
+
+			if (value._minDocFreq.HasValue)
+			{
+				writer.WritePropertyName("min_doc_freq");
+				writer.WriteNumberValue(value._minDocFreq.Value);
+			}
+
+			if (value._minWordLength.HasValue)
+			{
+				writer.WritePropertyName("min_word_length");
+				writer.WriteNumberValue(value._minWordLength.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value._postFilter))
+			{
+				writer.WritePropertyName("post_filter");
+				writer.WriteStringValue(value._postFilter);
+			}
+
+			if (!string.IsNullOrEmpty(value._preFilter))
+			{
+				writer.WritePropertyName("pre_filter");
+				writer.WriteStringValue(value._preFilter);
+			}
+
+			if (value._prefixLength.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(value._prefixLength.Value);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._suggestMode is not null)
+			{
+				writer.WritePropertyName("suggest_mode");
+				JsonSerializer.Serialize(writer, value._suggestMode, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class DocStats
@@ -124,6 +629,101 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("suppressed")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
+	}
+
+	public partial class Explanation
+	{
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("details")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ExplanationDetail> Details { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public float Value { get; init; }
+	}
+
+	public partial class ExplanationDetail
+	{
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("details")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ExplanationDetail>? Details { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public float Value { get; init; }
+	}
+
+	public partial class FetchProfile
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_in_nanos")]
+		public object TimeInNanos { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("breakdown")]
+		public Elastic.Clients.Elasticsearch.FetchProfileBreakdown Breakdown { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("debug")]
+		public Elastic.Clients.Elasticsearch.FetchProfileDebug? Debug { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FetchProfile>? Children { get; init; }
+	}
+
+	public partial class FetchProfileBreakdown
+	{
+		[JsonInclude]
+		[JsonPropertyName("load_stored_fields")]
+		public int? LoadStoredFields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("load_stored_fields_count")]
+		public int? LoadStoredFieldsCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("next_reader")]
+		public int? NextReader { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("next_reader_count")]
+		public int? NextReaderCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("process_count")]
+		public int? ProcessCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("process")]
+		public int? Process { get; init; }
+	}
+
+	public partial class FetchProfileDebug
+	{
+		[JsonInclude]
+		[JsonPropertyName("stored_fields")]
+		public IReadOnlyCollection<string>? StoredFields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fast_path")]
+		public int? FastPath { get; init; }
 	}
 
 	public partial class FieldAndFormat
@@ -872,11 +1472,105 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class Hit<TDocument>
+	{
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_score")]
+		public double? Score { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_type")]
+		public string? Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_explanation")]
+		public Elastic.Clients.Elasticsearch.Explanation? Explanation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("highlight")]
+		public Dictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("inner_hits")]
+		public Dictionary<string, Elastic.Clients.Elasticsearch.InnerHitsResult>? InnerHits { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("matched_queries")]
+		public IReadOnlyCollection<string>? MatchedQueries { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_nested")]
+		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_ignored")]
+		public IReadOnlyCollection<string>? Ignored { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_shard")]
+		public string? Shard { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_node")]
+		public string? Node { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public TDocument? Source { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public object? SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public object? PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_version")]
+		public object? Version { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public IReadOnlyCollection<object>? Sort { get; init; }
+	}
+
+	public partial class HitsMetadata<T>
+	{
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public Union<Elastic.Clients.Elasticsearch.TotalHits, object> Total { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("hits")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Hit<T>> Hits { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_score")]
+		public double? MaxScore { get; init; }
+	}
+
 	public partial class IndexedScript : ScriptBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 	}
 
 	public partial class IndexingStats
@@ -1162,6 +1856,33 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class InnerHitsMetadata
+	{
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public Union<Elastic.Clients.Elasticsearch.TotalHits, object> Total { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_score")]
+		public double? MaxScore { get; init; }
+	}
+
+	public partial class InnerHitsResult
+	{
+		[JsonInclude]
+		[JsonPropertyName("hits")]
+		public Elastic.Clients.Elasticsearch.InnerHitsMetadata Hits { get; init; }
+	}
+
+	public partial class LaplaceSmoothingModel : ISmoothingModelContainerVariant
+	{
+		[JsonIgnore]
+		string ISmoothingModelContainerVariant.SmoothingModelContainerVariantName => "laplace";
+		[JsonInclude]
+		[JsonPropertyName("alpha")]
+		public double Alpha { get; set; }
+	}
+
 	public partial class LatLon
 	{
 		[JsonInclude]
@@ -1171,6 +1892,23 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("lon")]
 		public double Lon { get; set; }
+	}
+
+	public partial class LinearInterpolationSmoothingModel : ISmoothingModelContainerVariant
+	{
+		[JsonIgnore]
+		string ISmoothingModelContainerVariant.SmoothingModelContainerVariantName => "linear_interpolation";
+		[JsonInclude]
+		[JsonPropertyName("bigram_lambda")]
+		public double BigramLambda { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("trigram_lambda")]
+		public double TrigramLambda { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("unigram_lambda")]
+		public double UnigramLambda { get; set; }
 	}
 
 	public partial class MergesStats
@@ -1240,6 +1978,21 @@ namespace Elastic.Clients.Elasticsearch
 		public object TotalTimeInMillis { get; init; }
 	}
 
+	public partial class NestedIdentity
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("offset")]
+		public int Offset { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_nested")]
+		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
+	}
+
 	public partial class NodeStatistics
 	{
 		[JsonInclude]
@@ -1257,6 +2010,150 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public int Failed { get; init; }
+	}
+
+	public partial class PhraseSuggestCollate
+	{
+		[JsonInclude]
+		[JsonPropertyName("params")]
+		public Dictionary<string, object>? Params { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prune")]
+		public bool? Prune { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery Query { get; set; }
+	}
+
+	[JsonConverter(typeof(PhraseSuggestCollateDescriptorConverter))]
+	public partial class PhraseSuggestCollateDescriptor : DescriptorBase<PhraseSuggestCollateDescriptor>
+	{
+		internal Dictionary<string, object>? _params;
+		internal bool? _prune;
+		internal Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery _query;
+		public PhraseSuggestCollateDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._params = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public PhraseSuggestCollateDescriptor Prune(bool? prune = true) => Assign(prune, (a, v) => a._prune = v);
+		public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery query) => Assign(query, (a, v) => a._query = v);
+	}
+
+	internal sealed class PhraseSuggestCollateDescriptorConverter : JsonConverter<PhraseSuggestCollateDescriptor>
+	{
+		public override PhraseSuggestCollateDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PhraseSuggestCollateDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._params is not null)
+			{
+				writer.WritePropertyName("params");
+				JsonSerializer.Serialize(writer, value._params, options);
+			}
+
+			if (value._prune.HasValue)
+			{
+				writer.WritePropertyName("prune");
+				writer.WriteBooleanValue(value._prune.Value);
+			}
+
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, value._query, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class PhraseSuggestCollateQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("source")]
+		public string? Source { get; set; }
+	}
+
+	public partial class PhraseSuggester : SuggesterBase, ISuggestContainerVariant
+	{
+		[JsonIgnore]
+		string ISuggestContainerVariant.SuggestContainerVariantName => "phrase";
+		[JsonInclude]
+		[JsonPropertyName("collate")]
+		public Elastic.Clients.Elasticsearch.PhraseSuggestCollate? Collate { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("confidence")]
+		public double? Confidence { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("direct_generator")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.DirectGenerator>? DirectGenerator { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("force_unigrams")]
+		public bool? ForceUnigrams { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gram_size")]
+		public int? GramSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("highlight")]
+		public Elastic.Clients.Elasticsearch.PhraseSuggestHighlight? Highlight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_errors")]
+		public double? MaxErrors { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("real_word_error_likelihood")]
+		public double? RealWordErrorLikelihood { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("separator")]
+		public string? Separator { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("smoothing")]
+		public Elastic.Clients.Elasticsearch.SmoothingModelContainer? Smoothing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("token_limit")]
+		public int? TokenLimit { get; set; }
+	}
+
+	public partial class PhraseSuggestHighlight
+	{
+		[JsonInclude]
+		[JsonPropertyName("post_tag")]
+		public string PostTag { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("pre_tag")]
+		public string PreTag { get; set; }
+	}
+
+	public partial class PhraseSuggestOption
+	{
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string Text { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("highlighted")]
+		public string Highlighted { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("score")]
+		public double Score { get; init; }
 	}
 
 	public partial class PluginStats
@@ -1302,6 +2199,99 @@ namespace Elastic.Clients.Elasticsearch
 		public string Type { get; init; }
 	}
 
+	public partial class PointInTimeReference
+	{
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keep_alive")]
+		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+	}
+
+	public partial class Profile
+	{
+		[JsonInclude]
+		[JsonPropertyName("shards")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardProfile> Shards { get; init; }
+	}
+
+	public partial class QueryBreakdown
+	{
+		[JsonInclude]
+		[JsonPropertyName("advance")]
+		public object Advance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("advance_count")]
+		public object AdvanceCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("build_scorer")]
+		public object BuildScorer { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("build_scorer_count")]
+		public object BuildScorerCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("create_weight")]
+		public object CreateWeight { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("create_weight_count")]
+		public object CreateWeightCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("match")]
+		public object Match { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("match_count")]
+		public object MatchCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("shallow_advance")]
+		public object ShallowAdvance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("shallow_advance_count")]
+		public object ShallowAdvanceCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("next_doc")]
+		public object NextDoc { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("next_doc_count")]
+		public object NextDocCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("score")]
+		public object Score { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("score_count")]
+		public object ScoreCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("compute_max_score")]
+		public object ComputeMaxScore { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("compute_max_score_count")]
+		public object ComputeMaxScoreCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("set_min_competitive_score")]
+		public object SetMinCompetitiveScore { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("set_min_competitive_score_count")]
+		public object SetMinCompetitiveScoreCount { get; init; }
+	}
+
 	public partial class QueryCacheStats
 	{
 		[JsonInclude]
@@ -1335,6 +2325,29 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("total_count")]
 		public int TotalCount { get; init; }
+	}
+
+	public partial class QueryProfile
+	{
+		[JsonInclude]
+		[JsonPropertyName("breakdown")]
+		public Elastic.Clients.Elasticsearch.QueryBreakdown Breakdown { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_in_nanos")]
+		public object TimeInNanos { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryProfile>? Children { get; init; }
 	}
 
 	public partial class RecoveryStats
@@ -1410,6 +2423,79 @@ namespace Elastic.Clients.Elasticsearch
 		public object MissCount { get; init; }
 	}
 
+	public partial class Rescore
+	{
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public Elastic.Clients.Elasticsearch.RescoreQuery Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("window_size")]
+		public int? WindowSize { get; set; }
+	}
+
+	public partial class RescoreQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("rescore_query")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query_weight")]
+		public double? QueryWeight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rescore_query_weight")]
+		public double? RescoreQueryWeight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("score_mode")]
+		public Elastic.Clients.Elasticsearch.ScoreMode? ScoreMode { get; set; }
+	}
+
+	[JsonConverter(typeof(RescoreQueryDescriptorConverter))]
+	public partial class RescoreQueryDescriptor : DescriptorBase<RescoreQueryDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _query;
+		internal double? _queryWeight;
+		internal double? _rescoreQueryWeight;
+		internal Elastic.Clients.Elasticsearch.ScoreMode? _scoreMode;
+		public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query) => Assign(query, (a, v) => a._query = v);
+		public RescoreQueryDescriptor QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a._queryWeight = v);
+		public RescoreQueryDescriptor RescoreQueryWeight(double? rescoreQueryWeight) => Assign(rescoreQueryWeight, (a, v) => a._rescoreQueryWeight = v);
+		public RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.ScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a._scoreMode = v);
+	}
+
+	internal sealed class RescoreQueryDescriptorConverter : JsonConverter<RescoreQueryDescriptor>
+	{
+		public override RescoreQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RescoreQueryDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("rescore_query");
+			JsonSerializer.Serialize(writer, value._query, options);
+			if (value._queryWeight.HasValue)
+			{
+				writer.WritePropertyName("query_weight");
+				writer.WriteNumberValue(value._queryWeight.Value);
+			}
+
+			if (value._rescoreQueryWeight.HasValue)
+			{
+				writer.WritePropertyName("rescore_query_weight");
+				writer.WriteNumberValue(value._rescoreQueryWeight.Value);
+			}
+
+			if (value._scoreMode is not null)
+			{
+				writer.WritePropertyName("score_mode");
+				JsonSerializer.Serialize(writer, value._scoreMode, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class ScoreSort
 	{
 		[JsonInclude]
@@ -1456,6 +2542,21 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string? Type { get; init; }
+	}
+
+	public partial class SearchProfile
+	{
+		[JsonInclude]
+		[JsonPropertyName("collector")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Collector> Collector { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryProfile> Query { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("rewrite_time")]
+		public object RewriteTime { get; init; }
 	}
 
 	public partial class SearchStats
@@ -1639,6 +2740,25 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Status { get; init; }
 	}
 
+	public partial class ShardProfile
+	{
+		[JsonInclude]
+		[JsonPropertyName("aggregations")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfile> Aggregations { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public string Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("searches")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchProfile> Searches { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fetch")]
+		public Elastic.Clients.Elasticsearch.FetchProfile? Fetch { get; init; }
+	}
+
 	public abstract partial class ShardsOperationResponseBase : ResponseBase
 	{
 		[JsonInclude]
@@ -1667,6 +2787,120 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("skipped")]
 		public int? Skipped { get; init; }
+	}
+
+	public partial class SlicedScroll
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string? Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public int Id { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max")]
+		public int Max { get; set; }
+	}
+
+	[JsonConverter(typeof(SlicedScrollDescriptorConverter))]
+	public partial class SlicedScrollDescriptor : DescriptorBase<SlicedScrollDescriptor>
+	{
+		internal string? _field;
+		internal int _id;
+		internal int _max;
+		public SlicedScrollDescriptor Field(string? field) => Assign(field, (a, v) => a._field = v);
+		public SlicedScrollDescriptor Id(int id) => Assign(id, (a, v) => a._id = v);
+		public SlicedScrollDescriptor Max(int max) => Assign(max, (a, v) => a._max = v);
+	}
+
+	internal sealed class SlicedScrollDescriptorConverter : JsonConverter<SlicedScrollDescriptor>
+	{
+		public override SlicedScrollDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SlicedScrollDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			writer.WritePropertyName("id");
+			writer.WriteNumberValue(value._id);
+			writer.WritePropertyName("max");
+			writer.WriteNumberValue(value._max);
+			writer.WriteEndObject();
+		}
+	}
+
+	public interface ISmoothingModelContainerVariant
+	{
+		string SmoothingModelContainerVariantName { get; }
+	}
+
+	[JsonConverter(typeof(SmoothingModelContainerConverter))]
+	public partial class SmoothingModelContainer : IContainer
+	{
+		public SmoothingModelContainer(ISmoothingModelContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal ISmoothingModelContainerVariant Variant { get; }
+	}
+
+	public class SmoothingModelContainerConverter : JsonConverter<SmoothingModelContainer>
+	{
+		public override SmoothingModelContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException();
+			}
+
+			var propertyName = reader.GetString();
+			if (propertyName == "laplace")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.LaplaceSmoothingModel?>(ref reader, options);
+				reader.Read();
+				return new SmoothingModelContainer(variant);
+			}
+
+			if (propertyName == "linear_interpolation")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.LinearInterpolationSmoothingModel?>(ref reader, options);
+				reader.Read();
+				return new SmoothingModelContainer(variant);
+			}
+
+			if (propertyName == "stupid_backoff")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.StupidBackoffSmoothingModel?>(ref reader, options);
+				reader.Read();
+				return new SmoothingModelContainer(variant);
+			}
+
+			throw new JsonException();
+		}
+
+		public override void Write(Utf8JsonWriter writer, SmoothingModelContainer value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(value.Variant.SmoothingModelContainerVariantName);
+			switch (value.Variant)
+			{
+				case Elastic.Clients.Elasticsearch.LaplaceSmoothingModel variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.LinearInterpolationSmoothingModel variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.StupidBackoffSmoothingModel variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class SortContainer
@@ -1779,6 +3013,363 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("total_data_set_size_in_bytes")]
 		public int? TotalDataSetSizeInBytes { get; init; }
+	}
+
+	public partial class StupidBackoffSmoothingModel : ISmoothingModelContainerVariant
+	{
+		[JsonIgnore]
+		string ISmoothingModelContainerVariant.SmoothingModelContainerVariantName => "stupid_backoff";
+		[JsonInclude]
+		[JsonPropertyName("discount")]
+		public double Discount { get; set; }
+	}
+
+	public partial class Suggest<T>
+	{
+		[JsonInclude]
+		[JsonPropertyName("length")]
+		public int Length { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("offset")]
+		public int Offset { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("options")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SuggestOption<T>> Options { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string Text { get; init; }
+	}
+
+	public interface ISuggestContainerVariant
+	{
+		string SuggestContainerVariantName { get; }
+	}
+
+	[JsonConverter(typeof(SuggestContainerConverter))]
+	public partial class SuggestContainer : IContainer
+	{
+		public SuggestContainer(ISuggestContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal ISuggestContainerVariant Variant { get; }
+	}
+
+	public class SuggestContainerConverter : JsonConverter<SuggestContainer>
+	{
+		public override SuggestContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			reader.Read();
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException();
+			}
+
+			var propertyName = reader.GetString();
+			if (propertyName == "completion")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.CompletionSuggester?>(ref reader, options);
+				reader.Read();
+				return new SuggestContainer(variant);
+			}
+
+			if (propertyName == "phrase")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PhraseSuggester?>(ref reader, options);
+				reader.Read();
+				return new SuggestContainer(variant);
+			}
+
+			if (propertyName == "term")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TermSuggester?>(ref reader, options);
+				reader.Read();
+				return new SuggestContainer(variant);
+			}
+
+			throw new JsonException();
+		}
+
+		public override void Write(Utf8JsonWriter writer, SuggestContainer value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(value.Variant.SuggestContainerVariantName);
+			switch (value.Variant)
+			{
+				case Elastic.Clients.Elasticsearch.CompletionSuggester variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.PhraseSuggester variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.TermSuggester variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class SuggestContextQuery
+	{
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public double? Boost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("context")]
+		public Elastic.Clients.Elasticsearch.Context Context { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("neighbours")]
+		public Union<IEnumerable<string>?, IEnumerable<int>?>? Neighbours { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("precision")]
+		public Union<string?, int?>? Precision { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prefix")]
+		public bool? Prefix { get; set; }
+	}
+
+	[JsonConverter(typeof(SuggestContextQueryDescriptorConverter))]
+	public partial class SuggestContextQueryDescriptor : DescriptorBase<SuggestContextQueryDescriptor>
+	{
+		internal double? _boost;
+		internal Elastic.Clients.Elasticsearch.Context _context;
+		internal Union<IEnumerable<string>?, IEnumerable<int>?>? _neighbours;
+		internal Union<string?, int?>? _precision;
+		internal bool? _prefix;
+		public SuggestContextQueryDescriptor Boost(double? boost) => Assign(boost, (a, v) => a._boost = v);
+		public SuggestContextQueryDescriptor Context(Elastic.Clients.Elasticsearch.Context context) => Assign(context, (a, v) => a._context = v);
+		public SuggestContextQueryDescriptor Neighbours(Union<IEnumerable<string>?, IEnumerable<int>?>? neighbours) => Assign(neighbours, (a, v) => a._neighbours = v);
+		public SuggestContextQueryDescriptor Precision(Union<string?, int?>? precision) => Assign(precision, (a, v) => a._precision = v);
+		public SuggestContextQueryDescriptor Prefix(bool? prefix = true) => Assign(prefix, (a, v) => a._prefix = v);
+	}
+
+	internal sealed class SuggestContextQueryDescriptorConverter : JsonConverter<SuggestContextQueryDescriptor>
+	{
+		public override SuggestContextQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SuggestContextQueryDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value._boost.Value);
+			}
+
+			writer.WritePropertyName("context");
+			JsonSerializer.Serialize(writer, value._context, options);
+			if (value._neighbours is not null)
+			{
+				writer.WritePropertyName("neighbours");
+				JsonSerializer.Serialize(writer, value._neighbours, options);
+			}
+
+			if (value._precision is not null)
+			{
+				writer.WritePropertyName("precision");
+				JsonSerializer.Serialize(writer, value._precision, options);
+			}
+
+			if (value._prefix.HasValue)
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteBooleanValue(value._prefix.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public abstract partial class SuggesterBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public string Field { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+	}
+
+	[JsonConverter(typeof(SuggesterBaseDescriptorConverter))]
+	public partial class SuggesterBaseDescriptor : DescriptorBase<SuggesterBaseDescriptor>
+	{
+		internal string _field;
+		internal string? _analyzer;
+		internal int? _size;
+		public SuggesterBaseDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
+		public SuggesterBaseDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a._analyzer = v);
+		public SuggesterBaseDescriptor Size(int? size) => Assign(size, (a, v) => a._size = v);
+	}
+
+	internal sealed class SuggesterBaseDescriptorConverter : JsonConverter<SuggesterBaseDescriptor>
+	{
+		public override SuggesterBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SuggesterBaseDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			if (!string.IsNullOrEmpty(value._analyzer))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(value._analyzer);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class SuggestFuzziness
+	{
+		[JsonInclude]
+		[JsonPropertyName("fuzziness")]
+		public Elastic.Clients.Elasticsearch.Fuzziness Fuzziness { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_length")]
+		public int MinLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prefix_length")]
+		public int PrefixLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("transpositions")]
+		public bool Transpositions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("unicode_aware")]
+		public bool UnicodeAware { get; set; }
+	}
+
+	[JsonConverter(typeof(SuggestFuzzinessDescriptorConverter))]
+	public partial class SuggestFuzzinessDescriptor : DescriptorBase<SuggestFuzzinessDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Fuzziness _fuzziness;
+		internal int _minLength;
+		internal int _prefixLength;
+		internal bool _transpositions;
+		internal bool _unicodeAware;
+		public SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a._fuzziness = v);
+		public SuggestFuzzinessDescriptor MinLength(int minLength) => Assign(minLength, (a, v) => a._minLength = v);
+		public SuggestFuzzinessDescriptor PrefixLength(int prefixLength) => Assign(prefixLength, (a, v) => a._prefixLength = v);
+		public SuggestFuzzinessDescriptor Transpositions(bool transpositions = true) => Assign(transpositions, (a, v) => a._transpositions = v);
+		public SuggestFuzzinessDescriptor UnicodeAware(bool unicodeAware = true) => Assign(unicodeAware, (a, v) => a._unicodeAware = v);
+	}
+
+	internal sealed class SuggestFuzzinessDescriptorConverter : JsonConverter<SuggestFuzzinessDescriptor>
+	{
+		public override SuggestFuzzinessDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SuggestFuzzinessDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("fuzziness");
+			JsonSerializer.Serialize(writer, value._fuzziness, options);
+			writer.WritePropertyName("min_length");
+			writer.WriteNumberValue(value._minLength);
+			writer.WritePropertyName("prefix_length");
+			writer.WriteNumberValue(value._prefixLength);
+			writer.WritePropertyName("transpositions");
+			writer.WriteBooleanValue(value._transpositions);
+			writer.WritePropertyName("unicode_aware");
+			writer.WriteBooleanValue(value._unicodeAware);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class TermSuggester : SuggesterBase, ISuggestContainerVariant
+	{
+		[JsonIgnore]
+		string ISuggestContainerVariant.SuggestContainerVariantName => "term";
+		[JsonInclude]
+		[JsonPropertyName("lowercase_terms")]
+		public bool? LowercaseTerms { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_edits")]
+		public int? MaxEdits { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_inspections")]
+		public int? MaxInspections { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_term_freq")]
+		public float? MaxTermFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_doc_freq")]
+		public float? MinDocFreq { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_word_length")]
+		public int? MinWordLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("prefix_length")]
+		public int? PrefixLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public Elastic.Clients.Elasticsearch.SuggestSort? Sort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("string_distance")]
+		public Elastic.Clients.Elasticsearch.StringDistance? StringDistance { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("suggest_mode")]
+		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string? Text { get; set; }
+	}
+
+	public partial class TermSuggestOption
+	{
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string Text { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("freq")]
+		public object? Freq { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("score")]
+		public double Score { get; init; }
+	}
+
+	public partial class TotalHits
+	{
+		[JsonInclude]
+		[JsonPropertyName("relation")]
+		public Elastic.Clients.Elasticsearch.TotalHitsRelation Relation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object Value { get; init; }
 	}
 
 	public partial class TranslogStats

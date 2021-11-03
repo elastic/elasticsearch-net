@@ -45,6 +45,7 @@ namespace Elastic.Clients.Elasticsearch
 					new IndexNameConverter(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
+					new IndicesJsonConverter(settings),
 					//new FieldConverterFactory(settings),
 					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					

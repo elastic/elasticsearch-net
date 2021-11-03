@@ -17,6 +17,7 @@
 
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Ingest;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,9 +31,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		IndexManagementNamespace IndexManagement { get; }
 
+		IngestNamespace Ingest { get; }
+
 		PingResponse Ping(PingRequest request);
 		Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default);
 		PingResponse Ping(Action<PingRequestDescriptor> configureRequest = null);
 		Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
+		SearchResponse<TDocument> Search<TDocument>(SearchRequest request);
+		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(SearchRequest request, CancellationToken cancellationToken = default);
+		SearchResponse<TDocument> Search<TDocument>(Action<SearchRequestDescriptor> configureRequest = null);
+		Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Action<SearchRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 	}
 }

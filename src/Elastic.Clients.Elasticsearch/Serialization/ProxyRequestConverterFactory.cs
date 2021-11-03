@@ -3,45 +3,44 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+internal sealed class CustomJsonWriterConverterFactory : JsonConverterFactory
 {
-	public class CustomJsonWriterConverterFactory : JsonConverterFactory
+	private readonly IElasticsearchClientSettings _settings;
+
+	public CustomJsonWriterConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override bool CanConvert(Type typeToConvert)
 	{
-		private readonly IElasticsearchClientSettings _settings;
+		var isGeneric = typeToConvert.IsGenericType;
+		var interfaces = typeToConvert.GetInterfaces();
 
-		public CustomJsonWriterConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+		var canConvert = false;
 
-		public override bool CanConvert(Type typeToConvert)
+		foreach (var item in interfaces)
 		{
-			var isGeneric = typeToConvert.IsGenericType;
-			var interfaces = typeToConvert.GetInterfaces();
-
-			var canConvert = false;
-
-			foreach (var item in interfaces)
-			{
-				var type = item.UnderlyingSystemType;
-				if (type == typeof(ICustomJsonWriter))
-					canConvert = true;
-			}
-
-			return canConvert && isGeneric;
+			var type = item.UnderlyingSystemType;
+			if (type == typeof(ICustomJsonWriter))
+				canConvert = true;
 		}
 
-		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-		{
-			var elementType = typeToConvert.GetGenericArguments()[0];
+		return canConvert && isGeneric;
+	}
 
-			var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
+	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+	{
+		var elementType = typeToConvert.GetGenericArguments()[0];
 
-			var converter = (JsonConverter)Activator.CreateInstance(
-				typeof(CustomJsonWriterConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ?? elementType),
-				BindingFlags.Instance | BindingFlags.Public,
-				args: new object[] {_settings},
-				binder: null,
-				culture: null)!;
+		var att = typeToConvert.GetCustomAttribute<ConvertAsAttribute>();
 
-			return converter;
-		}
+		var converter = (JsonConverter)Activator.CreateInstance(
+			typeof(CustomJsonWriterConverter<>).MakeGenericType(att?.ConvertType.MakeGenericType(elementType) ?? elementType),
+			BindingFlags.Instance | BindingFlags.Public,
+			args: new object[] { _settings },
+			binder: null,
+			culture: null)!;
+
+		return converter;
 	}
 }

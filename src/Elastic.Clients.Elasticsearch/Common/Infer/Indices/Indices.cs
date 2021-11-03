@@ -6,11 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
+[JsonConverter(typeof(IndicesJsonConverter))]
 public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 {
 	internal Indices(AllIndicesMarker all) : base(all) { }
@@ -36,7 +39,7 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 		all => "_all",
 		many =>
 		{
-			if (!(settings is IElasticsearchClientSettings clientSettings))
+			if (settings is not IElasticsearchClientSettings clientSettings)
 				throw new Exception(
 					"Tried to pass index names on querysting but it could not be resolved because no nest settings are available");
 
@@ -52,13 +55,13 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 
 	public static IndexName Index<T>() => typeof(T);
 
-	public static ManyIndices Index(IEnumerable<IndexName> indices) => new ManyIndices(indices);
+	public static ManyIndices Index(IEnumerable<IndexName> indices) => new(indices);
 
-	public static ManyIndices Index(params IndexName[] indices) => new ManyIndices(indices);
+	public static ManyIndices Index(params IndexName[] indices) => new(indices);
 
-	public static ManyIndices Index(IEnumerable<string> indices) => new ManyIndices(indices);
+	public static ManyIndices Index(IEnumerable<string> indices) => new(indices);
 
-	public static ManyIndices Index(params string[] indices) => new ManyIndices(indices);
+	public static ManyIndices Index(params string[] indices) => new(indices);
 
 	public static Indices Parse(string indicesString)
 	{
@@ -120,7 +123,7 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 
 	public class ManyIndices
 	{
-		private readonly List<IndexName> _indices = new List<IndexName>();
+		private readonly List<IndexName> _indices = new();
 
 		internal ManyIndices(IEnumerable<IndexName> indices) => _indices.AddRange(indices.NotEmpty(nameof(indices)));
 
@@ -133,6 +136,44 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 		{
 			_indices.Add(typeof(T));
 			return this;
+		}
+	}
+}
+
+public class IndicesJsonConverter : JsonConverter<Indices>
+{
+	private readonly IElasticsearchClientSettings _settings;
+
+	public IndicesJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override Indices? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType == JsonTokenType.String)
+		{
+			Indices indices = reader.GetString();
+			return indices;
+		}
+
+		reader.Read();
+		return null;
+	}
+
+	public override void Write(Utf8JsonWriter writer, Indices value, JsonSerializerOptions options)
+	{
+		if (value == null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		switch (value.Tag)
+		{
+			case 0:
+				writer.WriteStringValue("_all");
+				break;
+			case 1:
+				writer.WriteStringValue(((IUrlParameter)value).GetString(_settings));
+				break;
 		}
 	}
 }

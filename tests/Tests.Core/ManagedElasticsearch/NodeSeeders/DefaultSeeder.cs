@@ -1,11 +1,15 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.Ingest;
 using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
@@ -17,15 +21,12 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 	{
 		public const string CommitsAliasFilter = "commits-only";
 		public const string ProjectsAliasFilter = "projects-only";
-
 		public const string ProjectsAliasName = "projects-alias";
 		public const string TestsIndexTemplateName = "nest_tests";
-
 		public const string RemoteClusterName = "remote-cluster";
-
 		public const string PipelineName = "nest-pipeline";
 
-		private readonly IndexSettings _defaultIndexSettings = new IndexSettings()
+		private readonly IndexSettings _defaultIndexSettings = new()
 		{
 			NumberOfShards = 2,
 			NumberOfReplicas = 0,
@@ -58,12 +59,13 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		public void SeedNodeNoData()
 		{
 			var alreadySeeded = false;
+
 			if (!TestClient.Configuration.ForceReseed && (alreadySeeded = AlreadySeeded()))
 				return;
 
-			//var t = Task.Run(async () => await SeedNodeNoDataAsync(alreadySeeded).ConfigureAwait(false));
+			var t = Task.Run(async () => await SeedNodeNoDataAsync(alreadySeeded).ConfigureAwait(false));
 
-			//t.Wait(TimeSpan.FromSeconds(40));
+			t.Wait(TimeSpan.FromSeconds(40));
 		}
 
 		// Sometimes we run against an manually started Elasticsearch when
@@ -76,31 +78,28 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			var response = Client.IndexManagement.IndexExistsTemplate(new IndexExistsTemplateRequest(TestsIndexTemplateName));
 			return response.Exists;
 		}
-
-		// Ensure a clean slate by deleting everything regardless of whether they may already exist
+		
 		private async Task SeedNodeAsync(bool alreadySeeded)
 		{
-			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
-
-			await ClusterSettingsAsync().ConfigureAwait(false);
-
-			//await PutPipeline().ConfigureAwait(false);
-
+			await CleanupCluster(alreadySeeded).ConfigureAwait(false);
+			await PutPipeline().ConfigureAwait(false);
 			await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
 		}
 
-		//	await ClusterSettingsAsync().ConfigureAwait(false);
-		//await PutPipeline().ConfigureAwait(false);
-		// and now recreate everything
-		//await CreateIndicesAndSeedIndexDataAsync().ConfigureAwait(false);
-		//private async Task SeedNodeNoDataAsync(bool alreadySeeded)
-		//{
-		//	// Ensure a clean slate by deleting everything regardless of whether they may already exist
-		//	await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
-		//	//await ClusterSettingsAsync().ConfigureAwait(false);
-		//	// and now recreate everything
-		//	await CreateIndicesAsync().ConfigureAwait(false);
-		//}
+		private async Task SeedNodeNoDataAsync(bool alreadySeeded)
+		{
+			await CleanupCluster(alreadySeeded).ConfigureAwait(false);
+			await CreateIndicesAsync().ConfigureAwait(false);
+		}
+
+		/// <summary>
+		/// Ensure a clean slate by deleting everything regardless of whether they may already exist
+		/// </summary>
+		private async Task CleanupCluster(bool alreadySeeded)
+		{
+			await DeleteIndicesAndTemplatesAsync(alreadySeeded).ConfigureAwait(false);
+			await ClusterSettingsAsync().ConfigureAwait(false);
+		}
 
 		public async Task ClusterSettingsAsync()
 		{
@@ -123,27 +122,24 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			putSettingsResponse.ShouldBeValid();
 		}
 
-		//public async Task PutPipeline()
-		//{
-		//	if (TestConfiguration.Instance.InRange("<6.1.0"))
-		//		return;
+		public async Task PutPipeline()
+		{
+			// TODO: Resume fluent version
+			var putProcessors = await Client.Ingest.PutPipelineAsync(PipelineName, pi => pi
+				.Description("A pipeline registered by the NEST test framework")
+				.Processors(new[] { new ProcessorContainer(new SetProcessor { Field = "metadata", Value = new { x = "y" } }) })
+			).ConfigureAwait(false);
 
-		//	var putProcessors = await Client.Ingest.PutPipelineAsync(PipelineName, pi => pi
-		//		.Description("A pipeline registered by the NEST test framework")
-		//		.Processors(pp => pp
-		//			.Set<Project>(s => s.Field(p => p.Metadata).Value(new { x = "y" }))
-		//		)
-		//	).ConfigureAwait(false);
-		//	putProcessors.ShouldBeValid();
-		//}
+			putProcessors.ShouldBeValid();
+		}
 
 		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
 		{
 			var tasks = new List<Task>
 			{
 				Client.IndexManagement.DeleteIndexAsync(typeof(Project)),
-				//Client.Indices.DeleteAsync(typeof(Developer)),
-				//Client.Indices.DeleteAsync(typeof(ProjectPercolation))
+				Client.IndexManagement.DeleteIndexAsync(typeof(Developer)),
+				Client.IndexManagement.DeleteIndexAsync(typeof(ProjectPercolation))
 			};
 
 			if (alreadySeeded)
@@ -161,7 +157,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 			var tasks = new[]
 			{
-				CreateProjectIndexAsync()
+				CreateProjectIndexAsync(),
+				CreateDeveloperIndexAsync()
 			};
 			await Task.WhenAll(tasks)
 				.ContinueWith(t =>
@@ -271,12 +268,12 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//				Settings = IndexSettings
 		//			});
 
-		//		private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.Indices.CreateAsync(Infer.Index<Developer>(), c => c
-		//			.Map<Developer>(m => m
-		//				.AutoMap()
-		//				.Properties(DeveloperProperties)
-		//			)
-		//		);
+		private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.IndexManagement.CreateIndexAsync(Infer.Index<Developer>());
+		//.Map<Developer>(m => m
+		//	.AutoMap()
+		//	.Properties(DeveloperProperties)
+		//)
+		//);
 
 		//#pragma warning disable 618
 		//		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.Indices.CreateAsync(typeof(Project), c => c
@@ -333,30 +330,40 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//			return mapping;
 		//		}
 
-		//public static IIndexSettingsAnalysis ProjectAnalysisSettings(IndexSettingsAnalysisDescriptor analysis)
-		//{
-		//	//analysis
-		//	//	.TokenFilters(tokenFilters => tokenFilters
-		//	//		.Shingle("shingle", shingle => shingle
-		//	//			.MinShingleSize(2)
-		//	//			.MaxShingleSize(4)
-		//	//		)
-		//	//	)
-		//	//	.Analyzers(analyzers => analyzers
-		//	//		.Custom("shingle", shingle => shingle
-		//	//			.Filters("shingle")
-		//	//			.Tokenizer("standard")
-		//	//		)
-		//	//	);
-		//	////normalizers are a new feature since 5.2.0
-		//	//if (TestConfiguration.Instance.InRange(">=5.2.0"))
-		//	//	analysis.Normalizers(analyzers => analyzers
-		//	//		.Custom("my_normalizer", n => n
-		//	//			.Filters("lowercase", "asciifolding")
-		//	//		)
-		//	//	);
-		//	return analysis;
-		//}
+		public static IndexSettingsAnalysisDescriptor ProjectAnalysisSettings(IndexSettingsAnalysisDescriptor analysis)
+		{
+			//analysis
+			//	.TokenFilters(tokenFilters => tokenFilters
+			//		.Shingle("shingle", shingle => shingle
+			//			.MinShingleSize(2)
+			//			.MaxShingleSize(4)
+			//		)
+			//	)
+			//	.Analyzers(analyzers => analyzers
+			//		.Custom("shingle", shingle => shingle
+			//			.Filters("shingle")
+			//			.Tokenizer("standard")
+			//		)
+			//	);
+
+			//var filters = new TokenFilters
+			//{
+			//	{ "shingle", new ShingleTokenFilter { MinShingleSize = 2, MaxShingleSize = 4 } }
+			//};
+
+			analysis.TokenFilters(tokenFilters => tokenFilters.Shingle("shingle", shingle => shingle.MinShingleSize(2)));
+
+			//analysis.Filter(f => f.Add("shingle", new ShingleTokenFilter { MinShingleSize = 2, MaxShingleSize = 4 }));
+
+			////normalizers are a new feature since 5.2.0
+			//if (TestConfiguration.Instance.InRange(">=5.2.0"))
+			//	analysis.Normalizers(analyzers => analyzers
+			//		.Custom("my_normalizer", n => n
+			//			.Filters("lowercase", "asciifolding")
+			//		)
+			////	);
+			return analysis;
+		}
 
 
 		//		private Task<CreateIndexResponse> CreatePercolatorIndexAsync() => Client.Indices.CreateAsync(typeof(ProjectPercolation), c => c

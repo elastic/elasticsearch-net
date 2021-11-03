@@ -13,6 +13,30 @@ namespace Tests.Domain.Extensions
 				.DefaultMappingFor<Project>(map => map
 					.IndexName(TestValueHelper.ProjectsIndex)
 					.IdProperty(p => p.Name)
-					.RelationName("project"));
+					.RelationName("project"))
+				.DefaultMappingFor<CommitActivity>(map => map
+					.IndexName(TestValueHelper.ProjectsIndex)
+					.RelationName("commits")
+				)
+				.DefaultMappingFor<Developer>(map => map
+					.IndexName("devs")
+					.Ignore(p => p.PrivateValue)
+					.PropertyName(p => p.OnlineHandle, "nickname")
+				)
+				.DefaultMappingFor<ProjectPercolation>(map => map
+					.IndexName("queries")
+				);
+				//.DefaultMappingFor<Metric>(map => map
+				//	.IndexName("server-metrics")
+				//)
+				//.DefaultMappingFor<GeoShape>(map => map
+				//	.IndexName("geoshapes")
+				//)
+				//.DefaultMappingFor<Shape>(map => map
+				//	.IndexName("shapes")
+				//)
+				//.DefaultMappingFor<Log>(map => map
+				//	.IndexName("customlogs-*")
+				//);
 	}
 }

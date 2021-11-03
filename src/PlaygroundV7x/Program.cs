@@ -9,9 +9,20 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
+			var client = new ElasticClient();
+
+			var settingsResponse = await client.Indices.CreateAsync("a", i => i.Settings(s => s.Analysis(a => a.TokenFilters(tf => tf
+				.Shingle("my-shingle", s => s.MinShingleSize(2))
+				.Snowball("my_snowball", s => s.Version("v1"))))));
+
 			//var c1 = new ElasticClient(new ConnectionSettings(new Uri("https://azure.es.eastus.azure.elastic-cloud.com:9243")).BasicAuthentication("a", "b").ThrowExceptions());
 
 			//var r1 = await c1.PingAsync();
+
+			if (settingsResponse.IsValid)
+			{
+
+			}
 
 
 
@@ -28,7 +39,9 @@ namespace PlaygroundV7x
 			var matchQueryTwo = new QueryContainer(new MatchQuery() { Field = Infer.Field<Person>(f => f.FirstName), Query = "Steve" });
 			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));
 
-			var client = new ElasticClient();
+
+
+			//var a = client.IndexMany<Person>(new Person[0] { }, a => a.)
 
 			var matchAll = new QueryContainer(new MatchAllQuery() { Name = "test_query", IsVerbatim = true });
 			//var filter = Query<Person>.Bool(b => b.Filter(f => f.Match(m => m.Field(fld => fld.FirstName).Query("Steve").Name("test_match"))));

@@ -229,56 +229,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
 	}
 
-	public partial class DateDecayFunction : QueryDsl.DecayFunctionBase
-	{
-	}
-
-	public partial class DateDistanceFeatureQuery<TOrigin, TDistance> : QueryDsl.DistanceFeatureQueryBase<TOrigin, TDistance>
-	{
-	}
-
-	public partial class DateRangeQuery : QueryDsl.RangeQueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("gt")]
-		public string? Gt { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("gte")]
-		public string? Gte { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("lt")]
-		public string? Lt { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("lte")]
-		public string? Lte { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public string? From { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public string? To { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("time_zone")]
-		public string? TimeZone { get; init; }
-	}
-
-	public abstract partial class DecayFunctionBase : QueryDsl.ScoreFunctionBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("multi_value_mode")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; init; }
-	}
-
 	public partial class DisMaxQuery : QueryDsl.QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
@@ -290,21 +240,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("tie_breaker")]
 		public double? TieBreaker { get; set; }
-	}
-
-	public abstract partial class DistanceFeatureQueryBase<TOrigin, TDistance> : QueryDsl.QueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("origin")]
-		public TOrigin Origin { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public TDistance Pivot { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public string Field { get; init; }
 	}
 
 	public partial class ExistsQuery : QueryDsl.QueryBase, IQueryContainerVariant
@@ -368,27 +303,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			var propertyName = reader.GetString();
-			//if (propertyName == "exp")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction?>(ref reader, options);
-			//	reader.Read();
-			//	return new FunctionScoreContainer(variant);
-			//}
-
-			//if (propertyName == "gauss")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction?>(ref reader, options);
-			//	reader.Read();
-			//	return new FunctionScoreContainer(variant);
-			//}
-
-			//if (propertyName == "linear")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction?>(ref reader, options);
-			//	reader.Read();
-			//	return new FunctionScoreContainer(variant);
-			//}
-
 			if (propertyName == "field_value_factor")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
@@ -419,15 +333,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WritePropertyName(value.Variant.FunctionScoreContainerVariantName);
 			switch (value.Variant)
 			{
-				case Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.DecayFunction variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
 				case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
@@ -512,14 +417,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
 		public bool? IgnoreUnmapped { get; set; }
-	}
-
-	public partial class GeoDecayFunction : QueryDsl.DecayFunctionBase
-	{
-	}
-
-	public partial class GeoDistanceFeatureQuery<TOrigin, TDistance> : QueryDsl.DistanceFeatureQueryBase<TOrigin, TDistance>
-	{
 	}
 
 	public partial class GeoDistanceQuery : QueryDsl.QueryBase, IQueryContainerVariant
@@ -672,13 +569,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsContainerConverter))]
-	public partial class IntervalsContainer : IContainer, IIntervalsFilterVariant
+	public partial class IntervalsContainer : IContainer
 	{
 		public IntervalsContainer(IIntervalsContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IIntervalsContainerVariant Variant { get; }
-
-		[JsonIgnore]
-		string QueryDsl.IIntervalsFilterVariant.IntervalsFilterVariantName => "after";
 	}
 
 	public class IntervalsContainerConverter : JsonConverter<IntervalsContainer>
@@ -790,69 +684,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			var propertyName = reader.GetString();
-			if (propertyName == "after")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "before")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "contained_by")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "containing")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "not_contained_by")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "not_containing")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "not_overlapping")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			if (propertyName == "overlapping")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer?>(ref reader, options);
-				reader.Read();
-				return new IntervalsFilter(variant);
-			}
-
-			//if (propertyName == "script")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-			//	reader.Read();
-			//	return new IntervalsFilter(variant);
-			//}
-
 			throw new JsonException();
 		}
 
@@ -860,37 +691,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.IntervalsFilterVariantName);
-			switch (value.Variant)
-			{
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				//case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
-				case Elastic.Clients.Elasticsearch.Script variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-			}
-
 			writer.WriteEndObject();
 		}
 	}
@@ -1108,7 +908,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("_id")]
-		public string? Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_type")]
@@ -1462,44 +1262,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreMode { get; set; }
 	}
 
-	public partial class NumberRangeQuery : QueryDsl.RangeQueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("gt")]
-		public double? Gt { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("gte")]
-		public double? Gte { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("lt")]
-		public double? Lt { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("lte")]
-		public double? Lte { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("from")]
-		public double? From { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("to")]
-		public double? To { get; init; }
-	}
-
-	public partial class NumericDecayFunction : QueryDsl.DecayFunctionBase
-	{
-	}
-
 	public partial class ParentIdQuery : QueryDsl.QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "parent_id";
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string? Id { get; set; }
+		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_unmapped")]
@@ -1528,7 +1297,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string? Id { get; set; }
+		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -1549,17 +1318,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public object? Version { get; set; }
-	}
-
-	public partial class PinnedDoc
-	{
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public string Id { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 	}
 
 	public interface IPinnedQueryVariant
@@ -1591,20 +1349,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			}
 
 			var propertyName = reader.GetString();
-			//if (propertyName == "ids")
-			//{
-			//	var variant = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
-			//	reader.Read();
-			//	return new PinnedQuery(variant);
-			//}
-
-			//if (propertyName == "docs")
-			//{
-			//	var variant = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>?>(ref reader, options);
-			//	reader.Read();
-			//	return new PinnedQuery(variant);
-			//}
-
 			throw new JsonException();
 		}
 
@@ -1612,16 +1356,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.PinnedQueryVariantName);
-			switch (value.Variant)
-			{
-				case IEnumerable<string> variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-			}
-
 			writer.WriteEndObject();
 		}
 	}
@@ -1714,13 +1448,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				reader.Read();
 				return new QueryContainer(variant);
 			}
-
-			//if (propertyName == "distance_feature")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.DistanceFeatureQuery?>(ref reader, options);
-			//	reader.Read();
-			//	return new QueryContainer(variant);
-			//}
 
 			if (propertyName == "exists")
 			{
@@ -1897,13 +1624,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return new QueryContainer(variant);
 			}
 
-			//if (propertyName == "range")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery>?>(ref reader, options);
-			//	reader.Read();
-			//	return new QueryContainer(variant);
-			//}
-
 			if (propertyName == "rank_feature")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery?>(ref reader, options);
@@ -2061,9 +1781,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				case Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.QueryDsl.DistanceFeatureQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
 				case Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
@@ -2137,9 +1854,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 				case Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery> variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 				case Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery variant:
@@ -2321,13 +2035,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("seed")]
 		public Union<object?, string?>? Seed { get; set; }
-	}
-
-	public abstract partial class RangeQueryBase : QueryDsl.QueryBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("relation")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; init; }
 	}
 
 	public partial class RankFeatureFunction

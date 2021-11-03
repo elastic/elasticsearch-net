@@ -19,13 +19,12 @@ using Xunit;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 		where TResponse : class, IResponse
-		where TInterface : class
-		where TDescriptor : class, TInterface
-		where TInitializer : class, TInterface
+		where TDescriptor : class
+		where TInitializer : class
 	{
 		private readonly EndpointUsage _usage;
 
@@ -44,7 +43,7 @@ namespace Tests.Framework.EndpointTests
 		public TCluster Cluster { get; }
 
 		protected virtual string CallIsolatedValue => UniqueValues.Value;
-		protected virtual Func<TDescriptor, TInterface> Fluent { get; } = null;
+		protected virtual Action<TDescriptor> Fluent { get; } = null;
 		protected virtual TInitializer Initializer { get; } = null;
 		protected bool RanIntegrationSetup => _usage?.CalledSetup ?? false;
 		protected LazyResponses Responses { get; }
@@ -78,8 +77,8 @@ namespace Tests.Framework.EndpointTests
 		protected abstract LazyResponses ClientUsage();
 
 		protected LazyResponses Calls(
-			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
-			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
+			Func<IElasticClient, Action<TDescriptor>, TResponse> fluent,
+			Func<IElasticClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
 			Func<IElasticClient, TInitializer, TResponse> request,
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		) => new(async () =>

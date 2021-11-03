@@ -14,6 +14,6 @@ public class UnsupportedProductException : Exception
 	internal const string InvalidProductError =
 		"The client noticed that the server is not a supported distribution of Elasticsearch or an unknown product.";
 
-	public UnsupportedProductException(string error)
+	internal UnsupportedProductException(string error)
 		: base(error) { }
 }
