@@ -110,6 +110,184 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		}
 	}
 
+	[JsonConverter(typeof(IcuCollationAlternateConverter))]
+	public enum IcuCollationAlternate
+	{
+		Shifted,
+		NonIgnorable
+	}
+
+	public class IcuCollationAlternateConverter : JsonConverter<IcuCollationAlternate>
+	{
+		public override IcuCollationAlternate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "shifted":
+					return IcuCollationAlternate.Shifted;
+				case "non-ignorable":
+					return IcuCollationAlternate.NonIgnorable;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IcuCollationAlternate value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IcuCollationAlternate.Shifted:
+					writer.WriteStringValue("shifted");
+					return;
+				case IcuCollationAlternate.NonIgnorable:
+					writer.WriteStringValue("non-ignorable");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IcuCollationCaseFirstConverter))]
+	public enum IcuCollationCaseFirst
+	{
+		Upper,
+		Lower
+	}
+
+	public class IcuCollationCaseFirstConverter : JsonConverter<IcuCollationCaseFirst>
+	{
+		public override IcuCollationCaseFirst Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "upper":
+					return IcuCollationCaseFirst.Upper;
+				case "lower":
+					return IcuCollationCaseFirst.Lower;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IcuCollationCaseFirst value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IcuCollationCaseFirst.Upper:
+					writer.WriteStringValue("upper");
+					return;
+				case IcuCollationCaseFirst.Lower:
+					writer.WriteStringValue("lower");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IcuCollationDecompositionConverter))]
+	public enum IcuCollationDecomposition
+	{
+		No,
+		Identical
+	}
+
+	public class IcuCollationDecompositionConverter : JsonConverter<IcuCollationDecomposition>
+	{
+		public override IcuCollationDecomposition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "no":
+					return IcuCollationDecomposition.No;
+				case "identical":
+					return IcuCollationDecomposition.Identical;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IcuCollationDecomposition value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IcuCollationDecomposition.No:
+					writer.WriteStringValue("no");
+					return;
+				case IcuCollationDecomposition.Identical:
+					writer.WriteStringValue("identical");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IcuCollationStrengthConverter))]
+	public enum IcuCollationStrength
+	{
+		Tertiary,
+		Secondary,
+		Quaternary,
+		Primary,
+		Identical
+	}
+
+	public class IcuCollationStrengthConverter : JsonConverter<IcuCollationStrength>
+	{
+		public override IcuCollationStrength Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "tertiary":
+					return IcuCollationStrength.Tertiary;
+				case "secondary":
+					return IcuCollationStrength.Secondary;
+				case "quaternary":
+					return IcuCollationStrength.Quaternary;
+				case "primary":
+					return IcuCollationStrength.Primary;
+				case "identical":
+					return IcuCollationStrength.Identical;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IcuCollationStrength value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IcuCollationStrength.Tertiary:
+					writer.WriteStringValue("tertiary");
+					return;
+				case IcuCollationStrength.Secondary:
+					writer.WriteStringValue("secondary");
+					return;
+				case IcuCollationStrength.Quaternary:
+					writer.WriteStringValue("quaternary");
+					return;
+				case IcuCollationStrength.Primary:
+					writer.WriteStringValue("primary");
+					return;
+				case IcuCollationStrength.Identical:
+					writer.WriteStringValue("identical");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(IcuNormalizationModeConverter))]
 	public enum IcuNormalizationMode
 	{
@@ -189,6 +367,46 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 					return;
 				case IcuNormalizationType.Nfc:
 					writer.WriteStringValue("nfc");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IcuTransformDirectionConverter))]
+	public enum IcuTransformDirection
+	{
+		Reverse,
+		Forward
+	}
+
+	public class IcuTransformDirectionConverter : JsonConverter<IcuTransformDirection>
+	{
+		public override IcuTransformDirection Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "reverse":
+					return IcuTransformDirection.Reverse;
+				case "forward":
+					return IcuTransformDirection.Forward;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IcuTransformDirection value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IcuTransformDirection.Reverse:
+					writer.WriteStringValue("reverse");
+					return;
+				case IcuTransformDirection.Forward:
+					writer.WriteStringValue("forward");
 					return;
 			}
 
@@ -553,6 +771,292 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 					return;
 				case NoriDecompoundMode.Discard:
 					writer.WriteStringValue("discard");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(PhoneticEncoderConverter))]
+	public enum PhoneticEncoder
+	{
+		Soundex,
+		RefinedSoundex,
+		Nysiis,
+		Metaphone,
+		Koelnerphonetik,
+		Haasephonetik,
+		DoubleMetaphone,
+		DaitchMokotoff,
+		Cologne,
+		Caverphone2,
+		Caverphone1,
+		BeiderMorse
+	}
+
+	public class PhoneticEncoderConverter : JsonConverter<PhoneticEncoder>
+	{
+		public override PhoneticEncoder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "soundex":
+					return PhoneticEncoder.Soundex;
+				case "refined_soundex":
+					return PhoneticEncoder.RefinedSoundex;
+				case "nysiis":
+					return PhoneticEncoder.Nysiis;
+				case "metaphone":
+					return PhoneticEncoder.Metaphone;
+				case "koelnerphonetik":
+					return PhoneticEncoder.Koelnerphonetik;
+				case "haasephonetik":
+					return PhoneticEncoder.Haasephonetik;
+				case "double_metaphone":
+					return PhoneticEncoder.DoubleMetaphone;
+				case "daitch_mokotoff":
+					return PhoneticEncoder.DaitchMokotoff;
+				case "cologne":
+					return PhoneticEncoder.Cologne;
+				case "caverphone2":
+					return PhoneticEncoder.Caverphone2;
+				case "caverphone1":
+					return PhoneticEncoder.Caverphone1;
+				case "beider_morse":
+					return PhoneticEncoder.BeiderMorse;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, PhoneticEncoder value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case PhoneticEncoder.Soundex:
+					writer.WriteStringValue("soundex");
+					return;
+				case PhoneticEncoder.RefinedSoundex:
+					writer.WriteStringValue("refined_soundex");
+					return;
+				case PhoneticEncoder.Nysiis:
+					writer.WriteStringValue("nysiis");
+					return;
+				case PhoneticEncoder.Metaphone:
+					writer.WriteStringValue("metaphone");
+					return;
+				case PhoneticEncoder.Koelnerphonetik:
+					writer.WriteStringValue("koelnerphonetik");
+					return;
+				case PhoneticEncoder.Haasephonetik:
+					writer.WriteStringValue("haasephonetik");
+					return;
+				case PhoneticEncoder.DoubleMetaphone:
+					writer.WriteStringValue("double_metaphone");
+					return;
+				case PhoneticEncoder.DaitchMokotoff:
+					writer.WriteStringValue("daitch_mokotoff");
+					return;
+				case PhoneticEncoder.Cologne:
+					writer.WriteStringValue("cologne");
+					return;
+				case PhoneticEncoder.Caverphone2:
+					writer.WriteStringValue("caverphone2");
+					return;
+				case PhoneticEncoder.Caverphone1:
+					writer.WriteStringValue("caverphone1");
+					return;
+				case PhoneticEncoder.BeiderMorse:
+					writer.WriteStringValue("beider_morse");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(PhoneticLanguageConverter))]
+	public enum PhoneticLanguage
+	{
+		Spanish,
+		Russian,
+		Romanian,
+		Polish,
+		Hungarian,
+		Hebrew,
+		German,
+		French,
+		English,
+		Cyrillic,
+		Common,
+		Any
+	}
+
+	public class PhoneticLanguageConverter : JsonConverter<PhoneticLanguage>
+	{
+		public override PhoneticLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "spanish":
+					return PhoneticLanguage.Spanish;
+				case "russian":
+					return PhoneticLanguage.Russian;
+				case "romanian":
+					return PhoneticLanguage.Romanian;
+				case "polish":
+					return PhoneticLanguage.Polish;
+				case "hungarian":
+					return PhoneticLanguage.Hungarian;
+				case "hebrew":
+					return PhoneticLanguage.Hebrew;
+				case "german":
+					return PhoneticLanguage.German;
+				case "french":
+					return PhoneticLanguage.French;
+				case "english":
+					return PhoneticLanguage.English;
+				case "cyrillic":
+					return PhoneticLanguage.Cyrillic;
+				case "common":
+					return PhoneticLanguage.Common;
+				case "any":
+					return PhoneticLanguage.Any;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, PhoneticLanguage value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case PhoneticLanguage.Spanish:
+					writer.WriteStringValue("spanish");
+					return;
+				case PhoneticLanguage.Russian:
+					writer.WriteStringValue("russian");
+					return;
+				case PhoneticLanguage.Romanian:
+					writer.WriteStringValue("romanian");
+					return;
+				case PhoneticLanguage.Polish:
+					writer.WriteStringValue("polish");
+					return;
+				case PhoneticLanguage.Hungarian:
+					writer.WriteStringValue("hungarian");
+					return;
+				case PhoneticLanguage.Hebrew:
+					writer.WriteStringValue("hebrew");
+					return;
+				case PhoneticLanguage.German:
+					writer.WriteStringValue("german");
+					return;
+				case PhoneticLanguage.French:
+					writer.WriteStringValue("french");
+					return;
+				case PhoneticLanguage.English:
+					writer.WriteStringValue("english");
+					return;
+				case PhoneticLanguage.Cyrillic:
+					writer.WriteStringValue("cyrillic");
+					return;
+				case PhoneticLanguage.Common:
+					writer.WriteStringValue("common");
+					return;
+				case PhoneticLanguage.Any:
+					writer.WriteStringValue("any");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(PhoneticNameTypeConverter))]
+	public enum PhoneticNameType
+	{
+		Sephardic,
+		Generic,
+		Ashkenazi
+	}
+
+	public class PhoneticNameTypeConverter : JsonConverter<PhoneticNameType>
+	{
+		public override PhoneticNameType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "sephardic":
+					return PhoneticNameType.Sephardic;
+				case "generic":
+					return PhoneticNameType.Generic;
+				case "ashkenazi":
+					return PhoneticNameType.Ashkenazi;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, PhoneticNameType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case PhoneticNameType.Sephardic:
+					writer.WriteStringValue("sephardic");
+					return;
+				case PhoneticNameType.Generic:
+					writer.WriteStringValue("generic");
+					return;
+				case PhoneticNameType.Ashkenazi:
+					writer.WriteStringValue("ashkenazi");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(PhoneticRuleTypeConverter))]
+	public enum PhoneticRuleType
+	{
+		Exact,
+		Approx
+	}
+
+	public class PhoneticRuleTypeConverter : JsonConverter<PhoneticRuleType>
+	{
+		public override PhoneticRuleType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "exact":
+					return PhoneticRuleType.Exact;
+				case "approx":
+					return PhoneticRuleType.Approx;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, PhoneticRuleType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case PhoneticRuleType.Exact:
+					writer.WriteStringValue("exact");
+					return;
+				case PhoneticRuleType.Approx:
+					writer.WriteStringValue("approx");
 					return;
 			}
 

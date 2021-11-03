@@ -116,15 +116,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal double? _right;
 		internal double? _bottom;
 		internal string? _wkt;
-		public BoundingBoxDescriptor BottomRight(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? bottomRight) => Assign(bottomRight, (a, v) => a._bottomRight = v);
-		public BoundingBoxDescriptor TopLeft(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? topLeft) => Assign(topLeft, (a, v) => a._topLeft = v);
-		public BoundingBoxDescriptor TopRight(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? topRight) => Assign(topRight, (a, v) => a._topRight = v);
-		public BoundingBoxDescriptor BottomLeft(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? bottomLeft) => Assign(bottomLeft, (a, v) => a._bottomLeft = v);
-		public BoundingBoxDescriptor Top(double? top) => Assign(top, (a, v) => a._top = v);
-		public BoundingBoxDescriptor Left(double? left) => Assign(left, (a, v) => a._left = v);
-		public BoundingBoxDescriptor Right(double? right) => Assign(right, (a, v) => a._right = v);
-		public BoundingBoxDescriptor Bottom(double? bottom) => Assign(bottom, (a, v) => a._bottom = v);
-		public BoundingBoxDescriptor Wkt(string? wkt) => Assign(wkt, (a, v) => a._wkt = v);
 	}
 
 	internal sealed class BoundingBoxDescriptorConverter : JsonConverter<BoundingBoxDescriptor>
@@ -2572,6 +2563,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public string Value { get; set; }
+		public string? Value { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("wildcard")]
+		public string? Wildcard { get; set; }
 	}
 }

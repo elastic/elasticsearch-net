@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch
 				Converters =
 				{
 					new InterfaceConverterFactory(settings),
-					new ConvertAsConverterFactory(settings),
+					//new ConvertAsConverterFactory(settings),
 					new IndexNameConverter(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch
 				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 			};
 
-		private JsonSerializerOptions Options { get; }
+		internal JsonSerializerOptions Options { get; }
 
 		// TODO - This is not ideal as we allocate a large string - No stream based sync overload - We should use a pooled byte array in the future
 		public override T Deserialize<T>(Stream stream)

@@ -570,10 +570,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _onFailure;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _processors;
 		internal object? _version;
-		public PipelineDescriptor Description(string? description) => Assign(description, (a, v) => a._description = v);
-		public PipelineDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a._onFailure = v);
-		public PipelineDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a._processors = v);
-		public PipelineDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
 	}
 
 	internal sealed class PipelineDescriptorConverter : JsonConverter<PipelineDescriptor>
@@ -645,10 +641,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal bool? _ignoreFailure;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _onFailure;
 		internal string? _tag;
-		public ProcessorBaseDescriptor If(string? ifCondition) => Assign(ifCondition, (a, v) => a._if = v);
-		public ProcessorBaseDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a._ignoreFailure = v);
-		public ProcessorBaseDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a._onFailure = v);
-		public ProcessorBaseDescriptor Tag(string? tag) => Assign(tag, (a, v) => a._tag = v);
 	}
 
 	internal sealed class ProcessorBaseDescriptorConverter : JsonConverter<ProcessorBaseDescriptor>

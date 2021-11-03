@@ -260,6 +260,126 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 	}
 
+	[JsonConverter(typeof(SegmentSortMissingConverter))]
+	public enum SegmentSortMissing
+	{
+		Last,
+		First
+	}
+
+	public class SegmentSortMissingConverter : JsonConverter<SegmentSortMissing>
+	{
+		public override SegmentSortMissing Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "_last":
+					return SegmentSortMissing.Last;
+				case "_first":
+					return SegmentSortMissing.First;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SegmentSortMissing value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SegmentSortMissing.Last:
+					writer.WriteStringValue("_last");
+					return;
+				case SegmentSortMissing.First:
+					writer.WriteStringValue("_first");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(SegmentSortModeConverter))]
+	public enum SegmentSortMode
+	{
+		Min,
+		Max
+	}
+
+	public class SegmentSortModeConverter : JsonConverter<SegmentSortMode>
+	{
+		public override SegmentSortMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "min":
+					return SegmentSortMode.Min;
+				case "max":
+					return SegmentSortMode.Max;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SegmentSortMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SegmentSortMode.Min:
+					writer.WriteStringValue("min");
+					return;
+				case SegmentSortMode.Max:
+					writer.WriteStringValue("max");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(SegmentSortOrderConverter))]
+	public enum SegmentSortOrder
+	{
+		Desc,
+		Asc
+	}
+
+	public class SegmentSortOrderConverter : JsonConverter<SegmentSortOrder>
+	{
+		public override SegmentSortOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "desc":
+					return SegmentSortOrder.Desc;
+				case "asc":
+					return SegmentSortOrder.Asc;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SegmentSortOrder value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SegmentSortOrder.Desc:
+					writer.WriteStringValue("desc");
+					return;
+				case SegmentSortOrder.Asc:
+					writer.WriteStringValue("asc");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(StringFielddataFormatConverter))]
 	public enum StringFielddataFormat
 	{

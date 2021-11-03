@@ -108,9 +108,10 @@ namespace Playground
 			//var response = client.IndexManagement.CreateIndex("testing", i => i
 			//	.Settings(s => s.Add("thing", 10)));
 
-			var qc = new QueryContainer(new BoolQuery { QueryName = "a_bool_query", Must = new[] { new QueryContainer(new TermQuery { Boost = 0.5f, Field = "the_field", Value = "the_value", CaseInsensitive = true }) } });
+			//var qc = new QueryContainer(new BoolQuery { QueryName = "a_bool_query", Must = new[] { new QueryContainer(new TermQuery { Boost = 0.5f, Field = "the_field", Value = "the_value", CaseInsensitive = true }) } });
+			//var thing = new Thing { Query = qc };
 
-			var thing = new Thing { Query = qc };
+			var thing = new IndexRequest<Person>(new Person() { FirstName = "Steve", LastName = "Gordon", Age = 37 });
 
 			var stream = new MemoryStream();
 			serialiser.Serialize(thing, stream);

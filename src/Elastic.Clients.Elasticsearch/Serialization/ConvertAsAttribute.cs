@@ -6,14 +6,6 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch
 {
 	[AttributeUsage(AttributeTargets.Interface)]
-	internal class ConvertAsAttribute : Attribute
-	{
-		public ConvertAsAttribute(Type convertType) => ConvertType = convertType;
-
-		public Type ConvertType { get; }
-	}
-
-	[AttributeUsage(AttributeTargets.Interface)]
 	internal class InterfaceConverterAttribute : Attribute
 	{
 		public InterfaceConverterAttribute(Type converterType) => ConverterType = converterType;

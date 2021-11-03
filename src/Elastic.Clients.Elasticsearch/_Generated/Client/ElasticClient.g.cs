@@ -40,6 +40,40 @@ namespace Elastic.Clients.Elasticsearch
 			Ingest = new IngestNamespace(this);
 		}
 
+		public DeleteResponse Delete(DeleteRequest request) => DoRequest<DeleteRequest, DeleteResponse>(request);
+		public Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<DeleteRequest, DeleteResponse>(request, cancellationToken);
+		public DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new DeleteRequestDescriptor(index, id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+		}
+
+		public Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteRequestDescriptor(index, id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
+		}
+
+		public IndexResponse Index<TDocument>(IndexRequest<TDocument> request) => DoRequest<IndexRequest<TDocument>, IndexResponse>(request);
+		public Task<IndexResponse> IndexAsync<TDocument>(IndexRequest<TDocument> request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexRequest<TDocument>, IndexResponse>(request, cancellationToken);
+		public IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(index);
+			descriptor.Document(document);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(index);
+			descriptor.Document(document);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
 		public PingResponse Ping(PingRequest request) => DoRequest<PingRequest, PingResponse>(request);
 		public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<PingRequest, PingResponse>(request, cancellationToken);
 		public PingResponse Ping(Action<PingRequestDescriptor> configureRequest = null)

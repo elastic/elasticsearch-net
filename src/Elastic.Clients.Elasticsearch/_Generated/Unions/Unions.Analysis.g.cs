@@ -19,8 +19,6 @@ using System;
 using System.Collections.Generic;
 using OneOf;
 using Elastic.Transport;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
@@ -74,7 +72,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	[JsonConverter(typeof(IsADictionaryConverter<TokenFilters, ITokenFiltersVariant>))]
 	public class TokenFilters : IsADictionaryBase<string, ITokenFiltersVariant>, Analysis.ITokenFilters
 	{
 	}

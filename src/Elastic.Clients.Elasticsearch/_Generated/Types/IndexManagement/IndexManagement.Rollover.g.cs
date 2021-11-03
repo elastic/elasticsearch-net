@@ -49,10 +49,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 		internal object? _maxDocs;
 		internal string? _maxSize;
 		internal Elastic.Clients.Elasticsearch.ByteSize? _maxPrimaryShardSize;
-		public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Time? maxAge) => Assign(maxAge, (a, v) => a._maxAge = v);
-		public RolloverConditionsDescriptor MaxDocs(object? maxDocs) => Assign(maxDocs, (a, v) => a._maxDocs = v);
-		public RolloverConditionsDescriptor MaxSize(string? maxSize) => Assign(maxSize, (a, v) => a._maxSize = v);
-		public RolloverConditionsDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize) => Assign(maxPrimaryShardSize, (a, v) => a._maxPrimaryShardSize = v);
 	}
 
 	internal sealed class RolloverConditionsDescriptorConverter : JsonConverter<RolloverConditionsDescriptor>
