@@ -97,12 +97,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[JsonConverter(typeof(DateRoundingConverter))]
 	public enum DateRounding
 	{
-		Year,
-		Week,
-		Second,
-		Minute,
-		Hour,
-		Day
+		y,
+		w,
+		s,
+		m,
+		h,
+		d
 	}
 
 	public class DateRoundingConverter : JsonConverter<DateRounding>
@@ -113,17 +113,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			switch (enumString)
 			{
 				case "y":
-					return DateRounding.Year;
+					return DateRounding.y;
 				case "w":
-					return DateRounding.Week;
+					return DateRounding.w;
 				case "s":
-					return DateRounding.Second;
+					return DateRounding.s;
 				case "m":
-					return DateRounding.Minute;
+					return DateRounding.m;
 				case "h":
-					return DateRounding.Hour;
+					return DateRounding.h;
 				case "d":
-					return DateRounding.Day;
+					return DateRounding.d;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -134,22 +134,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 			switch (value)
 			{
-				case DateRounding.Year:
+				case DateRounding.y:
 					writer.WriteStringValue("y");
 					return;
-				case DateRounding.Week:
+				case DateRounding.w:
 					writer.WriteStringValue("w");
 					return;
-				case DateRounding.Second:
+				case DateRounding.s:
 					writer.WriteStringValue("s");
 					return;
-				case DateRounding.Minute:
+				case DateRounding.m:
 					writer.WriteStringValue("m");
 					return;
-				case DateRounding.Hour:
+				case DateRounding.h:
 					writer.WriteStringValue("h");
 					return;
-				case DateRounding.Day:
+				case DateRounding.d:
 					writer.WriteStringValue("d");
 					return;
 			}

@@ -330,40 +330,40 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//			return mapping;
 		//		}
 
-		public static IndexSettingsAnalysisDescriptor ProjectAnalysisSettings(IndexSettingsAnalysisDescriptor analysis)
-		{
-			//analysis
-			//	.TokenFilters(tokenFilters => tokenFilters
-			//		.Shingle("shingle", shingle => shingle
-			//			.MinShingleSize(2)
-			//			.MaxShingleSize(4)
-			//		)
-			//	)
-			//	.Analyzers(analyzers => analyzers
-			//		.Custom("shingle", shingle => shingle
-			//			.Filters("shingle")
-			//			.Tokenizer("standard")
-			//		)
-			//	);
+		public static IndexSettingsAnalysisDescriptor ProjectAnalysisSettings(IndexSettingsAnalysisDescriptor analysis) => analysis;
+		//{
+		//	//analysis
+		//	//	.TokenFilters(tokenFilters => tokenFilters
+		//	//		.Shingle("shingle", shingle => shingle
+		//	//			.MinShingleSize(2)
+		//	//			.MaxShingleSize(4)
+		//	//		)
+		//	//	)
+		//	//	.Analyzers(analyzers => analyzers
+		//	//		.Custom("shingle", shingle => shingle
+		//	//			.Filters("shingle")
+		//	//			.Tokenizer("standard")
+		//	//		)
+		//	//	);
 
-			//var filters = new TokenFilters
-			//{
-			//	{ "shingle", new ShingleTokenFilter { MinShingleSize = 2, MaxShingleSize = 4 } }
-			//};
+		//	//var filters = new TokenFilters
+		//	//{
+		//	//	{ "shingle", new ShingleTokenFilter { MinShingleSize = 2, MaxShingleSize = 4 } }
+		//	//};
 
-			analysis.TokenFilters(tokenFilters => tokenFilters.Shingle("shingle", shingle => shingle.MinShingleSize(2)));
+		//	//analysis.TokenFilters(tokenFilters => tokenFilters.Shingle("shingle", shingle => shingle.MinShingleSize(2)));
 
-			//analysis.Filter(f => f.Add("shingle", new ShingleTokenFilter { MinShingleSize = 2, MaxShingleSize = 4 }));
+		//	//analysis.Filter(f => f.Add("shingle", new ShingleTokenFilter { MinShingleSize = 2, MaxShingleSize = 4 }));
 
-			////normalizers are a new feature since 5.2.0
-			//if (TestConfiguration.Instance.InRange(">=5.2.0"))
-			//	analysis.Normalizers(analyzers => analyzers
-			//		.Custom("my_normalizer", n => n
-			//			.Filters("lowercase", "asciifolding")
-			//		)
-			////	);
-			return analysis;
-		}
+		//	////normalizers are a new feature since 5.2.0
+		//	//if (TestConfiguration.Instance.InRange(">=5.2.0"))
+		//	//	analysis.Normalizers(analyzers => analyzers
+		//	//		.Custom("my_normalizer", n => n
+		//	//			.Filters("lowercase", "asciifolding")
+		//	//		)
+		//	////	);
+		//	return analysis;
+		//}
 
 
 		//		private Task<CreateIndexResponse> CreatePercolatorIndexAsync() => Client.Indices.CreateAsync(typeof(ProjectPercolation), c => c

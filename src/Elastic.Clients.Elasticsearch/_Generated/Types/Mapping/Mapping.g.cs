@@ -42,8 +42,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		internal string _defaultMetric;
 		internal IReadOnlyCollection<string> _metrics;
-		public AggregateMetricDoublePropertyDescriptor DefaultMetric(string defaultMetric) => Assign(defaultMetric, (a, v) => a._defaultMetric = v);
-		public AggregateMetricDoublePropertyDescriptor Metrics(IReadOnlyCollection<string> metrics) => Assign(metrics, (a, v) => a._metrics = v);
 	}
 
 	internal sealed class AggregateMetricDoublePropertyDescriptorConverter : JsonConverter<AggregateMetricDoublePropertyDescriptor>
@@ -118,16 +116,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal bool _storeTermVectorPayloads;
 		internal bool _storeTermVectorPositions;
 		internal bool _storeTermVectors;
-		public AllFieldDescriptor Analyzer(string analyzer) => Assign(analyzer, (a, v) => a._analyzer = v);
-		public AllFieldDescriptor Enabled(bool enabled = true) => Assign(enabled, (a, v) => a._enabled = v);
-		public AllFieldDescriptor OmitNorms(bool omitNorms = true) => Assign(omitNorms, (a, v) => a._omitNorms = v);
-		public AllFieldDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(searchAnalyzer, (a, v) => a._searchAnalyzer = v);
-		public AllFieldDescriptor Similarity(string similarity) => Assign(similarity, (a, v) => a._similarity = v);
-		public AllFieldDescriptor Store(bool store = true) => Assign(store, (a, v) => a._store = v);
-		public AllFieldDescriptor StoreTermVectorOffsets(bool storeTermVectorOffsets = true) => Assign(storeTermVectorOffsets, (a, v) => a._storeTermVectorOffsets = v);
-		public AllFieldDescriptor StoreTermVectorPayloads(bool storeTermVectorPayloads = true) => Assign(storeTermVectorPayloads, (a, v) => a._storeTermVectorPayloads = v);
-		public AllFieldDescriptor StoreTermVectorPositions(bool storeTermVectorPositions = true) => Assign(storeTermVectorPositions, (a, v) => a._storeTermVectorPositions = v);
-		public AllFieldDescriptor StoreTermVectors(bool storeTermVectors = true) => Assign(storeTermVectors, (a, v) => a._storeTermVectors = v);
 	}
 
 	internal sealed class AllFieldDescriptorConverter : JsonConverter<AllFieldDescriptor>
@@ -246,7 +234,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public partial class ConstantKeywordPropertyDescriptor : DescriptorBase<ConstantKeywordPropertyDescriptor>
 	{
 		internal object? _value;
-		public ConstantKeywordPropertyDescriptor Value(object? value) => Assign(value, (a, v) => a._value = v);
 	}
 
 	internal sealed class ConstantKeywordPropertyDescriptorConverter : JsonConverter<ConstantKeywordPropertyDescriptor>
@@ -338,6 +325,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public int? PrecisionStep { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("locale")]
+		public string? Locale { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "date";
 	}
@@ -353,6 +344,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "date_range";
 	}
 
+	public partial class DenseVectorIndexOptions
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("m")]
+		public int m { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ef_construction")]
+		public int EfConstruction { get; init; }
+	}
+
 	public partial class DenseVectorProperty : Mapping.PropertyBase, IPropertiesVariant
 	{
 		[JsonInclude]
@@ -361,13 +367,27 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("dims")]
 		public int Dims { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity")]
+		public string? Similarity { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public bool? Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_options")]
+		public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; init; }
 	}
 
 	[JsonConverter(typeof(DenseVectorPropertyDescriptorConverter))]
 	public partial class DenseVectorPropertyDescriptor : DescriptorBase<DenseVectorPropertyDescriptor>
 	{
 		internal int _dims;
-		public DenseVectorPropertyDescriptor Dims(int dims) => Assign(dims, (a, v) => a._dims = v);
+		internal string? _similarity;
+		internal bool? _index;
+		internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? _indexOptions;
 	}
 
 	internal sealed class DenseVectorPropertyDescriptorConverter : JsonConverter<DenseVectorPropertyDescriptor>
@@ -380,6 +400,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteStringValue("dense_vector");
 			writer.WritePropertyName("dims");
 			writer.WriteNumberValue(value._dims);
+			if (!string.IsNullOrEmpty(value._similarity))
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStringValue(value._similarity);
+			}
+
+			if (value._index.HasValue)
+			{
+				writer.WritePropertyName("index");
+				writer.WriteBooleanValue(value._index.Value);
+			}
+
+			if (value._indexOptions is not null)
+			{
+				writer.WritePropertyName("index_options");
+				JsonSerializer.Serialize(writer, value._indexOptions, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -449,13 +487,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal string? _pathMatch;
 		internal string? _pathUnmatch;
 		internal string? _unmatch;
-		public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.Properties? mapping) => Assign(mapping, (a, v) => a._mapping = v);
-		public DynamicTemplateDescriptor Match(string? match) => Assign(match, (a, v) => a._match = v);
-		public DynamicTemplateDescriptor MatchMappingType(string? matchMappingType) => Assign(matchMappingType, (a, v) => a._matchMappingType = v);
-		public DynamicTemplateDescriptor MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? matchPattern) => Assign(matchPattern, (a, v) => a._matchPattern = v);
-		public DynamicTemplateDescriptor PathMatch(string? pathMatch) => Assign(pathMatch, (a, v) => a._pathMatch = v);
-		public DynamicTemplateDescriptor PathUnmatch(string? pathUnmatch) => Assign(pathUnmatch, (a, v) => a._pathUnmatch = v);
-		public DynamicTemplateDescriptor Unmatch(string? unmatch) => Assign(unmatch, (a, v) => a._unmatch = v);
 	}
 
 	internal sealed class DynamicTemplateDescriptorConverter : JsonConverter<DynamicTemplateDescriptor>
@@ -525,7 +556,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public partial class FieldAliasPropertyDescriptor : DescriptorBase<FieldAliasPropertyDescriptor>
 	{
 		internal string? _path;
-		public FieldAliasPropertyDescriptor Path(string? path) => Assign(path, (a, v) => a._path = v);
 	}
 
 	internal sealed class FieldAliasPropertyDescriptorConverter : JsonConverter<FieldAliasPropertyDescriptor>
@@ -619,15 +649,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal string? _nullValue;
 		internal string? _similarity;
 		internal bool? _splitQueriesOnWhitespace;
-		public FlattenedPropertyDescriptor Boost(double? boost) => Assign(boost, (a, v) => a._boost = v);
-		public FlattenedPropertyDescriptor DepthLimit(int? depthLimit) => Assign(depthLimit, (a, v) => a._depthLimit = v);
-		public FlattenedPropertyDescriptor DocValues(bool? docValues = true) => Assign(docValues, (a, v) => a._docValues = v);
-		public FlattenedPropertyDescriptor EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) => Assign(eagerGlobalOrdinals, (a, v) => a._eagerGlobalOrdinals = v);
-		public FlattenedPropertyDescriptor Index(bool? index = true) => Assign(index, (a, v) => a._index = v);
-		public FlattenedPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions) => Assign(indexOptions, (a, v) => a._indexOptions = v);
-		public FlattenedPropertyDescriptor NullValue(string? nullValue) => Assign(nullValue, (a, v) => a._nullValue = v);
-		public FlattenedPropertyDescriptor Similarity(string? similarity) => Assign(similarity, (a, v) => a._similarity = v);
-		public FlattenedPropertyDescriptor SplitQueriesOnWhitespace(bool? splitQueriesOnWhitespace = true) => Assign(splitQueriesOnWhitespace, (a, v) => a._splitQueriesOnWhitespace = v);
 	}
 
 	internal sealed class FlattenedPropertyDescriptorConverter : JsonConverter<FlattenedPropertyDescriptor>
@@ -835,7 +856,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public partial class HistogramPropertyDescriptor : DescriptorBase<HistogramPropertyDescriptor>
 	{
 		internal bool? _ignoreMalformed;
-		public HistogramPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true) => Assign(ignoreMalformed, (a, v) => a._ignoreMalformed = v);
 	}
 
 	internal sealed class HistogramPropertyDescriptorConverter : JsonConverter<HistogramPropertyDescriptor>
@@ -925,7 +945,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public partial class JoinPropertyDescriptor : DescriptorBase<JoinPropertyDescriptor>
 	{
 		internal Dictionary<string, IReadOnlyCollection<string>>? _relations;
-		public JoinPropertyDescriptor Relations(Func<FluentDictionary<string?, IReadOnlyCollection<string>?>, FluentDictionary<string?, IReadOnlyCollection<string>?>> selector) => Assign(selector, (a, v) => a._relations = v?.Invoke(new FluentDictionary<string?, IReadOnlyCollection<string>?>()));
 	}
 
 	internal sealed class JoinPropertyDescriptorConverter : JsonConverter<JoinPropertyDescriptor>
@@ -979,6 +998,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("split_queries_on_whitespace")]
 		public bool? SplitQueriesOnWhitespace { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series_dimension")]
+		public bool? TimeSeriesDimension { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1037,6 +1060,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("ignore_malformed")]
 		public bool? IgnoreMalformed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series_metric")]
+		public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; init; }
 	}
 
 	public partial class ObjectProperty : Mapping.CorePropertyBase
@@ -1154,7 +1181,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public partial class RankFeaturePropertyDescriptor : DescriptorBase<RankFeaturePropertyDescriptor>
 	{
 		internal bool? _positiveScoreImpact;
-		public RankFeaturePropertyDescriptor PositiveScoreImpact(bool? positiveScoreImpact = true) => Assign(positiveScoreImpact, (a, v) => a._positiveScoreImpact = v);
 	}
 
 	internal sealed class RankFeaturePropertyDescriptorConverter : JsonConverter<RankFeaturePropertyDescriptor>
@@ -1227,9 +1253,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal string? _format;
 		internal Elastic.Clients.Elasticsearch.Script? _script;
 		internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType _type;
-		public RuntimeFieldDescriptor Format(string? format) => Assign(format, (a, v) => a._format = v);
-		public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a._script = v);
-		public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type) => Assign(type, (a, v) => a._type = v);
 	}
 
 	internal sealed class RuntimeFieldDescriptorConverter : JsonConverter<RuntimeFieldDescriptor>
@@ -1384,11 +1407,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal bool? _enabled;
 		internal IEnumerable<string>? _excludes;
 		internal IEnumerable<string>? _includes;
-		public SourceFieldDescriptor Compress(bool? compress = true) => Assign(compress, (a, v) => a._compress = v);
-		public SourceFieldDescriptor CompressThreshold(string? compressThreshold) => Assign(compressThreshold, (a, v) => a._compressThreshold = v);
-		public SourceFieldDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a._enabled = v);
-		public SourceFieldDescriptor Excludes(IEnumerable<string>? excludes) => Assign(excludes, (a, v) => a._excludes = v);
-		public SourceFieldDescriptor Includes(IEnumerable<string>? includes) => Assign(includes, (a, v) => a._includes = v);
 	}
 
 	internal sealed class SourceFieldDescriptorConverter : JsonConverter<SourceFieldDescriptor>
@@ -1647,20 +1665,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal Elastic.Clients.Elasticsearch.Mapping.SourceField? _source;
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? _runtime;
 		internal bool? _enabled;
-		public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField) => Assign(allField, (a, v) => a._allField = v);
-		public TypeMappingDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a._dateDetection = v);
-		public TypeMappingDescriptor Dynamic(Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? dynamic) => Assign(dynamic, (a, v) => a._dynamic = v);
-		public TypeMappingDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats) => Assign(dynamicDateFormats, (a, v) => a._dynamicDateFormats = v);
-		public TypeMappingDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a._dynamicTemplates = v);
-		public TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a._fieldNames = v);
-		public TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField? indexField) => Assign(indexField, (a, v) => a._indexField = v);
-		public TypeMappingDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
-		public TypeMappingDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a._numericDetection = v);
-		public TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing) => Assign(routing, (a, v) => a._routing = v);
-		public TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeField? size) => Assign(size, (a, v) => a._size = v);
-		public TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source) => Assign(source, (a, v) => a._source = v);
-		public TypeMappingDescriptor Runtime(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>> selector) => Assign(selector, (a, v) => a._runtime = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>()));
-		public TypeMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a._enabled = v);
 	}
 
 	internal sealed class TypeMappingDescriptorConverter : JsonConverter<TypeMappingDescriptor>

@@ -62,5 +62,3 @@ public class IndexCoordinatedTests : CoordinatedIntegrationTestBase<WritableClus
 		r.Acknowledged.Should().BeTrue();
 	});
 }
-
-

@@ -98,6 +98,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class Refresh : Union<bool?, Elastic.Clients.Elasticsearch.RefreshOptions?>
+	{
+		public Refresh(bool? item) : base(item)
+		{
+		}
+
+		public Refresh(Elastic.Clients.Elasticsearch.RefreshOptions? item) : base(item)
+		{
+		}
+	}
+
 	public partial class Script
 	{
 	}

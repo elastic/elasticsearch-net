@@ -807,9 +807,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal Union<double?, string?>? _from;
 		internal string? _key;
 		internal Union<double?, string?>? _to;
-		public AggregationRangeDescriptor From(Union<double?, string?>? from) => Assign(from, (a, v) => a._from = v);
-		public AggregationRangeDescriptor Key(string? key) => Assign(key, (a, v) => a._key = v);
-		public AggregationRangeDescriptor To(Union<double?, string?>? to) => Assign(to, (a, v) => a._to = v);
 	}
 
 	internal sealed class AggregationRangeDescriptorConverter : JsonConverter<AggregationRangeDescriptor>
@@ -1073,11 +1070,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string? _predictionFieldType;
 		internal string? _resultsField;
 		internal string? _topClassesResultsField;
-		public ClassificationInferenceOptionsDescriptor NumTopClasses(int? numTopClasses) => Assign(numTopClasses, (a, v) => a._numTopClasses = v);
-		public ClassificationInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues) => Assign(numTopFeatureImportanceValues, (a, v) => a._numTopFeatureImportanceValues = v);
-		public ClassificationInferenceOptionsDescriptor PredictionFieldType(string? predictionFieldType) => Assign(predictionFieldType, (a, v) => a._predictionFieldType = v);
-		public ClassificationInferenceOptionsDescriptor ResultsField(string? resultsField) => Assign(resultsField, (a, v) => a._resultsField = v);
-		public ClassificationInferenceOptionsDescriptor TopClassesResultsField(string? topClassesResultsField) => Assign(topClassesResultsField, (a, v) => a._topClassesResultsField = v);
 	}
 
 	internal sealed class ClassificationInferenceOptionsDescriptorConverter : JsonConverter<ClassificationInferenceOptionsDescriptor>
@@ -1163,10 +1155,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? _histogram;
 		internal Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? _dateHistogram;
 		internal Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation? _geotileGrid;
-		public CompositeAggregationSourceDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? terms) => Assign(terms, (a, v) => a._terms = v);
-		public CompositeAggregationSourceDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? histogram) => Assign(histogram, (a, v) => a._histogram = v);
-		public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram) => Assign(dateHistogram, (a, v) => a._dateHistogram = v);
-		public CompositeAggregationSourceDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation? geotileGrid) => Assign(geotileGrid, (a, v) => a._geotileGrid = v);
 	}
 
 	internal sealed class CompositeAggregationSourceDescriptorConverter : JsonConverter<CompositeAggregationSourceDescriptor>
@@ -1354,12 +1342,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string? _key;
 		internal Union<string?, float?>? _to;
 		internal object? _docCount;
-		public DateRangeExpressionDescriptor From(Union<string?, float?>? from) => Assign(from, (a, v) => a._from = v);
-		public DateRangeExpressionDescriptor FromAsString(string? fromAsString) => Assign(fromAsString, (a, v) => a._fromAsString = v);
-		public DateRangeExpressionDescriptor ToAsString(string? toAsString) => Assign(toAsString, (a, v) => a._toAsString = v);
-		public DateRangeExpressionDescriptor Key(string? key) => Assign(key, (a, v) => a._key = v);
-		public DateRangeExpressionDescriptor To(Union<string?, float?>? to) => Assign(to, (a, v) => a._to = v);
-		public DateRangeExpressionDescriptor DocCount(object? docCount) => Assign(docCount, (a, v) => a._docCount = v);
 	}
 
 	internal sealed class DateRangeExpressionDescriptorConverter : JsonConverter<DateRangeExpressionDescriptor>
@@ -1940,9 +1922,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string? _from;
 		internal string? _mask;
 		internal string? _to;
-		public IpRangeAggregationRangeDescriptor From(string? from) => Assign(from, (a, v) => a._from = v);
-		public IpRangeAggregationRangeDescriptor Mask(string? mask) => Assign(mask, (a, v) => a._mask = v);
-		public IpRangeAggregationRangeDescriptor To(string? to) => Assign(to, (a, v) => a._to = v);
 	}
 
 	internal sealed class IpRangeAggregationRangeDescriptorConverter : JsonConverter<IpRangeAggregationRangeDescriptor>
@@ -2103,9 +2082,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string? _field;
 		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? _missing;
 		internal Elastic.Clients.Elasticsearch.Script? _script;
-		public MetricAggregationBaseDescriptor Field(string? field) => Assign(field, (a, v) => a._field = v);
-		public MetricAggregationBaseDescriptor Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a._missing = v);
-		public MetricAggregationBaseDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a._script = v);
 	}
 
 	internal sealed class MetricAggregationBaseDescriptorConverter : JsonConverter<MetricAggregationBaseDescriptor>
@@ -2375,9 +2351,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal object? _bucketsPath;
 		internal string? _format;
 		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? _gapPolicy;
-		public PipelineAggregationBaseDescriptor BucketsPath(object? bucketsPath) => Assign(bucketsPath, (a, v) => a._bucketsPath = v);
-		public PipelineAggregationBaseDescriptor Format(string? format) => Assign(format, (a, v) => a._format = v);
-		public PipelineAggregationBaseDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a._gapPolicy = v);
 	}
 
 	internal sealed class PipelineAggregationBaseDescriptorConverter : JsonConverter<PipelineAggregationBaseDescriptor>
@@ -2950,9 +2923,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string _field;
 		internal Elastic.Clients.Elasticsearch.Script? _script;
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
-		public TestPopulationDescriptor Field(string field) => Assign(field, (a, v) => a._field = v);
-		public TestPopulationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a._script = v);
-		public TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a._filter = v);
 	}
 
 	internal sealed class TestPopulationDescriptorConverter : JsonConverter<TestPopulationDescriptor>
@@ -3175,9 +3145,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string? _field;
 		internal double? _missing;
 		internal Elastic.Clients.Elasticsearch.Script? _script;
-		public WeightedAverageValueDescriptor Field(string? field) => Assign(field, (a, v) => a._field = v);
-		public WeightedAverageValueDescriptor Missing(double? missing) => Assign(missing, (a, v) => a._missing = v);
-		public WeightedAverageValueDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a._script = v);
 	}
 
 	internal sealed class WeightedAverageValueDescriptorConverter : JsonConverter<WeightedAverageValueDescriptor>

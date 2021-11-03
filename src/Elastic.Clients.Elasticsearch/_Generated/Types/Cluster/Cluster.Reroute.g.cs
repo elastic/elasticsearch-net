@@ -54,11 +54,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaAction? _allocateReplica;
 		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? _allocateStalePrimary;
 		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? _allocateEmptyPrimary;
-		public CommandDescriptor Cancel(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelAction? cancel) => Assign(cancel, (a, v) => a._cancel = v);
-		public CommandDescriptor Move(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveAction? move) => Assign(move, (a, v) => a._move = v);
-		public CommandDescriptor AllocateReplica(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaAction? allocateReplica) => Assign(allocateReplica, (a, v) => a._allocateReplica = v);
-		public CommandDescriptor AllocateStalePrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? allocateStalePrimary) => Assign(allocateStalePrimary, (a, v) => a._allocateStalePrimary = v);
-		public CommandDescriptor AllocateEmptyPrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? allocateEmptyPrimary) => Assign(allocateEmptyPrimary, (a, v) => a._allocateEmptyPrimary = v);
 	}
 
 	internal sealed class CommandDescriptorConverter : JsonConverter<CommandDescriptor>
@@ -127,10 +122,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		internal int _shard;
 		internal string _node;
 		internal bool _acceptDataLoss;
-		public CommandAllocatePrimaryActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a._index = v);
-		public CommandAllocatePrimaryActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a._shard = v);
-		public CommandAllocatePrimaryActionDescriptor Node(string node) => Assign(node, (a, v) => a._node = v);
-		public CommandAllocatePrimaryActionDescriptor AcceptDataLoss(bool acceptDataLoss = true) => Assign(acceptDataLoss, (a, v) => a._acceptDataLoss = v);
 	}
 
 	internal sealed class CommandAllocatePrimaryActionDescriptorConverter : JsonConverter<CommandAllocatePrimaryActionDescriptor>
@@ -172,9 +163,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		internal Elastic.Clients.Elasticsearch.IndexName _index;
 		internal int _shard;
 		internal string _node;
-		public CommandAllocateReplicaActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a._index = v);
-		public CommandAllocateReplicaActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a._shard = v);
-		public CommandAllocateReplicaActionDescriptor Node(string node) => Assign(node, (a, v) => a._node = v);
 	}
 
 	internal sealed class CommandAllocateReplicaActionDescriptorConverter : JsonConverter<CommandAllocateReplicaActionDescriptor>
@@ -219,10 +207,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		internal int _shard;
 		internal string _node;
 		internal bool? _allowPrimary;
-		public CommandCancelActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a._index = v);
-		public CommandCancelActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a._shard = v);
-		public CommandCancelActionDescriptor Node(string node) => Assign(node, (a, v) => a._node = v);
-		public CommandCancelActionDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(allowPrimary, (a, v) => a._allowPrimary = v);
 	}
 
 	internal sealed class CommandCancelActionDescriptorConverter : JsonConverter<CommandCancelActionDescriptor>
@@ -273,10 +257,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		internal int _shard;
 		internal string _fromNode;
 		internal string _toNode;
-		public CommandMoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a._index = v);
-		public CommandMoveActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a._shard = v);
-		public CommandMoveActionDescriptor FromNode(string fromNode) => Assign(fromNode, (a, v) => a._fromNode = v);
-		public CommandMoveActionDescriptor ToNode(string toNode) => Assign(toNode, (a, v) => a._toNode = v);
 	}
 
 	internal sealed class CommandMoveActionDescriptorConverter : JsonConverter<CommandMoveActionDescriptor>

@@ -7,11 +7,6 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Document\**" />
-    <EmbeddedResource Remove="Document\**" />
-    <None Remove="Document\**" />
-  </ItemGroup>
-  <ItemGroup>
 
     <!--    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport.VirtualizedCluster\Elastic.Transport.VirtualizedCluster.csproj" />-->
     <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="0.2.2" />
