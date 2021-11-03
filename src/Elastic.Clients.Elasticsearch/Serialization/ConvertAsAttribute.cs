@@ -21,7 +21,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Type ConverterType { get; }
 	}
 
-	public class SimpleInterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface> where TConcrete : class, TInterface
+	internal sealed class SimpleInterfaceConverter<TInterface, TConcrete> : JsonConverter<TInterface> where TConcrete : class, TInterface
 	{
 		public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
 			JsonSerializer.Deserialize<TConcrete>(ref reader, options);
@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch
 			=> JsonSerializer.Serialize(writer, value, typeof(TConcrete), options);
 	}
 
-	public class InterfaceConverterFactory : JsonConverterFactory
+	internal sealed class InterfaceConverterFactory : JsonConverterFactory
 	{
 		private readonly IElasticsearchClientSettings _settings;
 

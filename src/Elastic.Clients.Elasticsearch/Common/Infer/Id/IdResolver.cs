@@ -72,7 +72,6 @@ namespace Elastic.Clients.Elasticsearch
 			return cachedLookup(@object);
 		}
 
-
 		private PropertyInfo GetInferredId(Type type)
 		{
 			// if the type specifies through ElasticAttribute what the id prop is

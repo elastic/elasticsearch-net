@@ -5,7 +5,7 @@ using Elastic.Clients.Elasticsearch.Core;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class PropertyNameConverter : JsonConverter<PropertyName?>
+	internal sealed class PropertyNameConverter : JsonConverter<PropertyName?>
 	{
 		public override PropertyName?
 			Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>

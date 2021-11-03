@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string? Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("ip")]

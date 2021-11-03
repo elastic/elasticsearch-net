@@ -19,6 +19,8 @@
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
 
     <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
+
+    <ProjectReference Include="..\Tests.ClusterLauncher\Tests.ClusterLauncher.csproj" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />

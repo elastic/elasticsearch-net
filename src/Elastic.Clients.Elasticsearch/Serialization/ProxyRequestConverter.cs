@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class CustomJsonWriterConverter<TRequest> : JsonConverter<TRequest>
+	internal sealed class CustomJsonWriterConverter<TRequest> : JsonConverter<TRequest>
 	{
 		private readonly IElasticsearchClientSettings _settings;
 

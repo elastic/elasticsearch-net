@@ -34,6 +34,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class Context : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?>
+	{
+		public Context(string? item) : base(item)
+		{
+		}
+
+		public Context(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? item) : base(item)
+		{
+		}
+	}
+
 	public partial class EpochMillis : Union<string?, object?>
 	{
 		public EpochMillis(string? item) : base(item)
@@ -97,6 +108,10 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	public partial class SortCombinations
+	{
+	}
+
+	public partial class SuggestOption<TDocument>
 	{
 	}
 

@@ -1,6 +1,8 @@
 using System;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Core;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -12,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			elasticsearchClientSettings.ThrowIfNull(nameof(elasticsearchClientSettings));
 			_elasticsearchClientSettings = elasticsearchClientSettings;
-			//IdResolver = new IdResolver(elasticsearchClientSettings);
+			IdResolver = new IdResolver(elasticsearchClientSettings);
 			IndexNameResolver = new IndexNameResolver(elasticsearchClientSettings);
 			//RelationNameResolver = new RelationNameResolver(connectionSettings);
 			//FieldResolver = new FieldResolver(elasticsearchClientSettings);
@@ -35,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch
 		//	CreateSearchResponseDelegates { get; }
 
 		//private FieldResolver FieldResolver { get; }
-		//private IdResolver IdResolver { get; }
+		private IdResolver IdResolver { get; }
 
 		private IndexNameResolver IndexNameResolver { get; }
 		//private RelationNameResolver RelationNameResolver { get; }
@@ -51,9 +53,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
-		//public string Id<T>(T instance) where T : class => IdResolver.Resolve(instance);
+		public string Id<T>(T instance) where T : class => IdResolver.Resolve(instance);
 
-		//public string Id(Type type, object instance) => IdResolver.Resolve(type, instance);
+		public string Id(Type type, object instance) => IdResolver.Resolve(type, instance);
 
 		//public string RelationName<T>() where T : class => RelationNameResolver.Resolve<T>();
 

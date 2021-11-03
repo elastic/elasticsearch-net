@@ -1352,6 +1352,12 @@
           "System.Text.Json": "5.0.0"
         }
       },
+      "tests.clusterlauncher": {
+        "type": "Project",
+        "dependencies": {
+          "Tests.Core": "7.0.0"
+        }
+      },
       "tests.configuration": {
         "type": "Project",
         "dependencies": {
@@ -2729,6 +2735,12 @@
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.0",
           "System.Text.Json": "5.0.0"
+        }
+      },
+      "tests.clusterlauncher": {
+        "type": "Project",
+        "dependencies": {
+          "Tests.Core": "7.0.0"
         }
       },
       "tests.configuration": {
@@ -4111,6 +4123,12 @@
           "System.Buffers": "4.5.1",
           "System.Diagnostics.DiagnosticSource": "5.0.0",
           "System.Text.Json": "5.0.0"
+        }
+      },
+      "tests.clusterlauncher": {
+        "type": "Project",
+        "dependencies": {
+          "Tests.Core": "7.0.0"
         }
       },
       "tests.configuration": {

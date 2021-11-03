@@ -23,8 +23,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 {
-	public partial class ClusterRemoteProxyInfo
+	public partial class ClusterRemoteProxyInfo : IClusterRemoteInfosVariant
 	{
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public string Mode => "proxy";
 		[JsonInclude]
 		[JsonPropertyName("connected")]
 		public bool Connected { get; init; }
@@ -54,8 +57,56 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		public int MaxProxySocketConnections { get; init; }
 	}
 
-	public partial class ClusterRemoteSniffInfo
+	[JsonConverter(typeof(ClusterRemoteProxyInfoDescriptorConverter))]
+	public partial class ClusterRemoteProxyInfoDescriptor : DescriptorBase<ClusterRemoteProxyInfoDescriptor>
 	{
+		internal bool _connected;
+		internal Elastic.Clients.Elasticsearch.Time _initialConnectTimeout;
+		internal bool _skipUnavailable;
+		internal string _proxyAddress;
+		internal string _serverName;
+		internal int _numProxySocketsConnected;
+		internal int _maxProxySocketConnections;
+		public ClusterRemoteProxyInfoDescriptor Connected(bool connected = true) => Assign(connected, (a, v) => a._connected = v);
+		public ClusterRemoteProxyInfoDescriptor InitialConnectTimeout(Elastic.Clients.Elasticsearch.Time initialConnectTimeout) => Assign(initialConnectTimeout, (a, v) => a._initialConnectTimeout = v);
+		public ClusterRemoteProxyInfoDescriptor SkipUnavailable(bool skipUnavailable = true) => Assign(skipUnavailable, (a, v) => a._skipUnavailable = v);
+		public ClusterRemoteProxyInfoDescriptor ProxyAddress(string proxyAddress) => Assign(proxyAddress, (a, v) => a._proxyAddress = v);
+		public ClusterRemoteProxyInfoDescriptor ServerName(string serverName) => Assign(serverName, (a, v) => a._serverName = v);
+		public ClusterRemoteProxyInfoDescriptor NumProxySocketsConnected(int numProxySocketsConnected) => Assign(numProxySocketsConnected, (a, v) => a._numProxySocketsConnected = v);
+		public ClusterRemoteProxyInfoDescriptor MaxProxySocketConnections(int maxProxySocketConnections) => Assign(maxProxySocketConnections, (a, v) => a._maxProxySocketConnections = v);
+	}
+
+	internal sealed class ClusterRemoteProxyInfoDescriptorConverter : JsonConverter<ClusterRemoteProxyInfoDescriptor>
+	{
+		public override ClusterRemoteProxyInfoDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterRemoteProxyInfoDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("mode");
+			writer.WriteStringValue("proxy");
+			writer.WritePropertyName("connected");
+			writer.WriteBooleanValue(value._connected);
+			writer.WritePropertyName("initial_connect_timeout");
+			JsonSerializer.Serialize(writer, value._initialConnectTimeout, options);
+			writer.WritePropertyName("skip_unavailable");
+			writer.WriteBooleanValue(value._skipUnavailable);
+			writer.WritePropertyName("proxy_address");
+			writer.WriteStringValue(value._proxyAddress);
+			writer.WritePropertyName("server_name");
+			writer.WriteStringValue(value._serverName);
+			writer.WritePropertyName("num_proxy_sockets_connected");
+			writer.WriteNumberValue(value._numProxySocketsConnected);
+			writer.WritePropertyName("max_proxy_socket_connections");
+			writer.WriteNumberValue(value._maxProxySocketConnections);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class ClusterRemoteSniffInfo : IClusterRemoteInfosVariant
+	{
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public string Mode => "sniff";
 		[JsonInclude]
 		[JsonPropertyName("connected")]
 		public bool Connected { get; init; }
@@ -79,5 +130,46 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 		[JsonInclude]
 		[JsonPropertyName("seeds")]
 		public IReadOnlyCollection<string> Seeds { get; init; }
+	}
+
+	[JsonConverter(typeof(ClusterRemoteSniffInfoDescriptorConverter))]
+	public partial class ClusterRemoteSniffInfoDescriptor : DescriptorBase<ClusterRemoteSniffInfoDescriptor>
+	{
+		internal bool _connected;
+		internal int _maxConnectionsPerCluster;
+		internal object _numNodesConnected;
+		internal Elastic.Clients.Elasticsearch.Time _initialConnectTimeout;
+		internal bool _skipUnavailable;
+		internal IReadOnlyCollection<string> _seeds;
+		public ClusterRemoteSniffInfoDescriptor Connected(bool connected = true) => Assign(connected, (a, v) => a._connected = v);
+		public ClusterRemoteSniffInfoDescriptor MaxConnectionsPerCluster(int maxConnectionsPerCluster) => Assign(maxConnectionsPerCluster, (a, v) => a._maxConnectionsPerCluster = v);
+		public ClusterRemoteSniffInfoDescriptor NumNodesConnected(object numNodesConnected) => Assign(numNodesConnected, (a, v) => a._numNodesConnected = v);
+		public ClusterRemoteSniffInfoDescriptor InitialConnectTimeout(Elastic.Clients.Elasticsearch.Time initialConnectTimeout) => Assign(initialConnectTimeout, (a, v) => a._initialConnectTimeout = v);
+		public ClusterRemoteSniffInfoDescriptor SkipUnavailable(bool skipUnavailable = true) => Assign(skipUnavailable, (a, v) => a._skipUnavailable = v);
+		public ClusterRemoteSniffInfoDescriptor Seeds(IReadOnlyCollection<string> seeds) => Assign(seeds, (a, v) => a._seeds = v);
+	}
+
+	internal sealed class ClusterRemoteSniffInfoDescriptorConverter : JsonConverter<ClusterRemoteSniffInfoDescriptor>
+	{
+		public override ClusterRemoteSniffInfoDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ClusterRemoteSniffInfoDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("mode");
+			writer.WriteStringValue("sniff");
+			writer.WritePropertyName("connected");
+			writer.WriteBooleanValue(value._connected);
+			writer.WritePropertyName("max_connections_per_cluster");
+			writer.WriteNumberValue(value._maxConnectionsPerCluster);
+			writer.WritePropertyName("num_nodes_connected");
+			JsonSerializer.Serialize(writer, value._numNodesConnected, options);
+			writer.WritePropertyName("initial_connect_timeout");
+			JsonSerializer.Serialize(writer, value._initialConnectTimeout, options);
+			writer.WritePropertyName("skip_unavailable");
+			writer.WriteBooleanValue(value._skipUnavailable);
+			writer.WritePropertyName("seeds");
+			JsonSerializer.Serialize(writer, value._seeds, options);
+			writer.WriteEndObject();
+		}
 	}
 }

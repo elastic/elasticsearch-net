@@ -26,5 +26,16 @@ namespace Tests.Core.Serialization
 			else
 				Tester.AssertSerialize(@object, ExpectJson, preserveNullInExpected: IncludeNullInExpected);
 		}
+
+		protected void RoundTripsOrSerializes<T>(T @object, bool supportDeserialization)
+		{
+			if (@object is null || ExpectJson is null)
+				return;
+
+			if (supportDeserialization)
+				Tester.AssertRoundTrip(@object, ExpectJson, preserveNullInExpected: IncludeNullInExpected);
+			else
+				Tester.AssertSerialize(@object, ExpectJson, preserveNullInExpected: IncludeNullInExpected);
+		}
 	}
 }

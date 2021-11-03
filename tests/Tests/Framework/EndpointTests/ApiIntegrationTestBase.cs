@@ -18,13 +18,12 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TDescriptor, TInitializer>
+		: ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 		where TResponse : class, IResponse
-		where TDescriptor : class, TInterface
-		where TInitializer : class, TInterface
-		where TInterface : class
+		where TDescriptor : class
+		where TInitializer : class
 	{
 		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

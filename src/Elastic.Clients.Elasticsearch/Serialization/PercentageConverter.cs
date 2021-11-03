@@ -7,7 +7,7 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class PercentageConverter : JsonConverter<Percentage>
+	internal sealed class PercentageConverter : JsonConverter<Percentage>
 	{
 		public override Percentage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
