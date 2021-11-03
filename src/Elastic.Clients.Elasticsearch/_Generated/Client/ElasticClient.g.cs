@@ -17,6 +17,7 @@
 
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Ingest;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,10 +31,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		public IndexManagementNamespace IndexManagement { get; private set; }
 
+		public IngestNamespace Ingest { get; private set; }
+
 		private partial void SetupNamespaces()
 		{
 			Cluster = new ClusterNamespace(this);
 			IndexManagement = new IndexManagementNamespace(this);
+			Ingest = new IngestNamespace(this);
 		}
 
 		public PingResponse Ping(PingRequest request) => DoRequest<PingRequest, PingResponse>(request);
@@ -50,6 +54,22 @@ namespace Elastic.Clients.Elasticsearch
 			var descriptor = new PingRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
+		}
+
+		public SearchResponse<TDocument> Search<TDocument>(SearchRequest request) => DoRequest<SearchRequest, SearchResponse<TDocument>>(request);
+		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(SearchRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<SearchRequest, SearchResponse<TDocument>>(request, cancellationToken);
+		public SearchResponse<TDocument> Search<TDocument>(Action<SearchRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new SearchRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<SearchRequestDescriptor, SearchResponse<TDocument>>(descriptor);
+		}
+
+		public Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Action<SearchRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SearchRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<SearchRequestDescriptor, SearchResponse<TDocument>>(descriptor);
 		}
 	}
 }

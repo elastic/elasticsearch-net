@@ -23,21 +23,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class DecayFunction
-	{
-	}
-
-	public partial class DistanceFeatureQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate, string>?, Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery<string, Elastic.Clients.Elasticsearch.Time>?>
-	{
-		public DistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate, string>? item) : base(item)
-		{
-		}
-
-		public DistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery<string, Elastic.Clients.Elasticsearch.Time>? item) : base(item)
-		{
-		}
-	}
-
 	public partial class GeoCoordinate
 	{
 	}
@@ -53,17 +38,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument? item) : base(item)
-		{
-		}
-	}
-
-	public partial class RangeQuery : Union<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery?, Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery?>
-	{
-		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery? item) : base(item)
-		{
-		}
-
-		public RangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery? item) : base(item)
 		{
 		}
 	}

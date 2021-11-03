@@ -290,6 +290,58 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(GeoShapeRelationConverter))]
+	public enum GeoShapeRelation
+	{
+		Within,
+		Intersects,
+		Disjoint,
+		Contains
+	}
+
+	public class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation>
+	{
+		public override GeoShapeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "within":
+					return GeoShapeRelation.Within;
+				case "intersects":
+					return GeoShapeRelation.Intersects;
+				case "disjoint":
+					return GeoShapeRelation.Disjoint;
+				case "contains":
+					return GeoShapeRelation.Contains;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoShapeRelation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case GeoShapeRelation.Within:
+					writer.WriteStringValue("within");
+					return;
+				case GeoShapeRelation.Intersects:
+					writer.WriteStringValue("intersects");
+					return;
+				case GeoShapeRelation.Disjoint:
+					writer.WriteStringValue("disjoint");
+					return;
+				case GeoShapeRelation.Contains:
+					writer.WriteStringValue("contains");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(HealthConverter))]
 	public enum Health
 	{
@@ -576,6 +628,64 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(ScoreModeConverter))]
+	public enum ScoreMode
+	{
+		Total,
+		Multiply,
+		Min,
+		Max,
+		Avg
+	}
+
+	public class ScoreModeConverter : JsonConverter<ScoreMode>
+	{
+		public override ScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "total":
+					return ScoreMode.Total;
+				case "multiply":
+					return ScoreMode.Multiply;
+				case "min":
+					return ScoreMode.Min;
+				case "max":
+					return ScoreMode.Max;
+				case "avg":
+					return ScoreMode.Avg;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ScoreMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ScoreMode.Total:
+					writer.WriteStringValue("total");
+					return;
+				case ScoreMode.Multiply:
+					writer.WriteStringValue("multiply");
+					return;
+				case ScoreMode.Min:
+					writer.WriteStringValue("min");
+					return;
+				case ScoreMode.Max:
+					writer.WriteStringValue("max");
+					return;
+				case ScoreMode.Avg:
+					writer.WriteStringValue("avg");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(ScriptLanguageConverter))]
 	public enum ScriptLanguage
 	{
@@ -621,6 +731,46 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case ScriptLanguage.Expression:
 					writer.WriteStringValue("expression");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(SearchTypeConverter))]
+	public enum SearchType
+	{
+		QueryThenFetch,
+		DfsQueryThenFetch
+	}
+
+	public class SearchTypeConverter : JsonConverter<SearchType>
+	{
+		public override SearchType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "query_then_fetch":
+					return SearchType.QueryThenFetch;
+				case "dfs_query_then_fetch":
+					return SearchType.DfsQueryThenFetch;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SearchType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SearchType.QueryThenFetch:
+					writer.WriteStringValue("query_then_fetch");
+					return;
+				case SearchType.DfsQueryThenFetch:
+					writer.WriteStringValue("dfs_query_then_fetch");
 					return;
 			}
 
@@ -732,6 +882,150 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(StringDistanceConverter))]
+	public enum StringDistance
+	{
+		Ngram,
+		Levenshtein,
+		JaroWinkler,
+		Internal,
+		DamerauLevenshtein
+	}
+
+	public class StringDistanceConverter : JsonConverter<StringDistance>
+	{
+		public override StringDistance Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "ngram":
+					return StringDistance.Ngram;
+				case "levenshtein":
+					return StringDistance.Levenshtein;
+				case "jaro_winkler":
+					return StringDistance.JaroWinkler;
+				case "internal":
+					return StringDistance.Internal;
+				case "damerau_levenshtein":
+					return StringDistance.DamerauLevenshtein;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, StringDistance value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case StringDistance.Ngram:
+					writer.WriteStringValue("ngram");
+					return;
+				case StringDistance.Levenshtein:
+					writer.WriteStringValue("levenshtein");
+					return;
+				case StringDistance.JaroWinkler:
+					writer.WriteStringValue("jaro_winkler");
+					return;
+				case StringDistance.Internal:
+					writer.WriteStringValue("internal");
+					return;
+				case StringDistance.DamerauLevenshtein:
+					writer.WriteStringValue("damerau_levenshtein");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(SuggestModeConverter))]
+	public enum SuggestMode
+	{
+		Popular,
+		Missing,
+		Always
+	}
+
+	public class SuggestModeConverter : JsonConverter<SuggestMode>
+	{
+		public override SuggestMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "popular":
+					return SuggestMode.Popular;
+				case "missing":
+					return SuggestMode.Missing;
+				case "always":
+					return SuggestMode.Always;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SuggestMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SuggestMode.Popular:
+					writer.WriteStringValue("popular");
+					return;
+				case SuggestMode.Missing:
+					writer.WriteStringValue("missing");
+					return;
+				case SuggestMode.Always:
+					writer.WriteStringValue("always");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(SuggestSortConverter))]
+	public enum SuggestSort
+	{
+		Score,
+		Frequency
+	}
+
+	public class SuggestSortConverter : JsonConverter<SuggestSort>
+	{
+		public override SuggestSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "score":
+					return SuggestSort.Score;
+				case "frequency":
+					return SuggestSort.Frequency;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SuggestSort value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case SuggestSort.Score:
+					writer.WriteStringValue("score");
+					return;
+				case SuggestSort.Frequency:
+					writer.WriteStringValue("frequency");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(TimeUnitConverter))]
 	public enum TimeUnit
 	{
@@ -795,6 +1089,46 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case TimeUnit.Days:
 					writer.WriteStringValue("d");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(TotalHitsRelationConverter))]
+	public enum TotalHitsRelation
+	{
+		Gte,
+		Eq
+	}
+
+	public class TotalHitsRelationConverter : JsonConverter<TotalHitsRelation>
+	{
+		public override TotalHitsRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "gte":
+					return TotalHitsRelation.Gte;
+				case "eq":
+					return TotalHitsRelation.Eq;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TotalHitsRelation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TotalHitsRelation.Gte:
+					writer.WriteStringValue("gte");
+					return;
+				case TotalHitsRelation.Eq:
+					writer.WriteStringValue("eq");
 					return;
 			}
 

@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class NumericAliasConverter<T> : JsonConverter<T>
+	internal sealed class NumericAliasConverter<T> : JsonConverter<T>
 	{
 		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

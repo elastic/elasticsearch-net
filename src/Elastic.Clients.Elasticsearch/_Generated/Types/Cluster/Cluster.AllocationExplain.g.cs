@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("node_id")]
-		public string NodeId { get; init; }
+		public Elastic.Clients.Elasticsearch.Id NodeId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node_name")]
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	{
 		[JsonInclude]
 		[JsonPropertyName("node_id")]
-		public string NodeId { get; init; }
+		public Elastic.Clients.Elasticsearch.Id NodeId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("path")]

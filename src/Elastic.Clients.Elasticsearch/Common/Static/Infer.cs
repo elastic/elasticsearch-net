@@ -11,11 +11,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		//public static readonly Indices AllIndices = Elastic.Clients.Elasticsearch.Indices.All;
 
-		//public static IndexName Index(IndexName index) => index;
+		public static IndexName Index(IndexName index) => index;
 
-		//public static IndexName Index<T>() => typeof(T);
+		public static IndexName Index<T>() => typeof(T);
 
-		//public static IndexName Index<T>(string clusterName) => IndexName.From<T>(clusterName);
+		public static IndexName Index<T>(string clusterName) => IndexName.From<T>(clusterName);
 
 		//public static Indices Indices<T>() => typeof(T);
 

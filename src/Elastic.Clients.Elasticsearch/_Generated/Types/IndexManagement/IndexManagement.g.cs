@@ -305,14 +305,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("_id")]
-		public string? Id { get; set; }
+		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 	}
 
 	public partial class IndexRoutingAllocationInitialRecovery
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]
-		public string? Id { get; set; }
+		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 	}
 
 	public partial class IndexRoutingRebalance
@@ -1010,32 +1010,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? Analyzer { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? CharFilter { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("normalizer")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? Normalizer { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizer { get; set; }
 	}
 
 	[JsonConverter(typeof(IndexSettingsAnalysisDescriptorConverter))]
 	public partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor>
 	{
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Analyzers>? _analyzer;
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.CharFilters>? _charFilter;
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.TokenFilters>? _filter;
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.Normalizers>? _normalizer;
-		public IndexSettingsAnalysisDescriptor Analyzer(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Analyzers?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Analyzers?>> selector) => Assign(selector, (a, v) => a._analyzer = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Analyzers?>()));
-		public IndexSettingsAnalysisDescriptor CharFilter(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>> selector) => Assign(selector, (a, v) => a._charFilter = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>()));
-		public IndexSettingsAnalysisDescriptor Filter(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>> selector) => Assign(selector, (a, v) => a._filter = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>()));
-		public IndexSettingsAnalysisDescriptor Normalizer(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Normalizers?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Normalizers?>> selector) => Assign(selector, (a, v) => a._normalizer = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Analysis.Normalizers?>()));
+		internal Elastic.Clients.Elasticsearch.Analysis.Analyzers? _analyzer;
+		internal Elastic.Clients.Elasticsearch.Analysis.CharFilters? _charFilter;
+		internal Elastic.Clients.Elasticsearch.Analysis.TokenFilters? _filter;
+		internal Elastic.Clients.Elasticsearch.Analysis.Normalizers? _normalizer;
 	}
 
 	internal sealed class IndexSettingsAnalysisDescriptorConverter : JsonConverter<IndexSettingsAnalysisDescriptor>
@@ -1060,6 +1056,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, value._filter, options);
+			}
+
+			if (value._tokenFilters is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value._tokenFilters, options);
 			}
 
 			if (value._normalizer is not null)

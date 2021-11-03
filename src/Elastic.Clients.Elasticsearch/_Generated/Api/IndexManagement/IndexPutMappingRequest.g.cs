@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("properties")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties>? Properties { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? _fieldNames;
 		internal Dictionary<string, object>? _meta;
 		internal bool? _numericDetection;
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.Properties>? _properties;
+		internal Elastic.Clients.Elasticsearch.Mapping.Properties? _properties;
 		internal Elastic.Clients.Elasticsearch.Mapping.RoutingField? _routing;
 		internal Elastic.Clients.Elasticsearch.Mapping.SourceField? _source;
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? _runtime;
@@ -159,7 +159,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames) => Assign(fieldNames, (a, v) => a._fieldNames = v);
 		public IndexPutMappingRequestDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._meta = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexPutMappingRequestDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a._numericDetection = v);
-		public IndexPutMappingRequestDescriptor Properties(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>> selector) => Assign(selector, (a, v) => a._properties = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.Properties?>()));
 		public IndexPutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing) => Assign(routing, (a, v) => a._routing = v);
 		public IndexPutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? source) => Assign(source, (a, v) => a._source = v);
 		public IndexPutMappingRequestDescriptor Runtime(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtime) => Assign(runtime, (a, v) => a._runtime = v);

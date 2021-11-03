@@ -8,7 +8,7 @@ using Elastic.Clients.Elasticsearch.Core;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class DictionaryConverter : JsonConverterFactory
+	internal sealed class DictionaryConverter : JsonConverterFactory
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{

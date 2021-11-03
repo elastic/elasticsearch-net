@@ -8,36 +8,30 @@ namespace Elastic.Clients.Elasticsearch
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	[JsonConverter(typeof(StringAliasConverter<Id>))]
-	public readonly partial struct Id : IUrlParameter
+	public class Id : IEquatable<Id>, IUrlParameter
 	{
 		public Id(string id)
 		{
 			Tag = 0;
 			StringValue = id;
-			LongValue = null;
-			Document = null;
 		}
 
 		public Id(long id)
 		{
 			Tag = 1;
 			LongValue = id;
-			Document = null;
-			StringValue = null;
 		}
 
 		public Id(object document)
 		{
 			Tag = 2;
-			LongValue = null;
 			Document = document;
-			StringValue = null;
 		}
 
-		internal object? Document { get; }
+		internal object Document { get; }
 		internal long? LongValue { get; }
 		internal string StringOrLongValue => StringValue ?? LongValue?.ToString(CultureInfo.InvariantCulture);
-		internal string? StringValue { get; }
+		internal string StringValue { get; }
 		internal int Tag { get; }
 
 		private string DebugDisplay => StringOrLongValue ?? "Id from instance typeof: " + Document?.GetType().Name;
@@ -63,10 +57,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			var ElasticsearchSettings = (IElasticsearchClientSettings)settings;
-
-			return string.Empty;
-			//return ElasticsearchSettings.Inferrer.Id(Document) ?? StringOrLongValue;
+			var nestSettings = (IElasticsearchClientSettings)settings;
+			return nestSettings.Inferrer.Id(Document) ?? StringOrLongValue;
 		}
 
 		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
@@ -94,7 +86,6 @@ namespace Elastic.Clients.Elasticsearch
 				case Guid g:
 					return Equals(g);
 			}
-
 			return Equals(new Id(obj));
 		}
 
@@ -113,7 +104,5 @@ namespace Elastic.Clients.Elasticsearch
 		public static bool operator ==(Id left, Id right) => Equals(left, right);
 
 		public static bool operator !=(Id left, Id right) => !Equals(left, right);
-
-		//public string GetString(ITransportConfiguration settings) => Value; // TEMP
 	}
 }

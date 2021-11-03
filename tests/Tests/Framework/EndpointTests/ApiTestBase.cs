@@ -17,13 +17,12 @@ using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Tests.Framework.EndpointTests
 {
-	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+	public abstract class ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
+		: RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 		where TResponse : class, IResponse
-		where TDescriptor : class, TInterface
-		where TInitializer : class, TInterface
-		where TInterface : class
+		where TDescriptor : class
+		where TInitializer : class
 	{
 		protected ApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -36,9 +35,15 @@ namespace Tests.Framework.EndpointTests
 		[U] protected virtual async Task UsesCorrectHttpMethod() =>
 			await AssertOnAllResponses(r => r.ApiCall.HttpMethod.Should().Be(HttpMethod, UniqueValues.CurrentView.GetStringValue()));
 
-		[U] protected virtual void SerializesInitializer() => RoundTripsOrSerializes<TInterface>(Initializer);
+		[U] protected virtual void SerializesInitializer() => RoundTripsOrSerializes(Initializer);
 
-		[U] protected virtual void SerializesFluent() => RoundTripsOrSerializes(Fluent?.Invoke(NewDescriptor()));
+		[U]
+		protected virtual void SerializesFluent()
+		{
+			var descriptor = NewDescriptor();
+			Fluent?.Invoke(descriptor);
+			RoundTripsOrSerializes(descriptor, false);
+		}
 
 		private void AssertUrl(Uri u) => u.PathEquals(ExpectedUrlPathAndQuery, UniqueValues.CurrentView.GetStringValue());
 	}

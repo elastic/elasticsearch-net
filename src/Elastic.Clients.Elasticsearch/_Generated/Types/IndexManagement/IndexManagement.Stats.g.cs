@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("num_docs")]
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("retaining_seq_no")]

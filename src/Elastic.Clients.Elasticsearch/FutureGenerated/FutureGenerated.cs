@@ -9,12 +9,47 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 
 	public class DocType { }
+}
+
+namespace Elastic.Clients.Elasticsearch.Analysis
+{
+	// TODO: Generator should handle these
+
+	public partial class ShingleTokenFilterDescriptor : ITokenFiltersVariant { }
+
+	public class TokenFiltersDescriptor : IsADictionaryDescriptorBase<TokenFiltersDescriptor, TokenFilters, string, ITokenFiltersVariant>
+	{
+		public TokenFiltersDescriptor() : base(new TokenFilters()) { }
+
+		public TokenFiltersDescriptor UserDefined(string name, ITokenFiltersVariant analyzer) => Assign(name, analyzer);
+
+		public TokenFiltersDescriptor Shingle(string name, Action<ShingleTokenFilterDescriptor> configure)
+		{
+			var descriptor = new ShingleTokenFilterDescriptor();
+			configure?.Invoke(descriptor);
+			return Assign(name, descriptor);
+		}
+	}
+
+	
+}
+
+namespace Elastic.Clients.Elasticsearch.IndexManagement
+{
+	public partial class IndexSettingsAnalysisDescriptor
+	{
+		internal TokenFilters _tokenFilters;
+
+		public IndexSettingsAnalysisDescriptor TokenFilters(Func<TokenFiltersDescriptor, IPromise<TokenFilters>> selector) =>
+			Assign(selector, (a, v) => _tokenFilters = v?.Invoke(new TokenFiltersDescriptor())?.Value);
+	}
 }
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl

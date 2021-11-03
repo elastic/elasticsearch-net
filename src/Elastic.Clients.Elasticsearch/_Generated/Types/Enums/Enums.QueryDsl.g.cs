@@ -424,58 +424,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	[JsonConverter(typeof(MultiValueModeConverter))]
-	public enum MultiValueMode
-	{
-		Sum,
-		Min,
-		Max,
-		Avg
-	}
-
-	public class MultiValueModeConverter : JsonConverter<MultiValueMode>
-	{
-		public override MultiValueMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "sum":
-					return MultiValueMode.Sum;
-				case "min":
-					return MultiValueMode.Min;
-				case "max":
-					return MultiValueMode.Max;
-				case "avg":
-					return MultiValueMode.Avg;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, MultiValueMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case MultiValueMode.Sum:
-					writer.WriteStringValue("sum");
-					return;
-				case MultiValueMode.Min:
-					writer.WriteStringValue("min");
-					return;
-				case MultiValueMode.Max:
-					writer.WriteStringValue("max");
-					return;
-				case MultiValueMode.Avg:
-					writer.WriteStringValue("avg");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(NestedScoreModeConverter))]
 	public enum NestedScoreMode
 	{
@@ -567,52 +515,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 					return;
 				case Operator.And:
 					writer.WriteStringValue("and");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(RangeRelationConverter))]
-	public enum RangeRelation
-	{
-		Within,
-		Intersects,
-		Contains
-	}
-
-	public class RangeRelationConverter : JsonConverter<RangeRelation>
-	{
-		public override RangeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "within":
-					return RangeRelation.Within;
-				case "intersects":
-					return RangeRelation.Intersects;
-				case "contains":
-					return RangeRelation.Contains;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, RangeRelation value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case RangeRelation.Within:
-					writer.WriteStringValue("within");
-					return;
-				case RangeRelation.Intersects:
-					writer.WriteStringValue("intersects");
-					return;
-				case RangeRelation.Contains:
-					writer.WriteStringValue("contains");
 					return;
 			}
 
