@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterPutSettingsRequestDescriptorConverter))]
-	public partial class ClusterPutSettingsRequestDescriptor : RequestDescriptorBase<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsRequestParameters>
+	public sealed partial class ClusterPutSettingsRequestDescriptor : RequestDescriptorBase<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsRequestParameters>
 	{
 		internal Dictionary<string, object>? _persistent;
 		internal Dictionary<string, object>? _transient;

@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexGetFieldMappingRequestDescriptorConverter))]
-	public partial class IndexGetFieldMappingRequestDescriptor : RequestDescriptorBase<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingRequestParameters>
+	public sealed partial class IndexGetFieldMappingRequestDescriptor : RequestDescriptorBase<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingRequestParameters>
 	{
 		public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 		{

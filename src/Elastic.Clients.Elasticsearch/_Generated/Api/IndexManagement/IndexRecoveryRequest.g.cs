@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexRecoveryRequestDescriptorConverter))]
-	public partial class IndexRecoveryRequestDescriptor : RequestDescriptorBase<IndexRecoveryRequestDescriptor, IndexRecoveryRequestParameters>
+	public sealed partial class IndexRecoveryRequestDescriptor : RequestDescriptorBase<IndexRecoveryRequestDescriptor, IndexRecoveryRequestParameters>
 	{
 		public IndexRecoveryRequestDescriptor()
 		{

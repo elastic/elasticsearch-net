@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexShardStoresRequestDescriptorConverter))]
-	public partial class IndexShardStoresRequestDescriptor : RequestDescriptorBase<IndexShardStoresRequestDescriptor, IndexShardStoresRequestParameters>
+	public sealed partial class IndexShardStoresRequestDescriptor : RequestDescriptorBase<IndexShardStoresRequestDescriptor, IndexShardStoresRequestParameters>
 	{
 		public IndexShardStoresRequestDescriptor()
 		{

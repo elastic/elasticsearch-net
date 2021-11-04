@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexCloseRequestDescriptorConverter))]
-	public partial class IndexCloseRequestDescriptor : RequestDescriptorBase<IndexCloseRequestDescriptor, IndexCloseRequestParameters>
+	public sealed partial class IndexCloseRequestDescriptor : RequestDescriptorBase<IndexCloseRequestDescriptor, IndexCloseRequestParameters>
 	{
 		public IndexCloseRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

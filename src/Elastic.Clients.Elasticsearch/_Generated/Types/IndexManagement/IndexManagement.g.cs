@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(AliasDescriptorConverter))]
-	public partial class AliasDescriptor : DescriptorBase<AliasDescriptor>
+	public sealed partial class AliasDescriptor : DescriptorBase<AliasDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
 		internal string? _indexRouting;
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(AliasDefinitionDescriptorConverter))]
-	public partial class AliasDefinitionDescriptor : DescriptorBase<AliasDefinitionDescriptor>
+	public sealed partial class AliasDefinitionDescriptor : DescriptorBase<AliasDefinitionDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
 		internal string? _indexRouting;
@@ -233,7 +233,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexRoutingAllocationDescriptorConverter))]
-	public partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor>
+	public sealed partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? _enable;
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? _include;
@@ -327,7 +327,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexSegmentSortDescriptorConverter))]
-	public partial class IndexSegmentSortDescriptor : DescriptorBase<IndexSegmentSortDescriptor>
+	public sealed partial class IndexSegmentSortDescriptor : DescriptorBase<IndexSegmentSortDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Fields _field;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder> _order;
@@ -385,7 +385,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexSettingBlocksDescriptorConverter))]
-	public partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor>
+	public sealed partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor>
 	{
 		internal bool? _readOnly;
 		internal bool? _readOnlyAllowDelete;
@@ -662,7 +662,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexSettingsDescriptorConverter))]
-	public partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor>
+	public sealed partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _index;
 		internal string? _mode;
@@ -1092,7 +1092,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexSettingsAnalysisDescriptorConverter))]
-	public partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor>
+	public sealed partial class IndexSettingsAnalysisDescriptor : DescriptorBase<IndexSettingsAnalysisDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.Analyzers? _analyzer;
 		internal Elastic.Clients.Elasticsearch.Analysis.CharFilters? _charFilter;
@@ -1168,7 +1168,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexStateDescriptorConverter))]
-	public partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor>
+	public sealed partial class IndexStateDescriptor : DescriptorBase<IndexStateDescriptor>
 	{
 		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
@@ -1280,18 +1280,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 	}
 
 	[JsonConverter(typeof(TemplateMappingDescriptorConverter))]
-	public partial class TemplateMappingDescriptor : DescriptorBase<TemplateMappingDescriptor>
+	public sealed partial class TemplateMappingDescriptor : DescriptorBase<TemplateMappingDescriptor>
 	{
 		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> _aliases;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Name> _indexPatterns;
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping _mappings;
 		internal int _order;
 		internal Dictionary<string, object> _settings;
-		internal object? _version;
+		internal long? _version;
 	}
 
 	internal sealed class TemplateMappingDescriptorConverter : JsonConverter<TemplateMappingDescriptor>

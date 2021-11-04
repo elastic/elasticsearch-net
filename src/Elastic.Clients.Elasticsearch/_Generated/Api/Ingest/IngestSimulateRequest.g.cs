@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(IngestSimulateRequestDescriptorConverter))]
-	public partial class IngestSimulateRequestDescriptor : RequestDescriptorBase<IngestSimulateRequestDescriptor, IngestSimulateRequestParameters>
+	public sealed partial class IngestSimulateRequestDescriptor : RequestDescriptorBase<IngestSimulateRequestDescriptor, IngestSimulateRequestParameters>
 	{
 		public IngestSimulateRequestDescriptor()
 		{

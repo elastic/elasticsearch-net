@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(BoundingBoxDescriptorConverter))]
-	public partial class BoundingBoxDescriptor : DescriptorBase<BoundingBoxDescriptor>
+	public sealed partial class BoundingBoxDescriptor : DescriptorBase<BoundingBoxDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _bottomRight;
 		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _topLeft;
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public double? Weight { get; set; }
 	}
 
-	public class FunctionScoreContainerConverter : JsonConverter<FunctionScoreContainer>
+	internal sealed class FunctionScoreContainerConverter : JsonConverter<FunctionScoreContainer>
 	{
 		public override FunctionScoreContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -566,7 +566,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal IIntervalsContainerVariant Variant { get; }
 	}
 
-	public class IntervalsContainerConverter : JsonConverter<IntervalsContainer>
+	internal sealed class IntervalsContainerConverter : JsonConverter<IntervalsContainer>
 	{
 		public override IntervalsContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -664,7 +664,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal IIntervalsFilterVariant Variant { get; }
 	}
 
-	public class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
+	internal sealed class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
 	{
 		public override IntervalsFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -782,7 +782,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "intervals";
 	}
 
-	public class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
+	internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
 	{
 		public override IntervalsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -919,7 +919,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; init; }
+		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version_type")]
@@ -1152,7 +1152,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version_type")]
@@ -1308,7 +1308,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 	}
 
 	public interface IPinnedQueryVariant
@@ -1329,7 +1329,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Organic { get; set; }
 	}
 
-	public class PinnedQueryConverter : JsonConverter<PinnedQuery>
+	internal sealed class PinnedQueryConverter : JsonConverter<PinnedQuery>
 	{
 		public override PinnedQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1394,7 +1394,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "filter";
 	}
 
-	public class QueryContainerConverter : JsonConverter<QueryContainer>
+	internal sealed class QueryContainerConverter : JsonConverter<QueryContainer>
 	{
 		public override QueryContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -2025,7 +2025,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("seed")]
-		public Union<object?, string?>? Seed { get; set; }
+		public Union<long?, string?>? Seed { get; set; }
 	}
 
 	public partial class RankFeatureFunction
@@ -2345,7 +2345,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal ISpanQueryVariant Variant { get; }
 	}
 
-	public class SpanQueryConverter : JsonConverter<SpanQuery>
+	internal sealed class SpanQueryConverter : JsonConverter<SpanQuery>
 	{
 		public override SpanQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

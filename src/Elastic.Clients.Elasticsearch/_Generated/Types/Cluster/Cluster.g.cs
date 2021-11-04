@@ -42,7 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; init; }
+		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; init; }
+		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]

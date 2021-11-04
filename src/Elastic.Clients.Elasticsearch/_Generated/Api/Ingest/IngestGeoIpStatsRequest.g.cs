@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(IngestGeoIpStatsRequestDescriptorConverter))]
-	public partial class IngestGeoIpStatsRequestDescriptor : RequestDescriptorBase<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsRequestParameters>
+	public sealed partial class IngestGeoIpStatsRequestDescriptor : RequestDescriptorBase<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGeoIpStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

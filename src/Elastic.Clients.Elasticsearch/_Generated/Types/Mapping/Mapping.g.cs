@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(AggregateMetricDoublePropertyDescriptorConverter))]
-	public partial class AggregateMetricDoublePropertyDescriptor : DescriptorBase<AggregateMetricDoublePropertyDescriptor>
+	public sealed partial class AggregateMetricDoublePropertyDescriptor : DescriptorBase<AggregateMetricDoublePropertyDescriptor>
 	{
 		internal string _defaultMetric;
 		internal IReadOnlyCollection<string> _metrics;
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(AllFieldDescriptorConverter))]
-	public partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor>
+	public sealed partial class AllFieldDescriptor : DescriptorBase<AllFieldDescriptor>
 	{
 		internal string _analyzer;
 		internal bool _enabled;
@@ -231,7 +231,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(ConstantKeywordPropertyDescriptorConverter))]
-	public partial class ConstantKeywordPropertyDescriptor : DescriptorBase<ConstantKeywordPropertyDescriptor>
+	public sealed partial class ConstantKeywordPropertyDescriptor : DescriptorBase<ConstantKeywordPropertyDescriptor>
 	{
 		internal object? _value;
 	}
@@ -382,7 +382,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(DenseVectorPropertyDescriptorConverter))]
-	public partial class DenseVectorPropertyDescriptor : DescriptorBase<DenseVectorPropertyDescriptor>
+	public sealed partial class DenseVectorPropertyDescriptor : DescriptorBase<DenseVectorPropertyDescriptor>
 	{
 		internal int _dims;
 		internal string? _similarity;
@@ -478,7 +478,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(DynamicTemplateDescriptorConverter))]
-	public partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor>
+	public sealed partial class DynamicTemplateDescriptor : DescriptorBase<DynamicTemplateDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Mapping.Properties? _mapping;
 		internal string? _match;
@@ -553,7 +553,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(FieldAliasPropertyDescriptorConverter))]
-	public partial class FieldAliasPropertyDescriptor : DescriptorBase<FieldAliasPropertyDescriptor>
+	public sealed partial class FieldAliasPropertyDescriptor : DescriptorBase<FieldAliasPropertyDescriptor>
 	{
 		internal string? _path;
 	}
@@ -638,7 +638,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(FlattenedPropertyDescriptorConverter))]
-	public partial class FlattenedPropertyDescriptor : DescriptorBase<FlattenedPropertyDescriptor>
+	public sealed partial class FlattenedPropertyDescriptor : DescriptorBase<FlattenedPropertyDescriptor>
 	{
 		internal double? _boost;
 		internal int? _depthLimit;
@@ -853,7 +853,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(HistogramPropertyDescriptorConverter))]
-	public partial class HistogramPropertyDescriptor : DescriptorBase<HistogramPropertyDescriptor>
+	public sealed partial class HistogramPropertyDescriptor : DescriptorBase<HistogramPropertyDescriptor>
 	{
 		internal bool? _ignoreMalformed;
 	}
@@ -942,7 +942,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(JoinPropertyDescriptorConverter))]
-	public partial class JoinPropertyDescriptor : DescriptorBase<JoinPropertyDescriptor>
+	public sealed partial class JoinPropertyDescriptor : DescriptorBase<JoinPropertyDescriptor>
 	{
 		internal Dictionary<string, IReadOnlyCollection<string>>? _relations;
 	}
@@ -1015,7 +1015,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "long";
 		[JsonInclude]
 		[JsonPropertyName("null_value")]
-		public object? NullValue { get; init; }
+		public long? NullValue { get; init; }
 	}
 
 	public partial class LongRangeProperty : Mapping.RangePropertyBase
@@ -1085,7 +1085,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(PercolatorPropertyDescriptorConverter))]
-	public partial class PercolatorPropertyDescriptor : DescriptorBase<PercolatorPropertyDescriptor>
+	public sealed partial class PercolatorPropertyDescriptor : DescriptorBase<PercolatorPropertyDescriptor>
 	{
 	}
 
@@ -1178,7 +1178,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(RankFeaturePropertyDescriptorConverter))]
-	public partial class RankFeaturePropertyDescriptor : DescriptorBase<RankFeaturePropertyDescriptor>
+	public sealed partial class RankFeaturePropertyDescriptor : DescriptorBase<RankFeaturePropertyDescriptor>
 	{
 		internal bool? _positiveScoreImpact;
 	}
@@ -1209,7 +1209,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(RankFeaturesPropertyDescriptorConverter))]
-	public partial class RankFeaturesPropertyDescriptor : DescriptorBase<RankFeaturesPropertyDescriptor>
+	public sealed partial class RankFeaturesPropertyDescriptor : DescriptorBase<RankFeaturesPropertyDescriptor>
 	{
 	}
 
@@ -1248,7 +1248,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(RuntimeFieldDescriptorConverter))]
-	public partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor>
+	public sealed partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor>
 	{
 		internal string? _format;
 		internal Elastic.Clients.Elasticsearch.Script? _script;
@@ -1400,7 +1400,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(SourceFieldDescriptorConverter))]
-	public partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor>
+	public sealed partial class SourceFieldDescriptor : DescriptorBase<SourceFieldDescriptor>
 	{
 		internal bool? _compress;
 		internal string? _compressThreshold;
@@ -1648,7 +1648,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	}
 
 	[JsonConverter(typeof(TypeMappingDescriptorConverter))]
-	public partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor>
+	public sealed partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Mapping.AllField? _allField;
 		internal bool? _dateDetection;

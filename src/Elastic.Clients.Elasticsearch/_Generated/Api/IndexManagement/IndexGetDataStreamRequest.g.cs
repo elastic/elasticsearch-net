@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexGetDataStreamRequestDescriptorConverter))]
-	public partial class IndexGetDataStreamRequestDescriptor : RequestDescriptorBase<IndexGetDataStreamRequestDescriptor, IndexGetDataStreamRequestParameters>
+	public sealed partial class IndexGetDataStreamRequestDescriptor : RequestDescriptorBase<IndexGetDataStreamRequestDescriptor, IndexGetDataStreamRequestParameters>
 	{
 		public IndexGetDataStreamRequestDescriptor()
 		{

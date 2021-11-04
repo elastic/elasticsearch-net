@@ -15,6 +15,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static IndexName Index<T>() => typeof(T);
 
+		public static IndexName Index(Type type) => type;
+
 		public static IndexName Index<T>(string clusterName) => IndexName.From<T>(clusterName);
 
 		//public static Indices Indices<T>() => typeof(T);

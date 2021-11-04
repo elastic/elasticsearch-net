@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("indexed_chars")]
-		public object? IndexedChars { get; set; }
+		public long? IndexedChars { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("indexed_chars_field")]
@@ -560,16 +560,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 	}
 
 	[JsonConverter(typeof(PipelineDescriptorConverter))]
-	public partial class PipelineDescriptor : DescriptorBase<PipelineDescriptor>
+	public sealed partial class PipelineDescriptor : DescriptorBase<PipelineDescriptor>
 	{
 		internal string? _description;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _onFailure;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _processors;
-		internal object? _version;
+		internal long? _version;
 	}
 
 	internal sealed class PipelineDescriptorConverter : JsonConverter<PipelineDescriptor>
@@ -635,7 +635,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(ProcessorBaseDescriptorConverter))]
-	public partial class ProcessorBaseDescriptor : DescriptorBase<ProcessorBaseDescriptor>
+	public sealed partial class ProcessorBaseDescriptor : DescriptorBase<ProcessorBaseDescriptor>
 	{
 		internal string? _if;
 		internal bool? _ignoreFailure;
@@ -689,7 +689,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal IProcessorContainerVariant Variant { get; }
 	}
 
-	public class ProcessorContainerConverter : JsonConverter<ProcessorContainer>
+	internal sealed class ProcessorContainerConverter : JsonConverter<ProcessorContainer>
 	{
 		public override ProcessorContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object>? Meta { get; set; }
 	}
 
-	public class AggregationContainerConverter : JsonConverter<AggregationContainer>
+	internal sealed class AggregationContainerConverter : JsonConverter<AggregationContainer>
 	{
 		public override AggregationContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -802,7 +802,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(AggregationRangeDescriptorConverter))]
-	public partial class AggregationRangeDescriptor : DescriptorBase<AggregationRangeDescriptor>
+	public sealed partial class AggregationRangeDescriptor : DescriptorBase<AggregationRangeDescriptor>
 	{
 		internal Union<double?, string?>? _from;
 		internal string? _key;
@@ -937,19 +937,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("bg_count")]
-		public object BgCount { get; init; }
+		public long BgCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount { get; init; }
+		public long DocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
-		public object DocCountErrorUpperBound { get; init; }
+		public long DocCountErrorUpperBound { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_other_doc_count")]
-		public object SumOtherDocCount { get; init; }
+		public long SumOtherDocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("interval")]
@@ -1063,7 +1063,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ClassificationInferenceOptionsDescriptorConverter))]
-	public partial class ClassificationInferenceOptionsDescriptor : DescriptorBase<ClassificationInferenceOptionsDescriptor>
+	public sealed partial class ClassificationInferenceOptionsDescriptor : DescriptorBase<ClassificationInferenceOptionsDescriptor>
 	{
 		internal int? _numTopClasses;
 		internal int? _numTopFeatureImportanceValues;
@@ -1149,7 +1149,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(CompositeAggregationSourceDescriptorConverter))]
-	public partial class CompositeAggregationSourceDescriptor : DescriptorBase<CompositeAggregationSourceDescriptor>
+	public sealed partial class CompositeAggregationSourceDescriptor : DescriptorBase<CompositeAggregationSourceDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? _terms;
 		internal Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? _histogram;
@@ -1330,18 +1330,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object? DocCount { get; set; }
+		public long? DocCount { get; set; }
 	}
 
 	[JsonConverter(typeof(DateRangeExpressionDescriptorConverter))]
-	public partial class DateRangeExpressionDescriptor : DescriptorBase<DateRangeExpressionDescriptor>
+	public sealed partial class DateRangeExpressionDescriptor : DescriptorBase<DateRangeExpressionDescriptor>
 	{
 		internal Union<string?, float?>? _from;
 		internal string? _fromAsString;
 		internal string? _toAsString;
 		internal string? _key;
 		internal Union<string?, float?>? _to;
-		internal object? _docCount;
+		internal long? _docCount;
 	}
 
 	internal sealed class DateRangeExpressionDescriptorConverter : JsonConverter<DateRangeExpressionDescriptor>
@@ -1380,10 +1380,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value._to, options);
 			}
 
-			if (value._docCount is not null)
+			if (value._docCount.HasValue)
 			{
 				writer.WritePropertyName("doc_count");
-				JsonSerializer.Serialize(writer, value._docCount, options);
+				writer.WriteNumberValue(value._docCount.Value);
 			}
 
 			writer.WriteEndObject();
@@ -1524,7 +1524,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount { get; init; }
+		public long DocCount { get; init; }
 	}
 
 	public abstract partial class FormatMetricAggregationBase : Aggregations.MetricAggregationBase
@@ -1572,7 +1572,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count { get; init; }
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("location")]
@@ -1585,7 +1585,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "geo_centroid";
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object? Count { get; set; }
+		public long? Count { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("location")]
@@ -1917,7 +1917,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(IpRangeAggregationRangeDescriptorConverter))]
-	public partial class IpRangeAggregationRangeDescriptor : DescriptorBase<IpRangeAggregationRangeDescriptor>
+	public sealed partial class IpRangeAggregationRangeDescriptor : DescriptorBase<IpRangeAggregationRangeDescriptor>
 	{
 		internal string? _from;
 		internal string? _mask;
@@ -1960,7 +1960,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount { get; init; }
+		public long DocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key")]
@@ -2077,7 +2077,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MetricAggregationBaseDescriptorConverter))]
-	public partial class MetricAggregationBaseDescriptor : DescriptorBase<MetricAggregationBaseDescriptor>
+	public sealed partial class MetricAggregationBaseDescriptor : DescriptorBase<MetricAggregationBaseDescriptor>
 	{
 		internal string? _field;
 		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? _missing;
@@ -2346,7 +2346,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(PipelineAggregationBaseDescriptorConverter))]
-	public partial class PipelineAggregationBaseDescriptor : DescriptorBase<PipelineAggregationBaseDescriptor>
+	public sealed partial class PipelineAggregationBaseDescriptor : DescriptorBase<PipelineAggregationBaseDescriptor>
 	{
 		internal object? _bucketsPath;
 		internal string? _format;
@@ -2428,7 +2428,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("max_doc_count")]
-		public object? MaxDocCount { get; set; }
+		public long? MaxDocCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
@@ -2541,11 +2541,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("bg_count")]
-		public object BgCount { get; init; }
+		public long BgCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public object DocCount { get; init; }
+		public long DocCount { get; init; }
 	}
 
 	public partial class SignificantTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -2582,7 +2582,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
-		public object? MinDocCount { get; set; }
+		public long? MinDocCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mutual_information")]
@@ -2598,7 +2598,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("shard_min_doc_count")]
-		public object? ShardMinDocCount { get; set; }
+		public long? ShardMinDocCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
@@ -2651,7 +2651,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
-		public object? MinDocCount { get; set; }
+		public long? MinDocCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mutual_information")]
@@ -2667,7 +2667,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("shard_min_doc_count")]
-		public object? ShardMinDocCount { get; set; }
+		public long? ShardMinDocCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
@@ -2755,7 +2755,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count { get; init; }
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_length")]
@@ -2817,11 +2817,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
-		public object DocCountErrorUpperBound { get; init; }
+		public long DocCountErrorUpperBound { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_other_doc_count")]
-		public object SumOtherDocCount { get; init; }
+		public long SumOtherDocCount { get; init; }
 	}
 
 	public partial class TermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
@@ -2895,11 +2895,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("num_partitions")]
-		public object NumPartitions { get; set; }
+		public long NumPartitions { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("partition")]
-		public object Partition { get; set; }
+		public long Partition { get; set; }
 	}
 
 	public partial class TestPopulation
@@ -2918,7 +2918,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TestPopulationDescriptorConverter))]
-	public partial class TestPopulationDescriptor : DescriptorBase<TestPopulationDescriptor>
+	public sealed partial class TestPopulationDescriptor : DescriptorBase<TestPopulationDescriptor>
 	{
 		internal string _field;
 		internal Elastic.Clients.Elasticsearch.Script? _script;
@@ -3140,7 +3140,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(WeightedAverageValueDescriptorConverter))]
-	public partial class WeightedAverageValueDescriptor : DescriptorBase<WeightedAverageValueDescriptor>
+	public sealed partial class WeightedAverageValueDescriptor : DescriptorBase<WeightedAverageValueDescriptor>
 	{
 		internal string? _field;
 		internal double? _missing;

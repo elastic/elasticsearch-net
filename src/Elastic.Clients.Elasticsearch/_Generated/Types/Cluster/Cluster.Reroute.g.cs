@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	}
 
 	[JsonConverter(typeof(CommandDescriptorConverter))]
-	public partial class CommandDescriptor : DescriptorBase<CommandDescriptor>
+	public sealed partial class CommandDescriptor : DescriptorBase<CommandDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelAction? _cancel;
 		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveAction? _move;
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	}
 
 	[JsonConverter(typeof(CommandAllocatePrimaryActionDescriptorConverter))]
-	public partial class CommandAllocatePrimaryActionDescriptor : DescriptorBase<CommandAllocatePrimaryActionDescriptor>
+	public sealed partial class CommandAllocatePrimaryActionDescriptor : DescriptorBase<CommandAllocatePrimaryActionDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.IndexName _index;
 		internal int _shard;
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	}
 
 	[JsonConverter(typeof(CommandAllocateReplicaActionDescriptorConverter))]
-	public partial class CommandAllocateReplicaActionDescriptor : DescriptorBase<CommandAllocateReplicaActionDescriptor>
+	public sealed partial class CommandAllocateReplicaActionDescriptor : DescriptorBase<CommandAllocateReplicaActionDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.IndexName _index;
 		internal int _shard;
@@ -201,7 +201,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	}
 
 	[JsonConverter(typeof(CommandCancelActionDescriptorConverter))]
-	public partial class CommandCancelActionDescriptor : DescriptorBase<CommandCancelActionDescriptor>
+	public sealed partial class CommandCancelActionDescriptor : DescriptorBase<CommandCancelActionDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.IndexName _index;
 		internal int _shard;
@@ -251,7 +251,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	}
 
 	[JsonConverter(typeof(CommandMoveActionDescriptorConverter))]
-	public partial class CommandMoveActionDescriptor : DescriptorBase<CommandMoveActionDescriptor>
+	public sealed partial class CommandMoveActionDescriptor : DescriptorBase<CommandMoveActionDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.IndexName _index;
 		internal int _shard;

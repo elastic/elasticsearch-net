@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public object? MaxNumSegments { get => Q<object?>("max_num_segments"); set => Q("max_num_segments", value); }
+		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 
 		[JsonIgnore]
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
@@ -72,14 +72,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public object? MaxNumSegments { get => Q<object?>("max_num_segments"); set => Q("max_num_segments", value); }
+		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 
 		[JsonIgnore]
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 	}
 
 	[JsonConverter(typeof(IndexForcemergeRequestDescriptorConverter))]
-	public partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters>
+	public sealed partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters>
 	{
 		public IndexForcemergeRequestDescriptor()
 		{
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexForcemergeRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexForcemergeRequestDescriptor Flush(bool? flush) => Qs("flush", flush);
 		public IndexForcemergeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public IndexForcemergeRequestDescriptor MaxNumSegments(object? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
+		public IndexForcemergeRequestDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		public IndexForcemergeRequestDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes) => Qs("only_expunge_deletes", onlyExpungeDeletes);
 	}
 

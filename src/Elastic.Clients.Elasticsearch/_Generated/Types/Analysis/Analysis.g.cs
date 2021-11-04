@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(AsciiFoldingTokenFilterDescriptorConverter))]
-	public partial class AsciiFoldingTokenFilterDescriptor : DescriptorBase<AsciiFoldingTokenFilterDescriptor>
+	public sealed partial class AsciiFoldingTokenFilterDescriptor : DescriptorBase<AsciiFoldingTokenFilterDescriptor>
 	{
 		internal bool _preserveOriginal;
 	}
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(CharGroupTokenizerDescriptorConverter))]
-	public partial class CharGroupTokenizerDescriptor : DescriptorBase<CharGroupTokenizerDescriptor>
+	public sealed partial class CharGroupTokenizerDescriptor : DescriptorBase<CharGroupTokenizerDescriptor>
 	{
 		internal IReadOnlyCollection<string> _tokenizeOnChars;
 		internal int? _maxTokenLength;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(CommonGramsTokenFilterDescriptorConverter))]
-	public partial class CommonGramsTokenFilterDescriptor : DescriptorBase<CommonGramsTokenFilterDescriptor>
+	public sealed partial class CommonGramsTokenFilterDescriptor : DescriptorBase<CommonGramsTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string>? _commonWords;
 		internal string? _commonWordsPath;
@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(ConditionTokenFilterDescriptorConverter))]
-	public partial class ConditionTokenFilterDescriptor : DescriptorBase<ConditionTokenFilterDescriptor>
+	public sealed partial class ConditionTokenFilterDescriptor : DescriptorBase<ConditionTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _filter;
 		internal Elastic.Clients.Elasticsearch.Script _script;
@@ -263,7 +263,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(CustomAnalyzerDescriptorConverter))]
-	public partial class CustomAnalyzerDescriptor : DescriptorBase<CustomAnalyzerDescriptor>
+	public sealed partial class CustomAnalyzerDescriptor : DescriptorBase<CustomAnalyzerDescriptor>
 	{
 		internal IReadOnlyCollection<string>? _charFilter;
 		internal IReadOnlyCollection<string>? _filter;
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(CustomNormalizerDescriptorConverter))]
-	public partial class CustomNormalizerDescriptor : DescriptorBase<CustomNormalizerDescriptor>
+	public sealed partial class CustomNormalizerDescriptor : DescriptorBase<CustomNormalizerDescriptor>
 	{
 		internal IReadOnlyCollection<string>? _charFilter;
 		internal IReadOnlyCollection<string>? _filter;
@@ -370,7 +370,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(DelimitedPayloadTokenFilterDescriptorConverter))]
-	public partial class DelimitedPayloadTokenFilterDescriptor : DescriptorBase<DelimitedPayloadTokenFilterDescriptor>
+	public sealed partial class DelimitedPayloadTokenFilterDescriptor : DescriptorBase<DelimitedPayloadTokenFilterDescriptor>
 	{
 		internal string _delimiter;
 		internal Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding _encoding;
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(DictionaryDecompounderTokenFilterDescriptorConverter))]
-	public partial class DictionaryDecompounderTokenFilterDescriptor : DescriptorBase<DictionaryDecompounderTokenFilterDescriptor>
+	public sealed partial class DictionaryDecompounderTokenFilterDescriptor : DescriptorBase<DictionaryDecompounderTokenFilterDescriptor>
 	{
 	}
 
@@ -427,7 +427,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(DutchAnalyzerDescriptorConverter))]
-	public partial class DutchAnalyzerDescriptor : DescriptorBase<DutchAnalyzerDescriptor>
+	public sealed partial class DutchAnalyzerDescriptor : DescriptorBase<DutchAnalyzerDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
 	}
@@ -473,7 +473,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(EdgeNGramTokenFilterDescriptorConverter))]
-	public partial class EdgeNGramTokenFilterDescriptor : DescriptorBase<EdgeNGramTokenFilterDescriptor>
+	public sealed partial class EdgeNGramTokenFilterDescriptor : DescriptorBase<EdgeNGramTokenFilterDescriptor>
 	{
 		internal int _maxGram;
 		internal int _minGram;
@@ -532,7 +532,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(EdgeNGramTokenizerDescriptorConverter))]
-	public partial class EdgeNGramTokenizerDescriptor : DescriptorBase<EdgeNGramTokenizerDescriptor>
+	public sealed partial class EdgeNGramTokenizerDescriptor : DescriptorBase<EdgeNGramTokenizerDescriptor>
 	{
 		internal string? _customTokenChars;
 		internal int _maxGram;
@@ -579,7 +579,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(ElisionTokenFilterDescriptorConverter))]
-	public partial class ElisionTokenFilterDescriptor : DescriptorBase<ElisionTokenFilterDescriptor>
+	public sealed partial class ElisionTokenFilterDescriptor : DescriptorBase<ElisionTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _articles;
 		internal bool _articlesCase;
@@ -632,7 +632,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(FingerprintAnalyzerDescriptorConverter))]
-	public partial class FingerprintAnalyzerDescriptor : DescriptorBase<FingerprintAnalyzerDescriptor>
+	public sealed partial class FingerprintAnalyzerDescriptor : DescriptorBase<FingerprintAnalyzerDescriptor>
 	{
 		internal string? _version;
 		internal int _maxOutputSize;
@@ -693,7 +693,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(FingerprintTokenFilterDescriptorConverter))]
-	public partial class FingerprintTokenFilterDescriptor : DescriptorBase<FingerprintTokenFilterDescriptor>
+	public sealed partial class FingerprintTokenFilterDescriptor : DescriptorBase<FingerprintTokenFilterDescriptor>
 	{
 		internal int _maxOutputSize;
 		internal string _separator;
@@ -723,7 +723,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(HtmlStripCharFilterDescriptorConverter))]
-	public partial class HtmlStripCharFilterDescriptor : DescriptorBase<HtmlStripCharFilterDescriptor>
+	public sealed partial class HtmlStripCharFilterDescriptor : DescriptorBase<HtmlStripCharFilterDescriptor>
 	{
 	}
 
@@ -762,7 +762,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(HunspellTokenFilterDescriptorConverter))]
-	public partial class HunspellTokenFilterDescriptor : DescriptorBase<HunspellTokenFilterDescriptor>
+	public sealed partial class HunspellTokenFilterDescriptor : DescriptorBase<HunspellTokenFilterDescriptor>
 	{
 		internal bool _dedup;
 		internal string _dictionary;
@@ -798,7 +798,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(HyphenationDecompounderTokenFilterDescriptorConverter))]
-	public partial class HyphenationDecompounderTokenFilterDescriptor : DescriptorBase<HyphenationDecompounderTokenFilterDescriptor>
+	public sealed partial class HyphenationDecompounderTokenFilterDescriptor : DescriptorBase<HyphenationDecompounderTokenFilterDescriptor>
 	{
 	}
 
@@ -829,7 +829,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuAnalyzerDescriptorConverter))]
-	public partial class IcuAnalyzerDescriptor : DescriptorBase<IcuAnalyzerDescriptor>
+	public sealed partial class IcuAnalyzerDescriptor : DescriptorBase<IcuAnalyzerDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType _method;
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode _mode;
@@ -902,7 +902,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuCollationTokenFilterDescriptorConverter))]
-	public partial class IcuCollationTokenFilterDescriptor : DescriptorBase<IcuCollationTokenFilterDescriptor>
+	public sealed partial class IcuCollationTokenFilterDescriptor : DescriptorBase<IcuCollationTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate _alternate;
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst _casefirst;
@@ -966,7 +966,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuFoldingTokenFilterDescriptorConverter))]
-	public partial class IcuFoldingTokenFilterDescriptor : DescriptorBase<IcuFoldingTokenFilterDescriptor>
+	public sealed partial class IcuFoldingTokenFilterDescriptor : DescriptorBase<IcuFoldingTokenFilterDescriptor>
 	{
 		internal string _unicodeSetFilter;
 	}
@@ -1000,7 +1000,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuNormalizationCharFilterDescriptorConverter))]
-	public partial class IcuNormalizationCharFilterDescriptor : DescriptorBase<IcuNormalizationCharFilterDescriptor>
+	public sealed partial class IcuNormalizationCharFilterDescriptor : DescriptorBase<IcuNormalizationCharFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? _mode;
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? _name;
@@ -1041,7 +1041,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuNormalizationTokenFilterDescriptorConverter))]
-	public partial class IcuNormalizationTokenFilterDescriptor : DescriptorBase<IcuNormalizationTokenFilterDescriptor>
+	public sealed partial class IcuNormalizationTokenFilterDescriptor : DescriptorBase<IcuNormalizationTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType _name;
 	}
@@ -1071,7 +1071,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuTokenizerDescriptorConverter))]
-	public partial class IcuTokenizerDescriptor : DescriptorBase<IcuTokenizerDescriptor>
+	public sealed partial class IcuTokenizerDescriptor : DescriptorBase<IcuTokenizerDescriptor>
 	{
 		internal string _ruleFiles;
 	}
@@ -1105,7 +1105,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(IcuTransformTokenFilterDescriptorConverter))]
-	public partial class IcuTransformTokenFilterDescriptor : DescriptorBase<IcuTransformTokenFilterDescriptor>
+	public sealed partial class IcuTransformTokenFilterDescriptor : DescriptorBase<IcuTransformTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection _dir;
 		internal string _id;
@@ -1142,7 +1142,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KeepTypesTokenFilterDescriptorConverter))]
-	public partial class KeepTypesTokenFilterDescriptor : DescriptorBase<KeepTypesTokenFilterDescriptor>
+	public sealed partial class KeepTypesTokenFilterDescriptor : DescriptorBase<KeepTypesTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? _mode;
 		internal IReadOnlyCollection<string>? _types;
@@ -1191,7 +1191,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KeepWordsTokenFilterDescriptorConverter))]
-	public partial class KeepWordsTokenFilterDescriptor : DescriptorBase<KeepWordsTokenFilterDescriptor>
+	public sealed partial class KeepWordsTokenFilterDescriptor : DescriptorBase<KeepWordsTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string>? _keepWords;
 		internal bool? _keepWordsCase;
@@ -1239,7 +1239,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KeywordAnalyzerDescriptorConverter))]
-	public partial class KeywordAnalyzerDescriptor : DescriptorBase<KeywordAnalyzerDescriptor>
+	public sealed partial class KeywordAnalyzerDescriptor : DescriptorBase<KeywordAnalyzerDescriptor>
 	{
 		internal string? _version;
 	}
@@ -1285,7 +1285,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KeywordMarkerTokenFilterDescriptorConverter))]
-	public partial class KeywordMarkerTokenFilterDescriptor : DescriptorBase<KeywordMarkerTokenFilterDescriptor>
+	public sealed partial class KeywordMarkerTokenFilterDescriptor : DescriptorBase<KeywordMarkerTokenFilterDescriptor>
 	{
 		internal bool? _ignoreCase;
 		internal IReadOnlyCollection<string>? _keywords;
@@ -1340,7 +1340,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KeywordTokenizerDescriptorConverter))]
-	public partial class KeywordTokenizerDescriptor : DescriptorBase<KeywordTokenizerDescriptor>
+	public sealed partial class KeywordTokenizerDescriptor : DescriptorBase<KeywordTokenizerDescriptor>
 	{
 		internal int _bufferSize;
 	}
@@ -1367,7 +1367,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KStemTokenFilterDescriptorConverter))]
-	public partial class KStemTokenFilterDescriptor : DescriptorBase<KStemTokenFilterDescriptor>
+	public sealed partial class KStemTokenFilterDescriptor : DescriptorBase<KStemTokenFilterDescriptor>
 	{
 	}
 
@@ -1398,7 +1398,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KuromojiAnalyzerDescriptorConverter))]
-	public partial class KuromojiAnalyzerDescriptor : DescriptorBase<KuromojiAnalyzerDescriptor>
+	public sealed partial class KuromojiAnalyzerDescriptor : DescriptorBase<KuromojiAnalyzerDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode _mode;
 		internal string? _userDictionary;
@@ -1439,7 +1439,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KuromojiIterationMarkCharFilterDescriptorConverter))]
-	public partial class KuromojiIterationMarkCharFilterDescriptor : DescriptorBase<KuromojiIterationMarkCharFilterDescriptor>
+	public sealed partial class KuromojiIterationMarkCharFilterDescriptor : DescriptorBase<KuromojiIterationMarkCharFilterDescriptor>
 	{
 		internal bool _normalizeKana;
 		internal bool _normalizeKanji;
@@ -1472,7 +1472,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KuromojiPartOfSpeechTokenFilterDescriptorConverter))]
-	public partial class KuromojiPartOfSpeechTokenFilterDescriptor : DescriptorBase<KuromojiPartOfSpeechTokenFilterDescriptor>
+	public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : DescriptorBase<KuromojiPartOfSpeechTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _stoptags;
 	}
@@ -1502,7 +1502,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KuromojiReadingFormTokenFilterDescriptorConverter))]
-	public partial class KuromojiReadingFormTokenFilterDescriptor : DescriptorBase<KuromojiReadingFormTokenFilterDescriptor>
+	public sealed partial class KuromojiReadingFormTokenFilterDescriptor : DescriptorBase<KuromojiReadingFormTokenFilterDescriptor>
 	{
 		internal bool _useRomaji;
 	}
@@ -1532,7 +1532,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KuromojiStemmerTokenFilterDescriptorConverter))]
-	public partial class KuromojiStemmerTokenFilterDescriptor : DescriptorBase<KuromojiStemmerTokenFilterDescriptor>
+	public sealed partial class KuromojiStemmerTokenFilterDescriptor : DescriptorBase<KuromojiStemmerTokenFilterDescriptor>
 	{
 		internal int _minimumLength;
 	}
@@ -1586,7 +1586,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(KuromojiTokenizerDescriptorConverter))]
-	public partial class KuromojiTokenizerDescriptor : DescriptorBase<KuromojiTokenizerDescriptor>
+	public sealed partial class KuromojiTokenizerDescriptor : DescriptorBase<KuromojiTokenizerDescriptor>
 	{
 		internal bool? _discardPunctuation;
 		internal Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode _mode;
@@ -1674,7 +1674,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LanguageAnalyzerDescriptorConverter))]
-	public partial class LanguageAnalyzerDescriptor : DescriptorBase<LanguageAnalyzerDescriptor>
+	public sealed partial class LanguageAnalyzerDescriptor : DescriptorBase<LanguageAnalyzerDescriptor>
 	{
 		internal string? _version;
 		internal Elastic.Clients.Elasticsearch.Analysis.Language _language;
@@ -1732,7 +1732,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LengthTokenFilterDescriptorConverter))]
-	public partial class LengthTokenFilterDescriptor : DescriptorBase<LengthTokenFilterDescriptor>
+	public sealed partial class LengthTokenFilterDescriptor : DescriptorBase<LengthTokenFilterDescriptor>
 	{
 		internal int _max;
 		internal int _min;
@@ -1762,7 +1762,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LetterTokenizerDescriptorConverter))]
-	public partial class LetterTokenizerDescriptor : DescriptorBase<LetterTokenizerDescriptor>
+	public sealed partial class LetterTokenizerDescriptor : DescriptorBase<LetterTokenizerDescriptor>
 	{
 	}
 
@@ -1793,7 +1793,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LimitTokenCountTokenFilterDescriptorConverter))]
-	public partial class LimitTokenCountTokenFilterDescriptor : DescriptorBase<LimitTokenCountTokenFilterDescriptor>
+	public sealed partial class LimitTokenCountTokenFilterDescriptor : DescriptorBase<LimitTokenCountTokenFilterDescriptor>
 	{
 		internal bool _consumeAllTokens;
 		internal int _maxTokenCount;
@@ -1823,7 +1823,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LowercaseNormalizerDescriptorConverter))]
-	public partial class LowercaseNormalizerDescriptor : DescriptorBase<LowercaseNormalizerDescriptor>
+	public sealed partial class LowercaseNormalizerDescriptor : DescriptorBase<LowercaseNormalizerDescriptor>
 	{
 	}
 
@@ -1850,7 +1850,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LowercaseTokenFilterDescriptorConverter))]
-	public partial class LowercaseTokenFilterDescriptor : DescriptorBase<LowercaseTokenFilterDescriptor>
+	public sealed partial class LowercaseTokenFilterDescriptor : DescriptorBase<LowercaseTokenFilterDescriptor>
 	{
 		internal string? _language;
 	}
@@ -1881,7 +1881,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(LowercaseTokenizerDescriptorConverter))]
-	public partial class LowercaseTokenizerDescriptor : DescriptorBase<LowercaseTokenizerDescriptor>
+	public sealed partial class LowercaseTokenizerDescriptor : DescriptorBase<LowercaseTokenizerDescriptor>
 	{
 	}
 
@@ -1912,7 +1912,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(MappingCharFilterDescriptorConverter))]
-	public partial class MappingCharFilterDescriptor : DescriptorBase<MappingCharFilterDescriptor>
+	public sealed partial class MappingCharFilterDescriptor : DescriptorBase<MappingCharFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _mappings;
 		internal string? _mappingsPath;
@@ -1953,7 +1953,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(MultiplexerTokenFilterDescriptorConverter))]
-	public partial class MultiplexerTokenFilterDescriptor : DescriptorBase<MultiplexerTokenFilterDescriptor>
+	public sealed partial class MultiplexerTokenFilterDescriptor : DescriptorBase<MultiplexerTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _filters;
 		internal bool _preserveOriginal;
@@ -1994,7 +1994,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(NGramTokenFilterDescriptorConverter))]
-	public partial class NGramTokenFilterDescriptor : DescriptorBase<NGramTokenFilterDescriptor>
+	public sealed partial class NGramTokenFilterDescriptor : DescriptorBase<NGramTokenFilterDescriptor>
 	{
 		internal int? _maxGram;
 		internal int? _minGram;
@@ -2054,7 +2054,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(NGramTokenizerDescriptorConverter))]
-	public partial class NGramTokenizerDescriptor : DescriptorBase<NGramTokenizerDescriptor>
+	public sealed partial class NGramTokenizerDescriptor : DescriptorBase<NGramTokenizerDescriptor>
 	{
 		internal string? _customTokenChars;
 		internal int _maxGram;
@@ -2109,7 +2109,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(NoriAnalyzerDescriptorConverter))]
-	public partial class NoriAnalyzerDescriptor : DescriptorBase<NoriAnalyzerDescriptor>
+	public sealed partial class NoriAnalyzerDescriptor : DescriptorBase<NoriAnalyzerDescriptor>
 	{
 		internal string? _version;
 		internal Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? _decompoundMode;
@@ -2164,7 +2164,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(NoriPartOfSpeechTokenFilterDescriptorConverter))]
-	public partial class NoriPartOfSpeechTokenFilterDescriptor : DescriptorBase<NoriPartOfSpeechTokenFilterDescriptor>
+	public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : DescriptorBase<NoriPartOfSpeechTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _stoptags;
 	}
@@ -2206,7 +2206,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(NoriTokenizerDescriptorConverter))]
-	public partial class NoriTokenizerDescriptor : DescriptorBase<NoriTokenizerDescriptor>
+	public sealed partial class NoriTokenizerDescriptor : DescriptorBase<NoriTokenizerDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? _decompoundMode;
 		internal bool? _discardPunctuation;
@@ -2277,7 +2277,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PathHierarchyTokenizerDescriptorConverter))]
-	public partial class PathHierarchyTokenizerDescriptor : DescriptorBase<PathHierarchyTokenizerDescriptor>
+	public sealed partial class PathHierarchyTokenizerDescriptor : DescriptorBase<PathHierarchyTokenizerDescriptor>
 	{
 		internal int _bufferSize;
 		internal string _delimiter;
@@ -2335,7 +2335,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PatternAnalyzerDescriptorConverter))]
-	public partial class PatternAnalyzerDescriptor : DescriptorBase<PatternAnalyzerDescriptor>
+	public sealed partial class PatternAnalyzerDescriptor : DescriptorBase<PatternAnalyzerDescriptor>
 	{
 		internal string? _version;
 		internal string? _flags;
@@ -2397,7 +2397,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PatternCaptureTokenFilterDescriptorConverter))]
-	public partial class PatternCaptureTokenFilterDescriptor : DescriptorBase<PatternCaptureTokenFilterDescriptor>
+	public sealed partial class PatternCaptureTokenFilterDescriptor : DescriptorBase<PatternCaptureTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string> _patterns;
 		internal bool _preserveOriginal;
@@ -2438,7 +2438,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PatternReplaceCharFilterDescriptorConverter))]
-	public partial class PatternReplaceCharFilterDescriptor : DescriptorBase<PatternReplaceCharFilterDescriptor>
+	public sealed partial class PatternReplaceCharFilterDescriptor : DescriptorBase<PatternReplaceCharFilterDescriptor>
 	{
 		internal string _flags;
 		internal string _pattern;
@@ -2482,7 +2482,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PatternReplaceTokenFilterDescriptorConverter))]
-	public partial class PatternReplaceTokenFilterDescriptor : DescriptorBase<PatternReplaceTokenFilterDescriptor>
+	public sealed partial class PatternReplaceTokenFilterDescriptor : DescriptorBase<PatternReplaceTokenFilterDescriptor>
 	{
 		internal string _flags;
 		internal string _pattern;
@@ -2526,7 +2526,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PatternTokenizerDescriptorConverter))]
-	public partial class PatternTokenizerDescriptor : DescriptorBase<PatternTokenizerDescriptor>
+	public sealed partial class PatternTokenizerDescriptor : DescriptorBase<PatternTokenizerDescriptor>
 	{
 		internal string _flags;
 		internal int _group;
@@ -2582,7 +2582,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PhoneticTokenFilterDescriptorConverter))]
-	public partial class PhoneticTokenFilterDescriptor : DescriptorBase<PhoneticTokenFilterDescriptor>
+	public sealed partial class PhoneticTokenFilterDescriptor : DescriptorBase<PhoneticTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder _encoder;
 		internal IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage> _languageset;
@@ -2632,7 +2632,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PorterStemTokenFilterDescriptorConverter))]
-	public partial class PorterStemTokenFilterDescriptor : DescriptorBase<PorterStemTokenFilterDescriptor>
+	public sealed partial class PorterStemTokenFilterDescriptor : DescriptorBase<PorterStemTokenFilterDescriptor>
 	{
 	}
 
@@ -2659,7 +2659,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(PredicateTokenFilterDescriptorConverter))]
-	public partial class PredicateTokenFilterDescriptor : DescriptorBase<PredicateTokenFilterDescriptor>
+	public sealed partial class PredicateTokenFilterDescriptor : DescriptorBase<PredicateTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Script _script;
 	}
@@ -2686,7 +2686,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(RemoveDuplicatesTokenFilterDescriptorConverter))]
-	public partial class RemoveDuplicatesTokenFilterDescriptor : DescriptorBase<RemoveDuplicatesTokenFilterDescriptor>
+	public sealed partial class RemoveDuplicatesTokenFilterDescriptor : DescriptorBase<RemoveDuplicatesTokenFilterDescriptor>
 	{
 	}
 
@@ -2710,7 +2710,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(ReverseTokenFilterDescriptorConverter))]
-	public partial class ReverseTokenFilterDescriptor : DescriptorBase<ReverseTokenFilterDescriptor>
+	public sealed partial class ReverseTokenFilterDescriptor : DescriptorBase<ReverseTokenFilterDescriptor>
 	{
 	}
 
@@ -2757,7 +2757,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(ShingleTokenFilterDescriptorConverter))]
-	public partial class ShingleTokenFilterDescriptor : DescriptorBase<ShingleTokenFilterDescriptor>
+	public sealed partial class ShingleTokenFilterDescriptor : DescriptorBase<ShingleTokenFilterDescriptor>
 	{
 		internal string? _fillerToken;
 		internal Union<int?, string?>? _maxShingleSize;
@@ -2826,7 +2826,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(SimpleAnalyzerDescriptorConverter))]
-	public partial class SimpleAnalyzerDescriptor : DescriptorBase<SimpleAnalyzerDescriptor>
+	public sealed partial class SimpleAnalyzerDescriptor : DescriptorBase<SimpleAnalyzerDescriptor>
 	{
 		internal string? _version;
 	}
@@ -2868,7 +2868,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(SnowballAnalyzerDescriptorConverter))]
-	public partial class SnowballAnalyzerDescriptor : DescriptorBase<SnowballAnalyzerDescriptor>
+	public sealed partial class SnowballAnalyzerDescriptor : DescriptorBase<SnowballAnalyzerDescriptor>
 	{
 		internal string? _version;
 		internal Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage _language;
@@ -2912,7 +2912,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(SnowballTokenFilterDescriptorConverter))]
-	public partial class SnowballTokenFilterDescriptor : DescriptorBase<SnowballTokenFilterDescriptor>
+	public sealed partial class SnowballTokenFilterDescriptor : DescriptorBase<SnowballTokenFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage _language;
 	}
@@ -2946,7 +2946,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(StandardAnalyzerDescriptorConverter))]
-	public partial class StandardAnalyzerDescriptor : DescriptorBase<StandardAnalyzerDescriptor>
+	public sealed partial class StandardAnalyzerDescriptor : DescriptorBase<StandardAnalyzerDescriptor>
 	{
 		internal int? _maxTokenLength;
 		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
@@ -2987,7 +2987,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(StandardTokenizerDescriptorConverter))]
-	public partial class StandardTokenizerDescriptor : DescriptorBase<StandardTokenizerDescriptor>
+	public sealed partial class StandardTokenizerDescriptor : DescriptorBase<StandardTokenizerDescriptor>
 	{
 		internal int? _maxTokenLength;
 	}
@@ -3025,7 +3025,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(StemmerOverrideTokenFilterDescriptorConverter))]
-	public partial class StemmerOverrideTokenFilterDescriptor : DescriptorBase<StemmerOverrideTokenFilterDescriptor>
+	public sealed partial class StemmerOverrideTokenFilterDescriptor : DescriptorBase<StemmerOverrideTokenFilterDescriptor>
 	{
 		internal IReadOnlyCollection<string>? _rules;
 		internal string? _rulesPath;
@@ -3066,7 +3066,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(StemmerTokenFilterDescriptorConverter))]
-	public partial class StemmerTokenFilterDescriptor : DescriptorBase<StemmerTokenFilterDescriptor>
+	public sealed partial class StemmerTokenFilterDescriptor : DescriptorBase<StemmerTokenFilterDescriptor>
 	{
 		internal string _language;
 	}
@@ -3104,7 +3104,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(StopAnalyzerDescriptorConverter))]
-	public partial class StopAnalyzerDescriptor : DescriptorBase<StopAnalyzerDescriptor>
+	public sealed partial class StopAnalyzerDescriptor : DescriptorBase<StopAnalyzerDescriptor>
 	{
 		internal string? _version;
 		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
@@ -3164,7 +3164,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(StopTokenFilterDescriptorConverter))]
-	public partial class StopTokenFilterDescriptor : DescriptorBase<StopTokenFilterDescriptor>
+	public sealed partial class StopTokenFilterDescriptor : DescriptorBase<StopTokenFilterDescriptor>
 	{
 		internal bool? _ignoreCase;
 		internal bool? _removeTrailing;
@@ -3239,7 +3239,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(SynonymGraphTokenFilterDescriptorConverter))]
-	public partial class SynonymGraphTokenFilterDescriptor : DescriptorBase<SynonymGraphTokenFilterDescriptor>
+	public sealed partial class SynonymGraphTokenFilterDescriptor : DescriptorBase<SynonymGraphTokenFilterDescriptor>
 	{
 		internal bool? _expand;
 		internal Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? _format;
@@ -3339,7 +3339,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(SynonymTokenFilterDescriptorConverter))]
-	public partial class SynonymTokenFilterDescriptor : DescriptorBase<SynonymTokenFilterDescriptor>
+	public sealed partial class SynonymTokenFilterDescriptor : DescriptorBase<SynonymTokenFilterDescriptor>
 	{
 		internal bool? _expand;
 		internal Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? _format;
@@ -3426,7 +3426,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(TrimTokenFilterDescriptorConverter))]
-	public partial class TrimTokenFilterDescriptor : DescriptorBase<TrimTokenFilterDescriptor>
+	public sealed partial class TrimTokenFilterDescriptor : DescriptorBase<TrimTokenFilterDescriptor>
 	{
 	}
 
@@ -3453,7 +3453,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(TruncateTokenFilterDescriptorConverter))]
-	public partial class TruncateTokenFilterDescriptor : DescriptorBase<TruncateTokenFilterDescriptor>
+	public sealed partial class TruncateTokenFilterDescriptor : DescriptorBase<TruncateTokenFilterDescriptor>
 	{
 		internal int _length;
 	}
@@ -3483,7 +3483,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(UaxEmailUrlTokenizerDescriptorConverter))]
-	public partial class UaxEmailUrlTokenizerDescriptor : DescriptorBase<UaxEmailUrlTokenizerDescriptor>
+	public sealed partial class UaxEmailUrlTokenizerDescriptor : DescriptorBase<UaxEmailUrlTokenizerDescriptor>
 	{
 		internal int? _maxTokenLength;
 	}
@@ -3517,7 +3517,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(UniqueTokenFilterDescriptorConverter))]
-	public partial class UniqueTokenFilterDescriptor : DescriptorBase<UniqueTokenFilterDescriptor>
+	public sealed partial class UniqueTokenFilterDescriptor : DescriptorBase<UniqueTokenFilterDescriptor>
 	{
 		internal bool? _onlyOnSamePosition;
 	}
@@ -3548,7 +3548,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(UppercaseTokenFilterDescriptorConverter))]
-	public partial class UppercaseTokenFilterDescriptor : DescriptorBase<UppercaseTokenFilterDescriptor>
+	public sealed partial class UppercaseTokenFilterDescriptor : DescriptorBase<UppercaseTokenFilterDescriptor>
 	{
 	}
 
@@ -3575,7 +3575,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(WhitespaceAnalyzerDescriptorConverter))]
-	public partial class WhitespaceAnalyzerDescriptor : DescriptorBase<WhitespaceAnalyzerDescriptor>
+	public sealed partial class WhitespaceAnalyzerDescriptor : DescriptorBase<WhitespaceAnalyzerDescriptor>
 	{
 		internal string? _version;
 	}
@@ -3609,7 +3609,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(WhitespaceTokenizerDescriptorConverter))]
-	public partial class WhitespaceTokenizerDescriptor : DescriptorBase<WhitespaceTokenizerDescriptor>
+	public sealed partial class WhitespaceTokenizerDescriptor : DescriptorBase<WhitespaceTokenizerDescriptor>
 	{
 		internal int? _maxTokenLength;
 	}
@@ -3699,7 +3699,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(WordDelimiterGraphTokenFilterDescriptorConverter))]
-	public partial class WordDelimiterGraphTokenFilterDescriptor : DescriptorBase<WordDelimiterGraphTokenFilterDescriptor>
+	public sealed partial class WordDelimiterGraphTokenFilterDescriptor : DescriptorBase<WordDelimiterGraphTokenFilterDescriptor>
 	{
 		internal bool? _adjustOffsets;
 		internal bool? _catenateAll;
@@ -3879,7 +3879,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	}
 
 	[JsonConverter(typeof(WordDelimiterTokenFilterDescriptorConverter))]
-	public partial class WordDelimiterTokenFilterDescriptor : DescriptorBase<WordDelimiterTokenFilterDescriptor>
+	public sealed partial class WordDelimiterTokenFilterDescriptor : DescriptorBase<WordDelimiterTokenFilterDescriptor>
 	{
 		internal bool? _catenateAll;
 		internal bool? _catenateNumbers;

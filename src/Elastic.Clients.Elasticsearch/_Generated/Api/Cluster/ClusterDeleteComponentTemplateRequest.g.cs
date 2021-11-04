@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterDeleteComponentTemplateRequestDescriptorConverter))]
-	public partial class ClusterDeleteComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterDeleteComponentTemplateRequestDescriptor, ClusterDeleteComponentTemplateRequestParameters>
+	public sealed partial class ClusterDeleteComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterDeleteComponentTemplateRequestDescriptor, ClusterDeleteComponentTemplateRequestParameters>
 	{
 		public ClusterDeleteComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{

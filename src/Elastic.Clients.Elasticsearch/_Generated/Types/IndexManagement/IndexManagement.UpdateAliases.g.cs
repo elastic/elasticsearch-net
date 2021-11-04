@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		internal IActionVariant Variant { get; }
 	}
 
-	public class ActionConverter : JsonConverter<Action>
+	internal sealed class ActionConverter : JsonConverter<Action>
 	{
 		public override Action Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

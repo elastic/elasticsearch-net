@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexSegmentsRequestDescriptorConverter))]
-	public partial class IndexSegmentsRequestDescriptor : RequestDescriptorBase<IndexSegmentsRequestDescriptor, IndexSegmentsRequestParameters>
+	public sealed partial class IndexSegmentsRequestDescriptor : RequestDescriptorBase<IndexSegmentsRequestDescriptor, IndexSegmentsRequestParameters>
 	{
 		public IndexSegmentsRequestDescriptor()
 		{

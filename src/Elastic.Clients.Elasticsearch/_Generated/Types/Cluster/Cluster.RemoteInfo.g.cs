@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 	}
 
 	[JsonConverter(typeof(ClusterRemoteProxyInfoDescriptorConverter))]
-	public partial class ClusterRemoteProxyInfoDescriptor : DescriptorBase<ClusterRemoteProxyInfoDescriptor>
+	public sealed partial class ClusterRemoteProxyInfoDescriptor : DescriptorBase<ClusterRemoteProxyInfoDescriptor>
 	{
 		internal bool _connected;
 		internal Elastic.Clients.Elasticsearch.Time _initialConnectTimeout;
@@ -110,7 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 
 		[JsonInclude]
 		[JsonPropertyName("num_nodes_connected")]
-		public object NumNodesConnected { get; init; }
+		public long NumNodesConnected { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("initial_connect_timeout")]
@@ -126,11 +126,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 	}
 
 	[JsonConverter(typeof(ClusterRemoteSniffInfoDescriptorConverter))]
-	public partial class ClusterRemoteSniffInfoDescriptor : DescriptorBase<ClusterRemoteSniffInfoDescriptor>
+	public sealed partial class ClusterRemoteSniffInfoDescriptor : DescriptorBase<ClusterRemoteSniffInfoDescriptor>
 	{
 		internal bool _connected;
 		internal int _maxConnectionsPerCluster;
-		internal object _numNodesConnected;
+		internal long _numNodesConnected;
 		internal Elastic.Clients.Elasticsearch.Time _initialConnectTimeout;
 		internal bool _skipUnavailable;
 		internal IReadOnlyCollection<string> _seeds;
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 			writer.WritePropertyName("max_connections_per_cluster");
 			writer.WriteNumberValue(value._maxConnectionsPerCluster);
 			writer.WritePropertyName("num_nodes_connected");
-			JsonSerializer.Serialize(writer, value._numNodesConnected, options);
+			writer.WriteNumberValue(value._numNodesConnected);
 			writer.WritePropertyName("initial_connect_timeout");
 			JsonSerializer.Serialize(writer, value._initialConnectTimeout, options);
 			writer.WritePropertyName("skip_unavailable");

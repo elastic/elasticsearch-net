@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 	}
 
 	[JsonConverter(typeof(IndexTemplateMappingDescriptorConverter))]
-	public partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor>
+	public sealed partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor>
 	{
 		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;

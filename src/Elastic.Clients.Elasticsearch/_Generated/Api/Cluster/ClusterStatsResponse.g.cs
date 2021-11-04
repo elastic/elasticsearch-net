@@ -45,6 +45,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public object Timestamp { get; init; }
+		public long Timestamp { get; init; }
 	}
 }

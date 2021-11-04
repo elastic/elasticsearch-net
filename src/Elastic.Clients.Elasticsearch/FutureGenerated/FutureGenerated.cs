@@ -22,9 +22,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 {
 	// TODO: Generator should handle these
 
-	public partial class ShingleTokenFilterDescriptor : ITokenFiltersVariant { }
+	public sealed partial class ShingleTokenFilterDescriptor : ITokenFiltersVariant { }
 
-	public class TokenFiltersDescriptor : IsADictionaryDescriptorBase<TokenFiltersDescriptor, TokenFilters, string, ITokenFiltersVariant>
+	public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptorBase<TokenFiltersDescriptor, TokenFilters, string, ITokenFiltersVariant>
 	{
 		public TokenFiltersDescriptor() : base(new TokenFilters()) { }
 
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexSettingsAnalysisDescriptor
+	public sealed partial class IndexSettingsAnalysisDescriptor
 	{
 		internal TokenFilters _tokenFilters;
 
@@ -570,13 +570,13 @@ namespace Elastic.Clients.Elasticsearch
 
 
 
-	[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]
-	public class VersionNumber
-	{
-		public VersionNumber(long value) => Value = value;
+	//[JsonConverter(typeof(NumericAliasConverter<VersionNumber>))]
+	//public class VersionNumber
+	//{
+	//	public VersionNumber(long value) => Value = value;
 
-		internal long Value { get; }
-	}
+	//	internal long Value { get; }
+	//}
 
 	//public class Types : IUrlParameter
 	//{

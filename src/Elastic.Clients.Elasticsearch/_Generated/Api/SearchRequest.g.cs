@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 		[JsonIgnore]
-		public object? BatchedReduceSize { get => Q<object?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 		[JsonIgnore]
 		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 		[JsonIgnore]
-		public object? MaxConcurrentShardRequests { get => Q<object?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 		[JsonIgnore]
 		public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public object? PreFilterShardSize { get => Q<object?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 		[JsonIgnore]
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
@@ -106,13 +106,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 		[JsonIgnore]
-		public object? SuggestSize { get => Q<object?>("suggest_size"); set => Q("suggest_size", value); }
+		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
 		[JsonIgnore]
 		public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 		[JsonIgnore]
-		public object? TerminateAfter { get => Q<object?>("terminate_after"); set => Q("terminate_after", value); }
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
@@ -183,7 +183,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 		[JsonIgnore]
-		public object? BatchedReduceSize { get => Q<object?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
 		[JsonIgnore]
 		public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 		[JsonIgnore]
-		public object? MaxConcurrentShardRequests { get => Q<object?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 		[JsonIgnore]
 		public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
@@ -222,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public object? PreFilterShardSize { get => Q<object?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 		[JsonIgnore]
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
@@ -249,13 +249,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
 		[JsonIgnore]
-		public object? SuggestSize { get => Q<object?>("suggest_size"); set => Q("suggest_size", value); }
+		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
 		[JsonIgnore]
 		public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 		[JsonIgnore]
-		public object? TerminateAfter { get => Q<object?>("terminate_after"); set => Q("terminate_after", value); }
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
@@ -365,7 +365,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SearchRequestDescriptorConverter))]
-	public partial class SearchRequestDescriptor : RequestDescriptorBase<SearchRequestDescriptor, SearchRequestParameters>
+	public sealed partial class SearchRequestDescriptor : RequestDescriptorBase<SearchRequestDescriptor, SearchRequestParameters>
 	{
 		public SearchRequestDescriptor()
 		{
@@ -398,7 +398,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults) => Qs("allow_partial_search_results", allowPartialSearchResults);
 		public SearchRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public SearchRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public SearchRequestDescriptor BatchedReduceSize(object? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
+		public SearchRequestDescriptor BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		public SearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		public SearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public SearchRequestDescriptor Df(string? df) => Qs("df", df);
@@ -408,10 +408,10 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
 		public SearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public SearchRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
-		public SearchRequestDescriptor MaxConcurrentShardRequests(object? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+		public SearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		public SearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 		public SearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-		public SearchRequestDescriptor PreFilterShardSize(object? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+		public SearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 		public SearchRequestDescriptor RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
 		public SearchRequestDescriptor Routing(string? routing) => Qs("routing", routing);
 		public SearchRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
@@ -420,9 +420,9 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
 		public SearchRequestDescriptor SuggestField(string? suggestField) => Qs("suggest_field", suggestField);
 		public SearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
-		public SearchRequestDescriptor SuggestSize(object? suggestSize) => Qs("suggest_size", suggestSize);
+		public SearchRequestDescriptor SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public SearchRequestDescriptor SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
-		public SearchRequestDescriptor TerminateAfter(object? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public SearchRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		public SearchRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public SearchRequestDescriptor TrackTotalHits(Union<bool?, int?>? trackTotalHits) => Qs("track_total_hits", trackTotalHits);
 		public SearchRequestDescriptor TrackScores(bool? trackScores) => Qs("track_scores", trackScores);
