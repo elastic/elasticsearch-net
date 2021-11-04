@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexRolloverRequestDescriptorConverter))]
-	public partial class IndexRolloverRequestDescriptor : RequestDescriptorBase<IndexRolloverRequestDescriptor, IndexRolloverRequestParameters>
+	public sealed partial class IndexRolloverRequestDescriptor : RequestDescriptorBase<IndexRolloverRequestDescriptor, IndexRolloverRequestParameters>
 	{
 		public IndexRolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
 		{

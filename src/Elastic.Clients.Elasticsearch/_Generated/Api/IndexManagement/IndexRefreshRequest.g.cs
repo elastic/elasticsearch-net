@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexRefreshRequestDescriptorConverter))]
-	public partial class IndexRefreshRequestDescriptor : RequestDescriptorBase<IndexRefreshRequestDescriptor, IndexRefreshRequestParameters>
+	public sealed partial class IndexRefreshRequestDescriptor : RequestDescriptorBase<IndexRefreshRequestDescriptor, IndexRefreshRequestParameters>
 	{
 		public IndexRefreshRequestDescriptor()
 		{

@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 	{
 		[JsonInclude]
 		[JsonPropertyName("length")]
-		public object Length { get; init; }
+		public long Length { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("recovered")]
-		public object Recovered { get; init; }
+		public long Recovered { get; init; }
 	}
 
 	public partial class RecoveryBytes
@@ -89,15 +89,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("recovered")]
-		public object Recovered { get; init; }
+		public long Recovered { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reused")]
-		public object Reused { get; init; }
+		public long Reused { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 	}
 
 	public partial class RecoveryIndexStatus
@@ -194,7 +194,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 	{
 		[JsonInclude]
 		[JsonPropertyName("check_index_time")]
-		public object CheckIndexTime { get; init; }
+		public long CheckIndexTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public object Id { get; init; }
+		public long Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -283,15 +283,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("recovered")]
-		public object Recovered { get; init; }
+		public long Recovered { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_on_start")]
-		public object TotalOnStart { get; init; }
+		public long TotalOnStart { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]

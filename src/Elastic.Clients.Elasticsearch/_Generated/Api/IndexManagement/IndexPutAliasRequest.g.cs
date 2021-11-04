@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexPutAliasRequestDescriptorConverter))]
-	public partial class IndexPutAliasRequestDescriptor : RequestDescriptorBase<IndexPutAliasRequestDescriptor, IndexPutAliasRequestParameters>
+	public sealed partial class IndexPutAliasRequestDescriptor : RequestDescriptorBase<IndexPutAliasRequestDescriptor, IndexPutAliasRequestParameters>
 	{
 		public IndexPutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 		{

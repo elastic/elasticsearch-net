@@ -109,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
-	public partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
+	public sealed partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
 	{
 		public ClusterHealthRequestDescriptor()
 		{

@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("matching_size_in_bytes")]
-		public object MatchingSizeInBytes { get; init; }
+		public long MatchingSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("matching_sync_id")]
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("shard_sizes")]
-		public Dictionary<string, object> ShardSizes { get; init; }
+		public Dictionary<string, long> ShardSizes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_data_set_sizes")]
@@ -119,15 +119,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("total_bytes")]
-		public object TotalBytes { get; init; }
+		public long TotalBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("used_bytes")]
-		public object UsedBytes { get; init; }
+		public long UsedBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("free_bytes")]
-		public object FreeBytes { get; init; }
+		public long FreeBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("free_disk_percent")]
@@ -200,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]

@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 
 		[JsonInclude]
 		[JsonPropertyName("legacy_version")]
-		public object LegacyVersion { get; init; }
+		public long LegacyVersion { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]

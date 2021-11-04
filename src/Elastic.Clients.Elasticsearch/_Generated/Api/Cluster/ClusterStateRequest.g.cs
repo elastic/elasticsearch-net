@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public object? WaitForMetadataVersion { get => Q<object?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
@@ -88,14 +88,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public object? WaitForMetadataVersion { get => Q<object?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
+		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
 	[JsonConverter(typeof(ClusterStateRequestDescriptorConverter))]
-	public partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
+	public sealed partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
 	{
 		public ClusterStateRequestDescriptor()
 		{
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ClusterStateRequestDescriptor Local(bool? local) => Qs("local", local);
 		public ClusterStateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterStateRequestDescriptor WaitForMetadataVersion(object? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
+		public ClusterStateRequestDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
 		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 	}
 

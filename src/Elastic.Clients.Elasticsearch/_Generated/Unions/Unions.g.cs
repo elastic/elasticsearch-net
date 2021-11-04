@@ -23,9 +23,9 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ByteSize : Union<object?, string?>
+	public partial class ByteSize : Union<long?, string?>
 	{
-		public ByteSize(object? item) : base(item)
+		public ByteSize(long? item) : base(item)
 		{
 		}
 
@@ -45,13 +45,13 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class EpochMillis : Union<string?, object?>
+	public partial class EpochMillis : Union<string?, long?>
 	{
 		public EpochMillis(string? item) : base(item)
 		{
 		}
 
-		public EpochMillis(object? item) : base(item)
+		public EpochMillis(long? item) : base(item)
 		{
 		}
 	}

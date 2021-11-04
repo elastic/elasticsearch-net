@@ -19,6 +19,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	internal static class ApiUrlsLookups
 	{
+		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "/_pit" });
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
 		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
 		internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[] { "/_cluster/voting_config_exclusions" });
@@ -34,7 +35,10 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls ClusterReroute = new ApiUrls(new[] { "/_cluster/reroute" });
 		internal static ApiUrls ClusterState = new ApiUrls(new[] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" });
 		internal static ApiUrls ClusterStats = new ApiUrls(new[] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" });
+		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls IndexManagementAnalyze = new ApiUrls(new[] { "/_analyze", "/{index}/_analyze" });
 		internal static ApiUrls IndexManagementCreate = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
@@ -91,7 +95,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "/_ingest/processor/grok" });
 		internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
 		internal static ApiUrls IngestSimulate = new ApiUrls(new[] { "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate" });
+		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
+		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
 	}
 }

@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 	}
 
 	[JsonConverter(typeof(DocumentDescriptorConverter))]
-	public partial class DocumentDescriptor : DescriptorBase<DocumentDescriptor>
+	public sealed partial class DocumentDescriptor : DescriptorBase<DocumentDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Id? _id;
 		internal Elastic.Clients.Elasticsearch.IndexName? _index;

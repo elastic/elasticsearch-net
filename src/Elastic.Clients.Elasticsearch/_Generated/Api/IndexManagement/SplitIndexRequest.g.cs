@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(SplitIndexRequestDescriptorConverter))]
-	public partial class SplitIndexRequestDescriptor : RequestDescriptorBase<SplitIndexRequestDescriptor, SplitIndexRequestParameters>
+	public sealed partial class SplitIndexRequestDescriptor : RequestDescriptorBase<SplitIndexRequestDescriptor, SplitIndexRequestParameters>
 	{
 		public SplitIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{

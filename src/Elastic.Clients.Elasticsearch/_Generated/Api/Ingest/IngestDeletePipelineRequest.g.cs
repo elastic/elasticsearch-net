@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(IngestDeletePipelineRequestDescriptorConverter))]
-	public partial class IngestDeletePipelineRequestDescriptor : RequestDescriptorBase<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineRequestParameters>
+	public sealed partial class IngestDeletePipelineRequestDescriptor : RequestDescriptorBase<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineRequestParameters>
 	{
 		public IngestDeletePipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{

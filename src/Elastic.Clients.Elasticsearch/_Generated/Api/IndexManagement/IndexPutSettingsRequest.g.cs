@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexPutSettingsRequestDescriptorConverter))]
-	public partial class IndexPutSettingsRequestDescriptor : RequestDescriptorBase<IndexPutSettingsRequestDescriptor, IndexPutSettingsRequestParameters>
+	public sealed partial class IndexPutSettingsRequestDescriptor : RequestDescriptorBase<IndexPutSettingsRequestDescriptor, IndexPutSettingsRequestParameters>
 	{
 		public IndexPutSettingsRequestDescriptor()
 		{

@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterPutComponentTemplateRequestDescriptorConverter))]
-	public partial class ClusterPutComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateRequestParameters>
+	public sealed partial class ClusterPutComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterPutComponentTemplateRequestDescriptor, ClusterPutComponentTemplateRequestParameters>
 	{
 		public ClusterPutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? _aliases;
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
-		internal object? _version;
+		internal long? _version;
 		internal Dictionary<string, object>? _meta;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>()));
 		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
 		public ClusterPutComponentTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
-		public ClusterPutComponentTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
+		public ClusterPutComponentTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a._version = v);
 		public ClusterPutComponentTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
 	}
 

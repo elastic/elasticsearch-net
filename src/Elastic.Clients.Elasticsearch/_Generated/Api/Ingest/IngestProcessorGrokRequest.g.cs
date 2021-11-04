@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(IngestProcessorGrokRequestDescriptorConverter))]
-	public partial class IngestProcessorGrokRequestDescriptor : RequestDescriptorBase<IngestProcessorGrokRequestDescriptor, IngestProcessorGrokRequestParameters>
+	public sealed partial class IngestProcessorGrokRequestDescriptor : RequestDescriptorBase<IngestProcessorGrokRequestDescriptor, IngestProcessorGrokRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

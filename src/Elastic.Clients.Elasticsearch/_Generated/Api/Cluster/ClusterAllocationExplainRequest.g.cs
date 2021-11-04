@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterAllocationExplainRequestDescriptorConverter))]
-	public partial class ClusterAllocationExplainRequestDescriptor : RequestDescriptorBase<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainRequestParameters>
+	public sealed partial class ClusterAllocationExplainRequestDescriptor : RequestDescriptorBase<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainRequestParameters>
 	{
 		internal string? _currentNode;
 		internal Elastic.Clients.Elasticsearch.IndexName? _index;

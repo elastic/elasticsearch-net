@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterPendingTasksRequestDescriptorConverter))]
-	public partial class ClusterPendingTasksRequestDescriptor : RequestDescriptorBase<ClusterPendingTasksRequestDescriptor, ClusterPendingTasksRequestParameters>
+	public sealed partial class ClusterPendingTasksRequestDescriptor : RequestDescriptorBase<ClusterPendingTasksRequestDescriptor, ClusterPendingTasksRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;

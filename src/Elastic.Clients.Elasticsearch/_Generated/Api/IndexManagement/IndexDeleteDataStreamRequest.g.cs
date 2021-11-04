@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexDeleteDataStreamRequestDescriptorConverter))]
-	public partial class IndexDeleteDataStreamRequestDescriptor : RequestDescriptorBase<IndexDeleteDataStreamRequestDescriptor, IndexDeleteDataStreamRequestParameters>
+	public sealed partial class IndexDeleteDataStreamRequestDescriptor : RequestDescriptorBase<IndexDeleteDataStreamRequestDescriptor, IndexDeleteDataStreamRequestParameters>
 	{
 		public IndexDeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 		{

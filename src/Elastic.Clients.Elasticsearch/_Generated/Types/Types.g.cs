@@ -34,51 +34,51 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("build_aggregation")]
-		public object BuildAggregation { get; init; }
+		public long BuildAggregation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_aggregation_count")]
-		public object BuildAggregationCount { get; init; }
+		public long BuildAggregationCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_leaf_collector")]
-		public object BuildLeafCollector { get; init; }
+		public long BuildLeafCollector { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_leaf_collector_count")]
-		public object BuildLeafCollectorCount { get; init; }
+		public long BuildLeafCollectorCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("collect")]
-		public object Collect { get; init; }
+		public long Collect { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("collect_count")]
-		public object CollectCount { get; init; }
+		public long CollectCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("initialize")]
-		public object Initialize { get; init; }
+		public long Initialize { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("initialize_count")]
-		public object InitializeCount { get; init; }
+		public long InitializeCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("post_collection")]
-		public object? PostCollection { get; init; }
+		public long? PostCollection { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("post_collection_count")]
-		public object? PostCollectionCount { get; init; }
+		public long? PostCollectionCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reduce")]
-		public object Reduce { get; init; }
+		public long Reduce { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reduce_count")]
-		public object ReduceCount { get; init; }
+		public long ReduceCount { get; init; }
 	}
 
 	public partial class AggregationProfile
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
-		public object TimeInNanos { get; init; }
+		public long TimeInNanos { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -241,7 +241,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("total_operations")]
-		public object TotalOperations { get; init; }
+		public long TotalOperations { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
@@ -249,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
-		public object TotalTimeInMillis { get; init; }
+		public long TotalTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_size")]
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_size_in_bytes")]
-		public object TotalSizeInBytes { get; init; }
+		public long TotalSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg_time")]
@@ -265,7 +265,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("avg_time_in_millis")]
-		public object AvgTimeInMillis { get; init; }
+		public long AvgTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg_size")]
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("avg_size_in_bytes")]
-		public object AvgSizeInBytes { get; init; }
+		public long AvgSizeInBytes { get; init; }
 	}
 
 	public partial class ClusterStatistics
@@ -303,7 +303,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
-		public object TimeInNanos { get; init; }
+		public long TimeInNanos { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("children")]
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
-		public object SizeInBytes { get; init; }
+		public long SizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -409,7 +409,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(DateFieldDescriptorConverter))]
-	public partial class DateFieldDescriptor : DescriptorBase<DateFieldDescriptor>
+	public sealed partial class DateFieldDescriptor : DescriptorBase<DateFieldDescriptor>
 	{
 		internal string _field;
 		internal string? _format;
@@ -492,7 +492,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(DirectGeneratorDescriptorConverter))]
-	public partial class DirectGeneratorDescriptor : DescriptorBase<DirectGeneratorDescriptor>
+	public sealed partial class DirectGeneratorDescriptor : DescriptorBase<DirectGeneratorDescriptor>
 	{
 		internal string _field;
 		internal int? _maxEdits;
@@ -583,11 +583,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count { get; init; }
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("deleted")]
-		public object Deleted { get; init; }
+		public long Deleted { get; init; }
 	}
 
 	public partial class ErrorCause
@@ -659,7 +659,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
-		public object TimeInNanos { get; init; }
+		public long TimeInNanos { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("breakdown")]
@@ -728,7 +728,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(FieldAndFormatDescriptorConverter))]
-	public partial class FieldAndFormatDescriptor : DescriptorBase<FieldAndFormatDescriptor>
+	public sealed partial class FieldAndFormatDescriptor : DescriptorBase<FieldAndFormatDescriptor>
 	{
 		internal string _field;
 		internal string? _format;
@@ -775,7 +775,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(FieldCollapseDescriptorConverter))]
-	public partial class FieldCollapseDescriptor : DescriptorBase<FieldCollapseDescriptor>
+	public sealed partial class FieldCollapseDescriptor : DescriptorBase<FieldCollapseDescriptor>
 	{
 		internal string _field;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? _innerHits;
@@ -810,7 +810,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("evictions")]
-		public object? Evictions { get; init; }
+		public long? Evictions { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size")]
@@ -818,7 +818,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size_in_bytes")]
-		public object MemorySizeInBytes { get; init; }
+		public long MemorySizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
@@ -833,7 +833,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size_in_bytes")]
-		public object MemorySizeInBytes { get; init; }
+		public long MemorySizeInBytes { get; init; }
 	}
 
 	public partial class FieldSizeUsage
@@ -844,18 +844,18 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
-		public object SizeInBytes { get; init; }
+		public long SizeInBytes { get; init; }
 	}
 
 	public partial class FlushStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("periodic")]
-		public object Periodic { get; init; }
+		public long Periodic { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
@@ -863,7 +863,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
-		public object TotalTimeInMillis { get; init; }
+		public long TotalTimeInMillis { get; init; }
 	}
 
 	public partial class GeoDistanceSort
@@ -889,7 +889,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("current")]
-		public object Current { get; init; }
+		public long Current { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("exists_time")]
@@ -897,11 +897,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("exists_time_in_millis")]
-		public object ExistsTimeInMillis { get; init; }
+		public long ExistsTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("exists_total")]
-		public object ExistsTotal { get; init; }
+		public long ExistsTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_time")]
@@ -909,11 +909,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("missing_time_in_millis")]
-		public object MissingTimeInMillis { get; init; }
+		public long MissingTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_total")]
-		public object MissingTotal { get; init; }
+		public long MissingTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time")]
@@ -921,11 +921,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
-		public object TimeInMillis { get; init; }
+		public long TimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 	}
 
 	public partial class Highlight
@@ -1012,7 +1012,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(HighlightDescriptorConverter))]
-	public partial class HighlightDescriptor : DescriptorBase<HighlightDescriptor>
+	public sealed partial class HighlightDescriptor : DescriptorBase<HighlightDescriptor>
 	{
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.HighlightField> _fields;
 		internal Elastic.Clients.Elasticsearch.HighlighterType? _type;
@@ -1250,7 +1250,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(HighlightFieldDescriptorConverter))]
-	public partial class HighlightFieldDescriptor : DescriptorBase<HighlightFieldDescriptor>
+	public sealed partial class HighlightFieldDescriptor : DescriptorBase<HighlightFieldDescriptor>
 	{
 		internal string? _boundaryChars;
 		internal int? _boundaryMaxScan;
@@ -1475,15 +1475,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
-		public object? SeqNo { get; init; }
+		public long? SeqNo { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
-		public object? PrimaryTerm { get; init; }
+		public long? PrimaryTerm { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_version")]
-		public object? Version { get; init; }
+		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
@@ -1494,7 +1494,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public Union<Elastic.Clients.Elasticsearch.TotalHits, object> Total { get; init; }
+		public Union<Elastic.Clients.Elasticsearch.TotalHits, long> Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]
@@ -1516,11 +1516,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("index_current")]
-		public object IndexCurrent { get; init; }
+		public long IndexCurrent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delete_current")]
-		public object DeleteCurrent { get; init; }
+		public long DeleteCurrent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delete_time")]
@@ -1528,11 +1528,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("delete_time_in_millis")]
-		public object DeleteTimeInMillis { get; init; }
+		public long DeleteTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delete_total")]
-		public object DeleteTotal { get; init; }
+		public long DeleteTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("is_throttled")]
@@ -1540,7 +1540,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("noop_update_total")]
-		public object NoopUpdateTotal { get; init; }
+		public long NoopUpdateTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time")]
@@ -1548,7 +1548,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time_in_millis")]
-		public object ThrottleTimeInMillis { get; init; }
+		public long ThrottleTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_time")]
@@ -1556,15 +1556,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("index_time_in_millis")]
-		public object IndexTimeInMillis { get; init; }
+		public long IndexTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_total")]
-		public object IndexTotal { get; init; }
+		public long IndexTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_failed")]
-		public object IndexFailed { get; init; }
+		public long IndexFailed { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("types")]
@@ -1576,6 +1576,33 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
+	}
+
+	public partial class InlineGet<TDocument>
+	{
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("found")]
+		public bool Found { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public long? SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public long? PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public TDocument Source { get; init; }
 	}
 
 	public partial class InlineScript : ScriptBase
@@ -1653,7 +1680,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(InnerHitsDescriptorConverter))]
-	public partial class InnerHitsDescriptor : DescriptorBase<InnerHitsDescriptor>
+	public sealed partial class InnerHitsDescriptor : DescriptorBase<InnerHitsDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Name? _name;
 		internal int? _size;
@@ -1783,7 +1810,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public Union<Elastic.Clients.Elasticsearch.TotalHits, object> Total { get; init; }
+		public Union<Elastic.Clients.Elasticsearch.TotalHits, long> Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_score")]
@@ -1838,11 +1865,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("current")]
-		public object Current { get; init; }
+		public long Current { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("current_docs")]
-		public object CurrentDocs { get; init; }
+		public long CurrentDocs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("current_size")]
@@ -1850,11 +1877,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("current_size_in_bytes")]
-		public object CurrentSizeInBytes { get; init; }
+		public long CurrentSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_auto_throttle")]
@@ -1862,11 +1889,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_auto_throttle_in_bytes")]
-		public object TotalAutoThrottleInBytes { get; init; }
+		public long TotalAutoThrottleInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_docs")]
-		public object TotalDocs { get; init; }
+		public long TotalDocs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_size")]
@@ -1874,7 +1901,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_size_in_bytes")]
-		public object TotalSizeInBytes { get; init; }
+		public long TotalSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_stopped_time")]
@@ -1882,7 +1909,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_stopped_time_in_millis")]
-		public object TotalStoppedTimeInMillis { get; init; }
+		public long TotalStoppedTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_throttled_time")]
@@ -1890,7 +1917,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_throttled_time_in_millis")]
-		public object TotalThrottledTimeInMillis { get; init; }
+		public long TotalThrottledTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
@@ -1898,7 +1925,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
-		public object TotalTimeInMillis { get; init; }
+		public long TotalTimeInMillis { get; init; }
 	}
 
 	public partial class NestedIdentity
@@ -1951,7 +1978,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(PhraseSuggestCollateDescriptorConverter))]
-	public partial class PhraseSuggestCollateDescriptor : DescriptorBase<PhraseSuggestCollateDescriptor>
+	public sealed partial class PhraseSuggestCollateDescriptor : DescriptorBase<PhraseSuggestCollateDescriptor>
 	{
 		internal Dictionary<string, object>? _params;
 		internal bool? _prune;
@@ -2141,75 +2168,75 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("advance")]
-		public object Advance { get; init; }
+		public long Advance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("advance_count")]
-		public object AdvanceCount { get; init; }
+		public long AdvanceCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_scorer")]
-		public object BuildScorer { get; init; }
+		public long BuildScorer { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("build_scorer_count")]
-		public object BuildScorerCount { get; init; }
+		public long BuildScorerCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("create_weight")]
-		public object CreateWeight { get; init; }
+		public long CreateWeight { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("create_weight_count")]
-		public object CreateWeightCount { get; init; }
+		public long CreateWeightCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("match")]
-		public object Match { get; init; }
+		public long Match { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("match_count")]
-		public object MatchCount { get; init; }
+		public long MatchCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shallow_advance")]
-		public object ShallowAdvance { get; init; }
+		public long ShallowAdvance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shallow_advance_count")]
-		public object ShallowAdvanceCount { get; init; }
+		public long ShallowAdvanceCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("next_doc")]
-		public object NextDoc { get; init; }
+		public long NextDoc { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("next_doc_count")]
-		public object NextDocCount { get; init; }
+		public long NextDocCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("score")]
-		public object Score { get; init; }
+		public long Score { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("score_count")]
-		public object ScoreCount { get; init; }
+		public long ScoreCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("compute_max_score")]
-		public object ComputeMaxScore { get; init; }
+		public long ComputeMaxScore { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("compute_max_score_count")]
-		public object ComputeMaxScoreCount { get; init; }
+		public long ComputeMaxScoreCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("set_min_competitive_score")]
-		public object SetMinCompetitiveScore { get; init; }
+		public long SetMinCompetitiveScore { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("set_min_competitive_score_count")]
-		public object SetMinCompetitiveScoreCount { get; init; }
+		public long SetMinCompetitiveScoreCount { get; init; }
 	}
 
 	public partial class QueryCacheStats
@@ -2259,7 +2286,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
-		public object TimeInNanos { get; init; }
+		public long TimeInNanos { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -2274,11 +2301,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("current_as_source")]
-		public object CurrentAsSource { get; init; }
+		public long CurrentAsSource { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("current_as_target")]
-		public object CurrentAsTarget { get; init; }
+		public long CurrentAsTarget { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time")]
@@ -2286,26 +2313,26 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("throttle_time_in_millis")]
-		public object ThrottleTimeInMillis { get; init; }
+		public long ThrottleTimeInMillis { get; init; }
 	}
 
 	public partial class RefreshStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("external_total")]
-		public object ExternalTotal { get; init; }
+		public long ExternalTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("external_total_time_in_millis")]
-		public object ExternalTotalTimeInMillis { get; init; }
+		public long ExternalTotalTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("listeners")]
-		public object Listeners { get; init; }
+		public long Listeners { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
@@ -2313,7 +2340,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
-		public object TotalTimeInMillis { get; init; }
+		public long TotalTimeInMillis { get; init; }
 	}
 
 	public abstract partial class RequestBase
@@ -2324,11 +2351,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("evictions")]
-		public object Evictions { get; init; }
+		public long Evictions { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hit_count")]
-		public object HitCount { get; init; }
+		public long HitCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size")]
@@ -2336,11 +2363,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size_in_bytes")]
-		public object MemorySizeInBytes { get; init; }
+		public long MemorySizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("miss_count")]
-		public object MissCount { get; init; }
+		public long MissCount { get; init; }
 	}
 
 	public partial class Rescore
@@ -2374,7 +2401,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(RescoreQueryDescriptorConverter))]
-	public partial class RescoreQueryDescriptor : DescriptorBase<RescoreQueryDescriptor>
+	public sealed partial class RescoreQueryDescriptor : DescriptorBase<RescoreQueryDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _query;
 		internal double? _queryWeight;
@@ -2472,62 +2499,62 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("rewrite_time")]
-		public object RewriteTime { get; init; }
+		public long RewriteTime { get; init; }
 	}
 
 	public partial class SearchStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("fetch_current")]
-		public object FetchCurrent { get; init; }
+		public long FetchCurrent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fetch_time_in_millis")]
-		public object FetchTimeInMillis { get; init; }
+		public long FetchTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fetch_total")]
-		public object FetchTotal { get; init; }
+		public long FetchTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("open_contexts")]
-		public object? OpenContexts { get; init; }
+		public long? OpenContexts { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("query_current")]
-		public object QueryCurrent { get; init; }
+		public long QueryCurrent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("query_time_in_millis")]
-		public object QueryTimeInMillis { get; init; }
+		public long QueryTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("query_total")]
-		public object QueryTotal { get; init; }
+		public long QueryTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("scroll_current")]
-		public object ScrollCurrent { get; init; }
+		public long ScrollCurrent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("scroll_time_in_millis")]
-		public object ScrollTimeInMillis { get; init; }
+		public long ScrollTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("scroll_total")]
-		public object ScrollTotal { get; init; }
+		public long ScrollTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("suggest_current")]
-		public object SuggestCurrent { get; init; }
+		public long SuggestCurrent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("suggest_time_in_millis")]
-		public object SuggestTimeInMillis { get; init; }
+		public long SuggestTimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("suggest_total")]
-		public object SuggestTotal { get; init; }
+		public long SuggestTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("groups")]
@@ -2721,7 +2748,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SlicedScrollDescriptorConverter))]
-	public partial class SlicedScrollDescriptor : DescriptorBase<SlicedScrollDescriptor>
+	public sealed partial class SlicedScrollDescriptor : DescriptorBase<SlicedScrollDescriptor>
 	{
 		internal string? _field;
 		internal int _id;
@@ -2760,7 +2787,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal ISmoothingModelContainerVariant Variant { get; }
 	}
 
-	public class SmoothingModelContainerConverter : JsonConverter<SmoothingModelContainer>
+	internal sealed class SmoothingModelContainerConverter : JsonConverter<SmoothingModelContainer>
 	{
 		public override SmoothingModelContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -2855,7 +2882,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SourceFilterDescriptorConverter))]
-	public partial class SourceFilterDescriptor : DescriptorBase<SourceFilterDescriptor>
+	public sealed partial class SourceFilterDescriptor : DescriptorBase<SourceFilterDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Fields? _excludes;
 		internal Elastic.Clients.Elasticsearch.Fields? _includes;
@@ -2964,7 +2991,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal ISuggestContainerVariant Variant { get; }
 	}
 
-	public class SuggestContainerConverter : JsonConverter<SuggestContainer>
+	internal sealed class SuggestContainerConverter : JsonConverter<SuggestContainer>
 	{
 		public override SuggestContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -3044,7 +3071,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SuggestContextQueryDescriptorConverter))]
-	public partial class SuggestContextQueryDescriptor : DescriptorBase<SuggestContextQueryDescriptor>
+	public sealed partial class SuggestContextQueryDescriptor : DescriptorBase<SuggestContextQueryDescriptor>
 	{
 		internal double? _boost;
 		internal Elastic.Clients.Elasticsearch.Context _context;
@@ -3105,7 +3132,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SuggesterBaseDescriptorConverter))]
-	public partial class SuggesterBaseDescriptor : DescriptorBase<SuggesterBaseDescriptor>
+	public sealed partial class SuggesterBaseDescriptor : DescriptorBase<SuggesterBaseDescriptor>
 	{
 		internal string _field;
 		internal string? _analyzer;
@@ -3160,7 +3187,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(SuggestFuzzinessDescriptorConverter))]
-	public partial class SuggestFuzzinessDescriptor : DescriptorBase<SuggestFuzzinessDescriptor>
+	public sealed partial class SuggestFuzzinessDescriptor : DescriptorBase<SuggestFuzzinessDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Fuzziness _fuzziness;
 		internal int _minLength;
@@ -3250,7 +3277,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("freq")]
-		public object? Freq { get; init; }
+		public long? Freq { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("score")]
@@ -3265,18 +3292,18 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public object Value { get; init; }
+		public long Value { get; init; }
 	}
 
 	public partial class TranslogStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("earliest_last_modified_age")]
-		public object EarliestLastModifiedAge { get; init; }
+		public long EarliestLastModifiedAge { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("operations")]
-		public object Operations { get; init; }
+		public long Operations { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -3284,7 +3311,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
-		public object SizeInBytes { get; init; }
+		public long SizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("uncommitted_operations")]
@@ -3296,18 +3323,18 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("uncommitted_size_in_bytes")]
-		public object UncommittedSizeInBytes { get; init; }
+		public long UncommittedSizeInBytes { get; init; }
 	}
 
 	public partial class WarmerStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("current")]
-		public object Current { get; init; }
+		public long Current { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public object Total { get; init; }
+		public long Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
@@ -3315,7 +3342,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
-		public object TotalTimeInMillis { get; init; }
+		public long TotalTimeInMillis { get; init; }
 	}
 
 	public abstract partial class WriteResponseBase : ResponseBase
@@ -3330,7 +3357,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
-		public object PrimaryTerm { get; init; }
+		public long PrimaryTerm { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("result")]
@@ -3338,7 +3365,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
-		public object SeqNo { get; init; }
+		public long SeqNo { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
@@ -3350,7 +3377,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_version")]
-		public object Version { get; init; }
+		public long Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]

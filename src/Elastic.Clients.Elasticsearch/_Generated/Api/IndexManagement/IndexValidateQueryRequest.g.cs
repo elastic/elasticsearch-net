@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexValidateQueryRequestDescriptorConverter))]
-	public partial class IndexValidateQueryRequestDescriptor : RequestDescriptorBase<IndexValidateQueryRequestDescriptor, IndexValidateQueryRequestParameters>
+	public sealed partial class IndexValidateQueryRequestDescriptor : RequestDescriptorBase<IndexValidateQueryRequestDescriptor, IndexValidateQueryRequestParameters>
 	{
 		public IndexValidateQueryRequestDescriptor()
 		{

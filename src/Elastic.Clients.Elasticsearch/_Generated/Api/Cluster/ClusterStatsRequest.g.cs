@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterStatsRequestDescriptorConverter))]
-	public partial class ClusterStatsRequestDescriptor : RequestDescriptorBase<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
+	public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptorBase<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
 	{
 		public ClusterStatsRequestDescriptor()
 		{

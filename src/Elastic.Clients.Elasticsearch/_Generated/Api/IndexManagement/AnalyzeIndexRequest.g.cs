@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(AnalyzeIndexRequestDescriptorConverter))]
-	public partial class AnalyzeIndexRequestDescriptor : RequestDescriptorBase<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>
+	public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptorBase<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>
 	{
 		public AnalyzeIndexRequestDescriptor()
 		{

@@ -35,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		internal IPivotGroupByContainerVariant Variant { get; }
 	}
 
-	public class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
+	internal sealed class PivotGroupByContainerConverter : JsonConverter<PivotGroupByContainer>
 	{
 		public override PivotGroupByContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

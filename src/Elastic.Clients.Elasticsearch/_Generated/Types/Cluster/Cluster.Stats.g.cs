@@ -62,15 +62,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("available_in_bytes")]
-		public object AvailableInBytes { get; init; }
+		public long AvailableInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
-		public object FreeInBytes { get; init; }
+		public long FreeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
-		public object TotalInBytes { get; init; }
+		public long TotalInBytes { get; init; }
 	}
 
 	public partial class ClusterIndices
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count { get; init; }
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("docs")]
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_uptime_in_millis")]
-		public object MaxUptimeInMillis { get; init; }
+		public long MaxUptimeInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mem")]
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("threads")]
-		public object Threads { get; init; }
+		public long Threads { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("versions")]
@@ -188,11 +188,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("heap_max_in_bytes")]
-		public object HeapMaxInBytes { get; init; }
+		public long HeapMaxInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("heap_used_in_bytes")]
-		public object HeapUsedInBytes { get; init; }
+		public long HeapUsedInBytes { get; init; }
 	}
 
 	public partial class ClusterJvmVersion
@@ -425,34 +425,34 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("avg")]
-		public object Avg { get; init; }
+		public long Avg { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public object Max { get; init; }
+		public long Max { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public object Min { get; init; }
+		public long Min { get; init; }
 	}
 
 	public partial class ClusterProcessor
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object Count { get; init; }
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("current")]
-		public object Current { get; init; }
+		public long Current { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("failed")]
-		public object Failed { get; init; }
+		public long Failed { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_in_millis")]
-		public object TimeInMillis { get; init; }
+		public long TimeInMillis { get; init; }
 	}
 
 	public partial class ClusterShardMetrics
@@ -512,7 +512,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("total_primary_bytes")]
-		public object TotalPrimaryBytes { get; init; }
+		public long TotalPrimaryBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -538,7 +538,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
-		public object FreeInBytes { get; init; }
+		public long FreeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("free_percent")]
@@ -546,11 +546,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("total_in_bytes")]
-		public object TotalInBytes { get; init; }
+		public long TotalInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("used_in_bytes")]
-		public object UsedInBytes { get; init; }
+		public long UsedInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("used_percent")]

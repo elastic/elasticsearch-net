@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexDiskUsageRequestDescriptorConverter))]
-	public partial class IndexDiskUsageRequestDescriptor : RequestDescriptorBase<IndexDiskUsageRequestDescriptor, IndexDiskUsageRequestParameters>
+	public sealed partial class IndexDiskUsageRequestDescriptor : RequestDescriptorBase<IndexDiskUsageRequestDescriptor, IndexDiskUsageRequestParameters>
 	{
 		public IndexDiskUsageRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
