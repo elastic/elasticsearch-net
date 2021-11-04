@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexDeleteAliasRequestDescriptorConverter))]
-	public partial class IndexDeleteAliasRequestDescriptor : RequestDescriptorBase<IndexDeleteAliasRequestDescriptor, IndexDeleteAliasRequestParameters>
+	public sealed partial class IndexDeleteAliasRequestDescriptor : RequestDescriptorBase<IndexDeleteAliasRequestDescriptor, IndexDeleteAliasRequestParameters>
 	{
 		public IndexDeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
 		{

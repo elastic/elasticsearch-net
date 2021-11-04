@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter))]
-	public partial class ClusterDeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsRequestParameters>
+	public sealed partial class ClusterDeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteVotingConfigExclusions;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;

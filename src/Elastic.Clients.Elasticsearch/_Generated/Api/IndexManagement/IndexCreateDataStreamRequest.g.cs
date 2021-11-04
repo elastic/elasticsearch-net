@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexCreateDataStreamRequestDescriptorConverter))]
-	public partial class IndexCreateDataStreamRequestDescriptor : RequestDescriptorBase<IndexCreateDataStreamRequestDescriptor, IndexCreateDataStreamRequestParameters>
+	public sealed partial class IndexCreateDataStreamRequestDescriptor : RequestDescriptorBase<IndexCreateDataStreamRequestDescriptor, IndexCreateDataStreamRequestParameters>
 	{
 		public IndexCreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 		{

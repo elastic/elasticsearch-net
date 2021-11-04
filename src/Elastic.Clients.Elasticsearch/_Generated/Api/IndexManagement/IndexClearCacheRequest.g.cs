@@ -85,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexClearCacheRequestDescriptorConverter))]
-	public partial class IndexClearCacheRequestDescriptor : RequestDescriptorBase<IndexClearCacheRequestDescriptor, IndexClearCacheRequestParameters>
+	public sealed partial class IndexClearCacheRequestDescriptor : RequestDescriptorBase<IndexClearCacheRequestDescriptor, IndexClearCacheRequestParameters>
 	{
 		public IndexClearCacheRequestDescriptor()
 		{

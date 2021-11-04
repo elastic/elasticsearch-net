@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("num_docs")]
-		public object NumDocs { get; init; }
+		public long NumDocs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("user_data")]
@@ -144,23 +144,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("size_in_bytes")]
-		public object SizeInBytes { get; init; }
+		public long SizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_size_in_bytes")]
-		public object? MinSizeInBytes { get; init; }
+		public long? MinSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_size_in_bytes")]
-		public object? MaxSizeInBytes { get; init; }
+		public long? MaxSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("average_size_in_bytes")]
-		public object? AverageSizeInBytes { get; init; }
+		public long? AverageSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public object? Count { get; init; }
+		public long? Count { get; init; }
 	}
 
 	public partial class ShardLease
@@ -171,11 +171,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("retaining_seq_no")]
-		public object RetainingSeqNo { get; init; }
+		public long RetainingSeqNo { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]
-		public object Timestamp { get; init; }
+		public long Timestamp { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("source")]
@@ -201,42 +201,42 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("cache_count")]
-		public object CacheCount { get; init; }
+		public long CacheCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("cache_size")]
-		public object CacheSize { get; init; }
+		public long CacheSize { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("evictions")]
-		public object Evictions { get; init; }
+		public long Evictions { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hit_count")]
-		public object HitCount { get; init; }
+		public long HitCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size_in_bytes")]
-		public object MemorySizeInBytes { get; init; }
+		public long MemorySizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("miss_count")]
-		public object MissCount { get; init; }
+		public long MissCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_count")]
-		public object TotalCount { get; init; }
+		public long TotalCount { get; init; }
 	}
 
 	public partial class ShardRetentionLeases
 	{
 		[JsonInclude]
 		[JsonPropertyName("primary_term")]
-		public object PrimaryTerm { get; init; }
+		public long PrimaryTerm { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object Version { get; init; }
+		public long Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("leases")]
@@ -266,15 +266,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("global_checkpoint")]
-		public object GlobalCheckpoint { get; init; }
+		public long GlobalCheckpoint { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("local_checkpoint")]
-		public object LocalCheckpoint { get; init; }
+		public long LocalCheckpoint { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_seq_no")]
-		public object MaxSeqNo { get; init; }
+		public long MaxSeqNo { get; init; }
 	}
 
 	public partial class ShardStats
@@ -376,6 +376,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("total_count")]
-		public object TotalCount { get; init; }
+		public long TotalCount { get; init; }
 	}
 }

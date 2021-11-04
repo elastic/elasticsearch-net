@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(ShrinkIndexRequestDescriptorConverter))]
-	public partial class ShrinkIndexRequestDescriptor : RequestDescriptorBase<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters>
+	public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptorBase<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters>
 	{
 		public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 		{

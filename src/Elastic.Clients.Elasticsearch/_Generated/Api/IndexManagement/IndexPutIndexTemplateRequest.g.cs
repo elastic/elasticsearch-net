@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexPutIndexTemplateRequestDescriptorConverter))]
-	public partial class IndexPutIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexPutIndexTemplateRequestDescriptor, IndexPutIndexTemplateRequestParameters>
+	public sealed partial class IndexPutIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexPutIndexTemplateRequestDescriptor, IndexPutIndexTemplateRequestParameters>
 	{
 		public IndexPutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? _template;
 		internal Elastic.Clients.Elasticsearch.IndexManagement.DataStream? _dataStream;
 		internal int? _priority;
-		internal object? _version;
+		internal long? _version;
 		internal Dictionary<string, object>? _meta;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? template) => Assign(template, (a, v) => a._template = v);
 		public IndexPutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStream? dataStream) => Assign(dataStream, (a, v) => a._dataStream = v);
 		public IndexPutIndexTemplateRequestDescriptor Priority(int? priority) => Assign(priority, (a, v) => a._priority = v);
-		public IndexPutIndexTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
+		public IndexPutIndexTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a._version = v);
 		public IndexPutIndexTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
 	}
 

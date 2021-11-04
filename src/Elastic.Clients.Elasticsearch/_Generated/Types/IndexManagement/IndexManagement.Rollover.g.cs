@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs")]
-		public object? MaxDocs { get; set; }
+		public long? MaxDocs { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_size")]
@@ -43,10 +43,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 	}
 
 	[JsonConverter(typeof(RolloverConditionsDescriptorConverter))]
-	public partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
+	public sealed partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
 	{
 		internal Elastic.Clients.Elasticsearch.Time? _maxAge;
-		internal object? _maxDocs;
+		internal long? _maxDocs;
 		internal string? _maxSize;
 		internal Elastic.Clients.Elasticsearch.ByteSize? _maxPrimaryShardSize;
 	}
@@ -63,10 +63,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 				JsonSerializer.Serialize(writer, value._maxAge, options);
 			}
 
-			if (value._maxDocs is not null)
+			if (value._maxDocs.HasValue)
 			{
 				writer.WritePropertyName("max_docs");
-				JsonSerializer.Serialize(writer, value._maxDocs, options);
+				writer.WriteNumberValue(value._maxDocs.Value);
 			}
 
 			if (!string.IsNullOrEmpty(value._maxSize))

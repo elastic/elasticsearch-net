@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexResolveIndexRequestDescriptorConverter))]
-	public partial class IndexResolveIndexRequestDescriptor : RequestDescriptorBase<IndexResolveIndexRequestDescriptor, IndexResolveIndexRequestParameters>
+	public sealed partial class IndexResolveIndexRequestDescriptor : RequestDescriptorBase<IndexResolveIndexRequestDescriptor, IndexResolveIndexRequestParameters>
 	{
 		public IndexResolveIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 		{

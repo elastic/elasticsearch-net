@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexFlushRequestDescriptorConverter))]
-	public partial class IndexFlushRequestDescriptor : RequestDescriptorBase<IndexFlushRequestDescriptor, IndexFlushRequestParameters>
+	public sealed partial class IndexFlushRequestDescriptor : RequestDescriptorBase<IndexFlushRequestDescriptor, IndexFlushRequestParameters>
 	{
 		public IndexFlushRequestDescriptor()
 		{

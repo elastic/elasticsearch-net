@@ -67,11 +67,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 	}
 
 	[JsonConverter(typeof(IngestPutPipelineRequestDescriptorConverter))]
-	public partial class IngestPutPipelineRequestDescriptor : RequestDescriptorBase<IngestPutPipelineRequestDescriptor, IngestPutPipelineRequestParameters>
+	public sealed partial class IngestPutPipelineRequestDescriptor : RequestDescriptorBase<IngestPutPipelineRequestDescriptor, IngestPutPipelineRequestParameters>
 	{
 		public IngestPutPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal string? _description;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _onFailure;
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _processors;
-		internal object? _version;
+		internal long? _version;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IngestPutPipelineRequestDescriptor Description(string? description) => Assign(description, (a, v) => a._description = v);
 		public IngestPutPipelineRequestDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a._onFailure = v);
 		public IngestPutPipelineRequestDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a._processors = v);
-		public IngestPutPipelineRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
+		public IngestPutPipelineRequestDescriptor Version(long? version) => Assign(version, (a, v) => a._version = v);
 	}
 
 	internal sealed class IngestPutPipelineRequestDescriptorConverter : JsonConverter<IngestPutPipelineRequestDescriptor>

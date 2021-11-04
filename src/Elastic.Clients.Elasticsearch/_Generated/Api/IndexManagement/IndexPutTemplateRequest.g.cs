@@ -91,11 +91,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; set; }
+		public long? Version { get; set; }
 	}
 
 	[JsonConverter(typeof(IndexPutTemplateRequestDescriptorConverter))]
-	public partial class IndexPutTemplateRequestDescriptor : RequestDescriptorBase<IndexPutTemplateRequestDescriptor, IndexPutTemplateRequestParameters>
+	public sealed partial class IndexPutTemplateRequestDescriptor : RequestDescriptorBase<IndexPutTemplateRequestDescriptor, IndexPutTemplateRequestParameters>
 	{
 		public IndexPutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal IEnumerable<string>? _indexPatterns;
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
 		internal Dictionary<string, object>? _settings;
-		internal object? _version;
+		internal long? _version;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
 		public IndexPutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
 		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public IndexPutTemplateRequestDescriptor Version(object? version) => Assign(version, (a, v) => a._version = v);
+		public IndexPutTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a._version = v);
 	}
 
 	internal sealed class IndexPutTemplateRequestDescriptorConverter : JsonConverter<IndexPutTemplateRequestDescriptor>

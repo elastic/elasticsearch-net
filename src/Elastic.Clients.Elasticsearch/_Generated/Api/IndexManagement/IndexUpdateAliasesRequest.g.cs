@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexUpdateAliasesRequestDescriptorConverter))]
-	public partial class IndexUpdateAliasesRequestDescriptor : RequestDescriptorBase<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesRequestParameters>
+	public sealed partial class IndexUpdateAliasesRequestDescriptor : RequestDescriptorBase<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesRequestParameters>
 	{
 		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? _actions;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;

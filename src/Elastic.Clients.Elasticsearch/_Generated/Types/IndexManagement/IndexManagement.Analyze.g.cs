@@ -61,19 +61,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 	{
 		[JsonInclude]
 		[JsonPropertyName("end_offset")]
-		public object EndOffset { get; init; }
+		public long EndOffset { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("position")]
-		public object Position { get; init; }
+		public long Position { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("position_length")]
-		public object? PositionLength { get; init; }
+		public long? PositionLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_offset")]
-		public object StartOffset { get; init; }
+		public long StartOffset { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("token")]
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 		[JsonInclude]
 		[JsonPropertyName("end_offset")]
-		public object EndOffset { get; init; }
+		public long EndOffset { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("keyword")]
@@ -111,19 +111,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 
 		[JsonInclude]
 		[JsonPropertyName("position")]
-		public object Position { get; init; }
+		public long Position { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("positionLength")]
-		public object Positionlength { get; init; }
+		public long Positionlength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("start_offset")]
-		public object StartOffset { get; init; }
+		public long StartOffset { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("termFrequency")]
-		public object Termfrequency { get; init; }
+		public long Termfrequency { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("token")]

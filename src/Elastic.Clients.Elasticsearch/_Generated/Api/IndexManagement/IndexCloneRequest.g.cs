@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexCloneRequestDescriptorConverter))]
-	public partial class IndexCloneRequestDescriptor : RequestDescriptorBase<IndexCloneRequestDescriptor, IndexCloneRequestParameters>
+	public sealed partial class IndexCloneRequestDescriptor : RequestDescriptorBase<IndexCloneRequestDescriptor, IndexCloneRequestParameters>
 	{
 		public IndexCloneRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target) : base(r => r.Required("index", index).Required("target", target))
 		{

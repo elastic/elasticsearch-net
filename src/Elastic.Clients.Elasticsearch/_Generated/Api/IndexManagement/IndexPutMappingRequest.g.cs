@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	}
 
 	[JsonConverter(typeof(IndexPutMappingRequestDescriptorConverter))]
-	public partial class IndexPutMappingRequestDescriptor : RequestDescriptorBase<IndexPutMappingRequestDescriptor, IndexPutMappingRequestParameters>
+	public sealed partial class IndexPutMappingRequestDescriptor : RequestDescriptorBase<IndexPutMappingRequestDescriptor, IndexPutMappingRequestParameters>
 	{
 		public IndexPutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{

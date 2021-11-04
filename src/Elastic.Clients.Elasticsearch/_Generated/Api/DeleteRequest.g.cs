@@ -28,10 +28,10 @@ namespace Elastic.Clients.Elasticsearch
 	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
 	{
 		[JsonIgnore]
-		public object? IfPrimaryTerm { get => Q<object?>("if_primary_term"); set => Q("if_primary_term", value); }
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 		[JsonIgnore]
-		public object? IfSeqNo { get => Q<object?>("if_seq_no"); set => Q("if_seq_no", value); }
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public object? Version { get => Q<object?>("version"); set => Q("version", value); }
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -62,10 +62,10 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public object? IfPrimaryTerm { get => Q<object?>("if_primary_term"); set => Q("if_primary_term", value); }
+		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 		[JsonIgnore]
-		public object? IfSeqNo { get => Q<object?>("if_seq_no"); set => Q("if_seq_no", value); }
+		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public object? Version { get => Q<object?>("version"); set => Q("version", value); }
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	[JsonConverter(typeof(DeleteRequestDescriptorConverter))]
-	public partial class DeleteRequestDescriptor : RequestDescriptorBase<DeleteRequestDescriptor, DeleteRequestParameters>
+	public sealed partial class DeleteRequestDescriptor : RequestDescriptorBase<DeleteRequestDescriptor, DeleteRequestParameters>
 	{
 		public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
@@ -96,12 +96,12 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		public DeleteRequestDescriptor IfPrimaryTerm(object? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
-		public DeleteRequestDescriptor IfSeqNo(object? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public DeleteRequestDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
+		public DeleteRequestDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 		public DeleteRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public DeleteRequestDescriptor Routing(string? routing) => Qs("routing", routing);
 		public DeleteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public DeleteRequestDescriptor Version(object? version) => Qs("version", version);
+		public DeleteRequestDescriptor Version(long? version) => Qs("version", version);
 		public DeleteRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public DeleteRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}

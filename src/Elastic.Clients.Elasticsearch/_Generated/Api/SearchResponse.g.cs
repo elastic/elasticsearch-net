@@ -49,7 +49,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("num_reduce_phases")]
-		public object? NumReducePhases { get; init; }
+		public long? NumReducePhases { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pit_id")]
@@ -81,6 +81,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("took")]
-		public object Took { get; init; }
+		public long Took { get; init; }
 	}
 }

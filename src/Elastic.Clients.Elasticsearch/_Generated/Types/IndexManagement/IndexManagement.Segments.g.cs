@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 
 		[JsonInclude]
 		[JsonPropertyName("deleted_docs")]
-		public object DeletedDocs { get; init; }
+		public long DeletedDocs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("generation")]
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 
 		[JsonInclude]
 		[JsonPropertyName("num_docs")]
-		public object NumDocs { get; init; }
+		public long NumDocs { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]

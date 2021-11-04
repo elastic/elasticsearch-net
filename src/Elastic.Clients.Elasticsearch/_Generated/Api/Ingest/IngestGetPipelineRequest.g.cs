@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	}
 
 	[JsonConverter(typeof(IngestGetPipelineRequestDescriptorConverter))]
-	public partial class IngestGetPipelineRequestDescriptor : RequestDescriptorBase<IngestGetPipelineRequestDescriptor, IngestGetPipelineRequestParameters>
+	public sealed partial class IngestGetPipelineRequestDescriptor : RequestDescriptorBase<IngestGetPipelineRequestDescriptor, IngestGetPipelineRequestParameters>
 	{
 		public IngestGetPipelineRequestDescriptor()
 		{

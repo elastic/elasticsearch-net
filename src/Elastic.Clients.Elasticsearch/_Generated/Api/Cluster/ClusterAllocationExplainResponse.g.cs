@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("allocation_delay_in_millis")]
-		public object? AllocationDelayInMillis { get; init; }
+		public long? AllocationDelayInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("can_allocate")]
@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("configured_delay_in_millis")]
-		public object? ConfiguredDelayInMillis { get; init; }
+		public long? ConfiguredDelayInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("current_node")]
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("remaining_delay_in_millis")]
-		public object? RemainingDelayInMillis { get; init; }
+		public long? RemainingDelayInMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard")]

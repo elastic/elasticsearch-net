@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterRerouteRequestDescriptorConverter))]
-	public partial class ClusterRerouteRequestDescriptor : RequestDescriptorBase<ClusterRerouteRequestDescriptor, ClusterRerouteRequestParameters>
+	public sealed partial class ClusterRerouteRequestDescriptor : RequestDescriptorBase<ClusterRerouteRequestDescriptor, ClusterRerouteRequestParameters>
 	{
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? _commands;
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;

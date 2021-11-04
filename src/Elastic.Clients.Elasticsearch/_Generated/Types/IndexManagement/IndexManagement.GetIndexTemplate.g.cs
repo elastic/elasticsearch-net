@@ -39,11 +39,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplate
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
-		public object? Version { get; init; }
+		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("priority")]
-		public object? Priority { get; init; }
+		public long? Priority { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]

@@ -59,7 +59,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	}
 
 	[JsonConverter(typeof(ClusterGetSettingsRequestDescriptorConverter))]
-	public partial class ClusterGetSettingsRequestDescriptor : RequestDescriptorBase<ClusterGetSettingsRequestDescriptor, ClusterGetSettingsRequestParameters>
+	public sealed partial class ClusterGetSettingsRequestDescriptor : RequestDescriptorBase<ClusterGetSettingsRequestDescriptor, ClusterGetSettingsRequestParameters>
 	{
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterGetSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
