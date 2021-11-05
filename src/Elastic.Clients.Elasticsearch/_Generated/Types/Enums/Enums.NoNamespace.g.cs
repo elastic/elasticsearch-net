@@ -668,40 +668,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(RefreshOptionsConverter))]
-	public enum RefreshOptions
-	{
-		WaitFor
-	}
-
-	public class RefreshOptionsConverter : JsonConverter<RefreshOptions>
-	{
-		public override RefreshOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "wait_for":
-					return RefreshOptions.WaitFor;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, RefreshOptions value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case RefreshOptions.WaitFor:
-					writer.WriteStringValue("wait_for");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(ResultConverter))]
 	public enum Result
 	{
@@ -1319,40 +1285,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case VersionType.External:
 					writer.WriteStringValue("external");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(WaitForActiveShardOptionsConverter))]
-	public enum WaitForActiveShardOptions
-	{
-		All
-	}
-
-	public class WaitForActiveShardOptionsConverter : JsonConverter<WaitForActiveShardOptions>
-	{
-		public override WaitForActiveShardOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "all":
-					return WaitForActiveShardOptions.All;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, WaitForActiveShardOptions value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case WaitForActiveShardOptions.All:
-					writer.WriteStringValue("all");
 					return;
 			}
 

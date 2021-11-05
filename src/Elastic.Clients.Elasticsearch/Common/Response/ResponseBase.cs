@@ -21,22 +21,26 @@ namespace Elastic.Clients.Elasticsearch
 		/// <summary> Returns useful information about the request(s) that were part of this API call. </summary>
 		public virtual IApiCallDetails? ApiCall => _originalApiCall;
 
+		// TODO: Had to make this public to allow STJ to deserialise it - Can we avoid this?
+		[JsonInclude]
 		[JsonPropertyName("error")]
-		internal Error? Error
+		public Error? Error
 		{
 			get => _error;
-			set
+			internal set
 			{
 				_error = value;
 				_serverError = null;
 			}
 		}
 
+		// TODO: Had to make this public to allow STJ to deserialise it - Can we avoid this?
+		[JsonInclude]
 		[JsonPropertyName("status")]
-		internal int? StatusCode
+		public int? StatusCode
 		{
 			get => _statusCode;
-			set
+			internal set
 			{
 				_statusCode = value;
 				_serverError = null;

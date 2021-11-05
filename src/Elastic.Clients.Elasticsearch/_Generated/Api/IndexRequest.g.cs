@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
@@ -90,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
@@ -105,7 +105,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
@@ -129,12 +129,12 @@ namespace Elastic.Clients.Elasticsearch
 		public IndexRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 		public IndexRequestDescriptor<TDocument> OpType(Elastic.Clients.Elasticsearch.OpType? opType) => Qs("op_type", opType);
 		public IndexRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-		public IndexRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
+		public IndexRequestDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		public IndexRequestDescriptor<TDocument> Routing(string? routing) => Qs("routing", routing);
 		public IndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		public IndexRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-		public IndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public IndexRequestDescriptor<TDocument> WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public IndexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
 		public IndexRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a._document = v);
 	}
