@@ -98,17 +98,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class Refresh : Union<bool?, Elastic.Clients.Elasticsearch.RefreshOptions?>
-	{
-		public Refresh(bool? item) : base(item)
-		{
-		}
-
-		public Refresh(Elastic.Clients.Elasticsearch.RefreshOptions? item) : base(item)
-		{
-		}
-	}
-
 	public partial class Script
 	{
 	}
@@ -140,16 +129,5 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class Types
 	{
 		private readonly List<DocType> _docTypeList = new();
-	}
-
-	public partial class WaitForActiveShards : Union<int?, Elastic.Clients.Elasticsearch.WaitForActiveShardOptions?>
-	{
-		public WaitForActiveShards(int? item) : base(item)
-		{
-		}
-
-		public WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShardOptions? item) : base(item)
-		{
-		}
 	}
 }

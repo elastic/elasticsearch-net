@@ -102,6 +102,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryString(name, value);
 
+		protected void Q(string name, IStringable value) => RequestState.RequestParameters.SetQueryString(name, value.GetString());
+
 		protected void SetAcceptHeader(string format)
 		{
 			RequestState.RequestParameters.RequestConfiguration ??= new RequestConfiguration();
@@ -159,6 +161,12 @@ namespace Elastic.Clients.Elasticsearch
 		protected TDescriptor Qs(string name, object value)
 		{
 			Q(name, value);
+			return _descriptor;
+		}
+
+		protected TDescriptor Qs(string name, IStringable value)
+		{
+			Q(name, value.GetString());
 			return _descriptor;
 		}
 

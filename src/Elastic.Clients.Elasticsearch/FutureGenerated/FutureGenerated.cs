@@ -9,13 +9,88 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+using System.Threading;
 using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Ingest.Simulate;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	public partial struct WaitForActiveShards : IStringable
+	{
+		public static WaitForActiveShards All = new("all");
+
+		public WaitForActiveShards(string value) => Value = value;
+
+		public string Value { get; }
+
+		public static implicit operator WaitForActiveShards(int v) => new(v.ToString());
+		public static implicit operator WaitForActiveShards(string v) => new(v);
+
+		public string GetString() => Value ?? string.Empty;
+	}
+
+	// COULD ALSO BE AN ENUM AS IN EXISTING NEST?
+	public partial struct Refresh : IStringable
+	{
+		public static Refresh WaitFor = new("wait_for");
+		public static Refresh True = new("true");
+		public static Refresh False = new("false");
+
+		public Refresh(string value) => Value = value;
+
+		public string Value { get; }
+
+		public string GetString() => Value ?? string.Empty;
+	}
+
 
 	public class DocType { }
+
+	public partial interface IElasticClient
+	{
+		IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest);
+
+		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
+
+		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default);
+
+		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null);
+	}
+
+	public partial class ElasticClient
+{
+		public IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(documentWithId: document);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new IndexRequestDescriptor<TDocument>(documentWithId: document);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+{
+			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+		}
+
+		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null)
+		{
+			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+		}
+	}
 }
 
 namespace Elastic.Clients.Elasticsearch.Analysis
@@ -505,6 +580,7 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(UnionConverter<EpochMillis>))]
 	public partial class EpochMillis
 	{
+		public EpochMillis() : base(1) { } // TODO: This is temp
 	}
 
 	// TODO: Implement properly

@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static implicit operator Id(Guid id) => new(id.ToString("D"));
 
-		public static Id From<T>(T document) where T : class => new(document);
+		public static Id From<T>(T document) => new(document);
 
 		public override string ToString() => DebugDisplay;
 

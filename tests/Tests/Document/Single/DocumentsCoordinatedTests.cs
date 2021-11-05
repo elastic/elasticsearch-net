@@ -13,10 +13,13 @@ using Tests.Domain;
 
 namespace Tests.Document.Single;
 
+// TODO: This test could become brittle as test runner order is not neccesarily gaurunteed
+// We should review this and support attributes to order which test case is called first.
 public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<WritableCluster>
 {
 	private const string IndexDocumentStep = nameof(IndexDocumentStep);
 	private const string DocumentExistsStep = nameof(DocumentExistsStep);
+	private const string GetDocumentStep = nameof(GetDocumentStep);
 	private const string DeleteDocumentStep = nameof(DeleteDocumentStep);
 
 	public DocumentsCoordinatedTests(WritableCluster cluster, EndpointUsage usage) : base(
@@ -45,6 +48,17 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 					)
 			},
 			{
+				GetDocumentStep, u =>
+					u.Calls<GetRequestDescriptor, GetRequest, GetResponse<Project>>(
+						v => new GetRequest(typeof(Project), v),
+						(v, d) => d,
+						(v, c, f) => c.Get<Project>(Infer.Index<Project>(), v, f),
+						(v, c, f) => c.GetAsync<Project>(Infer.Index<Project>(), v, f),
+						(_, c, r) => c.Get<Project>(r),
+						(_, c, r) => c.GetAsync<Project>(r)
+					)
+			},
+			{
 				DeleteDocumentStep, u =>
 					u.Calls<DeleteRequestDescriptor, DeleteRequest, DeleteResponse>(
 						v => new DeleteRequest(Infer.Index<Project>(), v),
@@ -65,12 +79,12 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 		r.IsValid.Should().BeTrue();
 		r.Index.Should().Be("project");
 		r.Id.Should().Be(v);
-		r.Version.Should().Be(1);
+		r.Version.Should().BeGreaterOrEqualTo(1);
 		r.Result.Should().Be(Result.Created);
 		r.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Failed.Should().Be(0);
-		r.SeqNo.Should().BeGreaterOrEqualTo(1);
+		r.SequenceNumber.Should().BeGreaterOrEqualTo(0);
 		r.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
 	});
 
@@ -78,6 +92,26 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 	public async Task ExistsResponse() => await Assert<ExistsResponse>(DocumentExistsStep, (v, r) =>
 	{
 		r.IsValid.Should().BeTrue();
+	});
+
+	[I]
+	public async Task GetResponse() => await Assert<GetResponse<Project>>(GetDocumentStep, (v, r) =>
+	{
+		r.IsValid.Should().BeTrue();
+		r.Index.Should().Be("project");
+		r.Id.Should().Be(v);
+		r.Version.Should().BeGreaterOrEqualTo(1);
+		r.Found.Should().BeTrue();
+		r.SeqNo.Should().BeGreaterOrEqualTo(0);
+		r.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
+		r.Routing.Should().BeNull();
+		r.Fields.Should().BeNull();
+
+		r.Source.Should().NotBeNull();
+
+		var project = r.Source;
+		project.LeadDeveloper.FirstName.Should().Be(Project.Instance.LeadDeveloper.FirstName);
+		project.LeadDeveloper.LastName.Should().Be(Project.Instance.LeadDeveloper.LastName);
 	});
 
 	[I]
@@ -91,7 +125,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 		r.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Failed.Should().Be(0);
-		r.SeqNo.Should().BeGreaterOrEqualTo(1);
+		r.SequenceNumber.Should().BeGreaterOrEqualTo(0);
 		r.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
 	});
 }

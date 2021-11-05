@@ -5,10 +5,13 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Bogus;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
 using Tests.Configuration;
 using Tests.Core.Client;
 
@@ -49,8 +52,8 @@ namespace Tests.Framework.EndpointTests.TestState
 	public class SingleEndpointUsage<TResponse> : EndpointUsage
 		where TResponse : class, IResponse
 	{
-		//private readonly Func<string, IElasticClient, TResponse> _fluent;
-		//private readonly Func<string, IElasticClient, Task<TResponse>> _fluentAsync;
+		private readonly Func<string, IElasticClient, TResponse> _fluent;
+		private readonly Func<string, IElasticClient, Task<TResponse>> _fluentAsync;
 		private readonly Func<string, IElasticClient, TResponse> _request;
 		private readonly Func<string, IElasticClient, Task<TResponse>> _requestAsync;
 
@@ -62,8 +65,8 @@ namespace Tests.Framework.EndpointTests.TestState
 			string valuePrefix = null
 		) : base(valuePrefix)
 		{
-			//_fluent = fluent;
-			//_fluentAsync = fluentAsync;
+			_fluent = fluent;
+			_fluentAsync = fluentAsync;
 			_request = request;
 			_requestAsync = requestAsync;
 		}
@@ -91,11 +94,11 @@ namespace Tests.Framework.EndpointTests.TestState
 
 				var dict = new Dictionary<ClientMethod, IResponse>();
 
-				//if (!oneRandomCall || randomCall == 0)
-				//	Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
+				if (!oneRandomCall || randomCall == 0)
+					Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
 
-				//if (!oneRandomCall || randomCall == 1)
-				//	await CallAsync(client, dict, ClientMethod.FluentAsync, v => _fluentAsync(v, client));
+				if (!oneRandomCall || randomCall == 1)
+					await CallAsync(client, dict, ClientMethod.FluentAsync, v => _fluentAsync(v, client));
 
 				if (!oneRandomCall || randomCall == 2)
 					Call(client, dict, ClientMethod.Initializer, v => _request(v, client));
@@ -131,30 +134,30 @@ namespace Tests.Framework.EndpointTests.TestState
 			OnAfterCall?.Invoke(client);
 		}
 
-		//public async Task AssertOnAllResponses(Action<TResponse> assert)
-		//{
-		//	var responses = await Responses;
-		//	foreach (var kv in responses)
-		//	{
-		//		var r = kv.Value as TResponse;
+		public async Task AssertOnAllResponses(Action<TResponse> assert)
+		{
+			var responses = await Responses;
+			foreach (var kv in responses)
+			{
+				var r = kv.Value as TResponse;
 
-		//		//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
-		//		if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-		//			&& !(r.ApiCall.OriginalException is TransportException))
-		//		{
-		//			var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
-		//			throw new ResponseAssertionException(e.SourceException, r);
-		//		}
+				//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
+					&& r.ApiCall.OriginalException is not TransportException)
+				{
+					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					throw new ResponseAssertionException(e.SourceException, r);
+				}
 
-		//		try
-		//		{
-		//			assert(r);
-		//		}
-		//		catch (Exception e)
-		//		{
-		//			throw new ResponseAssertionException(e, r);
-		//		}
-		//	}
-		//}
+				try
+				{
+					assert(r);
+				}
+				catch (Exception e)
+				{
+					throw new ResponseAssertionException(e, r);
+				}
+			}
+		}
 	}
 }
