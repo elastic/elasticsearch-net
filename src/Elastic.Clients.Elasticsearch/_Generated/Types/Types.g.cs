@@ -3365,7 +3365,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
-		public long SeqNo { get; init; }
+		public long SequenceNumber { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]

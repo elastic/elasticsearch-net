@@ -32,6 +32,16 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
 	{
+		public IndexRequestDescriptor() : this(typeof(TDocument))
+		{
+		}
+
+		public IndexRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
+
+		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a._document = v);
+
+		public IndexRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+
 		internal Id _id;
 
 		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(_document, writer, sourceSerializer);

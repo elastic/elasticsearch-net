@@ -46,7 +46,7 @@ public class Project
 
 	//public SourceOnlyObject SourceOnly { get; set; }
 	public DateTime StartedOn { get; set; }
-	//public StateOfBeing State { get; set; }
+	public StateOfBeing State { get; set; }
 	//public CompletionField Suggest { get; set; }
 	public IEnumerable<Tag> Tags { get; set; }
 

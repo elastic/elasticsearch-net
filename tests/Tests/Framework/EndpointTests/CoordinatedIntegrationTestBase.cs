@@ -17,6 +17,8 @@ using Xunit;
 
 namespace Tests.Framework.EndpointTests;
 
+// TODO: Future, support running tests in a specified order.
+// Tests may currently run randomly and cause an update to occur before we want it to, causing in an invalid get for example.
 public abstract class CoordinatedIntegrationTestBase<TCluster>
 	: IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
@@ -41,6 +43,9 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	protected async Task Assert<TResponse>(string name, Action<string, TResponse> assert)
 		where TResponse : class, IResponse
 	{
+		if (_coordinatedUsage.Skips(name))
+			return;
+
 		var lazyResponses = await ExecuteOnceInOrderUntil(name);
 		if (lazyResponses == null)
 			throw new Exception($"{name} is defined but it yields no LazyResponses object");
@@ -60,7 +65,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	{
 		foreach (var (key, value) in await responses)
 		{
-			if (!(value is TResponse response))
+			if (value is not TResponse response)
 				throw new Exception($"{value.GetType()} is not expected response type {typeof(TResponse)}");
 
 			if (!_coordinatedUsage.MethodIsolatedValues.TryGetValue(key, out var isolatedValue))
@@ -68,7 +73,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 
 			var r = response;
 			if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-				&& !(r.ApiCall.OriginalException is TransportException))
+				&& r.ApiCall.OriginalException is not TransportException)
 			{
 				var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
 				throw new ResponseAssertionException(e.SourceException, r).Demystify();
@@ -97,6 +102,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 			if (lazyResponses.Name == name)
 				return lazyResponses;
 		}
+
 		return null;
 	}
 }

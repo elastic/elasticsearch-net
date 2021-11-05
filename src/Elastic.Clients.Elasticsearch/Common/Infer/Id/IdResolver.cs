@@ -81,8 +81,8 @@ namespace Elastic.Clients.Elasticsearch
 			if (!propertyName.IsNullOrEmpty())
 				return GetPropertyCaseInsensitive(type, propertyName);
 
-			//var esTypeAtt = ElasticsearchTypeAttribute.From(type);
-			//propertyName = esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ? "Id" : esTypeAtt.IdProperty;
+			var esTypeAtt = ElasticsearchTypeAttribute.From(type);
+			propertyName = esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ? "Id" : esTypeAtt.IdProperty;
 
 			return GetPropertyCaseInsensitive(type, propertyName);
 		}
