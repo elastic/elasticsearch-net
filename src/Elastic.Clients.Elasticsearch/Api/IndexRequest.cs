@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
@@ -26,8 +25,7 @@ namespace Elastic.Clients.Elasticsearch
 		void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 
 		internal static HttpMethod GetHttpMethod(IndexRequest<TDocument> request) =>
-			request.Id is not null || request.Self.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
-		//request.Id?.StringOrLongValue != null || request.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
+			request.Id?.StringOrLongValue != null || request.Self.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 	}
 
 	public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
@@ -53,13 +51,6 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
-		protected override HttpMethod? DynamicHttpMethod =>	_id is not null || RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
-	}
-
-	public partial class ExistsRequest
-	{
-		public ExistsRequest(Type type, Id id) : base(r => r.Required("index", Infer.Index(type)).Required("id", id))
-		{
-		}
+		protected override HttpMethod? DynamicHttpMethod => _id is not null || RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 	}
 }

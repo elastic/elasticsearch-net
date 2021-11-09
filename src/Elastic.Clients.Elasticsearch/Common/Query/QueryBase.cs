@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		/// <summary>
 		///     The name of the query. Allows you to retrieve for each document what part of the query it matched on.
 		/// </summary>
-		//string QueryName { get; set; }
+		//string Name { get; set; }
 	}
 
 	//public abstract class QueryDescriptorBase<TDescriptor, TInterface>

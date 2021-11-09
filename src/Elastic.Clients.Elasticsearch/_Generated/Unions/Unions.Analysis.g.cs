@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	public class Analyzers : IsADictionaryBase<string, IAnalyzersVariant>, Analysis.IAnalyzers
+	public class Analyzers : IsADictionaryBase<string, IAnalyzersVariant>
 	{
 	}
 
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	public class CharFilters : IsADictionaryBase<string, ICharFiltersVariant>, Analysis.ICharFilters
+	public class CharFilters : IsADictionaryBase<string, ICharFiltersVariant>
 	{
 	}
 
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	public class Normalizers : IsADictionaryBase<string, INormalizersVariant>, Analysis.INormalizers
+	public class Normalizers : IsADictionaryBase<string, INormalizersVariant>
 	{
 	}
 
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	public class TokenFilters : IsADictionaryBase<string, ITokenFiltersVariant>, Analysis.ITokenFilters
+	public class TokenFilters : IsADictionaryBase<string, ITokenFiltersVariant>
 	{
 	}
 
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	public class Tokenizers : IsADictionaryBase<string, ITokenizersVariant>, Analysis.ITokenizers
+	public class Tokenizers : IsADictionaryBase<string, ITokenizersVariant>
 	{
 	}
 }

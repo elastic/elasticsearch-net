@@ -21,7 +21,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterRemoteInfoResponse<TKey, TValue> : DictionaryResponseBase<TKey, TValue>
+	public partial class ClusterRemoteInfoResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Cluster.RemoteInfo.ClusterRemoteInfos>
 	{
 	}
 }

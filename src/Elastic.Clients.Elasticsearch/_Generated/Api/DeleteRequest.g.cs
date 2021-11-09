@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
@@ -74,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
@@ -100,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteRequestDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 		public DeleteRequestDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		public DeleteRequestDescriptor Routing(string? routing) => Qs("routing", routing);
-		public DeleteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public DeleteRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
 		public DeleteRequestDescriptor Version(long? version) => Qs("version", version);
 		public DeleteRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public DeleteRequestDescriptor WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);

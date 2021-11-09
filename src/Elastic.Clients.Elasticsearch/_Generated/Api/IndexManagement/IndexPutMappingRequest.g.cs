@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -40,10 +39,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
@@ -71,10 +70,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
@@ -149,8 +148,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutMappingRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexPutMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexPutMappingRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
-		public IndexPutMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexPutMappingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IndexPutMappingRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexPutMappingRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
 		public IndexPutMappingRequestDescriptor WriteIndexOnly(bool? writeIndexOnly) => Qs("write_index_only", writeIndexOnly);
 		public IndexPutMappingRequestDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a._dateDetection = v);
 		public IndexPutMappingRequestDescriptor Dynamic(Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? dynamic) => Assign(dynamic, (a, v) => a._dynamic = v);

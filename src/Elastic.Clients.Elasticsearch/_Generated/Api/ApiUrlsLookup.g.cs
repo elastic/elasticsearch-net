@@ -19,6 +19,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	internal static class ApiUrlsLookups
 	{
+		internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "/_bulk", "/{index}/_bulk" });
 		internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "/_pit" });
 		internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
 		internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "/_component_template/{name}" });
@@ -36,6 +37,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls ClusterState = new ApiUrls(new[] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" });
 		internal static ApiUrls ClusterStats = new ApiUrls(new[] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" });
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
+		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
+		internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[] { "/{index}/_delete_by_query" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });

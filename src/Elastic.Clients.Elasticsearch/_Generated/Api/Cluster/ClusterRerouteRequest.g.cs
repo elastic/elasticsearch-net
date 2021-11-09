@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -40,10 +39,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>
@@ -64,10 +63,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("commands")]
@@ -85,8 +84,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterRerouteRequestDescriptor Explain(bool? explain) => Qs("explain", explain);
 		public ClusterRerouteRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric) => Qs("metric", metric);
 		public ClusterRerouteRequestDescriptor RetryFailed(bool? retryFailed) => Qs("retry_failed", retryFailed);
-		public ClusterRerouteRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterRerouteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterRerouteRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterRerouteRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
 		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? commands) => Assign(commands, (a, v) => a._commands = v);
 	}
 

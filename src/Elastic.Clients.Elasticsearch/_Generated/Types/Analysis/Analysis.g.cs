@@ -33,26 +33,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal { get; init; }
 	}
 
-	[JsonConverter(typeof(AsciiFoldingTokenFilterDescriptorConverter))]
-	public sealed partial class AsciiFoldingTokenFilterDescriptor : DescriptorBase<AsciiFoldingTokenFilterDescriptor>
-	{
-		internal bool _preserveOriginal;
-	}
-
-	internal sealed class AsciiFoldingTokenFilterDescriptorConverter : JsonConverter<AsciiFoldingTokenFilterDescriptor>
-	{
-		public override AsciiFoldingTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, AsciiFoldingTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("asciifolding");
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(value._preserveOriginal);
-			writer.WriteEndObject();
-		}
-	}
-
 	public abstract partial class CharFilterBase
 	{
 		[JsonInclude]
@@ -72,33 +52,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int? MaxTokenLength { get; init; }
-	}
-
-	[JsonConverter(typeof(CharGroupTokenizerDescriptorConverter))]
-	public sealed partial class CharGroupTokenizerDescriptor : DescriptorBase<CharGroupTokenizerDescriptor>
-	{
-		internal IReadOnlyCollection<string> _tokenizeOnChars;
-		internal int? _maxTokenLength;
-	}
-
-	internal sealed class CharGroupTokenizerDescriptorConverter : JsonConverter<CharGroupTokenizerDescriptor>
-	{
-		public override CharGroupTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CharGroupTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("char_group");
-			writer.WritePropertyName("tokenize_on_chars");
-			JsonSerializer.Serialize(writer, value._tokenizeOnChars, options);
-			if (value._maxTokenLength.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(value._maxTokenLength.Value);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -121,51 +74,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("query_mode")]
 		public bool? QueryMode { get; init; }
-	}
-
-	[JsonConverter(typeof(CommonGramsTokenFilterDescriptorConverter))]
-	public sealed partial class CommonGramsTokenFilterDescriptor : DescriptorBase<CommonGramsTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string>? _commonWords;
-		internal string? _commonWordsPath;
-		internal bool? _ignoreCase;
-		internal bool? _queryMode;
-	}
-
-	internal sealed class CommonGramsTokenFilterDescriptorConverter : JsonConverter<CommonGramsTokenFilterDescriptor>
-	{
-		public override CommonGramsTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CommonGramsTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("common_grams");
-			if (value._commonWords is not null)
-			{
-				writer.WritePropertyName("common_words");
-				JsonSerializer.Serialize(writer, value._commonWords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._commonWordsPath))
-			{
-				writer.WritePropertyName("common_words_path");
-				writer.WriteStringValue(value._commonWordsPath);
-			}
-
-			if (value._ignoreCase.HasValue)
-			{
-				writer.WritePropertyName("ignore_case");
-				writer.WriteBooleanValue(value._ignoreCase.Value);
-			}
-
-			if (value._queryMode.HasValue)
-			{
-				writer.WritePropertyName("query_mode");
-				writer.WriteBooleanValue(value._queryMode.Value);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public abstract partial class CompoundWordTokenFilterBase : Analysis.TokenFilterBase
@@ -213,29 +121,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Script Script { get; init; }
 	}
 
-	[JsonConverter(typeof(ConditionTokenFilterDescriptorConverter))]
-	public sealed partial class ConditionTokenFilterDescriptor : DescriptorBase<ConditionTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _filter;
-		internal Elastic.Clients.Elasticsearch.Script _script;
-	}
-
-	internal sealed class ConditionTokenFilterDescriptorConverter : JsonConverter<ConditionTokenFilterDescriptor>
-	{
-		public override ConditionTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ConditionTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("condition");
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, value._filter, options);
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value._script, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class CustomAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
@@ -262,54 +147,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Tokenizer { get; init; }
 	}
 
-	[JsonConverter(typeof(CustomAnalyzerDescriptorConverter))]
-	public sealed partial class CustomAnalyzerDescriptor : DescriptorBase<CustomAnalyzerDescriptor>
-	{
-		internal IReadOnlyCollection<string>? _charFilter;
-		internal IReadOnlyCollection<string>? _filter;
-		internal int? _positionIncrementGap;
-		internal int? _positionOffsetGap;
-		internal string _tokenizer;
-	}
-
-	internal sealed class CustomAnalyzerDescriptorConverter : JsonConverter<CustomAnalyzerDescriptor>
-	{
-		public override CustomAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CustomAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("custom");
-			if (value._charFilter is not null)
-			{
-				writer.WritePropertyName("char_filter");
-				JsonSerializer.Serialize(writer, value._charFilter, options);
-			}
-
-			if (value._filter is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
-			}
-
-			if (value._positionIncrementGap.HasValue)
-			{
-				writer.WritePropertyName("position_increment_gap");
-				writer.WriteNumberValue(value._positionIncrementGap.Value);
-			}
-
-			if (value._positionOffsetGap.HasValue)
-			{
-				writer.WritePropertyName("position_offset_gap");
-				writer.WriteNumberValue(value._positionOffsetGap.Value);
-			}
-
-			writer.WritePropertyName("tokenizer");
-			writer.WriteStringValue(value._tokenizer);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class CustomNormalizer : INormalizersVariant
 	{
 		[JsonInclude]
@@ -322,37 +159,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IReadOnlyCollection<string>? Filter { get; init; }
-	}
-
-	[JsonConverter(typeof(CustomNormalizerDescriptorConverter))]
-	public sealed partial class CustomNormalizerDescriptor : DescriptorBase<CustomNormalizerDescriptor>
-	{
-		internal IReadOnlyCollection<string>? _charFilter;
-		internal IReadOnlyCollection<string>? _filter;
-	}
-
-	internal sealed class CustomNormalizerDescriptorConverter : JsonConverter<CustomNormalizerDescriptor>
-	{
-		public override CustomNormalizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CustomNormalizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("custom");
-			if (value._charFilter is not null)
-			{
-				writer.WritePropertyName("char_filter");
-				JsonSerializer.Serialize(writer, value._charFilter, options);
-			}
-
-			if (value._filter is not null)
-			{
-				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -369,51 +175,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Encoding { get; init; }
 	}
 
-	[JsonConverter(typeof(DelimitedPayloadTokenFilterDescriptorConverter))]
-	public sealed partial class DelimitedPayloadTokenFilterDescriptor : DescriptorBase<DelimitedPayloadTokenFilterDescriptor>
-	{
-		internal string _delimiter;
-		internal Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding _encoding;
-	}
-
-	internal sealed class DelimitedPayloadTokenFilterDescriptorConverter : JsonConverter<DelimitedPayloadTokenFilterDescriptor>
-	{
-		public override DelimitedPayloadTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DelimitedPayloadTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("delimited_payload");
-			writer.WritePropertyName("delimiter");
-			writer.WriteStringValue(value._delimiter);
-			writer.WritePropertyName("encoding");
-			JsonSerializer.Serialize(writer, value._encoding, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class DictionaryDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "dictionary_decompounder";
-	}
-
-	[JsonConverter(typeof(DictionaryDecompounderTokenFilterDescriptorConverter))]
-	public sealed partial class DictionaryDecompounderTokenFilterDescriptor : DescriptorBase<DictionaryDecompounderTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class DictionaryDecompounderTokenFilterDescriptorConverter : JsonConverter<DictionaryDecompounderTokenFilterDescriptor>
-	{
-		public override DictionaryDecompounderTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DictionaryDecompounderTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("dictionary_decompounder");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class DutchAnalyzer : IAnalyzersVariant
@@ -424,30 +190,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
-	}
-
-	[JsonConverter(typeof(DutchAnalyzerDescriptorConverter))]
-	public sealed partial class DutchAnalyzerDescriptor : DescriptorBase<DutchAnalyzerDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-	}
-
-	internal sealed class DutchAnalyzerDescriptorConverter : JsonConverter<DutchAnalyzerDescriptor>
-	{
-		public override DutchAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DutchAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("dutch");
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class EdgeNGramTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -472,43 +214,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? PreserveOriginal { get; init; }
 	}
 
-	[JsonConverter(typeof(EdgeNGramTokenFilterDescriptorConverter))]
-	public sealed partial class EdgeNGramTokenFilterDescriptor : DescriptorBase<EdgeNGramTokenFilterDescriptor>
-	{
-		internal int _maxGram;
-		internal int _minGram;
-		internal Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? _side;
-		internal bool? _preserveOriginal;
-	}
-
-	internal sealed class EdgeNGramTokenFilterDescriptorConverter : JsonConverter<EdgeNGramTokenFilterDescriptor>
-	{
-		public override EdgeNGramTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, EdgeNGramTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("edge_ngram");
-			writer.WritePropertyName("max_gram");
-			writer.WriteNumberValue(value._maxGram);
-			writer.WritePropertyName("min_gram");
-			writer.WriteNumberValue(value._minGram);
-			if (value._side is not null)
-			{
-				writer.WritePropertyName("side");
-				JsonSerializer.Serialize(writer, value._side, options);
-			}
-
-			if (value._preserveOriginal.HasValue)
-			{
-				writer.WritePropertyName("preserve_original");
-				writer.WriteBooleanValue(value._preserveOriginal.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
@@ -531,39 +236,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; init; }
 	}
 
-	[JsonConverter(typeof(EdgeNGramTokenizerDescriptorConverter))]
-	public sealed partial class EdgeNGramTokenizerDescriptor : DescriptorBase<EdgeNGramTokenizerDescriptor>
-	{
-		internal string? _customTokenChars;
-		internal int _maxGram;
-		internal int _minGram;
-		internal IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> _tokenChars;
-	}
-
-	internal sealed class EdgeNGramTokenizerDescriptorConverter : JsonConverter<EdgeNGramTokenizerDescriptor>
-	{
-		public override EdgeNGramTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, EdgeNGramTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("edge_ngram");
-			if (!string.IsNullOrEmpty(value._customTokenChars))
-			{
-				writer.WritePropertyName("custom_token_chars");
-				writer.WriteStringValue(value._customTokenChars);
-			}
-
-			writer.WritePropertyName("max_gram");
-			writer.WriteNumberValue(value._maxGram);
-			writer.WritePropertyName("min_gram");
-			writer.WriteNumberValue(value._minGram);
-			writer.WritePropertyName("token_chars");
-			JsonSerializer.Serialize(writer, value._tokenChars, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class ElisionTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -576,29 +248,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("articles_case")]
 		public bool ArticlesCase { get; init; }
-	}
-
-	[JsonConverter(typeof(ElisionTokenFilterDescriptorConverter))]
-	public sealed partial class ElisionTokenFilterDescriptor : DescriptorBase<ElisionTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _articles;
-		internal bool _articlesCase;
-	}
-
-	internal sealed class ElisionTokenFilterDescriptorConverter : JsonConverter<ElisionTokenFilterDescriptor>
-	{
-		public override ElisionTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ElisionTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("elision");
-			writer.WritePropertyName("articles");
-			JsonSerializer.Serialize(writer, value._articles, options);
-			writer.WritePropertyName("articles_case");
-			writer.WriteBooleanValue(value._articlesCase);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class FingerprintAnalyzer : IAnalyzersVariant
@@ -631,53 +280,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath { get; init; }
 	}
 
-	[JsonConverter(typeof(FingerprintAnalyzerDescriptorConverter))]
-	public sealed partial class FingerprintAnalyzerDescriptor : DescriptorBase<FingerprintAnalyzerDescriptor>
-	{
-		internal string? _version;
-		internal int _maxOutputSize;
-		internal bool _preserveOriginal;
-		internal string _separator;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-		internal string? _stopwordsPath;
-	}
-
-	internal sealed class FingerprintAnalyzerDescriptorConverter : JsonConverter<FingerprintAnalyzerDescriptor>
-	{
-		public override FingerprintAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FingerprintAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("fingerprint");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			writer.WritePropertyName("max_output_size");
-			writer.WriteNumberValue(value._maxOutputSize);
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(value._preserveOriginal);
-			writer.WritePropertyName("separator");
-			writer.WriteStringValue(value._separator);
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._stopwordsPath))
-			{
-				writer.WritePropertyName("stopwords_path");
-				writer.WriteStringValue(value._stopwordsPath);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class FingerprintTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -692,51 +294,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Separator { get; init; }
 	}
 
-	[JsonConverter(typeof(FingerprintTokenFilterDescriptorConverter))]
-	public sealed partial class FingerprintTokenFilterDescriptor : DescriptorBase<FingerprintTokenFilterDescriptor>
-	{
-		internal int _maxOutputSize;
-		internal string _separator;
-	}
-
-	internal sealed class FingerprintTokenFilterDescriptorConverter : JsonConverter<FingerprintTokenFilterDescriptor>
-	{
-		public override FingerprintTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FingerprintTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("fingerprint");
-			writer.WritePropertyName("max_output_size");
-			writer.WriteNumberValue(value._maxOutputSize);
-			writer.WritePropertyName("separator");
-			writer.WriteStringValue(value._separator);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class HtmlStripCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "html_strip";
-	}
-
-	[JsonConverter(typeof(HtmlStripCharFilterDescriptorConverter))]
-	public sealed partial class HtmlStripCharFilterDescriptor : DescriptorBase<HtmlStripCharFilterDescriptor>
-	{
-	}
-
-	internal sealed class HtmlStripCharFilterDescriptorConverter : JsonConverter<HtmlStripCharFilterDescriptor>
-	{
-		public override HtmlStripCharFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, HtmlStripCharFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("html_strip");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class HunspellTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -761,57 +323,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool LongestOnly { get; init; }
 	}
 
-	[JsonConverter(typeof(HunspellTokenFilterDescriptorConverter))]
-	public sealed partial class HunspellTokenFilterDescriptor : DescriptorBase<HunspellTokenFilterDescriptor>
-	{
-		internal bool _dedup;
-		internal string _dictionary;
-		internal string _locale;
-		internal bool _longestOnly;
-	}
-
-	internal sealed class HunspellTokenFilterDescriptorConverter : JsonConverter<HunspellTokenFilterDescriptor>
-	{
-		public override HunspellTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, HunspellTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("hunspell");
-			writer.WritePropertyName("dedup");
-			writer.WriteBooleanValue(value._dedup);
-			writer.WritePropertyName("dictionary");
-			writer.WriteStringValue(value._dictionary);
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(value._locale);
-			writer.WritePropertyName("longest_only");
-			writer.WriteBooleanValue(value._longestOnly);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class HyphenationDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "hyphenation_decompounder";
-	}
-
-	[JsonConverter(typeof(HyphenationDecompounderTokenFilterDescriptorConverter))]
-	public sealed partial class HyphenationDecompounderTokenFilterDescriptor : DescriptorBase<HyphenationDecompounderTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class HyphenationDecompounderTokenFilterDescriptorConverter : JsonConverter<HyphenationDecompounderTokenFilterDescriptor>
-	{
-		public override HyphenationDecompounderTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, HyphenationDecompounderTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("hyphenation_decompounder");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class IcuAnalyzer : IAnalyzersVariant
@@ -826,29 +342,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; init; }
-	}
-
-	[JsonConverter(typeof(IcuAnalyzerDescriptorConverter))]
-	public sealed partial class IcuAnalyzerDescriptor : DescriptorBase<IcuAnalyzerDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType _method;
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode _mode;
-	}
-
-	internal sealed class IcuAnalyzerDescriptorConverter : JsonConverter<IcuAnalyzerDescriptor>
-	{
-		public override IcuAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_analyzer");
-			writer.WritePropertyName("method");
-			JsonSerializer.Serialize(writer, value._method, options);
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, value._mode, options);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class IcuCollationTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -901,60 +394,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Variant { get; init; }
 	}
 
-	[JsonConverter(typeof(IcuCollationTokenFilterDescriptorConverter))]
-	public sealed partial class IcuCollationTokenFilterDescriptor : DescriptorBase<IcuCollationTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate _alternate;
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst _casefirst;
-		internal bool _caselevel;
-		internal string _country;
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition _decomposition;
-		internal bool _hiraganaquaternarymode;
-		internal string _language;
-		internal bool _numeric;
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength _strength;
-		internal string? _variabletop;
-		internal string _variant;
-	}
-
-	internal sealed class IcuCollationTokenFilterDescriptorConverter : JsonConverter<IcuCollationTokenFilterDescriptor>
-	{
-		public override IcuCollationTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuCollationTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_collation");
-			writer.WritePropertyName("alternate");
-			JsonSerializer.Serialize(writer, value._alternate, options);
-			writer.WritePropertyName("caseFirst");
-			JsonSerializer.Serialize(writer, value._casefirst, options);
-			writer.WritePropertyName("caseLevel");
-			writer.WriteBooleanValue(value._caselevel);
-			writer.WritePropertyName("country");
-			writer.WriteStringValue(value._country);
-			writer.WritePropertyName("decomposition");
-			JsonSerializer.Serialize(writer, value._decomposition, options);
-			writer.WritePropertyName("hiraganaQuaternaryMode");
-			writer.WriteBooleanValue(value._hiraganaquaternarymode);
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(value._language);
-			writer.WritePropertyName("numeric");
-			writer.WriteBooleanValue(value._numeric);
-			writer.WritePropertyName("strength");
-			JsonSerializer.Serialize(writer, value._strength, options);
-			if (!string.IsNullOrEmpty(value._variabletop))
-			{
-				writer.WritePropertyName("variableTop");
-				writer.WriteStringValue(value._variabletop);
-			}
-
-			writer.WritePropertyName("variant");
-			writer.WriteStringValue(value._variant);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class IcuFoldingTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -963,26 +402,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("unicode_set_filter")]
 		public string UnicodeSetFilter { get; init; }
-	}
-
-	[JsonConverter(typeof(IcuFoldingTokenFilterDescriptorConverter))]
-	public sealed partial class IcuFoldingTokenFilterDescriptor : DescriptorBase<IcuFoldingTokenFilterDescriptor>
-	{
-		internal string _unicodeSetFilter;
-	}
-
-	internal sealed class IcuFoldingTokenFilterDescriptorConverter : JsonConverter<IcuFoldingTokenFilterDescriptor>
-	{
-		public override IcuFoldingTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuFoldingTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_folding");
-			writer.WritePropertyName("unicode_set_filter");
-			writer.WriteStringValue(value._unicodeSetFilter);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class IcuNormalizationCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
@@ -999,37 +418,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? Name { get; init; }
 	}
 
-	[JsonConverter(typeof(IcuNormalizationCharFilterDescriptorConverter))]
-	public sealed partial class IcuNormalizationCharFilterDescriptor : DescriptorBase<IcuNormalizationCharFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? _mode;
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? _name;
-	}
-
-	internal sealed class IcuNormalizationCharFilterDescriptorConverter : JsonConverter<IcuNormalizationCharFilterDescriptor>
-	{
-		public override IcuNormalizationCharFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuNormalizationCharFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_normalizer");
-			if (value._mode is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value._mode, options);
-			}
-
-			if (value._name is not null)
-			{
-				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, value._name, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class IcuNormalizationTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -1040,26 +428,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; init; }
 	}
 
-	[JsonConverter(typeof(IcuNormalizationTokenFilterDescriptorConverter))]
-	public sealed partial class IcuNormalizationTokenFilterDescriptor : DescriptorBase<IcuNormalizationTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType _name;
-	}
-
-	internal sealed class IcuNormalizationTokenFilterDescriptorConverter : JsonConverter<IcuNormalizationTokenFilterDescriptor>
-	{
-		public override IcuNormalizationTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuNormalizationTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_normalizer");
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, value._name, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class IcuTokenizer : Analysis.TokenizerBase, ITokenFiltersVariant, ITokenizersVariant
 	{
 		[JsonInclude]
@@ -1068,26 +436,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("rule_files")]
 		public string RuleFiles { get; init; }
-	}
-
-	[JsonConverter(typeof(IcuTokenizerDescriptorConverter))]
-	public sealed partial class IcuTokenizerDescriptor : DescriptorBase<IcuTokenizerDescriptor>
-	{
-		internal string _ruleFiles;
-	}
-
-	internal sealed class IcuTokenizerDescriptorConverter : JsonConverter<IcuTokenizerDescriptor>
-	{
-		public override IcuTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_tokenizer");
-			writer.WritePropertyName("rule_files");
-			writer.WriteStringValue(value._ruleFiles);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class IcuTransformTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1104,29 +452,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Id { get; init; }
 	}
 
-	[JsonConverter(typeof(IcuTransformTokenFilterDescriptorConverter))]
-	public sealed partial class IcuTransformTokenFilterDescriptor : DescriptorBase<IcuTransformTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection _dir;
-		internal string _id;
-	}
-
-	internal sealed class IcuTransformTokenFilterDescriptorConverter : JsonConverter<IcuTransformTokenFilterDescriptor>
-	{
-		public override IcuTransformTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IcuTransformTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("icu_transform");
-			writer.WritePropertyName("dir");
-			JsonSerializer.Serialize(writer, value._dir, options);
-			writer.WritePropertyName("id");
-			writer.WriteStringValue(value._id);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -1139,37 +464,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("types")]
 		public IReadOnlyCollection<string>? Types { get; init; }
-	}
-
-	[JsonConverter(typeof(KeepTypesTokenFilterDescriptorConverter))]
-	public sealed partial class KeepTypesTokenFilterDescriptor : DescriptorBase<KeepTypesTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? _mode;
-		internal IReadOnlyCollection<string>? _types;
-	}
-
-	internal sealed class KeepTypesTokenFilterDescriptorConverter : JsonConverter<KeepTypesTokenFilterDescriptor>
-	{
-		public override KeepTypesTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KeepTypesTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("keep_types");
-			if (value._mode is not null)
-			{
-				writer.WritePropertyName("mode");
-				JsonSerializer.Serialize(writer, value._mode, options);
-			}
-
-			if (value._types is not null)
-			{
-				writer.WritePropertyName("types");
-				JsonSerializer.Serialize(writer, value._types, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class KeepWordsTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1190,44 +484,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? KeepWordsPath { get; init; }
 	}
 
-	[JsonConverter(typeof(KeepWordsTokenFilterDescriptorConverter))]
-	public sealed partial class KeepWordsTokenFilterDescriptor : DescriptorBase<KeepWordsTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string>? _keepWords;
-		internal bool? _keepWordsCase;
-		internal string? _keepWordsPath;
-	}
-
-	internal sealed class KeepWordsTokenFilterDescriptorConverter : JsonConverter<KeepWordsTokenFilterDescriptor>
-	{
-		public override KeepWordsTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KeepWordsTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("keep");
-			if (value._keepWords is not null)
-			{
-				writer.WritePropertyName("keep_words");
-				JsonSerializer.Serialize(writer, value._keepWords, options);
-			}
-
-			if (value._keepWordsCase.HasValue)
-			{
-				writer.WritePropertyName("keep_words_case");
-				writer.WriteBooleanValue(value._keepWordsCase.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value._keepWordsPath))
-			{
-				writer.WritePropertyName("keep_words_path");
-				writer.WriteStringValue(value._keepWordsPath);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KeywordAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
@@ -1236,30 +492,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public string? Version { get; init; }
-	}
-
-	[JsonConverter(typeof(KeywordAnalyzerDescriptorConverter))]
-	public sealed partial class KeywordAnalyzerDescriptor : DescriptorBase<KeywordAnalyzerDescriptor>
-	{
-		internal string? _version;
-	}
-
-	internal sealed class KeywordAnalyzerDescriptorConverter : JsonConverter<KeywordAnalyzerDescriptor>
-	{
-		public override KeywordAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KeywordAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("keyword");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class KeywordMarkerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1284,51 +516,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? KeywordsPattern { get; init; }
 	}
 
-	[JsonConverter(typeof(KeywordMarkerTokenFilterDescriptorConverter))]
-	public sealed partial class KeywordMarkerTokenFilterDescriptor : DescriptorBase<KeywordMarkerTokenFilterDescriptor>
-	{
-		internal bool? _ignoreCase;
-		internal IReadOnlyCollection<string>? _keywords;
-		internal string? _keywordsPath;
-		internal string? _keywordsPattern;
-	}
-
-	internal sealed class KeywordMarkerTokenFilterDescriptorConverter : JsonConverter<KeywordMarkerTokenFilterDescriptor>
-	{
-		public override KeywordMarkerTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KeywordMarkerTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("keyword_marker");
-			if (value._ignoreCase.HasValue)
-			{
-				writer.WritePropertyName("ignore_case");
-				writer.WriteBooleanValue(value._ignoreCase.Value);
-			}
-
-			if (value._keywords is not null)
-			{
-				writer.WritePropertyName("keywords");
-				JsonSerializer.Serialize(writer, value._keywords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._keywordsPath))
-			{
-				writer.WritePropertyName("keywords_path");
-				writer.WriteStringValue(value._keywordsPath);
-			}
-
-			if (!string.IsNullOrEmpty(value._keywordsPattern))
-			{
-				writer.WritePropertyName("keywords_pattern");
-				writer.WriteStringValue(value._keywordsPattern);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KeywordTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
@@ -1339,48 +526,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int BufferSize { get; init; }
 	}
 
-	[JsonConverter(typeof(KeywordTokenizerDescriptorConverter))]
-	public sealed partial class KeywordTokenizerDescriptor : DescriptorBase<KeywordTokenizerDescriptor>
-	{
-		internal int _bufferSize;
-	}
-
-	internal sealed class KeywordTokenizerDescriptorConverter : JsonConverter<KeywordTokenizerDescriptor>
-	{
-		public override KeywordTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KeywordTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("keyword");
-			writer.WritePropertyName("buffer_size");
-			writer.WriteNumberValue(value._bufferSize);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KStemTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "kstem";
-	}
-
-	[JsonConverter(typeof(KStemTokenFilterDescriptorConverter))]
-	public sealed partial class KStemTokenFilterDescriptor : DescriptorBase<KStemTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class KStemTokenFilterDescriptorConverter : JsonConverter<KStemTokenFilterDescriptor>
-	{
-		public override KStemTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KStemTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kstem");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class KuromojiAnalyzer : IAnalyzersVariant
@@ -1397,33 +547,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? UserDictionary { get; init; }
 	}
 
-	[JsonConverter(typeof(KuromojiAnalyzerDescriptorConverter))]
-	public sealed partial class KuromojiAnalyzerDescriptor : DescriptorBase<KuromojiAnalyzerDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode _mode;
-		internal string? _userDictionary;
-	}
-
-	internal sealed class KuromojiAnalyzerDescriptorConverter : JsonConverter<KuromojiAnalyzerDescriptor>
-	{
-		public override KuromojiAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KuromojiAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji");
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, value._mode, options);
-			if (!string.IsNullOrEmpty(value._userDictionary))
-			{
-				writer.WritePropertyName("user_dictionary");
-				writer.WriteStringValue(value._userDictionary);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KuromojiIterationMarkCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
 	{
 		[JsonInclude]
@@ -1438,29 +561,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool NormalizeKanji { get; init; }
 	}
 
-	[JsonConverter(typeof(KuromojiIterationMarkCharFilterDescriptorConverter))]
-	public sealed partial class KuromojiIterationMarkCharFilterDescriptor : DescriptorBase<KuromojiIterationMarkCharFilterDescriptor>
-	{
-		internal bool _normalizeKana;
-		internal bool _normalizeKanji;
-	}
-
-	internal sealed class KuromojiIterationMarkCharFilterDescriptorConverter : JsonConverter<KuromojiIterationMarkCharFilterDescriptor>
-	{
-		public override KuromojiIterationMarkCharFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KuromojiIterationMarkCharFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji_iteration_mark");
-			writer.WritePropertyName("normalize_kana");
-			writer.WriteBooleanValue(value._normalizeKana);
-			writer.WritePropertyName("normalize_kanji");
-			writer.WriteBooleanValue(value._normalizeKanji);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KuromojiPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -1469,26 +569,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
 		public IReadOnlyCollection<string> Stoptags { get; init; }
-	}
-
-	[JsonConverter(typeof(KuromojiPartOfSpeechTokenFilterDescriptorConverter))]
-	public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : DescriptorBase<KuromojiPartOfSpeechTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _stoptags;
-	}
-
-	internal sealed class KuromojiPartOfSpeechTokenFilterDescriptorConverter : JsonConverter<KuromojiPartOfSpeechTokenFilterDescriptor>
-	{
-		public override KuromojiPartOfSpeechTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KuromojiPartOfSpeechTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji_part_of_speech");
-			writer.WritePropertyName("stoptags");
-			JsonSerializer.Serialize(writer, value._stoptags, options);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class KuromojiReadingFormTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1501,26 +581,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool UseRomaji { get; init; }
 	}
 
-	[JsonConverter(typeof(KuromojiReadingFormTokenFilterDescriptorConverter))]
-	public sealed partial class KuromojiReadingFormTokenFilterDescriptor : DescriptorBase<KuromojiReadingFormTokenFilterDescriptor>
-	{
-		internal bool _useRomaji;
-	}
-
-	internal sealed class KuromojiReadingFormTokenFilterDescriptorConverter : JsonConverter<KuromojiReadingFormTokenFilterDescriptor>
-	{
-		public override KuromojiReadingFormTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KuromojiReadingFormTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji_readingform");
-			writer.WritePropertyName("use_romaji");
-			writer.WriteBooleanValue(value._useRomaji);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class KuromojiStemmerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -1529,26 +589,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("minimum_length")]
 		public int MinimumLength { get; init; }
-	}
-
-	[JsonConverter(typeof(KuromojiStemmerTokenFilterDescriptorConverter))]
-	public sealed partial class KuromojiStemmerTokenFilterDescriptor : DescriptorBase<KuromojiStemmerTokenFilterDescriptor>
-	{
-		internal int _minimumLength;
-	}
-
-	internal sealed class KuromojiStemmerTokenFilterDescriptorConverter : JsonConverter<KuromojiStemmerTokenFilterDescriptor>
-	{
-		public override KuromojiStemmerTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KuromojiStemmerTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji_stemmer");
-			writer.WritePropertyName("minimum_length");
-			writer.WriteNumberValue(value._minimumLength);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class KuromojiTokenizer : Analysis.TokenizerBase, ITokenizersVariant
@@ -1585,68 +625,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? DiscardCompoundToken { get; init; }
 	}
 
-	[JsonConverter(typeof(KuromojiTokenizerDescriptorConverter))]
-	public sealed partial class KuromojiTokenizerDescriptor : DescriptorBase<KuromojiTokenizerDescriptor>
-	{
-		internal bool? _discardPunctuation;
-		internal Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode _mode;
-		internal int? _nbestCost;
-		internal string? _nbestExamples;
-		internal string? _userDictionary;
-		internal IReadOnlyCollection<string>? _userDictionaryRules;
-		internal bool? _discardCompoundToken;
-	}
-
-	internal sealed class KuromojiTokenizerDescriptorConverter : JsonConverter<KuromojiTokenizerDescriptor>
-	{
-		public override KuromojiTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KuromojiTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("kuromoji_tokenizer");
-			if (value._discardPunctuation.HasValue)
-			{
-				writer.WritePropertyName("discard_punctuation");
-				writer.WriteBooleanValue(value._discardPunctuation.Value);
-			}
-
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, value._mode, options);
-			if (value._nbestCost.HasValue)
-			{
-				writer.WritePropertyName("nbest_cost");
-				writer.WriteNumberValue(value._nbestCost.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value._nbestExamples))
-			{
-				writer.WritePropertyName("nbest_examples");
-				writer.WriteStringValue(value._nbestExamples);
-			}
-
-			if (!string.IsNullOrEmpty(value._userDictionary))
-			{
-				writer.WritePropertyName("user_dictionary");
-				writer.WriteStringValue(value._userDictionary);
-			}
-
-			if (value._userDictionaryRules is not null)
-			{
-				writer.WritePropertyName("user_dictionary_rules");
-				JsonSerializer.Serialize(writer, value._userDictionaryRules, options);
-			}
-
-			if (value._discardCompoundToken.HasValue)
-			{
-				writer.WritePropertyName("discard_compound_token");
-				writer.WriteBooleanValue(value._discardCompoundToken.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class LanguageAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
@@ -1673,50 +651,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath { get; init; }
 	}
 
-	[JsonConverter(typeof(LanguageAnalyzerDescriptorConverter))]
-	public sealed partial class LanguageAnalyzerDescriptor : DescriptorBase<LanguageAnalyzerDescriptor>
-	{
-		internal string? _version;
-		internal Elastic.Clients.Elasticsearch.Analysis.Language _language;
-		internal IReadOnlyCollection<string> _stemExclusion;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-		internal string? _stopwordsPath;
-	}
-
-	internal sealed class LanguageAnalyzerDescriptorConverter : JsonConverter<LanguageAnalyzerDescriptor>
-	{
-		public override LanguageAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LanguageAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("language");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			writer.WritePropertyName("language");
-			JsonSerializer.Serialize(writer, value._language, options);
-			writer.WritePropertyName("stem_exclusion");
-			JsonSerializer.Serialize(writer, value._stemExclusion, options);
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._stopwordsPath))
-			{
-				writer.WritePropertyName("stopwords_path");
-				writer.WriteStringValue(value._stopwordsPath);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class LengthTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -1731,51 +665,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Min { get; init; }
 	}
 
-	[JsonConverter(typeof(LengthTokenFilterDescriptorConverter))]
-	public sealed partial class LengthTokenFilterDescriptor : DescriptorBase<LengthTokenFilterDescriptor>
-	{
-		internal int _max;
-		internal int _min;
-	}
-
-	internal sealed class LengthTokenFilterDescriptorConverter : JsonConverter<LengthTokenFilterDescriptor>
-	{
-		public override LengthTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LengthTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("length");
-			writer.WritePropertyName("max");
-			writer.WriteNumberValue(value._max);
-			writer.WritePropertyName("min");
-			writer.WriteNumberValue(value._min);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class LetterTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "letter";
-	}
-
-	[JsonConverter(typeof(LetterTokenizerDescriptorConverter))]
-	public sealed partial class LetterTokenizerDescriptor : DescriptorBase<LetterTokenizerDescriptor>
-	{
-	}
-
-	internal sealed class LetterTokenizerDescriptorConverter : JsonConverter<LetterTokenizerDescriptor>
-	{
-		public override LetterTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LetterTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("letter");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1792,51 +686,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MaxTokenCount { get; init; }
 	}
 
-	[JsonConverter(typeof(LimitTokenCountTokenFilterDescriptorConverter))]
-	public sealed partial class LimitTokenCountTokenFilterDescriptor : DescriptorBase<LimitTokenCountTokenFilterDescriptor>
-	{
-		internal bool _consumeAllTokens;
-		internal int _maxTokenCount;
-	}
-
-	internal sealed class LimitTokenCountTokenFilterDescriptorConverter : JsonConverter<LimitTokenCountTokenFilterDescriptor>
-	{
-		public override LimitTokenCountTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LimitTokenCountTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("limit");
-			writer.WritePropertyName("consume_all_tokens");
-			writer.WriteBooleanValue(value._consumeAllTokens);
-			writer.WritePropertyName("max_token_count");
-			writer.WriteNumberValue(value._maxTokenCount);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class LowercaseNormalizer : INormalizersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "lowercase";
-	}
-
-	[JsonConverter(typeof(LowercaseNormalizerDescriptorConverter))]
-	public sealed partial class LowercaseNormalizerDescriptor : DescriptorBase<LowercaseNormalizerDescriptor>
-	{
-	}
-
-	internal sealed class LowercaseNormalizerDescriptorConverter : JsonConverter<LowercaseNormalizerDescriptor>
-	{
-		public override LowercaseNormalizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LowercaseNormalizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("lowercase");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class LowercaseTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1849,52 +703,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Language { get; init; }
 	}
 
-	[JsonConverter(typeof(LowercaseTokenFilterDescriptorConverter))]
-	public sealed partial class LowercaseTokenFilterDescriptor : DescriptorBase<LowercaseTokenFilterDescriptor>
-	{
-		internal string? _language;
-	}
-
-	internal sealed class LowercaseTokenFilterDescriptorConverter : JsonConverter<LowercaseTokenFilterDescriptor>
-	{
-		public override LowercaseTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LowercaseTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("lowercase");
-			if (!string.IsNullOrEmpty(value._language))
-			{
-				writer.WritePropertyName("language");
-				writer.WriteStringValue(value._language);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class LowercaseTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "lowercase";
-	}
-
-	[JsonConverter(typeof(LowercaseTokenizerDescriptorConverter))]
-	public sealed partial class LowercaseTokenizerDescriptor : DescriptorBase<LowercaseTokenizerDescriptor>
-	{
-	}
-
-	internal sealed class LowercaseTokenizerDescriptorConverter : JsonConverter<LowercaseTokenizerDescriptor>
-	{
-		public override LowercaseTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LowercaseTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("lowercase");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class MappingCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
@@ -1911,33 +724,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? MappingsPath { get; init; }
 	}
 
-	[JsonConverter(typeof(MappingCharFilterDescriptorConverter))]
-	public sealed partial class MappingCharFilterDescriptor : DescriptorBase<MappingCharFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _mappings;
-		internal string? _mappingsPath;
-	}
-
-	internal sealed class MappingCharFilterDescriptorConverter : JsonConverter<MappingCharFilterDescriptor>
-	{
-		public override MappingCharFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, MappingCharFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("mapping");
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, value._mappings, options);
-			if (!string.IsNullOrEmpty(value._mappingsPath))
-			{
-				writer.WritePropertyName("mappings_path");
-				writer.WriteStringValue(value._mappingsPath);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class MultiplexerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -1950,29 +736,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal { get; init; }
-	}
-
-	[JsonConverter(typeof(MultiplexerTokenFilterDescriptorConverter))]
-	public sealed partial class MultiplexerTokenFilterDescriptor : DescriptorBase<MultiplexerTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _filters;
-		internal bool _preserveOriginal;
-	}
-
-	internal sealed class MultiplexerTokenFilterDescriptorConverter : JsonConverter<MultiplexerTokenFilterDescriptor>
-	{
-		public override MultiplexerTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, MultiplexerTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("multiplexer");
-			writer.WritePropertyName("filters");
-			JsonSerializer.Serialize(writer, value._filters, options);
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(value._preserveOriginal);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class NGramTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -1991,44 +754,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool? PreserveOriginal { get; init; }
-	}
-
-	[JsonConverter(typeof(NGramTokenFilterDescriptorConverter))]
-	public sealed partial class NGramTokenFilterDescriptor : DescriptorBase<NGramTokenFilterDescriptor>
-	{
-		internal int? _maxGram;
-		internal int? _minGram;
-		internal bool? _preserveOriginal;
-	}
-
-	internal sealed class NGramTokenFilterDescriptorConverter : JsonConverter<NGramTokenFilterDescriptor>
-	{
-		public override NGramTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, NGramTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("ngram");
-			if (value._maxGram.HasValue)
-			{
-				writer.WritePropertyName("max_gram");
-				writer.WriteNumberValue(value._maxGram.Value);
-			}
-
-			if (value._minGram.HasValue)
-			{
-				writer.WritePropertyName("min_gram");
-				writer.WriteNumberValue(value._minGram.Value);
-			}
-
-			if (value._preserveOriginal.HasValue)
-			{
-				writer.WritePropertyName("preserve_original");
-				writer.WriteBooleanValue(value._preserveOriginal.Value);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class NGramTokenizer : Analysis.TokenizerBase, ITokenizersVariant
@@ -2053,39 +778,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; init; }
 	}
 
-	[JsonConverter(typeof(NGramTokenizerDescriptorConverter))]
-	public sealed partial class NGramTokenizerDescriptor : DescriptorBase<NGramTokenizerDescriptor>
-	{
-		internal string? _customTokenChars;
-		internal int _maxGram;
-		internal int _minGram;
-		internal IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> _tokenChars;
-	}
-
-	internal sealed class NGramTokenizerDescriptorConverter : JsonConverter<NGramTokenizerDescriptor>
-	{
-		public override NGramTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, NGramTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("ngram");
-			if (!string.IsNullOrEmpty(value._customTokenChars))
-			{
-				writer.WritePropertyName("custom_token_chars");
-				writer.WriteStringValue(value._customTokenChars);
-			}
-
-			writer.WritePropertyName("max_gram");
-			writer.WriteNumberValue(value._maxGram);
-			writer.WritePropertyName("min_gram");
-			writer.WriteNumberValue(value._minGram);
-			writer.WritePropertyName("token_chars");
-			JsonSerializer.Serialize(writer, value._tokenChars, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class NoriAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
@@ -2108,51 +800,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? UserDictionary { get; init; }
 	}
 
-	[JsonConverter(typeof(NoriAnalyzerDescriptorConverter))]
-	public sealed partial class NoriAnalyzerDescriptor : DescriptorBase<NoriAnalyzerDescriptor>
-	{
-		internal string? _version;
-		internal Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? _decompoundMode;
-		internal IReadOnlyCollection<string>? _stoptags;
-		internal string? _userDictionary;
-	}
-
-	internal sealed class NoriAnalyzerDescriptorConverter : JsonConverter<NoriAnalyzerDescriptor>
-	{
-		public override NoriAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, NoriAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("nori");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			if (value._decompoundMode is not null)
-			{
-				writer.WritePropertyName("decompound_mode");
-				JsonSerializer.Serialize(writer, value._decompoundMode, options);
-			}
-
-			if (value._stoptags is not null)
-			{
-				writer.WritePropertyName("stoptags");
-				JsonSerializer.Serialize(writer, value._stoptags, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._userDictionary))
-			{
-				writer.WritePropertyName("user_dictionary");
-				writer.WriteStringValue(value._userDictionary);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class NoriPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -2161,26 +808,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stoptags")]
 		public IReadOnlyCollection<string> Stoptags { get; init; }
-	}
-
-	[JsonConverter(typeof(NoriPartOfSpeechTokenFilterDescriptorConverter))]
-	public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : DescriptorBase<NoriPartOfSpeechTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _stoptags;
-	}
-
-	internal sealed class NoriPartOfSpeechTokenFilterDescriptorConverter : JsonConverter<NoriPartOfSpeechTokenFilterDescriptor>
-	{
-		public override NoriPartOfSpeechTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, NoriPartOfSpeechTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("nori_part_of_speech");
-			writer.WritePropertyName("stoptags");
-			JsonSerializer.Serialize(writer, value._stoptags, options);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class NoriTokenizer : Analysis.TokenizerBase, ITokenizersVariant
@@ -2203,51 +830,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary_rules")]
 		public IReadOnlyCollection<string>? UserDictionaryRules { get; init; }
-	}
-
-	[JsonConverter(typeof(NoriTokenizerDescriptorConverter))]
-	public sealed partial class NoriTokenizerDescriptor : DescriptorBase<NoriTokenizerDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? _decompoundMode;
-		internal bool? _discardPunctuation;
-		internal string? _userDictionary;
-		internal IReadOnlyCollection<string>? _userDictionaryRules;
-	}
-
-	internal sealed class NoriTokenizerDescriptorConverter : JsonConverter<NoriTokenizerDescriptor>
-	{
-		public override NoriTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, NoriTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("nori_tokenizer");
-			if (value._decompoundMode is not null)
-			{
-				writer.WritePropertyName("decompound_mode");
-				JsonSerializer.Serialize(writer, value._decompoundMode, options);
-			}
-
-			if (value._discardPunctuation.HasValue)
-			{
-				writer.WritePropertyName("discard_punctuation");
-				writer.WriteBooleanValue(value._discardPunctuation.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value._userDictionary))
-			{
-				writer.WritePropertyName("user_dictionary");
-				writer.WriteStringValue(value._userDictionary);
-			}
-
-			if (value._userDictionaryRules is not null)
-			{
-				writer.WritePropertyName("user_dictionary_rules");
-				JsonSerializer.Serialize(writer, value._userDictionaryRules, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class PathHierarchyTokenizer : Analysis.TokenizerBase, ITokenizersVariant
@@ -2276,38 +858,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Skip { get; init; }
 	}
 
-	[JsonConverter(typeof(PathHierarchyTokenizerDescriptorConverter))]
-	public sealed partial class PathHierarchyTokenizerDescriptor : DescriptorBase<PathHierarchyTokenizerDescriptor>
-	{
-		internal int _bufferSize;
-		internal string _delimiter;
-		internal string _replacement;
-		internal bool _reverse;
-		internal int _skip;
-	}
-
-	internal sealed class PathHierarchyTokenizerDescriptorConverter : JsonConverter<PathHierarchyTokenizerDescriptor>
-	{
-		public override PathHierarchyTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PathHierarchyTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("path_hierarchy");
-			writer.WritePropertyName("buffer_size");
-			writer.WriteNumberValue(value._bufferSize);
-			writer.WritePropertyName("delimiter");
-			writer.WriteStringValue(value._delimiter);
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(value._replacement);
-			writer.WritePropertyName("reverse");
-			writer.WriteBooleanValue(value._reverse);
-			writer.WritePropertyName("skip");
-			writer.WriteNumberValue(value._skip);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class PatternAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
@@ -2334,54 +884,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	[JsonConverter(typeof(PatternAnalyzerDescriptorConverter))]
-	public sealed partial class PatternAnalyzerDescriptor : DescriptorBase<PatternAnalyzerDescriptor>
-	{
-		internal string? _version;
-		internal string? _flags;
-		internal bool? _lowercase;
-		internal string _pattern;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-	}
-
-	internal sealed class PatternAnalyzerDescriptorConverter : JsonConverter<PatternAnalyzerDescriptor>
-	{
-		public override PatternAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PatternAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("pattern");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._flags))
-			{
-				writer.WritePropertyName("flags");
-				writer.WriteStringValue(value._flags);
-			}
-
-			if (value._lowercase.HasValue)
-			{
-				writer.WritePropertyName("lowercase");
-				writer.WriteBooleanValue(value._lowercase.Value);
-			}
-
-			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value._pattern);
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class PatternCaptureTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -2394,29 +896,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal { get; init; }
-	}
-
-	[JsonConverter(typeof(PatternCaptureTokenFilterDescriptorConverter))]
-	public sealed partial class PatternCaptureTokenFilterDescriptor : DescriptorBase<PatternCaptureTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string> _patterns;
-		internal bool _preserveOriginal;
-	}
-
-	internal sealed class PatternCaptureTokenFilterDescriptorConverter : JsonConverter<PatternCaptureTokenFilterDescriptor>
-	{
-		public override PatternCaptureTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PatternCaptureTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("pattern_capture");
-			writer.WritePropertyName("patterns");
-			JsonSerializer.Serialize(writer, value._patterns, options);
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(value._preserveOriginal);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
@@ -2437,32 +916,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Replacement { get; init; }
 	}
 
-	[JsonConverter(typeof(PatternReplaceCharFilterDescriptorConverter))]
-	public sealed partial class PatternReplaceCharFilterDescriptor : DescriptorBase<PatternReplaceCharFilterDescriptor>
-	{
-		internal string _flags;
-		internal string _pattern;
-		internal string _replacement;
-	}
-
-	internal sealed class PatternReplaceCharFilterDescriptorConverter : JsonConverter<PatternReplaceCharFilterDescriptor>
-	{
-		public override PatternReplaceCharFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PatternReplaceCharFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("pattern_replace");
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(value._flags);
-			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value._pattern);
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(value._replacement);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class PatternReplaceTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -2481,32 +934,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Replacement { get; init; }
 	}
 
-	[JsonConverter(typeof(PatternReplaceTokenFilterDescriptorConverter))]
-	public sealed partial class PatternReplaceTokenFilterDescriptor : DescriptorBase<PatternReplaceTokenFilterDescriptor>
-	{
-		internal string _flags;
-		internal string _pattern;
-		internal string _replacement;
-	}
-
-	internal sealed class PatternReplaceTokenFilterDescriptorConverter : JsonConverter<PatternReplaceTokenFilterDescriptor>
-	{
-		public override PatternReplaceTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PatternReplaceTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("pattern_replace");
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(value._flags);
-			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value._pattern);
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(value._replacement);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class PatternTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
@@ -2523,32 +950,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("pattern")]
 		public string Pattern { get; init; }
-	}
-
-	[JsonConverter(typeof(PatternTokenizerDescriptorConverter))]
-	public sealed partial class PatternTokenizerDescriptor : DescriptorBase<PatternTokenizerDescriptor>
-	{
-		internal string _flags;
-		internal int _group;
-		internal string _pattern;
-	}
-
-	internal sealed class PatternTokenizerDescriptorConverter : JsonConverter<PatternTokenizerDescriptor>
-	{
-		public override PatternTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PatternTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("pattern");
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(value._flags);
-			writer.WritePropertyName("group");
-			writer.WriteNumberValue(value._group);
-			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value._pattern);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class PhoneticTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -2581,71 +982,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleType { get; init; }
 	}
 
-	[JsonConverter(typeof(PhoneticTokenFilterDescriptorConverter))]
-	public sealed partial class PhoneticTokenFilterDescriptor : DescriptorBase<PhoneticTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder _encoder;
-		internal IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage> _languageset;
-		internal int? _maxCodeLen;
-		internal Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType _nameType;
-		internal bool? _replace;
-		internal Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType _ruleType;
-	}
-
-	internal sealed class PhoneticTokenFilterDescriptorConverter : JsonConverter<PhoneticTokenFilterDescriptor>
-	{
-		public override PhoneticTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PhoneticTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("phonetic");
-			writer.WritePropertyName("encoder");
-			JsonSerializer.Serialize(writer, value._encoder, options);
-			writer.WritePropertyName("languageset");
-			JsonSerializer.Serialize(writer, value._languageset, options);
-			if (value._maxCodeLen.HasValue)
-			{
-				writer.WritePropertyName("max_code_len");
-				writer.WriteNumberValue(value._maxCodeLen.Value);
-			}
-
-			writer.WritePropertyName("name_type");
-			JsonSerializer.Serialize(writer, value._nameType, options);
-			if (value._replace.HasValue)
-			{
-				writer.WritePropertyName("replace");
-				writer.WriteBooleanValue(value._replace.Value);
-			}
-
-			writer.WritePropertyName("rule_type");
-			JsonSerializer.Serialize(writer, value._ruleType, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class PorterStemTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "porter_stem";
-	}
-
-	[JsonConverter(typeof(PorterStemTokenFilterDescriptorConverter))]
-	public sealed partial class PorterStemTokenFilterDescriptor : DescriptorBase<PorterStemTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class PorterStemTokenFilterDescriptorConverter : JsonConverter<PorterStemTokenFilterDescriptor>
-	{
-		public override PorterStemTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PorterStemTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("porter_stem");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class PredicateTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -2658,26 +999,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Script Script { get; init; }
 	}
 
-	[JsonConverter(typeof(PredicateTokenFilterDescriptorConverter))]
-	public sealed partial class PredicateTokenFilterDescriptor : DescriptorBase<PredicateTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Script _script;
-	}
-
-	internal sealed class PredicateTokenFilterDescriptorConverter : JsonConverter<PredicateTokenFilterDescriptor>
-	{
-		public override PredicateTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PredicateTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("predicate_token_filter");
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value._script, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class RemoveDuplicatesTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -2685,45 +1006,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "remove_duplicates";
 	}
 
-	[JsonConverter(typeof(RemoveDuplicatesTokenFilterDescriptorConverter))]
-	public sealed partial class RemoveDuplicatesTokenFilterDescriptor : DescriptorBase<RemoveDuplicatesTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class RemoveDuplicatesTokenFilterDescriptorConverter : JsonConverter<RemoveDuplicatesTokenFilterDescriptor>
-	{
-		public override RemoveDuplicatesTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RemoveDuplicatesTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("remove_duplicates");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class ReverseTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "reverse";
-	}
-
-	[JsonConverter(typeof(ReverseTokenFilterDescriptorConverter))]
-	public sealed partial class ReverseTokenFilterDescriptor : DescriptorBase<ReverseTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class ReverseTokenFilterDescriptorConverter : JsonConverter<ReverseTokenFilterDescriptor>
-	{
-		public override ReverseTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ReverseTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("reverse");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class ShingleTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -2756,65 +1043,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? TokenSeparator { get; init; }
 	}
 
-	[JsonConverter(typeof(ShingleTokenFilterDescriptorConverter))]
-	public sealed partial class ShingleTokenFilterDescriptor : DescriptorBase<ShingleTokenFilterDescriptor>
-	{
-		internal string? _fillerToken;
-		internal Union<int?, string?>? _maxShingleSize;
-		internal Union<int?, string?>? _minShingleSize;
-		internal bool? _outputUnigrams;
-		internal bool? _outputUnigramsIfNoShingles;
-		internal string? _tokenSeparator;
-	}
-
-	internal sealed class ShingleTokenFilterDescriptorConverter : JsonConverter<ShingleTokenFilterDescriptor>
-	{
-		public override ShingleTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ShingleTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("shingle");
-			if (!string.IsNullOrEmpty(value._fillerToken))
-			{
-				writer.WritePropertyName("filler_token");
-				writer.WriteStringValue(value._fillerToken);
-			}
-
-			if (value._maxShingleSize is not null)
-			{
-				writer.WritePropertyName("max_shingle_size");
-				JsonSerializer.Serialize(writer, value._maxShingleSize, options);
-			}
-
-			if (value._minShingleSize is not null)
-			{
-				writer.WritePropertyName("min_shingle_size");
-				JsonSerializer.Serialize(writer, value._minShingleSize, options);
-			}
-
-			if (value._outputUnigrams.HasValue)
-			{
-				writer.WritePropertyName("output_unigrams");
-				writer.WriteBooleanValue(value._outputUnigrams.Value);
-			}
-
-			if (value._outputUnigramsIfNoShingles.HasValue)
-			{
-				writer.WritePropertyName("output_unigrams_if_no_shingles");
-				writer.WriteBooleanValue(value._outputUnigramsIfNoShingles.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value._tokenSeparator))
-			{
-				writer.WritePropertyName("token_separator");
-				writer.WriteStringValue(value._tokenSeparator);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class SimpleAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
@@ -2823,30 +1051,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("version")]
 		public string? Version { get; init; }
-	}
-
-	[JsonConverter(typeof(SimpleAnalyzerDescriptorConverter))]
-	public sealed partial class SimpleAnalyzerDescriptor : DescriptorBase<SimpleAnalyzerDescriptor>
-	{
-		internal string? _version;
-	}
-
-	internal sealed class SimpleAnalyzerDescriptorConverter : JsonConverter<SimpleAnalyzerDescriptor>
-	{
-		public override SimpleAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SimpleAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("simple");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class SnowballAnalyzer : IAnalyzersVariant
@@ -2867,40 +1071,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	[JsonConverter(typeof(SnowballAnalyzerDescriptorConverter))]
-	public sealed partial class SnowballAnalyzerDescriptor : DescriptorBase<SnowballAnalyzerDescriptor>
-	{
-		internal string? _version;
-		internal Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage _language;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-	}
-
-	internal sealed class SnowballAnalyzerDescriptorConverter : JsonConverter<SnowballAnalyzerDescriptor>
-	{
-		public override SnowballAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SnowballAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("snowball");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			writer.WritePropertyName("language");
-			JsonSerializer.Serialize(writer, value._language, options);
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class SnowballTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -2909,26 +1079,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("language")]
 		public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; init; }
-	}
-
-	[JsonConverter(typeof(SnowballTokenFilterDescriptorConverter))]
-	public sealed partial class SnowballTokenFilterDescriptor : DescriptorBase<SnowballTokenFilterDescriptor>
-	{
-		internal Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage _language;
-	}
-
-	internal sealed class SnowballTokenFilterDescriptorConverter : JsonConverter<SnowballTokenFilterDescriptor>
-	{
-		public override SnowballTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SnowballTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("snowball");
-			writer.WritePropertyName("language");
-			JsonSerializer.Serialize(writer, value._language, options);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class StandardAnalyzer : IAnalyzersVariant
@@ -2945,37 +1095,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	[JsonConverter(typeof(StandardAnalyzerDescriptorConverter))]
-	public sealed partial class StandardAnalyzerDescriptor : DescriptorBase<StandardAnalyzerDescriptor>
-	{
-		internal int? _maxTokenLength;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-	}
-
-	internal sealed class StandardAnalyzerDescriptorConverter : JsonConverter<StandardAnalyzerDescriptor>
-	{
-		public override StandardAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StandardAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("standard");
-			if (value._maxTokenLength.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(value._maxTokenLength.Value);
-			}
-
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class StandardTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
@@ -2984,30 +1103,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int? MaxTokenLength { get; init; }
-	}
-
-	[JsonConverter(typeof(StandardTokenizerDescriptorConverter))]
-	public sealed partial class StandardTokenizerDescriptor : DescriptorBase<StandardTokenizerDescriptor>
-	{
-		internal int? _maxTokenLength;
-	}
-
-	internal sealed class StandardTokenizerDescriptorConverter : JsonConverter<StandardTokenizerDescriptor>
-	{
-		public override StandardTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StandardTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("standard");
-			if (value._maxTokenLength.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(value._maxTokenLength.Value);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -3024,37 +1119,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? RulesPath { get; init; }
 	}
 
-	[JsonConverter(typeof(StemmerOverrideTokenFilterDescriptorConverter))]
-	public sealed partial class StemmerOverrideTokenFilterDescriptor : DescriptorBase<StemmerOverrideTokenFilterDescriptor>
-	{
-		internal IReadOnlyCollection<string>? _rules;
-		internal string? _rulesPath;
-	}
-
-	internal sealed class StemmerOverrideTokenFilterDescriptorConverter : JsonConverter<StemmerOverrideTokenFilterDescriptor>
-	{
-		public override StemmerOverrideTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StemmerOverrideTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("stemmer_override");
-			if (value._rules is not null)
-			{
-				writer.WritePropertyName("rules");
-				JsonSerializer.Serialize(writer, value._rules, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._rulesPath))
-			{
-				writer.WritePropertyName("rules_path");
-				writer.WriteStringValue(value._rulesPath);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class StemmerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -3063,26 +1127,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("language")]
 		public string Language { get; init; }
-	}
-
-	[JsonConverter(typeof(StemmerTokenFilterDescriptorConverter))]
-	public sealed partial class StemmerTokenFilterDescriptor : DescriptorBase<StemmerTokenFilterDescriptor>
-	{
-		internal string _language;
-	}
-
-	internal sealed class StemmerTokenFilterDescriptorConverter : JsonConverter<StemmerTokenFilterDescriptor>
-	{
-		public override StemmerTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StemmerTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("stemmer");
-			writer.WritePropertyName("language");
-			writer.WriteStringValue(value._language);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class StopAnalyzer : IAnalyzersVariant
@@ -3101,44 +1145,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath { get; init; }
-	}
-
-	[JsonConverter(typeof(StopAnalyzerDescriptorConverter))]
-	public sealed partial class StopAnalyzerDescriptor : DescriptorBase<StopAnalyzerDescriptor>
-	{
-		internal string? _version;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopwords;
-		internal string? _stopwordsPath;
-	}
-
-	internal sealed class StopAnalyzerDescriptorConverter : JsonConverter<StopAnalyzerDescriptor>
-	{
-		public override StopAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StopAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("stop");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			if (value._stopwords is not null)
-			{
-				writer.WritePropertyName("stopwords");
-				JsonSerializer.Serialize(writer, value._stopwords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._stopwordsPath))
-			{
-				writer.WritePropertyName("stopwords_path");
-				writer.WriteStringValue(value._stopwordsPath);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class StopTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -3161,47 +1167,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath { get; init; }
-	}
-
-	[JsonConverter(typeof(StopTokenFilterDescriptorConverter))]
-	public sealed partial class StopTokenFilterDescriptor : DescriptorBase<StopTokenFilterDescriptor>
-	{
-		internal bool? _ignoreCase;
-		internal bool? _removeTrailing;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords _stopwords;
-		internal string? _stopwordsPath;
-	}
-
-	internal sealed class StopTokenFilterDescriptorConverter : JsonConverter<StopTokenFilterDescriptor>
-	{
-		public override StopTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StopTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("stop");
-			if (value._ignoreCase.HasValue)
-			{
-				writer.WritePropertyName("ignore_case");
-				writer.WriteBooleanValue(value._ignoreCase.Value);
-			}
-
-			if (value._removeTrailing.HasValue)
-			{
-				writer.WritePropertyName("remove_trailing");
-				writer.WriteBooleanValue(value._removeTrailing.Value);
-			}
-
-			writer.WritePropertyName("stopwords");
-			JsonSerializer.Serialize(writer, value._stopwords, options);
-			if (!string.IsNullOrEmpty(value._stopwordsPath))
-			{
-				writer.WritePropertyName("stopwords_path");
-				writer.WriteStringValue(value._stopwordsPath);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -3238,72 +1203,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? Updateable { get; init; }
 	}
 
-	[JsonConverter(typeof(SynonymGraphTokenFilterDescriptorConverter))]
-	public sealed partial class SynonymGraphTokenFilterDescriptor : DescriptorBase<SynonymGraphTokenFilterDescriptor>
-	{
-		internal bool? _expand;
-		internal Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? _format;
-		internal bool? _lenient;
-		internal IReadOnlyCollection<string>? _synonyms;
-		internal string? _synonymsPath;
-		internal string? _tokenizer;
-		internal bool? _updateable;
-	}
-
-	internal sealed class SynonymGraphTokenFilterDescriptorConverter : JsonConverter<SynonymGraphTokenFilterDescriptor>
-	{
-		public override SynonymGraphTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SynonymGraphTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("synonym_graph");
-			if (value._expand.HasValue)
-			{
-				writer.WritePropertyName("expand");
-				writer.WriteBooleanValue(value._expand.Value);
-			}
-
-			if (value._format is not null)
-			{
-				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, value._format, options);
-			}
-
-			if (value._lenient.HasValue)
-			{
-				writer.WritePropertyName("lenient");
-				writer.WriteBooleanValue(value._lenient.Value);
-			}
-
-			if (value._synonyms is not null)
-			{
-				writer.WritePropertyName("synonyms");
-				JsonSerializer.Serialize(writer, value._synonyms, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._synonymsPath))
-			{
-				writer.WritePropertyName("synonyms_path");
-				writer.WriteStringValue(value._synonymsPath);
-			}
-
-			if (!string.IsNullOrEmpty(value._tokenizer))
-			{
-				writer.WritePropertyName("tokenizer");
-				writer.WriteStringValue(value._tokenizer);
-			}
-
-			if (value._updateable.HasValue)
-			{
-				writer.WritePropertyName("updateable");
-				writer.WriteBooleanValue(value._updateable.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class SynonymTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -3338,72 +1237,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? Updateable { get; init; }
 	}
 
-	[JsonConverter(typeof(SynonymTokenFilterDescriptorConverter))]
-	public sealed partial class SynonymTokenFilterDescriptor : DescriptorBase<SynonymTokenFilterDescriptor>
-	{
-		internal bool? _expand;
-		internal Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? _format;
-		internal bool? _lenient;
-		internal IReadOnlyCollection<string>? _synonyms;
-		internal string? _synonymsPath;
-		internal string? _tokenizer;
-		internal bool? _updateable;
-	}
-
-	internal sealed class SynonymTokenFilterDescriptorConverter : JsonConverter<SynonymTokenFilterDescriptor>
-	{
-		public override SynonymTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SynonymTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("synonym");
-			if (value._expand.HasValue)
-			{
-				writer.WritePropertyName("expand");
-				writer.WriteBooleanValue(value._expand.Value);
-			}
-
-			if (value._format is not null)
-			{
-				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, value._format, options);
-			}
-
-			if (value._lenient.HasValue)
-			{
-				writer.WritePropertyName("lenient");
-				writer.WriteBooleanValue(value._lenient.Value);
-			}
-
-			if (value._synonyms is not null)
-			{
-				writer.WritePropertyName("synonyms");
-				JsonSerializer.Serialize(writer, value._synonyms, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._synonymsPath))
-			{
-				writer.WritePropertyName("synonyms_path");
-				writer.WriteStringValue(value._synonymsPath);
-			}
-
-			if (!string.IsNullOrEmpty(value._tokenizer))
-			{
-				writer.WritePropertyName("tokenizer");
-				writer.WriteStringValue(value._tokenizer);
-			}
-
-			if (value._updateable.HasValue)
-			{
-				writer.WritePropertyName("updateable");
-				writer.WriteBooleanValue(value._updateable.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public abstract partial class TokenFilterBase
 	{
 		[JsonInclude]
@@ -3425,23 +1258,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "trim";
 	}
 
-	[JsonConverter(typeof(TrimTokenFilterDescriptorConverter))]
-	public sealed partial class TrimTokenFilterDescriptor : DescriptorBase<TrimTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class TrimTokenFilterDescriptorConverter : JsonConverter<TrimTokenFilterDescriptor>
-	{
-		public override TrimTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, TrimTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("trim");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class TruncateTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -3450,26 +1266,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("length")]
 		public int Length { get; init; }
-	}
-
-	[JsonConverter(typeof(TruncateTokenFilterDescriptorConverter))]
-	public sealed partial class TruncateTokenFilterDescriptor : DescriptorBase<TruncateTokenFilterDescriptor>
-	{
-		internal int _length;
-	}
-
-	internal sealed class TruncateTokenFilterDescriptorConverter : JsonConverter<TruncateTokenFilterDescriptor>
-	{
-		public override TruncateTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, TruncateTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("truncate");
-			writer.WritePropertyName("length");
-			writer.WriteNumberValue(value._length);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase, ITokenizersVariant
@@ -3482,30 +1278,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int? MaxTokenLength { get; init; }
 	}
 
-	[JsonConverter(typeof(UaxEmailUrlTokenizerDescriptorConverter))]
-	public sealed partial class UaxEmailUrlTokenizerDescriptor : DescriptorBase<UaxEmailUrlTokenizerDescriptor>
-	{
-		internal int? _maxTokenLength;
-	}
-
-	internal sealed class UaxEmailUrlTokenizerDescriptorConverter : JsonConverter<UaxEmailUrlTokenizerDescriptor>
-	{
-		public override UaxEmailUrlTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, UaxEmailUrlTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("uax_url_email");
-			if (value._maxTokenLength.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(value._maxTokenLength.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class UniqueTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -3516,52 +1288,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? OnlyOnSamePosition { get; init; }
 	}
 
-	[JsonConverter(typeof(UniqueTokenFilterDescriptorConverter))]
-	public sealed partial class UniqueTokenFilterDescriptor : DescriptorBase<UniqueTokenFilterDescriptor>
-	{
-		internal bool? _onlyOnSamePosition;
-	}
-
-	internal sealed class UniqueTokenFilterDescriptorConverter : JsonConverter<UniqueTokenFilterDescriptor>
-	{
-		public override UniqueTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, UniqueTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("unique");
-			if (value._onlyOnSamePosition.HasValue)
-			{
-				writer.WritePropertyName("only_on_same_position");
-				writer.WriteBooleanValue(value._onlyOnSamePosition.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class UppercaseTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "uppercase";
-	}
-
-	[JsonConverter(typeof(UppercaseTokenFilterDescriptorConverter))]
-	public sealed partial class UppercaseTokenFilterDescriptor : DescriptorBase<UppercaseTokenFilterDescriptor>
-	{
-	}
-
-	internal sealed class UppercaseTokenFilterDescriptorConverter : JsonConverter<UppercaseTokenFilterDescriptor>
-	{
-		public override UppercaseTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, UppercaseTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("uppercase");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class WhitespaceAnalyzer : IAnalyzersVariant
@@ -3574,30 +1305,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
-	[JsonConverter(typeof(WhitespaceAnalyzerDescriptorConverter))]
-	public sealed partial class WhitespaceAnalyzerDescriptor : DescriptorBase<WhitespaceAnalyzerDescriptor>
-	{
-		internal string? _version;
-	}
-
-	internal sealed class WhitespaceAnalyzerDescriptorConverter : JsonConverter<WhitespaceAnalyzerDescriptor>
-	{
-		public override WhitespaceAnalyzerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, WhitespaceAnalyzerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("whitespace");
-			if (value._version is not null)
-			{
-				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class WhitespaceTokenizer : Analysis.TokenizerBase, ITokenizersVariant
 	{
 		[JsonInclude]
@@ -3606,30 +1313,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int? MaxTokenLength { get; init; }
-	}
-
-	[JsonConverter(typeof(WhitespaceTokenizerDescriptorConverter))]
-	public sealed partial class WhitespaceTokenizerDescriptor : DescriptorBase<WhitespaceTokenizerDescriptor>
-	{
-		internal int? _maxTokenLength;
-	}
-
-	internal sealed class WhitespaceTokenizerDescriptorConverter : JsonConverter<WhitespaceTokenizerDescriptor>
-	{
-		public override WhitespaceTokenizerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, WhitespaceTokenizerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("whitespace");
-			if (value._maxTokenLength.HasValue)
-			{
-				writer.WritePropertyName("max_token_length");
-				writer.WriteNumberValue(value._maxTokenLength.Value);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
@@ -3698,128 +1381,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? TypeTablePath { get; init; }
 	}
 
-	[JsonConverter(typeof(WordDelimiterGraphTokenFilterDescriptorConverter))]
-	public sealed partial class WordDelimiterGraphTokenFilterDescriptor : DescriptorBase<WordDelimiterGraphTokenFilterDescriptor>
-	{
-		internal bool? _adjustOffsets;
-		internal bool? _catenateAll;
-		internal bool? _catenateNumbers;
-		internal bool? _catenateWords;
-		internal bool? _generateNumberParts;
-		internal bool? _generateWordParts;
-		internal bool? _ignoreKeywords;
-		internal bool? _preserveOriginal;
-		internal IReadOnlyCollection<string>? _protectedWords;
-		internal string? _protectedWordsPath;
-		internal bool? _splitOnCaseChange;
-		internal bool? _splitOnNumerics;
-		internal bool? _stemEnglishPossessive;
-		internal IReadOnlyCollection<string>? _typeTable;
-		internal string? _typeTablePath;
-	}
-
-	internal sealed class WordDelimiterGraphTokenFilterDescriptorConverter : JsonConverter<WordDelimiterGraphTokenFilterDescriptor>
-	{
-		public override WordDelimiterGraphTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, WordDelimiterGraphTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("word_delimiter_graph");
-			if (value._adjustOffsets.HasValue)
-			{
-				writer.WritePropertyName("adjust_offsets");
-				writer.WriteBooleanValue(value._adjustOffsets.Value);
-			}
-
-			if (value._catenateAll.HasValue)
-			{
-				writer.WritePropertyName("catenate_all");
-				writer.WriteBooleanValue(value._catenateAll.Value);
-			}
-
-			if (value._catenateNumbers.HasValue)
-			{
-				writer.WritePropertyName("catenate_numbers");
-				writer.WriteBooleanValue(value._catenateNumbers.Value);
-			}
-
-			if (value._catenateWords.HasValue)
-			{
-				writer.WritePropertyName("catenate_words");
-				writer.WriteBooleanValue(value._catenateWords.Value);
-			}
-
-			if (value._generateNumberParts.HasValue)
-			{
-				writer.WritePropertyName("generate_number_parts");
-				writer.WriteBooleanValue(value._generateNumberParts.Value);
-			}
-
-			if (value._generateWordParts.HasValue)
-			{
-				writer.WritePropertyName("generate_word_parts");
-				writer.WriteBooleanValue(value._generateWordParts.Value);
-			}
-
-			if (value._ignoreKeywords.HasValue)
-			{
-				writer.WritePropertyName("ignore_keywords");
-				writer.WriteBooleanValue(value._ignoreKeywords.Value);
-			}
-
-			if (value._preserveOriginal.HasValue)
-			{
-				writer.WritePropertyName("preserve_original");
-				writer.WriteBooleanValue(value._preserveOriginal.Value);
-			}
-
-			if (value._protectedWords is not null)
-			{
-				writer.WritePropertyName("protected_words");
-				JsonSerializer.Serialize(writer, value._protectedWords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._protectedWordsPath))
-			{
-				writer.WritePropertyName("protected_words_path");
-				writer.WriteStringValue(value._protectedWordsPath);
-			}
-
-			if (value._splitOnCaseChange.HasValue)
-			{
-				writer.WritePropertyName("split_on_case_change");
-				writer.WriteBooleanValue(value._splitOnCaseChange.Value);
-			}
-
-			if (value._splitOnNumerics.HasValue)
-			{
-				writer.WritePropertyName("split_on_numerics");
-				writer.WriteBooleanValue(value._splitOnNumerics.Value);
-			}
-
-			if (value._stemEnglishPossessive.HasValue)
-			{
-				writer.WritePropertyName("stem_english_possessive");
-				writer.WriteBooleanValue(value._stemEnglishPossessive.Value);
-			}
-
-			if (value._typeTable is not null)
-			{
-				writer.WritePropertyName("type_table");
-				JsonSerializer.Serialize(writer, value._typeTable, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._typeTablePath))
-			{
-				writer.WritePropertyName("type_table_path");
-				writer.WriteStringValue(value._typeTablePath);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class WordDelimiterTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
 	{
 		[JsonInclude]
@@ -3876,113 +1437,5 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("type_table_path")]
 		public string? TypeTablePath { get; init; }
-	}
-
-	[JsonConverter(typeof(WordDelimiterTokenFilterDescriptorConverter))]
-	public sealed partial class WordDelimiterTokenFilterDescriptor : DescriptorBase<WordDelimiterTokenFilterDescriptor>
-	{
-		internal bool? _catenateAll;
-		internal bool? _catenateNumbers;
-		internal bool? _catenateWords;
-		internal bool? _generateNumberParts;
-		internal bool? _generateWordParts;
-		internal bool? _preserveOriginal;
-		internal IReadOnlyCollection<string>? _protectedWords;
-		internal string? _protectedWordsPath;
-		internal bool? _splitOnCaseChange;
-		internal bool? _splitOnNumerics;
-		internal bool? _stemEnglishPossessive;
-		internal IReadOnlyCollection<string>? _typeTable;
-		internal string? _typeTablePath;
-	}
-
-	internal sealed class WordDelimiterTokenFilterDescriptorConverter : JsonConverter<WordDelimiterTokenFilterDescriptor>
-	{
-		public override WordDelimiterTokenFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, WordDelimiterTokenFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("word_delimiter");
-			if (value._catenateAll.HasValue)
-			{
-				writer.WritePropertyName("catenate_all");
-				writer.WriteBooleanValue(value._catenateAll.Value);
-			}
-
-			if (value._catenateNumbers.HasValue)
-			{
-				writer.WritePropertyName("catenate_numbers");
-				writer.WriteBooleanValue(value._catenateNumbers.Value);
-			}
-
-			if (value._catenateWords.HasValue)
-			{
-				writer.WritePropertyName("catenate_words");
-				writer.WriteBooleanValue(value._catenateWords.Value);
-			}
-
-			if (value._generateNumberParts.HasValue)
-			{
-				writer.WritePropertyName("generate_number_parts");
-				writer.WriteBooleanValue(value._generateNumberParts.Value);
-			}
-
-			if (value._generateWordParts.HasValue)
-			{
-				writer.WritePropertyName("generate_word_parts");
-				writer.WriteBooleanValue(value._generateWordParts.Value);
-			}
-
-			if (value._preserveOriginal.HasValue)
-			{
-				writer.WritePropertyName("preserve_original");
-				writer.WriteBooleanValue(value._preserveOriginal.Value);
-			}
-
-			if (value._protectedWords is not null)
-			{
-				writer.WritePropertyName("protected_words");
-				JsonSerializer.Serialize(writer, value._protectedWords, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._protectedWordsPath))
-			{
-				writer.WritePropertyName("protected_words_path");
-				writer.WriteStringValue(value._protectedWordsPath);
-			}
-
-			if (value._splitOnCaseChange.HasValue)
-			{
-				writer.WritePropertyName("split_on_case_change");
-				writer.WriteBooleanValue(value._splitOnCaseChange.Value);
-			}
-
-			if (value._splitOnNumerics.HasValue)
-			{
-				writer.WritePropertyName("split_on_numerics");
-				writer.WriteBooleanValue(value._splitOnNumerics.Value);
-			}
-
-			if (value._stemEnglishPossessive.HasValue)
-			{
-				writer.WritePropertyName("stem_english_possessive");
-				writer.WriteBooleanValue(value._stemEnglishPossessive.Value);
-			}
-
-			if (value._typeTable is not null)
-			{
-				writer.WritePropertyName("type_table");
-				JsonSerializer.Serialize(writer, value._typeTable, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._typeTablePath))
-			{
-				writer.WritePropertyName("type_table_path");
-				writer.WriteStringValue(value._typeTablePath);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 }

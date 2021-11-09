@@ -27,12 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 	}
 
-	public partial class Bucket
+	public partial class Buckets<TBucket> : Union<Dictionary<string, TBucket>?, IReadOnlyCollection<TBucket>?>
 	{
-	}
+		public Buckets(Dictionary<string, TBucket>? item) : base(item)
+		{
+		}
 
-	public partial class MetricAggregate
-	{
+		public Buckets(IReadOnlyCollection<TBucket>? item) : base(item)
+		{
+		}
 	}
 
 	public partial class Missing

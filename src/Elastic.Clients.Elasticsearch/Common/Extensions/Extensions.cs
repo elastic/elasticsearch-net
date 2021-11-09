@@ -2,7 +2,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.ExceptionServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +18,62 @@ namespace Elastic.Clients.Elasticsearch
 		//internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
 
 		//internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
+
+		internal static string ToEnumValue<T>(this T enumValue) where T : struct
+		{
+			var enumType = typeof(T);
+			var name = Enum.GetName(enumType, enumValue);
+			var enumMemberAttribute = enumType.GetField(name).GetCustomAttribute<EnumMemberAttribute>();
+
+			//if (enumMemberAttribute != null)
+				//return enumMemberAttribute.Value;
+
+			//var alternativeEnumMemberAttribute = enumType.GetField(name).GetCustomAttribute<AlternativeEnumMemberAttribute>();
+
+			return enumMemberAttribute != null
+				? enumMemberAttribute.Value
+				: enumValue.ToString();
+		}
+
+		internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
+		{
+			if (str == null)
+				return null;
+
+			var enumType = typeof(T);
+			var key = $"{enumType.Name}.{str}";
+			if (EnumCache.TryGetValue(key, out var value))
+				return (T)value;
+
+			foreach (var name in Enum.GetNames(enumType))
+			{
+				if (name.Equals(str, comparison))
+				{
+					var v = (T)Enum.Parse(enumType, name, true);
+					EnumCache.TryAdd(key, v);
+					return v;
+				}
+
+				var enumFieldInfo = enumType.GetField(name);
+				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
+				if (enumMemberAttribute?.Value.Equals(str, comparison) ?? false)
+				{
+					var v = (T)Enum.Parse(enumType, name);
+					EnumCache.TryAdd(key, v);
+					return v;
+				}
+
+				//var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
+				//if (alternativeEnumMemberAttribute?.Value.Equals(str, comparison) ?? false)
+				//{
+				//	var v = (T)Enum.Parse(enumType, name);
+				//	EnumCache.TryAdd(key, v);
+				//	return v;
+				//}
+			}
+
+			return null;
+		}
 
 		internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
 			where T : class, TReturn where TReturn : class =>

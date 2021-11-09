@@ -70,6 +70,46 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(ConflictsConverter))]
+	public enum Conflicts
+	{
+		Proceed,
+		Abort
+	}
+
+	public class ConflictsConverter : JsonConverter<Conflicts>
+	{
+		public override Conflicts Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "proceed":
+					return Conflicts.Proceed;
+				case "abort":
+					return Conflicts.Abort;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Conflicts value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case Conflicts.Proceed:
+					writer.WriteStringValue("proceed");
+					return;
+				case Conflicts.Abort:
+					writer.WriteStringValue("abort");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(DefaultOperatorConverter))]
 	public enum DefaultOperator
 	{
@@ -113,15 +153,15 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(DistanceUnitConverter))]
 	public enum DistanceUnit
 	{
-		Yd,
-		Nmi,
-		Mm,
-		Mi,
-		m,
-		Km,
-		In,
-		Ft,
-		Cm
+		Yards,
+		NauticMiles,
+		Millimeters,
+		Miles,
+		Meters,
+		Kilometers,
+		Inches,
+		Feet,
+		Centimeters
 	}
 
 	public class DistanceUnitConverter : JsonConverter<DistanceUnit>
@@ -132,23 +172,23 @@ namespace Elastic.Clients.Elasticsearch
 			switch (enumString)
 			{
 				case "yd":
-					return DistanceUnit.Yd;
+					return DistanceUnit.Yards;
 				case "nmi":
-					return DistanceUnit.Nmi;
+					return DistanceUnit.NauticMiles;
 				case "mm":
-					return DistanceUnit.Mm;
+					return DistanceUnit.Millimeters;
 				case "mi":
-					return DistanceUnit.Mi;
+					return DistanceUnit.Miles;
 				case "m":
-					return DistanceUnit.m;
+					return DistanceUnit.Meters;
 				case "km":
-					return DistanceUnit.Km;
+					return DistanceUnit.Kilometers;
 				case "in":
-					return DistanceUnit.In;
+					return DistanceUnit.Inches;
 				case "ft":
-					return DistanceUnit.Ft;
+					return DistanceUnit.Feet;
 				case "cm":
-					return DistanceUnit.Cm;
+					return DistanceUnit.Centimeters;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -159,31 +199,31 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			switch (value)
 			{
-				case DistanceUnit.Yd:
+				case DistanceUnit.Yards:
 					writer.WriteStringValue("yd");
 					return;
-				case DistanceUnit.Nmi:
+				case DistanceUnit.NauticMiles:
 					writer.WriteStringValue("nmi");
 					return;
-				case DistanceUnit.Mm:
+				case DistanceUnit.Millimeters:
 					writer.WriteStringValue("mm");
 					return;
-				case DistanceUnit.Mi:
+				case DistanceUnit.Miles:
 					writer.WriteStringValue("mi");
 					return;
-				case DistanceUnit.m:
+				case DistanceUnit.Meters:
 					writer.WriteStringValue("m");
 					return;
-				case DistanceUnit.Km:
+				case DistanceUnit.Kilometers:
 					writer.WriteStringValue("km");
 					return;
-				case DistanceUnit.In:
+				case DistanceUnit.Inches:
 					writer.WriteStringValue("in");
 					return;
-				case DistanceUnit.Ft:
+				case DistanceUnit.Feet:
 					writer.WriteStringValue("ft");
 					return;
-				case DistanceUnit.Cm:
+				case DistanceUnit.Centimeters:
 					writer.WriteStringValue("cm");
 					return;
 			}
@@ -628,6 +668,58 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(OperationTypeConverter))]
+	public enum OperationType
+	{
+		Update,
+		Index,
+		Delete,
+		Create
+	}
+
+	public class OperationTypeConverter : JsonConverter<OperationType>
+	{
+		public override OperationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "update":
+					return OperationType.Update;
+				case "index":
+					return OperationType.Index;
+				case "delete":
+					return OperationType.Delete;
+				case "create":
+					return OperationType.Create;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, OperationType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case OperationType.Update:
+					writer.WriteStringValue("update");
+					return;
+				case OperationType.Index:
+					writer.WriteStringValue("index");
+					return;
+				case OperationType.Delete:
+					writer.WriteStringValue("delete");
+					return;
+				case OperationType.Create:
+					writer.WriteStringValue("create");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(OpTypeConverter))]
 	public enum OpType
 	{
@@ -673,7 +765,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		Updated,
 		NotFound,
-		Noop,
+		NoOp,
 		Deleted,
 		Created,
 		Error
@@ -691,7 +783,7 @@ namespace Elastic.Clients.Elasticsearch
 				case "not_found":
 					return Result.NotFound;
 				case "noop":
-					return Result.Noop;
+					return Result.NoOp;
 				case "deleted":
 					return Result.Deleted;
 				case "created":
@@ -714,7 +806,7 @@ namespace Elastic.Clients.Elasticsearch
 				case Result.NotFound:
 					writer.WriteStringValue("not_found");
 					return;
-				case Result.Noop:
+				case Result.NoOp:
 					writer.WriteStringValue("noop");
 					return;
 				case Result.Deleted:
@@ -945,7 +1037,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		Desc,
 		Asc,
-		Doc
+		Document
 	}
 
 	public class SortOrderConverter : JsonConverter<SortOrder>
@@ -960,7 +1052,7 @@ namespace Elastic.Clients.Elasticsearch
 				case "asc":
 					return SortOrder.Asc;
 				case "_doc":
-					return SortOrder.Doc;
+					return SortOrder.Document;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -977,7 +1069,7 @@ namespace Elastic.Clients.Elasticsearch
 				case SortOrder.Asc:
 					writer.WriteStringValue("asc");
 					return;
-				case SortOrder.Doc:
+				case SortOrder.Document:
 					writer.WriteStringValue("_doc");
 					return;
 			}
@@ -1133,13 +1225,13 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(TimeUnitConverter))]
 	public enum TimeUnit
 	{
-		s,
-		Nanos,
-		Ms,
-		Micros,
-		m,
-		h,
-		d
+		Seconds,
+		Nanoseconds,
+		Milliseconds,
+		Microseconds,
+		Minutes,
+		Hours,
+		Days
 	}
 
 	public class TimeUnitConverter : JsonConverter<TimeUnit>
@@ -1150,19 +1242,19 @@ namespace Elastic.Clients.Elasticsearch
 			switch (enumString)
 			{
 				case "s":
-					return TimeUnit.s;
+					return TimeUnit.Seconds;
 				case "nanos":
-					return TimeUnit.Nanos;
+					return TimeUnit.Nanoseconds;
 				case "ms":
-					return TimeUnit.Ms;
+					return TimeUnit.Milliseconds;
 				case "micros":
-					return TimeUnit.Micros;
+					return TimeUnit.Microseconds;
 				case "m":
-					return TimeUnit.m;
+					return TimeUnit.Minutes;
 				case "h":
-					return TimeUnit.h;
+					return TimeUnit.Hours;
 				case "d":
-					return TimeUnit.d;
+					return TimeUnit.Days;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -1173,25 +1265,25 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			switch (value)
 			{
-				case TimeUnit.s:
+				case TimeUnit.Seconds:
 					writer.WriteStringValue("s");
 					return;
-				case TimeUnit.Nanos:
+				case TimeUnit.Nanoseconds:
 					writer.WriteStringValue("nanos");
 					return;
-				case TimeUnit.Ms:
+				case TimeUnit.Milliseconds:
 					writer.WriteStringValue("ms");
 					return;
-				case TimeUnit.Micros:
+				case TimeUnit.Microseconds:
 					writer.WriteStringValue("micros");
 					return;
-				case TimeUnit.m:
+				case TimeUnit.Minutes:
 					writer.WriteStringValue("m");
 					return;
-				case TimeUnit.h:
+				case TimeUnit.Hours:
 					writer.WriteStringValue("h");
 					return;
-				case TimeUnit.d:
+				case TimeUnit.Days:
 					writer.WriteStringValue("d");
 					return;
 			}

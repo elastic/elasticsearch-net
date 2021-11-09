@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>
@@ -51,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	[JsonConverter(typeof(ClusterStatsRequestDescriptorConverter))]
@@ -69,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public ClusterStatsRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
-		public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterStatsRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
 	}
 
 	internal sealed class ClusterStatsRequestDescriptorConverter : JsonConverter<ClusterStatsRequestDescriptor>

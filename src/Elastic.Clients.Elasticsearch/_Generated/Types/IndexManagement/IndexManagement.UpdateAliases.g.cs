@@ -91,6 +91,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		}
 	}
 
+	public sealed partial class ActionDescriptor : DescriptorBase<ActionDescriptor>
+	{
+	}
+
+	internal sealed class ActionDescriptorConverter : JsonConverter<ActionDescriptor>
+	{
+		public override ActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ActionDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class AddAction : IActionVariant
 	{
 		[JsonIgnore]
@@ -136,6 +150,91 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public string? SearchRouting { get; set; }
 	}
 
+	[JsonConverter(typeof(AddActionDescriptorConverter))]
+	public sealed partial class AddActionDescriptor : DescriptorBase<AddActionDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.IndexAlias? _alias;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? _aliases;
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
+		internal Elastic.Clients.Elasticsearch.IndexName? _index;
+		internal Elastic.Clients.Elasticsearch.Indices? _indices;
+		internal string? _indexRouting;
+		internal bool? _isHidden;
+		internal bool? _isWriteIndex;
+		internal string? _routing;
+		internal string? _searchRouting;
+	}
+
+	internal sealed class AddActionDescriptorConverter : JsonConverter<AddActionDescriptor>
+	{
+		public override AddActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AddActionDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._alias is not null)
+			{
+				writer.WritePropertyName("alias");
+				JsonSerializer.Serialize(writer, value._alias, options);
+			}
+
+			if (value._aliases is not null)
+			{
+				writer.WritePropertyName("aliases");
+				JsonSerializer.Serialize(writer, value._aliases, options);
+			}
+
+			if (value._filter is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value._filter, options);
+			}
+
+			if (value._index is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, value._index, options);
+			}
+
+			if (value._indices is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, value._indices, options);
+			}
+
+			if (value._indexRouting is not null)
+			{
+				writer.WritePropertyName("index_routing");
+				JsonSerializer.Serialize(writer, value._indexRouting, options);
+			}
+
+			if (value._isHidden.HasValue)
+			{
+				writer.WritePropertyName("is_hidden");
+				writer.WriteBooleanValue(value._isHidden.Value);
+			}
+
+			if (value._isWriteIndex.HasValue)
+			{
+				writer.WritePropertyName("is_write_index");
+				writer.WriteBooleanValue(value._isWriteIndex.Value);
+			}
+
+			if (value._routing is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, value._routing, options);
+			}
+
+			if (value._searchRouting is not null)
+			{
+				writer.WritePropertyName("search_routing");
+				JsonSerializer.Serialize(writer, value._searchRouting, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class RemoveAction : IActionVariant
 	{
 		[JsonIgnore]
@@ -161,6 +260,56 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public bool? MustExist { get; set; }
 	}
 
+	[JsonConverter(typeof(RemoveActionDescriptorConverter))]
+	public sealed partial class RemoveActionDescriptor : DescriptorBase<RemoveActionDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.IndexAlias? _alias;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? _aliases;
+		internal Elastic.Clients.Elasticsearch.IndexName? _index;
+		internal Elastic.Clients.Elasticsearch.Indices? _indices;
+		internal bool? _mustExist;
+	}
+
+	internal sealed class RemoveActionDescriptorConverter : JsonConverter<RemoveActionDescriptor>
+	{
+		public override RemoveActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RemoveActionDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._alias is not null)
+			{
+				writer.WritePropertyName("alias");
+				JsonSerializer.Serialize(writer, value._alias, options);
+			}
+
+			if (value._aliases is not null)
+			{
+				writer.WritePropertyName("aliases");
+				JsonSerializer.Serialize(writer, value._aliases, options);
+			}
+
+			if (value._index is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, value._index, options);
+			}
+
+			if (value._indices is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, value._indices, options);
+			}
+
+			if (value._mustExist.HasValue)
+			{
+				writer.WritePropertyName("must_exist");
+				writer.WriteBooleanValue(value._mustExist.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class RemoveIndexAction : IActionVariant
 	{
 		[JsonIgnore]
@@ -172,5 +321,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		[JsonInclude]
 		[JsonPropertyName("indices")]
 		public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
+	}
+
+	[JsonConverter(typeof(RemoveIndexActionDescriptorConverter))]
+	public sealed partial class RemoveIndexActionDescriptor : DescriptorBase<RemoveIndexActionDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.IndexName? _index;
+		internal Elastic.Clients.Elasticsearch.Indices? _indices;
+	}
+
+	internal sealed class RemoveIndexActionDescriptorConverter : JsonConverter<RemoveIndexActionDescriptor>
+	{
+		public override RemoveIndexActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RemoveIndexActionDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._index is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, value._index, options);
+			}
+
+			if (value._indices is not null)
+			{
+				writer.WritePropertyName("indices");
+				JsonSerializer.Serialize(writer, value._indices, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

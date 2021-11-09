@@ -100,4 +100,18 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			writer.WriteEndObject();
 		}
 	}
+
+	public sealed partial class PivotGroupByContainerDescriptor : DescriptorBase<PivotGroupByContainerDescriptor>
+	{
+	}
+
+	internal sealed class PivotGroupByContainerDescriptorConverter : JsonConverter<PivotGroupByContainerDescriptor>
+	{
+		public override PivotGroupByContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PivotGroupByContainerDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
 }

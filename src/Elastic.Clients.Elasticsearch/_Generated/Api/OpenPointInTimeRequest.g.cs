@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch
 	public class OpenPointInTimeRequestParameters : RequestParameters<OpenPointInTimeRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
 	}
 
 	public partial class OpenPointInTimeRequest : PlainRequestBase<OpenPointInTimeRequestParameters>
@@ -41,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time?>("keep_alive"); set => Q("keep_alive", value); }
+		public Time? KeepAlive { get => Q<Time?>("keep_alive"); set => Q("keep_alive", value); }
 	}
 
 	[JsonConverter(typeof(OpenPointInTimeRequestDescriptorConverter))]
@@ -54,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public OpenPointInTimeRequestDescriptor KeepAlive(Time? keepAlive) => Qs("keep_alive", keepAlive);
 	}
 
 	internal sealed class OpenPointInTimeRequestDescriptorConverter : JsonConverter<OpenPointInTimeRequestDescriptor>

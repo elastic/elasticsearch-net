@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>
@@ -47,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
@@ -91,7 +90,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public ClusterPutComponentTemplateRequestDescriptor Create(bool? create) => Qs("create", create);
-		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterPutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template) => Assign(template, (a, v) => a._template = v);
 		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>()));
 		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
