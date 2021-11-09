@@ -21,7 +21,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class IngestGetPipelineResponse<TKey, TValue> : DictionaryResponseBase<TKey, TValue>
+	public partial class IngestGetPipelineResponse : DictionaryResponseBase<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>
 	{
 	}
 }

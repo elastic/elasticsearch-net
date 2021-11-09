@@ -35,12 +35,12 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		// TODO: Had to make this public to allow STJ to deserialise it - Can we avoid this?
-		[JsonInclude]
+		// Collides with a property on ClusterHealthResponse
 		[JsonPropertyName("status")]
-		public int? StatusCode
+		internal int? StatusCode
 		{
 			get => _statusCode;
-			internal set
+			set
 			{
 				_statusCode = value;
 				_serverError = null;

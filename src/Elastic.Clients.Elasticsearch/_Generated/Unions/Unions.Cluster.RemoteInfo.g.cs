@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 	{
 	}
 
-	public class ClusterRemoteInfos : IsADictionaryBase<string, IClusterRemoteInfosVariant>, Cluster.RemoteInfo.IClusterRemoteInfos
+	public class ClusterRemoteInfos : IsADictionaryBase<string, IClusterRemoteInfosVariant>
 	{
 	}
 }

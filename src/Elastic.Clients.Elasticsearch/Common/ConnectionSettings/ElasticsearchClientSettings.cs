@@ -255,61 +255,57 @@ namespace Elastic.Clients.Elasticsearch
 		///     serialization behaviour for CLR properties.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor<TDocument>(
-			Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
-			where TDocument : class
-		{
-			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
-			if (!inferMapping.IndexName.IsNullOrEmpty())
-				_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
+			Action<ClrTypeMappingDescriptor<TDocument>> selector)
+			where TDocument : class =>
+			//var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
+			//if (!inferMapping.IndexName.IsNullOrEmpty())
+			//	_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
-			if (!inferMapping.RelationName.IsNullOrEmpty())
-				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
+			//if (!inferMapping.RelationName.IsNullOrEmpty())
+			//	_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 
-			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
-				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
+			//if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
+			//	_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			if (inferMapping.IdProperty != null)
-				MapIdPropertyFor(inferMapping.IdProperty);
+			//if (inferMapping.IdProperty != null)
+			//	MapIdPropertyFor(inferMapping.IdProperty);
 
-			if (inferMapping.RoutingProperty != null)
-				MapRoutePropertyFor(inferMapping.RoutingProperty);
+			//if (inferMapping.RoutingProperty != null)
+			//	MapRoutePropertyFor(inferMapping.RoutingProperty);
 
-			if (inferMapping.Properties != null)
-				ApplyPropertyMappings(inferMapping.Properties);
+			//if (inferMapping.Properties != null)
+			//	ApplyPropertyMappings(inferMapping.Properties);
 
-			if (inferMapping.DisableIdInference)
-				_disableIdInference.Add(inferMapping.ClrType);
-			else
-				_disableIdInference.Remove(inferMapping.ClrType);
+			//if (inferMapping.DisableIdInference)
+			//	_disableIdInference.Add(inferMapping.ClrType);
+			//else
+			//	_disableIdInference.Remove(inferMapping.ClrType);
 
-			return (TConnectionSettings)this;
-		}
+			(TConnectionSettings)this;
 
 		/// <summary>
 		///     Specify how the mapping is inferred for a given CLR type.
 		///     The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(Type documentType,
-			Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
-		{
-			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
-			if (!inferMapping.IndexName.IsNullOrEmpty())
-				_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
+			Action<ClrTypeMappingDescriptor> selector) =>
+			//var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
+			//if (!inferMapping.IndexName.IsNullOrEmpty())
+			//	_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
 
-			if (!inferMapping.RelationName.IsNullOrEmpty())
-				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
+			//if (!inferMapping.RelationName.IsNullOrEmpty())
+			//	_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
 
-			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
-				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
+			//if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
+			//	_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
-			return (TConnectionSettings)this;
-		}
+			(TConnectionSettings)this;
 
 		/// <summary>
 		///     Specify how the mapping is inferred for a given CLR type.
 		///     The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
-		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
+		public TConnectionSettings DefaultMappingFor(IEnumerable<ClrTypeMapping> typeMappings)
 		{
 			if (typeMappings == null)
 				return (TConnectionSettings)this;

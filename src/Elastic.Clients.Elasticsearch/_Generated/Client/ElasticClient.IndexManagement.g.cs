@@ -76,20 +76,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<DeleteIndexRequestDescriptor, DeleteIndexResponse>(descriptor);
 		}
 
-		public GetIndexResponse<TKey, TValue> GetIndex<TKey, TValue>(GetIndexRequest request) => DoRequest<GetIndexRequest, GetIndexResponse<TKey, TValue>>(request);
-		public Task<GetIndexResponse<TKey, TValue>> GetIndexAsync<TKey, TValue>(GetIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<GetIndexRequest, GetIndexResponse<TKey, TValue>>(request, cancellationToken);
-		public GetIndexResponse<TKey, TValue> GetIndex<TKey, TValue>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest = null)
+		public GetIndexResponse GetIndex(GetIndexRequest request) => DoRequest<GetIndexRequest, GetIndexResponse>(request);
+		public Task<GetIndexResponse> GetIndexAsync(GetIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<GetIndexRequest, GetIndexResponse>(request, cancellationToken);
+		public GetIndexResponse GetIndex(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new GetIndexRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<GetIndexRequestDescriptor, GetIndexResponse<TKey, TValue>>(descriptor);
+			return DoRequest<GetIndexRequestDescriptor, GetIndexResponse>(descriptor);
 		}
 
-		public Task<GetIndexResponse<TKey, TValue>> GetIndexAsync<TKey, TValue>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<GetIndexResponse> GetIndexAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new GetIndexRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<GetIndexRequestDescriptor, GetIndexResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<GetIndexRequestDescriptor, GetIndexResponse>(descriptor);
 		}
 
 		public IndexClearCacheResponse IndexClearCache(IndexClearCacheRequest request) => DoRequest<IndexClearCacheRequest, IndexClearCacheResponse>(request);
@@ -348,20 +348,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<IndexForcemergeRequestDescriptor, IndexForcemergeResponse>(descriptor);
 		}
 
-		public IndexGetAliasResponse<TKey, TValue> IndexGetAlias<TKey, TValue>(IndexGetAliasRequest request) => DoRequest<IndexGetAliasRequest, IndexGetAliasResponse<TKey, TValue>>(request);
-		public Task<IndexGetAliasResponse<TKey, TValue>> IndexGetAliasAsync<TKey, TValue>(IndexGetAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetAliasRequest, IndexGetAliasResponse<TKey, TValue>>(request, cancellationToken);
-		public IndexGetAliasResponse<TKey, TValue> IndexGetAlias<TKey, TValue>(Action<IndexGetAliasRequestDescriptor> configureRequest = null)
+		public IndexGetAliasResponse IndexGetAlias(IndexGetAliasRequest request) => DoRequest<IndexGetAliasRequest, IndexGetAliasResponse>(request);
+		public Task<IndexGetAliasResponse> IndexGetAliasAsync(IndexGetAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetAliasRequest, IndexGetAliasResponse>(request, cancellationToken);
+		public IndexGetAliasResponse IndexGetAlias(Action<IndexGetAliasRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IndexGetAliasRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexGetAliasRequestDescriptor, IndexGetAliasResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IndexGetAliasRequestDescriptor, IndexGetAliasResponse>(descriptor);
 		}
 
-		public Task<IndexGetAliasResponse<TKey, TValue>> IndexGetAliasAsync<TKey, TValue>(Action<IndexGetAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexGetAliasResponse> IndexGetAliasAsync(Action<IndexGetAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexGetAliasRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexGetAliasRequestDescriptor, IndexGetAliasResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IndexGetAliasRequestDescriptor, IndexGetAliasResponse>(descriptor);
 		}
 
 		public IndexGetDataStreamResponse IndexGetDataStream(IndexGetDataStreamRequest request) => DoRequest<IndexGetDataStreamRequest, IndexGetDataStreamResponse>(request);
@@ -380,20 +380,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<IndexGetDataStreamRequestDescriptor, IndexGetDataStreamResponse>(descriptor);
 		}
 
-		public IndexGetFieldMappingResponse<TKey, TValue> IndexGetFieldMapping<TKey, TValue>(IndexGetFieldMappingRequest request) => DoRequest<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse<TKey, TValue>>(request);
-		public Task<IndexGetFieldMappingResponse<TKey, TValue>> IndexGetFieldMappingAsync<TKey, TValue>(IndexGetFieldMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse<TKey, TValue>>(request, cancellationToken);
-		public IndexGetFieldMappingResponse<TKey, TValue> IndexGetFieldMapping<TKey, TValue>(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null)
+		public IndexGetFieldMappingResponse IndexGetFieldMapping(IndexGetFieldMappingRequest request) => DoRequest<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse>(request);
+		public Task<IndexGetFieldMappingResponse> IndexGetFieldMappingAsync(IndexGetFieldMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse>(request, cancellationToken);
+		public IndexGetFieldMappingResponse IndexGetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IndexGetFieldMappingRequestDescriptor(fields);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingResponse>(descriptor);
 		}
 
-		public Task<IndexGetFieldMappingResponse<TKey, TValue>> IndexGetFieldMappingAsync<TKey, TValue>(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexGetFieldMappingResponse> IndexGetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexGetFieldMappingRequestDescriptor(fields);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingResponse>(descriptor);
 		}
 
 		public IndexGetIndexTemplateResponse IndexGetIndexTemplate(IndexGetIndexTemplateRequest request) => DoRequest<IndexGetIndexTemplateRequest, IndexGetIndexTemplateResponse>(request);
@@ -412,52 +412,52 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<IndexGetIndexTemplateRequestDescriptor, IndexGetIndexTemplateResponse>(descriptor);
 		}
 
-		public IndexGetMappingResponse<TKey, TValue> IndexGetMapping<TKey, TValue>(IndexGetMappingRequest request) => DoRequest<IndexGetMappingRequest, IndexGetMappingResponse<TKey, TValue>>(request);
-		public Task<IndexGetMappingResponse<TKey, TValue>> IndexGetMappingAsync<TKey, TValue>(IndexGetMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetMappingRequest, IndexGetMappingResponse<TKey, TValue>>(request, cancellationToken);
-		public IndexGetMappingResponse<TKey, TValue> IndexGetMapping<TKey, TValue>(Action<IndexGetMappingRequestDescriptor> configureRequest = null)
+		public IndexGetMappingResponse IndexGetMapping(IndexGetMappingRequest request) => DoRequest<IndexGetMappingRequest, IndexGetMappingResponse>(request);
+		public Task<IndexGetMappingResponse> IndexGetMappingAsync(IndexGetMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetMappingRequest, IndexGetMappingResponse>(request, cancellationToken);
+		public IndexGetMappingResponse IndexGetMapping(Action<IndexGetMappingRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IndexGetMappingRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexGetMappingRequestDescriptor, IndexGetMappingResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IndexGetMappingRequestDescriptor, IndexGetMappingResponse>(descriptor);
 		}
 
-		public Task<IndexGetMappingResponse<TKey, TValue>> IndexGetMappingAsync<TKey, TValue>(Action<IndexGetMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexGetMappingResponse> IndexGetMappingAsync(Action<IndexGetMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexGetMappingRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexGetMappingRequestDescriptor, IndexGetMappingResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IndexGetMappingRequestDescriptor, IndexGetMappingResponse>(descriptor);
 		}
 
-		public IndexGetSettingsResponse<TKey, TValue> IndexGetSettings<TKey, TValue>(IndexGetSettingsRequest request) => DoRequest<IndexGetSettingsRequest, IndexGetSettingsResponse<TKey, TValue>>(request);
-		public Task<IndexGetSettingsResponse<TKey, TValue>> IndexGetSettingsAsync<TKey, TValue>(IndexGetSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetSettingsRequest, IndexGetSettingsResponse<TKey, TValue>>(request, cancellationToken);
-		public IndexGetSettingsResponse<TKey, TValue> IndexGetSettings<TKey, TValue>(Action<IndexGetSettingsRequestDescriptor> configureRequest = null)
+		public IndexGetSettingsResponse IndexGetSettings(IndexGetSettingsRequest request) => DoRequest<IndexGetSettingsRequest, IndexGetSettingsResponse>(request);
+		public Task<IndexGetSettingsResponse> IndexGetSettingsAsync(IndexGetSettingsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetSettingsRequest, IndexGetSettingsResponse>(request, cancellationToken);
+		public IndexGetSettingsResponse IndexGetSettings(Action<IndexGetSettingsRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IndexGetSettingsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexGetSettingsRequestDescriptor, IndexGetSettingsResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IndexGetSettingsRequestDescriptor, IndexGetSettingsResponse>(descriptor);
 		}
 
-		public Task<IndexGetSettingsResponse<TKey, TValue>> IndexGetSettingsAsync<TKey, TValue>(Action<IndexGetSettingsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexGetSettingsResponse> IndexGetSettingsAsync(Action<IndexGetSettingsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexGetSettingsRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexGetSettingsRequestDescriptor, IndexGetSettingsResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IndexGetSettingsRequestDescriptor, IndexGetSettingsResponse>(descriptor);
 		}
 
-		public IndexGetTemplateResponse<TKey, TValue> IndexGetTemplate<TKey, TValue>(IndexGetTemplateRequest request) => DoRequest<IndexGetTemplateRequest, IndexGetTemplateResponse<TKey, TValue>>(request);
-		public Task<IndexGetTemplateResponse<TKey, TValue>> IndexGetTemplateAsync<TKey, TValue>(IndexGetTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetTemplateRequest, IndexGetTemplateResponse<TKey, TValue>>(request, cancellationToken);
-		public IndexGetTemplateResponse<TKey, TValue> IndexGetTemplate<TKey, TValue>(Action<IndexGetTemplateRequestDescriptor> configureRequest = null)
+		public IndexGetTemplateResponse IndexGetTemplate(IndexGetTemplateRequest request) => DoRequest<IndexGetTemplateRequest, IndexGetTemplateResponse>(request);
+		public Task<IndexGetTemplateResponse> IndexGetTemplateAsync(IndexGetTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetTemplateRequest, IndexGetTemplateResponse>(request, cancellationToken);
+		public IndexGetTemplateResponse IndexGetTemplate(Action<IndexGetTemplateRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IndexGetTemplateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexGetTemplateRequestDescriptor, IndexGetTemplateResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IndexGetTemplateRequestDescriptor, IndexGetTemplateResponse>(descriptor);
 		}
 
-		public Task<IndexGetTemplateResponse<TKey, TValue>> IndexGetTemplateAsync<TKey, TValue>(Action<IndexGetTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexGetTemplateResponse> IndexGetTemplateAsync(Action<IndexGetTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexGetTemplateRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexGetTemplateRequestDescriptor, IndexGetTemplateResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IndexGetTemplateRequestDescriptor, IndexGetTemplateResponse>(descriptor);
 		}
 
 		public IndexMigrateToDataStreamResponse IndexMigrateToDataStream(IndexMigrateToDataStreamRequest request) => DoRequest<IndexMigrateToDataStreamRequest, IndexMigrateToDataStreamResponse>(request);
@@ -588,20 +588,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<IndexPutTemplateRequestDescriptor, IndexPutTemplateResponse>(descriptor);
 		}
 
-		public IndexRecoveryResponse<TKey, TValue> IndexRecovery<TKey, TValue>(IndexRecoveryRequest request) => DoRequest<IndexRecoveryRequest, IndexRecoveryResponse<TKey, TValue>>(request);
-		public Task<IndexRecoveryResponse<TKey, TValue>> IndexRecoveryAsync<TKey, TValue>(IndexRecoveryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexRecoveryRequest, IndexRecoveryResponse<TKey, TValue>>(request, cancellationToken);
-		public IndexRecoveryResponse<TKey, TValue> IndexRecovery<TKey, TValue>(Action<IndexRecoveryRequestDescriptor> configureRequest = null)
+		public IndexRecoveryResponse IndexRecovery(IndexRecoveryRequest request) => DoRequest<IndexRecoveryRequest, IndexRecoveryResponse>(request);
+		public Task<IndexRecoveryResponse> IndexRecoveryAsync(IndexRecoveryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexRecoveryRequest, IndexRecoveryResponse>(request, cancellationToken);
+		public IndexRecoveryResponse IndexRecovery(Action<IndexRecoveryRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IndexRecoveryRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexRecoveryRequestDescriptor, IndexRecoveryResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IndexRecoveryRequestDescriptor, IndexRecoveryResponse>(descriptor);
 		}
 
-		public Task<IndexRecoveryResponse<TKey, TValue>> IndexRecoveryAsync<TKey, TValue>(Action<IndexRecoveryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexRecoveryResponse> IndexRecoveryAsync(Action<IndexRecoveryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IndexRecoveryRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexRecoveryRequestDescriptor, IndexRecoveryResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IndexRecoveryRequestDescriptor, IndexRecoveryResponse>(descriptor);
 		}
 
 		public IndexRefreshResponse IndexRefresh(IndexRefreshRequest request) => DoRequest<IndexRefreshRequest, IndexRefreshResponse>(request);

@@ -23,10 +23,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class GeoCoordinate
-	{
-	}
-
 	public partial class GeoLocation
 	{
 	}

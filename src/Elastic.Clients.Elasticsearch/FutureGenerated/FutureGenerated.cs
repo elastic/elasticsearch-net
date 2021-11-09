@@ -4,18 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Threading;
 using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Transport;
-using Elastic.Clients.Elasticsearch.Ingest.Simulate;
-using System.Reflection;
-using System.Xml.Linq;
+using System.Text.Json;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -52,6 +48,14 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial interface IElasticClient
 	{
+		DeleteResponse Delete<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest);
+
+		Task<DeleteResponse> DeleteAsync<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
+
+		CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest);
+
+		Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
+
 		IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest);
 
 		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
@@ -77,6 +81,34 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
 		}
 
+		public CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new CreateRequestDescriptor<TDocument>(documentWithId: document);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		}
+
+		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CreateRequestDescriptor<TDocument>(documentWithId: document);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
+		}
+
+		public DeleteResponse Delete<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
+		{
+			var descriptor = new DeleteRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+		}
+
+		public Task<DeleteResponse> DeleteAsync<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteRequestDescriptor<TDocument>(id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse>(descriptor);
+		}
+
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default)
 {
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
@@ -89,6 +121,97 @@ namespace Elastic.Clients.Elasticsearch
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
 			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
+		}
+	}
+
+	public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteRequestDescriptor<TDocument>, DeleteRequestParameters>
+	{
+		public DeleteRequestDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		public DeleteRequestDescriptor(Id id) : this(typeof(TDocument), id)
+		{
+		}
+
+		public DeleteRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		public DeleteRequestDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
+		public DeleteRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+		public DeleteRequestDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public DeleteRequestDescriptor<TDocument> Routing(string? routing) => Qs("routing", routing);
+		public DeleteRequestDescriptor<TDocument> Timeout(Time? timeout) => Qs("timeout", timeout);
+		public DeleteRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
+		public DeleteRequestDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
+		public DeleteRequestDescriptor<TDocument> WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
+		public DeleteRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+	}
+
+	public sealed partial class CountRequestDescriptor
+	{
+		//public CountRequestDescriptor Query(Action<QueryContainerDescriptor> configureContainer) => Assign(query, (a, v) => a._query = v);
+	}
+
+	public sealed partial class CreateRequest<TDocument>
+	{
+
+		public CreateRequest(Id id) : this(typeof(TDocument), id)
+		{
+		}
+
+		public CreateRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) => Document = documentWithId;
+	}
+
+	public sealed partial class CreateRequestDescriptor<TDocument> : ICustomJsonWriter
+	{
+		
+
+		public CreateRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
+
+		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a._document = v);
+
+		public CreateRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(_document, writer, sourceSerializer);
+
+		// TODO: We should be able to generate these for optional params
+		public CreateRequestDescriptor<TDocument> Id(Id id)
+		{
+			RouteValues.Optional("id", id);
+			return this;
+		}
+	}
+
+	public sealed partial class DeleteRequest<TDocument> : DeleteRequest
+	{
+		public DeleteRequest(IndexName index, Id id) : base(index, id) { }
+
+		public DeleteRequest(Id id) : this(typeof(TDocument), id)
+		{
+		}
+
+		public DeleteRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
+	}
+
+	public sealed partial class SearchRequestDescriptor
+	{
+		public SearchRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
+		{
+			var container = configure?.Invoke(new QueryContainerDescriptor());
+			return Assign(container, (a, v) => a._query = v);
+		}
+	}
+
+	public sealed partial class CountRequestDescriptor
+	{
+		public CountRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
+		{
+			var container = configure?.Invoke(new QueryContainerDescriptor());
+			return Assign(container, (a, v) => a._query = v);
 		}
 	}
 }
@@ -129,45 +252,158 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	//[JsonConverter(typeof(QueryContainerConverter))]
-	//public partial class QueryContainer
-	//{
-	//}
+	public sealed partial class BoolQueryDescriptor
+	{
+		internal BoolQuery ToQuery()
+		{
+			var query = new BoolQuery();
 
-	//public partial class QueryContainerConverter : JsonConverter<QueryContainer>
-	//{
-	//	public override QueryContainer? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+			if (_filter is not null)
+				query.Filter = _filter;
 
-	//	public override void Write(Utf8JsonWriter writer, QueryContainer value, JsonSerializerOptions options)
+			// TODO - More
+
+			return query;
+		}
+	}
+
+	public sealed partial class MatchQueryDescriptor
+	{
+		public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
+
+		internal MatchQuery ToQuery()
+		{
+			var query = new MatchQuery();
+
+			if (_field is not null)
+				query.Field = _field;
+
+			if (_query is not null)
+				query.Query = _query;
+
+			return query;
+		}
+	}
+
+	[JsonConverter(typeof(MatchQueryConverter))]
+	public sealed partial class MatchQuery
+	{
+
+	}
+
+	internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
+	{
+		internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Query))
+			{
+				writer.WritePropertyName("query");
+				writer.WriteStringValue(value.Query);
+			}
+			writer.WriteEndObject();
+		}
+	}
+
+	internal abstract class FieldNameQueryConverterBase<T> : JsonConverter<T> where T : FieldNameQueryBase
+	{
+		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName(value.Field.ToString());
+				WriteInternal(writer, value, options);
+			}
+			writer.WriteEndObject();
+		}
+
+		internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
+	}
+
+	internal sealed class MatchQueryDescriptorConverter : FieldNameQueryDescriptorConverterBase<MatchQueryDescriptor>
+	{
+		internal override void WriteInternal(Utf8JsonWriter writer, MatchQueryDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			if (!string.IsNullOrEmpty(value._query))
+			{
+				writer.WritePropertyName("query");
+				writer.WriteStringValue(value._query);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	//internal sealed partial class QueryContainerDescriptorConverter
+	//{
+	//	public override QueryContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	//	public override void Write(Utf8JsonWriter writer, QueryContainerDescriptor value, JsonSerializerOptions options)
 	//	{
-	//		//var variant = value.ContainedVariant;
-
-	//		//if (variant is null)
-	//		//	writer.WriteNullValue();
-
-	//		// TODO - Use serialiser from settings
-	//		//JsonSerializer.Serialize(writer, variant, options);
-
-	//		var container = value as QueryContainer; // This gives us access to the properties
-
 	//		writer.WriteStartObject();
 
-	//		if (container.Bool is not null)
+	//		if (value._variantDescriptor is MatchQueryDescriptor descriptor)
 	//		{
-	//			writer.WritePropertyName("bool");
-
-	//			// TODO - The options here are valid as they come for the initiating serialiser which is the DefaultRequestResponseSerialiser
-	//			// Arguably, we want to have access to the transport settings to access the registered serialiser to use for this.
-	//			// Considerations:
-	//			//   a) Requires a converter factory approach which has costs on the CanConvert method for each factory which is attempted.
-	//			//   b) The default serialiser for our types is known so we can be 'safe' in knowing we're using STJ.
-	//			//   c) We know this converter would only get called by STJ internally, so if it's called, we're using STJ.
-	//			JsonSerializer.Serialize(writer, container.Bool, options);
+	//			writer.WritePropertyName("query");
+	//			JsonSerializer.Serialize(writer, descriptor, options);
 	//		}
 
 	//		writer.WriteEndObject();
 	//	}
 	//}
+
+	public sealed partial class QueryContainerDescriptor
+	{
+		internal QueryContainer _container;
+		internal object _variantDescriptor;
+
+		//public QueryContainerDescriptor QueryString(Action<BoolQueryDescriptor> configure)
+		//{
+		//	var descriptor = new BoolQueryDescriptor();
+		//	configure?.Invoke(descriptor);
+		//	return Assign(descriptor, (d, v) => d._boolQueryDescriptor = v);
+		//}
+
+		public QueryContainer Bool(Action<BoolQueryDescriptor> configure)
+		{
+			if (configure is null)
+				return new QueryContainer(new BoolQuery());
+
+			var descriptor = new BoolQueryDescriptor();
+			configure.Invoke(descriptor);
+			Assign(descriptor, (d, v) => d._variantDescriptor = v);
+
+			return ToQueryContainer();
+		}
+
+		public QueryContainer Match(Action<MatchQueryDescriptor> configure)
+		{
+			if (configure is null)
+				return new QueryContainer(new MatchQuery());
+
+			var descriptor = new MatchQueryDescriptor();
+			configure.Invoke(descriptor);
+			Assign(descriptor, (d, v) => d._variantDescriptor = v);
+
+			return ToQueryContainer();
+		}
+
+		internal QueryContainer ToQueryContainer()
+		{
+			if (_container is not null)
+				return _container;
+
+			return _variantDescriptor switch
+			{
+				BoolQueryDescriptor variant => new QueryContainer(variant.ToQuery()),
+				MatchQueryDescriptor variant => new QueryContainer(variant.ToQuery()),
+				_ => null,
+			};
+		}
+	}
 }
 
 

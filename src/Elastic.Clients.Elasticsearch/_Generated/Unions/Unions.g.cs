@@ -98,6 +98,10 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class ScalarValue
+	{
+	}
+
 	public partial class Script
 	{
 	}
@@ -115,13 +119,13 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	public partial class Time : Union<string?, int?>
+	public partial class TaskId : Union<string?, int?>
 	{
-		public Time(string? item) : base(item)
+		public TaskId(string? item) : base(item)
 		{
 		}
 
-		public Time(int? item) : base(item)
+		public TaskId(int? item) : base(item)
 		{
 		}
 	}

@@ -187,6 +187,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Hidden { get; set; }
 	}
 
+	[JsonConverter(typeof(DataStreamDescriptorConverter))]
+	public sealed partial class DataStreamDescriptor : DescriptorBase<DataStreamDescriptor>
+	{
+		internal bool? _hidden;
+	}
+
+	internal sealed class DataStreamDescriptorConverter : JsonConverter<DataStreamDescriptor>
+	{
+		public override DataStreamDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DataStreamDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._hidden.HasValue)
+			{
+				writer.WritePropertyName("hidden");
+				writer.WriteBooleanValue(value._hidden.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class FielddataFrequencyFilter
 	{
 		[JsonInclude]
@@ -211,6 +233,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("rebalance")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
+	}
+
+	[JsonConverter(typeof(IndexRoutingDescriptorConverter))]
+	public sealed partial class IndexRoutingDescriptor : DescriptorBase<IndexRoutingDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? _allocation;
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? _rebalance;
+	}
+
+	internal sealed class IndexRoutingDescriptorConverter : JsonConverter<IndexRoutingDescriptor>
+	{
+		public override IndexRoutingDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRoutingDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._allocation is not null)
+			{
+				writer.WritePropertyName("allocation");
+				JsonSerializer.Serialize(writer, value._allocation, options);
+			}
+
+			if (value._rebalance is not null)
+			{
+				writer.WritePropertyName("rebalance");
+				JsonSerializer.Serialize(writer, value._rebalance, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class IndexRoutingAllocation
@@ -282,6 +333,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Union<bool, string> ThresholdEnabled { get; set; }
 	}
 
+	[JsonConverter(typeof(IndexRoutingAllocationDiskDescriptorConverter))]
+	public sealed partial class IndexRoutingAllocationDiskDescriptor : DescriptorBase<IndexRoutingAllocationDiskDescriptor>
+	{
+		internal Union<bool, string> _thresholdEnabled;
+	}
+
+	internal sealed class IndexRoutingAllocationDiskDescriptorConverter : JsonConverter<IndexRoutingAllocationDiskDescriptor>
+	{
+		public override IndexRoutingAllocationDiskDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRoutingAllocationDiskDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("threshold_enabled");
+			JsonSerializer.Serialize(writer, value._thresholdEnabled, options);
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class IndexRoutingAllocationInclude
 	{
 		[JsonInclude]
@@ -293,6 +362,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 	}
 
+	[JsonConverter(typeof(IndexRoutingAllocationIncludeDescriptorConverter))]
+	public sealed partial class IndexRoutingAllocationIncludeDescriptor : DescriptorBase<IndexRoutingAllocationIncludeDescriptor>
+	{
+		internal string? _tierPreference;
+		internal Elastic.Clients.Elasticsearch.Id? _id;
+	}
+
+	internal sealed class IndexRoutingAllocationIncludeDescriptorConverter : JsonConverter<IndexRoutingAllocationIncludeDescriptor>
+	{
+		public override IndexRoutingAllocationIncludeDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRoutingAllocationIncludeDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value._tierPreference))
+			{
+				writer.WritePropertyName("_tier_preference");
+				writer.WriteStringValue(value._tierPreference);
+			}
+
+			if (value._id is not null)
+			{
+				writer.WritePropertyName("_id");
+				JsonSerializer.Serialize(writer, value._id, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class IndexRoutingAllocationInitialRecovery
 	{
 		[JsonInclude]
@@ -300,11 +398,51 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 	}
 
+	[JsonConverter(typeof(IndexRoutingAllocationInitialRecoveryDescriptorConverter))]
+	public sealed partial class IndexRoutingAllocationInitialRecoveryDescriptor : DescriptorBase<IndexRoutingAllocationInitialRecoveryDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Id? _id;
+	}
+
+	internal sealed class IndexRoutingAllocationInitialRecoveryDescriptorConverter : JsonConverter<IndexRoutingAllocationInitialRecoveryDescriptor>
+	{
+		public override IndexRoutingAllocationInitialRecoveryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRoutingAllocationInitialRecoveryDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._id is not null)
+			{
+				writer.WritePropertyName("_id");
+				JsonSerializer.Serialize(writer, value._id, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class IndexRoutingRebalance
 	{
 		[JsonInclude]
 		[JsonPropertyName("enable")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
+	}
+
+	[JsonConverter(typeof(IndexRoutingRebalanceDescriptorConverter))]
+	public sealed partial class IndexRoutingRebalanceDescriptor : DescriptorBase<IndexRoutingRebalanceDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions _enable;
+	}
+
+	internal sealed class IndexRoutingRebalanceDescriptorConverter : JsonConverter<IndexRoutingRebalanceDescriptor>
+	{
+		public override IndexRoutingRebalanceDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexRoutingRebalanceDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enable");
+			JsonSerializer.Serialize(writer, value._enable, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class IndexSegmentSort
@@ -482,7 +620,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("soft_deletes.retention_lease.period")]
-		public Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriod { get; set; }
+		public Time? SoftDeletesRetentionLeasePeriod { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
@@ -502,11 +640,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("search.idle.after")]
-		public Elastic.Clients.Elasticsearch.Time? SearchIdleAfter { get; set; }
+		public Time? SearchIdleAfter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("refresh_interval")]
-		public Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
+		public Time? RefreshInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_result_window")]
@@ -586,7 +724,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("gc_deletes")]
-		public Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
+		public Time? GcDeletes { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("default_pipeline")]
@@ -675,13 +813,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? _checkOnStartup;
 		internal string? _codec;
 		internal int? _routingPartitionSize;
-		internal Elastic.Clients.Elasticsearch.Time? _softDeletesRetentionLeasePeriod;
+		internal Time? _softDeletesRetentionLeasePeriod;
 		internal bool? _loadFixedBitsetFiltersEagerly;
 		internal Union<bool?, string?>? _hidden;
 		internal string? _autoExpandReplicas;
 		internal int? _mergeSchedulerMaxThreadCount;
-		internal Elastic.Clients.Elasticsearch.Time? _searchIdleAfter;
-		internal Elastic.Clients.Elasticsearch.Time? _refreshInterval;
+		internal Time? _searchIdleAfter;
+		internal Time? _refreshInterval;
 		internal int? _maxResultWindow;
 		internal int? _maxInnerResultWindow;
 		internal int? _maxRescoreWindow;
@@ -701,7 +839,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal int? _maxTermsCount;
 		internal int? _maxRegexLength;
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? _routing;
-		internal Elastic.Clients.Elasticsearch.Time? _gcDeletes;
+		internal Time? _gcDeletes;
 		internal string? _defaultPipeline;
 		internal string? _finalPipeline;
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? _lifecycle;
@@ -1148,6 +1286,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
+	[JsonConverter(typeof(IndexSettingsLifecycleDescriptorConverter))]
+	public sealed partial class IndexSettingsLifecycleDescriptor : DescriptorBase<IndexSettingsLifecycleDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Name _name;
+	}
+
+	internal sealed class IndexSettingsLifecycleDescriptorConverter : JsonConverter<IndexSettingsLifecycleDescriptor>
+	{
+		public override IndexSettingsLifecycleDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexSettingsLifecycleDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, value._name, options);
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class IndexState
 	{
 		[JsonInclude]
@@ -1217,11 +1373,47 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Index { get; set; }
 	}
 
+	[JsonConverter(typeof(IndexStatePrefixedSettingsDescriptorConverter))]
+	public sealed partial class IndexStatePrefixedSettingsDescriptor : DescriptorBase<IndexStatePrefixedSettingsDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings _index;
+	}
+
+	internal sealed class IndexStatePrefixedSettingsDescriptorConverter : JsonConverter<IndexStatePrefixedSettingsDescriptor>
+	{
+		public override IndexStatePrefixedSettingsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexStatePrefixedSettingsDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, value._index, options);
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class IndexVersioning
 	{
 		[JsonInclude]
 		[JsonPropertyName("created")]
 		public string Created { get; set; }
+	}
+
+	[JsonConverter(typeof(IndexVersioningDescriptorConverter))]
+	public sealed partial class IndexVersioningDescriptor : DescriptorBase<IndexVersioningDescriptor>
+	{
+		internal string _created;
+	}
+
+	internal sealed class IndexVersioningDescriptorConverter : JsonConverter<IndexVersioningDescriptor>
+	{
+		public override IndexVersioningDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexVersioningDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("created");
+			JsonSerializer.Serialize(writer, value._created, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class NumericFielddata
@@ -1242,11 +1434,54 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? IndexPatterns { get; set; }
 	}
 
+	[JsonConverter(typeof(OverlappingIndexTemplateDescriptorConverter))]
+	public sealed partial class OverlappingIndexTemplateDescriptor : DescriptorBase<OverlappingIndexTemplateDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Name _name;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? _indexPatterns;
+	}
+
+	internal sealed class OverlappingIndexTemplateDescriptorConverter : JsonConverter<OverlappingIndexTemplateDescriptor>
+	{
+		public override OverlappingIndexTemplateDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, OverlappingIndexTemplateDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, value._name, options);
+			if (value._indexPatterns is not null)
+			{
+				writer.WritePropertyName("index_patterns");
+				JsonSerializer.Serialize(writer, value._indexPatterns, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class SoftDeletes
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
+	}
+
+	[JsonConverter(typeof(SoftDeletesDescriptorConverter))]
+	public sealed partial class SoftDeletesDescriptor : DescriptorBase<SoftDeletesDescriptor>
+	{
+		internal bool _enabled;
+	}
+
+	internal sealed class SoftDeletesDescriptorConverter : JsonConverter<SoftDeletesDescriptor>
+	{
+		public override SoftDeletesDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SoftDeletesDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(value._enabled);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class StringFielddata

@@ -4,52 +4,16 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 
 public interface IDescriptor { }
-
-public abstract class OldDescriptorBase<TDescriptor, TInterface> : IDescriptor
-	where TDescriptor : OldDescriptorBase<TDescriptor, TInterface>, TInterface
-	where TInterface : class
-{
-	private readonly TDescriptor _self;
-
-	protected OldDescriptorBase() => _self = (TDescriptor)this;
-
-	[IgnoreDataMember]
-	protected TInterface Self => _self;
-
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	protected TDescriptor Assign<TValue>(TValue value, Action<TInterface, TValue> assigner) => Fluent.Assign(_self, value, assigner);
-
-	/// <summary>
-	/// Hides the <see cref="Equals" /> method.
-	/// </summary>
-	[Browsable(false)]
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	// ReSharper disable once BaseObjectEqualsIsObjectEquals
-	//only used to hide by default
-	public override bool Equals(object obj) => base.Equals(obj);
-
-	/// <summary>
-	/// Hides the <see cref="GetHashCode" /> method.
-	/// </summary>
-	[Browsable(false)]
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	// ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-	//only used to hide by default
-	public override int GetHashCode() => base.GetHashCode();
-
-	/// <summary>
-	/// Hides the <see cref="ToString" /> method.
-	/// </summary>
-	[Browsable(false)]
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public override string ToString() => base.ToString();
-}
 
 public abstract class DescriptorBase<TDescriptor> : IDescriptor
 	where TDescriptor : DescriptorBase<TDescriptor>
@@ -88,4 +52,71 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public override string ToString() => base.ToString();
+}
+
+public abstract class QueryDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IQuery
+		where TDescriptor : QueryDescriptorBase<TDescriptor>, IQuery
+{
+	internal string _name;
+
+	///// <inheritdoc cref="IQuery.Conditionless"/>
+	//protected abstract bool Conditionless { get; }
+
+	//double? IQuery.Boost { get; set; }
+
+	//bool IQuery.Conditionless => Conditionless;
+
+	//bool IQuery.IsStrict { get; set; }
+
+	//bool IQuery.IsVerbatim { get; set; }
+
+	bool IQuery.IsWritable => true; /*Self.IsVerbatim || !Self.Conditionless;*/
+
+	public TDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
+
+	///// <inheritdoc cref="IQuery.Boost"/>
+	//public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
+
+	///// <inheritdoc cref="IQuery.IsVerbatim"/>
+	//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
+
+	///// <inheritdoc cref="IQuery.IsStrict"/>
+	//public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
+}
+
+//internal abstract class QueryDescriptorConverterBase<T> : JsonConverter<T> where T : QueryDescriptorBase<T>
+//{
+//}
+
+internal abstract class FieldNameQueryDescriptorConverterBase<T> : JsonConverter<T> where T : FieldNameQueryDescriptorBase<T>
+{
+	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		if (value._field is not null)
+		{
+			writer.WritePropertyName(value._field.ToString());
+			WriteInternal(writer, value, options);
+		}
+		writer.WriteEndObject();
+	}
+
+	internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
+}
+
+public abstract class FieldNameQueryDescriptorBase<TDescriptor> : QueryDescriptorBase<TDescriptor>
+		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor>
+		//where T : class
+{
+	internal Field _field;
+
+	//bool IQuery.IsStrict { get; set; }
+
+	//bool IQuery.IsVerbatim { get; set; }
+
+	public TDescriptor Field(Field field) => Assign(field, (a, v) => a._field = v);
+
+	//public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
+	//	Assign(objectPath, (a, v) => a._field = v);
 }

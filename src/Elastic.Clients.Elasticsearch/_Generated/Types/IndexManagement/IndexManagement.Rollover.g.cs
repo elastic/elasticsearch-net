@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_age")]
-		public Elastic.Clients.Elasticsearch.Time? MaxAge { get; set; }
+		public Time? MaxAge { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs")]
@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 	[JsonConverter(typeof(RolloverConditionsDescriptorConverter))]
 	public sealed partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.Time? _maxAge;
+		internal Time? _maxAge;
 		internal long? _maxDocs;
 		internal string? _maxSize;
 		internal Elastic.Clients.Elasticsearch.ByteSize? _maxPrimaryShardSize;
