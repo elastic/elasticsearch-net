@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 	}
 
-	public class Properties : IsADictionaryBase<string, IPropertiesVariant>, Mapping.IProperties
+	public class Properties : IsADictionaryBase<string, IPropertiesVariant>
 	{
 	}
 

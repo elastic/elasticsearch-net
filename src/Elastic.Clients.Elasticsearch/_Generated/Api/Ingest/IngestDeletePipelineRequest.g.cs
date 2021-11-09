@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	public class IngestDeletePipelineRequestParameters : RequestParameters<IngestDeletePipelineRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class IngestDeletePipelineRequest : PlainRequestBase<IngestDeletePipelineRequestParameters>
@@ -44,10 +43,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
+		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	[JsonConverter(typeof(IngestDeletePipelineRequestDescriptorConverter))]
@@ -60,8 +59,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestDeletePipeline;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		public IngestDeletePipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IngestDeletePipelineRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IngestDeletePipelineRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IngestDeletePipelineRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
 	}
 
 	internal sealed class IngestDeletePipelineRequestDescriptorConverter : JsonConverter<IngestDeletePipelineRequestDescriptor>

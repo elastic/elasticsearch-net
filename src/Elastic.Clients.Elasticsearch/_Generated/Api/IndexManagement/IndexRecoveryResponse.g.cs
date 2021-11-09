@@ -21,7 +21,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class IndexRecoveryResponse<TKey, TValue> : DictionaryResponseBase<TKey, TValue>
+	public partial class IndexRecoveryResponse : DictionaryResponseBase<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Recovery.RecoveryStatus>
 	{
 	}
 }

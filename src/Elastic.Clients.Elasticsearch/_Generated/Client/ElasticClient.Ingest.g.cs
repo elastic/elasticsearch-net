@@ -60,20 +60,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return DoRequestAsync<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsResponse>(descriptor);
 		}
 
-		public IngestGetPipelineResponse<TKey, TValue> GetPipeline<TKey, TValue>(IngestGetPipelineRequest request) => DoRequest<IngestGetPipelineRequest, IngestGetPipelineResponse<TKey, TValue>>(request);
-		public Task<IngestGetPipelineResponse<TKey, TValue>> GetPipelineAsync<TKey, TValue>(IngestGetPipelineRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IngestGetPipelineRequest, IngestGetPipelineResponse<TKey, TValue>>(request, cancellationToken);
-		public IngestGetPipelineResponse<TKey, TValue> GetPipeline<TKey, TValue>(Action<IngestGetPipelineRequestDescriptor> configureRequest = null)
+		public IngestGetPipelineResponse GetPipeline(IngestGetPipelineRequest request) => DoRequest<IngestGetPipelineRequest, IngestGetPipelineResponse>(request);
+		public Task<IngestGetPipelineResponse> GetPipelineAsync(IngestGetPipelineRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IngestGetPipelineRequest, IngestGetPipelineResponse>(request, cancellationToken);
+		public IngestGetPipelineResponse GetPipeline(Action<IngestGetPipelineRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse<TKey, TValue>>(descriptor);
+			return DoRequest<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
 		}
 
-		public Task<IngestGetPipelineResponse<TKey, TValue>> GetPipelineAsync<TKey, TValue>(Action<IngestGetPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IngestGetPipelineResponse> GetPipelineAsync(Action<IngestGetPipelineRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new IngestGetPipelineRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<IngestGetPipelineRequestDescriptor, IngestGetPipelineResponse>(descriptor);
 		}
 
 		public IngestProcessorGrokResponse ProcessorGrok(IngestProcessorGrokRequest request) => DoRequest<IngestProcessorGrokRequest, IngestProcessorGrokResponse>(request);

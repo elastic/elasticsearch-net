@@ -37,29 +37,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public IReadOnlyCollection<string> Metrics { get; init; }
 	}
 
-	[JsonConverter(typeof(AggregateMetricDoublePropertyDescriptorConverter))]
-	public sealed partial class AggregateMetricDoublePropertyDescriptor : DescriptorBase<AggregateMetricDoublePropertyDescriptor>
-	{
-		internal string _defaultMetric;
-		internal IReadOnlyCollection<string> _metrics;
-	}
-
-	internal sealed class AggregateMetricDoublePropertyDescriptorConverter : JsonConverter<AggregateMetricDoublePropertyDescriptor>
-	{
-		public override AggregateMetricDoublePropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, AggregateMetricDoublePropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("aggregate_metric_double");
-			writer.WritePropertyName("default_metric");
-			writer.WriteStringValue(value._defaultMetric);
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, value._metrics, options);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class AllField
 	{
 		[JsonInclude]
@@ -230,24 +207,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "constant_keyword";
 	}
 
-	[JsonConverter(typeof(ConstantKeywordPropertyDescriptorConverter))]
-	public sealed partial class ConstantKeywordPropertyDescriptor : DescriptorBase<ConstantKeywordPropertyDescriptor>
-	{
-		internal object? _value;
-	}
-
-	internal sealed class ConstantKeywordPropertyDescriptorConverter : JsonConverter<ConstantKeywordPropertyDescriptor>
-	{
-		public override ConstantKeywordPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ConstantKeywordPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("constant_keyword");
-			writer.WriteEndObject();
-		}
-	}
-
 	public abstract partial class CorePropertyBase : Mapping.PropertyBase
 	{
 		[JsonInclude]
@@ -381,47 +340,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? IndexOptions { get; init; }
 	}
 
-	[JsonConverter(typeof(DenseVectorPropertyDescriptorConverter))]
-	public sealed partial class DenseVectorPropertyDescriptor : DescriptorBase<DenseVectorPropertyDescriptor>
-	{
-		internal int _dims;
-		internal string? _similarity;
-		internal bool? _index;
-		internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? _indexOptions;
-	}
-
-	internal sealed class DenseVectorPropertyDescriptorConverter : JsonConverter<DenseVectorPropertyDescriptor>
-	{
-		public override DenseVectorPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DenseVectorPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("dense_vector");
-			writer.WritePropertyName("dims");
-			writer.WriteNumberValue(value._dims);
-			if (!string.IsNullOrEmpty(value._similarity))
-			{
-				writer.WritePropertyName("similarity");
-				writer.WriteStringValue(value._similarity);
-			}
-
-			if (value._index.HasValue)
-			{
-				writer.WritePropertyName("index");
-				writer.WriteBooleanValue(value._index.Value);
-			}
-
-			if (value._indexOptions is not null)
-			{
-				writer.WritePropertyName("index_options");
-				JsonSerializer.Serialize(writer, value._indexOptions, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public abstract partial class DocValuesPropertyBase : Mapping.CorePropertyBase
 	{
 		[JsonInclude]
@@ -552,30 +470,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "alias";
 	}
 
-	[JsonConverter(typeof(FieldAliasPropertyDescriptorConverter))]
-	public sealed partial class FieldAliasPropertyDescriptor : DescriptorBase<FieldAliasPropertyDescriptor>
-	{
-		internal string? _path;
-	}
-
-	internal sealed class FieldAliasPropertyDescriptorConverter : JsonConverter<FieldAliasPropertyDescriptor>
-	{
-		public override FieldAliasPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FieldAliasPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value._path is not null)
-			{
-				writer.WritePropertyName("path");
-				JsonSerializer.Serialize(writer, value._path, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("alias");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class FieldMapping
 	{
 		[JsonInclude]
@@ -592,6 +486,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
+	}
+
+	[JsonConverter(typeof(FieldNamesFieldDescriptorConverter))]
+	public sealed partial class FieldNamesFieldDescriptor : DescriptorBase<FieldNamesFieldDescriptor>
+	{
+		internal bool _enabled;
+	}
+
+	internal sealed class FieldNamesFieldDescriptorConverter : JsonConverter<FieldNamesFieldDescriptor>
+	{
+		public override FieldNamesFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, FieldNamesFieldDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(value._enabled);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class FlattenedProperty : Mapping.PropertyBase, IPropertiesVariant
@@ -635,86 +547,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "flattened";
-	}
-
-	[JsonConverter(typeof(FlattenedPropertyDescriptorConverter))]
-	public sealed partial class FlattenedPropertyDescriptor : DescriptorBase<FlattenedPropertyDescriptor>
-	{
-		internal double? _boost;
-		internal int? _depthLimit;
-		internal bool? _docValues;
-		internal bool? _eagerGlobalOrdinals;
-		internal bool? _index;
-		internal Elastic.Clients.Elasticsearch.Mapping.IndexOptions? _indexOptions;
-		internal string? _nullValue;
-		internal string? _similarity;
-		internal bool? _splitQueriesOnWhitespace;
-	}
-
-	internal sealed class FlattenedPropertyDescriptorConverter : JsonConverter<FlattenedPropertyDescriptor>
-	{
-		public override FlattenedPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FlattenedPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value._boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value._boost.Value);
-			}
-
-			if (value._depthLimit.HasValue)
-			{
-				writer.WritePropertyName("depth_limit");
-				writer.WriteNumberValue(value._depthLimit.Value);
-			}
-
-			if (value._docValues.HasValue)
-			{
-				writer.WritePropertyName("doc_values");
-				writer.WriteBooleanValue(value._docValues.Value);
-			}
-
-			if (value._eagerGlobalOrdinals.HasValue)
-			{
-				writer.WritePropertyName("eager_global_ordinals");
-				writer.WriteBooleanValue(value._eagerGlobalOrdinals.Value);
-			}
-
-			if (value._index.HasValue)
-			{
-				writer.WritePropertyName("index");
-				writer.WriteBooleanValue(value._index.Value);
-			}
-
-			if (value._indexOptions is not null)
-			{
-				writer.WritePropertyName("index_options");
-				JsonSerializer.Serialize(writer, value._indexOptions, options);
-			}
-
-			if (!string.IsNullOrEmpty(value._nullValue))
-			{
-				writer.WritePropertyName("null_value");
-				writer.WriteStringValue(value._nullValue);
-			}
-
-			if (!string.IsNullOrEmpty(value._similarity))
-			{
-				writer.WritePropertyName("similarity");
-				writer.WriteStringValue(value._similarity);
-			}
-
-			if (value._splitQueriesOnWhitespace.HasValue)
-			{
-				writer.WritePropertyName("split_queries_on_whitespace");
-				writer.WriteBooleanValue(value._splitQueriesOnWhitespace.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("flattened");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class FloatNumberProperty : Mapping.StandardNumberProperty
@@ -852,35 +684,29 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "histogram";
 	}
 
-	[JsonConverter(typeof(HistogramPropertyDescriptorConverter))]
-	public sealed partial class HistogramPropertyDescriptor : DescriptorBase<HistogramPropertyDescriptor>
-	{
-		internal bool? _ignoreMalformed;
-	}
-
-	internal sealed class HistogramPropertyDescriptorConverter : JsonConverter<HistogramPropertyDescriptor>
-	{
-		public override HistogramPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, HistogramPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value._ignoreMalformed.HasValue)
-			{
-				writer.WritePropertyName("ignore_malformed");
-				writer.WriteBooleanValue(value._ignoreMalformed.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("histogram");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class IndexField
 	{
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
+	}
+
+	[JsonConverter(typeof(IndexFieldDescriptorConverter))]
+	public sealed partial class IndexFieldDescriptor : DescriptorBase<IndexFieldDescriptor>
+	{
+		internal bool _enabled;
+	}
+
+	internal sealed class IndexFieldDescriptorConverter : JsonConverter<IndexFieldDescriptor>
+	{
+		public override IndexFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IndexFieldDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(value._enabled);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class IntegerNumberProperty : Mapping.StandardNumberProperty
@@ -939,30 +765,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "join";
-	}
-
-	[JsonConverter(typeof(JoinPropertyDescriptorConverter))]
-	public sealed partial class JoinPropertyDescriptor : DescriptorBase<JoinPropertyDescriptor>
-	{
-		internal Dictionary<string, IReadOnlyCollection<string>>? _relations;
-	}
-
-	internal sealed class JoinPropertyDescriptorConverter : JsonConverter<JoinPropertyDescriptor>
-	{
-		public override JoinPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, JoinPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value._relations is not null)
-			{
-				writer.WritePropertyName("relations");
-				JsonSerializer.Serialize(writer, value._relations, options);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("join");
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class KeywordProperty : Mapping.DocValuesPropertyBase
@@ -1084,23 +886,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "percolator";
 	}
 
-	[JsonConverter(typeof(PercolatorPropertyDescriptorConverter))]
-	public sealed partial class PercolatorPropertyDescriptor : DescriptorBase<PercolatorPropertyDescriptor>
-	{
-	}
-
-	internal sealed class PercolatorPropertyDescriptorConverter : JsonConverter<PercolatorPropertyDescriptor>
-	{
-		public override PercolatorPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PercolatorPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("percolator");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class PointProperty : Mapping.DocValuesPropertyBase
 	{
 		[JsonInclude]
@@ -1177,30 +962,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "rank_feature";
 	}
 
-	[JsonConverter(typeof(RankFeaturePropertyDescriptorConverter))]
-	public sealed partial class RankFeaturePropertyDescriptor : DescriptorBase<RankFeaturePropertyDescriptor>
-	{
-		internal bool? _positiveScoreImpact;
-	}
-
-	internal sealed class RankFeaturePropertyDescriptorConverter : JsonConverter<RankFeaturePropertyDescriptor>
-	{
-		public override RankFeaturePropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RankFeaturePropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value._positiveScoreImpact.HasValue)
-			{
-				writer.WritePropertyName("positive_score_impact");
-				writer.WriteBooleanValue(value._positiveScoreImpact.Value);
-			}
-
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("rank_feature");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class RankFeaturesProperty : Mapping.PropertyBase, IPropertiesVariant
 	{
 		[JsonInclude]
@@ -1208,28 +969,29 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		public string Type => "rank_features";
 	}
 
-	[JsonConverter(typeof(RankFeaturesPropertyDescriptorConverter))]
-	public sealed partial class RankFeaturesPropertyDescriptor : DescriptorBase<RankFeaturesPropertyDescriptor>
-	{
-	}
-
-	internal sealed class RankFeaturesPropertyDescriptorConverter : JsonConverter<RankFeaturesPropertyDescriptor>
-	{
-		public override RankFeaturesPropertyDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RankFeaturesPropertyDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("type");
-			writer.WriteStringValue("rank_features");
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class RoutingField
 	{
 		[JsonInclude]
 		[JsonPropertyName("required")]
 		public bool Required { get; set; }
+	}
+
+	[JsonConverter(typeof(RoutingFieldDescriptorConverter))]
+	public sealed partial class RoutingFieldDescriptor : DescriptorBase<RoutingFieldDescriptor>
+	{
+		internal bool _required;
+	}
+
+	internal sealed class RoutingFieldDescriptorConverter : JsonConverter<RoutingFieldDescriptor>
+	{
+		public override RoutingFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RoutingFieldDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("required");
+			writer.WriteBooleanValue(value._required);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class RuntimeField
@@ -1374,6 +1136,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool Enabled { get; set; }
+	}
+
+	[JsonConverter(typeof(SizeFieldDescriptorConverter))]
+	public sealed partial class SizeFieldDescriptor : DescriptorBase<SizeFieldDescriptor>
+	{
+		internal bool _enabled;
+	}
+
+	internal sealed class SizeFieldDescriptorConverter : JsonConverter<SizeFieldDescriptor>
+	{
+		public override SizeFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SizeFieldDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(value._enabled);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class SourceField

@@ -143,8 +143,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(HoltWintersTypeConverter))]
 	public enum HoltWintersType
 	{
-		Mult,
-		Add
+		Multiplicative,
+		Additive
 	}
 
 	public class HoltWintersTypeConverter : JsonConverter<HoltWintersType>
@@ -155,9 +155,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			switch (enumString)
 			{
 				case "mult":
-					return HoltWintersType.Mult;
+					return HoltWintersType.Multiplicative;
 				case "add":
-					return HoltWintersType.Add;
+					return HoltWintersType.Additive;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -168,10 +168,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			switch (value)
 			{
-				case HoltWintersType.Mult:
+				case HoltWintersType.Multiplicative:
 					writer.WriteStringValue("mult");
 					return;
-				case HoltWintersType.Add:
+				case HoltWintersType.Additive:
 					writer.WriteStringValue("add");
 					return;
 			}

@@ -204,20 +204,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return DoRequestAsync<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsResponse>(descriptor);
 		}
 
-		public ClusterRemoteInfoResponse<TKey, TValue> RemoteInfo<TKey, TValue>(ClusterRemoteInfoRequest request) => DoRequest<ClusterRemoteInfoRequest, ClusterRemoteInfoResponse<TKey, TValue>>(request);
-		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(ClusterRemoteInfoRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterRemoteInfoRequest, ClusterRemoteInfoResponse<TKey, TValue>>(request, cancellationToken);
-		public ClusterRemoteInfoResponse<TKey, TValue> RemoteInfo<TKey, TValue>(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null)
+		public ClusterRemoteInfoResponse RemoteInfo(ClusterRemoteInfoRequest request) => DoRequest<ClusterRemoteInfoRequest, ClusterRemoteInfoResponse>(request);
+		public Task<ClusterRemoteInfoResponse> RemoteInfoAsync(ClusterRemoteInfoRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<ClusterRemoteInfoRequest, ClusterRemoteInfoResponse>(request, cancellationToken);
+		public ClusterRemoteInfoResponse RemoteInfo(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new ClusterRemoteInfoRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse<TKey, TValue>>(descriptor);
+			return DoRequest<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse>(descriptor);
 		}
 
-		public Task<ClusterRemoteInfoResponse<TKey, TValue>> RemoteInfoAsync<TKey, TValue>(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<ClusterRemoteInfoResponse> RemoteInfoAsync(Action<ClusterRemoteInfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ClusterRemoteInfoRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse<TKey, TValue>>(descriptor);
+			return DoRequestAsync<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoResponse>(descriptor);
 		}
 
 		public ClusterRerouteResponse Reroute(ClusterRerouteRequest request) => DoRequest<ClusterRerouteRequest, ClusterRerouteResponse>(request);

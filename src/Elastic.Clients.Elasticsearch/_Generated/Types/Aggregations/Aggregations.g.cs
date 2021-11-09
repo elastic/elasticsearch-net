@@ -23,6 +23,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	public partial class AdjacencyMatrixAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixBucket>
+	{
+	}
+
 	public partial class AdjacencyMatrixAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -30,6 +34,32 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("filters")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
+	}
+
+	[JsonConverter(typeof(AdjacencyMatrixAggregationDescriptorConverter))]
+	public sealed partial class AdjacencyMatrixAggregationDescriptor : DescriptorBase<AdjacencyMatrixAggregationDescriptor>
+	{
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? _filters;
+	}
+
+	internal sealed class AdjacencyMatrixAggregationDescriptorConverter : JsonConverter<AdjacencyMatrixAggregationDescriptor>
+	{
+		public override AdjacencyMatrixAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AdjacencyMatrixAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._filters is not null)
+			{
+				writer.WritePropertyName("filters");
+				JsonSerializer.Serialize(writer, value._filters, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class AdjacencyMatrixBucket : Aggregations.MultiBucketBase
+	{
 	}
 
 	public abstract partial class AggregateBase
@@ -50,6 +80,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Name { get; set; }
 	}
 
+	[JsonConverter(typeof(AggregationDescriptorConverter))]
+	public sealed partial class AggregationDescriptor : DescriptorBase<AggregationDescriptor>
+	{
+		internal Dictionary<string, object>? _meta;
+		internal string? _name;
+	}
+
+	internal sealed class AggregationDescriptorConverter : JsonConverter<AggregationDescriptor>
+	{
+		public override AggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value._meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._name))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(value._name);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public interface IAggregationContainerVariant
 	{
 		string AggregationContainerVariantName { get; }
@@ -60,10 +119,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		public AggregationContainer(IAggregationContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 		internal IAggregationContainerVariant Variant { get; }
-
-		[JsonInclude]
-		[JsonPropertyName("aggs")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggs { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("meta")]
@@ -786,6 +841,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public sealed partial class AggregationContainerDescriptor : DescriptorBase<AggregationContainerDescriptor>
+	{
+	}
+
+	internal sealed class AggregationContainerDescriptorConverter : JsonConverter<AggregationContainerDescriptor>
+	{
+		public override AggregationContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AggregationContainerDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class AggregationRange
 	{
 		[JsonInclude]
@@ -837,7 +906,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class AutoDateHistogramAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
+	public partial class ArrayPercentilesItem
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
+	}
+
+	public partial class AutoDateHistogramAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket>
 	{
 		[JsonInclude]
 		[JsonPropertyName("interval")]
@@ -885,16 +969,128 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? TimeZone { get; set; }
 	}
 
+	[JsonConverter(typeof(AutoDateHistogramAggregationDescriptorConverter))]
+	public sealed partial class AutoDateHistogramAggregationDescriptor : DescriptorBase<AutoDateHistogramAggregationDescriptor>
+	{
+		internal int? _buckets;
+		internal string? _field;
+		internal string? _format;
+		internal Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? _minimumInterval;
+		internal string? _missing;
+		internal string? _offset;
+		internal Dictionary<string, object>? _params;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal string? _timeZone;
+	}
+
+	internal sealed class AutoDateHistogramAggregationDescriptorConverter : JsonConverter<AutoDateHistogramAggregationDescriptor>
+	{
+		public override AutoDateHistogramAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AutoDateHistogramAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._buckets.HasValue)
+			{
+				writer.WritePropertyName("buckets");
+				writer.WriteNumberValue(value._buckets.Value);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			if (value._minimumInterval is not null)
+			{
+				writer.WritePropertyName("minimum_interval");
+				JsonSerializer.Serialize(writer, value._minimumInterval, options);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._offset))
+			{
+				writer.WritePropertyName("offset");
+				writer.WriteStringValue(value._offset);
+			}
+
+			if (value._params is not null)
+			{
+				writer.WritePropertyName("params");
+				JsonSerializer.Serialize(writer, value._params, options);
+			}
+
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._timeZone))
+			{
+				writer.WritePropertyName("time_zone");
+				writer.WriteStringValue(value._timeZone);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class AverageAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "avg";
 	}
 
+	[JsonConverter(typeof(AverageAggregationDescriptorConverter))]
+	public sealed partial class AverageAggregationDescriptor : DescriptorBase<AverageAggregationDescriptor>
+	{
+	}
+
+	internal sealed class AverageAggregationDescriptorConverter : JsonConverter<AverageAggregationDescriptor>
+	{
+		public override AverageAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AverageAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class AverageBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "avg_bucket";
+	}
+
+	[JsonConverter(typeof(AverageBucketAggregationDescriptorConverter))]
+	public sealed partial class AverageBucketAggregationDescriptor : DescriptorBase<AverageBucketAggregationDescriptor>
+	{
+	}
+
+	internal sealed class AverageBucketAggregationDescriptorConverter : JsonConverter<AverageBucketAggregationDescriptor>
+	{
+		public override AverageBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, AverageBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class AvgAggregate : Aggregations.SingleMetricAggregateBase
+	{
 	}
 
 	public partial class BoxPlotAggregate : Aggregations.AggregateBase
@@ -918,6 +1114,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("q3")]
 		public double Q3 { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("lower")]
+		public double Lower { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper")]
+		public double Upper { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_as_string")]
+		public string? MinAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_as_string")]
+		public string? MaxAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("q1_as_string")]
+		public string? Q1AsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("q2_as_string")]
+		public string? Q2AsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("q3_as_string")]
+		public string? Q3AsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("lower_as_string")]
+		public string? LowerAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper_as_string")]
+		public string? UpperAsString { get; init; }
 	}
 
 	public partial class BoxplotAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
@@ -929,42 +1161,52 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public partial class BucketAggregate : Aggregations.AggregateBase
+	[JsonConverter(typeof(BoxplotAggregationDescriptorConverter))]
+	public sealed partial class BoxplotAggregationDescriptor : DescriptorBase<BoxplotAggregationDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("after_key")]
-		public Dictionary<string, object> AfterKey { get; init; }
+		internal double? _compression;
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("bg_count")]
-		public long BgCount { get; init; }
+	internal sealed class BoxplotAggregationDescriptorConverter : JsonConverter<BoxplotAggregationDescriptor>
+	{
+		public override BoxplotAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, BoxplotAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._compression.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(value._compression.Value);
+			}
 
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count_error_upper_bound")]
-		public long DocCountErrorUpperBound { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("sum_other_doc_count")]
-		public long SumOtherDocCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("interval")]
-		public string Interval { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("items")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Bucket Items { get; init; }
+			writer.WriteEndObject();
+		}
 	}
 
 	public abstract partial class BucketAggregationBase : Aggregations.Aggregation
 	{
+	}
+
+	[JsonConverter(typeof(BucketAggregationBaseDescriptorConverter))]
+	public sealed partial class BucketAggregationBaseDescriptor : DescriptorBase<BucketAggregationBaseDescriptor>
+	{
+	}
+
+	internal sealed class BucketAggregationBaseDescriptorConverter : JsonConverter<BucketAggregationBaseDescriptor>
+	{
+		public override BucketAggregationBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, BucketAggregationBaseDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class BucketMetricValueAggregate : Aggregations.SingleMetricAggregateBase
+	{
 		[JsonInclude]
-		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
+		[JsonPropertyName("keys")]
+		public IReadOnlyCollection<string> Keys { get; init; }
 	}
 
 	public partial class BucketScriptAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
@@ -976,6 +1218,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
+	[JsonConverter(typeof(BucketScriptAggregationDescriptorConverter))]
+	public sealed partial class BucketScriptAggregationDescriptor : DescriptorBase<BucketScriptAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+	}
+
+	internal sealed class BucketScriptAggregationDescriptorConverter : JsonConverter<BucketScriptAggregationDescriptor>
+	{
+		public override BucketScriptAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, BucketScriptAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class BucketSelectorAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -983,6 +1247,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+	}
+
+	[JsonConverter(typeof(BucketSelectorAggregationDescriptorConverter))]
+	public sealed partial class BucketSelectorAggregationDescriptor : DescriptorBase<BucketSelectorAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+	}
+
+	internal sealed class BucketSelectorAggregationDescriptorConverter : JsonConverter<BucketSelectorAggregationDescriptor>
+	{
+		public override BucketSelectorAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, BucketSelectorAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class BucketSortAggregation : Aggregations.Aggregation, IAggregationContainerVariant
@@ -1006,6 +1292,56 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 	}
 
+	[JsonConverter(typeof(BucketSortAggregationDescriptorConverter))]
+	public sealed partial class BucketSortAggregationDescriptor : DescriptorBase<BucketSortAggregationDescriptor>
+	{
+		internal int? _from;
+		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? _gapPolicy;
+		internal int? _size;
+		internal Elastic.Clients.Elasticsearch.Sort? _sort;
+	}
+
+	internal sealed class BucketSortAggregationDescriptorConverter : JsonConverter<BucketSortAggregationDescriptor>
+	{
+		public override BucketSortAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, BucketSortAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._from.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(value._from.Value);
+			}
+
+			if (value._gapPolicy is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, value._gapPolicy, options);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value._sort, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class CardinalityAggregate : Aggregations.AggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public long Value { get; init; }
+	}
+
 	public partial class CardinalityAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -1019,6 +1355,43 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Rehash { get; set; }
 	}
 
+	[JsonConverter(typeof(CardinalityAggregationDescriptorConverter))]
+	public sealed partial class CardinalityAggregationDescriptor : DescriptorBase<CardinalityAggregationDescriptor>
+	{
+		internal int? _precisionThreshold;
+		internal bool? _rehash;
+	}
+
+	internal sealed class CardinalityAggregationDescriptorConverter : JsonConverter<CardinalityAggregationDescriptor>
+	{
+		public override CardinalityAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, CardinalityAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._precisionThreshold.HasValue)
+			{
+				writer.WritePropertyName("precision_threshold");
+				writer.WriteNumberValue(value._precisionThreshold.Value);
+			}
+
+			if (value._rehash.HasValue)
+			{
+				writer.WritePropertyName("rehash");
+				writer.WriteBooleanValue(value._rehash.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class ChildrenAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregateBucket>
+	{
+	}
+
+	public partial class ChildrenAggregateBucket : Aggregations.MultiBucketBase
+	{
+	}
+
 	public partial class ChildrenAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -1026,6 +1399,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string? Type { get; set; }
+	}
+
+	[JsonConverter(typeof(ChildrenAggregationDescriptorConverter))]
+	public sealed partial class ChildrenAggregationDescriptor : DescriptorBase<ChildrenAggregationDescriptor>
+	{
+		internal string? _type;
+	}
+
+	internal sealed class ChildrenAggregationDescriptorConverter : JsonConverter<ChildrenAggregationDescriptor>
+	{
+		public override ChildrenAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ChildrenAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._type is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, value._type, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class ChiSquareHeuristic
@@ -1037,6 +1432,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("include_negatives")]
 		public bool IncludeNegatives { get; set; }
+	}
+
+	[JsonConverter(typeof(ChiSquareHeuristicDescriptorConverter))]
+	public sealed partial class ChiSquareHeuristicDescriptor : DescriptorBase<ChiSquareHeuristicDescriptor>
+	{
+		internal bool _backgroundIsSuperset;
+		internal bool _includeNegatives;
+	}
+
+	internal sealed class ChiSquareHeuristicDescriptorConverter : JsonConverter<ChiSquareHeuristicDescriptor>
+	{
+		public override ChiSquareHeuristicDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ChiSquareHeuristicDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("background_is_superset");
+			writer.WriteBooleanValue(value._backgroundIsSuperset);
+			writer.WritePropertyName("include_negatives");
+			writer.WriteBooleanValue(value._includeNegatives);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class ClassificationInferenceOptions
@@ -1112,6 +1528,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public partial class CompositeAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.CompositeBucket>
+	{
+		[JsonInclude]
+		[JsonPropertyName("after_key")]
+		public Dictionary<string, object>? AfterKey { get; init; }
+	}
+
 	public partial class CompositeAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -1127,6 +1550,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("sources")]
 		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
+	}
+
+	[JsonConverter(typeof(CompositeAggregationDescriptorConverter))]
+	public sealed partial class CompositeAggregationDescriptor : DescriptorBase<CompositeAggregationDescriptor>
+	{
+		internal Dictionary<string, object>? _after;
+		internal int? _size;
+		internal IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? _sources;
+	}
+
+	internal sealed class CompositeAggregationDescriptorConverter : JsonConverter<CompositeAggregationDescriptor>
+	{
+		public override CompositeAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, CompositeAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._after is not null)
+			{
+				writer.WritePropertyName("after");
+				JsonSerializer.Serialize(writer, value._after, options);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._sources is not null)
+			{
+				writer.WritePropertyName("sources");
+				JsonSerializer.Serialize(writer, value._sources, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class CompositeAggregationSource
@@ -1191,15 +1650,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class CompositeBucket
-	{
-	}
-
-	public partial class CompositeBucketAggregate<TBucket> : Aggregations.MultiBucketAggregate<TBucket>
+	public partial class CompositeBucket : Aggregations.MultiBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("after_key")]
-		public Dictionary<string, object> AfterKey { get; init; }
+		[JsonPropertyName("key")]
+		public Dictionary<string, object> Key { get; init; }
+	}
+
+	public partial class CumulativeCardinalityAggregate : Aggregations.AggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public long Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
 	}
 
 	public partial class CumulativeCardinalityAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
@@ -1208,10 +1674,44 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "cumulative_cardinality";
 	}
 
+	[JsonConverter(typeof(CumulativeCardinalityAggregationDescriptorConverter))]
+	public sealed partial class CumulativeCardinalityAggregationDescriptor : DescriptorBase<CumulativeCardinalityAggregationDescriptor>
+	{
+	}
+
+	internal sealed class CumulativeCardinalityAggregationDescriptorConverter : JsonConverter<CumulativeCardinalityAggregationDescriptor>
+	{
+		public override CumulativeCardinalityAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, CumulativeCardinalityAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class CumulativeSumAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "cumulative_sum";
+	}
+
+	[JsonConverter(typeof(CumulativeSumAggregationDescriptorConverter))]
+	public sealed partial class CumulativeSumAggregationDescriptor : DescriptorBase<CumulativeSumAggregationDescriptor>
+	{
+	}
+
+	internal sealed class CumulativeSumAggregationDescriptorConverter : JsonConverter<CumulativeSumAggregationDescriptor>
+	{
+		public override CumulativeSumAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, CumulativeSumAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class DateHistogramAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket>
+	{
 	}
 
 	public partial class DateHistogramAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
@@ -1222,7 +1722,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string TransformManagement.IPivotGroupByContainerVariant.PivotGroupByContainerVariantName => "date_histogram";
 		[JsonInclude]
 		[JsonPropertyName("calendar_interval")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? CalendarInterval { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Time?>? CalendarInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -1230,7 +1730,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("fixed_interval")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? FixedInterval { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Time?>? FixedInterval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -1238,7 +1738,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("interval")]
-		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Elastic.Clients.Elasticsearch.Time?>? Interval { get; set; }
+		public Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Time?>? Interval { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -1250,7 +1750,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]
-		public Elastic.Clients.Elasticsearch.Time? Offset { get; set; }
+		public Time? Offset { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
@@ -1273,7 +1773,124 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public partial class DateHistogramBucket
+	[JsonConverter(typeof(DateHistogramAggregationDescriptorConverter))]
+	public sealed partial class DateHistogramAggregationDescriptor : DescriptorBase<DateHistogramAggregationDescriptor>
+	{
+		internal Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Time?>? _calendarInterval;
+		internal string? _field;
+		internal Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Time?>? _fixedInterval;
+		internal string? _format;
+		internal Union<Elastic.Clients.Elasticsearch.Aggregations.DateInterval?, Time?>? _interval;
+		internal int? _minDocCount;
+		internal string? _missing;
+		internal Time? _offset;
+		internal Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? _order;
+		internal Dictionary<string, object>? _params;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal string? _timeZone;
+		internal bool? _keyed;
+	}
+
+	internal sealed class DateHistogramAggregationDescriptorConverter : JsonConverter<DateHistogramAggregationDescriptor>
+	{
+		public override DateHistogramAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DateHistogramAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._calendarInterval is not null)
+			{
+				writer.WritePropertyName("calendar_interval");
+				JsonSerializer.Serialize(writer, value._calendarInterval, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._fixedInterval is not null)
+			{
+				writer.WritePropertyName("fixed_interval");
+				JsonSerializer.Serialize(writer, value._fixedInterval, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			if (value._interval is not null)
+			{
+				writer.WritePropertyName("interval");
+				JsonSerializer.Serialize(writer, value._interval, options);
+			}
+
+			if (value._minDocCount.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(value._minDocCount.Value);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			if (value._offset is not null)
+			{
+				writer.WritePropertyName("offset");
+				JsonSerializer.Serialize(writer, value._offset, options);
+			}
+
+			if (value._order is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, value._order, options);
+			}
+
+			if (value._params is not null)
+			{
+				writer.WritePropertyName("params");
+				JsonSerializer.Serialize(writer, value._params, options);
+			}
+
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._timeZone))
+			{
+				writer.WritePropertyName("time_zone");
+				writer.WriteStringValue(value._timeZone);
+			}
+
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class DateHistogramBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public Elastic.Clients.Elasticsearch.EpochMillis Key { get; init; }
+	}
+
+	public partial class DateRangeAggregate : Aggregations.RangeAggregate
 	{
 	}
 
@@ -1304,6 +1921,63 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("keyed")]
 		public bool? Keyed { get; set; }
+	}
+
+	[JsonConverter(typeof(DateRangeAggregationDescriptorConverter))]
+	public sealed partial class DateRangeAggregationDescriptor : DescriptorBase<DateRangeAggregationDescriptor>
+	{
+		internal string? _field;
+		internal string? _format;
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? _missing;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? _ranges;
+		internal string? _timeZone;
+		internal bool? _keyed;
+	}
+
+	internal sealed class DateRangeAggregationDescriptorConverter : JsonConverter<DateRangeAggregationDescriptor>
+	{
+		public override DateRangeAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DateRangeAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			if (value._ranges is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, value._ranges, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._timeZone))
+			{
+				writer.WritePropertyName("time_zone");
+				writer.WriteStringValue(value._timeZone);
+			}
+
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class DateRangeExpression
@@ -1390,10 +2064,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public partial class DerivativeAggregate : Aggregations.SingleMetricAggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("normalized_value")]
+		public double? NormalizedValue { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("normalized_value_as_string")]
+		public string? NormalizedValueAsString { get; init; }
+	}
+
 	public partial class DerivativeAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "derivative";
+	}
+
+	[JsonConverter(typeof(DerivativeAggregationDescriptorConverter))]
+	public sealed partial class DerivativeAggregationDescriptor : DescriptorBase<DerivativeAggregationDescriptor>
+	{
+	}
+
+	internal sealed class DerivativeAggregationDescriptorConverter : JsonConverter<DerivativeAggregationDescriptor>
+	{
+		public override DerivativeAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DerivativeAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class DiversifiedSamplerAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -1421,6 +2121,71 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Field { get; set; }
 	}
 
+	[JsonConverter(typeof(DiversifiedSamplerAggregationDescriptorConverter))]
+	public sealed partial class DiversifiedSamplerAggregationDescriptor : DescriptorBase<DiversifiedSamplerAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? _executionHint;
+		internal int? _maxDocsPerValue;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal int? _shardSize;
+		internal string? _field;
+	}
+
+	internal sealed class DiversifiedSamplerAggregationDescriptorConverter : JsonConverter<DiversifiedSamplerAggregationDescriptor>
+	{
+		public override DiversifiedSamplerAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, DiversifiedSamplerAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._executionHint is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, value._executionHint, options);
+			}
+
+			if (value._maxDocsPerValue.HasValue)
+			{
+				writer.WritePropertyName("max_docs_per_value");
+				writer.WriteNumberValue(value._maxDocsPerValue.Value);
+			}
+
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class DoubleTermsAggregate : Aggregations.TermsAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsBucket>
+	{
+	}
+
+	public partial class DoubleTermsBucket : Aggregations.TermsBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public double Key { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
+	}
+
 	public partial class EwmaModelSettings
 	{
 		[JsonInclude]
@@ -1439,39 +2204,61 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public T Min { get; set; }
 	}
 
+	public sealed partial class ExtendedBoundsDescriptor<T> : DescriptorBase<ExtendedBoundsDescriptor<T>>
+	{
+		internal T _max;
+		internal T _min;
+	}
+
 	public partial class ExtendedStatsAggregate : Aggregations.StatsAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("std_deviation_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds StdDeviationBounds { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("sum_of_squares")]
-		public double? SumOfSquares { get; init; }
+		public object SumOfSquares { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance")]
-		public double? Variance { get; init; }
+		public object Variance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance_population")]
-		public double? VariancePopulation { get; init; }
+		public object VariancePopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance_sampling")]
-		public double? VarianceSampling { get; init; }
+		public object VarianceSampling { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation")]
-		public double? StdDeviation { get; init; }
+		public object StdDeviation { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("std_deviation_population")]
-		public double? StdDeviationPopulation { get; init; }
+		[JsonPropertyName("std_deviation_bounds")]
+		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("std_deviation_sampling")]
-		public double? StdDeviationSampling { get; init; }
+		[JsonPropertyName("sum_of_squares_as_string")]
+		public string? SumOfSquaresAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_as_string")]
+		public string? VarianceAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_population_as_string")]
+		public string? VariancePopulationAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_sampling_as_string")]
+		public string? VarianceSamplingAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("std_deviation_as_string")]
+		public string? StdDeviationAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("std_deviation_bounds_as_string")]
+		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; init; }
 	}
 
 	public partial class ExtendedStatsAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
@@ -1483,6 +2270,32 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Sigma { get; set; }
 	}
 
+	[JsonConverter(typeof(ExtendedStatsAggregationDescriptorConverter))]
+	public sealed partial class ExtendedStatsAggregationDescriptor : DescriptorBase<ExtendedStatsAggregationDescriptor>
+	{
+		internal double? _sigma;
+	}
+
+	internal sealed class ExtendedStatsAggregationDescriptorConverter : JsonConverter<ExtendedStatsAggregationDescriptor>
+	{
+		public override ExtendedStatsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ExtendedStatsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._sigma.HasValue)
+			{
+				writer.WritePropertyName("sigma");
+				writer.WriteNumberValue(value._sigma.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class ExtendedStatsBucketAggregate : Aggregations.ExtendedStatsAggregate
+	{
+	}
+
 	public partial class ExtendedStatsBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -1492,11 +2305,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Sigma { get; set; }
 	}
 
-	public partial class FiltersAggregate : Aggregations.AggregateBase
+	[JsonConverter(typeof(ExtendedStatsBucketAggregationDescriptorConverter))]
+	public sealed partial class ExtendedStatsBucketAggregationDescriptor : DescriptorBase<ExtendedStatsBucketAggregationDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
-		public Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>, Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.FiltersBucketItem>> Buckets { get; init; }
+		internal double? _sigma;
+	}
+
+	internal sealed class ExtendedStatsBucketAggregationDescriptorConverter : JsonConverter<ExtendedStatsBucketAggregationDescriptor>
+	{
+		public override ExtendedStatsBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ExtendedStatsBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._sigma.HasValue)
+			{
+				writer.WritePropertyName("sigma");
+				writer.WriteNumberValue(value._sigma.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class FilterAggregate : Aggregations.SingleBucketAggregateBase
+	{
+	}
+
+	public partial class FiltersAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket>
+	{
 	}
 
 	public partial class FiltersAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -1520,11 +2356,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public partial class FiltersBucketItem
+	[JsonConverter(typeof(FiltersAggregationDescriptorConverter))]
+	public sealed partial class FiltersAggregationDescriptor : DescriptorBase<FiltersAggregationDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
+		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?, IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>?>? _filters;
+		internal bool? _otherBucket;
+		internal string? _otherBucketKey;
+		internal bool? _keyed;
+	}
+
+	internal sealed class FiltersAggregationDescriptorConverter : JsonConverter<FiltersAggregationDescriptor>
+	{
+		public override FiltersAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, FiltersAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._filters is not null)
+			{
+				writer.WritePropertyName("filters");
+				JsonSerializer.Serialize(writer, value._filters, options);
+			}
+
+			if (value._otherBucket.HasValue)
+			{
+				writer.WritePropertyName("other_bucket");
+				writer.WriteBooleanValue(value._otherBucket.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value._otherBucketKey))
+			{
+				writer.WritePropertyName("other_bucket_key");
+				writer.WriteStringValue(value._otherBucketKey);
+			}
+
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class FiltersBucket : Aggregations.MultiBucketBase
+	{
 	}
 
 	public abstract partial class FormatMetricAggregationBase : Aggregations.MetricAggregationBase
@@ -1534,11 +2410,55 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 	}
 
+	[JsonConverter(typeof(FormatMetricAggregationBaseDescriptorConverter))]
+	public sealed partial class FormatMetricAggregationBaseDescriptor : DescriptorBase<FormatMetricAggregationBaseDescriptor>
+	{
+		internal string? _format;
+	}
+
+	internal sealed class FormatMetricAggregationBaseDescriptorConverter : JsonConverter<FormatMetricAggregationBaseDescriptor>
+	{
+		public override FormatMetricAggregationBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, FormatMetricAggregationBaseDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class FormattableMetricAggregation : Aggregations.MetricAggregationBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("format")]
 		public string? Format { get; set; }
+	}
+
+	[JsonConverter(typeof(FormattableMetricAggregationDescriptorConverter))]
+	public sealed partial class FormattableMetricAggregationDescriptor : DescriptorBase<FormattableMetricAggregationDescriptor>
+	{
+		internal string? _format;
+	}
+
+	internal sealed class FormattableMetricAggregationDescriptorConverter : JsonConverter<FormattableMetricAggregationDescriptor>
+	{
+		public override FormattableMetricAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, FormattableMetricAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class GeoBounds
@@ -1550,6 +2470,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("top_left")]
 		public Elastic.Clients.Elasticsearch.LatLon TopLeft { get; set; }
+	}
+
+	[JsonConverter(typeof(GeoBoundsDescriptorConverter))]
+	public sealed partial class GeoBoundsDescriptor : DescriptorBase<GeoBoundsDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.LatLon _bottomRight;
+		internal Elastic.Clients.Elasticsearch.LatLon _topLeft;
+	}
+
+	internal sealed class GeoBoundsDescriptorConverter : JsonConverter<GeoBoundsDescriptor>
+	{
+		public override GeoBoundsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoBoundsDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("bottom_right");
+			JsonSerializer.Serialize(writer, value._bottomRight, options);
+			writer.WritePropertyName("top_left");
+			JsonSerializer.Serialize(writer, value._topLeft, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class GeoBoundsAggregate : Aggregations.AggregateBase
@@ -1568,6 +2509,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? WrapLongitude { get; set; }
 	}
 
+	[JsonConverter(typeof(GeoBoundsAggregationDescriptorConverter))]
+	public sealed partial class GeoBoundsAggregationDescriptor : DescriptorBase<GeoBoundsAggregationDescriptor>
+	{
+		internal bool? _wrapLongitude;
+	}
+
+	internal sealed class GeoBoundsAggregationDescriptorConverter : JsonConverter<GeoBoundsAggregationDescriptor>
+	{
+		public override GeoBoundsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoBoundsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._wrapLongitude.HasValue)
+			{
+				writer.WritePropertyName("wrap_longitude");
+				writer.WriteBooleanValue(value._wrapLongitude.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class GeoCentroidAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
@@ -1576,7 +2539,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("location")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation Location { get; init; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; init; }
 	}
 
 	public partial class GeoCentroidAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
@@ -1590,6 +2553,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("location")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? Location { get; set; }
+	}
+
+	[JsonConverter(typeof(GeoCentroidAggregationDescriptorConverter))]
+	public sealed partial class GeoCentroidAggregationDescriptor : DescriptorBase<GeoCentroidAggregationDescriptor>
+	{
+		internal long? _count;
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _location;
+	}
+
+	internal sealed class GeoCentroidAggregationDescriptorConverter : JsonConverter<GeoCentroidAggregationDescriptor>
+	{
+		public override GeoCentroidAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoCentroidAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._count.HasValue)
+			{
+				writer.WritePropertyName("count");
+				writer.WriteNumberValue(value._count.Value);
+			}
+
+			if (value._location is not null)
+			{
+				writer.WritePropertyName("location");
+				JsonSerializer.Serialize(writer, value._location, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class GeoDistanceAggregate : Aggregations.RangeAggregate
+	{
 	}
 
 	public partial class GeoDistanceAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -1617,6 +2613,60 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 	}
 
+	[JsonConverter(typeof(GeoDistanceAggregationDescriptorConverter))]
+	public sealed partial class GeoDistanceAggregationDescriptor : DescriptorBase<GeoDistanceAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.GeoDistanceType? _distanceType;
+		internal string? _field;
+		internal Union<Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?, string?>? _origin;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? _ranges;
+		internal Elastic.Clients.Elasticsearch.DistanceUnit? _unit;
+	}
+
+	internal sealed class GeoDistanceAggregationDescriptorConverter : JsonConverter<GeoDistanceAggregationDescriptor>
+	{
+		public override GeoDistanceAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoDistanceAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._distanceType is not null)
+			{
+				writer.WritePropertyName("distance_type");
+				JsonSerializer.Serialize(writer, value._distanceType, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._origin is not null)
+			{
+				writer.WritePropertyName("origin");
+				JsonSerializer.Serialize(writer, value._origin, options);
+			}
+
+			if (value._ranges is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, value._ranges, options);
+			}
+
+			if (value._unit is not null)
+			{
+				writer.WritePropertyName("unit");
+				JsonSerializer.Serialize(writer, value._unit, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class GeoHashGridAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridBucket>
+	{
+	}
+
 	public partial class GeoHashGridAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -1642,19 +2692,71 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 	}
 
+	[JsonConverter(typeof(GeoHashGridAggregationDescriptorConverter))]
+	public sealed partial class GeoHashGridAggregationDescriptor : DescriptorBase<GeoHashGridAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.QueryDsl.BoundingBox? _bounds;
+		internal string? _field;
+		internal double? _precision;
+		internal int? _shardSize;
+		internal int? _size;
+	}
+
+	internal sealed class GeoHashGridAggregationDescriptorConverter : JsonConverter<GeoHashGridAggregationDescriptor>
+	{
+		public override GeoHashGridAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoHashGridAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._bounds is not null)
+			{
+				writer.WritePropertyName("bounds");
+				JsonSerializer.Serialize(writer, value._bounds, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._precision is not null)
+			{
+				writer.WritePropertyName("precision");
+				JsonSerializer.Serialize(writer, value._precision, options);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class GeoHashGridBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
+	}
+
 	public partial class GeoLineAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type { get; init; }
-
+		public string Type => "Feature";
 		[JsonInclude]
 		[JsonPropertyName("geometry")]
-		public Elastic.Clients.Elasticsearch.Aggregations.LineStringGeoShape Geometry { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("properties")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineProperties Properties { get; init; }
+		public Elastic.Clients.Elasticsearch.GeoLine Geometry { get; init; }
 	}
 
 	public partial class GeoLineAggregation : IAggregationContainerVariant
@@ -1682,6 +2784,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 	}
 
+	[JsonConverter(typeof(GeoLineAggregationDescriptorConverter))]
+	public sealed partial class GeoLineAggregationDescriptor : DescriptorBase<GeoLineAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint _point;
+		internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort _sort;
+		internal bool? _includeSort;
+		internal Elastic.Clients.Elasticsearch.SortOrder? _sortOrder;
+		internal int? _size;
+	}
+
+	internal sealed class GeoLineAggregationDescriptorConverter : JsonConverter<GeoLineAggregationDescriptor>
+	{
+		public override GeoLineAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoLineAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("point");
+			JsonSerializer.Serialize(writer, value._point, options);
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, value._sort, options);
+			if (value._includeSort.HasValue)
+			{
+				writer.WritePropertyName("include_sort");
+				writer.WriteBooleanValue(value._includeSort.Value);
+			}
+
+			if (value._sortOrder is not null)
+			{
+				writer.WritePropertyName("sort_order");
+				JsonSerializer.Serialize(writer, value._sortOrder, options);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class GeoLinePoint
 	{
 		[JsonInclude]
@@ -1689,15 +2833,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Field { get; set; }
 	}
 
-	public partial class GeoLineProperties
+	[JsonConverter(typeof(GeoLinePointDescriptorConverter))]
+	public sealed partial class GeoLinePointDescriptor : DescriptorBase<GeoLinePointDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("complete")]
-		public bool Complete { get; init; }
+		internal string _field;
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("sort_values")]
-		public IReadOnlyCollection<double> SortValues { get; init; }
+	internal sealed class GeoLinePointDescriptorConverter : JsonConverter<GeoLinePointDescriptor>
+	{
+		public override GeoLinePointDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoLinePointDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class GeoLineSort
@@ -1705,6 +2856,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public string Field { get; set; }
+	}
+
+	[JsonConverter(typeof(GeoLineSortDescriptorConverter))]
+	public sealed partial class GeoLineSortDescriptor : DescriptorBase<GeoLineSortDescriptor>
+	{
+		internal string _field;
+	}
+
+	internal sealed class GeoLineSortDescriptorConverter : JsonConverter<GeoLineSortDescriptor>
+	{
+		public override GeoLineSortDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoLineSortDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class GeoTileGridAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridBucket>
+	{
 	}
 
 	public partial class GeoTileGridAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
@@ -1734,10 +2907,86 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoBounds? Bounds { get; set; }
 	}
 
+	[JsonConverter(typeof(GeoTileGridAggregationDescriptorConverter))]
+	public sealed partial class GeoTileGridAggregationDescriptor : DescriptorBase<GeoTileGridAggregationDescriptor>
+	{
+		internal string? _field;
+		internal double? _precision;
+		internal int? _shardSize;
+		internal int? _size;
+		internal Elastic.Clients.Elasticsearch.Aggregations.GeoBounds? _bounds;
+	}
+
+	internal sealed class GeoTileGridAggregationDescriptorConverter : JsonConverter<GeoTileGridAggregationDescriptor>
+	{
+		public override GeoTileGridAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GeoTileGridAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._precision is not null)
+			{
+				writer.WritePropertyName("precision");
+				JsonSerializer.Serialize(writer, value._precision, options);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._bounds is not null)
+			{
+				writer.WritePropertyName("bounds");
+				JsonSerializer.Serialize(writer, value._bounds, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class GeoTileGridBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
+	}
+
+	public partial class GlobalAggregate : Aggregations.SingleBucketAggregateBase
+	{
+	}
+
 	public partial class GlobalAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "global";
+	}
+
+	[JsonConverter(typeof(GlobalAggregationDescriptorConverter))]
+	public sealed partial class GlobalAggregationDescriptor : DescriptorBase<GlobalAggregationDescriptor>
+	{
+	}
+
+	internal sealed class GlobalAggregationDescriptorConverter : JsonConverter<GlobalAggregationDescriptor>
+	{
+		public override GlobalAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GlobalAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class GoogleNormalizedDistanceHeuristic
@@ -1747,6 +2996,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? BackgroundIsSuperset { get; set; }
 	}
 
+	[JsonConverter(typeof(GoogleNormalizedDistanceHeuristicDescriptorConverter))]
+	public sealed partial class GoogleNormalizedDistanceHeuristicDescriptor : DescriptorBase<GoogleNormalizedDistanceHeuristicDescriptor>
+	{
+		internal bool? _backgroundIsSuperset;
+	}
+
+	internal sealed class GoogleNormalizedDistanceHeuristicDescriptorConverter : JsonConverter<GoogleNormalizedDistanceHeuristicDescriptor>
+	{
+		public override GoogleNormalizedDistanceHeuristicDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, GoogleNormalizedDistanceHeuristicDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._backgroundIsSuperset.HasValue)
+			{
+				writer.WritePropertyName("background_is_superset");
+				writer.WriteBooleanValue(value._backgroundIsSuperset.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class HdrMethod
 	{
 		[JsonInclude]
@@ -1754,22 +3025,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? NumberOfSignificantValueDigits { get; set; }
 	}
 
-	public partial class HdrPercentileItem
+	[JsonConverter(typeof(HdrMethodDescriptorConverter))]
+	public sealed partial class HdrMethodDescriptor : DescriptorBase<HdrMethodDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("key")]
-		public double Key { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public double Value { get; init; }
+		internal int? _numberOfSignificantValueDigits;
 	}
 
-	public partial class HdrPercentilesAggregate : Aggregations.AggregateBase
+	internal sealed class HdrMethodDescriptorConverter : JsonConverter<HdrMethodDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("values")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileItem> Values { get; init; }
+		public override HdrMethodDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, HdrMethodDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._numberOfSignificantValueDigits.HasValue)
+			{
+				writer.WritePropertyName("number_of_significant_value_digits");
+				writer.WriteNumberValue(value._numberOfSignificantValueDigits.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class HdrPercentileRanksAggregate : Aggregations.PercentilesAggregateBase
+	{
+	}
+
+	public partial class HdrPercentilesAggregate : Aggregations.PercentilesAggregateBase
+	{
+	}
+
+	public partial class HistogramAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.HistogramBucket>
+	{
 	}
 
 	public partial class HistogramAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
@@ -1815,6 +3102,96 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
+	[JsonConverter(typeof(HistogramAggregationDescriptorConverter))]
+	public sealed partial class HistogramAggregationDescriptor : DescriptorBase<HistogramAggregationDescriptor>
+	{
+		internal string? _field;
+		internal double? _interval;
+		internal int? _minDocCount;
+		internal double? _missing;
+		internal double? _offset;
+		internal Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? _order;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal string? _format;
+		internal bool? _keyed;
+	}
+
+	internal sealed class HistogramAggregationDescriptorConverter : JsonConverter<HistogramAggregationDescriptor>
+	{
+		public override HistogramAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, HistogramAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._interval.HasValue)
+			{
+				writer.WritePropertyName("interval");
+				writer.WriteNumberValue(value._interval.Value);
+			}
+
+			if (value._minDocCount.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(value._minDocCount.Value);
+			}
+
+			if (value._missing.HasValue)
+			{
+				writer.WritePropertyName("missing");
+				writer.WriteNumberValue(value._missing.Value);
+			}
+
+			if (value._offset.HasValue)
+			{
+				writer.WritePropertyName("offset");
+				writer.WriteNumberValue(value._offset.Value);
+			}
+
+			if (value._order is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, value._order, options);
+			}
+
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class HistogramBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public double Key { get; init; }
+	}
+
 	public partial class HistogramOrder
 	{
 		[JsonInclude]
@@ -1824,6 +3201,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("_key")]
 		public Elastic.Clients.Elasticsearch.SortOrder? Key { get; set; }
+	}
+
+	[JsonConverter(typeof(HistogramOrderDescriptorConverter))]
+	public sealed partial class HistogramOrderDescriptor : DescriptorBase<HistogramOrderDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.SortOrder? _count;
+		internal Elastic.Clients.Elasticsearch.SortOrder? _key;
+	}
+
+	internal sealed class HistogramOrderDescriptorConverter : JsonConverter<HistogramOrderDescriptor>
+	{
+		public override HistogramOrderDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, HistogramOrderDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._count is not null)
+			{
+				writer.WritePropertyName("_count");
+				JsonSerializer.Serialize(writer, value._count, options);
+			}
+
+			if (value._key is not null)
+			{
+				writer.WritePropertyName("_key");
+				JsonSerializer.Serialize(writer, value._key, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class HoltLinearModelSettings
@@ -1864,6 +3270,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.HoltWintersType? Type { get; init; }
 	}
 
+	public partial class InferenceAggregate : Aggregations.AggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public Elastic.Clients.Elasticsearch.ScalarValue? Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("feature_importance")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_classes")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? TopClasses { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("warning")]
+		public string? Warning { get; init; }
+	}
+
 	public partial class InferenceAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -1877,6 +3302,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
 	}
 
+	[JsonConverter(typeof(InferenceAggregationDescriptorConverter))]
+	public sealed partial class InferenceAggregationDescriptor : DescriptorBase<InferenceAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Name _modelId;
+		internal Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? _inferenceConfig;
+	}
+
+	internal sealed class InferenceAggregationDescriptorConverter : JsonConverter<InferenceAggregationDescriptor>
+	{
+		public override InferenceAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, InferenceAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("model_id");
+			JsonSerializer.Serialize(writer, value._modelId, options);
+			if (value._inferenceConfig is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, value._inferenceConfig, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class InferenceClassImportance
+	{
+		[JsonInclude]
+		[JsonPropertyName("class_name")]
+		public string ClassName { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("importance")]
+		public double Importance { get; init; }
+	}
+
 	public partial class InferenceConfigContainer
 	{
 		[JsonInclude]
@@ -1886,6 +3347,69 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("classification")]
 		public Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? Classification { get; set; }
+	}
+
+	[JsonConverter(typeof(InferenceConfigContainerDescriptorConverter))]
+	public sealed partial class InferenceConfigContainerDescriptor : DescriptorBase<InferenceConfigContainerDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.RegressionInferenceOptions? _regression;
+		internal Elastic.Clients.Elasticsearch.Aggregations.ClassificationInferenceOptions? _classification;
+	}
+
+	internal sealed class InferenceConfigContainerDescriptorConverter : JsonConverter<InferenceConfigContainerDescriptor>
+	{
+		public override InferenceConfigContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, InferenceConfigContainerDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._regression is not null)
+			{
+				writer.WritePropertyName("regression");
+				JsonSerializer.Serialize(writer, value._regression, options);
+			}
+
+			if (value._classification is not null)
+			{
+				writer.WritePropertyName("classification");
+				JsonSerializer.Serialize(writer, value._classification, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class InferenceFeatureImportance
+	{
+		[JsonInclude]
+		[JsonPropertyName("feature_name")]
+		public string FeatureName { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("importance")]
+		public double? Importance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("classes")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance>? Classes { get; init; }
+	}
+
+	public partial class InferenceTopClassEntry
+	{
+		[JsonInclude]
+		[JsonPropertyName("class_name")]
+		public Elastic.Clients.Elasticsearch.ScalarValue ClassName { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("class_probability")]
+		public double ClassProbability { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("class_score")]
+		public double ClassScore { get; init; }
+	}
+
+	public partial class IpRangeAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.IpRangeBucket>
+	{
 	}
 
 	public partial class IpRangeAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -1899,6 +3423,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("ranges")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
+	}
+
+	[JsonConverter(typeof(IpRangeAggregationDescriptorConverter))]
+	public sealed partial class IpRangeAggregationDescriptor : DescriptorBase<IpRangeAggregationDescriptor>
+	{
+		internal string? _field;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? _ranges;
+	}
+
+	internal sealed class IpRangeAggregationDescriptorConverter : JsonConverter<IpRangeAggregationDescriptor>
+	{
+		public override IpRangeAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, IpRangeAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._ranges is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, value._ranges, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class IpRangeAggregationRange
@@ -1952,37 +3505,45 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class IpRangeBucket
+	public partial class IpRangeBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("from")]
+		public string? From { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("to")]
+		public string? To { get; init; }
+	}
+
+	public partial class LongRareTermsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsBucket>
 	{
 	}
 
-	public partial class KeyedBucket<TKey>
+	public partial class LongRareTermsBucket : Aggregations.MultiBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("key")]
-		public TKey Key { get; init; }
+		public long Key { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key_as_string")]
-		public string KeyAsString { get; init; }
+		public string? KeyAsString { get; init; }
 	}
 
-	public partial class KeyedValueAggregate : Aggregations.ValueAggregate
+	public partial class LongTermsAggregate : Aggregations.TermsAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.LongTermsBucket>
 	{
-		[JsonInclude]
-		[JsonPropertyName("keys")]
-		public IReadOnlyCollection<string> Keys { get; init; }
 	}
 
-	public partial class LineStringGeoShape
+	public partial class LongTermsBucket : Aggregations.TermsBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("coordinates")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.GeoCoordinate> Coordinates { get; init; }
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
 	}
 
 	public partial class MatrixAggregation : Aggregations.Aggregation
@@ -1996,39 +3557,44 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, double>? Missing { get; set; }
 	}
 
+	[JsonConverter(typeof(MatrixAggregationDescriptorConverter))]
+	public sealed partial class MatrixAggregationDescriptor : DescriptorBase<MatrixAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Fields? _fields;
+		internal Dictionary<string, double>? _missing;
+	}
+
+	internal sealed class MatrixAggregationDescriptorConverter : JsonConverter<MatrixAggregationDescriptor>
+	{
+		public override MatrixAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MatrixAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._fields is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, value._fields, options);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class MatrixStatsAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("correlation")]
-		public Dictionary<string, double> Correlation { get; init; }
+		[JsonPropertyName("doc_count")]
+		public long DocCount { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("covariance")]
-		public Dictionary<string, double> Covariance { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("count")]
-		public int Count { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("kurtosis")]
-		public double Kurtosis { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("mean")]
-		public double Mean { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("skewness")]
-		public double Skewness { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance")]
-		public double Variance { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		[JsonPropertyName("fields")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields> Fields { get; init; }
 	}
 
 	public partial class MatrixStatsAggregation : Aggregations.MatrixAggregation, IAggregationContainerVariant
@@ -2040,16 +3606,111 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
 	}
 
+	[JsonConverter(typeof(MatrixStatsAggregationDescriptorConverter))]
+	public sealed partial class MatrixStatsAggregationDescriptor : DescriptorBase<MatrixStatsAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? _mode;
+	}
+
+	internal sealed class MatrixStatsAggregationDescriptorConverter : JsonConverter<MatrixStatsAggregationDescriptor>
+	{
+		public override MatrixStatsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MatrixStatsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._mode is not null)
+			{
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, value._mode, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class MatrixStatsFields
+	{
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public string Name { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public long Count { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("mean")]
+		public double Mean { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance")]
+		public double Variance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("skewness")]
+		public double Skewness { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("kurtosis")]
+		public double Kurtosis { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("covariance")]
+		public Dictionary<string, double> Covariance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("correlation")]
+		public Dictionary<string, double> Correlation { get; init; }
+	}
+
+	public partial class MaxAggregate : Aggregations.SingleMetricAggregateBase
+	{
+	}
+
 	public partial class MaxAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "max";
 	}
 
+	[JsonConverter(typeof(MaxAggregationDescriptorConverter))]
+	public sealed partial class MaxAggregationDescriptor : DescriptorBase<MaxAggregationDescriptor>
+	{
+	}
+
+	internal sealed class MaxAggregationDescriptorConverter : JsonConverter<MaxAggregationDescriptor>
+	{
+		public override MaxAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MaxAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class MaxBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "max_bucket";
+	}
+
+	[JsonConverter(typeof(MaxBucketAggregationDescriptorConverter))]
+	public sealed partial class MaxBucketAggregationDescriptor : DescriptorBase<MaxBucketAggregationDescriptor>
+	{
+	}
+
+	internal sealed class MaxBucketAggregationDescriptorConverter : JsonConverter<MaxBucketAggregationDescriptor>
+	{
+		public override MaxBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MaxBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class MedianAbsoluteDeviationAggregate : Aggregations.SingleMetricAggregateBase
+	{
 	}
 
 	public partial class MedianAbsoluteDeviationAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
@@ -2059,6 +3720,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("compression")]
 		public double? Compression { get; set; }
+	}
+
+	[JsonConverter(typeof(MedianAbsoluteDeviationAggregationDescriptorConverter))]
+	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor>
+	{
+		internal double? _compression;
+	}
+
+	internal sealed class MedianAbsoluteDeviationAggregationDescriptorConverter : JsonConverter<MedianAbsoluteDeviationAggregationDescriptor>
+	{
+		public override MedianAbsoluteDeviationAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MedianAbsoluteDeviationAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._compression.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(value._compression.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public abstract partial class MetricAggregationBase
@@ -2112,16 +3795,54 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public partial class MinAggregate : Aggregations.SingleMetricAggregateBase
+	{
+	}
+
 	public partial class MinAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "min";
 	}
 
+	[JsonConverter(typeof(MinAggregationDescriptorConverter))]
+	public sealed partial class MinAggregationDescriptor : DescriptorBase<MinAggregationDescriptor>
+	{
+	}
+
+	internal sealed class MinAggregationDescriptorConverter : JsonConverter<MinAggregationDescriptor>
+	{
+		public override MinAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MinAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class MinBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "min_bucket";
+	}
+
+	[JsonConverter(typeof(MinBucketAggregationDescriptorConverter))]
+	public sealed partial class MinBucketAggregationDescriptor : DescriptorBase<MinBucketAggregationDescriptor>
+	{
+	}
+
+	internal sealed class MinBucketAggregationDescriptorConverter : JsonConverter<MinBucketAggregationDescriptor>
+	{
+		public override MinBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MinBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class MissingAggregate : Aggregations.SingleBucketAggregateBase
+	{
 	}
 
 	public partial class MissingAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -2135,6 +3856,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("missing")]
 		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
+	}
+
+	[JsonConverter(typeof(MissingAggregationDescriptorConverter))]
+	public sealed partial class MissingAggregationDescriptor : DescriptorBase<MissingAggregationDescriptor>
+	{
+		internal string? _field;
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? _missing;
+	}
+
+	internal sealed class MissingAggregationDescriptorConverter : JsonConverter<MissingAggregationDescriptor>
+	{
+		public override MissingAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MissingAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class MovingAverageAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
@@ -2162,6 +3912,52 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Window { get; set; }
 	}
 
+	[JsonConverter(typeof(MovingAverageAggregationDescriptorConverter))]
+	public sealed partial class MovingAverageAggregationDescriptor : DescriptorBase<MovingAverageAggregationDescriptor>
+	{
+		internal bool? _minimize;
+		internal Elastic.Clients.Elasticsearch.Aggregations.MovingAverageModel? _model;
+		internal Elastic.Clients.Elasticsearch.Aggregations.MovingAverageSettings _settings;
+		internal int? _predict;
+		internal int? _window;
+	}
+
+	internal sealed class MovingAverageAggregationDescriptorConverter : JsonConverter<MovingAverageAggregationDescriptor>
+	{
+		public override MovingAverageAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MovingAverageAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._minimize.HasValue)
+			{
+				writer.WritePropertyName("minimize");
+				writer.WriteBooleanValue(value._minimize.Value);
+			}
+
+			if (value._model is not null)
+			{
+				writer.WritePropertyName("model");
+				JsonSerializer.Serialize(writer, value._model, options);
+			}
+
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, value._settings, options);
+			if (value._predict.HasValue)
+			{
+				writer.WritePropertyName("predict");
+				writer.WriteNumberValue(value._predict.Value);
+			}
+
+			if (value._window.HasValue)
+			{
+				writer.WritePropertyName("window");
+				writer.WriteNumberValue(value._window.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class MovingFunctionAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2177,6 +3973,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("window")]
 		public int? Window { get; set; }
+	}
+
+	[JsonConverter(typeof(MovingFunctionAggregationDescriptorConverter))]
+	public sealed partial class MovingFunctionAggregationDescriptor : DescriptorBase<MovingFunctionAggregationDescriptor>
+	{
+		internal string? _script;
+		internal int? _shift;
+		internal int? _window;
+	}
+
+	internal sealed class MovingFunctionAggregationDescriptorConverter : JsonConverter<MovingFunctionAggregationDescriptor>
+	{
+		public override MovingFunctionAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MovingFunctionAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value._script))
+			{
+				writer.WritePropertyName("script");
+				writer.WriteStringValue(value._script);
+			}
+
+			if (value._shift.HasValue)
+			{
+				writer.WritePropertyName("shift");
+				writer.WriteNumberValue(value._shift.Value);
+			}
+
+			if (value._window.HasValue)
+			{
+				writer.WritePropertyName("window");
+				writer.WriteNumberValue(value._window.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class MovingPercentilesAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
@@ -2196,11 +4028,54 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public partial class MultiBucketAggregate<TBucket> : Aggregations.AggregateBase
+	[JsonConverter(typeof(MovingPercentilesAggregationDescriptorConverter))]
+	public sealed partial class MovingPercentilesAggregationDescriptor : DescriptorBase<MovingPercentilesAggregationDescriptor>
+	{
+		internal int? _window;
+		internal int? _shift;
+		internal bool? _keyed;
+	}
+
+	internal sealed class MovingPercentilesAggregationDescriptorConverter : JsonConverter<MovingPercentilesAggregationDescriptor>
+	{
+		public override MovingPercentilesAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MovingPercentilesAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._window.HasValue)
+			{
+				writer.WritePropertyName("window");
+				writer.WriteNumberValue(value._window.Value);
+			}
+
+			if (value._shift.HasValue)
+			{
+				writer.WritePropertyName("shift");
+				writer.WriteNumberValue(value._shift.Value);
+			}
+
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public abstract partial class MultiBucketAggregateBase<TBucket> : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
-		public IReadOnlyCollection<TBucket> Buckets { get; init; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket> Buckets { get; init; }
+	}
+
+	public abstract partial class MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_count")]
+		public long DocCount { get; init; }
 	}
 
 	public partial class MultiTermLookup
@@ -2210,6 +4085,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string Field { get; set; }
 	}
 
+	[JsonConverter(typeof(MultiTermLookupDescriptorConverter))]
+	public sealed partial class MultiTermLookupDescriptor : DescriptorBase<MultiTermLookupDescriptor>
+	{
+		internal string _field;
+	}
+
+	internal sealed class MultiTermLookupDescriptorConverter : JsonConverter<MultiTermLookupDescriptor>
+	{
+		public override MultiTermLookupDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MultiTermLookupDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class MultiTermsAggregate : Aggregations.TermsAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsBucket>
+	{
+	}
+
 	public partial class MultiTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2217,6 +4114,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
+	}
+
+	[JsonConverter(typeof(MultiTermsAggregationDescriptorConverter))]
+	public sealed partial class MultiTermsAggregationDescriptor : DescriptorBase<MultiTermsAggregationDescriptor>
+	{
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> _terms;
+	}
+
+	internal sealed class MultiTermsAggregationDescriptorConverter : JsonConverter<MultiTermsAggregationDescriptor>
+	{
+		public override MultiTermsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MultiTermsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, value._terms, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class MultiTermsBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public IReadOnlyCollection<object> Key { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_count_error_upper_bound")]
+		public long? DocCountErrorUpperBound { get; init; }
 	}
 
 	public partial class MutualInformationHeuristic
@@ -2230,6 +4160,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? IncludeNegatives { get; set; }
 	}
 
+	[JsonConverter(typeof(MutualInformationHeuristicDescriptorConverter))]
+	public sealed partial class MutualInformationHeuristicDescriptor : DescriptorBase<MutualInformationHeuristicDescriptor>
+	{
+		internal bool? _backgroundIsSuperset;
+		internal bool? _includeNegatives;
+	}
+
+	internal sealed class MutualInformationHeuristicDescriptorConverter : JsonConverter<MutualInformationHeuristicDescriptor>
+	{
+		public override MutualInformationHeuristicDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, MutualInformationHeuristicDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._backgroundIsSuperset.HasValue)
+			{
+				writer.WritePropertyName("background_is_superset");
+				writer.WriteBooleanValue(value._backgroundIsSuperset.Value);
+			}
+
+			if (value._includeNegatives.HasValue)
+			{
+				writer.WritePropertyName("include_negatives");
+				writer.WriteBooleanValue(value._includeNegatives.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class NestedAggregate : Aggregations.SingleBucketAggregateBase
+	{
+	}
+
 	public partial class NestedAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2237,6 +4200,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string? Path { get; set; }
+	}
+
+	[JsonConverter(typeof(NestedAggregationDescriptorConverter))]
+	public sealed partial class NestedAggregationDescriptor : DescriptorBase<NestedAggregationDescriptor>
+	{
+		internal string? _path;
+	}
+
+	internal sealed class NestedAggregationDescriptorConverter : JsonConverter<NestedAggregationDescriptor>
+	{
+		public override NestedAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, NestedAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._path is not null)
+			{
+				writer.WritePropertyName("path");
+				JsonSerializer.Serialize(writer, value._path, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class NormalizeAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
@@ -2248,6 +4233,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
 	}
 
+	[JsonConverter(typeof(NormalizeAggregationDescriptorConverter))]
+	public sealed partial class NormalizeAggregationDescriptor : DescriptorBase<NormalizeAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? _method;
+	}
+
+	internal sealed class NormalizeAggregationDescriptorConverter : JsonConverter<NormalizeAggregationDescriptor>
+	{
+		public override NormalizeAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, NormalizeAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._method is not null)
+			{
+				writer.WritePropertyName("method");
+				JsonSerializer.Serialize(writer, value._method, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class ParentAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2257,19 +4264,45 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Type { get; set; }
 	}
 
+	[JsonConverter(typeof(ParentAggregationDescriptorConverter))]
+	public sealed partial class ParentAggregationDescriptor : DescriptorBase<ParentAggregationDescriptor>
+	{
+		internal string? _type;
+	}
+
+	internal sealed class ParentAggregationDescriptorConverter : JsonConverter<ParentAggregationDescriptor>
+	{
+		public override ParentAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ParentAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._type is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, value._type, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class PercentageScoreHeuristic
 	{
 	}
 
-	public partial class PercentileItem
+	[JsonConverter(typeof(PercentageScoreHeuristicDescriptorConverter))]
+	public sealed partial class PercentageScoreHeuristicDescriptor : DescriptorBase<PercentageScoreHeuristicDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("percentile")]
-		public double Percentile { get; init; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public double Value { get; init; }
+	internal sealed class PercentageScoreHeuristicDescriptorConverter : JsonConverter<PercentageScoreHeuristicDescriptor>
+	{
+		public override PercentageScoreHeuristicDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PercentageScoreHeuristicDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class PercentileRanksAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
@@ -2293,11 +4326,54 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? Tdigest { get; set; }
 	}
 
-	public partial class PercentilesAggregate : Aggregations.AggregateBase
+	[JsonConverter(typeof(PercentileRanksAggregationDescriptorConverter))]
+	public sealed partial class PercentileRanksAggregationDescriptor : DescriptorBase<PercentileRanksAggregationDescriptor>
+	{
+		internal bool? _keyed;
+		internal IEnumerable<double>? _values;
+		internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? _hdr;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TDigest? _tdigest;
+	}
+
+	internal sealed class PercentileRanksAggregationDescriptorConverter : JsonConverter<PercentileRanksAggregationDescriptor>
+	{
+		public override PercentileRanksAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PercentileRanksAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			if (value._values is not null)
+			{
+				writer.WritePropertyName("values");
+				JsonSerializer.Serialize(writer, value._values, options);
+			}
+
+			if (value._hdr is not null)
+			{
+				writer.WritePropertyName("hdr");
+				JsonSerializer.Serialize(writer, value._hdr, options);
+			}
+
+			if (value._tdigest is not null)
+			{
+				writer.WritePropertyName("tdigest");
+				JsonSerializer.Serialize(writer, value._tdigest, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public abstract partial class PercentilesAggregateBase : Aggregations.AggregateBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("items")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentileItem> Items { get; init; }
+		[JsonPropertyName("values")]
+		public Union<Dictionary<string, object>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>> Values { get; init; }
 	}
 
 	public partial class PercentilesAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
@@ -2321,6 +4397,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? Tdigest { get; set; }
 	}
 
+	[JsonConverter(typeof(PercentilesAggregationDescriptorConverter))]
+	public sealed partial class PercentilesAggregationDescriptor : DescriptorBase<PercentilesAggregationDescriptor>
+	{
+		internal bool? _keyed;
+		internal IEnumerable<double>? _percents;
+		internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? _hdr;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TDigest? _tdigest;
+	}
+
+	internal sealed class PercentilesAggregationDescriptorConverter : JsonConverter<PercentilesAggregationDescriptor>
+	{
+		public override PercentilesAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PercentilesAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			if (value._percents is not null)
+			{
+				writer.WritePropertyName("percents");
+				JsonSerializer.Serialize(writer, value._percents, options);
+			}
+
+			if (value._hdr is not null)
+			{
+				writer.WritePropertyName("hdr");
+				JsonSerializer.Serialize(writer, value._hdr, options);
+			}
+
+			if (value._tdigest is not null)
+			{
+				writer.WritePropertyName("tdigest");
+				JsonSerializer.Serialize(writer, value._tdigest, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class PercentilesBucketAggregate : Aggregations.PercentilesAggregateBase
+	{
+	}
+
 	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2328,6 +4451,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("percents")]
 		public IEnumerable<double>? Percents { get; set; }
+	}
+
+	[JsonConverter(typeof(PercentilesBucketAggregationDescriptorConverter))]
+	public sealed partial class PercentilesBucketAggregationDescriptor : DescriptorBase<PercentilesBucketAggregationDescriptor>
+	{
+		internal IEnumerable<double>? _percents;
+	}
+
+	internal sealed class PercentilesBucketAggregationDescriptorConverter : JsonConverter<PercentilesBucketAggregationDescriptor>
+	{
+		public override PercentilesBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PercentilesBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._percents is not null)
+			{
+				writer.WritePropertyName("percents");
+				JsonSerializer.Serialize(writer, value._percents, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public abstract partial class PipelineAggregationBase : Aggregations.Aggregation
@@ -2381,6 +4526,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public partial class RangeAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.RangeBucket>
+	{
+	}
+
 	public partial class RangeAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2406,8 +4555,73 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public partial class RangeBucket
+	[JsonConverter(typeof(RangeAggregationDescriptorConverter))]
+	public sealed partial class RangeAggregationDescriptor : DescriptorBase<RangeAggregationDescriptor>
 	{
+		internal string? _field;
+		internal int? _missing;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? _ranges;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal bool? _keyed;
+	}
+
+	internal sealed class RangeAggregationDescriptorConverter : JsonConverter<RangeAggregationDescriptor>
+	{
+		public override RangeAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RangeAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._missing.HasValue)
+			{
+				writer.WritePropertyName("missing");
+				writer.WriteNumberValue(value._missing.Value);
+			}
+
+			if (value._ranges is not null)
+			{
+				writer.WritePropertyName("ranges");
+				JsonSerializer.Serialize(writer, value._ranges, options);
+			}
+
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			if (value._keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value._keyed.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class RangeBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("from")]
+		public double? From { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("to")]
+		public double? To { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("from_as_string")]
+		public string? FromAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("to_as_string")]
+		public string? ToAsString { get; init; }
 	}
 
 	public partial class RareTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -2443,8 +4657,79 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? ValueType { get; set; }
 	}
 
-	public partial class RareTermsBucket<TKey>
+	[JsonConverter(typeof(RareTermsAggregationDescriptorConverter))]
+	public sealed partial class RareTermsAggregationDescriptor : DescriptorBase<RareTermsAggregationDescriptor>
 	{
+		internal IEnumerable<string>? _exclude;
+		internal string? _field;
+		internal object? _include;
+		internal long? _maxDocCount;
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? _missing;
+		internal double? _precision;
+		internal string? _valueType;
+	}
+
+	internal sealed class RareTermsAggregationDescriptorConverter : JsonConverter<RareTermsAggregationDescriptor>
+	{
+		public override RareTermsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RareTermsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._exclude is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, value._exclude, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._include is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value._include, options);
+			}
+
+			if (value._maxDocCount.HasValue)
+			{
+				writer.WritePropertyName("max_doc_count");
+				writer.WriteNumberValue(value._maxDocCount.Value);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			if (value._precision.HasValue)
+			{
+				writer.WritePropertyName("precision");
+				writer.WriteNumberValue(value._precision.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value._valueType))
+			{
+				writer.WritePropertyName("value_type");
+				writer.WriteStringValue(value._valueType);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class RateAggregate : Aggregations.AggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public double Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
 	}
 
 	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
@@ -2460,6 +4745,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 	}
 
+	[JsonConverter(typeof(RateAggregationDescriptorConverter))]
+	public sealed partial class RateAggregationDescriptor : DescriptorBase<RateAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.DateInterval? _unit;
+		internal Elastic.Clients.Elasticsearch.Aggregations.RateMode? _mode;
+	}
+
+	internal sealed class RateAggregationDescriptorConverter : JsonConverter<RateAggregationDescriptor>
+	{
+		public override RateAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RateAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._unit is not null)
+			{
+				writer.WritePropertyName("unit");
+				JsonSerializer.Serialize(writer, value._unit, options);
+			}
+
+			if (value._mode is not null)
+			{
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, value._mode, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class RegressionInferenceOptions
 	{
 		[JsonInclude]
@@ -2471,6 +4785,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? NumTopFeatureImportanceValues { get; set; }
 	}
 
+	[JsonConverter(typeof(RegressionInferenceOptionsDescriptorConverter))]
+	public sealed partial class RegressionInferenceOptionsDescriptor : DescriptorBase<RegressionInferenceOptionsDescriptor>
+	{
+		internal string? _resultsField;
+		internal int? _numTopFeatureImportanceValues;
+	}
+
+	internal sealed class RegressionInferenceOptionsDescriptorConverter : JsonConverter<RegressionInferenceOptionsDescriptor>
+	{
+		public override RegressionInferenceOptionsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RegressionInferenceOptionsDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._resultsField is not null)
+			{
+				writer.WritePropertyName("results_field");
+				JsonSerializer.Serialize(writer, value._resultsField, options);
+			}
+
+			if (value._numTopFeatureImportanceValues.HasValue)
+			{
+				writer.WritePropertyName("num_top_feature_importance_values");
+				writer.WriteNumberValue(value._numTopFeatureImportanceValues.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class ReverseNestedAggregate : Aggregations.SingleBucketAggregateBase
+	{
+	}
+
 	public partial class ReverseNestedAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2478,6 +4825,32 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string? Path { get; set; }
+	}
+
+	[JsonConverter(typeof(ReverseNestedAggregationDescriptorConverter))]
+	public sealed partial class ReverseNestedAggregationDescriptor : DescriptorBase<ReverseNestedAggregationDescriptor>
+	{
+		internal string? _path;
+	}
+
+	internal sealed class ReverseNestedAggregationDescriptorConverter : JsonConverter<ReverseNestedAggregationDescriptor>
+	{
+		public override ReverseNestedAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ReverseNestedAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._path is not null)
+			{
+				writer.WritePropertyName("path");
+				JsonSerializer.Serialize(writer, value._path, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class SamplerAggregate : Aggregations.SingleBucketAggregateBase
+	{
 	}
 
 	public partial class SamplerAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -2489,11 +4862,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? ShardSize { get; set; }
 	}
 
+	[JsonConverter(typeof(SamplerAggregationDescriptorConverter))]
+	public sealed partial class SamplerAggregationDescriptor : DescriptorBase<SamplerAggregationDescriptor>
+	{
+		internal int? _shardSize;
+	}
+
+	internal sealed class SamplerAggregationDescriptorConverter : JsonConverter<SamplerAggregationDescriptor>
+	{
+		public override SamplerAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SamplerAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class ScriptedHeuristic
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	}
+
+	[JsonConverter(typeof(ScriptedHeuristicDescriptorConverter))]
+	public sealed partial class ScriptedHeuristicDescriptor : DescriptorBase<ScriptedHeuristicDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Script _script;
+	}
+
+	internal sealed class ScriptedHeuristicDescriptorConverter : JsonConverter<ScriptedHeuristicDescriptor>
+	{
+		public override ScriptedHeuristicDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ScriptedHeuristicDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value._script, options);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class ScriptedMetricAggregate : Aggregations.AggregateBase
@@ -2528,6 +4941,56 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 	}
 
+	[JsonConverter(typeof(ScriptedMetricAggregationDescriptorConverter))]
+	public sealed partial class ScriptedMetricAggregationDescriptor : DescriptorBase<ScriptedMetricAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Script? _combineScript;
+		internal Elastic.Clients.Elasticsearch.Script? _initScript;
+		internal Elastic.Clients.Elasticsearch.Script? _mapScript;
+		internal Dictionary<string, object>? _params;
+		internal Elastic.Clients.Elasticsearch.Script? _reduceScript;
+	}
+
+	internal sealed class ScriptedMetricAggregationDescriptorConverter : JsonConverter<ScriptedMetricAggregationDescriptor>
+	{
+		public override ScriptedMetricAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ScriptedMetricAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._combineScript is not null)
+			{
+				writer.WritePropertyName("combine_script");
+				JsonSerializer.Serialize(writer, value._combineScript, options);
+			}
+
+			if (value._initScript is not null)
+			{
+				writer.WritePropertyName("init_script");
+				JsonSerializer.Serialize(writer, value._initScript, options);
+			}
+
+			if (value._mapScript is not null)
+			{
+				writer.WritePropertyName("map_script");
+				JsonSerializer.Serialize(writer, value._mapScript, options);
+			}
+
+			if (value._params is not null)
+			{
+				writer.WritePropertyName("params");
+				JsonSerializer.Serialize(writer, value._params, options);
+			}
+
+			if (value._reduceScript is not null)
+			{
+				writer.WritePropertyName("reduce_script");
+				JsonSerializer.Serialize(writer, value._reduceScript, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class SerialDifferencingAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -2537,15 +5000,52 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Lag { get; set; }
 	}
 
-	public partial class SignificantTermsAggregate<TBucket, TKey> : Aggregations.MultiBucketAggregate<TBucket>
+	[JsonConverter(typeof(SerialDifferencingAggregationDescriptorConverter))]
+	public sealed partial class SerialDifferencingAggregationDescriptor : DescriptorBase<SerialDifferencingAggregationDescriptor>
+	{
+		internal int? _lag;
+	}
+
+	internal sealed class SerialDifferencingAggregationDescriptorConverter : JsonConverter<SerialDifferencingAggregationDescriptor>
+	{
+		public override SerialDifferencingAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SerialDifferencingAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._lag.HasValue)
+			{
+				writer.WritePropertyName("lag");
+				writer.WriteNumberValue(value._lag.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class SignificantLongTermsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsBucket>
+	{
+	}
+
+	public partial class SignificantLongTermsBucket : Aggregations.SignificantTermsBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("bg_count")]
-		public long BgCount { get; init; }
+		[JsonPropertyName("key")]
+		public long Key { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("doc_count")]
-		public long DocCount { get; init; }
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
+	}
+
+	public partial class SignificantStringTermsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsBucket>
+	{
+	}
+
+	public partial class SignificantStringTermsBucket : Aggregations.SignificantTermsBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
 	}
 
 	public partial class SignificantTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -2609,8 +5109,128 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 	}
 
-	public partial class SignificantTermsBucket<TKey>
+	[JsonConverter(typeof(SignificantTermsAggregationDescriptorConverter))]
+	public sealed partial class SignificantTermsAggregationDescriptor : DescriptorBase<SignificantTermsAggregationDescriptor>
 	{
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _backgroundFilter;
+		internal Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? _chiSquare;
+		internal IEnumerable<string>? _exclude;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? _executionHint;
+		internal string? _field;
+		internal Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? _gnd;
+		internal IEnumerable<string>? _include;
+		internal long? _minDocCount;
+		internal Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? _mutualInformation;
+		internal Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? _percentage;
+		internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? _scriptHeuristic;
+		internal long? _shardMinDocCount;
+		internal int? _shardSize;
+		internal int? _size;
+	}
+
+	internal sealed class SignificantTermsAggregationDescriptorConverter : JsonConverter<SignificantTermsAggregationDescriptor>
+	{
+		public override SignificantTermsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SignificantTermsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._backgroundFilter is not null)
+			{
+				writer.WritePropertyName("background_filter");
+				JsonSerializer.Serialize(writer, value._backgroundFilter, options);
+			}
+
+			if (value._chiSquare is not null)
+			{
+				writer.WritePropertyName("chi_square");
+				JsonSerializer.Serialize(writer, value._chiSquare, options);
+			}
+
+			if (value._exclude is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, value._exclude, options);
+			}
+
+			if (value._executionHint is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, value._executionHint, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._gnd is not null)
+			{
+				writer.WritePropertyName("gnd");
+				JsonSerializer.Serialize(writer, value._gnd, options);
+			}
+
+			if (value._include is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value._include, options);
+			}
+
+			if (value._minDocCount.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(value._minDocCount.Value);
+			}
+
+			if (value._mutualInformation is not null)
+			{
+				writer.WritePropertyName("mutual_information");
+				JsonSerializer.Serialize(writer, value._mutualInformation, options);
+			}
+
+			if (value._percentage is not null)
+			{
+				writer.WritePropertyName("percentage");
+				JsonSerializer.Serialize(writer, value._percentage, options);
+			}
+
+			if (value._scriptHeuristic is not null)
+			{
+				writer.WritePropertyName("script_heuristic");
+				JsonSerializer.Serialize(writer, value._scriptHeuristic, options);
+			}
+
+			if (value._shardMinDocCount.HasValue)
+			{
+				writer.WritePropertyName("shard_min_doc_count");
+				writer.WriteNumberValue(value._shardMinDocCount.Value);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public abstract partial class SignificantTermsBucketBase : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("score")]
+		public double Score { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("bg_count")]
+		public long BgCount { get; init; }
 	}
 
 	public partial class SignificantTextAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
@@ -2682,61 +5302,246 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
 	}
 
-	public partial class SingleBucketAggregate : Aggregations.AggregateBase
+	[JsonConverter(typeof(SignificantTextAggregationDescriptorConverter))]
+	public sealed partial class SignificantTextAggregationDescriptor : DescriptorBase<SignificantTextAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _backgroundFilter;
+		internal Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? _chiSquare;
+		internal IEnumerable<string>? _exclude;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? _executionHint;
+		internal string? _field;
+		internal bool? _filterDuplicateText;
+		internal Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? _gnd;
+		internal IEnumerable<string>? _include;
+		internal long? _minDocCount;
+		internal Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? _mutualInformation;
+		internal Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? _percentage;
+		internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? _scriptHeuristic;
+		internal long? _shardMinDocCount;
+		internal int? _shardSize;
+		internal int? _size;
+		internal Elastic.Clients.Elasticsearch.Fields? _sourceFields;
+	}
+
+	internal sealed class SignificantTextAggregationDescriptorConverter : JsonConverter<SignificantTextAggregationDescriptor>
+	{
+		public override SignificantTextAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SignificantTextAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._backgroundFilter is not null)
+			{
+				writer.WritePropertyName("background_filter");
+				JsonSerializer.Serialize(writer, value._backgroundFilter, options);
+			}
+
+			if (value._chiSquare is not null)
+			{
+				writer.WritePropertyName("chi_square");
+				JsonSerializer.Serialize(writer, value._chiSquare, options);
+			}
+
+			if (value._exclude is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, value._exclude, options);
+			}
+
+			if (value._executionHint is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, value._executionHint, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._filterDuplicateText.HasValue)
+			{
+				writer.WritePropertyName("filter_duplicate_text");
+				writer.WriteBooleanValue(value._filterDuplicateText.Value);
+			}
+
+			if (value._gnd is not null)
+			{
+				writer.WritePropertyName("gnd");
+				JsonSerializer.Serialize(writer, value._gnd, options);
+			}
+
+			if (value._include is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value._include, options);
+			}
+
+			if (value._minDocCount.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(value._minDocCount.Value);
+			}
+
+			if (value._mutualInformation is not null)
+			{
+				writer.WritePropertyName("mutual_information");
+				JsonSerializer.Serialize(writer, value._mutualInformation, options);
+			}
+
+			if (value._percentage is not null)
+			{
+				writer.WritePropertyName("percentage");
+				JsonSerializer.Serialize(writer, value._percentage, options);
+			}
+
+			if (value._scriptHeuristic is not null)
+			{
+				writer.WritePropertyName("script_heuristic");
+				JsonSerializer.Serialize(writer, value._scriptHeuristic, options);
+			}
+
+			if (value._shardMinDocCount.HasValue)
+			{
+				writer.WritePropertyName("shard_min_doc_count");
+				writer.WriteNumberValue(value._shardMinDocCount.Value);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._sourceFields is not null)
+			{
+				writer.WritePropertyName("source_fields");
+				JsonSerializer.Serialize(writer, value._sourceFields, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class SimpleValueAggregate : Aggregations.SingleMetricAggregateBase
+	{
+	}
+
+	public abstract partial class SingleBucketAggregateBase : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count")]
-		public double DocCount { get; init; }
+		public long DocCount { get; init; }
+	}
+
+	public abstract partial class SingleMetricAggregateBase : Aggregations.AggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
 	}
 
 	public partial class StandardDeviationBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("lower")]
-		public double? Lower { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("upper")]
-		public double? Upper { get; init; }
+		public object Upper { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("lower_population")]
-		public double? LowerPopulation { get; init; }
+		[JsonPropertyName("lower")]
+		public object Lower { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper_population")]
-		public double? UpperPopulation { get; init; }
+		public object UpperPopulation { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("lower_sampling")]
-		public double? LowerSampling { get; init; }
+		[JsonPropertyName("lower_population")]
+		public object LowerPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper_sampling")]
-		public double? UpperSampling { get; init; }
+		public object UpperSampling { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("lower_sampling")]
+		public object LowerSampling { get; init; }
+	}
+
+	public partial class StandardDeviationBoundsAsString
+	{
+		[JsonInclude]
+		[JsonPropertyName("upper")]
+		public string Upper { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("lower")]
+		public string Lower { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper_population")]
+		public string UpperPopulation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("lower_population")]
+		public string LowerPopulation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper_sampling")]
+		public string UpperSampling { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("lower_sampling")]
+		public string LowerSampling { get; init; }
 	}
 
 	public partial class StatsAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("count")]
-		public double Count { get; init; }
+		public long Count { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min")]
+		public object Min { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max")]
+		public object Max { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("avg")]
+		public object Avg { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum")]
 		public double Sum { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("avg")]
-		public double? Avg { get; init; }
+		[JsonPropertyName("min_as_string")]
+		public string? MinAsString { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("max")]
-		public double? Max { get; init; }
+		[JsonPropertyName("max_as_string")]
+		public string? MaxAsString { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("min")]
-		public double? Min { get; init; }
+		[JsonPropertyName("avg_as_string")]
+		public string? AvgAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("sum_as_string")]
+		public string? SumAsString { get; init; }
 	}
 
 	public partial class StatsAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
@@ -2745,10 +5550,55 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "stats";
 	}
 
+	[JsonConverter(typeof(StatsAggregationDescriptorConverter))]
+	public sealed partial class StatsAggregationDescriptor : DescriptorBase<StatsAggregationDescriptor>
+	{
+	}
+
+	internal sealed class StatsAggregationDescriptorConverter : JsonConverter<StatsAggregationDescriptor>
+	{
+		public override StatsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, StatsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class StatsBucketAggregate : Aggregations.StatsAggregate
+	{
+	}
+
 	public partial class StatsBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "stats_bucket";
+	}
+
+	[JsonConverter(typeof(StatsBucketAggregationDescriptorConverter))]
+	public sealed partial class StatsBucketAggregationDescriptor : DescriptorBase<StatsBucketAggregationDescriptor>
+	{
+	}
+
+	internal sealed class StatsBucketAggregationDescriptorConverter : JsonConverter<StatsBucketAggregationDescriptor>
+	{
+		public override StatsBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, StatsBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class StringRareTermsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsBucket>
+	{
+	}
+
+	public partial class StringRareTermsBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
 	}
 
 	public partial class StringStatsAggregate : Aggregations.AggregateBase
@@ -2759,23 +5609,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("min_length")]
-		public int MinLength { get; init; }
+		public object MinLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_length")]
-		public int MaxLength { get; init; }
+		public object MaxLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg_length")]
-		public double AvgLength { get; init; }
+		public object AvgLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("entropy")]
-		public double Entropy { get; init; }
+		public object Entropy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("distribution")]
-		public Dictionary<string, double>? Distribution { get; init; }
+		public object? Distribution { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_length_as_string")]
+		public string? MinLengthAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_length_as_string")]
+		public string? MaxLengthAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("avg_length_as_string")]
+		public string? AvgLengthAsString { get; init; }
 	}
 
 	public partial class StringStatsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
@@ -2787,16 +5649,83 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? ShowDistribution { get; set; }
 	}
 
+	[JsonConverter(typeof(StringStatsAggregationDescriptorConverter))]
+	public sealed partial class StringStatsAggregationDescriptor : DescriptorBase<StringStatsAggregationDescriptor>
+	{
+		internal bool? _showDistribution;
+	}
+
+	internal sealed class StringStatsAggregationDescriptorConverter : JsonConverter<StringStatsAggregationDescriptor>
+	{
+		public override StringStatsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, StringStatsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._showDistribution.HasValue)
+			{
+				writer.WritePropertyName("show_distribution");
+				writer.WriteBooleanValue(value._showDistribution.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class StringTermsAggregate : Aggregations.TermsAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket>
+	{
+	}
+
+	public partial class StringTermsBucket : Aggregations.TermsBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public string Key { get; init; }
+	}
+
+	public partial class SumAggregate : Aggregations.SingleMetricAggregateBase
+	{
+	}
+
 	public partial class SumAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "sum";
 	}
 
+	[JsonConverter(typeof(SumAggregationDescriptorConverter))]
+	public sealed partial class SumAggregationDescriptor : DescriptorBase<SumAggregationDescriptor>
+	{
+	}
+
+	internal sealed class SumAggregationDescriptorConverter : JsonConverter<SumAggregationDescriptor>
+	{
+		public override SumAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SumAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class SumBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "sum_bucket";
+	}
+
+	[JsonConverter(typeof(SumBucketAggregationDescriptorConverter))]
+	public sealed partial class SumBucketAggregationDescriptor : DescriptorBase<SumBucketAggregationDescriptor>
+	{
+	}
+
+	internal sealed class SumBucketAggregationDescriptorConverter : JsonConverter<SumBucketAggregationDescriptor>
+	{
+		public override SumBucketAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SumBucketAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class TDigest
@@ -2806,18 +5735,41 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Compression { get; set; }
 	}
 
-	public partial class TDigestPercentilesAggregate : Aggregations.AggregateBase
+	[JsonConverter(typeof(TDigestDescriptorConverter))]
+	public sealed partial class TDigestDescriptor : DescriptorBase<TDigestDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("values")]
-		public Dictionary<string, double> Values { get; init; }
+		internal int? _compression;
 	}
 
-	public partial class TermsAggregate<TBucket, TKey> : Aggregations.MultiBucketAggregate<TBucket>
+	internal sealed class TDigestDescriptorConverter : JsonConverter<TDigestDescriptor>
+	{
+		public override TDigestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TDigestDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._compression.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(value._compression.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class TDigestPercentileRanksAggregate : Aggregations.PercentilesAggregateBase
+	{
+	}
+
+	public partial class TDigestPercentilesAggregate : Aggregations.PercentilesAggregateBase
+	{
+	}
+
+	public abstract partial class TermsAggregateBase<TBucket> : Aggregations.MultiBucketAggregateBase<TBucket>
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc_count_error_upper_bound")]
-		public long DocCountErrorUpperBound { get; init; }
+		public long? DocCountErrorUpperBound { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_other_doc_count")]
@@ -2891,6 +5843,133 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 	}
 
+	[JsonConverter(typeof(TermsAggregationDescriptorConverter))]
+	public sealed partial class TermsAggregationDescriptor : DescriptorBase<TermsAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? _collectMode;
+		internal IEnumerable<string>? _exclude;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? _executionHint;
+		internal string? _field;
+		internal object? _include;
+		internal int? _minDocCount;
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? _missing;
+		internal Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? _missingOrder;
+		internal bool? _missingBucket;
+		internal string? _valueType;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? _order;
+		internal Elastic.Clients.Elasticsearch.Script? _script;
+		internal int? _shardSize;
+		internal bool? _showTermDocCountError;
+		internal int? _size;
+	}
+
+	internal sealed class TermsAggregationDescriptorConverter : JsonConverter<TermsAggregationDescriptor>
+	{
+		public override TermsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TermsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._collectMode is not null)
+			{
+				writer.WritePropertyName("collect_mode");
+				JsonSerializer.Serialize(writer, value._collectMode, options);
+			}
+
+			if (value._exclude is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, value._exclude, options);
+			}
+
+			if (value._executionHint is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, value._executionHint, options);
+			}
+
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._include is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value._include, options);
+			}
+
+			if (value._minDocCount.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(value._minDocCount.Value);
+			}
+
+			if (value._missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value._missing, options);
+			}
+
+			if (value._missingOrder is not null)
+			{
+				writer.WritePropertyName("missing_order");
+				JsonSerializer.Serialize(writer, value._missingOrder, options);
+			}
+
+			if (value._missingBucket.HasValue)
+			{
+				writer.WritePropertyName("missing_bucket");
+				writer.WriteBooleanValue(value._missingBucket.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value._valueType))
+			{
+				writer.WritePropertyName("value_type");
+				writer.WriteStringValue(value._valueType);
+			}
+
+			if (value._order is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, value._order, options);
+			}
+
+			if (value._script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value._script, options);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._showTermDocCountError.HasValue)
+			{
+				writer.WritePropertyName("show_term_doc_count_error");
+				writer.WriteBooleanValue(value._showTermDocCountError.Value);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public abstract partial class TermsBucketBase : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("doc_count_error")]
+		public long? DocCountError { get; init; }
+	}
+
 	public partial class TermsInclude
 	{
 		[JsonInclude]
@@ -2900,6 +5979,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("partition")]
 		public long Partition { get; set; }
+	}
+
+	[JsonConverter(typeof(TermsIncludeDescriptorConverter))]
+	public sealed partial class TermsIncludeDescriptor : DescriptorBase<TermsIncludeDescriptor>
+	{
+		internal long _numPartitions;
+		internal long _partition;
+	}
+
+	internal sealed class TermsIncludeDescriptorConverter : JsonConverter<TermsIncludeDescriptor>
+	{
+		public override TermsIncludeDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TermsIncludeDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("num_partitions");
+			writer.WriteNumberValue(value._numPartitions);
+			writer.WritePropertyName("partition");
+			writer.WriteNumberValue(value._partition);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class TestPopulation
@@ -3006,6 +6106,105 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? SeqNoPrimaryTerm { get; set; }
 	}
 
+	[JsonConverter(typeof(TopHitsAggregationDescriptorConverter))]
+	public sealed partial class TopHitsAggregationDescriptor : DescriptorBase<TopHitsAggregationDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Fields? _docvalueFields;
+		internal bool? _explain;
+		internal int? _from;
+		internal Elastic.Clients.Elasticsearch.Highlight? _highlight;
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? _scriptFields;
+		internal int? _size;
+		internal Elastic.Clients.Elasticsearch.Sort? _sort;
+		internal object? _source;
+		internal Elastic.Clients.Elasticsearch.Fields? _storedFields;
+		internal bool? _trackScores;
+		internal bool? _version;
+		internal bool? _seqNoPrimaryTerm;
+	}
+
+	internal sealed class TopHitsAggregationDescriptorConverter : JsonConverter<TopHitsAggregationDescriptor>
+	{
+		public override TopHitsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TopHitsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._docvalueFields is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, value._docvalueFields, options);
+			}
+
+			if (value._explain.HasValue)
+			{
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(value._explain.Value);
+			}
+
+			if (value._from.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(value._from.Value);
+			}
+
+			if (value._highlight is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, value._highlight, options);
+			}
+
+			if (value._scriptFields is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, value._scriptFields, options);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value._sort, options);
+			}
+
+			if (value._source is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, value._source, options);
+			}
+
+			if (value._storedFields is not null)
+			{
+				writer.WritePropertyName("stored_fields");
+				JsonSerializer.Serialize(writer, value._storedFields, options);
+			}
+
+			if (value._trackScores.HasValue)
+			{
+				writer.WritePropertyName("track_scores");
+				writer.WriteBooleanValue(value._trackScores.Value);
+			}
+
+			if (value._version.HasValue)
+			{
+				writer.WritePropertyName("version");
+				writer.WriteBooleanValue(value._version.Value);
+			}
+
+			if (value._seqNoPrimaryTerm.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(value._seqNoPrimaryTerm.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class TopMetrics
 	{
 		[JsonInclude]
@@ -3017,11 +6216,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object> Metrics { get; init; }
 	}
 
-	public partial class TopMetricsAggregate : Aggregations.AggregateBase
+	public partial class TopMetricsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsBucket>
 	{
-		[JsonInclude]
-		[JsonPropertyName("top")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top { get; init; }
 	}
 
 	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
@@ -3041,11 +6237,83 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
 	}
 
+	[JsonConverter(typeof(TopMetricsAggregationDescriptorConverter))]
+	public sealed partial class TopMetricsAggregationDescriptor : DescriptorBase<TopMetricsAggregationDescriptor>
+	{
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? _metrics;
+		internal int? _size;
+		internal Elastic.Clients.Elasticsearch.Sort? _sort;
+	}
+
+	internal sealed class TopMetricsAggregationDescriptorConverter : JsonConverter<TopMetricsAggregationDescriptor>
+	{
+		public override TopMetricsAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TopMetricsAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._metrics is not null)
+			{
+				writer.WritePropertyName("metrics");
+				JsonSerializer.Serialize(writer, value._metrics, options);
+			}
+
+			if (value._size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value._size.Value);
+			}
+
+			if (value._sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value._sort, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class TopMetricsBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("top")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top { get; init; }
+	}
+
 	public partial class TopMetricsValue
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public string Field { get; set; }
+	}
+
+	[JsonConverter(typeof(TopMetricsValueDescriptorConverter))]
+	public sealed partial class TopMetricsValueDescriptor : DescriptorBase<TopMetricsValueDescriptor>
+	{
+		internal string _field;
+	}
+
+	internal sealed class TopMetricsValueDescriptorConverter : JsonConverter<TopMetricsValueDescriptor>
+	{
+		public override TopMetricsValueDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TopMetricsValueDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value._field, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class TTestAggregate : Aggregations.AggregateBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object Value { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value_as_string")]
+		public string? ValueAsString { get; init; }
 	}
 
 	public partial class TTestAggregation : Aggregations.Aggregation, IAggregationContainerVariant
@@ -3065,21 +6333,69 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}
 
-	public partial class ValueAggregate : Aggregations.AggregateBase
+	[JsonConverter(typeof(TTestAggregationDescriptorConverter))]
+	public sealed partial class TTestAggregationDescriptor : DescriptorBase<TTestAggregationDescriptor>
 	{
-		[JsonInclude]
-		[JsonPropertyName("value")]
-		public double Value { get; init; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? _a;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? _b;
+		internal Elastic.Clients.Elasticsearch.Aggregations.TTestType? _type;
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("value_as_string")]
-		public string? ValueAsString { get; init; }
+	internal sealed class TTestAggregationDescriptorConverter : JsonConverter<TTestAggregationDescriptor>
+	{
+		public override TTestAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TTestAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._a is not null)
+			{
+				writer.WritePropertyName("a");
+				JsonSerializer.Serialize(writer, value._a, options);
+			}
+
+			if (value._b is not null)
+			{
+				writer.WritePropertyName("b");
+				JsonSerializer.Serialize(writer, value._b, options);
+			}
+
+			if (value._type is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, value._type, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class ValueCountAggregate : Aggregations.SingleMetricAggregateBase
+	{
 	}
 
 	public partial class ValueCountAggregation : Aggregations.FormattableMetricAggregation, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "value_count";
+	}
+
+	[JsonConverter(typeof(ValueCountAggregationDescriptorConverter))]
+	public sealed partial class ValueCountAggregationDescriptor : DescriptorBase<ValueCountAggregationDescriptor>
+	{
+	}
+
+	internal sealed class ValueCountAggregationDescriptorConverter : JsonConverter<ValueCountAggregationDescriptor>
+	{
+		public override ValueCountAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ValueCountAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class VariableWidthHistogramAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramBucket>
+	{
 	}
 
 	public partial class VariableWidthHistogramAggregation : IAggregationContainerVariant
@@ -3103,6 +6419,76 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? InitialBuffer { get; set; }
 	}
 
+	[JsonConverter(typeof(VariableWidthHistogramAggregationDescriptorConverter))]
+	public sealed partial class VariableWidthHistogramAggregationDescriptor : DescriptorBase<VariableWidthHistogramAggregationDescriptor>
+	{
+		internal string? _field;
+		internal int? _buckets;
+		internal int? _shardSize;
+		internal int? _initialBuffer;
+	}
+
+	internal sealed class VariableWidthHistogramAggregationDescriptorConverter : JsonConverter<VariableWidthHistogramAggregationDescriptor>
+	{
+		public override VariableWidthHistogramAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, VariableWidthHistogramAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value._field, options);
+			}
+
+			if (value._buckets.HasValue)
+			{
+				writer.WritePropertyName("buckets");
+				writer.WriteNumberValue(value._buckets.Value);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._initialBuffer.HasValue)
+			{
+				writer.WritePropertyName("initial_buffer");
+				writer.WriteNumberValue(value._initialBuffer.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public partial class VariableWidthHistogramBucket : Aggregations.MultiBucketBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("min")]
+		public double Min { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key")]
+		public double Key { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max")]
+		public double Max { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_as_string")]
+		public string? MinAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_as_string")]
+		public string? MaxAsString { get; init; }
+	}
+
 	public partial class WeightedAverageAggregation : Aggregations.Aggregation, IAggregationContainerVariant
 	{
 		[JsonIgnore]
@@ -3122,6 +6508,49 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("weight")]
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
+	}
+
+	[JsonConverter(typeof(WeightedAverageAggregationDescriptorConverter))]
+	public sealed partial class WeightedAverageAggregationDescriptor : DescriptorBase<WeightedAverageAggregationDescriptor>
+	{
+		internal string? _format;
+		internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? _value;
+		internal Elastic.Clients.Elasticsearch.Aggregations.ValueType? _valueType;
+		internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? _weight;
+	}
+
+	internal sealed class WeightedAverageAggregationDescriptorConverter : JsonConverter<WeightedAverageAggregationDescriptor>
+	{
+		public override WeightedAverageAggregationDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, WeightedAverageAggregationDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value._format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value._format);
+			}
+
+			if (value._value is not null)
+			{
+				writer.WritePropertyName("value");
+				JsonSerializer.Serialize(writer, value._value, options);
+			}
+
+			if (value._valueType is not null)
+			{
+				writer.WritePropertyName("value_type");
+				JsonSerializer.Serialize(writer, value._valueType, options);
+			}
+
+			if (value._weight is not null)
+			{
+				writer.WritePropertyName("weight");
+				JsonSerializer.Serialize(writer, value._weight, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class WeightedAverageValue
@@ -3173,5 +6602,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			writer.WriteEndObject();
 		}
+	}
+
+	public partial class WeightedAvgAggregate : Aggregations.SingleMetricAggregateBase
+	{
 	}
 }

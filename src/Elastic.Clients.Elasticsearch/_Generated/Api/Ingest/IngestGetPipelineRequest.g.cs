@@ -15,7 +15,6 @@
 //
 // ------------------------------------------------
 
-using Elastic.Clients.Elasticsearch.Experimental;
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	public class IngestGetPipelineRequestParameters : RequestParameters<IngestGetPipelineRequestParameters>
 	{
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
@@ -48,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
@@ -68,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IngestGetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IngestGetPipelineRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IngestGetPipelineRequestDescriptor Summary(bool? summary) => Qs("summary", summary);
 	}
 

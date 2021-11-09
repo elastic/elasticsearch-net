@@ -33,6 +33,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		IngestNamespace Ingest { get; }
 
+		BulkResponse Bulk<TSource>(BulkRequest<TSource> request);
+		Task<BulkResponse> BulkAsync<TSource>(BulkRequest<TSource> request, CancellationToken cancellationToken = default);
+		BulkResponse Bulk<TSource>(Action<BulkRequestDescriptor<TSource>> configureRequest = null);
+		Task<BulkResponse> BulkAsync<TSource>(Action<BulkRequestDescriptor<TSource>> configureRequest = null, CancellationToken cancellationToken = default);
 		ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request);
 		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default);
 		ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest = null);
@@ -41,6 +45,14 @@ namespace Elastic.Clients.Elasticsearch
 		Task<CountResponse> CountAsync(CountRequest request, CancellationToken cancellationToken = default);
 		CountResponse Count(Action<CountRequestDescriptor> configureRequest = null);
 		Task<CountResponse> CountAsync(Action<CountRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
+		CreateResponse Create<TDocument>(CreateRequest<TDocument> request);
+		Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default);
+		CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest = null);
+		Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
+		DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request);
+		Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default);
+		DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest = null);
+		Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 		DeleteResponse Delete(DeleteRequest request);
 		Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default);
 		DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null);

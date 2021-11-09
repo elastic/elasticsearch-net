@@ -237,6 +237,29 @@ namespace Elastic.Clients.Elasticsearch
 		public string? SpecializedFor { get; init; }
 	}
 
+	public partial class BulkIndexByScrollFailure
+	{
+		[JsonInclude]
+		[JsonPropertyName("cause")]
+		public Elastic.Clients.Elasticsearch.ErrorCause Cause { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public int Status { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
+	}
+
 	public partial class BulkStats
 	{
 		[JsonInclude]
@@ -348,6 +371,56 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("skip_duplicates")]
 		public bool? SkipDuplicates { get; set; }
+	}
+
+	[JsonConverter(typeof(CompletionSuggesterDescriptorConverter))]
+	public sealed partial class CompletionSuggesterDescriptor : DescriptorBase<CompletionSuggesterDescriptor>
+	{
+		internal Dictionary<string, object>? _contexts;
+		internal Elastic.Clients.Elasticsearch.SuggestFuzziness? _fuzzy;
+		internal string? _prefix;
+		internal string? _regex;
+		internal bool? _skipDuplicates;
+	}
+
+	internal sealed class CompletionSuggesterDescriptorConverter : JsonConverter<CompletionSuggesterDescriptor>
+	{
+		public override CompletionSuggesterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, CompletionSuggesterDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._contexts is not null)
+			{
+				writer.WritePropertyName("contexts");
+				JsonSerializer.Serialize(writer, value._contexts, options);
+			}
+
+			if (value._fuzzy is not null)
+			{
+				writer.WritePropertyName("fuzzy");
+				JsonSerializer.Serialize(writer, value._fuzzy, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._prefix))
+			{
+				writer.WritePropertyName("prefix");
+				writer.WriteStringValue(value._prefix);
+			}
+
+			if (!string.IsNullOrEmpty(value._regex))
+			{
+				writer.WritePropertyName("regex");
+				writer.WriteStringValue(value._regex);
+			}
+
+			if (value._skipDuplicates.HasValue)
+			{
+				writer.WritePropertyName("skip_duplicates");
+				writer.WriteBooleanValue(value._skipDuplicates.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class CompletionSuggestOption<TDocument>
@@ -883,6 +956,17 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("unit")]
 		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; init; }
+	}
+
+	public partial class GeoLine
+	{
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("coordinates")]
+		public IReadOnlyCollection<IReadOnlyCollection<double>> Coordinates { get; init; }
 	}
 
 	public partial class GetStats
@@ -1612,6 +1696,24 @@ namespace Elastic.Clients.Elasticsearch
 		public string Source { get; set; }
 	}
 
+	[JsonConverter(typeof(InlineScriptDescriptorConverter))]
+	public sealed partial class InlineScriptDescriptor : DescriptorBase<InlineScriptDescriptor>
+	{
+		internal string _source;
+	}
+
+	internal sealed class InlineScriptDescriptorConverter : JsonConverter<InlineScriptDescriptor>
+	{
+		public override InlineScriptDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, InlineScriptDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("source");
+			writer.WriteStringValue(value._source);
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class InnerHits
 	{
 		[JsonInclude]
@@ -1833,6 +1935,24 @@ namespace Elastic.Clients.Elasticsearch
 		public double Alpha { get; set; }
 	}
 
+	[JsonConverter(typeof(LaplaceSmoothingModelDescriptorConverter))]
+	public sealed partial class LaplaceSmoothingModelDescriptor : DescriptorBase<LaplaceSmoothingModelDescriptor>
+	{
+		internal double _alpha;
+	}
+
+	internal sealed class LaplaceSmoothingModelDescriptorConverter : JsonConverter<LaplaceSmoothingModelDescriptor>
+	{
+		public override LaplaceSmoothingModelDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, LaplaceSmoothingModelDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("alpha");
+			writer.WriteNumberValue(value._alpha);
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class LatLon
 	{
 		[JsonInclude]
@@ -1842,6 +1962,27 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("lon")]
 		public double Lon { get; set; }
+	}
+
+	[JsonConverter(typeof(LatLonDescriptorConverter))]
+	public sealed partial class LatLonDescriptor : DescriptorBase<LatLonDescriptor>
+	{
+		internal double _lat;
+		internal double _lon;
+	}
+
+	internal sealed class LatLonDescriptorConverter : JsonConverter<LatLonDescriptor>
+	{
+		public override LatLonDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, LatLonDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("lat");
+			writer.WriteNumberValue(value._lat);
+			writer.WritePropertyName("lon");
+			writer.WriteNumberValue(value._lon);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class LinearInterpolationSmoothingModel : ISmoothingModelContainerVariant
@@ -1859,6 +2000,30 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("unigram_lambda")]
 		public double UnigramLambda { get; set; }
+	}
+
+	[JsonConverter(typeof(LinearInterpolationSmoothingModelDescriptorConverter))]
+	public sealed partial class LinearInterpolationSmoothingModelDescriptor : DescriptorBase<LinearInterpolationSmoothingModelDescriptor>
+	{
+		internal double _bigramLambda;
+		internal double _trigramLambda;
+		internal double _unigramLambda;
+	}
+
+	internal sealed class LinearInterpolationSmoothingModelDescriptorConverter : JsonConverter<LinearInterpolationSmoothingModelDescriptor>
+	{
+		public override LinearInterpolationSmoothingModelDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, LinearInterpolationSmoothingModelDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("bigram_lambda");
+			writer.WriteNumberValue(value._bigramLambda);
+			writer.WritePropertyName("trigram_lambda");
+			writer.WriteNumberValue(value._trigramLambda);
+			writer.WritePropertyName("unigram_lambda");
+			writer.WriteNumberValue(value._unigramLambda);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class MergesStats
@@ -2020,6 +2185,35 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Source { get; set; }
 	}
 
+	[JsonConverter(typeof(PhraseSuggestCollateQueryDescriptorConverter))]
+	public sealed partial class PhraseSuggestCollateQueryDescriptor : DescriptorBase<PhraseSuggestCollateQueryDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Id? _id;
+		internal string? _source;
+	}
+
+	internal sealed class PhraseSuggestCollateQueryDescriptorConverter : JsonConverter<PhraseSuggestCollateQueryDescriptor>
+	{
+		public override PhraseSuggestCollateQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PhraseSuggestCollateQueryDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._id is not null)
+			{
+				writer.WritePropertyName("id");
+				JsonSerializer.Serialize(writer, value._id, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._source))
+			{
+				writer.WritePropertyName("source");
+				writer.WriteStringValue(value._source);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class PhraseSuggester : SuggesterBase, ISuggestContainerVariant
 	{
 		[JsonIgnore]
@@ -2077,6 +2271,112 @@ namespace Elastic.Clients.Elasticsearch
 		public int? TokenLimit { get; set; }
 	}
 
+	[JsonConverter(typeof(PhraseSuggesterDescriptorConverter))]
+	public sealed partial class PhraseSuggesterDescriptor : DescriptorBase<PhraseSuggesterDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.PhraseSuggestCollate? _collate;
+		internal double? _confidence;
+		internal IEnumerable<Elastic.Clients.Elasticsearch.DirectGenerator>? _directGenerator;
+		internal bool? _forceUnigrams;
+		internal int? _gramSize;
+		internal Elastic.Clients.Elasticsearch.PhraseSuggestHighlight? _highlight;
+		internal double? _maxErrors;
+		internal double? _realWordErrorLikelihood;
+		internal string? _separator;
+		internal int? _shardSize;
+		internal Elastic.Clients.Elasticsearch.SmoothingModelContainer? _smoothing;
+		internal string? _text;
+		internal int? _tokenLimit;
+	}
+
+	internal sealed class PhraseSuggesterDescriptorConverter : JsonConverter<PhraseSuggesterDescriptor>
+	{
+		public override PhraseSuggesterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PhraseSuggesterDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._collate is not null)
+			{
+				writer.WritePropertyName("collate");
+				JsonSerializer.Serialize(writer, value._collate, options);
+			}
+
+			if (value._confidence.HasValue)
+			{
+				writer.WritePropertyName("confidence");
+				writer.WriteNumberValue(value._confidence.Value);
+			}
+
+			if (value._directGenerator is not null)
+			{
+				writer.WritePropertyName("direct_generator");
+				JsonSerializer.Serialize(writer, value._directGenerator, options);
+			}
+
+			if (value._forceUnigrams.HasValue)
+			{
+				writer.WritePropertyName("force_unigrams");
+				writer.WriteBooleanValue(value._forceUnigrams.Value);
+			}
+
+			if (value._gramSize.HasValue)
+			{
+				writer.WritePropertyName("gram_size");
+				writer.WriteNumberValue(value._gramSize.Value);
+			}
+
+			if (value._highlight is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, value._highlight, options);
+			}
+
+			if (value._maxErrors.HasValue)
+			{
+				writer.WritePropertyName("max_errors");
+				writer.WriteNumberValue(value._maxErrors.Value);
+			}
+
+			if (value._realWordErrorLikelihood.HasValue)
+			{
+				writer.WritePropertyName("real_word_error_likelihood");
+				writer.WriteNumberValue(value._realWordErrorLikelihood.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value._separator))
+			{
+				writer.WritePropertyName("separator");
+				writer.WriteStringValue(value._separator);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._smoothing is not null)
+			{
+				writer.WritePropertyName("smoothing");
+				JsonSerializer.Serialize(writer, value._smoothing, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._text))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(value._text);
+			}
+
+			if (value._tokenLimit.HasValue)
+			{
+				writer.WritePropertyName("token_limit");
+				writer.WriteNumberValue(value._tokenLimit.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class PhraseSuggestHighlight
 	{
 		[JsonInclude]
@@ -2086,6 +2386,27 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("pre_tag")]
 		public string PreTag { get; set; }
+	}
+
+	[JsonConverter(typeof(PhraseSuggestHighlightDescriptorConverter))]
+	public sealed partial class PhraseSuggestHighlightDescriptor : DescriptorBase<PhraseSuggestHighlightDescriptor>
+	{
+		internal string _postTag;
+		internal string _preTag;
+	}
+
+	internal sealed class PhraseSuggestHighlightDescriptorConverter : JsonConverter<PhraseSuggestHighlightDescriptor>
+	{
+		public override PhraseSuggestHighlightDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PhraseSuggestHighlightDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("post_tag");
+			writer.WriteStringValue(value._postTag);
+			writer.WritePropertyName("pre_tag");
+			writer.WriteStringValue(value._preTag);
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class PhraseSuggestOption
@@ -2154,7 +2475,32 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
-		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
+		public Time? KeepAlive { get; set; }
+	}
+
+	[JsonConverter(typeof(PointInTimeReferenceDescriptorConverter))]
+	public sealed partial class PointInTimeReferenceDescriptor : DescriptorBase<PointInTimeReferenceDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Id _id;
+		internal Time? _keepAlive;
+	}
+
+	internal sealed class PointInTimeReferenceDescriptorConverter : JsonConverter<PointInTimeReferenceDescriptor>
+	{
+		public override PointInTimeReferenceDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, PointInTimeReferenceDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("id");
+			JsonSerializer.Serialize(writer, value._id, options);
+			if (value._keepAlive is not null)
+			{
+				writer.WritePropertyName("keep_alive");
+				JsonSerializer.Serialize(writer, value._keepAlive, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class Profile
@@ -2347,6 +2693,21 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
+	[JsonConverter(typeof(RequestBaseDescriptorConverter))]
+	public sealed partial class RequestBaseDescriptor : DescriptorBase<RequestBaseDescriptor>
+	{
+	}
+
+	internal sealed class RequestBaseDescriptorConverter : JsonConverter<RequestBaseDescriptor>
+	{
+		public override RequestBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RequestBaseDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class RequestCacheStats
 	{
 		[JsonInclude]
@@ -2379,6 +2740,31 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("window_size")]
 		public int? WindowSize { get; set; }
+	}
+
+	[JsonConverter(typeof(RescoreDescriptorConverter))]
+	public sealed partial class RescoreDescriptor : DescriptorBase<RescoreDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.RescoreQuery _query;
+		internal int? _windowSize;
+	}
+
+	internal sealed class RescoreDescriptorConverter : JsonConverter<RescoreDescriptor>
+	{
+		public override RescoreDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RescoreDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, value._query, options);
+			if (value._windowSize.HasValue)
+			{
+				writer.WritePropertyName("window_size");
+				writer.WriteNumberValue(value._windowSize.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class RescoreQuery
@@ -2439,6 +2825,64 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class ResponseItem
+	{
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public object? Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public string Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public int Status { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("error")]
+		public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public long? PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("result")]
+		public string? Result { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public long? SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_type")]
+		public string? Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_version")]
+		public long? Version { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("forced_refresh")]
+		public bool? ForcedRefresh { get; init; }
+	}
+
+	public partial class Retries
+	{
+		[JsonInclude]
+		[JsonPropertyName("bulk")]
+		public long Bulk { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("search")]
+		public long Search { get; init; }
+	}
+
 	public partial class ScoreSort
 	{
 		[JsonInclude]
@@ -2461,6 +2905,35 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, object>? Params { get; set; }
 	}
 
+	[JsonConverter(typeof(ScriptBaseDescriptorConverter))]
+	public sealed partial class ScriptBaseDescriptor : DescriptorBase<ScriptBaseDescriptor>
+	{
+		internal Union<Elastic.Clients.Elasticsearch.ScriptLanguage?, string?>? _lang;
+		internal Dictionary<string, object>? _params;
+	}
+
+	internal sealed class ScriptBaseDescriptorConverter : JsonConverter<ScriptBaseDescriptor>
+	{
+		public override ScriptBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ScriptBaseDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._lang is not null)
+			{
+				writer.WritePropertyName("lang");
+				JsonSerializer.Serialize(writer, value._lang, options);
+			}
+
+			if (value._params is not null)
+			{
+				writer.WritePropertyName("params");
+				JsonSerializer.Serialize(writer, value._params, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class ScriptField
 	{
 		[JsonInclude]
@@ -2470,6 +2943,31 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("ignore_failure")]
 		public bool? IgnoreFailure { get; set; }
+	}
+
+	[JsonConverter(typeof(ScriptFieldDescriptorConverter))]
+	public sealed partial class ScriptFieldDescriptor : DescriptorBase<ScriptFieldDescriptor>
+	{
+		internal Elastic.Clients.Elasticsearch.Script _script;
+		internal bool? _ignoreFailure;
+	}
+
+	internal sealed class ScriptFieldDescriptorConverter : JsonConverter<ScriptFieldDescriptor>
+	{
+		public override ScriptFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, ScriptFieldDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, value._script, options);
+			if (value._ignoreFailure.HasValue)
+			{
+				writer.WritePropertyName("ignore_failure");
+				writer.WriteBooleanValue(value._ignoreFailure.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class ScriptSort
@@ -2843,6 +3341,20 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public sealed partial class SmoothingModelContainerDescriptor : DescriptorBase<SmoothingModelContainerDescriptor>
+	{
+	}
+
+	internal sealed class SmoothingModelContainerDescriptorConverter : JsonConverter<SmoothingModelContainerDescriptor>
+	{
+		public override SmoothingModelContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SmoothingModelContainerDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class SortContainer
 	{
 		[JsonInclude]
@@ -2960,6 +3472,24 @@ namespace Elastic.Clients.Elasticsearch
 		public double Discount { get; set; }
 	}
 
+	[JsonConverter(typeof(StupidBackoffSmoothingModelDescriptorConverter))]
+	public sealed partial class StupidBackoffSmoothingModelDescriptor : DescriptorBase<StupidBackoffSmoothingModelDescriptor>
+	{
+		internal double _discount;
+	}
+
+	internal sealed class StupidBackoffSmoothingModelDescriptorConverter : JsonConverter<StupidBackoffSmoothingModelDescriptor>
+	{
+		public override StupidBackoffSmoothingModelDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, StupidBackoffSmoothingModelDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("discount");
+			writer.WriteNumberValue(value._discount);
+			writer.WriteEndObject();
+		}
+	}
+
 	public partial class Suggest<T>
 	{
 		[JsonInclude]
@@ -3043,6 +3573,20 @@ namespace Elastic.Clients.Elasticsearch
 					break;
 			}
 
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class SuggestContainerDescriptor : DescriptorBase<SuggestContainerDescriptor>
+	{
+	}
+
+	internal sealed class SuggestContainerDescriptorConverter : JsonConverter<SuggestContainerDescriptor>
+	{
+		public override SuggestContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, SuggestContainerDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
 			writer.WriteEndObject();
 		}
 	}
@@ -3267,6 +3811,105 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string? Text { get; set; }
+	}
+
+	[JsonConverter(typeof(TermSuggesterDescriptorConverter))]
+	public sealed partial class TermSuggesterDescriptor : DescriptorBase<TermSuggesterDescriptor>
+	{
+		internal bool? _lowercaseTerms;
+		internal int? _maxEdits;
+		internal int? _maxInspections;
+		internal float? _maxTermFreq;
+		internal float? _minDocFreq;
+		internal int? _minWordLength;
+		internal int? _prefixLength;
+		internal int? _shardSize;
+		internal Elastic.Clients.Elasticsearch.SuggestSort? _sort;
+		internal Elastic.Clients.Elasticsearch.StringDistance? _stringDistance;
+		internal Elastic.Clients.Elasticsearch.SuggestMode? _suggestMode;
+		internal string? _text;
+	}
+
+	internal sealed class TermSuggesterDescriptorConverter : JsonConverter<TermSuggesterDescriptor>
+	{
+		public override TermSuggesterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, TermSuggesterDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value._lowercaseTerms.HasValue)
+			{
+				writer.WritePropertyName("lowercase_terms");
+				writer.WriteBooleanValue(value._lowercaseTerms.Value);
+			}
+
+			if (value._maxEdits.HasValue)
+			{
+				writer.WritePropertyName("max_edits");
+				writer.WriteNumberValue(value._maxEdits.Value);
+			}
+
+			if (value._maxInspections.HasValue)
+			{
+				writer.WritePropertyName("max_inspections");
+				writer.WriteNumberValue(value._maxInspections.Value);
+			}
+
+			if (value._maxTermFreq.HasValue)
+			{
+				writer.WritePropertyName("max_term_freq");
+				writer.WriteNumberValue(value._maxTermFreq.Value);
+			}
+
+			if (value._minDocFreq.HasValue)
+			{
+				writer.WritePropertyName("min_doc_freq");
+				writer.WriteNumberValue(value._minDocFreq.Value);
+			}
+
+			if (value._minWordLength.HasValue)
+			{
+				writer.WritePropertyName("min_word_length");
+				writer.WriteNumberValue(value._minWordLength.Value);
+			}
+
+			if (value._prefixLength.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(value._prefixLength.Value);
+			}
+
+			if (value._shardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value._shardSize.Value);
+			}
+
+			if (value._sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value._sort, options);
+			}
+
+			if (value._stringDistance is not null)
+			{
+				writer.WritePropertyName("string_distance");
+				JsonSerializer.Serialize(writer, value._stringDistance, options);
+			}
+
+			if (value._suggestMode is not null)
+			{
+				writer.WritePropertyName("suggest_mode");
+				JsonSerializer.Serialize(writer, value._suggestMode, options);
+			}
+
+			if (!string.IsNullOrEmpty(value._text))
+			{
+				writer.WritePropertyName("text");
+				writer.WriteStringValue(value._text);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public partial class TermSuggestOption
