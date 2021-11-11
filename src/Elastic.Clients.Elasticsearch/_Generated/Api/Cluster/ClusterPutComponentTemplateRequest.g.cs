@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class ClusterPutComponentTemplateRequest : PlainRequestBase<ClusterPutComponentTemplateRequestParameters>
@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("template")]
@@ -80,23 +80,106 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexState _template;
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? _aliases;
-		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
-		internal long? _version;
-		internal Dictionary<string, object>? _meta;
+		public ClusterPutComponentTemplateRequestDescriptor()
+		{
+		}
+
+		internal ClusterPutComponentTemplateRequestDescriptor(Action<ClusterPutComponentTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public ClusterPutComponentTemplateRequestDescriptor Create(bool? create) => Qs("create", create);
-		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterPutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template) => Assign(template, (a, v) => a._template = v);
-		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>()));
-		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings) => Assign(mappings, (a, v) => a._mappings = v);
-		public ClusterPutComponentTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings) => Assign(settings, (a, v) => a._settings = v);
-		public ClusterPutComponentTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a._version = v);
-		public ClusterPutComponentTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
+		public ClusterPutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexState TemplateValue { get; private set; }
+
+		internal Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? AliasesValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
+
+		internal long? VersionValue { get; private set; }
+
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal IndexManagement.IndexStateDescriptor TemplateDescriptor { get; private set; }
+
+		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
+
+		internal IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; private set; }
+
+		internal Action<IndexManagement.IndexStateDescriptor> TemplateDescriptorAction { get; private set; }
+
+		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
+
+		internal Action<IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; private set; }
+
+		public ClusterPutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
+		{
+			TemplateDescriptor = null;
+			TemplateDescriptorAction = null;
+			return Assign(template, (a, v) => a.TemplateValue = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor descriptor)
+		{
+			TemplateValue = null;
+			TemplateDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.TemplateDescriptor = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor> configure)
+		{
+			TemplateValue = null;
+			TemplateDescriptorAction = null;
+			return Assign(configure, (a, v) => a.TemplateDescriptorAction = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Aliases(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>()));
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			return Assign(mappings, (a, v) => a.MappingsValue = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		{
+			SettingsDescriptor = null;
+			SettingsDescriptorAction = null;
+			return Assign(settings, (a, v) => a.SettingsValue = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
+		}
+
+		public ClusterPutComponentTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public ClusterPutComponentTemplateRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.MetaValue = v);
 	}
 
 	internal sealed class ClusterPutComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterPutComponentTemplateRequestDescriptor>
@@ -105,36 +188,70 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public override void Write(Utf8JsonWriter writer, ClusterPutComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, value._template, options);
-			if (value._aliases is not null)
+			if (value.TemplateDescriptor is not null)
+			{
+				writer.WritePropertyName("template");
+				JsonSerializer.Serialize(writer, value.TemplateDescriptor, options);
+			}
+			else if (value.TemplateDescriptorAction is not null)
+			{
+				writer.WritePropertyName("template");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexStateDescriptor(value.TemplateDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("template");
+				JsonSerializer.Serialize(writer, value.TemplateValue, options);
+			}
+
+			if (value.AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value._aliases, options);
+				JsonSerializer.Serialize(writer, value.AliasesValue, options);
 			}
 
-			if (value._mappings is not null)
+			if (value.MappingsDescriptor is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value._mappings, options);
+				JsonSerializer.Serialize(writer, value.MappingsDescriptor, options);
+			}
+			else if (value.MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(value.MappingsDescriptorAction), options);
+			}
+			else if (value.MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, value.MappingsValue, options);
 			}
 
-			if (value._settings is not null)
+			if (value.SettingsDescriptor is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value._settings, options);
+				JsonSerializer.Serialize(writer, value.SettingsDescriptor, options);
+			}
+			else if (value.SettingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor(value.SettingsDescriptorAction), options);
+			}
+			else if (value.SettingsValue is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, value.SettingsValue, options);
 			}
 
-			if (value._version is not null)
+			if (value.VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
+				JsonSerializer.Serialize(writer, value.VersionValue, options);
 			}
 
-			if (value._meta is not null)
+			if (value.MetaValue is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value._meta, options);
+				JsonSerializer.Serialize(writer, value.MetaValue, options);
 			}
 
 			writer.WriteEndObject();

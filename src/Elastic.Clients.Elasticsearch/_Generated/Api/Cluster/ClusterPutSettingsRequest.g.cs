@@ -30,10 +30,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>
@@ -45,10 +45,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("persistent")]
@@ -62,16 +62,23 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[JsonConverter(typeof(ClusterPutSettingsRequestDescriptorConverter))]
 	public sealed partial class ClusterPutSettingsRequestDescriptor : RequestDescriptorBase<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsRequestParameters>
 	{
-		internal Dictionary<string, object>? _persistent;
-		internal Dictionary<string, object>? _transient;
+		public ClusterPutSettingsRequestDescriptor()
+		{
+		}
+
+		internal ClusterPutSettingsRequestDescriptor(Action<ClusterPutSettingsRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutSettings;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public ClusterPutSettingsRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
-		public ClusterPutSettingsRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterPutSettingsRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
-		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._persistent = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._transient = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ClusterPutSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		internal Dictionary<string, object>? PersistentValue { get; private set; }
+
+		internal Dictionary<string, object>? TransientValue { get; private set; }
+
+		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.PersistentValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.TransientValue = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 
 	internal sealed class ClusterPutSettingsRequestDescriptorConverter : JsonConverter<ClusterPutSettingsRequestDescriptor>
@@ -80,16 +87,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public override void Write(Utf8JsonWriter writer, ClusterPutSettingsRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._persistent is not null)
+			if (value.PersistentValue is not null)
 			{
 				writer.WritePropertyName("persistent");
-				JsonSerializer.Serialize(writer, value._persistent, options);
+				JsonSerializer.Serialize(writer, value.PersistentValue, options);
 			}
 
-			if (value._transient is not null)
+			if (value.TransientValue is not null)
 			{
 				writer.WritePropertyName("transient");
-				JsonSerializer.Serialize(writer, value._transient, options);
+				JsonSerializer.Serialize(writer, value.TransientValue, options);
 			}
 
 			writer.WriteEndObject();

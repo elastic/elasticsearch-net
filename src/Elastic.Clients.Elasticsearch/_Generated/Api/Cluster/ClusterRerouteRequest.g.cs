@@ -39,10 +39,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>
@@ -63,10 +63,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("commands")]
@@ -76,7 +76,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[JsonConverter(typeof(ClusterRerouteRequestDescriptorConverter))]
 	public sealed partial class ClusterRerouteRequestDescriptor : RequestDescriptorBase<ClusterRerouteRequestDescriptor, ClusterRerouteRequestParameters>
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? _commands;
+		public ClusterRerouteRequestDescriptor()
+		{
+		}
+
+		internal ClusterRerouteRequestDescriptor(Action<ClusterRerouteRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterReroute;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -84,9 +88,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterRerouteRequestDescriptor Explain(bool? explain) => Qs("explain", explain);
 		public ClusterRerouteRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric) => Qs("metric", metric);
 		public ClusterRerouteRequestDescriptor RetryFailed(bool? retryFailed) => Qs("retry_failed", retryFailed);
-		public ClusterRerouteRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterRerouteRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
-		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? commands) => Assign(commands, (a, v) => a._commands = v);
+		public ClusterRerouteRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterRerouteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? CommandsValue { get; private set; }
+
+		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? commands) => Assign(commands, (a, v) => a.CommandsValue = v);
 	}
 
 	internal sealed class ClusterRerouteRequestDescriptorConverter : JsonConverter<ClusterRerouteRequestDescriptor>
@@ -95,10 +101,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public override void Write(Utf8JsonWriter writer, ClusterRerouteRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._commands is not null)
+			if (value.CommandsValue is not null)
 			{
 				writer.WritePropertyName("commands");
-				JsonSerializer.Serialize(writer, value._commands, options);
+				JsonSerializer.Serialize(writer, value.CommandsValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -70,6 +70,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal IndexRefreshRequestDescriptor(Action<IndexRefreshRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;

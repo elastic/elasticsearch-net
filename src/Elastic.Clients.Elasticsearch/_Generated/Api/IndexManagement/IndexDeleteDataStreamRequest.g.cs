@@ -50,6 +50,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexDeleteDataStreamRequestDescriptor()
+		{
+		}
+
+		internal IndexDeleteDataStreamRequestDescriptor(Action<IndexDeleteDataStreamRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteDataStream;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;

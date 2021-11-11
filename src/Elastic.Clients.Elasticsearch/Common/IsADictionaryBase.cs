@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 namespace Elastic.Clients.Elasticsearch
 {
+
 	public interface IIsADictionary { }
 
 	public interface IIsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IIsADictionary { }

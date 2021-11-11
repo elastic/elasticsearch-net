@@ -168,15 +168,13 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class CreateRequestDescriptor<TDocument> : ICustomJsonWriter
 	{
-		
-
 		public CreateRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
 
-		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a._document = v);
+		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
 
 		public CreateRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 
-		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(_document, writer, sourceSerializer);
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
 
 		// TODO: We should be able to generate these for optional params
 		public CreateRequestDescriptor<TDocument> Id(Id id)
@@ -184,6 +182,18 @@ namespace Elastic.Clients.Elasticsearch
 			RouteValues.Optional("id", id);
 			return this;
 		}
+	}
+
+	public sealed partial class CreateRequestDescriptor<TDocument>
+	{
+		// TODO: Codegen
+		public CreateRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+	}
+
+	public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
+	{
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument document) => this;  // TODO
 	}
 
 	public sealed partial class DeleteRequest<TDocument> : DeleteRequest
@@ -202,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
 		{
 			var container = configure?.Invoke(new QueryContainerDescriptor());
-			return Assign(container, (a, v) => a._query = v);
+			return Assign(container, (a, v) => a.QueryValue = v);
 		}
 	}
 
@@ -211,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch
 		public CountRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
 		{
 			var container = configure?.Invoke(new QueryContainerDescriptor());
-			return Assign(container, (a, v) => a._query = v);
+			return Assign(container, (a, v) => a.QueryValue = v);
 		}
 	}
 }
@@ -252,38 +262,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public sealed partial class BoolQueryDescriptor
-	{
-		internal BoolQuery ToQuery()
-		{
-			var query = new BoolQuery();
+	//public sealed partial class BoolQueryDescriptor
+	//{
+	//	internal BoolQuery ToQuery()
+	//	{
+	//		var query = new BoolQuery();
 
-			if (_filter is not null)
-				query.Filter = _filter;
+	//		if (_filter is not null)
+	//			query.Filter = _filter;
 
-			// TODO - More
+	//		// TODO - More
 
-			return query;
-		}
-	}
+	//		return query;
+	//	}
+	//}
 
-	public sealed partial class MatchQueryDescriptor
-	{
-		public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
+	//public sealed partial class MatchQueryDescriptor
+	//{
+	//	public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
 
-		internal MatchQuery ToQuery()
-		{
-			var query = new MatchQuery();
+	//	internal MatchQuery ToQuery()
+	//	{
+	//		var query = new MatchQuery();
 
-			if (_field is not null)
-				query.Field = _field;
+	//		if (_field is not null)
+	//			query.Field = _field;
 
-			if (_query is not null)
-				query.Query = _query;
+	//		if (_query is not null)
+	//			query.Query = _query;
 
-			return query;
-		}
-	}
+	//		return query;
+	//	}
+	//}
 
 	[JsonConverter(typeof(MatchQueryConverter))]
 	public sealed partial class MatchQuery
@@ -293,6 +303,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
 	{
+		internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new JsonException();
+			}
+
+			string queryValue = default;
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				var property = reader.GetString();
+
+				if (property == "query")
+				{
+					reader.Read();
+					queryValue = reader.GetString();
+				}
+			}
+
+			var query = new MatchQuery()
+			{
+				Query = queryValue
+			};
+
+			return query;
+		}
+
 		internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
@@ -305,22 +343,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	internal abstract class FieldNameQueryConverterBase<T> : JsonConverter<T> where T : FieldNameQueryBase
-	{
-		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName(value.Field.ToString());
-				WriteInternal(writer, value, options);
-			}
-			writer.WriteEndObject();
-		}
-
-		internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
-	}
+	
 
 	internal sealed class MatchQueryDescriptorConverter : FieldNameQueryDescriptorConverterBase<MatchQueryDescriptor>
 	{
@@ -328,37 +351,52 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 
-			if (!string.IsNullOrEmpty(value._query))
+			if (!string.IsNullOrEmpty(value.QueryValue))
 			{
 				writer.WritePropertyName("query");
-				writer.WriteStringValue(value._query);
+				writer.WriteStringValue(value.QueryValue);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	//internal sealed partial class QueryContainerDescriptorConverter
-	//{
-	//	public override QueryContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-	//	public override void Write(Utf8JsonWriter writer, QueryContainerDescriptor value, JsonSerializerOptions options)
-	//	{
-	//		writer.WriteStartObject();
+	internal sealed partial class QueryContainerDescriptorConverter : JsonConverter<QueryContainerDescriptor>
+	{
+		public override QueryContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, QueryContainerDescriptor value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
 
-	//		if (value._variantDescriptor is MatchQueryDescriptor descriptor)
-	//		{
-	//			writer.WritePropertyName("query");
-	//			JsonSerializer.Serialize(writer, descriptor, options);
-	//		}
+			if (value.ContainedVariant is not null)
+			{
+				writer.WritePropertyName(value._containedVariant);
+				JsonSerializer.Serialize(writer, value.ContainedVariant, options);
+			}
 
-	//		writer.WriteEndObject();
-	//	}
-	//}
+			if (value.QueryContainerDescriptorAction is not null)
+			{
+				writer.WritePropertyName(value._containedVariant);
+
+				if (value._containedVariant == "match")
+				{
+					var descriptor = new MatchQueryDescriptor();
+					((Action<MatchQueryDescriptor>)value.QueryContainerDescriptorAction).Invoke(descriptor);
+					JsonSerializer.Serialize(writer, descriptor, options);
+				}
+			}
+
+			writer.WriteEndObject();
+		}
+	}
 
 	public sealed partial class QueryContainerDescriptor
 	{
-		internal QueryContainer _container;
-		internal object _variantDescriptor;
+		private bool _containsVariant;
+		internal string _containedVariant;
+
+		internal QueryContainer ContainedVariant { get; private set; }
+		internal object QueryContainerDescriptorAction { get; private set; }
 
 		//public QueryContainerDescriptor QueryString(Action<BoolQueryDescriptor> configure)
 		//{
@@ -367,42 +405,65 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		//	return Assign(descriptor, (d, v) => d._boolQueryDescriptor = v);
 		//}
 
-		public QueryContainer Bool(Action<BoolQueryDescriptor> configure)
+		//internal QueryContainerDescriptor(Action<QueryContainerDescriptor> configure) => configure.Invoke(this);
+
+		//public void Bool(Action<BoolQueryDescriptor> configure) => Set((Action<IQueryContainerVariantDescriptor>)configure, "bool");
+		//{
+			//if (_containsVariant)
+			//	throw new Exception("TODO");
+
+			//QueryContainerDescriptorAction = (Action<IQueryContainerVariantDescriptor>)configure;
+
+			//_containedVariant = "bool";
+			//_containsVariant = true;
+
+			//if (configure is null)
+			//	return new QueryContainer(new BoolQuery());
+
+			//var descriptor = new BoolQueryDescriptor();
+			//configure.Invoke(descriptor);
+			//Assign(descriptor, (d, v) => d._variantDescriptor = v);
+
+			//return ToQueryContainer();
+		//}
+
+		private void Set(object descriptorAction, string variantName)
 		{
-			if (configure is null)
-				return new QueryContainer(new BoolQuery());
+			if (_containsVariant)
+				throw new Exception("TODO");
 
-			var descriptor = new BoolQueryDescriptor();
-			configure.Invoke(descriptor);
-			Assign(descriptor, (d, v) => d._variantDescriptor = v);
+			QueryContainerDescriptorAction = descriptorAction;
 
-			return ToQueryContainer();
+			_containedVariant = variantName;
+			_containsVariant = true;
 		}
 
-		public QueryContainer Match(Action<MatchQueryDescriptor> configure)
-		{
-			if (configure is null)
-				return new QueryContainer(new MatchQuery());
+		public void Match(Action<MatchQueryDescriptor> configure) => Set(configure, "match");
 
-			var descriptor = new MatchQueryDescriptor();
-			configure.Invoke(descriptor);
-			Assign(descriptor, (d, v) => d._variantDescriptor = v);
+		//internal QueryContainer ToQueryContainer()
+		//{
+		//	if (!_containsQuery)
+		//		throw new Exception("TODO");
 
-			return ToQueryContainer();
-		}
+		//	if (ContainedVariant is not null)
+		//		return ContainedVariant;
 
-		internal QueryContainer ToQueryContainer()
-		{
-			if (_container is not null)
-				return _container;
+		//	if (_descriptorType == "bool")
+		//	{
+		//		var descriptor = new BoolQueryDescriptor();
+		//		QueryContainerDescriptorAction.Invoke(descriptor);
 
-			return _variantDescriptor switch
-			{
-				BoolQueryDescriptor variant => new QueryContainer(variant.ToQuery()),
-				MatchQueryDescriptor variant => new QueryContainer(variant.ToQuery()),
-				_ => null,
-			};
-		}
+		//	}
+
+		//	ContainedVariant = _descriptorType switch
+		//	{
+		//		"bool" => new QueryContainer(variant.ToQuery()),
+		//		MatchQueryDescriptor variant => new QueryContainer(variant.ToQuery()),
+		//		_ => null,
+		//	};
+
+		//	return ContainedVariant;
+		//}
 	}
 }
 

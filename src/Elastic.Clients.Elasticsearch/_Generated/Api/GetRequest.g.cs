@@ -104,6 +104,11 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		public GetRequestDescriptor()
+		{
+		}
+
+		internal GetRequestDescriptor(Action<GetRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;

@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	public class ClusterExistsComponentTemplateRequestParameters : RequestParameters<ClusterExistsComponentTemplateRequestParameters>
 	{
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -56,10 +56,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
+		public ClusterExistsComponentTemplateRequestDescriptor()
+		{
+		}
+
+		internal ClusterExistsComponentTemplateRequestDescriptor(Action<ClusterExistsComponentTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterExistsComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
-		public ClusterExistsComponentTemplateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterExistsComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterExistsComponentTemplateRequestDescriptor Local(bool? local) => Qs("local", local);
 	}
 

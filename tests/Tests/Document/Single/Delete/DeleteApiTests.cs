@@ -54,7 +54,7 @@ public class DeleteApiTests
 		response.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		response.PrimaryTerm.Should().BeGreaterThan(0);
-		response.SequenceNumber.Should().BeGreaterThan(0);
+		response.SeqNo.Should().BeGreaterThan(0);
 	}
 }
 
@@ -97,7 +97,7 @@ public class OriginalDeleteApiTests
 		response.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		response.PrimaryTerm.Should().BeGreaterThan(0);
-		response.SequenceNumber.Should().BeGreaterThan(0);
+		response.SeqNo.Should().BeGreaterThan(0);
 	}
 }
 
@@ -134,7 +134,7 @@ public class DeleteNonExistentDocumentApiTests
 		response.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		response.PrimaryTerm.Should().BeGreaterThan(0);
-		response.SequenceNumber.Should().BeGreaterThan(0);
+		response.SeqNo.Should().BeGreaterThan(0);
 	}
 }
 

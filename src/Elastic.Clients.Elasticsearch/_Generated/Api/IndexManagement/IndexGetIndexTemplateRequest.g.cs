@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class IndexGetIndexTemplateRequest : PlainRequestBase<IndexGetIndexTemplateRequestParameters>
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	[JsonConverter(typeof(IndexGetIndexTemplateRequestDescriptorConverter))]
@@ -76,13 +76,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal IndexGetIndexTemplateRequestDescriptor(Action<IndexGetIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public IndexGetIndexTemplateRequestDescriptor Local(bool? local) => Qs("local", local);
 		public IndexGetIndexTemplateRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public IndexGetIndexTemplateRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
-		public IndexGetIndexTemplateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexGetIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	internal sealed class IndexGetIndexTemplateRequestDescriptorConverter : JsonConverter<IndexGetIndexTemplateRequestDescriptor>

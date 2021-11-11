@@ -88,6 +88,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexGetFieldMappingRequestDescriptor()
+		{
+		}
+
+		internal IndexGetFieldMappingRequestDescriptor(Action<IndexGetFieldMappingRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;

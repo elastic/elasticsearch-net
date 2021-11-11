@@ -62,6 +62,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexReloadSearchAnalyzersRequestDescriptor()
+		{
+		}
+
+		internal IndexReloadSearchAnalyzersRequestDescriptor(Action<IndexReloadSearchAnalyzersRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementReloadSearchAnalyzers;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
