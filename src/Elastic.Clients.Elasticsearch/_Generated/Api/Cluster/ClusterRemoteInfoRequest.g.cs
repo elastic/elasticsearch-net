@@ -38,6 +38,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	[JsonConverter(typeof(ClusterRemoteInfoRequestDescriptorConverter))]
 	public sealed partial class ClusterRemoteInfoRequestDescriptor : RequestDescriptorBase<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoRequestParameters>
 	{
+		public ClusterRemoteInfoRequestDescriptor()
+		{
+		}
+
+		internal ClusterRemoteInfoRequestDescriptor(Action<ClusterRemoteInfoRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;

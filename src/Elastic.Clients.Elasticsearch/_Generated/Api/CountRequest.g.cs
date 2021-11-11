@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _query;
+		internal CountRequestDescriptor(Action<CountRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -158,7 +158,32 @@ namespace Elastic.Clients.Elasticsearch
 		public CountRequestDescriptor Routing(string? routing) => Qs("routing", routing);
 		public CountRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		public CountRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
-		public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a._query = v);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
+
+		internal QueryDsl.QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public CountRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
 	}
 
 	internal sealed class CountRequestDescriptorConverter : JsonConverter<CountRequestDescriptor>
@@ -167,10 +192,20 @@ namespace Elastic.Clients.Elasticsearch
 		public override void Write(Utf8JsonWriter writer, CountRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._query is not null)
+			if (value.QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value._query, options);
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else if (value.QueryValue is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
 			}
 
 			writer.WriteEndObject();

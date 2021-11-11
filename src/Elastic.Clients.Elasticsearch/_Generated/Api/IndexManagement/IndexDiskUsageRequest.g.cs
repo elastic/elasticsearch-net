@@ -92,6 +92,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexDiskUsageRequestDescriptor()
+		{
+		}
+
+		internal IndexDiskUsageRequestDescriptor(Action<IndexDiskUsageRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDiskUsage;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;

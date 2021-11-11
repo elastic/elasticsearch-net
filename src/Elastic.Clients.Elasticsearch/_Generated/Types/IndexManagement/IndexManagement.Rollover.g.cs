@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 	{
 		[JsonInclude]
 		[JsonPropertyName("max_age")]
-		public Time? MaxAge { get; set; }
+		public Elastic.Clients.Elasticsearch.Time? MaxAge { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_docs")]
@@ -45,10 +45,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 	[JsonConverter(typeof(RolloverConditionsDescriptorConverter))]
 	public sealed partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
 	{
-		internal Time? _maxAge;
-		internal long? _maxDocs;
-		internal string? _maxSize;
-		internal Elastic.Clients.Elasticsearch.ByteSize? _maxPrimaryShardSize;
+		public RolloverConditionsDescriptor()
+		{
+		}
+
+		internal RolloverConditionsDescriptor(Action<RolloverConditionsDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Time? MaxAgeValue { get; private set; }
+
+		internal long? MaxDocsValue { get; private set; }
+
+		internal string? MaxSizeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeValue { get; private set; }
+
+		public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Time? maxAge) => Assign(maxAge, (a, v) => a.MaxAgeValue = v);
+		public RolloverConditionsDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsValue = v);
+		public RolloverConditionsDescriptor MaxSize(string? maxSize) => Assign(maxSize, (a, v) => a.MaxSizeValue = v);
+		public RolloverConditionsDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize) => Assign(maxPrimaryShardSize, (a, v) => a.MaxPrimaryShardSizeValue = v);
 	}
 
 	internal sealed class RolloverConditionsDescriptorConverter : JsonConverter<RolloverConditionsDescriptor>
@@ -57,28 +70,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 		public override void Write(Utf8JsonWriter writer, RolloverConditionsDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._maxAge is not null)
+			if (value.MaxAgeValue is not null)
 			{
 				writer.WritePropertyName("max_age");
-				JsonSerializer.Serialize(writer, value._maxAge, options);
+				JsonSerializer.Serialize(writer, value.MaxAgeValue, options);
 			}
 
-			if (value._maxDocs.HasValue)
+			if (value.MaxDocsValue.HasValue)
 			{
 				writer.WritePropertyName("max_docs");
-				writer.WriteNumberValue(value._maxDocs.Value);
+				writer.WriteNumberValue(value.MaxDocsValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value._maxSize))
+			if (!string.IsNullOrEmpty(value.MaxSizeValue))
 			{
 				writer.WritePropertyName("max_size");
-				writer.WriteStringValue(value._maxSize);
+				writer.WriteStringValue(value.MaxSizeValue);
 			}
 
-			if (value._maxPrimaryShardSize is not null)
+			if (value.MaxPrimaryShardSizeValue is not null)
 			{
 				writer.WritePropertyName("max_primary_shard_size");
-				JsonSerializer.Serialize(writer, value._maxPrimaryShardSize, options);
+				JsonSerializer.Serialize(writer, value.MaxPrimaryShardSizeValue, options);
 			}
 
 			writer.WriteEndObject();

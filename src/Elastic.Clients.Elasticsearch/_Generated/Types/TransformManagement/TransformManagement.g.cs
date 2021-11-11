@@ -28,6 +28,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		string PivotGroupByContainerVariantName { get; }
 	}
 
+	internal interface IPivotGroupByContainerVariantDescriptor
+	{
+	}
+
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
 	public partial class PivotGroupByContainer : IContainer
 	{
@@ -103,6 +107,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public sealed partial class PivotGroupByContainerDescriptor : DescriptorBase<PivotGroupByContainerDescriptor>
 	{
+		public PivotGroupByContainerDescriptor()
+		{
+		}
+
+		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class PivotGroupByContainerDescriptorConverter : JsonConverter<PivotGroupByContainerDescriptor>

@@ -66,14 +66,40 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? _docs;
-		internal Elastic.Clients.Elasticsearch.Ingest.Pipeline? _pipeline;
+		internal IngestSimulateRequestDescriptor(Action<IngestSimulateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public IngestSimulateRequestDescriptor Verbose(bool? verbose) => Qs("verbose", verbose);
-		public IngestSimulateRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? docs) => Assign(docs, (a, v) => a._docs = v);
-		public IngestSimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? DocsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; private set; }
+
+		internal PipelineDescriptor PipelineDescriptor { get; private set; }
+
+		internal Action<PipelineDescriptor> PipelineDescriptorAction { get; private set; }
+
+		public IngestSimulateRequestDescriptor Docs(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.Simulate.Document>? docs) => Assign(docs, (a, v) => a.DocsValue = v);
+		public IngestSimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
+		{
+			PipelineDescriptor = null;
+			PipelineDescriptorAction = null;
+			return Assign(pipeline, (a, v) => a.PipelineValue = v);
+		}
+
+		public IngestSimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor descriptor)
+		{
+			PipelineValue = null;
+			PipelineDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.PipelineDescriptor = v);
+		}
+
+		public IngestSimulateRequestDescriptor Pipeline(Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor> configure)
+		{
+			PipelineValue = null;
+			PipelineDescriptorAction = null;
+			return Assign(configure, (a, v) => a.PipelineDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IngestSimulateRequestDescriptorConverter : JsonConverter<IngestSimulateRequestDescriptor>
@@ -82,16 +108,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public override void Write(Utf8JsonWriter writer, IngestSimulateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._docs is not null)
+			if (value.DocsValue is not null)
 			{
 				writer.WritePropertyName("docs");
-				JsonSerializer.Serialize(writer, value._docs, options);
+				JsonSerializer.Serialize(writer, value.DocsValue, options);
 			}
 
-			if (value._pipeline is not null)
+			if (value.PipelineDescriptor is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, value._pipeline, options);
+				JsonSerializer.Serialize(writer, value.PipelineDescriptor, options);
+			}
+			else if (value.PipelineDescriptorAction is not null)
+			{
+				writer.WritePropertyName("pipeline");
+				JsonSerializer.Serialize(writer, new PipelineDescriptor(value.PipelineDescriptorAction), options);
+			}
+			else if (value.PipelineValue is not null)
+			{
+				writer.WritePropertyName("pipeline");
+				JsonSerializer.Serialize(writer, value.PipelineValue, options);
 			}
 
 			writer.WriteEndObject();

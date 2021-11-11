@@ -104,6 +104,11 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		public ExistsRequestDescriptor()
+		{
+		}
+
+		internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;

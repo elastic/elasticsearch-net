@@ -38,6 +38,11 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(PingRequestDescriptorConverter))]
 	public sealed partial class PingRequestDescriptor : RequestDescriptorBase<PingRequestDescriptor, PingRequestParameters>
 	{
+		public PingRequestDescriptor()
+		{
+		}
+
+		internal PingRequestDescriptor(Action<PingRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;

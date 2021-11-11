@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("source_throttle_time")]
-		public Time? SourceThrottleTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Time? SourceThrottleTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("source_throttle_time_in_millis")]
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("target_throttle_time")]
-		public Time? TargetThrottleTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Time? TargetThrottleTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("target_throttle_time_in_millis")]
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
-		public Time? TotalTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Time? TotalTime { get; init; }
 	}
 
 	public partial class RecoveryOrigin
@@ -306,7 +306,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 	{
 		[JsonInclude]
 		[JsonPropertyName("check_index_time")]
-		public Time? CheckIndexTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Time? CheckIndexTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("check_index_time_in_millis")]
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Recovery
 
 		[JsonInclude]
 		[JsonPropertyName("total_time")]
-		public Time? TotalTime { get; init; }
+		public Elastic.Clients.Elasticsearch.Time? TotalTime { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]

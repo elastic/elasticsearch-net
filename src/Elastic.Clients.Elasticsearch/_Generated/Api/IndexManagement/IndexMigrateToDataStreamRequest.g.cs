@@ -46,6 +46,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexMigrateToDataStreamRequestDescriptor()
+		{
+		}
+
+		internal IndexMigrateToDataStreamRequestDescriptor(Action<IndexMigrateToDataStreamRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;

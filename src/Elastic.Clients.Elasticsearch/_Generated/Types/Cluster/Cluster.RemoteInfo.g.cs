@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 
 		[JsonInclude]
 		[JsonPropertyName("initial_connect_timeout")]
-		public Time InitialConnectTimeout { get; init; }
+		public Elastic.Clients.Elasticsearch.Time InitialConnectTimeout { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("skip_unavailable")]
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.RemoteInfo
 
 		[JsonInclude]
 		[JsonPropertyName("initial_connect_timeout")]
-		public Time InitialConnectTimeout { get; init; }
+		public Elastic.Clients.Elasticsearch.Time InitialConnectTimeout { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("skip_unavailable")]

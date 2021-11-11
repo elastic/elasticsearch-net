@@ -27,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	public class IngestPutPipelineRequestParameters : RequestParameters<IngestPutPipelineRequestParameters>
 	{
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class IngestPutPipelineRequest : PlainRequestBase<IngestPutPipelineRequestParameters>
@@ -43,10 +43,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("_meta")]
@@ -76,21 +76,31 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
-		internal Dictionary<string, object>? _meta;
-		internal string? _description;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _onFailure;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? _processors;
-		internal long? _version;
+		public IngestPutPipelineRequestDescriptor()
+		{
+		}
+
+		internal IngestPutPipelineRequestDescriptor(Action<IngestPutPipelineRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public IngestPutPipelineRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IngestPutPipelineRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
-		public IngestPutPipelineRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a._meta = v);
-		public IngestPutPipelineRequestDescriptor Description(string? description) => Assign(description, (a, v) => a._description = v);
-		public IngestPutPipelineRequestDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a._onFailure = v);
-		public IngestPutPipelineRequestDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a._processors = v);
-		public IngestPutPipelineRequestDescriptor Version(long? version) => Assign(version, (a, v) => a._version = v);
+		public IngestPutPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IngestPutPipelineRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? DescriptionValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? ProcessorsValue { get; private set; }
+
+		internal long? VersionValue { get; private set; }
+
+		public IngestPutPipelineRequestDescriptor Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.MetaValue = v);
+		public IngestPutPipelineRequestDescriptor Description(string? description) => Assign(description, (a, v) => a.DescriptionValue = v);
+		public IngestPutPipelineRequestDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public IngestPutPipelineRequestDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a.ProcessorsValue = v);
+		public IngestPutPipelineRequestDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 	}
 
 	internal sealed class IngestPutPipelineRequestDescriptorConverter : JsonConverter<IngestPutPipelineRequestDescriptor>
@@ -99,34 +109,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public override void Write(Utf8JsonWriter writer, IngestPutPipelineRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._meta is not null)
+			if (value.MetaValue is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value._meta, options);
+				JsonSerializer.Serialize(writer, value.MetaValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value._description))
+			if (!string.IsNullOrEmpty(value.DescriptionValue))
 			{
 				writer.WritePropertyName("description");
-				writer.WriteStringValue(value._description);
+				writer.WriteStringValue(value.DescriptionValue);
 			}
 
-			if (value._onFailure is not null)
+			if (value.OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
-				JsonSerializer.Serialize(writer, value._onFailure, options);
+				JsonSerializer.Serialize(writer, value.OnFailureValue, options);
 			}
 
-			if (value._processors is not null)
+			if (value.ProcessorsValue is not null)
 			{
 				writer.WritePropertyName("processors");
-				JsonSerializer.Serialize(writer, value._processors, options);
+				JsonSerializer.Serialize(writer, value.ProcessorsValue, options);
 			}
 
-			if (value._version is not null)
+			if (value.VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
+				JsonSerializer.Serialize(writer, value.VersionValue, options);
 			}
 
 			writer.WriteEndObject();

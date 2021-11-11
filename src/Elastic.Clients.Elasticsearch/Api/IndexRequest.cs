@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
@@ -30,27 +31,26 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
 	{
-		public IndexRequestDescriptor() : this(typeof(TDocument))
-		{
-		}
-
+		// TODO: Codegen
 		public IndexRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
 
-		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a._document = v);
+		// ??
+		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
 
+		// TODO: Codegen
+		// Perhaps not required as this should always be set via ctors
 		public IndexRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+
+		// TODO: Codegen
+		public IndexRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
 
 		internal Id _id;
 
-		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(_document, writer, sourceSerializer);
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
 
-		// TODO: We should be able to generate these for optional params
-		public IndexRequestDescriptor<TDocument> Id(Id id)
-		{
-			RouteValues.Optional("id", id);
-			return this;
-		}
-
+		// TODO: Codegen for optional params
+		public IndexRequestDescriptor<TDocument> Id(Id id) => Assign(id, (a, v) => a.RouteValues.Optional("id", v));
+	
 		protected override HttpMethod? DynamicHttpMethod => _id is not null || RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 	}
 }

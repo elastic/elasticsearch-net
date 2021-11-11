@@ -76,17 +76,6 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<Id> _idList = new();
 	}
 
-	public partial class MinimumShouldMatch : Union<int?, string?>
-	{
-		public MinimumShouldMatch(int? item) : base(item)
-		{
-		}
-
-		public MinimumShouldMatch(string? item) : base(item)
-		{
-		}
-	}
-
 	public partial class Percentage : Union<string?, float?>
 	{
 		public Percentage(string? item) : base(item)

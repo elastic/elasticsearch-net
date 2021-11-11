@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
         "requested": "[1.0.0-preview.2, )",
@@ -28,7 +28,7 @@
         "resolved": "5.0.0",
         "contentHash": "+luxMQNZ2WqeffBU7Ml6njIvxc8169NW2oU+ygNudXQGZiarjE7DOtN7bILiQjTZjkmwwRZGTtLzmdrSI/Ustw=="
       },
-      "Elastic.Clients.Elasticsearch": {
+      "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
           "Elastic.Transport": "1.0.0"

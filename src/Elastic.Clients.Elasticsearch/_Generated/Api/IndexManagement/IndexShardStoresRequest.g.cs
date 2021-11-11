@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>?>("status"); set => Q("status", value); }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus? Status { get => Q<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus?>("status"); set => Q("status", value); }
 	}
 
 	public partial class IndexShardStoresRequest : PlainRequestBase<IndexShardStoresRequestParameters>
@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 		[JsonIgnore]
-		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>? Status { get => Q<IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>?>("status"); set => Q("status", value); }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus? Status { get => Q<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus?>("status"); set => Q("status", value); }
 	}
 
 	[JsonConverter(typeof(IndexShardStoresRequestDescriptorConverter))]
@@ -76,13 +76,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal IndexShardStoresRequestDescriptor(Action<IndexShardStoresRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementShardStores;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public IndexShardStoresRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
 		public IndexShardStoresRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexShardStoresRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public IndexShardStoresRequestDescriptor Status(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus>? status) => Qs("status", status);
+		public IndexShardStoresRequestDescriptor Status(Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus? status) => Qs("status", status);
 	}
 
 	internal sealed class IndexShardStoresRequestDescriptorConverter : JsonConverter<IndexShardStoresRequestDescriptor>
