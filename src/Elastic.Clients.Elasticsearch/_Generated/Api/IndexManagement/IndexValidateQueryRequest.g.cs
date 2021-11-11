@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _query;
+		internal IndexValidateQueryRequestDescriptor(Action<IndexValidateQueryRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementValidateQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -144,7 +144,32 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexValidateQueryRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
 		public IndexValidateQueryRequestDescriptor Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
 		public IndexValidateQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
-		public IndexValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query) => Assign(query, (a, v) => a._query = v);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
+
+		internal QueryDsl.QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public IndexValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public IndexValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public IndexValidateQueryRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IndexValidateQueryRequestDescriptorConverter : JsonConverter<IndexValidateQueryRequestDescriptor>
@@ -153,10 +178,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public override void Write(Utf8JsonWriter writer, IndexValidateQueryRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._query is not null)
+			if (value.QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value._query, options);
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else if (value.QueryValue is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
 			}
 
 			writer.WriteEndObject();

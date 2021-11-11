@@ -33,13 +33,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	public partial class IndexRolloverRequest : PlainRequestBase<IndexRolloverRequestParameters>
@@ -62,13 +62,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
@@ -98,22 +98,55 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
-		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? _conditions;
-		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? _mappings;
-		internal Dictionary<string, object>? _settings;
+		public IndexRolloverRequestDescriptor()
+		{
+		}
+
+		internal IndexRolloverRequestDescriptor(Action<IndexRolloverRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public IndexRolloverRequestDescriptor DryRun(bool? dryRun) => Qs("dry_run", dryRun);
 		public IndexRolloverRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
-		public IndexRolloverRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexRolloverRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
-		public IndexRolloverRequestDescriptor WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a._aliases = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
-		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? conditions) => Assign(conditions, (a, v) => a._conditions = v);
-		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? mappings) => Assign(mappings, (a, v) => a._mappings = v);
-		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a._settings = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public IndexRolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexRolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IndexRolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? ConditionsValue { get; private set; }
+
+		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? MappingsValue { get; private set; }
+
+		internal Dictionary<string, object>? SettingsValue { get; private set; }
+
+		internal IndexManagement.Rollover.RolloverConditionsDescriptor ConditionsDescriptor { get; private set; }
+
+		internal Action<IndexManagement.Rollover.RolloverConditionsDescriptor> ConditionsDescriptorAction { get; private set; }
+
+		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? conditions)
+		{
+			ConditionsDescriptor = null;
+			ConditionsDescriptorAction = null;
+			return Assign(conditions, (a, v) => a.ConditionsValue = v);
+		}
+
+		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditionsDescriptor descriptor)
+		{
+			ConditionsValue = null;
+			ConditionsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ConditionsDescriptor = v);
+		}
+
+		public IndexRolloverRequestDescriptor Conditions(Action<Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditionsDescriptor> configure)
+		{
+			ConditionsValue = null;
+			ConditionsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ConditionsDescriptorAction = v);
+		}
+
+		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? mappings) => Assign(mappings, (a, v) => a.MappingsValue = v);
+		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
 	}
 
 	internal sealed class IndexRolloverRequestDescriptorConverter : JsonConverter<IndexRolloverRequestDescriptor>
@@ -122,28 +155,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public override void Write(Utf8JsonWriter writer, IndexRolloverRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._aliases is not null)
+			if (value.AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value._aliases, options);
+				JsonSerializer.Serialize(writer, value.AliasesValue, options);
 			}
 
-			if (value._conditions is not null)
+			if (value.ConditionsDescriptor is not null)
 			{
 				writer.WritePropertyName("conditions");
-				JsonSerializer.Serialize(writer, value._conditions, options);
+				JsonSerializer.Serialize(writer, value.ConditionsDescriptor, options);
+			}
+			else if (value.ConditionsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("conditions");
+				JsonSerializer.Serialize(writer, new IndexManagement.Rollover.RolloverConditionsDescriptor(value.ConditionsDescriptorAction), options);
+			}
+			else if (value.ConditionsValue is not null)
+			{
+				writer.WritePropertyName("conditions");
+				JsonSerializer.Serialize(writer, value.ConditionsValue, options);
 			}
 
-			if (value._mappings is not null)
+			if (value.MappingsValue is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value._mappings, options);
+				JsonSerializer.Serialize(writer, value.MappingsValue, options);
 			}
 
-			if (value._settings is not null)
+			if (value.SettingsValue is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value._settings, options);
+				JsonSerializer.Serialize(writer, value.SettingsValue, options);
 			}
 
 			writer.WriteEndObject();

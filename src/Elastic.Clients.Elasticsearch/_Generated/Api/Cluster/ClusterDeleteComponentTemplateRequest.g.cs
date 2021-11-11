@@ -27,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	public class ClusterDeleteComponentTemplateRequestParameters : RequestParameters<ClusterDeleteComponentTemplateRequestParameters>
 	{
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class ClusterDeleteComponentTemplateRequest : PlainRequestBase<ClusterDeleteComponentTemplateRequestParameters>
@@ -43,10 +43,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	[JsonConverter(typeof(ClusterDeleteComponentTemplateRequestDescriptorConverter))]
@@ -56,11 +56,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
+		public ClusterDeleteComponentTemplateRequestDescriptor()
+		{
+		}
+
+		internal ClusterDeleteComponentTemplateRequestDescriptor(Action<ClusterDeleteComponentTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterDeleteComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		public ClusterDeleteComponentTemplateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public ClusterDeleteComponentTemplateRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
+		public ClusterDeleteComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterDeleteComponentTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	internal sealed class ClusterDeleteComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterDeleteComponentTemplateRequestDescriptor>

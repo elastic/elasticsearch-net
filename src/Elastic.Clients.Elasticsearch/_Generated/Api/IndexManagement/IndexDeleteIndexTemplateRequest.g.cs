@@ -46,6 +46,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexDeleteIndexTemplateRequestDescriptor()
+		{
+		}
+
+		internal IndexDeleteIndexTemplateRequestDescriptor(Action<IndexDeleteIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;

@@ -46,6 +46,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexCreateDataStreamRequestDescriptor()
+		{
+		}
+
+		internal IndexCreateDataStreamRequestDescriptor(Action<IndexCreateDataStreamRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;

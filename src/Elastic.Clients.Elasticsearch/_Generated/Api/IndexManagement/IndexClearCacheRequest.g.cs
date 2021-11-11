@@ -94,6 +94,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal IndexClearCacheRequestDescriptor(Action<IndexClearCacheRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClearCache;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;

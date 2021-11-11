@@ -84,7 +84,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 		r.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Failed.Should().Be(0);
-		r.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+		r.SeqNo.Should().BeGreaterOrEqualTo(0);
 		r.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
 	});
 
@@ -125,7 +125,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 		r.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		r.Shards.Failed.Should().Be(0);
-		r.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+		r.SeqNo.Should().BeGreaterOrEqualTo(0);
 		r.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
 	});
 }

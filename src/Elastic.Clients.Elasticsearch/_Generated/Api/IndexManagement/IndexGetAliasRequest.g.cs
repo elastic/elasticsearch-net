@@ -92,6 +92,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal IndexGetAliasRequestDescriptor(Action<IndexGetAliasRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;

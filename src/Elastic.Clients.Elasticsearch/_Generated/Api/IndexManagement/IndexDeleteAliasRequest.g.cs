@@ -27,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public class IndexDeleteAliasRequestParameters : RequestParameters<IndexDeleteAliasRequestParameters>
 	{
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class IndexDeleteAliasRequest : PlainRequestBase<IndexDeleteAliasRequestParameters>
@@ -43,10 +43,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	[JsonConverter(typeof(IndexDeleteAliasRequestDescriptorConverter))]
@@ -56,11 +56,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexDeleteAliasRequestDescriptor()
+		{
+		}
+
+		internal IndexDeleteAliasRequestDescriptor(Action<IndexDeleteAliasRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteAlias;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-		public IndexDeleteAliasRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexDeleteAliasRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
+		public IndexDeleteAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexDeleteAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 	}
 
 	internal sealed class IndexDeleteAliasRequestDescriptorConverter : JsonConverter<IndexDeleteAliasRequestDescriptor>

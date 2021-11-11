@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 		[JsonIgnore]
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
@@ -45,13 +45,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public string? Type { get => Q<string?>("type"); set => Q("type", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
@@ -70,12 +70,11 @@ namespace Elastic.Clients.Elasticsearch
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-
 		[JsonIgnore]
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 		[JsonIgnore]
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
@@ -90,13 +89,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public string? Type { get => Q<string?>("type"); set => Q("type", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
@@ -112,20 +111,19 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal TSource _source;
+		internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TSource>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public BulkRequestDescriptor<TSource> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-		public BulkRequestDescriptor<TSource> Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public BulkRequestDescriptor<TSource> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public BulkRequestDescriptor<TSource> Routing(string? routing) => Qs("routing", routing);
 		public BulkRequestDescriptor<TSource> Source(Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? source) => Qs("_source", source);
 		public BulkRequestDescriptor<TSource> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public BulkRequestDescriptor<TSource> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public BulkRequestDescriptor<TSource> Timeout(Time? timeout) => Qs("timeout", timeout);
+		public BulkRequestDescriptor<TSource> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public BulkRequestDescriptor<TSource> Type(string? type) => Qs("type", type);
-		public BulkRequestDescriptor<TSource> WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public BulkRequestDescriptor<TSource> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public BulkRequestDescriptor<TSource> RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
-		public BulkRequestDescriptor<TSource> Source(TSource source) => Assign(source, (a, v) => a._source = v);
 	}
 }

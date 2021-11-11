@@ -50,6 +50,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexResolveIndexRequestDescriptor()
+		{
+		}
+
+		internal IndexResolveIndexRequestDescriptor(Action<IndexResolveIndexRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementResolveIndex;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;

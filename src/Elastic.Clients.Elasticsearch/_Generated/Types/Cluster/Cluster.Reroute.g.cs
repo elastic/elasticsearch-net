@@ -49,11 +49,145 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	[JsonConverter(typeof(CommandDescriptorConverter))]
 	public sealed partial class CommandDescriptor : DescriptorBase<CommandDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelAction? _cancel;
-		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveAction? _move;
-		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaAction? _allocateReplica;
-		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? _allocateStalePrimary;
-		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? _allocateEmptyPrimary;
+		public CommandDescriptor()
+		{
+		}
+
+		internal CommandDescriptor(Action<CommandDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelAction? CancelValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveAction? MoveValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaAction? AllocateReplicaValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? AllocateStalePrimaryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? AllocateEmptyPrimaryValue { get; private set; }
+
+		internal CommandCancelActionDescriptor CancelDescriptor { get; private set; }
+
+		internal CommandMoveActionDescriptor MoveDescriptor { get; private set; }
+
+		internal CommandAllocateReplicaActionDescriptor AllocateReplicaDescriptor { get; private set; }
+
+		internal CommandAllocatePrimaryActionDescriptor AllocateStalePrimaryDescriptor { get; private set; }
+
+		internal CommandAllocatePrimaryActionDescriptor AllocateEmptyPrimaryDescriptor { get; private set; }
+
+		internal Action<CommandCancelActionDescriptor> CancelDescriptorAction { get; private set; }
+
+		internal Action<CommandMoveActionDescriptor> MoveDescriptorAction { get; private set; }
+
+		internal Action<CommandAllocateReplicaActionDescriptor> AllocateReplicaDescriptorAction { get; private set; }
+
+		internal Action<CommandAllocatePrimaryActionDescriptor> AllocateStalePrimaryDescriptorAction { get; private set; }
+
+		internal Action<CommandAllocatePrimaryActionDescriptor> AllocateEmptyPrimaryDescriptorAction { get; private set; }
+
+		public CommandDescriptor Cancel(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelAction? cancel)
+		{
+			CancelDescriptor = null;
+			CancelDescriptorAction = null;
+			return Assign(cancel, (a, v) => a.CancelValue = v);
+		}
+
+		public CommandDescriptor Cancel(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelActionDescriptor descriptor)
+		{
+			CancelValue = null;
+			CancelDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.CancelDescriptor = v);
+		}
+
+		public CommandDescriptor Cancel(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelActionDescriptor> configure)
+		{
+			CancelValue = null;
+			CancelDescriptorAction = null;
+			return Assign(configure, (a, v) => a.CancelDescriptorAction = v);
+		}
+
+		public CommandDescriptor Move(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveAction? move)
+		{
+			MoveDescriptor = null;
+			MoveDescriptorAction = null;
+			return Assign(move, (a, v) => a.MoveValue = v);
+		}
+
+		public CommandDescriptor Move(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveActionDescriptor descriptor)
+		{
+			MoveValue = null;
+			MoveDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MoveDescriptor = v);
+		}
+
+		public CommandDescriptor Move(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveActionDescriptor> configure)
+		{
+			MoveValue = null;
+			MoveDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MoveDescriptorAction = v);
+		}
+
+		public CommandDescriptor AllocateReplica(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaAction? allocateReplica)
+		{
+			AllocateReplicaDescriptor = null;
+			AllocateReplicaDescriptorAction = null;
+			return Assign(allocateReplica, (a, v) => a.AllocateReplicaValue = v);
+		}
+
+		public CommandDescriptor AllocateReplica(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaActionDescriptor descriptor)
+		{
+			AllocateReplicaValue = null;
+			AllocateReplicaDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AllocateReplicaDescriptor = v);
+		}
+
+		public CommandDescriptor AllocateReplica(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaActionDescriptor> configure)
+		{
+			AllocateReplicaValue = null;
+			AllocateReplicaDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AllocateReplicaDescriptorAction = v);
+		}
+
+		public CommandDescriptor AllocateStalePrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? allocateStalePrimary)
+		{
+			AllocateStalePrimaryDescriptor = null;
+			AllocateStalePrimaryDescriptorAction = null;
+			return Assign(allocateStalePrimary, (a, v) => a.AllocateStalePrimaryValue = v);
+		}
+
+		public CommandDescriptor AllocateStalePrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor descriptor)
+		{
+			AllocateStalePrimaryValue = null;
+			AllocateStalePrimaryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AllocateStalePrimaryDescriptor = v);
+		}
+
+		public CommandDescriptor AllocateStalePrimary(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor> configure)
+		{
+			AllocateStalePrimaryValue = null;
+			AllocateStalePrimaryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AllocateStalePrimaryDescriptorAction = v);
+		}
+
+		public CommandDescriptor AllocateEmptyPrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? allocateEmptyPrimary)
+		{
+			AllocateEmptyPrimaryDescriptor = null;
+			AllocateEmptyPrimaryDescriptorAction = null;
+			return Assign(allocateEmptyPrimary, (a, v) => a.AllocateEmptyPrimaryValue = v);
+		}
+
+		public CommandDescriptor AllocateEmptyPrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor descriptor)
+		{
+			AllocateEmptyPrimaryValue = null;
+			AllocateEmptyPrimaryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AllocateEmptyPrimaryDescriptor = v);
+		}
+
+		public CommandDescriptor AllocateEmptyPrimary(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor> configure)
+		{
+			AllocateEmptyPrimaryValue = null;
+			AllocateEmptyPrimaryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AllocateEmptyPrimaryDescriptorAction = v);
+		}
 	}
 
 	internal sealed class CommandDescriptorConverter : JsonConverter<CommandDescriptor>
@@ -62,34 +196,84 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public override void Write(Utf8JsonWriter writer, CommandDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._cancel is not null)
+			if (value.CancelDescriptor is not null)
 			{
 				writer.WritePropertyName("cancel");
-				JsonSerializer.Serialize(writer, value._cancel, options);
+				JsonSerializer.Serialize(writer, value.CancelDescriptor, options);
+			}
+			else if (value.CancelDescriptorAction is not null)
+			{
+				writer.WritePropertyName("cancel");
+				JsonSerializer.Serialize(writer, new CommandCancelActionDescriptor(value.CancelDescriptorAction), options);
+			}
+			else if (value.CancelValue is not null)
+			{
+				writer.WritePropertyName("cancel");
+				JsonSerializer.Serialize(writer, value.CancelValue, options);
 			}
 
-			if (value._move is not null)
+			if (value.MoveDescriptor is not null)
 			{
 				writer.WritePropertyName("move");
-				JsonSerializer.Serialize(writer, value._move, options);
+				JsonSerializer.Serialize(writer, value.MoveDescriptor, options);
+			}
+			else if (value.MoveDescriptorAction is not null)
+			{
+				writer.WritePropertyName("move");
+				JsonSerializer.Serialize(writer, new CommandMoveActionDescriptor(value.MoveDescriptorAction), options);
+			}
+			else if (value.MoveValue is not null)
+			{
+				writer.WritePropertyName("move");
+				JsonSerializer.Serialize(writer, value.MoveValue, options);
 			}
 
-			if (value._allocateReplica is not null)
+			if (value.AllocateReplicaDescriptor is not null)
 			{
 				writer.WritePropertyName("allocate_replica");
-				JsonSerializer.Serialize(writer, value._allocateReplica, options);
+				JsonSerializer.Serialize(writer, value.AllocateReplicaDescriptor, options);
+			}
+			else if (value.AllocateReplicaDescriptorAction is not null)
+			{
+				writer.WritePropertyName("allocate_replica");
+				JsonSerializer.Serialize(writer, new CommandAllocateReplicaActionDescriptor(value.AllocateReplicaDescriptorAction), options);
+			}
+			else if (value.AllocateReplicaValue is not null)
+			{
+				writer.WritePropertyName("allocate_replica");
+				JsonSerializer.Serialize(writer, value.AllocateReplicaValue, options);
 			}
 
-			if (value._allocateStalePrimary is not null)
+			if (value.AllocateStalePrimaryDescriptor is not null)
 			{
 				writer.WritePropertyName("allocate_stale_primary");
-				JsonSerializer.Serialize(writer, value._allocateStalePrimary, options);
+				JsonSerializer.Serialize(writer, value.AllocateStalePrimaryDescriptor, options);
+			}
+			else if (value.AllocateStalePrimaryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("allocate_stale_primary");
+				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(value.AllocateStalePrimaryDescriptorAction), options);
+			}
+			else if (value.AllocateStalePrimaryValue is not null)
+			{
+				writer.WritePropertyName("allocate_stale_primary");
+				JsonSerializer.Serialize(writer, value.AllocateStalePrimaryValue, options);
 			}
 
-			if (value._allocateEmptyPrimary is not null)
+			if (value.AllocateEmptyPrimaryDescriptor is not null)
 			{
 				writer.WritePropertyName("allocate_empty_primary");
-				JsonSerializer.Serialize(writer, value._allocateEmptyPrimary, options);
+				JsonSerializer.Serialize(writer, value.AllocateEmptyPrimaryDescriptor, options);
+			}
+			else if (value.AllocateEmptyPrimaryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("allocate_empty_primary");
+				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(value.AllocateEmptyPrimaryDescriptorAction), options);
+			}
+			else if (value.AllocateEmptyPrimaryValue is not null)
+			{
+				writer.WritePropertyName("allocate_empty_primary");
+				JsonSerializer.Serialize(writer, value.AllocateEmptyPrimaryValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -118,10 +302,23 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	[JsonConverter(typeof(CommandAllocatePrimaryActionDescriptorConverter))]
 	public sealed partial class CommandAllocatePrimaryActionDescriptor : DescriptorBase<CommandAllocatePrimaryActionDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.IndexName _index;
-		internal int _shard;
-		internal string _node;
-		internal bool _acceptDataLoss;
+		public CommandAllocatePrimaryActionDescriptor()
+		{
+		}
+
+		internal CommandAllocatePrimaryActionDescriptor(Action<CommandAllocatePrimaryActionDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.IndexName IndexValue { get; private set; }
+
+		internal int ShardValue { get; private set; }
+
+		internal string NodeValue { get; private set; }
+
+		internal bool AcceptDataLossValue { get; private set; }
+
+		public CommandAllocatePrimaryActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a.IndexValue = v);
+		public CommandAllocatePrimaryActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
+		public CommandAllocatePrimaryActionDescriptor Node(string node) => Assign(node, (a, v) => a.NodeValue = v);
+		public CommandAllocatePrimaryActionDescriptor AcceptDataLoss(bool acceptDataLoss = true) => Assign(acceptDataLoss, (a, v) => a.AcceptDataLossValue = v);
 	}
 
 	internal sealed class CommandAllocatePrimaryActionDescriptorConverter : JsonConverter<CommandAllocatePrimaryActionDescriptor>
@@ -131,13 +328,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value._index, options);
+			JsonSerializer.Serialize(writer, value.IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value._shard);
+			writer.WriteNumberValue(value.ShardValue);
 			writer.WritePropertyName("node");
-			writer.WriteStringValue(value._node);
+			writer.WriteStringValue(value.NodeValue);
 			writer.WritePropertyName("accept_data_loss");
-			writer.WriteBooleanValue(value._acceptDataLoss);
+			writer.WriteBooleanValue(value.AcceptDataLossValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -160,9 +357,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	[JsonConverter(typeof(CommandAllocateReplicaActionDescriptorConverter))]
 	public sealed partial class CommandAllocateReplicaActionDescriptor : DescriptorBase<CommandAllocateReplicaActionDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.IndexName _index;
-		internal int _shard;
-		internal string _node;
+		public CommandAllocateReplicaActionDescriptor()
+		{
+		}
+
+		internal CommandAllocateReplicaActionDescriptor(Action<CommandAllocateReplicaActionDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.IndexName IndexValue { get; private set; }
+
+		internal int ShardValue { get; private set; }
+
+		internal string NodeValue { get; private set; }
+
+		public CommandAllocateReplicaActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a.IndexValue = v);
+		public CommandAllocateReplicaActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
+		public CommandAllocateReplicaActionDescriptor Node(string node) => Assign(node, (a, v) => a.NodeValue = v);
 	}
 
 	internal sealed class CommandAllocateReplicaActionDescriptorConverter : JsonConverter<CommandAllocateReplicaActionDescriptor>
@@ -172,11 +380,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value._index, options);
+			JsonSerializer.Serialize(writer, value.IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value._shard);
+			writer.WriteNumberValue(value.ShardValue);
 			writer.WritePropertyName("node");
-			writer.WriteStringValue(value._node);
+			writer.WriteStringValue(value.NodeValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -203,10 +411,23 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	[JsonConverter(typeof(CommandCancelActionDescriptorConverter))]
 	public sealed partial class CommandCancelActionDescriptor : DescriptorBase<CommandCancelActionDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.IndexName _index;
-		internal int _shard;
-		internal string _node;
-		internal bool? _allowPrimary;
+		public CommandCancelActionDescriptor()
+		{
+		}
+
+		internal CommandCancelActionDescriptor(Action<CommandCancelActionDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.IndexName IndexValue { get; private set; }
+
+		internal int ShardValue { get; private set; }
+
+		internal string NodeValue { get; private set; }
+
+		internal bool? AllowPrimaryValue { get; private set; }
+
+		public CommandCancelActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a.IndexValue = v);
+		public CommandCancelActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
+		public CommandCancelActionDescriptor Node(string node) => Assign(node, (a, v) => a.NodeValue = v);
+		public CommandCancelActionDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(allowPrimary, (a, v) => a.AllowPrimaryValue = v);
 	}
 
 	internal sealed class CommandCancelActionDescriptorConverter : JsonConverter<CommandCancelActionDescriptor>
@@ -216,15 +437,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value._index, options);
+			JsonSerializer.Serialize(writer, value.IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value._shard);
+			writer.WriteNumberValue(value.ShardValue);
 			writer.WritePropertyName("node");
-			writer.WriteStringValue(value._node);
-			if (value._allowPrimary.HasValue)
+			writer.WriteStringValue(value.NodeValue);
+			if (value.AllowPrimaryValue.HasValue)
 			{
 				writer.WritePropertyName("allow_primary");
-				writer.WriteBooleanValue(value._allowPrimary.Value);
+				writer.WriteBooleanValue(value.AllowPrimaryValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -253,10 +474,23 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 	[JsonConverter(typeof(CommandMoveActionDescriptorConverter))]
 	public sealed partial class CommandMoveActionDescriptor : DescriptorBase<CommandMoveActionDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.IndexName _index;
-		internal int _shard;
-		internal string _fromNode;
-		internal string _toNode;
+		public CommandMoveActionDescriptor()
+		{
+		}
+
+		internal CommandMoveActionDescriptor(Action<CommandMoveActionDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.IndexName IndexValue { get; private set; }
+
+		internal int ShardValue { get; private set; }
+
+		internal string FromNodeValue { get; private set; }
+
+		internal string ToNodeValue { get; private set; }
+
+		public CommandMoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a.IndexValue = v);
+		public CommandMoveActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
+		public CommandMoveActionDescriptor FromNode(string fromNode) => Assign(fromNode, (a, v) => a.FromNodeValue = v);
+		public CommandMoveActionDescriptor ToNode(string toNode) => Assign(toNode, (a, v) => a.ToNodeValue = v);
 	}
 
 	internal sealed class CommandMoveActionDescriptorConverter : JsonConverter<CommandMoveActionDescriptor>
@@ -266,13 +500,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value._index, options);
+			JsonSerializer.Serialize(writer, value.IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value._shard);
+			writer.WriteNumberValue(value.ShardValue);
 			writer.WritePropertyName("from_node");
-			writer.WriteStringValue(value._fromNode);
+			writer.WriteStringValue(value.FromNodeValue);
 			writer.WritePropertyName("to_node");
-			writer.WriteStringValue(value._toNode);
+			writer.WriteStringValue(value.ToNodeValue);
 			writer.WriteEndObject();
 		}
 	}

@@ -46,6 +46,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexPromoteDataStreamRequestDescriptor()
+		{
+		}
+
+		internal IndexPromoteDataStreamRequestDescriptor(Action<IndexPromoteDataStreamRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPromoteDataStream;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;

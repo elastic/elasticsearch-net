@@ -104,7 +104,7 @@ namespace Tests.Document.Single.Create
 			createResponse.Shards.Total.Should().BeGreaterThan(0);
 			createResponse.Shards.Successful.Should().BeGreaterThan(0);
 			createResponse.PrimaryTerm.Should().BeGreaterThan(0);
-			createResponse.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+			createResponse.SeqNo.Should().BeGreaterOrEqualTo(0);
 
 			createResponse = Client.Create(project, f => f
 				.Index(index)

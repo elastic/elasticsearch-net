@@ -80,6 +80,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexExistsRequestDescriptor()
+		{
+		}
+
+		internal IndexExistsRequestDescriptor(Action<IndexExistsRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;

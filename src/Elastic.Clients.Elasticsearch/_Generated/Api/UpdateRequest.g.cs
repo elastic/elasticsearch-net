@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
 		[JsonIgnore]
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
@@ -48,10 +48,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonIgnore]
 		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
@@ -76,9 +76,6 @@ namespace Elastic.Clients.Elasticsearch
 		public TDocument Document { get; set; }
 
 		[JsonIgnore]
-		public TPartialDocument PartialDocument { get; set; }
-
-		[JsonIgnore]
 		public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 		[JsonIgnore]
@@ -88,7 +85,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
 		[JsonIgnore]
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
@@ -100,10 +97,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 		[JsonIgnore]
 		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
@@ -145,36 +142,41 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal TDocument _document;
-		internal TPartialDocument _partialDocument;
-		internal bool? _detectNoop;
-		internal TPartialDocument? _doc;
-		internal bool? _docAsUpsert;
-		internal Elastic.Clients.Elasticsearch.Script? _script;
-		internal bool? _scriptedUpsert;
-		internal TDocument? _upsert;
+		internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
+		internal TDocument DocumentValue { get; private set; }
+
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Lang(string? lang) => Qs("lang", lang);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> RetryOnConflict(int? retryOnConflict) => Qs("retry_on_conflict", retryOnConflict);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Routing(string? routing) => Qs("routing", routing);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Time? timeout) => Qs("timeout", timeout);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? source) => Qs("_source", source);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Document(TDocument document) => Assign(document, (a, v) => a._document = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument partialDocument) => Assign(partialDocument, (a, v) => a._partialDocument = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true) => Assign(detectNoop, (a, v) => a._detectNoop = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc) => Assign(doc, (a, v) => a._doc = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(docAsUpsert, (a, v) => a._docAsUpsert = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a._script = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) => Assign(scriptedUpsert, (a, v) => a._scriptedUpsert = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert) => Assign(upsert, (a, v) => a._upsert = v);
+		internal bool? DetectNoopValue { get; private set; }
+
+		internal TPartialDocument? DocValue { get; private set; }
+
+		internal bool? DocAsUpsertValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		internal bool? ScriptedUpsertValue { get; private set; }
+
+		internal TDocument? UpsertValue { get; private set; }
+
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true) => Assign(detectNoop, (a, v) => a.DetectNoopValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc) => Assign(doc, (a, v) => a.DocValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(docAsUpsert, (a, v) => a.DocAsUpsertValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) => Assign(scriptedUpsert, (a, v) => a.ScriptedUpsertValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert) => Assign(upsert, (a, v) => a.UpsertValue = v);
 	}
 }

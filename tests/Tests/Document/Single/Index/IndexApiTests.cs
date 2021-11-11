@@ -131,7 +131,7 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 		indexResult.Shards.Should().NotBeNull();
 		indexResult.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		indexResult.Shards.Successful.Should().BeGreaterOrEqualTo(1);
-		indexResult.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+		indexResult.SeqNo.Should().BeGreaterOrEqualTo(0);
 		indexResult.PrimaryTerm.Should().BeGreaterThan(0);
 
 		indexResult = Client.Index(commitActivity, f => f.Index(indexName));
@@ -240,7 +240,7 @@ public class IndexAnonymousTypesIntegrationTests : IntegrationDocumentationTestB
 		indexResult.Shards.Should().NotBeNull();
 		indexResult.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		indexResult.Shards.Successful.Should().BeGreaterOrEqualTo(1);
-		indexResult.SequenceNumber.Should().BeGreaterOrEqualTo(0);
+		indexResult.SeqNo.Should().BeGreaterOrEqualTo(0);
 		indexResult.PrimaryTerm.Should().BeGreaterThan(0);
 	}
 }

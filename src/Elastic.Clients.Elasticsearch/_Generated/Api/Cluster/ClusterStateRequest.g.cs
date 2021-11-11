@@ -42,13 +42,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
-		public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>
@@ -84,13 +84,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
 		public long? WaitForMetadataVersion { get => Q<long?>("wait_for_metadata_version"); set => Q("wait_for_metadata_version", value); }
 
 		[JsonIgnore]
-		public Time? WaitForTimeout { get => Q<Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
 	[JsonConverter(typeof(ClusterStateRequestDescriptorConverter))]
@@ -108,6 +108,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
+		internal ClusterStateRequestDescriptor(Action<ClusterStateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -116,9 +117,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public ClusterStateRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ClusterStateRequestDescriptor Local(bool? local) => Qs("local", local);
-		public ClusterStateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterStateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterStateRequestDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
-		public ClusterStateRequestDescriptor WaitForTimeout(Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
+		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 	}
 
 	internal sealed class ClusterStateRequestDescriptorConverter : JsonConverter<ClusterStateRequestDescriptor>

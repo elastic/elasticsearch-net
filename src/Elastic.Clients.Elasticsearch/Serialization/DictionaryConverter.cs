@@ -5,9 +5,11 @@ using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Core;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch
 {
+
 	internal sealed class DictionaryConverter : JsonConverterFactory
 	{
 		public override bool CanConvert(Type typeToConvert)

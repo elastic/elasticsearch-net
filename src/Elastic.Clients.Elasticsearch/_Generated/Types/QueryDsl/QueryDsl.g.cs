@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "bool";
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filter { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("minimum_should_match")]
@@ -37,25 +37,135 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("must")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Must { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Must { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("must_not")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNot { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? MustNot { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("should")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Should { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Should { get; set; }
 	}
 
 	[JsonConverter(typeof(BoolQueryDescriptorConverter))]
-	public sealed partial class BoolQueryDescriptor : DescriptorBase<BoolQueryDescriptor>
+	public sealed partial class BoolQueryDescriptor : DescriptorBase<BoolQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? _filter;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? _must;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? _mustNot;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? _should;
+		public BoolQueryDescriptor()
+		{
+		}
+
+		internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? MustValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? MustNotValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? ShouldValue { get; private set; }
+
+		internal QueryContainerDescriptor FilterDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor MustDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor MustNotDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor ShouldDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> FilterDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> MustDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> MustNotDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> ShouldDescriptorAction { get; private set; }
+
+		public BoolQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public BoolQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public BoolQueryDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
+
+		public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public BoolQueryDescriptor Must(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? must)
+		{
+			MustDescriptor = null;
+			MustDescriptorAction = null;
+			return Assign(must, (a, v) => a.MustValue = v);
+		}
+
+		public BoolQueryDescriptor Must(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			MustValue = null;
+			MustDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MustDescriptor = v);
+		}
+
+		public BoolQueryDescriptor Must(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			MustValue = null;
+			MustDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MustDescriptorAction = v);
+		}
+
+		public BoolQueryDescriptor MustNot(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? mustNot)
+		{
+			MustNotDescriptor = null;
+			MustNotDescriptorAction = null;
+			return Assign(mustNot, (a, v) => a.MustNotValue = v);
+		}
+
+		public BoolQueryDescriptor MustNot(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			MustNotValue = null;
+			MustNotDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MustNotDescriptor = v);
+		}
+
+		public BoolQueryDescriptor MustNot(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			MustNotValue = null;
+			MustNotDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MustNotDescriptorAction = v);
+		}
+
+		public BoolQueryDescriptor Should(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? should)
+		{
+			ShouldDescriptor = null;
+			ShouldDescriptorAction = null;
+			return Assign(should, (a, v) => a.ShouldValue = v);
+		}
+
+		public BoolQueryDescriptor Should(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			ShouldValue = null;
+			ShouldDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ShouldDescriptor = v);
+		}
+
+		public BoolQueryDescriptor Should(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			ShouldValue = null;
+			ShouldDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ShouldDescriptorAction = v);
+		}
 	}
 
 	internal sealed class BoolQueryDescriptorConverter : JsonConverter<BoolQueryDescriptor>
@@ -64,34 +174,74 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, BoolQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._filter is not null)
+			if (value.FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.FilterDescriptorAction), options);
+			}
+			else if (value.FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
 			}
 
-			if (value._minimumShouldMatch is not null)
+			if (value.MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
 			}
 
-			if (value._must is not null)
+			if (value.MustDescriptor is not null)
 			{
 				writer.WritePropertyName("must");
-				JsonSerializer.Serialize(writer, value._must, options);
+				JsonSerializer.Serialize(writer, value.MustDescriptor, options);
+			}
+			else if (value.MustDescriptorAction is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.MustDescriptorAction), options);
+			}
+			else if (value.MustValue is not null)
+			{
+				writer.WritePropertyName("must");
+				JsonSerializer.Serialize(writer, value.MustValue, options);
 			}
 
-			if (value._mustNot is not null)
+			if (value.MustNotDescriptor is not null)
 			{
 				writer.WritePropertyName("must_not");
-				JsonSerializer.Serialize(writer, value._mustNot, options);
+				JsonSerializer.Serialize(writer, value.MustNotDescriptor, options);
+			}
+			else if (value.MustNotDescriptorAction is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.MustNotDescriptorAction), options);
+			}
+			else if (value.MustNotValue is not null)
+			{
+				writer.WritePropertyName("must_not");
+				JsonSerializer.Serialize(writer, value.MustNotValue, options);
 			}
 
-			if (value._should is not null)
+			if (value.ShouldDescriptor is not null)
 			{
 				writer.WritePropertyName("should");
-				JsonSerializer.Serialize(writer, value._should, options);
+				JsonSerializer.Serialize(writer, value.ShouldDescriptor, options);
+			}
+			else if (value.ShouldDescriptorAction is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.ShouldDescriptorAction), options);
+			}
+			else if (value.ShouldValue is not null)
+			{
+				writer.WritePropertyName("should");
+				JsonSerializer.Serialize(writer, value.ShouldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -116,11 +266,69 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(BoostingQueryDescriptorConverter))]
-	public sealed partial class BoostingQueryDescriptor : DescriptorBase<BoostingQueryDescriptor>
+	public sealed partial class BoostingQueryDescriptor : DescriptorBase<BoostingQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal double _negativeBoost;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _negative;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _positive;
+		public BoostingQueryDescriptor()
+		{
+		}
+
+		internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor> configure) => configure.Invoke(this);
+		internal double NegativeBoostValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer NegativeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer PositiveValue { get; private set; }
+
+		internal QueryContainerDescriptor NegativeDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor PositiveDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> NegativeDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> PositiveDescriptorAction { get; private set; }
+
+		public BoostingQueryDescriptor NegativeBoost(double negativeBoost) => Assign(negativeBoost, (a, v) => a.NegativeBoostValue = v);
+		public BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer negative)
+		{
+			NegativeDescriptor = null;
+			NegativeDescriptorAction = null;
+			return Assign(negative, (a, v) => a.NegativeValue = v);
+		}
+
+		public BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			NegativeValue = null;
+			NegativeDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.NegativeDescriptor = v);
+		}
+
+		public BoostingQueryDescriptor Negative(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			NegativeValue = null;
+			NegativeDescriptorAction = null;
+			return Assign(configure, (a, v) => a.NegativeDescriptorAction = v);
+		}
+
+		public BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer positive)
+		{
+			PositiveDescriptor = null;
+			PositiveDescriptorAction = null;
+			return Assign(positive, (a, v) => a.PositiveValue = v);
+		}
+
+		public BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			PositiveValue = null;
+			PositiveDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.PositiveDescriptor = v);
+		}
+
+		public BoostingQueryDescriptor Positive(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			PositiveValue = null;
+			PositiveDescriptorAction = null;
+			return Assign(configure, (a, v) => a.PositiveDescriptorAction = v);
+		}
 	}
 
 	internal sealed class BoostingQueryDescriptorConverter : JsonConverter<BoostingQueryDescriptor>
@@ -130,11 +338,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("negative_boost");
-			writer.WriteNumberValue(value._negativeBoost);
-			writer.WritePropertyName("negative");
-			JsonSerializer.Serialize(writer, value._negative, options);
-			writer.WritePropertyName("positive");
-			JsonSerializer.Serialize(writer, value._positive, options);
+			writer.WriteNumberValue(value.NegativeBoostValue);
+			if (value.NegativeDescriptor is not null)
+			{
+				writer.WritePropertyName("negative");
+				JsonSerializer.Serialize(writer, value.NegativeDescriptor, options);
+			}
+			else if (value.NegativeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("negative");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.NegativeDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("negative");
+				JsonSerializer.Serialize(writer, value.NegativeValue, options);
+			}
+
+			if (value.PositiveDescriptor is not null)
+			{
+				writer.WritePropertyName("positive");
+				JsonSerializer.Serialize(writer, value.PositiveDescriptor, options);
+			}
+			else if (value.PositiveDescriptorAction is not null)
+			{
+				writer.WritePropertyName("positive");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.PositiveDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("positive");
+				JsonSerializer.Serialize(writer, value.PositiveValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -181,15 +417,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(BoundingBoxDescriptorConverter))]
 	public sealed partial class BoundingBoxDescriptor : DescriptorBase<BoundingBoxDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _bottomRight;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _topLeft;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _topRight;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? _bottomLeft;
-		internal double? _top;
-		internal double? _left;
-		internal double? _right;
-		internal double? _bottom;
-		internal string? _wkt;
+		public BoundingBoxDescriptor()
+		{
+		}
+
+		internal BoundingBoxDescriptor(Action<BoundingBoxDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomRightValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopLeftValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? TopRightValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? BottomLeftValue { get; private set; }
+
+		internal double? TopValue { get; private set; }
+
+		internal double? LeftValue { get; private set; }
+
+		internal double? RightValue { get; private set; }
+
+		internal double? BottomValue { get; private set; }
+
+		internal string? WktValue { get; private set; }
+
+		public BoundingBoxDescriptor BottomRight(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? bottomRight) => Assign(bottomRight, (a, v) => a.BottomRightValue = v);
+		public BoundingBoxDescriptor TopLeft(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? topLeft) => Assign(topLeft, (a, v) => a.TopLeftValue = v);
+		public BoundingBoxDescriptor TopRight(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? topRight) => Assign(topRight, (a, v) => a.TopRightValue = v);
+		public BoundingBoxDescriptor BottomLeft(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? bottomLeft) => Assign(bottomLeft, (a, v) => a.BottomLeftValue = v);
+		public BoundingBoxDescriptor Top(double? top) => Assign(top, (a, v) => a.TopValue = v);
+		public BoundingBoxDescriptor Left(double? left) => Assign(left, (a, v) => a.LeftValue = v);
+		public BoundingBoxDescriptor Right(double? right) => Assign(right, (a, v) => a.RightValue = v);
+		public BoundingBoxDescriptor Bottom(double? bottom) => Assign(bottom, (a, v) => a.BottomValue = v);
+		public BoundingBoxDescriptor Wkt(string? wkt) => Assign(wkt, (a, v) => a.WktValue = v);
 	}
 
 	internal sealed class BoundingBoxDescriptorConverter : JsonConverter<BoundingBoxDescriptor>
@@ -198,58 +457,58 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, BoundingBoxDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._bottomRight is not null)
+			if (value.BottomRightValue is not null)
 			{
 				writer.WritePropertyName("bottom_right");
-				JsonSerializer.Serialize(writer, value._bottomRight, options);
+				JsonSerializer.Serialize(writer, value.BottomRightValue, options);
 			}
 
-			if (value._topLeft is not null)
+			if (value.TopLeftValue is not null)
 			{
 				writer.WritePropertyName("top_left");
-				JsonSerializer.Serialize(writer, value._topLeft, options);
+				JsonSerializer.Serialize(writer, value.TopLeftValue, options);
 			}
 
-			if (value._topRight is not null)
+			if (value.TopRightValue is not null)
 			{
 				writer.WritePropertyName("top_right");
-				JsonSerializer.Serialize(writer, value._topRight, options);
+				JsonSerializer.Serialize(writer, value.TopRightValue, options);
 			}
 
-			if (value._bottomLeft is not null)
+			if (value.BottomLeftValue is not null)
 			{
 				writer.WritePropertyName("bottom_left");
-				JsonSerializer.Serialize(writer, value._bottomLeft, options);
+				JsonSerializer.Serialize(writer, value.BottomLeftValue, options);
 			}
 
-			if (value._top.HasValue)
+			if (value.TopValue.HasValue)
 			{
 				writer.WritePropertyName("top");
-				writer.WriteNumberValue(value._top.Value);
+				writer.WriteNumberValue(value.TopValue.Value);
 			}
 
-			if (value._left.HasValue)
+			if (value.LeftValue.HasValue)
 			{
 				writer.WritePropertyName("left");
-				writer.WriteNumberValue(value._left.Value);
+				writer.WriteNumberValue(value.LeftValue.Value);
 			}
 
-			if (value._right.HasValue)
+			if (value.RightValue.HasValue)
 			{
 				writer.WritePropertyName("right");
-				writer.WriteNumberValue(value._right.Value);
+				writer.WriteNumberValue(value.RightValue.Value);
 			}
 
-			if (value._bottom.HasValue)
+			if (value.BottomValue.HasValue)
 			{
 				writer.WritePropertyName("bottom");
-				writer.WriteNumberValue(value._bottom.Value);
+				writer.WriteNumberValue(value.BottomValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value._wkt))
+			if (!string.IsNullOrEmpty(value.WktValue))
 			{
 				writer.WritePropertyName("wkt");
-				writer.WriteStringValue(value._wkt);
+				writer.WriteStringValue(value.WktValue);
 			}
 
 			writer.WriteEndObject();
@@ -286,14 +545,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(CombinedFieldsQueryDescriptorConverter))]
-	public sealed partial class CombinedFieldsQueryDescriptor : DescriptorBase<CombinedFieldsQueryDescriptor>
+	public sealed partial class CombinedFieldsQueryDescriptor : DescriptorBase<CombinedFieldsQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal IEnumerable<string> _fields;
-		internal string _query;
-		internal bool? _autoGenerateSynonymsPhraseQuery;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? _operator;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _mimimumShouldMatch;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? _zeroTermsQuery;
+		public CombinedFieldsQueryDescriptor()
+		{
+		}
+
+		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<string> FieldsValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MimimumShouldMatchValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; private set; }
+
+		public CombinedFieldsQueryDescriptor Fields(IEnumerable<string> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public CombinedFieldsQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public CombinedFieldsQueryDescriptor MimimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? mimimumShouldMatch) => Assign(mimimumShouldMatch, (a, v) => a.MimimumShouldMatchValue = v);
+		public CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 	}
 
 	internal sealed class CombinedFieldsQueryDescriptorConverter : JsonConverter<CombinedFieldsQueryDescriptor>
@@ -303,31 +579,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, value._fields, options);
+			JsonSerializer.Serialize(writer, value.FieldsValue, options);
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (value._autoGenerateSynonymsPhraseQuery.HasValue)
+			writer.WriteStringValue(value.QueryValue);
+			if (value.AutoGenerateSynonymsPhraseQueryValue.HasValue)
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-				writer.WriteBooleanValue(value._autoGenerateSynonymsPhraseQuery.Value);
+				writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQueryValue.Value);
 			}
 
-			if (value._operator is not null)
+			if (value.OperatorValue is not null)
 			{
 				writer.WritePropertyName("operator");
-				JsonSerializer.Serialize(writer, value._operator, options);
+				JsonSerializer.Serialize(writer, value.OperatorValue, options);
 			}
 
-			if (value._mimimumShouldMatch is not null)
+			if (value.MimimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("mimimum_should_match");
-				JsonSerializer.Serialize(writer, value._mimimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MimimumShouldMatchValue, options);
 			}
 
-			if (value._zeroTermsQuery is not null)
+			if (value.ZeroTermsQueryValue is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value._zeroTermsQuery, options);
+				JsonSerializer.Serialize(writer, value.ZeroTermsQueryValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -344,9 +620,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ConstantScoreQueryDescriptorConverter))]
-	public sealed partial class ConstantScoreQueryDescriptor : DescriptorBase<ConstantScoreQueryDescriptor>
+	public sealed partial class ConstantScoreQueryDescriptor : DescriptorBase<ConstantScoreQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _filter;
+		public ConstantScoreQueryDescriptor()
+		{
+		}
+
+		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; private set; }
+
+		internal QueryContainerDescriptor FilterDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> FilterDescriptorAction { get; private set; }
+
+		public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public ConstantScoreQueryDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
 	}
 
 	internal sealed class ConstantScoreQueryDescriptorConverter : JsonConverter<ConstantScoreQueryDescriptor>
@@ -355,8 +661,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, ConstantScoreQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, value._filter, options);
+			if (value.FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.FilterDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -375,10 +695,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(DisMaxQueryDescriptorConverter))]
-	public sealed partial class DisMaxQueryDescriptor : DescriptorBase<DisMaxQueryDescriptor>
+	public sealed partial class DisMaxQueryDescriptor : DescriptorBase<DisMaxQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> _queries;
-		internal double? _tieBreaker;
+		public DisMaxQueryDescriptor()
+		{
+		}
+
+		internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; private set; }
+
+		internal double? TieBreakerValue { get; private set; }
+
+		public DisMaxQueryDescriptor Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries) => Assign(queries, (a, v) => a.QueriesValue = v);
+		public DisMaxQueryDescriptor TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
 	}
 
 	internal sealed class DisMaxQueryDescriptorConverter : JsonConverter<DisMaxQueryDescriptor>
@@ -388,11 +717,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("queries");
-			JsonSerializer.Serialize(writer, value._queries, options);
-			if (value._tieBreaker.HasValue)
+			JsonSerializer.Serialize(writer, value.QueriesValue, options);
+			if (value.TieBreakerValue.HasValue)
 			{
 				writer.WritePropertyName("tie_breaker");
-				writer.WriteNumberValue(value._tieBreaker.Value);
+				writer.WriteNumberValue(value.TieBreakerValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -409,9 +738,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ExistsQueryDescriptorConverter))]
-	public sealed partial class ExistsQueryDescriptor : DescriptorBase<ExistsQueryDescriptor>
+	public sealed partial class ExistsQueryDescriptor : DescriptorBase<ExistsQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string _field;
+		public ExistsQueryDescriptor()
+		{
+		}
+
+		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor> configure) => configure.Invoke(this);
+		internal string FieldValue { get; private set; }
+
+		public ExistsQueryDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
 	}
 
 	internal sealed class ExistsQueryDescriptorConverter : JsonConverter<ExistsQueryDescriptor>
@@ -421,7 +757,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value._field, options);
+			JsonSerializer.Serialize(writer, value.FieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -448,12 +784,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(FieldValueFactorScoreFunctionDescriptorConverter))]
-	public sealed partial class FieldValueFactorScoreFunctionDescriptor : DescriptorBase<FieldValueFactorScoreFunctionDescriptor>
+	public sealed partial class FieldValueFactorScoreFunctionDescriptor : DescriptorBase<FieldValueFactorScoreFunctionDescriptor>, IFunctionScoreContainerVariantDescriptor
 	{
-		internal string _field;
-		internal double? _factor;
-		internal double? _missing;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? _modifier;
+		public FieldValueFactorScoreFunctionDescriptor()
+		{
+		}
+
+		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
+		internal string FieldValue { get; private set; }
+
+		internal double? FactorValue { get; private set; }
+
+		internal double? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; private set; }
+
+		public FieldValueFactorScoreFunctionDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldValueFactorScoreFunctionDescriptor Factor(double? factor) => Assign(factor, (a, v) => a.FactorValue = v);
+		public FieldValueFactorScoreFunctionDescriptor Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier) => Assign(modifier, (a, v) => a.ModifierValue = v);
 	}
 
 	internal sealed class FieldValueFactorScoreFunctionDescriptorConverter : JsonConverter<FieldValueFactorScoreFunctionDescriptor>
@@ -463,23 +812,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value._field, options);
-			if (value._factor.HasValue)
+			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			if (value.FactorValue.HasValue)
 			{
 				writer.WritePropertyName("factor");
-				writer.WriteNumberValue(value._factor.Value);
+				writer.WriteNumberValue(value.FactorValue.Value);
 			}
 
-			if (value._missing.HasValue)
+			if (value.MissingValue.HasValue)
 			{
 				writer.WritePropertyName("missing");
-				writer.WriteNumberValue(value._missing.Value);
+				writer.WriteNumberValue(value.MissingValue.Value);
 			}
 
-			if (value._modifier is not null)
+			if (value.ModifierValue is not null)
 			{
 				writer.WritePropertyName("modifier");
-				JsonSerializer.Serialize(writer, value._modifier, options);
+				JsonSerializer.Serialize(writer, value.ModifierValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -489,6 +838,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface IFunctionScoreContainerVariant
 	{
 		string FunctionScoreContainerVariantName { get; }
+	}
+
+	internal interface IFunctionScoreContainerVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(FunctionScoreContainerConverter))]
@@ -564,6 +917,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class FunctionScoreContainerDescriptor : DescriptorBase<FunctionScoreContainerDescriptor>
 	{
+		public FunctionScoreContainerDescriptor()
+		{
+		}
+
+		internal FunctionScoreContainerDescriptor(Action<FunctionScoreContainerDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class FunctionScoreContainerDescriptorConverter : JsonConverter<FunctionScoreContainerDescriptor>
@@ -606,14 +964,55 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(FunctionScoreQueryDescriptorConverter))]
-	public sealed partial class FunctionScoreQueryDescriptor : DescriptorBase<FunctionScoreQueryDescriptor>
+	public sealed partial class FunctionScoreQueryDescriptor : DescriptorBase<FunctionScoreQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? _boostMode;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? _functions;
-		internal double? _maxBoost;
-		internal double? _minScore;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _query;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? _scoreMode;
+		public FunctionScoreQueryDescriptor()
+		{
+		}
+
+		internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostModeValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; private set; }
+
+		internal double? MaxBoostValue { get; private set; }
+
+		internal double? MinScoreValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; private set; }
+
+		internal QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public FunctionScoreQueryDescriptor BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? boostMode) => Assign(boostMode, (a, v) => a.BoostModeValue = v);
+		public FunctionScoreQueryDescriptor Functions(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions) => Assign(functions, (a, v) => a.FunctionsValue = v);
+		public FunctionScoreQueryDescriptor MaxBoost(double? maxBoost) => Assign(maxBoost, (a, v) => a.MaxBoostValue = v);
+		public FunctionScoreQueryDescriptor MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
+		public FunctionScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public FunctionScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public FunctionScoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
+
+		public FunctionScoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
 	}
 
 	internal sealed class FunctionScoreQueryDescriptorConverter : JsonConverter<FunctionScoreQueryDescriptor>
@@ -622,40 +1021,50 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, FunctionScoreQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._boostMode is not null)
+			if (value.BoostModeValue is not null)
 			{
 				writer.WritePropertyName("boost_mode");
-				JsonSerializer.Serialize(writer, value._boostMode, options);
+				JsonSerializer.Serialize(writer, value.BoostModeValue, options);
 			}
 
-			if (value._functions is not null)
+			if (value.FunctionsValue is not null)
 			{
 				writer.WritePropertyName("functions");
-				JsonSerializer.Serialize(writer, value._functions, options);
+				JsonSerializer.Serialize(writer, value.FunctionsValue, options);
 			}
 
-			if (value._maxBoost.HasValue)
+			if (value.MaxBoostValue.HasValue)
 			{
 				writer.WritePropertyName("max_boost");
-				writer.WriteNumberValue(value._maxBoost.Value);
+				writer.WriteNumberValue(value.MaxBoostValue.Value);
 			}
 
-			if (value._minScore.HasValue)
+			if (value.MinScoreValue.HasValue)
 			{
 				writer.WritePropertyName("min_score");
-				writer.WriteNumberValue(value._minScore.Value);
+				writer.WriteNumberValue(value.MinScoreValue.Value);
 			}
 
-			if (value._query is not null)
+			if (value.QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value._query, options);
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else if (value.QueryValue is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
 			}
 
-			if (value._scoreMode is not null)
+			if (value.ScoreModeValue is not null)
 			{
 				writer.WritePropertyName("score_mode");
-				JsonSerializer.Serialize(writer, value._scoreMode, options);
+				JsonSerializer.Serialize(writer, value.ScoreModeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -692,14 +1101,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(FuzzyQueryDescriptorConverter))]
-	public sealed partial class FuzzyQueryDescriptor : DescriptorBase<FuzzyQueryDescriptor>
+	public sealed partial class FuzzyQueryDescriptor : DescriptorBase<FuzzyQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal int? _maxExpansions;
-		internal int? _prefixLength;
-		internal string? _rewrite;
-		internal bool? _transpositions;
-		internal Elastic.Clients.Elasticsearch.Fuzziness? _fuzziness;
-		internal object _value;
+		public FuzzyQueryDescriptor()
+		{
+		}
+
+		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
+		internal int? MaxExpansionsValue { get; private set; }
+
+		internal int? PrefixLengthValue { get; private set; }
+
+		internal string? RewriteValue { get; private set; }
+
+		internal bool? TranspositionsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+
+		internal object ValueValue { get; private set; }
+
+		public FuzzyQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public FuzzyQueryDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public FuzzyQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public FuzzyQueryDescriptor Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
+		public FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public FuzzyQueryDescriptor Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
 	}
 
 	internal sealed class FuzzyQueryDescriptorConverter : JsonConverter<FuzzyQueryDescriptor>
@@ -708,38 +1134,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, FuzzyQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._maxExpansions.HasValue)
+			if (value.MaxExpansionsValue.HasValue)
 			{
 				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value._maxExpansions.Value);
+				writer.WriteNumberValue(value.MaxExpansionsValue.Value);
 			}
 
-			if (value._prefixLength.HasValue)
+			if (value.PrefixLengthValue.HasValue)
 			{
 				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value._prefixLength.Value);
+				writer.WriteNumberValue(value.PrefixLengthValue.Value);
 			}
 
-			if (value._rewrite is not null)
+			if (value.RewriteValue is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value._rewrite, options);
+				JsonSerializer.Serialize(writer, value.RewriteValue, options);
 			}
 
-			if (value._transpositions.HasValue)
+			if (value.TranspositionsValue.HasValue)
 			{
 				writer.WritePropertyName("transpositions");
-				writer.WriteBooleanValue(value._transpositions.Value);
+				writer.WriteBooleanValue(value.TranspositionsValue.Value);
 			}
 
-			if (value._fuzziness is not null)
+			if (value.FuzzinessValue is not null)
 			{
 				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value._fuzziness, options);
+				JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
 			}
 
 			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value._value, options);
+			JsonSerializer.Serialize(writer, value.ValueValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -758,10 +1184,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoBoundingBoxQueryDescriptorConverter))]
-	public sealed partial class GeoBoundingBoxQueryDescriptor : DescriptorBase<GeoBoundingBoxQueryDescriptor>
+	public sealed partial class GeoBoundingBoxQueryDescriptor : DescriptorBase<GeoBoundingBoxQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? _validationMethod;
-		internal bool? _ignoreUnmapped;
+		public GeoBoundingBoxQueryDescriptor()
+		{
+		}
+
+		internal GeoBoundingBoxQueryDescriptor(Action<GeoBoundingBoxQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; private set; }
+
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod) => Assign(validationMethod, (a, v) => a.ValidationMethodValue = v);
+		public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
 	}
 
 	internal sealed class GeoBoundingBoxQueryDescriptorConverter : JsonConverter<GeoBoundingBoxQueryDescriptor>
@@ -770,16 +1205,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, GeoBoundingBoxQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._validationMethod is not null)
+			if (value.ValidationMethodValue is not null)
 			{
 				writer.WritePropertyName("validation_method");
-				JsonSerializer.Serialize(writer, value._validationMethod, options);
+				JsonSerializer.Serialize(writer, value.ValidationMethodValue, options);
 			}
 
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -804,11 +1239,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoDistanceQueryDescriptorConverter))]
-	public sealed partial class GeoDistanceQueryDescriptor : DescriptorBase<GeoDistanceQueryDescriptor>
+	public sealed partial class GeoDistanceQueryDescriptor : DescriptorBase<GeoDistanceQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _distance;
-		internal Elastic.Clients.Elasticsearch.GeoDistanceType? _distanceType;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? _validationMethod;
+		public GeoDistanceQueryDescriptor()
+		{
+		}
+
+		internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? DistanceValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; private set; }
+
+		public GeoDistanceQueryDescriptor Distance(string? distance) => Assign(distance, (a, v) => a.DistanceValue = v);
+		public GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType) => Assign(distanceType, (a, v) => a.DistanceTypeValue = v);
+		public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod) => Assign(validationMethod, (a, v) => a.ValidationMethodValue = v);
 	}
 
 	internal sealed class GeoDistanceQueryDescriptorConverter : JsonConverter<GeoDistanceQueryDescriptor>
@@ -817,22 +1263,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, GeoDistanceQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._distance is not null)
+			if (value.DistanceValue is not null)
 			{
 				writer.WritePropertyName("distance");
-				JsonSerializer.Serialize(writer, value._distance, options);
+				JsonSerializer.Serialize(writer, value.DistanceValue, options);
 			}
 
-			if (value._distanceType is not null)
+			if (value.DistanceTypeValue is not null)
 			{
 				writer.WritePropertyName("distance_type");
-				JsonSerializer.Serialize(writer, value._distanceType, options);
+				JsonSerializer.Serialize(writer, value.DistanceTypeValue, options);
 			}
 
-			if (value._validationMethod is not null)
+			if (value.ValidationMethodValue is not null)
 			{
 				writer.WritePropertyName("validation_method");
-				JsonSerializer.Serialize(writer, value._validationMethod, options);
+				JsonSerializer.Serialize(writer, value.ValidationMethodValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -853,10 +1299,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoPolygonQueryDescriptorConverter))]
-	public sealed partial class GeoPolygonQueryDescriptor : DescriptorBase<GeoPolygonQueryDescriptor>
+	public sealed partial class GeoPolygonQueryDescriptor : DescriptorBase<GeoPolygonQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? _validationMethod;
-		internal bool? _ignoreUnmapped;
+		public GeoPolygonQueryDescriptor()
+		{
+		}
+
+		internal GeoPolygonQueryDescriptor(Action<GeoPolygonQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; private set; }
+
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		public GeoPolygonQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod) => Assign(validationMethod, (a, v) => a.ValidationMethodValue = v);
+		public GeoPolygonQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
 	}
 
 	internal sealed class GeoPolygonQueryDescriptorConverter : JsonConverter<GeoPolygonQueryDescriptor>
@@ -865,16 +1320,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, GeoPolygonQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._validationMethod is not null)
+			if (value.ValidationMethodValue is not null)
 			{
 				writer.WritePropertyName("validation_method");
-				JsonSerializer.Serialize(writer, value._validationMethod, options);
+				JsonSerializer.Serialize(writer, value.ValidationMethodValue, options);
 			}
 
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -891,9 +1346,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(GeoShapeQueryDescriptorConverter))]
-	public sealed partial class GeoShapeQueryDescriptor : DescriptorBase<GeoShapeQueryDescriptor>
+	public sealed partial class GeoShapeQueryDescriptor : DescriptorBase<GeoShapeQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _ignoreUnmapped;
+		public GeoShapeQueryDescriptor()
+		{
+		}
+
+		internal GeoShapeQueryDescriptor(Action<GeoShapeQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		public GeoShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
 	}
 
 	internal sealed class GeoShapeQueryDescriptorConverter : JsonConverter<GeoShapeQueryDescriptor>
@@ -902,10 +1364,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, GeoShapeQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -946,15 +1408,82 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(HasChildQueryDescriptorConverter))]
-	public sealed partial class HasChildQueryDescriptor : DescriptorBase<HasChildQueryDescriptor>
+	public sealed partial class HasChildQueryDescriptor : DescriptorBase<HasChildQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _ignoreUnmapped;
-		internal Elastic.Clients.Elasticsearch.InnerHits? _innerHits;
-		internal int? _maxChildren;
-		internal int? _minChildren;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _query;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? _scoreMode;
-		internal string _type;
+		public HasChildQueryDescriptor()
+		{
+		}
+
+		internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
+
+		internal int? MaxChildrenValue { get; private set; }
+
+		internal int? MinChildrenValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; private set; }
+
+		internal string TypeValue { get; private set; }
+
+		internal InnerHitsDescriptor InnerHitsDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public HasChildQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
+		public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		{
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
+		}
+
+		public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor descriptor)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
+		}
+
+		public HasChildQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor> configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
+		}
+
+		public HasChildQueryDescriptor MaxChildren(int? maxChildren) => Assign(maxChildren, (a, v) => a.MaxChildrenValue = v);
+		public HasChildQueryDescriptor MinChildren(int? minChildren) => Assign(minChildren, (a, v) => a.MinChildrenValue = v);
+		public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public HasChildQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
+
+		public HasChildQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
+		public HasChildQueryDescriptor Type(string type) => Assign(type, (a, v) => a.TypeValue = v);
 	}
 
 	internal sealed class HasChildQueryDescriptorConverter : JsonConverter<HasChildQueryDescriptor>
@@ -963,40 +1492,64 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, HasChildQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
-			if (value._innerHits is not null)
+			if (value.InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, value._innerHits, options);
+				JsonSerializer.Serialize(writer, value.InnerHitsDescriptor, options);
+			}
+			else if (value.InnerHitsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(value.InnerHitsDescriptorAction), options);
+			}
+			else if (value.InnerHitsValue is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, value.InnerHitsValue, options);
 			}
 
-			if (value._maxChildren.HasValue)
+			if (value.MaxChildrenValue.HasValue)
 			{
 				writer.WritePropertyName("max_children");
-				writer.WriteNumberValue(value._maxChildren.Value);
+				writer.WriteNumberValue(value.MaxChildrenValue.Value);
 			}
 
-			if (value._minChildren.HasValue)
+			if (value.MinChildrenValue.HasValue)
 			{
 				writer.WritePropertyName("min_children");
-				writer.WriteNumberValue(value._minChildren.Value);
+				writer.WriteNumberValue(value.MinChildrenValue.Value);
 			}
 
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value._query, options);
-			if (value._scoreMode is not null)
+			if (value.QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
+			}
+
+			if (value.ScoreModeValue is not null)
 			{
 				writer.WritePropertyName("score_mode");
-				JsonSerializer.Serialize(writer, value._scoreMode, options);
+				JsonSerializer.Serialize(writer, value.ScoreModeValue, options);
 			}
 
 			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, value._type, options);
+			JsonSerializer.Serialize(writer, value.TypeValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -1027,13 +1580,76 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(HasParentQueryDescriptorConverter))]
-	public sealed partial class HasParentQueryDescriptor : DescriptorBase<HasParentQueryDescriptor>
+	public sealed partial class HasParentQueryDescriptor : DescriptorBase<HasParentQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _ignoreUnmapped;
-		internal Elastic.Clients.Elasticsearch.InnerHits? _innerHits;
-		internal string _parentType;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _query;
-		internal bool? _score;
+		public HasParentQueryDescriptor()
+		{
+		}
+
+		internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
+
+		internal string ParentTypeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
+
+		internal bool? ScoreValue { get; private set; }
+
+		internal InnerHitsDescriptor InnerHitsDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public HasParentQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
+		public HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		{
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
+		}
+
+		public HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor descriptor)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
+		}
+
+		public HasParentQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor> configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
+		}
+
+		public HasParentQueryDescriptor ParentType(string parentType) => Assign(parentType, (a, v) => a.ParentTypeValue = v);
+		public HasParentQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public HasParentQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public HasParentQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
+
+		public HasParentQueryDescriptor Score(bool? score = true) => Assign(score, (a, v) => a.ScoreValue = v);
 	}
 
 	internal sealed class HasParentQueryDescriptorConverter : JsonConverter<HasParentQueryDescriptor>
@@ -1042,26 +1658,50 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, HasParentQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
-			if (value._innerHits is not null)
+			if (value.InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, value._innerHits, options);
+				JsonSerializer.Serialize(writer, value.InnerHitsDescriptor, options);
+			}
+			else if (value.InnerHitsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(value.InnerHitsDescriptorAction), options);
+			}
+			else if (value.InnerHitsValue is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, value.InnerHitsValue, options);
 			}
 
 			writer.WritePropertyName("parent_type");
-			JsonSerializer.Serialize(writer, value._parentType, options);
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value._query, options);
-			if (value._score.HasValue)
+			JsonSerializer.Serialize(writer, value.ParentTypeValue, options);
+			if (value.QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
+			}
+
+			if (value.ScoreValue.HasValue)
 			{
 				writer.WritePropertyName("score");
-				writer.WriteBooleanValue(value._score.Value);
+				writer.WriteBooleanValue(value.ScoreValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -1078,9 +1718,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IdsQueryDescriptorConverter))]
-	public sealed partial class IdsQueryDescriptor : DescriptorBase<IdsQueryDescriptor>
+	public sealed partial class IdsQueryDescriptor : DescriptorBase<IdsQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.Ids? _values;
+		public IdsQueryDescriptor()
+		{
+		}
+
+		internal IdsQueryDescriptor(Action<IdsQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Ids? ValuesValue { get; private set; }
+
+		public IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? values) => Assign(values, (a, v) => a.ValuesValue = v);
 	}
 
 	internal sealed class IdsQueryDescriptorConverter : JsonConverter<IdsQueryDescriptor>
@@ -1089,10 +1736,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IdsQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._values is not null)
+			if (value.ValuesValue is not null)
 			{
 				writer.WritePropertyName("values");
-				JsonSerializer.Serialize(writer, value._values, options);
+				JsonSerializer.Serialize(writer, value.ValuesValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1123,12 +1770,48 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsAllOfDescriptorConverter))]
-	public sealed partial class IntervalsAllOfDescriptor : DescriptorBase<IntervalsAllOfDescriptor>
+	public sealed partial class IntervalsAllOfDescriptor : DescriptorBase<IntervalsAllOfDescriptor>, IIntervalsContainerVariantDescriptor, IIntervalsQueryVariantDescriptor
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> _intervals;
-		internal int? _maxGaps;
-		internal bool? _ordered;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? _filter;
+		public IntervalsAllOfDescriptor()
+		{
+		}
+
+		internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; private set; }
+
+		internal int? MaxGapsValue { get; private set; }
+
+		internal bool? OrderedValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
+
+		internal IntervalsFilterDescriptor FilterDescriptor { get; private set; }
+
+		internal Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; private set; }
+
+		public IntervalsAllOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals) => Assign(intervals, (a, v) => a.IntervalsValue = v);
+		public IntervalsAllOfDescriptor MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
+		public IntervalsAllOfDescriptor Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
+		public IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public IntervalsAllOfDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IntervalsAllOfDescriptorConverter : JsonConverter<IntervalsAllOfDescriptor>
@@ -1138,23 +1821,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("intervals");
-			JsonSerializer.Serialize(writer, value._intervals, options);
-			if (value._maxGaps.HasValue)
+			JsonSerializer.Serialize(writer, value.IntervalsValue, options);
+			if (value.MaxGapsValue.HasValue)
 			{
 				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(value._maxGaps.Value);
+				writer.WriteNumberValue(value.MaxGapsValue.Value);
 			}
 
-			if (value._ordered.HasValue)
+			if (value.OrderedValue.HasValue)
 			{
 				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(value._ordered.Value);
+				writer.WriteBooleanValue(value.OrderedValue.Value);
 			}
 
-			if (value._filter is not null)
+			if (value.FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(value.FilterDescriptorAction), options);
+			}
+			else if (value.FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1177,10 +1870,42 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsAnyOfDescriptorConverter))]
-	public sealed partial class IntervalsAnyOfDescriptor : DescriptorBase<IntervalsAnyOfDescriptor>
+	public sealed partial class IntervalsAnyOfDescriptor : DescriptorBase<IntervalsAnyOfDescriptor>, IIntervalsContainerVariantDescriptor, IIntervalsQueryVariantDescriptor
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> _intervals;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? _filter;
+		public IntervalsAnyOfDescriptor()
+		{
+		}
+
+		internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
+
+		internal IntervalsFilterDescriptor FilterDescriptor { get; private set; }
+
+		internal Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; private set; }
+
+		public IntervalsAnyOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals) => Assign(intervals, (a, v) => a.IntervalsValue = v);
+		public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public IntervalsAnyOfDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IntervalsAnyOfDescriptorConverter : JsonConverter<IntervalsAnyOfDescriptor>
@@ -1190,11 +1915,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("intervals");
-			JsonSerializer.Serialize(writer, value._intervals, options);
-			if (value._filter is not null)
+			JsonSerializer.Serialize(writer, value.IntervalsValue, options);
+			if (value.FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(value.FilterDescriptorAction), options);
+			}
+			else if (value.FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1204,6 +1939,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface IIntervalsContainerVariant
 	{
 		string IntervalsContainerVariantName { get; }
+	}
+
+	internal interface IIntervalsContainerVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(IntervalsContainerConverter))]
@@ -1301,6 +2040,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class IntervalsContainerDescriptor : DescriptorBase<IntervalsContainerDescriptor>
 	{
+		public IntervalsContainerDescriptor()
+		{
+		}
+
+		internal IntervalsContainerDescriptor(Action<IntervalsContainerDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class IntervalsContainerDescriptorConverter : JsonConverter<IntervalsContainerDescriptor>
@@ -1316,6 +2060,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface IIntervalsFilterVariant
 	{
 		string IntervalsFilterVariantName { get; }
+	}
+
+	internal interface IIntervalsFilterVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(IntervalsFilterConverter))]
@@ -1349,6 +2097,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class IntervalsFilterDescriptor : DescriptorBase<IntervalsFilterDescriptor>
 	{
+		public IntervalsFilterDescriptor()
+		{
+		}
+
+		internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class IntervalsFilterDescriptorConverter : JsonConverter<IntervalsFilterDescriptor>
@@ -1393,14 +2146,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsFuzzyDescriptorConverter))]
-	public sealed partial class IntervalsFuzzyDescriptor : DescriptorBase<IntervalsFuzzyDescriptor>
+	public sealed partial class IntervalsFuzzyDescriptor : DescriptorBase<IntervalsFuzzyDescriptor>, IIntervalsContainerVariantDescriptor, IIntervalsQueryVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal Elastic.Clients.Elasticsearch.Fuzziness? _fuzziness;
-		internal int? _prefixLength;
-		internal string _term;
-		internal bool? _transpositions;
-		internal string? _useField;
+		public IntervalsFuzzyDescriptor()
+		{
+		}
+
+		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+
+		internal int? PrefixLengthValue { get; private set; }
+
+		internal string TermValue { get; private set; }
+
+		internal bool? TranspositionsValue { get; private set; }
+
+		internal string? UseFieldValue { get; private set; }
+
+		public IntervalsFuzzyDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public IntervalsFuzzyDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public IntervalsFuzzyDescriptor Term(string term) => Assign(term, (a, v) => a.TermValue = v);
+		public IntervalsFuzzyDescriptor Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
+		public IntervalsFuzzyDescriptor UseField(string? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 	}
 
 	internal sealed class IntervalsFuzzyDescriptorConverter : JsonConverter<IntervalsFuzzyDescriptor>
@@ -1409,36 +2179,36 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IntervalsFuzzyDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._fuzziness is not null)
+			if (value.FuzzinessValue is not null)
 			{
 				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value._fuzziness, options);
+				JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
 			}
 
-			if (value._prefixLength.HasValue)
+			if (value.PrefixLengthValue.HasValue)
 			{
 				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value._prefixLength.Value);
+				writer.WriteNumberValue(value.PrefixLengthValue.Value);
 			}
 
 			writer.WritePropertyName("term");
-			writer.WriteStringValue(value._term);
-			if (value._transpositions.HasValue)
+			writer.WriteStringValue(value.TermValue);
+			if (value.TranspositionsValue.HasValue)
 			{
 				writer.WritePropertyName("transpositions");
-				writer.WriteBooleanValue(value._transpositions.Value);
+				writer.WriteBooleanValue(value.TranspositionsValue.Value);
 			}
 
-			if (value._useField is not null)
+			if (value.UseFieldValue is not null)
 			{
 				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, value._useField, options);
+				JsonSerializer.Serialize(writer, value.UseFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1477,14 +2247,54 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsMatchDescriptorConverter))]
-	public sealed partial class IntervalsMatchDescriptor : DescriptorBase<IntervalsMatchDescriptor>
+	public sealed partial class IntervalsMatchDescriptor : DescriptorBase<IntervalsMatchDescriptor>, IIntervalsContainerVariantDescriptor, IIntervalsQueryVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal int? _maxGaps;
-		internal bool? _ordered;
-		internal string _query;
-		internal string? _useField;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? _filter;
+		public IntervalsMatchDescriptor()
+		{
+		}
+
+		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal int? MaxGapsValue { get; private set; }
+
+		internal bool? OrderedValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal string? UseFieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
+
+		internal IntervalsFilterDescriptor FilterDescriptor { get; private set; }
+
+		internal Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; private set; }
+
+		public IntervalsMatchDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsMatchDescriptor MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
+		public IntervalsMatchDescriptor Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
+		public IntervalsMatchDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public IntervalsMatchDescriptor UseField(string? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public IntervalsMatchDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IntervalsMatchDescriptorConverter : JsonConverter<IntervalsMatchDescriptor>
@@ -1493,36 +2303,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IntervalsMatchDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._maxGaps.HasValue)
+			if (value.MaxGapsValue.HasValue)
 			{
 				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(value._maxGaps.Value);
+				writer.WriteNumberValue(value.MaxGapsValue.Value);
 			}
 
-			if (value._ordered.HasValue)
+			if (value.OrderedValue.HasValue)
 			{
 				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(value._ordered.Value);
+				writer.WriteBooleanValue(value.OrderedValue.Value);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (value._useField is not null)
+			writer.WriteStringValue(value.QueryValue);
+			if (value.UseFieldValue is not null)
 			{
 				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, value._useField, options);
+				JsonSerializer.Serialize(writer, value.UseFieldValue, options);
 			}
 
-			if (value._filter is not null)
+			if (value.FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(value.FilterDescriptorAction), options);
+			}
+			else if (value.FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1549,11 +2369,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsPrefixDescriptorConverter))]
-	public sealed partial class IntervalsPrefixDescriptor : DescriptorBase<IntervalsPrefixDescriptor>
+	public sealed partial class IntervalsPrefixDescriptor : DescriptorBase<IntervalsPrefixDescriptor>, IIntervalsContainerVariantDescriptor, IIntervalsQueryVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal string _prefix;
-		internal string? _useField;
+		public IntervalsPrefixDescriptor()
+		{
+		}
+
+		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal string PrefixValue { get; private set; }
+
+		internal string? UseFieldValue { get; private set; }
+
+		public IntervalsPrefixDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsPrefixDescriptor Prefix(string prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
+		public IntervalsPrefixDescriptor UseField(string? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 	}
 
 	internal sealed class IntervalsPrefixDescriptorConverter : JsonConverter<IntervalsPrefixDescriptor>
@@ -1562,18 +2393,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IntervalsPrefixDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
 			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(value._prefix);
-			if (value._useField is not null)
+			writer.WriteStringValue(value.PrefixValue);
+			if (value.UseFieldValue is not null)
 			{
 				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, value._useField, options);
+				JsonSerializer.Serialize(writer, value.UseFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1583,6 +2414,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface IIntervalsQueryVariant
 	{
 		string IntervalsQueryVariantName { get; }
+	}
+
+	internal interface IIntervalsQueryVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(IntervalsQueryConverter))]
@@ -1683,6 +2518,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class IntervalsQueryDescriptor : DescriptorBase<IntervalsQueryDescriptor>
 	{
+		public IntervalsQueryDescriptor()
+		{
+		}
+
+		internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class IntervalsQueryDescriptorConverter : JsonConverter<IntervalsQueryDescriptor>
@@ -1715,11 +2555,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(IntervalsWildcardDescriptorConverter))]
-	public sealed partial class IntervalsWildcardDescriptor : DescriptorBase<IntervalsWildcardDescriptor>
+	public sealed partial class IntervalsWildcardDescriptor : DescriptorBase<IntervalsWildcardDescriptor>, IIntervalsContainerVariantDescriptor, IIntervalsQueryVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal string _pattern;
-		internal string? _useField;
+		public IntervalsWildcardDescriptor()
+		{
+		}
+
+		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal string PatternValue { get; private set; }
+
+		internal string? UseFieldValue { get; private set; }
+
+		public IntervalsWildcardDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsWildcardDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
+		public IntervalsWildcardDescriptor UseField(string? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 	}
 
 	internal sealed class IntervalsWildcardDescriptorConverter : JsonConverter<IntervalsWildcardDescriptor>
@@ -1728,18 +2579,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, IntervalsWildcardDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
 			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value._pattern);
-			if (value._useField is not null)
+			writer.WriteStringValue(value.PatternValue);
+			if (value.UseFieldValue is not null)
 			{
 				writer.WritePropertyName("use_field");
-				JsonSerializer.Serialize(writer, value._useField, options);
+				JsonSerializer.Serialize(writer, value.UseFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1792,8 +2643,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchAllQueryDescriptorConverter))]
-	public sealed partial class MatchAllQueryDescriptor : DescriptorBase<MatchAllQueryDescriptor>
+	public sealed partial class MatchAllQueryDescriptor : DescriptorBase<MatchAllQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
+		public MatchAllQueryDescriptor()
+		{
+		}
+
+		internal MatchAllQueryDescriptor(Action<MatchAllQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class MatchAllQueryDescriptorConverter : JsonConverter<MatchAllQueryDescriptor>
@@ -1848,17 +2704,40 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchBoolPrefixQueryDescriptorConverter))]
-	public sealed partial class MatchBoolPrefixQueryDescriptor : DescriptorBase<MatchBoolPrefixQueryDescriptor>
+	public sealed partial class MatchBoolPrefixQueryDescriptor : DescriptorBase<MatchBoolPrefixQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal Elastic.Clients.Elasticsearch.Fuzziness? _fuzziness;
-		internal string? _fuzzyRewrite;
-		internal bool? _fuzzyTranspositions;
-		internal int? _maxExpansions;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? _operator;
-		internal int? _prefixLength;
-		internal string _query;
+		public MatchBoolPrefixQueryDescriptor()
+		{
+		}
+
+		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+
+		internal string? FuzzyRewriteValue { get; private set; }
+
+		internal bool? FuzzyTranspositionsValue { get; private set; }
+
+		internal int? MaxExpansionsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; private set; }
+
+		internal int? PrefixLengthValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		public MatchBoolPrefixQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchBoolPrefixQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public MatchBoolPrefixQueryDescriptor FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
+		public MatchBoolPrefixQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public MatchBoolPrefixQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public MatchBoolPrefixQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public MatchBoolPrefixQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public MatchBoolPrefixQueryDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public MatchBoolPrefixQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
 	}
 
 	internal sealed class MatchBoolPrefixQueryDescriptorConverter : JsonConverter<MatchBoolPrefixQueryDescriptor>
@@ -1867,56 +2746,56 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, MatchBoolPrefixQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._fuzziness is not null)
+			if (value.FuzzinessValue is not null)
 			{
 				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value._fuzziness, options);
+				JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
 			}
 
-			if (value._fuzzyRewrite is not null)
+			if (value.FuzzyRewriteValue is not null)
 			{
 				writer.WritePropertyName("fuzzy_rewrite");
-				JsonSerializer.Serialize(writer, value._fuzzyRewrite, options);
+				JsonSerializer.Serialize(writer, value.FuzzyRewriteValue, options);
 			}
 
-			if (value._fuzzyTranspositions.HasValue)
+			if (value.FuzzyTranspositionsValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_transpositions");
-				writer.WriteBooleanValue(value._fuzzyTranspositions.Value);
+				writer.WriteBooleanValue(value.FuzzyTranspositionsValue.Value);
 			}
 
-			if (value._maxExpansions.HasValue)
+			if (value.MaxExpansionsValue.HasValue)
 			{
 				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value._maxExpansions.Value);
+				writer.WriteNumberValue(value.MaxExpansionsValue.Value);
 			}
 
-			if (value._minimumShouldMatch is not null)
+			if (value.MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
 			}
 
-			if (value._operator is not null)
+			if (value.OperatorValue is not null)
 			{
 				writer.WritePropertyName("operator");
-				JsonSerializer.Serialize(writer, value._operator, options);
+				JsonSerializer.Serialize(writer, value.OperatorValue, options);
 			}
 
-			if (value._prefixLength.HasValue)
+			if (value.PrefixLengthValue.HasValue)
 			{
 				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value._prefixLength.Value);
+				writer.WriteNumberValue(value.PrefixLengthValue.Value);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
+			writer.WriteStringValue(value.QueryValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -1928,8 +2807,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchNoneQueryDescriptorConverter))]
-	public sealed partial class MatchNoneQueryDescriptor : DescriptorBase<MatchNoneQueryDescriptor>
+	public sealed partial class MatchNoneQueryDescriptor : DescriptorBase<MatchNoneQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
+		public MatchNoneQueryDescriptor()
+		{
+		}
+
+		internal MatchNoneQueryDescriptor(Action<MatchNoneQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class MatchNoneQueryDescriptorConverter : JsonConverter<MatchNoneQueryDescriptor>
@@ -1968,13 +2852,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchPhrasePrefixQueryDescriptorConverter))]
-	public sealed partial class MatchPhrasePrefixQueryDescriptor : DescriptorBase<MatchPhrasePrefixQueryDescriptor>
+	public sealed partial class MatchPhrasePrefixQueryDescriptor : DescriptorBase<MatchPhrasePrefixQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal int? _maxExpansions;
-		internal string _query;
-		internal int? _slop;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? _zeroTermsQuery;
+		public MatchPhrasePrefixQueryDescriptor()
+		{
+		}
+
+		internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal int? MaxExpansionsValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal int? SlopValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
+
+		public MatchPhrasePrefixQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchPhrasePrefixQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public MatchPhrasePrefixQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MatchPhrasePrefixQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
+		public MatchPhrasePrefixQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 	}
 
 	internal sealed class MatchPhrasePrefixQueryDescriptorConverter : JsonConverter<MatchPhrasePrefixQueryDescriptor>
@@ -1983,30 +2882,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, MatchPhrasePrefixQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._maxExpansions.HasValue)
+			if (value.MaxExpansionsValue.HasValue)
 			{
 				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value._maxExpansions.Value);
+				writer.WriteNumberValue(value.MaxExpansionsValue.Value);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (value._slop.HasValue)
+			writer.WriteStringValue(value.QueryValue);
+			if (value.SlopValue.HasValue)
 			{
 				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(value._slop.Value);
+				writer.WriteNumberValue(value.SlopValue.Value);
 			}
 
-			if (value._zeroTermsQuery is not null)
+			if (value.ZeroTermsQueryValue is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value._zeroTermsQuery, options);
+				JsonSerializer.Serialize(writer, value.ZeroTermsQueryValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2035,12 +2934,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchPhraseQueryDescriptorConverter))]
-	public sealed partial class MatchPhraseQueryDescriptor : DescriptorBase<MatchPhraseQueryDescriptor>
+	public sealed partial class MatchPhraseQueryDescriptor : DescriptorBase<MatchPhraseQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal string _query;
-		internal int? _slop;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? _zeroTermsQuery;
+		public MatchPhraseQueryDescriptor()
+		{
+		}
+
+		internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal int? SlopValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
+
+		public MatchPhraseQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchPhraseQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MatchPhraseQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
+		public MatchPhraseQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 	}
 
 	internal sealed class MatchPhraseQueryDescriptorConverter : JsonConverter<MatchPhraseQueryDescriptor>
@@ -2049,24 +2961,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, MatchPhraseQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (value._slop.HasValue)
+			writer.WriteStringValue(value.QueryValue);
+			if (value.SlopValue.HasValue)
 			{
 				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(value._slop.Value);
+				writer.WriteNumberValue(value.SlopValue.Value);
 			}
 
-			if (value._zeroTermsQuery is not null)
+			if (value.ZeroTermsQueryValue is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value._zeroTermsQuery, options);
+				JsonSerializer.Serialize(writer, value.ZeroTermsQueryValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2127,20 +3039,49 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MatchQueryDescriptorConverter))]
-	public sealed partial class MatchQueryDescriptor : FieldNameQueryDescriptorBase<MatchQueryDescriptor>
+	public sealed partial class MatchQueryDescriptor : FieldNameQueryDescriptorBase<MatchQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal bool? _autoGenerateSynonymsPhraseQuery;
-		internal Elastic.Clients.Elasticsearch.Fuzziness? _fuzziness;
-		internal string? _fuzzyRewrite;
-		internal bool? _fuzzyTranspositions;
-		internal bool? _lenient;
-		internal int? _maxExpansions;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? _operator;
-		internal int? _prefixLength;
-		internal string _query;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? _zeroTermsQuery;
+		public MatchQueryDescriptor()
+		{
+		}
+
+		internal MatchQueryDescriptor(Action<MatchQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+
+		internal string? FuzzyRewriteValue { get; private set; }
+
+		internal bool? FuzzyTranspositionsValue { get; private set; }
+
+		internal bool? LenientValue { get; private set; }
+
+		internal int? MaxExpansionsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; private set; }
+
+		internal int? PrefixLengthValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
+
+		public MatchQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public MatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public MatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
+		public MatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public MatchQueryDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public MatchQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public MatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public MatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public MatchQueryDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 	}
 
 	//internal sealed class MatchQueryDescriptorConverter : JsonConverter<MatchQueryDescriptor>
@@ -2148,7 +3089,76 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	public override MatchQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 	//	public override void Write(Utf8JsonWriter writer, MatchQueryDescriptor value, JsonSerializerOptions options)
 	//	{
+	//		writer.WriteStartObject();
+	//		if (!string.IsNullOrEmpty(value.AnalyzerValue))
+	//		{
+	//			writer.WritePropertyName("analyzer");
+	//			writer.WriteStringValue(value.AnalyzerValue);
+	//		}
 
+	//		if (value.AutoGenerateSynonymsPhraseQueryValue.HasValue)
+	//		{
+	//			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+	//			writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQueryValue.Value);
+	//		}
+
+	//		if (value.FuzzinessValue is not null)
+	//		{
+	//			writer.WritePropertyName("fuzziness");
+	//			JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
+	//		}
+
+	//		if (value.FuzzyRewriteValue is not null)
+	//		{
+	//			writer.WritePropertyName("fuzzy_rewrite");
+	//			JsonSerializer.Serialize(writer, value.FuzzyRewriteValue, options);
+	//		}
+
+	//		if (value.FuzzyTranspositionsValue.HasValue)
+	//		{
+	//			writer.WritePropertyName("fuzzy_transpositions");
+	//			writer.WriteBooleanValue(value.FuzzyTranspositionsValue.Value);
+	//		}
+
+	//		if (value.LenientValue.HasValue)
+	//		{
+	//			writer.WritePropertyName("lenient");
+	//			writer.WriteBooleanValue(value.LenientValue.Value);
+	//		}
+
+	//		if (value.MaxExpansionsValue.HasValue)
+	//		{
+	//			writer.WritePropertyName("max_expansions");
+	//			writer.WriteNumberValue(value.MaxExpansionsValue.Value);
+	//		}
+
+	//		if (value.MinimumShouldMatchValue is not null)
+	//		{
+	//			writer.WritePropertyName("minimum_should_match");
+	//			JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
+	//		}
+
+	//		if (value.OperatorValue is not null)
+	//		{
+	//			writer.WritePropertyName("operator");
+	//			JsonSerializer.Serialize(writer, value.OperatorValue, options);
+	//		}
+
+	//		if (value.PrefixLengthValue.HasValue)
+	//		{
+	//			writer.WritePropertyName("prefix_length");
+	//			writer.WriteNumberValue(value.PrefixLengthValue.Value);
+	//		}
+
+	//		writer.WritePropertyName("query");
+	//		JsonSerializer.Serialize(writer, value.QueryValue, options);
+	//		if (value.ZeroTermsQueryValue is not null)
+	//		{
+	//			writer.WritePropertyName("zero_terms_query");
+	//			JsonSerializer.Serialize(writer, value.ZeroTermsQueryValue, options);
+	//		}
+
+	//		writer.WriteEndObject();
 	//	}
 	//}
 
@@ -2178,7 +3188,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("like")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.Like Like { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_doc_freq")]
@@ -2222,7 +3232,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("unlike")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.Like? Unlike { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -2234,27 +3244,70 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MoreLikeThisQueryDescriptorConverter))]
-	public sealed partial class MoreLikeThisQueryDescriptor : DescriptorBase<MoreLikeThisQueryDescriptor>
+	public sealed partial class MoreLikeThisQueryDescriptor : DescriptorBase<MoreLikeThisQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal double? _boostTerms;
-		internal bool? _failOnUnsupportedField;
-		internal IEnumerable<string>? _fields;
-		internal bool? _include;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> _like;
-		internal int? _maxDocFreq;
-		internal int? _maxQueryTerms;
-		internal int? _maxWordLength;
-		internal int? _minDocFreq;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal int? _minTermFreq;
-		internal int? _minWordLength;
-		internal Dictionary<string, string>? _perFieldAnalyzer;
-		internal string? _routing;
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? _stopWords;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? _unlike;
-		internal long? _version;
-		internal Elastic.Clients.Elasticsearch.VersionType? _versionType;
+		public MoreLikeThisQueryDescriptor()
+		{
+		}
+
+		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal double? BoostTermsValue { get; private set; }
+
+		internal bool? FailOnUnsupportedFieldValue { get; private set; }
+
+		internal IEnumerable<string>? FieldsValue { get; private set; }
+
+		internal bool? IncludeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Like LikeValue { get; private set; }
+
+		internal int? MaxDocFreqValue { get; private set; }
+
+		internal int? MaxQueryTermsValue { get; private set; }
+
+		internal int? MaxWordLengthValue { get; private set; }
+
+		internal int? MinDocFreqValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal int? MinTermFreqValue { get; private set; }
+
+		internal int? MinWordLengthValue { get; private set; }
+
+		internal Dictionary<string, string>? PerFieldAnalyzerValue { get; private set; }
+
+		internal string? RoutingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Like? UnlikeValue { get; private set; }
+
+		internal long? VersionValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; private set; }
+
+		public MoreLikeThisQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MoreLikeThisQueryDescriptor BoostTerms(double? boostTerms) => Assign(boostTerms, (a, v) => a.BoostTermsValue = v);
+		public MoreLikeThisQueryDescriptor FailOnUnsupportedField(bool? failOnUnsupportedField = true) => Assign(failOnUnsupportedField, (a, v) => a.FailOnUnsupportedFieldValue = v);
+		public MoreLikeThisQueryDescriptor Fields(IEnumerable<string>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public MoreLikeThisQueryDescriptor Include(bool? include = true) => Assign(include, (a, v) => a.IncludeValue = v);
+		public MoreLikeThisQueryDescriptor Like(Elastic.Clients.Elasticsearch.QueryDsl.Like like) => Assign(like, (a, v) => a.LikeValue = v);
+		public MoreLikeThisQueryDescriptor MaxDocFreq(int? maxDocFreq) => Assign(maxDocFreq, (a, v) => a.MaxDocFreqValue = v);
+		public MoreLikeThisQueryDescriptor MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTermsValue = v);
+		public MoreLikeThisQueryDescriptor MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLengthValue = v);
+		public MoreLikeThisQueryDescriptor MinDocFreq(int? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
+		public MoreLikeThisQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public MoreLikeThisQueryDescriptor MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
+		public MoreLikeThisQueryDescriptor MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
+		public MoreLikeThisQueryDescriptor PerFieldAnalyzer(Func<FluentDictionary<string?, string?>, FluentDictionary<string?, string?>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<string?, string?>()));
+		public MoreLikeThisQueryDescriptor Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public MoreLikeThisQueryDescriptor StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
+		public MoreLikeThisQueryDescriptor Unlike(Elastic.Clients.Elasticsearch.QueryDsl.Like? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
+		public MoreLikeThisQueryDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public MoreLikeThisQueryDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Assign(versionType, (a, v) => a.VersionTypeValue = v);
 	}
 
 	internal sealed class MoreLikeThisQueryDescriptorConverter : JsonConverter<MoreLikeThisQueryDescriptor>
@@ -2263,114 +3316,114 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, MoreLikeThisQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._boostTerms.HasValue)
+			if (value.BoostTermsValue.HasValue)
 			{
 				writer.WritePropertyName("boost_terms");
-				writer.WriteNumberValue(value._boostTerms.Value);
+				writer.WriteNumberValue(value.BoostTermsValue.Value);
 			}
 
-			if (value._failOnUnsupportedField.HasValue)
+			if (value.FailOnUnsupportedFieldValue.HasValue)
 			{
 				writer.WritePropertyName("fail_on_unsupported_field");
-				writer.WriteBooleanValue(value._failOnUnsupportedField.Value);
+				writer.WriteBooleanValue(value.FailOnUnsupportedFieldValue.Value);
 			}
 
-			if (value._fields is not null)
+			if (value.FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, value._fields, options);
+				JsonSerializer.Serialize(writer, value.FieldsValue, options);
 			}
 
-			if (value._include.HasValue)
+			if (value.IncludeValue.HasValue)
 			{
 				writer.WritePropertyName("include");
-				writer.WriteBooleanValue(value._include.Value);
+				writer.WriteBooleanValue(value.IncludeValue.Value);
 			}
 
 			writer.WritePropertyName("like");
-			JsonSerializer.Serialize(writer, value._like, options);
-			if (value._maxDocFreq.HasValue)
+			JsonSerializer.Serialize(writer, value.LikeValue, options);
+			if (value.MaxDocFreqValue.HasValue)
 			{
 				writer.WritePropertyName("max_doc_freq");
-				writer.WriteNumberValue(value._maxDocFreq.Value);
+				writer.WriteNumberValue(value.MaxDocFreqValue.Value);
 			}
 
-			if (value._maxQueryTerms.HasValue)
+			if (value.MaxQueryTermsValue.HasValue)
 			{
 				writer.WritePropertyName("max_query_terms");
-				writer.WriteNumberValue(value._maxQueryTerms.Value);
+				writer.WriteNumberValue(value.MaxQueryTermsValue.Value);
 			}
 
-			if (value._maxWordLength.HasValue)
+			if (value.MaxWordLengthValue.HasValue)
 			{
 				writer.WritePropertyName("max_word_length");
-				writer.WriteNumberValue(value._maxWordLength.Value);
+				writer.WriteNumberValue(value.MaxWordLengthValue.Value);
 			}
 
-			if (value._minDocFreq.HasValue)
+			if (value.MinDocFreqValue.HasValue)
 			{
 				writer.WritePropertyName("min_doc_freq");
-				writer.WriteNumberValue(value._minDocFreq.Value);
+				writer.WriteNumberValue(value.MinDocFreqValue.Value);
 			}
 
-			if (value._minimumShouldMatch is not null)
+			if (value.MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
 			}
 
-			if (value._minTermFreq.HasValue)
+			if (value.MinTermFreqValue.HasValue)
 			{
 				writer.WritePropertyName("min_term_freq");
-				writer.WriteNumberValue(value._minTermFreq.Value);
+				writer.WriteNumberValue(value.MinTermFreqValue.Value);
 			}
 
-			if (value._minWordLength.HasValue)
+			if (value.MinWordLengthValue.HasValue)
 			{
 				writer.WritePropertyName("min_word_length");
-				writer.WriteNumberValue(value._minWordLength.Value);
+				writer.WriteNumberValue(value.MinWordLengthValue.Value);
 			}
 
-			if (value._perFieldAnalyzer is not null)
+			if (value.PerFieldAnalyzerValue is not null)
 			{
 				writer.WritePropertyName("per_field_analyzer");
-				JsonSerializer.Serialize(writer, value._perFieldAnalyzer, options);
+				JsonSerializer.Serialize(writer, value.PerFieldAnalyzerValue, options);
 			}
 
-			if (value._routing is not null)
+			if (value.RoutingValue is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, value._routing, options);
+				JsonSerializer.Serialize(writer, value.RoutingValue, options);
 			}
 
-			if (value._stopWords is not null)
+			if (value.StopWordsValue is not null)
 			{
 				writer.WritePropertyName("stop_words");
-				JsonSerializer.Serialize(writer, value._stopWords, options);
+				JsonSerializer.Serialize(writer, value.StopWordsValue, options);
 			}
 
-			if (value._unlike is not null)
+			if (value.UnlikeValue is not null)
 			{
 				writer.WritePropertyName("unlike");
-				JsonSerializer.Serialize(writer, value._unlike, options);
+				JsonSerializer.Serialize(writer, value.UnlikeValue, options);
 			}
 
-			if (value._version is not null)
+			if (value.VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
+				JsonSerializer.Serialize(writer, value.VersionValue, options);
 			}
 
-			if (value._versionType is not null)
+			if (value.VersionTypeValue is not null)
 			{
 				writer.WritePropertyName("version_type");
-				JsonSerializer.Serialize(writer, value._versionType, options);
+				JsonSerializer.Serialize(writer, value.VersionTypeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2447,24 +3500,61 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(MultiMatchQueryDescriptorConverter))]
-	public sealed partial class MultiMatchQueryDescriptor : DescriptorBase<MultiMatchQueryDescriptor>
+	public sealed partial class MultiMatchQueryDescriptor : DescriptorBase<MultiMatchQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal bool? _autoGenerateSynonymsPhraseQuery;
-		internal Elastic.Clients.Elasticsearch.Fields? _fields;
-		internal Elastic.Clients.Elasticsearch.Fuzziness? _fuzziness;
-		internal string? _fuzzyRewrite;
-		internal bool? _fuzzyTranspositions;
-		internal bool? _lenient;
-		internal int? _maxExpansions;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? _operator;
-		internal int? _prefixLength;
-		internal string _query;
-		internal int? _slop;
-		internal double? _tieBreaker;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? _type;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? _zeroTermsQuery;
+		public MultiMatchQueryDescriptor()
+		{
+		}
+
+		internal MultiMatchQueryDescriptor(Action<MultiMatchQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+
+		internal string? FuzzyRewriteValue { get; private set; }
+
+		internal bool? FuzzyTranspositionsValue { get; private set; }
+
+		internal bool? LenientValue { get; private set; }
+
+		internal int? MaxExpansionsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; private set; }
+
+		internal int? PrefixLengthValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal int? SlopValue { get; private set; }
+
+		internal double? TieBreakerValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
+
+		public MultiMatchQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MultiMatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public MultiMatchQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public MultiMatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public MultiMatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
+		public MultiMatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public MultiMatchQueryDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public MultiMatchQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public MultiMatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public MultiMatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public MultiMatchQueryDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public MultiMatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MultiMatchQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
+		public MultiMatchQueryDescriptor TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
+		public MultiMatchQueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public MultiMatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 	}
 
 	internal sealed class MultiMatchQueryDescriptorConverter : JsonConverter<MultiMatchQueryDescriptor>
@@ -2473,96 +3563,96 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, MultiMatchQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._autoGenerateSynonymsPhraseQuery.HasValue)
+			if (value.AutoGenerateSynonymsPhraseQueryValue.HasValue)
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-				writer.WriteBooleanValue(value._autoGenerateSynonymsPhraseQuery.Value);
+				writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQueryValue.Value);
 			}
 
-			if (value._fields is not null)
+			if (value.FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, value._fields, options);
+				JsonSerializer.Serialize(writer, value.FieldsValue, options);
 			}
 
-			if (value._fuzziness is not null)
+			if (value.FuzzinessValue is not null)
 			{
 				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value._fuzziness, options);
+				JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
 			}
 
-			if (value._fuzzyRewrite is not null)
+			if (value.FuzzyRewriteValue is not null)
 			{
 				writer.WritePropertyName("fuzzy_rewrite");
-				JsonSerializer.Serialize(writer, value._fuzzyRewrite, options);
+				JsonSerializer.Serialize(writer, value.FuzzyRewriteValue, options);
 			}
 
-			if (value._fuzzyTranspositions.HasValue)
+			if (value.FuzzyTranspositionsValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_transpositions");
-				writer.WriteBooleanValue(value._fuzzyTranspositions.Value);
+				writer.WriteBooleanValue(value.FuzzyTranspositionsValue.Value);
 			}
 
-			if (value._lenient.HasValue)
+			if (value.LenientValue.HasValue)
 			{
 				writer.WritePropertyName("lenient");
-				writer.WriteBooleanValue(value._lenient.Value);
+				writer.WriteBooleanValue(value.LenientValue.Value);
 			}
 
-			if (value._maxExpansions.HasValue)
+			if (value.MaxExpansionsValue.HasValue)
 			{
 				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value._maxExpansions.Value);
+				writer.WriteNumberValue(value.MaxExpansionsValue.Value);
 			}
 
-			if (value._minimumShouldMatch is not null)
+			if (value.MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
 			}
 
-			if (value._operator is not null)
+			if (value.OperatorValue is not null)
 			{
 				writer.WritePropertyName("operator");
-				JsonSerializer.Serialize(writer, value._operator, options);
+				JsonSerializer.Serialize(writer, value.OperatorValue, options);
 			}
 
-			if (value._prefixLength.HasValue)
+			if (value.PrefixLengthValue.HasValue)
 			{
 				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value._prefixLength.Value);
+				writer.WriteNumberValue(value.PrefixLengthValue.Value);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (value._slop.HasValue)
+			writer.WriteStringValue(value.QueryValue);
+			if (value.SlopValue.HasValue)
 			{
 				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(value._slop.Value);
+				writer.WriteNumberValue(value.SlopValue.Value);
 			}
 
-			if (value._tieBreaker.HasValue)
+			if (value.TieBreakerValue.HasValue)
 			{
 				writer.WritePropertyName("tie_breaker");
-				writer.WriteNumberValue(value._tieBreaker.Value);
+				writer.WriteNumberValue(value.TieBreakerValue.Value);
 			}
 
-			if (value._type is not null)
+			if (value.TypeValue is not null)
 			{
 				writer.WritePropertyName("type");
-				JsonSerializer.Serialize(writer, value._type, options);
+				JsonSerializer.Serialize(writer, value.TypeValue, options);
 			}
 
-			if (value._zeroTermsQuery is not null)
+			if (value.ZeroTermsQueryValue is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value._zeroTermsQuery, options);
+				JsonSerializer.Serialize(writer, value.ZeroTermsQueryValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2595,13 +3685,76 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(NestedQueryDescriptorConverter))]
-	public sealed partial class NestedQueryDescriptor : DescriptorBase<NestedQueryDescriptor>
+	public sealed partial class NestedQueryDescriptor : DescriptorBase<NestedQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _ignoreUnmapped;
-		internal Elastic.Clients.Elasticsearch.InnerHits? _innerHits;
-		internal string _path;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _query;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? _scoreMode;
+		public NestedQueryDescriptor()
+		{
+		}
+
+		internal NestedQueryDescriptor(Action<NestedQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
+
+		internal string PathValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreModeValue { get; private set; }
+
+		internal InnerHitsDescriptor InnerHitsDescriptor { get; private set; }
+
+		internal QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; private set; }
+
+		internal Action<QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public NestedQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
+		public NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		{
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
+		}
+
+		public NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor descriptor)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
+		}
+
+		public NestedQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor> configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
+		}
+
+		public NestedQueryDescriptor Path(string path) => Assign(path, (a, v) => a.PathValue = v);
+		public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public NestedQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
+
+		public NestedQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
 	}
 
 	internal sealed class NestedQueryDescriptorConverter : JsonConverter<NestedQueryDescriptor>
@@ -2610,26 +3763,50 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, NestedQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
-			if (value._innerHits is not null)
+			if (value.InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, value._innerHits, options);
+				JsonSerializer.Serialize(writer, value.InnerHitsDescriptor, options);
+			}
+			else if (value.InnerHitsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(value.InnerHitsDescriptorAction), options);
+			}
+			else if (value.InnerHitsValue is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, value.InnerHitsValue, options);
 			}
 
 			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, value._path, options);
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value._query, options);
-			if (value._scoreMode is not null)
+			JsonSerializer.Serialize(writer, value.PathValue, options);
+			if (value.QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
+			}
+
+			if (value.ScoreModeValue is not null)
 			{
 				writer.WritePropertyName("score_mode");
-				JsonSerializer.Serialize(writer, value._scoreMode, options);
+				JsonSerializer.Serialize(writer, value.ScoreModeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2654,11 +3831,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ParentIdQueryDescriptorConverter))]
-	public sealed partial class ParentIdQueryDescriptor : DescriptorBase<ParentIdQueryDescriptor>
+	public sealed partial class ParentIdQueryDescriptor : DescriptorBase<ParentIdQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.Id? _id;
-		internal bool? _ignoreUnmapped;
-		internal string? _type;
+		public ParentIdQueryDescriptor()
+		{
+		}
+
+		internal ParentIdQueryDescriptor(Action<ParentIdQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
+
+		internal bool? IgnoreUnmappedValue { get; private set; }
+
+		internal string? TypeValue { get; private set; }
+
+		public ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
+		public ParentIdQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
+		public ParentIdQueryDescriptor Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
 	}
 
 	internal sealed class ParentIdQueryDescriptorConverter : JsonConverter<ParentIdQueryDescriptor>
@@ -2667,22 +3855,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, ParentIdQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._id is not null)
+			if (value.IdValue is not null)
 			{
 				writer.WritePropertyName("id");
-				JsonSerializer.Serialize(writer, value._id, options);
+				JsonSerializer.Serialize(writer, value.IdValue, options);
 			}
 
-			if (value._ignoreUnmapped.HasValue)
+			if (value.IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value._ignoreUnmapped.Value);
+				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
 			}
 
-			if (value._type is not null)
+			if (value.TypeValue is not null)
 			{
 				writer.WritePropertyName("type");
-				JsonSerializer.Serialize(writer, value._type, options);
+				JsonSerializer.Serialize(writer, value.TypeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2731,17 +3919,40 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(PercolateQueryDescriptorConverter))]
-	public sealed partial class PercolateQueryDescriptor : DescriptorBase<PercolateQueryDescriptor>
+	public sealed partial class PercolateQueryDescriptor : DescriptorBase<PercolateQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal object? _document;
-		internal IEnumerable<object>? _documents;
-		internal string _field;
-		internal Elastic.Clients.Elasticsearch.Id? _id;
-		internal Elastic.Clients.Elasticsearch.IndexName? _index;
-		internal string? _name;
-		internal string? _preference;
-		internal string? _routing;
-		internal long? _version;
+		public PercolateQueryDescriptor()
+		{
+		}
+
+		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor> configure) => configure.Invoke(this);
+		internal object? DocumentValue { get; private set; }
+
+		internal IEnumerable<object>? DocumentsValue { get; private set; }
+
+		internal string FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
+		internal string? PreferenceValue { get; private set; }
+
+		internal string? RoutingValue { get; private set; }
+
+		internal long? VersionValue { get; private set; }
+
+		public PercolateQueryDescriptor Document(object? document) => Assign(document, (a, v) => a.DocumentValue = v);
+		public PercolateQueryDescriptor Documents(IEnumerable<object>? documents) => Assign(documents, (a, v) => a.DocumentsValue = v);
+		public PercolateQueryDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercolateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
+		public PercolateQueryDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
+		public PercolateQueryDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		public PercolateQueryDescriptor Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
+		public PercolateQueryDescriptor Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public PercolateQueryDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 	}
 
 	internal sealed class PercolateQueryDescriptorConverter : JsonConverter<PercolateQueryDescriptor>
@@ -2750,48 +3961,48 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, PercolateQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._documents is not null)
+			if (value.DocumentsValue is not null)
 			{
 				writer.WritePropertyName("documents");
-				JsonSerializer.Serialize(writer, value._documents, options);
+				JsonSerializer.Serialize(writer, value.DocumentsValue, options);
 			}
 
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value._field, options);
-			if (value._id is not null)
+			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			if (value.IdValue is not null)
 			{
 				writer.WritePropertyName("id");
-				JsonSerializer.Serialize(writer, value._id, options);
+				JsonSerializer.Serialize(writer, value.IdValue, options);
 			}
 
-			if (value._index is not null)
+			if (value.IndexValue is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, value._index, options);
+				JsonSerializer.Serialize(writer, value.IndexValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value._name))
+			if (!string.IsNullOrEmpty(value.NameValue))
 			{
 				writer.WritePropertyName("name");
-				writer.WriteStringValue(value._name);
+				writer.WriteStringValue(value.NameValue);
 			}
 
-			if (!string.IsNullOrEmpty(value._preference))
+			if (!string.IsNullOrEmpty(value.PreferenceValue))
 			{
 				writer.WritePropertyName("preference");
-				writer.WriteStringValue(value._preference);
+				writer.WriteStringValue(value.PreferenceValue);
 			}
 
-			if (value._routing is not null)
+			if (value.RoutingValue is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, value._routing, options);
+				JsonSerializer.Serialize(writer, value.RoutingValue, options);
 			}
 
-			if (value._version is not null)
+			if (value.VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value._version, options);
+				JsonSerializer.Serialize(writer, value.VersionValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2801,6 +4012,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface IPinnedQueryVariant
 	{
 		string PinnedQueryVariantName { get; }
+	}
+
+	internal interface IPinnedQueryVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(PinnedQueryConverter))]
@@ -2840,6 +4055,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class PinnedQueryDescriptor : DescriptorBase<PinnedQueryDescriptor>
 	{
+		public PinnedQueryDescriptor()
+		{
+		}
+
+		internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class PinnedQueryDescriptorConverter : JsonConverter<PinnedQueryDescriptor>
@@ -2870,11 +4090,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(PrefixQueryDescriptorConverter))]
-	public sealed partial class PrefixQueryDescriptor : DescriptorBase<PrefixQueryDescriptor>
+	public sealed partial class PrefixQueryDescriptor : DescriptorBase<PrefixQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _rewrite;
-		internal string _value;
-		internal bool? _caseInsensitive;
+		public PrefixQueryDescriptor()
+		{
+		}
+
+		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? RewriteValue { get; private set; }
+
+		internal string ValueValue { get; private set; }
+
+		internal bool? CaseInsensitiveValue { get; private set; }
+
+		public PrefixQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public PrefixQueryDescriptor Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
+		public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
 	}
 
 	internal sealed class PrefixQueryDescriptorConverter : JsonConverter<PrefixQueryDescriptor>
@@ -2883,18 +4114,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, PrefixQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._rewrite is not null)
+			if (value.RewriteValue is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value._rewrite, options);
+				JsonSerializer.Serialize(writer, value.RewriteValue, options);
 			}
 
 			writer.WritePropertyName("value");
-			writer.WriteStringValue(value._value);
-			if (value._caseInsensitive.HasValue)
+			writer.WriteStringValue(value.ValueValue);
+			if (value.CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value._caseInsensitive.Value);
+				writer.WriteBooleanValue(value.CaseInsensitiveValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -2915,8 +4146,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(QueryBaseDescriptorConverter))]
 	public sealed partial class QueryBaseDescriptor : DescriptorBase<QueryBaseDescriptor>
 	{
-		internal float? _boost;
-		internal string? _queryName;
+		public QueryBaseDescriptor()
+		{
+		}
+
+		internal QueryBaseDescriptor(Action<QueryBaseDescriptor> configure) => configure.Invoke(this);
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
+		public QueryBaseDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public QueryBaseDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 	}
 
 	internal sealed class QueryBaseDescriptorConverter : JsonConverter<QueryBaseDescriptor>
@@ -2925,16 +4165,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, QueryBaseDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._boost.HasValue)
+			if (value.BoostValue.HasValue)
 			{
 				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value._boost.Value);
+				writer.WriteNumberValue(value.BoostValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value._queryName))
+			if (!string.IsNullOrEmpty(value.QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value._queryName);
+				writer.WriteStringValue(value.QueryNameValue);
 			}
 
 			writer.WriteEndObject();
@@ -2944,6 +4184,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface IQueryContainerVariant
 	{
 		string QueryContainerVariantName { get; }
+	}
+
+	internal interface IQueryContainerVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(QueryContainerConverter))]
@@ -3472,27 +4716,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
+	[JsonConverter(typeof(QueryContainerDescriptorConverter))]
 	public sealed partial class QueryContainerDescriptor : DescriptorBase<QueryContainerDescriptor>
 	{
-		
-	}
-
-	internal sealed partial class QueryContainerDescriptorConverter : JsonConverter<QueryContainerDescriptor>
-	{
-		public override QueryContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, QueryContainerDescriptor value, JsonSerializerOptions options)
+		public QueryContainerDescriptor()
 		{
-			writer.WriteStartObject();
-
-			if (value._variantDescriptor is MatchQueryDescriptor descriptor)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, descriptor, options);
-			}
-
-			writer.WriteEndObject();
 		}
+
+		internal QueryContainerDescriptor(Action<QueryContainerDescriptor> configure) => configure.Invoke(this);
 	}
+
+	//internal sealed class QueryContainerDescriptorConverter : JsonConverter<QueryContainerDescriptor>
+	//{
+	//	public override QueryContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	//	public override void Write(Utf8JsonWriter writer, QueryContainerDescriptor value, JsonSerializerOptions options)
+	//	{
+	//		writer.WriteStartObject();
+	//		writer.WriteEndObject();
+	//	}
+	//}
 
 	public partial class QueryStringQuery : QueryDsl.QueryBase, IQueryContainerVariant
 	{
@@ -3600,33 +4842,88 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(QueryStringQueryDescriptorConverter))]
-	public sealed partial class QueryStringQueryDescriptor : DescriptorBase<QueryStringQueryDescriptor>
+	public sealed partial class QueryStringQueryDescriptor : DescriptorBase<QueryStringQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _allowLeadingWildcard;
-		internal string? _analyzer;
-		internal bool? _analyzeWildcard;
-		internal bool? _autoGenerateSynonymsPhraseQuery;
-		internal string? _defaultField;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? _defaultOperator;
-		internal bool? _enablePositionIncrements;
-		internal bool? _escape;
-		internal IEnumerable<string>? _fields;
-		internal Elastic.Clients.Elasticsearch.Fuzziness? _fuzziness;
-		internal int? _fuzzyMaxExpansions;
-		internal int? _fuzzyPrefixLength;
-		internal string? _fuzzyRewrite;
-		internal bool? _fuzzyTranspositions;
-		internal bool? _lenient;
-		internal int? _maxDeterminizedStates;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal double? _phraseSlop;
-		internal string _query;
-		internal string? _quoteAnalyzer;
-		internal string? _quoteFieldSuffix;
-		internal string? _rewrite;
-		internal double? _tieBreaker;
-		internal string? _timeZone;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? _type;
+		public QueryStringQueryDescriptor()
+		{
+		}
+
+		internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? AllowLeadingWildcardValue { get; private set; }
+
+		internal string? AnalyzerValue { get; private set; }
+
+		internal bool? AnalyzeWildcardValue { get; private set; }
+
+		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+
+		internal string? DefaultFieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; private set; }
+
+		internal bool? EnablePositionIncrementsValue { get; private set; }
+
+		internal bool? EscapeValue { get; private set; }
+
+		internal IEnumerable<string>? FieldsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+
+		internal int? FuzzyMaxExpansionsValue { get; private set; }
+
+		internal int? FuzzyPrefixLengthValue { get; private set; }
+
+		internal string? FuzzyRewriteValue { get; private set; }
+
+		internal bool? FuzzyTranspositionsValue { get; private set; }
+
+		internal bool? LenientValue { get; private set; }
+
+		internal int? MaxDeterminizedStatesValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal double? PhraseSlopValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal string? QuoteAnalyzerValue { get; private set; }
+
+		internal string? QuoteFieldSuffixValue { get; private set; }
+
+		internal string? RewriteValue { get; private set; }
+
+		internal double? TieBreakerValue { get; private set; }
+
+		internal string? TimeZoneValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; private set; }
+
+		public QueryStringQueryDescriptor AllowLeadingWildcard(bool? allowLeadingWildcard = true) => Assign(allowLeadingWildcard, (a, v) => a.AllowLeadingWildcardValue = v);
+		public QueryStringQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public QueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
+		public QueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public QueryStringQueryDescriptor DefaultField(string? defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
+		public QueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
+		public QueryStringQueryDescriptor EnablePositionIncrements(bool? enablePositionIncrements = true) => Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrementsValue = v);
+		public QueryStringQueryDescriptor Escape(bool? escape = true) => Assign(escape, (a, v) => a.EscapeValue = v);
+		public QueryStringQueryDescriptor Fields(IEnumerable<string>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public QueryStringQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public QueryStringQueryDescriptor FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
+		public QueryStringQueryDescriptor FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
+		public QueryStringQueryDescriptor FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
+		public QueryStringQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public QueryStringQueryDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public QueryStringQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
+		public QueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public QueryStringQueryDescriptor PhraseSlop(double? phraseSlop) => Assign(phraseSlop, (a, v) => a.PhraseSlopValue = v);
+		public QueryStringQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public QueryStringQueryDescriptor QuoteAnalyzer(string? quoteAnalyzer) => Assign(quoteAnalyzer, (a, v) => a.QuoteAnalyzerValue = v);
+		public QueryStringQueryDescriptor QuoteFieldSuffix(string? quoteFieldSuffix) => Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffixValue = v);
+		public QueryStringQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public QueryStringQueryDescriptor TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
+		public QueryStringQueryDescriptor TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
+		public QueryStringQueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
 	}
 
 	internal sealed class QueryStringQueryDescriptorConverter : JsonConverter<QueryStringQueryDescriptor>
@@ -3635,150 +4932,150 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, QueryStringQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._allowLeadingWildcard.HasValue)
+			if (value.AllowLeadingWildcardValue.HasValue)
 			{
 				writer.WritePropertyName("allow_leading_wildcard");
-				writer.WriteBooleanValue(value._allowLeadingWildcard.Value);
+				writer.WriteBooleanValue(value.AllowLeadingWildcardValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._analyzeWildcard.HasValue)
+			if (value.AnalyzeWildcardValue.HasValue)
 			{
 				writer.WritePropertyName("analyze_wildcard");
-				writer.WriteBooleanValue(value._analyzeWildcard.Value);
+				writer.WriteBooleanValue(value.AnalyzeWildcardValue.Value);
 			}
 
-			if (value._autoGenerateSynonymsPhraseQuery.HasValue)
+			if (value.AutoGenerateSynonymsPhraseQueryValue.HasValue)
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-				writer.WriteBooleanValue(value._autoGenerateSynonymsPhraseQuery.Value);
+				writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQueryValue.Value);
 			}
 
-			if (value._defaultField is not null)
+			if (value.DefaultFieldValue is not null)
 			{
 				writer.WritePropertyName("default_field");
-				JsonSerializer.Serialize(writer, value._defaultField, options);
+				JsonSerializer.Serialize(writer, value.DefaultFieldValue, options);
 			}
 
-			if (value._defaultOperator is not null)
+			if (value.DefaultOperatorValue is not null)
 			{
 				writer.WritePropertyName("default_operator");
-				JsonSerializer.Serialize(writer, value._defaultOperator, options);
+				JsonSerializer.Serialize(writer, value.DefaultOperatorValue, options);
 			}
 
-			if (value._enablePositionIncrements.HasValue)
+			if (value.EnablePositionIncrementsValue.HasValue)
 			{
 				writer.WritePropertyName("enable_position_increments");
-				writer.WriteBooleanValue(value._enablePositionIncrements.Value);
+				writer.WriteBooleanValue(value.EnablePositionIncrementsValue.Value);
 			}
 
-			if (value._escape.HasValue)
+			if (value.EscapeValue.HasValue)
 			{
 				writer.WritePropertyName("escape");
-				writer.WriteBooleanValue(value._escape.Value);
+				writer.WriteBooleanValue(value.EscapeValue.Value);
 			}
 
-			if (value._fields is not null)
+			if (value.FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, value._fields, options);
+				JsonSerializer.Serialize(writer, value.FieldsValue, options);
 			}
 
-			if (value._fuzziness is not null)
+			if (value.FuzzinessValue is not null)
 			{
 				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value._fuzziness, options);
+				JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
 			}
 
-			if (value._fuzzyMaxExpansions.HasValue)
+			if (value.FuzzyMaxExpansionsValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_max_expansions");
-				writer.WriteNumberValue(value._fuzzyMaxExpansions.Value);
+				writer.WriteNumberValue(value.FuzzyMaxExpansionsValue.Value);
 			}
 
-			if (value._fuzzyPrefixLength.HasValue)
+			if (value.FuzzyPrefixLengthValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_prefix_length");
-				writer.WriteNumberValue(value._fuzzyPrefixLength.Value);
+				writer.WriteNumberValue(value.FuzzyPrefixLengthValue.Value);
 			}
 
-			if (value._fuzzyRewrite is not null)
+			if (value.FuzzyRewriteValue is not null)
 			{
 				writer.WritePropertyName("fuzzy_rewrite");
-				JsonSerializer.Serialize(writer, value._fuzzyRewrite, options);
+				JsonSerializer.Serialize(writer, value.FuzzyRewriteValue, options);
 			}
 
-			if (value._fuzzyTranspositions.HasValue)
+			if (value.FuzzyTranspositionsValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_transpositions");
-				writer.WriteBooleanValue(value._fuzzyTranspositions.Value);
+				writer.WriteBooleanValue(value.FuzzyTranspositionsValue.Value);
 			}
 
-			if (value._lenient.HasValue)
+			if (value.LenientValue.HasValue)
 			{
 				writer.WritePropertyName("lenient");
-				writer.WriteBooleanValue(value._lenient.Value);
+				writer.WriteBooleanValue(value.LenientValue.Value);
 			}
 
-			if (value._maxDeterminizedStates.HasValue)
+			if (value.MaxDeterminizedStatesValue.HasValue)
 			{
 				writer.WritePropertyName("max_determinized_states");
-				writer.WriteNumberValue(value._maxDeterminizedStates.Value);
+				writer.WriteNumberValue(value.MaxDeterminizedStatesValue.Value);
 			}
 
-			if (value._minimumShouldMatch is not null)
+			if (value.MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
 			}
 
-			if (value._phraseSlop.HasValue)
+			if (value.PhraseSlopValue.HasValue)
 			{
 				writer.WritePropertyName("phrase_slop");
-				writer.WriteNumberValue(value._phraseSlop.Value);
+				writer.WriteNumberValue(value.PhraseSlopValue.Value);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (!string.IsNullOrEmpty(value._quoteAnalyzer))
+			writer.WriteStringValue(value.QueryValue);
+			if (!string.IsNullOrEmpty(value.QuoteAnalyzerValue))
 			{
 				writer.WritePropertyName("quote_analyzer");
-				writer.WriteStringValue(value._quoteAnalyzer);
+				writer.WriteStringValue(value.QuoteAnalyzerValue);
 			}
 
-			if (!string.IsNullOrEmpty(value._quoteFieldSuffix))
+			if (!string.IsNullOrEmpty(value.QuoteFieldSuffixValue))
 			{
 				writer.WritePropertyName("quote_field_suffix");
-				writer.WriteStringValue(value._quoteFieldSuffix);
+				writer.WriteStringValue(value.QuoteFieldSuffixValue);
 			}
 
-			if (value._rewrite is not null)
+			if (value.RewriteValue is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value._rewrite, options);
+				JsonSerializer.Serialize(writer, value.RewriteValue, options);
 			}
 
-			if (value._tieBreaker.HasValue)
+			if (value.TieBreakerValue.HasValue)
 			{
 				writer.WritePropertyName("tie_breaker");
-				writer.WriteNumberValue(value._tieBreaker.Value);
+				writer.WriteNumberValue(value.TieBreakerValue.Value);
 			}
 
-			if (value._timeZone is not null)
+			if (value.TimeZoneValue is not null)
 			{
 				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, value._timeZone, options);
+				JsonSerializer.Serialize(writer, value.TimeZoneValue, options);
 			}
 
-			if (value._type is not null)
+			if (value.TypeValue is not null)
 			{
 				writer.WritePropertyName("type");
-				JsonSerializer.Serialize(writer, value._type, options);
+				JsonSerializer.Serialize(writer, value.TypeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -3799,10 +5096,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(RandomScoreFunctionDescriptorConverter))]
-	public sealed partial class RandomScoreFunctionDescriptor : DescriptorBase<RandomScoreFunctionDescriptor>
+	public sealed partial class RandomScoreFunctionDescriptor : DescriptorBase<RandomScoreFunctionDescriptor>, IFunctionScoreContainerVariantDescriptor
 	{
-		internal string? _field;
-		internal Union<long?, string?>? _seed;
+		public RandomScoreFunctionDescriptor()
+		{
+		}
+
+		internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor> configure) => configure.Invoke(this);
+		internal string? FieldValue { get; private set; }
+
+		internal Union<long?, string?>? SeedValue { get; private set; }
+
+		public RandomScoreFunctionDescriptor Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RandomScoreFunctionDescriptor Seed(Union<long?, string?>? seed) => Assign(seed, (a, v) => a.SeedValue = v);
 	}
 
 	internal sealed class RandomScoreFunctionDescriptorConverter : JsonConverter<RandomScoreFunctionDescriptor>
@@ -3811,16 +5117,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, RandomScoreFunctionDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._field is not null)
+			if (value.FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value._field, options);
+				JsonSerializer.Serialize(writer, value.FieldValue, options);
 			}
 
-			if (value._seed is not null)
+			if (value.SeedValue is not null)
 			{
 				writer.WritePropertyName("seed");
-				JsonSerializer.Serialize(writer, value._seed, options);
+				JsonSerializer.Serialize(writer, value.SeedValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -3834,6 +5140,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RankFeatureFunctionDescriptorConverter))]
 	public sealed partial class RankFeatureFunctionDescriptor : DescriptorBase<RankFeatureFunctionDescriptor>
 	{
+		public RankFeatureFunctionDescriptor()
+		{
+		}
+
+		internal RankFeatureFunctionDescriptor(Action<RankFeatureFunctionDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class RankFeatureFunctionDescriptorConverter : JsonConverter<RankFeatureFunctionDescriptor>
@@ -3853,6 +5164,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RankFeatureFunctionLinearDescriptorConverter))]
 	public sealed partial class RankFeatureFunctionLinearDescriptor : DescriptorBase<RankFeatureFunctionLinearDescriptor>
 	{
+		public RankFeatureFunctionLinearDescriptor()
+		{
+		}
+
+		internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class RankFeatureFunctionLinearDescriptorConverter : JsonConverter<RankFeatureFunctionLinearDescriptor>
@@ -3875,7 +5191,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RankFeatureFunctionLogarithmDescriptorConverter))]
 	public sealed partial class RankFeatureFunctionLogarithmDescriptor : DescriptorBase<RankFeatureFunctionLogarithmDescriptor>
 	{
-		internal float _scalingFactor;
+		public RankFeatureFunctionLogarithmDescriptor()
+		{
+		}
+
+		internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
+		internal float ScalingFactorValue { get; private set; }
+
+		public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor) => Assign(scalingFactor, (a, v) => a.ScalingFactorValue = v);
 	}
 
 	internal sealed class RankFeatureFunctionLogarithmDescriptorConverter : JsonConverter<RankFeatureFunctionLogarithmDescriptor>
@@ -3885,7 +5208,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("scaling_factor");
-			writer.WriteNumberValue(value._scalingFactor);
+			writer.WriteNumberValue(value.ScalingFactorValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -3900,7 +5223,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RankFeatureFunctionSaturationDescriptorConverter))]
 	public sealed partial class RankFeatureFunctionSaturationDescriptor : DescriptorBase<RankFeatureFunctionSaturationDescriptor>
 	{
-		internal float? _pivot;
+		public RankFeatureFunctionSaturationDescriptor()
+		{
+		}
+
+		internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
+		internal float? PivotValue { get; private set; }
+
+		public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot) => Assign(pivot, (a, v) => a.PivotValue = v);
 	}
 
 	internal sealed class RankFeatureFunctionSaturationDescriptorConverter : JsonConverter<RankFeatureFunctionSaturationDescriptor>
@@ -3909,10 +5239,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, RankFeatureFunctionSaturationDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._pivot.HasValue)
+			if (value.PivotValue.HasValue)
 			{
 				writer.WritePropertyName("pivot");
-				writer.WriteNumberValue(value._pivot.Value);
+				writer.WriteNumberValue(value.PivotValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -3933,8 +5263,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(RankFeatureFunctionSigmoidDescriptorConverter))]
 	public sealed partial class RankFeatureFunctionSigmoidDescriptor : DescriptorBase<RankFeatureFunctionSigmoidDescriptor>
 	{
-		internal float _pivot;
-		internal float _exponent;
+		public RankFeatureFunctionSigmoidDescriptor()
+		{
+		}
+
+		internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
+		internal float PivotValue { get; private set; }
+
+		internal float ExponentValue { get; private set; }
+
+		public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot) => Assign(pivot, (a, v) => a.PivotValue = v);
+		public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent) => Assign(exponent, (a, v) => a.ExponentValue = v);
 	}
 
 	internal sealed class RankFeatureFunctionSigmoidDescriptorConverter : JsonConverter<RankFeatureFunctionSigmoidDescriptor>
@@ -3944,9 +5283,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("pivot");
-			writer.WriteNumberValue(value._pivot);
+			writer.WriteNumberValue(value.PivotValue);
 			writer.WritePropertyName("exponent");
-			writer.WriteNumberValue(value._exponent);
+			writer.WriteNumberValue(value.ExponentValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -3977,13 +5316,123 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(RankFeatureQueryDescriptorConverter))]
-	public sealed partial class RankFeatureQueryDescriptor : DescriptorBase<RankFeatureQueryDescriptor>
+	public sealed partial class RankFeatureQueryDescriptor : DescriptorBase<RankFeatureQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string _field;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? _saturation;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? _log;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? _linear;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? _sigmoid;
+		public RankFeatureQueryDescriptor()
+		{
+		}
+
+		internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor> configure) => configure.Invoke(this);
+		internal string FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? LogValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? LinearValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? SigmoidValue { get; private set; }
+
+		internal RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; private set; }
+
+		internal RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; private set; }
+
+		internal RankFeatureFunctionLinearDescriptor LinearDescriptor { get; private set; }
+
+		internal RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; private set; }
+
+		internal Action<RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; private set; }
+
+		internal Action<RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; private set; }
+
+		internal Action<RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; private set; }
+
+		internal Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; private set; }
+
+		public RankFeatureQueryDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RankFeatureQueryDescriptor Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? saturation)
+		{
+			SaturationDescriptor = null;
+			SaturationDescriptorAction = null;
+			return Assign(saturation, (a, v) => a.SaturationValue = v);
+		}
+
+		public RankFeatureQueryDescriptor Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
+		{
+			SaturationValue = null;
+			SaturationDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SaturationDescriptor = v);
+		}
+
+		public RankFeatureQueryDescriptor Saturation(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
+		{
+			SaturationValue = null;
+			SaturationDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SaturationDescriptorAction = v);
+		}
+
+		public RankFeatureQueryDescriptor Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? log)
+		{
+			LogDescriptor = null;
+			LogDescriptorAction = null;
+			return Assign(log, (a, v) => a.LogValue = v);
+		}
+
+		public RankFeatureQueryDescriptor Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
+		{
+			LogValue = null;
+			LogDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.LogDescriptor = v);
+		}
+
+		public RankFeatureQueryDescriptor Log(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
+		{
+			LogValue = null;
+			LogDescriptorAction = null;
+			return Assign(configure, (a, v) => a.LogDescriptorAction = v);
+		}
+
+		public RankFeatureQueryDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? linear)
+		{
+			LinearDescriptor = null;
+			LinearDescriptorAction = null;
+			return Assign(linear, (a, v) => a.LinearValue = v);
+		}
+
+		public RankFeatureQueryDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
+		{
+			LinearValue = null;
+			LinearDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.LinearDescriptor = v);
+		}
+
+		public RankFeatureQueryDescriptor Linear(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
+		{
+			LinearValue = null;
+			LinearDescriptorAction = null;
+			return Assign(configure, (a, v) => a.LinearDescriptorAction = v);
+		}
+
+		public RankFeatureQueryDescriptor Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
+		{
+			SigmoidDescriptor = null;
+			SigmoidDescriptorAction = null;
+			return Assign(sigmoid, (a, v) => a.SigmoidValue = v);
+		}
+
+		public RankFeatureQueryDescriptor Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
+		{
+			SigmoidValue = null;
+			SigmoidDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SigmoidDescriptor = v);
+		}
+
+		public RankFeatureQueryDescriptor Sigmoid(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
+		{
+			SigmoidValue = null;
+			SigmoidDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SigmoidDescriptorAction = v);
+		}
 	}
 
 	internal sealed class RankFeatureQueryDescriptorConverter : JsonConverter<RankFeatureQueryDescriptor>
@@ -3993,29 +5442,69 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value._field, options);
-			if (value._saturation is not null)
+			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			if (value.SaturationDescriptor is not null)
 			{
 				writer.WritePropertyName("saturation");
-				JsonSerializer.Serialize(writer, value._saturation, options);
+				JsonSerializer.Serialize(writer, value.SaturationDescriptor, options);
+			}
+			else if (value.SaturationDescriptorAction is not null)
+			{
+				writer.WritePropertyName("saturation");
+				JsonSerializer.Serialize(writer, new RankFeatureFunctionSaturationDescriptor(value.SaturationDescriptorAction), options);
+			}
+			else if (value.SaturationValue is not null)
+			{
+				writer.WritePropertyName("saturation");
+				JsonSerializer.Serialize(writer, value.SaturationValue, options);
 			}
 
-			if (value._log is not null)
+			if (value.LogDescriptor is not null)
 			{
 				writer.WritePropertyName("log");
-				JsonSerializer.Serialize(writer, value._log, options);
+				JsonSerializer.Serialize(writer, value.LogDescriptor, options);
+			}
+			else if (value.LogDescriptorAction is not null)
+			{
+				writer.WritePropertyName("log");
+				JsonSerializer.Serialize(writer, new RankFeatureFunctionLogarithmDescriptor(value.LogDescriptorAction), options);
+			}
+			else if (value.LogValue is not null)
+			{
+				writer.WritePropertyName("log");
+				JsonSerializer.Serialize(writer, value.LogValue, options);
 			}
 
-			if (value._linear is not null)
+			if (value.LinearDescriptor is not null)
 			{
 				writer.WritePropertyName("linear");
-				JsonSerializer.Serialize(writer, value._linear, options);
+				JsonSerializer.Serialize(writer, value.LinearDescriptor, options);
+			}
+			else if (value.LinearDescriptorAction is not null)
+			{
+				writer.WritePropertyName("linear");
+				JsonSerializer.Serialize(writer, new RankFeatureFunctionLinearDescriptor(value.LinearDescriptorAction), options);
+			}
+			else if (value.LinearValue is not null)
+			{
+				writer.WritePropertyName("linear");
+				JsonSerializer.Serialize(writer, value.LinearValue, options);
 			}
 
-			if (value._sigmoid is not null)
+			if (value.SigmoidDescriptor is not null)
 			{
 				writer.WritePropertyName("sigmoid");
-				JsonSerializer.Serialize(writer, value._sigmoid, options);
+				JsonSerializer.Serialize(writer, value.SigmoidDescriptor, options);
+			}
+			else if (value.SigmoidDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sigmoid");
+				JsonSerializer.Serialize(writer, new RankFeatureFunctionSigmoidDescriptor(value.SigmoidDescriptorAction), options);
+			}
+			else if (value.SigmoidValue is not null)
+			{
+				writer.WritePropertyName("sigmoid");
+				JsonSerializer.Serialize(writer, value.SigmoidValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -4048,13 +5537,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(RegexpQueryDescriptorConverter))]
-	public sealed partial class RegexpQueryDescriptor : DescriptorBase<RegexpQueryDescriptor>
+	public sealed partial class RegexpQueryDescriptor : DescriptorBase<RegexpQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _caseInsensitive;
-		internal string? _flags;
-		internal int? _maxDeterminizedStates;
-		internal string? _rewrite;
-		internal string _value;
+		public RegexpQueryDescriptor()
+		{
+		}
+
+		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? CaseInsensitiveValue { get; private set; }
+
+		internal string? FlagsValue { get; private set; }
+
+		internal int? MaxDeterminizedStatesValue { get; private set; }
+
+		internal string? RewriteValue { get; private set; }
+
+		internal string ValueValue { get; private set; }
+
+		public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public RegexpQueryDescriptor Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
+		public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
+		public RegexpQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public RegexpQueryDescriptor Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
 	}
 
 	internal sealed class RegexpQueryDescriptorConverter : JsonConverter<RegexpQueryDescriptor>
@@ -4063,32 +5567,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, RegexpQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._caseInsensitive.HasValue)
+			if (value.CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value._caseInsensitive.Value);
+				writer.WriteBooleanValue(value.CaseInsensitiveValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value._flags))
+			if (!string.IsNullOrEmpty(value.FlagsValue))
 			{
 				writer.WritePropertyName("flags");
-				writer.WriteStringValue(value._flags);
+				writer.WriteStringValue(value.FlagsValue);
 			}
 
-			if (value._maxDeterminizedStates.HasValue)
+			if (value.MaxDeterminizedStatesValue.HasValue)
 			{
 				writer.WritePropertyName("max_determinized_states");
-				writer.WriteNumberValue(value._maxDeterminizedStates.Value);
+				writer.WriteNumberValue(value.MaxDeterminizedStatesValue.Value);
 			}
 
-			if (value._rewrite is not null)
+			if (value.RewriteValue is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value._rewrite, options);
+				JsonSerializer.Serialize(writer, value.RewriteValue, options);
 			}
 
 			writer.WritePropertyName("value");
-			writer.WriteStringValue(value._value);
+			writer.WriteStringValue(value.ValueValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -4107,8 +5611,41 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(ScoreFunctionBaseDescriptorConverter))]
 	public sealed partial class ScoreFunctionBaseDescriptor : DescriptorBase<ScoreFunctionBaseDescriptor>
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
-		internal double? _weight;
+		public ScoreFunctionBaseDescriptor()
+		{
+		}
+
+		internal ScoreFunctionBaseDescriptor(Action<ScoreFunctionBaseDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
+
+		internal double? WeightValue { get; private set; }
+
+		internal QueryContainerDescriptor FilterDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> FilterDescriptorAction { get; private set; }
+
+		public ScoreFunctionBaseDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public ScoreFunctionBaseDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public ScoreFunctionBaseDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
+
+		public ScoreFunctionBaseDescriptor Weight(double? weight) => Assign(weight, (a, v) => a.WeightValue = v);
 	}
 
 	internal sealed class ScoreFunctionBaseDescriptorConverter : JsonConverter<ScoreFunctionBaseDescriptor>
@@ -4117,16 +5654,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, ScoreFunctionBaseDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._filter is not null)
+			if (value.FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.FilterDescriptorAction), options);
+			}
+			else if (value.FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
 			}
 
-			if (value._weight.HasValue)
+			if (value.WeightValue.HasValue)
 			{
 				writer.WritePropertyName("weight");
-				writer.WriteNumberValue(value._weight.Value);
+				writer.WriteNumberValue(value.WeightValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -4143,9 +5690,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ScriptQueryDescriptorConverter))]
-	public sealed partial class ScriptQueryDescriptor : DescriptorBase<ScriptQueryDescriptor>
+	public sealed partial class ScriptQueryDescriptor : DescriptorBase<ScriptQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.Script _script;
+		public ScriptQueryDescriptor()
+		{
+		}
+
+		internal ScriptQueryDescriptor(Action<ScriptQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Script ScriptValue { get; private set; }
+
+		public ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
 	}
 
 	internal sealed class ScriptQueryDescriptorConverter : JsonConverter<ScriptQueryDescriptor>
@@ -4155,7 +5709,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value._script, options);
+			JsonSerializer.Serialize(writer, value.ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -4170,9 +5724,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ScriptScoreFunctionDescriptorConverter))]
-	public sealed partial class ScriptScoreFunctionDescriptor : DescriptorBase<ScriptScoreFunctionDescriptor>
+	public sealed partial class ScriptScoreFunctionDescriptor : DescriptorBase<ScriptScoreFunctionDescriptor>, IFunctionScoreContainerVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.Script _script;
+		public ScriptScoreFunctionDescriptor()
+		{
+		}
+
+		internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Script ScriptValue { get; private set; }
+
+		public ScriptScoreFunctionDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
 	}
 
 	internal sealed class ScriptScoreFunctionDescriptorConverter : JsonConverter<ScriptScoreFunctionDescriptor>
@@ -4182,7 +5743,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value._script, options);
+			JsonSerializer.Serialize(writer, value.ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -4205,11 +5766,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ScriptScoreQueryDescriptorConverter))]
-	public sealed partial class ScriptScoreQueryDescriptor : DescriptorBase<ScriptScoreQueryDescriptor>
+	public sealed partial class ScriptScoreQueryDescriptor : DescriptorBase<ScriptScoreQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal float? _minScore;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _query;
-		internal Elastic.Clients.Elasticsearch.Script _script;
+		public ScriptScoreQueryDescriptor()
+		{
+		}
+
+		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor> configure) => configure.Invoke(this);
+		internal float? MinScoreValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script ScriptValue { get; private set; }
+
+		internal QueryContainerDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+
+		public ScriptScoreQueryDescriptor MinScore(float? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
+		public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public ScriptScoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
+
+		public ScriptScoreQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
 	}
 
 	internal sealed class ScriptScoreQueryDescriptorConverter : JsonConverter<ScriptScoreQueryDescriptor>
@@ -4218,16 +5814,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, ScriptScoreQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._minScore.HasValue)
+			if (value.MinScoreValue.HasValue)
 			{
 				writer.WritePropertyName("min_score");
-				writer.WriteNumberValue(value._minScore.Value);
+				writer.WriteNumberValue(value.MinScoreValue.Value);
 			}
 
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value._query, options);
+			if (value.QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
+			}
+
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value._script, options);
+			JsonSerializer.Serialize(writer, value.ScriptValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -4239,8 +5849,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(ShapeQueryDescriptorConverter))]
-	public sealed partial class ShapeQueryDescriptor : DescriptorBase<ShapeQueryDescriptor>
+	public sealed partial class ShapeQueryDescriptor : DescriptorBase<ShapeQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
+		public ShapeQueryDescriptor()
+		{
+		}
+
+		internal ShapeQueryDescriptor(Action<ShapeQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class ShapeQueryDescriptorConverter : JsonConverter<ShapeQueryDescriptor>
@@ -4311,21 +5926,52 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SimpleQueryStringQueryDescriptorConverter))]
-	public sealed partial class SimpleQueryStringQueryDescriptor : DescriptorBase<SimpleQueryStringQueryDescriptor>
+	public sealed partial class SimpleQueryStringQueryDescriptor : DescriptorBase<SimpleQueryStringQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _analyzer;
-		internal bool? _analyzeWildcard;
-		internal bool? _autoGenerateSynonymsPhraseQuery;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? _defaultOperator;
-		internal IEnumerable<string>? _fields;
-		internal Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags?, string?>? _flags;
-		internal int? _fuzzyMaxExpansions;
-		internal int? _fuzzyPrefixLength;
-		internal bool? _fuzzyTranspositions;
-		internal bool? _lenient;
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? _minimumShouldMatch;
-		internal string _query;
-		internal string? _quoteFieldSuffix;
+		public SimpleQueryStringQueryDescriptor()
+		{
+		}
+
+		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? AnalyzerValue { get; private set; }
+
+		internal bool? AnalyzeWildcardValue { get; private set; }
+
+		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; private set; }
+
+		internal IEnumerable<string>? FieldsValue { get; private set; }
+
+		internal Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags?, string?>? FlagsValue { get; private set; }
+
+		internal int? FuzzyMaxExpansionsValue { get; private set; }
+
+		internal int? FuzzyPrefixLengthValue { get; private set; }
+
+		internal bool? FuzzyTranspositionsValue { get; private set; }
+
+		internal bool? LenientValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+
+		internal string QueryValue { get; private set; }
+
+		internal string? QuoteFieldSuffixValue { get; private set; }
+
+		public SimpleQueryStringQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
+		public SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public SimpleQueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
+		public SimpleQueryStringQueryDescriptor Fields(IEnumerable<string>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public SimpleQueryStringQueryDescriptor Flags(Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags?, string?>? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
+		public SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
+		public SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
+		public SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public SimpleQueryStringQueryDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public SimpleQueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public SimpleQueryStringQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? quoteFieldSuffix) => Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffixValue = v);
 	}
 
 	internal sealed class SimpleQueryStringQueryDescriptorConverter : JsonConverter<SimpleQueryStringQueryDescriptor>
@@ -4334,78 +5980,78 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, SimpleQueryStringQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value._analyzer))
+			if (!string.IsNullOrEmpty(value.AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value._analyzer);
+				writer.WriteStringValue(value.AnalyzerValue);
 			}
 
-			if (value._analyzeWildcard.HasValue)
+			if (value.AnalyzeWildcardValue.HasValue)
 			{
 				writer.WritePropertyName("analyze_wildcard");
-				writer.WriteBooleanValue(value._analyzeWildcard.Value);
+				writer.WriteBooleanValue(value.AnalyzeWildcardValue.Value);
 			}
 
-			if (value._autoGenerateSynonymsPhraseQuery.HasValue)
+			if (value.AutoGenerateSynonymsPhraseQueryValue.HasValue)
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
-				writer.WriteBooleanValue(value._autoGenerateSynonymsPhraseQuery.Value);
+				writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQueryValue.Value);
 			}
 
-			if (value._defaultOperator is not null)
+			if (value.DefaultOperatorValue is not null)
 			{
 				writer.WritePropertyName("default_operator");
-				JsonSerializer.Serialize(writer, value._defaultOperator, options);
+				JsonSerializer.Serialize(writer, value.DefaultOperatorValue, options);
 			}
 
-			if (value._fields is not null)
+			if (value.FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, value._fields, options);
+				JsonSerializer.Serialize(writer, value.FieldsValue, options);
 			}
 
-			if (value._flags is not null)
+			if (value.FlagsValue is not null)
 			{
 				writer.WritePropertyName("flags");
-				JsonSerializer.Serialize(writer, value._flags, options);
+				JsonSerializer.Serialize(writer, value.FlagsValue, options);
 			}
 
-			if (value._fuzzyMaxExpansions.HasValue)
+			if (value.FuzzyMaxExpansionsValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_max_expansions");
-				writer.WriteNumberValue(value._fuzzyMaxExpansions.Value);
+				writer.WriteNumberValue(value.FuzzyMaxExpansionsValue.Value);
 			}
 
-			if (value._fuzzyPrefixLength.HasValue)
+			if (value.FuzzyPrefixLengthValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_prefix_length");
-				writer.WriteNumberValue(value._fuzzyPrefixLength.Value);
+				writer.WriteNumberValue(value.FuzzyPrefixLengthValue.Value);
 			}
 
-			if (value._fuzzyTranspositions.HasValue)
+			if (value.FuzzyTranspositionsValue.HasValue)
 			{
 				writer.WritePropertyName("fuzzy_transpositions");
-				writer.WriteBooleanValue(value._fuzzyTranspositions.Value);
+				writer.WriteBooleanValue(value.FuzzyTranspositionsValue.Value);
 			}
 
-			if (value._lenient.HasValue)
+			if (value.LenientValue.HasValue)
 			{
 				writer.WritePropertyName("lenient");
-				writer.WriteBooleanValue(value._lenient.Value);
+				writer.WriteBooleanValue(value.LenientValue.Value);
 			}
 
-			if (value._minimumShouldMatch is not null)
+			if (value.MinimumShouldMatchValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatch, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchValue, options);
 			}
 
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(value._query);
-			if (!string.IsNullOrEmpty(value._quoteFieldSuffix))
+			writer.WriteStringValue(value.QueryValue);
+			if (!string.IsNullOrEmpty(value.QuoteFieldSuffixValue))
 			{
 				writer.WritePropertyName("quote_field_suffix");
-				writer.WriteStringValue(value._quoteFieldSuffix);
+				writer.WriteStringValue(value.QuoteFieldSuffixValue);
 			}
 
 			writer.WriteEndObject();
@@ -4428,10 +6074,66 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanContainingQueryDescriptorConverter))]
-	public sealed partial class SpanContainingQueryDescriptor : DescriptorBase<SpanContainingQueryDescriptor>
+	public sealed partial class SpanContainingQueryDescriptor : DescriptorBase<SpanContainingQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _big;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _little;
+		public SpanContainingQueryDescriptor()
+		{
+		}
+
+		internal SpanContainingQueryDescriptor(Action<SpanContainingQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; private set; }
+
+		internal SpanQueryDescriptor BigDescriptor { get; private set; }
+
+		internal SpanQueryDescriptor LittleDescriptor { get; private set; }
+
+		internal Action<SpanQueryDescriptor> BigDescriptorAction { get; private set; }
+
+		internal Action<SpanQueryDescriptor> LittleDescriptorAction { get; private set; }
+
+		public SpanContainingQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
+		{
+			BigDescriptor = null;
+			BigDescriptorAction = null;
+			return Assign(big, (a, v) => a.BigValue = v);
+		}
+
+		public SpanContainingQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			BigValue = null;
+			BigDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.BigDescriptor = v);
+		}
+
+		public SpanContainingQueryDescriptor Big(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			BigValue = null;
+			BigDescriptorAction = null;
+			return Assign(configure, (a, v) => a.BigDescriptorAction = v);
+		}
+
+		public SpanContainingQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
+		{
+			LittleDescriptor = null;
+			LittleDescriptorAction = null;
+			return Assign(little, (a, v) => a.LittleValue = v);
+		}
+
+		public SpanContainingQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			LittleValue = null;
+			LittleDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.LittleDescriptor = v);
+		}
+
+		public SpanContainingQueryDescriptor Little(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			LittleValue = null;
+			LittleDescriptorAction = null;
+			return Assign(configure, (a, v) => a.LittleDescriptorAction = v);
+		}
 	}
 
 	internal sealed class SpanContainingQueryDescriptorConverter : JsonConverter<SpanContainingQueryDescriptor>
@@ -4440,10 +6142,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, SpanContainingQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, value._big, options);
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, value._little, options);
+			if (value.BigDescriptor is not null)
+			{
+				writer.WritePropertyName("big");
+				JsonSerializer.Serialize(writer, value.BigDescriptor, options);
+			}
+			else if (value.BigDescriptorAction is not null)
+			{
+				writer.WritePropertyName("big");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.BigDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("big");
+				JsonSerializer.Serialize(writer, value.BigValue, options);
+			}
+
+			if (value.LittleDescriptor is not null)
+			{
+				writer.WritePropertyName("little");
+				JsonSerializer.Serialize(writer, value.LittleDescriptor, options);
+			}
+			else if (value.LittleDescriptorAction is not null)
+			{
+				writer.WritePropertyName("little");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.LittleDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("little");
+				JsonSerializer.Serialize(writer, value.LittleValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -4464,10 +6194,42 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanFieldMaskingQueryDescriptorConverter))]
-	public sealed partial class SpanFieldMaskingQueryDescriptor : DescriptorBase<SpanFieldMaskingQueryDescriptor>
+	public sealed partial class SpanFieldMaskingQueryDescriptor : DescriptorBase<SpanFieldMaskingQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal string _field;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _query;
+		public SpanFieldMaskingQueryDescriptor()
+		{
+		}
+
+		internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor> configure) => configure.Invoke(this);
+		internal string FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; private set; }
+
+		internal SpanQueryDescriptor QueryDescriptor { get; private set; }
+
+		internal Action<SpanQueryDescriptor> QueryDescriptorAction { get; private set; }
+
+		public SpanFieldMaskingQueryDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SpanFieldMaskingQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			return Assign(query, (a, v) => a.QueryValue = v);
+		}
+
+		public SpanFieldMaskingQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+		}
+
+		public SpanFieldMaskingQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+		}
 	}
 
 	internal sealed class SpanFieldMaskingQueryDescriptorConverter : JsonConverter<SpanFieldMaskingQueryDescriptor>
@@ -4477,9 +6239,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value._field, options);
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value._query, options);
+			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			if (value.QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+			}
+			else if (value.QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, value.QueryValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -4500,10 +6276,42 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanFirstQueryDescriptorConverter))]
-	public sealed partial class SpanFirstQueryDescriptor : DescriptorBase<SpanFirstQueryDescriptor>
+	public sealed partial class SpanFirstQueryDescriptor : DescriptorBase<SpanFirstQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal int _end;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _match;
+		public SpanFirstQueryDescriptor()
+		{
+		}
+
+		internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor> configure) => configure.Invoke(this);
+		internal int EndValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; private set; }
+
+		internal SpanQueryDescriptor MatchDescriptor { get; private set; }
+
+		internal Action<SpanQueryDescriptor> MatchDescriptorAction { get; private set; }
+
+		public SpanFirstQueryDescriptor End(int end) => Assign(end, (a, v) => a.EndValue = v);
+		public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
+		{
+			MatchDescriptor = null;
+			MatchDescriptorAction = null;
+			return Assign(match, (a, v) => a.MatchValue = v);
+		}
+
+		public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MatchDescriptor = v);
+		}
+
+		public SpanFirstQueryDescriptor Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MatchDescriptorAction = v);
+		}
 	}
 
 	internal sealed class SpanFirstQueryDescriptorConverter : JsonConverter<SpanFirstQueryDescriptor>
@@ -4513,9 +6321,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("end");
-			writer.WriteNumberValue(value._end);
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, value._match, options);
+			writer.WriteNumberValue(value.EndValue);
+			if (value.MatchDescriptor is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, value.MatchDescriptor, options);
+			}
+			else if (value.MatchDescriptorAction is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.MatchDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, value.MatchValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -4532,9 +6354,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanMultiTermQueryDescriptorConverter))]
-	public sealed partial class SpanMultiTermQueryDescriptor : DescriptorBase<SpanMultiTermQueryDescriptor>
+	public sealed partial class SpanMultiTermQueryDescriptor : DescriptorBase<SpanMultiTermQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer _match;
+		public SpanMultiTermQueryDescriptor()
+		{
+		}
+
+		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer MatchValue { get; private set; }
+
+		internal QueryContainerDescriptor MatchDescriptor { get; private set; }
+
+		internal Action<QueryContainerDescriptor> MatchDescriptorAction { get; private set; }
+
+		public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer match)
+		{
+			MatchDescriptor = null;
+			MatchDescriptorAction = null;
+			return Assign(match, (a, v) => a.MatchValue = v);
+		}
+
+		public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MatchDescriptor = v);
+		}
+
+		public SpanMultiTermQueryDescriptor Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MatchDescriptorAction = v);
+		}
 	}
 
 	internal sealed class SpanMultiTermQueryDescriptorConverter : JsonConverter<SpanMultiTermQueryDescriptor>
@@ -4543,8 +6395,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, SpanMultiTermQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, value._match, options);
+			if (value.MatchDescriptor is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, value.MatchDescriptor, options);
+			}
+			else if (value.MatchDescriptorAction is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(value.MatchDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, value.MatchValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -4569,11 +6435,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanNearQueryDescriptorConverter))]
-	public sealed partial class SpanNearQueryDescriptor : DescriptorBase<SpanNearQueryDescriptor>
+	public sealed partial class SpanNearQueryDescriptor : DescriptorBase<SpanNearQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> _clauses;
-		internal bool? _inOrder;
-		internal int? _slop;
+		public SpanNearQueryDescriptor()
+		{
+		}
+
+		internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; private set; }
+
+		internal bool? InOrderValue { get; private set; }
+
+		internal int? SlopValue { get; private set; }
+
+		public SpanNearQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses) => Assign(clauses, (a, v) => a.ClausesValue = v);
+		public SpanNearQueryDescriptor InOrder(bool? inOrder = true) => Assign(inOrder, (a, v) => a.InOrderValue = v);
+		public SpanNearQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
 	}
 
 	internal sealed class SpanNearQueryDescriptorConverter : JsonConverter<SpanNearQueryDescriptor>
@@ -4583,17 +6460,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, value._clauses, options);
-			if (value._inOrder.HasValue)
+			JsonSerializer.Serialize(writer, value.ClausesValue, options);
+			if (value.InOrderValue.HasValue)
 			{
 				writer.WritePropertyName("in_order");
-				writer.WriteBooleanValue(value._inOrder.Value);
+				writer.WriteBooleanValue(value.InOrderValue.Value);
 			}
 
-			if (value._slop.HasValue)
+			if (value.SlopValue.HasValue)
 			{
 				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(value._slop.Value);
+				writer.WriteNumberValue(value.SlopValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -4628,13 +6505,76 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanNotQueryDescriptorConverter))]
-	public sealed partial class SpanNotQueryDescriptor : DescriptorBase<SpanNotQueryDescriptor>
+	public sealed partial class SpanNotQueryDescriptor : DescriptorBase<SpanNotQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal int? _dist;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _exclude;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _include;
-		internal int? _post;
-		internal int? _pre;
+		public SpanNotQueryDescriptor()
+		{
+		}
+
+		internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor> configure) => configure.Invoke(this);
+		internal int? DistValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; private set; }
+
+		internal int? PostValue { get; private set; }
+
+		internal int? PreValue { get; private set; }
+
+		internal SpanQueryDescriptor ExcludeDescriptor { get; private set; }
+
+		internal SpanQueryDescriptor IncludeDescriptor { get; private set; }
+
+		internal Action<SpanQueryDescriptor> ExcludeDescriptorAction { get; private set; }
+
+		internal Action<SpanQueryDescriptor> IncludeDescriptorAction { get; private set; }
+
+		public SpanNotQueryDescriptor Dist(int? dist) => Assign(dist, (a, v) => a.DistValue = v);
+		public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
+		{
+			ExcludeDescriptor = null;
+			ExcludeDescriptorAction = null;
+			return Assign(exclude, (a, v) => a.ExcludeValue = v);
+		}
+
+		public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			ExcludeValue = null;
+			ExcludeDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ExcludeDescriptor = v);
+		}
+
+		public SpanNotQueryDescriptor Exclude(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			ExcludeValue = null;
+			ExcludeDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ExcludeDescriptorAction = v);
+		}
+
+		public SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
+		{
+			IncludeDescriptor = null;
+			IncludeDescriptorAction = null;
+			return Assign(include, (a, v) => a.IncludeValue = v);
+		}
+
+		public SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			IncludeValue = null;
+			IncludeDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.IncludeDescriptor = v);
+		}
+
+		public SpanNotQueryDescriptor Include(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			IncludeValue = null;
+			IncludeDescriptorAction = null;
+			return Assign(configure, (a, v) => a.IncludeDescriptorAction = v);
+		}
+
+		public SpanNotQueryDescriptor Post(int? post) => Assign(post, (a, v) => a.PostValue = v);
+		public SpanNotQueryDescriptor Pre(int? pre) => Assign(pre, (a, v) => a.PreValue = v);
 	}
 
 	internal sealed class SpanNotQueryDescriptorConverter : JsonConverter<SpanNotQueryDescriptor>
@@ -4643,26 +6583,54 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, SpanNotQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._dist.HasValue)
+			if (value.DistValue.HasValue)
 			{
 				writer.WritePropertyName("dist");
-				writer.WriteNumberValue(value._dist.Value);
+				writer.WriteNumberValue(value.DistValue.Value);
 			}
 
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, value._exclude, options);
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, value._include, options);
-			if (value._post.HasValue)
+			if (value.ExcludeDescriptor is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, value.ExcludeDescriptor, options);
+			}
+			else if (value.ExcludeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.ExcludeDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, value.ExcludeValue, options);
+			}
+
+			if (value.IncludeDescriptor is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value.IncludeDescriptor, options);
+			}
+			else if (value.IncludeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.IncludeDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, value.IncludeValue, options);
+			}
+
+			if (value.PostValue.HasValue)
 			{
 				writer.WritePropertyName("post");
-				writer.WriteNumberValue(value._post.Value);
+				writer.WriteNumberValue(value.PostValue.Value);
 			}
 
-			if (value._pre.HasValue)
+			if (value.PreValue.HasValue)
 			{
 				writer.WritePropertyName("pre");
-				writer.WriteNumberValue(value._pre.Value);
+				writer.WriteNumberValue(value.PreValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -4681,9 +6649,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanOrQueryDescriptorConverter))]
-	public sealed partial class SpanOrQueryDescriptor : DescriptorBase<SpanOrQueryDescriptor>
+	public sealed partial class SpanOrQueryDescriptor : DescriptorBase<SpanOrQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> _clauses;
+		public SpanOrQueryDescriptor()
+		{
+		}
+
+		internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; private set; }
+
+		public SpanOrQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses) => Assign(clauses, (a, v) => a.ClausesValue = v);
 	}
 
 	internal sealed class SpanOrQueryDescriptorConverter : JsonConverter<SpanOrQueryDescriptor>
@@ -4693,7 +6668,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, value._clauses, options);
+			JsonSerializer.Serialize(writer, value.ClausesValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -4701,6 +6676,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public interface ISpanQueryVariant
 	{
 		string SpanQueryVariantName { get; }
+	}
+
+	internal interface ISpanQueryVariantDescriptor
+	{
 	}
 
 	[JsonConverter(typeof(SpanQueryConverter))]
@@ -4828,6 +6807,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SpanQueryDescriptor : DescriptorBase<SpanQueryDescriptor>
 	{
+		public SpanQueryDescriptor()
+		{
+		}
+
+		internal SpanQueryDescriptor(Action<SpanQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class SpanQueryDescriptorConverter : JsonConverter<SpanQueryDescriptor>
@@ -4852,9 +6836,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanTermQueryDescriptorConverter))]
-	public sealed partial class SpanTermQueryDescriptor : DescriptorBase<SpanTermQueryDescriptor>
+	public sealed partial class SpanTermQueryDescriptor : DescriptorBase<SpanTermQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal string _value;
+		public SpanTermQueryDescriptor()
+		{
+		}
+
+		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor> configure) => configure.Invoke(this);
+		internal string ValueValue { get; private set; }
+
+		public SpanTermQueryDescriptor Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
 	}
 
 	internal sealed class SpanTermQueryDescriptorConverter : JsonConverter<SpanTermQueryDescriptor>
@@ -4864,7 +6855,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("value");
-			writer.WriteStringValue(value._value);
+			writer.WriteStringValue(value.ValueValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -4885,10 +6876,66 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(SpanWithinQueryDescriptorConverter))]
-	public sealed partial class SpanWithinQueryDescriptor : DescriptorBase<SpanWithinQueryDescriptor>
+	public sealed partial class SpanWithinQueryDescriptor : DescriptorBase<SpanWithinQueryDescriptor>, IQueryContainerVariantDescriptor, ISpanQueryVariantDescriptor
 	{
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _big;
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery _little;
+		public SpanWithinQueryDescriptor()
+		{
+		}
+
+		internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; private set; }
+
+		internal SpanQueryDescriptor BigDescriptor { get; private set; }
+
+		internal SpanQueryDescriptor LittleDescriptor { get; private set; }
+
+		internal Action<SpanQueryDescriptor> BigDescriptorAction { get; private set; }
+
+		internal Action<SpanQueryDescriptor> LittleDescriptorAction { get; private set; }
+
+		public SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
+		{
+			BigDescriptor = null;
+			BigDescriptorAction = null;
+			return Assign(big, (a, v) => a.BigValue = v);
+		}
+
+		public SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			BigValue = null;
+			BigDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.BigDescriptor = v);
+		}
+
+		public SpanWithinQueryDescriptor Big(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			BigValue = null;
+			BigDescriptorAction = null;
+			return Assign(configure, (a, v) => a.BigDescriptorAction = v);
+		}
+
+		public SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
+		{
+			LittleDescriptor = null;
+			LittleDescriptorAction = null;
+			return Assign(little, (a, v) => a.LittleValue = v);
+		}
+
+		public SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			LittleValue = null;
+			LittleDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.LittleDescriptor = v);
+		}
+
+		public SpanWithinQueryDescriptor Little(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
+		{
+			LittleValue = null;
+			LittleDescriptorAction = null;
+			return Assign(configure, (a, v) => a.LittleDescriptorAction = v);
+		}
 	}
 
 	internal sealed class SpanWithinQueryDescriptorConverter : JsonConverter<SpanWithinQueryDescriptor>
@@ -4897,10 +6944,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, SpanWithinQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("big");
-			JsonSerializer.Serialize(writer, value._big, options);
-			writer.WritePropertyName("little");
-			JsonSerializer.Serialize(writer, value._little, options);
+			if (value.BigDescriptor is not null)
+			{
+				writer.WritePropertyName("big");
+				JsonSerializer.Serialize(writer, value.BigDescriptor, options);
+			}
+			else if (value.BigDescriptorAction is not null)
+			{
+				writer.WritePropertyName("big");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.BigDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("big");
+				JsonSerializer.Serialize(writer, value.BigValue, options);
+			}
+
+			if (value.LittleDescriptor is not null)
+			{
+				writer.WritePropertyName("little");
+				JsonSerializer.Serialize(writer, value.LittleDescriptor, options);
+			}
+			else if (value.LittleDescriptorAction is not null)
+			{
+				writer.WritePropertyName("little");
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(value.LittleDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("little");
+				JsonSerializer.Serialize(writer, value.LittleValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
@@ -4919,10 +6994,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(TermQueryDescriptorConverter))]
-	public sealed partial class TermQueryDescriptor : DescriptorBase<TermQueryDescriptor>
+	public sealed partial class TermQueryDescriptor : DescriptorBase<TermQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal object _value;
-		internal bool? _caseInsensitive;
+		public TermQueryDescriptor()
+		{
+		}
+
+		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
+		internal object ValueValue { get; private set; }
+
+		internal bool? CaseInsensitiveValue { get; private set; }
+
+		public TermQueryDescriptor Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
+		public TermQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
 	}
 
 	internal sealed class TermQueryDescriptorConverter : JsonConverter<TermQueryDescriptor>
@@ -4932,11 +7016,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value._value, options);
-			if (value._caseInsensitive.HasValue)
+			JsonSerializer.Serialize(writer, value.ValueValue, options);
+			if (value.CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value._caseInsensitive.Value);
+				writer.WriteBooleanValue(value.CaseInsensitiveValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -4950,8 +7034,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(TermsQueryDescriptorConverter))]
-	public sealed partial class TermsQueryDescriptor : DescriptorBase<TermsQueryDescriptor>
+	public sealed partial class TermsQueryDescriptor : DescriptorBase<TermsQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
+		public TermsQueryDescriptor()
+		{
+		}
+
+		internal TermsQueryDescriptor(Action<TermsQueryDescriptor> configure) => configure.Invoke(this);
 	}
 
 	internal sealed class TermsQueryDescriptorConverter : JsonConverter<TermsQueryDescriptor>
@@ -4982,11 +7071,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(TermsSetQueryDescriptorConverter))]
-	public sealed partial class TermsSetQueryDescriptor : DescriptorBase<TermsSetQueryDescriptor>
+	public sealed partial class TermsSetQueryDescriptor : DescriptorBase<TermsSetQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal string? _minimumShouldMatchField;
-		internal Elastic.Clients.Elasticsearch.Script? _minimumShouldMatchScript;
-		internal IEnumerable<string> _terms;
+		public TermsSetQueryDescriptor()
+		{
+		}
+
+		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor> configure) => configure.Invoke(this);
+		internal string? MinimumShouldMatchFieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScriptValue { get; private set; }
+
+		internal IEnumerable<string> TermsValue { get; private set; }
+
+		public TermsSetQueryDescriptor MinimumShouldMatchField(string? minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
+		public TermsSetQueryDescriptor MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript) => Assign(minimumShouldMatchScript, (a, v) => a.MinimumShouldMatchScriptValue = v);
+		public TermsSetQueryDescriptor Terms(IEnumerable<string> terms) => Assign(terms, (a, v) => a.TermsValue = v);
 	}
 
 	internal sealed class TermsSetQueryDescriptorConverter : JsonConverter<TermsSetQueryDescriptor>
@@ -4995,20 +7095,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, TermsSetQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._minimumShouldMatchField is not null)
+			if (value.MinimumShouldMatchFieldValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match_field");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatchField, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchFieldValue, options);
 			}
 
-			if (value._minimumShouldMatchScript is not null)
+			if (value.MinimumShouldMatchScriptValue is not null)
 			{
 				writer.WritePropertyName("minimum_should_match_script");
-				JsonSerializer.Serialize(writer, value._minimumShouldMatchScript, options);
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchScriptValue, options);
 			}
 
 			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, value._terms, options);
+			JsonSerializer.Serialize(writer, value.TermsValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -5046,12 +7146,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	}
 
 	[JsonConverter(typeof(WildcardQueryDescriptorConverter))]
-	public sealed partial class WildcardQueryDescriptor : DescriptorBase<WildcardQueryDescriptor>
+	public sealed partial class WildcardQueryDescriptor : DescriptorBase<WildcardQueryDescriptor>, IQueryContainerVariantDescriptor
 	{
-		internal bool? _caseInsensitive;
-		internal string? _rewrite;
-		internal string? _value;
-		internal string? _wildcard;
+		public WildcardQueryDescriptor()
+		{
+		}
+
+		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
+		internal bool? CaseInsensitiveValue { get; private set; }
+
+		internal string? RewriteValue { get; private set; }
+
+		internal string? ValueValue { get; private set; }
+
+		internal string? WildcardValue { get; private set; }
+
+		public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public WildcardQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public WildcardQueryDescriptor Value(string? value) => Assign(value, (a, v) => a.ValueValue = v);
+		public WildcardQueryDescriptor Wildcard(string? wildcard) => Assign(wildcard, (a, v) => a.WildcardValue = v);
 	}
 
 	internal sealed class WildcardQueryDescriptorConverter : JsonConverter<WildcardQueryDescriptor>
@@ -5060,28 +7173,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public override void Write(Utf8JsonWriter writer, WildcardQueryDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._caseInsensitive.HasValue)
+			if (value.CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value._caseInsensitive.Value);
+				writer.WriteBooleanValue(value.CaseInsensitiveValue.Value);
 			}
 
-			if (value._rewrite is not null)
+			if (value.RewriteValue is not null)
 			{
 				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value._rewrite, options);
+				JsonSerializer.Serialize(writer, value.RewriteValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value._value))
+			if (!string.IsNullOrEmpty(value.ValueValue))
 			{
 				writer.WritePropertyName("value");
-				writer.WriteStringValue(value._value);
+				writer.WriteStringValue(value.ValueValue);
 			}
 
-			if (!string.IsNullOrEmpty(value._wildcard))
+			if (!string.IsNullOrEmpty(value.WildcardValue))
 			{
 				writer.WritePropertyName("wildcard");
-				writer.WriteStringValue(value._wildcard);
+				writer.WriteStringValue(value.WildcardValue);
 			}
 
 			writer.WriteEndObject();

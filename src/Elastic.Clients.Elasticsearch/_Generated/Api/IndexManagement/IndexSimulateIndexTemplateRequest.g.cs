@@ -61,17 +61,49 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? _indexPatterns;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Name>? _composedOf;
-		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? _overlapping;
-		internal Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? _template;
+		public IndexSimulateIndexTemplateRequestDescriptor()
+		{
+		}
+
+		internal IndexSimulateIndexTemplateRequestDescriptor(Action<IndexSimulateIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public IndexSimulateIndexTemplateRequestDescriptor IndexPatterns(IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? indexPatterns) => Assign(indexPatterns, (a, v) => a._indexPatterns = v);
-		public IndexSimulateIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a._composedOf = v);
-		public IndexSimulateIndexTemplateRequestDescriptor Overlapping(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a._overlapping = v);
-		public IndexSimulateIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? template) => Assign(template, (a, v) => a._template = v);
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? IndexPatternsValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? OverlappingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? TemplateValue { get; private set; }
+
+		internal TemplateMappingDescriptor TemplateDescriptor { get; private set; }
+
+		internal Action<TemplateMappingDescriptor> TemplateDescriptorAction { get; private set; }
+
+		public IndexSimulateIndexTemplateRequestDescriptor IndexPatterns(IEnumerable<Elastic.Clients.Elasticsearch.IndexName>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatternsValue = v);
+		public IndexSimulateIndexTemplateRequestDescriptor ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOfValue = v);
+		public IndexSimulateIndexTemplateRequestDescriptor Overlapping(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.OverlappingIndexTemplate>? overlapping) => Assign(overlapping, (a, v) => a.OverlappingValue = v);
+		public IndexSimulateIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? template)
+		{
+			TemplateDescriptor = null;
+			TemplateDescriptorAction = null;
+			return Assign(template, (a, v) => a.TemplateValue = v);
+		}
+
+		public IndexSimulateIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.TemplateMappingDescriptor descriptor)
+		{
+			TemplateValue = null;
+			TemplateDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.TemplateDescriptor = v);
+		}
+
+		public IndexSimulateIndexTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.TemplateMappingDescriptor> configure)
+		{
+			TemplateValue = null;
+			TemplateDescriptorAction = null;
+			return Assign(configure, (a, v) => a.TemplateDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IndexSimulateIndexTemplateRequestDescriptorConverter : JsonConverter<IndexSimulateIndexTemplateRequestDescriptor>
@@ -80,28 +112,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public override void Write(Utf8JsonWriter writer, IndexSimulateIndexTemplateRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._indexPatterns is not null)
+			if (value.IndexPatternsValue is not null)
 			{
 				writer.WritePropertyName("index_patterns");
-				JsonSerializer.Serialize(writer, value._indexPatterns, options);
+				JsonSerializer.Serialize(writer, value.IndexPatternsValue, options);
 			}
 
-			if (value._composedOf is not null)
+			if (value.ComposedOfValue is not null)
 			{
 				writer.WritePropertyName("composed_of");
-				JsonSerializer.Serialize(writer, value._composedOf, options);
+				JsonSerializer.Serialize(writer, value.ComposedOfValue, options);
 			}
 
-			if (value._overlapping is not null)
+			if (value.OverlappingValue is not null)
 			{
 				writer.WritePropertyName("overlapping");
-				JsonSerializer.Serialize(writer, value._overlapping, options);
+				JsonSerializer.Serialize(writer, value.OverlappingValue, options);
 			}
 
-			if (value._template is not null)
+			if (value.TemplateDescriptor is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, value._template, options);
+				JsonSerializer.Serialize(writer, value.TemplateDescriptor, options);
+			}
+			else if (value.TemplateDescriptorAction is not null)
+			{
+				writer.WritePropertyName("template");
+				JsonSerializer.Serialize(writer, new TemplateMappingDescriptor(value.TemplateDescriptorAction), options);
+			}
+			else if (value.TemplateValue is not null)
+			{
+				writer.WritePropertyName("template");
+				JsonSerializer.Serialize(writer, value.TemplateValue, options);
 			}
 
 			writer.WriteEndObject();

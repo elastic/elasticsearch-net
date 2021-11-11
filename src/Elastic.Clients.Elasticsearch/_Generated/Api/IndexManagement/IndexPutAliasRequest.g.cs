@@ -27,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public class IndexPutAliasRequestParameters : RequestParameters<IndexPutAliasRequestParameters>
 	{
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
 	public partial class IndexPutAliasRequest : PlainRequestBase<IndexPutAliasRequestParameters>
@@ -43,10 +43,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -76,21 +76,55 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? _filter;
-		internal string? _indexRouting;
-		internal bool? _isWriteIndex;
-		internal string? _routing;
-		internal string? _searchRouting;
+		public IndexPutAliasRequestDescriptor()
+		{
+		}
+
+		internal IndexPutAliasRequestDescriptor(Action<IndexPutAliasRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public IndexPutAliasRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexPutAliasRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
-		public IndexPutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter) => Assign(filter, (a, v) => a._filter = v);
-		public IndexPutAliasRequestDescriptor IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a._indexRouting = v);
-		public IndexPutAliasRequestDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a._isWriteIndex = v);
-		public IndexPutAliasRequestDescriptor Routing(string? routing) => Assign(routing, (a, v) => a._routing = v);
-		public IndexPutAliasRequestDescriptor SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a._searchRouting = v);
+		public IndexPutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexPutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
+
+		internal string? IndexRoutingValue { get; private set; }
+
+		internal bool? IsWriteIndexValue { get; private set; }
+
+		internal string? RoutingValue { get; private set; }
+
+		internal string? SearchRoutingValue { get; private set; }
+
+		internal QueryDsl.QueryContainerDescriptor FilterDescriptor { get; private set; }
+
+		internal Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; private set; }
+
+		public IndexPutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			return Assign(filter, (a, v) => a.FilterValue = v);
+		}
+
+		public IndexPutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+		}
+
+		public IndexPutAliasRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+		}
+
+		public IndexPutAliasRequestDescriptor IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
+		public IndexPutAliasRequestDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
+		public IndexPutAliasRequestDescriptor Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public IndexPutAliasRequestDescriptor SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
 	}
 
 	internal sealed class IndexPutAliasRequestDescriptorConverter : JsonConverter<IndexPutAliasRequestDescriptor>
@@ -99,34 +133,44 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public override void Write(Utf8JsonWriter writer, IndexPutAliasRequestDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._filter is not null)
+			if (value.FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value._filter, options);
+				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+			}
+			else if (value.FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.FilterDescriptorAction), options);
+			}
+			else if (value.FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, value.FilterValue, options);
 			}
 
-			if (value._indexRouting is not null)
+			if (value.IndexRoutingValue is not null)
 			{
 				writer.WritePropertyName("index_routing");
-				JsonSerializer.Serialize(writer, value._indexRouting, options);
+				JsonSerializer.Serialize(writer, value.IndexRoutingValue, options);
 			}
 
-			if (value._isWriteIndex.HasValue)
+			if (value.IsWriteIndexValue.HasValue)
 			{
 				writer.WritePropertyName("is_write_index");
-				writer.WriteBooleanValue(value._isWriteIndex.Value);
+				writer.WriteBooleanValue(value.IsWriteIndexValue.Value);
 			}
 
-			if (value._routing is not null)
+			if (value.RoutingValue is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, value._routing, options);
+				JsonSerializer.Serialize(writer, value.RoutingValue, options);
 			}
 
-			if (value._searchRouting is not null)
+			if (value.SearchRoutingValue is not null)
 			{
 				writer.WritePropertyName("search_routing");
-				JsonSerializer.Serialize(writer, value._searchRouting, options);
+				JsonSerializer.Serialize(writer, value.SearchRoutingValue, options);
 			}
 
 			writer.WriteEndObject();

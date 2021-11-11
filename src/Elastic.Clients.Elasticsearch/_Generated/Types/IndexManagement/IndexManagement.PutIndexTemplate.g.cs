@@ -41,9 +41,67 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 	[JsonConverter(typeof(IndexTemplateMappingDescriptorConverter))]
 	public sealed partial class IndexTemplateMappingDescriptor : DescriptorBase<IndexTemplateMappingDescriptor>
 	{
-		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? _aliases;
-		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? _mappings;
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? _settings;
+		public IndexTemplateMappingDescriptor()
+		{
+		}
+
+		internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor> configure) => configure.Invoke(this);
+		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
+
+		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
+
+		internal IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; private set; }
+
+		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
+
+		internal Action<IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; private set; }
+
+		public IndexTemplateMappingDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			return Assign(mappings, (a, v) => a.MappingsValue = v);
+		}
+
+		public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
+		}
+
+		public IndexTemplateMappingDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
+		}
+
+		public IndexTemplateMappingDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		{
+			SettingsDescriptor = null;
+			SettingsDescriptorAction = null;
+			return Assign(settings, (a, v) => a.SettingsValue = v);
+		}
+
+		public IndexTemplateMappingDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
+		}
+
+		public IndexTemplateMappingDescriptor Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
+		}
 	}
 
 	internal sealed class IndexTemplateMappingDescriptorConverter : JsonConverter<IndexTemplateMappingDescriptor>
@@ -52,22 +110,42 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 		public override void Write(Utf8JsonWriter writer, IndexTemplateMappingDescriptor value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			if (value._aliases is not null)
+			if (value.AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value._aliases, options);
+				JsonSerializer.Serialize(writer, value.AliasesValue, options);
 			}
 
-			if (value._mappings is not null)
+			if (value.MappingsDescriptor is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value._mappings, options);
+				JsonSerializer.Serialize(writer, value.MappingsDescriptor, options);
+			}
+			else if (value.MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(value.MappingsDescriptorAction), options);
+			}
+			else if (value.MappingsValue is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, value.MappingsValue, options);
 			}
 
-			if (value._settings is not null)
+			if (value.SettingsDescriptor is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value._settings, options);
+				JsonSerializer.Serialize(writer, value.SettingsDescriptor, options);
+			}
+			else if (value.SettingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor(value.SettingsDescriptorAction), options);
+			}
+			else if (value.SettingsValue is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, value.SettingsValue, options);
 			}
 
 			writer.WriteEndObject();

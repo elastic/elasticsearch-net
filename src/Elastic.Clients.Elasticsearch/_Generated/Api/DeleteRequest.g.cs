@@ -33,13 +33,13 @@ namespace Elastic.Clients.Elasticsearch
 		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 		[JsonIgnore]
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>
@@ -67,13 +67,13 @@ namespace Elastic.Clients.Elasticsearch
 		public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 		[JsonIgnore]
-		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Time? Timeout { get => Q<Time?>("timeout"); set => Q("timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
 		[JsonIgnore]
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 		[JsonIgnore]
-		public WaitForActiveShards? WaitForActiveShards { get => Q<WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
 	[JsonConverter(typeof(DeleteRequestDescriptorConverter))]
@@ -92,17 +92,22 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		public DeleteRequestDescriptor()
+		{
+		}
+
+		internal DeleteRequestDescriptor(Action<DeleteRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public DeleteRequestDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		public DeleteRequestDescriptor IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
-		public DeleteRequestDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+		public DeleteRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public DeleteRequestDescriptor Routing(string? routing) => Qs("routing", routing);
-		public DeleteRequestDescriptor Timeout(Time? timeout) => Qs("timeout", timeout);
+		public DeleteRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public DeleteRequestDescriptor Version(long? version) => Qs("version", version);
 		public DeleteRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-		public DeleteRequestDescriptor WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public DeleteRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	}
 
 	internal sealed class DeleteRequestDescriptorConverter : JsonConverter<DeleteRequestDescriptor>

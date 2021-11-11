@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public class IndexExistsIndexTemplateRequestParameters : RequestParameters<IndexExistsIndexTemplateRequestParameters>
 	{
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	public partial class IndexExistsIndexTemplateRequest : PlainRequestBase<IndexExistsIndexTemplateRequestParameters>
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 		[JsonIgnore]
-		public Time? MasterTimeout { get => Q<Time?>("master_timeout"); set => Q("master_timeout", value); }
+		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
 	[JsonConverter(typeof(IndexExistsIndexTemplateRequestDescriptorConverter))]
@@ -50,10 +50,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		public IndexExistsIndexTemplateRequestDescriptor()
+		{
+		}
+
+		internal IndexExistsIndexTemplateRequestDescriptor(Action<IndexExistsIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
-		public IndexExistsIndexTemplateRequestDescriptor MasterTimeout(Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 
 	internal sealed class IndexExistsIndexTemplateRequestDescriptorConverter : JsonConverter<IndexExistsIndexTemplateRequestDescriptor>

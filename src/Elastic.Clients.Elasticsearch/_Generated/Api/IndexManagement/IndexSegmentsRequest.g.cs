@@ -76,6 +76,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal IndexSegmentsRequestDescriptor(Action<IndexSegmentsRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSegments;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
