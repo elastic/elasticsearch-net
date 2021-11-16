@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Specification.SnapshotApi
 	public class CleanupRepositoryRequestParameters : RequestParameters<CleanupRepositoryRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => true;
+		public override bool SupportsBody => false;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout
 		{

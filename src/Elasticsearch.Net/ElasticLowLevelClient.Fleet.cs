@@ -57,48 +57,48 @@ namespace Elasticsearch.Net.Specification.FleetApi
 		[MapsApi("fleet.global_checkpoints", "index")]
 		public Task<TResponse> GlobalCheckpointsAsync<TResponse>(string index, GlobalCheckpointsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(GET, Url($"{index:index}/_fleet/global_checkpoints"), ctx, null, RequestParams(requestParameters));
-		///<summary>POST on /_fleet/_msearch</summary>
+		///<summary>POST on /_fleet/_fleet_msearch</summary>
 		///<param name = "body">The request definitions (metadata-fleet search request definition pairs), separated by newlines</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse Msearch<TResponse>(PostData body, MsearchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_fleet/_msearch", body, RequestParams(requestParameters));
-		///<summary>POST on /_fleet/_msearch</summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, "_fleet/_fleet_msearch", body, RequestParams(requestParameters));
+		///<summary>POST on /_fleet/_fleet_msearch</summary>
 		///<param name = "body">The request definitions (metadata-fleet search request definition pairs), separated by newlines</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("fleet.msearch", "body")]
 		public Task<TResponse> MsearchAsync<TResponse>(PostData body, MsearchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_fleet/_msearch", ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_fleet/_msearch</summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, "_fleet/_fleet_msearch", ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_fleet/_fleet_msearch</summary>
 		///<param name = "index">The index name to use as the default</param>
 		///<param name = "body">The request definitions (metadata-fleet search request definition pairs), separated by newlines</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse Msearch<TResponse>(string index, PostData body, MsearchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_fleet/_msearch"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_fleet/_msearch</summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_fleet/_fleet_msearch"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_fleet/_fleet_msearch</summary>
 		///<param name = "index">The index name to use as the default</param>
 		///<param name = "body">The request definitions (metadata-fleet search request definition pairs), separated by newlines</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("fleet.msearch", "index, body")]
 		public Task<TResponse> MsearchAsync<TResponse>(string index, PostData body, MsearchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_fleet/_msearch"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_fleet/_search</summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_fleet/_fleet_msearch"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_fleet/_fleet_search</summary>
 		///<param name = "index">The index name to search.</param>
 		///<param name = "body">The search definition using the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse Search<TResponse>(string index, PostData body, SearchRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_fleet/_search"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/_fleet/_search</summary>
+			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_fleet/_fleet_search"), body, RequestParams(requestParameters));
+		///<summary>POST on /{index}/_fleet/_fleet_search</summary>
 		///<param name = "index">The index name to search.</param>
 		///<param name = "body">The search definition using the Query DSL</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		[MapsApi("fleet.search", "index, body")]
 		public Task<TResponse> SearchAsync<TResponse>(string index, PostData body, SearchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_fleet/_search"), ctx, body, RequestParams(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_fleet/_fleet_search"), ctx, body, RequestParams(requestParameters));
 	}
 }
