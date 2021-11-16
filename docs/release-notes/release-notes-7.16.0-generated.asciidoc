@@ -1,5 +1,11 @@
 
 [float]
+[[bug]]
+=== Bug Fixes
+
+- * Fix cleanup repository patch and regen LL code https://github.com/elastic/elasticsearch-net/pull/6055[#6055]  (issue: https://github.com/elastic/elasticsearch-net/issues/6054[#6054])
+
+[float]
 [[enhancement]]
 === New Features
 
