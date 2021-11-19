@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object>? Meta { get; init; }
 	}
 
-	public partial class Aggregation
+	public abstract partial class AggregationBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("meta")]
@@ -81,19 +81,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Name { get; set; }
 	}
 
-	public sealed partial class AggregationDescriptor : DescriptorBase<AggregationDescriptor>
+	public sealed partial class AggregationBaseDescriptor : DescriptorBase<AggregationBaseDescriptor>
 	{
-		public AggregationDescriptor()
+		public AggregationBaseDescriptor()
 		{
 		}
 
-		internal AggregationDescriptor(Action<AggregationDescriptor> configure) => configure.Invoke(this);
+		internal AggregationBaseDescriptor(Action<AggregationBaseDescriptor> configure) => configure.Invoke(this);
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
 		internal string? NameValue { get; private set; }
 
-		public AggregationDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public AggregationDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		public AggregationBaseDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public AggregationBaseDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -405,13 +405,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				reader.Read();
 				return new AggregationContainer(variant);
 			}
-
-			//if (propertyName == "moving_avg")
-			//{
-			//	var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregations?>(ref reader, options);
-			//	reader.Read();
-			//	return new AggregationContainer(variant);
-			//}
 
 			if (propertyName == "moving_percentiles")
 			{
@@ -746,9 +739,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				case Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregations variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
 				case Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
@@ -954,8 +944,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public void MinBucket(Action<MinBucketAggregationDescriptor> configure) => Set(configure, "min_bucket");
 		public void Missing(MissingAggregation variant) => Set(variant, "missing");
 		public void Missing(Action<MissingAggregationDescriptor<T>> configure) => Set(configure, "missing");
-		public void MovingAvg(MovingAverageAggregations variant) => Set(variant, "moving_avg");
-		//public void MovingAvg(Action<MovingAverageAggregationsDescriptor> configure) => Set(configure, "moving_avg");
 		public void MovingPercentiles(MovingPercentilesAggregation variant) => Set(variant, "moving_percentiles");
 		public void MovingPercentiles(Action<MovingPercentilesAggregationDescriptor> configure) => Set(configure, "moving_percentiles");
 		public void MovingFn(MovingFunctionAggregation variant) => Set(variant, "moving_fn");
@@ -1297,13 +1285,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				((Action<MissingAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 			}
-
-			//if (ContainedVariantName == "moving_avg")
-			//{
-			//	var descriptor = new MovingAverageAggregationsDescriptor();
-			//	((Action<MovingAverageAggregationsDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-			//	JsonSerializer.Serialize(writer, descriptor, options);
-			//}
 
 			if (ContainedVariantName == "moving_percentiles")
 			{
@@ -1869,7 +1850,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public abstract partial class BucketAggregationBase : Aggregations.Aggregation
+	public abstract partial class BucketAggregationBase : Aggregations.AggregationBase
 	{
 	}
 
@@ -1958,7 +1939,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class BucketSortAggregation : Aggregations.Aggregation, IAggregationContainerVariant
+	public partial class BucketSortAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "bucket_sort";
@@ -3092,23 +3073,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? KeyAsString { get; init; }
 	}
 
-	public partial class EwmaModelSettings
-	{
-		[JsonInclude]
-		[JsonPropertyName("alpha")]
-		public float? Alpha { get; init; }
-	}
-
-	public partial class EwmaMovingAverageAggregation : Aggregations.MovingAverageAggregationBase, IMovingAverageAggregationsVariant
-	{
-		[JsonInclude]
-		[JsonPropertyName("model")]
-		public string Model => "ewma";
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Aggregations.EwmaModelSettings Settings { get; init; }
-	}
-
 	public partial class ExtendedStatsAggregate : Aggregations.StatsAggregate
 	{
 		[JsonInclude]
@@ -3241,6 +3205,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "filters";
 		[JsonInclude]
+		[JsonPropertyName("filters")]
+		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("other_bucket")]
 		public bool? OtherBucket { get; set; }
 
@@ -3260,23 +3228,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; private set; }
+
 		internal bool? OtherBucketValue { get; private set; }
 
 		internal string? OtherBucketKeyValue { get; private set; }
 
 		internal bool? KeyedValue { get; private set; }
 
+		public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters) => Assign(filters, (a, v) => a.FiltersValue = v);
 		public FiltersAggregationDescriptor OtherBucket(bool? otherBucket = true) => Assign(otherBucket, (a, v) => a.OtherBucketValue = v);
 		public FiltersAggregationDescriptor OtherBucketKey(string? otherBucketKey) => Assign(otherBucketKey, (a, v) => a.OtherBucketKeyValue = v);
 		public FiltersAggregationDescriptor Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			//if (FiltersValue is not null)
-			//{
-			//	writer.WritePropertyName("filters");
-			//	JsonSerializer.Serialize(writer, FiltersValue, options);
-			//}
+			if (FiltersValue is not null)
+			{
+				writer.WritePropertyName("filters");
+				JsonSerializer.Serialize(writer, FiltersValue, options);
+			}
 
 			if (OtherBucketValue.HasValue)
 			{
@@ -4276,69 +4247,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class HoltLinearModelSettings
-	{
-		[JsonInclude]
-		[JsonPropertyName("alpha")]
-		public float? Alpha { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("beta")]
-		public float? Beta { get; init; }
-	}
-
-	public partial class HoltMovingAverageAggregation : Aggregations.MovingAverageAggregationBase, IMovingAverageAggregationsVariant
-	{
-		[JsonInclude]
-		[JsonPropertyName("model")]
-		public string Model => "holt";
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HoltLinearModelSettings Settings { get; init; }
-	}
-
-	public partial class HoltWintersModelSettings
-	{
-		[JsonInclude]
-		[JsonPropertyName("alpha")]
-		public float? Alpha { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("beta")]
-		public float? Beta { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("gamma")]
-		public float? Gamma { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("pad")]
-		public bool? Pad { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("period")]
-		public int? Period { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HoltWintersType? Type { get; init; }
-	}
-
-	public partial class HoltWintersMovingAverageAggregation : Aggregations.MovingAverageAggregationBase, IMovingAverageAggregationsVariant
-	{
-		[JsonInclude]
-		[JsonPropertyName("model")]
-		public string Model => "holt_winters";
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HoltWintersModelSettings Settings { get; init; }
-	}
-
 	public partial class InferenceAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public Elastic.Clients.Elasticsearch.FieldValue? Value { get; init; }
+		public object? Value { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("feature_importance")]
@@ -4569,7 +4482,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("class_name")]
-		public Elastic.Clients.Elasticsearch.FieldValue ClassName { get; init; }
+		public object ClassName { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("class_probability")]
@@ -4696,16 +4609,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? To { get; init; }
 	}
 
-	public partial class LinearMovingAverageAggregation : Aggregations.MovingAverageAggregationBase, IMovingAverageAggregationsVariant
-	{
-		[JsonInclude]
-		[JsonPropertyName("model")]
-		public string Model => "linear";
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.EmptyObject Settings { get; init; }
-	}
-
 	public partial class LongRareTermsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsBucket>
 	{
 	}
@@ -4736,7 +4639,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? KeyAsString { get; init; }
 	}
 
-	public partial class MatrixAggregation : Aggregations.Aggregation
+	public partial class MatrixAggregation : Aggregations.AggregationBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("fields")]
@@ -4759,7 +4662,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal Dictionary<string, double>? MissingValue { get; private set; }
 
 		public MatrixAggregationDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		//public MatrixAggregationDescriptor<T> Missing(Func<FluentDictionary<string?, double?>, FluentDictionary<string?, double?>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string?, double?>()));
+		public MatrixAggregationDescriptor<T> Missing(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string, double>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -5084,21 +4987,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			writer.WriteEndObject();
 		}
-	}
-
-	public abstract partial class MovingAverageAggregationBase : Aggregations.PipelineAggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("minimize")]
-		public bool? Minimize { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("predict")]
-		public int? Predict { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("window")]
-		public int? Window { get; init; }
 	}
 
 	public partial class MovingFunctionAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
@@ -5786,7 +5674,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public abstract partial class PipelineAggregationBase : Aggregations.Aggregation
+	public abstract partial class PipelineAggregationBase : Aggregations.AggregationBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets_path")]
@@ -7252,16 +7140,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public partial class SimpleMovingAverageAggregation : Aggregations.MovingAverageAggregationBase, IMovingAverageAggregationsVariant
-	{
-		[JsonInclude]
-		[JsonPropertyName("model")]
-		public string Model => "simple";
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.EmptyObject Settings { get; init; }
-	}
-
 	public partial class SimpleValueAggregate : Aggregations.SingleMetricAggregateBase
 	{
 	}
@@ -7929,6 +7807,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public partial class TopHitsAggregate : Aggregations.AggregateBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("hits")]
+		public Elastic.Clients.Elasticsearch.HitsMetadata<object> Hits { get; init; }
 	}
 
 	public partial class TopHitsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
@@ -8291,7 +8172,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? ValueAsString { get; init; }
 	}
 
-	public partial class TTestAggregation : Aggregations.Aggregation, IAggregationContainerVariant
+	public partial class TTestAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "t_test";
@@ -8543,7 +8424,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? MaxAsString { get; init; }
 	}
 
-	public partial class WeightedAverageAggregation : Aggregations.Aggregation, IAggregationContainerVariant
+	public partial class WeightedAverageAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonIgnore]
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "weighted_avg";

@@ -4,17 +4,13 @@
 
 using System;
 using System.Collections.Generic;
-using Elastic.Clients.Elasticsearch;
-using Elastic.Transport;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Core.Extensions;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 using Tests.Framework.DocumentationTests;
 using System.Linq;
-using FluentAssertions;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index;

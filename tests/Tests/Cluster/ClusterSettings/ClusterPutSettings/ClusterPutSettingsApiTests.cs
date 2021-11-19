@@ -5,8 +5,6 @@
 using System;
 using System.Collections.Generic;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Transport;
-using FluentAssertions;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;

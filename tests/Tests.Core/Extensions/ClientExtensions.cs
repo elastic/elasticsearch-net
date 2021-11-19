@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch;
 //using Elastic.Clients.Elasticsearch.Cluster;
 
 namespace Tests.Core.Extensions

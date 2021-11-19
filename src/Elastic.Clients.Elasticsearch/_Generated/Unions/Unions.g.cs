@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using OneOf;
 using Elastic.Transport;
 
 #nullable restore
@@ -59,10 +58,6 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class ExpandWildcards
 	{
 		private readonly List<ExpandWildcard> _expandWildcardList = new();
-	}
-
-	public partial class FieldValue
-	{
 	}
 
 	public partial class Fuzziness : Union<string?, int?>

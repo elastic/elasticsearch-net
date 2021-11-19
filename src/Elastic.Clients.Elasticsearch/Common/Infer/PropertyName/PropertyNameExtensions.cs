@@ -1,5 +1,3 @@
-using Elastic.Clients.Elasticsearch.Core;
-
 namespace Elastic.Clients.Elasticsearch
 {
 	//internal static class PropertyNameExtensions

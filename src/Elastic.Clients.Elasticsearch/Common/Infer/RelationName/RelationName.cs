@@ -1,7 +1,3 @@
-using System;
-using System.Diagnostics;
-using Elastic.Transport;
-
 namespace Elastic.Clients.Elasticsearch
 {
 	//[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]

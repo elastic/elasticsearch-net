@@ -5,10 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Clients.Elasticsearch;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elastic.Transport;
-using FluentAssertions;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;

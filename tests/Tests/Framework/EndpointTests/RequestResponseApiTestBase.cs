@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Ephemeral;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
