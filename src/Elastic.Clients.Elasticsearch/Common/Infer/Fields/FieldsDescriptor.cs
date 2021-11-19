@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Elastic.Clients.Elasticsearch.Core;
-
 namespace Elastic.Clients.Elasticsearch
 {
 	//public class FieldsDescriptor<T> : DescriptorPromiseBase<FieldsDescriptor<T>, Fields>

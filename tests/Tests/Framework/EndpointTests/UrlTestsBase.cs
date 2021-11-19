@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
 
 namespace Tests.Framework.EndpointTests
 {

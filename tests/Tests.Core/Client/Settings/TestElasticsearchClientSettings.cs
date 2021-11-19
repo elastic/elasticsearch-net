@@ -6,7 +6,6 @@ using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Extensions;
-using Tests.Core.Xunit;
 
 namespace Tests.Core.Client.Settings
 {

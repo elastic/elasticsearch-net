@@ -4,9 +4,8 @@
 
 using System;
 using System.Linq;
-using System.Net.Http;
-using Elastic.Clients.Elasticsearch;
-using FluentAssertions;
+using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -15,104 +14,120 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.Search
 {
-	//public class SearchApiTests
-	//	: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, SearchRequestDescriptor<Project>, SearchRequest<Project>>
-	//{
-	//	public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class SearchApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, SearchRequestDescriptor<Project>, SearchRequest>
+	{
+		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => true;
 
-	//	protected override object ExpectJson => new
-	//	{
-	//		from = 10,
-	//		size = 20,
-	//		query = new
-	//		{
-	//			match_all = new { }
-	//		},
-	//		aggs = new
-	//		{
-	//			startDates = new
-	//			{
-	//				terms = new
-	//				{
-	//					field = "startedOn"
-	//				}
-	//			}
-	//		},
-	//		post_filter = new
-	//		{
-	//			term = new
-	//			{
-	//				state = new
-	//				{
-	//					value = "Stable"
-	//				}
-	//			}
-	//		}
-	//	};
+		protected override object ExpectJson => new
+		{
+			from = 10,
+			size = 20,
+			query = new
+			{
+				match_all = new { }
+			},
+			aggs = new
+			{
+				startDates = new
+				{
+					terms = new
+					{
+						field = "startedOn"
+					}
+				}
+			},
+			post_filter = new
+			{
+				term = new
+				{
+					state = new
+					{
+						value = "Stable"
+					}
+				}
+			}
+		};
 
-	//	protected override int ExpectStatusCode => 200;
+		protected override int ExpectStatusCode => 200;
 
-	//	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
-	//		.From(10)
-	//		.Size(20)
-	//		.Query(q => q
-	//			.MatchAll()
-	//		)
-	//		.Aggregations(a => a
-	//			.Terms("startDates", t => t
-	//				.Field(p => p.StartedOn)
-	//			)
-	//		)
-	//		.PostFilter(f => f
-	//			.Term(p => p.State, StateOfBeing.Stable)
-	//		);
+		protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
+			.From(10)
+			.Size(20)
+			.Query(q => q
+				.MatchAll()
+			);
+			//.Aggregations(a => a
+			//	.Terms("startDates", t => t
+			//		.Field(p => p.StartedOn)
+			//	)
+			//)
+			//.PostFilter(f => f
+			//	.Term(p => p.State, StateOfBeing.Stable)
+			//);
 
-	//	protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-	//	protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-	//	{
-	//		From = 10,
-	//		Size = 20,
-	//		Query = new QueryContainer(new MatchAllQuery()),
-	//		Aggregations = new TermsAggregation("startDates")
-	//		{
-	//			Field = "startedOn"
-	//		},
-	//		PostFilter = new QueryContainer(new TermQuery
-	//		{
-	//			Field = "state",
-	//			Value = "Stable"
-	//		})
-	//	};
+		protected override SearchRequest Initializer => new SearchRequest()
+		{
+			From = 10,
+			Size = 20,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Aggregations = new TermsAggregation("startDates")
+			{
+				Field = "startedOn"
+			},
+			PostFilter = new QueryContainer(new TermQuery
+			{
+				Field = "state",
+				Value = "Stable"
+			})
+		};
 
-	//	protected override string ExpectedUrlPathAndQuery => $"/project/_search";
+		protected override string ExpectedUrlPathAndQuery => $"/project/_search";
 
-	//	protected override LazyResponses ClientUsage() => Calls(
-	//		(c, f) => c.Search(f),
-	//		(c, f) => c.SearchAsync(f),
-	//		(c, r) => c.Search<Project>(r),
-	//		(c, r) => c.SearchAsync<Project>(r)
-	//	);
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Search(f),
+			(c, f) => c.SearchAsync(f),
+			(c, r) => c.Search<Project>(r),
+			(c, r) => c.SearchAsync<Project>(r)
+		);
 
-	//	protected override void ExpectResponse(SearchResponse<Project> response)
-	//	{
-	//		response.Total.Should().BeGreaterThan(0);
-	//		response.Hits.Count.Should().BeGreaterThan(0);
-	//		response.HitsMetadata.Total.Value.Should().Be(response.Total);
-	//		response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
-	//		response.Hits.First().Should().NotBeNull();
-	//		response.Hits.First().Source.Should().NotBeNull();
-	//		response.Aggregations.Count.Should().BeGreaterThan(0);
-	//		response.Took.Should().BeGreaterThan(0);
-	//		var startDates = response.Aggregations.Terms("startDates");
-	//		startDates.Should().NotBeNull();
+		protected override void ExpectResponse(SearchResponse<Project> response)
+		{
+			//response.Total.Should().BeGreaterThan(0);
+			//response.Hits.Count.Should().BeGreaterThan(0);
+			//response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			//response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
+			response.Hits.Hits.First().Should().NotBeNull();
+			response.Hits.Hits.First().Source.Should().NotBeNull();
+			response.Aggregations.Count.Should().BeGreaterThan(0);
+			response.Took.Should().BeGreaterThan(0);
+			//var startDates = response.Aggregations.Terms("startDates");
+			//startDates.Should().NotBeNull();
 
-	//		foreach (var document in response.Documents)
-	//			document.ShouldAdhereToSourceSerializerWhenSet();
-	//	}
-	//}
+			//foreach (var document in response.Documents)
+			//	document.ShouldAdhereToSourceSerializerWhenSet();
+
+			// ORIGINAL ASSERTIONS
+
+			//response.Total.Should().BeGreaterThan(0);
+			//response.Hits.Count.Should().BeGreaterThan(0);
+			//response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			//response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
+			//response.Hits.First().Should().NotBeNull();
+			//response.Hits.First().Source.Should().NotBeNull();
+			//response.Aggregations.Count.Should().BeGreaterThan(0);
+			//response.Took.Should().BeGreaterThan(0);
+			//var startDates = response.Aggregations.Terms("startDates");
+			//startDates.Should().NotBeNull();
+
+			//foreach (var document in response.Documents)
+			//	document.ShouldAdhereToSourceSerializerWhenSet();
+		}
+	}
 
 	//public class SearchApiSequenceNumberPrimaryTermTests
 	//	: SearchApiTests

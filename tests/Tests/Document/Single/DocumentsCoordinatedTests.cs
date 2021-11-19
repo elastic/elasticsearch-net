@@ -3,12 +3,9 @@
 // See the LICENSE file in the project root for more information
 
 using System.Threading.Tasks;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using FluentAssertions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using Elastic.Clients.Elasticsearch;
 using Tests.Domain;
 
 namespace Tests.Document.Single;

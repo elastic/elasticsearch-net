@@ -4,7 +4,6 @@
 
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Cluster;
-using FluentAssertions;
 
 namespace Tests.Cluster.ClusterPendingTasks
 {

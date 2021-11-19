@@ -3,9 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System.IO;
-using Elastic.Elasticsearch.Xunit.XunitPlumbing;
-using Elastic.Clients.Elasticsearch;
-using Elastic.Transport;
 
 namespace Tests
 {

@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using OneOf;
 using Elastic.Transport;
 
 #nullable restore
@@ -54,18 +53,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	public partial class Missing
-	{
-	}
-
-	public interface IMovingAverageAggregationsVariant
-	{
-	}
-
-	public interface IMovingAverageAggregations : IIsADictionary<string, IMovingAverageAggregationsVariant>
-	{
-	}
-
-	public class MovingAverageAggregations : IsADictionaryBase<string, IMovingAverageAggregationsVariant>
 	{
 	}
 

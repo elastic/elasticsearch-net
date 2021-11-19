@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information
 
 using System.Globalization;
-using Elastic.Clients.Elasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 
-namespace Tests.Document.Single.Exists 
+namespace Tests.Document.Single.Exists
 {
 	public class DocumentExistsNotFoundApiTests : DocumentExistsApiTests
 	{

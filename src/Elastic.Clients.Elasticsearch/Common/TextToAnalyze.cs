@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Elastic.Transport;
-
 namespace Elastic.Clients.Elasticsearch.IndexManagement.Analyze
 {
 	//public partial class TextToAnalyze

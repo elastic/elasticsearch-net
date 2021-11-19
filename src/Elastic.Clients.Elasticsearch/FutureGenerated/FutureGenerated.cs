@@ -8,13 +8,18 @@ using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Threading;
-using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Transport;
 using System.Text.Json;
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	public enum FieldType
+	{
+		// TODO: Generate this
+	}
+
 	public partial struct WaitForActiveShards : IStringable
 	{
 		public static WaitForActiveShards All = new("all");
@@ -66,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	public partial class ElasticClient
-{
+	{
 		public IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
 		{
 			var descriptor = new IndexRequestDescriptor<TDocument>(documentWithId: document);
@@ -110,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default)
-{
+		{
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
 			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
@@ -261,6 +266,93 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	//}
 }
 
+namespace Elastic.Clients.Elasticsearch.Aggregations
+{
+	public partial class TermsAggregation
+	{
+		public TermsAggregation(string name) => Name = name;
+	}
+
+	public partial class AggregationContainer
+	{
+		public static implicit operator AggregationContainer(AggregationBase aggregator)
+		{
+			if (aggregator == null)
+				return null;
+
+			// TODO: Unhacky this!
+
+			var container = new AggregationContainer((IAggregationContainerVariant)aggregator)
+			{
+				Meta = aggregator.Meta
+			};
+
+			//aggregator.WrapInContainer(container);
+			//var bucket = aggregator as BucketAggregationBase;
+			//container.Aggregations = bucket?.Aggregations;
+
+			//var combinator = aggregator as AggregationCombinator;
+			//if (combinator?.Aggregations != null)
+			//{
+			//	var dict = new AggregationDictionary();
+			//	foreach (var agg in combinator.Aggregations)
+			//		dict.Add(((IAggregation)agg).Name, agg);
+			//	container.Aggregations = dict;
+			//}
+
+			return container;
+		}
+	}
+
+	public class AggregationDictionary : IsADictionaryBase<string, AggregationContainer>
+	{
+		public AggregationDictionary() { }
+
+		public AggregationDictionary(IDictionary<string, AggregationContainer> container) : base(container) { }
+
+		public AggregationDictionary(Dictionary<string, AggregationContainer> container)
+			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+
+		public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> container) =>
+			new(container);
+
+		public static implicit operator AggregationDictionary(AggregationBase aggregator)
+		{
+			AggregationBase b;
+			//if (aggregator is AggregationCombinator combinator)
+			//{
+			//	var dict = new AggregationDictionary();
+			//	foreach (var agg in combinator.Aggregations)
+			//	{
+			//		b = agg;
+			//		if (b.Name.IsNullOrEmpty())
+			//			throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
+
+			//		dict.Add(b.Name, agg);
+			//	}
+			//	return dict;
+			//}
+
+			b = aggregator;
+
+			if (b.Name.IsNullOrEmpty())
+				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
+
+			return new AggregationDictionary { { b.Name, aggregator } };
+		}
+
+		public void Add(string key, AggregationContainer value) => BackingDictionary.Add(ValidateKey(key), value);
+
+		protected override string ValidateKey(string key) => key; // TODO!
+		//{
+			//if (AggregateFormatter.AllReservedAggregationNames.Contains(key))
+			//	throw new ArgumentException(
+			//		string.Format(AggregateFormatter.UsingReservedAggNameFormat, key), nameof(key));
+			//return key;
+		//}
+	}
+}
+
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	//public sealed partial class BoolQueryDescriptor
@@ -343,6 +435,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WriteEndObject();
 		}
 	}
+
+	public sealed partial class QueryContainerDescriptor<T>
+	{
+		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
+	}
+
 
 	//public sealed partial class QueryContainerDescriptor
 	//{

@@ -1,6 +1,3 @@
-using System;
-using Elastic.Clients.Elasticsearch.Core;
-
 namespace Elastic.Clients.Elasticsearch
 {
 	//public interface IDocumentPath

@@ -140,46 +140,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	[JsonConverter(typeof(HoltWintersTypeConverter))]
-	public enum HoltWintersType
-	{
-		Multiplicative,
-		Additive
-	}
-
-	public class HoltWintersTypeConverter : JsonConverter<HoltWintersType>
-	{
-		public override HoltWintersType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "mult":
-					return HoltWintersType.Multiplicative;
-				case "add":
-					return HoltWintersType.Additive;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, HoltWintersType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case HoltWintersType.Multiplicative:
-					writer.WriteStringValue("mult");
-					return;
-				case HoltWintersType.Additive:
-					writer.WriteStringValue("add");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(MatrixStatsModeConverter))]
 	public enum MatrixStatsMode
 	{

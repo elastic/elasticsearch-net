@@ -4,7 +4,6 @@
 
 using System;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 

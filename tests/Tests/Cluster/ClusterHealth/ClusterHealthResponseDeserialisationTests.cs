@@ -2,8 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using FluentAssertions;
-using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
 
 namespace Tests.Cluster.ClusterHealth

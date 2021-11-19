@@ -7449,7 +7449,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "term";
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
+		public object Value { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
@@ -7463,11 +7463,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; private set; }
+		internal object ValueValue { get; private set; }
 
 		internal bool? CaseInsensitiveValue { get; private set; }
 
-		public TermQueryDescriptor Value(Elastic.Clients.Elasticsearch.FieldValue value) => Assign(value, (a, v) => a.ValueValue = v);
+		public TermQueryDescriptor Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
 		public TermQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
