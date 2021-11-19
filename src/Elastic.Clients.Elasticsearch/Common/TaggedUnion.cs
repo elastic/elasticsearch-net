@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 

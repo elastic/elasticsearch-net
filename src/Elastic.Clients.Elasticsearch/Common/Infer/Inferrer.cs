@@ -1,6 +1,5 @@
 using System;
 using Elastic.Transport;
-using Elastic.Clients.Elasticsearch.Core;
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Globalization;
@@ -190,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
 			var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
-			var ignore = memberInfo.GetCustomAttribute<IgnoreAttribute>(true);
+			var ignore = memberInfo.GetCustomAttribute<IgnoreForMappingAttribute>(true);
 			if (ignore == null && propertyName == null && dataMemberProperty == null)
 				return null;
 

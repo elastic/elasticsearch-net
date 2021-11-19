@@ -702,18 +702,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate(IndexSimulateIndexTemplateRequest request) => DoRequest<IndexSimulateIndexTemplateRequest, IndexSimulateIndexTemplateResponse>(request);
 		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync(IndexSimulateIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexSimulateIndexTemplateRequest, IndexSimulateIndexTemplateResponse>(request, cancellationToken);
-		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexSimulateIndexTemplateRequestDescriptor> configureRequest = null)
+		public IndexSimulateIndexTemplateResponse IndexSimulateIndexTemplate<T>(Elastic.Clients.Elasticsearch.Name name, Action<IndexSimulateIndexTemplateRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexSimulateIndexTemplateRequestDescriptor(name);
+			var descriptor = new IndexSimulateIndexTemplateRequestDescriptor<T>(name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexSimulateIndexTemplateRequestDescriptor, IndexSimulateIndexTemplateResponse>(descriptor);
+			return DoRequest<IndexSimulateIndexTemplateRequestDescriptor<T>, IndexSimulateIndexTemplateResponse>(descriptor);
 		}
 
-		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexSimulateIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexSimulateIndexTemplateResponse> IndexSimulateIndexTemplateAsync<T>(Elastic.Clients.Elasticsearch.Name name, Action<IndexSimulateIndexTemplateRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexSimulateIndexTemplateRequestDescriptor(name);
+			var descriptor = new IndexSimulateIndexTemplateRequestDescriptor<T>(name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexSimulateIndexTemplateRequestDescriptor, IndexSimulateIndexTemplateResponse>(descriptor);
+			return DoRequestAsync<IndexSimulateIndexTemplateRequestDescriptor<T>, IndexSimulateIndexTemplateResponse>(descriptor);
 		}
 
 		public IndexSimulateTemplateResponse IndexSimulateTemplate(IndexSimulateTemplateRequest request) => DoRequest<IndexSimulateTemplateRequest, IndexSimulateTemplateResponse>(request);

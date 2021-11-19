@@ -3,10 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Collections.Generic;
-using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Transport;
-using FluentAssertions;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;

@@ -1,14 +1,9 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.IndexManagement;
 
 namespace Playground
 {

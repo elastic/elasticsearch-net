@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Elastic.Clients.Elasticsearch;
 
 namespace Tests.Framework.EndpointTests
 {

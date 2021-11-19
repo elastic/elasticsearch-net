@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
@@ -420,7 +420,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<T> Size(int? size) => Qs("size", size);
 		public SearchRequestDescriptor<T> From(int? from) => Qs("from", from);
 		public SearchRequestDescriptor<T> Sort(string? sort) => Qs("sort", sort);
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? AggregationsValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
 
@@ -484,7 +484,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; private set; }
 
-		public SearchRequestDescriptor<T> Aggregations(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer?>> selector) => Assign(selector, (a, v) => a.AggregationsValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer?>()));
+		public SearchRequestDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations) => Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		public SearchRequestDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;

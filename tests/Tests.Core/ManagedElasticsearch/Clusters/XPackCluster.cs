@@ -5,8 +5,6 @@ using Elastic.Elasticsearch.Xunit;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
-using Elastic.Clients.Elasticsearch.Cluster.Health;
-using Elastic.Clients.Elasticsearch.Core;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Core.ManagedElasticsearch.Tasks;

@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using OneOf;
 using Elastic.Transport;
 
 #nullable restore

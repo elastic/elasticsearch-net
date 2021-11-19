@@ -425,10 +425,6 @@ namespace Elastic.Clients.Elasticsearch
 		public long Deleted { get; init; }
 	}
 
-	public partial class EmptyObject
-	{
-	}
-
 	public partial class ErrorCause
 	{
 		[JsonInclude]
@@ -1948,6 +1944,9 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class InnerHitsResult
 	{
+		[JsonInclude]
+		[JsonPropertyName("hits")]
+		public Elastic.Clients.Elasticsearch.HitsMetadata<object> Hits { get; init; }
 	}
 
 	public partial class LatLonGeoLocation
@@ -2630,6 +2629,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]
 		public bool? ForcedRefresh { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("get")]
+		public Elastic.Clients.Elasticsearch.InlineGet<Dictionary<string, object>>? Get { get; init; }
 	}
 
 	public partial class Retries
@@ -3102,9 +3105,6 @@ namespace Elastic.Clients.Elasticsearch
 				case Elastic.Clients.Elasticsearch.ScoreSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				//case Elastic.Clients.Elasticsearch.ScoreSort variant:
-				//	JsonSerializer.Serialize(writer, variant, options);
-				//	break;
 				case Elastic.Clients.Elasticsearch.GeoDistanceSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;

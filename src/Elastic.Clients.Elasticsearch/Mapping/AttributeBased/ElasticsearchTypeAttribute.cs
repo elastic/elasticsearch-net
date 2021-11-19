@@ -9,29 +9,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text.Json;
 using Elastic.Transport.Extensions;
-using System.Xml.Linq;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	[AttributeUsage(AttributeTargets.Property)]
-	public class IgnoreAttribute : Attribute { }
 
-	[AttributeUsage(AttributeTargets.Property)]
-	public class PropertyNameAttribute : Attribute/*, IJsonProperty*/
-	{
-		public PropertyNameAttribute(string name) => Name = name;
 
-		public string Name { get; set; }
-		public int Order { get; } = -1;
-		public bool Ignore { get; set; }
-		public bool? AllowPrivate { get; set; } = true;
-	}
-
-	public enum FieldType
-	{
-	}
 
 	/// <summary>
 	/// A document field mapping in Elasticsearch

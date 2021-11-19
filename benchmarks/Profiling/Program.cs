@@ -1,7 +1,3 @@
-using JetBrains.Profiler.Api;
-using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.IndexManagement;
-
 var req1 = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest("test");
 
 ////var list = new List<IndexName>();
