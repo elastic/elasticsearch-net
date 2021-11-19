@@ -9,6 +9,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Tests.Domain;
 
 namespace Tests.IndexManagement;
 
@@ -22,7 +23,7 @@ public class IndexCoordinatedTests : CoordinatedIntegrationTestBase<WritableClus
 		{
 				{
 					CreateIndexStep, u =>
-						u.Calls<CreateIndexRequestDescriptor, CreateIndexRequest, CreateIndexResponse>(
+						u.Calls<CreateIndexRequestDescriptor<Project>, CreateIndexRequest, CreateIndexResponse>(
 							v => new CreateIndexRequest(v),
 							(v, d) => d,
 							(v, c, f) => c.IndexManagement.CreateIndex(v, f),

@@ -3,9 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
-using Elastic.Transport;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
@@ -14,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Count
 {
 	public class CountApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor, CountRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest>
 	{
 		public CountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -36,18 +34,12 @@ namespace Tests.Search.Count
 
 		protected override int ExpectStatusCode => 200;
 
-		protected override Action<CountRequestDescriptor> Fluent => c => c
+		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
 			.Query(new QueryContainer(new MatchQuery
 			{
 				Field = "name",
 				Query = "NEST"
 			}));
-			//.Query(q => q
-			//	.Match(m => m
-			//		.Field(p => p.Name)
-			//		.Query("NEST")
-			//	)
-			//);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
@@ -123,7 +115,7 @@ namespace Tests.Search.Count
 	//}
 
 	public class CountApiV2Tests
-		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor, CountRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest>
 	{
 		public CountApiV2Tests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -145,7 +137,7 @@ namespace Tests.Search.Count
 
 		protected override int ExpectStatusCode => 200;
 
-		protected override Action<CountRequestDescriptor> Fluent => c => c
+		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
 			.Query(q => q
 				.Match(m => m
 					.Field("name")

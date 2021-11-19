@@ -63,7 +63,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Settings { get; set; }
 	}
 
-	[JsonConverter(typeof(ShrinkIndexRequestDescriptorConverter))]
 	public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptorBase<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters>
 	{
 		public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
@@ -87,24 +86,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public ShrinkIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
 		public ShrinkIndexRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-	}
-
-	internal sealed class ShrinkIndexRequestDescriptorConverter : JsonConverter<ShrinkIndexRequestDescriptor>
-	{
-		public override ShrinkIndexRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ShrinkIndexRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.AliasesValue is not null)
+			if (AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.AliasesValue, options);
+				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (value.SettingsValue is not null)
+			if (SettingsValue is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.SettingsValue, options);
+				JsonSerializer.Serialize(writer, SettingsValue, options);
 			}
 
 			writer.WriteEndObject();

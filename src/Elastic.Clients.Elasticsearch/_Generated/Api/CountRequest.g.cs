@@ -129,8 +129,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
-	[JsonConverter(typeof(CountRequestDescriptorConverter))]
-	public sealed partial class CountRequestDescriptor : RequestDescriptorBase<CountRequestDescriptor, CountRequestParameters>
+	public sealed partial class CountRequestDescriptor<T> : RequestDescriptorBase<CountRequestDescriptor<T>, CountRequestParameters>
 	{
 		public CountRequestDescriptor()
 		{
@@ -140,72 +139,68 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal CountRequestDescriptor(Action<CountRequestDescriptor> configure) => configure.Invoke(this);
+		internal CountRequestDescriptor(Action<CountRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public CountRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public CountRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public CountRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public CountRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public CountRequestDescriptor Df(string? df) => Qs("df", df);
-		public CountRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public CountRequestDescriptor IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
-		public CountRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public CountRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
-		public CountRequestDescriptor MinScore(double? minScore) => Qs("min_score", minScore);
-		public CountRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-		public CountRequestDescriptor Routing(string? routing) => Qs("routing", routing);
-		public CountRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public CountRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+		public CountRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public CountRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public CountRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public CountRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public CountRequestDescriptor<T> Df(string? df) => Qs("df", df);
+		public CountRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public CountRequestDescriptor<T> IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
+		public CountRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public CountRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public CountRequestDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
+		public CountRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
+		public CountRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public CountRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public CountRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public CountRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public CountRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public CountRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public CountRequestDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
-	}
 
-	internal sealed class CountRequestDescriptorConverter : JsonConverter<CountRequestDescriptor>
-	{
-		public override CountRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CountRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.QueryDescriptor is not null)
+			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
 			}
-			else if (value.QueryDescriptorAction is not null)
+			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
 			}
-			else if (value.QueryValue is not null)
+			else if (QueryValue is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryValue, options);
+				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
 			writer.WriteEndObject();

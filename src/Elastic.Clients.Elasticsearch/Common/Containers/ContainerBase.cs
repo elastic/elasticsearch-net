@@ -37,7 +37,7 @@ public abstract class ContainerVariantBase<TVariantContainer> : ContainerVariant
 	internal TVariantContainer WrapInContainer() => (TVariantContainer)Activator.CreateInstance(typeof(TVariantContainer), this);
 }
 
-public class VariantDescriptorBase<T> : DescriptorBase<T> where T : DescriptorBase<T>
+public abstract class VariantDescriptorBase<T> : DescriptorBase<T> where T : DescriptorBase<T>
 {
 	internal string VariantName { get; private set; }
 

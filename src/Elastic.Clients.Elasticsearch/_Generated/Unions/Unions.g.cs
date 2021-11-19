@@ -34,13 +34,13 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class Context : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation?>
+	public partial class Context : Union<string?, Elastic.Clients.Elasticsearch.GeoLocation?>
 	{
 		public Context(string? item) : base(item)
 		{
 		}
 
-		public Context(Elastic.Clients.Elasticsearch.QueryDsl.GeoLocation? item) : base(item)
+		public Context(Elastic.Clients.Elasticsearch.GeoLocation? item) : base(item)
 		{
 		}
 	}
@@ -58,6 +58,11 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class ExpandWildcards
 	{
+		private readonly List<ExpandWildcard> _expandWildcardList = new();
+	}
+
+	public partial class FieldValue
+	{
 	}
 
 	public partial class Fuzziness : Union<string?, int?>
@@ -67,6 +72,47 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public Fuzziness(int? item) : base(item)
+		{
+		}
+	}
+
+	public partial class GeoBounds
+	{
+	}
+
+	public partial class GeoHashPrecision : Union<double?, string?>
+	{
+		public GeoHashPrecision(double? item) : base(item)
+		{
+		}
+
+		public GeoHashPrecision(string? item) : base(item)
+		{
+		}
+	}
+
+	public partial class GeoLocation
+	{
+	}
+
+	public partial class GetSourceConfig : Union<bool?, Elastic.Clients.Elasticsearch.Fields?>
+	{
+		public GetSourceConfig(bool? item) : base(item)
+		{
+		}
+
+		public GetSourceConfig(Elastic.Clients.Elasticsearch.Fields? item) : base(item)
+		{
+		}
+	}
+
+	public partial class HighlighterType : Union<Elastic.Clients.Elasticsearch.BuiltinHighlighterType?, string?>
+	{
+		public HighlighterType(Elastic.Clients.Elasticsearch.BuiltinHighlighterType? item) : base(item)
+		{
+		}
+
+		public HighlighterType(string? item) : base(item)
 		{
 		}
 	}
@@ -87,12 +133,26 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class ScalarValue
+	public partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript?, Elastic.Clients.Elasticsearch.StoredScriptId?>
 	{
+		public Script(Elastic.Clients.Elasticsearch.InlineScript? item) : base(item)
+		{
+		}
+
+		public Script(Elastic.Clients.Elasticsearch.StoredScriptId? item) : base(item)
+		{
+		}
 	}
 
-	public partial class Script
+	public partial class ScriptLanguage : Union<Elastic.Clients.Elasticsearch.BuiltinScriptLanguage?, string?>
 	{
+		public ScriptLanguage(Elastic.Clients.Elasticsearch.BuiltinScriptLanguage? item) : base(item)
+		{
+		}
+
+		public ScriptLanguage(string? item) : base(item)
+		{
+		}
 	}
 
 	public partial class Sort
@@ -100,8 +160,26 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly List<SortCombinations> _sortCombinationsList = new();
 	}
 
-	public partial class SortCombinations
+	public partial class SortCombinations : Union<string?, Elastic.Clients.Elasticsearch.SortOptions?>
 	{
+		public SortCombinations(string? item) : base(item)
+		{
+		}
+
+		public SortCombinations(Elastic.Clients.Elasticsearch.SortOptions? item) : base(item)
+		{
+		}
+	}
+
+	public partial class SourceConfig : Union<bool?, Elastic.Clients.Elasticsearch.SourceFilter?>
+	{
+		public SourceConfig(bool? item) : base(item)
+		{
+		}
+
+		public SourceConfig(Elastic.Clients.Elasticsearch.SourceFilter? item) : base(item)
+		{
+		}
 	}
 
 	public partial class SuggestOption<TDocument>
@@ -115,6 +193,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public TaskId(int? item) : base(item)
+		{
+		}
+	}
+
+	public partial class TrackHits : Union<bool?, int?>
+	{
+		public TrackHits(bool? item) : base(item)
+		{
+		}
+
+		public TrackHits(int? item) : base(item)
 		{
 		}
 	}

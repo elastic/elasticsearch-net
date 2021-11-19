@@ -70,6 +70,104 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(BuiltinHighlighterTypeConverter))]
+	public enum BuiltinHighlighterType
+	{
+		Unified,
+		Plain,
+		FastVector
+	}
+
+	public class BuiltinHighlighterTypeConverter : JsonConverter<BuiltinHighlighterType>
+	{
+		public override BuiltinHighlighterType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "unified":
+					return BuiltinHighlighterType.Unified;
+				case "plain":
+					return BuiltinHighlighterType.Plain;
+				case "fvh":
+					return BuiltinHighlighterType.FastVector;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, BuiltinHighlighterType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case BuiltinHighlighterType.Unified:
+					writer.WriteStringValue("unified");
+					return;
+				case BuiltinHighlighterType.Plain:
+					writer.WriteStringValue("plain");
+					return;
+				case BuiltinHighlighterType.FastVector:
+					writer.WriteStringValue("fvh");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(BuiltinScriptLanguageConverter))]
+	public enum BuiltinScriptLanguage
+	{
+		Painless,
+		Mustache,
+		Java,
+		Expression
+	}
+
+	public class BuiltinScriptLanguageConverter : JsonConverter<BuiltinScriptLanguage>
+	{
+		public override BuiltinScriptLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "painless":
+					return BuiltinScriptLanguage.Painless;
+				case "mustache":
+					return BuiltinScriptLanguage.Mustache;
+				case "java":
+					return BuiltinScriptLanguage.Java;
+				case "expression":
+					return BuiltinScriptLanguage.Expression;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, BuiltinScriptLanguage value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case BuiltinScriptLanguage.Painless:
+					writer.WriteStringValue("painless");
+					return;
+				case BuiltinScriptLanguage.Mustache:
+					writer.WriteStringValue("mustache");
+					return;
+				case BuiltinScriptLanguage.Java:
+					writer.WriteStringValue("java");
+					return;
+				case BuiltinScriptLanguage.Expression:
+					writer.WriteStringValue("expression");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(ConflictsConverter))]
 	public enum Conflicts
 	{
@@ -232,8 +330,8 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(ExpandWildcardOptionsConverter))]
-	public enum ExpandWildcardOptions
+	[JsonConverter(typeof(ExpandWildcardConverter))]
+	public enum ExpandWildcard
 	{
 		Open,
 		None,
@@ -242,46 +340,46 @@ namespace Elastic.Clients.Elasticsearch
 		All
 	}
 
-	public class ExpandWildcardOptionsConverter : JsonConverter<ExpandWildcardOptions>
+	public class ExpandWildcardConverter : JsonConverter<ExpandWildcard>
 	{
-		public override ExpandWildcardOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override ExpandWildcard Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
 				case "open":
-					return ExpandWildcardOptions.Open;
+					return ExpandWildcard.Open;
 				case "none":
-					return ExpandWildcardOptions.None;
+					return ExpandWildcard.None;
 				case "hidden":
-					return ExpandWildcardOptions.Hidden;
+					return ExpandWildcard.Hidden;
 				case "closed":
-					return ExpandWildcardOptions.Closed;
+					return ExpandWildcard.Closed;
 				case "all":
-					return ExpandWildcardOptions.All;
+					return ExpandWildcard.All;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, ExpandWildcardOptions value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, ExpandWildcard value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case ExpandWildcardOptions.Open:
+				case ExpandWildcard.Open:
 					writer.WriteStringValue("open");
 					return;
-				case ExpandWildcardOptions.None:
+				case ExpandWildcard.None:
 					writer.WriteStringValue("none");
 					return;
-				case ExpandWildcardOptions.Hidden:
+				case ExpandWildcard.Hidden:
 					writer.WriteStringValue("hidden");
 					return;
-				case ExpandWildcardOptions.Closed:
+				case ExpandWildcard.Closed:
 					writer.WriteStringValue("closed");
 					return;
-				case ExpandWildcardOptions.All:
+				case ExpandWildcard.All:
 					writer.WriteStringValue("all");
 					return;
 			}
@@ -576,52 +674,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(HighlighterTypeConverter))]
-	public enum HighlighterType
-	{
-		Unified,
-		Plain,
-		Fvh
-	}
-
-	public class HighlighterTypeConverter : JsonConverter<HighlighterType>
-	{
-		public override HighlighterType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "unified":
-					return HighlighterType.Unified;
-				case "plain":
-					return HighlighterType.Plain;
-				case "fvh":
-					return HighlighterType.Fvh;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, HighlighterType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case HighlighterType.Unified:
-					writer.WriteStringValue("unified");
-					return;
-				case HighlighterType.Plain:
-					writer.WriteStringValue("plain");
-					return;
-				case HighlighterType.Fvh:
-					writer.WriteStringValue("fvh");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(LevelConverter))]
 	public enum Level
 	{
@@ -882,51 +934,39 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(ScriptLanguageConverter))]
-	public enum ScriptLanguage
+	[JsonConverter(typeof(ScriptSortTypeConverter))]
+	public enum ScriptSortType
 	{
-		Painless,
-		Mustache,
-		Java,
-		Expression
+		String,
+		Number
 	}
 
-	public class ScriptLanguageConverter : JsonConverter<ScriptLanguage>
+	public class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
 	{
-		public override ScriptLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override ScriptSortType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
-				case "painless":
-					return ScriptLanguage.Painless;
-				case "mustache":
-					return ScriptLanguage.Mustache;
-				case "java":
-					return ScriptLanguage.Java;
-				case "expression":
-					return ScriptLanguage.Expression;
+				case "string":
+					return ScriptSortType.String;
+				case "number":
+					return ScriptSortType.Number;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, ScriptLanguage value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, ScriptSortType value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case ScriptLanguage.Painless:
-					writer.WriteStringValue("painless");
+				case ScriptSortType.String:
+					writer.WriteStringValue("string");
 					return;
-				case ScriptLanguage.Mustache:
-					writer.WriteStringValue("mustache");
-					return;
-				case ScriptLanguage.Java:
-					writer.WriteStringValue("java");
-					return;
-				case ScriptLanguage.Expression:
-					writer.WriteStringValue("expression");
+				case ScriptSortType.Number:
+					writer.WriteStringValue("number");
 					return;
 			}
 
@@ -1036,8 +1076,7 @@ namespace Elastic.Clients.Elasticsearch
 	public enum SortOrder
 	{
 		Desc,
-		Asc,
-		Document
+		Asc
 	}
 
 	public class SortOrderConverter : JsonConverter<SortOrder>
@@ -1051,8 +1090,6 @@ namespace Elastic.Clients.Elasticsearch
 					return SortOrder.Desc;
 				case "asc":
 					return SortOrder.Asc;
-				case "_doc":
-					return SortOrder.Document;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -1068,67 +1105,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case SortOrder.Asc:
 					writer.WriteStringValue("asc");
-					return;
-				case SortOrder.Document:
-					writer.WriteStringValue("_doc");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(StringDistanceConverter))]
-	public enum StringDistance
-	{
-		Ngram,
-		Levenshtein,
-		JaroWinkler,
-		Internal,
-		DamerauLevenshtein
-	}
-
-	public class StringDistanceConverter : JsonConverter<StringDistance>
-	{
-		public override StringDistance Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "ngram":
-					return StringDistance.Ngram;
-				case "levenshtein":
-					return StringDistance.Levenshtein;
-				case "jaro_winkler":
-					return StringDistance.JaroWinkler;
-				case "internal":
-					return StringDistance.Internal;
-				case "damerau_levenshtein":
-					return StringDistance.DamerauLevenshtein;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, StringDistance value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case StringDistance.Ngram:
-					writer.WriteStringValue("ngram");
-					return;
-				case StringDistance.Levenshtein:
-					writer.WriteStringValue("levenshtein");
-					return;
-				case StringDistance.JaroWinkler:
-					writer.WriteStringValue("jaro_winkler");
-					return;
-				case StringDistance.Internal:
-					writer.WriteStringValue("internal");
-					return;
-				case StringDistance.DamerauLevenshtein:
-					writer.WriteStringValue("damerau_levenshtein");
 					return;
 			}
 
@@ -1175,46 +1151,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case SuggestMode.Always:
 					writer.WriteStringValue("always");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(SuggestSortConverter))]
-	public enum SuggestSort
-	{
-		Score,
-		Frequency
-	}
-
-	public class SuggestSortConverter : JsonConverter<SuggestSort>
-	{
-		public override SuggestSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "score":
-					return SuggestSort.Score;
-				case "frequency":
-					return SuggestSort.Frequency;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, SuggestSort value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case SuggestSort.Score:
-					writer.WriteStringValue("score");
-					return;
-				case SuggestSort.Frequency:
-					writer.WriteStringValue("frequency");
 					return;
 			}
 

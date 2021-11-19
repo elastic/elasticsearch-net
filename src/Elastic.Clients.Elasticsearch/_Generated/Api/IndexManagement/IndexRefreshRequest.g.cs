@@ -59,7 +59,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	[JsonConverter(typeof(IndexRefreshRequestDescriptorConverter))]
 	public sealed partial class IndexRefreshRequestDescriptor : RequestDescriptorBase<IndexRefreshRequestDescriptor, IndexRefreshRequestParameters>
 	{
 		public IndexRefreshRequestDescriptor()
@@ -77,12 +76,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexRefreshRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
 		public IndexRefreshRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexRefreshRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-	}
-
-	internal sealed class IndexRefreshRequestDescriptorConverter : JsonConverter<IndexRefreshRequestDescriptor>
-	{
-		public override IndexRefreshRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexRefreshRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -53,7 +53,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[JsonConverter(typeof(ClusterStatsRequestDescriptorConverter))]
 	public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptorBase<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
 	{
 		public ClusterStatsRequestDescriptor()
@@ -70,12 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => false;
 		public ClusterStatsRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-	}
-
-	internal sealed class ClusterStatsRequestDescriptorConverter : JsonConverter<ClusterStatsRequestDescriptor>
-	{
-		public override ClusterStatsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterStatsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

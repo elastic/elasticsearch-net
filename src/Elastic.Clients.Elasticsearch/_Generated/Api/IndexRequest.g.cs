@@ -141,5 +141,10 @@ namespace Elastic.Clients.Elasticsearch
 		public IndexRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public IndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public IndexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
 	}
 }

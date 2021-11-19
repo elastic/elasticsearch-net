@@ -73,7 +73,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[JsonConverter(typeof(IndexCloseRequestDescriptorConverter))]
 	public sealed partial class IndexCloseRequestDescriptor : RequestDescriptorBase<IndexCloseRequestDescriptor, IndexCloseRequestParameters>
 	{
 		public IndexCloseRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -94,12 +93,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexCloseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexCloseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexCloseRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	}
-
-	internal sealed class IndexCloseRequestDescriptorConverter : JsonConverter<IndexCloseRequestDescriptor>
-	{
-		public override IndexCloseRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexCloseRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

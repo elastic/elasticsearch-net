@@ -522,8 +522,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	[JsonConverter(typeof(SimpleQueryStringFlagsConverter))]
-	public enum SimpleQueryStringFlags
+	[JsonConverter(typeof(SimpleQueryStringFlagConverter))]
+	public enum SimpleQueryStringFlag
 	{
 		Whitespace,
 		Slop,
@@ -540,86 +540,86 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		All
 	}
 
-	public class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQueryStringFlags>
+	public class SimpleQueryStringFlagConverter : JsonConverter<SimpleQueryStringFlag>
 	{
-		public override SimpleQueryStringFlags Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override SimpleQueryStringFlag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
 				case "WHITESPACE":
-					return SimpleQueryStringFlags.Whitespace;
+					return SimpleQueryStringFlag.Whitespace;
 				case "SLOP":
-					return SimpleQueryStringFlags.Slop;
+					return SimpleQueryStringFlag.Slop;
 				case "PREFIX":
-					return SimpleQueryStringFlags.Prefix;
+					return SimpleQueryStringFlag.Prefix;
 				case "PRECEDENCE":
-					return SimpleQueryStringFlags.Precedence;
+					return SimpleQueryStringFlag.Precedence;
 				case "PHRASE":
-					return SimpleQueryStringFlags.Phrase;
+					return SimpleQueryStringFlag.Phrase;
 				case "OR":
-					return SimpleQueryStringFlags.Or;
+					return SimpleQueryStringFlag.Or;
 				case "NOT":
-					return SimpleQueryStringFlags.Not;
+					return SimpleQueryStringFlag.Not;
 				case "NONE":
-					return SimpleQueryStringFlags.None;
+					return SimpleQueryStringFlag.None;
 				case "NEAR":
-					return SimpleQueryStringFlags.Near;
+					return SimpleQueryStringFlag.Near;
 				case "FUZZY":
-					return SimpleQueryStringFlags.Fuzzy;
+					return SimpleQueryStringFlag.Fuzzy;
 				case "ESCAPE":
-					return SimpleQueryStringFlags.Escape;
+					return SimpleQueryStringFlag.Escape;
 				case "AND":
-					return SimpleQueryStringFlags.And;
+					return SimpleQueryStringFlag.And;
 				case "ALL":
-					return SimpleQueryStringFlags.All;
+					return SimpleQueryStringFlag.All;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, SimpleQueryStringFlags value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, SimpleQueryStringFlag value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case SimpleQueryStringFlags.Whitespace:
+				case SimpleQueryStringFlag.Whitespace:
 					writer.WriteStringValue("WHITESPACE");
 					return;
-				case SimpleQueryStringFlags.Slop:
+				case SimpleQueryStringFlag.Slop:
 					writer.WriteStringValue("SLOP");
 					return;
-				case SimpleQueryStringFlags.Prefix:
+				case SimpleQueryStringFlag.Prefix:
 					writer.WriteStringValue("PREFIX");
 					return;
-				case SimpleQueryStringFlags.Precedence:
+				case SimpleQueryStringFlag.Precedence:
 					writer.WriteStringValue("PRECEDENCE");
 					return;
-				case SimpleQueryStringFlags.Phrase:
+				case SimpleQueryStringFlag.Phrase:
 					writer.WriteStringValue("PHRASE");
 					return;
-				case SimpleQueryStringFlags.Or:
+				case SimpleQueryStringFlag.Or:
 					writer.WriteStringValue("OR");
 					return;
-				case SimpleQueryStringFlags.Not:
+				case SimpleQueryStringFlag.Not:
 					writer.WriteStringValue("NOT");
 					return;
-				case SimpleQueryStringFlags.None:
+				case SimpleQueryStringFlag.None:
 					writer.WriteStringValue("NONE");
 					return;
-				case SimpleQueryStringFlags.Near:
+				case SimpleQueryStringFlag.Near:
 					writer.WriteStringValue("NEAR");
 					return;
-				case SimpleQueryStringFlags.Fuzzy:
+				case SimpleQueryStringFlag.Fuzzy:
 					writer.WriteStringValue("FUZZY");
 					return;
-				case SimpleQueryStringFlags.Escape:
+				case SimpleQueryStringFlag.Escape:
 					writer.WriteStringValue("ESCAPE");
 					return;
-				case SimpleQueryStringFlags.And:
+				case SimpleQueryStringFlag.And:
 					writer.WriteStringValue("AND");
 					return;
-				case SimpleQueryStringFlags.All:
+				case SimpleQueryStringFlag.All:
 					writer.WriteStringValue("ALL");
 					return;
 			}

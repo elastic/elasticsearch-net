@@ -39,7 +39,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 	}
 
-	[JsonConverter(typeof(ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter))]
 	public sealed partial class ClusterDeleteVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterDeleteVotingConfigExclusionsRequestDescriptor, ClusterDeleteVotingConfigExclusionsRequestParameters>
 	{
 		public ClusterDeleteVotingConfigExclusionsRequestDescriptor()
@@ -51,12 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public ClusterDeleteVotingConfigExclusionsRequestDescriptor WaitForRemoval(bool? waitForRemoval) => Qs("wait_for_removal", waitForRemoval);
-	}
-
-	internal sealed class ClusterDeleteVotingConfigExclusionsRequestDescriptorConverter : JsonConverter<ClusterDeleteVotingConfigExclusionsRequestDescriptor>
-	{
-		public override ClusterDeleteVotingConfigExclusionsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterDeleteVotingConfigExclusionsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

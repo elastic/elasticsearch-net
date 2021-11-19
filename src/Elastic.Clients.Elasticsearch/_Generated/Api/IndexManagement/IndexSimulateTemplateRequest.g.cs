@@ -53,7 +53,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[JsonConverter(typeof(IndexSimulateTemplateRequestDescriptorConverter))]
 	public sealed partial class IndexSimulateTemplateRequestDescriptor : RequestDescriptorBase<IndexSimulateTemplateRequestDescriptor, IndexSimulateTemplateRequestParameters>
 	{
 		public IndexSimulateTemplateRequestDescriptor()
@@ -70,12 +69,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 		public IndexSimulateTemplateRequestDescriptor Create(bool? create) => Qs("create", create);
 		public IndexSimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-	}
-
-	internal sealed class IndexSimulateTemplateRequestDescriptorConverter : JsonConverter<IndexSimulateTemplateRequestDescriptor>
-	{
-		public override IndexSimulateTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexSimulateTemplateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

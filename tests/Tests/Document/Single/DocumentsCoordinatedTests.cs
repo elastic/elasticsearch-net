@@ -38,7 +38,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			},
 			{
 				DocumentExistsStep, u =>
-					u.Calls<ExistsRequestDescriptor, ExistsRequest, ExistsResponse>(
+					u.Calls<ExistsRequestDescriptor<Project>, ExistsRequest, ExistsResponse>(
 						v => new ExistsRequest(typeof(Project), v),
 						(v, d) => d,
 						(v, c, f) => c.Exists(Infer.Index<Project>(), v, f), 
@@ -49,11 +49,11 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			},
 			{
 				GetDocumentStep, u =>
-					u.Calls<GetRequestDescriptor, GetRequest, GetResponse<Project>>(
+					u.Calls<GetRequestDescriptor<Project>, GetRequest, GetResponse<Project>>(
 						v => new GetRequest(typeof(Project), v),
 						(v, d) => d,
-						(v, c, f) => c.Get<Project>(Infer.Index<Project>(), v, f),
-						(v, c, f) => c.GetAsync<Project>(Infer.Index<Project>(), v, f),
+						(v, c, f) => c.Get(Infer.Index<Project>(), v, f),
+						(v, c, f) => c.GetAsync(Infer.Index<Project>(), v, f),
 						(_, c, r) => c.Get<Project>(r),
 						(_, c, r) => c.GetAsync<Project>(r)
 					)

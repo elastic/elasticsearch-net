@@ -118,8 +118,7 @@ namespace Elastic.Clients.Elasticsearch
 					$"Can not resolve {nameof(Field)} if no {nameof(IElasticsearchClientSettings)} is provided");
 			}
 
-			return string.Empty;
-			//return ElasticsearchSettings.Inferrer.Field(this);
+			return ElasticsearchSettings.Inferrer.Field(this);
 		}
 
 		public override string ToString() => DebugDisplay;

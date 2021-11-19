@@ -107,7 +107,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.WaitForStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
-	[JsonConverter(typeof(ClusterHealthRequestDescriptorConverter))]
 	public sealed partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
 	{
 		public ClusterHealthRequestDescriptor()
@@ -133,12 +132,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterHealthRequestDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 		public ClusterHealthRequestDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
-	}
-
-	internal sealed class ClusterHealthRequestDescriptorConverter : JsonConverter<ClusterHealthRequestDescriptor>
-	{
-		public override ClusterHealthRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterHealthRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

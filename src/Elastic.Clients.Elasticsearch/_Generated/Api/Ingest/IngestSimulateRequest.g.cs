@@ -55,7 +55,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
 	}
 
-	[JsonConverter(typeof(IngestSimulateRequestDescriptorConverter))]
 	public sealed partial class IngestSimulateRequestDescriptor : RequestDescriptorBase<IngestSimulateRequestDescriptor, IngestSimulateRequestParameters>
 	{
 		public IngestSimulateRequestDescriptor()
@@ -100,34 +99,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			PipelineDescriptorAction = null;
 			return Assign(configure, (a, v) => a.PipelineDescriptorAction = v);
 		}
-	}
 
-	internal sealed class IngestSimulateRequestDescriptorConverter : JsonConverter<IngestSimulateRequestDescriptor>
-	{
-		public override IngestSimulateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IngestSimulateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.DocsValue is not null)
+			if (DocsValue is not null)
 			{
 				writer.WritePropertyName("docs");
-				JsonSerializer.Serialize(writer, value.DocsValue, options);
+				JsonSerializer.Serialize(writer, DocsValue, options);
 			}
 
-			if (value.PipelineDescriptor is not null)
+			if (PipelineDescriptor is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, value.PipelineDescriptor, options);
+				JsonSerializer.Serialize(writer, PipelineDescriptor, options);
 			}
-			else if (value.PipelineDescriptorAction is not null)
+			else if (PipelineDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, new PipelineDescriptor(value.PipelineDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
 			}
-			else if (value.PipelineValue is not null)
+			else if (PipelineValue is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, value.PipelineValue, options);
+				JsonSerializer.Serialize(writer, PipelineValue, options);
 			}
 
 			writer.WriteEndObject();

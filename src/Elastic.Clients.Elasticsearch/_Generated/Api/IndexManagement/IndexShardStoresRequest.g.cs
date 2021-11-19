@@ -65,7 +65,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus? Status { get => Q<Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus?>("status"); set => Q("status", value); }
 	}
 
-	[JsonConverter(typeof(IndexShardStoresRequestDescriptorConverter))]
 	public sealed partial class IndexShardStoresRequestDescriptor : RequestDescriptorBase<IndexShardStoresRequestDescriptor, IndexShardStoresRequestParameters>
 	{
 		public IndexShardStoresRequestDescriptor()
@@ -84,12 +83,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexShardStoresRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexShardStoresRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexShardStoresRequestDescriptor Status(Elastic.Clients.Elasticsearch.IndexManagement.ShardStores.ShardStatus? status) => Qs("status", status);
-	}
-
-	internal sealed class IndexShardStoresRequestDescriptorConverter : JsonConverter<IndexShardStoresRequestDescriptor>
-	{
-		public override IndexShardStoresRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexShardStoresRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

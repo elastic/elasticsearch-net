@@ -40,39 +40,33 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? AllowDuplicates { get; set; }
 	}
 
-	[JsonConverter(typeof(AppendProcessorDescriptorConverter))]
-	public sealed partial class AppendProcessorDescriptor : DescriptorBase<AppendProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class AppendProcessorDescriptor<T> : DescriptorBase<AppendProcessorDescriptor<T>>
 	{
 		public AppendProcessorDescriptor()
 		{
 		}
 
-		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor> configure) => configure.Invoke(this);
+		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal IEnumerable<object> ValueValue { get; private set; }
 
 		internal bool? AllowDuplicatesValue { get; private set; }
 
-		public AppendProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AppendProcessorDescriptor Value(IEnumerable<object> value) => Assign(value, (a, v) => a.ValueValue = v);
-		public AppendProcessorDescriptor AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicatesValue = v);
-	}
-
-	internal sealed class AppendProcessorDescriptorConverter : JsonConverter<AppendProcessorDescriptor>
-	{
-		public override AppendProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, AppendProcessorDescriptor value, JsonSerializerOptions options)
+		public AppendProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AppendProcessorDescriptor<T> Value(IEnumerable<object> value) => Assign(value, (a, v) => a.ValueValue = v);
+		public AppendProcessorDescriptor<T> AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicatesValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.ValueValue, options);
-			if (value.AllowDuplicatesValue.HasValue)
+			JsonSerializer.Serialize(writer, ValueValue, options);
+			if (AllowDuplicatesValue.HasValue)
 			{
 				writer.WritePropertyName("allow_duplicates");
-				writer.WriteBooleanValue(value.AllowDuplicatesValue.Value);
+				writer.WriteBooleanValue(AllowDuplicatesValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -112,14 +106,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? ResourceName { get; set; }
 	}
 
-	[JsonConverter(typeof(AttachmentProcessorDescriptorConverter))]
-	public sealed partial class AttachmentProcessorDescriptor : DescriptorBase<AttachmentProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class AttachmentProcessorDescriptor<T> : DescriptorBase<AttachmentProcessorDescriptor<T>>
 	{
 		public AttachmentProcessorDescriptor()
 		{
 		}
 
-		internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor> configure) => configure.Invoke(this);
+		internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -134,57 +127,52 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? ResourceNameValue { get; private set; }
 
-		public AttachmentProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AttachmentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public AttachmentProcessorDescriptor IndexedChars(long? indexedChars) => Assign(indexedChars, (a, v) => a.IndexedCharsValue = v);
-		public AttachmentProcessorDescriptor IndexedCharsField(string? indexedCharsField) => Assign(indexedCharsField, (a, v) => a.IndexedCharsFieldValue = v);
-		public AttachmentProcessorDescriptor Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
-		public AttachmentProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public AttachmentProcessorDescriptor ResourceName(string? resourceName) => Assign(resourceName, (a, v) => a.ResourceNameValue = v);
-	}
-
-	internal sealed class AttachmentProcessorDescriptorConverter : JsonConverter<AttachmentProcessorDescriptor>
-	{
-		public override AttachmentProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, AttachmentProcessorDescriptor value, JsonSerializerOptions options)
+		public AttachmentProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public AttachmentProcessorDescriptor<T> IndexedChars(long? indexedChars) => Assign(indexedChars, (a, v) => a.IndexedCharsValue = v);
+		public AttachmentProcessorDescriptor<T> IndexedCharsField(string? indexedCharsField) => Assign(indexedCharsField, (a, v) => a.IndexedCharsFieldValue = v);
+		public AttachmentProcessorDescriptor<T> Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
+		public AttachmentProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public AttachmentProcessorDescriptor<T> ResourceName(string? resourceName) => Assign(resourceName, (a, v) => a.ResourceNameValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.IndexedCharsValue.HasValue)
+			if (IndexedCharsValue.HasValue)
 			{
 				writer.WritePropertyName("indexed_chars");
-				writer.WriteNumberValue(value.IndexedCharsValue.Value);
+				writer.WriteNumberValue(IndexedCharsValue.Value);
 			}
 
-			if (value.IndexedCharsFieldValue is not null)
+			if (IndexedCharsFieldValue is not null)
 			{
 				writer.WritePropertyName("indexed_chars_field");
-				JsonSerializer.Serialize(writer, value.IndexedCharsFieldValue, options);
+				JsonSerializer.Serialize(writer, IndexedCharsFieldValue, options);
 			}
 
-			if (value.PropertiesValue is not null)
+			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, value.PropertiesValue, options);
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.ResourceNameValue))
+			if (!string.IsNullOrEmpty(ResourceNameValue))
 			{
 				writer.WritePropertyName("resource_name");
-				writer.WriteStringValue(value.ResourceNameValue);
+				writer.WriteStringValue(ResourceNameValue);
 			}
 
 			writer.WriteEndObject();
@@ -208,43 +196,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(BytesProcessorDescriptorConverter))]
-	public sealed partial class BytesProcessorDescriptor : DescriptorBase<BytesProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class BytesProcessorDescriptor<T> : DescriptorBase<BytesProcessorDescriptor<T>>
 	{
 		public BytesProcessorDescriptor()
 		{
 		}
 
-		internal BytesProcessorDescriptor(Action<BytesProcessorDescriptor> configure) => configure.Invoke(this);
+		internal BytesProcessorDescriptor(Action<BytesProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public BytesProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public BytesProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public BytesProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class BytesProcessorDescriptorConverter : JsonConverter<BytesProcessorDescriptor>
-	{
-		public override BytesProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, BytesProcessorDescriptor value, JsonSerializerOptions options)
+		public BytesProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public BytesProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public BytesProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -276,14 +258,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(CircleProcessorDescriptorConverter))]
-	public sealed partial class CircleProcessorDescriptor : DescriptorBase<CircleProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class CircleProcessorDescriptor<T> : DescriptorBase<CircleProcessorDescriptor<T>>
 	{
 		public CircleProcessorDescriptor()
 		{
 		}
 
-		internal CircleProcessorDescriptor(Action<CircleProcessorDescriptor> configure) => configure.Invoke(this);
+		internal CircleProcessorDescriptor(Action<CircleProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal double ErrorDistanceValue { get; private set; }
 
 		internal string FieldValue { get; private set; }
@@ -294,29 +275,24 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string TargetFieldValue { get; private set; }
 
-		public CircleProcessorDescriptor ErrorDistance(double errorDistance) => Assign(errorDistance, (a, v) => a.ErrorDistanceValue = v);
-		public CircleProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CircleProcessorDescriptor IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public CircleProcessorDescriptor ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType shapeType) => Assign(shapeType, (a, v) => a.ShapeTypeValue = v);
-		public CircleProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class CircleProcessorDescriptorConverter : JsonConverter<CircleProcessorDescriptor>
-	{
-		public override CircleProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CircleProcessorDescriptor value, JsonSerializerOptions options)
+		public CircleProcessorDescriptor<T> ErrorDistance(double errorDistance) => Assign(errorDistance, (a, v) => a.ErrorDistanceValue = v);
+		public CircleProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CircleProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public CircleProcessorDescriptor<T> ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType shapeType) => Assign(shapeType, (a, v) => a.ShapeTypeValue = v);
+		public CircleProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("error_distance");
-			writer.WriteNumberValue(value.ErrorDistanceValue);
+			writer.WriteNumberValue(ErrorDistanceValue);
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(value.IgnoreMissingValue);
+			writer.WriteBooleanValue(IgnoreMissingValue);
 			writer.WritePropertyName("shape_type");
-			JsonSerializer.Serialize(writer, value.ShapeTypeValue, options);
+			JsonSerializer.Serialize(writer, ShapeTypeValue, options);
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -342,14 +318,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
 	}
 
-	[JsonConverter(typeof(ConvertProcessorDescriptorConverter))]
-	public sealed partial class ConvertProcessorDescriptor : DescriptorBase<ConvertProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class ConvertProcessorDescriptor<T> : DescriptorBase<ConvertProcessorDescriptor<T>>
 	{
 		public ConvertProcessorDescriptor()
 		{
 		}
 
-		internal ConvertProcessorDescriptor(Action<ConvertProcessorDescriptor> configure) => configure.Invoke(this);
+		internal ConvertProcessorDescriptor(Action<ConvertProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -358,30 +333,25 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal Elastic.Clients.Elasticsearch.Ingest.ConvertType TypeValue { get; private set; }
 
-		public ConvertProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ConvertProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public ConvertProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public ConvertProcessorDescriptor Type(Elastic.Clients.Elasticsearch.Ingest.ConvertType type) => Assign(type, (a, v) => a.TypeValue = v);
-	}
-
-	internal sealed class ConvertProcessorDescriptorConverter : JsonConverter<ConvertProcessorDescriptor>
-	{
-		public override ConvertProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ConvertProcessorDescriptor value, JsonSerializerOptions options)
+		public ConvertProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ConvertProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public ConvertProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public ConvertProcessorDescriptor<T> Type(Elastic.Clients.Elasticsearch.Ingest.ConvertType type) => Assign(type, (a, v) => a.TypeValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, value.TypeValue, options);
+			JsonSerializer.Serialize(writer, TypeValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -423,14 +393,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool Trim { get; set; }
 	}
 
-	[JsonConverter(typeof(CsvProcessorDescriptorConverter))]
-	public sealed partial class CsvProcessorDescriptor : DescriptorBase<CsvProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class CsvProcessorDescriptor<T> : DescriptorBase<CsvProcessorDescriptor<T>>
 	{
 		public CsvProcessorDescriptor()
 		{
 		}
 
-		internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor> configure) => configure.Invoke(this);
+		internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal object EmptyValueValue { get; private set; }
 
 		internal string? DescriptionValue { get; private set; }
@@ -447,52 +416,47 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal bool TrimValue { get; private set; }
 
-		public CsvProcessorDescriptor EmptyValue(object emptyValue) => Assign(emptyValue, (a, v) => a.EmptyValueValue = v);
-		public CsvProcessorDescriptor Description(string? description) => Assign(description, (a, v) => a.DescriptionValue = v);
-		public CsvProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CsvProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public CsvProcessorDescriptor Quote(string? quote) => Assign(quote, (a, v) => a.QuoteValue = v);
-		public CsvProcessorDescriptor Separator(string? separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
-		public CsvProcessorDescriptor TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields) => Assign(targetFields, (a, v) => a.TargetFieldsValue = v);
-		public CsvProcessorDescriptor Trim(bool trim = true) => Assign(trim, (a, v) => a.TrimValue = v);
-	}
-
-	internal sealed class CsvProcessorDescriptorConverter : JsonConverter<CsvProcessorDescriptor>
-	{
-		public override CsvProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CsvProcessorDescriptor value, JsonSerializerOptions options)
+		public CsvProcessorDescriptor<T> EmptyValue(object emptyValue) => Assign(emptyValue, (a, v) => a.EmptyValueValue = v);
+		public CsvProcessorDescriptor<T> Description(string? description) => Assign(description, (a, v) => a.DescriptionValue = v);
+		public CsvProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CsvProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public CsvProcessorDescriptor<T> Quote(string? quote) => Assign(quote, (a, v) => a.QuoteValue = v);
+		public CsvProcessorDescriptor<T> Separator(string? separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
+		public CsvProcessorDescriptor<T> TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields) => Assign(targetFields, (a, v) => a.TargetFieldsValue = v);
+		public CsvProcessorDescriptor<T> Trim(bool trim = true) => Assign(trim, (a, v) => a.TrimValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.DescriptionValue))
+			if (!string.IsNullOrEmpty(DescriptionValue))
 			{
 				writer.WritePropertyName("description");
-				writer.WriteStringValue(value.DescriptionValue);
+				writer.WriteStringValue(DescriptionValue);
 			}
 
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.QuoteValue))
+			if (!string.IsNullOrEmpty(QuoteValue))
 			{
 				writer.WritePropertyName("quote");
-				writer.WriteStringValue(value.QuoteValue);
+				writer.WriteStringValue(QuoteValue);
 			}
 
-			if (!string.IsNullOrEmpty(value.SeparatorValue))
+			if (!string.IsNullOrEmpty(SeparatorValue))
 			{
 				writer.WritePropertyName("separator");
-				writer.WriteStringValue(value.SeparatorValue);
+				writer.WriteStringValue(SeparatorValue);
 			}
 
 			writer.WritePropertyName("target_fields");
-			JsonSerializer.Serialize(writer, value.TargetFieldsValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldsValue, options);
 			writer.WritePropertyName("trim");
-			writer.WriteBooleanValue(value.TrimValue);
+			writer.WriteBooleanValue(TrimValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -507,7 +471,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("date_rounding")]
-		public Union<string, Elastic.Clients.Elasticsearch.Ingest.DateRounding> DateRounding { get; set; }
+		public string DateRounding { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
@@ -530,17 +494,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Timezone { get; set; }
 	}
 
-	[JsonConverter(typeof(DateIndexNameProcessorDescriptorConverter))]
-	public sealed partial class DateIndexNameProcessorDescriptor : DescriptorBase<DateIndexNameProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class DateIndexNameProcessorDescriptor<T> : DescriptorBase<DateIndexNameProcessorDescriptor<T>>
 	{
 		public DateIndexNameProcessorDescriptor()
 		{
 		}
 
-		internal DateIndexNameProcessorDescriptor(Action<DateIndexNameProcessorDescriptor> configure) => configure.Invoke(this);
+		internal DateIndexNameProcessorDescriptor(Action<DateIndexNameProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal IEnumerable<string> DateFormatsValue { get; private set; }
 
-		internal Union<string, Elastic.Clients.Elasticsearch.Ingest.DateRounding> DateRoundingValue { get; private set; }
+		internal string DateRoundingValue { get; private set; }
 
 		internal string FieldValue { get; private set; }
 
@@ -552,35 +515,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string TimezoneValue { get; private set; }
 
-		public DateIndexNameProcessorDescriptor DateFormats(IEnumerable<string> dateFormats) => Assign(dateFormats, (a, v) => a.DateFormatsValue = v);
-		public DateIndexNameProcessorDescriptor DateRounding(Union<string, Elastic.Clients.Elasticsearch.Ingest.DateRounding> dateRounding) => Assign(dateRounding, (a, v) => a.DateRoundingValue = v);
-		public DateIndexNameProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateIndexNameProcessorDescriptor IndexNameFormat(string indexNameFormat) => Assign(indexNameFormat, (a, v) => a.IndexNameFormatValue = v);
-		public DateIndexNameProcessorDescriptor IndexNamePrefix(string indexNamePrefix) => Assign(indexNamePrefix, (a, v) => a.IndexNamePrefixValue = v);
-		public DateIndexNameProcessorDescriptor Locale(string locale) => Assign(locale, (a, v) => a.LocaleValue = v);
-		public DateIndexNameProcessorDescriptor Timezone(string timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
-	}
-
-	internal sealed class DateIndexNameProcessorDescriptorConverter : JsonConverter<DateIndexNameProcessorDescriptor>
-	{
-		public override DateIndexNameProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DateIndexNameProcessorDescriptor value, JsonSerializerOptions options)
+		public DateIndexNameProcessorDescriptor<T> DateFormats(IEnumerable<string> dateFormats) => Assign(dateFormats, (a, v) => a.DateFormatsValue = v);
+		public DateIndexNameProcessorDescriptor<T> DateRounding(string dateRounding) => Assign(dateRounding, (a, v) => a.DateRoundingValue = v);
+		public DateIndexNameProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateIndexNameProcessorDescriptor<T> IndexNameFormat(string indexNameFormat) => Assign(indexNameFormat, (a, v) => a.IndexNameFormatValue = v);
+		public DateIndexNameProcessorDescriptor<T> IndexNamePrefix(string indexNamePrefix) => Assign(indexNamePrefix, (a, v) => a.IndexNamePrefixValue = v);
+		public DateIndexNameProcessorDescriptor<T> Locale(string locale) => Assign(locale, (a, v) => a.LocaleValue = v);
+		public DateIndexNameProcessorDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("date_formats");
-			JsonSerializer.Serialize(writer, value.DateFormatsValue, options);
+			JsonSerializer.Serialize(writer, DateFormatsValue, options);
 			writer.WritePropertyName("date_rounding");
-			JsonSerializer.Serialize(writer, value.DateRoundingValue, options);
+			writer.WriteStringValue(DateRoundingValue);
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("index_name_format");
-			writer.WriteStringValue(value.IndexNameFormatValue);
+			writer.WriteStringValue(IndexNameFormatValue);
 			writer.WritePropertyName("index_name_prefix");
-			writer.WriteStringValue(value.IndexNamePrefixValue);
+			writer.WriteStringValue(IndexNamePrefixValue);
 			writer.WritePropertyName("locale");
-			writer.WriteStringValue(value.LocaleValue);
+			writer.WriteStringValue(LocaleValue);
 			writer.WritePropertyName("timezone");
-			writer.WriteStringValue(value.TimezoneValue);
+			writer.WriteStringValue(TimezoneValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -610,14 +568,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Timezone { get; set; }
 	}
 
-	[JsonConverter(typeof(DateProcessorDescriptorConverter))]
-	public sealed partial class DateProcessorDescriptor : DescriptorBase<DateProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class DateProcessorDescriptor<T> : DescriptorBase<DateProcessorDescriptor<T>>
 	{
 		public DateProcessorDescriptor()
 		{
 		}
 
-		internal DateProcessorDescriptor(Action<DateProcessorDescriptor> configure) => configure.Invoke(this);
+		internal DateProcessorDescriptor(Action<DateProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal IEnumerable<string> FormatsValue { get; private set; }
@@ -628,39 +585,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TimezoneValue { get; private set; }
 
-		public DateProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateProcessorDescriptor Formats(IEnumerable<string> formats) => Assign(formats, (a, v) => a.FormatsValue = v);
-		public DateProcessorDescriptor Locale(string? locale) => Assign(locale, (a, v) => a.LocaleValue = v);
-		public DateProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public DateProcessorDescriptor Timezone(string? timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
-	}
-
-	internal sealed class DateProcessorDescriptorConverter : JsonConverter<DateProcessorDescriptor>
-	{
-		public override DateProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DateProcessorDescriptor value, JsonSerializerOptions options)
+		public DateProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateProcessorDescriptor<T> Formats(IEnumerable<string> formats) => Assign(formats, (a, v) => a.FormatsValue = v);
+		public DateProcessorDescriptor<T> Locale(string? locale) => Assign(locale, (a, v) => a.LocaleValue = v);
+		public DateProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public DateProcessorDescriptor<T> Timezone(string? timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("formats");
-			JsonSerializer.Serialize(writer, value.FormatsValue, options);
-			if (!string.IsNullOrEmpty(value.LocaleValue))
+			JsonSerializer.Serialize(writer, FormatsValue, options);
+			if (!string.IsNullOrEmpty(LocaleValue))
 			{
 				writer.WritePropertyName("locale");
-				writer.WriteStringValue(value.LocaleValue);
+				writer.WriteStringValue(LocaleValue);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TimezoneValue))
+			if (!string.IsNullOrEmpty(TimezoneValue))
 			{
 				writer.WritePropertyName("timezone");
-				writer.WriteStringValue(value.TimezoneValue);
+				writer.WriteStringValue(TimezoneValue);
 			}
 
 			writer.WriteEndObject();
@@ -688,14 +640,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Pattern { get; set; }
 	}
 
-	[JsonConverter(typeof(DissectProcessorDescriptorConverter))]
-	public sealed partial class DissectProcessorDescriptor : DescriptorBase<DissectProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class DissectProcessorDescriptor<T> : DescriptorBase<DissectProcessorDescriptor<T>>
 	{
 		public DissectProcessorDescriptor()
 		{
 		}
 
-		internal DissectProcessorDescriptor(Action<DissectProcessorDescriptor> configure) => configure.Invoke(this);
+		internal DissectProcessorDescriptor(Action<DissectProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string AppendSeparatorValue { get; private set; }
 
 		internal string FieldValue { get; private set; }
@@ -704,26 +655,21 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string PatternValue { get; private set; }
 
-		public DissectProcessorDescriptor AppendSeparator(string appendSeparator) => Assign(appendSeparator, (a, v) => a.AppendSeparatorValue = v);
-		public DissectProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DissectProcessorDescriptor IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public DissectProcessorDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
-	}
-
-	internal sealed class DissectProcessorDescriptorConverter : JsonConverter<DissectProcessorDescriptor>
-	{
-		public override DissectProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DissectProcessorDescriptor value, JsonSerializerOptions options)
+		public DissectProcessorDescriptor<T> AppendSeparator(string appendSeparator) => Assign(appendSeparator, (a, v) => a.AppendSeparatorValue = v);
+		public DissectProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DissectProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public DissectProcessorDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("append_separator");
-			writer.WriteStringValue(value.AppendSeparatorValue);
+			writer.WriteStringValue(AppendSeparatorValue);
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(value.IgnoreMissingValue);
+			writer.WriteBooleanValue(IgnoreMissingValue);
 			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value.PatternValue);
+			writer.WriteStringValue(PatternValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -741,34 +687,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Path { get; set; }
 	}
 
-	[JsonConverter(typeof(DotExpanderProcessorDescriptorConverter))]
-	public sealed partial class DotExpanderProcessorDescriptor : DescriptorBase<DotExpanderProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class DotExpanderProcessorDescriptor<T> : DescriptorBase<DotExpanderProcessorDescriptor<T>>
 	{
 		public DotExpanderProcessorDescriptor()
 		{
 		}
 
-		internal DotExpanderProcessorDescriptor(Action<DotExpanderProcessorDescriptor> configure) => configure.Invoke(this);
+		internal DotExpanderProcessorDescriptor(Action<DotExpanderProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal string? PathValue { get; private set; }
 
-		public DotExpanderProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DotExpanderProcessorDescriptor Path(string? path) => Assign(path, (a, v) => a.PathValue = v);
-	}
-
-	internal sealed class DotExpanderProcessorDescriptorConverter : JsonConverter<DotExpanderProcessorDescriptor>
-	{
-		public override DotExpanderProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DotExpanderProcessorDescriptor value, JsonSerializerOptions options)
+		public DotExpanderProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DotExpanderProcessorDescriptor<T> Path(string? path) => Assign(path, (a, v) => a.PathValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (!string.IsNullOrEmpty(value.PathValue))
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (!string.IsNullOrEmpty(PathValue))
 			{
 				writer.WritePropertyName("path");
-				writer.WriteStringValue(value.PathValue);
+				writer.WriteStringValue(PathValue);
 			}
 
 			writer.WriteEndObject();
@@ -781,20 +721,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "drop";
 	}
 
-	[JsonConverter(typeof(DropProcessorDescriptorConverter))]
-	public sealed partial class DropProcessorDescriptor : DescriptorBase<DropProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class DropProcessorDescriptor : DescriptorBase<DropProcessorDescriptor>
 	{
 		public DropProcessorDescriptor()
 		{
 		}
 
 		internal DropProcessorDescriptor(Action<DropProcessorDescriptor> configure) => configure.Invoke(this);
-	}
-
-	internal sealed class DropProcessorDescriptorConverter : JsonConverter<DropProcessorDescriptor>
-	{
-		public override DropProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DropProcessorDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();
@@ -834,14 +768,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(EnrichProcessorDescriptorConverter))]
-	public sealed partial class EnrichProcessorDescriptor : DescriptorBase<EnrichProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class EnrichProcessorDescriptor<T> : DescriptorBase<EnrichProcessorDescriptor<T>>
 	{
 		public EnrichProcessorDescriptor()
 		{
 		}
 
-		internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor> configure) => configure.Invoke(this);
+		internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -856,51 +789,46 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string TargetFieldValue { get; private set; }
 
-		public EnrichProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public EnrichProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public EnrichProcessorDescriptor MaxMatches(int? maxMatches) => Assign(maxMatches, (a, v) => a.MaxMatchesValue = v);
-		public EnrichProcessorDescriptor Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
-		public EnrichProcessorDescriptor PolicyName(string policyName) => Assign(policyName, (a, v) => a.PolicyNameValue = v);
-		public EnrichProcessorDescriptor ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation) => Assign(shapeRelation, (a, v) => a.ShapeRelationValue = v);
-		public EnrichProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class EnrichProcessorDescriptorConverter : JsonConverter<EnrichProcessorDescriptor>
-	{
-		public override EnrichProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, EnrichProcessorDescriptor value, JsonSerializerOptions options)
+		public EnrichProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public EnrichProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public EnrichProcessorDescriptor<T> MaxMatches(int? maxMatches) => Assign(maxMatches, (a, v) => a.MaxMatchesValue = v);
+		public EnrichProcessorDescriptor<T> Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
+		public EnrichProcessorDescriptor<T> PolicyName(string policyName) => Assign(policyName, (a, v) => a.PolicyNameValue = v);
+		public EnrichProcessorDescriptor<T> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation) => Assign(shapeRelation, (a, v) => a.ShapeRelationValue = v);
+		public EnrichProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.MaxMatchesValue.HasValue)
+			if (MaxMatchesValue.HasValue)
 			{
 				writer.WritePropertyName("max_matches");
-				writer.WriteNumberValue(value.MaxMatchesValue.Value);
+				writer.WriteNumberValue(MaxMatchesValue.Value);
 			}
 
-			if (value.OverrideValue.HasValue)
+			if (OverrideValue.HasValue)
 			{
 				writer.WritePropertyName("override");
-				writer.WriteBooleanValue(value.OverrideValue.Value);
+				writer.WriteBooleanValue(OverrideValue.Value);
 			}
 
 			writer.WritePropertyName("policy_name");
-			writer.WriteStringValue(value.PolicyNameValue);
-			if (value.ShapeRelationValue is not null)
+			writer.WriteStringValue(PolicyNameValue);
+			if (ShapeRelationValue is not null)
 			{
 				writer.WritePropertyName("shape_relation");
-				JsonSerializer.Serialize(writer, value.ShapeRelationValue, options);
+				JsonSerializer.Serialize(writer, ShapeRelationValue, options);
 			}
 
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -914,8 +842,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Message { get; set; }
 	}
 
-	[JsonConverter(typeof(FailProcessorDescriptorConverter))]
-	public sealed partial class FailProcessorDescriptor : DescriptorBase<FailProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class FailProcessorDescriptor : DescriptorBase<FailProcessorDescriptor>
 	{
 		public FailProcessorDescriptor()
 		{
@@ -925,16 +852,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal string MessageValue { get; private set; }
 
 		public FailProcessorDescriptor Message(string message) => Assign(message, (a, v) => a.MessageValue = v);
-	}
-
-	internal sealed class FailProcessorDescriptorConverter : JsonConverter<FailProcessorDescriptor>
-	{
-		public override FailProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FailProcessorDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("message");
-			writer.WriteStringValue(value.MessageValue);
+			writer.WriteStringValue(MessageValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -956,76 +878,71 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer Processor { get; set; }
 	}
 
-	[JsonConverter(typeof(ForeachProcessorDescriptorConverter))]
-	public sealed partial class ForeachProcessorDescriptor : DescriptorBase<ForeachProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class ForeachProcessorDescriptor<T> : DescriptorBase<ForeachProcessorDescriptor<T>>
 	{
 		public ForeachProcessorDescriptor()
 		{
 		}
 
-		internal ForeachProcessorDescriptor(Action<ForeachProcessorDescriptor> configure) => configure.Invoke(this);
+		internal ForeachProcessorDescriptor(Action<ForeachProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer ProcessorValue { get; private set; }
 
-		internal ProcessorContainerDescriptor ProcessorDescriptor { get; private set; }
+		internal ProcessorContainerDescriptor<T> ProcessorDescriptor { get; private set; }
 
-		internal Action<ProcessorContainerDescriptor> ProcessorDescriptorAction { get; private set; }
+		internal Action<ProcessorContainerDescriptor<T>> ProcessorDescriptorAction { get; private set; }
 
-		public ForeachProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ForeachProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public ForeachProcessorDescriptor Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer processor)
+		public ForeachProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ForeachProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public ForeachProcessorDescriptor<T> Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer processor)
 		{
 			ProcessorDescriptor = null;
 			ProcessorDescriptorAction = null;
 			return Assign(processor, (a, v) => a.ProcessorValue = v);
 		}
 
-		public ForeachProcessorDescriptor Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorContainerDescriptor descriptor)
+		public ForeachProcessorDescriptor<T> Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorContainerDescriptor<T> descriptor)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ProcessorDescriptor = v);
 		}
 
-		public ForeachProcessorDescriptor Processor(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainerDescriptor> configure)
+		public ForeachProcessorDescriptor<T> Processor(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainerDescriptor<T>> configure)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ProcessorDescriptorAction = v);
 		}
-	}
 
-	internal sealed class ForeachProcessorDescriptorConverter : JsonConverter<ForeachProcessorDescriptor>
-	{
-		public override ForeachProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ForeachProcessorDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.ProcessorDescriptor is not null)
+			if (ProcessorDescriptor is not null)
 			{
 				writer.WritePropertyName("processor");
-				JsonSerializer.Serialize(writer, value.ProcessorDescriptor, options);
+				JsonSerializer.Serialize(writer, ProcessorDescriptor, options);
 			}
-			else if (value.ProcessorDescriptorAction is not null)
+			else if (ProcessorDescriptorAction is not null)
 			{
 				writer.WritePropertyName("processor");
-				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor(value.ProcessorDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<T>(ProcessorDescriptorAction), options);
 			}
 			else
 			{
 				writer.WritePropertyName("processor");
-				JsonSerializer.Serialize(writer, value.ProcessorValue, options);
+				JsonSerializer.Serialize(writer, ProcessorValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1061,14 +978,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(GeoIpProcessorDescriptorConverter))]
-	public sealed partial class GeoIpProcessorDescriptor : DescriptorBase<GeoIpProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class GeoIpProcessorDescriptor<T> : DescriptorBase<GeoIpProcessorDescriptor<T>>
 	{
 		public GeoIpProcessorDescriptor()
 		{
 		}
 
-		internal GeoIpProcessorDescriptor(Action<GeoIpProcessorDescriptor> configure) => configure.Invoke(this);
+		internal GeoIpProcessorDescriptor(Action<GeoIpProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string DatabaseFileValue { get; private set; }
 
 		internal string FieldValue { get; private set; }
@@ -1081,32 +997,27 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string TargetFieldValue { get; private set; }
 
-		public GeoIpProcessorDescriptor DatabaseFile(string databaseFile) => Assign(databaseFile, (a, v) => a.DatabaseFileValue = v);
-		public GeoIpProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GeoIpProcessorDescriptor FirstOnly(bool firstOnly = true) => Assign(firstOnly, (a, v) => a.FirstOnlyValue = v);
-		public GeoIpProcessorDescriptor IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public GeoIpProcessorDescriptor Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
-		public GeoIpProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class GeoIpProcessorDescriptorConverter : JsonConverter<GeoIpProcessorDescriptor>
-	{
-		public override GeoIpProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, GeoIpProcessorDescriptor value, JsonSerializerOptions options)
+		public GeoIpProcessorDescriptor<T> DatabaseFile(string databaseFile) => Assign(databaseFile, (a, v) => a.DatabaseFileValue = v);
+		public GeoIpProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoIpProcessorDescriptor<T> FirstOnly(bool firstOnly = true) => Assign(firstOnly, (a, v) => a.FirstOnlyValue = v);
+		public GeoIpProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public GeoIpProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
+		public GeoIpProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("database_file");
-			writer.WriteStringValue(value.DatabaseFileValue);
+			writer.WriteStringValue(DatabaseFileValue);
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("first_only");
-			writer.WriteBooleanValue(value.FirstOnlyValue);
+			writer.WriteBooleanValue(FirstOnlyValue);
 			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(value.IgnoreMissingValue);
+			writer.WriteBooleanValue(IgnoreMissingValue);
 			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, value.PropertiesValue, options);
+			JsonSerializer.Serialize(writer, PropertiesValue, options);
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -1136,14 +1047,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? TraceMatch { get; set; }
 	}
 
-	[JsonConverter(typeof(GrokProcessorDescriptorConverter))]
-	public sealed partial class GrokProcessorDescriptor : DescriptorBase<GrokProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class GrokProcessorDescriptor<T> : DescriptorBase<GrokProcessorDescriptor<T>>
 	{
 		public GrokProcessorDescriptor()
 		{
 		}
 
-		internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor> configure) => configure.Invoke(this);
+		internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -1154,35 +1064,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal bool? TraceMatchValue { get; private set; }
 
-		public GrokProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GrokProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public GrokProcessorDescriptor PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.PatternDefinitionsValue = v?.Invoke(new FluentDictionary<string, string>()));
-		public GrokProcessorDescriptor Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.PatternsValue = v);
-		public GrokProcessorDescriptor TraceMatch(bool? traceMatch = true) => Assign(traceMatch, (a, v) => a.TraceMatchValue = v);
-	}
-
-	internal sealed class GrokProcessorDescriptorConverter : JsonConverter<GrokProcessorDescriptor>
-	{
-		public override GrokProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, GrokProcessorDescriptor value, JsonSerializerOptions options)
+		public GrokProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GrokProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public GrokProcessorDescriptor<T> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.PatternDefinitionsValue = v?.Invoke(new FluentDictionary<string, string>()));
+		public GrokProcessorDescriptor<T> Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.PatternsValue = v);
+		public GrokProcessorDescriptor<T> TraceMatch(bool? traceMatch = true) => Assign(traceMatch, (a, v) => a.TraceMatchValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
 			writer.WritePropertyName("pattern_definitions");
-			JsonSerializer.Serialize(writer, value.PatternDefinitionsValue, options);
+			JsonSerializer.Serialize(writer, PatternDefinitionsValue, options);
 			writer.WritePropertyName("patterns");
-			JsonSerializer.Serialize(writer, value.PatternsValue, options);
-			if (value.TraceMatchValue.HasValue)
+			JsonSerializer.Serialize(writer, PatternsValue, options);
+			if (TraceMatchValue.HasValue)
 			{
 				writer.WritePropertyName("trace_match");
-				writer.WriteBooleanValue(value.TraceMatchValue.Value);
+				writer.WriteBooleanValue(TraceMatchValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -1214,14 +1119,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(GsubProcessorDescriptorConverter))]
-	public sealed partial class GsubProcessorDescriptor : DescriptorBase<GsubProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class GsubProcessorDescriptor<T> : DescriptorBase<GsubProcessorDescriptor<T>>
 	{
 		public GsubProcessorDescriptor()
 		{
 		}
 
-		internal GsubProcessorDescriptor(Action<GsubProcessorDescriptor> configure) => configure.Invoke(this);
+		internal GsubProcessorDescriptor(Action<GsubProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -1232,35 +1136,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public GsubProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GsubProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public GsubProcessorDescriptor Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
-		public GsubProcessorDescriptor Replacement(string replacement) => Assign(replacement, (a, v) => a.ReplacementValue = v);
-		public GsubProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class GsubProcessorDescriptorConverter : JsonConverter<GsubProcessorDescriptor>
-	{
-		public override GsubProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, GsubProcessorDescriptor value, JsonSerializerOptions options)
+		public GsubProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GsubProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public GsubProcessorDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
+		public GsubProcessorDescriptor<T> Replacement(string replacement) => Assign(replacement, (a, v) => a.ReplacementValue = v);
+		public GsubProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
 			writer.WritePropertyName("pattern");
-			writer.WriteStringValue(value.PatternValue);
+			writer.WriteStringValue(PatternValue);
 			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(value.ReplacementValue);
-			if (value.TargetFieldValue is not null)
+			writer.WriteStringValue(ReplacementValue);
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1274,7 +1173,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression? Regression { get; set; }
 	}
 
-	[JsonConverter(typeof(InferenceConfigDescriptorConverter))]
 	public sealed partial class InferenceConfigDescriptor : DescriptorBase<InferenceConfigDescriptor>
 	{
 		public InferenceConfigDescriptor()
@@ -1308,28 +1206,24 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			RegressionDescriptorAction = null;
 			return Assign(configure, (a, v) => a.RegressionDescriptorAction = v);
 		}
-	}
 
-	internal sealed class InferenceConfigDescriptorConverter : JsonConverter<InferenceConfigDescriptor>
-	{
-		public override InferenceConfigDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, InferenceConfigDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.RegressionDescriptor is not null)
+			if (RegressionDescriptor is not null)
 			{
 				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, value.RegressionDescriptor, options);
+				JsonSerializer.Serialize(writer, RegressionDescriptor, options);
 			}
-			else if (value.RegressionDescriptorAction is not null)
+			else if (RegressionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, new InferenceConfigRegressionDescriptor(value.RegressionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigRegressionDescriptor(RegressionDescriptorAction), options);
 			}
-			else if (value.RegressionValue is not null)
+			else if (RegressionValue is not null)
 			{
 				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, value.RegressionValue, options);
+				JsonSerializer.Serialize(writer, RegressionValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1343,7 +1237,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string ResultsField { get; set; }
 	}
 
-	[JsonConverter(typeof(InferenceConfigRegressionDescriptorConverter))]
 	public sealed partial class InferenceConfigRegressionDescriptor : DescriptorBase<InferenceConfigRegressionDescriptor>
 	{
 		public InferenceConfigRegressionDescriptor()
@@ -1354,16 +1247,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal string ResultsFieldValue { get; private set; }
 
 		public InferenceConfigRegressionDescriptor ResultsField(string resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
-	}
-
-	internal sealed class InferenceConfigRegressionDescriptorConverter : JsonConverter<InferenceConfigRegressionDescriptor>
-	{
-		public override InferenceConfigRegressionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, InferenceConfigRegressionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(value.ResultsFieldValue);
+			writer.WriteStringValue(ResultsFieldValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -1389,14 +1277,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
 	}
 
-	[JsonConverter(typeof(InferenceProcessorDescriptorConverter))]
-	public sealed partial class InferenceProcessorDescriptor : DescriptorBase<InferenceProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class InferenceProcessorDescriptor<T> : DescriptorBase<InferenceProcessorDescriptor<T>>
 	{
 		public InferenceProcessorDescriptor()
 		{
 		}
 
-		internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor> configure) => configure.Invoke(this);
+		internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Id ModelIdValue { get; private set; }
 
 		internal string TargetFieldValue { get; private set; }
@@ -1409,61 +1296,57 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; private set; }
 
-		public InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId) => Assign(modelId, (a, v) => a.ModelIdValue = v);
-		public InferenceProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public InferenceProcessorDescriptor FieldMap(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.FieldMapValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
+		public InferenceProcessorDescriptor<T> ModelId(Elastic.Clients.Elasticsearch.Id modelId) => Assign(modelId, (a, v) => a.ModelIdValue = v);
+		public InferenceProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public InferenceProcessorDescriptor<T> FieldMap(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.FieldMapValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public InferenceProcessorDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
 		{
 			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(inferenceConfig, (a, v) => a.InferenceConfigValue = v);
 		}
 
-		public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor descriptor)
+		public InferenceProcessorDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InferenceConfigDescriptor = v);
 		}
 
-		public InferenceProcessorDescriptor InferenceConfig(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> configure)
+		public InferenceProcessorDescriptor<T> InferenceConfig(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(configure, (a, v) => a.InferenceConfigDescriptorAction = v);
 		}
-	}
 
-	internal sealed class InferenceProcessorDescriptorConverter : JsonConverter<InferenceProcessorDescriptor>
-	{
-		public override InferenceProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, InferenceProcessorDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("model_id");
-			JsonSerializer.Serialize(writer, value.ModelIdValue, options);
+			JsonSerializer.Serialize(writer, ModelIdValue, options);
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
-			if (value.FieldMapValue is not null)
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
+			if (FieldMapValue is not null)
 			{
 				writer.WritePropertyName("field_map");
-				JsonSerializer.Serialize(writer, value.FieldMapValue, options);
+				JsonSerializer.Serialize(writer, FieldMapValue, options);
 			}
 
-			if (value.InferenceConfigDescriptor is not null)
+			if (InferenceConfigDescriptor is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, value.InferenceConfigDescriptor, options);
+				JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
 			}
-			else if (value.InferenceConfigDescriptorAction is not null)
+			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(value.InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
 			}
-			else if (value.InferenceConfigValue is not null)
+			else if (InferenceConfigValue is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, value.InferenceConfigValue, options);
+				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1487,39 +1370,33 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(JoinProcessorDescriptorConverter))]
-	public sealed partial class JoinProcessorDescriptor : DescriptorBase<JoinProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class JoinProcessorDescriptor<T> : DescriptorBase<JoinProcessorDescriptor<T>>
 	{
 		public JoinProcessorDescriptor()
 		{
 		}
 
-		internal JoinProcessorDescriptor(Action<JoinProcessorDescriptor> configure) => configure.Invoke(this);
+		internal JoinProcessorDescriptor(Action<JoinProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal string SeparatorValue { get; private set; }
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public JoinProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public JoinProcessorDescriptor Separator(string separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
-		public JoinProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class JoinProcessorDescriptorConverter : JsonConverter<JoinProcessorDescriptor>
-	{
-		public override JoinProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, JoinProcessorDescriptor value, JsonSerializerOptions options)
+		public JoinProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public JoinProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
+		public JoinProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("separator");
-			writer.WriteStringValue(value.SeparatorValue);
-			if (value.TargetFieldValue is not null)
+			writer.WriteStringValue(SeparatorValue);
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1543,37 +1420,31 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(JsonProcessorDescriptorConverter))]
-	public sealed partial class JsonProcessorDescriptor : DescriptorBase<JsonProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class JsonProcessorDescriptor<T> : DescriptorBase<JsonProcessorDescriptor<T>>
 	{
 		public JsonProcessorDescriptor()
 		{
 		}
 
-		internal JsonProcessorDescriptor(Action<JsonProcessorDescriptor> configure) => configure.Invoke(this);
+		internal JsonProcessorDescriptor(Action<JsonProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal bool AddToRootValue { get; private set; }
 
 		internal string FieldValue { get; private set; }
 
 		internal string TargetFieldValue { get; private set; }
 
-		public JsonProcessorDescriptor AddToRoot(bool addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRootValue = v);
-		public JsonProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public JsonProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class JsonProcessorDescriptorConverter : JsonConverter<JsonProcessorDescriptor>
-	{
-		public override JsonProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, JsonProcessorDescriptor value, JsonSerializerOptions options)
+		public JsonProcessorDescriptor<T> AddToRoot(bool addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRootValue = v);
+		public JsonProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public JsonProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("add_to_root");
-			writer.WriteBooleanValue(value.AddToRootValue);
+			writer.WriteBooleanValue(AddToRootValue);
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -1627,14 +1498,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string ValueSplit { get; set; }
 	}
 
-	[JsonConverter(typeof(KeyValueProcessorDescriptorConverter))]
-	public sealed partial class KeyValueProcessorDescriptor : DescriptorBase<KeyValueProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class KeyValueProcessorDescriptor<T> : DescriptorBase<KeyValueProcessorDescriptor<T>>
 	{
 		public KeyValueProcessorDescriptor()
 		{
 		}
 
-		internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor> configure) => configure.Invoke(this);
+		internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal IEnumerable<string>? ExcludeKeysValue { get; private set; }
 
 		internal string FieldValue { get; private set; }
@@ -1657,79 +1527,74 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string ValueSplitValue { get; private set; }
 
-		public KeyValueProcessorDescriptor ExcludeKeys(IEnumerable<string>? excludeKeys) => Assign(excludeKeys, (a, v) => a.ExcludeKeysValue = v);
-		public KeyValueProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public KeyValueProcessorDescriptor FieldSplit(string fieldSplit) => Assign(fieldSplit, (a, v) => a.FieldSplitValue = v);
-		public KeyValueProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public KeyValueProcessorDescriptor IncludeKeys(IEnumerable<string>? includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeysValue = v);
-		public KeyValueProcessorDescriptor Prefix(string? prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
-		public KeyValueProcessorDescriptor StripBrackets(bool? stripBrackets = true) => Assign(stripBrackets, (a, v) => a.StripBracketsValue = v);
-		public KeyValueProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public KeyValueProcessorDescriptor TrimKey(string? trimKey) => Assign(trimKey, (a, v) => a.TrimKeyValue = v);
-		public KeyValueProcessorDescriptor TrimValue(string? trimValue) => Assign(trimValue, (a, v) => a.TrimValueValue = v);
-		public KeyValueProcessorDescriptor ValueSplit(string valueSplit) => Assign(valueSplit, (a, v) => a.ValueSplitValue = v);
-	}
-
-	internal sealed class KeyValueProcessorDescriptorConverter : JsonConverter<KeyValueProcessorDescriptor>
-	{
-		public override KeyValueProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, KeyValueProcessorDescriptor value, JsonSerializerOptions options)
+		public KeyValueProcessorDescriptor<T> ExcludeKeys(IEnumerable<string>? excludeKeys) => Assign(excludeKeys, (a, v) => a.ExcludeKeysValue = v);
+		public KeyValueProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public KeyValueProcessorDescriptor<T> FieldSplit(string fieldSplit) => Assign(fieldSplit, (a, v) => a.FieldSplitValue = v);
+		public KeyValueProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public KeyValueProcessorDescriptor<T> IncludeKeys(IEnumerable<string>? includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeysValue = v);
+		public KeyValueProcessorDescriptor<T> Prefix(string? prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
+		public KeyValueProcessorDescriptor<T> StripBrackets(bool? stripBrackets = true) => Assign(stripBrackets, (a, v) => a.StripBracketsValue = v);
+		public KeyValueProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public KeyValueProcessorDescriptor<T> TrimKey(string? trimKey) => Assign(trimKey, (a, v) => a.TrimKeyValue = v);
+		public KeyValueProcessorDescriptor<T> TrimValue(string? trimValue) => Assign(trimValue, (a, v) => a.TrimValueValue = v);
+		public KeyValueProcessorDescriptor<T> ValueSplit(string valueSplit) => Assign(valueSplit, (a, v) => a.ValueSplitValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.ExcludeKeysValue is not null)
+			if (ExcludeKeysValue is not null)
 			{
 				writer.WritePropertyName("exclude_keys");
-				JsonSerializer.Serialize(writer, value.ExcludeKeysValue, options);
+				JsonSerializer.Serialize(writer, ExcludeKeysValue, options);
 			}
 
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("field_split");
-			writer.WriteStringValue(value.FieldSplitValue);
-			if (value.IgnoreMissingValue.HasValue)
+			writer.WriteStringValue(FieldSplitValue);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.IncludeKeysValue is not null)
+			if (IncludeKeysValue is not null)
 			{
 				writer.WritePropertyName("include_keys");
-				JsonSerializer.Serialize(writer, value.IncludeKeysValue, options);
+				JsonSerializer.Serialize(writer, IncludeKeysValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.PrefixValue))
+			if (!string.IsNullOrEmpty(PrefixValue))
 			{
 				writer.WritePropertyName("prefix");
-				writer.WriteStringValue(value.PrefixValue);
+				writer.WriteStringValue(PrefixValue);
 			}
 
-			if (value.StripBracketsValue.HasValue)
+			if (StripBracketsValue.HasValue)
 			{
 				writer.WritePropertyName("strip_brackets");
-				writer.WriteBooleanValue(value.StripBracketsValue.Value);
+				writer.WriteBooleanValue(StripBracketsValue.Value);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TrimKeyValue))
+			if (!string.IsNullOrEmpty(TrimKeyValue))
 			{
 				writer.WritePropertyName("trim_key");
-				writer.WriteStringValue(value.TrimKeyValue);
+				writer.WriteStringValue(TrimKeyValue);
 			}
 
-			if (!string.IsNullOrEmpty(value.TrimValueValue))
+			if (!string.IsNullOrEmpty(TrimValueValue))
 			{
 				writer.WritePropertyName("trim_value");
-				writer.WriteStringValue(value.TrimValueValue);
+				writer.WriteStringValue(TrimValueValue);
 			}
 
 			writer.WritePropertyName("value_split");
-			writer.WriteStringValue(value.ValueSplitValue);
+			writer.WriteStringValue(ValueSplitValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -1751,43 +1616,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(LowercaseProcessorDescriptorConverter))]
-	public sealed partial class LowercaseProcessorDescriptor : DescriptorBase<LowercaseProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class LowercaseProcessorDescriptor<T> : DescriptorBase<LowercaseProcessorDescriptor<T>>
 	{
 		public LowercaseProcessorDescriptor()
 		{
 		}
 
-		internal LowercaseProcessorDescriptor(Action<LowercaseProcessorDescriptor> configure) => configure.Invoke(this);
+		internal LowercaseProcessorDescriptor(Action<LowercaseProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public LowercaseProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public LowercaseProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public LowercaseProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class LowercaseProcessorDescriptorConverter : JsonConverter<LowercaseProcessorDescriptor>
-	{
-		public override LowercaseProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LowercaseProcessorDescriptor value, JsonSerializerOptions options)
+		public LowercaseProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public LowercaseProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public LowercaseProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1813,7 +1672,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public long? Version { get; set; }
 	}
 
-	[JsonConverter(typeof(PipelineDescriptorConverter))]
 	public sealed partial class PipelineDescriptor : DescriptorBase<PipelineDescriptor>
 	{
 		public PipelineDescriptor()
@@ -1833,36 +1691,31 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public PipelineDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
 		public PipelineDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a.ProcessorsValue = v);
 		public PipelineDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-	}
-
-	internal sealed class PipelineDescriptorConverter : JsonConverter<PipelineDescriptor>
-	{
-		public override PipelineDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PipelineDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.DescriptionValue))
+			if (!string.IsNullOrEmpty(DescriptionValue))
 			{
 				writer.WritePropertyName("description");
-				writer.WriteStringValue(value.DescriptionValue);
+				writer.WriteStringValue(DescriptionValue);
 			}
 
-			if (value.OnFailureValue is not null)
+			if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
-				JsonSerializer.Serialize(writer, value.OnFailureValue, options);
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
 			}
 
-			if (value.ProcessorsValue is not null)
+			if (ProcessorsValue is not null)
 			{
 				writer.WritePropertyName("processors");
-				JsonSerializer.Serialize(writer, value.ProcessorsValue, options);
+				JsonSerializer.Serialize(writer, ProcessorsValue, options);
 			}
 
-			if (value.VersionValue is not null)
+			if (VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.VersionValue, options);
+				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1878,8 +1731,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	}
 
-	[JsonConverter(typeof(PipelineProcessorDescriptorConverter))]
-	public sealed partial class PipelineProcessorDescriptor : DescriptorBase<PipelineProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class PipelineProcessorDescriptor : DescriptorBase<PipelineProcessorDescriptor>
 	{
 		public PipelineProcessorDescriptor()
 		{
@@ -1889,16 +1741,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal Elastic.Clients.Elasticsearch.Name NameValue { get; private set; }
 
 		public PipelineProcessorDescriptor Name(Elastic.Clients.Elasticsearch.Name name) => Assign(name, (a, v) => a.NameValue = v);
-	}
-
-	internal sealed class PipelineProcessorDescriptorConverter : JsonConverter<PipelineProcessorDescriptor>
-	{
-		public override PipelineProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PipelineProcessorDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, value.NameValue, options);
+			JsonSerializer.Serialize(writer, NameValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -1922,7 +1769,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Tag { get; set; }
 	}
 
-	[JsonConverter(typeof(ProcessorBaseDescriptorConverter))]
 	public sealed partial class ProcessorBaseDescriptor : DescriptorBase<ProcessorBaseDescriptor>
 	{
 		public ProcessorBaseDescriptor()
@@ -1942,36 +1788,31 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public ProcessorBaseDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
 		public ProcessorBaseDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
 		public ProcessorBaseDescriptor Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
-	}
-
-	internal sealed class ProcessorBaseDescriptorConverter : JsonConverter<ProcessorBaseDescriptor>
-	{
-		public override ProcessorBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ProcessorBaseDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.IfValue))
+			if (!string.IsNullOrEmpty(IfValue))
 			{
 				writer.WritePropertyName("if");
-				writer.WriteStringValue(value.IfValue);
+				writer.WriteStringValue(IfValue);
 			}
 
-			if (value.IgnoreFailureValue.HasValue)
+			if (IgnoreFailureValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_failure");
-				writer.WriteBooleanValue(value.IgnoreFailureValue.Value);
+				writer.WriteBooleanValue(IgnoreFailureValue.Value);
 			}
 
-			if (value.OnFailureValue is not null)
+			if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
-				JsonSerializer.Serialize(writer, value.OnFailureValue, options);
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.TagValue))
+			if (!string.IsNullOrEmpty(TagValue))
 			{
 				writer.WritePropertyName("tag");
-				writer.WriteStringValue(value.TagValue);
+				writer.WriteStringValue(TagValue);
 			}
 
 			writer.WriteEndObject();
@@ -1981,10 +1822,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	public interface IProcessorContainerVariant
 	{
 		string ProcessorContainerVariantName { get; }
-	}
-
-	internal interface IProcessorContainerVariantDescriptor
-	{
 	}
 
 	[JsonConverter(typeof(ProcessorContainerConverter))]
@@ -2350,21 +2187,353 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class ProcessorContainerDescriptor : DescriptorBase<ProcessorContainerDescriptor>
+	public sealed partial class ProcessorContainerDescriptor<T> : DescriptorBase<ProcessorContainerDescriptor<T>>
 	{
 		public ProcessorContainerDescriptor()
 		{
 		}
 
-		internal ProcessorContainerDescriptor(Action<ProcessorContainerDescriptor> configure) => configure.Invoke(this);
-	}
+		internal ProcessorContainerDescriptor(Action<ProcessorContainerDescriptor<T>> configure) => configure.Invoke(this);
+		internal bool ContainsVariant { get; private set; }
 
-	internal sealed class ProcessorContainerDescriptorConverter : JsonConverter<ProcessorContainerDescriptor>
-	{
-		public override ProcessorContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ProcessorContainerDescriptor value, JsonSerializerOptions options)
+		internal string ContainedVariantName { get; private set; }
+
+		internal ProcessorContainer Container { get; private set; }
+
+		internal object ContainerVariantDescriptorAction { get; private set; }
+
+		private void Set(object descriptorAction, string variantName)
 		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainerVariantDescriptorAction = descriptorAction;
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		private void Set(IProcessorContainerVariant variant, string variantName)
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new ProcessorContainer(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		public void Attachment(AttachmentProcessor variant) => Set(variant, "attachment");
+		public void Attachment(Action<AttachmentProcessorDescriptor<T>> configure) => Set(configure, "attachment");
+		public void Append(AppendProcessor variant) => Set(variant, "append");
+		public void Append(Action<AppendProcessorDescriptor<T>> configure) => Set(configure, "append");
+		public void Csv(CsvProcessor variant) => Set(variant, "csv");
+		public void Csv(Action<CsvProcessorDescriptor<T>> configure) => Set(configure, "csv");
+		public void Convert(ConvertProcessor variant) => Set(variant, "convert");
+		public void Convert(Action<ConvertProcessorDescriptor<T>> configure) => Set(configure, "convert");
+		public void Date(DateProcessor variant) => Set(variant, "date");
+		public void Date(Action<DateProcessorDescriptor<T>> configure) => Set(configure, "date");
+		public void DateIndexName(DateIndexNameProcessor variant) => Set(variant, "date_index_name");
+		public void DateIndexName(Action<DateIndexNameProcessorDescriptor<T>> configure) => Set(configure, "date_index_name");
+		public void DotExpander(DotExpanderProcessor variant) => Set(variant, "dot_expander");
+		public void DotExpander(Action<DotExpanderProcessorDescriptor<T>> configure) => Set(configure, "dot_expander");
+		public void Enrich(EnrichProcessor variant) => Set(variant, "enrich");
+		public void Enrich(Action<EnrichProcessorDescriptor<T>> configure) => Set(configure, "enrich");
+		public void Fail(FailProcessor variant) => Set(variant, "fail");
+		public void Fail(Action<FailProcessorDescriptor> configure) => Set(configure, "fail");
+		public void Foreach(ForeachProcessor variant) => Set(variant, "foreach");
+		public void Foreach(Action<ForeachProcessorDescriptor<T>> configure) => Set(configure, "foreach");
+		public void Json(JsonProcessor variant) => Set(variant, "json");
+		public void Json(Action<JsonProcessorDescriptor<T>> configure) => Set(configure, "json");
+		public void UserAgent(UserAgentProcessor variant) => Set(variant, "user_agent");
+		public void UserAgent(Action<UserAgentProcessorDescriptor<T>> configure) => Set(configure, "user_agent");
+		public void Kv(KeyValueProcessor variant) => Set(variant, "kv");
+		public void Kv(Action<KeyValueProcessorDescriptor<T>> configure) => Set(configure, "kv");
+		public void Geoip(GeoIpProcessor variant) => Set(variant, "geoip");
+		public void Geoip(Action<GeoIpProcessorDescriptor<T>> configure) => Set(configure, "geoip");
+		public void Grok(GrokProcessor variant) => Set(variant, "grok");
+		public void Grok(Action<GrokProcessorDescriptor<T>> configure) => Set(configure, "grok");
+		public void Gsub(GsubProcessor variant) => Set(variant, "gsub");
+		public void Gsub(Action<GsubProcessorDescriptor<T>> configure) => Set(configure, "gsub");
+		public void Join(JoinProcessor variant) => Set(variant, "join");
+		public void Join(Action<JoinProcessorDescriptor<T>> configure) => Set(configure, "join");
+		public void Lowercase(LowercaseProcessor variant) => Set(variant, "lowercase");
+		public void Lowercase(Action<LowercaseProcessorDescriptor<T>> configure) => Set(configure, "lowercase");
+		public void Remove(RemoveProcessor variant) => Set(variant, "remove");
+		public void Remove(Action<RemoveProcessorDescriptor<T>> configure) => Set(configure, "remove");
+		public void Rename(RenameProcessor variant) => Set(variant, "rename");
+		public void Rename(Action<RenameProcessorDescriptor<T>> configure) => Set(configure, "rename");
+		public void Set(SetProcessor variant) => Set(variant, "set");
+		public void Set(Action<SetProcessorDescriptor<T>> configure) => Set(configure, "set");
+		public void Sort(SortProcessor variant) => Set(variant, "sort");
+		public void Sort(Action<SortProcessorDescriptor<T>> configure) => Set(configure, "sort");
+		public void Split(SplitProcessor variant) => Set(variant, "split");
+		public void Split(Action<SplitProcessorDescriptor<T>> configure) => Set(configure, "split");
+		public void Trim(TrimProcessor variant) => Set(variant, "trim");
+		public void Trim(Action<TrimProcessorDescriptor<T>> configure) => Set(configure, "trim");
+		public void Uppercase(UppercaseProcessor variant) => Set(variant, "uppercase");
+		public void Uppercase(Action<UppercaseProcessorDescriptor<T>> configure) => Set(configure, "uppercase");
+		public void Urldecode(UrlDecodeProcessor variant) => Set(variant, "urldecode");
+		public void Urldecode(Action<UrlDecodeProcessorDescriptor<T>> configure) => Set(configure, "urldecode");
+		public void Bytes(BytesProcessor variant) => Set(variant, "bytes");
+		public void Bytes(Action<BytesProcessorDescriptor<T>> configure) => Set(configure, "bytes");
+		public void Dissect(DissectProcessor variant) => Set(variant, "dissect");
+		public void Dissect(Action<DissectProcessorDescriptor<T>> configure) => Set(configure, "dissect");
+		public void SetSecurityUser(SetSecurityUserProcessor variant) => Set(variant, "set_security_user");
+		public void SetSecurityUser(Action<SetSecurityUserProcessorDescriptor<T>> configure) => Set(configure, "set_security_user");
+		public void Pipeline(PipelineProcessor variant) => Set(variant, "pipeline");
+		public void Pipeline(Action<PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
+		public void Drop(DropProcessor variant) => Set(variant, "drop");
+		public void Drop(Action<DropProcessorDescriptor> configure) => Set(configure, "drop");
+		public void Circle(CircleProcessor variant) => Set(variant, "circle");
+		public void Circle(Action<CircleProcessorDescriptor<T>> configure) => Set(configure, "circle");
+		public void Inference(InferenceProcessor variant) => Set(variant, "inference");
+		public void Inference(Action<InferenceProcessorDescriptor<T>> configure) => Set(configure, "inference");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
 			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			writer.WriteStartObject();
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+			}
+
+			if (ContainedVariantName == "attachment")
+			{
+				var descriptor = new AttachmentProcessorDescriptor<T>();
+				((Action<AttachmentProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "append")
+			{
+				var descriptor = new AppendProcessorDescriptor<T>();
+				((Action<AppendProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "csv")
+			{
+				var descriptor = new CsvProcessorDescriptor<T>();
+				((Action<CsvProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "convert")
+			{
+				var descriptor = new ConvertProcessorDescriptor<T>();
+				((Action<ConvertProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "date")
+			{
+				var descriptor = new DateProcessorDescriptor<T>();
+				((Action<DateProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "date_index_name")
+			{
+				var descriptor = new DateIndexNameProcessorDescriptor<T>();
+				((Action<DateIndexNameProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "dot_expander")
+			{
+				var descriptor = new DotExpanderProcessorDescriptor<T>();
+				((Action<DotExpanderProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "enrich")
+			{
+				var descriptor = new EnrichProcessorDescriptor<T>();
+				((Action<EnrichProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "fail")
+			{
+				var descriptor = new FailProcessorDescriptor();
+				((Action<FailProcessorDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "foreach")
+			{
+				var descriptor = new ForeachProcessorDescriptor<T>();
+				((Action<ForeachProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "json")
+			{
+				var descriptor = new JsonProcessorDescriptor<T>();
+				((Action<JsonProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "user_agent")
+			{
+				var descriptor = new UserAgentProcessorDescriptor<T>();
+				((Action<UserAgentProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "kv")
+			{
+				var descriptor = new KeyValueProcessorDescriptor<T>();
+				((Action<KeyValueProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "geoip")
+			{
+				var descriptor = new GeoIpProcessorDescriptor<T>();
+				((Action<GeoIpProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "grok")
+			{
+				var descriptor = new GrokProcessorDescriptor<T>();
+				((Action<GrokProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "gsub")
+			{
+				var descriptor = new GsubProcessorDescriptor<T>();
+				((Action<GsubProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "join")
+			{
+				var descriptor = new JoinProcessorDescriptor<T>();
+				((Action<JoinProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "lowercase")
+			{
+				var descriptor = new LowercaseProcessorDescriptor<T>();
+				((Action<LowercaseProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "remove")
+			{
+				var descriptor = new RemoveProcessorDescriptor<T>();
+				((Action<RemoveProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "rename")
+			{
+				var descriptor = new RenameProcessorDescriptor<T>();
+				((Action<RenameProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "set")
+			{
+				var descriptor = new SetProcessorDescriptor<T>();
+				((Action<SetProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "sort")
+			{
+				var descriptor = new SortProcessorDescriptor<T>();
+				((Action<SortProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "split")
+			{
+				var descriptor = new SplitProcessorDescriptor<T>();
+				((Action<SplitProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "trim")
+			{
+				var descriptor = new TrimProcessorDescriptor<T>();
+				((Action<TrimProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "uppercase")
+			{
+				var descriptor = new UppercaseProcessorDescriptor<T>();
+				((Action<UppercaseProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "urldecode")
+			{
+				var descriptor = new UrlDecodeProcessorDescriptor<T>();
+				((Action<UrlDecodeProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "bytes")
+			{
+				var descriptor = new BytesProcessorDescriptor<T>();
+				((Action<BytesProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "dissect")
+			{
+				var descriptor = new DissectProcessorDescriptor<T>();
+				((Action<DissectProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "set_security_user")
+			{
+				var descriptor = new SetSecurityUserProcessorDescriptor<T>();
+				((Action<SetSecurityUserProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "pipeline")
+			{
+				var descriptor = new PipelineProcessorDescriptor();
+				((Action<PipelineProcessorDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "drop")
+			{
+				var descriptor = new DropProcessorDescriptor();
+				((Action<DropProcessorDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "circle")
+			{
+				var descriptor = new CircleProcessorDescriptor<T>();
+				((Action<CircleProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "inference")
+			{
+				var descriptor = new InferenceProcessorDescriptor<T>();
+				((Action<InferenceProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}
@@ -2382,34 +2551,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? IgnoreMissing { get; set; }
 	}
 
-	[JsonConverter(typeof(RemoveProcessorDescriptorConverter))]
-	public sealed partial class RemoveProcessorDescriptor : DescriptorBase<RemoveProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class RemoveProcessorDescriptor<T> : DescriptorBase<RemoveProcessorDescriptor<T>>
 	{
 		public RemoveProcessorDescriptor()
 		{
 		}
 
-		internal RemoveProcessorDescriptor(Action<RemoveProcessorDescriptor> configure) => configure.Invoke(this);
+		internal RemoveProcessorDescriptor(Action<RemoveProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Fields FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
-		public RemoveProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Fields field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RemoveProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-	}
-
-	internal sealed class RemoveProcessorDescriptorConverter : JsonConverter<RemoveProcessorDescriptor>
-	{
-		public override RemoveProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RemoveProcessorDescriptor value, JsonSerializerOptions options)
+		public RemoveProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Fields field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RemoveProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -2433,41 +2596,35 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(RenameProcessorDescriptorConverter))]
-	public sealed partial class RenameProcessorDescriptor : DescriptorBase<RenameProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class RenameProcessorDescriptor<T> : DescriptorBase<RenameProcessorDescriptor<T>>
 	{
 		public RenameProcessorDescriptor()
 		{
 		}
 
-		internal RenameProcessorDescriptor(Action<RenameProcessorDescriptor> configure) => configure.Invoke(this);
+		internal RenameProcessorDescriptor(Action<RenameProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal string TargetFieldValue { get; private set; }
 
-		public RenameProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RenameProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public RenameProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class RenameProcessorDescriptorConverter : JsonConverter<RenameProcessorDescriptor>
-	{
-		public override RenameProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RenameProcessorDescriptor value, JsonSerializerOptions options)
+		public RenameProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RenameProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public RenameProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -2489,37 +2646,31 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public object Value { get; set; }
 	}
 
-	[JsonConverter(typeof(SetProcessorDescriptorConverter))]
-	public sealed partial class SetProcessorDescriptor : DescriptorBase<SetProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class SetProcessorDescriptor<T> : DescriptorBase<SetProcessorDescriptor<T>>
 	{
 		public SetProcessorDescriptor()
 		{
 		}
 
-		internal SetProcessorDescriptor(Action<SetProcessorDescriptor> configure) => configure.Invoke(this);
+		internal SetProcessorDescriptor(Action<SetProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? OverrideValue { get; private set; }
 
 		internal object ValueValue { get; private set; }
 
-		public SetProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SetProcessorDescriptor Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
-		public SetProcessorDescriptor Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
-	}
-
-	internal sealed class SetProcessorDescriptorConverter : JsonConverter<SetProcessorDescriptor>
-	{
-		public override SetProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SetProcessorDescriptor value, JsonSerializerOptions options)
+		public SetProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SetProcessorDescriptor<T> Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
+		public SetProcessorDescriptor<T> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.OverrideValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (OverrideValue.HasValue)
 			{
 				writer.WritePropertyName("override");
-				writer.WriteBooleanValue(value.OverrideValue.Value);
+				writer.WriteBooleanValue(OverrideValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -2539,34 +2690,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<string>? Properties { get; set; }
 	}
 
-	[JsonConverter(typeof(SetSecurityUserProcessorDescriptorConverter))]
-	public sealed partial class SetSecurityUserProcessorDescriptor : DescriptorBase<SetSecurityUserProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class SetSecurityUserProcessorDescriptor<T> : DescriptorBase<SetSecurityUserProcessorDescriptor<T>>
 	{
 		public SetSecurityUserProcessorDescriptor()
 		{
 		}
 
-		internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor> configure) => configure.Invoke(this);
+		internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal IEnumerable<string>? PropertiesValue { get; private set; }
 
-		public SetSecurityUserProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SetSecurityUserProcessorDescriptor Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
-	}
-
-	internal sealed class SetSecurityUserProcessorDescriptorConverter : JsonConverter<SetSecurityUserProcessorDescriptor>
-	{
-		public override SetSecurityUserProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SetSecurityUserProcessorDescriptor value, JsonSerializerOptions options)
+		public SetSecurityUserProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SetSecurityUserProcessorDescriptor<T> Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.PropertiesValue is not null)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, value.PropertiesValue, options);
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2590,37 +2735,31 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(SortProcessorDescriptorConverter))]
-	public sealed partial class SortProcessorDescriptor : DescriptorBase<SortProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class SortProcessorDescriptor<T> : DescriptorBase<SortProcessorDescriptor<T>>
 	{
 		public SortProcessorDescriptor()
 		{
 		}
 
-		internal SortProcessorDescriptor(Action<SortProcessorDescriptor> configure) => configure.Invoke(this);
+		internal SortProcessorDescriptor(Action<SortProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SortOrder OrderValue { get; private set; }
 
 		internal string TargetFieldValue { get; private set; }
 
-		public SortProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SortProcessorDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder order) => Assign(order, (a, v) => a.OrderValue = v);
-		public SortProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class SortProcessorDescriptorConverter : JsonConverter<SortProcessorDescriptor>
-	{
-		public override SortProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SortProcessorDescriptor value, JsonSerializerOptions options)
+		public SortProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SortProcessorDescriptor<T> Order(Elastic.Clients.Elasticsearch.SortOrder order) => Assign(order, (a, v) => a.OrderValue = v);
+		public SortProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, value.OrderValue, options);
+			JsonSerializer.Serialize(writer, OrderValue, options);
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}
@@ -2650,14 +2789,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(SplitProcessorDescriptorConverter))]
-	public sealed partial class SplitProcessorDescriptor : DescriptorBase<SplitProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class SplitProcessorDescriptor<T> : DescriptorBase<SplitProcessorDescriptor<T>>
 	{
 		public SplitProcessorDescriptor()
 		{
 		}
 
-		internal SplitProcessorDescriptor(Action<SplitProcessorDescriptor> configure) => configure.Invoke(this);
+		internal SplitProcessorDescriptor(Action<SplitProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -2668,39 +2806,34 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public SplitProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SplitProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public SplitProcessorDescriptor PreserveTrailing(bool? preserveTrailing = true) => Assign(preserveTrailing, (a, v) => a.PreserveTrailingValue = v);
-		public SplitProcessorDescriptor Separator(string separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
-		public SplitProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class SplitProcessorDescriptorConverter : JsonConverter<SplitProcessorDescriptor>
-	{
-		public override SplitProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SplitProcessorDescriptor value, JsonSerializerOptions options)
+		public SplitProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SplitProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public SplitProcessorDescriptor<T> PreserveTrailing(bool? preserveTrailing = true) => Assign(preserveTrailing, (a, v) => a.PreserveTrailingValue = v);
+		public SplitProcessorDescriptor<T> Separator(string separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
+		public SplitProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.PreserveTrailingValue.HasValue)
+			if (PreserveTrailingValue.HasValue)
 			{
 				writer.WritePropertyName("preserve_trailing");
-				writer.WriteBooleanValue(value.PreserveTrailingValue.Value);
+				writer.WriteBooleanValue(PreserveTrailingValue.Value);
 			}
 
 			writer.WritePropertyName("separator");
-			writer.WriteStringValue(value.SeparatorValue);
-			if (value.TargetFieldValue is not null)
+			writer.WriteStringValue(SeparatorValue);
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2724,43 +2857,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(TrimProcessorDescriptorConverter))]
-	public sealed partial class TrimProcessorDescriptor : DescriptorBase<TrimProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class TrimProcessorDescriptor<T> : DescriptorBase<TrimProcessorDescriptor<T>>
 	{
 		public TrimProcessorDescriptor()
 		{
 		}
 
-		internal TrimProcessorDescriptor(Action<TrimProcessorDescriptor> configure) => configure.Invoke(this);
+		internal TrimProcessorDescriptor(Action<TrimProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public TrimProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TrimProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public TrimProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class TrimProcessorDescriptorConverter : JsonConverter<TrimProcessorDescriptor>
-	{
-		public override TrimProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, TrimProcessorDescriptor value, JsonSerializerOptions options)
+		public TrimProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public TrimProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public TrimProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2784,43 +2911,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(UppercaseProcessorDescriptorConverter))]
-	public sealed partial class UppercaseProcessorDescriptor : DescriptorBase<UppercaseProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class UppercaseProcessorDescriptor<T> : DescriptorBase<UppercaseProcessorDescriptor<T>>
 	{
 		public UppercaseProcessorDescriptor()
 		{
 		}
 
-		internal UppercaseProcessorDescriptor(Action<UppercaseProcessorDescriptor> configure) => configure.Invoke(this);
+		internal UppercaseProcessorDescriptor(Action<UppercaseProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public UppercaseProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public UppercaseProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public UppercaseProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class UppercaseProcessorDescriptorConverter : JsonConverter<UppercaseProcessorDescriptor>
-	{
-		public override UppercaseProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, UppercaseProcessorDescriptor value, JsonSerializerOptions options)
+		public UppercaseProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public UppercaseProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public UppercaseProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2844,43 +2965,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(UrlDecodeProcessorDescriptorConverter))]
-	public sealed partial class UrlDecodeProcessorDescriptor : DescriptorBase<UrlDecodeProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class UrlDecodeProcessorDescriptor<T> : DescriptorBase<UrlDecodeProcessorDescriptor<T>>
 	{
 		public UrlDecodeProcessorDescriptor()
 		{
 		}
 
-		internal UrlDecodeProcessorDescriptor(Action<UrlDecodeProcessorDescriptor> configure) => configure.Invoke(this);
+		internal UrlDecodeProcessorDescriptor(Action<UrlDecodeProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal string? TargetFieldValue { get; private set; }
 
-		public UrlDecodeProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public UrlDecodeProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public UrlDecodeProcessorDescriptor TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class UrlDecodeProcessorDescriptorConverter : JsonConverter<UrlDecodeProcessorDescriptor>
-	{
-		public override UrlDecodeProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, UrlDecodeProcessorDescriptor value, JsonSerializerOptions options)
+		public UrlDecodeProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public UrlDecodeProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public UrlDecodeProcessorDescriptor<T> TargetField(string? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.IgnoreMissingValue.HasValue)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IgnoreMissingValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_missing");
-				writer.WriteBooleanValue(value.IgnoreMissingValue.Value);
+				writer.WriteBooleanValue(IgnoreMissingValue.Value);
 			}
 
-			if (value.TargetFieldValue is not null)
+			if (TargetFieldValue is not null)
 			{
 				writer.WritePropertyName("target_field");
-				JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+				JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -2912,14 +3027,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string TargetField { get; set; }
 	}
 
-	[JsonConverter(typeof(UserAgentProcessorDescriptorConverter))]
-	public sealed partial class UserAgentProcessorDescriptor : DescriptorBase<UserAgentProcessorDescriptor>, IProcessorContainerVariantDescriptor
+	public sealed partial class UserAgentProcessorDescriptor<T> : DescriptorBase<UserAgentProcessorDescriptor<T>>
 	{
 		public UserAgentProcessorDescriptor()
 		{
 		}
 
-		internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor> configure) => configure.Invoke(this);
+		internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal bool IgnoreMissingValue { get; private set; }
@@ -2930,29 +3044,24 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string TargetFieldValue { get; private set; }
 
-		public UserAgentProcessorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public UserAgentProcessorDescriptor IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public UserAgentProcessorDescriptor Options(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty> options) => Assign(options, (a, v) => a.OptionsValue = v);
-		public UserAgentProcessorDescriptor RegexFile(string regexFile) => Assign(regexFile, (a, v) => a.RegexFileValue = v);
-		public UserAgentProcessorDescriptor TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-	}
-
-	internal sealed class UserAgentProcessorDescriptorConverter : JsonConverter<UserAgentProcessorDescriptor>
-	{
-		public override UserAgentProcessorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, UserAgentProcessorDescriptor value, JsonSerializerOptions options)
+		public UserAgentProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public UserAgentProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public UserAgentProcessorDescriptor<T> Options(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty> options) => Assign(options, (a, v) => a.OptionsValue = v);
+		public UserAgentProcessorDescriptor<T> RegexFile(string regexFile) => Assign(regexFile, (a, v) => a.RegexFileValue = v);
+		public UserAgentProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(value.IgnoreMissingValue);
+			writer.WriteBooleanValue(IgnoreMissingValue);
 			writer.WritePropertyName("options");
-			JsonSerializer.Serialize(writer, value.OptionsValue, options);
+			JsonSerializer.Serialize(writer, OptionsValue, options);
 			writer.WritePropertyName("regex_file");
-			writer.WriteStringValue(value.RegexFileValue);
+			writer.WriteStringValue(RegexFileValue);
 			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, value.TargetFieldValue, options);
+			JsonSerializer.Serialize(writer, TargetFieldValue, options);
 			writer.WriteEndObject();
 		}
 	}

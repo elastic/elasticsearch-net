@@ -39,7 +39,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	[JsonConverter(typeof(IndexDeleteIndexTemplateRequestDescriptorConverter))]
 	public sealed partial class IndexDeleteIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexDeleteIndexTemplateRequestDescriptor, IndexDeleteIndexTemplateRequestParameters>
 	{
 		public IndexDeleteIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
@@ -54,12 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
-	}
-
-	internal sealed class IndexDeleteIndexTemplateRequestDescriptorConverter : JsonConverter<IndexDeleteIndexTemplateRequestDescriptor>
-	{
-		public override IndexDeleteIndexTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexDeleteIndexTemplateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

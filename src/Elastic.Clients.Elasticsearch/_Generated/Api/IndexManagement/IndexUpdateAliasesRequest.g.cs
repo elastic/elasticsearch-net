@@ -49,7 +49,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? Actions { get; set; }
 	}
 
-	[JsonConverter(typeof(IndexUpdateAliasesRequestDescriptorConverter))]
 	public sealed partial class IndexUpdateAliasesRequestDescriptor : RequestDescriptorBase<IndexUpdateAliasesRequestDescriptor, IndexUpdateAliasesRequestParameters>
 	{
 		public IndexUpdateAliasesRequestDescriptor()
@@ -65,18 +64,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? ActionsValue { get; private set; }
 
 		public IndexUpdateAliasesRequestDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? actions) => Assign(actions, (a, v) => a.ActionsValue = v);
-	}
-
-	internal sealed class IndexUpdateAliasesRequestDescriptorConverter : JsonConverter<IndexUpdateAliasesRequestDescriptor>
-	{
-		public override IndexUpdateAliasesRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexUpdateAliasesRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.ActionsValue is not null)
+			if (ActionsValue is not null)
 			{
 				writer.WritePropertyName("actions");
-				JsonSerializer.Serialize(writer, value.ActionsValue, options);
+				JsonSerializer.Serialize(writer, ActionsValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -40,11 +40,12 @@ namespace Elastic.Clients.Elasticsearch
 				IncludeFields= true,
 				Converters =
 				{
-					new InterfaceConverterFactory(settings),
+					//new InterfaceConverterFactory(settings),
 					//new ConvertAsConverterFactory(settings),
 					new IndexNameConverter(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
+					new SelfSerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					//new FieldConverterFactory(settings),
 					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),

@@ -93,7 +93,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
-	[JsonConverter(typeof(ClusterStateRequestDescriptorConverter))]
 	public sealed partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
 	{
 		public ClusterStateRequestDescriptor()
@@ -120,12 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterStateRequestDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
 		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
-	}
-
-	internal sealed class ClusterStateRequestDescriptorConverter : JsonConverter<ClusterStateRequestDescriptor>
-	{
-		public override ClusterStateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterStateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

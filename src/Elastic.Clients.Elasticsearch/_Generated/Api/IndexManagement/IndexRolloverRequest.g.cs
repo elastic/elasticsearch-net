@@ -80,14 +80,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
 		public Dictionary<string, object>? Settings { get; set; }
 	}
 
-	[JsonConverter(typeof(IndexRolloverRequestDescriptorConverter))]
 	public sealed partial class IndexRolloverRequestDescriptor : RequestDescriptorBase<IndexRolloverRequestDescriptor, IndexRolloverRequestParameters>
 	{
 		public IndexRolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
@@ -115,7 +114,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? ConditionsValue { get; private set; }
 
-		internal Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? MappingsValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? MappingsValue { get; private set; }
 
 		internal Dictionary<string, object>? SettingsValue { get; private set; }
 
@@ -145,48 +144,43 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.ConditionsDescriptorAction = v);
 		}
 
-		public IndexRolloverRequestDescriptor Mappings(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?, Elastic.Clients.Elasticsearch.Mapping.TypeMapping?>? mappings) => Assign(mappings, (a, v) => a.MappingsValue = v);
+		public IndexRolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? mappings) => Assign(mappings, (a, v) => a.MappingsValue = v);
 		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-	}
-
-	internal sealed class IndexRolloverRequestDescriptorConverter : JsonConverter<IndexRolloverRequestDescriptor>
-	{
-		public override IndexRolloverRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexRolloverRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.AliasesValue is not null)
+			if (AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.AliasesValue, options);
+				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (value.ConditionsDescriptor is not null)
+			if (ConditionsDescriptor is not null)
 			{
 				writer.WritePropertyName("conditions");
-				JsonSerializer.Serialize(writer, value.ConditionsDescriptor, options);
+				JsonSerializer.Serialize(writer, ConditionsDescriptor, options);
 			}
-			else if (value.ConditionsDescriptorAction is not null)
+			else if (ConditionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("conditions");
-				JsonSerializer.Serialize(writer, new IndexManagement.Rollover.RolloverConditionsDescriptor(value.ConditionsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.Rollover.RolloverConditionsDescriptor(ConditionsDescriptorAction), options);
 			}
-			else if (value.ConditionsValue is not null)
+			else if (ConditionsValue is not null)
 			{
 				writer.WritePropertyName("conditions");
-				JsonSerializer.Serialize(writer, value.ConditionsValue, options);
+				JsonSerializer.Serialize(writer, ConditionsValue, options);
 			}
 
-			if (value.MappingsValue is not null)
+			if (MappingsValue is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.MappingsValue, options);
+				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
-			if (value.SettingsValue is not null)
+			if (SettingsValue is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.SettingsValue, options);
+				JsonSerializer.Serialize(writer, SettingsValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -85,7 +85,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[JsonConverter(typeof(DeleteRequestDescriptorConverter))]
 	public sealed partial class DeleteRequestDescriptor : RequestDescriptorBase<DeleteRequestDescriptor, DeleteRequestParameters>
 	{
 		public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
@@ -108,12 +107,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteRequestDescriptor Version(long? version) => Qs("version", version);
 		public DeleteRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public DeleteRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	}
-
-	internal sealed class DeleteRequestDescriptorConverter : JsonConverter<DeleteRequestDescriptor>
-	{
-		public override DeleteRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DeleteRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();
