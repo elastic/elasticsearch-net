@@ -85,7 +85,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? WaitForActiveShards { get => Q<string?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 
-	[JsonConverter(typeof(IndexDiskUsageRequestDescriptorConverter))]
 	public sealed partial class IndexDiskUsageRequestDescriptor : RequestDescriptorBase<IndexDiskUsageRequestDescriptor, IndexDiskUsageRequestParameters>
 	{
 		public IndexDiskUsageRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
@@ -108,12 +107,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexDiskUsageRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.TimeUnit? timeout) => Qs("timeout", timeout);
 		public IndexDiskUsageRequestDescriptor RunExpensiveTasks(bool? runExpensiveTasks) => Qs("run_expensive_tasks", runExpensiveTasks);
 		public IndexDiskUsageRequestDescriptor WaitForActiveShards(string? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	}
-
-	internal sealed class IndexDiskUsageRequestDescriptorConverter : JsonConverter<IndexDiskUsageRequestDescriptor>
-	{
-		public override IndexDiskUsageRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexDiskUsageRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

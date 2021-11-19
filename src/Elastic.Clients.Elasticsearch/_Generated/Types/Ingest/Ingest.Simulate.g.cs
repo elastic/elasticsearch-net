@@ -38,7 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public object Source { get; set; }
 	}
 
-	[JsonConverter(typeof(DocumentDescriptorConverter))]
 	public sealed partial class DocumentDescriptor : DescriptorBase<DocumentDescriptor>
 	{
 		public DocumentDescriptor()
@@ -55,24 +54,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		public DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
 		public DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public DocumentDescriptor Source(object source) => Assign(source, (a, v) => a.SourceValue = v);
-	}
-
-	internal sealed class DocumentDescriptorConverter : JsonConverter<DocumentDescriptor>
-	{
-		public override DocumentDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DocumentDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.IdValue is not null)
+			if (IdValue is not null)
 			{
 				writer.WritePropertyName("_id");
-				JsonSerializer.Serialize(writer, value.IdValue, options);
+				JsonSerializer.Serialize(writer, IdValue, options);
 			}
 
-			if (value.IndexValue is not null)
+			if (IndexValue is not null)
 			{
 				writer.WritePropertyName("_index");
-				JsonSerializer.Serialize(writer, value.IndexValue, options);
+				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
 			writer.WriteEndObject();

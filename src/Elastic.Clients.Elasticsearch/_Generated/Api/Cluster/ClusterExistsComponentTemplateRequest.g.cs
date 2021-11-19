@@ -49,7 +49,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[JsonConverter(typeof(ClusterExistsComponentTemplateRequestDescriptorConverter))]
 	public sealed partial class ClusterExistsComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterExistsComponentTemplateRequestDescriptor, ClusterExistsComponentTemplateRequestParameters>
 	{
 		public ClusterExistsComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
@@ -66,12 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => false;
 		public ClusterExistsComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterExistsComponentTemplateRequestDescriptor Local(bool? local) => Qs("local", local);
-	}
-
-	internal sealed class ClusterExistsComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterExistsComponentTemplateRequestDescriptor>
-	{
-		public override ClusterExistsComponentTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterExistsComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -24,8 +24,8 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	[JsonConverter(typeof(DateIntervalConverter))]
-	public enum DateInterval
+	[JsonConverter(typeof(CalendarIntervalConverter))]
+	public enum CalendarInterval
 	{
 		Year,
 		Week,
@@ -37,61 +37,61 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Day
 	}
 
-	public class DateIntervalConverter : JsonConverter<DateInterval>
+	public class CalendarIntervalConverter : JsonConverter<CalendarInterval>
 	{
-		public override DateInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override CalendarInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
 				case "year":
-					return DateInterval.Year;
+					return CalendarInterval.Year;
 				case "week":
-					return DateInterval.Week;
+					return CalendarInterval.Week;
 				case "second":
-					return DateInterval.Second;
+					return CalendarInterval.Second;
 				case "quarter":
-					return DateInterval.Quarter;
+					return CalendarInterval.Quarter;
 				case "month":
-					return DateInterval.Month;
+					return CalendarInterval.Month;
 				case "minute":
-					return DateInterval.Minute;
+					return CalendarInterval.Minute;
 				case "hour":
-					return DateInterval.Hour;
+					return CalendarInterval.Hour;
 				case "day":
-					return DateInterval.Day;
+					return CalendarInterval.Day;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, DateInterval value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, CalendarInterval value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case DateInterval.Year:
+				case CalendarInterval.Year:
 					writer.WriteStringValue("year");
 					return;
-				case DateInterval.Week:
+				case CalendarInterval.Week:
 					writer.WriteStringValue("week");
 					return;
-				case DateInterval.Second:
+				case CalendarInterval.Second:
 					writer.WriteStringValue("second");
 					return;
-				case DateInterval.Quarter:
+				case CalendarInterval.Quarter:
 					writer.WriteStringValue("quarter");
 					return;
-				case DateInterval.Month:
+				case CalendarInterval.Month:
 					writer.WriteStringValue("month");
 					return;
-				case DateInterval.Minute:
+				case CalendarInterval.Minute:
 					writer.WriteStringValue("minute");
 					return;
-				case DateInterval.Hour:
+				case CalendarInterval.Hour:
 					writer.WriteStringValue("hour");
 					return;
-				case DateInterval.Day:
+				case CalendarInterval.Day:
 					writer.WriteStringValue("day");
 					return;
 			}
@@ -341,64 +341,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					return;
 				case MissingOrder.Default:
 					writer.WriteStringValue("default");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(MovingAverageModelConverter))]
-	public enum MovingAverageModel
-	{
-		Simple,
-		Linear,
-		HoltWinters,
-		Holt,
-		Ewma
-	}
-
-	public class MovingAverageModelConverter : JsonConverter<MovingAverageModel>
-	{
-		public override MovingAverageModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "simple":
-					return MovingAverageModel.Simple;
-				case "linear":
-					return MovingAverageModel.Linear;
-				case "holt_winters":
-					return MovingAverageModel.HoltWinters;
-				case "holt":
-					return MovingAverageModel.Holt;
-				case "ewma":
-					return MovingAverageModel.Ewma;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, MovingAverageModel value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case MovingAverageModel.Simple:
-					writer.WriteStringValue("simple");
-					return;
-				case MovingAverageModel.Linear:
-					writer.WriteStringValue("linear");
-					return;
-				case MovingAverageModel.HoltWinters:
-					writer.WriteStringValue("holt_winters");
-					return;
-				case MovingAverageModel.Holt:
-					writer.WriteStringValue("holt");
-					return;
-				case MovingAverageModel.Ewma:
-					writer.WriteStringValue("ewma");
 					return;
 			}
 

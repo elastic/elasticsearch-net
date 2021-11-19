@@ -51,7 +51,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[JsonConverter(typeof(ClusterPostVotingConfigExclusionsRequestDescriptorConverter))]
 	public sealed partial class ClusterPostVotingConfigExclusionsRequestDescriptor : RequestDescriptorBase<ClusterPostVotingConfigExclusionsRequestDescriptor, ClusterPostVotingConfigExclusionsRequestParameters>
 	{
 		public ClusterPostVotingConfigExclusionsRequestDescriptor()
@@ -65,12 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterPostVotingConfigExclusionsRequestDescriptor NodeNames(Elastic.Clients.Elasticsearch.Names? nodeNames) => Qs("node_names", nodeNames);
 		public ClusterPostVotingConfigExclusionsRequestDescriptor NodeIds(Elastic.Clients.Elasticsearch.Ids? nodeIds) => Qs("node_ids", nodeIds);
 		public ClusterPostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-	}
-
-	internal sealed class ClusterPostVotingConfigExclusionsRequestDescriptorConverter : JsonConverter<ClusterPostVotingConfigExclusionsRequestDescriptor>
-	{
-		public override ClusterPostVotingConfigExclusionsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterPostVotingConfigExclusionsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

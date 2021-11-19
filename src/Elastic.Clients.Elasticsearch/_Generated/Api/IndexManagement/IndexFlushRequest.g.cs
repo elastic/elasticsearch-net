@@ -71,7 +71,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 	}
 
-	[JsonConverter(typeof(IndexFlushRequestDescriptorConverter))]
 	public sealed partial class IndexFlushRequestDescriptor : RequestDescriptorBase<IndexFlushRequestDescriptor, IndexFlushRequestParameters>
 	{
 		public IndexFlushRequestDescriptor()
@@ -91,12 +90,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexFlushRequestDescriptor Force(bool? force) => Qs("force", force);
 		public IndexFlushRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexFlushRequestDescriptor WaitIfOngoing(bool? waitIfOngoing) => Qs("wait_if_ongoing", waitIfOngoing);
-	}
-
-	internal sealed class IndexFlushRequestDescriptorConverter : JsonConverter<IndexFlushRequestDescriptor>
-	{
-		public override IndexFlushRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexFlushRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

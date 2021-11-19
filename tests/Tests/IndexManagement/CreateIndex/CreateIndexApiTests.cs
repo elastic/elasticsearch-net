@@ -8,13 +8,14 @@ using Elastic.Transport;
 using FluentAssertions;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.IndexManagement.CreateIndex;
 
 public class CreateBasicIndexApiTests
-	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, CreateIndexRequestDescriptor,
+	: ApiIntegrationTestBase<WritableCluster, CreateIndexResponse, CreateIndexRequestDescriptor<Project>,
 		CreateIndexRequest>
 {
 	public CreateBasicIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -34,7 +35,7 @@ public class CreateBasicIndexApiTests
 		(client, r) => client.IndexManagement.CreateIndexAsync(r)
 	);
 
-	protected override CreateIndexRequestDescriptor NewDescriptor() => new(CallIsolatedValue);
+	protected override CreateIndexRequestDescriptor<Project> NewDescriptor() => new(CallIsolatedValue);
 
 	protected override void ExpectResponse(CreateIndexResponse response)
 	{

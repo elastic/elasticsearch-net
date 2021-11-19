@@ -35,7 +35,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override bool SupportsBody => false;
 	}
 
-	[JsonConverter(typeof(IngestGeoIpStatsRequestDescriptorConverter))]
 	public sealed partial class IngestGeoIpStatsRequestDescriptor : RequestDescriptorBase<IngestGeoIpStatsRequestDescriptor, IngestGeoIpStatsRequestParameters>
 	{
 		public IngestGeoIpStatsRequestDescriptor()
@@ -46,12 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGeoIpStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-	}
-
-	internal sealed class IngestGeoIpStatsRequestDescriptorConverter : JsonConverter<IngestGeoIpStatsRequestDescriptor>
-	{
-		public override IngestGeoIpStatsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IngestGeoIpStatsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

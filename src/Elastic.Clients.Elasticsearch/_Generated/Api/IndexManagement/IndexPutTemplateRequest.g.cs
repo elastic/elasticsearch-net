@@ -93,7 +93,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public long? Version { get; set; }
 	}
 
-	[JsonConverter(typeof(IndexPutTemplateRequestDescriptorConverter))]
 	public sealed partial class IndexPutTemplateRequestDescriptor : RequestDescriptorBase<IndexPutTemplateRequestDescriptor, IndexPutTemplateRequestParameters>
 	{
 		public IndexPutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
@@ -153,52 +152,47 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexPutTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-	}
-
-	internal sealed class IndexPutTemplateRequestDescriptorConverter : JsonConverter<IndexPutTemplateRequestDescriptor>
-	{
-		public override IndexPutTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexPutTemplateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.AliasesValue is not null)
+			if (AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.AliasesValue, options);
+				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.IndexPatternsValue))
+			if (!string.IsNullOrEmpty(IndexPatternsValue))
 			{
 				writer.WritePropertyName("index_patterns");
-				writer.WriteStringValue(value.IndexPatternsValue);
+				writer.WriteStringValue(IndexPatternsValue);
 			}
 
-			if (value.MappingsDescriptor is not null)
+			if (MappingsDescriptor is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.MappingsDescriptor, options);
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
 			}
-			else if (value.MappingsDescriptorAction is not null)
+			else if (MappingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(value.MappingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
 			}
-			else if (value.MappingsValue is not null)
+			else if (MappingsValue is not null)
 			{
 				writer.WritePropertyName("mappings");
-				JsonSerializer.Serialize(writer, value.MappingsValue, options);
+				JsonSerializer.Serialize(writer, MappingsValue, options);
 			}
 
-			if (value.SettingsValue is not null)
+			if (SettingsValue is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, value.SettingsValue, options);
+				JsonSerializer.Serialize(writer, SettingsValue, options);
 			}
 
-			if (value.VersionValue is not null)
+			if (VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.VersionValue, options);
+				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
 			writer.WriteEndObject();

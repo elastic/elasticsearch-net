@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -75,6 +76,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		///// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
 		public ClrTypeMappingDescriptor DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._disableIdInference = v);
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => throw new NotImplementedException();
 	}
 
 	public sealed class ClrTypeMappingDescriptor<TDocument>
@@ -128,5 +131,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		///// <inheritdoc cref="IClrTypeMapping.DisableIdInference"/>
 		public ClrTypeMappingDescriptor<TDocument> DisableIdInference(bool disable = true) => Assign(disable, (a, v) => a._disableIdInference = v);
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => throw new NotImplementedException();
 	}
 }

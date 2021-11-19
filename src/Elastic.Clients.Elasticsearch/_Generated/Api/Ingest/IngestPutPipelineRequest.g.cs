@@ -69,7 +69,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public long? Version { get; set; }
 	}
 
-	[JsonConverter(typeof(IngestPutPipelineRequestDescriptorConverter))]
 	public sealed partial class IngestPutPipelineRequestDescriptor : RequestDescriptorBase<IngestPutPipelineRequestDescriptor, IngestPutPipelineRequestParameters>
 	{
 		public IngestPutPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -101,42 +100,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IngestPutPipelineRequestDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
 		public IngestPutPipelineRequestDescriptor Processors(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? processors) => Assign(processors, (a, v) => a.ProcessorsValue = v);
 		public IngestPutPipelineRequestDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-	}
-
-	internal sealed class IngestPutPipelineRequestDescriptorConverter : JsonConverter<IngestPutPipelineRequestDescriptor>
-	{
-		public override IngestPutPipelineRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IngestPutPipelineRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.MetaValue is not null)
+			if (MetaValue is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value.MetaValue, options);
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.DescriptionValue))
+			if (!string.IsNullOrEmpty(DescriptionValue))
 			{
 				writer.WritePropertyName("description");
-				writer.WriteStringValue(value.DescriptionValue);
+				writer.WriteStringValue(DescriptionValue);
 			}
 
-			if (value.OnFailureValue is not null)
+			if (OnFailureValue is not null)
 			{
 				writer.WritePropertyName("on_failure");
-				JsonSerializer.Serialize(writer, value.OnFailureValue, options);
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
 			}
 
-			if (value.ProcessorsValue is not null)
+			if (ProcessorsValue is not null)
 			{
 				writer.WritePropertyName("processors");
-				JsonSerializer.Serialize(writer, value.ProcessorsValue, options);
+				JsonSerializer.Serialize(writer, ProcessorsValue, options);
 			}
 
-			if (value.VersionValue is not null)
+			if (VersionValue is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, value.VersionValue, options);
+				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
 			writer.WriteEndObject();

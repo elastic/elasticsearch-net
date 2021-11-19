@@ -101,5 +101,10 @@ namespace Elastic.Clients.Elasticsearch
 		public CreateRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		public CreateRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public CreateRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+		}
 	}
 }

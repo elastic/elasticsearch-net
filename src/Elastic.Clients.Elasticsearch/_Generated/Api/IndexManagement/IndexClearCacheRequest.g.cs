@@ -83,8 +83,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
 
-	[JsonConverter(typeof(IndexClearCacheRequestDescriptorConverter))]
-	public sealed partial class IndexClearCacheRequestDescriptor : RequestDescriptorBase<IndexClearCacheRequestDescriptor, IndexClearCacheRequestParameters>
+	public sealed partial class IndexClearCacheRequestDescriptor<T> : RequestDescriptorBase<IndexClearCacheRequestDescriptor<T>, IndexClearCacheRequestParameters>
 	{
 		public IndexClearCacheRequestDescriptor()
 		{
@@ -94,23 +93,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal IndexClearCacheRequestDescriptor(Action<IndexClearCacheRequestDescriptor> configure) => configure.Invoke(this);
+		internal IndexClearCacheRequestDescriptor(Action<IndexClearCacheRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClearCache;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
-		public IndexClearCacheRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public IndexClearCacheRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public IndexClearCacheRequestDescriptor Fielddata(bool? fielddata) => Qs("fielddata", fielddata);
-		public IndexClearCacheRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-		public IndexClearCacheRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public IndexClearCacheRequestDescriptor Query(bool? query) => Qs("query", query);
-		public IndexClearCacheRequestDescriptor Request(bool? request) => Qs("request", request);
-	}
-
-	internal sealed class IndexClearCacheRequestDescriptorConverter : JsonConverter<IndexClearCacheRequestDescriptor>
-	{
-		public override IndexClearCacheRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexClearCacheRequestDescriptor value, JsonSerializerOptions options)
+		public IndexClearCacheRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public IndexClearCacheRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndexClearCacheRequestDescriptor<T> Fielddata(bool? fielddata) => Qs("fielddata", fielddata);
+		public IndexClearCacheRequestDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
+		public IndexClearCacheRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public IndexClearCacheRequestDescriptor<T> Query(bool? query) => Qs("query", query);
+		public IndexClearCacheRequestDescriptor<T> Request(bool? request) => Qs("request", request);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

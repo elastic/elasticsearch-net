@@ -59,7 +59,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object>? Transient { get; set; }
 	}
 
-	[JsonConverter(typeof(ClusterPutSettingsRequestDescriptorConverter))]
 	public sealed partial class ClusterPutSettingsRequestDescriptor : RequestDescriptorBase<ClusterPutSettingsRequestDescriptor, ClusterPutSettingsRequestParameters>
 	{
 		public ClusterPutSettingsRequestDescriptor()
@@ -79,24 +78,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.PersistentValue = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.TransientValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-	}
-
-	internal sealed class ClusterPutSettingsRequestDescriptorConverter : JsonConverter<ClusterPutSettingsRequestDescriptor>
-	{
-		public override ClusterPutSettingsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterPutSettingsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.PersistentValue is not null)
+			if (PersistentValue is not null)
 			{
 				writer.WritePropertyName("persistent");
-				JsonSerializer.Serialize(writer, value.PersistentValue, options);
+				JsonSerializer.Serialize(writer, PersistentValue, options);
 			}
 
-			if (value.TransientValue is not null)
+			if (TransientValue is not null)
 			{
 				writer.WritePropertyName("transient");
-				JsonSerializer.Serialize(writer, value.TransientValue, options);
+				JsonSerializer.Serialize(writer, TransientValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -43,7 +43,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time>("keep_alive"); set => Q("keep_alive", value); }
 	}
 
-	[JsonConverter(typeof(OpenPointInTimeRequestDescriptorConverter))]
 	public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptorBase<OpenPointInTimeRequestDescriptor, OpenPointInTimeRequestParameters>
 	{
 		public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -59,12 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time keepAlive) => Qs("keep_alive", keepAlive);
-	}
-
-	internal sealed class OpenPointInTimeRequestDescriptorConverter : JsonConverter<OpenPointInTimeRequestDescriptor>
-	{
-		public override OpenPointInTimeRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, OpenPointInTimeRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

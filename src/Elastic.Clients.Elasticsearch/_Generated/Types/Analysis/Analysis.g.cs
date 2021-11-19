@@ -23,7 +23,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class AsciiFoldingTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class AsciiFoldingTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
-	public partial class CharGroupTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class CharGroupTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int? MaxTokenLength { get; init; }
 	}
 
-	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? WordListPath { get; init; }
 	}
 
-	public partial class ConditionTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class ConditionTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -161,7 +161,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string>? Filter { get; init; }
 	}
 
-	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Encoding { get; init; }
 	}
 
-	public partial class DictionaryDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFiltersVariant
+	public partial class DictionaryDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	public partial class EdgeNGramTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class EdgeNGramTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? PreserveOriginal { get; init; }
 	}
 
-	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -236,7 +236,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; init; }
 	}
 
-	public partial class ElisionTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class ElisionTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -280,7 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath { get; init; }
 	}
 
-	public partial class FingerprintTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class FingerprintTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -294,14 +294,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Separator { get; init; }
 	}
 
-	public partial class HtmlStripCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
+	public partial class HtmlStripCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "html_strip";
 	}
 
-	public partial class HunspellTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class HunspellTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -323,7 +323,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool LongestOnly { get; init; }
 	}
 
-	public partial class HyphenationDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFiltersVariant
+	public partial class HyphenationDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -344,7 +344,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; init; }
 	}
 
-	public partial class IcuCollationTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class IcuCollationTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Variant { get; init; }
 	}
 
-	public partial class IcuFoldingTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class IcuFoldingTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -404,7 +404,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string UnicodeSetFilter { get; init; }
 	}
 
-	public partial class IcuNormalizationCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
+	public partial class IcuNormalizationCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -418,7 +418,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? Name { get; init; }
 	}
 
-	public partial class IcuNormalizationTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class IcuNormalizationTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -428,7 +428,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; init; }
 	}
 
-	public partial class IcuTokenizer : Analysis.TokenizerBase, ITokenFiltersVariant, ITokenizersVariant
+	public partial class IcuTokenizer : Analysis.TokenizerBase, ITokenFilterDefinitionsVariant, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -438,7 +438,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string RuleFiles { get; init; }
 	}
 
-	public partial class IcuTransformTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class IcuTransformTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -452,7 +452,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Id { get; init; }
 	}
 
-	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -466,7 +466,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string>? Types { get; init; }
 	}
 
-	public partial class KeepWordsTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KeepWordsTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -494,7 +494,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
-	public partial class KeywordMarkerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KeywordMarkerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -516,7 +516,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? KeywordsPattern { get; init; }
 	}
 
-	public partial class KeywordTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class KeywordTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -526,7 +526,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int BufferSize { get; init; }
 	}
 
-	public partial class KStemTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KStemTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -547,7 +547,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? UserDictionary { get; init; }
 	}
 
-	public partial class KuromojiIterationMarkCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
+	public partial class KuromojiIterationMarkCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -561,7 +561,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool NormalizeKanji { get; init; }
 	}
 
-	public partial class KuromojiPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KuromojiPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -571,7 +571,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Stoptags { get; init; }
 	}
 
-	public partial class KuromojiReadingFormTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KuromojiReadingFormTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -581,7 +581,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool UseRomaji { get; init; }
 	}
 
-	public partial class KuromojiStemmerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class KuromojiStemmerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -591,7 +591,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinimumLength { get; init; }
 	}
 
-	public partial class KuromojiTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class KuromojiTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -651,7 +651,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath { get; init; }
 	}
 
-	public partial class LengthTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class LengthTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -665,14 +665,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Min { get; init; }
 	}
 
-	public partial class LetterTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class LetterTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "letter";
 	}
 
-	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -693,7 +693,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Type => "lowercase";
 	}
 
-	public partial class LowercaseTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class LowercaseTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -703,14 +703,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Language { get; init; }
 	}
 
-	public partial class LowercaseTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class LowercaseTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "lowercase";
 	}
 
-	public partial class MappingCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
+	public partial class MappingCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -724,7 +724,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? MappingsPath { get; init; }
 	}
 
-	public partial class MultiplexerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class MultiplexerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -738,7 +738,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal { get; init; }
 	}
 
-	public partial class NGramTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class NGramTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -756,7 +756,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? PreserveOriginal { get; init; }
 	}
 
-	public partial class NGramTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class NGramTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -800,7 +800,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? UserDictionary { get; init; }
 	}
 
-	public partial class NoriPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class NoriPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -810,7 +810,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string> Stoptags { get; init; }
 	}
 
-	public partial class NoriTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class NoriTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -832,7 +832,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string>? UserDictionaryRules { get; init; }
 	}
 
-	public partial class PathHierarchyTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class PathHierarchyTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -884,7 +884,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	public partial class PatternCaptureTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class PatternCaptureTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -898,7 +898,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool PreserveOriginal { get; init; }
 	}
 
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFiltersVariant
+	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -916,7 +916,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Replacement { get; init; }
 	}
 
-	public partial class PatternReplaceTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class PatternReplaceTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -934,7 +934,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Replacement { get; init; }
 	}
 
-	public partial class PatternTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class PatternTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -952,7 +952,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string Pattern { get; init; }
 	}
 
-	public partial class PhoneticTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class PhoneticTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -982,14 +982,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleType { get; init; }
 	}
 
-	public partial class PorterStemTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class PorterStemTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "porter_stem";
 	}
 
-	public partial class PredicateTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class PredicateTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -999,21 +999,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Script Script { get; init; }
 	}
 
-	public partial class RemoveDuplicatesTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class RemoveDuplicatesTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "remove_duplicates";
 	}
 
-	public partial class ReverseTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class ReverseTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "reverse";
 	}
 
-	public partial class ShingleTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class ShingleTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1071,7 +1071,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	public partial class SnowballTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class SnowballTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1095,7 +1095,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 	}
 
-	public partial class StandardTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class StandardTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1105,7 +1105,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int? MaxTokenLength { get; init; }
 	}
 
-	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1119,7 +1119,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? RulesPath { get; init; }
 	}
 
-	public partial class StemmerTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class StemmerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1147,7 +1147,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath { get; init; }
 	}
 
-	public partial class StopTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class StopTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1169,7 +1169,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? StopwordsPath { get; init; }
 	}
 
-	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1203,7 +1203,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? Updateable { get; init; }
 	}
 
-	public partial class SynonymTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class SynonymTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1251,14 +1251,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
-	public partial class TrimTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class TrimTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "trim";
 	}
 
-	public partial class TruncateTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class TruncateTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1268,7 +1268,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int Length { get; init; }
 	}
 
-	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1278,7 +1278,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int? MaxTokenLength { get; init; }
 	}
 
-	public partial class UniqueTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class UniqueTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1288,7 +1288,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public bool? OnlyOnSamePosition { get; init; }
 	}
 
-	public partial class UppercaseTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class UppercaseTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1305,7 +1305,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? Version { get; init; }
 	}
 
-	public partial class WhitespaceTokenizer : Analysis.TokenizerBase, ITokenizersVariant
+	public partial class WhitespaceTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1315,7 +1315,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int? MaxTokenLength { get; init; }
 	}
 
-	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -1381,7 +1381,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public string? TypeTablePath { get; init; }
 	}
 
-	public partial class WordDelimiterTokenFilter : Analysis.TokenFilterBase, ITokenFiltersVariant
+	public partial class WordDelimiterTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]

@@ -83,7 +83,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[JsonConverter(typeof(IndexPutSettingsRequestDescriptorConverter))]
 	public sealed partial class IndexPutSettingsRequestDescriptor : RequestDescriptorBase<IndexPutSettingsRequestDescriptor, IndexPutSettingsRequestParameters>
 	{
 		public IndexPutSettingsRequestDescriptor()
@@ -105,12 +104,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexPutSettingsRequestDescriptor PreserveExisting(bool? preserveExisting) => Qs("preserve_existing", preserveExisting);
 		public IndexPutSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-	}
-
-	internal sealed class IndexPutSettingsRequestDescriptorConverter : JsonConverter<IndexPutSettingsRequestDescriptor>
-	{
-		public override IndexPutSettingsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexPutSettingsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -73,7 +73,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? Commands { get; set; }
 	}
 
-	[JsonConverter(typeof(ClusterRerouteRequestDescriptorConverter))]
 	public sealed partial class ClusterRerouteRequestDescriptor : RequestDescriptorBase<ClusterRerouteRequestDescriptor, ClusterRerouteRequestParameters>
 	{
 		public ClusterRerouteRequestDescriptor()
@@ -93,18 +92,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? CommandsValue { get; private set; }
 
 		public ClusterRerouteRequestDescriptor Commands(IEnumerable<Elastic.Clients.Elasticsearch.Cluster.Reroute.Command>? commands) => Assign(commands, (a, v) => a.CommandsValue = v);
-	}
-
-	internal sealed class ClusterRerouteRequestDescriptorConverter : JsonConverter<ClusterRerouteRequestDescriptor>
-	{
-		public override ClusterRerouteRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterRerouteRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.CommandsValue is not null)
+			if (CommandsValue is not null)
 			{
 				writer.WritePropertyName("commands");
-				JsonSerializer.Serialize(writer, value.CommandsValue, options);
+				JsonSerializer.Serialize(writer, CommandsValue, options);
 			}
 
 			writer.WriteEndObject();

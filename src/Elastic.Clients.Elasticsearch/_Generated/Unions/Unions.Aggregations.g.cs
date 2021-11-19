@@ -38,15 +38,65 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	public partial class BucketsPath
+	{
+	}
+
+	public partial class FieldDateMath : Union<string?, double?>
+	{
+		public FieldDateMath(string? item) : base(item)
+		{
+		}
+
+		public FieldDateMath(double? item) : base(item)
+		{
+		}
+	}
+
 	public partial class Missing
 	{
 	}
 
-	public partial class MovingAverageSettings
+	public interface IMovingAverageAggregationsVariant
 	{
 	}
 
-	public partial class TermsAggregationOrder
+	public interface IMovingAverageAggregations : IIsADictionary<string, IMovingAverageAggregationsVariant>
+	{
+	}
+
+	public class MovingAverageAggregations : IsADictionaryBase<string, IMovingAverageAggregationsVariant>
+	{
+	}
+
+	public partial class Percentiles : Union<Dictionary<string, object>?, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>?>
+	{
+		public Percentiles(Dictionary<string, object>? item) : base(item)
+		{
+		}
+
+		public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>? item) : base(item)
+		{
+		}
+	}
+
+	public partial class TermsAggregationOrder : Union<Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>?, IReadOnlyCollection<Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>>?>
+	{
+		public TermsAggregationOrder(Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>? item) : base(item)
+		{
+		}
+
+		public TermsAggregationOrder(IReadOnlyCollection<Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>>? item) : base(item)
+		{
+		}
+	}
+
+	public partial class TermsExclude
+	{
+		private readonly List<string> _stringList = new();
+	}
+
+	public partial class TermsInclude
 	{
 	}
 }

@@ -14,7 +14,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Document.Single.Exists
 {
 	public class DocumentExistsApiTests
-		: ApiIntegrationTestBase<WritableCluster, ExistsResponse, ExistsRequestDescriptor, ExistsRequest>
+		: ApiIntegrationTestBase<WritableCluster, ExistsResponse, ExistsRequestDescriptor<Project>, ExistsRequest>
 	{
 		public DocumentExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -25,7 +25,7 @@ namespace Tests.Document.Single.Exists
 		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
 		protected override bool SupportsDeserialization => false;
-		protected override ExistsRequestDescriptor NewDescriptor() => new(Infer.Index<Project>(), CallIsolatedValue);
+		protected override ExistsRequestDescriptor<Project> NewDescriptor() => new(Infer.Index<Project>(), CallIsolatedValue);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -41,7 +41,7 @@ namespace Tests.Document.Single.Exists
 		);
 
 		protected override ExistsRequest Initializer => new(Infer.Index<Project>(), CallIsolatedValue) { Routing = CallIsolatedValue };
-		protected override Action<ExistsRequestDescriptor> Fluent => d => d.Routing(CallIsolatedValue);
+		protected override Action<ExistsRequestDescriptor<Project>> Fluent => d => d.Routing(CallIsolatedValue);
 
 		protected override void ExpectResponse(ExistsResponse response)
 		{

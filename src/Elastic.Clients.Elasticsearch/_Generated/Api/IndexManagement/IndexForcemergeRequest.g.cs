@@ -77,7 +77,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 	}
 
-	[JsonConverter(typeof(IndexForcemergeRequestDescriptorConverter))]
 	public sealed partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters>
 	{
 		public IndexForcemergeRequestDescriptor()
@@ -98,12 +97,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexForcemergeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexForcemergeRequestDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		public IndexForcemergeRequestDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes) => Qs("only_expunge_deletes", onlyExpungeDeletes);
-	}
-
-	internal sealed class IndexForcemergeRequestDescriptorConverter : JsonConverter<IndexForcemergeRequestDescriptor>
-	{
-		public override IndexForcemergeRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexForcemergeRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

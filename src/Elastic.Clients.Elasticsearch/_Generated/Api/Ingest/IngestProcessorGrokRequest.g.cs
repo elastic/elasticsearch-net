@@ -35,7 +35,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override bool SupportsBody => false;
 	}
 
-	[JsonConverter(typeof(IngestProcessorGrokRequestDescriptorConverter))]
 	public sealed partial class IngestProcessorGrokRequestDescriptor : RequestDescriptorBase<IngestProcessorGrokRequestDescriptor, IngestProcessorGrokRequestParameters>
 	{
 		public IngestProcessorGrokRequestDescriptor()
@@ -46,12 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-	}
-
-	internal sealed class IngestProcessorGrokRequestDescriptorConverter : JsonConverter<IngestProcessorGrokRequestDescriptor>
-	{
-		public override IngestProcessorGrokRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IngestProcessorGrokRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -49,7 +49,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 	}
 
-	[JsonConverter(typeof(IngestDeletePipelineRequestDescriptorConverter))]
 	public sealed partial class IngestDeletePipelineRequestDescriptor : RequestDescriptorBase<IngestDeletePipelineRequestDescriptor, IngestDeletePipelineRequestParameters>
 	{
 		public IngestDeletePipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -66,12 +65,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override bool SupportsBody => false;
 		public IngestDeletePipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IngestDeletePipelineRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-	}
-
-	internal sealed class IngestDeletePipelineRequestDescriptorConverter : JsonConverter<IngestDeletePipelineRequestDescriptor>
-	{
-		public override IngestDeletePipelineRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IngestDeletePipelineRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

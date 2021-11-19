@@ -117,8 +117,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
-	[JsonConverter(typeof(IndexValidateQueryRequestDescriptorConverter))]
-	public sealed partial class IndexValidateQueryRequestDescriptor : RequestDescriptorBase<IndexValidateQueryRequestDescriptor, IndexValidateQueryRequestParameters>
+	public sealed partial class IndexValidateQueryRequestDescriptor<T> : RequestDescriptorBase<IndexValidateQueryRequestDescriptor<T>, IndexValidateQueryRequestParameters>
 	{
 		public IndexValidateQueryRequestDescriptor()
 		{
@@ -128,70 +127,66 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal IndexValidateQueryRequestDescriptor(Action<IndexValidateQueryRequestDescriptor> configure) => configure.Invoke(this);
+		internal IndexValidateQueryRequestDescriptor(Action<IndexValidateQueryRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementValidateQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public IndexValidateQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public IndexValidateQueryRequestDescriptor AllShards(bool? allShards) => Qs("all_shards", allShards);
-		public IndexValidateQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public IndexValidateQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public IndexValidateQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public IndexValidateQueryRequestDescriptor Df(string? df) => Qs("df", df);
-		public IndexValidateQueryRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public IndexValidateQueryRequestDescriptor Explain(bool? explain) => Qs("explain", explain);
-		public IndexValidateQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public IndexValidateQueryRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
-		public IndexValidateQueryRequestDescriptor Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
-		public IndexValidateQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+		public IndexValidateQueryRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public IndexValidateQueryRequestDescriptor<T> AllShards(bool? allShards) => Qs("all_shards", allShards);
+		public IndexValidateQueryRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public IndexValidateQueryRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public IndexValidateQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public IndexValidateQueryRequestDescriptor<T> Df(string? df) => Qs("df", df);
+		public IndexValidateQueryRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndexValidateQueryRequestDescriptor<T> Explain(bool? explain) => Qs("explain", explain);
+		public IndexValidateQueryRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public IndexValidateQueryRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public IndexValidateQueryRequestDescriptor<T> Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
+		public IndexValidateQueryRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		public IndexValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public IndexValidateQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public IndexValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public IndexValidateQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public IndexValidateQueryRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public IndexValidateQueryRequestDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
-	}
 
-	internal sealed class IndexValidateQueryRequestDescriptorConverter : JsonConverter<IndexValidateQueryRequestDescriptor>
-	{
-		public override IndexValidateQueryRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexValidateQueryRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.QueryDescriptor is not null)
+			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
 			}
-			else if (value.QueryDescriptorAction is not null)
+			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
 			}
-			else if (value.QueryValue is not null)
+			else if (QueryValue is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryValue, options);
+				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
 			writer.WriteEndObject();

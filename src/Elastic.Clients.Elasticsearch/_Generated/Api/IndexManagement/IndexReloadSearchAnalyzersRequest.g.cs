@@ -55,7 +55,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	[JsonConverter(typeof(IndexReloadSearchAnalyzersRequestDescriptorConverter))]
 	public sealed partial class IndexReloadSearchAnalyzersRequestDescriptor : RequestDescriptorBase<IndexReloadSearchAnalyzersRequestDescriptor, IndexReloadSearchAnalyzersRequestParameters>
 	{
 		public IndexReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -73,12 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexReloadSearchAnalyzersRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
 		public IndexReloadSearchAnalyzersRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexReloadSearchAnalyzersRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-	}
-
-	internal sealed class IndexReloadSearchAnalyzersRequestDescriptorConverter : JsonConverter<IndexReloadSearchAnalyzersRequestDescriptor>
-	{
-		public override IndexReloadSearchAnalyzersRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexReloadSearchAnalyzersRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

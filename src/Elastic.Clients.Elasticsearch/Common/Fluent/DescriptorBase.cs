@@ -4,7 +4,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -15,7 +14,12 @@ namespace Elastic.Clients.Elasticsearch;
 
 public interface IDescriptor { }
 
-public abstract class DescriptorBase<TDescriptor> : IDescriptor
+internal interface ISelfSerializable
+{
+	void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+}
+
+public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializable
 	where TDescriptor : DescriptorBase<TDescriptor>
 {
 	private readonly TDescriptor _self;
@@ -27,6 +31,8 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_self, value, assign);
+
+	protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 
 	/// <summary>
 	/// Hides the <see cref="Equals" /> method.
@@ -52,6 +58,8 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public override string ToString() => base.ToString();
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
 }
 
 public abstract class QueryDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IQuery
@@ -112,6 +120,7 @@ public abstract class FieldNameQueryDescriptorBase<TDescriptor> : QueryDescripto
 	internal Field _field;
 
 	//bool IQuery.IsStrict { get; set; }
+
 
 	//bool IQuery.IsVerbatim { get; set; }
 

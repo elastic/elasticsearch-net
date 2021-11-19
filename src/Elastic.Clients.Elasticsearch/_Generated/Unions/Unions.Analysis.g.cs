@@ -35,15 +35,26 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	{
 	}
 
-	public interface ICharFiltersVariant
+	public partial class CharFilter : Union<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions?>
+	{
+		public CharFilter(string? item) : base(item)
+		{
+		}
+
+		public CharFilter(Elastic.Clients.Elasticsearch.Analysis.CharFilterDefinitions? item) : base(item)
+		{
+		}
+	}
+
+	public interface ICharFilterDefinitionsVariant
 	{
 	}
 
-	public interface ICharFilters : IIsADictionary<string, ICharFiltersVariant>
+	public interface ICharFilterDefinitions : IIsADictionary<string, ICharFilterDefinitionsVariant>
 	{
 	}
 
-	public class CharFilters : IsADictionaryBase<string, ICharFiltersVariant>
+	public class CharFilterDefinitions : IsADictionaryBase<string, ICharFilterDefinitionsVariant>
 	{
 	}
 
@@ -64,27 +75,49 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		private readonly List<string> _stringList = new();
 	}
 
-	public interface ITokenFiltersVariant
+	public partial class TokenFilter : Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions?>
+	{
+		public TokenFilter(string? item) : base(item)
+		{
+		}
+
+		public TokenFilter(Elastic.Clients.Elasticsearch.Analysis.TokenFilterDefinitions? item) : base(item)
+		{
+		}
+	}
+
+	public interface ITokenFilterDefinitionsVariant
 	{
 	}
 
-	public interface ITokenFilters : IIsADictionary<string, ITokenFiltersVariant>
+	public interface ITokenFilterDefinitions : IIsADictionary<string, ITokenFilterDefinitionsVariant>
 	{
 	}
 
-	public class TokenFilters : IsADictionaryBase<string, ITokenFiltersVariant>
+	public class TokenFilterDefinitions : IsADictionaryBase<string, ITokenFilterDefinitionsVariant>
 	{
 	}
 
-	public interface ITokenizersVariant
+	public partial class Tokenizer : Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions?>
+	{
+		public Tokenizer(string? item) : base(item)
+		{
+		}
+
+		public Tokenizer(Elastic.Clients.Elasticsearch.Analysis.TokenizerDefinitions? item) : base(item)
+		{
+		}
+	}
+
+	public interface ITokenizerDefinitionsVariant
 	{
 	}
 
-	public interface ITokenizers : IIsADictionary<string, ITokenizersVariant>
+	public interface ITokenizerDefinitions : IIsADictionary<string, ITokenizerDefinitionsVariant>
 	{
 	}
 
-	public class Tokenizers : IsADictionaryBase<string, ITokenizersVariant>
+	public class TokenizerDefinitions : IsADictionaryBase<string, ITokenizerDefinitionsVariant>
 	{
 	}
 }

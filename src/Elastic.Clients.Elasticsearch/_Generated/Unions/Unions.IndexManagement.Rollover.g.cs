@@ -15,40 +15,22 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using OneOf;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 {
-	public class PingRequestParameters : RequestParameters<PingRequestParameters>
+	public partial class IndexRolloverMapping : Union<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?, Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>?>
 	{
-	}
-
-	public partial class PingRequest : PlainRequestBase<PingRequestParameters>
-	{
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-	}
-
-	public sealed partial class PingRequestDescriptor : RequestDescriptorBase<PingRequestDescriptor, PingRequestParameters>
-	{
-		public PingRequestDescriptor()
+		public IndexRolloverMapping(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? item) : base(item)
 		{
 		}
 
-		internal PingRequestDescriptor(Action<PingRequestDescriptor> configure) => configure.Invoke(this);
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
-		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override bool SupportsBody => false;
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		public IndexRolloverMapping(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.TypeMapping>? item) : base(item)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }

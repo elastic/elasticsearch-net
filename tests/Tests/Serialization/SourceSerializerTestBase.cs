@@ -1,16 +1,15 @@
-
 using System.IO;
 
 namespace Tests.Serialization;
 
 public abstract class SourceSerializerTestBase
 {
-	protected static readonly Serializer _sourceSerializer;
+	protected static readonly Serializer _requestResponseSerializer;
 
 	static SourceSerializerTestBase()
 	{
 		var client = new ElasticClient();
-		_sourceSerializer = client.SourceSerializer;
+		_requestResponseSerializer = client.RequestResponseSerializer;
 	}
 
 	protected static Stream WrapInStream(string json)
@@ -21,5 +20,14 @@ public abstract class SourceSerializerTestBase
 		writer.Flush();
 		stream.Position = 0;
 		return stream;
+	}
+
+	protected static string DeserialiseToString<T>(T data)
+	{
+		var stream = new MemoryStream();
+		_requestResponseSerializer.Serialize(data, stream);
+		stream.Position = 0;
+		var reader = new StreamReader(stream);
+		return reader.ReadToEnd();
 	}
 }
