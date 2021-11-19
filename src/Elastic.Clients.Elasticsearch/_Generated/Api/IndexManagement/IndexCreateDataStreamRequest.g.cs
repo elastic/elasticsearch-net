@@ -39,7 +39,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 	}
 
-	[JsonConverter(typeof(IndexCreateDataStreamRequestDescriptorConverter))]
 	public sealed partial class IndexCreateDataStreamRequestDescriptor : RequestDescriptorBase<IndexCreateDataStreamRequestDescriptor, IndexCreateDataStreamRequestParameters>
 	{
 		public IndexCreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
@@ -54,12 +53,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => false;
-	}
-
-	internal sealed class IndexCreateDataStreamRequestDescriptorConverter : JsonConverter<IndexCreateDataStreamRequestDescriptor>
-	{
-		public override IndexCreateDataStreamRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexCreateDataStreamRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

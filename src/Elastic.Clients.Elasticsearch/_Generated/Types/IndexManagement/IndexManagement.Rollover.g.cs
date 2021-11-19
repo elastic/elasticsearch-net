@@ -42,7 +42,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
 	}
 
-	[JsonConverter(typeof(RolloverConditionsDescriptorConverter))]
 	public sealed partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
 	{
 		public RolloverConditionsDescriptor()
@@ -62,36 +61,31 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 		public RolloverConditionsDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsValue = v);
 		public RolloverConditionsDescriptor MaxSize(string? maxSize) => Assign(maxSize, (a, v) => a.MaxSizeValue = v);
 		public RolloverConditionsDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize) => Assign(maxPrimaryShardSize, (a, v) => a.MaxPrimaryShardSizeValue = v);
-	}
-
-	internal sealed class RolloverConditionsDescriptorConverter : JsonConverter<RolloverConditionsDescriptor>
-	{
-		public override RolloverConditionsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RolloverConditionsDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.MaxAgeValue is not null)
+			if (MaxAgeValue is not null)
 			{
 				writer.WritePropertyName("max_age");
-				JsonSerializer.Serialize(writer, value.MaxAgeValue, options);
+				JsonSerializer.Serialize(writer, MaxAgeValue, options);
 			}
 
-			if (value.MaxDocsValue.HasValue)
+			if (MaxDocsValue.HasValue)
 			{
 				writer.WritePropertyName("max_docs");
-				writer.WriteNumberValue(value.MaxDocsValue.Value);
+				writer.WriteNumberValue(MaxDocsValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.MaxSizeValue))
+			if (!string.IsNullOrEmpty(MaxSizeValue))
 			{
 				writer.WritePropertyName("max_size");
-				writer.WriteStringValue(value.MaxSizeValue);
+				writer.WriteStringValue(MaxSizeValue);
 			}
 
-			if (value.MaxPrimaryShardSizeValue is not null)
+			if (MaxPrimaryShardSizeValue is not null)
 			{
 				writer.WritePropertyName("max_primary_shard_size");
-				JsonSerializer.Serialize(writer, value.MaxPrimaryShardSizeValue, options);
+				JsonSerializer.Serialize(writer, MaxPrimaryShardSizeValue, options);
 			}
 
 			writer.WriteEndObject();

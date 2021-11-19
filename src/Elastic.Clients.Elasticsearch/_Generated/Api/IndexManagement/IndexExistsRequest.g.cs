@@ -73,7 +73,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[JsonConverter(typeof(IndexExistsRequestDescriptorConverter))]
 	public sealed partial class IndexExistsRequestDescriptor : RequestDescriptorBase<IndexExistsRequestDescriptor, IndexExistsRequestParameters>
 	{
 		public IndexExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -94,12 +93,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexExistsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexExistsRequestDescriptor IncludeDefaults(bool? includeDefaults) => Qs("include_defaults", includeDefaults);
 		public IndexExistsRequestDescriptor Local(bool? local) => Qs("local", local);
-	}
-
-	internal sealed class IndexExistsRequestDescriptorConverter : JsonConverter<IndexExistsRequestDescriptor>
-	{
-		public override IndexExistsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexExistsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

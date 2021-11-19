@@ -38,7 +38,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 	}
 
-	[JsonConverter(typeof(ClosePointInTimeRequestDescriptorConverter))]
 	public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptorBase<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
 	{
 		public ClosePointInTimeRequestDescriptor()
@@ -52,16 +51,11 @@ namespace Elastic.Clients.Elasticsearch
 		internal Elastic.Clients.Elasticsearch.Id IdValue { get; private set; }
 
 		public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id) => Assign(id, (a, v) => a.IdValue = v);
-	}
-
-	internal sealed class ClosePointInTimeRequestDescriptorConverter : JsonConverter<ClosePointInTimeRequestDescriptor>
-	{
-		public override ClosePointInTimeRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClosePointInTimeRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, value.IdValue, options);
+			JsonSerializer.Serialize(writer, IdValue, options);
 			writer.WriteEndObject();
 		}
 	}

@@ -35,7 +35,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		protected override bool SupportsBody => false;
 	}
 
-	[JsonConverter(typeof(ClusterRemoteInfoRequestDescriptorConverter))]
 	public sealed partial class ClusterRemoteInfoRequestDescriptor : RequestDescriptorBase<ClusterRemoteInfoRequestDescriptor, ClusterRemoteInfoRequestParameters>
 	{
 		public ClusterRemoteInfoRequestDescriptor()
@@ -46,12 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterRemoteInfo;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-	}
-
-	internal sealed class ClusterRemoteInfoRequestDescriptorConverter : JsonConverter<ClusterRemoteInfoRequestDescriptor>
-	{
-		public override ClusterRemoteInfoRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterRemoteInfoRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

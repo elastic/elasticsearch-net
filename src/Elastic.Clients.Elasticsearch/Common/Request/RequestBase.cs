@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -134,13 +135,17 @@ namespace Elastic.Clients.Elasticsearch
 	///     Base class for all Request descriptor types
 	/// </summary>
 	public abstract partial class
-		RequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IDescriptor
+		RequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IDescriptor, ISelfSerializable
 			where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>, IRequest<TParameters>
 			where TParameters : RequestParameters<TParameters>, new()
 	{
 		private readonly TDescriptor _descriptor;
 
+		void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
+
 		protected RequestDescriptorBase() => _descriptor = (TDescriptor)this;
+
+		protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 
 		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) =>
 			_descriptor = (TDescriptor)this;

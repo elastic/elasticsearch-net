@@ -61,7 +61,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public int? Shard { get; set; }
 	}
 
-	[JsonConverter(typeof(ClusterAllocationExplainRequestDescriptorConverter))]
 	public sealed partial class ClusterAllocationExplainRequestDescriptor : RequestDescriptorBase<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainRequestParameters>
 	{
 		public ClusterAllocationExplainRequestDescriptor()
@@ -86,36 +85,31 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterAllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary = true) => Assign(primary, (a, v) => a.PrimaryValue = v);
 		public ClusterAllocationExplainRequestDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.ShardValue = v);
-	}
-
-	internal sealed class ClusterAllocationExplainRequestDescriptorConverter : JsonConverter<ClusterAllocationExplainRequestDescriptor>
-	{
-		public override ClusterAllocationExplainRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterAllocationExplainRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.CurrentNodeValue))
+			if (!string.IsNullOrEmpty(CurrentNodeValue))
 			{
 				writer.WritePropertyName("current_node");
-				writer.WriteStringValue(value.CurrentNodeValue);
+				writer.WriteStringValue(CurrentNodeValue);
 			}
 
-			if (value.IndexValue is not null)
+			if (IndexValue is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, value.IndexValue, options);
+				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
-			if (value.PrimaryValue.HasValue)
+			if (PrimaryValue.HasValue)
 			{
 				writer.WritePropertyName("primary");
-				writer.WriteBooleanValue(value.PrimaryValue.Value);
+				writer.WriteBooleanValue(PrimaryValue.Value);
 			}
 
-			if (value.ShardValue.HasValue)
+			if (ShardValue.HasValue)
 			{
 				writer.WritePropertyName("shard");
-				writer.WriteNumberValue(value.ShardValue.Value);
+				writer.WriteNumberValue(ShardValue.Value);
 			}
 
 			writer.WriteEndObject();

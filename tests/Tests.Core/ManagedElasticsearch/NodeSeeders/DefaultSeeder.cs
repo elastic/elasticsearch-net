@@ -155,20 +155,20 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
 			indexTemplateResponse.ShouldBeValid();
 
-			var tasks = new[]
-			{
-				CreateProjectIndexAsync(),
-				CreateDeveloperIndexAsync()
-			};
-			await Task.WhenAll(tasks)
-				.ContinueWith(t =>
-				{
-					foreach (var r in t.Result)
-						r.ShouldBeValid();
-				}).ConfigureAwait(false);
+			//var tasks = new[]
+			//{
+			//	CreateProjectIndexAsync(),
+			//	CreateDeveloperIndexAsync()
+			//};
+			//await Task.WhenAll(tasks)
+			//	.ContinueWith(t =>
+			//	{
+			//		foreach (var r in t.Result)
+			//			r.ShouldBeValid();
+			//	}).ConfigureAwait(false);
 		}
 
-		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync(typeof(Project));
+		//private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync(typeof(Project));
 					//.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
 					// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
 					// TODO 8.0 remove with once the overloads are gone too
@@ -268,7 +268,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//				Settings = IndexSettings
 		//			});
 
-		private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.IndexManagement.CreateIndexAsync(Infer.Index<Developer>());
+		//private Task<CreateIndexResponse> CreateDeveloperIndexAsync() => Client.IndexManagement.CreateIndexAsync(Infer.Index<Developer>());
 		//.Map<Developer>(m => m
 		//	.AutoMap()
 		//	.Properties(DeveloperProperties)

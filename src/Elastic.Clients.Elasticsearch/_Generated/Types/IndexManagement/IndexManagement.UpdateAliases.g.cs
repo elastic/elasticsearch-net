@@ -28,10 +28,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		string ActionVariantName { get; }
 	}
 
-	internal interface IActionVariantDescriptor
-	{
-	}
-
 	[JsonConverter(typeof(ActionConverter))]
 	public partial class Action : IContainer
 	{
@@ -95,21 +91,83 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		}
 	}
 
-	public sealed partial class ActionDescriptor : DescriptorBase<ActionDescriptor>
+	public sealed partial class ActionDescriptor<T> : DescriptorBase<ActionDescriptor<T>>
 	{
 		public ActionDescriptor()
 		{
 		}
 
-		internal ActionDescriptor(Action<ActionDescriptor> configure) => configure.Invoke(this);
-	}
+		internal ActionDescriptor(Action<ActionDescriptor<T>> configure) => configure.Invoke(this);
+		internal bool ContainsVariant { get; private set; }
 
-	internal sealed class ActionDescriptorConverter : JsonConverter<ActionDescriptor>
-	{
-		public override ActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ActionDescriptor value, JsonSerializerOptions options)
+		internal string ContainedVariantName { get; private set; }
+
+		internal Action Container { get; private set; }
+
+		internal object ContainerVariantDescriptorAction { get; private set; }
+
+		private void Set(object descriptorAction, string variantName)
 		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainerVariantDescriptorAction = descriptorAction;
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		private void Set(IActionVariant variant, string variantName)
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new Action(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		public void Add(AddAction variant) => Set(variant, "add");
+		public void Add(Action<AddActionDescriptor<T>> configure) => Set(configure, "add");
+		public void Remove(RemoveAction variant) => Set(variant, "remove");
+		public void Remove(Action<RemoveActionDescriptor> configure) => Set(configure, "remove");
+		public void RemoveIndex(RemoveIndexAction variant) => Set(variant, "remove_index");
+		public void RemoveIndex(Action<RemoveIndexActionDescriptor> configure) => Set(configure, "remove_index");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
 			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			writer.WriteStartObject();
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+			}
+
+			if (ContainedVariantName == "add")
+			{
+				var descriptor = new AddActionDescriptor<T>();
+				((Action<AddActionDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "remove")
+			{
+				var descriptor = new RemoveActionDescriptor();
+				((Action<RemoveActionDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "remove_index")
+			{
+				var descriptor = new RemoveIndexActionDescriptor();
+				((Action<RemoveIndexActionDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}
@@ -159,14 +217,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public string? SearchRouting { get; set; }
 	}
 
-	[JsonConverter(typeof(AddActionDescriptorConverter))]
-	public sealed partial class AddActionDescriptor : DescriptorBase<AddActionDescriptor>, IActionVariantDescriptor
+	public sealed partial class AddActionDescriptor<T> : DescriptorBase<AddActionDescriptor<T>>
 	{
 		public AddActionDescriptor()
 		{
 		}
 
-		internal AddActionDescriptor(Action<AddActionDescriptor> configure) => configure.Invoke(this);
+		internal AddActionDescriptor(Action<AddActionDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasesValue { get; private set; }
@@ -187,116 +244,111 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		internal string? SearchRoutingValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor FilterDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> FilterDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
 
-		public AddActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias) => Assign(alias, (a, v) => a.AliasValue = v);
-		public AddActionDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexAlias? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
-		public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		public AddActionDescriptor<T> Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias) => Assign(alias, (a, v) => a.AliasValue = v);
+		public AddActionDescriptor<T> Aliases(Elastic.Clients.Elasticsearch.IndexAlias? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
+		public AddActionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public AddActionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public AddActionDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public AddActionDescriptor<T> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
-		public AddActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
-		public AddActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
-		public AddActionDescriptor IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
-		public AddActionDescriptor IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHiddenValue = v);
-		public AddActionDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
-		public AddActionDescriptor Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public AddActionDescriptor SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
-	}
-
-	internal sealed class AddActionDescriptorConverter : JsonConverter<AddActionDescriptor>
-	{
-		public override AddActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, AddActionDescriptor value, JsonSerializerOptions options)
+		public AddActionDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
+		public AddActionDescriptor<T> Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
+		public AddActionDescriptor<T> IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
+		public AddActionDescriptor<T> IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHiddenValue = v);
+		public AddActionDescriptor<T> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
+		public AddActionDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public AddActionDescriptor<T> SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.AliasValue is not null)
+			if (AliasValue is not null)
 			{
 				writer.WritePropertyName("alias");
-				JsonSerializer.Serialize(writer, value.AliasValue, options);
+				JsonSerializer.Serialize(writer, AliasValue, options);
 			}
 
-			if (value.AliasesValue is not null)
+			if (AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.AliasesValue, options);
+				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (value.FilterDescriptor is not null)
+			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.FilterDescriptor, options);
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
 			}
-			else if (value.FilterDescriptorAction is not null)
+			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
 			}
-			else if (value.FilterValue is not null)
+			else if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.FilterValue, options);
+				JsonSerializer.Serialize(writer, FilterValue, options);
 			}
 
-			if (value.IndexValue is not null)
+			if (IndexValue is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, value.IndexValue, options);
+				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
-			if (value.IndicesValue is not null)
+			if (IndicesValue is not null)
 			{
 				writer.WritePropertyName("indices");
-				JsonSerializer.Serialize(writer, value.IndicesValue, options);
+				JsonSerializer.Serialize(writer, IndicesValue, options);
 			}
 
-			if (value.IndexRoutingValue is not null)
+			if (IndexRoutingValue is not null)
 			{
 				writer.WritePropertyName("index_routing");
-				JsonSerializer.Serialize(writer, value.IndexRoutingValue, options);
+				JsonSerializer.Serialize(writer, IndexRoutingValue, options);
 			}
 
-			if (value.IsHiddenValue.HasValue)
+			if (IsHiddenValue.HasValue)
 			{
 				writer.WritePropertyName("is_hidden");
-				writer.WriteBooleanValue(value.IsHiddenValue.Value);
+				writer.WriteBooleanValue(IsHiddenValue.Value);
 			}
 
-			if (value.IsWriteIndexValue.HasValue)
+			if (IsWriteIndexValue.HasValue)
 			{
 				writer.WritePropertyName("is_write_index");
-				writer.WriteBooleanValue(value.IsWriteIndexValue.Value);
+				writer.WriteBooleanValue(IsWriteIndexValue.Value);
 			}
 
-			if (value.RoutingValue is not null)
+			if (RoutingValue is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, value.RoutingValue, options);
+				JsonSerializer.Serialize(writer, RoutingValue, options);
 			}
 
-			if (value.SearchRoutingValue is not null)
+			if (SearchRoutingValue is not null)
 			{
 				writer.WritePropertyName("search_routing");
-				JsonSerializer.Serialize(writer, value.SearchRoutingValue, options);
+				JsonSerializer.Serialize(writer, SearchRoutingValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -328,8 +380,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public bool? MustExist { get; set; }
 	}
 
-	[JsonConverter(typeof(RemoveActionDescriptorConverter))]
-	public sealed partial class RemoveActionDescriptor : DescriptorBase<RemoveActionDescriptor>, IActionVariantDescriptor
+	public sealed partial class RemoveActionDescriptor : DescriptorBase<RemoveActionDescriptor>
 	{
 		public RemoveActionDescriptor()
 		{
@@ -351,42 +402,37 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public RemoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public RemoveActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
 		public RemoveActionDescriptor MustExist(bool? mustExist = true) => Assign(mustExist, (a, v) => a.MustExistValue = v);
-	}
-
-	internal sealed class RemoveActionDescriptorConverter : JsonConverter<RemoveActionDescriptor>
-	{
-		public override RemoveActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RemoveActionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.AliasValue is not null)
+			if (AliasValue is not null)
 			{
 				writer.WritePropertyName("alias");
-				JsonSerializer.Serialize(writer, value.AliasValue, options);
+				JsonSerializer.Serialize(writer, AliasValue, options);
 			}
 
-			if (value.AliasesValue is not null)
+			if (AliasesValue is not null)
 			{
 				writer.WritePropertyName("aliases");
-				JsonSerializer.Serialize(writer, value.AliasesValue, options);
+				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (value.IndexValue is not null)
+			if (IndexValue is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, value.IndexValue, options);
+				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
-			if (value.IndicesValue is not null)
+			if (IndicesValue is not null)
 			{
 				writer.WritePropertyName("indices");
-				JsonSerializer.Serialize(writer, value.IndicesValue, options);
+				JsonSerializer.Serialize(writer, IndicesValue, options);
 			}
 
-			if (value.MustExistValue.HasValue)
+			if (MustExistValue.HasValue)
 			{
 				writer.WritePropertyName("must_exist");
-				writer.WriteBooleanValue(value.MustExistValue.Value);
+				writer.WriteBooleanValue(MustExistValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -406,8 +452,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 	}
 
-	[JsonConverter(typeof(RemoveIndexActionDescriptorConverter))]
-	public sealed partial class RemoveIndexActionDescriptor : DescriptorBase<RemoveIndexActionDescriptor>, IActionVariantDescriptor
+	public sealed partial class RemoveIndexActionDescriptor : DescriptorBase<RemoveIndexActionDescriptor>
 	{
 		public RemoveIndexActionDescriptor()
 		{
@@ -420,24 +465,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		public RemoveIndexActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public RemoveIndexActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
-	}
-
-	internal sealed class RemoveIndexActionDescriptorConverter : JsonConverter<RemoveIndexActionDescriptor>
-	{
-		public override RemoveIndexActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RemoveIndexActionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.IndexValue is not null)
+			if (IndexValue is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, value.IndexValue, options);
+				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
-			if (value.IndicesValue is not null)
+			if (IndicesValue is not null)
 			{
 				writer.WritePropertyName("indices");
-				JsonSerializer.Serialize(writer, value.IndicesValue, options);
+				JsonSerializer.Serialize(writer, IndicesValue, options);
 			}
 
 			writer.WriteEndObject();

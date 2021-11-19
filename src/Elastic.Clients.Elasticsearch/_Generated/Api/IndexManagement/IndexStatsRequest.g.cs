@@ -109,8 +109,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Types? Types { get => Q<Elastic.Clients.Elasticsearch.Types?>("types"); set => Q("types", value); }
 	}
 
-	[JsonConverter(typeof(IndexStatsRequestDescriptorConverter))]
-	public sealed partial class IndexStatsRequestDescriptor : RequestDescriptorBase<IndexStatsRequestDescriptor, IndexStatsRequestParameters>
+	public sealed partial class IndexStatsRequestDescriptor<T> : RequestDescriptorBase<IndexStatsRequestDescriptor<T>, IndexStatsRequestParameters>
 	{
 		public IndexStatsRequestDescriptor()
 		{
@@ -128,26 +127,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal IndexStatsRequestDescriptor(Action<IndexStatsRequestDescriptor> configure) => configure.Invoke(this);
+		internal IndexStatsRequestDescriptor(Action<IndexStatsRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IndexStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
-		public IndexStatsRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public IndexStatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
-		public IndexStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-		public IndexStatsRequestDescriptor ForbidClosedIndices(bool? forbidClosedIndices) => Qs("forbid_closed_indices", forbidClosedIndices);
-		public IndexStatsRequestDescriptor Groups(string? groups) => Qs("groups", groups);
-		public IndexStatsRequestDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
-		public IndexStatsRequestDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments) => Qs("include_unloaded_segments", includeUnloadedSegments);
-		public IndexStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
-		public IndexStatsRequestDescriptor Types(Elastic.Clients.Elasticsearch.Types? types) => Qs("types", types);
-	}
-
-	internal sealed class IndexStatsRequestDescriptorConverter : JsonConverter<IndexStatsRequestDescriptor>
-	{
-		public override IndexStatsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexStatsRequestDescriptor value, JsonSerializerOptions options)
+		public IndexStatsRequestDescriptor<T> CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
+		public IndexStatsRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndexStatsRequestDescriptor<T> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
+		public IndexStatsRequestDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
+		public IndexStatsRequestDescriptor<T> ForbidClosedIndices(bool? forbidClosedIndices) => Qs("forbid_closed_indices", forbidClosedIndices);
+		public IndexStatsRequestDescriptor<T> Groups(string? groups) => Qs("groups", groups);
+		public IndexStatsRequestDescriptor<T> IncludeSegmentFileSizes(bool? includeSegmentFileSizes) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
+		public IndexStatsRequestDescriptor<T> IncludeUnloadedSegments(bool? includeUnloadedSegments) => Qs("include_unloaded_segments", includeUnloadedSegments);
+		public IndexStatsRequestDescriptor<T> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
+		public IndexStatsRequestDescriptor<T> Types(Elastic.Clients.Elasticsearch.Types? types) => Qs("types", types);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

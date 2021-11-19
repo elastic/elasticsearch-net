@@ -15,13 +15,13 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Document.Single.Get
 {
 	public class GetApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, GetRequestDescriptor, GetRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, GetRequestDescriptor<Project>, GetRequest>
 	{
 		public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override Action<GetRequestDescriptor> Fluent => g => g.Routing(ProjectId);
+		protected override Action<GetRequestDescriptor<Project>> Fluent => g => g.Routing(ProjectId);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override GetRequest Initializer => new(Infer.Index<Project>(), ProjectId)
@@ -35,13 +35,13 @@ namespace Tests.Document.Single.Get
 		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get<Project>(Infer.Index<Project>(), ProjectId, f),
-			(client, f) => client.GetAsync<Project>(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.Get(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.GetAsync(Infer.Index<Project>(), ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);
 
-		protected override GetRequestDescriptor NewDescriptor() => new(Infer.Index<Project>(), ProjectId);
+		protected override GetRequestDescriptor<Project> NewDescriptor() => new(Infer.Index<Project>(), ProjectId);
 
 		protected override void ExpectResponse(GetResponse<Project> response)
 		{

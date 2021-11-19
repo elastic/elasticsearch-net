@@ -59,7 +59,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 	}
 
-	[JsonConverter(typeof(ClusterGetComponentTemplateRequestDescriptorConverter))]
 	public sealed partial class ClusterGetComponentTemplateRequestDescriptor : RequestDescriptorBase<ClusterGetComponentTemplateRequestDescriptor, ClusterGetComponentTemplateRequestParameters>
 	{
 		public ClusterGetComponentTemplateRequestDescriptor()
@@ -77,12 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterGetComponentTemplateRequestDescriptor FlatSettings(bool? flatSettings) => Qs("flat_settings", flatSettings);
 		public ClusterGetComponentTemplateRequestDescriptor Local(bool? local) => Qs("local", local);
 		public ClusterGetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-	}
-
-	internal sealed class ClusterGetComponentTemplateRequestDescriptorConverter : JsonConverter<ClusterGetComponentTemplateRequestDescriptor>
-	{
-		public override ClusterGetComponentTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ClusterGetComponentTemplateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

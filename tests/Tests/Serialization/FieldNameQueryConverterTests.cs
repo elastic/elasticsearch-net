@@ -1,22 +1,28 @@
-using System.IO;
-using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using Tests.Domain;
 
 namespace Tests.Serialization;
 
 public class QueryContainerWithFieldNameQuerySerializationTests : SourceSerializerTestBase
 {
+	private const string BasicMatchQueryJson = @"{""match"":{""name"":{""query"":""NEST""}}}";
+
 	[U]
-	public void CanSerializeQueryContainerWithMatchQuery()
+	public void CanSerializeQueryContainerDescriptor_WithSimpleMatchQuery()
 	{
+		var descriptor = new QueryContainerDescriptor<Project>(c => c.Match(m => m.Field("name").Query("NEST")));
+		var json = DeserialiseToString(descriptor);
+		json.Should().Be(BasicMatchQueryJson);
 	}
 
-	[U]
-	public void CanDeserializeQueryContainerWithMatchQuery()
-	{
-		var stream = WrapInStream(@"{""match"":{""name"":{""query"":""NEST""}}}");
+	// TODO - Object initializer test
 
-		var queryContainer = _sourceSerializer.Deserialize<QueryContainer>(stream);
+	[U]
+	public void CanDeserializeQueryContainer_WithSimpleMatchQuery()
+	{
+		var stream = WrapInStream(BasicMatchQueryJson);
+
+		var queryContainer = _requestResponseSerializer.Deserialize<QueryContainer>(stream);
 		var matchQuery = queryContainer.Variant.Should().BeOfType<MatchQuery>().Subject;
 		matchQuery.Field.Should().Be("name");
 		matchQuery.Query.Should().Be("NEST");

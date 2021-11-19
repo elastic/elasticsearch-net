@@ -73,7 +73,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	[JsonConverter(typeof(IndexGetAliasRequestDescriptorConverter))]
 	public sealed partial class IndexGetAliasRequestDescriptor : RequestDescriptorBase<IndexGetAliasRequestDescriptor, IndexGetAliasRequestParameters>
 	{
 		public IndexGetAliasRequestDescriptor()
@@ -100,12 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetAliasRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexGetAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexGetAliasRequestDescriptor Local(bool? local) => Qs("local", local);
-	}
-
-	internal sealed class IndexGetAliasRequestDescriptorConverter : JsonConverter<IndexGetAliasRequestDescriptor>
-	{
-		public override IndexGetAliasRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexGetAliasRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

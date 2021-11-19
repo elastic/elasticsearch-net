@@ -47,7 +47,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	[JsonConverter(typeof(IndexDataStreamsStatsRequestDescriptorConverter))]
 	public sealed partial class IndexDataStreamsStatsRequestDescriptor : RequestDescriptorBase<IndexDataStreamsStatsRequestDescriptor, IndexDataStreamsStatsRequestParameters>
 	{
 		public IndexDataStreamsStatsRequestDescriptor()
@@ -63,12 +62,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public IndexDataStreamsStatsRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	}
-
-	internal sealed class IndexDataStreamsStatsRequestDescriptorConverter : JsonConverter<IndexDataStreamsStatsRequestDescriptor>
-	{
-		public override IndexDataStreamsStatsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexDataStreamsStatsRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

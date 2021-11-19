@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.GetSourceConfig? Source { get => Q<Elastic.Clients.Elasticsearch.GetSourceConfig?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
-		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.GetSourceConfig? Source { get => Q<Elastic.Clients.Elasticsearch.GetSourceConfig?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -97,8 +97,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 
-	[JsonConverter(typeof(ExistsRequestDescriptorConverter))]
-	public sealed partial class ExistsRequestDescriptor : RequestDescriptorBase<ExistsRequestDescriptor, ExistsRequestParameters>
+	public sealed partial class ExistsRequestDescriptor<T> : RequestDescriptorBase<ExistsRequestDescriptor<T>, ExistsRequestParameters>
 	{
 		public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
@@ -108,26 +107,21 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor> configure) => configure.Invoke(this);
+		internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
-		public ExistsRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-		public ExistsRequestDescriptor Realtime(bool? realtime) => Qs("realtime", realtime);
-		public ExistsRequestDescriptor Refresh(bool? refresh) => Qs("refresh", refresh);
-		public ExistsRequestDescriptor Routing(string? routing) => Qs("routing", routing);
-		public ExistsRequestDescriptor Source(Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? source) => Qs("_source", source);
-		public ExistsRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public ExistsRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public ExistsRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-		public ExistsRequestDescriptor Version(long? version) => Qs("version", version);
-		public ExistsRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
-	}
-
-	internal sealed class ExistsRequestDescriptorConverter : JsonConverter<ExistsRequestDescriptor>
-	{
-		public override ExistsRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ExistsRequestDescriptor value, JsonSerializerOptions options)
+		public ExistsRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
+		public ExistsRequestDescriptor<T> Realtime(bool? realtime) => Qs("realtime", realtime);
+		public ExistsRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
+		public ExistsRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public ExistsRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.GetSourceConfig? source) => Qs("_source", source);
+		public ExistsRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public ExistsRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public ExistsRequestDescriptor<T> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
+		public ExistsRequestDescriptor<T> Version(long? version) => Qs("version", version);
+		public ExistsRequestDescriptor<T> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

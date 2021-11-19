@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("dynamic")]
-		public Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? Dynamic { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("dynamic_date_formats")]
@@ -123,7 +123,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 	}
 
-	[JsonConverter(typeof(IndexPutMappingRequestDescriptorConverter))]
 	public sealed partial class IndexPutMappingRequestDescriptor : RequestDescriptorBase<IndexPutMappingRequestDescriptor, IndexPutMappingRequestParameters>
 	{
 		public IndexPutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -147,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutMappingRequestDescriptor WriteIndexOnly(bool? writeIndexOnly) => Qs("write_index_only", writeIndexOnly);
 		internal bool? DateDetectionValue { get; private set; }
 
-		internal Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? DynamicValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; private set; }
 
 		internal IEnumerable<string>? DynamicDateFormatsValue { get; private set; }
 
@@ -180,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; private set; }
 
 		public IndexPutMappingRequestDescriptor DateDetection(bool? dateDetection = true) => Assign(dateDetection, (a, v) => a.DateDetectionValue = v);
-		public IndexPutMappingRequestDescriptor Dynamic(Union<bool?, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?>? dynamic) => Assign(dynamic, (a, v) => a.DynamicValue = v);
+		public IndexPutMappingRequestDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic) => Assign(dynamic, (a, v) => a.DynamicValue = v);
 		public IndexPutMappingRequestDescriptor DynamicDateFormats(IEnumerable<string>? dynamicDateFormats) => Assign(dynamicDateFormats, (a, v) => a.DynamicDateFormatsValue = v);
 		public IndexPutMappingRequestDescriptor DynamicTemplates(Union<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>?, IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>?>? dynamicTemplates) => Assign(dynamicTemplates, (a, v) => a.DynamicTemplatesValue = v);
 		public IndexPutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
@@ -250,108 +249,103 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		public IndexPutMappingRequestDescriptor Runtime(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtime) => Assign(runtime, (a, v) => a.RuntimeValue = v);
-	}
-
-	internal sealed class IndexPutMappingRequestDescriptorConverter : JsonConverter<IndexPutMappingRequestDescriptor>
-	{
-		public override IndexPutMappingRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexPutMappingRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.DateDetectionValue.HasValue)
+			if (DateDetectionValue.HasValue)
 			{
 				writer.WritePropertyName("date_detection");
-				writer.WriteBooleanValue(value.DateDetectionValue.Value);
+				writer.WriteBooleanValue(DateDetectionValue.Value);
 			}
 
-			if (value.DynamicValue is not null)
+			if (DynamicValue is not null)
 			{
 				writer.WritePropertyName("dynamic");
-				JsonSerializer.Serialize(writer, value.DynamicValue, options);
+				JsonSerializer.Serialize(writer, DynamicValue, options);
 			}
 
-			if (value.DynamicDateFormatsValue is not null)
+			if (DynamicDateFormatsValue is not null)
 			{
 				writer.WritePropertyName("dynamic_date_formats");
-				JsonSerializer.Serialize(writer, value.DynamicDateFormatsValue, options);
+				JsonSerializer.Serialize(writer, DynamicDateFormatsValue, options);
 			}
 
-			if (value.DynamicTemplatesValue is not null)
+			if (DynamicTemplatesValue is not null)
 			{
 				writer.WritePropertyName("dynamic_templates");
-				JsonSerializer.Serialize(writer, value.DynamicTemplatesValue, options);
+				JsonSerializer.Serialize(writer, DynamicTemplatesValue, options);
 			}
 
-			if (value.FieldNamesDescriptor is not null)
+			if (FieldNamesDescriptor is not null)
 			{
 				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, value.FieldNamesDescriptor, options);
+				JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
 			}
-			else if (value.FieldNamesDescriptorAction is not null)
+			else if (FieldNamesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(value.FieldNamesDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
 			}
-			else if (value.FieldNamesValue is not null)
+			else if (FieldNamesValue is not null)
 			{
 				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, value.FieldNamesValue, options);
+				JsonSerializer.Serialize(writer, FieldNamesValue, options);
 			}
 
-			if (value.MetaValue is not null)
+			if (MetaValue is not null)
 			{
 				writer.WritePropertyName("_meta");
-				JsonSerializer.Serialize(writer, value.MetaValue, options);
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
-			if (value.NumericDetectionValue.HasValue)
+			if (NumericDetectionValue.HasValue)
 			{
 				writer.WritePropertyName("numeric_detection");
-				writer.WriteBooleanValue(value.NumericDetectionValue.Value);
+				writer.WriteBooleanValue(NumericDetectionValue.Value);
 			}
 
-			if (value.PropertiesValue is not null)
+			if (PropertiesValue is not null)
 			{
 				writer.WritePropertyName("properties");
-				JsonSerializer.Serialize(writer, value.PropertiesValue, options);
+				JsonSerializer.Serialize(writer, PropertiesValue, options);
 			}
 
-			if (value.RoutingDescriptor is not null)
+			if (RoutingDescriptor is not null)
 			{
 				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, value.RoutingDescriptor, options);
+				JsonSerializer.Serialize(writer, RoutingDescriptor, options);
 			}
-			else if (value.RoutingDescriptorAction is not null)
+			else if (RoutingDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(value.RoutingDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
 			}
-			else if (value.RoutingValue is not null)
+			else if (RoutingValue is not null)
 			{
 				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, value.RoutingValue, options);
+				JsonSerializer.Serialize(writer, RoutingValue, options);
 			}
 
-			if (value.SourceDescriptor is not null)
+			if (SourceDescriptor is not null)
 			{
 				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, value.SourceDescriptor, options);
+				JsonSerializer.Serialize(writer, SourceDescriptor, options);
 			}
-			else if (value.SourceDescriptorAction is not null)
+			else if (SourceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(value.SourceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
 			}
-			else if (value.SourceValue is not null)
+			else if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, value.SourceValue, options);
+				JsonSerializer.Serialize(writer, SourceValue, options);
 			}
 
-			if (value.RuntimeValue is not null)
+			if (RuntimeValue is not null)
 			{
 				writer.WritePropertyName("runtime");
-				JsonSerializer.Serialize(writer, value.RuntimeValue, options);
+				JsonSerializer.Serialize(writer, RuntimeValue, options);
 			}
 
 			writer.WriteEndObject();

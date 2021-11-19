@@ -23,10 +23,6 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class GeoLocation
-	{
-	}
-
 	public partial class Like : Union<string?, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument?>
 	{
 		public Like(string? item) : base(item)
@@ -34,6 +30,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument? item) : base(item)
+		{
+		}
+	}
+
+	public partial class SimpleQueryStringFlags : Union<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag?, string?>
+	{
+		public SimpleQueryStringFlags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? item) : base(item)
+		{
+		}
+
+		public SimpleQueryStringFlags(string? item) : base(item)
 		{
 		}
 	}

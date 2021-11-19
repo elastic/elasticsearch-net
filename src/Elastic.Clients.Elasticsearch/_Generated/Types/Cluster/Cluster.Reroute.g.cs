@@ -46,7 +46,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryAction? AllocateEmptyPrimary { get; set; }
 	}
 
-	[JsonConverter(typeof(CommandDescriptorConverter))]
 	public sealed partial class CommandDescriptor : DescriptorBase<CommandDescriptor>
 	{
 		public CommandDescriptor()
@@ -188,92 +187,88 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			AllocateEmptyPrimaryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AllocateEmptyPrimaryDescriptorAction = v);
 		}
-	}
 
-	internal sealed class CommandDescriptorConverter : JsonConverter<CommandDescriptor>
-	{
-		public override CommandDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CommandDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.CancelDescriptor is not null)
+			if (CancelDescriptor is not null)
 			{
 				writer.WritePropertyName("cancel");
-				JsonSerializer.Serialize(writer, value.CancelDescriptor, options);
+				JsonSerializer.Serialize(writer, CancelDescriptor, options);
 			}
-			else if (value.CancelDescriptorAction is not null)
+			else if (CancelDescriptorAction is not null)
 			{
 				writer.WritePropertyName("cancel");
-				JsonSerializer.Serialize(writer, new CommandCancelActionDescriptor(value.CancelDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new CommandCancelActionDescriptor(CancelDescriptorAction), options);
 			}
-			else if (value.CancelValue is not null)
+			else if (CancelValue is not null)
 			{
 				writer.WritePropertyName("cancel");
-				JsonSerializer.Serialize(writer, value.CancelValue, options);
+				JsonSerializer.Serialize(writer, CancelValue, options);
 			}
 
-			if (value.MoveDescriptor is not null)
+			if (MoveDescriptor is not null)
 			{
 				writer.WritePropertyName("move");
-				JsonSerializer.Serialize(writer, value.MoveDescriptor, options);
+				JsonSerializer.Serialize(writer, MoveDescriptor, options);
 			}
-			else if (value.MoveDescriptorAction is not null)
+			else if (MoveDescriptorAction is not null)
 			{
 				writer.WritePropertyName("move");
-				JsonSerializer.Serialize(writer, new CommandMoveActionDescriptor(value.MoveDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new CommandMoveActionDescriptor(MoveDescriptorAction), options);
 			}
-			else if (value.MoveValue is not null)
+			else if (MoveValue is not null)
 			{
 				writer.WritePropertyName("move");
-				JsonSerializer.Serialize(writer, value.MoveValue, options);
+				JsonSerializer.Serialize(writer, MoveValue, options);
 			}
 
-			if (value.AllocateReplicaDescriptor is not null)
+			if (AllocateReplicaDescriptor is not null)
 			{
 				writer.WritePropertyName("allocate_replica");
-				JsonSerializer.Serialize(writer, value.AllocateReplicaDescriptor, options);
+				JsonSerializer.Serialize(writer, AllocateReplicaDescriptor, options);
 			}
-			else if (value.AllocateReplicaDescriptorAction is not null)
+			else if (AllocateReplicaDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocate_replica");
-				JsonSerializer.Serialize(writer, new CommandAllocateReplicaActionDescriptor(value.AllocateReplicaDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new CommandAllocateReplicaActionDescriptor(AllocateReplicaDescriptorAction), options);
 			}
-			else if (value.AllocateReplicaValue is not null)
+			else if (AllocateReplicaValue is not null)
 			{
 				writer.WritePropertyName("allocate_replica");
-				JsonSerializer.Serialize(writer, value.AllocateReplicaValue, options);
+				JsonSerializer.Serialize(writer, AllocateReplicaValue, options);
 			}
 
-			if (value.AllocateStalePrimaryDescriptor is not null)
+			if (AllocateStalePrimaryDescriptor is not null)
 			{
 				writer.WritePropertyName("allocate_stale_primary");
-				JsonSerializer.Serialize(writer, value.AllocateStalePrimaryDescriptor, options);
+				JsonSerializer.Serialize(writer, AllocateStalePrimaryDescriptor, options);
 			}
-			else if (value.AllocateStalePrimaryDescriptorAction is not null)
+			else if (AllocateStalePrimaryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocate_stale_primary");
-				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(value.AllocateStalePrimaryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(AllocateStalePrimaryDescriptorAction), options);
 			}
-			else if (value.AllocateStalePrimaryValue is not null)
+			else if (AllocateStalePrimaryValue is not null)
 			{
 				writer.WritePropertyName("allocate_stale_primary");
-				JsonSerializer.Serialize(writer, value.AllocateStalePrimaryValue, options);
+				JsonSerializer.Serialize(writer, AllocateStalePrimaryValue, options);
 			}
 
-			if (value.AllocateEmptyPrimaryDescriptor is not null)
+			if (AllocateEmptyPrimaryDescriptor is not null)
 			{
 				writer.WritePropertyName("allocate_empty_primary");
-				JsonSerializer.Serialize(writer, value.AllocateEmptyPrimaryDescriptor, options);
+				JsonSerializer.Serialize(writer, AllocateEmptyPrimaryDescriptor, options);
 			}
-			else if (value.AllocateEmptyPrimaryDescriptorAction is not null)
+			else if (AllocateEmptyPrimaryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocate_empty_primary");
-				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(value.AllocateEmptyPrimaryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(AllocateEmptyPrimaryDescriptorAction), options);
 			}
-			else if (value.AllocateEmptyPrimaryValue is not null)
+			else if (AllocateEmptyPrimaryValue is not null)
 			{
 				writer.WritePropertyName("allocate_empty_primary");
-				JsonSerializer.Serialize(writer, value.AllocateEmptyPrimaryValue, options);
+				JsonSerializer.Serialize(writer, AllocateEmptyPrimaryValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -299,7 +294,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public bool AcceptDataLoss { get; set; }
 	}
 
-	[JsonConverter(typeof(CommandAllocatePrimaryActionDescriptorConverter))]
 	public sealed partial class CommandAllocatePrimaryActionDescriptor : DescriptorBase<CommandAllocatePrimaryActionDescriptor>
 	{
 		public CommandAllocatePrimaryActionDescriptor()
@@ -319,22 +313,17 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public CommandAllocatePrimaryActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
 		public CommandAllocatePrimaryActionDescriptor Node(string node) => Assign(node, (a, v) => a.NodeValue = v);
 		public CommandAllocatePrimaryActionDescriptor AcceptDataLoss(bool acceptDataLoss = true) => Assign(acceptDataLoss, (a, v) => a.AcceptDataLossValue = v);
-	}
-
-	internal sealed class CommandAllocatePrimaryActionDescriptorConverter : JsonConverter<CommandAllocatePrimaryActionDescriptor>
-	{
-		public override CommandAllocatePrimaryActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CommandAllocatePrimaryActionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value.IndexValue, options);
+			JsonSerializer.Serialize(writer, IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value.ShardValue);
+			writer.WriteNumberValue(ShardValue);
 			writer.WritePropertyName("node");
-			writer.WriteStringValue(value.NodeValue);
+			writer.WriteStringValue(NodeValue);
 			writer.WritePropertyName("accept_data_loss");
-			writer.WriteBooleanValue(value.AcceptDataLossValue);
+			writer.WriteBooleanValue(AcceptDataLossValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -354,7 +343,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string Node { get; set; }
 	}
 
-	[JsonConverter(typeof(CommandAllocateReplicaActionDescriptorConverter))]
 	public sealed partial class CommandAllocateReplicaActionDescriptor : DescriptorBase<CommandAllocateReplicaActionDescriptor>
 	{
 		public CommandAllocateReplicaActionDescriptor()
@@ -371,20 +359,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public CommandAllocateReplicaActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index) => Assign(index, (a, v) => a.IndexValue = v);
 		public CommandAllocateReplicaActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
 		public CommandAllocateReplicaActionDescriptor Node(string node) => Assign(node, (a, v) => a.NodeValue = v);
-	}
-
-	internal sealed class CommandAllocateReplicaActionDescriptorConverter : JsonConverter<CommandAllocateReplicaActionDescriptor>
-	{
-		public override CommandAllocateReplicaActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CommandAllocateReplicaActionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value.IndexValue, options);
+			JsonSerializer.Serialize(writer, IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value.ShardValue);
+			writer.WriteNumberValue(ShardValue);
 			writer.WritePropertyName("node");
-			writer.WriteStringValue(value.NodeValue);
+			writer.WriteStringValue(NodeValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -408,7 +391,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public bool? AllowPrimary { get; set; }
 	}
 
-	[JsonConverter(typeof(CommandCancelActionDescriptorConverter))]
 	public sealed partial class CommandCancelActionDescriptor : DescriptorBase<CommandCancelActionDescriptor>
 	{
 		public CommandCancelActionDescriptor()
@@ -428,24 +410,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public CommandCancelActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
 		public CommandCancelActionDescriptor Node(string node) => Assign(node, (a, v) => a.NodeValue = v);
 		public CommandCancelActionDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(allowPrimary, (a, v) => a.AllowPrimaryValue = v);
-	}
-
-	internal sealed class CommandCancelActionDescriptorConverter : JsonConverter<CommandCancelActionDescriptor>
-	{
-		public override CommandCancelActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CommandCancelActionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value.IndexValue, options);
+			JsonSerializer.Serialize(writer, IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value.ShardValue);
+			writer.WriteNumberValue(ShardValue);
 			writer.WritePropertyName("node");
-			writer.WriteStringValue(value.NodeValue);
-			if (value.AllowPrimaryValue.HasValue)
+			writer.WriteStringValue(NodeValue);
+			if (AllowPrimaryValue.HasValue)
 			{
 				writer.WritePropertyName("allow_primary");
-				writer.WriteBooleanValue(value.AllowPrimaryValue.Value);
+				writer.WriteBooleanValue(AllowPrimaryValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -471,7 +448,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public string ToNode { get; set; }
 	}
 
-	[JsonConverter(typeof(CommandMoveActionDescriptorConverter))]
 	public sealed partial class CommandMoveActionDescriptor : DescriptorBase<CommandMoveActionDescriptor>
 	{
 		public CommandMoveActionDescriptor()
@@ -491,22 +467,17 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 		public CommandMoveActionDescriptor Shard(int shard) => Assign(shard, (a, v) => a.ShardValue = v);
 		public CommandMoveActionDescriptor FromNode(string fromNode) => Assign(fromNode, (a, v) => a.FromNodeValue = v);
 		public CommandMoveActionDescriptor ToNode(string toNode) => Assign(toNode, (a, v) => a.ToNodeValue = v);
-	}
-
-	internal sealed class CommandMoveActionDescriptorConverter : JsonConverter<CommandMoveActionDescriptor>
-	{
-		public override CommandMoveActionDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CommandMoveActionDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, value.IndexValue, options);
+			JsonSerializer.Serialize(writer, IndexValue, options);
 			writer.WritePropertyName("shard");
-			writer.WriteNumberValue(value.ShardValue);
+			writer.WriteNumberValue(ShardValue);
 			writer.WritePropertyName("from_node");
-			writer.WriteStringValue(value.FromNodeValue);
+			writer.WriteStringValue(FromNodeValue);
 			writer.WritePropertyName("to_node");
-			writer.WriteStringValue(value.ToNodeValue);
+			writer.WriteStringValue(ToNodeValue);
 			writer.WriteEndObject();
 		}
 	}

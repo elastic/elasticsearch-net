@@ -30,34 +30,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public AnalyzeIndexResponse AnalyzeIndex(AnalyzeIndexRequest request) => DoRequest<AnalyzeIndexRequest, AnalyzeIndexResponse>(request);
 		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync(AnalyzeIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<AnalyzeIndexRequest, AnalyzeIndexResponse>(request, cancellationToken);
-		public AnalyzeIndexResponse AnalyzeIndex(Action<AnalyzeIndexRequestDescriptor> configureRequest = null)
+		public AnalyzeIndexResponse AnalyzeIndex<T>(Action<AnalyzeIndexRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new AnalyzeIndexRequestDescriptor();
+			var descriptor = new AnalyzeIndexRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<AnalyzeIndexRequestDescriptor, AnalyzeIndexResponse>(descriptor);
+			return DoRequest<AnalyzeIndexRequestDescriptor<T>, AnalyzeIndexResponse>(descriptor);
 		}
 
-		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync(Action<AnalyzeIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<AnalyzeIndexResponse> AnalyzeIndexAsync<T>(Action<AnalyzeIndexRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new AnalyzeIndexRequestDescriptor();
+			var descriptor = new AnalyzeIndexRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<AnalyzeIndexRequestDescriptor, AnalyzeIndexResponse>(descriptor);
+			return DoRequestAsync<AnalyzeIndexRequestDescriptor<T>, AnalyzeIndexResponse>(descriptor);
 		}
 
 		public CreateIndexResponse CreateIndex(CreateIndexRequest request) => DoRequest<CreateIndexRequest, CreateIndexResponse>(request);
 		public Task<CreateIndexResponse> CreateIndexAsync(CreateIndexRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<CreateIndexRequest, CreateIndexResponse>(request, cancellationToken);
-		public CreateIndexResponse CreateIndex(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest = null)
+		public CreateIndexResponse CreateIndex<T>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new CreateIndexRequestDescriptor(index);
+			var descriptor = new CreateIndexRequestDescriptor<T>(index);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<CreateIndexRequestDescriptor, CreateIndexResponse>(descriptor);
+			return DoRequest<CreateIndexRequestDescriptor<T>, CreateIndexResponse>(descriptor);
 		}
 
-		public Task<CreateIndexResponse> CreateIndexAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<CreateIndexResponse> CreateIndexAsync<T>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new CreateIndexRequestDescriptor(index);
+			var descriptor = new CreateIndexRequestDescriptor<T>(index);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<CreateIndexRequestDescriptor, CreateIndexResponse>(descriptor);
+			return DoRequestAsync<CreateIndexRequestDescriptor<T>, CreateIndexResponse>(descriptor);
 		}
 
 		public DeleteIndexResponse DeleteIndex(DeleteIndexRequest request) => DoRequest<DeleteIndexRequest, DeleteIndexResponse>(request);
@@ -94,18 +94,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexClearCacheResponse IndexClearCache(IndexClearCacheRequest request) => DoRequest<IndexClearCacheRequest, IndexClearCacheResponse>(request);
 		public Task<IndexClearCacheResponse> IndexClearCacheAsync(IndexClearCacheRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexClearCacheRequest, IndexClearCacheResponse>(request, cancellationToken);
-		public IndexClearCacheResponse IndexClearCache(Action<IndexClearCacheRequestDescriptor> configureRequest = null)
+		public IndexClearCacheResponse IndexClearCache<T>(Action<IndexClearCacheRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexClearCacheRequestDescriptor();
+			var descriptor = new IndexClearCacheRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexClearCacheRequestDescriptor, IndexClearCacheResponse>(descriptor);
+			return DoRequest<IndexClearCacheRequestDescriptor<T>, IndexClearCacheResponse>(descriptor);
 		}
 
-		public Task<IndexClearCacheResponse> IndexClearCacheAsync(Action<IndexClearCacheRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexClearCacheResponse> IndexClearCacheAsync<T>(Action<IndexClearCacheRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexClearCacheRequestDescriptor();
+			var descriptor = new IndexClearCacheRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexClearCacheRequestDescriptor, IndexClearCacheResponse>(descriptor);
+			return DoRequestAsync<IndexClearCacheRequestDescriptor<T>, IndexClearCacheResponse>(descriptor);
 		}
 
 		public IndexCloneResponse IndexClone(IndexCloneRequest request) => DoRequest<IndexCloneRequest, IndexCloneResponse>(request);
@@ -382,18 +382,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexGetFieldMappingResponse IndexGetFieldMapping(IndexGetFieldMappingRequest request) => DoRequest<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse>(request);
 		public Task<IndexGetFieldMappingResponse> IndexGetFieldMappingAsync(IndexGetFieldMappingRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexGetFieldMappingRequest, IndexGetFieldMappingResponse>(request, cancellationToken);
-		public IndexGetFieldMappingResponse IndexGetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null)
+		public IndexGetFieldMappingResponse IndexGetFieldMapping<T>(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexGetFieldMappingRequestDescriptor(fields);
+			var descriptor = new IndexGetFieldMappingRequestDescriptor<T>(fields);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingResponse>(descriptor);
+			return DoRequest<IndexGetFieldMappingRequestDescriptor<T>, IndexGetFieldMappingResponse>(descriptor);
 		}
 
-		public Task<IndexGetFieldMappingResponse> IndexGetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexGetFieldMappingResponse> IndexGetFieldMappingAsync<T>(Elastic.Clients.Elasticsearch.Fields fields, Action<IndexGetFieldMappingRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexGetFieldMappingRequestDescriptor(fields);
+			var descriptor = new IndexGetFieldMappingRequestDescriptor<T>(fields);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexGetFieldMappingRequestDescriptor, IndexGetFieldMappingResponse>(descriptor);
+			return DoRequestAsync<IndexGetFieldMappingRequestDescriptor<T>, IndexGetFieldMappingResponse>(descriptor);
 		}
 
 		public IndexGetIndexTemplateResponse IndexGetIndexTemplate(IndexGetIndexTemplateRequest request) => DoRequest<IndexGetIndexTemplateRequest, IndexGetIndexTemplateResponse>(request);
@@ -510,34 +510,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexPutAliasResponse IndexPutAlias(IndexPutAliasRequest request) => DoRequest<IndexPutAliasRequest, IndexPutAliasResponse>(request);
 		public Task<IndexPutAliasResponse> IndexPutAliasAsync(IndexPutAliasRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutAliasRequest, IndexPutAliasResponse>(request, cancellationToken);
-		public IndexPutAliasResponse IndexPutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<IndexPutAliasRequestDescriptor> configureRequest = null)
+		public IndexPutAliasResponse IndexPutAlias<T>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<IndexPutAliasRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexPutAliasRequestDescriptor(indices, name);
+			var descriptor = new IndexPutAliasRequestDescriptor<T>(indices, name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexPutAliasRequestDescriptor, IndexPutAliasResponse>(descriptor);
+			return DoRequest<IndexPutAliasRequestDescriptor<T>, IndexPutAliasResponse>(descriptor);
 		}
 
-		public Task<IndexPutAliasResponse> IndexPutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<IndexPutAliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexPutAliasResponse> IndexPutAliasAsync<T>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<IndexPutAliasRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexPutAliasRequestDescriptor(indices, name);
+			var descriptor = new IndexPutAliasRequestDescriptor<T>(indices, name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexPutAliasRequestDescriptor, IndexPutAliasResponse>(descriptor);
+			return DoRequestAsync<IndexPutAliasRequestDescriptor<T>, IndexPutAliasResponse>(descriptor);
 		}
 
 		public IndexPutIndexTemplateResponse IndexPutIndexTemplate(IndexPutIndexTemplateRequest request) => DoRequest<IndexPutIndexTemplateRequest, IndexPutIndexTemplateResponse>(request);
 		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync(IndexPutIndexTemplateRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexPutIndexTemplateRequest, IndexPutIndexTemplateResponse>(request, cancellationToken);
-		public IndexPutIndexTemplateResponse IndexPutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutIndexTemplateRequestDescriptor> configureRequest = null)
+		public IndexPutIndexTemplateResponse IndexPutIndexTemplate<T>(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutIndexTemplateRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexPutIndexTemplateRequestDescriptor(name);
+			var descriptor = new IndexPutIndexTemplateRequestDescriptor<T>(name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexPutIndexTemplateRequestDescriptor, IndexPutIndexTemplateResponse>(descriptor);
+			return DoRequest<IndexPutIndexTemplateRequestDescriptor<T>, IndexPutIndexTemplateResponse>(descriptor);
 		}
 
-		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutIndexTemplateRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexPutIndexTemplateResponse> IndexPutIndexTemplateAsync<T>(Elastic.Clients.Elasticsearch.Name name, Action<IndexPutIndexTemplateRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexPutIndexTemplateRequestDescriptor(name);
+			var descriptor = new IndexPutIndexTemplateRequestDescriptor<T>(name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexPutIndexTemplateRequestDescriptor, IndexPutIndexTemplateResponse>(descriptor);
+			return DoRequestAsync<IndexPutIndexTemplateRequestDescriptor<T>, IndexPutIndexTemplateResponse>(descriptor);
 		}
 
 		public IndexPutMappingResponse IndexPutMapping(IndexPutMappingRequest request) => DoRequest<IndexPutMappingRequest, IndexPutMappingResponse>(request);
@@ -734,18 +734,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexStatsResponse IndexStats(IndexStatsRequest request) => DoRequest<IndexStatsRequest, IndexStatsResponse>(request);
 		public Task<IndexStatsResponse> IndexStatsAsync(IndexStatsRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexStatsRequest, IndexStatsResponse>(request, cancellationToken);
-		public IndexStatsResponse IndexStats(Action<IndexStatsRequestDescriptor> configureRequest = null)
+		public IndexStatsResponse IndexStats<T>(Action<IndexStatsRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexStatsRequestDescriptor();
+			var descriptor = new IndexStatsRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexStatsRequestDescriptor, IndexStatsResponse>(descriptor);
+			return DoRequest<IndexStatsRequestDescriptor<T>, IndexStatsResponse>(descriptor);
 		}
 
-		public Task<IndexStatsResponse> IndexStatsAsync(Action<IndexStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexStatsResponse> IndexStatsAsync<T>(Action<IndexStatsRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexStatsRequestDescriptor();
+			var descriptor = new IndexStatsRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexStatsRequestDescriptor, IndexStatsResponse>(descriptor);
+			return DoRequestAsync<IndexStatsRequestDescriptor<T>, IndexStatsResponse>(descriptor);
 		}
 
 		public IndexUpdateAliasesResponse IndexUpdateAliases(IndexUpdateAliasesRequest request) => DoRequest<IndexUpdateAliasesRequest, IndexUpdateAliasesResponse>(request);
@@ -766,18 +766,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		public IndexValidateQueryResponse IndexValidateQuery(IndexValidateQueryRequest request) => DoRequest<IndexValidateQueryRequest, IndexValidateQueryResponse>(request);
 		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync(IndexValidateQueryRequest request, CancellationToken cancellationToken = default) => DoRequestAsync<IndexValidateQueryRequest, IndexValidateQueryResponse>(request, cancellationToken);
-		public IndexValidateQueryResponse IndexValidateQuery(Action<IndexValidateQueryRequestDescriptor> configureRequest = null)
+		public IndexValidateQueryResponse IndexValidateQuery<T>(Action<IndexValidateQueryRequestDescriptor<T>> configureRequest = null)
 		{
-			var descriptor = new IndexValidateQueryRequestDescriptor();
+			var descriptor = new IndexValidateQueryRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<IndexValidateQueryRequestDescriptor, IndexValidateQueryResponse>(descriptor);
+			return DoRequest<IndexValidateQueryRequestDescriptor<T>, IndexValidateQueryResponse>(descriptor);
 		}
 
-		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync(Action<IndexValidateQueryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<IndexValidateQueryResponse> IndexValidateQueryAsync<T>(Action<IndexValidateQueryRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new IndexValidateQueryRequestDescriptor();
+			var descriptor = new IndexValidateQueryRequestDescriptor<T>();
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<IndexValidateQueryRequestDescriptor, IndexValidateQueryResponse>(descriptor);
+			return DoRequestAsync<IndexValidateQueryRequestDescriptor<T>, IndexValidateQueryResponse>(descriptor);
 		}
 
 		public ShrinkIndexResponse ShrinkIndex(ShrinkIndexRequest request) => DoRequest<ShrinkIndexRequest, ShrinkIndexResponse>(request);

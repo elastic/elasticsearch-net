@@ -43,7 +43,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 
-	[JsonConverter(typeof(IndexDeleteDataStreamRequestDescriptorConverter))]
 	public sealed partial class IndexDeleteDataStreamRequestDescriptor : RequestDescriptorBase<IndexDeleteDataStreamRequestDescriptor, IndexDeleteDataStreamRequestParameters>
 	{
 		public IndexDeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
@@ -59,12 +58,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
 		public IndexDeleteDataStreamRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	}
-
-	internal sealed class IndexDeleteDataStreamRequestDescriptorConverter : JsonConverter<IndexDeleteDataStreamRequestDescriptor>
-	{
-		public override IndexDeleteDataStreamRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexDeleteDataStreamRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

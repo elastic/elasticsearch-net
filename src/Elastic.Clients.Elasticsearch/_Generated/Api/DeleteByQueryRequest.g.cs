@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.GetSourceConfig? Source { get => Q<Elastic.Clients.Elasticsearch.GetSourceConfig?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? Source { get => Q<Union<bool?, Elastic.Clients.Elasticsearch.Fields?>?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.GetSourceConfig? Source { get => Q<Elastic.Clients.Elasticsearch.GetSourceConfig?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -243,8 +243,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	}
 
-	[JsonConverter(typeof(DeleteByQueryRequestDescriptorConverter))]
-	public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptorBase<DeleteByQueryRequestDescriptor, DeleteByQueryRequestParameters>
+	public sealed partial class DeleteByQueryRequestDescriptor<T> : RequestDescriptorBase<DeleteByQueryRequestDescriptor<T>, DeleteByQueryRequestParameters>
 	{
 		public DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
@@ -254,134 +253,130 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor> configure) => configure.Invoke(this);
+		internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public DeleteByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public DeleteByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public DeleteByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
-		public DeleteByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public DeleteByQueryRequestDescriptor Df(string? df) => Qs("df", df);
-		public DeleteByQueryRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public DeleteByQueryRequestDescriptor From(long? from) => Qs("from", from);
-		public DeleteByQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public DeleteByQueryRequestDescriptor Lenient(bool? lenient) => Qs("lenient", lenient);
-		public DeleteByQueryRequestDescriptor MaxDocs(long? maxDocs) => Qs("max_docs", maxDocs);
-		public DeleteByQueryRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-		public DeleteByQueryRequestDescriptor Refresh(bool? refresh) => Qs("refresh", refresh);
-		public DeleteByQueryRequestDescriptor RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
-		public DeleteByQueryRequestDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-		public DeleteByQueryRequestDescriptor Routing(string? routing) => Qs("routing", routing);
-		public DeleteByQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
-		public DeleteByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
-		public DeleteByQueryRequestDescriptor ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-		public DeleteByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
-		public DeleteByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public DeleteByQueryRequestDescriptor Size(long? size) => Qs("size", size);
-		public DeleteByQueryRequestDescriptor Slices(long? slices) => Qs("slices", slices);
-		public DeleteByQueryRequestDescriptor Sort(IEnumerable<string>? sort) => Qs("sort", sort);
-		public DeleteByQueryRequestDescriptor Source(Union<bool?, Elastic.Clients.Elasticsearch.Fields?>? source) => Qs("_source", source);
-		public DeleteByQueryRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public DeleteByQueryRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public DeleteByQueryRequestDescriptor Stats(IEnumerable<string>? stats) => Qs("stats", stats);
-		public DeleteByQueryRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public DeleteByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public DeleteByQueryRequestDescriptor Version(bool? version) => Qs("version", version);
-		public DeleteByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public DeleteByQueryRequestDescriptor WaitForCompletion(bool? waitForCompletion) => Qs("wait_for_completion", waitForCompletion);
+		public DeleteByQueryRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public DeleteByQueryRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public DeleteByQueryRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public DeleteByQueryRequestDescriptor<T> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
+		public DeleteByQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public DeleteByQueryRequestDescriptor<T> Df(string? df) => Qs("df", df);
+		public DeleteByQueryRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DeleteByQueryRequestDescriptor<T> From(long? from) => Qs("from", from);
+		public DeleteByQueryRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public DeleteByQueryRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public DeleteByQueryRequestDescriptor<T> MaxDocs(long? maxDocs) => Qs("max_docs", maxDocs);
+		public DeleteByQueryRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
+		public DeleteByQueryRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
+		public DeleteByQueryRequestDescriptor<T> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
+		public DeleteByQueryRequestDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteByQueryRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public DeleteByQueryRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
+		public DeleteByQueryRequestDescriptor<T> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public DeleteByQueryRequestDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
+		public DeleteByQueryRequestDescriptor<T> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
+		public DeleteByQueryRequestDescriptor<T> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
+		public DeleteByQueryRequestDescriptor<T> Size(long? size) => Qs("size", size);
+		public DeleteByQueryRequestDescriptor<T> Slices(long? slices) => Qs("slices", slices);
+		public DeleteByQueryRequestDescriptor<T> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
+		public DeleteByQueryRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.GetSourceConfig? source) => Qs("_source", source);
+		public DeleteByQueryRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public DeleteByQueryRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public DeleteByQueryRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
+		public DeleteByQueryRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public DeleteByQueryRequestDescriptor<T> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public DeleteByQueryRequestDescriptor<T> Version(bool? version) => Qs("version", version);
+		public DeleteByQueryRequestDescriptor<T> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public DeleteByQueryRequestDescriptor<T> WaitForCompletion(bool? waitForCompletion) => Qs("wait_for_completion", waitForCompletion);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
 
-		internal SlicedScrollDescriptor SliceDescriptor { get; private set; }
+		internal SlicedScrollDescriptor<T> SliceDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		internal Action<SlicedScrollDescriptor> SliceDescriptorAction { get; private set; }
+		internal Action<SlicedScrollDescriptor<T>> SliceDescriptorAction { get; private set; }
 
-		public DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public DeleteByQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public DeleteByQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public DeleteByQueryRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public DeleteByQueryRequestDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public DeleteByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+		public DeleteByQueryRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
 		{
 			SliceDescriptor = null;
 			SliceDescriptorAction = null;
 			return Assign(slice, (a, v) => a.SliceValue = v);
 		}
 
-		public DeleteByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor descriptor)
+		public DeleteByQueryRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T> descriptor)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SliceDescriptor = v);
 		}
 
-		public DeleteByQueryRequestDescriptor Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> configure)
+		public DeleteByQueryRequestDescriptor<T> Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> configure)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SliceDescriptorAction = v);
 		}
-	}
 
-	internal sealed class DeleteByQueryRequestDescriptorConverter : JsonConverter<DeleteByQueryRequestDescriptor>
-	{
-		public override DeleteByQueryRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DeleteByQueryRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.QueryDescriptor is not null)
+			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
 			}
-			else if (value.QueryDescriptorAction is not null)
+			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
 			}
-			else if (value.QueryValue is not null)
+			else if (QueryValue is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryValue, options);
+				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (value.SliceDescriptor is not null)
+			if (SliceDescriptor is not null)
 			{
 				writer.WritePropertyName("slice");
-				JsonSerializer.Serialize(writer, value.SliceDescriptor, options);
+				JsonSerializer.Serialize(writer, SliceDescriptor, options);
 			}
-			else if (value.SliceDescriptorAction is not null)
+			else if (SliceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("slice");
-				JsonSerializer.Serialize(writer, new SlicedScrollDescriptor(value.SliceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SlicedScrollDescriptor<T>(SliceDescriptorAction), options);
 			}
-			else if (value.SliceValue is not null)
+			else if (SliceValue is not null)
 			{
 				writer.WritePropertyName("slice");
-				JsonSerializer.Serialize(writer, value.SliceValue, options);
+				JsonSerializer.Serialize(writer, SliceValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -53,7 +53,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 	}
 
-	[JsonConverter(typeof(IngestGetPipelineRequestDescriptorConverter))]
 	public sealed partial class IngestGetPipelineRequestDescriptor : RequestDescriptorBase<IngestGetPipelineRequestDescriptor, IngestGetPipelineRequestParameters>
 	{
 		public IngestGetPipelineRequestDescriptor()
@@ -70,12 +69,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		protected override bool SupportsBody => false;
 		public IngestGetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IngestGetPipelineRequestDescriptor Summary(bool? summary) => Qs("summary", summary);
-	}
-
-	internal sealed class IngestGetPipelineRequestDescriptorConverter : JsonConverter<IngestGetPipelineRequestDescriptor>
-	{
-		public override IngestGetPipelineRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IngestGetPipelineRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

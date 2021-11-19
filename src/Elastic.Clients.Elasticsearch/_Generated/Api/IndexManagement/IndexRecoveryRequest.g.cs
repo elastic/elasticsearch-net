@@ -53,7 +53,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 	}
 
-	[JsonConverter(typeof(IndexRecoveryRequestDescriptorConverter))]
 	public sealed partial class IndexRecoveryRequestDescriptor : RequestDescriptorBase<IndexRecoveryRequestDescriptor, IndexRecoveryRequestParameters>
 	{
 		public IndexRecoveryRequestDescriptor()
@@ -70,12 +69,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => false;
 		public IndexRecoveryRequestDescriptor ActiveOnly(bool? activeOnly) => Qs("active_only", activeOnly);
 		public IndexRecoveryRequestDescriptor Detailed(bool? detailed) => Qs("detailed", detailed);
-	}
-
-	internal sealed class IndexRecoveryRequestDescriptorConverter : JsonConverter<IndexRecoveryRequestDescriptor>
-	{
-		public override IndexRecoveryRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexRecoveryRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();

@@ -5,6 +5,9 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	/// <summary>
+	/// A base for converters handling field name query variants.
+	/// </summary>
 	internal abstract class FieldNameQueryConverterBase<T> : JsonConverter<T> where T : FieldNameQueryBase
 	{
 		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

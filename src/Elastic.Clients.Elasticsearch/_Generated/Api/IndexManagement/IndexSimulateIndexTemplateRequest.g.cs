@@ -54,7 +54,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping? Template { get; set; }
 	}
 
-	[JsonConverter(typeof(IndexSimulateIndexTemplateRequestDescriptorConverter))]
 	public sealed partial class IndexSimulateIndexTemplateRequestDescriptor : RequestDescriptorBase<IndexSimulateIndexTemplateRequestDescriptor, IndexSimulateIndexTemplateRequestParameters>
 	{
 		public IndexSimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
@@ -104,46 +103,42 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			TemplateDescriptorAction = null;
 			return Assign(configure, (a, v) => a.TemplateDescriptorAction = v);
 		}
-	}
 
-	internal sealed class IndexSimulateIndexTemplateRequestDescriptorConverter : JsonConverter<IndexSimulateIndexTemplateRequestDescriptor>
-	{
-		public override IndexSimulateIndexTemplateRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, IndexSimulateIndexTemplateRequestDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.IndexPatternsValue is not null)
+			if (IndexPatternsValue is not null)
 			{
 				writer.WritePropertyName("index_patterns");
-				JsonSerializer.Serialize(writer, value.IndexPatternsValue, options);
+				JsonSerializer.Serialize(writer, IndexPatternsValue, options);
 			}
 
-			if (value.ComposedOfValue is not null)
+			if (ComposedOfValue is not null)
 			{
 				writer.WritePropertyName("composed_of");
-				JsonSerializer.Serialize(writer, value.ComposedOfValue, options);
+				JsonSerializer.Serialize(writer, ComposedOfValue, options);
 			}
 
-			if (value.OverlappingValue is not null)
+			if (OverlappingValue is not null)
 			{
 				writer.WritePropertyName("overlapping");
-				JsonSerializer.Serialize(writer, value.OverlappingValue, options);
+				JsonSerializer.Serialize(writer, OverlappingValue, options);
 			}
 
-			if (value.TemplateDescriptor is not null)
+			if (TemplateDescriptor is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, value.TemplateDescriptor, options);
+				JsonSerializer.Serialize(writer, TemplateDescriptor, options);
 			}
-			else if (value.TemplateDescriptorAction is not null)
+			else if (TemplateDescriptorAction is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, new TemplateMappingDescriptor(value.TemplateDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TemplateMappingDescriptor(TemplateDescriptorAction), options);
 			}
-			else if (value.TemplateValue is not null)
+			else if (TemplateValue is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, value.TemplateValue, options);
+				JsonSerializer.Serialize(writer, TemplateValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -348,130 +348,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
 	}
 
-	public partial class CompletionSuggester : SuggesterBase, ISuggestContainerVariant
-	{
-		[JsonIgnore]
-		string ISuggestContainerVariant.SuggestContainerVariantName => "completion";
-		[JsonInclude]
-		[JsonPropertyName("contexts")]
-		public Dictionary<string, object>? Contexts { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("fuzzy")]
-		public Elastic.Clients.Elasticsearch.SuggestFuzziness? Fuzzy { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix")]
-		public string? Prefix { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("regex")]
-		public string? Regex { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("skip_duplicates")]
-		public bool? SkipDuplicates { get; set; }
-	}
-
-	[JsonConverter(typeof(CompletionSuggesterDescriptorConverter))]
-	public sealed partial class CompletionSuggesterDescriptor : DescriptorBase<CompletionSuggesterDescriptor>, ISuggestContainerVariantDescriptor
-	{
-		public CompletionSuggesterDescriptor()
-		{
-		}
-
-		internal CompletionSuggesterDescriptor(Action<CompletionSuggesterDescriptor> configure) => configure.Invoke(this);
-		internal Dictionary<string, object>? ContextsValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.SuggestFuzziness? FuzzyValue { get; private set; }
-
-		internal string? PrefixValue { get; private set; }
-
-		internal string? RegexValue { get; private set; }
-
-		internal bool? SkipDuplicatesValue { get; private set; }
-
-		internal SuggestFuzzinessDescriptor FuzzyDescriptor { get; private set; }
-
-		internal Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; private set; }
-
-		public CompletionSuggesterDescriptor Contexts(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ContextsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.SuggestFuzziness? fuzzy)
-		{
-			FuzzyDescriptor = null;
-			FuzzyDescriptorAction = null;
-			return Assign(fuzzy, (a, v) => a.FuzzyValue = v);
-		}
-
-		public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.SuggestFuzzinessDescriptor descriptor)
-		{
-			FuzzyValue = null;
-			FuzzyDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.FuzzyDescriptor = v);
-		}
-
-		public CompletionSuggesterDescriptor Fuzzy(Action<Elastic.Clients.Elasticsearch.SuggestFuzzinessDescriptor> configure)
-		{
-			FuzzyValue = null;
-			FuzzyDescriptorAction = null;
-			return Assign(configure, (a, v) => a.FuzzyDescriptorAction = v);
-		}
-
-		public CompletionSuggesterDescriptor Prefix(string? prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
-		public CompletionSuggesterDescriptor Regex(string? regex) => Assign(regex, (a, v) => a.RegexValue = v);
-		public CompletionSuggesterDescriptor SkipDuplicates(bool? skipDuplicates = true) => Assign(skipDuplicates, (a, v) => a.SkipDuplicatesValue = v);
-	}
-
-	internal sealed class CompletionSuggesterDescriptorConverter : JsonConverter<CompletionSuggesterDescriptor>
-	{
-		public override CompletionSuggesterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, CompletionSuggesterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.ContextsValue is not null)
-			{
-				writer.WritePropertyName("contexts");
-				JsonSerializer.Serialize(writer, value.ContextsValue, options);
-			}
-
-			if (value.FuzzyDescriptor is not null)
-			{
-				writer.WritePropertyName("fuzzy");
-				JsonSerializer.Serialize(writer, value.FuzzyDescriptor, options);
-			}
-			else if (value.FuzzyDescriptorAction is not null)
-			{
-				writer.WritePropertyName("fuzzy");
-				JsonSerializer.Serialize(writer, new SuggestFuzzinessDescriptor(value.FuzzyDescriptorAction), options);
-			}
-			else if (value.FuzzyValue is not null)
-			{
-				writer.WritePropertyName("fuzzy");
-				JsonSerializer.Serialize(writer, value.FuzzyValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.PrefixValue))
-			{
-				writer.WritePropertyName("prefix");
-				writer.WriteStringValue(value.PrefixValue);
-			}
-
-			if (!string.IsNullOrEmpty(value.RegexValue))
-			{
-				writer.WritePropertyName("regex");
-				writer.WriteStringValue(value.RegexValue);
-			}
-
-			if (value.SkipDuplicatesValue.HasValue)
-			{
-				writer.WritePropertyName("skip_duplicates");
-				writer.WriteBooleanValue(value.SkipDuplicatesValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class CompletionSuggestOption<TDocument>
 	{
 		[JsonInclude]
@@ -515,228 +391,27 @@ namespace Elastic.Clients.Elasticsearch
 		public string Text { get; init; }
 	}
 
-	public partial class DateField
+	public partial class CoordsGeoBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		[JsonPropertyName("top")]
+		public double Top { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		[JsonPropertyName("bottom")]
+		public double Bottom { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("include_unmapped")]
-		public bool? IncludeUnmapped { get; set; }
-	}
+		[JsonPropertyName("left")]
+		public double Left { get; init; }
 
-	[JsonConverter(typeof(DateFieldDescriptorConverter))]
-	public sealed partial class DateFieldDescriptor : DescriptorBase<DateFieldDescriptor>
-	{
-		public DateFieldDescriptor()
-		{
-		}
-
-		internal DateFieldDescriptor(Action<DateFieldDescriptor> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
-
-		internal string? FormatValue { get; private set; }
-
-		internal bool? IncludeUnmappedValue { get; private set; }
-
-		public DateFieldDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateFieldDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public DateFieldDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a.IncludeUnmappedValue = v);
-	}
-
-	internal sealed class DateFieldDescriptorConverter : JsonConverter<DateFieldDescriptor>
-	{
-		public override DateFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DateFieldDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (!string.IsNullOrEmpty(value.FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.FormatValue);
-			}
-
-			if (value.IncludeUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("include_unmapped");
-				writer.WriteBooleanValue(value.IncludeUnmappedValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
+		[JsonInclude]
+		[JsonPropertyName("right")]
+		public double Right { get; init; }
 	}
 
 	public abstract partial class DictionaryResponseBase<TKey, TValue> : ResponseBase
 	{
-	}
-
-	public partial class DirectGenerator
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public string Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_edits")]
-		public int? MaxEdits { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_inspections")]
-		public float? MaxInspections { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_term_freq")]
-		public float? MaxTermFreq { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_doc_freq")]
-		public float? MinDocFreq { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_word_length")]
-		public int? MinWordLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("post_filter")]
-		public string? PostFilter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("pre_filter")]
-		public string? PreFilter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
-		public int? PrefixLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("suggest_mode")]
-		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
-	}
-
-	[JsonConverter(typeof(DirectGeneratorDescriptorConverter))]
-	public sealed partial class DirectGeneratorDescriptor : DescriptorBase<DirectGeneratorDescriptor>
-	{
-		public DirectGeneratorDescriptor()
-		{
-		}
-
-		internal DirectGeneratorDescriptor(Action<DirectGeneratorDescriptor> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
-
-		internal int? MaxEditsValue { get; private set; }
-
-		internal float? MaxInspectionsValue { get; private set; }
-
-		internal float? MaxTermFreqValue { get; private set; }
-
-		internal float? MinDocFreqValue { get; private set; }
-
-		internal int? MinWordLengthValue { get; private set; }
-
-		internal string? PostFilterValue { get; private set; }
-
-		internal string? PreFilterValue { get; private set; }
-
-		internal int? PrefixLengthValue { get; private set; }
-
-		internal int? SizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; private set; }
-
-		public DirectGeneratorDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DirectGeneratorDescriptor MaxEdits(int? maxEdits) => Assign(maxEdits, (a, v) => a.MaxEditsValue = v);
-		public DirectGeneratorDescriptor MaxInspections(float? maxInspections) => Assign(maxInspections, (a, v) => a.MaxInspectionsValue = v);
-		public DirectGeneratorDescriptor MaxTermFreq(float? maxTermFreq) => Assign(maxTermFreq, (a, v) => a.MaxTermFreqValue = v);
-		public DirectGeneratorDescriptor MinDocFreq(float? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
-		public DirectGeneratorDescriptor MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
-		public DirectGeneratorDescriptor PostFilter(string? postFilter) => Assign(postFilter, (a, v) => a.PostFilterValue = v);
-		public DirectGeneratorDescriptor PreFilter(string? preFilter) => Assign(preFilter, (a, v) => a.PreFilterValue = v);
-		public DirectGeneratorDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public DirectGeneratorDescriptor Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Assign(suggestMode, (a, v) => a.SuggestModeValue = v);
-	}
-
-	internal sealed class DirectGeneratorDescriptorConverter : JsonConverter<DirectGeneratorDescriptor>
-	{
-		public override DirectGeneratorDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, DirectGeneratorDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.MaxEditsValue.HasValue)
-			{
-				writer.WritePropertyName("max_edits");
-				writer.WriteNumberValue(value.MaxEditsValue.Value);
-			}
-
-			if (value.MaxInspectionsValue.HasValue)
-			{
-				writer.WritePropertyName("max_inspections");
-				writer.WriteNumberValue(value.MaxInspectionsValue.Value);
-			}
-
-			if (value.MaxTermFreqValue.HasValue)
-			{
-				writer.WritePropertyName("max_term_freq");
-				writer.WriteNumberValue(value.MaxTermFreqValue.Value);
-			}
-
-			if (value.MinDocFreqValue.HasValue)
-			{
-				writer.WritePropertyName("min_doc_freq");
-				writer.WriteNumberValue(value.MinDocFreqValue.Value);
-			}
-
-			if (value.MinWordLengthValue.HasValue)
-			{
-				writer.WritePropertyName("min_word_length");
-				writer.WriteNumberValue(value.MinWordLengthValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.PostFilterValue))
-			{
-				writer.WritePropertyName("post_filter");
-				writer.WriteStringValue(value.PostFilterValue);
-			}
-
-			if (!string.IsNullOrEmpty(value.PreFilterValue))
-			{
-				writer.WritePropertyName("pre_filter");
-				writer.WriteStringValue(value.PreFilterValue);
-			}
-
-			if (value.PrefixLengthValue.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value.PrefixLengthValue.Value);
-			}
-
-			if (value.SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(value.SizeValue.Value);
-			}
-
-			if (value.SuggestModeValue is not null)
-			{
-				writer.WritePropertyName("suggest_mode");
-				JsonSerializer.Serialize(writer, value.SuggestModeValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class DocStats
@@ -748,6 +423,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("deleted")]
 		public long Deleted { get; init; }
+	}
+
+	public partial class EmptyObject
+	{
 	}
 
 	public partial class ErrorCause
@@ -872,64 +551,6 @@ namespace Elastic.Clients.Elasticsearch
 		public int? FastPath { get; init; }
 	}
 
-	public partial class FieldAndFormat
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public string Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include_unmapped")]
-		public bool? IncludeUnmapped { get; set; }
-	}
-
-	[JsonConverter(typeof(FieldAndFormatDescriptorConverter))]
-	public sealed partial class FieldAndFormatDescriptor : DescriptorBase<FieldAndFormatDescriptor>
-	{
-		public FieldAndFormatDescriptor()
-		{
-		}
-
-		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
-
-		internal string? FormatValue { get; private set; }
-
-		internal bool? IncludeUnmappedValue { get; private set; }
-
-		public FieldAndFormatDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldAndFormatDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public FieldAndFormatDescriptor IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a.IncludeUnmappedValue = v);
-	}
-
-	internal sealed class FieldAndFormatDescriptorConverter : JsonConverter<FieldAndFormatDescriptor>
-	{
-		public override FieldAndFormatDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FieldAndFormatDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (!string.IsNullOrEmpty(value.FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.FormatValue);
-			}
-
-			if (value.IncludeUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("include_unmapped");
-				writer.WriteBooleanValue(value.IncludeUnmappedValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class FieldCollapse
 	{
 		[JsonInclude]
@@ -945,77 +566,71 @@ namespace Elastic.Clients.Elasticsearch
 		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	[JsonConverter(typeof(FieldCollapseDescriptorConverter))]
-	public sealed partial class FieldCollapseDescriptor : DescriptorBase<FieldCollapseDescriptor>
+	public sealed partial class FieldCollapseDescriptor<T> : DescriptorBase<FieldCollapseDescriptor<T>>
 	{
 		public FieldCollapseDescriptor()
 		{
 		}
 
-		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor> configure) => configure.Invoke(this);
+		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<T>> configure) => configure.Invoke(this);
 		internal string FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
 
 		internal int? MaxConcurrentGroupSearchesValue { get; private set; }
 
-		internal InnerHitsDescriptor InnerHitsDescriptor { get; private set; }
+		internal InnerHitsDescriptor<T> InnerHitsDescriptor { get; private set; }
 
-		internal Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; private set; }
+		internal Action<InnerHitsDescriptor<T>> InnerHitsDescriptorAction { get; private set; }
 
-		public FieldCollapseDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldCollapseDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		public FieldCollapseDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
 		{
 			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
 		}
 
-		public FieldCollapseDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor descriptor)
+		public FieldCollapseDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor<T> descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
 		}
 
-		public FieldCollapseDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor> configure)
+		public FieldCollapseDescriptor<T> InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor<T>> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
 		}
 
-		public FieldCollapseDescriptor MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
-	}
-
-	internal sealed class FieldCollapseDescriptorConverter : JsonConverter<FieldCollapseDescriptor>
-	{
-		public override FieldCollapseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, FieldCollapseDescriptor value, JsonSerializerOptions options)
+		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (value.InnerHitsDescriptor is not null)
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, value.InnerHitsDescriptor, options);
+				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
 			}
-			else if (value.InnerHitsDescriptorAction is not null)
+			else if (InnerHitsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(value.InnerHitsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<T>(InnerHitsDescriptorAction), options);
 			}
-			else if (value.InnerHitsValue is not null)
+			else if (InnerHitsValue is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, value.InnerHitsValue, options);
+				JsonSerializer.Serialize(writer, InnerHitsValue, options);
 			}
 
-			if (value.MaxConcurrentGroupSearchesValue.HasValue)
+			if (MaxConcurrentGroupSearchesValue.HasValue)
 			{
 				writer.WritePropertyName("max_concurrent_group_searches");
-				writer.WriteNumberValue(value.MaxConcurrentGroupSearchesValue.Value);
+				writer.WriteNumberValue(MaxConcurrentGroupSearchesValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -1082,8 +697,10 @@ namespace Elastic.Clients.Elasticsearch
 		public long TotalTimeInMillis { get; init; }
 	}
 
-	public partial class GeoDistanceSort
+	public partial class GeoDistanceSort : ISortOptionsVariant
 	{
+		[JsonIgnore]
+		string ISortOptionsVariant.SortOptionsVariantName => "_geo_distance";
 		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
@@ -1093,12 +710,23 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("unit")]
 		public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; init; }
+	}
+
+	public partial class GeoHashLocation
+	{
+		[JsonInclude]
+		[JsonPropertyName("geohash")]
+		public string Geohash { get; init; }
 	}
 
 	public partial class GeoLine
@@ -1238,14 +866,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Union<string?, int?>? MaxAnalyzedOffset { get; set; }
 	}
 
-	[JsonConverter(typeof(HighlightDescriptorConverter))]
-	public sealed partial class HighlightDescriptor : DescriptorBase<HighlightDescriptor>
+	public sealed partial class HighlightDescriptor<T> : DescriptorBase<HighlightDescriptor<T>>
 	{
 		public HighlightDescriptor()
 		{
 		}
 
-		internal HighlightDescriptor(Action<HighlightDescriptor> configure) => configure.Invoke(this);
+		internal HighlightDescriptor(Action<HighlightDescriptor<T>> configure) => configure.Invoke(this);
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.HighlightField> FieldsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; private set; }
@@ -1286,182 +913,177 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Union<string?, int?>? MaxAnalyzedOffsetValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor HighlightQueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> HighlightQueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> HighlightQueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> HighlightQueryDescriptorAction { get; private set; }
 
-		public HighlightDescriptor Fields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>> selector) => Assign(selector, (a, v) => a.FieldsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>()));
-		public HighlightDescriptor Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public HighlightDescriptor BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
-		public HighlightDescriptor BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
-		public HighlightDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
-		public HighlightDescriptor BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
-		public HighlightDescriptor Encoder(Elastic.Clients.Elasticsearch.HighlighterEncoder? encoder) => Assign(encoder, (a, v) => a.EncoderValue = v);
-		public HighlightDescriptor Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
-		public HighlightDescriptor FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
-		public HighlightDescriptor FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
-		public HighlightDescriptor MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
-		public HighlightDescriptor NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
-		public HighlightDescriptor NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);
-		public HighlightDescriptor Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public HighlightDescriptor PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a.PostTagsValue = v);
-		public HighlightDescriptor PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
-		public HighlightDescriptor RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
-		public HighlightDescriptor TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
-		public HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
+		public HighlightDescriptor<T> Fields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>> selector) => Assign(selector, (a, v) => a.FieldsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>()));
+		public HighlightDescriptor<T> Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public HighlightDescriptor<T> BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
+		public HighlightDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
+		public HighlightDescriptor<T> BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
+		public HighlightDescriptor<T> BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
+		public HighlightDescriptor<T> Encoder(Elastic.Clients.Elasticsearch.HighlighterEncoder? encoder) => Assign(encoder, (a, v) => a.EncoderValue = v);
+		public HighlightDescriptor<T> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
+		public HighlightDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
+		public HighlightDescriptor<T> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
+		public HighlightDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
+		public HighlightDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
+		public HighlightDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);
+		public HighlightDescriptor<T> Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
+		public HighlightDescriptor<T> PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a.PostTagsValue = v);
+		public HighlightDescriptor<T> PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
+		public HighlightDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
+		public HighlightDescriptor<T> TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
+		public HighlightDescriptor<T> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
 		{
 			HighlightQueryDescriptor = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(highlightQuery, (a, v) => a.HighlightQueryValue = v);
 		}
 
-		public HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public HighlightDescriptor<T> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightQueryDescriptor = v);
 		}
 
-		public HighlightDescriptor HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public HighlightDescriptor<T> HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.HighlightQueryDescriptorAction = v);
 		}
 
-		public HighlightDescriptor MaxAnalyzedOffset(Union<string?, int?>? maxAnalyzedOffset) => Assign(maxAnalyzedOffset, (a, v) => a.MaxAnalyzedOffsetValue = v);
-	}
-
-	internal sealed class HighlightDescriptorConverter : JsonConverter<HighlightDescriptor>
-	{
-		public override HighlightDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, HighlightDescriptor value, JsonSerializerOptions options)
+		public HighlightDescriptor<T> MaxAnalyzedOffset(Union<string?, int?>? maxAnalyzedOffset) => Assign(maxAnalyzedOffset, (a, v) => a.MaxAnalyzedOffsetValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, value.FieldsValue, options);
-			if (value.TypeValue is not null)
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+			if (TypeValue is not null)
 			{
 				writer.WritePropertyName("type");
-				JsonSerializer.Serialize(writer, value.TypeValue, options);
+				JsonSerializer.Serialize(writer, TypeValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.BoundaryCharsValue))
+			if (!string.IsNullOrEmpty(BoundaryCharsValue))
 			{
 				writer.WritePropertyName("boundary_chars");
-				writer.WriteStringValue(value.BoundaryCharsValue);
+				writer.WriteStringValue(BoundaryCharsValue);
 			}
 
-			if (value.BoundaryMaxScanValue.HasValue)
+			if (BoundaryMaxScanValue.HasValue)
 			{
 				writer.WritePropertyName("boundary_max_scan");
-				writer.WriteNumberValue(value.BoundaryMaxScanValue.Value);
+				writer.WriteNumberValue(BoundaryMaxScanValue.Value);
 			}
 
-			if (value.BoundaryScannerValue is not null)
+			if (BoundaryScannerValue is not null)
 			{
 				writer.WritePropertyName("boundary_scanner");
-				JsonSerializer.Serialize(writer, value.BoundaryScannerValue, options);
+				JsonSerializer.Serialize(writer, BoundaryScannerValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.BoundaryScannerLocaleValue))
+			if (!string.IsNullOrEmpty(BoundaryScannerLocaleValue))
 			{
 				writer.WritePropertyName("boundary_scanner_locale");
-				writer.WriteStringValue(value.BoundaryScannerLocaleValue);
+				writer.WriteStringValue(BoundaryScannerLocaleValue);
 			}
 
-			if (value.EncoderValue is not null)
+			if (EncoderValue is not null)
 			{
 				writer.WritePropertyName("encoder");
-				JsonSerializer.Serialize(writer, value.EncoderValue, options);
+				JsonSerializer.Serialize(writer, EncoderValue, options);
 			}
 
-			if (value.FragmenterValue is not null)
+			if (FragmenterValue is not null)
 			{
 				writer.WritePropertyName("fragmenter");
-				JsonSerializer.Serialize(writer, value.FragmenterValue, options);
+				JsonSerializer.Serialize(writer, FragmenterValue, options);
 			}
 
-			if (value.FragmentOffsetValue.HasValue)
+			if (FragmentOffsetValue.HasValue)
 			{
 				writer.WritePropertyName("fragment_offset");
-				writer.WriteNumberValue(value.FragmentOffsetValue.Value);
+				writer.WriteNumberValue(FragmentOffsetValue.Value);
 			}
 
-			if (value.FragmentSizeValue.HasValue)
+			if (FragmentSizeValue.HasValue)
 			{
 				writer.WritePropertyName("fragment_size");
-				writer.WriteNumberValue(value.FragmentSizeValue.Value);
+				writer.WriteNumberValue(FragmentSizeValue.Value);
 			}
 
-			if (value.MaxFragmentLengthValue.HasValue)
+			if (MaxFragmentLengthValue.HasValue)
 			{
 				writer.WritePropertyName("max_fragment_length");
-				writer.WriteNumberValue(value.MaxFragmentLengthValue.Value);
+				writer.WriteNumberValue(MaxFragmentLengthValue.Value);
 			}
 
-			if (value.NoMatchSizeValue.HasValue)
+			if (NoMatchSizeValue.HasValue)
 			{
 				writer.WritePropertyName("no_match_size");
-				writer.WriteNumberValue(value.NoMatchSizeValue.Value);
+				writer.WriteNumberValue(NoMatchSizeValue.Value);
 			}
 
-			if (value.NumberOfFragmentsValue.HasValue)
+			if (NumberOfFragmentsValue.HasValue)
 			{
 				writer.WritePropertyName("number_of_fragments");
-				writer.WriteNumberValue(value.NumberOfFragmentsValue.Value);
+				writer.WriteNumberValue(NumberOfFragmentsValue.Value);
 			}
 
-			if (value.OrderValue is not null)
+			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.OrderValue, options);
+				JsonSerializer.Serialize(writer, OrderValue, options);
 			}
 
-			if (value.PostTagsValue is not null)
+			if (PostTagsValue is not null)
 			{
 				writer.WritePropertyName("post_tags");
-				JsonSerializer.Serialize(writer, value.PostTagsValue, options);
+				JsonSerializer.Serialize(writer, PostTagsValue, options);
 			}
 
-			if (value.PreTagsValue is not null)
+			if (PreTagsValue is not null)
 			{
 				writer.WritePropertyName("pre_tags");
-				JsonSerializer.Serialize(writer, value.PreTagsValue, options);
+				JsonSerializer.Serialize(writer, PreTagsValue, options);
 			}
 
-			if (value.RequireFieldMatchValue.HasValue)
+			if (RequireFieldMatchValue.HasValue)
 			{
 				writer.WritePropertyName("require_field_match");
-				writer.WriteBooleanValue(value.RequireFieldMatchValue.Value);
+				writer.WriteBooleanValue(RequireFieldMatchValue.Value);
 			}
 
-			if (value.TagsSchemaValue is not null)
+			if (TagsSchemaValue is not null)
 			{
 				writer.WritePropertyName("tags_schema");
-				JsonSerializer.Serialize(writer, value.TagsSchemaValue, options);
+				JsonSerializer.Serialize(writer, TagsSchemaValue, options);
 			}
 
-			if (value.HighlightQueryDescriptor is not null)
+			if (HighlightQueryDescriptor is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, value.HighlightQueryDescriptor, options);
+				JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
 			}
-			else if (value.HighlightQueryDescriptorAction is not null)
+			else if (HighlightQueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.HighlightQueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(HighlightQueryDescriptorAction), options);
 			}
-			else if (value.HighlightQueryValue is not null)
+			else if (HighlightQueryValue is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, value.HighlightQueryValue, options);
+				JsonSerializer.Serialize(writer, HighlightQueryValue, options);
 			}
 
-			if (value.MaxAnalyzedOffsetValue is not null)
+			if (MaxAnalyzedOffsetValue is not null)
 			{
 				writer.WritePropertyName("max_analyzed_offset");
-				JsonSerializer.Serialize(writer, value.MaxAnalyzedOffsetValue, options);
+				JsonSerializer.Serialize(writer, MaxAnalyzedOffsetValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1552,17 +1174,16 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Union<Elastic.Clients.Elasticsearch.HighlighterType?, string?>? Type { get; set; }
+		public Elastic.Clients.Elasticsearch.HighlighterType? Type { get; set; }
 	}
 
-	[JsonConverter(typeof(HighlightFieldDescriptorConverter))]
-	public sealed partial class HighlightFieldDescriptor : DescriptorBase<HighlightFieldDescriptor>
+	public sealed partial class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>>
 	{
 		public HighlightFieldDescriptor()
 		{
 		}
 
-		internal HighlightFieldDescriptor(Action<HighlightFieldDescriptor> configure) => configure.Invoke(this);
+		internal HighlightFieldDescriptor(Action<HighlightFieldDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? BoundaryCharsValue { get; private set; }
 
 		internal int? BoundaryMaxScanValue { get; private set; }
@@ -1603,195 +1224,190 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.HighlighterTagsSchema? TagsSchemaValue { get; private set; }
 
-		internal Union<Elastic.Clients.Elasticsearch.HighlighterType?, string?>? TypeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor HighlightQueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> HighlightQueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> HighlightQueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> HighlightQueryDescriptorAction { get; private set; }
 
-		public HighlightFieldDescriptor BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
-		public HighlightFieldDescriptor BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
-		public HighlightFieldDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
-		public HighlightFieldDescriptor BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
-		public HighlightFieldDescriptor Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public HighlightFieldDescriptor ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a.ForceSourceValue = v);
-		public HighlightFieldDescriptor Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
-		public HighlightFieldDescriptor FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
-		public HighlightFieldDescriptor FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
-		public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
+		public HighlightFieldDescriptor<T> BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
+		public HighlightFieldDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
+		public HighlightFieldDescriptor<T> BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
+		public HighlightFieldDescriptor<T> BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
+		public HighlightFieldDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HighlightFieldDescriptor<T> ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a.ForceSourceValue = v);
+		public HighlightFieldDescriptor<T> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
+		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
+		public HighlightFieldDescriptor<T> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
+		public HighlightFieldDescriptor<T> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
 		{
 			HighlightQueryDescriptor = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(highlightQuery, (a, v) => a.HighlightQueryValue = v);
 		}
 
-		public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public HighlightFieldDescriptor<T> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightQueryDescriptor = v);
 		}
 
-		public HighlightFieldDescriptor HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public HighlightFieldDescriptor<T> HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.HighlightQueryDescriptorAction = v);
 		}
 
-		public HighlightFieldDescriptor MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
-		public HighlightFieldDescriptor MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
-		public HighlightFieldDescriptor NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
-		public HighlightFieldDescriptor NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);
-		public HighlightFieldDescriptor Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public HighlightFieldDescriptor PhraseLimit(int? phraseLimit) => Assign(phraseLimit, (a, v) => a.PhraseLimitValue = v);
-		public HighlightFieldDescriptor PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a.PostTagsValue = v);
-		public HighlightFieldDescriptor PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
-		public HighlightFieldDescriptor RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
-		public HighlightFieldDescriptor TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
-		public HighlightFieldDescriptor Type(Union<Elastic.Clients.Elasticsearch.HighlighterType?, string?>? type) => Assign(type, (a, v) => a.TypeValue = v);
-	}
-
-	internal sealed class HighlightFieldDescriptorConverter : JsonConverter<HighlightFieldDescriptor>
-	{
-		public override HighlightFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, HighlightFieldDescriptor value, JsonSerializerOptions options)
+		public HighlightFieldDescriptor<T> MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
+		public HighlightFieldDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
+		public HighlightFieldDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
+		public HighlightFieldDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);
+		public HighlightFieldDescriptor<T> Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
+		public HighlightFieldDescriptor<T> PhraseLimit(int? phraseLimit) => Assign(phraseLimit, (a, v) => a.PhraseLimitValue = v);
+		public HighlightFieldDescriptor<T> PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a.PostTagsValue = v);
+		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
+		public HighlightFieldDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
+		public HighlightFieldDescriptor<T> TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
+		public HighlightFieldDescriptor<T> Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.BoundaryCharsValue))
+			if (!string.IsNullOrEmpty(BoundaryCharsValue))
 			{
 				writer.WritePropertyName("boundary_chars");
-				writer.WriteStringValue(value.BoundaryCharsValue);
+				writer.WriteStringValue(BoundaryCharsValue);
 			}
 
-			if (value.BoundaryMaxScanValue.HasValue)
+			if (BoundaryMaxScanValue.HasValue)
 			{
 				writer.WritePropertyName("boundary_max_scan");
-				writer.WriteNumberValue(value.BoundaryMaxScanValue.Value);
+				writer.WriteNumberValue(BoundaryMaxScanValue.Value);
 			}
 
-			if (value.BoundaryScannerValue is not null)
+			if (BoundaryScannerValue is not null)
 			{
 				writer.WritePropertyName("boundary_scanner");
-				JsonSerializer.Serialize(writer, value.BoundaryScannerValue, options);
+				JsonSerializer.Serialize(writer, BoundaryScannerValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.BoundaryScannerLocaleValue))
+			if (!string.IsNullOrEmpty(BoundaryScannerLocaleValue))
 			{
 				writer.WritePropertyName("boundary_scanner_locale");
-				writer.WriteStringValue(value.BoundaryScannerLocaleValue);
+				writer.WriteStringValue(BoundaryScannerLocaleValue);
 			}
 
-			if (value.FieldValue is not null)
+			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.FieldValue, options);
+				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
-			if (value.ForceSourceValue.HasValue)
+			if (ForceSourceValue.HasValue)
 			{
 				writer.WritePropertyName("force_source");
-				writer.WriteBooleanValue(value.ForceSourceValue.Value);
+				writer.WriteBooleanValue(ForceSourceValue.Value);
 			}
 
-			if (value.FragmenterValue is not null)
+			if (FragmenterValue is not null)
 			{
 				writer.WritePropertyName("fragmenter");
-				JsonSerializer.Serialize(writer, value.FragmenterValue, options);
+				JsonSerializer.Serialize(writer, FragmenterValue, options);
 			}
 
-			if (value.FragmentOffsetValue.HasValue)
+			if (FragmentOffsetValue.HasValue)
 			{
 				writer.WritePropertyName("fragment_offset");
-				writer.WriteNumberValue(value.FragmentOffsetValue.Value);
+				writer.WriteNumberValue(FragmentOffsetValue.Value);
 			}
 
-			if (value.FragmentSizeValue.HasValue)
+			if (FragmentSizeValue.HasValue)
 			{
 				writer.WritePropertyName("fragment_size");
-				writer.WriteNumberValue(value.FragmentSizeValue.Value);
+				writer.WriteNumberValue(FragmentSizeValue.Value);
 			}
 
-			if (value.HighlightQueryDescriptor is not null)
+			if (HighlightQueryDescriptor is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, value.HighlightQueryDescriptor, options);
+				JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
 			}
-			else if (value.HighlightQueryDescriptorAction is not null)
+			else if (HighlightQueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.HighlightQueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(HighlightQueryDescriptorAction), options);
 			}
-			else if (value.HighlightQueryValue is not null)
+			else if (HighlightQueryValue is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, value.HighlightQueryValue, options);
+				JsonSerializer.Serialize(writer, HighlightQueryValue, options);
 			}
 
-			if (value.MatchedFieldsValue is not null)
+			if (MatchedFieldsValue is not null)
 			{
 				writer.WritePropertyName("matched_fields");
-				JsonSerializer.Serialize(writer, value.MatchedFieldsValue, options);
+				JsonSerializer.Serialize(writer, MatchedFieldsValue, options);
 			}
 
-			if (value.MaxFragmentLengthValue.HasValue)
+			if (MaxFragmentLengthValue.HasValue)
 			{
 				writer.WritePropertyName("max_fragment_length");
-				writer.WriteNumberValue(value.MaxFragmentLengthValue.Value);
+				writer.WriteNumberValue(MaxFragmentLengthValue.Value);
 			}
 
-			if (value.NoMatchSizeValue.HasValue)
+			if (NoMatchSizeValue.HasValue)
 			{
 				writer.WritePropertyName("no_match_size");
-				writer.WriteNumberValue(value.NoMatchSizeValue.Value);
+				writer.WriteNumberValue(NoMatchSizeValue.Value);
 			}
 
-			if (value.NumberOfFragmentsValue.HasValue)
+			if (NumberOfFragmentsValue.HasValue)
 			{
 				writer.WritePropertyName("number_of_fragments");
-				writer.WriteNumberValue(value.NumberOfFragmentsValue.Value);
+				writer.WriteNumberValue(NumberOfFragmentsValue.Value);
 			}
 
-			if (value.OrderValue is not null)
+			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
-				JsonSerializer.Serialize(writer, value.OrderValue, options);
+				JsonSerializer.Serialize(writer, OrderValue, options);
 			}
 
-			if (value.PhraseLimitValue.HasValue)
+			if (PhraseLimitValue.HasValue)
 			{
 				writer.WritePropertyName("phrase_limit");
-				writer.WriteNumberValue(value.PhraseLimitValue.Value);
+				writer.WriteNumberValue(PhraseLimitValue.Value);
 			}
 
-			if (value.PostTagsValue is not null)
+			if (PostTagsValue is not null)
 			{
 				writer.WritePropertyName("post_tags");
-				JsonSerializer.Serialize(writer, value.PostTagsValue, options);
+				JsonSerializer.Serialize(writer, PostTagsValue, options);
 			}
 
-			if (value.PreTagsValue is not null)
+			if (PreTagsValue is not null)
 			{
 				writer.WritePropertyName("pre_tags");
-				JsonSerializer.Serialize(writer, value.PreTagsValue, options);
+				JsonSerializer.Serialize(writer, PreTagsValue, options);
 			}
 
-			if (value.RequireFieldMatchValue.HasValue)
+			if (RequireFieldMatchValue.HasValue)
 			{
 				writer.WritePropertyName("require_field_match");
-				writer.WriteBooleanValue(value.RequireFieldMatchValue.Value);
+				writer.WriteBooleanValue(RequireFieldMatchValue.Value);
 			}
 
-			if (value.TagsSchemaValue is not null)
+			if (TagsSchemaValue is not null)
 			{
 				writer.WritePropertyName("tags_schema");
-				JsonSerializer.Serialize(writer, value.TagsSchemaValue, options);
+				JsonSerializer.Serialize(writer, TagsSchemaValue, options);
 			}
 
-			if (value.TypeValue is not null)
+			if (TypeValue is not null)
 			{
 				writer.WritePropertyName("type");
-				JsonSerializer.Serialize(writer, value.TypeValue, options);
+				JsonSerializer.Serialize(writer, TypeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -1892,13 +1508,6 @@ namespace Elastic.Clients.Elasticsearch
 		public double? MaxScore { get; init; }
 	}
 
-	public partial class IndexedScript : ScriptBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
-	}
-
 	public partial class IndexingStats
 	{
 		[JsonInclude]
@@ -1995,11 +1604,18 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class InlineScript : ScriptBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("lang")]
+		public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("options")]
+		public Dictionary<string, string>? Options { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source { get; set; }
 	}
 
-	[JsonConverter(typeof(InlineScriptDescriptorConverter))]
 	public sealed partial class InlineScriptDescriptor : DescriptorBase<InlineScriptDescriptor>
 	{
 		public InlineScriptDescriptor()
@@ -2007,19 +1623,32 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal InlineScriptDescriptor(Action<InlineScriptDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.ScriptLanguage? LangValue { get; private set; }
+
+		internal Dictionary<string, string>? OptionsValue { get; private set; }
+
 		internal string SourceValue { get; private set; }
 
+		public InlineScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? lang) => Assign(lang, (a, v) => a.LangValue = v);
+		public InlineScriptDescriptor Options(Func<FluentDictionary<string?, string?>, FluentDictionary<string?, string?>> selector) => Assign(selector, (a, v) => a.OptionsValue = v?.Invoke(new FluentDictionary<string?, string?>()));
 		public InlineScriptDescriptor Source(string source) => Assign(source, (a, v) => a.SourceValue = v);
-	}
-
-	internal sealed class InlineScriptDescriptorConverter : JsonConverter<InlineScriptDescriptor>
-	{
-		public override InlineScriptDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, InlineScriptDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (LangValue is not null)
+			{
+				writer.WritePropertyName("lang");
+				JsonSerializer.Serialize(writer, LangValue, options);
+			}
+
+			if (OptionsValue is not null)
+			{
+				writer.WritePropertyName("options");
+				JsonSerializer.Serialize(writer, OptionsValue, options);
+			}
+
 			writer.WritePropertyName("source");
-			writer.WriteStringValue(value.SourceValue);
+			writer.WriteStringValue(SourceValue);
 			writer.WriteEndObject();
 		}
 	}
@@ -2044,7 +1673,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("docvalue_fields")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.FieldAndFormat>? DocvalueFields { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("explain")]
@@ -2076,7 +1705,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
-		public Union<bool?, Elastic.Clients.Elasticsearch.SourceFilter?>? Source { get; set; }
+		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stored_field")]
@@ -2091,14 +1720,13 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Version { get; set; }
 	}
 
-	[JsonConverter(typeof(InnerHitsDescriptorConverter))]
-	public sealed partial class InnerHitsDescriptor : DescriptorBase<InnerHitsDescriptor>
+	public sealed partial class InnerHitsDescriptor<T> : DescriptorBase<InnerHitsDescriptor<T>>
 	{
 		public InnerHitsDescriptor()
 		{
 		}
 
-		internal InnerHitsDescriptor(Action<InnerHitsDescriptor> configure) => configure.Invoke(this);
+		internal InnerHitsDescriptor(Action<InnerHitsDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Name? NameValue { get; private set; }
 
 		internal int? SizeValue { get; private set; }
@@ -2107,7 +1735,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.FieldAndFormat>? DocvalueFieldsValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; private set; }
 
 		internal bool? ExplainValue { get; private set; }
 
@@ -2123,7 +1751,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.Sort? SortValue { get; private set; }
 
-		internal Union<bool?, Elastic.Clients.Elasticsearch.SourceFilter?>? SourceValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; private set; }
 
@@ -2131,341 +1759,206 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal bool? VersionValue { get; private set; }
 
-		internal FieldCollapseDescriptor CollapseDescriptor { get; private set; }
+		internal FieldCollapseDescriptor<T> CollapseDescriptor { get; private set; }
 
-		internal HighlightDescriptor HighlightDescriptor { get; private set; }
+		internal HighlightDescriptor<T> HighlightDescriptor { get; private set; }
 
-		internal Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; private set; }
+		internal Action<FieldCollapseDescriptor<T>> CollapseDescriptorAction { get; private set; }
 
-		internal Action<HighlightDescriptor> HighlightDescriptorAction { get; private set; }
+		internal Action<HighlightDescriptor<T>> HighlightDescriptorAction { get; private set; }
 
-		public InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a.NameValue = v);
-		public InnerHitsDescriptor Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public InnerHitsDescriptor From(int? from) => Assign(from, (a, v) => a.FromValue = v);
-		public InnerHitsDescriptor Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
+		public InnerHitsDescriptor<T> Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a.NameValue = v);
+		public InnerHitsDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public InnerHitsDescriptor<T> From(int? from) => Assign(from, (a, v) => a.FromValue = v);
+		public InnerHitsDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
 			CollapseDescriptorAction = null;
 			return Assign(collapse, (a, v) => a.CollapseValue = v);
 		}
 
-		public InnerHitsDescriptor Collapse(Elastic.Clients.Elasticsearch.FieldCollapseDescriptor descriptor)
+		public InnerHitsDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapseDescriptor<T> descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.CollapseDescriptor = v);
 		}
 
-		public InnerHitsDescriptor Collapse(Action<Elastic.Clients.Elasticsearch.FieldCollapseDescriptor> configure)
+		public InnerHitsDescriptor<T> Collapse(Action<Elastic.Clients.Elasticsearch.FieldCollapseDescriptor<T>> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
 			return Assign(configure, (a, v) => a.CollapseDescriptorAction = v);
 		}
 
-		public InnerHitsDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.FieldAndFormat>? docvalueFields) => Assign(docvalueFields, (a, v) => a.DocvalueFieldsValue = v);
-		public InnerHitsDescriptor Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
-		public InnerHitsDescriptor Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		public InnerHitsDescriptor<T> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields) => Assign(docvalueFields, (a, v) => a.DocvalueFieldsValue = v);
+		public InnerHitsDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
+		public InnerHitsDescriptor<T> Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
 			return Assign(highlight, (a, v) => a.HighlightValue = v);
 		}
 
-		public InnerHitsDescriptor Highlight(Elastic.Clients.Elasticsearch.HighlightDescriptor descriptor)
+		public InnerHitsDescriptor<T> Highlight(Elastic.Clients.Elasticsearch.HighlightDescriptor<T> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
 		}
 
-		public InnerHitsDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.HighlightDescriptor> configure)
+		public InnerHitsDescriptor<T> Highlight(Action<Elastic.Clients.Elasticsearch.HighlightDescriptor<T>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
 			return Assign(configure, (a, v) => a.HighlightDescriptorAction = v);
 		}
 
-		public InnerHitsDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public InnerHitsDescriptor ScriptFields(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>()));
-		public InnerHitsDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
-		public InnerHitsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public InnerHitsDescriptor Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
-		public InnerHitsDescriptor Source(Union<bool?, Elastic.Clients.Elasticsearch.SourceFilter?>? source) => Assign(source, (a, v) => a.SourceValue = v);
-		public InnerHitsDescriptor StoredField(Elastic.Clients.Elasticsearch.Fields? storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
-		public InnerHitsDescriptor TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScoresValue = v);
-		public InnerHitsDescriptor Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
-	}
-
-	internal sealed class InnerHitsDescriptorConverter : JsonConverter<InnerHitsDescriptor>
-	{
-		public override InnerHitsDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, InnerHitsDescriptor value, JsonSerializerOptions options)
+		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
+		public InnerHitsDescriptor<T> ScriptFields(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>()));
+		public InnerHitsDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
+		public InnerHitsDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public InnerHitsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
+		public InnerHitsDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
+		public InnerHitsDescriptor<T> StoredField(Elastic.Clients.Elasticsearch.Fields? storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
+		public InnerHitsDescriptor<T> TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScoresValue = v);
+		public InnerHitsDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.NameValue is not null)
+			if (NameValue is not null)
 			{
 				writer.WritePropertyName("name");
-				JsonSerializer.Serialize(writer, value.NameValue, options);
+				JsonSerializer.Serialize(writer, NameValue, options);
 			}
 
-			if (value.SizeValue.HasValue)
+			if (SizeValue.HasValue)
 			{
 				writer.WritePropertyName("size");
-				writer.WriteNumberValue(value.SizeValue.Value);
+				writer.WriteNumberValue(SizeValue.Value);
 			}
 
-			if (value.FromValue.HasValue)
+			if (FromValue.HasValue)
 			{
 				writer.WritePropertyName("from");
-				writer.WriteNumberValue(value.FromValue.Value);
+				writer.WriteNumberValue(FromValue.Value);
 			}
 
-			if (value.CollapseDescriptor is not null)
+			if (CollapseDescriptor is not null)
 			{
 				writer.WritePropertyName("collapse");
-				JsonSerializer.Serialize(writer, value.CollapseDescriptor, options);
+				JsonSerializer.Serialize(writer, CollapseDescriptor, options);
 			}
-			else if (value.CollapseDescriptorAction is not null)
+			else if (CollapseDescriptorAction is not null)
 			{
 				writer.WritePropertyName("collapse");
-				JsonSerializer.Serialize(writer, new FieldCollapseDescriptor(value.CollapseDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new FieldCollapseDescriptor<T>(CollapseDescriptorAction), options);
 			}
-			else if (value.CollapseValue is not null)
+			else if (CollapseValue is not null)
 			{
 				writer.WritePropertyName("collapse");
-				JsonSerializer.Serialize(writer, value.CollapseValue, options);
+				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (value.DocvalueFieldsValue is not null)
+			if (DocvalueFieldsValue is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
-				JsonSerializer.Serialize(writer, value.DocvalueFieldsValue, options);
+				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 			}
 
-			if (value.ExplainValue.HasValue)
+			if (ExplainValue.HasValue)
 			{
 				writer.WritePropertyName("explain");
-				writer.WriteBooleanValue(value.ExplainValue.Value);
+				writer.WriteBooleanValue(ExplainValue.Value);
 			}
 
-			if (value.HighlightDescriptor is not null)
+			if (HighlightDescriptor is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, value.HighlightDescriptor, options);
+				JsonSerializer.Serialize(writer, HighlightDescriptor, options);
 			}
-			else if (value.HighlightDescriptorAction is not null)
+			else if (HighlightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new HighlightDescriptor(value.HighlightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new HighlightDescriptor<T>(HighlightDescriptorAction), options);
 			}
-			else if (value.HighlightValue is not null)
+			else if (HighlightValue is not null)
 			{
 				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, value.HighlightValue, options);
+				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
-			if (value.IgnoreUnmappedValue.HasValue)
+			if (IgnoreUnmappedValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(value.IgnoreUnmappedValue.Value);
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 			}
 
-			if (value.ScriptFieldsValue is not null)
+			if (ScriptFieldsValue is not null)
 			{
 				writer.WritePropertyName("script_fields");
-				JsonSerializer.Serialize(writer, value.ScriptFieldsValue, options);
+				JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
 			}
 
-			if (value.SeqNoPrimaryTermValue.HasValue)
+			if (SeqNoPrimaryTermValue.HasValue)
 			{
 				writer.WritePropertyName("seq_no_primary_term");
-				writer.WriteBooleanValue(value.SeqNoPrimaryTermValue.Value);
+				writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
 			}
 
-			if (value.FieldsValue is not null)
+			if (FieldsValue is not null)
 			{
 				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, value.FieldsValue, options);
+				JsonSerializer.Serialize(writer, FieldsValue, options);
 			}
 
-			if (value.SortValue is not null)
+			if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, value.SortValue, options);
+				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
-			if (value.SourceValue is not null)
+			if (SourceValue is not null)
 			{
 				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, value.SourceValue, options);
+				JsonSerializer.Serialize(writer, SourceValue, options);
 			}
 
-			if (value.StoredFieldValue is not null)
+			if (StoredFieldValue is not null)
 			{
 				writer.WritePropertyName("stored_field");
-				JsonSerializer.Serialize(writer, value.StoredFieldValue, options);
+				JsonSerializer.Serialize(writer, StoredFieldValue, options);
 			}
 
-			if (value.TrackScoresValue.HasValue)
+			if (TrackScoresValue.HasValue)
 			{
 				writer.WritePropertyName("track_scores");
-				writer.WriteBooleanValue(value.TrackScoresValue.Value);
+				writer.WriteBooleanValue(TrackScoresValue.Value);
 			}
 
-			if (value.VersionValue.HasValue)
+			if (VersionValue.HasValue)
 			{
 				writer.WritePropertyName("version");
-				writer.WriteBooleanValue(value.VersionValue.Value);
+				writer.WriteBooleanValue(VersionValue.Value);
 			}
 
 			writer.WriteEndObject();
 		}
-	}
-
-	public partial class InnerHitsMetadata
-	{
-		[JsonInclude]
-		[JsonPropertyName("total")]
-		public Union<Elastic.Clients.Elasticsearch.TotalHits, long> Total { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_score")]
-		public double? MaxScore { get; init; }
 	}
 
 	public partial class InnerHitsResult
 	{
-		[JsonInclude]
-		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.InnerHitsMetadata Hits { get; init; }
 	}
 
-	public partial class LaplaceSmoothingModel : ISmoothingModelContainerVariant
-	{
-		[JsonIgnore]
-		string ISmoothingModelContainerVariant.SmoothingModelContainerVariantName => "laplace";
-		[JsonInclude]
-		[JsonPropertyName("alpha")]
-		public double Alpha { get; set; }
-	}
-
-	[JsonConverter(typeof(LaplaceSmoothingModelDescriptorConverter))]
-	public sealed partial class LaplaceSmoothingModelDescriptor : DescriptorBase<LaplaceSmoothingModelDescriptor>, ISmoothingModelContainerVariantDescriptor
-	{
-		public LaplaceSmoothingModelDescriptor()
-		{
-		}
-
-		internal LaplaceSmoothingModelDescriptor(Action<LaplaceSmoothingModelDescriptor> configure) => configure.Invoke(this);
-		internal double AlphaValue { get; private set; }
-
-		public LaplaceSmoothingModelDescriptor Alpha(double alpha) => Assign(alpha, (a, v) => a.AlphaValue = v);
-	}
-
-	internal sealed class LaplaceSmoothingModelDescriptorConverter : JsonConverter<LaplaceSmoothingModelDescriptor>
-	{
-		public override LaplaceSmoothingModelDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LaplaceSmoothingModelDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("alpha");
-			writer.WriteNumberValue(value.AlphaValue);
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class LatLon
+	public partial class LatLonGeoLocation
 	{
 		[JsonInclude]
 		[JsonPropertyName("lat")]
-		public double Lat { get; set; }
+		public double Lat { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lon")]
-		public double Lon { get; set; }
-	}
-
-	[JsonConverter(typeof(LatLonDescriptorConverter))]
-	public sealed partial class LatLonDescriptor : DescriptorBase<LatLonDescriptor>
-	{
-		public LatLonDescriptor()
-		{
-		}
-
-		internal LatLonDescriptor(Action<LatLonDescriptor> configure) => configure.Invoke(this);
-		internal double LatValue { get; private set; }
-
-		internal double LonValue { get; private set; }
-
-		public LatLonDescriptor Lat(double lat) => Assign(lat, (a, v) => a.LatValue = v);
-		public LatLonDescriptor Lon(double lon) => Assign(lon, (a, v) => a.LonValue = v);
-	}
-
-	internal sealed class LatLonDescriptorConverter : JsonConverter<LatLonDescriptor>
-	{
-		public override LatLonDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LatLonDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("lat");
-			writer.WriteNumberValue(value.LatValue);
-			writer.WritePropertyName("lon");
-			writer.WriteNumberValue(value.LonValue);
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class LinearInterpolationSmoothingModel : ISmoothingModelContainerVariant
-	{
-		[JsonIgnore]
-		string ISmoothingModelContainerVariant.SmoothingModelContainerVariantName => "linear_interpolation";
-		[JsonInclude]
-		[JsonPropertyName("bigram_lambda")]
-		public double BigramLambda { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("trigram_lambda")]
-		public double TrigramLambda { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("unigram_lambda")]
-		public double UnigramLambda { get; set; }
-	}
-
-	[JsonConverter(typeof(LinearInterpolationSmoothingModelDescriptorConverter))]
-	public sealed partial class LinearInterpolationSmoothingModelDescriptor : DescriptorBase<LinearInterpolationSmoothingModelDescriptor>, ISmoothingModelContainerVariantDescriptor
-	{
-		public LinearInterpolationSmoothingModelDescriptor()
-		{
-		}
-
-		internal LinearInterpolationSmoothingModelDescriptor(Action<LinearInterpolationSmoothingModelDescriptor> configure) => configure.Invoke(this);
-		internal double BigramLambdaValue { get; private set; }
-
-		internal double TrigramLambdaValue { get; private set; }
-
-		internal double UnigramLambdaValue { get; private set; }
-
-		public LinearInterpolationSmoothingModelDescriptor BigramLambda(double bigramLambda) => Assign(bigramLambda, (a, v) => a.BigramLambdaValue = v);
-		public LinearInterpolationSmoothingModelDescriptor TrigramLambda(double trigramLambda) => Assign(trigramLambda, (a, v) => a.TrigramLambdaValue = v);
-		public LinearInterpolationSmoothingModelDescriptor UnigramLambda(double unigramLambda) => Assign(unigramLambda, (a, v) => a.UnigramLambdaValue = v);
-	}
-
-	internal sealed class LinearInterpolationSmoothingModelDescriptorConverter : JsonConverter<LinearInterpolationSmoothingModelDescriptor>
-	{
-		public override LinearInterpolationSmoothingModelDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, LinearInterpolationSmoothingModelDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("bigram_lambda");
-			writer.WriteNumberValue(value.BigramLambdaValue);
-			writer.WritePropertyName("trigram_lambda");
-			writer.WriteNumberValue(value.TrigramLambdaValue);
-			writer.WritePropertyName("unigram_lambda");
-			writer.WriteNumberValue(value.UnigramLambdaValue);
-			writer.WriteEndObject();
-		}
+		public double Lon { get; init; }
 	}
 
 	public partial class MergesStats
@@ -2550,6 +2043,25 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
 	}
 
+	public partial class NestedSortValue
+	{
+		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_children")]
+		public int? MaxChildren { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("nested")]
+		public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("path")]
+		public string Path { get; init; }
+	}
+
 	public partial class NodeStatistics
 	{
 		[JsonInclude]
@@ -2567,487 +2079,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("failed")]
 		public int Failed { get; init; }
-	}
-
-	public partial class PhraseSuggestCollate
-	{
-		[JsonInclude]
-		[JsonPropertyName("params")]
-		public Dictionary<string, object>? Params { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prune")]
-		public bool? Prune { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("query")]
-		public Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery Query { get; set; }
-	}
-
-	[JsonConverter(typeof(PhraseSuggestCollateDescriptorConverter))]
-	public sealed partial class PhraseSuggestCollateDescriptor : DescriptorBase<PhraseSuggestCollateDescriptor>
-	{
-		public PhraseSuggestCollateDescriptor()
-		{
-		}
-
-		internal PhraseSuggestCollateDescriptor(Action<PhraseSuggestCollateDescriptor> configure) => configure.Invoke(this);
-		internal Dictionary<string, object>? ParamsValue { get; private set; }
-
-		internal bool? PruneValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery QueryValue { get; private set; }
-
-		internal PhraseSuggestCollateQueryDescriptor QueryDescriptor { get; private set; }
-
-		internal Action<PhraseSuggestCollateQueryDescriptor> QueryDescriptorAction { get; private set; }
-
-		public PhraseSuggestCollateDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public PhraseSuggestCollateDescriptor Prune(bool? prune = true) => Assign(prune, (a, v) => a.PruneValue = v);
-		public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.PhraseSuggestCollateQuery query)
-		{
-			QueryDescriptor = null;
-			QueryDescriptorAction = null;
-			return Assign(query, (a, v) => a.QueryValue = v);
-		}
-
-		public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.PhraseSuggestCollateQueryDescriptor descriptor)
-		{
-			QueryValue = null;
-			QueryDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
-		}
-
-		public PhraseSuggestCollateDescriptor Query(Action<Elastic.Clients.Elasticsearch.PhraseSuggestCollateQueryDescriptor> configure)
-		{
-			QueryValue = null;
-			QueryDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
-		}
-	}
-
-	internal sealed class PhraseSuggestCollateDescriptorConverter : JsonConverter<PhraseSuggestCollateDescriptor>
-	{
-		public override PhraseSuggestCollateDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PhraseSuggestCollateDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.ParamsValue is not null)
-			{
-				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, value.ParamsValue, options);
-			}
-
-			if (value.PruneValue.HasValue)
-			{
-				writer.WritePropertyName("prune");
-				writer.WriteBooleanValue(value.PruneValue.Value);
-			}
-
-			if (value.QueryDescriptor is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
-			}
-			else if (value.QueryDescriptorAction is not null)
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new PhraseSuggestCollateQueryDescriptor(value.QueryDescriptorAction), options);
-			}
-			else
-			{
-				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class PhraseSuggestCollateQuery
-	{
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("source")]
-		public string? Source { get; set; }
-	}
-
-	[JsonConverter(typeof(PhraseSuggestCollateQueryDescriptorConverter))]
-	public sealed partial class PhraseSuggestCollateQueryDescriptor : DescriptorBase<PhraseSuggestCollateQueryDescriptor>
-	{
-		public PhraseSuggestCollateQueryDescriptor()
-		{
-		}
-
-		internal PhraseSuggestCollateQueryDescriptor(Action<PhraseSuggestCollateQueryDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
-
-		internal string? SourceValue { get; private set; }
-
-		public PhraseSuggestCollateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
-		public PhraseSuggestCollateQueryDescriptor Source(string? source) => Assign(source, (a, v) => a.SourceValue = v);
-	}
-
-	internal sealed class PhraseSuggestCollateQueryDescriptorConverter : JsonConverter<PhraseSuggestCollateQueryDescriptor>
-	{
-		public override PhraseSuggestCollateQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PhraseSuggestCollateQueryDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.IdValue is not null)
-			{
-				writer.WritePropertyName("id");
-				JsonSerializer.Serialize(writer, value.IdValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.SourceValue))
-			{
-				writer.WritePropertyName("source");
-				writer.WriteStringValue(value.SourceValue);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class PhraseSuggester : SuggesterBase, ISuggestContainerVariant
-	{
-		[JsonIgnore]
-		string ISuggestContainerVariant.SuggestContainerVariantName => "phrase";
-		[JsonInclude]
-		[JsonPropertyName("collate")]
-		public Elastic.Clients.Elasticsearch.PhraseSuggestCollate? Collate { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("confidence")]
-		public double? Confidence { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("direct_generator")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.DirectGenerator>? DirectGenerator { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("force_unigrams")]
-		public bool? ForceUnigrams { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gram_size")]
-		public int? GramSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("highlight")]
-		public Elastic.Clients.Elasticsearch.PhraseSuggestHighlight? Highlight { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_errors")]
-		public double? MaxErrors { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("real_word_error_likelihood")]
-		public double? RealWordErrorLikelihood { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("separator")]
-		public string? Separator { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("smoothing")]
-		public Elastic.Clients.Elasticsearch.SmoothingModelContainer? Smoothing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("text")]
-		public string? Text { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("token_limit")]
-		public int? TokenLimit { get; set; }
-	}
-
-	[JsonConverter(typeof(PhraseSuggesterDescriptorConverter))]
-	public sealed partial class PhraseSuggesterDescriptor : DescriptorBase<PhraseSuggesterDescriptor>, ISuggestContainerVariantDescriptor
-	{
-		public PhraseSuggesterDescriptor()
-		{
-		}
-
-		internal PhraseSuggesterDescriptor(Action<PhraseSuggesterDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.PhraseSuggestCollate? CollateValue { get; private set; }
-
-		internal double? ConfidenceValue { get; private set; }
-
-		internal IEnumerable<Elastic.Clients.Elasticsearch.DirectGenerator>? DirectGeneratorValue { get; private set; }
-
-		internal bool? ForceUnigramsValue { get; private set; }
-
-		internal int? GramSizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.PhraseSuggestHighlight? HighlightValue { get; private set; }
-
-		internal double? MaxErrorsValue { get; private set; }
-
-		internal double? RealWordErrorLikelihoodValue { get; private set; }
-
-		internal string? SeparatorValue { get; private set; }
-
-		internal int? ShardSizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.SmoothingModelContainer? SmoothingValue { get; private set; }
-
-		internal string? TextValue { get; private set; }
-
-		internal int? TokenLimitValue { get; private set; }
-
-		internal PhraseSuggestCollateDescriptor CollateDescriptor { get; private set; }
-
-		internal PhraseSuggestHighlightDescriptor HighlightDescriptor { get; private set; }
-
-		internal SmoothingModelContainerDescriptor SmoothingDescriptor { get; private set; }
-
-		internal Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; private set; }
-
-		internal Action<PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; private set; }
-
-		internal Action<SmoothingModelContainerDescriptor> SmoothingDescriptorAction { get; private set; }
-
-		public PhraseSuggesterDescriptor Collate(Elastic.Clients.Elasticsearch.PhraseSuggestCollate? collate)
-		{
-			CollateDescriptor = null;
-			CollateDescriptorAction = null;
-			return Assign(collate, (a, v) => a.CollateValue = v);
-		}
-
-		public PhraseSuggesterDescriptor Collate(Elastic.Clients.Elasticsearch.PhraseSuggestCollateDescriptor descriptor)
-		{
-			CollateValue = null;
-			CollateDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.CollateDescriptor = v);
-		}
-
-		public PhraseSuggesterDescriptor Collate(Action<Elastic.Clients.Elasticsearch.PhraseSuggestCollateDescriptor> configure)
-		{
-			CollateValue = null;
-			CollateDescriptorAction = null;
-			return Assign(configure, (a, v) => a.CollateDescriptorAction = v);
-		}
-
-		public PhraseSuggesterDescriptor Confidence(double? confidence) => Assign(confidence, (a, v) => a.ConfidenceValue = v);
-		public PhraseSuggesterDescriptor DirectGenerator(IEnumerable<Elastic.Clients.Elasticsearch.DirectGenerator>? directGenerator) => Assign(directGenerator, (a, v) => a.DirectGeneratorValue = v);
-		public PhraseSuggesterDescriptor ForceUnigrams(bool? forceUnigrams = true) => Assign(forceUnigrams, (a, v) => a.ForceUnigramsValue = v);
-		public PhraseSuggesterDescriptor GramSize(int? gramSize) => Assign(gramSize, (a, v) => a.GramSizeValue = v);
-		public PhraseSuggesterDescriptor Highlight(Elastic.Clients.Elasticsearch.PhraseSuggestHighlight? highlight)
-		{
-			HighlightDescriptor = null;
-			HighlightDescriptorAction = null;
-			return Assign(highlight, (a, v) => a.HighlightValue = v);
-		}
-
-		public PhraseSuggesterDescriptor Highlight(Elastic.Clients.Elasticsearch.PhraseSuggestHighlightDescriptor descriptor)
-		{
-			HighlightValue = null;
-			HighlightDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
-		}
-
-		public PhraseSuggesterDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.PhraseSuggestHighlightDescriptor> configure)
-		{
-			HighlightValue = null;
-			HighlightDescriptorAction = null;
-			return Assign(configure, (a, v) => a.HighlightDescriptorAction = v);
-		}
-
-		public PhraseSuggesterDescriptor MaxErrors(double? maxErrors) => Assign(maxErrors, (a, v) => a.MaxErrorsValue = v);
-		public PhraseSuggesterDescriptor RealWordErrorLikelihood(double? realWordErrorLikelihood) => Assign(realWordErrorLikelihood, (a, v) => a.RealWordErrorLikelihoodValue = v);
-		public PhraseSuggesterDescriptor Separator(string? separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
-		public PhraseSuggesterDescriptor ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.SmoothingModelContainer? smoothing)
-		{
-			SmoothingDescriptor = null;
-			SmoothingDescriptorAction = null;
-			return Assign(smoothing, (a, v) => a.SmoothingValue = v);
-		}
-
-		public PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.SmoothingModelContainerDescriptor descriptor)
-		{
-			SmoothingValue = null;
-			SmoothingDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SmoothingDescriptor = v);
-		}
-
-		public PhraseSuggesterDescriptor Smoothing(Action<Elastic.Clients.Elasticsearch.SmoothingModelContainerDescriptor> configure)
-		{
-			SmoothingValue = null;
-			SmoothingDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SmoothingDescriptorAction = v);
-		}
-
-		public PhraseSuggesterDescriptor Text(string? text) => Assign(text, (a, v) => a.TextValue = v);
-		public PhraseSuggesterDescriptor TokenLimit(int? tokenLimit) => Assign(tokenLimit, (a, v) => a.TokenLimitValue = v);
-	}
-
-	internal sealed class PhraseSuggesterDescriptorConverter : JsonConverter<PhraseSuggesterDescriptor>
-	{
-		public override PhraseSuggesterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PhraseSuggesterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.CollateDescriptor is not null)
-			{
-				writer.WritePropertyName("collate");
-				JsonSerializer.Serialize(writer, value.CollateDescriptor, options);
-			}
-			else if (value.CollateDescriptorAction is not null)
-			{
-				writer.WritePropertyName("collate");
-				JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(value.CollateDescriptorAction), options);
-			}
-			else if (value.CollateValue is not null)
-			{
-				writer.WritePropertyName("collate");
-				JsonSerializer.Serialize(writer, value.CollateValue, options);
-			}
-
-			if (value.ConfidenceValue.HasValue)
-			{
-				writer.WritePropertyName("confidence");
-				writer.WriteNumberValue(value.ConfidenceValue.Value);
-			}
-
-			if (value.DirectGeneratorValue is not null)
-			{
-				writer.WritePropertyName("direct_generator");
-				JsonSerializer.Serialize(writer, value.DirectGeneratorValue, options);
-			}
-
-			if (value.ForceUnigramsValue.HasValue)
-			{
-				writer.WritePropertyName("force_unigrams");
-				writer.WriteBooleanValue(value.ForceUnigramsValue.Value);
-			}
-
-			if (value.GramSizeValue.HasValue)
-			{
-				writer.WritePropertyName("gram_size");
-				writer.WriteNumberValue(value.GramSizeValue.Value);
-			}
-
-			if (value.HighlightDescriptor is not null)
-			{
-				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, value.HighlightDescriptor, options);
-			}
-			else if (value.HighlightDescriptorAction is not null)
-			{
-				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new PhraseSuggestHighlightDescriptor(value.HighlightDescriptorAction), options);
-			}
-			else if (value.HighlightValue is not null)
-			{
-				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, value.HighlightValue, options);
-			}
-
-			if (value.MaxErrorsValue.HasValue)
-			{
-				writer.WritePropertyName("max_errors");
-				writer.WriteNumberValue(value.MaxErrorsValue.Value);
-			}
-
-			if (value.RealWordErrorLikelihoodValue.HasValue)
-			{
-				writer.WritePropertyName("real_word_error_likelihood");
-				writer.WriteNumberValue(value.RealWordErrorLikelihoodValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.SeparatorValue))
-			{
-				writer.WritePropertyName("separator");
-				writer.WriteStringValue(value.SeparatorValue);
-			}
-
-			if (value.ShardSizeValue.HasValue)
-			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(value.ShardSizeValue.Value);
-			}
-
-			if (value.SmoothingDescriptor is not null)
-			{
-				writer.WritePropertyName("smoothing");
-				JsonSerializer.Serialize(writer, value.SmoothingDescriptor, options);
-			}
-			else if (value.SmoothingDescriptorAction is not null)
-			{
-				writer.WritePropertyName("smoothing");
-				JsonSerializer.Serialize(writer, new SmoothingModelContainerDescriptor(value.SmoothingDescriptorAction), options);
-			}
-			else if (value.SmoothingValue is not null)
-			{
-				writer.WritePropertyName("smoothing");
-				JsonSerializer.Serialize(writer, value.SmoothingValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.TextValue))
-			{
-				writer.WritePropertyName("text");
-				writer.WriteStringValue(value.TextValue);
-			}
-
-			if (value.TokenLimitValue.HasValue)
-			{
-				writer.WritePropertyName("token_limit");
-				writer.WriteNumberValue(value.TokenLimitValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class PhraseSuggestHighlight
-	{
-		[JsonInclude]
-		[JsonPropertyName("post_tag")]
-		public string PostTag { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("pre_tag")]
-		public string PreTag { get; set; }
-	}
-
-	[JsonConverter(typeof(PhraseSuggestHighlightDescriptorConverter))]
-	public sealed partial class PhraseSuggestHighlightDescriptor : DescriptorBase<PhraseSuggestHighlightDescriptor>
-	{
-		public PhraseSuggestHighlightDescriptor()
-		{
-		}
-
-		internal PhraseSuggestHighlightDescriptor(Action<PhraseSuggestHighlightDescriptor> configure) => configure.Invoke(this);
-		internal string PostTagValue { get; private set; }
-
-		internal string PreTagValue { get; private set; }
-
-		public PhraseSuggestHighlightDescriptor PostTag(string postTag) => Assign(postTag, (a, v) => a.PostTagValue = v);
-		public PhraseSuggestHighlightDescriptor PreTag(string preTag) => Assign(preTag, (a, v) => a.PreTagValue = v);
-	}
-
-	internal sealed class PhraseSuggestHighlightDescriptorConverter : JsonConverter<PhraseSuggestHighlightDescriptor>
-	{
-		public override PhraseSuggestHighlightDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PhraseSuggestHighlightDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("post_tag");
-			writer.WriteStringValue(value.PostTagValue);
-			writer.WritePropertyName("pre_tag");
-			writer.WriteStringValue(value.PreTagValue);
-			writer.WriteEndObject();
-		}
 	}
 
 	public partial class PhraseSuggestOption
@@ -3119,7 +2150,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time? KeepAlive { get; set; }
 	}
 
-	[JsonConverter(typeof(PointInTimeReferenceDescriptorConverter))]
 	public sealed partial class PointInTimeReferenceDescriptor : DescriptorBase<PointInTimeReferenceDescriptor>
 	{
 		public PointInTimeReferenceDescriptor()
@@ -3133,20 +2163,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		public PointInTimeReferenceDescriptor Id(Elastic.Clients.Elasticsearch.Id id) => Assign(id, (a, v) => a.IdValue = v);
 		public PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Assign(keepAlive, (a, v) => a.KeepAliveValue = v);
-	}
-
-	internal sealed class PointInTimeReferenceDescriptorConverter : JsonConverter<PointInTimeReferenceDescriptor>
-	{
-		public override PointInTimeReferenceDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PointInTimeReferenceDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, value.IdValue, options);
-			if (value.KeepAliveValue is not null)
+			JsonSerializer.Serialize(writer, IdValue, options);
+			if (KeepAliveValue is not null)
 			{
 				writer.WritePropertyName("keep_alive");
-				JsonSerializer.Serialize(writer, value.KeepAliveValue, options);
+				JsonSerializer.Serialize(writer, KeepAliveValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -3343,7 +2368,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
-	[JsonConverter(typeof(RequestBaseDescriptorConverter))]
 	public sealed partial class RequestBaseDescriptor : DescriptorBase<RequestBaseDescriptor>
 	{
 		public RequestBaseDescriptor()
@@ -3351,12 +2375,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal RequestBaseDescriptor(Action<RequestBaseDescriptor> configure) => configure.Invoke(this);
-	}
-
-	internal sealed class RequestBaseDescriptorConverter : JsonConverter<RequestBaseDescriptor>
-	{
-		public override RequestBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RequestBaseDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WriteEndObject();
@@ -3397,72 +2416,66 @@ namespace Elastic.Clients.Elasticsearch
 		public int? WindowSize { get; set; }
 	}
 
-	[JsonConverter(typeof(RescoreDescriptorConverter))]
-	public sealed partial class RescoreDescriptor : DescriptorBase<RescoreDescriptor>
+	public sealed partial class RescoreDescriptor<T> : DescriptorBase<RescoreDescriptor<T>>
 	{
 		public RescoreDescriptor()
 		{
 		}
 
-		internal RescoreDescriptor(Action<RescoreDescriptor> configure) => configure.Invoke(this);
+		internal RescoreDescriptor(Action<RescoreDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.RescoreQuery QueryValue { get; private set; }
 
 		internal int? WindowSizeValue { get; private set; }
 
-		internal RescoreQueryDescriptor QueryDescriptor { get; private set; }
+		internal RescoreQueryDescriptor<T> QueryDescriptor { get; private set; }
 
-		internal Action<RescoreQueryDescriptor> QueryDescriptorAction { get; private set; }
+		internal Action<RescoreQueryDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.RescoreQuery query)
+		public RescoreDescriptor<T> Query(Elastic.Clients.Elasticsearch.RescoreQuery query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.RescoreQueryDescriptor descriptor)
+		public RescoreDescriptor<T> Query(Elastic.Clients.Elasticsearch.RescoreQueryDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public RescoreDescriptor Query(Action<Elastic.Clients.Elasticsearch.RescoreQueryDescriptor> configure)
+		public RescoreDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.RescoreQueryDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public RescoreDescriptor WindowSize(int? windowSize) => Assign(windowSize, (a, v) => a.WindowSizeValue = v);
-	}
-
-	internal sealed class RescoreDescriptorConverter : JsonConverter<RescoreDescriptor>
-	{
-		public override RescoreDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RescoreDescriptor value, JsonSerializerOptions options)
+		public RescoreDescriptor<T> WindowSize(int? windowSize) => Assign(windowSize, (a, v) => a.WindowSizeValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.QueryDescriptor is not null)
+			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
 			}
-			else if (value.QueryDescriptorAction is not null)
+			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new RescoreQueryDescriptor(value.QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new RescoreQueryDescriptor<T>(QueryDescriptorAction), options);
 			}
 			else
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, value.QueryValue, options);
+				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (value.WindowSizeValue.HasValue)
+			if (WindowSizeValue.HasValue)
 			{
 				writer.WritePropertyName("window_size");
-				writer.WriteNumberValue(value.WindowSizeValue.Value);
+				writer.WriteNumberValue(WindowSizeValue.Value);
 			}
 
 			writer.WriteEndObject();
@@ -3488,14 +2501,13 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ScoreMode? ScoreMode { get; set; }
 	}
 
-	[JsonConverter(typeof(RescoreQueryDescriptorConverter))]
-	public sealed partial class RescoreQueryDescriptor : DescriptorBase<RescoreQueryDescriptor>
+	public sealed partial class RescoreQueryDescriptor<T> : DescriptorBase<RescoreQueryDescriptor<T>>
 	{
 		public RescoreQueryDescriptor()
 		{
 		}
 
-		internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor> configure) => configure.Invoke(this);
+		internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
 
 		internal double? QueryWeightValue { get; private set; }
@@ -3504,74 +2516,69 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.ScoreMode? ScoreModeValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		public RescoreQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor descriptor)
+		public RescoreQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public RescoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor> configure)
+		public RescoreQueryDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public RescoreQueryDescriptor QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a.QueryWeightValue = v);
-		public RescoreQueryDescriptor RescoreQueryWeight(double? rescoreQueryWeight) => Assign(rescoreQueryWeight, (a, v) => a.RescoreQueryWeightValue = v);
-		public RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.ScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
-	}
-
-	internal sealed class RescoreQueryDescriptorConverter : JsonConverter<RescoreQueryDescriptor>
-	{
-		public override RescoreQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, RescoreQueryDescriptor value, JsonSerializerOptions options)
+		public RescoreQueryDescriptor<T> QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a.QueryWeightValue = v);
+		public RescoreQueryDescriptor<T> RescoreQueryWeight(double? rescoreQueryWeight) => Assign(rescoreQueryWeight, (a, v) => a.RescoreQueryWeightValue = v);
+		public RescoreQueryDescriptor<T> ScoreMode(Elastic.Clients.Elasticsearch.ScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.QueryDescriptor is not null)
+			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("rescore_query");
-				JsonSerializer.Serialize(writer, value.QueryDescriptor, options);
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
 			}
-			else if (value.QueryDescriptorAction is not null)
+			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("rescore_query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(value.QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
 			}
 			else
 			{
 				writer.WritePropertyName("rescore_query");
-				JsonSerializer.Serialize(writer, value.QueryValue, options);
+				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (value.QueryWeightValue.HasValue)
+			if (QueryWeightValue.HasValue)
 			{
 				writer.WritePropertyName("query_weight");
-				writer.WriteNumberValue(value.QueryWeightValue.Value);
+				writer.WriteNumberValue(QueryWeightValue.Value);
 			}
 
-			if (value.RescoreQueryWeightValue.HasValue)
+			if (RescoreQueryWeightValue.HasValue)
 			{
 				writer.WritePropertyName("rescore_query_weight");
-				writer.WriteNumberValue(value.RescoreQueryWeightValue.Value);
+				writer.WriteNumberValue(RescoreQueryWeightValue.Value);
 			}
 
-			if (value.ScoreModeValue is not null)
+			if (ScoreModeValue is not null)
 			{
 				writer.WritePropertyName("score_mode");
-				JsonSerializer.Serialize(writer, value.ScoreModeValue, options);
+				JsonSerializer.Serialize(writer, ScoreModeValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -3636,12 +2643,10 @@ namespace Elastic.Clients.Elasticsearch
 		public long Search { get; init; }
 	}
 
-	public partial class ScoreSort
+	public partial class ScoreSort : ISortOptionsVariant
 	{
-		[JsonInclude]
-		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
-
+		[JsonIgnore]
+		string ISortOptionsVariant.SortOptionsVariantName => "_score";
 		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
@@ -3650,15 +2655,10 @@ namespace Elastic.Clients.Elasticsearch
 	public abstract partial class ScriptBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("lang")]
-		public Union<Elastic.Clients.Elasticsearch.ScriptLanguage?, string?>? Lang { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("params")]
 		public Dictionary<string, object>? Params { get; set; }
 	}
 
-	[JsonConverter(typeof(ScriptBaseDescriptorConverter))]
 	public sealed partial class ScriptBaseDescriptor : DescriptorBase<ScriptBaseDescriptor>
 	{
 		public ScriptBaseDescriptor()
@@ -3666,30 +2666,16 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal ScriptBaseDescriptor(Action<ScriptBaseDescriptor> configure) => configure.Invoke(this);
-		internal Union<Elastic.Clients.Elasticsearch.ScriptLanguage?, string?>? LangValue { get; private set; }
-
 		internal Dictionary<string, object>? ParamsValue { get; private set; }
 
-		public ScriptBaseDescriptor Lang(Union<Elastic.Clients.Elasticsearch.ScriptLanguage?, string?>? lang) => Assign(lang, (a, v) => a.LangValue = v);
 		public ScriptBaseDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-	}
-
-	internal sealed class ScriptBaseDescriptorConverter : JsonConverter<ScriptBaseDescriptor>
-	{
-		public override ScriptBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ScriptBaseDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.LangValue is not null)
-			{
-				writer.WritePropertyName("lang");
-				JsonSerializer.Serialize(writer, value.LangValue, options);
-			}
-
-			if (value.ParamsValue is not null)
+			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, value.ParamsValue, options);
+				JsonSerializer.Serialize(writer, ParamsValue, options);
 			}
 
 			writer.WriteEndObject();
@@ -3707,7 +2693,6 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? IgnoreFailure { get; set; }
 	}
 
-	[JsonConverter(typeof(ScriptFieldDescriptorConverter))]
 	public sealed partial class ScriptFieldDescriptor : DescriptorBase<ScriptFieldDescriptor>
 	{
 		public ScriptFieldDescriptor()
@@ -3721,28 +2706,25 @@ namespace Elastic.Clients.Elasticsearch
 
 		public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
 		public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-	}
-
-	internal sealed class ScriptFieldDescriptorConverter : JsonConverter<ScriptFieldDescriptor>
-	{
-		public override ScriptFieldDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, ScriptFieldDescriptor value, JsonSerializerOptions options)
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.ScriptValue, options);
-			if (value.IgnoreFailureValue.HasValue)
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+			if (IgnoreFailureValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_failure");
-				writer.WriteBooleanValue(value.IgnoreFailureValue.Value);
+				writer.WriteBooleanValue(IgnoreFailureValue.Value);
 			}
 
 			writer.WriteEndObject();
 		}
 	}
 
-	public partial class ScriptSort
+	public partial class ScriptSort : ISortOptionsVariant
 	{
+		[JsonIgnore]
+		string ISortOptionsVariant.SortOptionsVariantName => "_script";
 		[JsonInclude]
 		[JsonPropertyName("order")]
 		public Elastic.Clients.Elasticsearch.SortOrder? Order { get; init; }
@@ -3753,7 +2735,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string? Type { get; init; }
+		public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("mode")]
+		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("nested")]
+		public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; init; }
 	}
 
 	public partial class SearchProfile
@@ -4016,64 +3006,54 @@ namespace Elastic.Clients.Elasticsearch
 		public int Max { get; set; }
 	}
 
-	[JsonConverter(typeof(SlicedScrollDescriptorConverter))]
-	public sealed partial class SlicedScrollDescriptor : DescriptorBase<SlicedScrollDescriptor>
+	public sealed partial class SlicedScrollDescriptor<T> : DescriptorBase<SlicedScrollDescriptor<T>>
 	{
 		public SlicedScrollDescriptor()
 		{
 		}
 
-		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor> configure) => configure.Invoke(this);
+		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? FieldValue { get; private set; }
 
 		internal int IdValue { get; private set; }
 
 		internal int MaxValue { get; private set; }
 
-		public SlicedScrollDescriptor Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SlicedScrollDescriptor Id(int id) => Assign(id, (a, v) => a.IdValue = v);
-		public SlicedScrollDescriptor Max(int max) => Assign(max, (a, v) => a.MaxValue = v);
-	}
-
-	internal sealed class SlicedScrollDescriptorConverter : JsonConverter<SlicedScrollDescriptor>
-	{
-		public override SlicedScrollDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SlicedScrollDescriptor value, JsonSerializerOptions options)
+		public SlicedScrollDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SlicedScrollDescriptor<T> Id(int id) => Assign(id, (a, v) => a.IdValue = v);
+		public SlicedScrollDescriptor<T> Max(int max) => Assign(max, (a, v) => a.MaxValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.FieldValue is not null)
+			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.FieldValue, options);
+				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
 			writer.WritePropertyName("id");
-			writer.WriteNumberValue(value.IdValue);
+			writer.WriteNumberValue(IdValue);
 			writer.WritePropertyName("max");
-			writer.WriteNumberValue(value.MaxValue);
+			writer.WriteNumberValue(MaxValue);
 			writer.WriteEndObject();
 		}
 	}
 
-	public interface ISmoothingModelContainerVariant
+	public interface ISortOptionsVariant
 	{
-		string SmoothingModelContainerVariantName { get; }
+		string SortOptionsVariantName { get; }
 	}
 
-	internal interface ISmoothingModelContainerVariantDescriptor
+	[JsonConverter(typeof(SortOptionsConverter))]
+	public partial class SortOptions : IContainer
 	{
+		public SortOptions(ISortOptionsVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+		internal ISortOptionsVariant Variant { get; }
 	}
 
-	[JsonConverter(typeof(SmoothingModelContainerConverter))]
-	public partial class SmoothingModelContainer : IContainer
+	internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
 	{
-		public SmoothingModelContainer(ISmoothingModelContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal ISmoothingModelContainerVariant Variant { get; }
-	}
-
-	internal sealed class SmoothingModelContainerConverter : JsonConverter<SmoothingModelContainer>
-	{
-		public override SmoothingModelContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override SortOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			reader.Read();
 			if (reader.TokenType != JsonTokenType.PropertyName)
@@ -4082,162 +3062,77 @@ namespace Elastic.Clients.Elasticsearch
 			}
 
 			var propertyName = reader.GetString();
-			if (propertyName == "laplace")
+			if (propertyName == "_score")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.LaplaceSmoothingModel?>(ref reader, options);
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
 				reader.Read();
-				return new SmoothingModelContainer(variant);
+				return new SortOptions(variant);
 			}
 
-			if (propertyName == "linear_interpolation")
+			if (propertyName == "_doc")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.LinearInterpolationSmoothingModel?>(ref reader, options);
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
 				reader.Read();
-				return new SmoothingModelContainer(variant);
+				return new SortOptions(variant);
 			}
 
-			if (propertyName == "stupid_backoff")
+			if (propertyName == "_geo_distance")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.StupidBackoffSmoothingModel?>(ref reader, options);
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceSort?>(ref reader, options);
 				reader.Read();
-				return new SmoothingModelContainer(variant);
+				return new SortOptions(variant);
+			}
+
+			if (propertyName == "_script")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptSort?>(ref reader, options);
+				reader.Read();
+				return new SortOptions(variant);
 			}
 
 			throw new JsonException();
 		}
 
-		public override void Write(Utf8JsonWriter writer, SmoothingModelContainer value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, SortOptions value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SmoothingModelContainerVariantName);
+			writer.WritePropertyName(value.Variant.SortOptionsVariantName);
 			switch (value.Variant)
 			{
-				case Elastic.Clients.Elasticsearch.LaplaceSmoothingModel variant:
+				case Elastic.Clients.Elasticsearch.ScoreSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.LinearInterpolationSmoothingModel variant:
+				//case Elastic.Clients.Elasticsearch.ScoreSort variant:
+				//	JsonSerializer.Serialize(writer, variant, options);
+				//	break;
+				case Elastic.Clients.Elasticsearch.GeoDistanceSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				case Elastic.Clients.Elasticsearch.StupidBackoffSmoothingModel variant:
+				case Elastic.Clients.Elasticsearch.ScriptSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 			}
 
 			writer.WriteEndObject();
 		}
-	}
-
-	public sealed partial class SmoothingModelContainerDescriptor : DescriptorBase<SmoothingModelContainerDescriptor>
-	{
-		public SmoothingModelContainerDescriptor()
-		{
-		}
-
-		internal SmoothingModelContainerDescriptor(Action<SmoothingModelContainerDescriptor> configure) => configure.Invoke(this);
-	}
-
-	internal sealed class SmoothingModelContainerDescriptorConverter : JsonConverter<SmoothingModelContainerDescriptor>
-	{
-		public override SmoothingModelContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SmoothingModelContainerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class SortContainer
-	{
-		[JsonInclude]
-		[JsonPropertyName("_score")]
-		public Elastic.Clients.Elasticsearch.ScoreSort? Score { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_doc")]
-		public Elastic.Clients.Elasticsearch.ScoreSort? Doc { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_geo_distance")]
-		public Elastic.Clients.Elasticsearch.GeoDistanceSort? GeoDistance { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_script")]
-		public Elastic.Clients.Elasticsearch.ScriptSort? Script { get; init; }
 	}
 
 	public partial class SourceFilter
 	{
 		[JsonInclude]
 		[JsonPropertyName("excludes")]
-		public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? Excludes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("includes")]
-		public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("exclude")]
-		public Elastic.Clients.Elasticsearch.Fields? Exclude { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("include")]
-		public Elastic.Clients.Elasticsearch.Fields? Include { get; set; }
+		public Elastic.Clients.Elasticsearch.Fields? Includes { get; init; }
 	}
 
-	[JsonConverter(typeof(SourceFilterDescriptorConverter))]
-	public sealed partial class SourceFilterDescriptor : DescriptorBase<SourceFilterDescriptor>
+	public partial class StoredScriptId : ScriptBase
 	{
-		public SourceFilterDescriptor()
-		{
-		}
-
-		internal SourceFilterDescriptor(Action<SourceFilterDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Fields? ExcludesValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Fields? IncludesValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Fields? ExcludeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Fields? IncludeValue { get; private set; }
-
-		public SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? excludes) => Assign(excludes, (a, v) => a.ExcludesValue = v);
-		public SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? includes) => Assign(includes, (a, v) => a.IncludesValue = v);
-		public SourceFilterDescriptor Exclude(Elastic.Clients.Elasticsearch.Fields? exclude) => Assign(exclude, (a, v) => a.ExcludeValue = v);
-		public SourceFilterDescriptor Include(Elastic.Clients.Elasticsearch.Fields? include) => Assign(include, (a, v) => a.IncludeValue = v);
-	}
-
-	internal sealed class SourceFilterDescriptorConverter : JsonConverter<SourceFilterDescriptor>
-	{
-		public override SourceFilterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SourceFilterDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.ExcludesValue is not null)
-			{
-				writer.WritePropertyName("excludes");
-				JsonSerializer.Serialize(writer, value.ExcludesValue, options);
-			}
-
-			if (value.IncludesValue is not null)
-			{
-				writer.WritePropertyName("includes");
-				JsonSerializer.Serialize(writer, value.IncludesValue, options);
-			}
-
-			if (value.ExcludeValue is not null)
-			{
-				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, value.ExcludeValue, options);
-			}
-
-			if (value.IncludeValue is not null)
-			{
-				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, value.IncludeValue, options);
-			}
-
-			writer.WriteEndObject();
-		}
+		[JsonInclude]
+		[JsonPropertyName("id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 	}
 
 	public partial class StoreStats
@@ -4267,40 +3162,6 @@ namespace Elastic.Clients.Elasticsearch
 		public int? TotalDataSetSizeInBytes { get; init; }
 	}
 
-	public partial class StupidBackoffSmoothingModel : ISmoothingModelContainerVariant
-	{
-		[JsonIgnore]
-		string ISmoothingModelContainerVariant.SmoothingModelContainerVariantName => "stupid_backoff";
-		[JsonInclude]
-		[JsonPropertyName("discount")]
-		public double Discount { get; set; }
-	}
-
-	[JsonConverter(typeof(StupidBackoffSmoothingModelDescriptorConverter))]
-	public sealed partial class StupidBackoffSmoothingModelDescriptor : DescriptorBase<StupidBackoffSmoothingModelDescriptor>, ISmoothingModelContainerVariantDescriptor
-	{
-		public StupidBackoffSmoothingModelDescriptor()
-		{
-		}
-
-		internal StupidBackoffSmoothingModelDescriptor(Action<StupidBackoffSmoothingModelDescriptor> configure) => configure.Invoke(this);
-		internal double DiscountValue { get; private set; }
-
-		public StupidBackoffSmoothingModelDescriptor Discount(double discount) => Assign(discount, (a, v) => a.DiscountValue = v);
-	}
-
-	internal sealed class StupidBackoffSmoothingModelDescriptorConverter : JsonConverter<StupidBackoffSmoothingModelDescriptor>
-	{
-		public override StupidBackoffSmoothingModelDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, StupidBackoffSmoothingModelDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("discount");
-			writer.WriteNumberValue(value.DiscountValue);
-			writer.WriteEndObject();
-		}
-	}
-
 	public partial class Suggest<T>
 	{
 		[JsonInclude]
@@ -4320,482 +3181,30 @@ namespace Elastic.Clients.Elasticsearch
 		public string Text { get; init; }
 	}
 
-	public interface ISuggestContainerVariant
+	public partial class Suggester
 	{
-		string SuggestContainerVariantName { get; }
-	}
-
-	internal interface ISuggestContainerVariantDescriptor
-	{
-	}
-
-	[JsonConverter(typeof(SuggestContainerConverter))]
-	public partial class SuggestContainer : IContainer
-	{
-		public SuggestContainer(ISuggestContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal ISuggestContainerVariant Variant { get; }
-	}
-
-	internal sealed class SuggestContainerConverter : JsonConverter<SuggestContainer>
-	{
-		public override SuggestContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException();
-			}
-
-			var propertyName = reader.GetString();
-			if (propertyName == "completion")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.CompletionSuggester?>(ref reader, options);
-				reader.Read();
-				return new SuggestContainer(variant);
-			}
-
-			if (propertyName == "phrase")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.PhraseSuggester?>(ref reader, options);
-				reader.Read();
-				return new SuggestContainer(variant);
-			}
-
-			if (propertyName == "term")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TermSuggester?>(ref reader, options);
-				reader.Read();
-				return new SuggestContainer(variant);
-			}
-
-			throw new JsonException();
-		}
-
-		public override void Write(Utf8JsonWriter writer, SuggestContainer value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.SuggestContainerVariantName);
-			switch (value.Variant)
-			{
-				case Elastic.Clients.Elasticsearch.CompletionSuggester variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.PhraseSuggester variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.TermSuggester variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
-	public sealed partial class SuggestContainerDescriptor : DescriptorBase<SuggestContainerDescriptor>
-	{
-		public SuggestContainerDescriptor()
-		{
-		}
-
-		internal SuggestContainerDescriptor(Action<SuggestContainerDescriptor> configure) => configure.Invoke(this);
-	}
-
-	internal sealed class SuggestContainerDescriptorConverter : JsonConverter<SuggestContainerDescriptor>
-	{
-		public override SuggestContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SuggestContainerDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class SuggestContextQuery
-	{
-		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public double? Boost { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("context")]
-		public Elastic.Clients.Elasticsearch.Context Context { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("neighbours")]
-		public Union<IEnumerable<string>?, IEnumerable<int>?>? Neighbours { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("precision")]
-		public Union<string?, int?>? Precision { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix")]
-		public bool? Prefix { get; set; }
-	}
-
-	[JsonConverter(typeof(SuggestContextQueryDescriptorConverter))]
-	public sealed partial class SuggestContextQueryDescriptor : DescriptorBase<SuggestContextQueryDescriptor>
-	{
-		public SuggestContextQueryDescriptor()
-		{
-		}
-
-		internal SuggestContextQueryDescriptor(Action<SuggestContextQueryDescriptor> configure) => configure.Invoke(this);
-		internal double? BoostValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Context ContextValue { get; private set; }
-
-		internal Union<IEnumerable<string>?, IEnumerable<int>?>? NeighboursValue { get; private set; }
-
-		internal Union<string?, int?>? PrecisionValue { get; private set; }
-
-		internal bool? PrefixValue { get; private set; }
-
-		public SuggestContextQueryDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public SuggestContextQueryDescriptor Context(Elastic.Clients.Elasticsearch.Context context) => Assign(context, (a, v) => a.ContextValue = v);
-		public SuggestContextQueryDescriptor Neighbours(Union<IEnumerable<string>?, IEnumerable<int>?>? neighbours) => Assign(neighbours, (a, v) => a.NeighboursValue = v);
-		public SuggestContextQueryDescriptor Precision(Union<string?, int?>? precision) => Assign(precision, (a, v) => a.PrecisionValue = v);
-		public SuggestContextQueryDescriptor Prefix(bool? prefix = true) => Assign(prefix, (a, v) => a.PrefixValue = v);
-	}
-
-	internal sealed class SuggestContextQueryDescriptorConverter : JsonConverter<SuggestContextQueryDescriptor>
-	{
-		public override SuggestContextQueryDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SuggestContextQueryDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (value.BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.BoostValue.Value);
-			}
-
-			writer.WritePropertyName("context");
-			JsonSerializer.Serialize(writer, value.ContextValue, options);
-			if (value.NeighboursValue is not null)
-			{
-				writer.WritePropertyName("neighbours");
-				JsonSerializer.Serialize(writer, value.NeighboursValue, options);
-			}
-
-			if (value.PrecisionValue is not null)
-			{
-				writer.WritePropertyName("precision");
-				JsonSerializer.Serialize(writer, value.PrecisionValue, options);
-			}
-
-			if (value.PrefixValue.HasValue)
-			{
-				writer.WritePropertyName("prefix");
-				writer.WriteBooleanValue(value.PrefixValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
-	public abstract partial class SuggesterBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public string Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
-	}
-
-	[JsonConverter(typeof(SuggesterBaseDescriptorConverter))]
-	public sealed partial class SuggesterBaseDescriptor : DescriptorBase<SuggesterBaseDescriptor>
-	{
-		public SuggesterBaseDescriptor()
-		{
-		}
-
-		internal SuggesterBaseDescriptor(Action<SuggesterBaseDescriptor> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
-
-		internal string? AnalyzerValue { get; private set; }
-
-		internal int? SizeValue { get; private set; }
-
-		public SuggesterBaseDescriptor Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SuggesterBaseDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public SuggesterBaseDescriptor Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-	}
-
-	internal sealed class SuggesterBaseDescriptorConverter : JsonConverter<SuggesterBaseDescriptor>
-	{
-		public override SuggesterBaseDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SuggesterBaseDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.FieldValue, options);
-			if (!string.IsNullOrEmpty(value.AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value.AnalyzerValue);
-			}
-
-			if (value.SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(value.SizeValue.Value);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class SuggestFuzziness
-	{
-		[JsonInclude]
-		[JsonPropertyName("fuzziness")]
-		public Elastic.Clients.Elasticsearch.Fuzziness Fuzziness { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_length")]
-		public int MinLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
-		public int PrefixLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("transpositions")]
-		public bool Transpositions { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("unicode_aware")]
-		public bool UnicodeAware { get; set; }
-	}
-
-	[JsonConverter(typeof(SuggestFuzzinessDescriptorConverter))]
-	public sealed partial class SuggestFuzzinessDescriptor : DescriptorBase<SuggestFuzzinessDescriptor>
-	{
-		public SuggestFuzzinessDescriptor()
-		{
-		}
-
-		internal SuggestFuzzinessDescriptor(Action<SuggestFuzzinessDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Fuzziness FuzzinessValue { get; private set; }
-
-		internal int MinLengthValue { get; private set; }
-
-		internal int PrefixLengthValue { get; private set; }
-
-		internal bool TranspositionsValue { get; private set; }
-
-		internal bool UnicodeAwareValue { get; private set; }
-
-		public SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public SuggestFuzzinessDescriptor MinLength(int minLength) => Assign(minLength, (a, v) => a.MinLengthValue = v);
-		public SuggestFuzzinessDescriptor PrefixLength(int prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public SuggestFuzzinessDescriptor Transpositions(bool transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
-		public SuggestFuzzinessDescriptor UnicodeAware(bool unicodeAware = true) => Assign(unicodeAware, (a, v) => a.UnicodeAwareValue = v);
-	}
-
-	internal sealed class SuggestFuzzinessDescriptorConverter : JsonConverter<SuggestFuzzinessDescriptor>
-	{
-		public override SuggestFuzzinessDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, SuggestFuzzinessDescriptor value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			writer.WritePropertyName("fuzziness");
-			JsonSerializer.Serialize(writer, value.FuzzinessValue, options);
-			writer.WritePropertyName("min_length");
-			writer.WriteNumberValue(value.MinLengthValue);
-			writer.WritePropertyName("prefix_length");
-			writer.WriteNumberValue(value.PrefixLengthValue);
-			writer.WritePropertyName("transpositions");
-			writer.WriteBooleanValue(value.TranspositionsValue);
-			writer.WritePropertyName("unicode_aware");
-			writer.WriteBooleanValue(value.UnicodeAwareValue);
-			writer.WriteEndObject();
-		}
-	}
-
-	public partial class TermSuggester : SuggesterBase, ISuggestContainerVariant
-	{
-		[JsonIgnore]
-		string ISuggestContainerVariant.SuggestContainerVariantName => "term";
-		[JsonInclude]
-		[JsonPropertyName("lowercase_terms")]
-		public bool? LowercaseTerms { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_edits")]
-		public int? MaxEdits { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_inspections")]
-		public int? MaxInspections { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_term_freq")]
-		public float? MaxTermFreq { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_doc_freq")]
-		public float? MinDocFreq { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_word_length")]
-		public int? MinWordLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("prefix_length")]
-		public int? PrefixLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.SuggestSort? Sort { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("string_distance")]
-		public Elastic.Clients.Elasticsearch.StringDistance? StringDistance { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("suggest_mode")]
-		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
-
 		[JsonInclude]
 		[JsonPropertyName("text")]
 		public string? Text { get; set; }
 	}
 
-	[JsonConverter(typeof(TermSuggesterDescriptorConverter))]
-	public sealed partial class TermSuggesterDescriptor : DescriptorBase<TermSuggesterDescriptor>, ISuggestContainerVariantDescriptor
+	public sealed partial class SuggesterDescriptor : DescriptorBase<SuggesterDescriptor>
 	{
-		public TermSuggesterDescriptor()
+		public SuggesterDescriptor()
 		{
 		}
 
-		internal TermSuggesterDescriptor(Action<TermSuggesterDescriptor> configure) => configure.Invoke(this);
-		internal bool? LowercaseTermsValue { get; private set; }
-
-		internal int? MaxEditsValue { get; private set; }
-
-		internal int? MaxInspectionsValue { get; private set; }
-
-		internal float? MaxTermFreqValue { get; private set; }
-
-		internal float? MinDocFreqValue { get; private set; }
-
-		internal int? MinWordLengthValue { get; private set; }
-
-		internal int? PrefixLengthValue { get; private set; }
-
-		internal int? ShardSizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.SuggestSort? SortValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.StringDistance? StringDistanceValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; private set; }
-
+		internal SuggesterDescriptor(Action<SuggesterDescriptor> configure) => configure.Invoke(this);
 		internal string? TextValue { get; private set; }
 
-		public TermSuggesterDescriptor LowercaseTerms(bool? lowercaseTerms = true) => Assign(lowercaseTerms, (a, v) => a.LowercaseTermsValue = v);
-		public TermSuggesterDescriptor MaxEdits(int? maxEdits) => Assign(maxEdits, (a, v) => a.MaxEditsValue = v);
-		public TermSuggesterDescriptor MaxInspections(int? maxInspections) => Assign(maxInspections, (a, v) => a.MaxInspectionsValue = v);
-		public TermSuggesterDescriptor MaxTermFreq(float? maxTermFreq) => Assign(maxTermFreq, (a, v) => a.MaxTermFreqValue = v);
-		public TermSuggesterDescriptor MinDocFreq(float? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
-		public TermSuggesterDescriptor MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
-		public TermSuggesterDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public TermSuggesterDescriptor ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public TermSuggesterDescriptor Sort(Elastic.Clients.Elasticsearch.SuggestSort? sort) => Assign(sort, (a, v) => a.SortValue = v);
-		public TermSuggesterDescriptor StringDistance(Elastic.Clients.Elasticsearch.StringDistance? stringDistance) => Assign(stringDistance, (a, v) => a.StringDistanceValue = v);
-		public TermSuggesterDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Assign(suggestMode, (a, v) => a.SuggestModeValue = v);
-		public TermSuggesterDescriptor Text(string? text) => Assign(text, (a, v) => a.TextValue = v);
-	}
-
-	internal sealed class TermSuggesterDescriptorConverter : JsonConverter<TermSuggesterDescriptor>
-	{
-		public override TermSuggesterDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, TermSuggesterDescriptor value, JsonSerializerOptions options)
+		public SuggesterDescriptor Text(string? text) => Assign(text, (a, v) => a.TextValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (value.LowercaseTermsValue.HasValue)
-			{
-				writer.WritePropertyName("lowercase_terms");
-				writer.WriteBooleanValue(value.LowercaseTermsValue.Value);
-			}
-
-			if (value.MaxEditsValue.HasValue)
-			{
-				writer.WritePropertyName("max_edits");
-				writer.WriteNumberValue(value.MaxEditsValue.Value);
-			}
-
-			if (value.MaxInspectionsValue.HasValue)
-			{
-				writer.WritePropertyName("max_inspections");
-				writer.WriteNumberValue(value.MaxInspectionsValue.Value);
-			}
-
-			if (value.MaxTermFreqValue.HasValue)
-			{
-				writer.WritePropertyName("max_term_freq");
-				writer.WriteNumberValue(value.MaxTermFreqValue.Value);
-			}
-
-			if (value.MinDocFreqValue.HasValue)
-			{
-				writer.WritePropertyName("min_doc_freq");
-				writer.WriteNumberValue(value.MinDocFreqValue.Value);
-			}
-
-			if (value.MinWordLengthValue.HasValue)
-			{
-				writer.WritePropertyName("min_word_length");
-				writer.WriteNumberValue(value.MinWordLengthValue.Value);
-			}
-
-			if (value.PrefixLengthValue.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value.PrefixLengthValue.Value);
-			}
-
-			if (value.ShardSizeValue.HasValue)
-			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(value.ShardSizeValue.Value);
-			}
-
-			if (value.SortValue is not null)
-			{
-				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, value.SortValue, options);
-			}
-
-			if (value.StringDistanceValue is not null)
-			{
-				writer.WritePropertyName("string_distance");
-				JsonSerializer.Serialize(writer, value.StringDistanceValue, options);
-			}
-
-			if (value.SuggestModeValue is not null)
-			{
-				writer.WritePropertyName("suggest_mode");
-				JsonSerializer.Serialize(writer, value.SuggestModeValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.TextValue))
+			if (!string.IsNullOrEmpty(TextValue))
 			{
 				writer.WritePropertyName("text");
-				writer.WriteStringValue(value.TextValue);
+				writer.WriteStringValue(TextValue);
 			}
 
 			writer.WriteEndObject();
@@ -4815,6 +3224,28 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("score")]
 		public double Score { get; init; }
+	}
+
+	public partial class TopLeftBottomRightGeoBounds
+	{
+		[JsonInclude]
+		[JsonPropertyName("top_left")]
+		public Elastic.Clients.Elasticsearch.GeoLocation TopLeft { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("bottom_right")]
+		public Elastic.Clients.Elasticsearch.GeoLocation BottomRight { get; init; }
+	}
+
+	public partial class TopRightBottomLeftGeoBounds
+	{
+		[JsonInclude]
+		[JsonPropertyName("top_right")]
+		public Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("bottom_left")]
+		public Elastic.Clients.Elasticsearch.GeoLocation BottomLeft { get; init; }
 	}
 
 	public partial class TotalHits
@@ -4876,6 +3307,13 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("total_time_in_millis")]
 		public long TotalTimeInMillis { get; init; }
+	}
+
+	public partial class WktGeoBounds
+	{
+		[JsonInclude]
+		[JsonPropertyName("wkt")]
+		public string Wkt { get; init; }
 	}
 
 	public abstract partial class WriteResponseBase : ResponseBase

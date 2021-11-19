@@ -51,7 +51,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
-		public IEnumerable<Union<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>>? CharFilter { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("explain")]
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
-		public IEnumerable<Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>>? Filter { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? Filter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("normalizer")]
@@ -75,11 +75,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
-		public Union<string?, Elastic.Clients.Elasticsearch.Analysis.Tokenizers?>? Tokenizer { get; set; }
+		public Elastic.Clients.Elasticsearch.Analysis.Tokenizer? Tokenizer { get; set; }
 	}
 
-	[JsonConverter(typeof(AnalyzeIndexRequestDescriptorConverter))]
-	public sealed partial class AnalyzeIndexRequestDescriptor : RequestDescriptorBase<AnalyzeIndexRequestDescriptor, AnalyzeIndexRequestParameters>
+	public sealed partial class AnalyzeIndexRequestDescriptor<T> : RequestDescriptorBase<AnalyzeIndexRequestDescriptor<T>, AnalyzeIndexRequestParameters>
 	{
 		public AnalyzeIndexRequestDescriptor()
 		{
@@ -89,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal AnalyzeIndexRequestDescriptor(Action<AnalyzeIndexRequestDescriptor> configure) => configure.Invoke(this);
+		internal AnalyzeIndexRequestDescriptor(Action<AnalyzeIndexRequestDescriptor<T>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementAnalyze;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -97,89 +96,84 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal IEnumerable<string>? AttributesValue { get; private set; }
 
-		internal IEnumerable<Union<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>>? CharFilterValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? CharFilterValue { get; private set; }
 
 		internal bool? ExplainValue { get; private set; }
 
 		internal string? FieldValue { get; private set; }
 
-		internal IEnumerable<Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>>? FilterValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; private set; }
 
 		internal string? NormalizerValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? TextValue { get; private set; }
 
-		internal Union<string?, Elastic.Clients.Elasticsearch.Analysis.Tokenizers?>? TokenizerValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; private set; }
 
-		public AnalyzeIndexRequestDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public AnalyzeIndexRequestDescriptor Attributes(IEnumerable<string>? attributes) => Assign(attributes, (a, v) => a.AttributesValue = v);
-		public AnalyzeIndexRequestDescriptor CharFilter(IEnumerable<Union<string?, Elastic.Clients.Elasticsearch.Analysis.CharFilters?>>? charFilter) => Assign(charFilter, (a, v) => a.CharFilterValue = v);
-		public AnalyzeIndexRequestDescriptor Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
-		public AnalyzeIndexRequestDescriptor Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AnalyzeIndexRequestDescriptor Filter(IEnumerable<Union<string?, Elastic.Clients.Elasticsearch.Analysis.TokenFilters?>>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
-		public AnalyzeIndexRequestDescriptor Normalizer(string? normalizer) => Assign(normalizer, (a, v) => a.NormalizerValue = v);
-		public AnalyzeIndexRequestDescriptor Text(Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? text) => Assign(text, (a, v) => a.TextValue = v);
-		public AnalyzeIndexRequestDescriptor Tokenizer(Union<string?, Elastic.Clients.Elasticsearch.Analysis.Tokenizers?>? tokenizer) => Assign(tokenizer, (a, v) => a.TokenizerValue = v);
-	}
-
-	internal sealed class AnalyzeIndexRequestDescriptorConverter : JsonConverter<AnalyzeIndexRequestDescriptor>
-	{
-		public override AnalyzeIndexRequestDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, AnalyzeIndexRequestDescriptor value, JsonSerializerOptions options)
+		public AnalyzeIndexRequestDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Attributes(IEnumerable<string>? attributes) => Assign(attributes, (a, v) => a.AttributesValue = v);
+		public AnalyzeIndexRequestDescriptor<T> CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter) => Assign(charFilter, (a, v) => a.CharFilterValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Normalizer(string? normalizer) => Assign(normalizer, (a, v) => a.NormalizerValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Text(Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? text) => Assign(text, (a, v) => a.TextValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.Tokenizer? tokenizer) => Assign(tokenizer, (a, v) => a.TokenizerValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.AnalyzerValue))
+			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value.AnalyzerValue);
+				writer.WriteStringValue(AnalyzerValue);
 			}
 
-			if (value.AttributesValue is not null)
+			if (AttributesValue is not null)
 			{
 				writer.WritePropertyName("attributes");
-				JsonSerializer.Serialize(writer, value.AttributesValue, options);
+				JsonSerializer.Serialize(writer, AttributesValue, options);
 			}
 
-			if (value.CharFilterValue is not null)
+			if (CharFilterValue is not null)
 			{
 				writer.WritePropertyName("char_filter");
-				JsonSerializer.Serialize(writer, value.CharFilterValue, options);
+				JsonSerializer.Serialize(writer, CharFilterValue, options);
 			}
 
-			if (value.ExplainValue.HasValue)
+			if (ExplainValue.HasValue)
 			{
 				writer.WritePropertyName("explain");
-				writer.WriteBooleanValue(value.ExplainValue.Value);
+				writer.WriteBooleanValue(ExplainValue.Value);
 			}
 
-			if (value.FieldValue is not null)
+			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.FieldValue, options);
+				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
-			if (value.FilterValue is not null)
+			if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, value.FilterValue, options);
+				JsonSerializer.Serialize(writer, FilterValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.NormalizerValue))
+			if (!string.IsNullOrEmpty(NormalizerValue))
 			{
 				writer.WritePropertyName("normalizer");
-				writer.WriteStringValue(value.NormalizerValue);
+				writer.WriteStringValue(NormalizerValue);
 			}
 
-			if (value.TextValue is not null)
+			if (TextValue is not null)
 			{
 				writer.WritePropertyName("text");
-				JsonSerializer.Serialize(writer, value.TextValue, options);
+				JsonSerializer.Serialize(writer, TextValue, options);
 			}
 
-			if (value.TokenizerValue is not null)
+			if (TokenizerValue is not null)
 			{
 				writer.WritePropertyName("tokenizer");
-				JsonSerializer.Serialize(writer, value.TokenizerValue, options);
+				JsonSerializer.Serialize(writer, TokenizerValue, options);
 			}
 
 			writer.WriteEndObject();

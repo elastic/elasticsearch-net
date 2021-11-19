@@ -28,10 +28,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		string PivotGroupByContainerVariantName { get; }
 	}
 
-	internal interface IPivotGroupByContainerVariantDescriptor
-	{
-	}
-
 	[JsonConverter(typeof(PivotGroupByContainerConverter))]
 	public partial class PivotGroupByContainer : IContainer
 	{
@@ -105,21 +101,92 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class PivotGroupByContainerDescriptor : DescriptorBase<PivotGroupByContainerDescriptor>
+	public sealed partial class PivotGroupByContainerDescriptor<T> : DescriptorBase<PivotGroupByContainerDescriptor<T>>
 	{
 		public PivotGroupByContainerDescriptor()
 		{
 		}
 
-		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
-	}
+		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<T>> configure) => configure.Invoke(this);
+		internal bool ContainsVariant { get; private set; }
 
-	internal sealed class PivotGroupByContainerDescriptorConverter : JsonConverter<PivotGroupByContainerDescriptor>
-	{
-		public override PivotGroupByContainerDescriptor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, PivotGroupByContainerDescriptor value, JsonSerializerOptions options)
+		internal string ContainedVariantName { get; private set; }
+
+		internal PivotGroupByContainer Container { get; private set; }
+
+		internal object ContainerVariantDescriptorAction { get; private set; }
+
+		private void Set(object descriptorAction, string variantName)
 		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainerVariantDescriptorAction = descriptorAction;
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		private void Set(IPivotGroupByContainerVariant variant, string variantName)
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new PivotGroupByContainer(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<T>> configure) => Set(configure, "date_histogram");
+		public void GeotileGrid(Aggregations.GeoTileGridAggregation variant) => Set(variant, "geotile_grid");
+		public void GeotileGrid(Action<Aggregations.GeoTileGridAggregationDescriptor<T>> configure) => Set(configure, "geotile_grid");
+		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<T>> configure) => Set(configure, "histogram");
+		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public void Terms(Action<Aggregations.TermsAggregationDescriptor<T>> configure) => Set(configure, "terms");
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
 			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			writer.WriteStartObject();
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+			}
+
+			if (ContainedVariantName == "date_histogram")
+			{
+				var descriptor = new Aggregations.DateHistogramAggregationDescriptor<T>();
+				((Action<Aggregations.DateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "geotile_grid")
+			{
+				var descriptor = new Aggregations.GeoTileGridAggregationDescriptor<T>();
+				((Action<Aggregations.GeoTileGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "histogram")
+			{
+				var descriptor = new Aggregations.HistogramAggregationDescriptor<T>();
+				((Action<Aggregations.HistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			if (ContainedVariantName == "terms")
+			{
+				var descriptor = new Aggregations.TermsAggregationDescriptor<T>();
+				((Action<Aggregations.TermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}
