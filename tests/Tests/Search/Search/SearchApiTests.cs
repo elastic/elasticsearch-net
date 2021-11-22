@@ -58,19 +58,19 @@ namespace Tests.Search.Search
 			.Size(20)
 			.Query(q => q
 				.MatchAll()
+			)
+			.Aggregations(a => a
+				.Terms("startDates", t => t
+					.Field(p => p.StartedOn)
+				)
 			);
-			//.Aggregations(a => a
-			//	.Terms("startDates", t => t
-			//		.Field(p => p.StartedOn)
-			//	)
-			//)
 			//.PostFilter(f => f
 			//	.Term(p => p.State, StateOfBeing.Stable)
 			//);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override SearchRequest Initializer => new SearchRequest()
+		protected override SearchRequest Initializer => new()
 		{
 			From = 10,
 			Size = 20,

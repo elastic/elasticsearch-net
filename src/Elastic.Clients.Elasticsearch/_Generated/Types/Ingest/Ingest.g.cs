@@ -2300,6 +2300,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "attachment")
@@ -2307,6 +2309,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new AttachmentProcessorDescriptor<T>();
 				((Action<AttachmentProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "append")
@@ -2314,6 +2318,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new AppendProcessorDescriptor<T>();
 				((Action<AppendProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "csv")
@@ -2321,6 +2327,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new CsvProcessorDescriptor<T>();
 				((Action<CsvProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "convert")
@@ -2328,6 +2336,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new ConvertProcessorDescriptor<T>();
 				((Action<ConvertProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "date")
@@ -2335,6 +2345,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new DateProcessorDescriptor<T>();
 				((Action<DateProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "date_index_name")
@@ -2342,6 +2354,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new DateIndexNameProcessorDescriptor<T>();
 				((Action<DateIndexNameProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "dot_expander")
@@ -2349,6 +2363,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new DotExpanderProcessorDescriptor<T>();
 				((Action<DotExpanderProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "enrich")
@@ -2356,6 +2372,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new EnrichProcessorDescriptor<T>();
 				((Action<EnrichProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "fail")
@@ -2363,6 +2381,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new FailProcessorDescriptor();
 				((Action<FailProcessorDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "foreach")
@@ -2370,6 +2390,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new ForeachProcessorDescriptor<T>();
 				((Action<ForeachProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "json")
@@ -2377,6 +2399,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new JsonProcessorDescriptor<T>();
 				((Action<JsonProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "user_agent")
@@ -2384,6 +2408,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new UserAgentProcessorDescriptor<T>();
 				((Action<UserAgentProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "kv")
@@ -2391,6 +2417,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new KeyValueProcessorDescriptor<T>();
 				((Action<KeyValueProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geoip")
@@ -2398,6 +2426,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new GeoIpProcessorDescriptor<T>();
 				((Action<GeoIpProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "grok")
@@ -2405,6 +2435,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new GrokProcessorDescriptor<T>();
 				((Action<GrokProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "gsub")
@@ -2412,6 +2444,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new GsubProcessorDescriptor<T>();
 				((Action<GsubProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "join")
@@ -2419,6 +2453,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new JoinProcessorDescriptor<T>();
 				((Action<JoinProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "lowercase")
@@ -2426,6 +2462,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new LowercaseProcessorDescriptor<T>();
 				((Action<LowercaseProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "remove")
@@ -2433,6 +2471,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new RemoveProcessorDescriptor<T>();
 				((Action<RemoveProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "rename")
@@ -2440,6 +2480,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new RenameProcessorDescriptor<T>();
 				((Action<RenameProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "set")
@@ -2447,6 +2489,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new SetProcessorDescriptor<T>();
 				((Action<SetProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "sort")
@@ -2454,6 +2498,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new SortProcessorDescriptor<T>();
 				((Action<SortProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "split")
@@ -2461,6 +2507,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new SplitProcessorDescriptor<T>();
 				((Action<SplitProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "trim")
@@ -2468,6 +2516,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new TrimProcessorDescriptor<T>();
 				((Action<TrimProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "uppercase")
@@ -2475,6 +2525,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new UppercaseProcessorDescriptor<T>();
 				((Action<UppercaseProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "urldecode")
@@ -2482,6 +2534,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new UrlDecodeProcessorDescriptor<T>();
 				((Action<UrlDecodeProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "bytes")
@@ -2489,6 +2543,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new BytesProcessorDescriptor<T>();
 				((Action<BytesProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "dissect")
@@ -2496,6 +2552,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new DissectProcessorDescriptor<T>();
 				((Action<DissectProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "set_security_user")
@@ -2503,6 +2561,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new SetSecurityUserProcessorDescriptor<T>();
 				((Action<SetSecurityUserProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "pipeline")
@@ -2510,6 +2570,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new PipelineProcessorDescriptor();
 				((Action<PipelineProcessorDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "drop")
@@ -2517,6 +2579,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new DropProcessorDescriptor();
 				((Action<DropProcessorDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "circle")
@@ -2524,6 +2588,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new CircleProcessorDescriptor<T>();
 				((Action<CircleProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "inference")
@@ -2531,10 +2597,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				var descriptor = new InferenceProcessorDescriptor<T>();
 				((Action<InferenceProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
