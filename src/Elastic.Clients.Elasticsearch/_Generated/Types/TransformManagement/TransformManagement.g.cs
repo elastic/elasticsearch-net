@@ -156,6 +156,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "date_histogram")
@@ -163,6 +165,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				var descriptor = new Aggregations.DateHistogramAggregationDescriptor<T>();
 				((Action<Aggregations.DateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geotile_grid")
@@ -170,6 +174,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				var descriptor = new Aggregations.GeoTileGridAggregationDescriptor<T>();
 				((Action<Aggregations.GeoTileGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "histogram")
@@ -177,6 +183,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				var descriptor = new Aggregations.HistogramAggregationDescriptor<T>();
 				((Action<Aggregations.HistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "terms")
@@ -184,10 +192,17 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				var descriptor = new Aggregations.TermsAggregationDescriptor<T>();
 				((Action<Aggregations.TermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 }

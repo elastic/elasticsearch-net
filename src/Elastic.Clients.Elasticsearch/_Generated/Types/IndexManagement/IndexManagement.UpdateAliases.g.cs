@@ -144,6 +144,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "add")
@@ -151,6 +153,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 				var descriptor = new AddActionDescriptor<T>();
 				((Action<AddActionDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "remove")
@@ -158,6 +162,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 				var descriptor = new RemoveActionDescriptor();
 				((Action<RemoveActionDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "remove_index")
@@ -165,10 +171,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 				var descriptor = new RemoveIndexActionDescriptor();
 				((Action<RemoveIndexActionDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 

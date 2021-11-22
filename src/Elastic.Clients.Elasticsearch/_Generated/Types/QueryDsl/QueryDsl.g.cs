@@ -837,6 +837,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "field_value_factor")
@@ -844,6 +846,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new FieldValueFactorScoreFunctionDescriptor<T>();
 				((Action<FieldValueFactorScoreFunctionDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "random_score")
@@ -851,6 +855,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new RandomScoreFunctionDescriptor<T>();
 				((Action<RandomScoreFunctionDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "script_score")
@@ -858,10 +864,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ScriptScoreFunctionDescriptor();
 				((Action<ScriptScoreFunctionDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -1961,6 +1974,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "all_of")
@@ -1968,6 +1983,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsAllOfDescriptor();
 				((Action<IntervalsAllOfDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "any_of")
@@ -1975,6 +1992,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsAnyOfDescriptor();
 				((Action<IntervalsAnyOfDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "fuzzy")
@@ -1982,6 +2001,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsFuzzyDescriptor<T>();
 				((Action<IntervalsFuzzyDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match")
@@ -1989,6 +2010,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsMatchDescriptor<T>();
 				((Action<IntervalsMatchDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "prefix")
@@ -1996,6 +2019,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsPrefixDescriptor<T>();
 				((Action<IntervalsPrefixDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "wildcard")
@@ -2003,10 +2028,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsWildcardDescriptor<T>();
 				((Action<IntervalsWildcardDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -2091,10 +2123,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -2538,6 +2577,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "all_of")
@@ -2545,6 +2586,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsAllOfDescriptor();
 				((Action<IntervalsAllOfDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "any_of")
@@ -2552,6 +2595,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsAnyOfDescriptor();
 				((Action<IntervalsAnyOfDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "fuzzy")
@@ -2559,6 +2604,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsFuzzyDescriptor<T>();
 				((Action<IntervalsFuzzyDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match")
@@ -2566,6 +2613,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsMatchDescriptor<T>();
 				((Action<IntervalsMatchDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "prefix")
@@ -2573,6 +2622,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsPrefixDescriptor<T>();
 				((Action<IntervalsPrefixDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "wildcard")
@@ -2580,10 +2631,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsWildcardDescriptor<T>();
 				((Action<IntervalsWildcardDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -4080,10 +4138,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -4861,6 +4926,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "bool")
@@ -4868,6 +4935,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new BoolQueryDescriptor<T>();
 				((Action<BoolQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "boosting")
@@ -4875,6 +4944,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new BoostingQueryDescriptor<T>();
 				((Action<BoostingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "combined_fields")
@@ -4882,6 +4953,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new CombinedFieldsQueryDescriptor<T>();
 				((Action<CombinedFieldsQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "constant_score")
@@ -4889,6 +4962,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ConstantScoreQueryDescriptor<T>();
 				((Action<ConstantScoreQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "dis_max")
@@ -4896,6 +4971,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new DisMaxQueryDescriptor();
 				((Action<DisMaxQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "exists")
@@ -4903,6 +4980,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ExistsQueryDescriptor<T>();
 				((Action<ExistsQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "function_score")
@@ -4910,6 +4989,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new FunctionScoreQueryDescriptor<T>();
 				((Action<FunctionScoreQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "fuzzy")
@@ -4917,6 +4998,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new FuzzyQueryDescriptor();
 				((Action<FuzzyQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_bounding_box")
@@ -4924,6 +5007,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new GeoBoundingBoxQueryDescriptor();
 				((Action<GeoBoundingBoxQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_distance")
@@ -4931,6 +5016,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new GeoDistanceQueryDescriptor();
 				((Action<GeoDistanceQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_polygon")
@@ -4938,6 +5025,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new GeoPolygonQueryDescriptor();
 				((Action<GeoPolygonQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_shape")
@@ -4945,6 +5034,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new GeoShapeQueryDescriptor();
 				((Action<GeoShapeQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "has_child")
@@ -4952,6 +5043,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new HasChildQueryDescriptor<T>();
 				((Action<HasChildQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "has_parent")
@@ -4959,6 +5052,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new HasParentQueryDescriptor<T>();
 				((Action<HasParentQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "ids")
@@ -4966,6 +5061,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IdsQueryDescriptor();
 				((Action<IdsQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "intervals")
@@ -4973,6 +5070,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new IntervalsQueryDescriptor<T>();
 				((Action<IntervalsQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match")
@@ -4980,6 +5079,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MatchQueryDescriptor();
 				((Action<MatchQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match_all")
@@ -4987,6 +5088,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MatchAllQueryDescriptor();
 				((Action<MatchAllQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match_bool_prefix")
@@ -4994,6 +5097,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MatchBoolPrefixQueryDescriptor();
 				((Action<MatchBoolPrefixQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match_none")
@@ -5001,6 +5106,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MatchNoneQueryDescriptor();
 				((Action<MatchNoneQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match_phrase")
@@ -5008,6 +5115,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MatchPhraseQueryDescriptor();
 				((Action<MatchPhraseQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "match_phrase_prefix")
@@ -5015,6 +5124,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MatchPhrasePrefixQueryDescriptor();
 				((Action<MatchPhrasePrefixQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "more_like_this")
@@ -5022,6 +5133,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MoreLikeThisQueryDescriptor<T>();
 				((Action<MoreLikeThisQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "multi_match")
@@ -5029,6 +5142,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new MultiMatchQueryDescriptor<T>();
 				((Action<MultiMatchQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "nested")
@@ -5036,6 +5151,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new NestedQueryDescriptor<T>();
 				((Action<NestedQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "parent_id")
@@ -5043,6 +5160,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ParentIdQueryDescriptor();
 				((Action<ParentIdQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "percolate")
@@ -5050,6 +5169,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new PercolateQueryDescriptor<T>();
 				((Action<PercolateQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "pinned")
@@ -5057,6 +5178,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new PinnedQueryDescriptor<T>();
 				((Action<PinnedQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "prefix")
@@ -5064,6 +5187,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new PrefixQueryDescriptor();
 				((Action<PrefixQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "query_string")
@@ -5071,6 +5196,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new QueryStringQueryDescriptor<T>();
 				((Action<QueryStringQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "rank_feature")
@@ -5078,6 +5205,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new RankFeatureQueryDescriptor<T>();
 				((Action<RankFeatureQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "regexp")
@@ -5085,6 +5214,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new RegexpQueryDescriptor();
 				((Action<RegexpQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "script")
@@ -5092,6 +5223,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ScriptQueryDescriptor();
 				((Action<ScriptQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "script_score")
@@ -5099,6 +5232,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ScriptScoreQueryDescriptor<T>();
 				((Action<ScriptScoreQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "shape")
@@ -5106,6 +5241,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new ShapeQueryDescriptor();
 				((Action<ShapeQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "simple_query_string")
@@ -5113,6 +5250,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SimpleQueryStringQueryDescriptor<T>();
 				((Action<SimpleQueryStringQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_containing")
@@ -5120,6 +5259,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanContainingQueryDescriptor<T>();
 				((Action<SpanContainingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "field_masking_span")
@@ -5127,6 +5268,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanFieldMaskingQueryDescriptor<T>();
 				((Action<SpanFieldMaskingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_first")
@@ -5134,6 +5277,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanFirstQueryDescriptor<T>();
 				((Action<SpanFirstQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_multi")
@@ -5141,6 +5286,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanMultiTermQueryDescriptor<T>();
 				((Action<SpanMultiTermQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_near")
@@ -5148,6 +5295,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanNearQueryDescriptor();
 				((Action<SpanNearQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_not")
@@ -5155,6 +5304,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanNotQueryDescriptor<T>();
 				((Action<SpanNotQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_or")
@@ -5162,6 +5313,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanOrQueryDescriptor();
 				((Action<SpanOrQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_term")
@@ -5169,6 +5322,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanTermQueryDescriptor();
 				((Action<SpanTermQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_within")
@@ -5176,6 +5331,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanWithinQueryDescriptor<T>();
 				((Action<SpanWithinQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "term")
@@ -5183,6 +5340,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new TermQueryDescriptor();
 				((Action<TermQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "terms")
@@ -5190,6 +5349,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new TermsQueryDescriptor();
 				((Action<TermsQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "terms_set")
@@ -5197,6 +5358,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new TermsSetQueryDescriptor<T>();
 				((Action<TermsSetQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "wildcard")
@@ -5204,10 +5367,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new WildcardQueryDescriptor();
 				((Action<WildcardQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -7227,6 +7397,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_containing")
@@ -7234,6 +7406,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanContainingQueryDescriptor<T>();
 				((Action<SpanContainingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "field_masking_span")
@@ -7241,6 +7415,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanFieldMaskingQueryDescriptor<T>();
 				((Action<SpanFieldMaskingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_first")
@@ -7248,6 +7424,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanFirstQueryDescriptor<T>();
 				((Action<SpanFirstQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_multi")
@@ -7255,6 +7433,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanMultiTermQueryDescriptor<T>();
 				((Action<SpanMultiTermQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_near")
@@ -7262,6 +7442,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanNearQueryDescriptor();
 				((Action<SpanNearQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_not")
@@ -7269,6 +7451,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanNotQueryDescriptor<T>();
 				((Action<SpanNotQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_or")
@@ -7276,6 +7460,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanOrQueryDescriptor();
 				((Action<SpanOrQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_term")
@@ -7283,6 +7469,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanTermQueryDescriptor();
 				((Action<SpanTermQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "span_within")
@@ -7290,10 +7478,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				var descriptor = new SpanWithinQueryDescriptor<T>();
 				((Action<SpanWithinQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 

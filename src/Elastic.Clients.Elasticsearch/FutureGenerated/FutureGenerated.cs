@@ -12,6 +12,7 @@ using Elastic.Transport;
 using System.Text.Json;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -215,11 +216,26 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class SearchRequestDescriptor<T>
 	{
-		public SearchRequestDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> configure)
-		{
-			var container = configure?.Invoke(new QueryContainerDescriptor<T>());
-			return Assign(container, (a, v) => a.QueryValue = v);
-		}
+		//internal AggregationContainerDescriptor<T> AggregationContainerDescriptor { get; private set; }
+		//internal Action<AggregationContainerDescriptor<T>> AggregationContainerDescriptorAction { get; private set; }
+
+		//public SearchRequestDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> configure)
+		//{
+		//	var container = configure?.Invoke(new QueryContainerDescriptor<T>());
+		//	return Assign(container, (a, v) => a.QueryValue = v);
+		//}
+
+		//public SearchRequestDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>> configure)
+		//{
+		//	return Assign(configure, (a, v) => a.AggregationContainerDescriptorAction = v);
+		//}
+
+		//public SearchRequestDescriptor<T> Aggregations(AggregationContainerDescriptor<T> configure)
+		//{
+		//	var descriptor = new AggregationContainerDescriptor<T>();
+		//	configure?.Invoke(descriptor);
+		//	return Assign(descriptor, (a, v) => a.AggregationContainerDescriptor = v);
+		//}
 	}
 
 	public sealed partial class CountRequestDescriptor<T>
@@ -268,6 +284,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	public abstract partial class AggregationBase
+	{
+		[JsonInclude]
+		[JsonPropertyName("meta")]
+		public Dictionary<string, object>? Meta { get; set; }
+
+		[JsonIgnore]
+		public string? Name { get; set; }
+	}
+
 	public partial class TermsAggregation
 	{
 		public TermsAggregation(string name) => Name = name;
