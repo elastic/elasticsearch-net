@@ -70,49 +70,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<string, object>? Meta { get; init; }
 	}
 
-	public abstract partial class AggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("name")]
-		public string? Name { get; set; }
-	}
-
-	public sealed partial class AggregationBaseDescriptor : DescriptorBase<AggregationBaseDescriptor>
-	{
-		public AggregationBaseDescriptor()
-		{
-		}
-
-		internal AggregationBaseDescriptor(Action<AggregationBaseDescriptor> configure) => configure.Invoke(this);
-		internal Dictionary<string, object>? MetaValue { get; private set; }
-
-		internal string? NameValue { get; private set; }
-
-		public AggregationBaseDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public AggregationBaseDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			writer.WriteStartObject();
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(NameValue))
-			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
-			}
-
-			writer.WriteEndObject();
-		}
-	}
-
 	public interface IAggregationContainerVariant
 	{
 		string AggregationContainerVariantName { get; }
@@ -1018,6 +975,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "adjacency_matrix")
@@ -1025,6 +984,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new AdjacencyMatrixAggregationDescriptor();
 				((Action<AdjacencyMatrixAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "auto_date_histogram")
@@ -1032,6 +993,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new AutoDateHistogramAggregationDescriptor<T>();
 				((Action<AutoDateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "avg")
@@ -1039,6 +1002,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new AverageAggregationDescriptor();
 				((Action<AverageAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "avg_bucket")
@@ -1046,6 +1011,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new AverageBucketAggregationDescriptor();
 				((Action<AverageBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "boxplot")
@@ -1053,6 +1020,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new BoxplotAggregationDescriptor();
 				((Action<BoxplotAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "bucket_script")
@@ -1060,6 +1029,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new BucketScriptAggregationDescriptor();
 				((Action<BucketScriptAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "bucket_selector")
@@ -1067,6 +1038,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new BucketSelectorAggregationDescriptor();
 				((Action<BucketSelectorAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "bucket_sort")
@@ -1074,6 +1047,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new BucketSortAggregationDescriptor();
 				((Action<BucketSortAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "cardinality")
@@ -1081,6 +1056,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new CardinalityAggregationDescriptor();
 				((Action<CardinalityAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "children")
@@ -1088,6 +1065,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ChildrenAggregationDescriptor();
 				((Action<ChildrenAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "composite")
@@ -1095,6 +1074,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new CompositeAggregationDescriptor();
 				((Action<CompositeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "cumulative_cardinality")
@@ -1102,6 +1083,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new CumulativeCardinalityAggregationDescriptor();
 				((Action<CumulativeCardinalityAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "cumulative_sum")
@@ -1109,6 +1092,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new CumulativeSumAggregationDescriptor();
 				((Action<CumulativeSumAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "date_histogram")
@@ -1116,6 +1101,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new DateHistogramAggregationDescriptor<T>();
 				((Action<DateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "date_range")
@@ -1123,6 +1110,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new DateRangeAggregationDescriptor<T>();
 				((Action<DateRangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "derivative")
@@ -1130,6 +1119,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new DerivativeAggregationDescriptor();
 				((Action<DerivativeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "diversified_sampler")
@@ -1137,6 +1128,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new DiversifiedSamplerAggregationDescriptor<T>();
 				((Action<DiversifiedSamplerAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "extended_stats")
@@ -1144,6 +1137,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ExtendedStatsAggregationDescriptor();
 				((Action<ExtendedStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "extended_stats_bucket")
@@ -1151,6 +1146,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ExtendedStatsBucketAggregationDescriptor();
 				((Action<ExtendedStatsBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "filter")
@@ -1158,6 +1155,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new QueryDsl.QueryContainerDescriptor<T>();
 				((Action<QueryDsl.QueryContainerDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "filters")
@@ -1165,6 +1164,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new FiltersAggregationDescriptor();
 				((Action<FiltersAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_bounds")
@@ -1172,6 +1173,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GeoBoundsAggregationDescriptor();
 				((Action<GeoBoundsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_centroid")
@@ -1179,6 +1182,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GeoCentroidAggregationDescriptor();
 				((Action<GeoCentroidAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_distance")
@@ -1186,6 +1191,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GeoDistanceAggregationDescriptor<T>();
 				((Action<GeoDistanceAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geohash_grid")
@@ -1193,6 +1200,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GeoHashGridAggregationDescriptor<T>();
 				((Action<GeoHashGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geo_line")
@@ -1200,6 +1209,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GeoLineAggregationDescriptor<T>();
 				((Action<GeoLineAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "geotile_grid")
@@ -1207,6 +1218,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GeoTileGridAggregationDescriptor<T>();
 				((Action<GeoTileGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "global")
@@ -1214,6 +1227,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new GlobalAggregationDescriptor();
 				((Action<GlobalAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "histogram")
@@ -1221,6 +1236,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new HistogramAggregationDescriptor<T>();
 				((Action<HistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "ip_range")
@@ -1228,6 +1245,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new IpRangeAggregationDescriptor<T>();
 				((Action<IpRangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "inference")
@@ -1235,6 +1254,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new InferenceAggregationDescriptor<T>();
 				((Action<InferenceAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "matrix_stats")
@@ -1242,6 +1263,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MatrixStatsAggregationDescriptor();
 				((Action<MatrixStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "max")
@@ -1249,6 +1272,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MaxAggregationDescriptor();
 				((Action<MaxAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "max_bucket")
@@ -1256,6 +1281,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MaxBucketAggregationDescriptor();
 				((Action<MaxBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "median_absolute_deviation")
@@ -1263,6 +1290,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MedianAbsoluteDeviationAggregationDescriptor();
 				((Action<MedianAbsoluteDeviationAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "min")
@@ -1270,6 +1299,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MinAggregationDescriptor();
 				((Action<MinAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "min_bucket")
@@ -1277,6 +1308,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MinBucketAggregationDescriptor();
 				((Action<MinBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "missing")
@@ -1284,6 +1317,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MissingAggregationDescriptor<T>();
 				((Action<MissingAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "moving_percentiles")
@@ -1291,6 +1326,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MovingPercentilesAggregationDescriptor();
 				((Action<MovingPercentilesAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "moving_fn")
@@ -1298,6 +1335,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MovingFunctionAggregationDescriptor();
 				((Action<MovingFunctionAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "multi_terms")
@@ -1305,6 +1344,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new MultiTermsAggregationDescriptor();
 				((Action<MultiTermsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "nested")
@@ -1312,6 +1353,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new NestedAggregationDescriptor<T>();
 				((Action<NestedAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "normalize")
@@ -1319,6 +1362,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new NormalizeAggregationDescriptor();
 				((Action<NormalizeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "parent")
@@ -1326,6 +1371,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ParentAggregationDescriptor();
 				((Action<ParentAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "percentile_ranks")
@@ -1333,6 +1380,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new PercentileRanksAggregationDescriptor();
 				((Action<PercentileRanksAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "percentiles")
@@ -1340,6 +1389,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new PercentilesAggregationDescriptor();
 				((Action<PercentilesAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "percentiles_bucket")
@@ -1347,6 +1398,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new PercentilesBucketAggregationDescriptor();
 				((Action<PercentilesBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "range")
@@ -1354,6 +1407,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new RangeAggregationDescriptor<T>();
 				((Action<RangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "rare_terms")
@@ -1361,6 +1416,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new RareTermsAggregationDescriptor<T>();
 				((Action<RareTermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "rate")
@@ -1368,6 +1425,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new RateAggregationDescriptor();
 				((Action<RateAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "reverse_nested")
@@ -1375,6 +1434,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ReverseNestedAggregationDescriptor<T>();
 				((Action<ReverseNestedAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "sampler")
@@ -1382,6 +1443,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new SamplerAggregationDescriptor();
 				((Action<SamplerAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "scripted_metric")
@@ -1389,6 +1452,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ScriptedMetricAggregationDescriptor();
 				((Action<ScriptedMetricAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "serial_diff")
@@ -1396,6 +1461,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new SerialDifferencingAggregationDescriptor();
 				((Action<SerialDifferencingAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "significant_terms")
@@ -1403,6 +1470,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new SignificantTermsAggregationDescriptor<T>();
 				((Action<SignificantTermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "significant_text")
@@ -1410,6 +1479,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new SignificantTextAggregationDescriptor<T>();
 				((Action<SignificantTextAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "stats")
@@ -1417,6 +1488,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new StatsAggregationDescriptor();
 				((Action<StatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "stats_bucket")
@@ -1424,6 +1497,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new StatsBucketAggregationDescriptor();
 				((Action<StatsBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "string_stats")
@@ -1431,6 +1506,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new StringStatsAggregationDescriptor();
 				((Action<StringStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "sum")
@@ -1438,6 +1515,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new SumAggregationDescriptor();
 				((Action<SumAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "sum_bucket")
@@ -1445,6 +1524,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new SumBucketAggregationDescriptor();
 				((Action<SumBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "terms")
@@ -1452,6 +1533,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new TermsAggregationDescriptor<T>();
 				((Action<TermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "top_hits")
@@ -1459,6 +1542,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new TopHitsAggregationDescriptor<T>();
 				((Action<TopHitsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "t_test")
@@ -1466,6 +1551,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new TTestAggregationDescriptor<T>();
 				((Action<TTestAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "top_metrics")
@@ -1473,6 +1560,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new TopMetricsAggregationDescriptor<T>();
 				((Action<TopMetricsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "value_count")
@@ -1480,6 +1569,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new ValueCountAggregationDescriptor();
 				((Action<ValueCountAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "weighted_avg")
@@ -1487,6 +1578,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new WeightedAverageAggregationDescriptor<T>();
 				((Action<WeightedAverageAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			if (ContainedVariantName == "variable_width_histogram")
@@ -1494,10 +1587,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var descriptor = new VariableWidthHistogramAggregationDescriptor<T>();
 				((Action<VariableWidthHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
 			}
 
 			writer.WriteEndObject();
 			writer.WriteEndObject();
+			void Finalise()
+			{
+				writer.WriteEndObject();
+				writer.WriteEndObject();
+			}
 		}
 	}
 
@@ -4662,7 +4762,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal Dictionary<string, double>? MissingValue { get; private set; }
 
 		public MatrixAggregationDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MatrixAggregationDescriptor<T> Missing(Func<FluentDictionary<string, double>, FluentDictionary<string, double>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string, double>()));
+		//public MatrixAggregationDescriptor<T> Missing(Func<FluentDictionary<string?, double?>, FluentDictionary<string?, double?>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string?, double?>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
