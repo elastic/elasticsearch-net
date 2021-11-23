@@ -8,6 +8,25 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
+			var aggs = new AggregationDictionary
+			{
+				{ "startDates", new TermsAggregation("startDates") { Field = "startedOn" } },
+				{ "endDates", new DateHistogramAggregation("endDates") { Field = "endedOn" } }
+			};
+
+			var a = new SearchRequest()
+			{
+				From = 10,
+				Size = 20,
+				Query = new QueryContainer(new MatchAllQuery()),
+				Aggregations = aggs,
+				PostFilter = new QueryContainer(new TermQuery
+				{
+					Field = "state",
+					Value = "Stable"
+				})
+			};
+
 			var client = new ElasticClient();
 
 			var settingsResponse = await client.Indices.CreateAsync("a", i => i.Settings(s => s.Analysis(a => a.TokenFilters(tf => tf
