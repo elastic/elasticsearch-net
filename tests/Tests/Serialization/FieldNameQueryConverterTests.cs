@@ -1,3 +1,4 @@
+using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Domain;
 

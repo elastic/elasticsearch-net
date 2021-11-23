@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Health Status { get; init; }
+		public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("task_max_waiting_in_queue_millis")]

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
 
@@ -16,6 +17,8 @@ namespace Playground
 
 		private static void Main()
 		{
+			
+
 			//var ec = new Client();
 
 			////#pragma warning disable IDE0039 // Use local function
@@ -108,8 +111,27 @@ namespace Playground
 
 			var thing = new IndexRequest<Person>(new Person() { FirstName = "Steve", LastName = "Gordon", Age = 37 });
 
+			var aggs = new AggregationDictionary
+			{
+				{ "startDates", new TermsAggregation("startDates") { Field = "startedOn" } },
+				{ "endDates", new DateHistogramAggregation("endDates") { Field = "endedOn" } }
+			};
+
+			var search = new SearchRequest()
+			{
+				From = 10,
+				Size = 20,
+				Query = new QueryContainer(new MatchAllQuery()),
+				Aggregations = aggs,
+				PostFilter = new QueryContainer(new TermQuery
+				{
+					Field = "state",
+					Value = "Stable"
+				})
+			};
+
 			var stream = new MemoryStream();
-			serialiser.Serialize(thing, stream);
+			serialiser.Serialize(search, stream);
 			stream.Position = 0;
 			var json = Encoding.UTF8.GetString(stream.ToArray());
 

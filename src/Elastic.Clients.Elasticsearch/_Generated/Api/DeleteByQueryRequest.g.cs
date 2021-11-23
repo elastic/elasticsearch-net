@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 		[JsonIgnore]
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.GetSourceConfig? Source { get => Q<Elastic.Clients.Elasticsearch.GetSourceConfig?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 		[JsonIgnore]
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
@@ -208,7 +208,7 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.GetSourceConfig? Source { get => Q<Elastic.Clients.Elasticsearch.GetSourceConfig?>("_source"); set => Q("_source", value); }
+		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public DeleteByQueryRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
 		public DeleteByQueryRequestDescriptor<T> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
-		public DeleteByQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public DeleteByQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public DeleteByQueryRequestDescriptor<T> Df(string? df) => Qs("df", df);
 		public DeleteByQueryRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public DeleteByQueryRequestDescriptor<T> From(long? from) => Qs("from", from);
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> Size(long? size) => Qs("size", size);
 		public DeleteByQueryRequestDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 		public DeleteByQueryRequestDescriptor<T> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
-		public DeleteByQueryRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.GetSourceConfig? source) => Qs("_source", source);
+		public DeleteByQueryRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
 		public DeleteByQueryRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public DeleteByQueryRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public DeleteByQueryRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Qs("stats", stats);

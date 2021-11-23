@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 		[JsonIgnore]
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.DefaultOperator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
+		public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 		[JsonIgnore]
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexValidateQueryRequestDescriptor<T> AllShards(bool? allShards) => Qs("all_shards", allShards);
 		public IndexValidateQueryRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public IndexValidateQueryRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public IndexValidateQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public IndexValidateQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public IndexValidateQueryRequestDescriptor<T> Df(string? df) => Qs("df", df);
 		public IndexValidateQueryRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexValidateQueryRequestDescriptor<T> Explain(bool? explain) => Qs("explain", explain);

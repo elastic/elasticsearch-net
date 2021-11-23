@@ -11,8 +11,237 @@ using System.Threading;
 using Elastic.Transport;
 using System.Text.Json;
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using System.Text;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Aggregations;
+using System.Collections;
+
+namespace Elastic.Clients.Elasticsearch.Aggregations
+{
+
+	public partial class Buckets<TBucket>
+	{
+
+	}
+
+	internal sealed class BucketsConverter
+	{
+
+	}
+
+	internal static class JsonHelper
+	{
+		public static bool TryReadUntilStringPropertyValue(ref Utf8JsonReader reader, byte[] propertyNameBytes)
+		{
+			while (reader.Read())
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName && reader.ValueTextEquals(propertyNameBytes))
+				{
+					reader.Read();
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public class EmptyTermsAggregate : TermsAggregateBase<EmptyTermsBucket>
+	{
+	}
+
+	public class EmptyTermsBucket { }
+
+	public class TermsAggregate : TermsAggregateBase<TermsBucket>
+	{
+	}
+
+	public class TermsBucket : TermsBucketBase
+	{
+		public object Key { get; init; }
+		public string? KeyAsString { get; init; }
+	}
+
+	internal static class TermsAggregateSerializationHelper
+	{
+		private static readonly byte[] s_buckets = Encoding.UTF8.GetBytes("buckets");
+		private static readonly byte[] s_key = Encoding.UTF8.GetBytes("key");
+		private static readonly byte s_period = (byte)'.';
+
+		public static bool TryDeserialiseTermsAggregate(ref Utf8JsonReader reader, JsonSerializerOptions options, out AggregateBase? aggregate)
+		{
+			aggregate = null;
+
+			// We take a copy here so we can read forward to establish the term key type before we resume with final deserialisation.
+			var readerCopy = reader;
+
+			if (JsonHelper.TryReadUntilStringPropertyValue(ref readerCopy, s_buckets))
+			{
+				if (readerCopy.TokenType != JsonTokenType.StartArray)
+					throw new Exception("TODO");
+
+				readerCopy.Read();
+
+				if (readerCopy.TokenType == JsonTokenType.EndArray) // We have no buckets
+				{
+					var agg = JsonSerializer.Deserialize<EmptyTermsAggregate>(ref reader, options);
+					aggregate = agg;
+					return true;
+				}
+				else
+				{
+					if (readerCopy.TokenType != JsonTokenType.StartObject)
+						throw new Exception("TODO"); // TODO!
+
+					if (JsonHelper.TryReadUntilStringPropertyValue(ref readerCopy, s_key))
+					{
+						if (readerCopy.TokenType == JsonTokenType.String)
+						{
+							var agg = JsonSerializer.Deserialize<StringTermsAggregate>(ref reader, options);
+							aggregate = agg;
+							return true;
+						}
+						else if (readerCopy.TokenType == JsonTokenType.Number)
+						{
+							var value = readerCopy.ValueSpan; // TODO - May need to check for sequence
+
+							if (value.IndexOf(s_period) > -1 && readerCopy.TryGetDouble(out _))
+							{
+								var agg = JsonSerializer.Deserialize<DoubleTermsAggregate>(ref reader, options);
+								aggregate = agg;
+								return true;
+							}
+							else if (readerCopy.TryGetInt64(out _))
+							{
+								var agg = JsonSerializer.Deserialize<LongTermsAggregate>(ref reader, options);
+								aggregate = agg;
+								return true;
+							}
+						}
+						else if (reader.TokenType == JsonTokenType.StartArray)
+						{
+
+						}
+						else
+						{
+							throw new JsonException("Unhandled token type when parsing the terms aggregate response");
+						}
+					}
+				}
+			}
+
+			return false;
+		}
+	}
+
+	internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDictionary>
+	{
+		public override AggregateDictionary? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var dictionary = new Dictionary<string, AggregateBase>();
+
+			if (reader.TokenType != JsonTokenType.StartObject)
+				return new AggregateDictionary(dictionary);
+
+			while (reader.Read())
+			{
+				if (reader.TokenType == JsonTokenType.EndObject)
+					break;
+
+				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those?
+
+				reader.Read();
+
+				var nameParts = name.Split('#');
+
+				if (nameParts.Length != 2)
+					throw new JsonException("Unable to parse typed-key from aggregation name");
+
+				if (nameParts[0] == "terms") // TODO: See future optimisation, above
+				{
+					if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(ref reader, options, out var agg))
+					{
+						dictionary.Add(nameParts[1], agg);
+					}
+				}
+			}
+
+			return new AggregateDictionary(dictionary);
+		}
+
+		public override void Write(Utf8JsonWriter writer, AggregateDictionary value, JsonSerializerOptions options) => throw new NotImplementedException();
+	}
+
+	public partial class AggregateDictionary
+	{
+		public EmptyTermsAggregate? EmptyTerms(string key) => TryGet<EmptyTermsAggregate?>(key);
+
+		public bool IsEmptyTerms(string key) => !BackingDictionary.TryGetValue(key, out var agg) || agg is EmptyTermsAggregate;
+
+		public bool TryGetStringTerms(string key, out StringTermsAggregate? aggregate)
+		{
+			aggregate = null;
+
+			if (BackingDictionary.TryGetValue(key, out var agg) && agg is StringTermsAggregate stringTermsAgg)
+			{
+				aggregate = stringTermsAgg;
+				return true;
+			}
+
+			return false;
+		}
+
+		public TermsAggregate Terms(string key)
+		{
+			if (!BackingDictionary.TryGetValue(key, out var agg))
+			{
+				return null;
+			}
+
+			switch (agg)
+			{
+				case EmptyTermsAggregate empty:
+					return new TermsAggregate
+					{
+						Buckets = Array.Empty<TermsBucket>().ToReadOnlyCollection(),
+						Meta = empty.Meta,
+						DocCountErrorUpperBound = empty.DocCountErrorUpperBound,
+						SumOtherDocCount = empty.SumOtherDocCount
+					};
+				case StringTermsAggregate stringTerms:
+					var buckets = stringTerms.Buckets.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key }).ToReadOnlyCollection();
+					return new TermsAggregate
+					{
+						Buckets = buckets,
+						Meta = stringTerms.Meta,
+						DocCountErrorUpperBound = stringTerms.DocCountErrorUpperBound,
+						SumOtherDocCount = stringTerms.SumOtherDocCount
+					};
+				case DoubleTermsAggregate doubleTerms:
+					var doubleTermsBuckets = doubleTerms.Buckets.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
+					return new TermsAggregate
+					{
+						Buckets = doubleTermsBuckets,
+						Meta = doubleTerms.Meta,
+						DocCountErrorUpperBound = doubleTerms.DocCountErrorUpperBound,
+						SumOtherDocCount = doubleTerms.SumOtherDocCount
+					};
+				case LongTermsAggregate longTerms:
+					var longTermsBuckets = longTerms.Buckets.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
+					return new TermsAggregate
+					{
+						Buckets = longTermsBuckets,
+						Meta = longTerms.Meta,
+						DocCountErrorUpperBound = longTerms.DocCountErrorUpperBound,
+						SumOtherDocCount = longTerms.SumOtherDocCount
+					};
+
+				// TODO - Bool / Multi-terms
+			}
+
+			return null;
+		}
+	}
+}
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -284,21 +513,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public abstract partial class AggregationBase
-	{
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; set; }
-
-		[JsonIgnore]
-		public string? Name { get; set; }
-	}
-
-	public partial class TermsAggregation
-	{
-		public TermsAggregation(string name) => Name = name;
-	}
-
 	public partial class AggregationContainer
 	{
 		public static implicit operator AggregationContainer(AggregationBase aggregator)
@@ -306,7 +520,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (aggregator == null)
 				return null;
 
-			// TODO: Unhacky this!
+			// TODO: Reimplement this fully - as neccesary!
 
 			var container = new AggregationContainer((IAggregationContainerVariant)aggregator)
 			{
@@ -330,53 +544,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public class AggregationDictionary : IsADictionaryBase<string, AggregationContainer>
-	{
-		public AggregationDictionary() { }
 
-		public AggregationDictionary(IDictionary<string, AggregationContainer> container) : base(container) { }
-
-		public AggregationDictionary(Dictionary<string, AggregationContainer> container)
-			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
-
-		public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> container) =>
-			new(container);
-
-		public static implicit operator AggregationDictionary(AggregationBase aggregator)
-		{
-			AggregationBase b;
-			//if (aggregator is AggregationCombinator combinator)
-			//{
-			//	var dict = new AggregationDictionary();
-			//	foreach (var agg in combinator.Aggregations)
-			//	{
-			//		b = agg;
-			//		if (b.Name.IsNullOrEmpty())
-			//			throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
-
-			//		dict.Add(b.Name, agg);
-			//	}
-			//	return dict;
-			//}
-
-			b = aggregator;
-
-			if (b.Name.IsNullOrEmpty())
-				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
-
-			return new AggregationDictionary { { b.Name, aggregator } };
-		}
-
-		public void Add(string key, AggregationContainer value) => BackingDictionary.Add(ValidateKey(key), value);
-
-		protected override string ValidateKey(string key) => key; // TODO!
-		//{
-			//if (AggregateFormatter.AllReservedAggregationNames.Contains(key))
-			//	throw new ArgumentException(
-			//		string.Format(AggregateFormatter.UsingReservedAggNameFormat, key), nameof(key));
-			//return key;
-		//}
-	}
 }
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
