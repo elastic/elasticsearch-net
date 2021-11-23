@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Cluster.ClusterStatus Status { get; init; }
+		public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp")]

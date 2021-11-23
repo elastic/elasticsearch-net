@@ -362,6 +362,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	public enum TermVectorOption
 	{
 		Yes,
+		WithPositionsPayloads,
 		WithPositionsOffsetsPayloads,
 		WithPositionsOffsets,
 		WithPositions,
@@ -378,6 +379,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				case "yes":
 					return TermVectorOption.Yes;
+				case "with_positions_payloads":
+					return TermVectorOption.WithPositionsPayloads;
 				case "with_positions_offsets_payloads":
 					return TermVectorOption.WithPositionsOffsetsPayloads;
 				case "with_positions_offsets":
@@ -400,6 +403,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				case TermVectorOption.Yes:
 					writer.WriteStringValue("yes");
+					return;
+				case TermVectorOption.WithPositionsPayloads:
+					writer.WriteStringValue("with_positions_payloads");
 					return;
 				case TermVectorOption.WithPositionsOffsetsPayloads:
 					writer.WriteStringValue("with_positions_offsets_payloads");

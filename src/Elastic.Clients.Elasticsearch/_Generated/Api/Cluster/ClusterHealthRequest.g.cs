@@ -57,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.WaitForStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
+		public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.WaitForStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
+		public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
 	public sealed partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterHealthRequestDescriptor WaitForNodes(string? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 		public ClusterHealthRequestDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 		public ClusterHealthRequestDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
-		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
+		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

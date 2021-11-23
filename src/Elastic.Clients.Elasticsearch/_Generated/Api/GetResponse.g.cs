@@ -23,44 +23,5 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class GetResponse<TDocument> : ResponseBase
 	{
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<string, object>? Fields { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("found")]
-		public bool Found { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_primary_term")]
-		public long? PrimaryTerm { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_routing")]
-		public string? Routing { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_seq_no")]
-		public long? SeqNo { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_source")]
-		public TDocument? Source { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_version")]
-		public long? Version { get; init; }
 	}
 }

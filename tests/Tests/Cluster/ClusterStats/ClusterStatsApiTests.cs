@@ -36,7 +36,7 @@ namespace Tests.Cluster.ClusterStats
 
 			//response.ClusterUUID.Should().NotBeNullOrWhiteSpace();
 			//response.NodeStatistics.Should().NotBeNull();
-			response.Status.Should().NotBe(ClusterStatus.Red);
+			response.Status.Should().NotBe(HealthStatus.Red);
 			//response.Timestamp.Should().BeGreaterThan(0);
 			Assert(response.Nodes);
 			Assert(response.Indices);

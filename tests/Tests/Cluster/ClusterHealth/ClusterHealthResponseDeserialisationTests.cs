@@ -71,7 +71,7 @@ namespace Tests.Cluster.ClusterHealth
 		protected override void Validate(ClusterHealthResponse response)
 		{
 			response.ClusterName.Should().Be("test-cluster");
-			response.Status.Should().Be(Health.Green);
+			response.Status.Should().Be(HealthStatus.Green);
 			response.NumberOfNodes.Should().Be(3);
 			response.NumberOfDataNodes.Should().Be(2);
 			response.ActivePrimaryShards.Should().Be(19);
@@ -86,7 +86,7 @@ namespace Tests.Cluster.ClusterHealth
 			response.Indices.Should().HaveCount(2);
 
 			var issueIndex = response.Indices["issue-test"];
-			issueIndex.Status.Should().Be(Health.Green);
+			issueIndex.Status.Should().Be(HealthStatus.Green);
 			issueIndex.NumberOfShards.Should().Be(10);
 
 			// TODO: The types for these properties are only stubs for now

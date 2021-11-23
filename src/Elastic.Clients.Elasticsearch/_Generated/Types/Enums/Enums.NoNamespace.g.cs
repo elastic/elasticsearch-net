@@ -208,46 +208,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(DefaultOperatorConverter))]
-	public enum DefaultOperator
-	{
-		Or,
-		And
-	}
-
-	public class DefaultOperatorConverter : JsonConverter<DefaultOperator>
-	{
-		public override DefaultOperator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "OR":
-					return DefaultOperator.Or;
-				case "AND":
-					return DefaultOperator.And;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, DefaultOperator value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case DefaultOperator.Or:
-					writer.WriteStringValue("OR");
-					return;
-				case DefaultOperator.And:
-					writer.WriteStringValue("AND");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(DistanceUnitConverter))]
 	public enum DistanceUnit
 	{
@@ -480,44 +440,44 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(HealthConverter))]
-	public enum Health
+	[JsonConverter(typeof(HealthStatusConverter))]
+	public enum HealthStatus
 	{
 		Yellow,
 		Red,
 		Green
 	}
 
-	public class HealthConverter : JsonConverter<Health>
+	public class HealthStatusConverter : JsonConverter<HealthStatus>
 	{
-		public override Health Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override HealthStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
 				case "yellow":
-					return Health.Yellow;
+					return HealthStatus.Yellow;
 				case "red":
-					return Health.Red;
+					return HealthStatus.Red;
 				case "green":
-					return Health.Green;
+					return HealthStatus.Green;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, Health value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, HealthStatus value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case Health.Yellow:
+				case HealthStatus.Yellow:
 					writer.WriteStringValue("yellow");
 					return;
-				case Health.Red:
+				case HealthStatus.Red:
 					writer.WriteStringValue("red");
 					return;
-				case Health.Green:
+				case HealthStatus.Green:
 					writer.WriteStringValue("green");
 					return;
 			}
@@ -1377,52 +1337,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case WaitForEvents.High:
 					writer.WriteStringValue("high");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(WaitForStatusConverter))]
-	public enum WaitForStatus
-	{
-		Yellow,
-		Red,
-		Green
-	}
-
-	public class WaitForStatusConverter : JsonConverter<WaitForStatus>
-	{
-		public override WaitForStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "yellow":
-					return WaitForStatus.Yellow;
-				case "red":
-					return WaitForStatus.Red;
-				case "green":
-					return WaitForStatus.Green;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, WaitForStatus value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case WaitForStatus.Yellow:
-					writer.WriteStringValue("yellow");
-					return;
-				case WaitForStatus.Red:
-					writer.WriteStringValue("red");
-					return;
-				case WaitForStatus.Green:
-					writer.WriteStringValue("green");
 					return;
 			}
 
