@@ -21,6 +21,8 @@ namespace Tests.Search.Search
 
 		protected override bool ExpectIsValid => true;
 
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson => new
 		{
 			from = 10,
@@ -29,7 +31,7 @@ namespace Tests.Search.Search
 			{
 				match_all = new { }
 			},
-			aggs = new
+			aggregations = new
 			{
 				startDates = new
 				{
@@ -38,17 +40,18 @@ namespace Tests.Search.Search
 						field = "startedOn"
 					}
 				}
-			},
-			post_filter = new
-			{
-				term = new
-				{
-					state = new
-					{
-						value = "Stable"
-					}
-				}
 			}
+			//,
+			//post_filter = new
+			//{
+			//	term = new
+			//	{
+			//		state = new
+			//		{
+			//			value = "Stable"
+			//		}
+			//	}
+			//}
 		};
 
 		protected override int ExpectStatusCode => 200;
@@ -58,14 +61,14 @@ namespace Tests.Search.Search
 			.Size(20)
 			.Query(q => q
 				.MatchAll()
+			)
+			.Aggregations(a => a
+				.Terms("startDates", t => t
+					.Field("startedOn")
+				)
 			);
-			//.Aggregations(a => a
-			//	.Terms("startDates", t => t
-			//		.Field(p => p.StartedOn)
-			//	)
-			//);
 			//.PostFilter(f => f
-			//	.Term(p => p.State, StateOfBeing.Stable)
+			//	.Term(p => p.State(StateOfBeing.Stable))
 			//);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -79,11 +82,11 @@ namespace Tests.Search.Search
 			{
 				Field = "startedOn"
 			},
-			PostFilter = new QueryContainer(new TermQuery
-			{
-				Field = "state",
-				Value = "Stable"
-			})
+			//PostFilter = new QueryContainer(new TermQuery
+			//{
+			//	Field = "state",
+			//	Value = "Stable"
+			//})
 		};
 
 		protected override string ExpectedUrlPathAndQuery => $"/project/_search";

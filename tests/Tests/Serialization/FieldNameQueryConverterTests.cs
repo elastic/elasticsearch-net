@@ -12,7 +12,7 @@ public class QueryContainerWithFieldNameQuerySerializationTests : SourceSerializ
 	public void CanSerializeQueryContainerDescriptor_WithSimpleMatchQuery()
 	{
 		var descriptor = new QueryContainerDescriptor<Project>(c => c.Match(m => m.Field("name").Query("NEST")));
-		var json = DeserialiseToString(descriptor);
+		var json = SerializeAndGetJsonString(descriptor);
 		json.Should().Be(BasicMatchQueryJson);
 	}
 
