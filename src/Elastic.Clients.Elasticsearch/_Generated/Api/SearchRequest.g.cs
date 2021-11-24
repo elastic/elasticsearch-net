@@ -485,6 +485,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; private set; }
 
 		public SearchRequestDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations) => Assign(aggregations, (a, v) => a.AggregationsValue = v);
+
+		
+
 		public SearchRequestDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
@@ -663,6 +666,9 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+
+			AfterStartObject(writer, options, settings);
+
 			if (AggregationsValue is not null)
 			{
 				writer.WritePropertyName("aggregations");

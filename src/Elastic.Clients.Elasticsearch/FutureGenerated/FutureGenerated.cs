@@ -14,9 +14,61 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 using System.Text;
 using System.Linq;
 using System.Collections;
+using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
+	{
+		internal AggregationDictionary Aggregations { get; set; }
+
+		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
+
+		public AggregationContainerDescriptor<T> Terms(string name, Action<TermsAggregationDescriptor<T>> configure) =>
+			SetInnerAggregation(name, configure);
+
+		private AggregationContainerDescriptor<T> SetInnerAggregation<TAggregationDescriptor>(string key, Action<TAggregationDescriptor> configureAggregation)
+			where TAggregationDescriptor : new()
+		{
+			// TODO - Future "improvement" would be to store the descriptor actions and invoke each one when serialising
+
+			var descriptor = new TAggregationDescriptor();
+			configureAggregation(descriptor);
+
+			// TEMP HARD CODED
+
+			if (descriptor is TermsAggregationDescriptor<T> t)
+			{
+				var agg = new TermsAggregation(key)
+				{
+					Field = t.FieldValue
+				};
+				
+				var container = new AggregationContainer(agg);
+
+				if (Self.Aggregations == null)
+					Self.Aggregations = new AggregationDictionary();
+
+				//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
+				//if (aggregator is IBucketAggregation bucket && bucket.Aggregations.HasAny())
+				//{
+				//	//make sure we copy those aggregations to the isolated container's
+				//	//own .Aggregations container (the one that gets serialized to "aggs")
+				//	IAggregationContainer d = container;
+				//	d.Aggregations = bucket.Aggregations;
+				//}
+				//assign the aggregations container under Aggregations ("aggs" in the json)
+
+				Self.Aggregations[key] = container;
+			}
+			
+			return this;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
+	}
+
 
 	public partial class Buckets<TBucket>
 	{
@@ -28,22 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	}
 
-	internal static class JsonHelper
-	{
-		public static bool TryReadUntilStringPropertyValue(ref Utf8JsonReader reader, byte[] propertyNameBytes)
-		{
-			while (reader.Read())
-			{
-				if (reader.TokenType == JsonTokenType.PropertyName && reader.ValueTextEquals(propertyNameBytes))
-				{
-					reader.Read();
-					return true;
-				}
-			}
-
-			return false;
-		}
-	}
+	
 
 	public class EmptyTermsAggregate : TermsAggregateBase<EmptyTermsBucket>
 	{
@@ -117,9 +154,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 								return true;
 							}
 						}
-						else if (reader.TokenType == JsonTokenType.StartArray)
+						else if (readerCopy.TokenType == JsonTokenType.StartArray)
 						{
-
+							var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
+							aggregate = agg;
+							return true;
 						}
 						else
 						{
@@ -147,7 +186,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				if (reader.TokenType == JsonTokenType.EndObject)
 					break;
 
-				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those?
+				var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
 
 				reader.Read();
 
@@ -445,6 +484,11 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class SearchRequestDescriptor<T>
 	{
+		internal Action<AggregationContainerDescriptor<T>> AggregationsAction { get; private set; }
+
+		public SearchRequestDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>>? configure) => Assign(configure, (a, v) => a.AggregationsAction = v);
+
+
 		//internal AggregationContainerDescriptor<T> AggregationContainerDescriptor { get; private set; }
 		//internal Action<AggregationContainerDescriptor<T>> AggregationContainerDescriptorAction { get; private set; }
 
@@ -465,6 +509,15 @@ namespace Elastic.Clients.Elasticsearch
 		//	configure?.Invoke(descriptor);
 		//	return Assign(descriptor, (a, v) => a.AggregationContainerDescriptor = v);
 		//}
+
+		private void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (AggregationsAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsAction), options);
+			}
+		}
 	}
 
 	public sealed partial class CountRequestDescriptor<T>

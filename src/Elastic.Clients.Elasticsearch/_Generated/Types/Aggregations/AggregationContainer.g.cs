@@ -735,801 +735,801 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
-	{
-		public AggregationContainerDescriptor()
-		{
-		}
-
-		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
-		internal bool ContainsVariant { get; private set; }
-
-		internal string ContainedVariantName { get; private set; }
-
-		internal AggregationContainer Container { get; private set; }
-
-		internal object ContainerVariantDescriptorAction { get; private set; }
-
-		private void Set(object descriptorAction, string variantName)
-		{
-			if (ContainsVariant)
-				throw new Exception("TODO");
-			ContainerVariantDescriptorAction = descriptorAction;
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-		}
-
-		private void Set(IAggregationContainerVariant variant, string variantName)
-		{
-			if (ContainsVariant)
-				throw new Exception("TODO");
-			Container = new AggregationContainer(variant);
-			ContainedVariantName = variantName;
-			ContainsVariant = true;
-		}
-
-		public void AdjacencyMatrix(AdjacencyMatrixAggregation variant) => Set(variant, "adjacency_matrix");
-		public void AdjacencyMatrix(Action<AdjacencyMatrixAggregationDescriptor> configure) => Set(configure, "adjacency_matrix");
-		public void AutoDateHistogram(AutoDateHistogramAggregation variant) => Set(variant, "auto_date_histogram");
-		public void AutoDateHistogram(Action<AutoDateHistogramAggregationDescriptor<T>> configure) => Set(configure, "auto_date_histogram");
-		public void Avg(AverageAggregation variant) => Set(variant, "avg");
-		public void Avg(Action<AverageAggregationDescriptor> configure) => Set(configure, "avg");
-		public void AvgBucket(AverageBucketAggregation variant) => Set(variant, "avg_bucket");
-		public void AvgBucket(Action<AverageBucketAggregationDescriptor> configure) => Set(configure, "avg_bucket");
-		public void Boxplot(BoxplotAggregation variant) => Set(variant, "boxplot");
-		public void Boxplot(Action<BoxplotAggregationDescriptor> configure) => Set(configure, "boxplot");
-		public void BucketScript(BucketScriptAggregation variant) => Set(variant, "bucket_script");
-		public void BucketScript(Action<BucketScriptAggregationDescriptor> configure) => Set(configure, "bucket_script");
-		public void BucketSelector(BucketSelectorAggregation variant) => Set(variant, "bucket_selector");
-		public void BucketSelector(Action<BucketSelectorAggregationDescriptor> configure) => Set(configure, "bucket_selector");
-		public void BucketSort(BucketSortAggregation variant) => Set(variant, "bucket_sort");
-		public void BucketSort(Action<BucketSortAggregationDescriptor> configure) => Set(configure, "bucket_sort");
-		public void Cardinality(CardinalityAggregation variant) => Set(variant, "cardinality");
-		public void Cardinality(Action<CardinalityAggregationDescriptor> configure) => Set(configure, "cardinality");
-		public void Children(ChildrenAggregation variant) => Set(variant, "children");
-		public void Children(Action<ChildrenAggregationDescriptor> configure) => Set(configure, "children");
-		public void Composite(CompositeAggregation variant) => Set(variant, "composite");
-		public void Composite(Action<CompositeAggregationDescriptor> configure) => Set(configure, "composite");
-		public void CumulativeCardinality(CumulativeCardinalityAggregation variant) => Set(variant, "cumulative_cardinality");
-		public void CumulativeCardinality(Action<CumulativeCardinalityAggregationDescriptor> configure) => Set(configure, "cumulative_cardinality");
-		public void CumulativeSum(CumulativeSumAggregation variant) => Set(variant, "cumulative_sum");
-		public void CumulativeSum(Action<CumulativeSumAggregationDescriptor> configure) => Set(configure, "cumulative_sum");
-		public void DateHistogram(DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<DateHistogramAggregationDescriptor<T>> configure) => Set(configure, "date_histogram");
-		public void DateRange(DateRangeAggregation variant) => Set(variant, "date_range");
-		public void DateRange(Action<DateRangeAggregationDescriptor<T>> configure) => Set(configure, "date_range");
-		public void Derivative(DerivativeAggregation variant) => Set(variant, "derivative");
-		public void Derivative(Action<DerivativeAggregationDescriptor> configure) => Set(configure, "derivative");
-		public void DiversifiedSampler(DiversifiedSamplerAggregation variant) => Set(variant, "diversified_sampler");
-		public void DiversifiedSampler(Action<DiversifiedSamplerAggregationDescriptor<T>> configure) => Set(configure, "diversified_sampler");
-		public void ExtendedStats(ExtendedStatsAggregation variant) => Set(variant, "extended_stats");
-		public void ExtendedStats(Action<ExtendedStatsAggregationDescriptor> configure) => Set(configure, "extended_stats");
-		public void ExtendedStatsBucket(ExtendedStatsBucketAggregation variant) => Set(variant, "extended_stats_bucket");
-		public void ExtendedStatsBucket(Action<ExtendedStatsBucketAggregationDescriptor> configure) => Set(configure, "extended_stats_bucket");
-		public void Filters(FiltersAggregation variant) => Set(variant, "filters");
-		public void Filters(Action<FiltersAggregationDescriptor> configure) => Set(configure, "filters");
-		public void GeoBounds(GeoBoundsAggregation variant) => Set(variant, "geo_bounds");
-		public void GeoBounds(Action<GeoBoundsAggregationDescriptor> configure) => Set(configure, "geo_bounds");
-		public void GeoCentroid(GeoCentroidAggregation variant) => Set(variant, "geo_centroid");
-		public void GeoCentroid(Action<GeoCentroidAggregationDescriptor> configure) => Set(configure, "geo_centroid");
-		public void GeoDistance(GeoDistanceAggregation variant) => Set(variant, "geo_distance");
-		public void GeoDistance(Action<GeoDistanceAggregationDescriptor<T>> configure) => Set(configure, "geo_distance");
-		public void GeohashGrid(GeoHashGridAggregation variant) => Set(variant, "geohash_grid");
-		public void GeohashGrid(Action<GeoHashGridAggregationDescriptor<T>> configure) => Set(configure, "geohash_grid");
-		public void GeoLine(GeoLineAggregation variant) => Set(variant, "geo_line");
-		public void GeoLine(Action<GeoLineAggregationDescriptor<T>> configure) => Set(configure, "geo_line");
-		public void GeotileGrid(GeoTileGridAggregation variant) => Set(variant, "geotile_grid");
-		public void GeotileGrid(Action<GeoTileGridAggregationDescriptor<T>> configure) => Set(configure, "geotile_grid");
-		public void Global(GlobalAggregation variant) => Set(variant, "global");
-		public void Global(Action<GlobalAggregationDescriptor> configure) => Set(configure, "global");
-		public void Histogram(HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<HistogramAggregationDescriptor<T>> configure) => Set(configure, "histogram");
-		public void IpRange(IpRangeAggregation variant) => Set(variant, "ip_range");
-		public void IpRange(Action<IpRangeAggregationDescriptor<T>> configure) => Set(configure, "ip_range");
-		public void Inference(InferenceAggregation variant) => Set(variant, "inference");
-		public void Inference(Action<InferenceAggregationDescriptor<T>> configure) => Set(configure, "inference");
-		public void MatrixStats(MatrixStatsAggregation variant) => Set(variant, "matrix_stats");
-		public void MatrixStats(Action<MatrixStatsAggregationDescriptor> configure) => Set(configure, "matrix_stats");
-		public void Max(MaxAggregation variant) => Set(variant, "max");
-		public void Max(Action<MaxAggregationDescriptor> configure) => Set(configure, "max");
-		public void MaxBucket(MaxBucketAggregation variant) => Set(variant, "max_bucket");
-		public void MaxBucket(Action<MaxBucketAggregationDescriptor> configure) => Set(configure, "max_bucket");
-		public void MedianAbsoluteDeviation(MedianAbsoluteDeviationAggregation variant) => Set(variant, "median_absolute_deviation");
-		public void MedianAbsoluteDeviation(Action<MedianAbsoluteDeviationAggregationDescriptor> configure) => Set(configure, "median_absolute_deviation");
-		public void Min(MinAggregation variant) => Set(variant, "min");
-		public void Min(Action<MinAggregationDescriptor> configure) => Set(configure, "min");
-		public void MinBucket(MinBucketAggregation variant) => Set(variant, "min_bucket");
-		public void MinBucket(Action<MinBucketAggregationDescriptor> configure) => Set(configure, "min_bucket");
-		public void Missing(MissingAggregation variant) => Set(variant, "missing");
-		public void Missing(Action<MissingAggregationDescriptor<T>> configure) => Set(configure, "missing");
-		public void MovingPercentiles(MovingPercentilesAggregation variant) => Set(variant, "moving_percentiles");
-		public void MovingPercentiles(Action<MovingPercentilesAggregationDescriptor> configure) => Set(configure, "moving_percentiles");
-		public void MovingFn(MovingFunctionAggregation variant) => Set(variant, "moving_fn");
-		public void MovingFn(Action<MovingFunctionAggregationDescriptor> configure) => Set(configure, "moving_fn");
-		public void MultiTerms(MultiTermsAggregation variant) => Set(variant, "multi_terms");
-		public void MultiTerms(Action<MultiTermsAggregationDescriptor> configure) => Set(configure, "multi_terms");
-		public void Nested(NestedAggregation variant) => Set(variant, "nested");
-		public void Nested(Action<NestedAggregationDescriptor<T>> configure) => Set(configure, "nested");
-		public void Normalize(NormalizeAggregation variant) => Set(variant, "normalize");
-		public void Normalize(Action<NormalizeAggregationDescriptor> configure) => Set(configure, "normalize");
-		public void Parent(ParentAggregation variant) => Set(variant, "parent");
-		public void Parent(Action<ParentAggregationDescriptor> configure) => Set(configure, "parent");
-		public void PercentileRanks(PercentileRanksAggregation variant) => Set(variant, "percentile_ranks");
-		public void PercentileRanks(Action<PercentileRanksAggregationDescriptor> configure) => Set(configure, "percentile_ranks");
-		public void Percentiles(PercentilesAggregation variant) => Set(variant, "percentiles");
-		public void Percentiles(Action<PercentilesAggregationDescriptor> configure) => Set(configure, "percentiles");
-		public void PercentilesBucket(PercentilesBucketAggregation variant) => Set(variant, "percentiles_bucket");
-		public void PercentilesBucket(Action<PercentilesBucketAggregationDescriptor> configure) => Set(configure, "percentiles_bucket");
-		public void Range(RangeAggregation variant) => Set(variant, "range");
-		public void Range(Action<RangeAggregationDescriptor<T>> configure) => Set(configure, "range");
-		public void RareTerms(RareTermsAggregation variant) => Set(variant, "rare_terms");
-		public void RareTerms(Action<RareTermsAggregationDescriptor<T>> configure) => Set(configure, "rare_terms");
-		public void Rate(RateAggregation variant) => Set(variant, "rate");
-		public void Rate(Action<RateAggregationDescriptor> configure) => Set(configure, "rate");
-		public void ReverseNested(ReverseNestedAggregation variant) => Set(variant, "reverse_nested");
-		public void ReverseNested(Action<ReverseNestedAggregationDescriptor<T>> configure) => Set(configure, "reverse_nested");
-		public void Sampler(SamplerAggregation variant) => Set(variant, "sampler");
-		public void Sampler(Action<SamplerAggregationDescriptor> configure) => Set(configure, "sampler");
-		public void ScriptedMetric(ScriptedMetricAggregation variant) => Set(variant, "scripted_metric");
-		public void ScriptedMetric(Action<ScriptedMetricAggregationDescriptor> configure) => Set(configure, "scripted_metric");
-		public void SerialDiff(SerialDifferencingAggregation variant) => Set(variant, "serial_diff");
-		public void SerialDiff(Action<SerialDifferencingAggregationDescriptor> configure) => Set(configure, "serial_diff");
-		public void SignificantTerms(SignificantTermsAggregation variant) => Set(variant, "significant_terms");
-		public void SignificantTerms(Action<SignificantTermsAggregationDescriptor<T>> configure) => Set(configure, "significant_terms");
-		public void SignificantText(SignificantTextAggregation variant) => Set(variant, "significant_text");
-		public void SignificantText(Action<SignificantTextAggregationDescriptor<T>> configure) => Set(configure, "significant_text");
-		public void Stats(StatsAggregation variant) => Set(variant, "stats");
-		public void Stats(Action<StatsAggregationDescriptor> configure) => Set(configure, "stats");
-		public void StatsBucket(StatsBucketAggregation variant) => Set(variant, "stats_bucket");
-		public void StatsBucket(Action<StatsBucketAggregationDescriptor> configure) => Set(configure, "stats_bucket");
-		public void StringStats(StringStatsAggregation variant) => Set(variant, "string_stats");
-		public void StringStats(Action<StringStatsAggregationDescriptor> configure) => Set(configure, "string_stats");
-		public void Sum(SumAggregation variant) => Set(variant, "sum");
-		public void Sum(Action<SumAggregationDescriptor> configure) => Set(configure, "sum");
-		public void SumBucket(SumBucketAggregation variant) => Set(variant, "sum_bucket");
-		public void SumBucket(Action<SumBucketAggregationDescriptor> configure) => Set(configure, "sum_bucket");
-		public void Terms(TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<TermsAggregationDescriptor<T>> configure) => Set(configure, "terms");
-		public void TopHits(TopHitsAggregation variant) => Set(variant, "top_hits");
-		public void TopHits(Action<TopHitsAggregationDescriptor<T>> configure) => Set(configure, "top_hits");
-		public void TTest(TTestAggregation variant) => Set(variant, "t_test");
-		public void TTest(Action<TTestAggregationDescriptor<T>> configure) => Set(configure, "t_test");
-		public void TopMetrics(TopMetricsAggregation variant) => Set(variant, "top_metrics");
-		public void TopMetrics(Action<TopMetricsAggregationDescriptor<T>> configure) => Set(configure, "top_metrics");
-		public void ValueCount(ValueCountAggregation variant) => Set(variant, "value_count");
-		public void ValueCount(Action<ValueCountAggregationDescriptor> configure) => Set(configure, "value_count");
-		public void WeightedAvg(WeightedAverageAggregation variant) => Set(variant, "weighted_avg");
-		public void WeightedAvg(Action<WeightedAverageAggregationDescriptor<T>> configure) => Set(configure, "weighted_avg");
-		public void VariableWidthHistogram(VariableWidthHistogramAggregation variant) => Set(variant, "variable_width_histogram");
-		public void VariableWidthHistogram(Action<VariableWidthHistogramAggregationDescriptor<T>> configure) => Set(configure, "variable_width_histogram");
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-			if (!ContainsVariant)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "adjacency_matrix")
-			{
-				var descriptor = new AdjacencyMatrixAggregationDescriptor();
-				((Action<AdjacencyMatrixAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "auto_date_histogram")
-			{
-				var descriptor = new AutoDateHistogramAggregationDescriptor<T>();
-				((Action<AutoDateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "avg")
-			{
-				var descriptor = new AverageAggregationDescriptor();
-				((Action<AverageAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "avg_bucket")
-			{
-				var descriptor = new AverageBucketAggregationDescriptor();
-				((Action<AverageBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "boxplot")
-			{
-				var descriptor = new BoxplotAggregationDescriptor();
-				((Action<BoxplotAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "bucket_script")
-			{
-				var descriptor = new BucketScriptAggregationDescriptor();
-				((Action<BucketScriptAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "bucket_selector")
-			{
-				var descriptor = new BucketSelectorAggregationDescriptor();
-				((Action<BucketSelectorAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "bucket_sort")
-			{
-				var descriptor = new BucketSortAggregationDescriptor();
-				((Action<BucketSortAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "cardinality")
-			{
-				var descriptor = new CardinalityAggregationDescriptor();
-				((Action<CardinalityAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "children")
-			{
-				var descriptor = new ChildrenAggregationDescriptor();
-				((Action<ChildrenAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "composite")
-			{
-				var descriptor = new CompositeAggregationDescriptor();
-				((Action<CompositeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "cumulative_cardinality")
-			{
-				var descriptor = new CumulativeCardinalityAggregationDescriptor();
-				((Action<CumulativeCardinalityAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "cumulative_sum")
-			{
-				var descriptor = new CumulativeSumAggregationDescriptor();
-				((Action<CumulativeSumAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "date_histogram")
-			{
-				var descriptor = new DateHistogramAggregationDescriptor<T>();
-				((Action<DateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "date_range")
-			{
-				var descriptor = new DateRangeAggregationDescriptor<T>();
-				((Action<DateRangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "derivative")
-			{
-				var descriptor = new DerivativeAggregationDescriptor();
-				((Action<DerivativeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "diversified_sampler")
-			{
-				var descriptor = new DiversifiedSamplerAggregationDescriptor<T>();
-				((Action<DiversifiedSamplerAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "extended_stats")
-			{
-				var descriptor = new ExtendedStatsAggregationDescriptor();
-				((Action<ExtendedStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "extended_stats_bucket")
-			{
-				var descriptor = new ExtendedStatsBucketAggregationDescriptor();
-				((Action<ExtendedStatsBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "filters")
-			{
-				var descriptor = new FiltersAggregationDescriptor();
-				((Action<FiltersAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geo_bounds")
-			{
-				var descriptor = new GeoBoundsAggregationDescriptor();
-				((Action<GeoBoundsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geo_centroid")
-			{
-				var descriptor = new GeoCentroidAggregationDescriptor();
-				((Action<GeoCentroidAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geo_distance")
-			{
-				var descriptor = new GeoDistanceAggregationDescriptor<T>();
-				((Action<GeoDistanceAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geohash_grid")
-			{
-				var descriptor = new GeoHashGridAggregationDescriptor<T>();
-				((Action<GeoHashGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geo_line")
-			{
-				var descriptor = new GeoLineAggregationDescriptor<T>();
-				((Action<GeoLineAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geotile_grid")
-			{
-				var descriptor = new GeoTileGridAggregationDescriptor<T>();
-				((Action<GeoTileGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "global")
-			{
-				var descriptor = new GlobalAggregationDescriptor();
-				((Action<GlobalAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "histogram")
-			{
-				var descriptor = new HistogramAggregationDescriptor<T>();
-				((Action<HistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "ip_range")
-			{
-				var descriptor = new IpRangeAggregationDescriptor<T>();
-				((Action<IpRangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "inference")
-			{
-				var descriptor = new InferenceAggregationDescriptor<T>();
-				((Action<InferenceAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "matrix_stats")
-			{
-				var descriptor = new MatrixStatsAggregationDescriptor();
-				((Action<MatrixStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "max")
-			{
-				var descriptor = new MaxAggregationDescriptor();
-				((Action<MaxAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "max_bucket")
-			{
-				var descriptor = new MaxBucketAggregationDescriptor();
-				((Action<MaxBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "median_absolute_deviation")
-			{
-				var descriptor = new MedianAbsoluteDeviationAggregationDescriptor();
-				((Action<MedianAbsoluteDeviationAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "min")
-			{
-				var descriptor = new MinAggregationDescriptor();
-				((Action<MinAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "min_bucket")
-			{
-				var descriptor = new MinBucketAggregationDescriptor();
-				((Action<MinBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "missing")
-			{
-				var descriptor = new MissingAggregationDescriptor<T>();
-				((Action<MissingAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "moving_percentiles")
-			{
-				var descriptor = new MovingPercentilesAggregationDescriptor();
-				((Action<MovingPercentilesAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "moving_fn")
-			{
-				var descriptor = new MovingFunctionAggregationDescriptor();
-				((Action<MovingFunctionAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "multi_terms")
-			{
-				var descriptor = new MultiTermsAggregationDescriptor();
-				((Action<MultiTermsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "nested")
-			{
-				var descriptor = new NestedAggregationDescriptor<T>();
-				((Action<NestedAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "normalize")
-			{
-				var descriptor = new NormalizeAggregationDescriptor();
-				((Action<NormalizeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "parent")
-			{
-				var descriptor = new ParentAggregationDescriptor();
-				((Action<ParentAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "percentile_ranks")
-			{
-				var descriptor = new PercentileRanksAggregationDescriptor();
-				((Action<PercentileRanksAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "percentiles")
-			{
-				var descriptor = new PercentilesAggregationDescriptor();
-				((Action<PercentilesAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "percentiles_bucket")
-			{
-				var descriptor = new PercentilesBucketAggregationDescriptor();
-				((Action<PercentilesBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "range")
-			{
-				var descriptor = new RangeAggregationDescriptor<T>();
-				((Action<RangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "rare_terms")
-			{
-				var descriptor = new RareTermsAggregationDescriptor<T>();
-				((Action<RareTermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "rate")
-			{
-				var descriptor = new RateAggregationDescriptor();
-				((Action<RateAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "reverse_nested")
-			{
-				var descriptor = new ReverseNestedAggregationDescriptor<T>();
-				((Action<ReverseNestedAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "sampler")
-			{
-				var descriptor = new SamplerAggregationDescriptor();
-				((Action<SamplerAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "scripted_metric")
-			{
-				var descriptor = new ScriptedMetricAggregationDescriptor();
-				((Action<ScriptedMetricAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "serial_diff")
-			{
-				var descriptor = new SerialDifferencingAggregationDescriptor();
-				((Action<SerialDifferencingAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "significant_terms")
-			{
-				var descriptor = new SignificantTermsAggregationDescriptor<T>();
-				((Action<SignificantTermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "significant_text")
-			{
-				var descriptor = new SignificantTextAggregationDescriptor<T>();
-				((Action<SignificantTextAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "stats")
-			{
-				var descriptor = new StatsAggregationDescriptor();
-				((Action<StatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "stats_bucket")
-			{
-				var descriptor = new StatsBucketAggregationDescriptor();
-				((Action<StatsBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "string_stats")
-			{
-				var descriptor = new StringStatsAggregationDescriptor();
-				((Action<StringStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "sum")
-			{
-				var descriptor = new SumAggregationDescriptor();
-				((Action<SumAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "sum_bucket")
-			{
-				var descriptor = new SumBucketAggregationDescriptor();
-				((Action<SumBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "terms")
-			{
-				var descriptor = new TermsAggregationDescriptor<T>();
-				((Action<TermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "top_hits")
-			{
-				var descriptor = new TopHitsAggregationDescriptor<T>();
-				((Action<TopHitsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "t_test")
-			{
-				var descriptor = new TTestAggregationDescriptor<T>();
-				((Action<TTestAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "top_metrics")
-			{
-				var descriptor = new TopMetricsAggregationDescriptor<T>();
-				((Action<TopMetricsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "value_count")
-			{
-				var descriptor = new ValueCountAggregationDescriptor();
-				((Action<ValueCountAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "weighted_avg")
-			{
-				var descriptor = new WeightedAverageAggregationDescriptor<T>();
-				((Action<WeightedAverageAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "variable_width_histogram")
-			{
-				var descriptor = new VariableWidthHistogramAggregationDescriptor<T>();
-				((Action<VariableWidthHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			void Finalise()
-			{
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-			}
-		}
-	}
+	//public sealed partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
+	//{
+	//	public AggregationContainerDescriptor()
+	//	{
+	//	}
+
+	//	internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
+	//	internal bool ContainsVariant { get; private set; }
+
+	//	internal string ContainedVariantName { get; private set; }
+
+	//	internal AggregationContainer Container { get; private set; }
+
+	//	internal object ContainerVariantDescriptorAction { get; private set; }
+
+	//	private void Set(object descriptorAction, string variantName)
+	//	{
+	//		if (ContainsVariant)
+	//			throw new Exception("TODO");
+	//		ContainerVariantDescriptorAction = descriptorAction;
+	//		ContainedVariantName = variantName;
+	//		ContainsVariant = true;
+	//	}
+
+	//	private void Set(IAggregationContainerVariant variant, string variantName)
+	//	{
+	//		if (ContainsVariant)
+	//			throw new Exception("TODO");
+	//		Container = new AggregationContainer(variant);
+	//		ContainedVariantName = variantName;
+	//		ContainsVariant = true;
+	//	}
+
+	//	public void AdjacencyMatrix(AdjacencyMatrixAggregation variant) => Set(variant, "adjacency_matrix");
+	//	public void AdjacencyMatrix(Action<AdjacencyMatrixAggregationDescriptor> configure) => Set(configure, "adjacency_matrix");
+	//	public void AutoDateHistogram(AutoDateHistogramAggregation variant) => Set(variant, "auto_date_histogram");
+	//	public void AutoDateHistogram(Action<AutoDateHistogramAggregationDescriptor<T>> configure) => Set(configure, "auto_date_histogram");
+	//	public void Avg(AverageAggregation variant) => Set(variant, "avg");
+	//	public void Avg(Action<AverageAggregationDescriptor> configure) => Set(configure, "avg");
+	//	public void AvgBucket(AverageBucketAggregation variant) => Set(variant, "avg_bucket");
+	//	public void AvgBucket(Action<AverageBucketAggregationDescriptor> configure) => Set(configure, "avg_bucket");
+	//	public void Boxplot(BoxplotAggregation variant) => Set(variant, "boxplot");
+	//	public void Boxplot(Action<BoxplotAggregationDescriptor> configure) => Set(configure, "boxplot");
+	//	public void BucketScript(BucketScriptAggregation variant) => Set(variant, "bucket_script");
+	//	public void BucketScript(Action<BucketScriptAggregationDescriptor> configure) => Set(configure, "bucket_script");
+	//	public void BucketSelector(BucketSelectorAggregation variant) => Set(variant, "bucket_selector");
+	//	public void BucketSelector(Action<BucketSelectorAggregationDescriptor> configure) => Set(configure, "bucket_selector");
+	//	public void BucketSort(BucketSortAggregation variant) => Set(variant, "bucket_sort");
+	//	public void BucketSort(Action<BucketSortAggregationDescriptor> configure) => Set(configure, "bucket_sort");
+	//	public void Cardinality(CardinalityAggregation variant) => Set(variant, "cardinality");
+	//	public void Cardinality(Action<CardinalityAggregationDescriptor> configure) => Set(configure, "cardinality");
+	//	public void Children(ChildrenAggregation variant) => Set(variant, "children");
+	//	public void Children(Action<ChildrenAggregationDescriptor> configure) => Set(configure, "children");
+	//	public void Composite(CompositeAggregation variant) => Set(variant, "composite");
+	//	public void Composite(Action<CompositeAggregationDescriptor> configure) => Set(configure, "composite");
+	//	public void CumulativeCardinality(CumulativeCardinalityAggregation variant) => Set(variant, "cumulative_cardinality");
+	//	public void CumulativeCardinality(Action<CumulativeCardinalityAggregationDescriptor> configure) => Set(configure, "cumulative_cardinality");
+	//	public void CumulativeSum(CumulativeSumAggregation variant) => Set(variant, "cumulative_sum");
+	//	public void CumulativeSum(Action<CumulativeSumAggregationDescriptor> configure) => Set(configure, "cumulative_sum");
+	//	public void DateHistogram(DateHistogramAggregation variant) => Set(variant, "date_histogram");
+	//	public void DateHistogram(Action<DateHistogramAggregationDescriptor<T>> configure) => Set(configure, "date_histogram");
+	//	public void DateRange(DateRangeAggregation variant) => Set(variant, "date_range");
+	//	public void DateRange(Action<DateRangeAggregationDescriptor<T>> configure) => Set(configure, "date_range");
+	//	public void Derivative(DerivativeAggregation variant) => Set(variant, "derivative");
+	//	public void Derivative(Action<DerivativeAggregationDescriptor> configure) => Set(configure, "derivative");
+	//	public void DiversifiedSampler(DiversifiedSamplerAggregation variant) => Set(variant, "diversified_sampler");
+	//	public void DiversifiedSampler(Action<DiversifiedSamplerAggregationDescriptor<T>> configure) => Set(configure, "diversified_sampler");
+	//	public void ExtendedStats(ExtendedStatsAggregation variant) => Set(variant, "extended_stats");
+	//	public void ExtendedStats(Action<ExtendedStatsAggregationDescriptor> configure) => Set(configure, "extended_stats");
+	//	public void ExtendedStatsBucket(ExtendedStatsBucketAggregation variant) => Set(variant, "extended_stats_bucket");
+	//	public void ExtendedStatsBucket(Action<ExtendedStatsBucketAggregationDescriptor> configure) => Set(configure, "extended_stats_bucket");
+	//	public void Filters(FiltersAggregation variant) => Set(variant, "filters");
+	//	public void Filters(Action<FiltersAggregationDescriptor> configure) => Set(configure, "filters");
+	//	public void GeoBounds(GeoBoundsAggregation variant) => Set(variant, "geo_bounds");
+	//	public void GeoBounds(Action<GeoBoundsAggregationDescriptor> configure) => Set(configure, "geo_bounds");
+	//	public void GeoCentroid(GeoCentroidAggregation variant) => Set(variant, "geo_centroid");
+	//	public void GeoCentroid(Action<GeoCentroidAggregationDescriptor> configure) => Set(configure, "geo_centroid");
+	//	public void GeoDistance(GeoDistanceAggregation variant) => Set(variant, "geo_distance");
+	//	public void GeoDistance(Action<GeoDistanceAggregationDescriptor<T>> configure) => Set(configure, "geo_distance");
+	//	public void GeohashGrid(GeoHashGridAggregation variant) => Set(variant, "geohash_grid");
+	//	public void GeohashGrid(Action<GeoHashGridAggregationDescriptor<T>> configure) => Set(configure, "geohash_grid");
+	//	public void GeoLine(GeoLineAggregation variant) => Set(variant, "geo_line");
+	//	public void GeoLine(Action<GeoLineAggregationDescriptor<T>> configure) => Set(configure, "geo_line");
+	//	public void GeotileGrid(GeoTileGridAggregation variant) => Set(variant, "geotile_grid");
+	//	public void GeotileGrid(Action<GeoTileGridAggregationDescriptor<T>> configure) => Set(configure, "geotile_grid");
+	//	public void Global(GlobalAggregation variant) => Set(variant, "global");
+	//	public void Global(Action<GlobalAggregationDescriptor> configure) => Set(configure, "global");
+	//	public void Histogram(HistogramAggregation variant) => Set(variant, "histogram");
+	//	public void Histogram(Action<HistogramAggregationDescriptor<T>> configure) => Set(configure, "histogram");
+	//	public void IpRange(IpRangeAggregation variant) => Set(variant, "ip_range");
+	//	public void IpRange(Action<IpRangeAggregationDescriptor<T>> configure) => Set(configure, "ip_range");
+	//	public void Inference(InferenceAggregation variant) => Set(variant, "inference");
+	//	public void Inference(Action<InferenceAggregationDescriptor<T>> configure) => Set(configure, "inference");
+	//	public void MatrixStats(MatrixStatsAggregation variant) => Set(variant, "matrix_stats");
+	//	public void MatrixStats(Action<MatrixStatsAggregationDescriptor> configure) => Set(configure, "matrix_stats");
+	//	public void Max(MaxAggregation variant) => Set(variant, "max");
+	//	public void Max(Action<MaxAggregationDescriptor> configure) => Set(configure, "max");
+	//	public void MaxBucket(MaxBucketAggregation variant) => Set(variant, "max_bucket");
+	//	public void MaxBucket(Action<MaxBucketAggregationDescriptor> configure) => Set(configure, "max_bucket");
+	//	public void MedianAbsoluteDeviation(MedianAbsoluteDeviationAggregation variant) => Set(variant, "median_absolute_deviation");
+	//	public void MedianAbsoluteDeviation(Action<MedianAbsoluteDeviationAggregationDescriptor> configure) => Set(configure, "median_absolute_deviation");
+	//	public void Min(MinAggregation variant) => Set(variant, "min");
+	//	public void Min(Action<MinAggregationDescriptor> configure) => Set(configure, "min");
+	//	public void MinBucket(MinBucketAggregation variant) => Set(variant, "min_bucket");
+	//	public void MinBucket(Action<MinBucketAggregationDescriptor> configure) => Set(configure, "min_bucket");
+	//	public void Missing(MissingAggregation variant) => Set(variant, "missing");
+	//	public void Missing(Action<MissingAggregationDescriptor<T>> configure) => Set(configure, "missing");
+	//	public void MovingPercentiles(MovingPercentilesAggregation variant) => Set(variant, "moving_percentiles");
+	//	public void MovingPercentiles(Action<MovingPercentilesAggregationDescriptor> configure) => Set(configure, "moving_percentiles");
+	//	public void MovingFn(MovingFunctionAggregation variant) => Set(variant, "moving_fn");
+	//	public void MovingFn(Action<MovingFunctionAggregationDescriptor> configure) => Set(configure, "moving_fn");
+	//	public void MultiTerms(MultiTermsAggregation variant) => Set(variant, "multi_terms");
+	//	public void MultiTerms(Action<MultiTermsAggregationDescriptor> configure) => Set(configure, "multi_terms");
+	//	public void Nested(NestedAggregation variant) => Set(variant, "nested");
+	//	public void Nested(Action<NestedAggregationDescriptor<T>> configure) => Set(configure, "nested");
+	//	public void Normalize(NormalizeAggregation variant) => Set(variant, "normalize");
+	//	public void Normalize(Action<NormalizeAggregationDescriptor> configure) => Set(configure, "normalize");
+	//	public void Parent(ParentAggregation variant) => Set(variant, "parent");
+	//	public void Parent(Action<ParentAggregationDescriptor> configure) => Set(configure, "parent");
+	//	public void PercentileRanks(PercentileRanksAggregation variant) => Set(variant, "percentile_ranks");
+	//	public void PercentileRanks(Action<PercentileRanksAggregationDescriptor> configure) => Set(configure, "percentile_ranks");
+	//	public void Percentiles(PercentilesAggregation variant) => Set(variant, "percentiles");
+	//	public void Percentiles(Action<PercentilesAggregationDescriptor> configure) => Set(configure, "percentiles");
+	//	public void PercentilesBucket(PercentilesBucketAggregation variant) => Set(variant, "percentiles_bucket");
+	//	public void PercentilesBucket(Action<PercentilesBucketAggregationDescriptor> configure) => Set(configure, "percentiles_bucket");
+	//	public void Range(RangeAggregation variant) => Set(variant, "range");
+	//	public void Range(Action<RangeAggregationDescriptor<T>> configure) => Set(configure, "range");
+	//	public void RareTerms(RareTermsAggregation variant) => Set(variant, "rare_terms");
+	//	public void RareTerms(Action<RareTermsAggregationDescriptor<T>> configure) => Set(configure, "rare_terms");
+	//	public void Rate(RateAggregation variant) => Set(variant, "rate");
+	//	public void Rate(Action<RateAggregationDescriptor> configure) => Set(configure, "rate");
+	//	public void ReverseNested(ReverseNestedAggregation variant) => Set(variant, "reverse_nested");
+	//	public void ReverseNested(Action<ReverseNestedAggregationDescriptor<T>> configure) => Set(configure, "reverse_nested");
+	//	public void Sampler(SamplerAggregation variant) => Set(variant, "sampler");
+	//	public void Sampler(Action<SamplerAggregationDescriptor> configure) => Set(configure, "sampler");
+	//	public void ScriptedMetric(ScriptedMetricAggregation variant) => Set(variant, "scripted_metric");
+	//	public void ScriptedMetric(Action<ScriptedMetricAggregationDescriptor> configure) => Set(configure, "scripted_metric");
+	//	public void SerialDiff(SerialDifferencingAggregation variant) => Set(variant, "serial_diff");
+	//	public void SerialDiff(Action<SerialDifferencingAggregationDescriptor> configure) => Set(configure, "serial_diff");
+	//	public void SignificantTerms(SignificantTermsAggregation variant) => Set(variant, "significant_terms");
+	//	public void SignificantTerms(Action<SignificantTermsAggregationDescriptor<T>> configure) => Set(configure, "significant_terms");
+	//	public void SignificantText(SignificantTextAggregation variant) => Set(variant, "significant_text");
+	//	public void SignificantText(Action<SignificantTextAggregationDescriptor<T>> configure) => Set(configure, "significant_text");
+	//	public void Stats(StatsAggregation variant) => Set(variant, "stats");
+	//	public void Stats(Action<StatsAggregationDescriptor> configure) => Set(configure, "stats");
+	//	public void StatsBucket(StatsBucketAggregation variant) => Set(variant, "stats_bucket");
+	//	public void StatsBucket(Action<StatsBucketAggregationDescriptor> configure) => Set(configure, "stats_bucket");
+	//	public void StringStats(StringStatsAggregation variant) => Set(variant, "string_stats");
+	//	public void StringStats(Action<StringStatsAggregationDescriptor> configure) => Set(configure, "string_stats");
+	//	public void Sum(SumAggregation variant) => Set(variant, "sum");
+	//	public void Sum(Action<SumAggregationDescriptor> configure) => Set(configure, "sum");
+	//	public void SumBucket(SumBucketAggregation variant) => Set(variant, "sum_bucket");
+	//	public void SumBucket(Action<SumBucketAggregationDescriptor> configure) => Set(configure, "sum_bucket");
+	//	public void Terms(TermsAggregation variant) => Set(variant, "terms");
+	//	public void Terms(Action<TermsAggregationDescriptor<T>> configure) => Set(configure, "terms");
+	//	public void TopHits(TopHitsAggregation variant) => Set(variant, "top_hits");
+	//	public void TopHits(Action<TopHitsAggregationDescriptor<T>> configure) => Set(configure, "top_hits");
+	//	public void TTest(TTestAggregation variant) => Set(variant, "t_test");
+	//	public void TTest(Action<TTestAggregationDescriptor<T>> configure) => Set(configure, "t_test");
+	//	public void TopMetrics(TopMetricsAggregation variant) => Set(variant, "top_metrics");
+	//	public void TopMetrics(Action<TopMetricsAggregationDescriptor<T>> configure) => Set(configure, "top_metrics");
+	//	public void ValueCount(ValueCountAggregation variant) => Set(variant, "value_count");
+	//	public void ValueCount(Action<ValueCountAggregationDescriptor> configure) => Set(configure, "value_count");
+	//	public void WeightedAvg(WeightedAverageAggregation variant) => Set(variant, "weighted_avg");
+	//	public void WeightedAvg(Action<WeightedAverageAggregationDescriptor<T>> configure) => Set(configure, "weighted_avg");
+	//	public void VariableWidthHistogram(VariableWidthHistogramAggregation variant) => Set(variant, "variable_width_histogram");
+	//	public void VariableWidthHistogram(Action<VariableWidthHistogramAggregationDescriptor<T>> configure) => Set(configure, "variable_width_histogram");
+	//	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	//	{
+	//		if (!ContainsVariant)
+	//		{
+	//			writer.WriteNullValue();
+	//			return;
+	//		}
+
+	//		writer.WriteStartObject();
+	//		writer.WritePropertyName(ContainedVariantName);
+	//		writer.WriteStartObject();
+	//		if (Container is not null)
+	//		{
+	//			JsonSerializer.Serialize(writer, Container, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "adjacency_matrix")
+	//		{
+	//			var descriptor = new AdjacencyMatrixAggregationDescriptor();
+	//			((Action<AdjacencyMatrixAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "auto_date_histogram")
+	//		{
+	//			var descriptor = new AutoDateHistogramAggregationDescriptor<T>();
+	//			((Action<AutoDateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "avg")
+	//		{
+	//			var descriptor = new AverageAggregationDescriptor();
+	//			((Action<AverageAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "avg_bucket")
+	//		{
+	//			var descriptor = new AverageBucketAggregationDescriptor();
+	//			((Action<AverageBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "boxplot")
+	//		{
+	//			var descriptor = new BoxplotAggregationDescriptor();
+	//			((Action<BoxplotAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "bucket_script")
+	//		{
+	//			var descriptor = new BucketScriptAggregationDescriptor();
+	//			((Action<BucketScriptAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "bucket_selector")
+	//		{
+	//			var descriptor = new BucketSelectorAggregationDescriptor();
+	//			((Action<BucketSelectorAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "bucket_sort")
+	//		{
+	//			var descriptor = new BucketSortAggregationDescriptor();
+	//			((Action<BucketSortAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "cardinality")
+	//		{
+	//			var descriptor = new CardinalityAggregationDescriptor();
+	//			((Action<CardinalityAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "children")
+	//		{
+	//			var descriptor = new ChildrenAggregationDescriptor();
+	//			((Action<ChildrenAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "composite")
+	//		{
+	//			var descriptor = new CompositeAggregationDescriptor();
+	//			((Action<CompositeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "cumulative_cardinality")
+	//		{
+	//			var descriptor = new CumulativeCardinalityAggregationDescriptor();
+	//			((Action<CumulativeCardinalityAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "cumulative_sum")
+	//		{
+	//			var descriptor = new CumulativeSumAggregationDescriptor();
+	//			((Action<CumulativeSumAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "date_histogram")
+	//		{
+	//			var descriptor = new DateHistogramAggregationDescriptor<T>();
+	//			((Action<DateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "date_range")
+	//		{
+	//			var descriptor = new DateRangeAggregationDescriptor<T>();
+	//			((Action<DateRangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "derivative")
+	//		{
+	//			var descriptor = new DerivativeAggregationDescriptor();
+	//			((Action<DerivativeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "diversified_sampler")
+	//		{
+	//			var descriptor = new DiversifiedSamplerAggregationDescriptor<T>();
+	//			((Action<DiversifiedSamplerAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "extended_stats")
+	//		{
+	//			var descriptor = new ExtendedStatsAggregationDescriptor();
+	//			((Action<ExtendedStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "extended_stats_bucket")
+	//		{
+	//			var descriptor = new ExtendedStatsBucketAggregationDescriptor();
+	//			((Action<ExtendedStatsBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "filters")
+	//		{
+	//			var descriptor = new FiltersAggregationDescriptor();
+	//			((Action<FiltersAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "geo_bounds")
+	//		{
+	//			var descriptor = new GeoBoundsAggregationDescriptor();
+	//			((Action<GeoBoundsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "geo_centroid")
+	//		{
+	//			var descriptor = new GeoCentroidAggregationDescriptor();
+	//			((Action<GeoCentroidAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "geo_distance")
+	//		{
+	//			var descriptor = new GeoDistanceAggregationDescriptor<T>();
+	//			((Action<GeoDistanceAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "geohash_grid")
+	//		{
+	//			var descriptor = new GeoHashGridAggregationDescriptor<T>();
+	//			((Action<GeoHashGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "geo_line")
+	//		{
+	//			var descriptor = new GeoLineAggregationDescriptor<T>();
+	//			((Action<GeoLineAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "geotile_grid")
+	//		{
+	//			var descriptor = new GeoTileGridAggregationDescriptor<T>();
+	//			((Action<GeoTileGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "global")
+	//		{
+	//			var descriptor = new GlobalAggregationDescriptor();
+	//			((Action<GlobalAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "histogram")
+	//		{
+	//			var descriptor = new HistogramAggregationDescriptor<T>();
+	//			((Action<HistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "ip_range")
+	//		{
+	//			var descriptor = new IpRangeAggregationDescriptor<T>();
+	//			((Action<IpRangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "inference")
+	//		{
+	//			var descriptor = new InferenceAggregationDescriptor<T>();
+	//			((Action<InferenceAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "matrix_stats")
+	//		{
+	//			var descriptor = new MatrixStatsAggregationDescriptor();
+	//			((Action<MatrixStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "max")
+	//		{
+	//			var descriptor = new MaxAggregationDescriptor();
+	//			((Action<MaxAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "max_bucket")
+	//		{
+	//			var descriptor = new MaxBucketAggregationDescriptor();
+	//			((Action<MaxBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "median_absolute_deviation")
+	//		{
+	//			var descriptor = new MedianAbsoluteDeviationAggregationDescriptor();
+	//			((Action<MedianAbsoluteDeviationAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "min")
+	//		{
+	//			var descriptor = new MinAggregationDescriptor();
+	//			((Action<MinAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "min_bucket")
+	//		{
+	//			var descriptor = new MinBucketAggregationDescriptor();
+	//			((Action<MinBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "missing")
+	//		{
+	//			var descriptor = new MissingAggregationDescriptor<T>();
+	//			((Action<MissingAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "moving_percentiles")
+	//		{
+	//			var descriptor = new MovingPercentilesAggregationDescriptor();
+	//			((Action<MovingPercentilesAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "moving_fn")
+	//		{
+	//			var descriptor = new MovingFunctionAggregationDescriptor();
+	//			((Action<MovingFunctionAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "multi_terms")
+	//		{
+	//			var descriptor = new MultiTermsAggregationDescriptor();
+	//			((Action<MultiTermsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "nested")
+	//		{
+	//			var descriptor = new NestedAggregationDescriptor<T>();
+	//			((Action<NestedAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "normalize")
+	//		{
+	//			var descriptor = new NormalizeAggregationDescriptor();
+	//			((Action<NormalizeAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "parent")
+	//		{
+	//			var descriptor = new ParentAggregationDescriptor();
+	//			((Action<ParentAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "percentile_ranks")
+	//		{
+	//			var descriptor = new PercentileRanksAggregationDescriptor();
+	//			((Action<PercentileRanksAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "percentiles")
+	//		{
+	//			var descriptor = new PercentilesAggregationDescriptor();
+	//			((Action<PercentilesAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "percentiles_bucket")
+	//		{
+	//			var descriptor = new PercentilesBucketAggregationDescriptor();
+	//			((Action<PercentilesBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "range")
+	//		{
+	//			var descriptor = new RangeAggregationDescriptor<T>();
+	//			((Action<RangeAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "rare_terms")
+	//		{
+	//			var descriptor = new RareTermsAggregationDescriptor<T>();
+	//			((Action<RareTermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "rate")
+	//		{
+	//			var descriptor = new RateAggregationDescriptor();
+	//			((Action<RateAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "reverse_nested")
+	//		{
+	//			var descriptor = new ReverseNestedAggregationDescriptor<T>();
+	//			((Action<ReverseNestedAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "sampler")
+	//		{
+	//			var descriptor = new SamplerAggregationDescriptor();
+	//			((Action<SamplerAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "scripted_metric")
+	//		{
+	//			var descriptor = new ScriptedMetricAggregationDescriptor();
+	//			((Action<ScriptedMetricAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "serial_diff")
+	//		{
+	//			var descriptor = new SerialDifferencingAggregationDescriptor();
+	//			((Action<SerialDifferencingAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "significant_terms")
+	//		{
+	//			var descriptor = new SignificantTermsAggregationDescriptor<T>();
+	//			((Action<SignificantTermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "significant_text")
+	//		{
+	//			var descriptor = new SignificantTextAggregationDescriptor<T>();
+	//			((Action<SignificantTextAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "stats")
+	//		{
+	//			var descriptor = new StatsAggregationDescriptor();
+	//			((Action<StatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "stats_bucket")
+	//		{
+	//			var descriptor = new StatsBucketAggregationDescriptor();
+	//			((Action<StatsBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "string_stats")
+	//		{
+	//			var descriptor = new StringStatsAggregationDescriptor();
+	//			((Action<StringStatsAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "sum")
+	//		{
+	//			var descriptor = new SumAggregationDescriptor();
+	//			((Action<SumAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "sum_bucket")
+	//		{
+	//			var descriptor = new SumBucketAggregationDescriptor();
+	//			((Action<SumBucketAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "terms")
+	//		{
+	//			var descriptor = new TermsAggregationDescriptor<T>();
+	//			((Action<TermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "top_hits")
+	//		{
+	//			var descriptor = new TopHitsAggregationDescriptor<T>();
+	//			((Action<TopHitsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "t_test")
+	//		{
+	//			var descriptor = new TTestAggregationDescriptor<T>();
+	//			((Action<TTestAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "top_metrics")
+	//		{
+	//			var descriptor = new TopMetricsAggregationDescriptor<T>();
+	//			((Action<TopMetricsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "value_count")
+	//		{
+	//			var descriptor = new ValueCountAggregationDescriptor();
+	//			((Action<ValueCountAggregationDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "weighted_avg")
+	//		{
+	//			var descriptor = new WeightedAverageAggregationDescriptor<T>();
+	//			((Action<WeightedAverageAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		if (ContainedVariantName == "variable_width_histogram")
+	//		{
+	//			var descriptor = new VariableWidthHistogramAggregationDescriptor<T>();
+	//			((Action<VariableWidthHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+	//			JsonSerializer.Serialize(writer, descriptor, options);
+	//			Finalise();
+	//			return;
+	//		}
+
+	//		writer.WriteEndObject();
+	//		writer.WriteEndObject();
+	//		void Finalise()
+	//		{
+	//			writer.WriteEndObject();
+	//			writer.WriteEndObject();
+	//		}
+	//	}
+	//}
 }

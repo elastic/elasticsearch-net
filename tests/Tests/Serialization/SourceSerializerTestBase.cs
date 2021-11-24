@@ -22,7 +22,7 @@ public abstract class SourceSerializerTestBase
 		return stream;
 	}
 
-	protected static string DeserialiseToString<T>(T data)
+	protected static string SerializeAndGetJsonString<T>(T data)
 	{
 		var stream = new MemoryStream();
 		_requestResponseSerializer.Serialize(data, stream);
