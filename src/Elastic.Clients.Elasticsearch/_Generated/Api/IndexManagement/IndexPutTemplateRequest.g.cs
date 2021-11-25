@@ -40,9 +40,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public int? Order { get => Q<int?>("order"); set => Q("order", value); }
 	}
 
 	public partial class IndexPutTemplateRequest : PlainRequestBase<IndexPutTemplateRequestParameters>
@@ -69,9 +66,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
 
-		[JsonIgnore]
-		public int? Order { get => Q<int?>("order"); set => Q("order", value); }
-
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
@@ -83,6 +77,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("order")]
+		public int? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -112,12 +110,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutTemplateRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public IndexPutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexPutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public IndexPutTemplateRequestDescriptor Order(int? order) => Qs("order", order);
 		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; private set; }
 
 		internal string? IndexPatternsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
+
+		internal int? OrderValue { get; private set; }
 
 		internal Dictionary<string, object>? SettingsValue { get; private set; }
 
@@ -150,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
 		}
 
+		public IndexPutTemplateRequestDescriptor Order(int? order) => Assign(order, (a, v) => a.OrderValue = v);
 		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
 		public IndexPutTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -181,6 +181,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("mappings");
 				JsonSerializer.Serialize(writer, MappingsValue, options);
+			}
+
+			if (OrderValue.HasValue)
+			{
+				writer.WritePropertyName("order");
+				writer.WriteNumberValue(OrderValue.Value);
 			}
 
 			if (SettingsValue is not null)

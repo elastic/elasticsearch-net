@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	{
 		[JsonInclude]
 		[JsonPropertyName("threshold_enabled")]
-		public Union<bool, string> ThresholdEnabled { get; set; }
+		public Union<bool?, string?>? ThresholdEnabled { get; set; }
 	}
 
 	public sealed partial class IndexRoutingAllocationDiskDescriptor : DescriptorBase<IndexRoutingAllocationDiskDescriptor>
@@ -37,14 +37,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		internal IndexRoutingAllocationDiskDescriptor(Action<IndexRoutingAllocationDiskDescriptor> configure) => configure.Invoke(this);
-		internal Union<bool, string> ThresholdEnabledValue { get; private set; }
+		internal Union<bool?, string?>? ThresholdEnabledValue { get; private set; }
 
-		public IndexRoutingAllocationDiskDescriptor ThresholdEnabled(Union<bool, string> thresholdEnabled) => Assign(thresholdEnabled, (a, v) => a.ThresholdEnabledValue = v);
+		public IndexRoutingAllocationDiskDescriptor ThresholdEnabled(Union<bool?, string?>? thresholdEnabled) => Assign(thresholdEnabled, (a, v) => a.ThresholdEnabledValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("threshold_enabled");
-			JsonSerializer.Serialize(writer, ThresholdEnabledValue, options);
+			if (ThresholdEnabledValue is not null)
+			{
+				writer.WritePropertyName("threshold_enabled");
+				JsonSerializer.Serialize(writer, ThresholdEnabledValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

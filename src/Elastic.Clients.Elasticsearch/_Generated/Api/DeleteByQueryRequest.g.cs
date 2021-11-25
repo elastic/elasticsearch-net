@@ -57,9 +57,6 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 		[JsonIgnore]
-		public long? MaxDocs { get => Q<long?>("max_docs"); set => Q("max_docs", value); }
-
-		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
@@ -166,9 +163,6 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 		[JsonIgnore]
-		public long? MaxDocs { get => Q<long?>("max_docs"); set => Q("max_docs", value); }
-
-		[JsonIgnore]
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
@@ -235,6 +229,10 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 		[JsonInclude]
+		[JsonPropertyName("max_docs")]
+		public long? MaxDocs { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("query")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 
@@ -267,7 +265,6 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> From(long? from) => Qs("from", from);
 		public DeleteByQueryRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public DeleteByQueryRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
-		public DeleteByQueryRequestDescriptor<T> MaxDocs(long? maxDocs) => Qs("max_docs", maxDocs);
 		public DeleteByQueryRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
 		public DeleteByQueryRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
 		public DeleteByQueryRequestDescriptor<T> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
@@ -290,6 +287,8 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> Version(bool? version) => Qs("version", version);
 		public DeleteByQueryRequestDescriptor<T> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public DeleteByQueryRequestDescriptor<T> WaitForCompletion(bool? waitForCompletion) => Qs("wait_for_completion", waitForCompletion);
+		internal long? MaxDocsValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
@@ -302,6 +301,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<SlicedScrollDescriptor<T>> SliceDescriptorAction { get; private set; }
 
+		public DeleteByQueryRequestDescriptor<T> MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsValue = v);
 		public DeleteByQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
@@ -347,6 +347,12 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MaxDocsValue.HasValue)
+			{
+				writer.WritePropertyName("max_docs");
+				writer.WriteNumberValue(MaxDocsValue.Value);
+			}
+
 			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");

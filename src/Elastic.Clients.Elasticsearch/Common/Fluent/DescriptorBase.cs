@@ -19,6 +19,23 @@ internal interface ISelfSerializable
 	void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 }
 
+internal interface ISelfDeserializable<T>
+{
+	T Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+}
+
+internal interface IFactoryDeserializable<T>
+{
+}
+
+internal abstract class UnionFactory<T>
+{
+	internal abstract T Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options);
+}
+
+
+
+
 public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializable
 	where TDescriptor : DescriptorBase<TDescriptor>
 {

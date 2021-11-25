@@ -140,64 +140,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	[JsonConverter(typeof(MatrixStatsModeConverter))]
-	public enum MatrixStatsMode
-	{
-		Sum,
-		Min,
-		Median,
-		Max,
-		Avg
-	}
-
-	public class MatrixStatsModeConverter : JsonConverter<MatrixStatsMode>
-	{
-		public override MatrixStatsMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "sum":
-					return MatrixStatsMode.Sum;
-				case "min":
-					return MatrixStatsMode.Min;
-				case "median":
-					return MatrixStatsMode.Median;
-				case "max":
-					return MatrixStatsMode.Max;
-				case "avg":
-					return MatrixStatsMode.Avg;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, MatrixStatsMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case MatrixStatsMode.Sum:
-					writer.WriteStringValue("sum");
-					return;
-				case MatrixStatsMode.Min:
-					writer.WriteStringValue("min");
-					return;
-				case MatrixStatsMode.Median:
-					writer.WriteStringValue("median");
-					return;
-				case MatrixStatsMode.Max:
-					writer.WriteStringValue("max");
-					return;
-				case MatrixStatsMode.Avg:
-					writer.WriteStringValue("avg");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(MinimumIntervalConverter))]
 	public enum MinimumInterval
 	{

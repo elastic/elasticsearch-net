@@ -689,17 +689,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNullValue();
 				return;
 			}
-			
-			if (Container is not null)
-			{
-				JsonSerializer.Serialize(writer, Container, options);
-				//Finalise();
-				return;
-			}
 
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			//writer.WriteStartObject();
+			writer.WriteStartObject();
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				Finalise();
+				return;
+			}
 
 			if (ContainedVariantName == "bool")
 			{
@@ -1142,11 +1141,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			writer.WriteNullValue();
-			Finalise();
-
+			writer.WriteEndObject();
+			writer.WriteEndObject();
 			void Finalise()
 			{
+				writer.WriteEndObject();
 				writer.WriteEndObject();
 			}
 		}

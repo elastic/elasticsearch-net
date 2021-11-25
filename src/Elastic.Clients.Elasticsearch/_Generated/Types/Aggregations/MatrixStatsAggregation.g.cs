@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "matrix_stats";
 		[JsonInclude]
 		[JsonPropertyName("mode")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? Mode { get; set; }
+		public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	}
 
 	public sealed partial class MatrixStatsAggregationDescriptor : DescriptorBase<MatrixStatsAggregationDescriptor>
@@ -43,9 +43,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? ModeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; private set; }
 
-		public MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
+		public MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

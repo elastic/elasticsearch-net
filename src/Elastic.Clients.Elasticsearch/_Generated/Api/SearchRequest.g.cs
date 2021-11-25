@@ -51,13 +51,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("docvalue_fields"); set => Q("docvalue_fields", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -93,12 +87,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-		[JsonIgnore]
 		public string? SuggestField { get => Q<string?>("suggest_field"); set => Q("suggest_field", value); }
 
 		[JsonIgnore]
@@ -111,28 +99,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 		[JsonIgnore]
-		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHits { get => Q<Elastic.Clients.Elasticsearch.TrackHits?>("track_total_hits"); set => Q("track_total_hits", value); }
-
-		[JsonIgnore]
-		public bool? TrackScores { get => Q<bool?>("track_scores"); set => Q("track_scores", value); }
-
-		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonIgnore]
 		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-		[JsonIgnore]
-		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -141,19 +111,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
-		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
-
-		[JsonIgnore]
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
-		[JsonIgnore]
-		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
-
-		[JsonIgnore]
-		public int? From { get => Q<int?>("from"); set => Q("from", value); }
-
-		[JsonIgnore]
-		public string? Sort { get => Q<string?>("sort"); set => Q("sort", value); }
 	}
 
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>
@@ -194,13 +152,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("docvalue_fields"); set => Q("docvalue_fields", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.ExpandWildcards? ExpandWildcards { get => Q<Elastic.Clients.Elasticsearch.ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
-		[JsonIgnore]
-		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
 		[JsonIgnore]
 		public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
@@ -236,12 +188,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-		[JsonIgnore]
 		public string? SuggestField { get => Q<string?>("suggest_field"); set => Q("suggest_field", value); }
 
 		[JsonIgnore]
@@ -254,28 +200,10 @@ namespace Elastic.Clients.Elasticsearch
 		public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
 		[JsonIgnore]
-		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHits { get => Q<Elastic.Clients.Elasticsearch.TrackHits?>("track_total_hits"); set => Q("track_total_hits", value); }
-
-		[JsonIgnore]
-		public bool? TrackScores { get => Q<bool?>("track_scores"); set => Q("track_scores", value); }
-
-		[JsonIgnore]
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 		[JsonIgnore]
 		public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-		[JsonIgnore]
-		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -284,19 +212,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 		[JsonIgnore]
-		public bool? SeqNoPrimaryTerm { get => Q<bool?>("seq_no_primary_term"); set => Q("seq_no_primary_term", value); }
-
-		[JsonIgnore]
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
-		[JsonIgnore]
-		public int? Size { get => Q<int?>("size"); set => Q("size", value); }
-
-		[JsonIgnore]
-		public int? From { get => Q<int?>("from"); set => Q("from", value); }
-
-		[JsonIgnore]
-		public string? Sort { get => Q<string?>("sort"); set => Q("sort", value); }
 
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
@@ -307,12 +223,28 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.FieldCollapse? Collapse { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("explain")]
+		public bool? Explain { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("from")]
+		public int? From { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("highlight")]
 		public Elastic.Clients.Elasticsearch.Highlight? Highlight { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("track_total_hits")]
+		public Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHits { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("indices_boost")]
 		public IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("docvalue_fields")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_score")]
@@ -343,8 +275,20 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<object>? SearchAfter { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("slice")]
 		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public Elastic.Clients.Elasticsearch.SourceConfig? Source { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
@@ -355,12 +299,40 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Suggester? Suggest { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("terminate_after")]
+		public long? TerminateAfter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("timeout")]
+		public string? Timeout { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("track_scores")]
+		public bool? TrackScores { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public bool? Version { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("seq_no_primary_term")]
+		public bool? SeqNoPrimaryTerm { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("stored_fields")]
+		public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("pit")]
 		public Elastic.Clients.Elasticsearch.PointInTimeReference? Pit { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("stats")]
+		public IEnumerable<string>? Stats { get; set; }
 	}
 
 	public sealed partial class SearchRequestDescriptor<T> : RequestDescriptorBase<SearchRequestDescriptor<T>, SearchRequestParameters>
@@ -385,9 +357,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<T> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		public SearchRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public SearchRequestDescriptor<T> Df(string? df) => Qs("df", df);
-		public SearchRequestDescriptor<T> DocvalueFields(Elastic.Clients.Elasticsearch.Fields? docvalueFields) => Qs("docvalue_fields", docvalueFields);
 		public SearchRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public SearchRequestDescriptor<T> Explain(bool? explain) => Qs("explain", explain);
 		public SearchRequestDescriptor<T> IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
 		public SearchRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public SearchRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
@@ -399,34 +369,30 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
 		public SearchRequestDescriptor<T> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public SearchRequestDescriptor<T> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public SearchRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
-		public SearchRequestDescriptor<T> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
 		public SearchRequestDescriptor<T> SuggestField(string? suggestField) => Qs("suggest_field", suggestField);
 		public SearchRequestDescriptor<T> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		public SearchRequestDescriptor<T> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public SearchRequestDescriptor<T> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
-		public SearchRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public SearchRequestDescriptor<T> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public SearchRequestDescriptor<T> TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits) => Qs("track_total_hits", trackTotalHits);
-		public SearchRequestDescriptor<T> TrackScores(bool? trackScores) => Qs("track_scores", trackScores);
 		public SearchRequestDescriptor<T> TypedKeys(bool? typedKeys) => Qs("typed_keys", typedKeys);
 		public SearchRequestDescriptor<T> RestTotalHitsAsInt(bool? restTotalHitsAsInt) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		public SearchRequestDescriptor<T> Version(bool? version) => Qs("version", version);
-		public SearchRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
 		public SearchRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public SearchRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public SearchRequestDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm) => Qs("seq_no_primary_term", seqNoPrimaryTerm);
 		public SearchRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
-		public SearchRequestDescriptor<T> Size(int? size) => Qs("size", size);
-		public SearchRequestDescriptor<T> From(int? from) => Qs("from", from);
-		public SearchRequestDescriptor<T> Sort(string? sort) => Qs("sort", sort);
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
 
+		internal bool? ExplainValue { get; private set; }
+
+		internal int? FromValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHitsValue { get; private set; }
+
 		internal IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; private set; }
 
 		internal double? MinScoreValue { get; private set; }
 
@@ -442,15 +408,35 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal IEnumerable<object>? SearchAfterValue { get; private set; }
 
+		internal int? SizeValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Sort? SortValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Suggester? SuggestValue { get; private set; }
 
+		internal long? TerminateAfterValue { get; private set; }
+
+		internal string? TimeoutValue { get; private set; }
+
+		internal bool? TrackScoresValue { get; private set; }
+
+		internal bool? VersionValue { get; private set; }
+
+		internal bool? SeqNoPrimaryTermValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; private set; }
 
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; private set; }
+
+		internal IEnumerable<string>? StatsValue { get; private set; }
 
 		internal FieldCollapseDescriptor<T> CollapseDescriptor { get; private set; }
 
@@ -484,10 +470,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; private set; }
 
+		private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 		public SearchRequestDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations) => Assign(aggregations, (a, v) => a.AggregationsValue = v);
-
-		
-
 		public SearchRequestDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
@@ -509,6 +493,8 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.CollapseDescriptorAction = v);
 		}
 
+		public SearchRequestDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
+		public SearchRequestDescriptor<T> From(int? from) => Assign(from, (a, v) => a.FromValue = v);
 		public SearchRequestDescriptor<T> Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
@@ -530,7 +516,9 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.HighlightDescriptorAction = v);
 		}
 
+		public SearchRequestDescriptor<T> TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits) => Assign(trackTotalHits, (a, v) => a.TrackTotalHitsValue = v);
 		public SearchRequestDescriptor<T> IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoostValue = v);
+		public SearchRequestDescriptor<T> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields) => Assign(docvalueFields, (a, v) => a.DocvalueFieldsValue = v);
 		public SearchRequestDescriptor<T> MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
 		public SearchRequestDescriptor<T> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter)
 		{
@@ -598,6 +586,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SearchRequestDescriptor<T> ScriptFields(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>()));
 		public SearchRequestDescriptor<T> SearchAfter(IEnumerable<object>? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfterValue = v);
+		public SearchRequestDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public SearchRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
 		{
 			SliceDescriptor = null;
@@ -619,6 +608,8 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.SliceDescriptorAction = v);
 		}
 
+		public SearchRequestDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
+		public SearchRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
 		public SearchRequestDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public SearchRequestDescriptor<T> Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
 		{
@@ -641,6 +632,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.SuggestDescriptorAction = v);
 		}
 
+		public SearchRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Assign(terminateAfter, (a, v) => a.TerminateAfterValue = v);
+		public SearchRequestDescriptor<T> Timeout(string? timeout) => Assign(timeout, (a, v) => a.TimeoutValue = v);
+		public SearchRequestDescriptor<T> TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScoresValue = v);
+		public SearchRequestDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
+		public SearchRequestDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
+		public SearchRequestDescriptor<T> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Assign(storedFields, (a, v) => a.StoredFieldsValue = v);
 		public SearchRequestDescriptor<T> Pit(Elastic.Clients.Elasticsearch.PointInTimeReference? pit)
 		{
 			PitDescriptor = null;
@@ -663,12 +660,11 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public SearchRequestDescriptor<T> RuntimeMappings(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappingsValue = v);
+		public SearchRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Assign(stats, (a, v) => a.StatsValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-
 			AfterStartObject(writer, options, settings);
-
 			if (AggregationsValue is not null)
 			{
 				writer.WritePropertyName("aggregations");
@@ -691,6 +687,18 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
+			if (ExplainValue.HasValue)
+			{
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(ExplainValue.Value);
+			}
+
+			if (FromValue.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(FromValue.Value);
+			}
+
 			if (HighlightDescriptor is not null)
 			{
 				writer.WritePropertyName("highlight");
@@ -707,10 +715,22 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
+			if (TrackTotalHitsValue is not null)
+			{
+				writer.WritePropertyName("track_total_hits");
+				JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
+			}
+
 			if (IndicesBoostValue is not null)
 			{
 				writer.WritePropertyName("indices_boost");
 				JsonSerializer.Serialize(writer, IndicesBoostValue, options);
+			}
+
+			if (DocvalueFieldsValue is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 			}
 
 			if (MinScoreValue.HasValue)
@@ -785,6 +805,12 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, SearchAfterValue, options);
 			}
 
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
+			}
+
 			if (SliceDescriptor is not null)
 			{
 				writer.WritePropertyName("slice");
@@ -799,6 +825,18 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("slice");
 				JsonSerializer.Serialize(writer, SliceValue, options);
+			}
+
+			if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
+			}
+
+			if (SourceValue is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, SourceValue, options);
 			}
 
 			if (FieldsValue is not null)
@@ -823,6 +861,42 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, SuggestValue, options);
 			}
 
+			if (TerminateAfterValue.HasValue)
+			{
+				writer.WritePropertyName("terminate_after");
+				writer.WriteNumberValue(TerminateAfterValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(TimeoutValue))
+			{
+				writer.WritePropertyName("timeout");
+				writer.WriteStringValue(TimeoutValue);
+			}
+
+			if (TrackScoresValue.HasValue)
+			{
+				writer.WritePropertyName("track_scores");
+				writer.WriteBooleanValue(TrackScoresValue.Value);
+			}
+
+			if (VersionValue.HasValue)
+			{
+				writer.WritePropertyName("version");
+				writer.WriteBooleanValue(VersionValue.Value);
+			}
+
+			if (SeqNoPrimaryTermValue.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+			}
+
+			if (StoredFieldsValue is not null)
+			{
+				writer.WritePropertyName("stored_fields");
+				JsonSerializer.Serialize(writer, StoredFieldsValue, options);
+			}
+
 			if (PitDescriptor is not null)
 			{
 				writer.WritePropertyName("pit");
@@ -843,6 +917,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("runtime_mappings");
 				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+			}
+
+			if (StatsValue is not null)
+			{
+				writer.WritePropertyName("stats");
+				JsonSerializer.Serialize(writer, StatsValue, options);
 			}
 
 			writer.WriteEndObject();

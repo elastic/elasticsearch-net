@@ -45,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("score_mode")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreMode { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 	}
 
 	public sealed partial class NestedQueryDescriptor<T> : DescriptorBase<NestedQueryDescriptor<T>>
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? ScoreModeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; private set; }
 
 		internal InnerHitsDescriptor<T> InnerHitsDescriptor { get; private set; }
 
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public NestedQueryDescriptor<T> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.NestedScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
+		public NestedQueryDescriptor<T> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
