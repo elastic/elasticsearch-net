@@ -84,8 +84,11 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptorBase<CreateRequestDescriptor<TDocument>, CreateRequestParameters>
 	{
-
 		public CreateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		public CreateRequestDescriptor()
 		{
 		}
 

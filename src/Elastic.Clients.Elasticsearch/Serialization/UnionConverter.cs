@@ -3,39 +3,53 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class UnionConverter : JsonConverterFactory
 {
-	public override bool CanConvert(Type typeToConvert) => typeToConvert.Name == typeof(Union<,>).Name;
+	public override bool CanConvert(Type typeToConvert) => typeToConvert.Name == typeof(Union<,>).Name || (typeToConvert.BaseType is not null && typeToConvert.BaseType.Name == typeof(Union<,>).Name);
 
 	public override JsonConverter CreateConverter(
 		Type type,
 		JsonSerializerOptions options)
 	{
-		var itemOneType = type.GetGenericArguments()[0];
-		var itemTwoType = type.GetGenericArguments()[1];
+		if (type.GetGenericTypeDefinition() == typeof(Buckets<>))
+		{
+			// TODO - Could potentially cache an instance for each bucket type and reuse it
+			var bucketType = type.GetGenericArguments()[0];
+			return (JsonConverter)Activator.CreateInstance(typeof(BucketsConverter<>).MakeGenericType(bucketType));
+		}
 
-		var converter = (JsonConverter)Activator.CreateInstance(
-			typeof(UnionConverterInner<,>).MakeGenericType(itemOneType, itemTwoType),
-			BindingFlags.Instance | BindingFlags.Public,
-			null,
-			null,
-			null);
+		// Fallback to generalised converter
+
+		Type itemOneType, itemTwoType;
+
+		if (type.Name == typeof(Union<,>).Name)
+		{
+			itemOneType = type.GetGenericArguments()[0];
+			itemTwoType = type.GetGenericArguments()[1];
+		}
+		else
+		{
+			itemOneType = type.BaseType.GetGenericArguments()[0];
+			itemTwoType = type.BaseType.GetGenericArguments()[1];
+		}
+
+		var converter = (JsonConverter)Activator.CreateInstance(typeof(UnionConverterInner<,>).MakeGenericType(itemOneType, itemTwoType));
 
 		return converter;
 	}
 
 	private class UnionConverterInner<TItem1, TItem2> : JsonConverter<Union<TItem1, TItem2>>
 	{
-		// TODO - Implement properly as we need to figure out the possible types and handle accordingly
 		public override Union<TItem1, TItem2>? Read(ref Utf8JsonReader reader, Type typeToConvert,
-			JsonSerializerOptions options) => null;
+			JsonSerializerOptions options) => throw new NotImplementedException();
 
 		public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
 			JsonSerializerOptions options)
@@ -55,33 +69,49 @@ internal sealed class UnionConverter : JsonConverterFactory
 			throw new SerializationException("Invalid union type");
 		}
 	}
-}
 
-public class UnionConverter<TConcrete> : JsonConverter<TConcrete> where TConcrete : class
-{
-	public override TConcrete Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private class BucketsConverter<TBucket> : JsonConverter<Buckets<TBucket>>
 	{
-		var token = reader.TokenType;
-
-		switch (token)
+		public override Buckets<TBucket>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			case JsonTokenType.String:
-				{
-					var value = reader.GetString();
-					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
-					return result;
-				}
-			case JsonTokenType.Number:
-				{
-					var value = reader.GetInt32();
-					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
-					return result;
-				}
+			// TODO - Read ahead to establish the type - For now, hardcoded for lists
+
+			var bucketType = typeToConvert.GetGenericArguments()[0];
+
+			var item = JsonSerializer.Deserialize(ref reader, typeof(IReadOnlyCollection<TBucket>), options);
+
+			return (Buckets<TBucket>)Activator.CreateInstance(typeof(Buckets<>).MakeGenericType(bucketType), item);
 		}
 
-		throw new SerializationException();
+		public override void Write(Utf8JsonWriter writer, Buckets<TBucket> value, JsonSerializerOptions options) => throw new NotImplementedException();
 	}
-
-	public override void Write(Utf8JsonWriter writer, TConcrete value, JsonSerializerOptions options) =>
-		throw new NotImplementedException();
 }
+
+//public class UnionConverter<TConcrete> : JsonConverter<TConcrete> where TConcrete : class
+//{
+//	public override TConcrete Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+//	{
+//		var token = reader.TokenType;
+
+//		switch (token)
+//		{
+//			case JsonTokenType.String:
+//				{
+//					var value = reader.GetString();
+//					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+//					return result;
+//				}
+//			case JsonTokenType.Number:
+//				{
+//					var value = reader.GetInt32();
+//					var result = (TConcrete)Activator.CreateInstance(typeof(TConcrete), value);
+//					return result;
+//				}
+//		}
+
+//		throw new SerializationException();
+//	}
+
+//	public override void Write(Utf8JsonWriter writer, TConcrete value, JsonSerializerOptions options) =>
+//		throw new NotImplementedException();
+//}

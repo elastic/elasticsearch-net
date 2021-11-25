@@ -52,6 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
 					
 					new DictionaryConverter(),
+					//new BucketsConverterFactory(),
 					new UnionConverter()
 				},
 				PropertyNamingPolicy = JsonNamingPolicy.CamelCase

@@ -38,6 +38,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("defaults")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Defaults { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("data_stream")]
 		public Elastic.Clients.Elasticsearch.DataStreamName? DataStream { get; set; }
 	}
@@ -55,15 +59,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? DefaultsValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; private set; }
 
 		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
 
 		internal IndexSettingsDescriptor<T> SettingsDescriptor { get; private set; }
 
+		internal IndexSettingsDescriptor<T> DefaultsDescriptor { get; private set; }
+
 		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
 		internal Action<IndexSettingsDescriptor<T>> SettingsDescriptorAction { get; private set; }
+
+		internal Action<IndexSettingsDescriptor<T>> DefaultsDescriptorAction { get; private set; }
 
 		public IndexStateDescriptor<T> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
 		public IndexStateDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
@@ -108,6 +118,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
 		}
 
+		public IndexStateDescriptor<T> Defaults(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? defaults)
+		{
+			DefaultsDescriptor = null;
+			DefaultsDescriptorAction = null;
+			return Assign(defaults, (a, v) => a.DefaultsValue = v);
+		}
+
+		public IndexStateDescriptor<T> Defaults(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		{
+			DefaultsValue = null;
+			DefaultsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.DefaultsDescriptor = v);
+		}
+
+		public IndexStateDescriptor<T> Defaults(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		{
+			DefaultsValue = null;
+			DefaultsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.DefaultsDescriptorAction = v);
+		}
+
 		public IndexStateDescriptor<T> DataStream(Elastic.Clients.Elasticsearch.DataStreamName? dataStream) => Assign(dataStream, (a, v) => a.DataStreamValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -148,6 +179,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("settings");
 				JsonSerializer.Serialize(writer, SettingsValue, options);
+			}
+
+			if (DefaultsDescriptor is not null)
+			{
+				writer.WritePropertyName("defaults");
+				JsonSerializer.Serialize(writer, DefaultsDescriptor, options);
+			}
+			else if (DefaultsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("defaults");
+				JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<T>(DefaultsDescriptorAction), options);
+			}
+			else if (DefaultsValue is not null)
+			{
+				writer.WritePropertyName("defaults");
+				JsonSerializer.Serialize(writer, DefaultsValue, options);
 			}
 
 			if (DataStreamValue is not null)

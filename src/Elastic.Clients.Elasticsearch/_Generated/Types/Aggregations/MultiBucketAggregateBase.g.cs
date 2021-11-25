@@ -27,6 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("buckets")]
-		public IReadOnlyCollection<TBucket> Buckets { get; init; }
+		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket> Buckets { get; init; }
 	}
 }
