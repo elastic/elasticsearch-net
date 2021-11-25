@@ -424,64 +424,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	[JsonConverter(typeof(NestedScoreModeConverter))]
-	public enum NestedScoreMode
-	{
-		Sum,
-		None,
-		Min,
-		Max,
-		Avg
-	}
-
-	public class NestedScoreModeConverter : JsonConverter<NestedScoreMode>
-	{
-		public override NestedScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "sum":
-					return NestedScoreMode.Sum;
-				case "none":
-					return NestedScoreMode.None;
-				case "min":
-					return NestedScoreMode.Min;
-				case "max":
-					return NestedScoreMode.Max;
-				case "avg":
-					return NestedScoreMode.Avg;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, NestedScoreMode value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case NestedScoreMode.Sum:
-					writer.WriteStringValue("sum");
-					return;
-				case NestedScoreMode.None:
-					writer.WriteStringValue("none");
-					return;
-				case NestedScoreMode.Min:
-					writer.WriteStringValue("min");
-					return;
-				case NestedScoreMode.Max:
-					writer.WriteStringValue("max");
-					return;
-				case NestedScoreMode.Avg:
-					writer.WriteStringValue("avg");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(OperatorConverter))]
 	public enum Operator
 	{

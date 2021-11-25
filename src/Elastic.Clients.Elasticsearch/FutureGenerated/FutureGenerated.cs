@@ -19,6 +19,51 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	public partial class Buckets<TBucket>
+	{
+		public IReadOnlyCollection<TBucket> Items => Item2 is not null ? Item2 : Array.Empty<TBucket>();
+
+		//public Buckets<TBucket> Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		//{
+		//	// TODO - This is prototype code and not complete
+
+		//	Type itemOneType, itemTwoType;
+
+		//	itemOneType = GetType().BaseType.GetGenericArguments()[0];
+		//	itemTwoType = GetType().BaseType.GetGenericArguments()[1];
+			
+		//	var item = JsonSerializer.Deserialize(ref reader, itemTwoType, options);
+
+		//	var type = itemTwoType.GetGenericArguments()[0];
+
+		//	return (Buckets<TBucket>)Activator.CreateInstance(typeof(Buckets<>).MakeGenericType(type), item);
+		//}
+	}
+
+	
+
+	//internal class BucketsFactory<TBucket> : UnionFactory<Buckets<TBucket>>
+	//{
+	//	internal Delegate DeserializeDelegate => Deserialize
+
+	//	internal override Buckets<TBucket> Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options)
+	//	{
+	//		// TODO - This is prototype code and not complete
+
+	//		Type itemOneType, itemTwoType;
+
+	//		itemOneType = GetType().BaseType.GetGenericArguments()[0];
+	//		itemTwoType = GetType().BaseType.GetGenericArguments()[1];
+
+	//		var item = JsonSerializer.Deserialize(ref reader, itemTwoType, options);
+
+	//		var type = itemTwoType.GetGenericArguments()[0];
+
+	//		return (Buckets<TBucket>)Activator.CreateInstance(typeof(Buckets<>).MakeGenericType(type), item);
+	//	}
+	//}
+
+
 	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
 	{
 		internal AggregationDictionary Aggregations { get; set; }
@@ -69,11 +114,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 	}
 
-
-	public partial class Buckets<TBucket>
-	{
-
-	}
 
 	internal sealed class BucketsConverter
 	{
@@ -241,40 +281,40 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				case EmptyTermsAggregate empty:
 					return new TermsAggregate
 					{
-						Buckets = Array.Empty<TermsBucket>().ToReadOnlyCollection(),
+						Buckets = new Buckets<TermsBucket>(Array.Empty<TermsBucket>().ToReadOnlyCollection()),
 						Meta = empty.Meta,
 						DocCountErrorUpperBound = empty.DocCountErrorUpperBound,
 						SumOtherDocCount = empty.SumOtherDocCount
 					};
 				case StringTermsAggregate stringTerms:
-					var buckets = stringTerms.Buckets.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key }).ToReadOnlyCollection();
+					var buckets = stringTerms.Buckets.Items.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key }).ToReadOnlyCollection();
 					return new TermsAggregate
 					{
-						Buckets = buckets,
+						Buckets = new Buckets<TermsBucket>(buckets),
 						Meta = stringTerms.Meta,
 						DocCountErrorUpperBound = stringTerms.DocCountErrorUpperBound,
 						SumOtherDocCount = stringTerms.SumOtherDocCount
 					};
 				case DoubleTermsAggregate doubleTerms:
-					var doubleTermsBuckets = doubleTerms.Buckets.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
+					var doubleTermsBuckets = doubleTerms.Buckets.Items.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
 					return new TermsAggregate
 					{
-						Buckets = doubleTermsBuckets,
+						Buckets = new Buckets<TermsBucket>(doubleTermsBuckets),
 						Meta = doubleTerms.Meta,
 						DocCountErrorUpperBound = doubleTerms.DocCountErrorUpperBound,
 						SumOtherDocCount = doubleTerms.SumOtherDocCount
 					};
 				case LongTermsAggregate longTerms:
-					var longTermsBuckets = longTerms.Buckets.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
+					var longTermsBuckets = longTerms.Buckets.Items.Select(b => new TermsBucket { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
 					return new TermsAggregate
 					{
-						Buckets = longTermsBuckets,
+						Buckets = new Buckets<TermsBucket>(longTermsBuckets),
 						Meta = longTerms.Meta,
 						DocCountErrorUpperBound = longTerms.DocCountErrorUpperBound,
 						SumOtherDocCount = longTerms.SumOtherDocCount
 					};
 
-				// TODO - Bool / Multi-terms
+				// TODO - Multi-terms
 			}
 
 			return null;
@@ -510,7 +550,7 @@ namespace Elastic.Clients.Elasticsearch
 		//	return Assign(descriptor, (a, v) => a.AggregationContainerDescriptor = v);
 		//}
 
-		private void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (AggregationsAction is not null)
 			{
@@ -1176,7 +1216,7 @@ namespace Elastic.Clients.Elasticsearch
 	//}
 
 	// TODO: Implement properly
-	[JsonConverter(typeof(UnionConverter<EpochMillis>))]
+	//[JsonConverter(typeof(UnionConverter<EpochMillis>))]
 	public partial class EpochMillis
 	{
 		public EpochMillis() : base(1) { } // TODO: This is temp

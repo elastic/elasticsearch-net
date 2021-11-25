@@ -779,8 +779,7 @@ namespace Elastic.Clients.Elasticsearch
 		NotFound,
 		NoOp,
 		Deleted,
-		Created,
-		Error
+		Created
 	}
 
 	public class ResultConverter : JsonConverter<Result>
@@ -800,8 +799,6 @@ namespace Elastic.Clients.Elasticsearch
 					return Result.Deleted;
 				case "created":
 					return Result.Created;
-				case "Error":
-					return Result.Error;
 			}
 
 			ThrowHelper.ThrowJsonException();
@@ -826,9 +823,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case Result.Created:
 					writer.WriteStringValue("created");
-					return;
-				case Result.Error:
-					writer.WriteStringValue("Error");
 					return;
 			}
 
