@@ -48,13 +48,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class RegexpQueryDescriptor : FieldNameQueryDescriptorBase<RegexpQueryDescriptor>
+	public sealed partial class RegexpQueryDescriptor<T> : FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, T>
 	{
 		public RegexpQueryDescriptor()
 		{
 		}
 
-		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
+		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal bool? CaseInsensitiveValue { get; private set; }
 
 		internal string? FlagsValue { get; private set; }
@@ -65,11 +65,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string ValueValue { get; private set; }
 
-		public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public RegexpQueryDescriptor Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
-		public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
-		public RegexpQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public RegexpQueryDescriptor Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
+		public RegexpQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public RegexpQueryDescriptor<T> Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
+		public RegexpQueryDescriptor<T> MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
+		public RegexpQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public RegexpQueryDescriptor<T> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

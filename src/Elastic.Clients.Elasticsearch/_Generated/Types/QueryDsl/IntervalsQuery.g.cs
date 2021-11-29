@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsQueryDescriptor<T> : FieldNameQueryDescriptorBase<IntervalsQueryDescriptor<T>>
+	public sealed partial class IntervalsQueryDescriptor<T> : FieldNameQueryDescriptorBase<IntervalsQueryDescriptor<T>, T>
 	{
 		public IntervalsQueryDescriptor()
 		{

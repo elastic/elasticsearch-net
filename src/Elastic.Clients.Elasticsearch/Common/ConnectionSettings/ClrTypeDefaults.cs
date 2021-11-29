@@ -48,8 +48,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed class ClrTypeMappingDescriptor : DescriptorBase<ClrTypeMappingDescriptor>
 	{
-		private readonly Type _type;
-
+		internal Type _clrType;
 		internal string _indexName;
 		internal string _relationName;
 		internal string _idProperty;
@@ -61,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// Instantiates a new instance of <see cref="ClrTypeMappingDescriptor" />
 		/// </summary>
 		/// <param name="type">The CLR type to map</param>
-		public ClrTypeMappingDescriptor(Type type) => _type = type;
+		public ClrTypeMappingDescriptor(Type type) => _clrType = type;
 
 		///// <inheritdoc cref="IClrTypeMapping.IndexName"/>
 		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(indexName, (a, v) => a._indexName = v);
@@ -84,6 +83,7 @@ namespace Elastic.Clients.Elasticsearch
 		: DescriptorBase<ClrTypeMappingDescriptor<TDocument>>
 			where TDocument : class
 	{
+		internal Type _clrType = typeof(TDocument);
 		internal string _indexName;
 		internal string _relationName;
 		internal string _idProperty;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Expression<Func<TDocument, object>> _idPropertyExpression;
 		internal Expression<Func<TDocument, object>> _routingPropertyExpression;
-		internal IList<IClrPropertyMapping<TDocument>> _properties;
+		internal IList<IClrPropertyMapping<TDocument>> _properties = new List<IClrPropertyMapping<TDocument>>();
 
 		/// <summary>
 		/// The default Elasticsearch index name for <typeparamref name="TDocument" />

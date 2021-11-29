@@ -48,13 +48,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class MatchPhrasePrefixQueryDescriptor : FieldNameQueryDescriptorBase<MatchPhrasePrefixQueryDescriptor>
+	public sealed partial class MatchPhrasePrefixQueryDescriptor<T> : FieldNameQueryDescriptorBase<MatchPhrasePrefixQueryDescriptor<T>, T>
 	{
 		public MatchPhrasePrefixQueryDescriptor()
 		{
 		}
 
-		internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor> configure) => configure.Invoke(this);
+		internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal int? MaxExpansionsValue { get; private set; }
@@ -65,11 +65,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
 
-		public MatchPhrasePrefixQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MatchPhrasePrefixQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
-		public MatchPhrasePrefixQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public MatchPhrasePrefixQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
-		public MatchPhrasePrefixQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
+		public MatchPhrasePrefixQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchPhrasePrefixQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public MatchPhrasePrefixQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MatchPhrasePrefixQueryDescriptor<T> Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
+		public MatchPhrasePrefixQueryDescriptor<T> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

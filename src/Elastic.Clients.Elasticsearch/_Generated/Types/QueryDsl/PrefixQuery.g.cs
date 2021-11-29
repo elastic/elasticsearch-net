@@ -40,22 +40,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? CaseInsensitive { get; set; }
 	}
 
-	public sealed partial class PrefixQueryDescriptor : FieldNameQueryDescriptorBase<PrefixQueryDescriptor>
+	public sealed partial class PrefixQueryDescriptor<T> : FieldNameQueryDescriptorBase<PrefixQueryDescriptor<T>, T>
 	{
 		public PrefixQueryDescriptor()
 		{
 		}
 
-		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
+		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? RewriteValue { get; private set; }
 
 		internal string ValueValue { get; private set; }
 
 		internal bool? CaseInsensitiveValue { get; private set; }
 
-		public PrefixQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public PrefixQueryDescriptor Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public PrefixQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public PrefixQueryDescriptor<T> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
+		public PrefixQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));
