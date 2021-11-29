@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text.Json;
@@ -113,26 +114,25 @@ public abstract class QueryDescriptorBase<TDescriptor> : DescriptorBase<TDescrip
 //{
 //}
 
-internal abstract class FieldNameQueryDescriptorConverterBase<T> : JsonConverter<T> where T : FieldNameQueryDescriptorBase<T>
-{
-	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-	public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		if (value._field is not null)
-		{
-			writer.WritePropertyName(value._field.ToString());
-			WriteInternal(writer, value, options);
-		}
-		writer.WriteEndObject();
-	}
+//internal abstract class FieldNameQueryDescriptorConverterBase<T> : JsonConverter<T> where T : FieldNameQueryDescriptorBase<T>
+//{
+//	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+//	public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+//	{
+//		writer.WriteStartObject();
+//		if (value._field is not null)
+//		{
+//			writer.WritePropertyName(value._field.ToString());
+//			WriteInternal(writer, value, options);
+//		}
+//		writer.WriteEndObject();
+//	}
 
-	internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
-}
+//	internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
+//}
 
-public abstract class FieldNameQueryDescriptorBase<TDescriptor> : QueryDescriptorBase<TDescriptor>
-		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor>
-		//where T : class
+public abstract class FieldNameQueryDescriptorBase<TDescriptor, T> : QueryDescriptorBase<TDescriptor>
+		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, T>
 {
 	internal Field _field;
 
@@ -143,6 +143,6 @@ public abstract class FieldNameQueryDescriptorBase<TDescriptor> : QueryDescripto
 
 	public TDescriptor Field(Field field) => Assign(field, (a, v) => a._field = v);
 
-	//public TDescriptor Field<TValue>(Expression<Func<T, TValue>> objectPath) =>
-	//	Assign(objectPath, (a, v) => a._field = v);
+	public TDescriptor Field<TValue>(Expression<Func<TDescriptor, TValue>> objectPath) =>
+		Assign(objectPath, (a, v) => a._field = v);
 }

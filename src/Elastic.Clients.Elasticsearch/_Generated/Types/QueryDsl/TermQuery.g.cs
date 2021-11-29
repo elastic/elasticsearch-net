@@ -36,19 +36,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? CaseInsensitive { get; set; }
 	}
 
-	public sealed partial class TermQueryDescriptor : FieldNameQueryDescriptorBase<TermQueryDescriptor>
+	public sealed partial class TermQueryDescriptor<T> : FieldNameQueryDescriptorBase<TermQueryDescriptor<T>, T>
 	{
 		public TermQueryDescriptor()
 		{
 		}
 
-		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
+		internal TermQueryDescriptor(Action<TermQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal object ValueValue { get; private set; }
 
 		internal bool? CaseInsensitiveValue { get; private set; }
 
-		public TermQueryDescriptor Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
-		public TermQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public TermQueryDescriptor<T> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
+		public TermQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

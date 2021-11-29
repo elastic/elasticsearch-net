@@ -52,13 +52,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public object Value { get; set; }
 	}
 
-	public sealed partial class FuzzyQueryDescriptor : FieldNameQueryDescriptorBase<FuzzyQueryDescriptor>
+	public sealed partial class FuzzyQueryDescriptor<T> : FieldNameQueryDescriptorBase<FuzzyQueryDescriptor<T>, T>
 	{
 		public FuzzyQueryDescriptor()
 		{
 		}
 
-		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
+		internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal int? MaxExpansionsValue { get; private set; }
 
 		internal int? PrefixLengthValue { get; private set; }
@@ -71,12 +71,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal object ValueValue { get; private set; }
 
-		public FuzzyQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
-		public FuzzyQueryDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public FuzzyQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public FuzzyQueryDescriptor Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
-		public FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public FuzzyQueryDescriptor Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
+		public FuzzyQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public FuzzyQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public FuzzyQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public FuzzyQueryDescriptor<T> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
+		public FuzzyQueryDescriptor<T> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public FuzzyQueryDescriptor<T> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

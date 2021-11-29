@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public Union<Elastic.Clients.Elasticsearch.TotalHits, long> Total { get; init; }
+		public Elastic.Clients.Elasticsearch.TotalHits Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]

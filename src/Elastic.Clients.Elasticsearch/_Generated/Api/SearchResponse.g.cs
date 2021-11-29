@@ -32,16 +32,12 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("documents")]
-		public IReadOnlyCollection<TDocument>? Documents { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public Dictionary<string, object>? Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> Hits { get; init; }
+		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> HitsMetadata { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_score")]

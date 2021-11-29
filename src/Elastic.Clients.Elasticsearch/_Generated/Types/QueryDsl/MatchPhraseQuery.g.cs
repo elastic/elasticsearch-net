@@ -44,13 +44,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class MatchPhraseQueryDescriptor : FieldNameQueryDescriptorBase<MatchPhraseQueryDescriptor>
+	public sealed partial class MatchPhraseQueryDescriptor<T> : FieldNameQueryDescriptorBase<MatchPhraseQueryDescriptor<T>, T>
 	{
 		public MatchPhraseQueryDescriptor()
 		{
 		}
 
-		internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor> configure) => configure.Invoke(this);
+		internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal string QueryValue { get; private set; }
@@ -59,10 +59,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
 
-		public MatchPhraseQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MatchPhraseQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public MatchPhraseQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
-		public MatchPhraseQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
+		public MatchPhraseQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchPhraseQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MatchPhraseQueryDescriptor<T> Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
+		public MatchPhraseQueryDescriptor<T> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

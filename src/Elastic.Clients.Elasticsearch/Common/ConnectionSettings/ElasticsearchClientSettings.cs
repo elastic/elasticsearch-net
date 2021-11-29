@@ -258,32 +258,36 @@ namespace Elastic.Clients.Elasticsearch
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor<TDocument>(
 			Action<ClrTypeMappingDescriptor<TDocument>> selector)
-			where TDocument : class =>
-			//var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
-			//if (!inferMapping.IndexName.IsNullOrEmpty())
-			//	_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
+			where TDocument : class
+		{
+			var inferMapping = new ClrTypeMappingDescriptor<TDocument>();
+			selector(inferMapping);
 
-			//if (!inferMapping.RelationName.IsNullOrEmpty())
-			//	_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
+			if (!inferMapping._indexName.IsNullOrEmpty())
+				_defaultIndices[inferMapping._clrType] = inferMapping._indexName;
 
-			//if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
-			//	_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
+			if (!inferMapping._relationName.IsNullOrEmpty())
+				_defaultRelationNames[inferMapping._clrType] = inferMapping._relationName;
 
-			//if (inferMapping.IdProperty != null)
-			//	MapIdPropertyFor(inferMapping.IdProperty);
+			if (!string.IsNullOrWhiteSpace(inferMapping._idProperty))
+				_idProperties[inferMapping._clrType] = inferMapping._idProperty;
 
-			//if (inferMapping.RoutingProperty != null)
-			//	MapRoutePropertyFor(inferMapping.RoutingProperty);
+			if (inferMapping._idPropertyExpression != null)
+				MapIdPropertyFor(inferMapping._idPropertyExpression);
 
-			//if (inferMapping.Properties != null)
-			//	ApplyPropertyMappings(inferMapping.Properties);
+			if (inferMapping._routingPropertyExpression != null)
+				MapRoutePropertyFor(inferMapping._routingPropertyExpression);
 
-			//if (inferMapping.DisableIdInference)
-			//	_disableIdInference.Add(inferMapping.ClrType);
-			//else
-			//	_disableIdInference.Remove(inferMapping.ClrType);
+			if (inferMapping._properties != null)
+				ApplyPropertyMappings(inferMapping._properties);
 
-			(TConnectionSettings)this;
+			if (inferMapping._disableIdInference)
+				_disableIdInference.Add(inferMapping._clrType);
+			else
+				_disableIdInference.Remove(inferMapping._clrType);
+
+			return (TConnectionSettings)this;
+		}
 
 		/// <summary>
 		///     Specify how the mapping is inferred for a given CLR type.

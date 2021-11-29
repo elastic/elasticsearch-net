@@ -15,7 +15,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Search
 {
 	public class SearchApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, SearchRequestDescriptor<Project>, SearchRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, SearchResponse<Project>, SearchRequestDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,18 +40,17 @@ namespace Tests.Search.Search
 						field = "startedOn"
 					}
 				}
+			},
+			post_filter = new
+			{
+				term = new
+				{
+					state = new
+					{
+						value = "Stable"
+					}
+				}
 			}
-			//,
-			//post_filter = new
-			//{
-			//	term = new
-			//	{
-			//		state = new
-			//		{
-			//			value = "Stable"
-			//		}
-			//	}
-			//}
 		};
 
 		protected override int ExpectStatusCode => 200;
@@ -66,14 +65,14 @@ namespace Tests.Search.Search
 				.Terms("startDates", t => t
 					.Field("startedOn")
 				)
+			)
+			.PostFilter(f => f
+				.Term(p => p.State, StateOfBeing.Stable)
 			);
-			//.PostFilter(f => f
-			//	.Term(p => p.State(StateOfBeing.Stable))
-			//);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override SearchRequest Initializer => new()
+		protected override SearchRequest<Project> Initializer => new()
 		{
 			From = 10,
 			Size = 20,
@@ -82,11 +81,11 @@ namespace Tests.Search.Search
 			{
 				Field = "startedOn"
 			},
-			//PostFilter = new QueryContainer(new TermQuery
-			//{
-			//	Field = "state",
-			//	Value = "Stable"
-			//})
+			PostFilter = new QueryContainer(new TermQuery
+			{
+				Field = "state",
+				Value = "Stable"
+			})
 		};
 
 		protected override string ExpectedUrlPathAndQuery => $"/project/_search";
@@ -100,14 +99,15 @@ namespace Tests.Search.Search
 
 		protected override void ExpectResponse(SearchResponse<Project> response)
 		{
-			//response.Total.Should().BeGreaterThan(0);
-			//response.Hits.Count.Should().BeGreaterThan(0);
-			//response.HitsMetadata.Total.Value.Should().Be(response.Total);
-			//response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
-			response.Hits.Hits.First().Should().NotBeNull();
-			response.Hits.Hits.First().Source.Should().NotBeNull();
+			response.Total.Should().BeGreaterThan(0);
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.Eq);
+			response.Hits.First().Should().NotBeNull();
+			response.Hits.First().Source.Should().NotBeNull();
 			response.Aggregations.Count.Should().BeGreaterThan(0);
 			response.Took.Should().BeGreaterThan(0);
+
 			//var startDates = response.Aggregations.Terms("startDates");
 			//startDates.Should().NotBeNull();
 
@@ -132,53 +132,53 @@ namespace Tests.Search.Search
 		}
 	}
 
-	//public class SearchApiSequenceNumberPrimaryTermTests
-	//	: SearchApiTests
-	//{
-	//	public SearchApiSequenceNumberPrimaryTermTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class SearchApiSequenceNumberPrimaryTermTests
+		: SearchApiTests
+	{
+		public SearchApiSequenceNumberPrimaryTermTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override object ExpectJson => new
-	//	{
-	//		query = new
-	//		{
-	//			match_all = new { }
-	//		}
-	//	};
+		protected override object ExpectJson => new
+		{
+			query = new
+			{
+				match_all = new { }
+			}
+		};
 
-	//	protected override int ExpectStatusCode => 200;
+		protected override int ExpectStatusCode => 200;
 
-	//	protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-	//		.SequenceNumberPrimaryTerm()
-	//		.Query(q => q
-	//			.MatchAll()
-	//		);
+		protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
+			.SeqNoPrimaryTerm()
+			.Query(q => q
+				.MatchAll()
+			);
 
-	//	protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-	//	protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-	//	{
-	//		SequenceNumberPrimaryTerm = true,
-	//		Query = new QueryContainer(new MatchAllQuery()),
-	//	};
+		protected override SearchRequest<Project> Initializer => new()
+		{
+			SeqNoPrimaryTerm = true,
+			Query = new QueryContainer(new MatchAllQuery()),
+		};
 
-	//	protected override string UrlPath => $"/project/_search?seq_no_primary_term=true";
+		protected override string ExpectedUrlPathAndQuery => $"/project/_search?seq_no_primary_term=true";
 
-	//	protected override void ExpectResponse(ISearchResponse<Project> response)
-	//	{
-	//		response.Total.Should().BeGreaterThan(0);
-	//		response.Hits.Count.Should().BeGreaterThan(0);
-	//		response.HitsMetadata.Total.Value.Should().Be(response.Total);
-	//		response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
+		protected override void ExpectResponse(SearchResponse<Project> response)
+		{
+			response.Total.Should().BeGreaterThan(0);
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.HitsMetadata.Total.Value.Should().Be(response.Total);
+			response.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.Eq);
 
-	//		foreach (var hit in response.Hits)
-	//		{
-	//			hit.Should().NotBeNull();
-	//			hit.Source.Should().NotBeNull();
-	//			hit.SequenceNumber.Should().HaveValue();
-	//			hit.PrimaryTerm.Should().HaveValue();
-	//		}
-	//	}
-	//}
+			foreach (var hit in response.Hits)
+			{
+				hit.Should().NotBeNull();
+				hit.Source.Should().NotBeNull();
+				hit.SeqNo.Should().HaveValue();
+				hit.PrimaryTerm.Should().HaveValue();
+			}
+		}
+	}
 
 	//public class SearchApiStoredFieldsTests : SearchApiTests
 	//{

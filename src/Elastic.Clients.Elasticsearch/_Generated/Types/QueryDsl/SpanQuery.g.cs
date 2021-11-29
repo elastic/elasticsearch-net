@@ -199,7 +199,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
 		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
 		public void SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
-		public void SpanTerm(Action<SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
+		public void SpanTerm(Action<SpanTermQueryDescriptor<T>> configure) => Set(configure, "span_term");
 		public void SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
 		public void SpanWithin(Action<SpanWithinQueryDescriptor<T>> configure) => Set(configure, "span_within");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -284,8 +284,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_term")
 			{
-				var descriptor = new SpanTermQueryDescriptor();
-				((Action<SpanTermQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanTermQueryDescriptor<T>();
+				((Action<SpanTermQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
