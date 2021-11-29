@@ -85,6 +85,7 @@ namespace Elasticsearch.Net
 			var key = HttpConnection.GetClientKey(requestData);
 			var handler = CreateHandler(key, requestData);
 			var client = new HttpClient(handler, disposeHandler: false);
+			client.Timeout = requestData.RequestTimeout;
 			return client;
 		}
 
