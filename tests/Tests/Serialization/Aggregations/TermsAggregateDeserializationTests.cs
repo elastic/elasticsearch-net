@@ -7,7 +7,7 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Tests.Serialization;
 
-public class AggregateDeserializationTests : SourceSerializerTestBase
+public class TermsAggregateDeserializationTests : SourceSerializerTestBase
 {
 	[U]
 	public void CanDeserialize_BasicStringTermsAggregate()
@@ -194,10 +194,5 @@ public class AggregateDeserializationTests : SourceSerializerTestBase
 
 		search.Aggregations.TryGetStringTerms("my-agg-name", out var stringTermsAggregate).Should().BeFalse();
 		stringTermsAggregate.Should().BeNull();
-	}
-
-	private class BasicSearchResponse
-	{
-		public AggregateDictionary Aggregations { get; set; }
 	}
 }

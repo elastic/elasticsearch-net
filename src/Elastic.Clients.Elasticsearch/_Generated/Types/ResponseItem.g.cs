@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]
-		public object? Id { get; init; }
+		public string? Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_index")]

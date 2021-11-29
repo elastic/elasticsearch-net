@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
-		public object Value { get; init; }
+		public double? Value { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("value_as_string")]

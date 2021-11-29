@@ -31,15 +31,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
-		public object Min { get; init; }
+		public double? Min { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]
-		public object Max { get; init; }
+		public double? Max { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg")]
-		public object Avg { get; init; }
+		public double? Avg { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum")]
