@@ -115,7 +115,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WriteStartObject();
 			writer.WriteEndObject();
 			writer.WriteEndObject();
-
 		}
 	}
 }

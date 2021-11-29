@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<string> Terms { get; set; }
 	}
 
-	public sealed partial class TermsSetQueryDescriptor<T> : FieldNameQueryDescriptorBase<TermsSetQueryDescriptor<T>>
+	public sealed partial class TermsSetQueryDescriptor<T> : FieldNameQueryDescriptorBase<TermsSetQueryDescriptor<T>, T>
 	{
 		public TermsSetQueryDescriptor()
 		{

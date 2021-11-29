@@ -76,13 +76,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class MatchQueryDescriptor : FieldNameQueryDescriptorBase<MatchQueryDescriptor>
+	public sealed partial class MatchQueryDescriptor<T> : FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, T>
 	{
 		public MatchQueryDescriptor()
 		{
 		}
 
-		internal MatchQueryDescriptor(Action<MatchQueryDescriptor> configure) => configure.Invoke(this);
+		internal MatchQueryDescriptor(Action<MatchQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
@@ -107,18 +107,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
 
-		public MatchQueryDescriptor Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public MatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public MatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
-		public MatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
-		public MatchQueryDescriptor Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
-		public MatchQueryDescriptor MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
-		public MatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public MatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
-		public MatchQueryDescriptor PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public MatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
+		public MatchQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public MatchQueryDescriptor<T> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public MatchQueryDescriptor<T> FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
+		public MatchQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public MatchQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
+		public MatchQueryDescriptor<T> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public MatchQueryDescriptor<T> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public MatchQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public MatchQueryDescriptor<T> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

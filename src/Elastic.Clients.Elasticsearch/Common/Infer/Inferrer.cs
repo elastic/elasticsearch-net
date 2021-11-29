@@ -56,9 +56,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		public string Field(Field field) => FieldResolver.Resolve(field);
 
-		//public string PropertyName(PropertyName property) => FieldResolver.Resolve(property);
+		public string PropertyName(PropertyName property) => FieldResolver.Resolve(property);
 
-		//public string IndexName<T>() where T : class => IndexNameResolver.Resolve<T>();
+		public string IndexName<T>() where T : class => IndexNameResolver.Resolve<T>();
 
 		public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 

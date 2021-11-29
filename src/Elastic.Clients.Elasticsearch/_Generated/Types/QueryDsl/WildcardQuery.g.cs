@@ -44,13 +44,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Wildcard { get; set; }
 	}
 
-	public sealed partial class WildcardQueryDescriptor : FieldNameQueryDescriptorBase<WildcardQueryDescriptor>
+	public sealed partial class WildcardQueryDescriptor<T> : FieldNameQueryDescriptorBase<WildcardQueryDescriptor<T>, T>
 	{
 		public WildcardQueryDescriptor()
 		{
 		}
 
-		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
+		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<T>> configure) => configure.Invoke(this);
 		internal bool? CaseInsensitiveValue { get; private set; }
 
 		internal string? RewriteValue { get; private set; }
@@ -59,10 +59,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? WildcardValue { get; private set; }
 
-		public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public WildcardQueryDescriptor Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public WildcardQueryDescriptor Value(string? value) => Assign(value, (a, v) => a.ValueValue = v);
-		public WildcardQueryDescriptor Wildcard(string? wildcard) => Assign(wildcard, (a, v) => a.WildcardValue = v);
+		public WildcardQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public WildcardQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public WildcardQueryDescriptor<T> Value(string? value) => Assign(value, (a, v) => a.ValueValue = v);
+		public WildcardQueryDescriptor<T> Wildcard(string? wildcard) => Assign(wildcard, (a, v) => a.WildcardValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

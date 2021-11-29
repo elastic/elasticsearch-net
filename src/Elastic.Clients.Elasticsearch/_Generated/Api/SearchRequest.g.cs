@@ -337,7 +337,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class SearchRequestDescriptor<T> : RequestDescriptorBase<SearchRequestDescriptor<T>, SearchRequestParameters>
 	{
-		public SearchRequestDescriptor()
+		public SearchRequestDescriptor() : this(typeof(T))
 		{
 		}
 

@@ -16,6 +16,7 @@ using System.Linq;
 using System.Collections;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Clients.Elasticsearch.Aggregations;
+using System.Linq.Expressions;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
@@ -880,7 +881,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
 	}
 
-	public sealed partial class SearchRequest
+	public partial class SearchRequest
 	{
 		internal override void BeforeRequest()
 		{
@@ -891,8 +892,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class SearchRequest<TInferDocument> : SearchRequest
+	{
+		public SearchRequest() : base(typeof(TInferDocument))
+		{
+		}
+	}
+
 	public sealed partial class SearchRequestDescriptor<T>
 	{
+		internal Type ClrType => typeof(T);
+
 		internal Action<AggregationContainerDescriptor<T>> AggregationsAction { get; private set; }
 
 		public SearchRequestDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>>? configure) => Assign(configure, (a, v) => a.AggregationsAction = v);
@@ -905,6 +915,13 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
+		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
+			//if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
+			//{
+			//	routeValues.Remove("index");
+			//}
+
+			base.ResolveUrl(routeValues, settings);
 
 		//internal AggregationContainerDescriptor<T> AggregationContainerDescriptor { get; private set; }
 		//internal Action<AggregationContainerDescriptor<T>> AggregationContainerDescriptorAction { get; private set; }
@@ -1103,6 +1120,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public sealed partial class QueryContainerDescriptor<T>
 	{
 		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
+
+		public void Term<TValue>(Expression<Func<T, TValue>> field, object value, double? boost = null, string name = null) =>
+			Term(t => t.Field(field).Value(value)/*.Boost(boost)*/.Name(name));
 	}
 
 
