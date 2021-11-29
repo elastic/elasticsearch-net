@@ -27,26 +27,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("upper")]
-		public object Upper { get; init; }
+		public double? Upper { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lower")]
-		public object Lower { get; init; }
+		public double? Lower { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper_population")]
-		public object UpperPopulation { get; init; }
+		public double? UpperPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lower_population")]
-		public object LowerPopulation { get; init; }
+		public double? LowerPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("upper_sampling")]
-		public object UpperSampling { get; init; }
+		public double? UpperSampling { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lower_sampling")]
-		public object LowerSampling { get; init; }
+		public double? LowerSampling { get; init; }
 	}
 }

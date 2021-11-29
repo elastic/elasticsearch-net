@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected abstract bool SupportsBody { get; }
 
+		internal virtual void BeforeRequest() { }
+
 		//protected virtual bool CanBeEmpty => false;
 
 		//protected virtual bool IsEmpty => false;

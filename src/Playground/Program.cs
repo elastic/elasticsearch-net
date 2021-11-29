@@ -101,6 +101,12 @@ namespace Playground
 				.Authentication(new BasicAuthentication("elastic", "-5qxtEZQ=NWx1v+PUjCJ"))
 				.CertificateFingerprint("bdbbcebde100130339ec62f7f4ff7008ae81ddaa0586178090d2a41ba5a6e6a1"));
 
+			client.Search<Person>(s => s
+				.Size(1)
+				.From(0)
+				.Aggregations(a => a.Terms("my-terms", t => t.Field("firstName")))
+				.Query(q => q.MatchAll()));
+
 			var serialiser = client.RequestResponseSerializer;
 
 			//var response = client.IndexManagement.CreateIndex("testing", i => i

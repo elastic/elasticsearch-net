@@ -498,16 +498,15 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				return;
 			}
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
-				Finalise();
 				return;
 			}
 
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			writer.WriteStartObject();
 			if (ContainedVariantName == "attachment")
 			{
 				var descriptor = new AttachmentProcessorDescriptor<T>();

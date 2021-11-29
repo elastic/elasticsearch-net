@@ -19,7 +19,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 		Type type,
 		JsonSerializerOptions options)
 	{
-		if (type.GetGenericTypeDefinition() == typeof(Buckets<>))
+		if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Buckets<>))
 		{
 			// TODO - Could potentially cache an instance for each bucket type and reuse it
 			var bucketType = type.GetGenericArguments()[0];
@@ -49,7 +49,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 	private class UnionConverterInner<TItem1, TItem2> : JsonConverter<Union<TItem1, TItem2>>
 	{
 		public override Union<TItem1, TItem2>? Read(ref Utf8JsonReader reader, Type typeToConvert,
-			JsonSerializerOptions options) => throw new NotImplementedException();
+			JsonSerializerOptions options) => null;
 
 		public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
 			JsonSerializerOptions options)

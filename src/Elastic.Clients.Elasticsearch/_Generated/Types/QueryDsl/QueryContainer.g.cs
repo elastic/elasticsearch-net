@@ -690,16 +690,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return;
 			}
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
-				Finalise();
 				return;
 			}
 
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			writer.WriteStartObject();
 			if (ContainedVariantName == "bool")
 			{
 				var descriptor = new BoolQueryDescriptor<T>();
