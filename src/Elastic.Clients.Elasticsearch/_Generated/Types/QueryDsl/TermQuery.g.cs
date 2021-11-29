@@ -23,6 +23,25 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
+	{
+		internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, value.Value, options);
+			if (value.CaseInsensitive.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(TermQueryConverter))]
 	public partial class TermQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

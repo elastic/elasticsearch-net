@@ -23,6 +23,43 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class MatchPhrasePrefixQueryConverter : FieldNameQueryConverterBase<MatchPhrasePrefixQuery>
+	{
+		internal override MatchPhrasePrefixQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, MatchPhrasePrefixQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Analyzer))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(value.Analyzer);
+			}
+
+			if (value.MaxExpansions.HasValue)
+			{
+				writer.WritePropertyName("max_expansions");
+				writer.WriteNumberValue(value.MaxExpansions.Value);
+			}
+
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(value.Query);
+			if (value.Slop.HasValue)
+			{
+				writer.WritePropertyName("slop");
+				writer.WriteNumberValue(value.Slop.Value);
+			}
+
+			if (value.ZeroTermsQuery is not null)
+			{
+				writer.WritePropertyName("zero_terms_query");
+				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MatchPhrasePrefixQueryConverter))]
 	public partial class MatchPhrasePrefixQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

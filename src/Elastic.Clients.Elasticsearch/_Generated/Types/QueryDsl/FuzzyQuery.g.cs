@@ -23,6 +23,49 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class FuzzyQueryConverter : FieldNameQueryConverterBase<FuzzyQuery>
+	{
+		internal override FuzzyQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, FuzzyQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.MaxExpansions.HasValue)
+			{
+				writer.WritePropertyName("max_expansions");
+				writer.WriteNumberValue(value.MaxExpansions.Value);
+			}
+
+			if (value.PrefixLength.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(value.PrefixLength.Value);
+			}
+
+			if (value.Rewrite is not null)
+			{
+				writer.WritePropertyName("rewrite");
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
+			}
+
+			if (value.Transpositions.HasValue)
+			{
+				writer.WritePropertyName("transpositions");
+				writer.WriteBooleanValue(value.Transpositions.Value);
+			}
+
+			if (value.Fuzziness is not null)
+			{
+				writer.WritePropertyName("fuzziness");
+				JsonSerializer.Serialize(writer, value.Fuzziness, options);
+			}
+
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, value.Value, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(FuzzyQueryConverter))]
 	public partial class FuzzyQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

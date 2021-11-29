@@ -335,6 +335,13 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Stats { get; set; }
 	}
 
+	public partial class SearchRequest<TInferDocument> : SearchRequest
+	{
+		public SearchRequest() : base(typeof(TInferDocument))
+		{
+		}
+	}
+
 	public sealed partial class SearchRequestDescriptor<T> : RequestDescriptorBase<SearchRequestDescriptor<T>, SearchRequestParameters>
 	{
 		public SearchRequestDescriptor() : this(typeof(T))
