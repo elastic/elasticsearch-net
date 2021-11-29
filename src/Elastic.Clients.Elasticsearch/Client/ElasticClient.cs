@@ -449,7 +449,7 @@ public partial class ElasticClient
 		where TRequest : class, IRequest
 		where TResponse : class, ITransportResponse, new()
 	{
-		if (_productCheckStatus == ProductCheckStatus.NotChecked)
+		if (response.ApiCall.HttpStatusCode.HasValue && response.ApiCall.HttpStatusCode.Value >= 200 && response.ApiCall.HttpStatusCode.Value <= 299 && _productCheckStatus == ProductCheckStatus.NotChecked)
 		{
 			if (response.ApiCall.ParsedHeaders is null || !response.ApiCall.ParsedHeaders.TryGetValue("x-elastic-product", out var values) || !values.Single().Equals("Elasticsearch", StringComparison.Ordinal))
 			{

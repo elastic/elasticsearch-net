@@ -138,16 +138,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 				return;
 			}
 
-			writer.WriteStartObject();
-			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
 			if (Container is not null)
 			{
 				JsonSerializer.Serialize(writer, Container, options);
-				Finalise();
 				return;
 			}
 
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			writer.WriteStartObject();
 			if (ContainedVariantName == "add")
 			{
 				var descriptor = new AddActionDescriptor<T>();

@@ -70,57 +70,73 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
 
-		public AggregationContainerDescriptor<T> Terms(string name, Action<TermsAggregationDescriptor<T>> configure) =>
-			SetInnerAggregation(name, configure);
+		 // TODO - Generator needs to do this for each variant.
 
-		private AggregationContainerDescriptor<T> SetInnerAggregation<TAggregationDescriptor>(string key, Action<TAggregationDescriptor> configureAggregation)
-			where TAggregationDescriptor : new()
+		public AggregationContainerDescriptor<T> Terms(string name, Action<TermsAggregationDescriptor<T>> configure)
 		{
-			// TODO - Future "improvement" would be to store the descriptor actions and invoke each one when serialising
+			var descriptor = new TermsAggregationDescriptor<T>();
+			configure(descriptor);
 
-			var descriptor = new TAggregationDescriptor();
-			configureAggregation(descriptor);
-
-			// TEMP HARD CODED
-
-			if (descriptor is TermsAggregationDescriptor<T> t)
+			var agg = new TermsAggregation(name)
 			{
-				var agg = new TermsAggregation(key)
-				{
-					Field = t.FieldValue
-				};
-				
-				var container = new AggregationContainer(agg);
+				Field = descriptor.FieldValue
+			};
 
-				if (Self.Aggregations == null)
-					Self.Aggregations = new AggregationDictionary();
+			var container = new AggregationContainer(agg);
 
-				//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
-				//if (aggregator is IBucketAggregation bucket && bucket.Aggregations.HasAny())
-				//{
-				//	//make sure we copy those aggregations to the isolated container's
-				//	//own .Aggregations container (the one that gets serialized to "aggs")
-				//	IAggregationContainer d = container;
-				//	d.Aggregations = bucket.Aggregations;
-				//}
-				//assign the aggregations container under Aggregations ("aggs" in the json)
+			return SetContainer(name, container);
+		}
 
-				Self.Aggregations[key] = container;
-			}
-			
+		private AggregationContainerDescriptor<T> SetContainer(string key, AggregationContainer container)
+		{
+			if (Self.Aggregations == null)
+				Self.Aggregations = new AggregationDictionary();
+
+			Self.Aggregations[key] = container;
+
 			return this;
 		}
 
+		//private AggregationContainerDescriptor<T> SetInnerAggregation<TAggregationDescriptor>(string key, Action<TAggregationDescriptor> configureAggregation)
+		//	where TAggregationDescriptor : new()
+		//{
+		//	// TODO - Future "improvement" would be to store the descriptor actions and invoke each one when serialising
+
+		//	var descriptor = new TAggregationDescriptor();
+		//	configureAggregation(descriptor);
+
+		//	// TEMP HARD CODED
+
+		//	if (descriptor is TermsAggregationDescriptor<T> t)
+		//	{
+		//		var agg = new TermsAggregation(key)
+		//		{
+		//			Field = t.FieldValue
+		//		};
+				
+		//		var container = new AggregationContainer(agg);
+
+		//		if (Self.Aggregations == null)
+		//			Self.Aggregations = new AggregationDictionary();
+
+		//		//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
+		//		//if (aggregator is IBucketAggregation bucket && bucket.Aggregations.HasAny())
+		//		//{
+		//		//	//make sure we copy those aggregations to the isolated container's
+		//		//	//own .Aggregations container (the one that gets serialized to "aggs")
+		//		//	IAggregationContainer d = container;
+		//		//	d.Aggregations = bucket.Aggregations;
+		//		//}
+		//		//assign the aggregations container under Aggregations ("aggs" in the json)
+
+		//		Self.Aggregations[key] = container;
+		//	}
+			
+		//	return this;
+		//}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 	}
-
-
-	internal sealed class BucketsConverter
-	{
-
-	}
-
-	
 
 	public class EmptyTermsAggregate : TermsAggregateBase<EmptyTermsBucket>
 	{
@@ -235,12 +251,354 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				if (nameParts.Length != 2)
 					throw new JsonException("Unable to parse typed-key from aggregation name");
 
-				if (nameParts[0] == "terms") // TODO: See future optimisation, above
+				// Bucket-based Aggregates
+
+				if (nameParts[0] == "terms")
 				{
 					if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(ref reader, options, out var agg))
 					{
 						dictionary.Add(nameParts[1], agg);
 					}
+				}
+				else if (nameParts[0] == "adjacency_matrix")
+				{
+					var agg = JsonSerializer.Deserialize<AdjacencyMatrixAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "auto_date_histogram")
+				{
+					var agg = JsonSerializer.Deserialize<AutoDateHistogramAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "children")
+				{
+					var agg = JsonSerializer.Deserialize<ChildrenAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "composite")
+				{
+					var agg = JsonSerializer.Deserialize<CompositeAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "date_histogram")
+				{
+					var agg = JsonSerializer.Deserialize<DateHistogramAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "date_range")
+				{
+					var agg = JsonSerializer.Deserialize<DateRangeAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "diversified_sampler")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "filter")
+				{
+					var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "filters")
+				{
+					var agg = JsonSerializer.Deserialize<FiltersAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "geo_distance")
+				{
+					var agg = JsonSerializer.Deserialize<GeoDistanceAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "geohash_grid")
+				{
+					var agg = JsonSerializer.Deserialize<GeoHashGridAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "geotile_grid")
+				{
+					var agg = JsonSerializer.Deserialize<GeoTileGridAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "global")
+				{
+					var agg = JsonSerializer.Deserialize<GlobalAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "histogram")
+				{
+					var agg = JsonSerializer.Deserialize<HistogramAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "ip_range")
+				{
+					var agg = JsonSerializer.Deserialize<IpRangeAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "missing")
+				{
+					var agg = JsonSerializer.Deserialize<MissingAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "multi-terms")
+				{
+					var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "nested")
+				{
+					var agg = JsonSerializer.Deserialize<NestedAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "parent")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "range")
+				{
+					var agg = JsonSerializer.Deserialize<RangeAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "rare_terms")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "reverse_nested")
+				{
+					var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "sampler")
+				{
+					var agg = JsonSerializer.Deserialize<SamplerAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "significant_terms")
+				{
+					// TODO - As per terms
+				}
+				else if (nameParts[0] == "significant_text")
+				{
+					// TODO
+					throw new Exception("The aggregate in response is not yet supported");
+				}
+				else if (nameParts[0] == "variable_width_histogram")
+				{
+					var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "variable_width_histogram")
+				{
+					var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+
+				// Metrics-based Aggregates
+
+				else if (nameParts[0] == "avg")
+				{
+					var agg = JsonSerializer.Deserialize<AvgAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "boxplot")
+				{
+					var agg = JsonSerializer.Deserialize<BoxPlotAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "cardinality")
+				{
+					var agg = JsonSerializer.Deserialize<CardinalityAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "extended_stats")
+				{
+					var agg = JsonSerializer.Deserialize<ExtendedStatsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "geo_bounds")
+				{
+					var agg = JsonSerializer.Deserialize<GeoBoundsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "geo_centroid")
+				{
+					var agg = JsonSerializer.Deserialize<GeoCentroidAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "geo_line")
+				{
+					var agg = JsonSerializer.Deserialize<GeoLineAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "matrix_stats")
+				{
+					var agg = JsonSerializer.Deserialize<MatrixStatsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "max")
+				{
+					var agg = JsonSerializer.Deserialize<MaxAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "median_absolute_deviation")
+				{
+					var agg = JsonSerializer.Deserialize<MedianAbsoluteDeviationAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "min")
+				{
+					var agg = JsonSerializer.Deserialize<MinAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "percentile_ranks")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "percentiles")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "rate")
+				{
+					var agg = JsonSerializer.Deserialize<RateAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "scripted_metric")
+				{
+					var agg = JsonSerializer.Deserialize<ScriptedMetricAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "stats")
+				{
+					var agg = JsonSerializer.Deserialize<StatsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "string_stats")
+				{
+					var agg = JsonSerializer.Deserialize<StringStatsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "sum")
+				{
+					var agg = JsonSerializer.Deserialize<SumAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "t_test")
+				{
+					var agg = JsonSerializer.Deserialize<TTestAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "top_hits")
+				{
+					var agg = JsonSerializer.Deserialize<TopHitsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "top_metrics")
+				{
+					var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "value_count")
+				{
+					var agg = JsonSerializer.Deserialize<ValueCountAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "weighted_avg")
+				{
+					var agg = JsonSerializer.Deserialize<WeightedAvgAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+
+				// Pipeline-based Aggregates
+
+				else if (nameParts[0] == "avg_bucket")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "bucket_script")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "bucket_count_ks_test")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "bucket_correlation")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "bucket_selector")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "bucket_sort")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "cumulative_cardinality")
+				{
+					var agg = JsonSerializer.Deserialize<CumulativeCardinalityAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "cumulative_sum")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "derivative")
+				{
+					var agg = JsonSerializer.Deserialize<DerivativeAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "extended_stats_bucket")
+				{
+					var agg = JsonSerializer.Deserialize<ExtendedStatsBucketAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "inference")
+				{
+					var agg = JsonSerializer.Deserialize<InferenceAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "max_bucket")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "min_bucket")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "moving_avg")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "moving_fn")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "moving_percentiles")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "normalize")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "percentiles_bucket")
+				{
+					var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "serial_diff")
+				{
+					// TODO
+				}
+				else if (nameParts[0] == "stats_bucket")
+				{
+					var agg = JsonSerializer.Deserialize<StatsBucketAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+				}
+				else if (nameParts[0] == "sum_bucket")
+				{
+					// TODO
 				}
 			}
 
@@ -522,11 +880,30 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
 	}
 
+	public sealed partial class SearchRequest
+	{
+		internal override void BeforeRequest()
+		{
+			if (Aggregations is not null)
+			{
+				TypedKeys = true;
+			}
+		}
+	}
+
 	public sealed partial class SearchRequestDescriptor<T>
 	{
 		internal Action<AggregationContainerDescriptor<T>> AggregationsAction { get; private set; }
 
 		public SearchRequestDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>>? configure) => Assign(configure, (a, v) => a.AggregationsAction = v);
+
+		internal override void BeforeRequest()
+		{
+			if (AggregationsValue is not null || AggregationsAction is not null)
+			{
+				TypedKeys(true);
+			}
+		}
 
 
 		//internal AggregationContainerDescriptor<T> AggregationContainerDescriptor { get; private set; }

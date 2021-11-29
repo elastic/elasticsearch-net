@@ -31,23 +31,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("min_length")]
-		public object MinLength { get; init; }
+		public int? MinLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_length")]
-		public object MaxLength { get; init; }
+		public int? MaxLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("avg_length")]
-		public object AvgLength { get; init; }
+		public double? AvgLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("entropy")]
-		public object Entropy { get; init; }
+		public double? Entropy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("distribution")]
-		public object? Distribution { get; init; }
+		public string? Distribution { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_length_as_string")]

@@ -27,23 +27,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("sum_of_squares")]
-		public object SumOfSquares { get; init; }
+		public double? SumOfSquares { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance")]
-		public object Variance { get; init; }
+		public double? Variance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance_population")]
-		public object VariancePopulation { get; init; }
+		public double? VariancePopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("variance_sampling")]
-		public object VarianceSampling { get; init; }
+		public double? VarianceSampling { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation")]
-		public object StdDeviation { get; init; }
+		public double? StdDeviation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation_bounds")]
