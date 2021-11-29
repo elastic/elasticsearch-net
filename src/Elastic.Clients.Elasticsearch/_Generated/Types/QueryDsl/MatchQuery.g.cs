@@ -23,6 +23,85 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
+	{
+		internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Analyzer))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(value.Analyzer);
+			}
+
+			if (value.AutoGenerateSynonymsPhraseQuery.HasValue)
+			{
+				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+				writer.WriteBooleanValue(value.AutoGenerateSynonymsPhraseQuery.Value);
+			}
+
+			if (value.Fuzziness is not null)
+			{
+				writer.WritePropertyName("fuzziness");
+				JsonSerializer.Serialize(writer, value.Fuzziness, options);
+			}
+
+			if (value.FuzzyRewrite is not null)
+			{
+				writer.WritePropertyName("fuzzy_rewrite");
+				JsonSerializer.Serialize(writer, value.FuzzyRewrite, options);
+			}
+
+			if (value.FuzzyTranspositions.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_transpositions");
+				writer.WriteBooleanValue(value.FuzzyTranspositions.Value);
+			}
+
+			if (value.Lenient.HasValue)
+			{
+				writer.WritePropertyName("lenient");
+				writer.WriteBooleanValue(value.Lenient.Value);
+			}
+
+			if (value.MaxExpansions.HasValue)
+			{
+				writer.WritePropertyName("max_expansions");
+				writer.WriteNumberValue(value.MaxExpansions.Value);
+			}
+
+			if (value.MinimumShouldMatch is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatch, options);
+			}
+
+			if (value.Operator is not null)
+			{
+				writer.WritePropertyName("operator");
+				JsonSerializer.Serialize(writer, value.Operator, options);
+			}
+
+			if (value.PrefixLength.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(value.PrefixLength.Value);
+			}
+
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, value.Query, options);
+			if (value.ZeroTermsQuery is not null)
+			{
+				writer.WritePropertyName("zero_terms_query");
+				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MatchQueryConverter))]
 	public partial class MatchQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

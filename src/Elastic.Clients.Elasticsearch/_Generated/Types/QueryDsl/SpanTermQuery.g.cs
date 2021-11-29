@@ -23,6 +23,19 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class SpanTermQueryConverter : FieldNameQueryConverterBase<SpanTermQuery>
+	{
+		internal override SpanTermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, SpanTermQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(value.Value);
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(SpanTermQueryConverter))]
 	public partial class SpanTermQuery : FieldNameQueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]

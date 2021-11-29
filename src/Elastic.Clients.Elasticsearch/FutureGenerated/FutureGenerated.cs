@@ -892,13 +892,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class SearchRequest<TInferDocument> : SearchRequest
-	{
-		public SearchRequest() : base(typeof(TInferDocument))
-		{
-		}
-	}
-
 	public sealed partial class SearchRequestDescriptor<T>
 	{
 		internal Type ClrType => typeof(T);
@@ -1069,53 +1062,63 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	}
 	//}
 
-	[JsonConverter(typeof(MatchQueryConverter))]
-	public sealed partial class MatchQuery
-	{
+	//internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
+	//{
+	//	internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	//	{
+	//		if (reader.TokenType != JsonTokenType.StartObject)
+	//		{
+	//			throw new JsonException();
+	//		}
 
-	}
+	//		string queryValue = default;
 
-	internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
-	{
-		internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-			{
-				throw new JsonException();
-			}
+	//		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+	//		{
+	//			var property = reader.GetString();
 
-			string queryValue = default;
+	//			if (property == "query")
+	//			{
+	//				reader.Read();
+	//				queryValue = reader.GetString();
+	//			}
+	//		}
 
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-			{
-				var property = reader.GetString();
+	//		var query = new MatchQuery()
+	//		{
+	//			Query = queryValue
+	//		};
 
-				if (property == "query")
-				{
-					reader.Read();
-					queryValue = reader.GetString();
-				}
-			}
+	//		return query;
+	//	}
 
-			var query = new MatchQuery()
-			{
-				Query = queryValue
-			};
+	//	internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
+	//	{
+	//		writer.WriteStartObject();
+	//		if (!string.IsNullOrEmpty(value.Query))
+	//		{
+	//			writer.WritePropertyName("query");
+	//			writer.WriteStringValue(value.Query);
+	//		}
+	//		writer.WriteEndObject();
+	//	}
+	//}
 
-			return query;
-		}
+	//internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
+	//{
+	//	internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
-		internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
-		{
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Query))
-			{
-				writer.WritePropertyName("query");
-				writer.WriteStringValue(value.Query);
-			}
-			writer.WriteEndObject();
-		}
-	}
+	//	internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
+	//	{
+	//		writer.WriteStartObject();
+	//		if (value.Value is not null)
+	//		{
+	//			writer.WritePropertyName("value");
+	//			JsonSerializer.Serialize(writer, value.Value, options);
+	//		}
+	//		writer.WriteEndObject();
+	//	}
+	//}
 
 	public sealed partial class QueryContainerDescriptor<T>
 	{

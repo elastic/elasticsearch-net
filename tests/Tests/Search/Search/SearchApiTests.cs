@@ -142,7 +142,8 @@ namespace Tests.Search.Search
 			query = new
 			{
 				match_all = new { }
-			}
+			},
+			seq_no_primary_term = true
 		};
 
 		protected override int ExpectStatusCode => 200;
@@ -161,7 +162,7 @@ namespace Tests.Search.Search
 			Query = new QueryContainer(new MatchAllQuery()),
 		};
 
-		protected override string ExpectedUrlPathAndQuery => $"/project/_search?seq_no_primary_term=true";
+		protected override string ExpectedUrlPathAndQuery => $"/project/_search";
 
 		protected override void ExpectResponse(SearchResponse<Project> response)
 		{

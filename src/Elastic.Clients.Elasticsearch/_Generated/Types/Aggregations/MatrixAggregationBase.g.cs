@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal Dictionary<string, double>? MissingValue { get; private set; }
 
 		public MatrixAggregationBaseDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		//public MatrixAggregationBaseDescriptor<T> Missing(Func<FluentDictionary<string?, double?>, FluentDictionary<string?, double?>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string?, double?>()));
+		///public MatrixAggregationBaseDescriptor<T> Missing(Func<FluentDictionary<string?, double?>, FluentDictionary<string?, double?>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string?, double?>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
