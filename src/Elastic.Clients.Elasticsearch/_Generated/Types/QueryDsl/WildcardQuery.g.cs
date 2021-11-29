@@ -23,6 +23,41 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class WildcardQueryConverter : FieldNameQueryConverterBase<WildcardQuery>
+	{
+		internal override WildcardQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, WildcardQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.CaseInsensitive.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			if (value.Rewrite is not null)
+			{
+				writer.WritePropertyName("rewrite");
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Value))
+			{
+				writer.WritePropertyName("value");
+				writer.WriteStringValue(value.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.Wildcard))
+			{
+				writer.WritePropertyName("wildcard");
+				writer.WriteStringValue(value.Wildcard);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(WildcardQueryConverter))]
 	public partial class WildcardQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

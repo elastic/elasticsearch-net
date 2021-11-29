@@ -23,6 +23,31 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class TermsSetQueryConverter : FieldNameQueryConverterBase<TermsSetQuery>
+	{
+		internal override TermsSetQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, TermsSetQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.MinimumShouldMatchField is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_field");
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchField, options);
+			}
+
+			if (value.MinimumShouldMatchScript is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_script");
+				JsonSerializer.Serialize(writer, value.MinimumShouldMatchScript, options);
+			}
+
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, value.Terms, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(TermsSetQueryConverter))]
 	public partial class TermsSetQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

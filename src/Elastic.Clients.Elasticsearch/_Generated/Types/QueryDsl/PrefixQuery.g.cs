@@ -23,6 +23,31 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class PrefixQueryConverter : FieldNameQueryConverterBase<PrefixQuery>
+	{
+		internal override PrefixQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.Rewrite is not null)
+			{
+				writer.WritePropertyName("rewrite");
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
+			}
+
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(value.Value);
+			if (value.CaseInsensitive.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(PrefixQueryConverter))]
 	public partial class PrefixQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

@@ -23,6 +23,43 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class RegexpQueryConverter : FieldNameQueryConverterBase<RegexpQuery>
+	{
+		internal override RegexpQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, RegexpQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (value.CaseInsensitive.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.Flags))
+			{
+				writer.WritePropertyName("flags");
+				writer.WriteStringValue(value.Flags);
+			}
+
+			if (value.MaxDeterminizedStates.HasValue)
+			{
+				writer.WritePropertyName("max_determinized_states");
+				writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
+			}
+
+			if (value.Rewrite is not null)
+			{
+				writer.WritePropertyName("rewrite");
+				JsonSerializer.Serialize(writer, value.Rewrite, options);
+			}
+
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(value.Value);
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(RegexpQueryConverter))]
 	public partial class RegexpQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]

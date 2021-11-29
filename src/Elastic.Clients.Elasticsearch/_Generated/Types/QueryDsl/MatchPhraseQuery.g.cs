@@ -23,6 +23,37 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
+	internal sealed class MatchPhraseQueryConverter : FieldNameQueryConverterBase<MatchPhraseQuery>
+	{
+		internal override MatchPhraseQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override void WriteInternal(Utf8JsonWriter writer, MatchPhraseQuery value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.Analyzer))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(value.Analyzer);
+			}
+
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(value.Query);
+			if (value.Slop.HasValue)
+			{
+				writer.WritePropertyName("slop");
+				writer.WriteNumberValue(value.Slop.Value);
+			}
+
+			if (value.ZeroTermsQuery is not null)
+			{
+				writer.WritePropertyName("zero_terms_query");
+				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MatchPhraseQueryConverter))]
 	public partial class MatchPhraseQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
