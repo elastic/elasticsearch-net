@@ -87,11 +87,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
-			}
+			//if (MetaValue is not null)
+			//{
+			//	writer.WritePropertyName("meta");
+			//	JsonSerializer.Serialize(writer, MetaValue, options);
+			//}
 
 			if (!string.IsNullOrEmpty(NameValue))
 			{
@@ -100,6 +100,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
 		}
 	}
 }
