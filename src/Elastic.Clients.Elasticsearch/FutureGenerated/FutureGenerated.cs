@@ -69,12 +69,31 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string ContainedVariantName { get; private set; }
 
 		internal object ContainerVariantDescriptorAction { get; private set; }
+
+		internal Action<Utf8JsonWriter, JsonSerializerOptions> SerializeFluent { get; private set; }
 		
 		internal AggregationContainer(string variant, object descriptorAction)
 		{
 			ContainedVariantName = variant;
 			ContainerVariantDescriptorAction = descriptorAction;
 		}
+
+		private AggregationContainer(string variant) => ContainedVariantName = variant;
+
+		internal static AggregationContainer CreateWithAction<T>(string name, Action<T> configure) where T : new()
+		{
+			var container = new AggregationContainer(name);
+			container.SetAction(configure);
+			return container;
+		}
+
+		private void SetAction<T>(Action<T> configure) where T : new()
+			=> SerializeFluent = (writer, options) =>
+				{
+					var descriptor = new T();
+					configure(descriptor);
+					JsonSerializer.Serialize(writer, descriptor, options);
+				};
 
 		public static implicit operator AggregationContainer(AggregationBase aggregator)
 		{
@@ -134,20 +153,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public AggregationContainerDescriptor<T> Min(string name, Action<MinAggregationDescriptor<T>> configure)
 		{
-			//var descriptor = new MinAggregationDescriptor<T>(configure);
-
-			//var agg = new MinAggregation(name)
-			//{
-			//	Field = descriptor.FieldValue
-			//};
-
-			//AggregationContainer container = agg;
-			//container.Meta = descriptor.MetaValue;
-
-			//return SetContainer(name, container);
-
-			var container = new AggregationContainer("min", configure);
-
+			var container = AggregationContainer.CreateWithAction("min", configure);
 			return SetContainer(name, container);
 		}
 

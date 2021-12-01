@@ -42,11 +42,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	internal sealed class AggregationContainerConverter : JsonConverter<AggregationContainer>
 	{
-		private static T Cast<T>(object o)
-		{
-			return (T)o;
-		}
-
 		public override AggregationContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			reader.Read();
@@ -398,25 +393,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			writer.WriteStartObject();
 
-			if (value.ContainerVariantDescriptorAction is not null)
+			if (value.SerializeFluent is not null)
 			{
 				writer.WritePropertyName(value.ContainedVariantName);
-
-				if (value.ContainedVariantName == "min")
-				{
-					var type = value.ContainerVariantDescriptorAction.GetType().GetGenericArguments()[0];
-
-					var descriptor = Activator.CreateInstance(type);
-
-					var method = value.ContainerVariantDescriptorAction.GetType().GetMethod("Invoke");
-					method.Invoke(value.ContainerVariantDescriptorAction, new object[] { descriptor });
-
-					JsonSerializer.Serialize(writer, descriptor, options);
-
-					writer.WriteEndObject();
-
-					return;
-				}
+				value.SerializeFluent(writer, options);
+				writer.WriteEndObject();
+				return;
 			}
 			
 			writer.WritePropertyName(value.Variant.AggregationContainerVariantName);
