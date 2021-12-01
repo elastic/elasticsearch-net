@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -36,16 +37,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Sigma { get; set; }
 	}
 
-	public sealed partial class ExtendedStatsAggregationDescriptor : DescriptorBase<ExtendedStatsAggregationDescriptor>
+	public sealed partial class ExtendedStatsAggregationDescriptor<T> : DescriptorBase<ExtendedStatsAggregationDescriptor<T>>
 	{
 		public ExtendedStatsAggregationDescriptor()
 		{
 		}
 
-		internal ExtendedStatsAggregationDescriptor(Action<ExtendedStatsAggregationDescriptor> configure) => configure.Invoke(this);
+		internal ExtendedStatsAggregationDescriptor(Action<ExtendedStatsAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal double? SigmaValue { get; private set; }
 
-		public ExtendedStatsAggregationDescriptor Sigma(double? sigma) => Assign(sigma, (a, v) => a.SigmaValue = v);
+		internal string? FormatValue { get; private set; }
+
+		public ExtendedStatsAggregationDescriptor<T> Sigma(double? sigma) => Assign(sigma, (a, v) => a.SigmaValue = v);
+		public ExtendedStatsAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		public Elastic.Clients.Elasticsearch.Field Name { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
@@ -51,10 +52,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("covariance")]
-		public Dictionary<string, double> Covariance { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, double> Covariance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("correlation")]
-		public Dictionary<string, double> Correlation { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, double> Correlation { get; init; }
 	}
 }

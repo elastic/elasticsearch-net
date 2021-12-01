@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -66,6 +67,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal int? PostValue { get; private set; }
 
 		internal int? PreValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
 
 		internal SpanQueryDescriptor<T> ExcludeDescriptor { get; private set; }
 
@@ -120,6 +125,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public SpanNotQueryDescriptor<T> Post(int? post) => Assign(post, (a, v) => a.PostValue = v);
 		public SpanNotQueryDescriptor<T> Pre(int? pre) => Assign(pre, (a, v) => a.PreValue = v);
+		public SpanNotQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanNotQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -171,6 +178,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("pre");
 				writer.WriteNumberValue(PreValue.Value);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

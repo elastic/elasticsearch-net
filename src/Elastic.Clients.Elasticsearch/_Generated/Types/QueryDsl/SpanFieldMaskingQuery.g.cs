@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -31,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.ISpanQueryVariant.SpanQueryVariantName => "field_masking_span";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
@@ -45,15 +46,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
 
 		internal SpanQueryDescriptor<T> QueryDescriptor { get; private set; }
 
 		internal Action<SpanQueryDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		public SpanFieldMaskingQueryDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SpanFieldMaskingQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SpanFieldMaskingQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public SpanFieldMaskingQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery query)
 		{
 			QueryDescriptor = null;
@@ -75,6 +81,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
+		public SpanFieldMaskingQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanFieldMaskingQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -94,6 +102,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("query");
 				JsonSerializer.Serialize(writer, QueryValue, options);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; init; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]

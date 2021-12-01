@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("results_field")]
-		public string? ResultsField { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("num_top_feature_importance_values")]
@@ -41,11 +42,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<T>> configure) => configure.Invoke(this);
-		internal string? ResultsFieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; private set; }
 
 		internal int? NumTopFeatureImportanceValuesValue { get; private set; }
 
-		public RegressionInferenceOptionsDescriptor<T> ResultsField(string? resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
+		public RegressionInferenceOptionsDescriptor<T> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
+		public RegressionInferenceOptionsDescriptor<T> ResultsField<TValue>(Expression<Func<T, TValue>> resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
 		public RegressionInferenceOptionsDescriptor<T> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues) => Assign(numTopFeatureImportanceValues, (a, v) => a.NumTopFeatureImportanceValuesValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

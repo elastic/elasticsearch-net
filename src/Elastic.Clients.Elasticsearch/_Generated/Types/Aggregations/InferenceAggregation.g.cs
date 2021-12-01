@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -51,6 +52,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
+
+		internal string? FormatValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
+
 		internal InferenceConfigContainerDescriptor<T> InferenceConfigDescriptor { get; private set; }
 
 		internal Action<InferenceConfigContainerDescriptor<T>> InferenceConfigDescriptorAction { get; private set; }
@@ -77,6 +84,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.InferenceConfigDescriptorAction = v);
 		}
 
+		public InferenceAggregationDescriptor<T> BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
+		public InferenceAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public InferenceAggregationDescriptor<T> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -58,6 +59,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing? MissingValue { get; private set; }
 
 		public IndexSegmentSortDescriptor<T> Field(Elastic.Clients.Elasticsearch.Fields field) => Assign(field, (a, v) => a.FieldValue = v);
+		public IndexSegmentSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public IndexSegmentSortDescriptor<T> Order(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder order) => Assign(order, (a, v) => a.OrderValue = v);
 		public IndexSegmentSortDescriptor<T> Mode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
 		public IndexSegmentSortDescriptor<T> Missing(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing? missing) => Assign(missing, (a, v) => a.MissingValue = v);

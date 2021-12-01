@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -52,471 +53,337 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			var propertyName = reader.GetString();
 			if (propertyName == "adjacency_matrix")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "auto_date_histogram")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "avg")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "avg_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "boxplot")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "bucket_script")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "bucket_selector")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "bucket_sort")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "cardinality")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "children")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "composite")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "cumulative_cardinality")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "cumulative_sum")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "date_histogram")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "date_range")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "derivative")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "diversified_sampler")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "extended_stats")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "extended_stats_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "filters")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "geo_bounds")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "geo_centroid")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "geo_distance")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "geohash_grid")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "geo_line")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "geotile_grid")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "global")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "histogram")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "ip_range")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "inference")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "matrix_stats")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "max")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "max_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "median_absolute_deviation")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "min")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "min_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "missing")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "moving_percentiles")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "moving_fn")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "multi_terms")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "nested")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "normalize")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "parent")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "percentile_ranks")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "percentiles")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "percentiles_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "range")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "rare_terms")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "rate")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "reverse_nested")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "sampler")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "scripted_metric")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "serial_diff")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "significant_terms")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "significant_text")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "stats")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "stats_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "string_stats")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "sum")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "sum_bucket")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "terms")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "top_hits")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "t_test")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "top_metrics")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "value_count")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "weighted_avg")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>(ref reader, options);
 			}
 
 			if (propertyName == "variable_width_histogram")
 			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation?>(ref reader, options);
-				reader.Read();
-				return new AggregationContainer(variant);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation?>(ref reader, options);
 			}
 
 			throw new JsonException();
@@ -729,6 +596,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				case Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
+			}
+
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
 			}
 
 			writer.WriteEndObject();

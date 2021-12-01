@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -31,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public IReadOnlyCollection<string>? Fields { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_id")]
@@ -47,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]
-		public Dictionary<string, string>? PerFieldAnalyzer { get; init; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]

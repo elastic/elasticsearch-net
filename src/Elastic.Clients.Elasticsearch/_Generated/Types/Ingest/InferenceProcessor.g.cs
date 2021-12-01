@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -33,11 +34,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("target_field")]
-		public string TargetField { get; set; }
+		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("field_map")]
-		public Dictionary<string, object>? FieldMap { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("inference_config")]
@@ -53,19 +54,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Id ModelIdValue { get; private set; }
 
-		internal string TargetFieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field TargetFieldValue { get; private set; }
 
-		internal Dictionary<string, object>? FieldMapValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; private set; }
+
+		internal string? IfValue { get; private set; }
+
+		internal bool? IgnoreFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal string? TagValue { get; private set; }
 
 		internal InferenceConfigDescriptor InferenceConfigDescriptor { get; private set; }
 
 		internal Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; private set; }
 
 		public InferenceProcessorDescriptor<T> ModelId(Elastic.Clients.Elasticsearch.Id modelId) => Assign(modelId, (a, v) => a.ModelIdValue = v);
-		public InferenceProcessorDescriptor<T> TargetField(string targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public InferenceProcessorDescriptor<T> FieldMap(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.FieldMapValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public InferenceProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public InferenceProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public InferenceProcessorDescriptor<T> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field?, object?>, FluentDictionary<Elastic.Clients.Elasticsearch.Field?, object?>> selector) => Assign(selector, (a, v) => a.FieldMapValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field?, object?>()));
 		public InferenceProcessorDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
 		{
 			InferenceConfigDescriptor = null;
@@ -87,6 +97,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Assign(configure, (a, v) => a.InferenceConfigDescriptorAction = v);
 		}
 
+		public InferenceProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public InferenceProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public InferenceProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public InferenceProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

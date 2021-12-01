@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "rank_feature";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("saturation")]
@@ -55,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; private set; }
 
@@ -64,6 +65,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? LinearValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? SigmoidValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
 
 		internal RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; private set; }
 
@@ -81,7 +86,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; private set; }
 
-		public RankFeatureQueryDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RankFeatureQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RankFeatureQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public RankFeatureQueryDescriptor<T> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? saturation)
 		{
 			SaturationDescriptor = null;
@@ -166,6 +172,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.SigmoidDescriptorAction = v);
 		}
 
+		public RankFeatureQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public RankFeatureQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -233,6 +241,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("sigmoid");
 				JsonSerializer.Serialize(writer, SigmoidValue, options);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

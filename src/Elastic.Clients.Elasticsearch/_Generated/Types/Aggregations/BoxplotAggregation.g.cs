@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -36,16 +37,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public sealed partial class BoxplotAggregationDescriptor : DescriptorBase<BoxplotAggregationDescriptor>
+	public sealed partial class BoxplotAggregationDescriptor<T> : DescriptorBase<BoxplotAggregationDescriptor<T>>
 	{
 		public BoxplotAggregationDescriptor()
 		{
 		}
 
-		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor> configure) => configure.Invoke(this);
+		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal double? CompressionValue { get; private set; }
 
-		public BoxplotAggregationDescriptor Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		public BoxplotAggregationDescriptor<T> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
+		public BoxplotAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public BoxplotAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public BoxplotAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public BoxplotAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

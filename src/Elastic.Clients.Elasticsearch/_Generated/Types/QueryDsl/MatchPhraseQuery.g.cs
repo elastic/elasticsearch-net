@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -25,7 +26,57 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	internal sealed class MatchPhraseQueryConverter : FieldNameQueryConverterBase<MatchPhraseQuery>
 	{
-		internal override MatchPhraseQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		internal override MatchPhraseQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			var variant = new MatchPhraseQuery();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					var property = reader.GetString();
+					if (property == "analyzer")
+					{
+						variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "query")
+					{
+						variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
+						continue;
+					}
+
+					if (property == "slop")
+					{
+						variant.Slop = JsonSerializer.Deserialize<int?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "zero_terms_query")
+					{
+						variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "_name")
+					{
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+				}
+			}
+
+			return variant;
+		}
+
 		internal override void WriteInternal(Utf8JsonWriter writer, MatchPhraseQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
@@ -47,6 +98,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("zero_terms_query");
 				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+			}
+
+			if (value.Boost is not null)
+			{
+				writer.WritePropertyName("boost");
+				JsonSerializer.Serialize(writer, value.Boost, options);
+			}
+
+			if (value.QueryName is not null)
+			{
+				writer.WritePropertyName("_name");
+				JsonSerializer.Serialize(writer, value.QueryName, options);
 			}
 
 			writer.WriteEndObject();
@@ -90,10 +153,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
 		public MatchPhraseQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public MatchPhraseQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
 		public MatchPhraseQueryDescriptor<T> Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
 		public MatchPhraseQueryDescriptor<T> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
+		public MatchPhraseQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public MatchPhraseQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

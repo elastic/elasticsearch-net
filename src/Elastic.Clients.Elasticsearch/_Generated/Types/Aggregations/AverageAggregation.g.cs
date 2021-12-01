@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -33,13 +34,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "avg";
 	}
 
-	public sealed partial class AverageAggregationDescriptor : DescriptorBase<AverageAggregationDescriptor>
+	public sealed partial class AverageAggregationDescriptor<T> : DescriptorBase<AverageAggregationDescriptor<T>>
 	{
 		public AverageAggregationDescriptor()
 		{
 		}
 
-		internal AverageAggregationDescriptor(Action<AverageAggregationDescriptor> configure) => configure.Invoke(this);
+		internal AverageAggregationDescriptor(Action<AverageAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal string? FormatValue { get; private set; }
+
+		public AverageAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -22,9 +22,9 @@ using System.Collections.Generic;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class SortCombinations : Union<string?, Elastic.Clients.Elasticsearch.SortOptions?>
+	public partial class SortCombinations : Union<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.SortOptions?>
 	{
-		public SortCombinations(string? item) : base(item)
+		public SortCombinations(Elastic.Clients.Elasticsearch.Field? item) : base(item)
 		{
 		}
 

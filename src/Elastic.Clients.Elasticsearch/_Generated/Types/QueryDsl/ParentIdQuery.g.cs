@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -53,9 +54,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? TypeValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
 		public ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
 		public ParentIdQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
 		public ParentIdQueryDescriptor Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public ParentIdQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ParentIdQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

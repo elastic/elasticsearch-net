@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
@@ -45,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
 
@@ -55,7 +56,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<InnerHitsDescriptor<T>> InnerHitsDescriptorAction { get; private set; }
 
-		public FieldCollapseDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public FieldCollapseDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
 		{
 			InnerHitsDescriptor = null;

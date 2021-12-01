@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -52,6 +53,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer NegativeValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer PositiveValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
 
 		internal QueryContainerDescriptor<T> NegativeDescriptor { get; private set; }
 
@@ -104,6 +109,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.PositiveDescriptorAction = v);
 		}
 
+		public BoostingQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public BoostingQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

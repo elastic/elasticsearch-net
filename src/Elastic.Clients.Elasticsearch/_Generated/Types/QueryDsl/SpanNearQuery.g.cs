@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -55,9 +56,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal int? SlopValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
 		public SpanNearQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses) => Assign(clauses, (a, v) => a.ClausesValue = v);
 		public SpanNearQueryDescriptor InOrder(bool? inOrder = true) => Assign(inOrder, (a, v) => a.InOrderValue = v);
 		public SpanNearQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
+		public SpanNearQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanNearQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -73,6 +80,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("slop");
 				writer.WriteNumberValue(SlopValue.Value);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

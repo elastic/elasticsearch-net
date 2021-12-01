@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -33,16 +34,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "max";
 	}
 
-	public sealed partial class MaxAggregationDescriptor : DescriptorBase<MaxAggregationDescriptor>
+	public sealed partial class MaxAggregationDescriptor<T> : DescriptorBase<MaxAggregationDescriptor<T>>
 	{
 		public MaxAggregationDescriptor()
 		{
 		}
 
-		internal MaxAggregationDescriptor(Action<MaxAggregationDescriptor> configure) => configure.Invoke(this);
+		internal MaxAggregationDescriptor(Action<MaxAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal string? FormatValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		public MaxAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public MaxAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public MaxAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public MaxAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public MaxAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

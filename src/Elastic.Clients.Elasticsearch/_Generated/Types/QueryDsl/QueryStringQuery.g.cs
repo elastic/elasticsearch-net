@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -45,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("default_field")]
-		public string? DefaultField { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? DefaultField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("default_operator")]
@@ -61,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public IEnumerable<string>? Fields { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fuzziness")]
@@ -143,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
 
-		internal string? DefaultFieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? DefaultFieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; private set; }
 
@@ -151,7 +152,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal bool? EscapeValue { get; private set; }
 
-		internal IEnumerable<string>? FieldsValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
 
@@ -185,15 +186,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) => Assign(allowLeadingWildcard, (a, v) => a.AllowLeadingWildcardValue = v);
 		public QueryStringQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
 		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public QueryStringQueryDescriptor<T> DefaultField(string? defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
+		public QueryStringQueryDescriptor<T> DefaultField(Elastic.Clients.Elasticsearch.Field? defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
+		public QueryStringQueryDescriptor<T> DefaultField<TValue>(Expression<Func<T, TValue>> defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
 		public QueryStringQueryDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) => Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrementsValue = v);
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(escape, (a, v) => a.EscapeValue = v);
-		public QueryStringQueryDescriptor<T> Fields(IEnumerable<string>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public QueryStringQueryDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public QueryStringQueryDescriptor<T> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
 		public QueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
 		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
@@ -210,6 +216,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
 		public QueryStringQueryDescriptor<T> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
 		public QueryStringQueryDescriptor<T> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public QueryStringQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public QueryStringQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -357,6 +365,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("type");
 				JsonSerializer.Serialize(writer, TypeValue, options);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

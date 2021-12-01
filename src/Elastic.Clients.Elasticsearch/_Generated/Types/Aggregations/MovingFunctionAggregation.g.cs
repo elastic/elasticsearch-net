@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -57,9 +58,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal int? WindowValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
+
+		internal string? FormatValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
+
 		public MovingFunctionAggregationDescriptor Script(string? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		public MovingFunctionAggregationDescriptor Shift(int? shift) => Assign(shift, (a, v) => a.ShiftValue = v);
 		public MovingFunctionAggregationDescriptor Window(int? window) => Assign(window, (a, v) => a.WindowValue = v);
+		public MovingFunctionAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
+		public MovingFunctionAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public MovingFunctionAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

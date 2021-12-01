@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -47,8 +48,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal double? TieBreakerValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
 		public DisMaxQueryDescriptor Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries) => Assign(queries, (a, v) => a.QueriesValue = v);
 		public DisMaxQueryDescriptor TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
+		public DisMaxQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public DisMaxQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

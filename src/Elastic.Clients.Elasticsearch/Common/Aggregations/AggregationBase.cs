@@ -14,15 +14,14 @@ public abstract class AggregationBase
 	/// <summary>
 	/// Custom metadata associated with the aggregation.
 	/// </summary>
-	[JsonInclude]
-	[JsonPropertyName("meta")]
+	[JsonIgnore]
 	public Dictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// The name for this aggregation.
 	/// </summary>
 	[JsonIgnore]
-	public string? Name { get; private set; }
+	public string? Name { get; internal set; }
 		
 	//always evaluate to false so that each side of && equation is evaluated
 	public static bool operator false(AggregationBase _) => false;

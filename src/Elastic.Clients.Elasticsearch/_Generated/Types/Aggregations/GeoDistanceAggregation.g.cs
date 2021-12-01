@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("origin")]
@@ -61,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal GeoDistanceAggregationDescriptor(Action<GeoDistanceAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; private set; }
 
-		internal string? FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; private set; }
 
@@ -69,11 +70,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; private set; }
 
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
 		public GeoDistanceAggregationDescriptor<T> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType) => Assign(distanceType, (a, v) => a.DistanceTypeValue = v);
-		public GeoDistanceAggregationDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoDistanceAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoDistanceAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoDistanceAggregationDescriptor<T> Origin(Elastic.Clients.Elasticsearch.GeoLocation? origin) => Assign(origin, (a, v) => a.OriginValue = v);
 		public GeoDistanceAggregationDescriptor<T> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges) => Assign(ranges, (a, v) => a.RangesValue = v);
 		public GeoDistanceAggregationDescriptor<T> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit) => Assign(unit, (a, v) => a.UnitValue = v);
+		public GeoDistanceAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public GeoDistanceAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -105,6 +113,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("unit");
 				JsonSerializer.Serialize(writer, UnitValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
 			}
 
 			writer.WriteEndObject();
