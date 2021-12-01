@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,9 +38,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal BucketAggregationBaseDescriptor(Action<BucketAggregationBaseDescriptor> configure) => configure.Invoke(this);
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
+		public BucketAggregationBaseDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public BucketAggregationBaseDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

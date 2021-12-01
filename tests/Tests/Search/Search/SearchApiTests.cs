@@ -181,88 +181,90 @@ namespace Tests.Search.Search
 		}
 	}
 
-	//public class SearchApiStoredFieldsTests : SearchApiTests
-	//{
-	//	public SearchApiStoredFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class SearchApiStoredFieldsTests : SearchApiTests
+	{
+		public SearchApiStoredFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override object ExpectJson => new
-	//	{
-	//		from = 10,
-	//		size = 20,
-	//		query = new
-	//		{
-	//			match_all = new { }
-	//		},
-	//		aggs = new
-	//		{
-	//			startDates = new
-	//			{
-	//				terms = new
-	//				{
-	//					field = "startedOn"
-	//				}
-	//			}
-	//		},
-	//		post_filter = new
-	//		{
-	//			term = new
-	//			{
-	//				state = new
-	//				{
-	//					value = "Stable"
-	//				}
-	//			}
-	//		},
-	//		stored_fields = new[] { "name", "numberOfCommits" }
-	//	};
+		protected override object ExpectJson => new
+		{
+			from = 10,
+			size = 20,
+			query = new
+			{
+				match_all = new { }
+			},
+			aggregations = new
+			{
+				startDates = new
+				{
+					terms = new
+					{
+						field = "startedOn"
+					}
+				}
+			},
+			post_filter = new
+			{
+				term = new
+				{
+					state = new
+					{
+						value = "Stable"
+					}
+				}
+			},
+			stored_fields = new[] { "name", "numberOfCommits" }
+		};
 
-	//	protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-	//		.From(10)
-	//		.Size(20)
-	//		.Query(q => q
-	//			.MatchAll()
-	//		)
-	//		.Aggregations(a => a
-	//			.Terms("startDates", t => t
-	//				.Field(p => p.StartedOn)
-	//			)
-	//		)
-	//		.PostFilter(f => f
-	//			.Term(p => p.State, StateOfBeing.Stable)
-	//		)
-	//		.StoredFields(fs => fs
-	//			.Field(p => p.Name)
-	//			.Field(p => p.NumberOfCommits)
-	//		);
+		protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
+			.From(10)
+			.Size(20)
+			.Query(q => q
+				.MatchAll()
+			)
+			.Aggregations(a => a
+				.Terms("startDates", t => t
+					//.Field(p => p.StartedOn)
+					.Field("startedOn")
+				)
+			)
+			.PostFilter(f => f
+				.Term(p => p.State, StateOfBeing.Stable)
+			)
+			.StoredFields(new Fields(new Field[] { "name", "numberOfCommits" }));
+			//.StoredFields(fs => fs
+			//	.Field(p => p.Name)
+			//	.Field(p => p.NumberOfCommits)
+			//);
 
-	//	protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-	//	{
-	//		From = 10,
-	//		Size = 20,
-	//		Query = new QueryContainer(new MatchAllQuery()),
-	//		Aggregations = new TermsAggregation("startDates")
-	//		{
-	//			Field = "startedOn"
-	//		},
-	//		PostFilter = new QueryContainer(new TermQuery
-	//		{
-	//			Field = "state",
-	//			Value = "Stable"
-	//		}),
-	//		StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
-	//	};
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		{
+			From = 10,
+			Size = 20,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Aggregations = new TermsAggregation("startDates")
+			{
+				Field = "startedOn"
+			},
+			PostFilter = new QueryContainer(new TermQuery
+			{
+				Field = "state",
+				Value = "Stable"
+			}),
+			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
+		};
 
-	//	protected override void ExpectResponse(ISearchResponse<Project> response)
-	//	{
-	//		response.Hits.Count.Should().BeGreaterThan(0);
-	//		response.Hits.First().Should().NotBeNull();
-	//		response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
-	//		response.Hits.First().Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
-	//		response.Aggregations.Count.Should().BeGreaterThan(0);
-	//		var startDates = response.Aggregations.Terms("startDates");
-	//		startDates.Should().NotBeNull();
-	//	}
-	//}
+		protected override void ExpectResponse(SearchResponse<Project> response)
+		{
+			response.Hits.Count.Should().BeGreaterThan(0);
+			response.Hits.First().Should().NotBeNull();
+			//response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
+			//response.Hits.First().Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
+			response.Aggregations.Count.Should().BeGreaterThan(0);
+			var startDates = response.Aggregations.Terms("startDates");
+			startDates.Should().NotBeNull();
+		}
+	}
 
 	//[SkipVersion("<6.4.0", "Doc Value Fields format only in Elasticsearch 6.4.0+")]
 	//public class SearchApiDocValueFieldsTests : SearchApiTests
@@ -759,7 +761,6 @@ namespace Tests.Search.Search
 	//	}
 	//}
 
-	//[SkipVersion("<7.13.0", "Format for sort values added in Elasticsearch 7.13.0")]
 	//public class SearchApiSortFormatTests : SearchApiTests
 	//{
 	//	public SearchApiSortFormatTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -785,7 +786,7 @@ namespace Tests.Search.Search
 	//		}
 	//	};
 
-	//	protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+	//	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
 	//		.Size(5)
 	//		.Query(q => q
 	//			.MatchAll()

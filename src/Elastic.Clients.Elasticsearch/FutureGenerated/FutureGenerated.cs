@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		//}
 	}
 
-	
+
 
 	//internal class BucketsFactory<TBucket> : UnionFactory<Buckets<TBucket>>
 	//{
@@ -64,8 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	//	}
 	//}
 
-
-	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
+	public partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
 	{
 		internal AggregationDictionary Aggregations { get; set; }
 
@@ -84,6 +83,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			};
 
 			var container = new AggregationContainer(agg);
+
+			return SetContainer(name, container);
+		}
+
+		public AggregationContainerDescriptor<T> Min(string name, Action<MinAggregationDescriptor<T>> configure)
+		{
+			var descriptor = new MinAggregationDescriptor<T>();
+			configure(descriptor);
+
+			var agg = new MinAggregation(name)
+			{
+				Field = descriptor.FieldValue
+			};
+
+			AggregationContainer container = agg;
+			container.Meta = descriptor.MetaValue;
 
 			return SetContainer(name, container);
 		}
@@ -900,6 +915,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SearchRequestDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>>? configure) => Assign(configure, (a, v) => a.AggregationsAction = v);
 
+		public SearchRequestDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+
 		internal override void BeforeRequest()
 		{
 			if (AggregationsValue is not null || AggregationsAction is not null)
@@ -955,6 +972,12 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(container, (a, v) => a.QueryValue = v);
 		}
 	}
+	public partial class SearchRequest<TInferDocument>
+	{
+		public SearchRequest(Indices? indices) : base(indices)
+		{
+		}
+	}
 }
 
 namespace Elastic.Clients.Elasticsearch.Analysis
@@ -1008,119 +1031,156 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			};
 
 			//aggregator.WrapInContainer(container);
-			//var bucket = aggregator as BucketAggregationBase;
+
+			var bucket = aggregator as BucketAggregationBase;
+
 			//container.Aggregations = bucket?.Aggregations;
 
-			//var combinator = aggregator as AggregationCombinator;
-			//if (combinator?.Aggregations != null)
-			//{
-			//	var dict = new AggregationDictionary();
+			var combinator = aggregator as AggregationCombinator;
+			if (combinator?.Aggregations != null)
+			{
+				var dict = new AggregationDictionary();
 			//	foreach (var agg in combinator.Aggregations)
 			//		dict.Add(((IAggregation)agg).Name, agg);
 			//	container.Aggregations = dict;
-			//}
+			}
 
 			return container;
 		}
 	}
-
-
 }
+
+//TERM QUERY
+
+//internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+//{
+//	if (reader.TokenType != JsonTokenType.StartObject)
+//		throw new JsonException("TODO");
+
+//	var termQuery = new TermQuery();
+
+//	while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+//	{
+//		if (reader.TokenType == JsonTokenType.PropertyName)
+//		{
+//			var property = reader.GetString();
+
+//			if (property == "value")
+//			{
+//				termQuery.Value = JsonSerializer.Deserialize<object>(ref reader, options);
+//				continue;
+//			}
+
+//			if (property == "case_insensitive")
+//			{
+//				termQuery.CaseInsensitive = reader.GetBoolean();
+//				continue;
+//			}
+//		}
+//	}
+
+//	return termQuery;
+//}
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	//public sealed partial class BoolQueryDescriptor
-	//{
-	//	internal BoolQuery ToQuery()
-	//	{
-	//		var query = new BoolQuery();
+	public partial class TermQuery
+	{
+		public static implicit operator QueryContainer(TermQuery termQuery) => new QueryContainer(termQuery);
+	}
 
-	//		if (_filter is not null)
-	//			query.Filter = _filter;
+		//public sealed partial class BoolQueryDescriptor
+		//{
+		//	internal BoolQuery ToQuery()
+		//	{
+		//		var query = new BoolQuery();
 
-	//		// TODO - More
+		//		if (_filter is not null)
+		//			query.Filter = _filter;
 
-	//		return query;
-	//	}
-	//}
+		//		// TODO - More
 
-	//public sealed partial class MatchQueryDescriptor
-	//{
-	//	public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
+		//		return query;
+		//	}
+		//}
 
-	//	internal MatchQuery ToQuery()
-	//	{
-	//		var query = new MatchQuery();
+		//public sealed partial class MatchQueryDescriptor
+		//{
+		//	public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
 
-	//		if (_field is not null)
-	//			query.Field = _field;
+		//	internal MatchQuery ToQuery()
+		//	{
+		//		var query = new MatchQuery();
 
-	//		if (_query is not null)
-	//			query.Query = _query;
+		//		if (_field is not null)
+		//			query.Field = _field;
 
-	//		return query;
-	//	}
-	//}
+		//		if (_query is not null)
+		//			query.Query = _query;
 
-	//internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
-	//{
-	//	internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	//	{
-	//		if (reader.TokenType != JsonTokenType.StartObject)
-	//		{
-	//			throw new JsonException();
-	//		}
+		//		return query;
+		//	}
+		//}
 
-	//		string queryValue = default;
+		//internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
+		//{
+		//	internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		//	{
+		//		if (reader.TokenType != JsonTokenType.StartObject)
+		//		{
+		//			throw new JsonException();
+		//		}
 
-	//		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-	//		{
-	//			var property = reader.GetString();
+		//		string queryValue = default;
 
-	//			if (property == "query")
-	//			{
-	//				reader.Read();
-	//				queryValue = reader.GetString();
-	//			}
-	//		}
+		//		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		//		{
+		//			var property = reader.GetString();
 
-	//		var query = new MatchQuery()
-	//		{
-	//			Query = queryValue
-	//		};
+		//			if (property == "query")
+		//			{
+		//				reader.Read();
+		//				queryValue = reader.GetString();
+		//			}
+		//		}
 
-	//		return query;
-	//	}
+		//		var query = new MatchQuery()
+		//		{
+		//			Query = queryValue
+		//		};
 
-	//	internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
-	//	{
-	//		writer.WriteStartObject();
-	//		if (!string.IsNullOrEmpty(value.Query))
-	//		{
-	//			writer.WritePropertyName("query");
-	//			writer.WriteStringValue(value.Query);
-	//		}
-	//		writer.WriteEndObject();
-	//	}
-	//}
+		//		return query;
+		//	}
 
-	//internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
-	//{
-	//	internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		//	internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
+		//	{
+		//		writer.WriteStartObject();
+		//		if (!string.IsNullOrEmpty(value.Query))
+		//		{
+		//			writer.WritePropertyName("query");
+		//			writer.WriteStringValue(value.Query);
+		//		}
+		//		writer.WriteEndObject();
+		//	}
+		//}
 
-	//	internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
-	//	{
-	//		writer.WriteStartObject();
-	//		if (value.Value is not null)
-	//		{
-	//			writer.WritePropertyName("value");
-	//			JsonSerializer.Serialize(writer, value.Value, options);
-	//		}
-	//		writer.WriteEndObject();
-	//	}
-	//}
+		//internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
+		//{
+		//	internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
-	public sealed partial class QueryContainerDescriptor<T>
+		//	internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
+		//	{
+		//		writer.WriteStartObject();
+		//		if (value.Value is not null)
+		//		{
+		//			writer.WritePropertyName("value");
+		//			JsonSerializer.Serialize(writer, value.Value, options);
+		//		}
+		//		writer.WriteEndObject();
+		//	}
+		//}
+
+		public sealed partial class QueryContainerDescriptor<T>
 	{
 		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
 

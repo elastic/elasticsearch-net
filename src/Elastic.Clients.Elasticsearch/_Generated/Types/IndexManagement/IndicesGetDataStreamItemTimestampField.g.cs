@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,6 +28,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 	{
 		[JsonInclude]
 		[JsonPropertyName("name")]
-		public string Name { get; init; }
+		public Elastic.Clients.Elasticsearch.Field Name { get; init; }
 	}
 }

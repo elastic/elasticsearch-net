@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -34,16 +35,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 	}
 
-	public sealed partial class FormattableMetricAggregationBaseDescriptor : DescriptorBase<FormattableMetricAggregationBaseDescriptor>
+	public sealed partial class FormattableMetricAggregationBaseDescriptor<T> : DescriptorBase<FormattableMetricAggregationBaseDescriptor<T>>
 	{
 		public FormattableMetricAggregationBaseDescriptor()
 		{
 		}
 
-		internal FormattableMetricAggregationBaseDescriptor(Action<FormattableMetricAggregationBaseDescriptor> configure) => configure.Invoke(this);
+		internal FormattableMetricAggregationBaseDescriptor(Action<FormattableMetricAggregationBaseDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? FormatValue { get; private set; }
 
-		public FormattableMetricAggregationBaseDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		public FormattableMetricAggregationBaseDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public FormattableMetricAggregationBaseDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FormattableMetricAggregationBaseDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FormattableMetricAggregationBaseDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public FormattableMetricAggregationBaseDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

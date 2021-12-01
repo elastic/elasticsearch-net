@@ -18,6 +18,7 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -87,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public string? SuggestField { get => Q<string?>("suggest_field"); set => Q("suggest_field", value); }
+		public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
@@ -188,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public string? SuggestField { get => Q<string?>("suggest_field"); set => Q("suggest_field", value); }
+		public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
@@ -328,7 +329,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
@@ -376,7 +377,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
 		public SearchRequestDescriptor<T> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public SearchRequestDescriptor<T> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public SearchRequestDescriptor<T> SuggestField(string? suggestField) => Qs("suggest_field", suggestField);
+		public SearchRequestDescriptor<T> SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
 		public SearchRequestDescriptor<T> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		public SearchRequestDescriptor<T> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public SearchRequestDescriptor<T> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
@@ -441,7 +442,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; private set; }
 
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; private set; }
 
 		internal IEnumerable<string>? StatsValue { get; private set; }
 
@@ -645,6 +646,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
 		public SearchRequestDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
 		public SearchRequestDescriptor<T> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Assign(storedFields, (a, v) => a.StoredFieldsValue = v);
+		public SearchRequestDescriptor<T> StoredFields<TValue>(Expression<Func<T, TValue>> storedFields) => Assign(storedFields, (a, v) => a.StoredFieldsValue = v);
 		public SearchRequestDescriptor<T> Pit(Elastic.Clients.Elasticsearch.PointInTimeReference? pit)
 		{
 			PitDescriptor = null;
@@ -666,7 +668,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.PitDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<T> RuntimeMappings(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappingsValue = v);
+		public SearchRequestDescriptor<T> RuntimeMappings(Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappingsValue = v);
 		public SearchRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Assign(stats, (a, v) => a.StatsValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

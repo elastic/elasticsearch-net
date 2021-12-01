@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -86,7 +87,6 @@ namespace Elastic.Clients.Elasticsearch
 				case Elastic.Clients.Elasticsearch.ScoreSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
-				
 				case Elastic.Clients.Elasticsearch.GeoDistanceSort variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;

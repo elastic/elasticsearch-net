@@ -44,6 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 					//new ConvertAsConverterFactory(settings),
 					new IndexNameConverter(settings),
 					new ObjectToInferredTypesConverter(),
+					new FieldConverter(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
 					new SelfSerializableConverterFactory(settings),

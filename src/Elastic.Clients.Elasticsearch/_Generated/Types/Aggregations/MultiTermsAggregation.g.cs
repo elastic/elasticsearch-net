@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -45,12 +46,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal MultiTermsAggregationDescriptor(Action<MultiTermsAggregationDescriptor> configure) => configure.Invoke(this);
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; private set; }
 
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
 		public MultiTermsAggregationDescriptor Terms(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> terms) => Assign(terms, (a, v) => a.TermsValue = v);
+		public MultiTermsAggregationDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public MultiTermsAggregationDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("terms");
 			JsonSerializer.Serialize(writer, TermsValue, options);
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

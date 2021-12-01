@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -51,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("use_field")]
-		public string? UseField { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
 	public sealed partial class IntervalsFuzzyDescriptor<T> : DescriptorBase<IntervalsFuzzyDescriptor<T>>
@@ -71,14 +72,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal bool? TranspositionsValue { get; private set; }
 
-		internal string? UseFieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; private set; }
 
 		public IntervalsFuzzyDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public IntervalsFuzzyDescriptor<T> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
 		public IntervalsFuzzyDescriptor<T> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
 		public IntervalsFuzzyDescriptor<T> Term(string term) => Assign(term, (a, v) => a.TermValue = v);
 		public IntervalsFuzzyDescriptor<T> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
-		public IntervalsFuzzyDescriptor<T> UseField(string? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsFuzzyDescriptor<T> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsFuzzyDescriptor<T> UseField<TValue>(Expression<Func<T, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -30,7 +30,7 @@ public class AggregationDictionary : IsADictionaryBase<string, AggregationContai
 			{
 				b = agg;
 				if (b.Name.IsNullOrEmpty())
-					throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
+					throw new ArgumentException($"{aggregator.GetType().Name}.Name is not set!");
 
 				dict.Add(b.Name, agg);
 			}
@@ -40,7 +40,7 @@ public class AggregationDictionary : IsADictionaryBase<string, AggregationContai
 		b = aggregator;
 
 		if (b.Name.IsNullOrEmpty())
-			throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
+			throw new ArgumentException($"{aggregator.GetType().Name}.Name is not set!");
 
 		return new AggregationDictionary { { b.Name, aggregator } };
 	}

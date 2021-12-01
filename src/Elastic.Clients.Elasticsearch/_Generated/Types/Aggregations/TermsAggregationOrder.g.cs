@@ -22,13 +22,13 @@ using System.Collections.Generic;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class TermsAggregationOrder : Union<Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>?, IReadOnlyCollection<Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>>?>
+	public partial class TermsAggregationOrder : Union<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>?, IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>?>
 	{
-		public TermsAggregationOrder(Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>? item) : base(item)
+		public TermsAggregationOrder(Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>? item) : base(item)
 		{
 		}
 
-		public TermsAggregationOrder(IReadOnlyCollection<Dictionary<string, Elastic.Clients.Elasticsearch.SortOrder>>? item) : base(item)
+		public TermsAggregationOrder(IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? item) : base(item)
 		{
 		}
 	}

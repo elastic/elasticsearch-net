@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -35,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string TransformManagement.IPivotGroupByContainerVariant.PivotGroupByContainerVariantName => "histogram";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("interval")]
@@ -77,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<T>> configure) => configure.Invoke(this);
-		internal string? FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal double? IntervalValue { get; private set; }
 
@@ -95,11 +96,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal bool? KeyedValue { get; private set; }
 
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
 		internal HistogramOrderDescriptor OrderDescriptor { get; private set; }
 
 		internal Action<HistogramOrderDescriptor> OrderDescriptorAction { get; private set; }
 
-		public HistogramAggregationDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HistogramAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public HistogramAggregationDescriptor<T> Interval(double? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
 		public HistogramAggregationDescriptor<T> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
 		public HistogramAggregationDescriptor<T> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
@@ -128,6 +134,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		public HistogramAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public HistogramAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public HistogramAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public HistogramAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -193,6 +201,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("keyed");
 				writer.WriteBooleanValue(KeyedValue.Value);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
 			}
 
 			writer.WriteEndObject();

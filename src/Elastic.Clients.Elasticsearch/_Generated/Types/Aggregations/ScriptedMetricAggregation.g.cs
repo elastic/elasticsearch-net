@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -52,13 +53,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 	}
 
-	public sealed partial class ScriptedMetricAggregationDescriptor : DescriptorBase<ScriptedMetricAggregationDescriptor>
+	public sealed partial class ScriptedMetricAggregationDescriptor<T> : DescriptorBase<ScriptedMetricAggregationDescriptor<T>>
 	{
 		public ScriptedMetricAggregationDescriptor()
 		{
 		}
 
-		internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor> configure) => configure.Invoke(this);
+		internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; private set; }
@@ -69,11 +70,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; private set; }
 
-		public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript) => Assign(combineScript, (a, v) => a.CombineScriptValue = v);
-		public ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Script? initScript) => Assign(initScript, (a, v) => a.InitScriptValue = v);
-		public ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Script? mapScript) => Assign(mapScript, (a, v) => a.MapScriptValue = v);
-		public ScriptedMetricAggregationDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript) => Assign(reduceScript, (a, v) => a.ReduceScriptValue = v);
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
+		public ScriptedMetricAggregationDescriptor<T> CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript) => Assign(combineScript, (a, v) => a.CombineScriptValue = v);
+		public ScriptedMetricAggregationDescriptor<T> InitScript(Elastic.Clients.Elasticsearch.Script? initScript) => Assign(initScript, (a, v) => a.InitScriptValue = v);
+		public ScriptedMetricAggregationDescriptor<T> MapScript(Elastic.Clients.Elasticsearch.Script? mapScript) => Assign(mapScript, (a, v) => a.MapScriptValue = v);
+		public ScriptedMetricAggregationDescriptor<T> Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ScriptedMetricAggregationDescriptor<T> ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript) => Assign(reduceScript, (a, v) => a.ReduceScriptValue = v);
+		public ScriptedMetricAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ScriptedMetricAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ScriptedMetricAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public ScriptedMetricAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public ScriptedMetricAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ScriptedMetricAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -105,6 +122,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("reduce_script");
 				JsonSerializer.Serialize(writer, ReduceScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
 			}
 
 			writer.WriteEndObject();

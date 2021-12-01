@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -41,7 +42,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		internal FailProcessorDescriptor(Action<FailProcessorDescriptor> configure) => configure.Invoke(this);
 		internal string MessageValue { get; private set; }
 
+		internal string? IfValue { get; private set; }
+
+		internal bool? IgnoreFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal string? TagValue { get; private set; }
+
 		public FailProcessorDescriptor Message(string message) => Assign(message, (a, v) => a.MessageValue = v);
+		public FailProcessorDescriptor If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public FailProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public FailProcessorDescriptor OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public FailProcessorDescriptor Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

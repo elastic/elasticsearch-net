@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("path")]
-		public string Path { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query")]
@@ -59,11 +60,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
 
-		internal string PathValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field PathValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
 
 		internal InnerHitsDescriptor<T> InnerHitsDescriptor { get; private set; }
 
@@ -95,7 +100,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
 		}
 
-		public NestedQueryDescriptor<T> Path(string path) => Assign(path, (a, v) => a.PathValue = v);
+		public NestedQueryDescriptor<T> Path(Elastic.Clients.Elasticsearch.Field path) => Assign(path, (a, v) => a.PathValue = v);
+		public NestedQueryDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> path) => Assign(path, (a, v) => a.PathValue = v);
 		public NestedQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
@@ -118,6 +124,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public NestedQueryDescriptor<T> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
+		public NestedQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public NestedQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

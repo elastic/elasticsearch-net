@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -40,19 +41,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.GeoLocation? Location { get; set; }
 	}
 
-	public sealed partial class GeoCentroidAggregationDescriptor : DescriptorBase<GeoCentroidAggregationDescriptor>
+	public sealed partial class GeoCentroidAggregationDescriptor<T> : DescriptorBase<GeoCentroidAggregationDescriptor<T>>
 	{
 		public GeoCentroidAggregationDescriptor()
 		{
 		}
 
-		internal GeoCentroidAggregationDescriptor(Action<GeoCentroidAggregationDescriptor> configure) => configure.Invoke(this);
+		internal GeoCentroidAggregationDescriptor(Action<GeoCentroidAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal long? CountValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.GeoLocation? LocationValue { get; private set; }
 
-		public GeoCentroidAggregationDescriptor Count(long? count) => Assign(count, (a, v) => a.CountValue = v);
-		public GeoCentroidAggregationDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation? location) => Assign(location, (a, v) => a.LocationValue = v);
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		public GeoCentroidAggregationDescriptor<T> Count(long? count) => Assign(count, (a, v) => a.CountValue = v);
+		public GeoCentroidAggregationDescriptor<T> Location(Elastic.Clients.Elasticsearch.GeoLocation? location) => Assign(location, (a, v) => a.LocationValue = v);
+		public GeoCentroidAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoCentroidAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoCentroidAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public GeoCentroidAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

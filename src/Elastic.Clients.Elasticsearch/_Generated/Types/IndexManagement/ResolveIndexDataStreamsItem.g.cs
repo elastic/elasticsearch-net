@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -31,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndex
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp_field")]
-		public string TimestampField { get; init; }
+		public Elastic.Clients.Elasticsearch.Field TimestampField { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("backing_indices")]

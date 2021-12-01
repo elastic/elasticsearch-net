@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "exists";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
 	public sealed partial class ExistsQueryDescriptor<T> : DescriptorBase<ExistsQueryDescriptor<T>>
@@ -39,9 +40,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
-		public ExistsQueryDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
+		public ExistsQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ExistsQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ExistsQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ExistsQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

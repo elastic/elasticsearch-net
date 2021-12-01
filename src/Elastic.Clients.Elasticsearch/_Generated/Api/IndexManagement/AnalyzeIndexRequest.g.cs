@@ -18,6 +18,7 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -59,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -100,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal bool? ExplainValue { get; private set; }
 
-		internal string? FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? FilterValue { get; private set; }
 
@@ -114,7 +115,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public AnalyzeIndexRequestDescriptor<T> Attributes(IEnumerable<string>? attributes) => Assign(attributes, (a, v) => a.AttributesValue = v);
 		public AnalyzeIndexRequestDescriptor<T> CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter) => Assign(charFilter, (a, v) => a.CharFilterValue = v);
 		public AnalyzeIndexRequestDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AnalyzeIndexRequestDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public AnalyzeIndexRequestDescriptor<T> Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
 		public AnalyzeIndexRequestDescriptor<T> Normalizer(string? normalizer) => Assign(normalizer, (a, v) => a.NormalizerValue = v);
 		public AnalyzeIndexRequestDescriptor<T> Text(Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? text) => Assign(text, (a, v) => a.TextValue = v);

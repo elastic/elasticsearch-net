@@ -18,6 +18,7 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -120,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("runtime")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 	}
 
 	public sealed partial class IndexPutMappingRequestDescriptor : RequestDescriptorBase<IndexPutMappingRequestDescriptor, IndexPutMappingRequestParameters>
@@ -164,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; private set; }
 
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; private set; }
 
 		internal Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; private set; }
 
@@ -248,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.SourceDescriptorAction = v);
 		}
 
-		public IndexPutMappingRequestDescriptor Runtime(Dictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtime) => Assign(runtime, (a, v) => a.RuntimeValue = v);
+		public IndexPutMappingRequestDescriptor Runtime(Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtime) => Assign(runtime, (a, v) => a.RuntimeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
