@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -33,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "nested";
 		[JsonInclude]
 		[JsonPropertyName("path")]
-		public string? Path { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	}
 
 	public sealed partial class NestedAggregationDescriptor<T> : DescriptorBase<NestedAggregationDescriptor<T>>
@@ -43,9 +44,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor<T>> configure) => configure.Invoke(this);
-		internal string? PathValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? PathValue { get; private set; }
 
-		public NestedAggregationDescriptor<T> Path(string? path) => Assign(path, (a, v) => a.PathValue = v);
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
+		public NestedAggregationDescriptor<T> Path(Elastic.Clients.Elasticsearch.Field? path) => Assign(path, (a, v) => a.PathValue = v);
+		public NestedAggregationDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> path) => Assign(path, (a, v) => a.PathValue = v);
+		public NestedAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public NestedAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -53,6 +61,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("path");
 				JsonSerializer.Serialize(writer, PathValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
 			}
 
 			writer.WriteEndObject();

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "set";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("override")]
@@ -47,15 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 
 		internal SetProcessorDescriptor(Action<SetProcessorDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal bool? OverrideValue { get; private set; }
 
 		internal object ValueValue { get; private set; }
 
-		public SetProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		internal string? IfValue { get; private set; }
+
+		internal bool? IgnoreFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal string? TagValue { get; private set; }
+
+		public SetProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SetProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public SetProcessorDescriptor<T> Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
 		public SetProcessorDescriptor<T> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
+		public SetProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public SetProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public SetProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public SetProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -65,6 +79,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			{
 				writer.WritePropertyName("override");
 				writer.WriteBooleanValue(OverrideValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(IfValue))
+			{
+				writer.WritePropertyName("if");
+				writer.WriteStringValue(IfValue);
+			}
+
+			if (IgnoreFailureValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_failure");
+				writer.WriteBooleanValue(IgnoreFailureValue.Value);
+			}
+
+			if (OnFailureValue is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(TagValue))
+			{
+				writer.WritePropertyName("tag");
+				writer.WriteStringValue(TagValue);
 			}
 
 			writer.WriteEndObject();

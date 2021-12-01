@@ -9,10 +9,107 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
+// TODO - Converter
+
+internal sealed class FieldsConverter : JsonConverter<Fields>
+{
+	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		reader.Read();
+
+		if (reader.TokenType != JsonTokenType.StartArray)
+		{
+			return null;
+		}
+
+		var fields = new List<Field>();
+		while (reader.Read())
+		{
+			if (reader.TokenType == JsonTokenType.EndArray)
+				break;
+
+			var field = JsonSerializer.Deserialize(ref reader, typeof(Field), options);
+
+			if (field is Field f)
+				fields.Add(f);
+		}
+
+		return new Fields(fields);
+	}
+
+	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		writer.WriteStartArray();
+		foreach (var field in value.ListOfFields)
+		{
+			JsonSerializer.Serialize(writer, field, options);
+		}
+		writer.WriteEndArray();
+	}
+}
+
+internal sealed class FieldConverter : JsonConverter<Field>
+{
+	private readonly IElasticsearchClientSettings _settings;
+
+	public FieldConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+	public override Field? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		// TODO - Implement fully
+
+		switch (reader.TokenType)
+		{
+			case JsonTokenType.Null:
+				return null;
+
+			case JsonTokenType.String:
+				return new Field(reader.GetString());
+		}
+
+		reader.Read();
+		return null;
+	}
+
+	public override void Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
+	{
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		var fieldName = _settings.Inferrer.Field(value);
+
+		if (string.IsNullOrEmpty(value.Format))
+		{
+			writer.WriteStringValue(fieldName);
+		}
+		else
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			writer.WriteStringValue(fieldName);
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
+			writer.WriteEndObject();
+		}
+	}
+}
+
+[JsonConverter(typeof(FieldsConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public partial class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 {
@@ -34,7 +131,7 @@ public partial class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fiel
 
 	string IUrlParameter.GetString(ITransportConfiguration settings)
 	{
-		if (!(settings is IElasticsearchClientSettings elasticsearchClientSettings))
+		if (settings is not IElasticsearchClientSettings elasticsearchClientSettings)
 		{
 			throw new ArgumentNullException(nameof(settings),
 				$"Can not resolve {nameof(Fields)} if no {nameof(IElasticsearchClientSettings)} is provided");

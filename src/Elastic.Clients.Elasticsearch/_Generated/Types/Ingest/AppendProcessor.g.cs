@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "append";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
@@ -47,15 +48,28 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 
 		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal IEnumerable<object> ValueValue { get; private set; }
 
 		internal bool? AllowDuplicatesValue { get; private set; }
 
-		public AppendProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		internal string? IfValue { get; private set; }
+
+		internal bool? IgnoreFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal string? TagValue { get; private set; }
+
+		public AppendProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AppendProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public AppendProcessorDescriptor<T> Value(IEnumerable<object> value) => Assign(value, (a, v) => a.ValueValue = v);
 		public AppendProcessorDescriptor<T> AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicatesValue = v);
+		public AppendProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public AppendProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public AppendProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public AppendProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

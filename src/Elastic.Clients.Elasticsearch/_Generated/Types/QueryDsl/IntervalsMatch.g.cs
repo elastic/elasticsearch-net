@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -47,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("use_field")]
-		public string? UseField { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -69,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string QueryValue { get; private set; }
 
-		internal string? UseFieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
 
@@ -81,7 +82,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IntervalsMatchDescriptor<T> MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
 		public IntervalsMatchDescriptor<T> Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
 		public IntervalsMatchDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public IntervalsMatchDescriptor<T> UseField(string? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsMatchDescriptor<T> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsMatchDescriptor<T> UseField<TValue>(Expression<Func<T, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 		public IntervalsMatchDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 		{
 			FilterDescriptor = null;

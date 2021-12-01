@@ -16,6 +16,7 @@ namespace Elastic.Clients.Elasticsearch
 	}
 
 	// TODO - Make struct
+	[JsonConverter(typeof(FieldConverter))]
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{

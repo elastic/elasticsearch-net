@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -31,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("path")]
-		public string? Path { get; init; }
+		public Elastic.Clients.Elasticsearch.Field? Path { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]

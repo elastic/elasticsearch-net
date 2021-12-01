@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -75,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IEnumerable<object>? DocumentsValue { get; private set; }
 
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
 
@@ -89,15 +90,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal long? VersionValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
+
 		public PercolateQueryDescriptor<T> Document(object? document) => Assign(document, (a, v) => a.DocumentValue = v);
 		public PercolateQueryDescriptor<T> Documents(IEnumerable<object>? documents) => Assign(documents, (a, v) => a.DocumentsValue = v);
-		public PercolateQueryDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercolateQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercolateQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public PercolateQueryDescriptor<T> Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
 		public PercolateQueryDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public PercolateQueryDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		public PercolateQueryDescriptor<T> Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
 		public PercolateQueryDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public PercolateQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public PercolateQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public PercolateQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

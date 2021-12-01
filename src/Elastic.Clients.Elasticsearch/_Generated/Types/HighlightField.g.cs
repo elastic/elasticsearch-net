@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -43,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("force_source")]
@@ -125,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal string? BoundaryScannerLocaleValue { get; private set; }
 
-		internal string? FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal bool? ForceSourceValue { get; private set; }
 
@@ -167,7 +168,8 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightFieldDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
 		public HighlightFieldDescriptor<T> BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
 		public HighlightFieldDescriptor<T> BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
-		public HighlightFieldDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HighlightFieldDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HighlightFieldDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public HighlightFieldDescriptor<T> ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a.ForceSourceValue = v);
 		public HighlightFieldDescriptor<T> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
 		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
@@ -194,6 +196,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public HighlightFieldDescriptor<T> MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
+		public HighlightFieldDescriptor<T> MatchedFields<TValue>(Expression<Func<T, TValue>> matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
 		public HighlightFieldDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
 		public HighlightFieldDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
 		public HighlightFieldDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);

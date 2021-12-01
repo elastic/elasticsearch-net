@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -45,13 +46,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
 
 		internal bool? IncludeUnmappedValue { get; private set; }
 
-		public FieldAndFormatDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldAndFormatDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldAndFormatDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public FieldAndFormatDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public FieldAndFormatDescriptor<T> IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a.IncludeUnmappedValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

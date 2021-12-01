@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
@@ -45,13 +46,14 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor<T>> configure) => configure.Invoke(this);
-		internal string? FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal int IdValue { get; private set; }
 
 		internal int MaxValue { get; private set; }
 
-		public SlicedScrollDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SlicedScrollDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SlicedScrollDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public SlicedScrollDescriptor<T> Id(int id) => Assign(id, (a, v) => a.IdValue = v);
 		public SlicedScrollDescriptor<T> Max(int max) => Assign(max, (a, v) => a.MaxValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

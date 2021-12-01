@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -35,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
-		public Dictionary<string, double>? Missing { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 	}
 
 	public sealed partial class MatrixAggregationBaseDescriptor<T> : DescriptorBase<MatrixAggregationBaseDescriptor<T>>
@@ -47,10 +48,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal MatrixAggregationBaseDescriptor(Action<MatrixAggregationBaseDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; private set; }
 
-		internal Dictionary<string, double>? MissingValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; private set; }
+
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
 
 		public MatrixAggregationBaseDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		///public MatrixAggregationBaseDescriptor<T> Missing(Func<FluentDictionary<string?, double?>, FluentDictionary<string?, double?>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<string?, double?>()));
+		public MatrixAggregationBaseDescriptor<T> Fields<TValue>(Expression<Func<T, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		//public MatrixAggregationBaseDescriptor<T> Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field?, double?>, FluentDictionary<Elastic.Clients.Elasticsearch.Field?, double?>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field?, double?>()));
+		public MatrixAggregationBaseDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public MatrixAggregationBaseDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -64,6 +72,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("missing");
 				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
 			}
 
 			writer.WriteEndObject();

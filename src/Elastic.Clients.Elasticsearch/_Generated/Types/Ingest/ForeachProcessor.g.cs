@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "foreach";
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_missing")]
@@ -47,17 +48,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 
 		internal ForeachProcessorDescriptor(Action<ForeachProcessorDescriptor<T>> configure) => configure.Invoke(this);
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer ProcessorValue { get; private set; }
 
+		internal string? IfValue { get; private set; }
+
+		internal bool? IgnoreFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal string? TagValue { get; private set; }
+
 		internal ProcessorContainerDescriptor<T> ProcessorDescriptor { get; private set; }
 
 		internal Action<ProcessorContainerDescriptor<T>> ProcessorDescriptorAction { get; private set; }
 
-		public ForeachProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ForeachProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ForeachProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public ForeachProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
 		public ForeachProcessorDescriptor<T> Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer processor)
 		{
@@ -80,6 +90,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Assign(configure, (a, v) => a.ProcessorDescriptorAction = v);
 		}
 
+		public ForeachProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public ForeachProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public ForeachProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public ForeachProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

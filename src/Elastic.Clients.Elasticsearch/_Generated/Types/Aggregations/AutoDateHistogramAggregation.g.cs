@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string? Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -77,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal AutoDateHistogramAggregationDescriptor(Action<AutoDateHistogramAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal int? BucketsValue { get; private set; }
 
-		internal string? FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
 
@@ -94,7 +95,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal string? TimeZoneValue { get; private set; }
 
 		public AutoDateHistogramAggregationDescriptor<T> Buckets(int? buckets) => Assign(buckets, (a, v) => a.BucketsValue = v);
-		public AutoDateHistogramAggregationDescriptor<T> Field(string? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AutoDateHistogramAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AutoDateHistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public AutoDateHistogramAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public AutoDateHistogramAggregationDescriptor<T> MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? minimumInterval) => Assign(minimumInterval, (a, v) => a.MinimumIntervalValue = v);
 		public AutoDateHistogramAggregationDescriptor<T> Missing(string? missing) => Assign(missing, (a, v) => a.MissingValue = v);

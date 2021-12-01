@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -40,19 +41,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 	}
 
-	public sealed partial class RateAggregationDescriptor : DescriptorBase<RateAggregationDescriptor>
+	public sealed partial class RateAggregationDescriptor<T> : DescriptorBase<RateAggregationDescriptor<T>>
 	{
 		public RateAggregationDescriptor()
 		{
 		}
 
-		internal RateAggregationDescriptor(Action<RateAggregationDescriptor> configure) => configure.Invoke(this);
+		internal RateAggregationDescriptor(Action<RateAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; private set; }
 
-		public RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit) => Assign(unit, (a, v) => a.UnitValue = v);
-		public RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
+		internal string? FormatValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal string? NameValue { get; private set; }
+
+		public RateAggregationDescriptor<T> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit) => Assign(unit, (a, v) => a.UnitValue = v);
+		public RateAggregationDescriptor<T> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
+		public RateAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public RateAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RateAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RateAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public RateAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public RateAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public RateAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -66,6 +86,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("mode");
 				JsonSerializer.Serialize(writer, ModeValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
 			}
 
 			writer.WriteEndObject();

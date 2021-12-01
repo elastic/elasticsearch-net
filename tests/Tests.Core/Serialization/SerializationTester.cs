@@ -160,9 +160,13 @@ namespace Tests.Core.Serialization
 		{
 			result.Serialized = SerializeUsingClientDefault(@object);
 
+			var json = expectedJsonDocument.ToString();
 
 			return TokenMatches(expectedJsonDocument, result);
 
+			
+
+			// TODO
 			//return expectedJsonDocument.RootElement.ValueKind == JsonValueKind.Array
 			//	? ArrayMatches((JArray)expectedJsonDocument, result)
 			//	: TokenMatches(expectedJsonDocument, result);

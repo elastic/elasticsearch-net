@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -64,6 +65,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
 
 		internal bool? ScoreValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
+
+		internal string? QueryNameValue { get; private set; }
 
 		internal InnerHitsDescriptor<T> InnerHitsDescriptor { get; private set; }
 
@@ -118,6 +123,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public HasParentQueryDescriptor<T> Score(bool? score = true) => Assign(score, (a, v) => a.ScoreValue = v);
+		public HasParentQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public HasParentQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -59,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("seq_no_primary_term")]
@@ -113,7 +114,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal bool? IgnoreUnmappedValue { get; private set; }
 
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; private set; }
 
 		internal bool? SeqNoPrimaryTermValue { get; private set; }
 
@@ -185,12 +186,14 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public InnerHitsDescriptor<T> ScriptFields(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>()));
+		public InnerHitsDescriptor<T> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.ScriptField?>()));
 		public InnerHitsDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
 		public InnerHitsDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public InnerHitsDescriptor<T> Fields<TValue>(Expression<Func<T, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public InnerHitsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
 		public InnerHitsDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
 		public InnerHitsDescriptor<T> StoredField(Elastic.Clients.Elasticsearch.Fields? storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
+		public InnerHitsDescriptor<T> StoredField<TValue>(Expression<Func<T, TValue>> storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
 		public InnerHitsDescriptor<T> TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScoresValue = v);
 		public InnerHitsDescriptor<T> Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("fields")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.HighlightField> Fields { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField> Fields { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -113,7 +114,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal HighlightDescriptor(Action<HighlightDescriptor<T>> configure) => configure.Invoke(this);
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.HighlightField> FieldsValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField> FieldsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; private set; }
 
@@ -157,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<QueryDsl.QueryContainerDescriptor<T>> HighlightQueryDescriptorAction { get; private set; }
 
-		public HighlightDescriptor<T> Fields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>> selector) => Assign(selector, (a, v) => a.FieldsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.HighlightField>()));
+		public HighlightDescriptor<T> Fields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField>> selector) => Assign(selector, (a, v) => a.FieldsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField>()));
 		public HighlightDescriptor<T> Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a.TypeValue = v);
 		public HighlightDescriptor<T> BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
 		public HighlightDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);

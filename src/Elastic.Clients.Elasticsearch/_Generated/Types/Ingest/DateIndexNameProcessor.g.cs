@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public string Field { get; set; }
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_name_format")]
@@ -67,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string DateRoundingValue { get; private set; }
 
-		internal string FieldValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal string IndexNameFormatValue { get; private set; }
 
@@ -77,13 +78,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string TimezoneValue { get; private set; }
 
+		internal string? IfValue { get; private set; }
+
+		internal bool? IgnoreFailureValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? OnFailureValue { get; private set; }
+
+		internal string? TagValue { get; private set; }
+
 		public DateIndexNameProcessorDescriptor<T> DateFormats(IEnumerable<string> dateFormats) => Assign(dateFormats, (a, v) => a.DateFormatsValue = v);
 		public DateIndexNameProcessorDescriptor<T> DateRounding(string dateRounding) => Assign(dateRounding, (a, v) => a.DateRoundingValue = v);
-		public DateIndexNameProcessorDescriptor<T> Field(string field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateIndexNameProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateIndexNameProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DateIndexNameProcessorDescriptor<T> IndexNameFormat(string indexNameFormat) => Assign(indexNameFormat, (a, v) => a.IndexNameFormatValue = v);
 		public DateIndexNameProcessorDescriptor<T> IndexNamePrefix(string indexNamePrefix) => Assign(indexNamePrefix, (a, v) => a.IndexNamePrefixValue = v);
 		public DateIndexNameProcessorDescriptor<T> Locale(string locale) => Assign(locale, (a, v) => a.LocaleValue = v);
 		public DateIndexNameProcessorDescriptor<T> Timezone(string timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
+		public DateIndexNameProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public DateIndexNameProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public DateIndexNameProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public DateIndexNameProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
