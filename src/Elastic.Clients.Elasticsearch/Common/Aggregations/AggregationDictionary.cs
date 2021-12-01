@@ -8,17 +8,21 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <summary>
+/// Describes aggregations that we would like to execute on Elasticsearch.
+/// </summary>
 public class AggregationDictionary : IsADictionaryBase<string, AggregationContainer>
 {
 	public AggregationDictionary() { }
 
-	public AggregationDictionary(IDictionary<string, AggregationContainer> container) : base(container) { }
+	public AggregationDictionary(IDictionary<string, AggregationContainer> dictionary)
+		: base(dictionary.ToDictionary(kv => kv.Key, kv => kv.Value)) { } // Copy the existing dictionary rather then using the existing reference
 
-	public AggregationDictionary(Dictionary<string, AggregationContainer> container)
-		: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+	public AggregationDictionary(Dictionary<string, AggregationContainer> dictionary)
+		: base(dictionary.ToDictionary(kv => kv.Key, kv => kv.Value)) { } // Copy the existing dictionary rather then using the existing reference
 
-	public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> container) =>
-		new(container);
+	public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> dictionary) =>
+		new(dictionary);
 
 	public static implicit operator AggregationDictionary(AggregationBase aggregator)
 	{
@@ -46,12 +50,4 @@ public class AggregationDictionary : IsADictionaryBase<string, AggregationContai
 	}
 
 	public void Add(string key, AggregationContainer value) => BackingDictionary.Add(ValidateKey(key), value);
-
-	protected override string ValidateKey(string key) => key; // TODO!
-															  //{
-															  //if (AggregateFormatter.AllReservedAggregationNames.Contains(key))
-															  //	throw new ArgumentException(
-															  //		string.Format(AggregateFormatter.UsingReservedAggNameFormat, key), nameof(key));
-															  //return key;
-															  //}
 }
