@@ -64,6 +64,49 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	//	}
 	//}
 
+	public partial class AggregationContainer
+	{
+		internal string ContainedVariantName { get; private set; }
+
+		internal object ContainerVariantDescriptorAction { get; private set; }
+		
+		internal AggregationContainer(string variant, object descriptorAction)
+		{
+			ContainedVariantName = variant;
+			ContainerVariantDescriptorAction = descriptorAction;
+		}
+
+		public static implicit operator AggregationContainer(AggregationBase aggregator)
+		{
+			if (aggregator == null)
+				return null;
+
+			// TODO: Reimplement this fully - as neccesary!
+
+			var container = new AggregationContainer((IAggregationContainerVariant)aggregator)
+			{
+				Meta = aggregator.Meta
+			};
+
+			//aggregator.WrapInContainer(container);
+
+			var bucket = aggregator as BucketAggregationBase;
+
+			//container.Aggregations = bucket?.Aggregations;
+
+			var combinator = aggregator as AggregationCombinator;
+			if (combinator?.Aggregations != null)
+			{
+				var dict = new AggregationDictionary();
+				//	foreach (var agg in combinator.Aggregations)
+				//		dict.Add(((IAggregation)agg).Name, agg);
+				//	container.Aggregations = dict;
+			}
+
+			return container;
+		}
+	}
+
 	public partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
 	{
 		internal AggregationDictionary Aggregations { get; set; }
@@ -71,11 +114,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
 
 		 // TODO - Generator needs to do this for each variant.
+		 // This is complex since the XyzValue field may not contain a value and we may need to access the descriptor instead!
+		 // Should each descriptor have a method to convert to the object type?
+		 // We can then use that to grab the final value.
 
 		public AggregationContainerDescriptor<T> Terms(string name, Action<TermsAggregationDescriptor<T>> configure)
 		{
-			var descriptor = new TermsAggregationDescriptor<T>();
-			configure(descriptor);
+			var descriptor = new TermsAggregationDescriptor<T>(configure);
 
 			var agg = new TermsAggregation(name)
 			{
@@ -89,16 +134,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public AggregationContainerDescriptor<T> Min(string name, Action<MinAggregationDescriptor<T>> configure)
 		{
-			var descriptor = new MinAggregationDescriptor<T>();
-			configure(descriptor);
+			//var descriptor = new MinAggregationDescriptor<T>(configure);
 
-			var agg = new MinAggregation(name)
-			{
-				Field = descriptor.FieldValue
-			};
+			//var agg = new MinAggregation(name)
+			//{
+			//	Field = descriptor.FieldValue
+			//};
 
-			AggregationContainer container = agg;
-			container.Meta = descriptor.MetaValue;
+			//AggregationContainer container = agg;
+			//container.Meta = descriptor.MetaValue;
+
+			//return SetContainer(name, container);
+
+			var container = new AggregationContainer("min", configure);
 
 			return SetContainer(name, container);
 		}
@@ -112,44 +160,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			return this;
 		}
-
-		//private AggregationContainerDescriptor<T> SetInnerAggregation<TAggregationDescriptor>(string key, Action<TAggregationDescriptor> configureAggregation)
-		//	where TAggregationDescriptor : new()
-		//{
-		//	// TODO - Future "improvement" would be to store the descriptor actions and invoke each one when serialising
-
-		//	var descriptor = new TAggregationDescriptor();
-		//	configureAggregation(descriptor);
-
-		//	// TEMP HARD CODED
-
-		//	if (descriptor is TermsAggregationDescriptor<T> t)
-		//	{
-		//		var agg = new TermsAggregation(key)
-		//		{
-		//			Field = t.FieldValue
-		//		};
-				
-		//		var container = new AggregationContainer(agg);
-
-		//		if (Self.Aggregations == null)
-		//			Self.Aggregations = new AggregationDictionary();
-
-		//		//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
-		//		//if (aggregator is IBucketAggregation bucket && bucket.Aggregations.HasAny())
-		//		//{
-		//		//	//make sure we copy those aggregations to the isolated container's
-		//		//	//own .Aggregations container (the one that gets serialized to "aggs")
-		//		//	IAggregationContainer d = container;
-		//		//	d.Aggregations = bucket.Aggregations;
-		//		//}
-		//		//assign the aggregations container under Aggregations ("aggs" in the json)
-
-		//		Self.Aggregations[key] = container;
-		//	}
-			
-		//	return this;
-		//}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 	}
@@ -643,6 +653,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return false;
 		}
 
+		public Elastic.Clients.Elasticsearch.Aggregations.AvgAggregate? Average(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AvgAggregate?>(key);
+
 		public TermsAggregate Terms(string key)
 		{
 			if (!BackingDictionary.TryGetValue(key, out var agg))
@@ -731,6 +743,15 @@ namespace Elastic.Clients.Elasticsearch
 		public string GetString() => Value ?? string.Empty;
 	}
 
+	public partial class InlineScript
+	{
+		public InlineScript(string source) => Source = source;
+	}
+
+	public partial class Script
+	{
+		public static implicit operator Script(InlineScript inlineScript) => new (inlineScript);
+	}
 
 	public class DocType { }
 
@@ -1016,38 +1037,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class AggregationContainer
-	{
-		public static implicit operator AggregationContainer(AggregationBase aggregator)
-		{
-			if (aggregator == null)
-				return null;
-
-			// TODO: Reimplement this fully - as neccesary!
-
-			var container = new AggregationContainer((IAggregationContainerVariant)aggregator)
-			{
-				Meta = aggregator.Meta
-			};
-
-			//aggregator.WrapInContainer(container);
-
-			var bucket = aggregator as BucketAggregationBase;
-
-			//container.Aggregations = bucket?.Aggregations;
-
-			var combinator = aggregator as AggregationCombinator;
-			if (combinator?.Aggregations != null)
-			{
-				var dict = new AggregationDictionary();
-			//	foreach (var agg in combinator.Aggregations)
-			//		dict.Add(((IAggregation)agg).Name, agg);
-			//	container.Aggregations = dict;
-			}
-
-			return container;
-		}
-	}
+	
 }
 
 //TERM QUERY
