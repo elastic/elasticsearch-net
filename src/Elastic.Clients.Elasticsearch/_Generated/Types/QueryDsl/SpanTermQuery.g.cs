@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WriteEndObject();
 		}
 	}
-	
+
 	[JsonConverter(typeof(SpanTermQueryConverter))]
 	public partial class SpanTermQuery : FieldNameQueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{

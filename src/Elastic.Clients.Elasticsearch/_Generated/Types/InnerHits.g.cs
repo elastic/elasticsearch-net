@@ -186,7 +186,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public InnerHitsDescriptor<T> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field?, Elastic.Clients.Elasticsearch.ScriptField?>()));
+		public InnerHitsDescriptor<T> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>()));
 		public InnerHitsDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
 		public InnerHitsDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public InnerHitsDescriptor<T> Fields<TValue>(Expression<Func<T, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);

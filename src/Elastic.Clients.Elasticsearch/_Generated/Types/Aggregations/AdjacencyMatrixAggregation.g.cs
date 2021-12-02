@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal AdjacencyMatrixAggregationDescriptor(Action<AdjacencyMatrixAggregationDescriptor> configure) => configure.Invoke(this);
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; private set; }
 
-		public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>> selector) => Assign(selector, (a, v) => a.FiltersValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer?>()));
+		public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>, FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>> selector) => Assign(selector, (a, v) => a.FiltersValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

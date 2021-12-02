@@ -127,7 +127,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
-		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
 		public IndexPutTemplateRequestDescriptor IndexPatterns(string? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatternsValue = v);
 		public IndexPutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		public IndexPutTemplateRequestDescriptor Order(int? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public IndexPutTemplateRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public IndexPutTemplateRequestDescriptor Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

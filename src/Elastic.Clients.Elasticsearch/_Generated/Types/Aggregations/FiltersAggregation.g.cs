@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public FiltersAggregationDescriptor OtherBucket(bool? otherBucket = true) => Assign(otherBucket, (a, v) => a.OtherBucketValue = v);
 		public FiltersAggregationDescriptor OtherBucketKey(string? otherBucketKey) => Assign(otherBucketKey, (a, v) => a.OtherBucketKeyValue = v);
 		public FiltersAggregationDescriptor Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public FiltersAggregationDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public FiltersAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public FiltersAggregationDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -99,12 +99,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("keyed");
 				writer.WriteBooleanValue(KeyedValue.Value);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(NameValue))

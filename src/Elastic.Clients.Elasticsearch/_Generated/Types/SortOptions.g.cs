@@ -82,19 +82,6 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.SortOptionsVariantName);
-			switch (value.Variant)
-			{
-				case Elastic.Clients.Elasticsearch.ScoreSort variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.GeoDistanceSort variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.ScriptSort variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-			}
-
 			writer.WriteEndObject();
 		}
 	}

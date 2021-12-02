@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AutoDateHistogramAggregationDescriptor<T> MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? minimumInterval) => Assign(minimumInterval, (a, v) => a.MinimumIntervalValue = v);
 		public AutoDateHistogramAggregationDescriptor<T> Missing(string? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public AutoDateHistogramAggregationDescriptor<T> Offset(string? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
-		public AutoDateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public AutoDateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public AutoDateHistogramAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		public AutoDateHistogramAggregationDescriptor<T> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

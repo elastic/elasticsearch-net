@@ -55,9 +55,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal Dictionary<string, object>? ParamsValue { get; private set; }
 
 		public InlineScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? lang) => Assign(lang, (a, v) => a.LangValue = v);
-		public InlineScriptDescriptor Options(Func<FluentDictionary<string?, string?>, FluentDictionary<string?, string?>> selector) => Assign(selector, (a, v) => a.OptionsValue = v?.Invoke(new FluentDictionary<string?, string?>()));
+		public InlineScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.OptionsValue = v?.Invoke(new FluentDictionary<string, string>()));
 		public InlineScriptDescriptor Source(string source) => Assign(source, (a, v) => a.SourceValue = v);
-		public InlineScriptDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

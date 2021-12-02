@@ -97,15 +97,6 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-		[JsonIgnore]
 		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
 
 		[JsonIgnore]
@@ -203,15 +194,6 @@ namespace Elastic.Clients.Elasticsearch
 		public IEnumerable<string>? Sort { get => Q<IEnumerable<string>?>("sort"); set => Q("sort", value); }
 
 		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-		[JsonIgnore]
 		public IEnumerable<string>? Stats { get => Q<IEnumerable<string>?>("stats"); set => Q("stats", value); }
 
 		[JsonIgnore]
@@ -279,9 +261,6 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> Size(long? size) => Qs("size", size);
 		public DeleteByQueryRequestDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 		public DeleteByQueryRequestDescriptor<T> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
-		public DeleteByQueryRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
-		public DeleteByQueryRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public DeleteByQueryRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public DeleteByQueryRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
 		public DeleteByQueryRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		public DeleteByQueryRequestDescriptor<T> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);

@@ -73,7 +73,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public VariableWidthHistogramAggregationDescriptor<T> Buckets(int? buckets) => Assign(buckets, (a, v) => a.BucketsValue = v);
 		public VariableWidthHistogramAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public VariableWidthHistogramAggregationDescriptor<T> InitialBuffer(int? initialBuffer) => Assign(initialBuffer, (a, v) => a.InitialBufferValue = v);
-		public VariableWidthHistogramAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public VariableWidthHistogramAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public VariableWidthHistogramAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -100,12 +100,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("initial_buffer");
 				writer.WriteNumberValue(InitialBufferValue.Value);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(NameValue))
