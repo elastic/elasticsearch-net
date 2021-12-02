@@ -107,6 +107,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("auto_date_histogram");
+			writer.WriteStartObject();
 			if (BucketsValue.HasValue)
 			{
 				writer.WritePropertyName("buckets");
@@ -161,6 +163,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(TimeZoneValue);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

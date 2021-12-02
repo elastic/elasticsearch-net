@@ -67,6 +67,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("geo_centroid");
+			writer.WriteStartObject();
 			if (CountValue.HasValue)
 			{
 				writer.WritePropertyName("count");
@@ -79,6 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, LocationValue, options);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

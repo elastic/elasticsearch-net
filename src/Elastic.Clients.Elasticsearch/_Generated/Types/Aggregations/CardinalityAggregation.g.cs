@@ -67,6 +67,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("cardinality");
+			writer.WriteStartObject();
 			if (PrecisionThresholdValue.HasValue)
 			{
 				writer.WritePropertyName("precision_threshold");
@@ -79,6 +81,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(RehashValue.Value);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

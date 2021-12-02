@@ -78,8 +78,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		public DateRangeAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DateRangeAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DateRangeAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
@@ -88,9 +86,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateRangeAggregationDescriptor<T> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
 		public DateRangeAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public DateRangeAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public DateRangeAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("date_range");
 			writer.WriteStartObject();
 			if (FieldValue is not null)
 			{
@@ -128,10 +127,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

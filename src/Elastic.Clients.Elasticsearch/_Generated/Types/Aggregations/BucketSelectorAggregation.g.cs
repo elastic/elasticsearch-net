@@ -59,12 +59,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("bucket_selector");
+			writer.WriteStartObject();
 			if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

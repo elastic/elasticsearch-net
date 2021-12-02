@@ -54,17 +54,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		public StringStatsAggregationDescriptor<T> ShowDistribution(bool? showDistribution = true) => Assign(showDistribution, (a, v) => a.ShowDistributionValue = v);
 		public StringStatsAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public StringStatsAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public StringStatsAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public StringStatsAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		public StringStatsAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public StringStatsAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("string_stats");
 			writer.WriteStartObject();
 			if (ShowDistributionValue.HasValue)
 			{
@@ -90,10 +89,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

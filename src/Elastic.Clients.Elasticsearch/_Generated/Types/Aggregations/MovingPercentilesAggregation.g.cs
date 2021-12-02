@@ -73,6 +73,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("moving_percentiles");
+			writer.WriteStartObject();
 			if (WindowValue.HasValue)
 			{
 				writer.WritePropertyName("window");
@@ -91,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

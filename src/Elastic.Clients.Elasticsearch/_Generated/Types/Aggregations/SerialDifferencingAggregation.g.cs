@@ -54,16 +54,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		public SerialDifferencingAggregationDescriptor Lag(int? lag) => Assign(lag, (a, v) => a.LagValue = v);
 		public SerialDifferencingAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
 		public SerialDifferencingAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public SerialDifferencingAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
 		public SerialDifferencingAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public SerialDifferencingAggregationDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("serial_diff");
 			writer.WriteStartObject();
 			if (LagValue.HasValue)
 			{
@@ -89,10 +88,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, GapPolicyValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

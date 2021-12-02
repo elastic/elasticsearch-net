@@ -72,8 +72,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		public DiversifiedSamplerAggregationDescriptor<T> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> MaxDocsPerValue(int? maxDocsPerValue) => Assign(maxDocsPerValue, (a, v) => a.MaxDocsPerValueValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
@@ -81,9 +79,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DiversifiedSamplerAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public DiversifiedSamplerAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("diversified_sampler");
 			writer.WriteStartObject();
 			if (ExecutionHintValue is not null)
 			{
@@ -115,10 +114,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

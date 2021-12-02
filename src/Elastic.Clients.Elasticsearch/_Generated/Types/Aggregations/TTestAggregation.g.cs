@@ -60,8 +60,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		internal TestPopulationDescriptor<T> aDescriptor { get; private set; }
 
 		internal TestPopulationDescriptor<T> bDescriptor { get; private set; }
@@ -114,9 +112,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public TTestAggregationDescriptor<T> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type) => Assign(type, (a, v) => a.TypeValue = v);
 		public TTestAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public TTestAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("t_test");
 			writer.WriteStartObject();
 			if (aDescriptor is not null)
 			{
@@ -156,10 +155,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, TypeValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();
