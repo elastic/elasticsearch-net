@@ -135,7 +135,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Assign(configure, (a, v) => a.TemplateDescriptorAction = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Aliases(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition?>()));
+		public ClusterPutComponentTemplateRequestDescriptor<T> Aliases(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>, FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>()));
 		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
 			MappingsDescriptor = null;

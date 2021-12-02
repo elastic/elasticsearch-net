@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
 		public MoreLikeThisQueryDescriptor<T> MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
 		public MoreLikeThisQueryDescriptor<T> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
-		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field?, string?>, FluentDictionary<Elastic.Clients.Elasticsearch.Field?, string?>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field?, string?>()));
+		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
 		public MoreLikeThisQueryDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public MoreLikeThisQueryDescriptor<T> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
 		public MoreLikeThisQueryDescriptor<T> Unlike(Elastic.Clients.Elasticsearch.QueryDsl.Like? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);

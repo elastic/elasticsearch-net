@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public InferenceProcessorDescriptor<T> ModelId(Elastic.Clients.Elasticsearch.Id modelId) => Assign(modelId, (a, v) => a.ModelIdValue = v);
 		public InferenceProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
 		public InferenceProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public InferenceProcessorDescriptor<T> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field?, object?>, FluentDictionary<Elastic.Clients.Elasticsearch.Field?, object?>> selector) => Assign(selector, (a, v) => a.FieldMapValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field?, object?>()));
+		public InferenceProcessorDescriptor<T> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector) => Assign(selector, (a, v) => a.FieldMapValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>()));
 		public InferenceProcessorDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
 		{
 			InferenceConfigDescriptor = null;

@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal ScriptBaseDescriptor(Action<ScriptBaseDescriptor> configure) => configure.Invoke(this);
 		internal Dictionary<string, object>? ParamsValue { get; private set; }
 
-		public ScriptBaseDescriptor Params(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ScriptBaseDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

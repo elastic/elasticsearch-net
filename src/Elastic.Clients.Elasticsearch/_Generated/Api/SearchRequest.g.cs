@@ -592,7 +592,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.RescoreDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<T> ScriptFields(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.ScriptField?>()));
+		public SearchRequestDescriptor<T> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>()));
 		public SearchRequestDescriptor<T> SearchAfter(IEnumerable<object>? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfterValue = v);
 		public SearchRequestDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public SearchRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)

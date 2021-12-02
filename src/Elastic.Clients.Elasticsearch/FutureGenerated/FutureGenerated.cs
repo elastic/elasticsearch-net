@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal AggregationContainer(string variant, object descriptorAction)
 		{
 			ContainedVariantName = variant;
-			ContainerVariantDescriptorAction = descriptorAction;
+			ContainerVariantDescriptorAction = descriptorAction; 
 		}
 
 		private AggregationContainer(string variant) => ContainedVariantName = variant;
@@ -129,33 +129,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
 	{
 		internal AggregationDictionary Aggregations { get; set; }
-
-		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
-
-		 // TODO - Generator needs to do this for each variant.
-		 // This is complex since the XyzValue field may not contain a value and we may need to access the descriptor instead!
-		 // Should each descriptor have a method to convert to the object type?
-		 // We can then use that to grab the final value.
-
-		public AggregationContainerDescriptor<T> Terms(string name, Action<TermsAggregationDescriptor<T>> configure)
-		{
-			var descriptor = new TermsAggregationDescriptor<T>(configure);
-
-			var agg = new TermsAggregation(name)
-			{
-				Field = descriptor.FieldValue
-			};
-
-			var container = new AggregationContainer(agg);
-
-			return SetContainer(name, container);
-		}
-
-		public AggregationContainerDescriptor<T> Min(string name, Action<MinAggregationDescriptor<T>> configure)
-		{
-			var container = AggregationContainer.CreateWithAction("min", configure);
-			return SetContainer(name, container);
-		}
 
 		private AggregationContainerDescriptor<T> SetContainer(string key, AggregationContainer container)
 		{
