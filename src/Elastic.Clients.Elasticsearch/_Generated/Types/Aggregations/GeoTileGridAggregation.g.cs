@@ -74,8 +74,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		public GeoTileGridAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoTileGridAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoTileGridAggregationDescriptor<T> Precision(double? precision) => Assign(precision, (a, v) => a.PrecisionValue = v);
@@ -83,9 +81,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public GeoTileGridAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public GeoTileGridAggregationDescriptor<T> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds) => Assign(bounds, (a, v) => a.BoundsValue = v);
 		public GeoTileGridAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public GeoTileGridAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("geotile_grid");
 			writer.WriteStartObject();
 			if (FieldValue is not null)
 			{
@@ -117,10 +116,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, BoundsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

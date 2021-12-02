@@ -59,12 +59,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("percentiles_bucket");
+			writer.WriteStartObject();
 			if (PercentsValue is not null)
 			{
 				writer.WritePropertyName("percents");
 				JsonSerializer.Serialize(writer, PercentsValue, options);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

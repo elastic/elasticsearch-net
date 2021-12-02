@@ -138,8 +138,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		internal QueryDsl.QueryContainerDescriptor<T> BackgroundFilterDescriptor { get; private set; }
 
 		internal ChiSquareHeuristicDescriptor ChiSquareDescriptor { get; private set; }
@@ -303,9 +301,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public SignificantTextAggregationDescriptor<T> SourceFields(Elastic.Clients.Elasticsearch.Fields? sourceFields) => Assign(sourceFields, (a, v) => a.SourceFieldsValue = v);
 		public SignificantTextAggregationDescriptor<T> SourceFields<TValue>(Expression<Func<T, TValue>> sourceFields) => Assign(sourceFields, (a, v) => a.SourceFieldsValue = v);
 		public SignificantTextAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public SignificantTextAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("significant_text");
 			writer.WriteStartObject();
 			if (BackgroundFilterDescriptor is not null)
 			{
@@ -463,10 +462,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, SourceFieldsValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -73,6 +73,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("moving_fn");
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(ScriptValue))
 			{
 				writer.WritePropertyName("script");
@@ -91,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(WindowValue.Value);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

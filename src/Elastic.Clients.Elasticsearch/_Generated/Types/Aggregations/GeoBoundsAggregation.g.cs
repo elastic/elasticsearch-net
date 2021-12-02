@@ -60,12 +60,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("geo_bounds");
+			writer.WriteStartObject();
 			if (WrapLongitudeValue.HasValue)
 			{
 				writer.WritePropertyName("wrap_longitude");
 				writer.WriteBooleanValue(WrapLongitudeValue.Value);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

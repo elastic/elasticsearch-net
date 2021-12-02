@@ -72,8 +72,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		internal GeoLinePointDescriptor<T> PointDescriptor { get; private set; }
 
 		internal GeoLineSortDescriptor<T> SortDescriptor { get; private set; }
@@ -128,9 +126,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public GeoLineAggregationDescriptor<T> SortOrder(Elastic.Clients.Elasticsearch.SortOrder? sortOrder) => Assign(sortOrder, (a, v) => a.SortOrderValue = v);
 		public GeoLineAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public GeoLineAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public GeoLineAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("geo_line");
 			writer.WriteStartObject();
 			if (PointDescriptor is not null)
 			{
@@ -182,10 +181,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(SizeValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -53,6 +53,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("cumulative_sum");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}
