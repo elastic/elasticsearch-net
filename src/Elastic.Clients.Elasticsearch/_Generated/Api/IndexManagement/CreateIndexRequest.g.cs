@@ -106,7 +106,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Action<IndexSettingsDescriptor<T>> SettingsDescriptorAction { get; private set; }
 
-		public CreateIndexRequestDescriptor<T> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.Name?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public CreateIndexRequestDescriptor<T> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
 		public CreateIndexRequestDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
 			MappingsDescriptor = null;

@@ -77,8 +77,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		internal Dictionary<string, object>? TransientValue { get; private set; }
 
-		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.PersistentValue = v?.Invoke(new FluentDictionary<string?, object?>()));
-		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.TransientValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public ClusterPutSettingsRequestDescriptor Persistent(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.PersistentValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public ClusterPutSettingsRequestDescriptor Transient(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.TransientValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

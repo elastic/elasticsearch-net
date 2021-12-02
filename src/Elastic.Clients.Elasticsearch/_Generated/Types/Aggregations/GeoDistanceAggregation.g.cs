@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public GeoDistanceAggregationDescriptor<T> Origin(Elastic.Clients.Elasticsearch.GeoLocation? origin) => Assign(origin, (a, v) => a.OriginValue = v);
 		public GeoDistanceAggregationDescriptor<T> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges) => Assign(ranges, (a, v) => a.RangesValue = v);
 		public GeoDistanceAggregationDescriptor<T> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? unit) => Assign(unit, (a, v) => a.UnitValue = v);
-		public GeoDistanceAggregationDescriptor<T> Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public GeoDistanceAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public GeoDistanceAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -113,12 +113,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("unit");
 				JsonSerializer.Serialize(writer, UnitValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(NameValue))

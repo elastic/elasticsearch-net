@@ -392,7 +392,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public override void Write(Utf8JsonWriter writer, AggregationContainer value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-
 			if (value.SerializeFluent is not null)
 			{
 				writer.WritePropertyName(value.ContainedVariantName);
@@ -400,7 +399,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteEndObject();
 				return;
 			}
-			
+
 			writer.WritePropertyName(value.Variant.AggregationContainerVariantName);
 			switch (value.Variant)
 			{
@@ -614,6 +613,349 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class AggregationContainerDescriptor<T>
+	{
+		public AggregationContainerDescriptor()
+		{
+		}
+
+		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
+		public AggregationContainerDescriptor<T> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
+		}
+
+		public AggregationContainerDescriptor<T> AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Avg(string name, Action<AverageAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+		}
+
+		public AggregationContainerDescriptor<T> AvgBucket(string name, Action<AverageBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("avg_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Boxplot(string name, Action<BoxplotAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("boxplot", configure));
+		}
+
+		public AggregationContainerDescriptor<T> BucketScript(string name, Action<BucketScriptAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_script", configure));
+		}
+
+		public AggregationContainerDescriptor<T> BucketSelector(string name, Action<BucketSelectorAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_selector", configure));
+		}
+
+		public AggregationContainerDescriptor<T> BucketSort(string name, Action<BucketSortAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_sort", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Cardinality(string name, Action<CardinalityAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Children(string name, Action<ChildrenAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Composite(string name, Action<CompositeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
+		}
+
+		public AggregationContainerDescriptor<T> CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cumulative_cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor<T> CumulativeSum(string name, Action<CumulativeSumAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cumulative_sum", configure));
+		}
+
+		public AggregationContainerDescriptor<T> DateHistogram(string name, Action<DateHistogramAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor<T> DateRange(string name, Action<DateRangeAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_range", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Derivative(string name, Action<DerivativeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("derivative", configure));
+		}
+
+		public AggregationContainerDescriptor<T> DiversifiedSampler(string name, Action<DiversifiedSamplerAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("diversified_sampler", configure));
+		}
+
+		public AggregationContainerDescriptor<T> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor<T> ExtendedStatsBucket(string name, Action<ExtendedStatsBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Filters(string name, Action<FiltersAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
+		}
+
+		public AggregationContainerDescriptor<T> GeoBounds(string name, Action<GeoBoundsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geo_bounds", configure));
+		}
+
+		public AggregationContainerDescriptor<T> GeoCentroid(string name, Action<GeoCentroidAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geo_centroid", configure));
+		}
+
+		public AggregationContainerDescriptor<T> GeoDistance(string name, Action<GeoDistanceAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geo_distance", configure));
+		}
+
+		public AggregationContainerDescriptor<T> GeohashGrid(string name, Action<GeoHashGridAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geohash_grid", configure));
+		}
+
+		public AggregationContainerDescriptor<T> GeoLine(string name, Action<GeoLineAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geo_line", configure));
+		}
+
+		public AggregationContainerDescriptor<T> GeotileGrid(string name, Action<GeoTileGridAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geotile_grid", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Global(string name, Action<GlobalAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Histogram(string name, Action<HistogramAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
+		}
+
+		public AggregationContainerDescriptor<T> IpRange(string name, Action<IpRangeAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Inference(string name, Action<InferenceAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("inference", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MatrixStats(string name, Action<MatrixStatsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("matrix_stats", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Max(string name, Action<MaxAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("max", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MaxBucket(string name, Action<MaxBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("max_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MedianAbsoluteDeviation(string name, Action<MedianAbsoluteDeviationAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("median_absolute_deviation", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Min(string name, Action<MinAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("min", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MinBucket(string name, Action<MinBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("min_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Missing(string name, Action<MissingAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("missing", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MovingPercentiles(string name, Action<MovingPercentilesAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("moving_percentiles", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MovingFn(string name, Action<MovingFunctionAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("moving_fn", configure));
+		}
+
+		public AggregationContainerDescriptor<T> MultiTerms(string name, Action<MultiTermsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("multi_terms", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Nested(string name, Action<NestedAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Normalize(string name, Action<NormalizeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("normalize", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Parent(string name, Action<ParentAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
+		}
+
+		public AggregationContainerDescriptor<T> PercentileRanks(string name, Action<PercentileRanksAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("percentile_ranks", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Percentiles(string name, Action<PercentilesAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("percentiles", configure));
+		}
+
+		public AggregationContainerDescriptor<T> PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("percentiles_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Range(string name, Action<RangeAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
+		}
+
+		public AggregationContainerDescriptor<T> RareTerms(string name, Action<RareTermsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("rare_terms", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Rate(string name, Action<RateAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("rate", configure));
+		}
+
+		public AggregationContainerDescriptor<T> ReverseNested(string name, Action<ReverseNestedAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("reverse_nested", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Sampler(string name, Action<SamplerAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
+		}
+
+		public AggregationContainerDescriptor<T> ScriptedMetric(string name, Action<ScriptedMetricAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("scripted_metric", configure));
+		}
+
+		public AggregationContainerDescriptor<T> SerialDiff(string name, Action<SerialDifferencingAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("serial_diff", configure));
+		}
+
+		public AggregationContainerDescriptor<T> SignificantTerms(string name, Action<SignificantTermsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("significant_terms", configure));
+		}
+
+		public AggregationContainerDescriptor<T> SignificantText(string name, Action<SignificantTextAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("significant_text", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Stats(string name, Action<StatsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("stats", configure));
+		}
+
+		public AggregationContainerDescriptor<T> StatsBucket(string name, Action<StatsBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("stats_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> StringStats(string name, Action<StringStatsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("string_stats", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Sum(string name, Action<SumAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("sum", configure));
+		}
+
+		public AggregationContainerDescriptor<T> SumBucket(string name, Action<SumBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("sum_bucket", configure));
+		}
+
+		public AggregationContainerDescriptor<T> Terms(string name, Action<TermsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
+		}
+
+		public AggregationContainerDescriptor<T> TopHits(string name, Action<TopHitsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_hits", configure));
+		}
+
+		public AggregationContainerDescriptor<T> TTest(string name, Action<TTestAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("t_test", configure));
+		}
+
+		public AggregationContainerDescriptor<T> TopMetrics(string name, Action<TopMetricsAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_metrics", configure));
+		}
+
+		public AggregationContainerDescriptor<T> ValueCount(string name, Action<ValueCountAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("value_count", configure));
+		}
+
+		public AggregationContainerDescriptor<T> WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+		}
+
+		public AggregationContainerDescriptor<T> VariableWidthHistogram(string name, Action<VariableWidthHistogramAggregationDescriptor<T>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("variable_width_histogram", configure));
 		}
 	}
 }

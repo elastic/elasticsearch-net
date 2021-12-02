@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Action<IndexManagement.Rollover.RolloverConditionsDescriptor> ConditionsDescriptorAction { get; private set; }
 
-		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName?, Elastic.Clients.Elasticsearch.IndexManagement.Alias?>()));
+		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
 		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? conditions)
 		{
 			ConditionsDescriptor = null;
@@ -146,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		public IndexRolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? mappings) => Assign(mappings, (a, v) => a.MappingsValue = v);
-		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

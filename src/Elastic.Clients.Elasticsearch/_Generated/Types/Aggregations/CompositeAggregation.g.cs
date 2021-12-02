@@ -62,10 +62,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal string? NameValue { get; private set; }
 
-		public CompositeAggregationDescriptor After(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.AfterValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public CompositeAggregationDescriptor After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.AfterValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public CompositeAggregationDescriptor Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public CompositeAggregationDescriptor Sources(IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources) => Assign(sources, (a, v) => a.SourcesValue = v);
-		public CompositeAggregationDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public CompositeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public CompositeAggregationDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -86,12 +86,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("sources");
 				JsonSerializer.Serialize(writer, SourcesValue, options);
-			}
-
-			if (MetaValue is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(NameValue))

@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(configure, (a, v) => a.SourceDescriptorAction = v);
 		}
 
-		public TypeMappingDescriptor Runtime(Func<FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>, FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>> selector) => Assign(selector, (a, v) => a.RuntimeValue = v?.Invoke(new FluentDictionary<string?, Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>()));
+		public TypeMappingDescriptor Runtime(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector) => Assign(selector, (a, v) => a.RuntimeValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>()));
 		public TypeMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.EnabledValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

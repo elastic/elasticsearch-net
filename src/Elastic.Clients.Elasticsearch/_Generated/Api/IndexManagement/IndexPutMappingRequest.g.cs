@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.FieldNamesDescriptorAction = v);
 		}
 
-		public IndexPutMappingRequestDescriptor Meta(Func<FluentDictionary<string?, object?>, FluentDictionary<string?, object?>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string?, object?>()));
+		public IndexPutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		public IndexPutMappingRequestDescriptor NumericDetection(bool? numericDetection = true) => Assign(numericDetection, (a, v) => a.NumericDetectionValue = v);
 		public IndexPutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
 		public IndexPutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? routing)
