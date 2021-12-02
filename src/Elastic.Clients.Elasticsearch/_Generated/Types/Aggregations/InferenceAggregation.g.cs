@@ -90,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("inference");
+			writer.WriteStartObject();
 			writer.WritePropertyName("model_id");
 			JsonSerializer.Serialize(writer, ModelIdValue, options);
 			if (InferenceConfigDescriptor is not null)
@@ -108,6 +110,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

@@ -50,12 +50,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("adjacency_matrix");
+			writer.WriteStartObject();
 			if (FiltersValue is not null)
 			{
 				writer.WritePropertyName("filters");
 				JsonSerializer.Serialize(writer, FiltersValue, options);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

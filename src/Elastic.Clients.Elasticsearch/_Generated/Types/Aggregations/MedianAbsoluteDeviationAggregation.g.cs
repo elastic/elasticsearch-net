@@ -63,6 +63,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("median_absolute_deviation");
+			writer.WriteStartObject();
 			if (CompressionValue.HasValue)
 			{
 				writer.WritePropertyName("compression");
@@ -75,6 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(FormatValue);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

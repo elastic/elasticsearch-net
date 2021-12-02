@@ -78,8 +78,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal string? NameValue { get; private set; }
-
 		public ScriptedMetricAggregationDescriptor<T> CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript) => Assign(combineScript, (a, v) => a.CombineScriptValue = v);
 		public ScriptedMetricAggregationDescriptor<T> InitScript(Elastic.Clients.Elasticsearch.Script? initScript) => Assign(initScript, (a, v) => a.InitScriptValue = v);
 		public ScriptedMetricAggregationDescriptor<T> MapScript(Elastic.Clients.Elasticsearch.Script? mapScript) => Assign(mapScript, (a, v) => a.MapScriptValue = v);
@@ -90,9 +88,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public ScriptedMetricAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public ScriptedMetricAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		public ScriptedMetricAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public ScriptedMetricAggregationDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("scripted_metric");
 			writer.WriteStartObject();
 			if (CombineScriptValue is not null)
 			{
@@ -142,10 +141,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(NameValue))
+			writer.WriteEndObject();
+			if (MetaValue is not null)
 			{
-				writer.WritePropertyName("name");
-				writer.WriteStringValue(NameValue);
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
 			}
 
 			writer.WriteEndObject();

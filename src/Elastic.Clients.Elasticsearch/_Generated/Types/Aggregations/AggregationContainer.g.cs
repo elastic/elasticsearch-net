@@ -391,15 +391,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public override void Write(Utf8JsonWriter writer, AggregationContainer value, JsonSerializerOptions options)
 		{
-			writer.WriteStartObject();
 			if (value.SerializeFluent is not null)
 			{
-				writer.WritePropertyName(value.ContainedVariantName);
 				value.SerializeFluent(writer, options);
-				writer.WriteEndObject();
 				return;
 			}
 
+			writer.WriteStartObject();
 			writer.WritePropertyName(value.Variant.AggregationContainerVariantName);
 			switch (value.Variant)
 			{

@@ -53,12 +53,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("extended_stats");
+			writer.WriteStartObject();
 			if (SigmaValue.HasValue)
 			{
 				writer.WritePropertyName("sigma");
 				writer.WriteNumberValue(SigmaValue.Value);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

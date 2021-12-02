@@ -59,12 +59,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			writer.WritePropertyName("normalize");
+			writer.WriteStartObject();
 			if (MethodValue is not null)
 			{
 				writer.WritePropertyName("method");
 				JsonSerializer.Serialize(writer, MethodValue, options);
 			}
 
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

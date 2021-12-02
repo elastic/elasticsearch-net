@@ -64,6 +64,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	//	}
 	//}
 
+	internal interface IAggregationContainerDescriptor
+	{
+		string NameValue { get; }
+	}
+
+	/// <summary>
+	/// Concept only, not yet used
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	public abstract class AggregationDescriptorBase<T> : DescriptorBase<T>, IAggregationContainerDescriptor where T : DescriptorBase<T>
+	{
+		string IAggregationContainerDescriptor.NameValue => NameValue;
+
+		internal string? NameValue { get; }
+
+		public AggregationDescriptorBase(string name) => NameValue = name;
+	}
+
 	public partial class AggregationContainer
 	{
 		internal string ContainedVariantName { get; private set; }
@@ -80,10 +98,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		private AggregationContainer(string variant) => ContainedVariantName = variant;
 
-		internal static AggregationContainer CreateWithAction<T>(string name, Action<T> configure) where T : new()
+		internal static AggregationContainer CreateWithAction<T>(string variantName, Action<T> configure) where T : new()
 		{
-			var container = new AggregationContainer(name);
+			var container = new AggregationContainer(variantName);
 			container.SetAction(configure);
+			return container;
+		}
+
+		internal static AggregationContainer CreateWithAction<T>(string variantName, Action<T> configure, T descriptor) where T : new()
+		{
+			var container = new AggregationContainer(variantName);
+			container.SetAction(configure, descriptor);
 			return container;
 		}
 
@@ -94,6 +119,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					configure(descriptor);
 					JsonSerializer.Serialize(writer, descriptor, options);
 				};
+
+		private void SetAction<T>(Action<T> configure, T descriptor) where T : new()
+			=> SerializeFluent = (writer, options) =>
+			{
+				//var descriptor = new T();
+				configure(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			};
 
 		public static implicit operator AggregationContainer(AggregationBase aggregator)
 		{
