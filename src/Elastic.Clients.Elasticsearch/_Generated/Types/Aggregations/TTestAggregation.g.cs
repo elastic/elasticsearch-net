@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class TTestAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public TTestAggregation(string name) : base(name)
 		{
 		}

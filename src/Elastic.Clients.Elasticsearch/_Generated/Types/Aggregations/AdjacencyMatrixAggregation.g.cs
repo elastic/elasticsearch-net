@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class AdjacencyMatrixAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public AdjacencyMatrixAggregation(string name) : base(name)
 		{
 		}
@@ -46,7 +47,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal AdjacencyMatrixAggregationDescriptor(Action<AdjacencyMatrixAggregationDescriptor> configure) => configure.Invoke(this);
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; private set; }
 
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
 		public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>, FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>> selector) => Assign(selector, (a, v) => a.FiltersValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>()));
+		public AdjacencyMatrixAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -59,6 +63,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

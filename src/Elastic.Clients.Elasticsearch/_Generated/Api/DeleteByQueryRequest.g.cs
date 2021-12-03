@@ -88,9 +88,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
-
-		[JsonIgnore]
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
@@ -185,9 +182,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 		[JsonIgnore]
-		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
-
-		[JsonIgnore]
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 
 		[JsonIgnore]
@@ -258,7 +252,6 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		public DeleteByQueryRequestDescriptor<T> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
 		public DeleteByQueryRequestDescriptor<T> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public DeleteByQueryRequestDescriptor<T> Size(long? size) => Qs("size", size);
 		public DeleteByQueryRequestDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 		public DeleteByQueryRequestDescriptor<T> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
 		public DeleteByQueryRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Qs("stats", stats);

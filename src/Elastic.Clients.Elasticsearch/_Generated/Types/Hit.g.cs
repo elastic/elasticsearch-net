@@ -39,10 +39,6 @@ namespace Elastic.Clients.Elasticsearch
 		public double? Score { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_explanation")]
 		public Elastic.Clients.Elasticsearch.Explanation? Explanation { get; init; }
 

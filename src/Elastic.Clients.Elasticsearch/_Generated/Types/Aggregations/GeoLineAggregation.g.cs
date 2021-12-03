@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class GeoLineAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public GeoLineAggregation(string name) : base(name)
 		{
 		}
