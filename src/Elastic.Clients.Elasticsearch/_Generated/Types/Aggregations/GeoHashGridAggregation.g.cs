@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class GeoHashGridAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public GeoHashGridAggregation(string name) : base(name)
 		{
 		}

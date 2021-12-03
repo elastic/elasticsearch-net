@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class MultiTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public MultiTermsAggregation(string name) : base(name)
 		{
 		}

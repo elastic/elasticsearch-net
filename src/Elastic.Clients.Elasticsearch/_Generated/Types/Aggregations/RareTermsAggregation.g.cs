@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class RareTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public RareTermsAggregation(string name) : base(name)
 		{
 		}

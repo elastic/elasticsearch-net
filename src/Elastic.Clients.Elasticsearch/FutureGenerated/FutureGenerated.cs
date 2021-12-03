@@ -173,6 +173,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return this;
 		}
 
+		public AggregationContainerDescriptor<T> Average(string name, Action<AverageAggregationDescriptor<T>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+
+		public AggregationContainerDescriptor<T> WeightedAverage(string name, Action<WeightedAverageAggregationDescriptor<T>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 	}
 

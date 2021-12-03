@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class NestedAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public NestedAggregation(string name) : base(name)
 		{
 		}

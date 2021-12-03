@@ -40,9 +40,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 		[JsonIgnore]
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-
-		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
@@ -72,9 +69,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 		[JsonIgnore]
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-
-		[JsonIgnore]
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
@@ -100,7 +94,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexGetFieldMappingRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public IndexGetFieldMappingRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexGetFieldMappingRequestDescriptor<T> IncludeDefaults(bool? includeDefaults) => Qs("include_defaults", includeDefaults);
-		public IndexGetFieldMappingRequestDescriptor<T> IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public IndexGetFieldMappingRequestDescriptor<T> Local(bool? local) => Qs("local", local);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class MinAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
+		public MinAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public MinAggregation(string name) : base(name)
 		{
 		}

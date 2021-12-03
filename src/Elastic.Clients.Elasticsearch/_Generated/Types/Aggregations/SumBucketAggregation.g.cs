@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class SumBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public SumBucketAggregation(string name) : base(name)
 		{
 		}

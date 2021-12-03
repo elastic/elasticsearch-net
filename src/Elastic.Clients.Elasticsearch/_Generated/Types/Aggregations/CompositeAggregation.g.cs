@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class CompositeAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public CompositeAggregation(string name) : base(name)
 		{
 		}

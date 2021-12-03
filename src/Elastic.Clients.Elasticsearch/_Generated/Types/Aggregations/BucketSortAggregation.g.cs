@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class BucketSortAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public BucketSortAggregation(string name) : base(name)
 		{
 		}

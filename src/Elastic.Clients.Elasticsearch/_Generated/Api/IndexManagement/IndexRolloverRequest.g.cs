@@ -31,9 +31,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 		[JsonIgnore]
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
@@ -60,9 +57,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 		[JsonIgnore]
-		public bool? IncludeTypeName { get => Q<bool?>("include_type_name"); set => Q("include_type_name", value); }
-
-		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("master_timeout"); set => Q("master_timeout", value); }
 
 		[JsonIgnore]
@@ -81,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? Mappings { get; set; }
+		public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("settings")]
@@ -107,7 +101,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public IndexRolloverRequestDescriptor DryRun(bool? dryRun) => Qs("dry_run", dryRun);
-		public IndexRolloverRequestDescriptor IncludeTypeName(bool? includeTypeName) => Qs("include_type_name", includeTypeName);
 		public IndexRolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public IndexRolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexRolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
@@ -115,13 +108,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? ConditionsValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? MappingsValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
 
 		internal Dictionary<string, object>? SettingsValue { get; private set; }
 
 		internal IndexManagement.Rollover.RolloverConditionsDescriptor ConditionsDescriptor { get; private set; }
 
+		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
+
 		internal Action<IndexManagement.Rollover.RolloverConditionsDescriptor> ConditionsDescriptorAction { get; private set; }
+
+		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
 		public IndexRolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
 		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditions? conditions)
@@ -145,7 +142,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.ConditionsDescriptorAction = v);
 		}
 
-		public IndexRolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.IndexRolloverMapping? mappings) => Assign(mappings, (a, v) => a.MappingsValue = v);
+		public IndexRolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		{
+			MappingsDescriptor = null;
+			MappingsDescriptorAction = null;
+			return Assign(mappings, (a, v) => a.MappingsValue = v);
+		}
+
+		public IndexRolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
+		}
+
+		public IndexRolloverRequestDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		{
+			MappingsValue = null;
+			MappingsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
+		}
+
 		public IndexRolloverRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.SettingsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -172,7 +189,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, ConditionsValue, options);
 			}
 
-			if (MappingsValue is not null)
+			if (MappingsDescriptor is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+			}
+			else if (MappingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("mappings");
+				JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+			}
+			else if (MappingsValue is not null)
 			{
 				writer.WritePropertyName("mappings");
 				JsonSerializer.Serialize(writer, MappingsValue, options);

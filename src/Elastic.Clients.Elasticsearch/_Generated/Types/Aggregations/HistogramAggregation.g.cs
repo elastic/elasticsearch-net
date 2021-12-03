@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class HistogramAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
 	{
+		[JsonConstructor]
 		public HistogramAggregation(string name) : base(name)
 		{
 		}

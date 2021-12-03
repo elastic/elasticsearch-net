@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class MovingPercentilesAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public MovingPercentilesAggregation(string name) : base(name)
 		{
 		}
@@ -64,12 +65,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
 
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
 		public MovingPercentilesAggregationDescriptor Window(int? window) => Assign(window, (a, v) => a.WindowValue = v);
 		public MovingPercentilesAggregationDescriptor Shift(int? shift) => Assign(shift, (a, v) => a.ShiftValue = v);
 		public MovingPercentilesAggregationDescriptor Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public MovingPercentilesAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
 		public MovingPercentilesAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
+		public MovingPercentilesAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -93,7 +97,31 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
+			if (BucketsPathValue is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, BucketsPathValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			if (GapPolicyValue is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, GapPolicyValue, options);
+			}
+
 			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

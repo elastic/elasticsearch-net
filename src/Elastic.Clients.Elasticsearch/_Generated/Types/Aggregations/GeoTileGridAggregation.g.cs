@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class GeoTileGridAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant, TransformManagement.IPivotGroupByContainerVariant
 	{
+		[JsonConstructor]
 		public GeoTileGridAggregation(string name) : base(name)
 		{
 		}

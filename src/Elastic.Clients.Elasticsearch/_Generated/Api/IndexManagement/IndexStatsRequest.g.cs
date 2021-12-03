@@ -53,9 +53,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Types? Types { get => Q<Elastic.Clients.Elasticsearch.Types?>("types"); set => Q("types", value); }
 	}
 
 	public partial class IndexStatsRequest : PlainRequestBase<IndexStatsRequestParameters>
@@ -105,9 +102,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
-
-		[JsonIgnore]
-		public Elastic.Clients.Elasticsearch.Types? Types { get => Q<Elastic.Clients.Elasticsearch.Types?>("types"); set => Q("types", value); }
 	}
 
 	public sealed partial class IndexStatsRequestDescriptor<T> : RequestDescriptorBase<IndexStatsRequestDescriptor<T>, IndexStatsRequestParameters>
@@ -141,7 +135,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexStatsRequestDescriptor<T> IncludeSegmentFileSizes(bool? includeSegmentFileSizes) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 		public IndexStatsRequestDescriptor<T> IncludeUnloadedSegments(bool? includeUnloadedSegments) => Qs("include_unloaded_segments", includeUnloadedSegments);
 		public IndexStatsRequestDescriptor<T> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
-		public IndexStatsRequestDescriptor<T> Types(Elastic.Clients.Elasticsearch.Types? types) => Qs("types", types);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
