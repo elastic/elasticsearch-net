@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class SumAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
+		public SumAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public SumAggregation(string name) : base(name)
 		{
 		}

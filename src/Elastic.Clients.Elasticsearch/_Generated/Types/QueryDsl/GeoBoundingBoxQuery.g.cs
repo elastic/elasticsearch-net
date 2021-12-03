@@ -71,6 +71,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 			}
 
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

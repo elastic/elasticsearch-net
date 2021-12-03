@@ -100,16 +100,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
 			}
 
-			if (value.Boost is not null)
+			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
-				JsonSerializer.Serialize(writer, value.Boost, options);
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
-			if (value.QueryName is not null)
+			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
-				JsonSerializer.Serialize(writer, value.QueryName, options);
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			writer.WriteEndObject();
@@ -185,6 +185,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("zero_terms_query");
 				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

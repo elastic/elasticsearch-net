@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class PercentileRanksAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
+		public PercentileRanksAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public PercentileRanksAggregation(string name) : base(name)
 		{
 		}
@@ -46,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("tdigest")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? Tdigest { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
 	}
 
 	public sealed partial class PercentileRanksAggregationDescriptor<T> : DescriptorBase<PercentileRanksAggregationDescriptor<T>>
@@ -62,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.TDigest? TdigestValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigestValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
 
@@ -76,11 +78,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal HdrMethodDescriptor HdrDescriptor { get; private set; }
 
-		internal TDigestDescriptor TdigestDescriptor { get; private set; }
+		internal TDigestDescriptor TDigestDescriptor { get; private set; }
 
 		internal Action<HdrMethodDescriptor> HdrDescriptorAction { get; private set; }
 
-		internal Action<TDigestDescriptor> TdigestDescriptorAction { get; private set; }
+		internal Action<TDigestDescriptor> TDigestDescriptorAction { get; private set; }
 
 		public PercentileRanksAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double>? values) => Assign(values, (a, v) => a.ValuesValue = v);
@@ -105,25 +107,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.HdrDescriptorAction = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> Tdigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tdigest)
+		public PercentileRanksAggregationDescriptor<T> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 		{
-			TdigestDescriptor = null;
-			TdigestDescriptorAction = null;
-			return Assign(tdigest, (a, v) => a.TdigestValue = v);
+			TDigestDescriptor = null;
+			TDigestDescriptorAction = null;
+			return Assign(tDigest, (a, v) => a.TDigestValue = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> Tdigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
+		public PercentileRanksAggregationDescriptor<T> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
 		{
-			TdigestValue = null;
-			TdigestDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.TdigestDescriptor = v);
+			TDigestValue = null;
+			TDigestDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.TDigestDescriptor = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> Tdigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
+		public PercentileRanksAggregationDescriptor<T> TDigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
 		{
-			TdigestValue = null;
-			TdigestDescriptorAction = null;
-			return Assign(configure, (a, v) => a.TdigestDescriptorAction = v);
+			TDigestValue = null;
+			TDigestDescriptorAction = null;
+			return Assign(configure, (a, v) => a.TDigestDescriptorAction = v);
 		}
 
 		public PercentileRanksAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
@@ -165,20 +167,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, HdrValue, options);
 			}
 
-			if (TdigestDescriptor is not null)
+			if (TDigestDescriptor is not null)
 			{
 				writer.WritePropertyName("tdigest");
-				JsonSerializer.Serialize(writer, TdigestDescriptor, options);
+				JsonSerializer.Serialize(writer, TDigestDescriptor, options);
 			}
-			else if (TdigestDescriptorAction is not null)
+			else if (TDigestDescriptorAction is not null)
 			{
 				writer.WritePropertyName("tdigest");
-				JsonSerializer.Serialize(writer, new TDigestDescriptor(TdigestDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new TDigestDescriptor(TDigestDescriptorAction), options);
 			}
-			else if (TdigestValue is not null)
+			else if (TDigestValue is not null)
 			{
 				writer.WritePropertyName("tdigest");
-				JsonSerializer.Serialize(writer, TdigestValue, options);
+				JsonSerializer.Serialize(writer, TDigestValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(FormatValue))

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class VariableWidthHistogramAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public VariableWidthHistogramAggregation(string name) : base(name)
 		{
 		}

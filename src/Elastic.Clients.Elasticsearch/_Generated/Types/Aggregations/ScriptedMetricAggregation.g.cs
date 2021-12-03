@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
+		public ScriptedMetricAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public ScriptedMetricAggregation(string name) : base(name)
 		{
 		}

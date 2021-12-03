@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class ValueCountAggregation : Aggregations.FormattableMetricAggregationBase, IAggregationContainerVariant
 	{
+		public ValueCountAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public ValueCountAggregation(string name) : base(name)
 		{
 		}

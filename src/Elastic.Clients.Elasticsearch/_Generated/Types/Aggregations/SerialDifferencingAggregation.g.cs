@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class SerialDifferencingAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public SerialDifferencingAggregation(string name) : base(name)
 		{
 		}

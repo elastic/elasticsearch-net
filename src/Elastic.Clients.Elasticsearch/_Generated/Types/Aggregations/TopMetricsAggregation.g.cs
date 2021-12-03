@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
+		public TopMetricsAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public TopMetricsAggregation(string name) : base(name)
 		{
 		}

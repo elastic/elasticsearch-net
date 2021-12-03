@@ -121,6 +121,30 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 				JsonSerializer.Serialize(writer, ProcessorValue, options);
 			}
 
+			if (!string.IsNullOrEmpty(IfValue))
+			{
+				writer.WritePropertyName("if");
+				writer.WriteStringValue(IfValue);
+			}
+
+			if (IgnoreFailureValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_failure");
+				writer.WriteBooleanValue(IgnoreFailureValue.Value);
+			}
+
+			if (OnFailureValue is not null)
+			{
+				writer.WritePropertyName("on_failure");
+				JsonSerializer.Serialize(writer, OnFailureValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(TagValue))
+			{
+				writer.WritePropertyName("tag");
+				writer.WriteStringValue(TagValue);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

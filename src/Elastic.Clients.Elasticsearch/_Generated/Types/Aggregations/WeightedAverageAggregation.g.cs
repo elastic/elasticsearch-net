@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class WeightedAverageAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public WeightedAverageAggregation(string name) : base(name)
 		{
 		}

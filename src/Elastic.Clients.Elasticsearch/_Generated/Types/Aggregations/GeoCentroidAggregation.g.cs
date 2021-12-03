@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class GeoCentroidAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
+		public GeoCentroidAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public GeoCentroidAggregation(string name) : base(name)
 		{
 		}
@@ -58,12 +60,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
 
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
 		public GeoCentroidAggregationDescriptor<T> Count(long? count) => Assign(count, (a, v) => a.CountValue = v);
 		public GeoCentroidAggregationDescriptor<T> Location(Elastic.Clients.Elasticsearch.GeoLocation? location) => Assign(location, (a, v) => a.LocationValue = v);
 		public GeoCentroidAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoCentroidAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoCentroidAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public GeoCentroidAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public GeoCentroidAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -81,7 +86,31 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, LocationValue, options);
 			}
 
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

@@ -49,9 +49,5 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
 		[JsonInclude]
 		[JsonPropertyName("_source")]
 		public Dictionary<string, object> Source { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
 	}
 }

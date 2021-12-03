@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class StatsBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public StatsBucketAggregation(string name) : base(name)
 		{
 		}

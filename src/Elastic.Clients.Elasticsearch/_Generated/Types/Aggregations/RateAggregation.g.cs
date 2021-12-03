@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
+		public RateAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public RateAggregation(string name) : base(name)
 		{
 		}

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class MatrixStatsAggregation : Aggregations.MatrixAggregationBase, IAggregationContainerVariant
 	{
+		[JsonConstructor]
 		public MatrixStatsAggregation(string name) : base(name)
 		{
 		}

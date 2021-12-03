@@ -39,10 +39,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; init; }
 

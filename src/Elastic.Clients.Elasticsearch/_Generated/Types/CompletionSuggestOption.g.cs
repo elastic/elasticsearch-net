@@ -47,10 +47,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_routing")]
 		public string? Routing { get; init; }
 

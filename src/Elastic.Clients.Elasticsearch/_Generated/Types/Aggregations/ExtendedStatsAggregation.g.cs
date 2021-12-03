@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public partial class ExtendedStatsAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
+		public ExtendedStatsAggregation(string name, Field field) : base(name) => Field = field;
+		[JsonConstructor]
 		public ExtendedStatsAggregation(string name) : base(name)
 		{
 		}
@@ -48,8 +50,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal string? FormatValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+
+		internal Dictionary<string, object>? MetaValue { get; private set; }
+
 		public ExtendedStatsAggregationDescriptor<T> Sigma(double? sigma) => Assign(sigma, (a, v) => a.SigmaValue = v);
 		public ExtendedStatsAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public ExtendedStatsAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ExtendedStatsAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ExtendedStatsAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public ExtendedStatsAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public ExtendedStatsAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -61,7 +76,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(SigmaValue.Value);
 			}
 
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}
