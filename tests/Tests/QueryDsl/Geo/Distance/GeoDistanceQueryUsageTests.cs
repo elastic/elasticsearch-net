@@ -28,7 +28,8 @@ namespace Tests.QueryDsl.Geo.Distance
 			DistanceType = GeoDistanceType.Arc,
 			Location = new GeoLocation(34, -34),
 			Distance = "200m",
-			ValidationMethod = GeoValidationMethod.IgnoreMalformed
+			ValidationMethod = GeoValidationMethod.IgnoreMalformed,
+			IgnoreUnmapped = true,
 		};
 
 		protected override object QueryJson => new
@@ -44,7 +45,8 @@ namespace Tests.QueryDsl.Geo.Distance
 				{
 					lat = 34.0,
 					lon = -34.0
-				}
+				},
+				ignore_unmapped = true,
 			}
 		};
 
@@ -57,6 +59,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				.Location(34, -34)
 				.Distance("200m")
 				.ValidationMethod(GeoValidationMethod.IgnoreMalformed)
+				.IgnoreUnmapped(true)
 			);
 	}
 }

@@ -15,6 +15,8 @@ namespace Nest
 		GeoLocation Location { get; set; }
 
 		GeoValidationMethod? ValidationMethod { get; set; }
+
+		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public class GeoDistanceQuery : FieldNameQueryBase, IGeoDistanceQuery
@@ -23,6 +25,7 @@ namespace Nest
 		public GeoDistanceType? DistanceType { get; set; }
 		public GeoLocation Location { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
+		public bool? IgnoreUnmapped { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoDistance = this;
@@ -40,6 +43,7 @@ namespace Nest
 		GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoLocation IGeoDistanceQuery.Location { get; set; }
 		GeoValidationMethod? IGeoDistanceQuery.ValidationMethod { get; set; }
+		bool? IGeoDistanceQuery.IgnoreUnmapped { get; set; }
 
 		public GeoDistanceQueryDescriptor<T> Location(GeoLocation location) => Assign(location, (a, v) => a.Location = v);
 
@@ -52,6 +56,8 @@ namespace Nest
 		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType? type) => Assign(type, (a, v) => a.DistanceType = v);
 
 		public GeoDistanceQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(validation, (a, v) => a.ValidationMethod = v);
+
+		public GeoDistanceQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 
 	internal class GeoDistanceQueryFormatter : IJsonFormatter<IGeoDistanceQuery>
@@ -62,7 +68,8 @@ namespace Nest
 			{ "boost", 1 },
 			{ "validation_method", 2 },
 			{ "distance", 3 },
-			{ "distance_type", 4 }
+			{ "distance_type", 4 },
+			{ "ignore_unmapped", 5 }
 		};
 
 		public IGeoDistanceQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -96,6 +103,9 @@ namespace Nest
 						case 4:
 							query.DistanceType = formatterResolver.GetFormatter<GeoDistanceType>()
 								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 5:
+							query.IgnoreUnmapped = reader.ReadNullableBoolean();
 							break;
 					}
 				}
@@ -169,6 +179,16 @@ namespace Nest
 				writer.WritePropertyName("distance_type");
 				formatterResolver.GetFormatter<GeoDistanceType>()
 					.Serialize(ref writer, value.DistanceType.Value, formatterResolver);
+				written = true;
+			}
+
+			if (value.IgnoreUnmapped != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBoolean(value.IgnoreUnmapped.Value);
 				written = true;
 			}
 
