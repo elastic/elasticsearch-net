@@ -27,7 +27,8 @@ namespace Tests.QueryDsl.Geo.Polygon
 			Name = "named_query",
 			ValidationMethod = GeoValidationMethod.Strict,
 			Points = new[] { new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70) },
-			Field = Infer.Field<Project>(p => p.LocationPoint)
+			Field = Infer.Field<Project>(p => p.LocationPoint),
+			IgnoreUnmapped = true
 		};
 
 		protected override object QueryJson => new
@@ -45,7 +46,8 @@ namespace Tests.QueryDsl.Geo.Polygon
 						new { lat = -34.0, lon = 34.0 },
 						new { lat = 70.0, lon = -70.0 },
 					}
-				}
+				},
+				ignore_unmapped = true,
 			}
 		};
 
@@ -56,6 +58,7 @@ namespace Tests.QueryDsl.Geo.Polygon
 				.Field(p => p.LocationPoint)
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Points(new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70))
+				.IgnoreUnmapped(true)
 			);
 	}
 }
