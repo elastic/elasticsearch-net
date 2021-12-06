@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("stats");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -70,20 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(StatsAggregationConverter))]
-	public partial class StatsAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	public partial class StatsAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public StatsAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public StatsAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "stats";
 	}
 
 	public sealed partial class StatsAggregationDescriptor<T> : DescriptorBase<StatsAggregationDescriptor<T>>

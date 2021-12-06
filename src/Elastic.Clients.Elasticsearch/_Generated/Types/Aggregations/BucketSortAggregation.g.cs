@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("bucket_sort");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.From.HasValue)
 			{
 				writer.WritePropertyName("from");
@@ -70,19 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(BucketSortAggregationConverter))]
-	public partial class BucketSortAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
+	public partial class BucketSortAggregation : Aggregations.AggregationBase
 	{
-		[JsonConstructor]
 		public BucketSortAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "bucket_sort";
 		[JsonInclude]
 		[JsonPropertyName("from")]
 		public int? From { get; set; }

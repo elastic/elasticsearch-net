@@ -1,15 +1,40 @@
+using System.IO;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using Dia2Lib;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Aggregations;
+
 namespace Benchmarks;
 
 internal class Program
 {
-	private static void Main()
-	{
+	private static void Main() =>
 		//var thing = new IndicesGetString() { NameCount = 3 };
 		//thing.Setup();
 		//thing.NaiveStringCreate();
 
-		//BenchmarkRunner.Run<OneOrMany>();
+		_ = BenchmarkRunner.Run<SerialisePolymorphic>();
+}
+
+
+[MemoryDiagnoser]
+public class SerialisePolymorphic
+{
+
+	private readonly AggregationContainer _container1 = new AggregationContainer(new MinAggregation("testing"));
+	private readonly ElasticClient _client = new ElasticClient();
+
+
+	private readonly Stream _stream = new MemoryStream();
+
+	[Benchmark]
+	public void Reflection()
+	{
+		_stream.Position = 0;
+		_client.RequestResponseSerializer.Serialize(_container1, _stream);
 	}
+
 }
 
 //[MemoryDiagnoser]

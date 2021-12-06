@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("t_test");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.a is not null)
 			{
 				writer.WritePropertyName("a");
@@ -64,19 +57,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(TTestAggregationConverter))]
-	public partial class TTestAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
+	public partial class TTestAggregation : Aggregations.AggregationBase
 	{
-		[JsonConstructor]
 		public TTestAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "t_test";
 		[JsonInclude]
 		[JsonPropertyName("a")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }

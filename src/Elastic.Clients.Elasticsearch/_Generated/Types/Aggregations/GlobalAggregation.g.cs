@@ -56,15 +56,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(GlobalAggregationConverter))]
-	public partial class GlobalAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class GlobalAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public GlobalAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "global";
 	}
 
 	public sealed partial class GlobalAggregationDescriptor<T> : DescriptorBase<GlobalAggregationDescriptor<T>>

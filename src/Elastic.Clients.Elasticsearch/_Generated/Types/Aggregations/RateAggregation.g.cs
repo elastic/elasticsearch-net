@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("rate");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Unit is not null)
 			{
 				writer.WritePropertyName("unit");
@@ -82,20 +75,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(RateAggregationConverter))]
-	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public RateAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public RateAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "rate";
 		[JsonInclude]
 		[JsonPropertyName("unit")]
 		public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }

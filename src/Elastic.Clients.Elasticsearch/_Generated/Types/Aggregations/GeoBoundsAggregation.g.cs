@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geo_bounds");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.WrapLongitude.HasValue)
 			{
 				writer.WritePropertyName("wrap_longitude");
@@ -70,20 +63,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(GeoBoundsAggregationConverter))]
-	public partial class GeoBoundsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class GeoBoundsAggregation : Aggregations.MetricAggregationBase
 	{
 		public GeoBoundsAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public GeoBoundsAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "geo_bounds";
 		[JsonInclude]
 		[JsonPropertyName("wrap_longitude")]
 		public bool? WrapLongitude { get; set; }

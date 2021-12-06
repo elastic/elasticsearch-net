@@ -38,6 +38,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("sampler");
 			writer.WriteStartObject();
+			if (value.ShardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value.ShardSize.Value);
+			}
+
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -51,26 +57,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Aggregations, options);
 			}
 
-			if (value.ShardSize.HasValue)
-			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(value.ShardSize.Value);
-			}
-
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(SamplerAggregationConverter))]
-	public partial class SamplerAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class SamplerAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public SamplerAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "sampler";
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }

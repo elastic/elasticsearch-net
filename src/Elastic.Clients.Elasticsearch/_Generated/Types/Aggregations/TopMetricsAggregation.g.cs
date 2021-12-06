@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("top_metrics");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Metrics is not null)
 			{
 				writer.WritePropertyName("metrics");
@@ -82,20 +75,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(TopMetricsAggregationConverter))]
-	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase
 	{
 		public TopMetricsAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public TopMetricsAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "top_metrics";
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue? Metrics { get; set; }
