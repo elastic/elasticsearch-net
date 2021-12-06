@@ -30,7 +30,57 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new TTestAggregation("");
+			var agg = new TTestAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("a"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TestPopulation?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.a = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("b"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TestPopulation?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.b = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("type"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TTestType?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Type = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, TTestAggregation value, JsonSerializerOptions options)

@@ -30,7 +30,156 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new DateHistogramAggregation("");
+			var agg = new DateHistogramAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("calendar_interval"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.CalendarInterval = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("field"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("fixed_interval"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Time?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.FixedInterval = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("interval"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Time?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Interval = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("min_doc_count"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.MinDocCount = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("missing"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("offset"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Time?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Offset = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("order"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Order = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("params"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Params = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("script"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("time_zone"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.TimeZone = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("keyed"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Keyed = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
+					{
+						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Aggregations = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, DateHistogramAggregation value, JsonSerializerOptions options)

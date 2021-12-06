@@ -30,17 +30,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-
 			var agg = new MinAggregation("");
-
-			while(reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					if (reader.ValueTextEquals("format"))
 					{
-						var value = JsonSerializer.Deserialize<string>(ref reader, options);
-
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Format = value;
@@ -49,11 +46,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("field"))
 					{
-						var value = JsonSerializer.Deserialize<Field?>(ref reader, options);
-
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Field = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("missing"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Missing?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("script"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
 						}
 					}
 				}
@@ -65,18 +79,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("meta"))
 					{
-						var meta = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-
-						if (meta is not null)
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
 						{
-							agg.Meta = meta;
+							agg.Meta = value;
 						}
 					}
 				}
 			}
 
 			reader.Read();
-
 			return agg;
 		}
 

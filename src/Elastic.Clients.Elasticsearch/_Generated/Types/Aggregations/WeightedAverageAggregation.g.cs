@@ -30,7 +30,66 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new WeightedAverageAggregation("");
+			var agg = new WeightedAverageAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("value"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Value = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("value_type"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueType?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ValueType = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("weight"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Weight = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, WeightedAverageAggregation value, JsonSerializerOptions options)
