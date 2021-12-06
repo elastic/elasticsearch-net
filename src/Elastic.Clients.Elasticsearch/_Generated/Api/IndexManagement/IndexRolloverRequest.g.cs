@@ -128,14 +128,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(conditions, (a, v) => a.ConditionsValue = v);
 		}
 
-		public IndexRolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditionsDescriptor descriptor)
+		public IndexRolloverRequestDescriptor Conditions(IndexManagement.Rollover.RolloverConditionsDescriptor descriptor)
 		{
 			ConditionsValue = null;
 			ConditionsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ConditionsDescriptor = v);
 		}
 
-		public IndexRolloverRequestDescriptor Conditions(Action<Elastic.Clients.Elasticsearch.IndexManagement.Rollover.RolloverConditionsDescriptor> configure)
+		public IndexRolloverRequestDescriptor Conditions(Action<IndexManagement.Rollover.RolloverConditionsDescriptor> configure)
 		{
 			ConditionsValue = null;
 			ConditionsDescriptorAction = null;
@@ -149,14 +149,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public IndexRolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		public IndexRolloverRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public IndexRolloverRequestDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		public IndexRolloverRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;

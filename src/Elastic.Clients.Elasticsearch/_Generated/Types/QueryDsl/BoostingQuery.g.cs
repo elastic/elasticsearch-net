@@ -74,14 +74,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(negative, (a, v) => a.NegativeValue = v);
 		}
 
-		public BoostingQueryDescriptor<T> Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoostingQueryDescriptor<T> Negative(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.NegativeDescriptor = v);
 		}
 
-		public BoostingQueryDescriptor<T> Negative(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoostingQueryDescriptor<T> Negative(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
@@ -95,14 +95,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(positive, (a, v) => a.PositiveValue = v);
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoostingQueryDescriptor<T> Positive(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PositiveDescriptor = v);
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoostingQueryDescriptor<T> Positive(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (NegativeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("negative");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(NegativeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(NegativeDescriptorAction), options);
 			}
 			else
 			{
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (PositiveDescriptorAction is not null)
 			{
 				writer.WritePropertyName("positive");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(PositiveDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(PositiveDescriptorAction), options);
 			}
 			else
 			{

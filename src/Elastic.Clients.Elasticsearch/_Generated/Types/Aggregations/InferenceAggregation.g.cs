@@ -24,6 +24,58 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAggregation>
+	{
+		public override InferenceAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new InferenceAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, InferenceAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("inference");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WritePropertyName("model_id");
+			JsonSerializer.Serialize(writer, value.ModelId, options);
+			if (value.InferenceConfig is not null)
+			{
+				writer.WritePropertyName("inference_config");
+				JsonSerializer.Serialize(writer, value.InferenceConfig, options);
+			}
+
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.GapPolicy is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(InferenceAggregationConverter))]
 	public partial class InferenceAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]
@@ -73,14 +125,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(inferenceConfig, (a, v) => a.InferenceConfigValue = v);
 		}
 
-		public InferenceAggregationDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainerDescriptor<T> descriptor)
+		public InferenceAggregationDescriptor<T> InferenceConfig(Aggregations.InferenceConfigContainerDescriptor<T> descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InferenceConfigDescriptor = v);
 		}
 
-		public InferenceAggregationDescriptor<T> InferenceConfig(Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainerDescriptor<T>> configure)
+		public InferenceAggregationDescriptor<T> InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor<T>> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -106,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigContainerDescriptor<T>(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor<T>(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{

@@ -24,6 +24,80 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class ScriptedMetricAggregationConverter : JsonConverter<ScriptedMetricAggregation>
+	{
+		public override ScriptedMetricAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new ScriptedMetricAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, ScriptedMetricAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("scripted_metric");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.CombineScript is not null)
+			{
+				writer.WritePropertyName("combine_script");
+				JsonSerializer.Serialize(writer, value.CombineScript, options);
+			}
+
+			if (value.InitScript is not null)
+			{
+				writer.WritePropertyName("init_script");
+				JsonSerializer.Serialize(writer, value.InitScript, options);
+			}
+
+			if (value.MapScript is not null)
+			{
+				writer.WritePropertyName("map_script");
+				JsonSerializer.Serialize(writer, value.MapScript, options);
+			}
+
+			if (value.Params is not null)
+			{
+				writer.WritePropertyName("params");
+				JsonSerializer.Serialize(writer, value.Params, options);
+			}
+
+			if (value.ReduceScript is not null)
+			{
+				writer.WritePropertyName("reduce_script");
+				JsonSerializer.Serialize(writer, value.ReduceScript, options);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(ScriptedMetricAggregationConverter))]
 	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
 		public ScriptedMetricAggregation(string name, Field field) : base(name) => Field = field;

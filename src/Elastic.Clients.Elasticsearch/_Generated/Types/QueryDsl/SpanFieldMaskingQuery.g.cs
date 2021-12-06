@@ -67,14 +67,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public SpanFieldMaskingQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanFieldMaskingQueryDescriptor<T> Query(QueryDsl.SpanQueryDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public SpanFieldMaskingQueryDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanFieldMaskingQueryDescriptor<T> Query(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(QueryDescriptorAction), options);
 			}
 			else
 			{

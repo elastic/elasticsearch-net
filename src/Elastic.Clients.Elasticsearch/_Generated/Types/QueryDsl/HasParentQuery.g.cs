@@ -86,14 +86,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
 		}
 
-		public HasParentQueryDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor<T> descriptor)
+		public HasParentQueryDescriptor<T> InnerHits(InnerHitsDescriptor<T> descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
 		}
 
-		public HasParentQueryDescriptor<T> InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor<T>> configure)
+		public HasParentQueryDescriptor<T> InnerHits(Action<InnerHitsDescriptor<T>> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
@@ -108,14 +108,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public HasParentQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public HasParentQueryDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public HasParentQueryDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public HasParentQueryDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
 			}
 			else
 			{

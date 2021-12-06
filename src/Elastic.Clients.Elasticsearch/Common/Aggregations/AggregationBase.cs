@@ -21,7 +21,7 @@ public abstract class AggregationBase
 	/// The name for this aggregation.
 	/// </summary>
 	[JsonIgnore]
-	public string? Name { get; }
+	public string? Name { get; internal set; }
 		
 	//always evaluate to false so that each side of && equation is evaluated
 	public static bool operator false(AggregationBase _) => false;

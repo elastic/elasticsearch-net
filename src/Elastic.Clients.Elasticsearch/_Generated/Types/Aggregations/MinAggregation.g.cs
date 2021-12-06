@@ -24,16 +24,74 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class MinAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	internal sealed class MinAggregationConverter : JsonConverter<MinAggregation>
+	{
+		public override MinAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new MinAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, MinAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("min");
+			writer.WriteStartObject();
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MinAggregationConverter))]
+	public partial class MinAggregation : AggregationBase
 	{
 		public MinAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
+
+
 		public MinAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "min";
+		public string? Format { get; set; }
+
+		public Field? Field { get; set; }
+
+		public Missing? Missing { get; set; }
+
+		public Script? Script { get; set; }
 	}
 
 	public sealed partial class MinAggregationDescriptor<T> : DescriptorBase<MinAggregationDescriptor<T>>

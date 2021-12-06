@@ -24,6 +24,68 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class TopMetricsAggregationConverter : JsonConverter<TopMetricsAggregation>
+	{
+		public override TopMetricsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new TopMetricsAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, TopMetricsAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("top_metrics");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Metrics is not null)
+			{
+				writer.WritePropertyName("metrics");
+				JsonSerializer.Serialize(writer, value.Metrics, options);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
+			}
+
+			if (value.Sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value.Sort, options);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(TopMetricsAggregationConverter))]
 	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
 		public TopMetricsAggregation(string name, Field field) : base(name) => Field = field;
@@ -79,14 +141,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(metrics, (a, v) => a.MetricsValue = v);
 		}
 
-		public TopMetricsAggregationDescriptor<T> Metrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<T> descriptor)
+		public TopMetricsAggregationDescriptor<T> Metrics(Aggregations.TopMetricsValueDescriptor<T> descriptor)
 		{
 			MetricsValue = null;
 			MetricsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MetricsDescriptor = v);
 		}
 
-		public TopMetricsAggregationDescriptor<T> Metrics(Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<T>> configure)
+		public TopMetricsAggregationDescriptor<T> Metrics(Action<Aggregations.TopMetricsValueDescriptor<T>> configure)
 		{
 			MetricsValue = null;
 			MetricsDescriptorAction = null;
@@ -113,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (MetricsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("metrics");
-				JsonSerializer.Serialize(writer, new TopMetricsValueDescriptor<T>(MetricsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.TopMetricsValueDescriptor<T>(MetricsDescriptorAction), options);
 			}
 			else if (MetricsValue is not null)
 			{

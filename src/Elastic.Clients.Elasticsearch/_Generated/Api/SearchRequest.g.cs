@@ -446,6 +446,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal IEnumerable<string>? StatsValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+
 		internal FieldCollapseDescriptor<T> CollapseDescriptor { get; private set; }
 
 		internal HighlightDescriptor<T> HighlightDescriptor { get; private set; }
@@ -461,6 +463,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal SuggesterDescriptor SuggestDescriptor { get; private set; }
 
 		internal PointInTimeReferenceDescriptor PitDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
 
 		internal Action<FieldCollapseDescriptor<T>> CollapseDescriptorAction { get; private set; }
 
@@ -479,7 +483,27 @@ namespace Elastic.Clients.Elasticsearch
 		internal Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; private set; }
 
 		private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
-		public SearchRequestDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations) => Assign(aggregations, (a, v) => a.AggregationsValue = v);
+		public SearchRequestDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+		}
+
+		public SearchRequestDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+		}
+
+		public SearchRequestDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+		}
+
 		public SearchRequestDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
@@ -487,14 +511,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(collapse, (a, v) => a.CollapseValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapseDescriptor<T> descriptor)
+		public SearchRequestDescriptor<T> Collapse(FieldCollapseDescriptor<T> descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.CollapseDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Collapse(Action<Elastic.Clients.Elasticsearch.FieldCollapseDescriptor<T>> configure)
+		public SearchRequestDescriptor<T> Collapse(Action<FieldCollapseDescriptor<T>> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
@@ -510,14 +534,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(highlight, (a, v) => a.HighlightValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Highlight(Elastic.Clients.Elasticsearch.HighlightDescriptor<T> descriptor)
+		public SearchRequestDescriptor<T> Highlight(HighlightDescriptor<T> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Highlight(Action<Elastic.Clients.Elasticsearch.HighlightDescriptor<T>> configure)
+		public SearchRequestDescriptor<T> Highlight(Action<HighlightDescriptor<T>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
@@ -535,14 +559,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(postFilter, (a, v) => a.PostFilterValue = v);
 		}
 
-		public SearchRequestDescriptor<T> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public SearchRequestDescriptor<T> PostFilter(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			PostFilterValue = null;
 			PostFilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PostFilterDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> PostFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public SearchRequestDescriptor<T> PostFilter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			PostFilterValue = null;
 			PostFilterDescriptorAction = null;
@@ -557,14 +581,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public SearchRequestDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public SearchRequestDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -578,14 +602,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(rescore, (a, v) => a.RescoreValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Rescore(Elastic.Clients.Elasticsearch.RescoreDescriptor<T> descriptor)
+		public SearchRequestDescriptor<T> Rescore(RescoreDescriptor<T> descriptor)
 		{
 			RescoreValue = null;
 			RescoreDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.RescoreDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Rescore(Action<Elastic.Clients.Elasticsearch.RescoreDescriptor<T>> configure)
+		public SearchRequestDescriptor<T> Rescore(Action<RescoreDescriptor<T>> configure)
 		{
 			RescoreValue = null;
 			RescoreDescriptorAction = null;
@@ -602,14 +626,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(slice, (a, v) => a.SliceValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T> descriptor)
+		public SearchRequestDescriptor<T> Slice(SlicedScrollDescriptor<T> descriptor)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SliceDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> configure)
+		public SearchRequestDescriptor<T> Slice(Action<SlicedScrollDescriptor<T>> configure)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
@@ -626,14 +650,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(suggest, (a, v) => a.SuggestValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Suggest(Elastic.Clients.Elasticsearch.SuggesterDescriptor descriptor)
+		public SearchRequestDescriptor<T> Suggest(SuggesterDescriptor descriptor)
 		{
 			SuggestValue = null;
 			SuggestDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SuggestDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Suggest(Action<Elastic.Clients.Elasticsearch.SuggesterDescriptor> configure)
+		public SearchRequestDescriptor<T> Suggest(Action<SuggesterDescriptor> configure)
 		{
 			SuggestValue = null;
 			SuggestDescriptorAction = null;
@@ -654,14 +678,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(pit, (a, v) => a.PitValue = v);
 		}
 
-		public SearchRequestDescriptor<T> Pit(Elastic.Clients.Elasticsearch.PointInTimeReferenceDescriptor descriptor)
+		public SearchRequestDescriptor<T> Pit(PointInTimeReferenceDescriptor descriptor)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PitDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<T> Pit(Action<Elastic.Clients.Elasticsearch.PointInTimeReferenceDescriptor> configure)
+		public SearchRequestDescriptor<T> Pit(Action<PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
@@ -674,7 +698,17 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			writer.WriteStartObject();
 			AfterStartObject(writer, options, settings);
-			if (AggregationsValue is not null)
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
 			{
 				writer.WritePropertyName("aggregations");
 				JsonSerializer.Serialize(writer, AggregationsValue, options);

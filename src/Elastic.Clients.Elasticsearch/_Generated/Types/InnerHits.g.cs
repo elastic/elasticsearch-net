@@ -148,14 +148,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(collapse, (a, v) => a.CollapseValue = v);
 		}
 
-		public InnerHitsDescriptor<T> Collapse(Elastic.Clients.Elasticsearch.FieldCollapseDescriptor<T> descriptor)
+		public InnerHitsDescriptor<T> Collapse(FieldCollapseDescriptor<T> descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.CollapseDescriptor = v);
 		}
 
-		public InnerHitsDescriptor<T> Collapse(Action<Elastic.Clients.Elasticsearch.FieldCollapseDescriptor<T>> configure)
+		public InnerHitsDescriptor<T> Collapse(Action<FieldCollapseDescriptor<T>> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
@@ -171,14 +171,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(highlight, (a, v) => a.HighlightValue = v);
 		}
 
-		public InnerHitsDescriptor<T> Highlight(Elastic.Clients.Elasticsearch.HighlightDescriptor<T> descriptor)
+		public InnerHitsDescriptor<T> Highlight(HighlightDescriptor<T> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
 		}
 
-		public InnerHitsDescriptor<T> Highlight(Action<Elastic.Clients.Elasticsearch.HighlightDescriptor<T>> configure)
+		public InnerHitsDescriptor<T> Highlight(Action<HighlightDescriptor<T>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;

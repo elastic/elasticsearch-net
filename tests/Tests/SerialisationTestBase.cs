@@ -4,22 +4,21 @@
 
 using System.IO;
 
-namespace Tests
+namespace Tests;
+
+public abstract class SerialisationTestBase<TResponse>
 {
-	public abstract class SerialisationTestBase<TResponse>
+	private readonly Serializer _serializer = new DefaultHighLevelSerializer(new ElasticsearchClientSettings());
+
+	protected abstract string ResponseJson { get; }
+
+	protected abstract void Validate(TResponse response);
+
+	[U]
+	public void ValidateResponse()
 	{
-		private readonly Serializer _serializer = new DefaultHighLevelSerializer(new ElasticsearchClientSettings());
-
-		protected abstract string ResponseJson { get; }
-
-		protected abstract void Validate(TResponse response);
-
-		[U]
-		public void ValidateResponse()
-		{
-			var ms = new MemoryStream(ResponseJson.Utf8Bytes());
-			var response = _serializer.Deserialize<TResponse>(ms);
-			Validate(response);
-		}
+		var ms = new MemoryStream(ResponseJson.Utf8Bytes());
+		var response = _serializer.Deserialize<TResponse>(ms);
+		Validate(response);
 	}
 }

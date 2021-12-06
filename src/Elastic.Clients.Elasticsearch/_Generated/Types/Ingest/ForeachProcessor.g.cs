@@ -76,14 +76,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Assign(processor, (a, v) => a.ProcessorValue = v);
 		}
 
-		public ForeachProcessorDescriptor<T> Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorContainerDescriptor<T> descriptor)
+		public ForeachProcessorDescriptor<T> Processor(Ingest.ProcessorContainerDescriptor<T> descriptor)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ProcessorDescriptor = v);
 		}
 
-		public ForeachProcessorDescriptor<T> Processor(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainerDescriptor<T>> configure)
+		public ForeachProcessorDescriptor<T> Processor(Action<Ingest.ProcessorContainerDescriptor<T>> configure)
 		{
 			ProcessorValue = null;
 			ProcessorDescriptorAction = null;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (ProcessorDescriptorAction is not null)
 			{
 				writer.WritePropertyName("processor");
-				JsonSerializer.Serialize(writer, new ProcessorContainerDescriptor<T>(ProcessorDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Ingest.ProcessorContainerDescriptor<T>(ProcessorDescriptorAction), options);
 			}
 			else
 			{

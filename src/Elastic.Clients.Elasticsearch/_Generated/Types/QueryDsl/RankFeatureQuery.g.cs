@@ -95,14 +95,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(saturation, (a, v) => a.SaturationValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
+		public RankFeatureQueryDescriptor<T> Saturation(QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
 		{
 			SaturationValue = null;
 			SaturationDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SaturationDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Saturation(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
+		public RankFeatureQueryDescriptor<T> Saturation(Action<QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
 		{
 			SaturationValue = null;
 			SaturationDescriptorAction = null;
@@ -116,14 +116,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(log, (a, v) => a.LogValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
+		public RankFeatureQueryDescriptor<T> Log(QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
 		{
 			LogValue = null;
 			LogDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LogDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Log(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
+		public RankFeatureQueryDescriptor<T> Log(Action<QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
 		{
 			LogValue = null;
 			LogDescriptorAction = null;
@@ -137,14 +137,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(linear, (a, v) => a.LinearValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
+		public RankFeatureQueryDescriptor<T> Linear(QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
 		{
 			LinearValue = null;
 			LinearDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LinearDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Linear(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
+		public RankFeatureQueryDescriptor<T> Linear(Action<QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
 		{
 			LinearValue = null;
 			LinearDescriptorAction = null;
@@ -158,14 +158,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(sigmoid, (a, v) => a.SigmoidValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
+		public RankFeatureQueryDescriptor<T> Sigmoid(QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
 		{
 			SigmoidValue = null;
 			SigmoidDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SigmoidDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Sigmoid(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
+		public RankFeatureQueryDescriptor<T> Sigmoid(Action<QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
 		{
 			SigmoidValue = null;
 			SigmoidDescriptorAction = null;
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (SaturationDescriptorAction is not null)
 			{
 				writer.WritePropertyName("saturation");
-				JsonSerializer.Serialize(writer, new RankFeatureFunctionSaturationDescriptor(SaturationDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.RankFeatureFunctionSaturationDescriptor(SaturationDescriptorAction), options);
 			}
 			else if (SaturationValue is not null)
 			{
@@ -203,7 +203,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (LogDescriptorAction is not null)
 			{
 				writer.WritePropertyName("log");
-				JsonSerializer.Serialize(writer, new RankFeatureFunctionLogarithmDescriptor(LogDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.RankFeatureFunctionLogarithmDescriptor(LogDescriptorAction), options);
 			}
 			else if (LogValue is not null)
 			{
@@ -219,7 +219,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (LinearDescriptorAction is not null)
 			{
 				writer.WritePropertyName("linear");
-				JsonSerializer.Serialize(writer, new RankFeatureFunctionLinearDescriptor(LinearDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.RankFeatureFunctionLinearDescriptor(LinearDescriptorAction), options);
 			}
 			else if (LinearValue is not null)
 			{
@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (SigmoidDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sigmoid");
-				JsonSerializer.Serialize(writer, new RankFeatureFunctionSigmoidDescriptor(SigmoidDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.RankFeatureFunctionSigmoidDescriptor(SigmoidDescriptorAction), options);
 			}
 			else if (SigmoidValue is not null)
 			{
