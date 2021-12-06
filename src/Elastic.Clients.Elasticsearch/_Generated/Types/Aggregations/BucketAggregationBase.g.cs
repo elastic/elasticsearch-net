@@ -29,24 +29,71 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		protected BucketAggregationBase(string name) : base(name)
 		{
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("aggregations")]
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	}
 
-	public sealed partial class BucketAggregationBaseDescriptor : DescriptorBase<BucketAggregationBaseDescriptor>
+	public sealed partial class BucketAggregationBaseDescriptor<T> : DescriptorBase<BucketAggregationBaseDescriptor<T>>
 	{
 		public BucketAggregationBaseDescriptor()
 		{
 		}
 
-		internal BucketAggregationBaseDescriptor(Action<BucketAggregationBaseDescriptor> configure) => configure.Invoke(this);
+		internal BucketAggregationBaseDescriptor(Action<BucketAggregationBaseDescriptor<T>> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
+
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
 		internal string? NameValue { get; private set; }
 
-		public BucketAggregationBaseDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public BucketAggregationBaseDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+
+		public BucketAggregationBaseDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+		}
+
+		public BucketAggregationBaseDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+		}
+
+		public BucketAggregationBaseDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+		}
+
+		public BucketAggregationBaseDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public BucketAggregationBaseDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
+			}
+
 			if (MetaValue is not null)
 			{
 				writer.WritePropertyName("meta");

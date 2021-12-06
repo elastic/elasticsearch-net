@@ -17,10 +17,11 @@ public class MinAggregationDeserializationTests : SourceSerializerTestBase
 
 		var aggregationContainer = _requestResponseSerializer.Deserialize<AggregationContainer>(stream);
 				
-		aggregationContainer.Meta.Should().HaveCount(3);
+		//aggregationContainer.Meta.Should().HaveCount(3);
 
 		var aggregation = aggregationContainer.Variant.Should().BeOfType<MinAggregation>().Subject;
 
 		aggregation.Field.Name.Should().Be("lastActivity");
+		aggregation.Meta.Should().HaveCount(3);
 	}
 }

@@ -181,14 +181,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(highlightQuery, (a, v) => a.HighlightQueryValue = v);
 		}
 
-		public HighlightFieldDescriptor<T> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public HighlightFieldDescriptor<T> HighlightQuery(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightQueryDescriptor = v);
 		}
 
-		public HighlightFieldDescriptor<T> HighlightQuery(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public HighlightFieldDescriptor<T> HighlightQuery(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;

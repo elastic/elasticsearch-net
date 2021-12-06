@@ -109,14 +109,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public AddActionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public AddActionDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public AddActionDescriptor<T> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public AddActionDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;

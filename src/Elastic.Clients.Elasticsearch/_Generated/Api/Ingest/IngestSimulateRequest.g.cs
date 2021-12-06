@@ -87,14 +87,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Assign(pipeline, (a, v) => a.PipelineValue = v);
 		}
 
-		public IngestSimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor descriptor)
+		public IngestSimulateRequestDescriptor Pipeline(Ingest.PipelineDescriptor descriptor)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PipelineDescriptor = v);
 		}
 
-		public IngestSimulateRequestDescriptor Pipeline(Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor> configure)
+		public IngestSimulateRequestDescriptor Pipeline(Action<Ingest.PipelineDescriptor> configure)
 		{
 			PipelineValue = null;
 			PipelineDescriptorAction = null;
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (PipelineDescriptorAction is not null)
 			{
 				writer.WritePropertyName("pipeline");
-				JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Ingest.PipelineDescriptor(PipelineDescriptorAction), options);
 			}
 			else if (PipelineValue is not null)
 			{

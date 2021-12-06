@@ -24,6 +24,50 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class TTestAggregationConverter : JsonConverter<TTestAggregation>
+	{
+		public override TTestAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new TTestAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, TTestAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("t_test");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.a is not null)
+			{
+				writer.WritePropertyName("a");
+				JsonSerializer.Serialize(writer, value.a, options);
+			}
+
+			if (value.b is not null)
+			{
+				writer.WritePropertyName("b");
+				JsonSerializer.Serialize(writer, value.b, options);
+			}
+
+			if (value.Type is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, value.Type, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(TTestAggregationConverter))]
 	public partial class TTestAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]
@@ -76,14 +120,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(a, (a, v) => a.aValue = v);
 		}
 
-		public TTestAggregationDescriptor<T> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T> descriptor)
+		public TTestAggregationDescriptor<T> a(Aggregations.TestPopulationDescriptor<T> descriptor)
 		{
 			aValue = null;
 			aDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.aDescriptor = v);
 		}
 
-		public TTestAggregationDescriptor<T> a(Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>> configure)
+		public TTestAggregationDescriptor<T> a(Action<Aggregations.TestPopulationDescriptor<T>> configure)
 		{
 			aValue = null;
 			aDescriptorAction = null;
@@ -97,14 +141,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(b, (a, v) => a.bValue = v);
 		}
 
-		public TTestAggregationDescriptor<T> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T> descriptor)
+		public TTestAggregationDescriptor<T> b(Aggregations.TestPopulationDescriptor<T> descriptor)
 		{
 			bValue = null;
 			bDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.bDescriptor = v);
 		}
 
-		public TTestAggregationDescriptor<T> b(Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>> configure)
+		public TTestAggregationDescriptor<T> b(Action<Aggregations.TestPopulationDescriptor<T>> configure)
 		{
 			bValue = null;
 			bDescriptorAction = null;
@@ -126,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (aDescriptorAction is not null)
 			{
 				writer.WritePropertyName("a");
-				JsonSerializer.Serialize(writer, new TestPopulationDescriptor<T>(aDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<T>(aDescriptorAction), options);
 			}
 			else if (aValue is not null)
 			{
@@ -142,7 +186,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (bDescriptorAction is not null)
 			{
 				writer.WritePropertyName("b");
-				JsonSerializer.Serialize(writer, new TestPopulationDescriptor<T>(bDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<T>(bDescriptorAction), options);
 			}
 			else if (bValue is not null)
 			{

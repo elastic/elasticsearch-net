@@ -107,14 +107,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		public CreateIndexRequestDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		public CreateIndexRequestDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
@@ -128,14 +128,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public CreateIndexRequestDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public CreateIndexRequestDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{

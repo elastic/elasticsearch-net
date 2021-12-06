@@ -132,14 +132,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(template, (a, v) => a.TemplateValue = v);
 		}
 
-		public IndexSimulateIndexTemplateRequestDescriptor<T> Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T> descriptor)
+		public IndexSimulateIndexTemplateRequestDescriptor<T> Template(IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T> descriptor)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.TemplateDescriptor = v);
 		}
 
-		public IndexSimulateIndexTemplateRequestDescriptor<T> Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T>> configure)
+		public IndexSimulateIndexTemplateRequestDescriptor<T> Template(Action<IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T>> configure)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
@@ -153,14 +153,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(dataStream, (a, v) => a.DataStreamValue = v);
 		}
 
-		public IndexSimulateIndexTemplateRequestDescriptor<T> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamDescriptor descriptor)
+		public IndexSimulateIndexTemplateRequestDescriptor<T> DataStream(IndexManagement.DataStreamDescriptor descriptor)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.DataStreamDescriptor = v);
 		}
 
-		public IndexSimulateIndexTemplateRequestDescriptor<T> DataStream(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamDescriptor> configure)
+		public IndexSimulateIndexTemplateRequestDescriptor<T> DataStream(Action<IndexManagement.DataStreamDescriptor> configure)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptorAction = null;
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (DataStreamDescriptorAction is not null)
 			{
 				writer.WritePropertyName("data_stream");
-				JsonSerializer.Serialize(writer, new DataStreamDescriptor(DataStreamDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.DataStreamDescriptor(DataStreamDescriptorAction), options);
 			}
 			else if (DataStreamValue is not null)
 			{

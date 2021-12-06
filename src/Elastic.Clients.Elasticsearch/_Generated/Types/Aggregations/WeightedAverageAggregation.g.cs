@@ -24,6 +24,56 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class WeightedAverageAggregationConverter : JsonConverter<WeightedAverageAggregation>
+	{
+		public override WeightedAverageAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new WeightedAverageAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, WeightedAverageAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("weighted_avg");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.Value is not null)
+			{
+				writer.WritePropertyName("value");
+				JsonSerializer.Serialize(writer, value.Value, options);
+			}
+
+			if (value.ValueType is not null)
+			{
+				writer.WritePropertyName("value_type");
+				JsonSerializer.Serialize(writer, value.ValueType, options);
+			}
+
+			if (value.Weight is not null)
+			{
+				writer.WritePropertyName("weight");
+				JsonSerializer.Serialize(writer, value.Weight, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(WeightedAverageAggregationConverter))]
 	public partial class WeightedAverageAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]
@@ -83,14 +133,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(value, (a, v) => a.ValueValue = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T> descriptor)
+		public WeightedAverageAggregationDescriptor<T> Value(Aggregations.WeightedAverageValueDescriptor<T> descriptor)
 		{
 			ValueValue = null;
 			ValueDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ValueDescriptor = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Value(Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T>> configure)
+		public WeightedAverageAggregationDescriptor<T> Value(Action<Aggregations.WeightedAverageValueDescriptor<T>> configure)
 		{
 			ValueValue = null;
 			ValueDescriptorAction = null;
@@ -105,14 +155,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(weight, (a, v) => a.WeightValue = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T> descriptor)
+		public WeightedAverageAggregationDescriptor<T> Weight(Aggregations.WeightedAverageValueDescriptor<T> descriptor)
 		{
 			WeightValue = null;
 			WeightDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.WeightDescriptor = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Weight(Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T>> configure)
+		public WeightedAverageAggregationDescriptor<T> Weight(Action<Aggregations.WeightedAverageValueDescriptor<T>> configure)
 		{
 			WeightValue = null;
 			WeightDescriptorAction = null;
@@ -139,7 +189,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ValueDescriptorAction is not null)
 			{
 				writer.WritePropertyName("value");
-				JsonSerializer.Serialize(writer, new WeightedAverageValueDescriptor<T>(ValueDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.WeightedAverageValueDescriptor<T>(ValueDescriptorAction), options);
 			}
 			else if (ValueValue is not null)
 			{
@@ -161,7 +211,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (WeightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("weight");
-				JsonSerializer.Serialize(writer, new WeightedAverageValueDescriptor<T>(WeightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.WeightedAverageValueDescriptor<T>(WeightDescriptorAction), options);
 			}
 			else if (WeightValue is not null)
 			{

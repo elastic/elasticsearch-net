@@ -83,14 +83,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Assign(inferenceConfig, (a, v) => a.InferenceConfigValue = v);
 		}
 
-		public InferenceProcessorDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor descriptor)
+		public InferenceProcessorDescriptor<T> InferenceConfig(Ingest.InferenceConfigDescriptor descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InferenceConfigDescriptor = v);
 		}
 
-		public InferenceProcessorDescriptor<T> InferenceConfig(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> configure)
+		public InferenceProcessorDescriptor<T> InferenceConfig(Action<Ingest.InferenceConfigDescriptor> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -122,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Ingest.InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{

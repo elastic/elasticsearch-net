@@ -24,6 +24,56 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class GeoBoundsAggregationConverter : JsonConverter<GeoBoundsAggregation>
+	{
+		public override GeoBoundsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new GeoBoundsAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoBoundsAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("geo_bounds");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.WrapLongitude.HasValue)
+			{
+				writer.WritePropertyName("wrap_longitude");
+				writer.WriteBooleanValue(value.WrapLongitude.Value);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(GeoBoundsAggregationConverter))]
 	public partial class GeoBoundsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
 		public GeoBoundsAggregation(string name, Field field) : base(name) => Field = field;

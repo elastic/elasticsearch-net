@@ -6,7 +6,7 @@ namespace Elastic.Clients.Elasticsearch
 {
 	internal static class AggregationContainerSerializationHelper
 	{
-		public static AggregationContainer ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : IAggregationContainerVariant
+		public static AggregationContainer ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : AggregationBase
 		{
 			var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
 
@@ -20,10 +20,10 @@ namespace Elastic.Clients.Elasticsearch
 				{
 					var meta = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
 
-					if (meta is not null)
-					{
-						container.Meta = meta;
-					}
+					//if (meta is not null)
+					//{
+					//	container.Meta = meta;
+					//}
 
 					reader.Read();
 				}

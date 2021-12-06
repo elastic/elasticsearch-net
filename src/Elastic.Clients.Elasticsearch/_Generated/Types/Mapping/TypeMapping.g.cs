@@ -155,14 +155,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(allField, (a, v) => a.AllFieldValue = v);
 		}
 
-		public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor descriptor)
+		public TypeMappingDescriptor AllField(Mapping.AllFieldDescriptor descriptor)
 		{
 			AllFieldValue = null;
 			AllFieldDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AllFieldDescriptor = v);
 		}
 
-		public TypeMappingDescriptor AllField(Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> configure)
+		public TypeMappingDescriptor AllField(Action<Mapping.AllFieldDescriptor> configure)
 		{
 			AllFieldValue = null;
 			AllFieldDescriptorAction = null;
@@ -180,14 +180,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(fieldNames, (a, v) => a.FieldNamesValue = v);
 		}
 
-		public TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor descriptor)
+		public TypeMappingDescriptor FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
 		{
 			FieldNamesValue = null;
 			FieldNamesDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FieldNamesDescriptor = v);
 		}
 
-		public TypeMappingDescriptor FieldNames(Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> configure)
+		public TypeMappingDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
 		{
 			FieldNamesValue = null;
 			FieldNamesDescriptorAction = null;
@@ -201,14 +201,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(indexField, (a, v) => a.IndexFieldValue = v);
 		}
 
-		public TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor descriptor)
+		public TypeMappingDescriptor IndexField(Mapping.IndexFieldDescriptor descriptor)
 		{
 			IndexFieldValue = null;
 			IndexFieldDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.IndexFieldDescriptor = v);
 		}
 
-		public TypeMappingDescriptor IndexField(Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> configure)
+		public TypeMappingDescriptor IndexField(Action<Mapping.IndexFieldDescriptor> configure)
 		{
 			IndexFieldValue = null;
 			IndexFieldDescriptorAction = null;
@@ -225,14 +225,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(routing, (a, v) => a.RoutingValue = v);
 		}
 
-		public TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor)
+		public TypeMappingDescriptor Routing(Mapping.RoutingFieldDescriptor descriptor)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
 		}
 
-		public TypeMappingDescriptor Routing(Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> configure)
+		public TypeMappingDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
@@ -246,14 +246,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(size, (a, v) => a.SizeValue = v);
 		}
 
-		public TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor descriptor)
+		public TypeMappingDescriptor Size(Mapping.SizeFieldDescriptor descriptor)
 		{
 			SizeValue = null;
 			SizeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SizeDescriptor = v);
 		}
 
-		public TypeMappingDescriptor Size(Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> configure)
+		public TypeMappingDescriptor Size(Action<Mapping.SizeFieldDescriptor> configure)
 		{
 			SizeValue = null;
 			SizeDescriptorAction = null;
@@ -267,14 +267,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			return Assign(source, (a, v) => a.SourceValue = v);
 		}
 
-		public TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor)
+		public TypeMappingDescriptor Source(Mapping.SourceFieldDescriptor descriptor)
 		{
 			SourceValue = null;
 			SourceDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SourceDescriptor = v);
 		}
 
-		public TypeMappingDescriptor Source(Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> configure)
+		public TypeMappingDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
 		{
 			SourceValue = null;
 			SourceDescriptorAction = null;
@@ -294,7 +294,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (AllFieldDescriptorAction is not null)
 			{
 				writer.WritePropertyName("all_field");
-				JsonSerializer.Serialize(writer, new AllFieldDescriptor(AllFieldDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.AllFieldDescriptor(AllFieldDescriptorAction), options);
 			}
 			else if (AllFieldValue is not null)
 			{
@@ -334,7 +334,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (FieldNamesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_field_names");
-				JsonSerializer.Serialize(writer, new FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
 			}
 			else if (FieldNamesValue is not null)
 			{
@@ -350,7 +350,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (IndexFieldDescriptorAction is not null)
 			{
 				writer.WritePropertyName("index_field");
-				JsonSerializer.Serialize(writer, new IndexFieldDescriptor(IndexFieldDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.IndexFieldDescriptor(IndexFieldDescriptorAction), options);
 			}
 			else if (IndexFieldValue is not null)
 			{
@@ -384,7 +384,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (RoutingDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_routing");
-				JsonSerializer.Serialize(writer, new RoutingFieldDescriptor(RoutingDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
 			}
 			else if (RoutingValue is not null)
 			{
@@ -400,7 +400,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (SizeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_size");
-				JsonSerializer.Serialize(writer, new SizeFieldDescriptor(SizeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.SizeFieldDescriptor(SizeDescriptorAction), options);
 			}
 			else if (SizeValue is not null)
 			{
@@ -416,7 +416,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (SourceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, new SourceFieldDescriptor(SourceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
 			}
 			else if (SourceValue is not null)
 			{

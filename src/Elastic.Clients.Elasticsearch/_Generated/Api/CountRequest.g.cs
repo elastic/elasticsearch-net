@@ -171,14 +171,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public CountRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public CountRequestDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public CountRequestDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public CountRequestDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;

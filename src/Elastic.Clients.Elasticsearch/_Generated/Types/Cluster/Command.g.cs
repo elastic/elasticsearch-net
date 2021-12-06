@@ -91,14 +91,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			return Assign(cancel, (a, v) => a.CancelValue = v);
 		}
 
-		public CommandDescriptor Cancel(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelActionDescriptor descriptor)
+		public CommandDescriptor Cancel(Cluster.Reroute.CommandCancelActionDescriptor descriptor)
 		{
 			CancelValue = null;
 			CancelDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.CancelDescriptor = v);
 		}
 
-		public CommandDescriptor Cancel(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandCancelActionDescriptor> configure)
+		public CommandDescriptor Cancel(Action<Cluster.Reroute.CommandCancelActionDescriptor> configure)
 		{
 			CancelValue = null;
 			CancelDescriptorAction = null;
@@ -112,14 +112,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			return Assign(move, (a, v) => a.MoveValue = v);
 		}
 
-		public CommandDescriptor Move(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveActionDescriptor descriptor)
+		public CommandDescriptor Move(Cluster.Reroute.CommandMoveActionDescriptor descriptor)
 		{
 			MoveValue = null;
 			MoveDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MoveDescriptor = v);
 		}
 
-		public CommandDescriptor Move(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandMoveActionDescriptor> configure)
+		public CommandDescriptor Move(Action<Cluster.Reroute.CommandMoveActionDescriptor> configure)
 		{
 			MoveValue = null;
 			MoveDescriptorAction = null;
@@ -133,14 +133,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			return Assign(allocateReplica, (a, v) => a.AllocateReplicaValue = v);
 		}
 
-		public CommandDescriptor AllocateReplica(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaActionDescriptor descriptor)
+		public CommandDescriptor AllocateReplica(Cluster.Reroute.CommandAllocateReplicaActionDescriptor descriptor)
 		{
 			AllocateReplicaValue = null;
 			AllocateReplicaDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AllocateReplicaDescriptor = v);
 		}
 
-		public CommandDescriptor AllocateReplica(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocateReplicaActionDescriptor> configure)
+		public CommandDescriptor AllocateReplica(Action<Cluster.Reroute.CommandAllocateReplicaActionDescriptor> configure)
 		{
 			AllocateReplicaValue = null;
 			AllocateReplicaDescriptorAction = null;
@@ -154,14 +154,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			return Assign(allocateStalePrimary, (a, v) => a.AllocateStalePrimaryValue = v);
 		}
 
-		public CommandDescriptor AllocateStalePrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor descriptor)
+		public CommandDescriptor AllocateStalePrimary(Cluster.Reroute.CommandAllocatePrimaryActionDescriptor descriptor)
 		{
 			AllocateStalePrimaryValue = null;
 			AllocateStalePrimaryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AllocateStalePrimaryDescriptor = v);
 		}
 
-		public CommandDescriptor AllocateStalePrimary(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor> configure)
+		public CommandDescriptor AllocateStalePrimary(Action<Cluster.Reroute.CommandAllocatePrimaryActionDescriptor> configure)
 		{
 			AllocateStalePrimaryValue = null;
 			AllocateStalePrimaryDescriptorAction = null;
@@ -175,14 +175,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			return Assign(allocateEmptyPrimary, (a, v) => a.AllocateEmptyPrimaryValue = v);
 		}
 
-		public CommandDescriptor AllocateEmptyPrimary(Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor descriptor)
+		public CommandDescriptor AllocateEmptyPrimary(Cluster.Reroute.CommandAllocatePrimaryActionDescriptor descriptor)
 		{
 			AllocateEmptyPrimaryValue = null;
 			AllocateEmptyPrimaryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AllocateEmptyPrimaryDescriptor = v);
 		}
 
-		public CommandDescriptor AllocateEmptyPrimary(Action<Elastic.Clients.Elasticsearch.Cluster.Reroute.CommandAllocatePrimaryActionDescriptor> configure)
+		public CommandDescriptor AllocateEmptyPrimary(Action<Cluster.Reroute.CommandAllocatePrimaryActionDescriptor> configure)
 		{
 			AllocateEmptyPrimaryValue = null;
 			AllocateEmptyPrimaryDescriptorAction = null;
@@ -200,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			else if (CancelDescriptorAction is not null)
 			{
 				writer.WritePropertyName("cancel");
-				JsonSerializer.Serialize(writer, new CommandCancelActionDescriptor(CancelDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Cluster.Reroute.CommandCancelActionDescriptor(CancelDescriptorAction), options);
 			}
 			else if (CancelValue is not null)
 			{
@@ -216,7 +216,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			else if (MoveDescriptorAction is not null)
 			{
 				writer.WritePropertyName("move");
-				JsonSerializer.Serialize(writer, new CommandMoveActionDescriptor(MoveDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Cluster.Reroute.CommandMoveActionDescriptor(MoveDescriptorAction), options);
 			}
 			else if (MoveValue is not null)
 			{
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			else if (AllocateReplicaDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocate_replica");
-				JsonSerializer.Serialize(writer, new CommandAllocateReplicaActionDescriptor(AllocateReplicaDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Cluster.Reroute.CommandAllocateReplicaActionDescriptor(AllocateReplicaDescriptorAction), options);
 			}
 			else if (AllocateReplicaValue is not null)
 			{
@@ -248,7 +248,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			else if (AllocateStalePrimaryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocate_stale_primary");
-				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(AllocateStalePrimaryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Cluster.Reroute.CommandAllocatePrimaryActionDescriptor(AllocateStalePrimaryDescriptorAction), options);
 			}
 			else if (AllocateStalePrimaryValue is not null)
 			{
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Reroute
 			else if (AllocateEmptyPrimaryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("allocate_empty_primary");
-				JsonSerializer.Serialize(writer, new CommandAllocatePrimaryActionDescriptor(AllocateEmptyPrimaryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Cluster.Reroute.CommandAllocatePrimaryActionDescriptor(AllocateEmptyPrimaryDescriptorAction), options);
 			}
 			else if (AllocateEmptyPrimaryValue is not null)
 			{

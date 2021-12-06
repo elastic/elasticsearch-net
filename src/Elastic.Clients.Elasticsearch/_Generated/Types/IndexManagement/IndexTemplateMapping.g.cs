@@ -68,14 +68,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		public IndexTemplateMappingDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		public IndexTemplateMappingDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
@@ -89,14 +89,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexTemplateMappingDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexTemplateMappingDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;

@@ -93,14 +93,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public BoolQueryDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoolQueryDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public BoolQueryDescriptor<T> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoolQueryDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -115,14 +115,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(must, (a, v) => a.MustValue = v);
 		}
 
-		public BoolQueryDescriptor<T> Must(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoolQueryDescriptor<T> Must(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			MustValue = null;
 			MustDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MustDescriptor = v);
 		}
 
-		public BoolQueryDescriptor<T> Must(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoolQueryDescriptor<T> Must(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			MustValue = null;
 			MustDescriptorAction = null;
@@ -136,14 +136,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(mustNot, (a, v) => a.MustNotValue = v);
 		}
 
-		public BoolQueryDescriptor<T> MustNot(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoolQueryDescriptor<T> MustNot(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			MustNotValue = null;
 			MustNotDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MustNotDescriptor = v);
 		}
 
-		public BoolQueryDescriptor<T> MustNot(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoolQueryDescriptor<T> MustNot(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			MustNotValue = null;
 			MustNotDescriptorAction = null;
@@ -157,14 +157,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(should, (a, v) => a.ShouldValue = v);
 		}
 
-		public BoolQueryDescriptor<T> Should(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoolQueryDescriptor<T> Should(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			ShouldValue = null;
 			ShouldDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ShouldDescriptor = v);
 		}
 
-		public BoolQueryDescriptor<T> Should(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoolQueryDescriptor<T> Should(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			ShouldValue = null;
 			ShouldDescriptorAction = null;
@@ -184,7 +184,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (MustDescriptorAction is not null)
 			{
 				writer.WritePropertyName("must");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(MustDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(MustDescriptorAction), options);
 			}
 			else if (MustValue is not null)
 			{
@@ -222,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (MustNotDescriptorAction is not null)
 			{
 				writer.WritePropertyName("must_not");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(MustNotDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(MustNotDescriptorAction), options);
 			}
 			else if (MustNotValue is not null)
 			{
@@ -238,7 +238,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ShouldDescriptorAction is not null)
 			{
 				writer.WritePropertyName("should");
-				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<T>(ShouldDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(ShouldDescriptorAction), options);
 			}
 			else if (ShouldValue is not null)
 			{

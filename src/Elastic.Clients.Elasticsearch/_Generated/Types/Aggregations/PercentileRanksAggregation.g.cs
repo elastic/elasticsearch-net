@@ -24,6 +24,80 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class PercentileRanksAggregationConverter : JsonConverter<PercentileRanksAggregation>
+	{
+		public override PercentileRanksAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new PercentileRanksAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, PercentileRanksAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("percentile_ranks");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value.Keyed.Value);
+			}
+
+			if (value.Values is not null)
+			{
+				writer.WritePropertyName("values");
+				JsonSerializer.Serialize(writer, value.Values, options);
+			}
+
+			if (value.Hdr is not null)
+			{
+				writer.WritePropertyName("hdr");
+				JsonSerializer.Serialize(writer, value.Hdr, options);
+			}
+
+			if (value.TDigest is not null)
+			{
+				writer.WritePropertyName("tdigest");
+				JsonSerializer.Serialize(writer, value.TDigest, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(PercentileRanksAggregationConverter))]
 	public partial class PercentileRanksAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
 		public PercentileRanksAggregation(string name, Field field) : base(name) => Field = field;
@@ -93,14 +167,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(hdr, (a, v) => a.HdrValue = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor)
+		public PercentileRanksAggregationDescriptor<T> Hdr(Aggregations.HdrMethodDescriptor descriptor)
 		{
 			HdrValue = null;
 			HdrDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HdrDescriptor = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> Hdr(Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> configure)
+		public PercentileRanksAggregationDescriptor<T> Hdr(Action<Aggregations.HdrMethodDescriptor> configure)
 		{
 			HdrValue = null;
 			HdrDescriptorAction = null;
@@ -114,14 +188,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(tDigest, (a, v) => a.TDigestValue = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
+		public PercentileRanksAggregationDescriptor<T> TDigest(Aggregations.TDigestDescriptor descriptor)
 		{
 			TDigestValue = null;
 			TDigestDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.TDigestDescriptor = v);
 		}
 
-		public PercentileRanksAggregationDescriptor<T> TDigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
+		public PercentileRanksAggregationDescriptor<T> TDigest(Action<Aggregations.TDigestDescriptor> configure)
 		{
 			TDigestValue = null;
 			TDigestDescriptorAction = null;
@@ -159,7 +233,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (HdrDescriptorAction is not null)
 			{
 				writer.WritePropertyName("hdr");
-				JsonSerializer.Serialize(writer, new HdrMethodDescriptor(HdrDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.HdrMethodDescriptor(HdrDescriptorAction), options);
 			}
 			else if (HdrValue is not null)
 			{
@@ -175,7 +249,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (TDigestDescriptorAction is not null)
 			{
 				writer.WritePropertyName("tdigest");
-				JsonSerializer.Serialize(writer, new TDigestDescriptor(TDigestDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.TDigestDescriptor(TDigestDescriptorAction), options);
 			}
 			else if (TDigestValue is not null)
 			{

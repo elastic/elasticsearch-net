@@ -65,14 +65,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
 		}
 
-		public FieldCollapseDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHitsDescriptor<T> descriptor)
+		public FieldCollapseDescriptor<T> InnerHits(InnerHitsDescriptor<T> descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
 		}
 
-		public FieldCollapseDescriptor<T> InnerHits(Action<Elastic.Clients.Elasticsearch.InnerHitsDescriptor<T>> configure)
+		public FieldCollapseDescriptor<T> InnerHits(Action<InnerHitsDescriptor<T>> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;

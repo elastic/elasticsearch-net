@@ -413,14 +413,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(index, (a, v) => a.IndexValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexSettingsDescriptor<T> Index(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			IndexValue = null;
 			IndexDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.IndexDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Index(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexSettingsDescriptor<T> Index(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			IndexValue = null;
 			IndexDescriptorAction = null;
@@ -436,14 +436,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(softDeletes, (a, v) => a.SoftDeletesValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor descriptor)
+		public IndexSettingsDescriptor<T> SoftDeletes(IndexManagement.SoftDeletesDescriptor descriptor)
 		{
 			SoftDeletesValue = null;
 			SoftDeletesDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SoftDeletesDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> SoftDeletes(Action<Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor> configure)
+		public IndexSettingsDescriptor<T> SoftDeletes(Action<IndexManagement.SoftDeletesDescriptor> configure)
 		{
 			SoftDeletesValue = null;
 			SoftDeletesDescriptorAction = null;
@@ -457,14 +457,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(sort, (a, v) => a.SortValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<T> descriptor)
+		public IndexSettingsDescriptor<T> Sort(IndexManagement.IndexSegmentSortDescriptor<T> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Sort(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSortDescriptor<T>> configure)
+		public IndexSettingsDescriptor<T> Sort(Action<IndexManagement.IndexSegmentSortDescriptor<T>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
@@ -498,14 +498,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(blocks, (a, v) => a.BlocksValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor descriptor)
+		public IndexSettingsDescriptor<T> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
 		{
 			BlocksValue = null;
 			BlocksDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.BlocksDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Blocks(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocksDescriptor> configure)
+		public IndexSettingsDescriptor<T> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
 		{
 			BlocksValue = null;
 			BlocksDescriptorAction = null;
@@ -529,14 +529,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(routing, (a, v) => a.RoutingValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor descriptor)
+		public IndexSettingsDescriptor<T> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Routing(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingDescriptor> configure)
+		public IndexSettingsDescriptor<T> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
@@ -553,14 +553,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(lifecycle, (a, v) => a.LifecycleValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
+		public IndexSettingsDescriptor<T> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
 		{
 			LifecycleValue = null;
 			LifecycleDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LifecycleDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Lifecycle(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor> configure)
+		public IndexSettingsDescriptor<T> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
 		{
 			LifecycleValue = null;
 			LifecycleDescriptorAction = null;
@@ -578,14 +578,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(version, (a, v) => a.VersionValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor descriptor)
+		public IndexSettingsDescriptor<T> Version(IndexManagement.IndexVersioningDescriptor descriptor)
 		{
 			VersionValue = null;
 			VersionDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.VersionDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Version(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioningDescriptor> configure)
+		public IndexSettingsDescriptor<T> Version(Action<IndexManagement.IndexVersioningDescriptor> configure)
 		{
 			VersionValue = null;
 			VersionDescriptorAction = null;
@@ -607,14 +607,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(analysis, (a, v) => a.AnalysisValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
+		public IndexSettingsDescriptor<T> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
 		{
 			AnalysisValue = null;
 			AnalysisDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AnalysisDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Analysis(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysisDescriptor> configure)
+		public IndexSettingsDescriptor<T> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
 		{
 			AnalysisValue = null;
 			AnalysisDescriptorAction = null;
@@ -628,14 +628,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexSettingsDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexSettingsDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
@@ -653,7 +653,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (IndexDescriptorAction is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<T>(IndexDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(IndexDescriptorAction), options);
 			}
 			else if (IndexValue is not null)
 			{
@@ -681,7 +681,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SoftDeletesDescriptorAction is not null)
 			{
 				writer.WritePropertyName("soft_deletes");
-				JsonSerializer.Serialize(writer, new SoftDeletesDescriptor(SoftDeletesDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.SoftDeletesDescriptor(SoftDeletesDescriptorAction), options);
 			}
 			else if (SoftDeletesValue is not null)
 			{
@@ -697,7 +697,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new IndexSegmentSortDescriptor<T>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSegmentSortDescriptor<T>(SortDescriptorAction), options);
 			}
 			else if (SortValue is not null)
 			{
@@ -833,7 +833,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (BlocksDescriptorAction is not null)
 			{
 				writer.WritePropertyName("blocks");
-				JsonSerializer.Serialize(writer, new IndexSettingBlocksDescriptor(BlocksDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingBlocksDescriptor(BlocksDescriptorAction), options);
 			}
 			else if (BlocksValue is not null)
 			{
@@ -909,7 +909,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (RoutingDescriptorAction is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, new IndexRoutingDescriptor(RoutingDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingDescriptor(RoutingDescriptorAction), options);
 			}
 			else if (RoutingValue is not null)
 			{
@@ -943,7 +943,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (LifecycleDescriptorAction is not null)
 			{
 				writer.WritePropertyName("lifecycle");
-				JsonSerializer.Serialize(writer, new IndexSettingsLifecycleDescriptor(LifecycleDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsLifecycleDescriptor(LifecycleDescriptorAction), options);
 			}
 			else if (LifecycleValue is not null)
 			{
@@ -983,7 +983,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (VersionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("version");
-				JsonSerializer.Serialize(writer, new IndexVersioningDescriptor(VersionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexVersioningDescriptor(VersionDescriptorAction), options);
 			}
 			else if (VersionValue is not null)
 			{
@@ -1047,7 +1047,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (AnalysisDescriptorAction is not null)
 			{
 				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, new IndexSettingsAnalysisDescriptor(AnalysisDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsAnalysisDescriptor(AnalysisDescriptorAction), options);
 			}
 			else if (AnalysisValue is not null)
 			{
@@ -1063,7 +1063,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{

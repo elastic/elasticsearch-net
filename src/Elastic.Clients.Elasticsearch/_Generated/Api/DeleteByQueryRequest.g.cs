@@ -282,14 +282,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public DeleteByQueryRequestDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainerDescriptor<T>> configure)
+		public DeleteByQueryRequestDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -303,14 +303,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(slice, (a, v) => a.SliceValue = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T> descriptor)
+		public DeleteByQueryRequestDescriptor<T> Slice(SlicedScrollDescriptor<T> descriptor)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SliceDescriptor = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> configure)
+		public DeleteByQueryRequestDescriptor<T> Slice(Action<SlicedScrollDescriptor<T>> configure)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
