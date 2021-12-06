@@ -38,6 +38,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("adjacency_matrix");
 			writer.WriteStartObject();
+			if (value.Filters is not null)
+			{
+				writer.WritePropertyName("filters");
+				JsonSerializer.Serialize(writer, value.Filters, options);
+			}
+
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -51,26 +57,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Aggregations, options);
 			}
 
-			if (value.Filters is not null)
-			{
-				writer.WritePropertyName("filters");
-				JsonSerializer.Serialize(writer, value.Filters, options);
-			}
-
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(AdjacencyMatrixAggregationConverter))]
-	public partial class AdjacencyMatrixAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class AdjacencyMatrixAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public AdjacencyMatrixAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "adjacency_matrix";
 		[JsonInclude]
 		[JsonPropertyName("filters")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }

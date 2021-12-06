@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geo_line");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			writer.WritePropertyName("point");
 			JsonSerializer.Serialize(writer, value.Point, options);
 			writer.WritePropertyName("sort");
@@ -68,19 +61,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(GeoLineAggregationConverter))]
-	public partial class GeoLineAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
+	public partial class GeoLineAggregation : Aggregations.AggregationBase
 	{
-		[JsonConstructor]
 		public GeoLineAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "geo_line";
 		[JsonInclude]
 		[JsonPropertyName("point")]
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }

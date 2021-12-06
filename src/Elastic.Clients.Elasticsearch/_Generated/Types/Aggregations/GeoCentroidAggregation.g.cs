@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geo_centroid");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Count.HasValue)
 			{
 				writer.WritePropertyName("count");
@@ -76,20 +69,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(GeoCentroidAggregationConverter))]
-	public partial class GeoCentroidAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class GeoCentroidAggregation : Aggregations.MetricAggregationBase
 	{
 		public GeoCentroidAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public GeoCentroidAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "geo_centroid";
 		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long? Count { get; set; }

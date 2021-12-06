@@ -24,16 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public interface IAggregationContainerVariant
-	{
-		string AggregationContainerVariantName { get; }
-	}
-
 	[JsonConverter(typeof(AggregationContainerConverter))]
 	public partial class AggregationContainer : IContainer
 	{
 		public AggregationContainer(AggregationBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-
 		internal AggregationBase Variant { get; }
 	}
 
@@ -41,6 +35,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		public override AggregationContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
+			//var readAheadCopy = reader;
+
 			reader.Read();
 			if (reader.TokenType != JsonTokenType.PropertyName)
 			{
@@ -48,6 +44,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			var propertyName = reader.GetString();
+
 			if (propertyName == "adjacency_matrix")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>(ref reader, options);
@@ -220,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			if (propertyName == "min")
 			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>(ref reader, options);
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>("min", ref reader, options);
 			}
 
 			if (propertyName == "min_bucket")

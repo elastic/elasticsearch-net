@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("stats_bucket");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.BucketsPath is not null)
 			{
 				writer.WritePropertyName("buckets_path");
@@ -64,19 +57,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(StatsBucketAggregationConverter))]
-	public partial class StatsBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
+	public partial class StatsBucketAggregation : Aggregations.PipelineAggregationBase
 	{
-		[JsonConstructor]
 		public StatsBucketAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "stats_bucket";
 	}
 
 	public sealed partial class StatsBucketAggregationDescriptor : DescriptorBase<StatsBucketAggregationDescriptor>

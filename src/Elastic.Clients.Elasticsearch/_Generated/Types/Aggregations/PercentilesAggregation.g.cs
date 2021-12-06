@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("percentiles");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Keyed.HasValue)
 			{
 				writer.WritePropertyName("keyed");
@@ -94,20 +87,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(PercentilesAggregationConverter))]
-	public partial class PercentilesAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	public partial class PercentilesAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public PercentilesAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public PercentilesAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "percentiles";
 		[JsonInclude]
 		[JsonPropertyName("keyed")]
 		public bool? Keyed { get; set; }

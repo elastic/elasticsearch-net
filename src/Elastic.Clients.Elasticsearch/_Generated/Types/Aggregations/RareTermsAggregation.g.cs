@@ -38,19 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("rare_terms");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (value.Aggregations is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, value.Aggregations, options);
-			}
-
 			if (value.Exclude is not null)
 			{
 				writer.WritePropertyName("exclude");
@@ -94,19 +81,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(RareTermsAggregationConverter))]
-	public partial class RareTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class RareTermsAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public RareTermsAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "rare_terms";
 		[JsonInclude]
 		[JsonPropertyName("exclude")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }

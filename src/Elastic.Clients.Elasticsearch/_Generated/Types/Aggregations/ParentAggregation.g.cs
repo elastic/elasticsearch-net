@@ -38,6 +38,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("parent");
 			writer.WriteStartObject();
+			if (value.Type is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, value.Type, options);
+			}
+
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -51,26 +57,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Aggregations, options);
 			}
 
-			if (value.Type is not null)
-			{
-				writer.WritePropertyName("type");
-				JsonSerializer.Serialize(writer, value.Type, options);
-			}
-
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(ParentAggregationConverter))]
-	public partial class ParentAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class ParentAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public ParentAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "parent";
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string? Type { get; set; }

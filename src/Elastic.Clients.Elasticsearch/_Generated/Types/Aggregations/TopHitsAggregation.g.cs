@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("top_hits");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.DocvalueFields is not null)
 			{
 				writer.WritePropertyName("docvalue_fields");
@@ -136,20 +129,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(TopHitsAggregationConverter))]
-	public partial class TopHitsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class TopHitsAggregation : Aggregations.MetricAggregationBase
 	{
 		public TopHitsAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public TopHitsAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "top_hits";
 		[JsonInclude]
 		[JsonPropertyName("docvalue_fields")]
 		public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }

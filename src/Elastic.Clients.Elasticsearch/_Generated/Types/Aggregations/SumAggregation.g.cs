@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("sum");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -70,20 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(SumAggregationConverter))]
-	public partial class SumAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	public partial class SumAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public SumAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public SumAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "sum";
 	}
 
 	public sealed partial class SumAggregationDescriptor<T> : DescriptorBase<SumAggregationDescriptor<T>>

@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("boxplot");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Compression.HasValue)
 			{
 				writer.WritePropertyName("compression");
@@ -70,20 +63,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(BoxplotAggregationConverter))]
-	public partial class BoxplotAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class BoxplotAggregation : Aggregations.MetricAggregationBase
 	{
 		public BoxplotAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public BoxplotAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "boxplot";
 		[JsonInclude]
 		[JsonPropertyName("compression")]
 		public double? Compression { get; set; }
