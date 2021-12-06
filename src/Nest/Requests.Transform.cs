@@ -74,6 +74,13 @@ namespace Nest
 			get => Q<bool? >("force");
 			set => Q("force", value);
 		}
+
+		///<summary>Controls the time to wait for the transform deletion</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -217,7 +224,13 @@ namespace Nest
 		// values part of the url path
 		[IgnoreDataMember]
 		Id IPreviewTransformRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
-	// Request parameters
+		// Request parameters
+		///<summary>Controls the time to wait for the preview</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	[InterfaceDataContract]
@@ -256,6 +269,13 @@ namespace Nest
 		{
 			get => Q<bool? >("defer_validation");
 			set => Q("defer_validation", value);
+		}
+
+		///<summary>Controls the time to wait for the transform to start</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
 		}
 	}
 
@@ -401,6 +421,13 @@ namespace Nest
 		{
 			get => Q<bool? >("defer_validation");
 			set => Q("defer_validation", value);
+		}
+
+		///<summary>Controls the time to wait for the update</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
 		}
 	}
 }

@@ -59,6 +59,8 @@ namespace Nest
 		public NodesHotThreadsDescriptor Interval(Time interval) => Qs("interval", interval);
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public NodesHotThreadsDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
+		///<summary>The sort order for 'cpu' type (default: total)</summary>
+		public NodesHotThreadsDescriptor Sort(Sort? sort) => Qs("sort", sort);
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsDescriptor ThreadType(ThreadType? threadtype) => Qs("type", threadtype);
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
