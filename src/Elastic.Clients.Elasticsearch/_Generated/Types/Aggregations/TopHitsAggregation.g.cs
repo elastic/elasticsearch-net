@@ -30,7 +30,165 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new TopHitsAggregation("");
+			var agg = new TopHitsAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("docvalue_fields"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.DocvalueFields = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("explain"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Explain = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("from"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.From = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("highlight"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Highlight?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Highlight = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("script_fields"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ScriptFields = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("sort"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Sort?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Sort = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("_source"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SourceConfig?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Source = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("stored_fields"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Fields?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.StoredFields = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("track_scores"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.TrackScores = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("version"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Version = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("seq_no_primary_term"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.SeqNoPrimaryTerm = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("field"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("missing"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Missing?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("script"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Script = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, TopHitsAggregation value, JsonSerializerOptions options)
