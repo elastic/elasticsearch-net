@@ -30,7 +30,66 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new VariableWidthHistogramAggregation("");
+			var agg = new VariableWidthHistogramAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("field"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("buckets"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Buckets = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("shard_size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardSize = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("initial_buffer"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.InitialBuffer = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, VariableWidthHistogramAggregation value, JsonSerializerOptions options)

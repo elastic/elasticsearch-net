@@ -30,7 +30,84 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new GeoDistanceAggregation("");
+			var agg = new GeoDistanceAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("distance_type"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.DistanceType = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("field"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("origin"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoLocation?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Origin = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("ranges"))
+					{
+						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Ranges = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("unit"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Unit = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
+					{
+						var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Aggregations = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, GeoDistanceAggregation value, JsonSerializerOptions options)

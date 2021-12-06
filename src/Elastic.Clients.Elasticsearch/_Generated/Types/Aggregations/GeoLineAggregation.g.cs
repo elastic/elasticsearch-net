@@ -30,7 +30,75 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new GeoLineAggregation("");
+			var agg = new GeoLineAggregation("");
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("point"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Point = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("sort"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Sort = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("include_sort"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.IncludeSort = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("sort_order"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortOrder?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.SortOrder = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Meta = value;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, GeoLineAggregation value, JsonSerializerOptions options)
