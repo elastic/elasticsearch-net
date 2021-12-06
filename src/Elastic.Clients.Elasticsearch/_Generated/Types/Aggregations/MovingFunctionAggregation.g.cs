@@ -24,6 +24,68 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class MovingFunctionAggregationConverter : JsonConverter<MovingFunctionAggregation>
+	{
+		public override MovingFunctionAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new MovingFunctionAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, MovingFunctionAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("moving_fn");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Script))
+			{
+				writer.WritePropertyName("script");
+				writer.WriteStringValue(value.Script);
+			}
+
+			if (value.Shift.HasValue)
+			{
+				writer.WritePropertyName("shift");
+				writer.WriteNumberValue(value.Shift.Value);
+			}
+
+			if (value.Window.HasValue)
+			{
+				writer.WritePropertyName("window");
+				writer.WriteNumberValue(value.Window.Value);
+			}
+
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.GapPolicy is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(MovingFunctionAggregationConverter))]
 	public partial class MovingFunctionAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]

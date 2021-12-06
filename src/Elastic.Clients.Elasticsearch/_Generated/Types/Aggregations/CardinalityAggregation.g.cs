@@ -24,6 +24,62 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class CardinalityAggregationConverter : JsonConverter<CardinalityAggregation>
+	{
+		public override CardinalityAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new CardinalityAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, CardinalityAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("cardinality");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.PrecisionThreshold.HasValue)
+			{
+				writer.WritePropertyName("precision_threshold");
+				writer.WriteNumberValue(value.PrecisionThreshold.Value);
+			}
+
+			if (value.Rehash.HasValue)
+			{
+				writer.WritePropertyName("rehash");
+				writer.WriteBooleanValue(value.Rehash.Value);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(CardinalityAggregationConverter))]
 	public partial class CardinalityAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
 		public CardinalityAggregation(string name, Field field) : base(name) => Field = field;

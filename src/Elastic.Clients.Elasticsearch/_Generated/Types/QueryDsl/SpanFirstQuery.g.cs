@@ -66,14 +66,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(match, (a, v) => a.MatchValue = v);
 		}
 
-		public SpanFirstQueryDescriptor<T> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanFirstQueryDescriptor<T> Match(QueryDsl.SpanQueryDescriptor<T> descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MatchDescriptor = v);
 		}
 
-		public SpanFirstQueryDescriptor<T> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanFirstQueryDescriptor<T> Match(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (MatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("match");
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<T>(MatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(MatchDescriptorAction), options);
 			}
 			else
 			{

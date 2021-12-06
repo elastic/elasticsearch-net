@@ -24,6 +24,68 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class DiversifiedSamplerAggregationConverter : JsonConverter<DiversifiedSamplerAggregation>
+	{
+		public override DiversifiedSamplerAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new DiversifiedSamplerAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, DiversifiedSamplerAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("diversified_sampler");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.ExecutionHint is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, value.ExecutionHint, options);
+			}
+
+			if (value.MaxDocsPerValue.HasValue)
+			{
+				writer.WritePropertyName("max_docs_per_value");
+				writer.WriteNumberValue(value.MaxDocsPerValue.Value);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			if (value.ShardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value.ShardSize.Value);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(DiversifiedSamplerAggregationConverter))]
 	public partial class DiversifiedSamplerAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]
@@ -71,7 +133,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
+
 		internal Dictionary<string, object>? MetaValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
 
 		public DiversifiedSamplerAggregationDescriptor<T> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> MaxDocsPerValue(int? maxDocsPerValue) => Assign(maxDocsPerValue, (a, v) => a.MaxDocsPerValueValue = v);
@@ -79,6 +147,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DiversifiedSamplerAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DiversifiedSamplerAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DiversifiedSamplerAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+		}
+
+		public DiversifiedSamplerAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+		}
+
+		public DiversifiedSamplerAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+		}
+
 		public DiversifiedSamplerAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -120,6 +209,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
 			}
 
 			writer.WriteEndObject();

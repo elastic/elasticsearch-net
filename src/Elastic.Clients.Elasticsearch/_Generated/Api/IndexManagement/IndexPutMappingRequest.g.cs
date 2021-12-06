@@ -183,14 +183,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(fieldNames, (a, v) => a.FieldNamesValue = v);
 		}
 
-		public IndexPutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor descriptor)
+		public IndexPutMappingRequestDescriptor FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
 		{
 			FieldNamesValue = null;
 			FieldNamesDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FieldNamesDescriptor = v);
 		}
 
-		public IndexPutMappingRequestDescriptor FieldNames(Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> configure)
+		public IndexPutMappingRequestDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
 		{
 			FieldNamesValue = null;
 			FieldNamesDescriptorAction = null;
@@ -207,14 +207,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(routing, (a, v) => a.RoutingValue = v);
 		}
 
-		public IndexPutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor)
+		public IndexPutMappingRequestDescriptor Routing(Mapping.RoutingFieldDescriptor descriptor)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
 		}
 
-		public IndexPutMappingRequestDescriptor Routing(Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> configure)
+		public IndexPutMappingRequestDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
@@ -228,14 +228,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(source, (a, v) => a.SourceValue = v);
 		}
 
-		public IndexPutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor)
+		public IndexPutMappingRequestDescriptor Source(Mapping.SourceFieldDescriptor descriptor)
 		{
 			SourceValue = null;
 			SourceDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SourceDescriptor = v);
 		}
 
-		public IndexPutMappingRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> configure)
+		public IndexPutMappingRequestDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
 		{
 			SourceValue = null;
 			SourceDescriptorAction = null;

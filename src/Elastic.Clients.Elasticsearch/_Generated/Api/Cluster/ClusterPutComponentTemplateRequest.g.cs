@@ -121,14 +121,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Assign(template, (a, v) => a.TemplateValue = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<T> descriptor)
+		public ClusterPutComponentTemplateRequestDescriptor<T> Template(IndexManagement.IndexStateDescriptor<T> descriptor)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.TemplateDescriptor = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<T>> configure)
+		public ClusterPutComponentTemplateRequestDescriptor<T> Template(Action<IndexManagement.IndexStateDescriptor<T>> configure)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
@@ -143,14 +143,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
@@ -164,14 +164,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;

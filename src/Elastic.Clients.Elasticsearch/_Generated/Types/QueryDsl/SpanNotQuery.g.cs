@@ -88,14 +88,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(exclude, (a, v) => a.ExcludeValue = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanNotQueryDescriptor<T> Exclude(QueryDsl.SpanQueryDescriptor<T> descriptor)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ExcludeDescriptor = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Exclude(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanNotQueryDescriptor<T> Exclude(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
@@ -109,14 +109,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(include, (a, v) => a.IncludeValue = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanNotQueryDescriptor<T> Include(QueryDsl.SpanQueryDescriptor<T> descriptor)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.IncludeDescriptor = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Include(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanNotQueryDescriptor<T> Include(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ExcludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<T>(ExcludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(ExcludeDescriptorAction), options);
 			}
 			else
 			{
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (IncludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<T>(IncludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(IncludeDescriptorAction), options);
 			}
 			else
 			{

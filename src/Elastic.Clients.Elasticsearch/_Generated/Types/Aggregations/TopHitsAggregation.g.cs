@@ -24,6 +24,122 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggregation>
+	{
+		public override TopHitsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new TopHitsAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, TopHitsAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("top_hits");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.DocvalueFields is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, value.DocvalueFields, options);
+			}
+
+			if (value.Explain.HasValue)
+			{
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(value.Explain.Value);
+			}
+
+			if (value.From.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(value.From.Value);
+			}
+
+			if (value.Highlight is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, value.Highlight, options);
+			}
+
+			if (value.ScriptFields is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, value.ScriptFields, options);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
+			}
+
+			if (value.Sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value.Sort, options);
+			}
+
+			if (value.Source is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, value.Source, options);
+			}
+
+			if (value.StoredFields is not null)
+			{
+				writer.WritePropertyName("stored_fields");
+				JsonSerializer.Serialize(writer, value.StoredFields, options);
+			}
+
+			if (value.TrackScores.HasValue)
+			{
+				writer.WritePropertyName("track_scores");
+				writer.WriteBooleanValue(value.TrackScores.Value);
+			}
+
+			if (value.Version.HasValue)
+			{
+				writer.WritePropertyName("version");
+				writer.WriteBooleanValue(value.Version.Value);
+			}
+
+			if (value.SeqNoPrimaryTerm.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(TopHitsAggregationConverter))]
 	public partial class TopHitsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
 	{
 		public TopHitsAggregation(string name, Field field) : base(name) => Field = field;
@@ -137,14 +253,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(highlight, (a, v) => a.HighlightValue = v);
 		}
 
-		public TopHitsAggregationDescriptor<T> Highlight(Elastic.Clients.Elasticsearch.HighlightDescriptor<T> descriptor)
+		public TopHitsAggregationDescriptor<T> Highlight(HighlightDescriptor<T> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
 		}
 
-		public TopHitsAggregationDescriptor<T> Highlight(Action<Elastic.Clients.Elasticsearch.HighlightDescriptor<T>> configure)
+		public TopHitsAggregationDescriptor<T> Highlight(Action<HighlightDescriptor<T>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;

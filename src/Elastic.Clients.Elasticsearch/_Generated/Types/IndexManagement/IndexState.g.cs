@@ -84,14 +84,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public IndexStateDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+		public IndexStateDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public IndexStateDescriptor<T> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+		public IndexStateDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
@@ -105,14 +105,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public IndexStateDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexStateDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public IndexStateDescriptor<T> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexStateDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
@@ -126,14 +126,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(defaults, (a, v) => a.DefaultsValue = v);
 		}
 
-		public IndexStateDescriptor<T> Defaults(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexStateDescriptor<T> Defaults(IndexManagement.IndexSettingsDescriptor<T> descriptor)
 		{
 			DefaultsValue = null;
 			DefaultsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.DefaultsDescriptor = v);
 		}
 
-		public IndexStateDescriptor<T> Defaults(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexStateDescriptor<T> Defaults(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
 		{
 			DefaultsValue = null;
 			DefaultsDescriptorAction = null;
@@ -174,7 +174,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (DefaultsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("defaults");
-				JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<T>(DefaultsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(DefaultsDescriptorAction), options);
 			}
 			else if (DefaultsValue is not null)
 			{

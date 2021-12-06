@@ -57,14 +57,14 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public RescoreDescriptor<T> Query(Elastic.Clients.Elasticsearch.RescoreQueryDescriptor<T> descriptor)
+		public RescoreDescriptor<T> Query(RescoreQueryDescriptor<T> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public RescoreDescriptor<T> Query(Action<Elastic.Clients.Elasticsearch.RescoreQueryDescriptor<T>> configure)
+		public RescoreDescriptor<T> Query(Action<RescoreQueryDescriptor<T>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;

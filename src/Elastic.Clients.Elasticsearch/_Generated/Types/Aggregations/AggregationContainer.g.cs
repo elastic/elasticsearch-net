@@ -32,12 +32,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	[JsonConverter(typeof(AggregationContainerConverter))]
 	public partial class AggregationContainer : IContainer
 	{
-		public AggregationContainer(IAggregationContainerVariant variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
-		internal IAggregationContainerVariant Variant { get; }
+		public AggregationContainer(AggregationBase variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
 
-		[JsonInclude]
-		[JsonPropertyName("meta")]
-		public Dictionary<string, object>? Meta { get; set; }
+		internal AggregationBase Variant { get; }
 	}
 
 	internal sealed class AggregationContainerConverter : JsonConverter<AggregationContainer>
@@ -391,226 +388,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public override void Write(Utf8JsonWriter writer, AggregationContainer value, JsonSerializerOptions options)
 		{
-			if (value.SerializeFluent is not null)
+			if (value is null)
+			{
+				writer.WriteNullValue();
+			}
+			else if (value.SerializeFluent is not null)
 			{
 				value.SerializeFluent(writer, options);
-				return;
 			}
-
-			writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.AggregationContainerVariantName);
-			switch (value.Variant)
+			else if (value.Variant is not null)
 			{
-				case Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MinAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.RateAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.SumAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
+				var type = value.Variant.GetType();
+				JsonSerializer.Serialize(writer, value.Variant, type, options);
 			}
-
-			if (value.Meta is not null)
+			else
 			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
+				throw new JsonException("Invalid container cannot be serialised");
 			}
-
-			writer.WriteEndObject();
 		}
 	}
 
@@ -621,7 +415,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<T>> configure) => configure.Invoke(this);
-		public AggregationContainerDescriptor<T> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
 		}
@@ -666,12 +460,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
 		}
 
-		public AggregationContainerDescriptor<T> Children(string name, Action<ChildrenAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> Children(string name, Action<ChildrenAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
 		}
 
-		public AggregationContainerDescriptor<T> Composite(string name, Action<CompositeAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> Composite(string name, Action<CompositeAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
@@ -716,7 +510,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats_bucket", configure));
 		}
 
-		public AggregationContainerDescriptor<T> Filters(string name, Action<FiltersAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> Filters(string name, Action<FiltersAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
@@ -751,7 +545,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("geotile_grid", configure));
 		}
 
-		public AggregationContainerDescriptor<T> Global(string name, Action<GlobalAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> Global(string name, Action<GlobalAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
 		}
@@ -816,7 +610,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("moving_fn", configure));
 		}
 
-		public AggregationContainerDescriptor<T> MultiTerms(string name, Action<MultiTermsAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> MultiTerms(string name, Action<MultiTermsAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("multi_terms", configure));
 		}
@@ -831,7 +625,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("normalize", configure));
 		}
 
-		public AggregationContainerDescriptor<T> Parent(string name, Action<ParentAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> Parent(string name, Action<ParentAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
 		}
@@ -871,7 +665,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("reverse_nested", configure));
 		}
 
-		public AggregationContainerDescriptor<T> Sampler(string name, Action<SamplerAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> Sampler(string name, Action<SamplerAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
 		}

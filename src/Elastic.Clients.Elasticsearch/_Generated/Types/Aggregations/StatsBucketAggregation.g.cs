@@ -24,6 +24,50 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucketAggregation>
+	{
+		public override StatsBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new StatsBucketAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, StatsBucketAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("stats_bucket");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.GapPolicy is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(StatsBucketAggregationConverter))]
 	public partial class StatsBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]

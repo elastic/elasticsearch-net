@@ -24,6 +24,56 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class BucketSortAggregationConverter : JsonConverter<BucketSortAggregation>
+	{
+		public override BucketSortAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new BucketSortAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, BucketSortAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("bucket_sort");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.From.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(value.From.Value);
+			}
+
+			if (value.GapPolicy is not null)
+			{
+				writer.WritePropertyName("gap_policy");
+				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
+			}
+
+			if (value.Sort is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, value.Sort, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(BucketSortAggregationConverter))]
 	public partial class BucketSortAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]

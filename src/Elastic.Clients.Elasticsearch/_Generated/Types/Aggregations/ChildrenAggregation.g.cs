@@ -24,6 +24,44 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class ChildrenAggregationConverter : JsonConverter<ChildrenAggregation>
+	{
+		public override ChildrenAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new ChildrenAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, ChildrenAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("children");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			if (value.Type is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, value.Type, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(ChildrenAggregationConverter))]
 	public partial class ChildrenAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]
@@ -38,19 +76,46 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Type { get; set; }
 	}
 
-	public sealed partial class ChildrenAggregationDescriptor : DescriptorBase<ChildrenAggregationDescriptor>
+	public sealed partial class ChildrenAggregationDescriptor<T> : DescriptorBase<ChildrenAggregationDescriptor<T>>
 	{
 		public ChildrenAggregationDescriptor()
 		{
 		}
 
-		internal ChildrenAggregationDescriptor(Action<ChildrenAggregationDescriptor> configure) => configure.Invoke(this);
+		internal ChildrenAggregationDescriptor(Action<ChildrenAggregationDescriptor<T>> configure) => configure.Invoke(this);
 		internal string? TypeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public ChildrenAggregationDescriptor Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public ChildrenAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+
+		public ChildrenAggregationDescriptor<T> Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public ChildrenAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+		}
+
+		public ChildrenAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+		}
+
+		public ChildrenAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+		}
+
+		public ChildrenAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -67,6 +132,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("meta");
 				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
 			}
 
 			writer.WriteEndObject();

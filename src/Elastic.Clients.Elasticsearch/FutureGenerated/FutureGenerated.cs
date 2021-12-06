@@ -86,15 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		internal string ContainedVariantName { get; private set; }
 
-		internal object ContainerVariantDescriptorAction { get; private set; }
-
 		internal Action<Utf8JsonWriter, JsonSerializerOptions> SerializeFluent { get; private set; }
-		
-		internal AggregationContainer(string variant, object descriptorAction)
-		{
-			ContainedVariantName = variant;
-			ContainerVariantDescriptorAction = descriptorAction; 
-		}
 
 		private AggregationContainer(string variant) => ContainedVariantName = variant;
 
@@ -102,13 +94,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			var container = new AggregationContainer(variantName);
 			container.SetAction(configure);
-			return container;
-		}
-
-		internal static AggregationContainer CreateWithAction<T>(string variantName, Action<T> configure, T descriptor) where T : new()
-		{
-			var container = new AggregationContainer(variantName);
-			container.SetAction(configure, descriptor);
 			return container;
 		}
 
@@ -120,14 +105,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					JsonSerializer.Serialize(writer, descriptor, options);
 				};
 
-		private void SetAction<T>(Action<T> configure, T descriptor) where T : new()
-			=> SerializeFluent = (writer, options) =>
-			{
-				//var descriptor = new T();
-				configure(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-			};
-
 		public static implicit operator AggregationContainer(AggregationBase aggregator)
 		{
 			if (aggregator == null)
@@ -135,9 +112,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			// TODO: Reimplement this fully - as neccesary!
 
-			var container = new AggregationContainer((IAggregationContainerVariant)aggregator)
+			var container = new AggregationContainer(aggregator)
 			{
-				Meta = aggregator.Meta
+				//Meta = aggregator.Meta
 			};
 
 			//aggregator.WrapInContainer(container);
@@ -157,6 +134,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 			return container;
 		}
+	}
+
+	public sealed partial class DateHistogramAggregationDescriptor<T>
+	{
+		//internal AggregationDictionary? AggregationsValue { get; private set; }
+
+		//internal Action<AggregationContainerDescriptor<T>>? AggregationsDescriptorAction { get; private set; }
+
+		//public DateHistogramAggregationDescriptor<T> Aggregations(AggregationDictionary aggregations) => Assign(aggregations, (a, v) => a.AggregationsValue = v);
+
+		//public DateHistogramAggregationDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>> aggregations) => Assign(aggregations, (a, v) => a.AggregationsDescriptorAction = v);
 	}
 
 	public partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
@@ -948,15 +936,11 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		internal Type ClrType => typeof(T);
 
-		internal Action<AggregationContainerDescriptor<T>> AggregationsAction { get; private set; }
-
-		public SearchRequestDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>>? configure) => Assign(configure, (a, v) => a.AggregationsAction = v);
-
 		public SearchRequestDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 
 		internal override void BeforeRequest()
 		{
-			if (AggregationsValue is not null || AggregationsAction is not null)
+			if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null)
 			{
 				TypedKeys(true);
 			}
@@ -993,11 +977,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			if (AggregationsAction is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsAction), options);
-			}
 		}
 	}
 

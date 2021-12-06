@@ -24,6 +24,54 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class GeoLineAggregationConverter : JsonConverter<GeoLineAggregation>
+	{
+		public override GeoLineAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new GeoLineAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoLineAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("geo_line");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WritePropertyName("point");
+			JsonSerializer.Serialize(writer, value.Point, options);
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, value.Sort, options);
+			if (value.IncludeSort.HasValue)
+			{
+				writer.WritePropertyName("include_sort");
+				writer.WriteBooleanValue(value.IncludeSort.Value);
+			}
+
+			if (value.SortOrder is not null)
+			{
+				writer.WritePropertyName("sort_order");
+				JsonSerializer.Serialize(writer, value.SortOrder, options);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(GeoLineAggregationConverter))]
 	public partial class GeoLineAggregation : Aggregations.AggregationBase, IAggregationContainerVariant
 	{
 		[JsonConstructor]
@@ -88,14 +136,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(point, (a, v) => a.PointValue = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<T> descriptor)
+		public GeoLineAggregationDescriptor<T> Point(Aggregations.GeoLinePointDescriptor<T> descriptor)
 		{
 			PointValue = null;
 			PointDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PointDescriptor = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Point(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<T>> configure)
+		public GeoLineAggregationDescriptor<T> Point(Action<Aggregations.GeoLinePointDescriptor<T>> configure)
 		{
 			PointValue = null;
 			PointDescriptorAction = null;
@@ -109,14 +157,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(sort, (a, v) => a.SortValue = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<T> descriptor)
+		public GeoLineAggregationDescriptor<T> Sort(Aggregations.GeoLineSortDescriptor<T> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Sort(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<T>> configure)
+		public GeoLineAggregationDescriptor<T> Sort(Action<Aggregations.GeoLineSortDescriptor<T>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
@@ -140,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (PointDescriptorAction is not null)
 			{
 				writer.WritePropertyName("point");
-				JsonSerializer.Serialize(writer, new GeoLinePointDescriptor<T>(PointDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.GeoLinePointDescriptor<T>(PointDescriptorAction), options);
 			}
 			else
 			{
@@ -156,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new GeoLineSortDescriptor<T>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.GeoLineSortDescriptor<T>(SortDescriptorAction), options);
 			}
 			else
 			{

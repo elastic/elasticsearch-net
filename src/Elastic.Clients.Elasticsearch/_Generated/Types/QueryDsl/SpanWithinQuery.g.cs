@@ -69,14 +69,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(big, (a, v) => a.BigValue = v);
 		}
 
-		public SpanWithinQueryDescriptor<T> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanWithinQueryDescriptor<T> Big(QueryDsl.SpanQueryDescriptor<T> descriptor)
 		{
 			BigValue = null;
 			BigDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.BigDescriptor = v);
 		}
 
-		public SpanWithinQueryDescriptor<T> Big(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanWithinQueryDescriptor<T> Big(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
 		{
 			BigValue = null;
 			BigDescriptorAction = null;
@@ -90,14 +90,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(little, (a, v) => a.LittleValue = v);
 		}
 
-		public SpanWithinQueryDescriptor<T> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanWithinQueryDescriptor<T> Little(QueryDsl.SpanQueryDescriptor<T> descriptor)
 		{
 			LittleValue = null;
 			LittleDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LittleDescriptor = v);
 		}
 
-		public SpanWithinQueryDescriptor<T> Little(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanWithinQueryDescriptor<T> Little(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
 		{
 			LittleValue = null;
 			LittleDescriptorAction = null;
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (BigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("big");
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<T>(BigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(BigDescriptorAction), options);
 			}
 			else
 			{
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (LittleDescriptorAction is not null)
 			{
 				writer.WritePropertyName("little");
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<T>(LittleDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(LittleDescriptorAction), options);
 			}
 			else
 			{

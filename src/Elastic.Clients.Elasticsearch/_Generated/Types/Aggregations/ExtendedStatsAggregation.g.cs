@@ -24,6 +24,62 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	internal sealed class ExtendedStatsAggregationConverter : JsonConverter<ExtendedStatsAggregation>
+	{
+		public override ExtendedStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartObject)
+				throw new JsonException("Unexpected JSON detected.");
+			return new ExtendedStatsAggregation("");
+		}
+
+		public override void Write(Utf8JsonWriter writer, ExtendedStatsAggregation value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("extended_stats");
+			writer.WriteStartObject();
+			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Sigma.HasValue)
+			{
+				writer.WritePropertyName("sigma");
+				writer.WriteNumberValue(value.Sigma.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
+			if (value.Missing is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
+			}
+
+			if (value.Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, value.Script, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	[JsonConverter(typeof(ExtendedStatsAggregationConverter))]
 	public partial class ExtendedStatsAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
 	{
 		public ExtendedStatsAggregation(string name, Field field) : base(name) => Field = field;
