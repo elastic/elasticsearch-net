@@ -30,7 +30,54 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			return new MinAggregation("");
+
+			var agg = new MinAggregation("");
+
+			while(reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string>(ref reader, options);
+
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+					}
+
+					if (reader.ValueTextEquals("field"))
+					{
+						var value = JsonSerializer.Deserialize<Field?>(ref reader, options);
+
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+					}
+				}
+			}
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("meta"))
+					{
+						var meta = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
+
+						if (meta is not null)
+						{
+							agg.Meta = meta;
+						}
+					}
+				}
+			}
+
+			reader.Read();
+
+			return agg;
 		}
 
 		public override void Write(Utf8JsonWriter writer, MinAggregation value, JsonSerializerOptions options)
@@ -38,7 +85,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("min");
 			writer.WriteStartObject();
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -64,7 +110,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
-
 			if (value.Meta is not null)
 			{
 				writer.WritePropertyName("meta");
@@ -76,22 +121,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MinAggregationConverter))]
-	public partial class MinAggregation : AggregationBase
+	public partial class MinAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public MinAggregation(string name, Field field) : base(name) => Field = field;
-
-
 		public MinAggregation(string name) : base(name)
 		{
 		}
-
-		public string? Format { get; set; }
-
-		public Field? Field { get; set; }
-
-		public Missing? Missing { get; set; }
-
-		public Script? Script { get; set; }
 	}
 
 	public sealed partial class MinAggregationDescriptor<T> : DescriptorBase<MinAggregationDescriptor<T>>

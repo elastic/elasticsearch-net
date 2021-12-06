@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("inference");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			writer.WritePropertyName("model_id");
 			JsonSerializer.Serialize(writer, value.ModelId, options);
 			if (value.InferenceConfig is not null)
@@ -72,19 +65,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(InferenceAggregationConverter))]
-	public partial class InferenceAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
+	public partial class InferenceAggregation : Aggregations.PipelineAggregationBase
 	{
-		[JsonConstructor]
 		public InferenceAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "inference";
 		[JsonInclude]
 		[JsonPropertyName("model_id")]
 		public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }

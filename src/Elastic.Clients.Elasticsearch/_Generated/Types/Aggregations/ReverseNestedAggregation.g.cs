@@ -38,6 +38,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("reverse_nested");
 			writer.WriteStartObject();
+			if (value.Path is not null)
+			{
+				writer.WritePropertyName("path");
+				JsonSerializer.Serialize(writer, value.Path, options);
+			}
+
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -51,26 +57,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Aggregations, options);
 			}
 
-			if (value.Path is not null)
-			{
-				writer.WritePropertyName("path");
-				JsonSerializer.Serialize(writer, value.Path, options);
-			}
-
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(ReverseNestedAggregationConverter))]
-	public partial class ReverseNestedAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class ReverseNestedAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public ReverseNestedAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "reverse_nested";
 		[JsonInclude]
 		[JsonPropertyName("path")]
 		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }

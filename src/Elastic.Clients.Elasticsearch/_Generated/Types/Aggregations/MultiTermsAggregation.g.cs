@@ -38,6 +38,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("multi_terms");
 			writer.WriteStartObject();
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, value.Terms, options);
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -51,22 +53,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Aggregations, options);
 			}
 
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, value.Terms, options);
 			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(MultiTermsAggregationConverter))]
-	public partial class MultiTermsAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class MultiTermsAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public MultiTermsAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "multi_terms";
 		[JsonInclude]
 		[JsonPropertyName("terms")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }

@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("percentiles_bucket");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Percents is not null)
 			{
 				writer.WritePropertyName("percents");
@@ -70,19 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(PercentilesBucketAggregationConverter))]
-	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
+	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase
 	{
-		[JsonConstructor]
 		public PercentilesBucketAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "percentiles_bucket";
 		[JsonInclude]
 		[JsonPropertyName("percents")]
 		public IEnumerable<double>? Percents { get; set; }

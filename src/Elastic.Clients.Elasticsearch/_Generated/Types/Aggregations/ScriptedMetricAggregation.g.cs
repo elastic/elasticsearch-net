@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("scripted_metric");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.CombineScript is not null)
 			{
 				writer.WritePropertyName("combine_script");
@@ -94,20 +87,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(ScriptedMetricAggregationConverter))]
-	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class ScriptedMetricAggregation : Aggregations.MetricAggregationBase
 	{
 		public ScriptedMetricAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public ScriptedMetricAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "scripted_metric";
 		[JsonInclude]
 		[JsonPropertyName("combine_script")]
 		public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }

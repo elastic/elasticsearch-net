@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("cardinality");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.PrecisionThreshold.HasValue)
 			{
 				writer.WritePropertyName("precision_threshold");
@@ -76,20 +69,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(CardinalityAggregationConverter))]
-	public partial class CardinalityAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class CardinalityAggregation : Aggregations.MetricAggregationBase
 	{
 		public CardinalityAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public CardinalityAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "cardinality";
 		[JsonInclude]
 		[JsonPropertyName("precision_threshold")]
 		public int? PrecisionThreshold { get; set; }

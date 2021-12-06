@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("string_stats");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.ShowDistribution.HasValue)
 			{
 				writer.WritePropertyName("show_distribution");
@@ -70,20 +63,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(StringStatsAggregationConverter))]
-	public partial class StringStatsAggregation : Aggregations.MetricAggregationBase, IAggregationContainerVariant
+	public partial class StringStatsAggregation : Aggregations.MetricAggregationBase
 	{
 		public StringStatsAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public StringStatsAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "string_stats";
 		[JsonInclude]
 		[JsonPropertyName("show_distribution")]
 		public bool? ShowDistribution { get; set; }

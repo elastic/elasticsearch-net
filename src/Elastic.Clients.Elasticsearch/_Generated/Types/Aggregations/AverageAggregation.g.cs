@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("avg");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -70,20 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(AverageAggregationConverter))]
-	public partial class AverageAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	public partial class AverageAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public AverageAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public AverageAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "avg";
 	}
 
 	public sealed partial class AverageAggregationDescriptor<T> : DescriptorBase<AverageAggregationDescriptor<T>>

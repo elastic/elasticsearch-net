@@ -11,23 +11,19 @@ namespace Elastic.Clients.Elasticsearch
 			var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
 
 			var container = new AggregationContainer(variant);
-			
+
+			return container;
+		}
+
+		public static AggregationContainer ReadContainer<T>(string variantName, ref Utf8JsonReader reader, JsonSerializerOptions options) where T : AggregationBase
+		{
+			var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
+
+			variant.Name = variantName;
+
+			var container = new AggregationContainer(variant);
+
 			reader.Read();
-
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var meta = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-
-					//if (meta is not null)
-					//{
-					//	container.Meta = meta;
-					//}
-
-					reader.Read();
-				}
-			}
 
 			return container;
 		}

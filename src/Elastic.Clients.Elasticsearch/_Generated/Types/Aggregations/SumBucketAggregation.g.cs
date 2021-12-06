@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("sum_bucket");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.BucketsPath is not null)
 			{
 				writer.WritePropertyName("buckets_path");
@@ -64,19 +57,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(SumBucketAggregationConverter))]
-	public partial class SumBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
+	public partial class SumBucketAggregation : Aggregations.PipelineAggregationBase
 	{
-		[JsonConstructor]
 		public SumBucketAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "sum_bucket";
 	}
 
 	public sealed partial class SumBucketAggregationDescriptor : DescriptorBase<SumBucketAggregationDescriptor>

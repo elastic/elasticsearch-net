@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("moving_percentiles");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.Window.HasValue)
 			{
 				writer.WritePropertyName("window");
@@ -82,19 +75,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(MovingPercentilesAggregationConverter))]
-	public partial class MovingPercentilesAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
+	public partial class MovingPercentilesAggregation : Aggregations.PipelineAggregationBase
 	{
-		[JsonConstructor]
 		public MovingPercentilesAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "moving_percentiles";
 		[JsonInclude]
 		[JsonPropertyName("window")]
 		public int? Window { get; set; }

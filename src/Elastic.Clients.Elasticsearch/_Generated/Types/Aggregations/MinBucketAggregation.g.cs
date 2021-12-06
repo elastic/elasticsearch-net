@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("min_bucket");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (value.BucketsPath is not null)
 			{
 				writer.WritePropertyName("buckets_path");
@@ -64,19 +57,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(MinBucketAggregationConverter))]
-	public partial class MinBucketAggregation : Aggregations.PipelineAggregationBase, IAggregationContainerVariant
+	public partial class MinBucketAggregation : Aggregations.PipelineAggregationBase
 	{
-		[JsonConstructor]
 		public MinBucketAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "min_bucket";
 	}
 
 	public sealed partial class MinBucketAggregationDescriptor : DescriptorBase<MinBucketAggregationDescriptor>

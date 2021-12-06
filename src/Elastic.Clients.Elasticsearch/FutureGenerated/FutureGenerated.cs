@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public partial class AggregationContainer
 	{
-		internal string ContainedVariantName { get; private set; }
+		internal string ContainedVariantName { get; set; }
 
 		internal Action<Utf8JsonWriter, JsonSerializerOptions> SerializeFluent { get; private set; }
 

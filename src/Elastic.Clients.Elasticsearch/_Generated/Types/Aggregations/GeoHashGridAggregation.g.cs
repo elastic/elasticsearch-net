@@ -38,19 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geohash_grid");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
-			if (value.Aggregations is not null)
-			{
-				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, value.Aggregations, options);
-			}
-
 			if (value.Bounds is not null)
 			{
 				writer.WritePropertyName("bounds");
@@ -82,19 +69,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			if (value.Aggregations is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, value.Aggregations, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(GeoHashGridAggregationConverter))]
-	public partial class GeoHashGridAggregation : Aggregations.BucketAggregationBase, IAggregationContainerVariant
+	public partial class GeoHashGridAggregation : Aggregations.BucketAggregationBase
 	{
-		[JsonConstructor]
 		public GeoHashGridAggregation(string name) : base(name)
 		{
 		}
 
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "geohash_grid";
 		[JsonInclude]
 		[JsonPropertyName("bounds")]
 		public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }

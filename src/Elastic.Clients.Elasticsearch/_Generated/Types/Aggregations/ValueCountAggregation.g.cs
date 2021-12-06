@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("value_count");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -70,20 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(ValueCountAggregationConverter))]
-	public partial class ValueCountAggregation : Aggregations.FormattableMetricAggregationBase, IAggregationContainerVariant
+	public partial class ValueCountAggregation : Aggregations.FormattableMetricAggregationBase
 	{
 		public ValueCountAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public ValueCountAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "value_count";
 	}
 
 	public sealed partial class ValueCountAggregationDescriptor<T> : DescriptorBase<ValueCountAggregationDescriptor<T>>

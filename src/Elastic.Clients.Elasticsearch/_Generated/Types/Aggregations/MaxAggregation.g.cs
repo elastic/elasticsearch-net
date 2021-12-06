@@ -38,13 +38,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("max");
 			writer.WriteStartObject();
-			writer.WriteEndObject();
-			if (value.Meta is not null)
-			{
-				writer.WritePropertyName("meta");
-				JsonSerializer.Serialize(writer, value.Meta, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -70,20 +63,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			writer.WriteEndObject();
+			if (value.Meta is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, value.Meta, options);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 
 	[JsonConverter(typeof(MaxAggregationConverter))]
-	public partial class MaxAggregation : Aggregations.FormatMetricAggregationBase, IAggregationContainerVariant
+	public partial class MaxAggregation : Aggregations.FormatMetricAggregationBase
 	{
 		public MaxAggregation(string name, Field field) : base(name) => Field = field;
-		[JsonConstructor]
 		public MaxAggregation(string name) : base(name)
 		{
 		}
-
-		[JsonIgnore]
-		string Aggregations.IAggregationContainerVariant.AggregationContainerVariantName => "max";
 	}
 
 	public sealed partial class MaxAggregationDescriptor<T> : DescriptorBase<MaxAggregationDescriptor<T>>
