@@ -54,6 +54,8 @@ namespace Nest
 		// Request parameters
 		///<summary>When `true`, the transform is deleted regardless of its current state. The default value is `false`, meaning that the transform must be `stopped` before it can be deleted.</summary>
 		public DeleteTransformDescriptor Force(bool? force = true) => Qs("force", force);
+		///<summary>Controls the time to wait for the transform deletion</summary>
+		public DeleteTransformDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html</para></summary>
@@ -132,7 +134,9 @@ namespace Nest
 		Id IPreviewTransformRequest.TransformId => Self.RouteValues.Get<Id>("transform_id");
 		///<summary>The id of the transform to preview.</summary>
 		public PreviewTransformDescriptor<TDocument> TransformId(Id transformId) => Assign(transformId, (a, v) => a.RouteValues.Optional("transform_id", v));
-	// Request parameters
+		// Request parameters
+		///<summary>Controls the time to wait for the preview</summary>
+		public PreviewTransformDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html</para></summary>
@@ -156,6 +160,8 @@ namespace Nest
 		// Request parameters
 		///<summary>If validations should be deferred until transform starts, defaults to false.</summary>
 		public PutTransformDescriptor<TDocument> DeferValidation(bool? defervalidation = true) => Qs("defer_validation", defervalidation);
+		///<summary>Controls the time to wait for the transform to start</summary>
+		public PutTransformDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 
 	///<summary>Descriptor for Start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html</para></summary>
@@ -233,5 +239,7 @@ namespace Nest
 		// Request parameters
 		///<summary>If validations should be deferred until transform starts, defaults to false.</summary>
 		public UpdateTransformDescriptor<TDocument> DeferValidation(bool? defervalidation = true) => Qs("defer_validation", defervalidation);
+		///<summary>Controls the time to wait for the update</summary>
+		public UpdateTransformDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
 	}
 }

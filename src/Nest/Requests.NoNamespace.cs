@@ -796,27 +796,6 @@ namespace Nest
 			set => Q("sort", value);
 		}
 
-		///<summary>Whether the _source should be included in the response.</summary>
-		public bool? SourceEnabled
-		{
-			get => Q<bool? >("_source");
-			set => Q("_source", value);
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExcludes
-		{
-			get => Q<Fields>("_source_excludes");
-			set => Q("_source_excludes", value);
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceIncludes
-		{
-			get => Q<Fields>("_source_includes");
-			set => Q("_source_includes", value);
-		}
-
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats
 		{
@@ -3689,27 +3668,6 @@ namespace Nest
 		{
 			get => Q<string[]>("sort");
 			set => Q("sort", value);
-		}
-
-		///<summary>Whether the _source should be included in the response.</summary>
-		public bool? SourceEnabled
-		{
-			get => Q<bool? >("_source");
-			set => Q("_source", value);
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExcludes
-		{
-			get => Q<Fields>("_source_excludes");
-			set => Q("_source_excludes", value);
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceIncludes
-		{
-			get => Q<Fields>("_source_includes");
-			set => Q("_source_includes", value);
 		}
 
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>

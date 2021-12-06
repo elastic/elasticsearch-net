@@ -361,16 +361,6 @@ namespace Nest
 		public DeleteByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);
-		///<summary>Whether the _source should be included in the response.</summary>
-		public DeleteByQueryDescriptor<TDocument> SourceEnabled(bool? sourceenabled = true) => Qs("_source", sourceenabled);
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<TDocument> SourceExcludes(Fields sourceexcludes) => Qs("_source_excludes", sourceexcludes);
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<TDocument> SourceIncludes(Fields sourceincludes) => Qs("_source_includes", sourceincludes);
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public DeleteByQueryDescriptor<TDocument> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
@@ -1691,16 +1681,6 @@ namespace Nest
 		public UpdateByQueryDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public UpdateByQueryDescriptor<TDocument> Sort(params string[] sort) => Qs("sort", sort);
-		///<summary>Whether the _source should be included in the response.</summary>
-		public UpdateByQueryDescriptor<TDocument> SourceEnabled(bool? sourceenabled = true) => Qs("_source", sourceenabled);
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<TDocument> SourceExcludes(Fields sourceexcludes) => Qs("_source_excludes", sourceexcludes);
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<TDocument> SourceExcludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_excludes", fields?.Select(e => (Field)e));
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<TDocument> SourceIncludes(Fields sourceincludes) => Qs("_source_includes", sourceincludes);
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<TDocument> SourceIncludes(params Expression<Func<TDocument, object>>[] fields) => Qs("_source_includes", fields?.Select(e => (Field)e));
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public UpdateByQueryDescriptor<TDocument> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
