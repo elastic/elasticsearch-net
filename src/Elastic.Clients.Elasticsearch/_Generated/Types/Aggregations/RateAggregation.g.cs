@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Unit = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("mode"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Mode = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("format"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Format = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("field"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Missing = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("script"))
@@ -91,6 +101,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Script = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -106,6 +118,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}

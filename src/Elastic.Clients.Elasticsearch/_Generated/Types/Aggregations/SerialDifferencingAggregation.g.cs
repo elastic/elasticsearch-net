@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Lag = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("buckets_path"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.BucketsPath = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("format"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Format = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("gap_policy"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.GapPolicy = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -88,6 +96,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}

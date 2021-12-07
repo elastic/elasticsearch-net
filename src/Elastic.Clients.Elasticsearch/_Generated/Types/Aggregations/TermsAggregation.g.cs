@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.CollectMode = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("exclude"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Exclude = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("execution_hint"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ExecutionHint = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("field"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("include"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Include = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("min_doc_count"))
@@ -91,6 +101,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.MinDocCount = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing"))
@@ -100,6 +112,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Missing = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing_order"))
@@ -109,6 +123,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.MissingOrder = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing_bucket"))
@@ -118,6 +134,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.MissingBucket = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("value_type"))
@@ -127,6 +145,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ValueType = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("order"))
@@ -136,6 +156,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Order = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("script"))
@@ -145,6 +167,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Script = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("shard_size"))
@@ -154,6 +178,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ShardSize = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("show_term_doc_count_error"))
@@ -163,6 +189,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ShowTermDocCountError = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("size"))
@@ -172,6 +200,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Size = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -187,6 +217,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
@@ -196,6 +228,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Aggregations = value;
 						}
+
+						continue;
 					}
 				}
 			}

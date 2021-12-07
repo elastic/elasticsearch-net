@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("precision"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Precision = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("shard_size"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ShardSize = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("size"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Size = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("bounds"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Bounds = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -97,6 +107,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
@@ -106,6 +118,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Aggregations = value;
 						}
+
+						continue;
 					}
 				}
 			}

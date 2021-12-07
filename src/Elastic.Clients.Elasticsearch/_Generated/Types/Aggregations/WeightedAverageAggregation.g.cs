@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Format = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("value"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Value = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("value_type"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ValueType = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("weight"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Weight = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -88,6 +96,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}

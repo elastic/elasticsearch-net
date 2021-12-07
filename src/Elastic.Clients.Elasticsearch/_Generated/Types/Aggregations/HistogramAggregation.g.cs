@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("interval"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Interval = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("min_doc_count"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.MinDocCount = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Missing = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("offset"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Offset = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("order"))
@@ -91,6 +101,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Order = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("script"))
@@ -100,6 +112,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Script = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("format"))
@@ -109,6 +123,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Format = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("keyed"))
@@ -118,6 +134,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Keyed = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -133,6 +151,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
@@ -142,6 +162,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Aggregations = value;
 						}
+
+						continue;
 					}
 				}
 			}

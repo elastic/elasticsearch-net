@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Point = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("sort"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Sort = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("include_sort"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.IncludeSort = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("sort_order"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.SortOrder = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("size"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Size = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -97,6 +107,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}

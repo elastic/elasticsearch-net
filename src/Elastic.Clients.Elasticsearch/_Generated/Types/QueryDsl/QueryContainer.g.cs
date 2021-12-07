@@ -347,8 +347,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public override void Write(Utf8JsonWriter writer, QueryContainer value, JsonSerializerOptions options)
 		{
-			 writer.WriteStartObject();
-			writer.WritePropertyName(value.Variant.QueryContainerVariantName); 
+			writer.WriteStartObject();
+			writer.WritePropertyName(value.Variant.QueryContainerVariantName);
 			switch (value.Variant)
 			{
 				case Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery variant:
