@@ -22,12 +22,16 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 		{
 			top_metrics = new
 			{
-				metrics = new[]
+				//metrics = new[]
+				//{
+				//	new
+				//	{
+				//		field = "numberOfContributors"
+				//	}
+				//},
+				metrics = new
 				{
-					new
-					{
-						field = "numberOfContributors"
-					}
+					field = "numberOfContributors"
 				},
 				size = 10,
 				sort = new[] { new { numberOfContributors = new { order = "asc" } } }
@@ -39,7 +43,7 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 		.TopMetrics("tm", st => st
 			.Metrics(m => m.Field(p => p.NumberOfContributors))
 			.Size(10)
-			.Sort(new Sort { new FieldSort { Field = "numberOfContributors", Order = SortOrder.Asc } })
+			.Sort(new Sort { new FieldSort("numberOfContributors") { Order = SortOrder.Asc } })
 			//.Sort(sort => sort
 			//	.Asc("numberOfContributors")
 			//)
@@ -57,7 +61,7 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 				Field = Field<Project>(p => p.NumberOfContributors)
 			},
 			Size = 10,
-			Sort = new Sort { new FieldSort { Field = "numberOfContributors", Order = SortOrder.Asc } }
+			Sort = new Sort { new FieldSort("numberOfContributors") { Order = SortOrder.Asc } }
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)
