@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -155,6 +156,20 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 					fieldSort.Nested = nested;
 					continue;
 				}
+
+				if (reader.ValueTextEquals("ignore_unmapped"))
+				{
+					var ignoreUnmapped = JsonSerializer.Deserialize<bool>(ref reader, options);
+					fieldSort.IgnoreUnmapped = ignoreUnmapped;
+					continue;
+				}
+
+				if (reader.ValueTextEquals("unmapped_type"))
+				{
+					var fieldType = JsonSerializer.Deserialize<FieldType>(ref reader, options);
+					fieldSort.UnmappedType = fieldType;
+					continue;
+				}
 			}
 		}
 
@@ -216,7 +231,7 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 
 			if (sort is FieldSort fieldSort)
 			{
-				WriteFieldSort(writer, fieldSort, options);
+				SortSerializationHelpers.WriteFieldSort(writer, fieldSort, options, _settings);
 				continue;
 			}
 
@@ -226,17 +241,20 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 
 		writer.WriteEndArray();
 	}
+}
 
-	private void WriteFieldSort(Utf8JsonWriter writer, FieldSort fieldSort, JsonSerializerOptions options)
+internal static class SortSerializationHelpers
+{
+	public static void WriteFieldSort(Utf8JsonWriter writer, FieldSort fieldSort, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(_settings.Inferrer.Field(fieldSort.Field));
+		writer.WritePropertyName(settings.Inferrer.Field(fieldSort.Field));
 		writer.WriteStartObject();
 
-		if (fieldSort.Order is not null)
+		if (fieldSort.Order.HasValue)
 		{
 			writer.WritePropertyName("order");
-			JsonSerializer.Serialize(writer, fieldSort.Order, options);
+			JsonSerializer.Serialize(writer, fieldSort.Order.Value, options);
 		}
 
 		if (fieldSort.Missing is not null)
@@ -251,22 +269,34 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 			writer.WriteStringValue(fieldSort.Format);
 		}
 
-		if (fieldSort.Mode is not null)
+		if (fieldSort.Mode.HasValue)
 		{
 			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, fieldSort.Mode, options);
+			JsonSerializer.Serialize(writer, fieldSort.Mode.Value, options);
 		}
 
-		if (fieldSort.NumericType is not null)
+		if (fieldSort.NumericType.HasValue)
 		{
 			writer.WritePropertyName("numeric_type");
-			JsonSerializer.Serialize(writer, fieldSort.NumericType, options);
+			JsonSerializer.Serialize(writer, fieldSort.NumericType.Value, options);
 		}
 
 		if (fieldSort.Nested is not null)
 		{
 			writer.WritePropertyName("nested");
 			JsonSerializer.Serialize(writer, fieldSort.Nested, options);
+		}
+
+		if (fieldSort.UnmappedType.HasValue)
+		{
+			writer.WritePropertyName("unmapped_type");
+			JsonSerializer.Serialize(writer, fieldSort.UnmappedType.Value, options);
+		}
+
+		if (fieldSort.IgnoreUnmapped.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			JsonSerializer.Serialize(writer, fieldSort.IgnoreUnmapped.Value, options);
 		}
 
 		writer.WriteEndObject();
@@ -293,11 +323,11 @@ public sealed class FieldSort : SortBase
 
 	public static readonly FieldSort ShardDocumentOrderDescending = new() { Field = ShardDoc, Order = SortOrder.Desc };
 
-	private FieldSort() { }
+	public FieldSort() { }
 
 	public FieldSort(Field field) => Field = field;
 
-	public Field Field { get; private set; }
+	public Field Field { get; init; }
 
 	public string? Format { get; set; }
 
@@ -310,6 +340,140 @@ public sealed class FieldSort : SortBase
 	public bool? IgnoreUnmapped { get; set; }
 
 	public FieldType? UnmappedType { get; set; }
+}
+
+public sealed class FieldSortDescriptor<T> : SortDescriptorBase<FieldSortDescriptor<T>, T>
+{
+	private Field _field;
+	
+	private string _format;
+	private bool? _ignoreUnmappedFields;
+	private SortMode? _sortMode;
+	private object _missing;
+	private NestedSort _nestedSort;
+	private NestedSortDescriptor<T> _nestedSortDescriptor;
+	private Action<NestedSortDescriptor<T>> _nestedSortDescriptorAction;
+	private SortOrder? _order;
+	private FieldType? _unmappedType;
+
+	/// <summary>
+	/// Sorts by ascending sort order.
+	/// </summary>
+	public FieldSortDescriptor<T> Ascending() => Assign(SortOrder.Asc, (a, v) => Self._order = v);
+
+	/// <summary>
+	/// Sorts by descending sort order.
+	/// </summary>
+	public FieldSortDescriptor<T> Descending() => Assign(SortOrder.Desc, (a, v) => a._order = v);
+
+	public FieldSortDescriptor<T> Field(Field field) => Assign(field, (a, v) => a._field = v);
+
+	public FieldSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a._field = v);
+
+	public FieldSortDescriptor<T> Format(string format) => Assign(format, (a, v) => a._format = v);
+
+	public FieldSortDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(ignore, (a, v) => a._ignoreUnmappedFields = v);
+
+	/// <summary>
+	/// Specifies that documents which are missing the sort field should be ordered last
+	/// </summary>
+	public FieldSortDescriptor<T> MissingLast() => Assign("_last", (a, v) => a._missing = v);
+
+	/// <summary>
+	/// Specifies that documents which are missing the sort field should be ordered first
+	/// </summary>
+	public FieldSortDescriptor<T> MissingFirst() => Assign("_first", (a, v) => a._missing = v);
+
+	/// <summary>
+	/// Specifies how documents which are missing the sort field should
+	/// be treated.
+	/// </summary>
+	public FieldSortDescriptor<T> Missing(object value) => Assign(value, (a, v) => a._missing = v);
+
+	public FieldSortDescriptor<T> Mode(SortMode? mode) => Assign(mode, (a, v) => a._sortMode = v);
+
+	public FieldSortDescriptor<T> Nested(NestedSort nestedSort) => Assign(nestedSort, (a, v) => a._nestedSort = v);
+
+	public FieldSortDescriptor<T> Nested(NestedSortDescriptor<T> descriptor) =>
+		Assign(descriptor, (a, v) => a._nestedSortDescriptor = v);
+
+	public FieldSortDescriptor<T> Nested(Action<NestedSortDescriptor<T>> configure) =>
+		Assign(configure, (a, v) => a._nestedSortDescriptorAction = v);
+
+	public FieldSortDescriptor<T> Order(SortOrder? order) => Assign(order, (a, v) => a._order = v);
+
+	public FieldSortDescriptor<T> UnmappedType(FieldType? fieldType) => Assign(fieldType, (a, v) => a._unmappedType = v);
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(_field));
+		writer.WriteStartObject();
+
+		if (_order.HasValue)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, _order.Value, options);
+		}
+
+		if (_missing is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, _missing, options);
+		}
+
+		if (_sortMode is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, _sortMode, options);
+		}
+
+		if (!string.IsNullOrEmpty(_format))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(_format);
+		}
+
+		if (_ignoreUnmappedFields.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			JsonSerializer.Serialize(writer, _ignoreUnmappedFields.Value, options);
+		}
+
+		if (_nestedSort is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, _nestedSort, options);
+		}
+		else if (_nestedSortDescriptor is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, _nestedSortDescriptor, options);
+		}
+		else if (_nestedSortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("nested");
+			var descriptor = new NestedSortDescriptor<T>();
+			_nestedSortDescriptorAction(descriptor);
+			JsonSerializer.Serialize(writer, descriptor, options);
+		}
+
+		if (_unmappedType.HasValue)
+		{
+			writer.WritePropertyName("unmapped_type");
+			JsonSerializer.Serialize(writer, _unmappedType.Value, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+
+	//internal FieldSort ToFieldSort() => null;
+}
+
+public abstract class SortDescriptorBase<TDescriptor, T> : DescriptorBase<TDescriptor> where TDescriptor : DescriptorBase<TDescriptor>
+{
+	
 }
 
 public sealed class GeoDistanceSort : SortBase
@@ -334,6 +498,60 @@ public sealed class NestedSort
 	public Field Path { get; set; }
 
 	public int? MaxChildren { get; set; }
+}
+
+public sealed class NestedSortDescriptor<T> : DescriptorBase<NestedSortDescriptor<T>>
+{
+	private QueryContainer _filter;
+	private QueryContainerDescriptor<T> _queryContainerDescriptor;
+	private Action<QueryContainerDescriptor<T>> _queryContainerDescriptorAction;
+	private Field _path;
+
+	public NestedSortDescriptor<T> Path(Field path) => Assign(path, (a, v) => a._path = v);
+
+	public NestedSortDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a._path = v);
+
+	public NestedSortDescriptor<T> Filter(QueryContainer queryContainer) =>
+		Assign(queryContainer, (a, v) => a._filter = v);
+
+	public NestedSortDescriptor<T> Filter(QueryContainerDescriptor<T> descriptor) =>
+		Assign(descriptor, (a, v) => a._queryContainerDescriptor = v);
+
+	public NestedSortDescriptor<T> Filter(Action<QueryContainerDescriptor<T>> configure) =>
+			Assign(configure, (a, v) => a._queryContainerDescriptorAction = v);
+
+	// TODO - Complete this
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+
+		if (_path is not null)
+		{
+			writer.WritePropertyName("path");
+			JsonSerializer.Serialize(writer, _path, options);
+		}
+
+		if (_filter is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, _filter, options);
+		}
+		else if (_queryContainerDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, _queryContainerDescriptor, options);
+		}
+		else if (_queryContainerDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			var descriptor = new QueryContainerDescriptor<T>();
+			_queryContainerDescriptorAction(descriptor);
+			JsonSerializer.Serialize(writer, descriptor, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }
 
 [JsonConverter(typeof(NumericTypeConverter))]
@@ -401,6 +619,8 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 
 	public SortDescriptor(Action<SortDescriptor<T>> configure) : base(new SortCollection()) => configure(this);
 
+	private List<Action<FieldSortDescriptor<T>>> _fieldSortDescriptorActions;
+
 	public SortDescriptor<T> Ascending<TValue>(Expression<Func<T, TValue>> objectPath) =>
 		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));
 
@@ -417,8 +637,22 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 	public SortDescriptor<T> Descending(SortSpecialField field) =>
 		Assign(field == SortSpecialField.Score ? "_score" : field == SortSpecialField.DocumentIndexOrder ? "_doc" : "_shard_doc", (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }));
 
-	//public SortDescriptor<T> Field(Action<FieldSortDescriptor<T>> sortSelector) =>
-	//	AddSort(sortSelector?.Invoke(new FieldSortDescriptor<T>()));
+	public SortDescriptor<T> Field(Action<FieldSortDescriptor<T>> sortSelector)
+	{
+		// TODO - Future idea: Store the actions and invoke at serialisation time
+
+		//var descriptor = new FieldSortDescriptor<T>();
+		//sortSelector?.Invoke(descriptor);
+
+		if (_fieldSortDescriptorActions is null)
+			_fieldSortDescriptorActions = new List<Action<FieldSortDescriptor<T>>>();
+
+		_fieldSortDescriptorActions.Add(sortSelector);
+
+		//return AddSort(descriptor.ToFieldSort());
+
+		return this;
+	}
 
 	public SortDescriptor<T> Field(Field field, SortOrder order) => AddSort(new FieldSort(field) { Order = order });
 
@@ -433,5 +667,35 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 
 	private SortDescriptor<T> AddSort(SortBase sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v));
 
-	public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize<SortCollection>(writer, PromisedValue, options);
+	public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartArray();
+
+		foreach (var sort in PromisedValue)
+		{
+			if (sort is null)
+				continue;
+
+			if (sort is FieldSort fieldSort)
+			{
+				SortSerializationHelpers.WriteFieldSort(writer, fieldSort, options, settings);
+				continue;
+			}
+
+			// TODO - Other types
+			throw new NotImplementedException("The sort type is not currently supported in this release.");
+		}
+
+		if (_fieldSortDescriptorActions is not null)
+		{
+			foreach (var action in _fieldSortDescriptorActions)
+			{
+				var descriptor = new FieldSortDescriptor<T>();
+				action(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+		}
+
+		writer.WriteEndArray();
+	}
 }

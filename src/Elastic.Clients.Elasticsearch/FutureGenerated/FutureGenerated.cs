@@ -719,9 +719,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 namespace Elastic.Clients.Elasticsearch
 {
+	[JsonConverter(typeof(FieldTypeConverter))]
 	public enum FieldType
 	{
-		// TODO: Generate this
+		Date,
+	}
+
+	internal class FieldTypeConverter : JsonConverter<FieldType>
+	{
+		public override FieldType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "date":
+					return FieldType.Date;
+			}
+
+			ThrowHelper.ThrowJsonException("Unexpected field type value.");
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, FieldType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case FieldType.Date:
+					writer.WriteStringValue("date");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
 	}
 
 	public partial struct WaitForActiveShards : IStringable
@@ -1076,7 +1105,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
 	public partial class TermQuery
 	{
-		public static implicit operator QueryContainer(TermQuery termQuery) => new QueryContainer(termQuery);
+		public static implicit operator QueryContainer(TermQuery termQuery) => new(termQuery);
+	}
+
+	public partial class MatchAllQuery
+	{
+		public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => new(matchAllQuery);
 	}
 
 		//public sealed partial class BoolQueryDescriptor
@@ -1085,92 +1119,92 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		//	{
 		//		var query = new BoolQuery();
 
-		//		if (_filter is not null)
-		//			query.Filter = _filter;
+	//		if (_filter is not null)
+	//			query.Filter = _filter;
 
-		//		// TODO - More
+	//		// TODO - More
 
-		//		return query;
-		//	}
-		//}
+	//		return query;
+	//	}
+	//}
 
-		//public sealed partial class MatchQueryDescriptor
-		//{
-		//	public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
+	//public sealed partial class MatchQueryDescriptor
+	//{
+	//	public MatchQueryDescriptor Query(string query) => Assign(query, (a, v) => a._query = v);
 
-		//	internal MatchQuery ToQuery()
-		//	{
-		//		var query = new MatchQuery();
+	//	internal MatchQuery ToQuery()
+	//	{
+	//		var query = new MatchQuery();
 
-		//		if (_field is not null)
-		//			query.Field = _field;
+	//		if (_field is not null)
+	//			query.Field = _field;
 
-		//		if (_query is not null)
-		//			query.Query = _query;
+	//		if (_query is not null)
+	//			query.Query = _query;
 
-		//		return query;
-		//	}
-		//}
+	//		return query;
+	//	}
+	//}
 
-		//internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
-		//{
-		//	internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		//	{
-		//		if (reader.TokenType != JsonTokenType.StartObject)
-		//		{
-		//			throw new JsonException();
-		//		}
+	//internal sealed class MatchQueryConverter : FieldNameQueryConverterBase<MatchQuery>
+	//{
+	//	internal override MatchQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	//	{
+	//		if (reader.TokenType != JsonTokenType.StartObject)
+	//		{
+	//			throw new JsonException();
+	//		}
 
-		//		string queryValue = default;
+	//		string queryValue = default;
 
-		//		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		//		{
-		//			var property = reader.GetString();
+	//		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+	//		{
+	//			var property = reader.GetString();
 
-		//			if (property == "query")
-		//			{
-		//				reader.Read();
-		//				queryValue = reader.GetString();
-		//			}
-		//		}
+	//			if (property == "query")
+	//			{
+	//				reader.Read();
+	//				queryValue = reader.GetString();
+	//			}
+	//		}
 
-		//		var query = new MatchQuery()
-		//		{
-		//			Query = queryValue
-		//		};
+	//		var query = new MatchQuery()
+	//		{
+	//			Query = queryValue
+	//		};
 
-		//		return query;
-		//	}
+	//		return query;
+	//	}
 
-		//	internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
-		//	{
-		//		writer.WriteStartObject();
-		//		if (!string.IsNullOrEmpty(value.Query))
-		//		{
-		//			writer.WritePropertyName("query");
-		//			writer.WriteStringValue(value.Query);
-		//		}
-		//		writer.WriteEndObject();
-		//	}
-		//}
+	//	internal override void WriteInternal(Utf8JsonWriter writer, MatchQuery value, JsonSerializerOptions options)
+	//	{
+	//		writer.WriteStartObject();
+	//		if (!string.IsNullOrEmpty(value.Query))
+	//		{
+	//			writer.WritePropertyName("query");
+	//			writer.WriteStringValue(value.Query);
+	//		}
+	//		writer.WriteEndObject();
+	//	}
+	//}
 
-		//internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
-		//{
-		//	internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	//internal sealed class TermQueryConverter : FieldNameQueryConverterBase<TermQuery>
+	//{
+	//	internal override TermQuery ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
 
-		//	internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
-		//	{
-		//		writer.WriteStartObject();
-		//		if (value.Value is not null)
-		//		{
-		//			writer.WritePropertyName("value");
-		//			JsonSerializer.Serialize(writer, value.Value, options);
-		//		}
-		//		writer.WriteEndObject();
-		//	}
-		//}
+	//	internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
+	//	{
+	//		writer.WriteStartObject();
+	//		if (value.Value is not null)
+	//		{
+	//			writer.WritePropertyName("value");
+	//			JsonSerializer.Serialize(writer, value.Value, options);
+	//		}
+	//		writer.WriteEndObject();
+	//	}
+	//}
 
-		public sealed partial class QueryContainerDescriptor<T>
+	public sealed partial class QueryContainerDescriptor<T>
 	{
 		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
 

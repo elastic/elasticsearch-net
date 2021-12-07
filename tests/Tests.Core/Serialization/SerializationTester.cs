@@ -160,7 +160,7 @@ namespace Tests.Core.Serialization
 		{
 			result.Serialized = SerializeUsingClientDefault(@object);
 
-			var json = expectedJsonDocument.ToString();
+			//var json = expectedJsonDocument.ToString();
 
 			return TokenMatches(expectedJsonDocument, result);
 
