@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.DocvalueFields = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("explain"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Explain = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("from"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.From = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("highlight"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Highlight = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("script_fields"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ScriptFields = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("size"))
@@ -91,6 +101,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Size = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("sort"))
@@ -100,6 +112,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Sort = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("_source"))
@@ -109,6 +123,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Source = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("stored_fields"))
@@ -118,6 +134,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.StoredFields = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("track_scores"))
@@ -127,6 +145,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.TrackScores = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("version"))
@@ -136,6 +156,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Version = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("seq_no_primary_term"))
@@ -145,6 +167,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.SeqNoPrimaryTerm = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("field"))
@@ -154,6 +178,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing"))
@@ -163,6 +189,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Missing = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("script"))
@@ -172,6 +200,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Script = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -187,6 +217,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}
