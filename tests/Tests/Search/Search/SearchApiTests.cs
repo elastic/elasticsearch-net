@@ -237,7 +237,7 @@ namespace Tests.Search.Search
 			//	.Field(p => p.NumberOfCommits)
 			//);
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		protected override SearchRequest<Project> Initializer => new()
 		{
 			From = 10,
 			Size = 20,
