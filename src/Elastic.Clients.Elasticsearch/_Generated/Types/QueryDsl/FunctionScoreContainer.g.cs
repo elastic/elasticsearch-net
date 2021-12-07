@@ -48,31 +48,29 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public override FunctionScoreContainer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
 			{
 				throw new JsonException();
 			}
 
-			var propertyName = reader.GetString();
+			var propertyName = readerCopy.GetString();
 			if (propertyName == "field_value_factor")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
-				reader.Read();
 				return new FunctionScoreContainer(variant);
 			}
 
 			if (propertyName == "random_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction?>(ref reader, options);
-				reader.Read();
 				return new FunctionScoreContainer(variant);
 			}
 
 			if (propertyName == "script_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction?>(ref reader, options);
-				reader.Read();
 				return new FunctionScoreContainer(variant);
 			}
 

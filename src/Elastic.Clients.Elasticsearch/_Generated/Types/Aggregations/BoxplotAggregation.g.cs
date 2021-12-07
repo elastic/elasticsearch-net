@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new BoxplotAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "boxplot")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new BoxplotAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

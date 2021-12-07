@@ -46,13 +46,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public override PinnedQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
 			{
 				throw new JsonException();
 			}
 
-			var propertyName = reader.GetString();
+			var propertyName = readerCopy.GetString();
 			throw new JsonException();
 		}
 

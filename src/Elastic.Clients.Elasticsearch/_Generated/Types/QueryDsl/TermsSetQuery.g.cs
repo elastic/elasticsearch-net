@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
+			reader.Read();
 			var variant = new TermsSetQuery();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
@@ -68,6 +69,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				}
 			}
 
+			reader.Read();
 			return variant;
 		}
 

@@ -40,31 +40,29 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 	{
 		public override Action Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
 			{
 				throw new JsonException();
 			}
 
-			var propertyName = reader.GetString();
+			var propertyName = readerCopy.GetString();
 			if (propertyName == "add")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.AddAction?>(ref reader, options);
-				reader.Read();
 				return new Action(variant);
 			}
 
 			if (propertyName == "remove")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveAction?>(ref reader, options);
-				reader.Read();
 				return new Action(variant);
 			}
 
 			if (propertyName == "remove_index")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.RemoveIndexAction?>(ref reader, options);
-				reader.Read();
 				return new Action(variant);
 			}
 

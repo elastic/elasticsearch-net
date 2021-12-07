@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new MaxBucketAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "max_bucket")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new MaxBucketAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
