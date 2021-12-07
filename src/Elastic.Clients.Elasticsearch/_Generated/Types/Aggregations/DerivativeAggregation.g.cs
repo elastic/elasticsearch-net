@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new DerivativeAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "derivative")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new DerivativeAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

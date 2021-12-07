@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new SumAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "sum")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new SumAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

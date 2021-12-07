@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new MedianAbsoluteDeviationAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "median_absolute_deviation")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new MedianAbsoluteDeviationAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

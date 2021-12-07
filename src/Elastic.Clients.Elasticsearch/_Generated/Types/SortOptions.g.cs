@@ -40,38 +40,35 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public override SortOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
+			var readerCopy = reader;
+			readerCopy.Read();
+			if (readerCopy.TokenType != JsonTokenType.PropertyName)
 			{
 				throw new JsonException();
 			}
 
-			var propertyName = reader.GetString();
+			var propertyName = readerCopy.GetString();
 			if (propertyName == "_score")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
-				reader.Read();
 				return new SortOptions(variant);
 			}
 
 			if (propertyName == "_doc")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScoreSort?>(ref reader, options);
-				reader.Read();
 				return new SortOptions(variant);
 			}
 
 			if (propertyName == "_geo_distance")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceSort?>(ref reader, options);
-				reader.Read();
 				return new SortOptions(variant);
 			}
 
 			if (propertyName == "_script")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptSort?>(ref reader, options);
-				reader.Read();
 				return new SortOptions(variant);
 			}
 

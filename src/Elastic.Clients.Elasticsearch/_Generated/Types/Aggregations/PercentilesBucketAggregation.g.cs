@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new PercentilesBucketAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "percentiles_bucket")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new PercentilesBucketAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

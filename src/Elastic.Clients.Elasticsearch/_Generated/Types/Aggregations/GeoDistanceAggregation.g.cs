@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new GeoDistanceAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "geo_distance")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new GeoDistanceAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

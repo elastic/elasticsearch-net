@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new TopHitsAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "top_hits")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new TopHitsAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

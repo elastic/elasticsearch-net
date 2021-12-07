@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new ReverseNestedAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "reverse_nested")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new ReverseNestedAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

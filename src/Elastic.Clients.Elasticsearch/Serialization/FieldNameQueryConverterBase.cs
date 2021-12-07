@@ -14,8 +14,10 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException($"Unexpected JSON response could not be serialized to {typeof(T)}.");
-			
-			reader.Read();
+
+			reader.Read(); // query type
+			reader.Read(); // start object
+			reader.Read(); // field name
 			var fieldName = reader.GetString();
 			reader.Read();
 
@@ -44,4 +46,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal abstract T? ReadInternal(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options);
 		internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
 	}
+
+
 }
