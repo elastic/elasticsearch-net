@@ -28,6 +28,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Segments
 	{
 		[JsonInclude]
 		[JsonPropertyName("shards")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardsSegment> Shards { get; init; }
+		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Segments.ShardsSegment>> Shards { get; init; }
 	}
 }

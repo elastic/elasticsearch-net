@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("metrics"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Metrics = value;
@@ -63,7 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("sort"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Sort?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortCollection?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Sort = value;
@@ -190,7 +190,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("metrics")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue? Metrics { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
@@ -198,7 +198,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.SortCollection? Sort { get; set; }
 	}
 
 	public sealed partial class TopMetricsAggregationDescriptor<T> : DescriptorBase<TopMetricsAggregationDescriptor<T>>
@@ -208,11 +208,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal TopMetricsAggregationDescriptor(Action<TopMetricsAggregationDescriptor<T>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue? MetricsValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? MetricsValue { get; private set; }
 
 		internal int? SizeValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Sort? SortValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.SortCollection? SortValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
@@ -222,33 +222,33 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal TopMetricsValueDescriptor<T> MetricsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.SortDescriptor<T> SortDescriptor { get; private set; }
 
-		internal Action<TopMetricsValueDescriptor<T>> MetricsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.SortDescriptor<T>> SortDescriptorAction { get; private set; }
 
-		public TopMetricsAggregationDescriptor<T> Metrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue? metrics)
-		{
-			MetricsDescriptor = null;
-			MetricsDescriptorAction = null;
-			return Assign(metrics, (a, v) => a.MetricsValue = v);
-		}
-
-		public TopMetricsAggregationDescriptor<T> Metrics(Aggregations.TopMetricsValueDescriptor<T> descriptor)
-		{
-			MetricsValue = null;
-			MetricsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.MetricsDescriptor = v);
-		}
-
-		public TopMetricsAggregationDescriptor<T> Metrics(Action<Aggregations.TopMetricsValueDescriptor<T>> configure)
-		{
-			MetricsValue = null;
-			MetricsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.MetricsDescriptorAction = v);
-		}
-
+		public TopMetricsAggregationDescriptor<T> Metrics(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics) => Assign(metrics, (a, v) => a.MetricsValue = v);
 		public TopMetricsAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public TopMetricsAggregationDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
+		public TopMetricsAggregationDescriptor<T> Sort(Elastic.Clients.Elasticsearch.SortCollection? sort)
+		{
+			SortDescriptor = null;
+			SortDescriptorAction = null;
+			return Assign(sort, (a, v) => a.SortValue = v);
+		}
+
+		public TopMetricsAggregationDescriptor<T> Sort(Elastic.Clients.Elasticsearch.SortDescriptor<T> descriptor)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
+		}
+
+		public TopMetricsAggregationDescriptor<T> Sort(Action<Elastic.Clients.Elasticsearch.SortDescriptor<T>> configure)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
+		}
+
 		public TopMetricsAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public TopMetricsAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public TopMetricsAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
@@ -259,17 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("top_metrics");
 			writer.WriteStartObject();
-			if (MetricsDescriptor is not null)
-			{
-				writer.WritePropertyName("metrics");
-				JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-			}
-			else if (MetricsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("metrics");
-				JsonSerializer.Serialize(writer, new Aggregations.TopMetricsValueDescriptor<T>(MetricsDescriptorAction), options);
-			}
-			else if (MetricsValue is not null)
+			if (MetricsValue is not null)
 			{
 				writer.WritePropertyName("metrics");
 				JsonSerializer.Serialize(writer, MetricsValue, options);
@@ -281,7 +271,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(SizeValue.Value);
 			}
 
-			if (SortValue is not null)
+			if (SortDescriptor is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortDescriptor, options);
+			}
+			else if (SortDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortDescriptor<T>(SortDescriptorAction), options);
+			}
+			else if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
 				JsonSerializer.Serialize(writer, SortValue, options);

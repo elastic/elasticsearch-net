@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Elastic.Clients.Elasticsearch.IndexAlias? Aliases { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		internal AddActionDescriptor(Action<AddActionDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasesValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		internal Action<QueryDsl.QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
 
 		public AddActionDescriptor<T> Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias) => Assign(alias, (a, v) => a.AliasValue = v);
-		public AddActionDescriptor<T> Aliases(Elastic.Clients.Elasticsearch.IndexAlias? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
+		public AddActionDescriptor<T> Aliases(IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
 		public AddActionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
