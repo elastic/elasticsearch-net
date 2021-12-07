@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -24,13 +24,13 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 			{
 				metrics = new[]
 				{
-						new
-						{
-							field = "numberOfContributors"
-						}
-					},
+					new
+					{
+						field = "numberOfContributors"
+					}
+				},
 				size = 10,
-				//sort = new[] { new { numberOfContributors = new { order = "asc" } } }
+				sort = new[] { new { numberOfContributors = new { order = "asc" } } }
 			}
 		}
 	};
@@ -39,8 +39,9 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 		.TopMetrics("tm", st => st
 			.Metrics(m => m.Field(p => p.NumberOfContributors))
 			.Size(10)
+			.Sort(new Sort { new FieldSort { Field = "numberOfContributors", Order = SortOrder.Asc } })
 			//.Sort(sort => sort
-			//	.Ascending("numberOfContributors")
+			//	.Asc("numberOfContributors")
 			//)
 		);
 
@@ -56,7 +57,7 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 				Field = Field<Project>(p => p.NumberOfContributors)
 			},
 			Size = 10,
-			//Sort = new List<ISort> { new FieldSort { Field = "numberOfContributors", Order = SortOrder.Ascending } }
+			Sort = new Sort { new FieldSort { Field = "numberOfContributors", Order = SortOrder.Asc } }
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)
