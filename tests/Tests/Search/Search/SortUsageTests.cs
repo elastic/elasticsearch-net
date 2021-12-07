@@ -97,22 +97,22 @@ public class SortUsageTests : SearchUsageTestBase
 				//		}
 				//	}
 				//},
-				//new
-				//{
-				//	_script = new
-				//	{
-				//		order = "asc",
-				//		type = "number",
-				//		script = new
-				//		{
-				//			@params = new
-				//			{
-				//				factor = 1.1
-				//			},
-				//			source = "doc['numberOfCommits'].value * params.factor",
-				//		}
-				//	}
-				//}
+				new
+				{
+					_script = new
+					{
+						order = "asc",
+						type = "number",
+						script = new
+						{
+							@params = new
+							{
+								factor = 1.1
+							},
+							source = "doc['numberOfCommits'].value * params.factor",
+						}
+					}
+				}
 			}
 		};
 
@@ -139,26 +139,26 @@ public class SortUsageTests : SearchUsageTestBase
 				.Order(SortOrder.Desc)
 				.Missing(-1)
 			)
-		//.GeoDistance(g => g
-		//	.Field(p => p.LocationPoint)
-		//	.DistanceType(GeoDistanceType.Arc)
-		//	.Order(SortOrder.Ascending)
-		//	.Unit(DistanceUnit.Centimeters)
-		//	.Mode(SortMode.Min)
-		//	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
-		//)
-		//.GeoDistance(g => g
-		//	.Field(p => p.LocationPoint)
-		//	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
-		//)
-		//.Script(sc => sc
-		//	.Type("number")
-		//	.Ascending()
-		//	.Script(script => script
-		//		.Source("doc['numberOfCommits'].value * params.factor")
-		//		.Params(p => p.Add("factor", 1.1))
-		//	)
-		//)
+			//.GeoDistance(g => g
+			//	.Field(p => p.LocationPoint)
+			//	.DistanceType(GeoDistanceType.Arc)
+			//	.Order(SortOrder.Ascending)
+			//	.Unit(DistanceUnit.Centimeters)
+			//	.Mode(SortMode.Min)
+			//	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+			//)
+			//.GeoDistance(g => g
+			//	.Field(p => p.LocationPoint)
+			//	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+			//)
+			.Script(sc => sc
+				.Type(ScriptSortType.Number)
+				.Ascending()
+				.Script(script => script
+					.Source("doc['numberOfCommits'].value * params.factor")
+					.Params(p => p.Add("factor", 1.1))
+				)
+			)
 		);
 
 	protected override SearchRequest<Project> Initializer =>
@@ -204,18 +204,18 @@ public class SortUsageTests : SearchUsageTestBase
 				//	Field = "locationPoint",
 				//	Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 				//},
-				//new ScriptSort
-				//{
-				//	Type = "number",
-				//	Order = SortOrder.Ascending,
-				//	Script = new InlineScript("doc['numberOfCommits'].value * params.factor")
-				//	{
-				//		Params = new Dictionary<string, object>
-				//		{
-				//			{ "factor", 1.1 }
-				//		}
-				//	}
-				//}
+				new ScriptSort
+				{
+					Type = ScriptSortType.Number,
+					Order = SortOrder.Asc,
+					Script = new InlineScript("doc['numberOfCommits'].value * params.factor")
+					{
+						Params = new Dictionary<string, object>
+						{
+							{ "factor", 1.1 }
+						}
+					}
+				}
 			}
 		};
 }

@@ -28,11 +28,11 @@ public sealed class SortCollection : List<SortBase>
 	}
 }
 
-internal sealed class SortConverter : JsonConverter<SortCollection>
+internal sealed class SortCollectionConverter : JsonConverter<SortCollection>
 {
 	private readonly IElasticsearchClientSettings _settings;
 
-	public SortConverter(IElasticsearchClientSettings settings) => _settings = settings;
+	public SortCollectionConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
 	public override SortCollection? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -80,8 +80,7 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 			}
 			else if (!string.IsNullOrEmpty(value) && value == "_script")
 			{
-				// TODO
-				throw new NotImplementedException("This feature is not complete.");
+				return ReadScriptSort(ref reader, options);
 			}
 			else
 			{
@@ -220,6 +219,68 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 		return geoDistanceSort;
 	}
 
+	private ScriptSort ReadScriptSort(ref Utf8JsonReader reader, JsonSerializerOptions options)
+	{
+		reader.Read();
+
+		if (reader.TokenType != JsonTokenType.PropertyName)
+			throw new JsonException("Unexpected JSON token. Expected property name.");
+
+		var field = reader.GetString();
+
+		if (field != "_script")
+			throw new JsonException("Invalid script sort object.");
+
+		reader.Read();
+
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON token. Expected start object.");
+
+		var fieldSort = new ScriptSort();
+
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
+			{
+				if (reader.ValueTextEquals("order"))
+				{
+					var order = JsonSerializer.Deserialize<SortOrder>(ref reader, options);
+					fieldSort.Order = order;
+					continue;
+				}
+
+				if (reader.ValueTextEquals("script"))
+				{
+					// TODO
+					throw new NotImplementedException("Needs a helper to determine the script type we have received");
+				}
+
+				if (reader.ValueTextEquals("type"))
+				{
+					var scriptSortType = JsonSerializer.Deserialize<ScriptSortType>(ref reader, options);
+					fieldSort.Type = scriptSortType;
+					continue;
+				}
+
+				if (reader.ValueTextEquals("mode"))
+				{
+					var sortMode = JsonSerializer.Deserialize<SortMode>(ref reader, options);
+					fieldSort.Mode = sortMode;
+					continue;
+				}
+
+				if (reader.ValueTextEquals("nested"))
+				{
+					var nested = JsonSerializer.Deserialize<NestedSort>(ref reader, options);
+					fieldSort.Nested = nested;
+					continue;
+				}
+			}
+		}
+
+		return fieldSort;
+	}
+
 	public override void Write(Utf8JsonWriter writer, SortCollection value, JsonSerializerOptions options)
 	{
 		writer.WriteStartArray();
@@ -235,11 +296,33 @@ internal sealed class SortConverter : JsonConverter<SortCollection>
 				continue;
 			}
 
+			if (sort is ScriptSort scriptSort)
+			{
+				SortSerializationHelpers.WriteScriptSort(writer, scriptSort, options);
+				continue;
+			}
+
 			// TODO - Other types
 			throw new NotImplementedException("The sort type is not currently supported in this release.");
 		}
 
 		writer.WriteEndArray();
+	}
+}
+
+internal sealed class ScriptBaseConverter : JsonConverter<ScriptBase>
+{
+	public override ScriptBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, ScriptBase value, JsonSerializerOptions options)
+	{
+		if (value is InlineScript scriptSort)
+			JsonSerializer.Serialize<InlineScript>(writer, scriptSort, options);
+
+		else if (value is StoredScriptId storedScript)
+			JsonSerializer.Serialize<StoredScriptId>(writer, storedScript, options);
+
+		else
+			throw new JsonException("Unsupported script implementation");
 	}
 }
 
@@ -302,6 +385,47 @@ internal static class SortSerializationHelpers
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
+
+	public static void WriteScriptSort(Utf8JsonWriter writer, ScriptSort scriptSort, JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("_script");
+		writer.WriteStartObject();
+
+		if (scriptSort.Order.HasValue)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, scriptSort.Order.Value, options);
+		}
+
+		if (scriptSort.Script is not null)
+		{
+			writer.WritePropertyName("script");
+			var type = scriptSort.Script.GetType();
+			JsonSerializer.Serialize(writer, scriptSort.Script, type, options);
+		}
+
+		if (scriptSort.Type.HasValue)
+		{
+			writer.WritePropertyName("type");
+			JsonSerializer.Serialize(writer, scriptSort.Type.Value, options);
+		}
+
+		if (scriptSort.Mode.HasValue)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, scriptSort.Mode.Value, options);
+		}
+
+		if (scriptSort.Nested is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, scriptSort.Nested, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
 }
 
 public abstract class SortBase
@@ -311,11 +435,175 @@ public abstract class SortBase
 	public SortOrder? Order { get; set; }
 }
 
+public sealed class ScriptSort : SortBase
+{
+	[JsonConverter(typeof(ScriptBaseConverter))]
+	public ScriptBase Script { get; set; }
+
+	public ScriptSortType? Type { get; set; }
+
+	public NestedSort? Nested { get; set; }
+}
+
+public sealed class ScriptSortDescriptor<T> : SortDescriptorBase<ScriptSortDescriptor<T>, T>
+{
+	private SortMode? _sortMode;
+	private NestedSort _nestedSort;
+	private NestedSortDescriptor<T> _nestedSortDescriptor;
+	private Action<NestedSortDescriptor<T>> _nestedSortDescriptorAction;
+	private SortOrder? _order;
+	private ScriptSortType? _scriptSortType;
+	private ScriptBase _script;
+	private InlineScriptDescriptor _inlineScriptDescriptor;
+	private Action<InlineScriptDescriptor> _inlineScriptDescriptorAction;
+
+	// TODO - Stored Script
+
+	/// <summary>
+	/// Sorts by ascending sort order.
+	/// </summary>
+	public ScriptSortDescriptor<T> Ascending() => Assign(SortOrder.Asc, (a, v) => Self._order = v);
+
+	/// <summary>
+	/// Sorts by descending sort order.
+	/// </summary>
+	public ScriptSortDescriptor<T> Descending() => Assign(SortOrder.Desc, (a, v) => a._order = v);
+
+	public ScriptSortDescriptor<T> Mode(SortMode? mode) => Assign(mode, (a, v) => a._sortMode = v);
+
+	public ScriptSortDescriptor<T> Nested(NestedSort nestedSort) => Assign(nestedSort, (a, v) => a._nestedSort = v);
+
+	public ScriptSortDescriptor<T> Nested(NestedSortDescriptor<T> descriptor) =>
+		Assign(descriptor, (a, v) => a._nestedSortDescriptor = v);
+
+	public ScriptSortDescriptor<T> Nested(Action<NestedSortDescriptor<T>> configure) =>
+		Assign(configure, (a, v) => a._nestedSortDescriptorAction = v);
+
+	public ScriptSortDescriptor<T> Order(SortOrder? order) => Assign(order, (a, v) => a._order = v);
+
+	public ScriptSortDescriptor<T> Script(ScriptBase script) => Assign(script, (a, v) => a._script = v);
+
+	public ScriptSortDescriptor<T> Script(InlineScriptDescriptor descriptor) =>
+		Assign(descriptor, (a, v) => a._inlineScriptDescriptor = v);
+
+	public ScriptSortDescriptor<T> Script(Action<InlineScriptDescriptor> configure) =>
+		Assign(configure, (a, v) => a._inlineScriptDescriptorAction = v);
+
+	public ScriptSortDescriptor<T> Type(ScriptSortType? type) => Assign(type, (a, v) => a._scriptSortType = v);
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("_script");
+		writer.WriteStartObject();
+
+		if (_order.HasValue)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, _order.Value, options);
+		}
+
+		if (_sortMode.HasValue)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, _sortMode.Value, options);
+		}
+
+		if (_nestedSort is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, _nestedSort, options);
+		}
+		else if (_nestedSortDescriptor is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, _nestedSortDescriptor, options);
+		}
+		else if (_nestedSortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("nested");
+			var descriptor = new NestedSortDescriptor<T>();
+			_nestedSortDescriptorAction(descriptor);
+			JsonSerializer.Serialize(writer, descriptor, options);
+		}
+
+		if (_script is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, _script, options);
+		}
+		else if (_inlineScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, _inlineScriptDescriptor, options);
+		}
+		else if (_inlineScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			var descriptor = new InlineScriptDescriptor();
+			_inlineScriptDescriptorAction(descriptor);
+			JsonSerializer.Serialize(writer, descriptor, options);
+		}
+
+		if (_scriptSortType.HasValue)
+		{
+			writer.WritePropertyName("type");
+			JsonSerializer.Serialize(writer, _scriptSortType.Value, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+
+	//internal FieldSort ToFieldSort() => null;
+}
+
+[JsonConverter(typeof(ScriptSortTypeConverter))]
+public enum ScriptSortType
+{
+	String,
+	Number
+}
+
+internal sealed class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
+{
+	public override ScriptSortType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "string":
+				return ScriptSortType.String;
+			case "number":
+				return ScriptSortType.Number;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ScriptSortType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ScriptSortType.String:
+				writer.WriteStringValue("string");
+				return;
+			case ScriptSortType.Number:
+				writer.WriteStringValue("number");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 public sealed class FieldSort : SortBase
 {
+	private const string Doc = "_doc";
 	private const string ShardDoc = "_shard_doc";
 
-	public static readonly IList<SortBase> ByDocumentOrder = new ReadOnlyCollection<SortBase>(new List<SortBase> { new FieldSort { Field = "_doc" } });
+	public static readonly IList<SortBase> ByDocumentOrder = new ReadOnlyCollection<SortBase>(new List<SortBase> { new FieldSort { Field = Doc } });
 
 	public static readonly IList<SortBase> ByShardDocumentOrder = new ReadOnlyCollection<SortBase>(new List<SortBase> { new FieldSort { Field = ShardDoc } });
 
@@ -620,6 +908,7 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 	public SortDescriptor(Action<SortDescriptor<T>> configure) : base(new SortCollection()) => configure(this);
 
 	private List<Action<FieldSortDescriptor<T>>> _fieldSortDescriptorActions;
+	private List<Action<ScriptSortDescriptor<T>>> _scriptSortDescriptorActions;
 
 	public SortDescriptor<T> Ascending<TValue>(Expression<Func<T, TValue>> objectPath) =>
 		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));
@@ -637,7 +926,7 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 	public SortDescriptor<T> Descending(SortSpecialField field) =>
 		Assign(field == SortSpecialField.Score ? "_score" : field == SortSpecialField.DocumentIndexOrder ? "_doc" : "_shard_doc", (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }));
 
-	public SortDescriptor<T> Field(Action<FieldSortDescriptor<T>> sortSelector)
+	public SortDescriptor<T> Field(Action<FieldSortDescriptor<T>> configure)
 	{
 		// TODO - Future idea: Store the actions and invoke at serialisation time
 
@@ -647,7 +936,7 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 		if (_fieldSortDescriptorActions is null)
 			_fieldSortDescriptorActions = new List<Action<FieldSortDescriptor<T>>>();
 
-		_fieldSortDescriptorActions.Add(sortSelector);
+		_fieldSortDescriptorActions.Add(configure);
 
 		//return AddSort(descriptor.ToFieldSort());
 
@@ -662,8 +951,16 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 	//public SortDescriptor<T> GeoDistance(Action<GeoDistanceSortDescriptor<T>> sortSelector) =>
 	//	AddSort(sortSelector?.Invoke(new GeoDistanceSortDescriptor<T>()));
 
-	//public SortDescriptor<T> Script(Func<ScriptSortDescriptor<T>, IScriptSort> sortSelector) =>
-	//	AddSort(sortSelector?.Invoke(new ScriptSortDescriptor<T>()));
+	public SortDescriptor<T> Script(Action<ScriptSortDescriptor<T>> configure)
+	{
+		if (_scriptSortDescriptorActions is null)
+			_scriptSortDescriptorActions = new List<Action<ScriptSortDescriptor<T>>>();
+
+		_scriptSortDescriptorActions.Add(configure);
+
+		return this;
+
+	}
 
 	private SortDescriptor<T> AddSort(SortBase sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v));
 
@@ -682,6 +979,12 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 				continue;
 			}
 
+			if (sort is ScriptSort scriptSort)
+			{
+				SortSerializationHelpers.WriteScriptSort(writer, scriptSort, options);
+				continue;
+			}
+
 			// TODO - Other types
 			throw new NotImplementedException("The sort type is not currently supported in this release.");
 		}
@@ -691,6 +994,16 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 			foreach (var action in _fieldSortDescriptorActions)
 			{
 				var descriptor = new FieldSortDescriptor<T>();
+				action(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+		}
+
+		if (_scriptSortDescriptorActions is not null)
+		{
+			foreach (var action in _scriptSortDescriptorActions)
+			{
+				var descriptor = new ScriptSortDescriptor<T>();
 				action(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 			}
