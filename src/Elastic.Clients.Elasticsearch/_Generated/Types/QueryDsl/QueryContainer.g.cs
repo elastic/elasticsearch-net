@@ -538,7 +538,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public void Bool(BoolQuery variant) => Set(variant, "bool");
-		public void Bool(Action<BoolQueryDescriptor<T>> configure) => Set(configure, "bool");
+		public void Bool(Action<BoolQueryDescriptor> configure) => Set(configure, "bool");
 		public void Boosting(BoostingQuery variant) => Set(variant, "boosting");
 		public void Boosting(Action<BoostingQueryDescriptor<T>> configure) => Set(configure, "boosting");
 		public void CombinedFields(CombinedFieldsQuery variant) => Set(variant, "combined_fields");
@@ -654,8 +654,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WriteStartObject();
 			if (ContainedVariantName == "bool")
 			{
-				var descriptor = new BoolQueryDescriptor<T>();
-				((Action<BoolQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new BoolQueryDescriptor();
+				((Action<BoolQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

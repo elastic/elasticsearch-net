@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
-		public string? IndexPatterns { get; set; }
+		public IEnumerable<string>? IndexPatterns { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings")]
@@ -106,7 +106,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexPutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; private set; }
 
-		internal string? IndexPatternsValue { get; private set; }
+		internal IEnumerable<string>? IndexPatternsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
 
@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
 		public IndexPutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
-		public IndexPutTemplateRequestDescriptor IndexPatterns(string? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatternsValue = v);
+		public IndexPutTemplateRequestDescriptor IndexPatterns(IEnumerable<string>? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatternsValue = v);
 		public IndexPutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
 			MappingsDescriptor = null;
@@ -155,10 +155,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, AliasesValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(IndexPatternsValue))
+			if (IndexPatternsValue is not null)
 			{
 				writer.WritePropertyName("index_patterns");
-				writer.WriteStringValue(IndexPatternsValue);
+				JsonSerializer.Serialize(writer, IndexPatternsValue, options);
 			}
 
 			if (MappingsDescriptor is not null)

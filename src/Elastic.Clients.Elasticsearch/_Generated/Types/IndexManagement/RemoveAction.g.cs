@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		[JsonInclude]
 		[JsonPropertyName("aliases")]
-		public Elastic.Clients.Elasticsearch.IndexAlias? Aliases { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		internal RemoveActionDescriptor(Action<RemoveActionDescriptor> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasesValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; private set; }
 
@@ -67,7 +67,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		internal bool? MustExistValue { get; private set; }
 
 		public RemoveActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias) => Assign(alias, (a, v) => a.AliasValue = v);
-		public RemoveActionDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexAlias? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
+		public RemoveActionDescriptor Aliases(IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
 		public RemoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public RemoveActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
 		public RemoveActionDescriptor MustExist(bool? mustExist = true) => Assign(mustExist, (a, v) => a.MustExistValue = v);

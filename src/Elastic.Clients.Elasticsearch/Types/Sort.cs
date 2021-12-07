@@ -12,28 +12,28 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class Sort : List<SortBase>
+public sealed class SortCollection : List<SortBase>
 {
-	public Sort() { }
+	public SortCollection() { }
 
-	public Sort(IEnumerable<SortBase> sorts) => AddRange(sorts);
+	public SortCollection(IEnumerable<SortBase> sorts) => AddRange(sorts);
 
-	public Sort(SortBase sort) => Add(sort);
+	public SortCollection(SortBase sort) => Add(sort);
 
-	public Sort(SortBase sort1, SortBase sort2)
+	public SortCollection(SortBase sort1, SortBase sort2)
 	{
 		Add(sort1);
 		Add(sort2);
 	}
 }
 
-internal sealed class SortConverter : JsonConverter<Sort>
+internal sealed class SortConverter : JsonConverter<SortCollection>
 {
 	private readonly IElasticsearchClientSettings _settings;
 
 	public SortConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-	public override Sort? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override SortCollection? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (typeToConvert is null)
 			return null;
@@ -41,7 +41,7 @@ internal sealed class SortConverter : JsonConverter<Sort>
 		if (reader.TokenType != JsonTokenType.StartArray)
 			throw new JsonException("Unexpected JSON token. Expected start array.");
 
-		var sort = new Sort();
+		var sort = new SortCollection();
 
 		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
 		{
@@ -197,13 +197,15 @@ internal sealed class SortConverter : JsonConverter<Sort>
 					geoDistanceSort.Mode = sortMode;
 					continue;
 				}
+
+				// TODO - Other properties
 			}
 		}
 
 		return geoDistanceSort;
 	}
 
-	public override void Write(Utf8JsonWriter writer, Sort value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, SortCollection value, JsonSerializerOptions options)
 	{
 		writer.WriteStartArray();
 
@@ -213,9 +215,13 @@ internal sealed class SortConverter : JsonConverter<Sort>
 				continue;
 
 			if (sort is FieldSort fieldSort)
+			{
 				WriteFieldSort(writer, fieldSort, options);
+				continue;
+			}
 
 			// TODO - Other types
+			throw new NotImplementedException("The sort type is not currently supported in this release.");
 		}
 
 		writer.WriteEndArray();
@@ -308,11 +314,11 @@ public sealed class FieldSort : SortBase
 
 public sealed class GeoDistanceSort : SortBase
 {
-	// TODO - Support geopoint against a field name.
-
 	public GeoDistanceType? DistanceType { get; set; }
 
 	public Field Field { get; set; }
+
+	public GeoPoints GeoPoints { get; set; }
 
 	public DistanceUnit? Unit { get; set; }
 
@@ -392,6 +398,8 @@ public enum SortSpecialField
 public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>, IList<SortBase>>
 {
 	public SortDescriptor() : base(new List<SortBase>()) { }
+
+	public SortDescriptor(Action<SortDescriptor<T>> configure) : base(new List<SortBase>()) => configure(this);
 
 	public SortDescriptor<T> Ascending<TValue>(Expression<Func<T, TValue>> objectPath) =>
 		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));

@@ -445,7 +445,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_selector", configure));
 		}
 
-		public AggregationContainerDescriptor<T> BucketSort(string name, Action<BucketSortAggregationDescriptor> configure)
+		public AggregationContainerDescriptor<T> BucketSort(string name, Action<BucketSortAggregationDescriptor<T>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_sort", configure));
 		}

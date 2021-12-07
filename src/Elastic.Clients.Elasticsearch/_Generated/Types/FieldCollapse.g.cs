@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
-		public Elastic.Clients.Elasticsearch.InnerHits? InnerHits { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? InnerHits { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_concurrent_group_searches")]
@@ -48,54 +48,20 @@ namespace Elastic.Clients.Elasticsearch
 		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<T>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? InnerHitsValue { get; private set; }
 
 		internal int? MaxConcurrentGroupSearchesValue { get; private set; }
 
-		internal InnerHitsDescriptor<T> InnerHitsDescriptor { get; private set; }
-
-		internal Action<InnerHitsDescriptor<T>> InnerHitsDescriptorAction { get; private set; }
-
 		public FieldCollapseDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
 		public FieldCollapseDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldCollapseDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
-		{
-			InnerHitsDescriptor = null;
-			InnerHitsDescriptorAction = null;
-			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
-		}
-
-		public FieldCollapseDescriptor<T> InnerHits(InnerHitsDescriptor<T> descriptor)
-		{
-			InnerHitsValue = null;
-			InnerHitsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
-		}
-
-		public FieldCollapseDescriptor<T> InnerHits(Action<InnerHitsDescriptor<T>> configure)
-		{
-			InnerHitsValue = null;
-			InnerHitsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
-		}
-
+		public FieldCollapseDescriptor<T> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits) => Assign(innerHits, (a, v) => a.InnerHitsValue = v);
 		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (InnerHitsDescriptor is not null)
-			{
-				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
-			}
-			else if (InnerHitsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<T>(InnerHitsDescriptorAction), options);
-			}
-			else if (InnerHitsValue is not null)
+			if (InnerHitsValue is not null)
 			{
 				writer.WritePropertyName("inner_hits");
 				JsonSerializer.Serialize(writer, InnerHitsValue, options);

@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("include"))
 					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Include = value;
@@ -268,10 +268,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Gnd, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Include))
+			if (value.Include is not null)
 			{
 				writer.WritePropertyName("include");
-				writer.WriteStringValue(value.Include);
+				JsonSerializer.Serialize(writer, value.Include, options);
 			}
 
 			if (value.MinDocCount.HasValue)
@@ -366,7 +366,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("include")]
-		public string? Include { get; set; }
+		public IEnumerable<string>? Include { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -416,7 +416,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? GndValue { get; private set; }
 
-		internal string? IncludeValue { get; private set; }
+		internal IEnumerable<string>? IncludeValue { get; private set; }
 
 		internal long? MinDocCountValue { get; private set; }
 
@@ -531,7 +531,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.GndDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Include(string? include) => Assign(include, (a, v) => a.IncludeValue = v);
+		public SignificantTermsAggregationDescriptor<T> Include(IEnumerable<string>? include) => Assign(include, (a, v) => a.IncludeValue = v);
 		public SignificantTermsAggregationDescriptor<T> MinDocCount(long? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
 		public SignificantTermsAggregationDescriptor<T> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? mutualInformation)
 		{
@@ -692,10 +692,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, GndValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(IncludeValue))
+			if (IncludeValue is not null)
 			{
 				writer.WritePropertyName("include");
-				writer.WriteStringValue(IncludeValue);
+				JsonSerializer.Serialize(writer, IncludeValue, options);
 			}
 
 			if (MinDocCountValue.HasValue)

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -22,16 +23,12 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 		{
 			top_metrics = new
 			{
-				//metrics = new[]
-				//{
-				//	new
-				//	{
-				//		field = "numberOfContributors"
-				//	}
-				//},
-				metrics = new
+				metrics = new[]
 				{
-					field = "numberOfContributors"
+					new
+					{
+						field = "numberOfContributors"
+					}
 				},
 				size = 10,
 				sort = new[] { new { numberOfContributors = new { order = "asc" } } }
@@ -41,27 +38,23 @@ public class TopMetricsAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 
 	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
 		.TopMetrics("tm", st => st
-			.Metrics(m => m.Field(p => p.NumberOfContributors))
+			//.Metrics(m => m.Field(p => p.NumberOfContributors))
+			.Metrics(new List<TopMetricsValue> { new TopMetricsValue(Field<Project>(p => p.NumberOfContributors)) })
 			.Size(10)
-			.Sort(new Sort { new FieldSort("numberOfContributors") { Order = SortOrder.Asc } })
-			//.Sort(sort => sort
-			//	.Asc("numberOfContributors")
-			//)
+			.Sort(sort => sort
+				.Ascending("numberOfContributors")
+			)
 		);
 
 	protected override AggregationDictionary InitializerAggs =>
 		new TopMetricsAggregation("tm")
 		{
-			//Metrics = new List<ITopMetricsValue>
-			//{
-			//	new TopMetricsValue(Field<Project>(p => p.NumberOfContributors))
-			//},
-			Metrics = new TopMetricsValue()
+			Metrics = new List<TopMetricsValue>
 			{
-				Field = Field<Project>(p => p.NumberOfContributors)
+				new TopMetricsValue(Field<Project>(p => p.NumberOfContributors))
 			},
 			Size = 10,
-			Sort = new Sort { new FieldSort("numberOfContributors") { Order = SortOrder.Asc } }
+			Sort = new SortCollection { new FieldSort("numberOfContributors") { Order = SortOrder.Asc } }
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)

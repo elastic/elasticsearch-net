@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.SortCollection? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Sort? SortValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.SortCollection? SortValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
 
@@ -134,9 +134,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal HighlightDescriptor<T> HighlightDescriptor { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.SortDescriptor<T> SortDescriptor { get; private set; }
+
 		internal Action<FieldCollapseDescriptor<T>> CollapseDescriptorAction { get; private set; }
 
 		internal Action<HighlightDescriptor<T>> HighlightDescriptorAction { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.SortDescriptor<T>> SortDescriptorAction { get; private set; }
 
 		public InnerHitsDescriptor<T> Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a.NameValue = v);
 		public InnerHitsDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
@@ -190,7 +194,27 @@ namespace Elastic.Clients.Elasticsearch
 		public InnerHitsDescriptor<T> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
 		public InnerHitsDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public InnerHitsDescriptor<T> Fields<TValue>(Expression<Func<T, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public InnerHitsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
+		public InnerHitsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.SortCollection? sort)
+		{
+			SortDescriptor = null;
+			SortDescriptorAction = null;
+			return Assign(sort, (a, v) => a.SortValue = v);
+		}
+
+		public InnerHitsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.SortDescriptor<T> descriptor)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
+		}
+
+		public InnerHitsDescriptor<T> Sort(Action<Elastic.Clients.Elasticsearch.SortDescriptor<T>> configure)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
+		}
+
 		public InnerHitsDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
 		public InnerHitsDescriptor<T> StoredField(Elastic.Clients.Elasticsearch.Fields? storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
 		public InnerHitsDescriptor<T> StoredField<TValue>(Expression<Func<T, TValue>> storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
@@ -285,7 +309,17 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, FieldsValue, options);
 			}
 
-			if (SortValue is not null)
+			if (SortDescriptor is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortDescriptor, options);
+			}
+			else if (SortDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortDescriptor<T>(SortDescriptorAction), options);
+			}
+			else if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
 				JsonSerializer.Serialize(writer, SortValue, options);
