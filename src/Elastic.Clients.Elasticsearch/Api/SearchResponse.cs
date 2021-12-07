@@ -19,4 +19,9 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public long Total => HitsMetadata?.Total?.Value ?? -1;
 	}
+
+	//public partial class SearchRequest
+	//{
+	//	public IList<SortBase> Sort { get; set; }
+	//}
 }
