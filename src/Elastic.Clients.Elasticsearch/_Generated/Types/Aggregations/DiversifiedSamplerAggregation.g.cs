@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ExecutionHint = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("max_docs_per_value"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.MaxDocsPerValue = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("script"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Script = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("shard_size"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ShardSize = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("field"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -97,6 +107,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
@@ -106,6 +118,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Aggregations = value;
 						}
+
+						continue;
 					}
 				}
 			}

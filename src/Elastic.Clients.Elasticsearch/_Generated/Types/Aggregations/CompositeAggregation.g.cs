@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.After = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("size"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Size = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("sources"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Sources = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -79,6 +85,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
@@ -88,6 +96,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Aggregations = value;
 						}
+
+						continue;
 					}
 				}
 			}

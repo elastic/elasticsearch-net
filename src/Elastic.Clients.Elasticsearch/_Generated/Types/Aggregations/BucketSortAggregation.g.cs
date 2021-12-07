@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.From = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("gap_policy"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.GapPolicy = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("size"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Size = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("sort"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Sort = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -88,6 +96,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}

@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.a = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("b"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.b = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("type"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Type = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -79,6 +85,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}

@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Exclude = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("field"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("include"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Include = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("max_doc_count"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.MaxDocCount = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("missing"))
@@ -82,6 +90,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Missing = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("precision"))
@@ -91,6 +101,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Precision = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("value_type"))
@@ -100,6 +112,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ValueType = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -115,6 +129,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
@@ -124,6 +140,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Aggregations = value;
 						}
+
+						continue;
 					}
 				}
 			}

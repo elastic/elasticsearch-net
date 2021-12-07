@@ -46,6 +46,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Field = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("buckets"))
@@ -55,6 +57,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Buckets = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("shard_size"))
@@ -64,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.ShardSize = value;
 						}
+
+						continue;
 					}
 
 					if (reader.ValueTextEquals("initial_buffer"))
@@ -73,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.InitialBuffer = value;
 						}
+
+						continue;
 					}
 				}
 			}
@@ -88,6 +96,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						{
 							agg.Meta = value;
 						}
+
+						continue;
 					}
 				}
 			}
