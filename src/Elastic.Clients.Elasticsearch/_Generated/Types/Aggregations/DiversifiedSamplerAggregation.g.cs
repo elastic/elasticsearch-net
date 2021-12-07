@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new DiversifiedSamplerAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "diversified_sampler")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new DiversifiedSamplerAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)

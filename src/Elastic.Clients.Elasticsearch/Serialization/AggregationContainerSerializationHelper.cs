@@ -19,11 +19,11 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var variant = JsonSerializer.Deserialize<T?>(ref reader, options);
 
-			variant.Name = variantName;
+			//variant.Name = variantName;
 
 			var container = new AggregationContainer(variant);
 
-			reader.Read();
+			//reader.Read();
 
 			return container;
 		}

@@ -30,7 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new CardinalityAggregation("");
+			reader.Read();
+			var aggName = reader.GetString();
+			if (aggName != "cardinality")
+				throw new JsonException("Unexpected JSON detected.");
+			var agg = new CardinalityAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
