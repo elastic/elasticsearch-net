@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 		[JsonIgnore]
-		public string? Groups { get => Q<string?>("groups"); set => Q("groups", value); }
+		public IEnumerable<string>? Groups { get => Q<IEnumerable<string>?>("groups"); set => Q("groups", value); }
 
 		[JsonIgnore]
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
 		[JsonIgnore]
-		public string? Groups { get => Q<string?>("groups"); set => Q("groups", value); }
+		public IEnumerable<string>? Groups { get => Q<IEnumerable<string>?>("groups"); set => Q("groups", value); }
 
 		[JsonIgnore]
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexStatsRequestDescriptor<T> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
 		public IndexStatsRequestDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 		public IndexStatsRequestDescriptor<T> ForbidClosedIndices(bool? forbidClosedIndices) => Qs("forbid_closed_indices", forbidClosedIndices);
-		public IndexStatsRequestDescriptor<T> Groups(string? groups) => Qs("groups", groups);
+		public IndexStatsRequestDescriptor<T> Groups(IEnumerable<string>? groups) => Qs("groups", groups);
 		public IndexStatsRequestDescriptor<T> IncludeSegmentFileSizes(bool? includeSegmentFileSizes) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 		public IndexStatsRequestDescriptor<T> IncludeUnloadedSegments(bool? includeUnloadedSegments) => Qs("include_unloaded_segments", includeUnloadedSegments);
 		public IndexStatsRequestDescriptor<T> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);

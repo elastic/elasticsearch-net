@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("like")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.Like Like { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_doc_freq")]
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("unlike")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.Like? Unlike { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -122,7 +122,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal bool? IncludeValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Like LikeValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; private set; }
 
 		internal int? MaxDocFreqValue { get; private set; }
 
@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Like? UnlikeValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; private set; }
 
 		internal long? VersionValue { get; private set; }
 
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public MoreLikeThisQueryDescriptor<T> FailOnUnsupportedField(bool? failOnUnsupportedField = true) => Assign(failOnUnsupportedField, (a, v) => a.FailOnUnsupportedFieldValue = v);
 		public MoreLikeThisQueryDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public MoreLikeThisQueryDescriptor<T> Include(bool? include = true) => Assign(include, (a, v) => a.IncludeValue = v);
-		public MoreLikeThisQueryDescriptor<T> Like(Elastic.Clients.Elasticsearch.QueryDsl.Like like) => Assign(like, (a, v) => a.LikeValue = v);
+		public MoreLikeThisQueryDescriptor<T> Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like) => Assign(like, (a, v) => a.LikeValue = v);
 		public MoreLikeThisQueryDescriptor<T> MaxDocFreq(int? maxDocFreq) => Assign(maxDocFreq, (a, v) => a.MaxDocFreqValue = v);
 		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTermsValue = v);
 		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLengthValue = v);
@@ -170,7 +170,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
 		public MoreLikeThisQueryDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public MoreLikeThisQueryDescriptor<T> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
-		public MoreLikeThisQueryDescriptor<T> Unlike(Elastic.Clients.Elasticsearch.QueryDsl.Like? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
+		public MoreLikeThisQueryDescriptor<T> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
 		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 		public MoreLikeThisQueryDescriptor<T> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Assign(versionType, (a, v) => a.VersionTypeValue = v);
 		public MoreLikeThisQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);

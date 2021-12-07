@@ -20,6 +20,11 @@ using System.Linq.Expressions;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
+	public partial class TopMetricsValue
+	{
+		public TopMetricsValue(Field field) => Field = field;
+	}
+
 	public partial class Buckets<TBucket>
 	{
 		public IReadOnlyCollection<TBucket> Items => Item2 is not null ? Item2 : Array.Empty<TBucket>();

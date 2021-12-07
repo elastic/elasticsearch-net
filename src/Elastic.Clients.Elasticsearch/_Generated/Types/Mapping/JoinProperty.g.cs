@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	{
 		[JsonInclude]
 		[JsonPropertyName("relations")]
-		public Dictionary<string, string>? Relations { get; init; }
+		public Dictionary<string, IReadOnlyCollection<string>>? Relations { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]

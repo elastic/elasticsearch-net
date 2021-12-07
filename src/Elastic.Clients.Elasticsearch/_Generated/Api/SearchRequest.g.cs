@@ -265,7 +265,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("rescore")]
-		public Elastic.Clients.Elasticsearch.Rescore? Rescore { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? Rescore { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_fields")]
@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Sort? Sort { get; set; }
+		public Elastic.Clients.Elasticsearch.SortCollection? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
@@ -410,7 +410,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Rescore? RescoreValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; private set; }
 
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; private set; }
 
@@ -420,7 +420,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Sort? SortValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.SortCollection? SortValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
 
@@ -456,9 +456,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
 
-		internal RescoreDescriptor<T> RescoreDescriptor { get; private set; }
-
 		internal SlicedScrollDescriptor<T> SliceDescriptor { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.SortDescriptor<T> SortDescriptor { get; private set; }
 
 		internal SuggesterDescriptor SuggestDescriptor { get; private set; }
 
@@ -474,9 +474,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
 
-		internal Action<RescoreDescriptor<T>> RescoreDescriptorAction { get; private set; }
-
 		internal Action<SlicedScrollDescriptor<T>> SliceDescriptorAction { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.SortDescriptor<T>> SortDescriptorAction { get; private set; }
 
 		internal Action<SuggesterDescriptor> SuggestDescriptorAction { get; private set; }
 
@@ -595,27 +595,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<T> Rescore(Elastic.Clients.Elasticsearch.Rescore? rescore)
-		{
-			RescoreDescriptor = null;
-			RescoreDescriptorAction = null;
-			return Assign(rescore, (a, v) => a.RescoreValue = v);
-		}
-
-		public SearchRequestDescriptor<T> Rescore(RescoreDescriptor<T> descriptor)
-		{
-			RescoreValue = null;
-			RescoreDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.RescoreDescriptor = v);
-		}
-
-		public SearchRequestDescriptor<T> Rescore(Action<RescoreDescriptor<T>> configure)
-		{
-			RescoreValue = null;
-			RescoreDescriptorAction = null;
-			return Assign(configure, (a, v) => a.RescoreDescriptorAction = v);
-		}
-
+		public SearchRequestDescriptor<T> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore) => Assign(rescore, (a, v) => a.RescoreValue = v);
 		public SearchRequestDescriptor<T> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>()));
 		public SearchRequestDescriptor<T> SearchAfter(IEnumerable<object>? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfterValue = v);
 		public SearchRequestDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
@@ -640,7 +620,27 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.SliceDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Sort? sort) => Assign(sort, (a, v) => a.SortValue = v);
+		public SearchRequestDescriptor<T> Sort(Elastic.Clients.Elasticsearch.SortCollection? sort)
+		{
+			SortDescriptor = null;
+			SortDescriptorAction = null;
+			return Assign(sort, (a, v) => a.SortValue = v);
+		}
+
+		public SearchRequestDescriptor<T> Sort(Elastic.Clients.Elasticsearch.SortDescriptor<T> descriptor)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
+		}
+
+		public SearchRequestDescriptor<T> Sort(Action<Elastic.Clients.Elasticsearch.SortDescriptor<T>> configure)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
+		}
+
 		public SearchRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
 		public SearchRequestDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public SearchRequestDescriptor<T> Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
@@ -820,17 +820,7 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (RescoreDescriptor is not null)
-			{
-				writer.WritePropertyName("rescore");
-				JsonSerializer.Serialize(writer, RescoreDescriptor, options);
-			}
-			else if (RescoreDescriptorAction is not null)
-			{
-				writer.WritePropertyName("rescore");
-				JsonSerializer.Serialize(writer, new RescoreDescriptor<T>(RescoreDescriptorAction), options);
-			}
-			else if (RescoreValue is not null)
+			if (RescoreValue is not null)
 			{
 				writer.WritePropertyName("rescore");
 				JsonSerializer.Serialize(writer, RescoreValue, options);
@@ -870,7 +860,17 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, SliceValue, options);
 			}
 
-			if (SortValue is not null)
+			if (SortDescriptor is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortDescriptor, options);
+			}
+			else if (SortDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortDescriptor<T>(SortDescriptorAction), options);
+			}
+			else if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
 				JsonSerializer.Serialize(writer, SortValue, options);
