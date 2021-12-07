@@ -395,11 +395,11 @@ public enum SortSpecialField
 	ShardDocumentOrder
 }
 
-public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>, IList<SortBase>>
+public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>, SortCollection>, ISelfSerializable
 {
-	public SortDescriptor() : base(new List<SortBase>()) { }
+	public SortDescriptor() : base(new SortCollection()) { }
 
-	public SortDescriptor(Action<SortDescriptor<T>> configure) : base(new List<SortBase>()) => configure(this);
+	public SortDescriptor(Action<SortDescriptor<T>> configure) : base(new SortCollection()) => configure(this);
 
 	public SortDescriptor<T> Ascending<TValue>(Expression<Func<T, TValue>> objectPath) =>
 		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));
@@ -432,4 +432,6 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 	//	AddSort(sortSelector?.Invoke(new ScriptSortDescriptor<T>()));
 
 	private SortDescriptor<T> AddSort(SortBase sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v));
+
+	public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize<SortCollection>(writer, PromisedValue, options);
 }
