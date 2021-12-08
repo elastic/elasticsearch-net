@@ -87,7 +87,7 @@ namespace Nest
 								.Deserialize(ref reader, formatterResolver);
 							break;
 						case 3:
-							query.IgnoreUnmapped = reader.ReadBoolean();
+							query.IgnoreUnmapped = reader.ReadNullableBoolean();
 							break;
 					}
 				}

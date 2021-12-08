@@ -106,6 +106,9 @@ namespace Nest
 							query.Type = formatterResolver.GetFormatter<GeoExecution>()
 								.Deserialize(ref reader, formatterResolver);
 							break;
+						case 4:
+							query.IgnoreUnmapped = reader.ReadNullableBoolean();
+							break;
 					}
 				}
 				else
@@ -167,6 +170,16 @@ namespace Nest
 				writer.WritePropertyName("type");
 				formatterResolver.GetFormatter<GeoExecution>()
 					.Serialize(ref writer, value.Type.Value, formatterResolver);
+				written = true;
+			}
+
+			if (value.IgnoreUnmapped != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBoolean(value.IgnoreUnmapped.Value);
 				written = true;
 			}
 
