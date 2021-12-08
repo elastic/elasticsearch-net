@@ -178,6 +178,10 @@ Instead of following a c/go like error checking on response.IsValid always throw
 +
 Reasons for such exceptions could be search parser errors, index missing exceptions, etc...
 
+`UserAgent`::
+
+The user agent string to send with requests. Useful for debugging purposes to understand client and framework versions that initiate requests to Elasticsearch
+
 :xml-docs: Elasticsearch.Net:ConnectionConfiguration`1
 
 ==== Options on ConnectionSettings
