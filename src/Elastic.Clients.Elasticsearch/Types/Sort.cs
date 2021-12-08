@@ -13,306 +13,12 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class SortCollection : List<SortBase>
-{
-	public SortCollection() { }
 
-	public SortCollection(IEnumerable<SortBase> sorts) => AddRange(sorts);
-
-	public SortCollection(SortBase sort) => Add(sort);
-
-	public SortCollection(SortBase sort1, SortBase sort2)
-	{
-		Add(sort1);
-		Add(sort2);
-	}
-}
-
-internal sealed class SortCollectionConverter : JsonConverter<SortCollection>
-{
-	private readonly IElasticsearchClientSettings _settings;
-
-	public SortCollectionConverter(IElasticsearchClientSettings settings) => _settings = settings;
-
-	public override SortCollection? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (typeToConvert is null)
-			return null;
-
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException("Unexpected JSON token. Expected start array.");
-
-		var sort = new SortCollection();
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-		{
-			var sortItem = ReadSortItem(ref reader, options);
-
-			if (sortItem is not null)
-				sort.Add(sortItem);
-		}
-
-		return sort;
-	}
-
-	private SortBase ReadSortItem(ref Utf8JsonReader reader, JsonSerializerOptions options)
-	{
-		if (reader.TokenType == JsonTokenType.String)
-		{
-			var field = reader.GetString();
-			return new FieldSort(field);
-		}
-		else if (reader.TokenType == JsonTokenType.StartObject)
-		{
-			var readAheadCopy = reader;
-
-			readAheadCopy.Read();
-
-			if (readAheadCopy.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException("Unexpected JSON token. Expected property name.");
-
-			var value = readAheadCopy.GetString();
-
-			if (!string.IsNullOrEmpty(value) && value == "_geo_distance")
-			{
-				// TODO
-				throw new NotImplementedException("This feature is not complete.");
-			}
-			else if (!string.IsNullOrEmpty(value) && value == "_script")
-			{
-				return ReadScriptSort(ref reader, options);
-			}
-			else
-			{
-				return ReadFieldSort(ref reader, options);
-			}
-		}
-
-		return null;
-	}
-
-	private FieldSort ReadFieldSort(ref Utf8JsonReader reader, JsonSerializerOptions options)
-	{
-		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.PropertyName)
-			throw new JsonException("Unexpected JSON token. Expected property name.");
-
-		var field = reader.GetString();
-
-		if (string.IsNullOrEmpty(field))
-			throw new JsonException("Invalid field name.");
-
-		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON token. Expected start object.");
-
-		var fieldSort = new FieldSort(field);
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("order"))
-				{
-					var order = JsonSerializer.Deserialize<SortOrder>(ref reader, options);
-					fieldSort.Order = order;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					var missing = JsonSerializer.Deserialize<object>(ref reader, options);
-					fieldSort.Missing = missing;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					var format = JsonSerializer.Deserialize<string>(ref reader, options);
-					fieldSort.Format = format;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("mode"))
-				{
-					var sortMode = JsonSerializer.Deserialize<SortMode>(ref reader, options);
-					fieldSort.Mode = sortMode;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("numeric_type"))
-				{
-					var numericType = JsonSerializer.Deserialize<FieldSortNumericType>(ref reader, options);
-					fieldSort.NumericType = numericType;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("nested"))
-				{
-					var nested = JsonSerializer.Deserialize<NestedSort>(ref reader, options);
-					fieldSort.Nested = nested;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("ignore_unmapped"))
-				{
-					var ignoreUnmapped = JsonSerializer.Deserialize<bool>(ref reader, options);
-					fieldSort.IgnoreUnmapped = ignoreUnmapped;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("unmapped_type"))
-				{
-					var fieldType = JsonSerializer.Deserialize<FieldType>(ref reader, options);
-					fieldSort.UnmappedType = fieldType;
-					continue;
-				}
-			}
-		}
-
-		return fieldSort;
-	}
-
-	private GeoDistanceSort ReadGeoDistanceSort(ref Utf8JsonReader reader, JsonSerializerOptions options)
-	{
-		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.PropertyName)
-			throw new JsonException("Unexpected JSON token. Expected property name.");
-
-		var field = reader.GetString();
-
-		if (field != "_geo_distance")
-			throw new JsonException("Invalid geo distance sort object.");
-
-		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON token. Expected start object.");
-
-		var geoDistanceSort = new GeoDistanceSort();
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("order"))
-				{
-					var order = JsonSerializer.Deserialize<SortOrder>(ref reader, options);
-					geoDistanceSort.Order = order;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("mode"))
-				{
-					var sortMode = JsonSerializer.Deserialize<SortMode>(ref reader, options);
-					geoDistanceSort.Mode = sortMode;
-					continue;
-				}
-
-				// TODO - Other properties
-			}
-		}
-
-		return geoDistanceSort;
-	}
-
-	private ScriptSort ReadScriptSort(ref Utf8JsonReader reader, JsonSerializerOptions options)
-	{
-		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.PropertyName)
-			throw new JsonException("Unexpected JSON token. Expected property name.");
-
-		var field = reader.GetString();
-
-		if (field != "_script")
-			throw new JsonException("Invalid script sort object.");
-
-		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON token. Expected start object.");
-
-		var fieldSort = new ScriptSort();
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("order"))
-				{
-					var order = JsonSerializer.Deserialize<SortOrder>(ref reader, options);
-					fieldSort.Order = order;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					// TODO
-					throw new NotImplementedException("Needs a helper to determine the script type we have received");
-				}
-
-				if (reader.ValueTextEquals("type"))
-				{
-					var scriptSortType = JsonSerializer.Deserialize<ScriptSortType>(ref reader, options);
-					fieldSort.Type = scriptSortType;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("mode"))
-				{
-					var sortMode = JsonSerializer.Deserialize<SortMode>(ref reader, options);
-					fieldSort.Mode = sortMode;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("nested"))
-				{
-					var nested = JsonSerializer.Deserialize<NestedSort>(ref reader, options);
-					fieldSort.Nested = nested;
-					continue;
-				}
-			}
-		}
-
-		return fieldSort;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SortCollection value, JsonSerializerOptions options)
-	{
-		writer.WriteStartArray();
-
-		foreach (var sort in value)
-		{
-			if (sort is null)
-				continue;
-
-			if (sort is FieldSort fieldSort)
-			{
-				SortSerializationHelpers.WriteFieldSort(writer, fieldSort, options, _settings);
-				continue;
-			}
-
-			if (sort is ScriptSort scriptSort)
-			{
-				SortSerializationHelpers.WriteScriptSort(writer, scriptSort, options);
-				continue;
-			}
-
-			// TODO - Other types
-			throw new NotImplementedException("The sort type is not currently supported in this release.");
-		}
-
-		writer.WriteEndArray();
-	}
-}
 
 internal sealed class ScriptBaseConverter : JsonConverter<ScriptBase>
 {
 	public override ScriptBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+
 	public override void Write(Utf8JsonWriter writer, ScriptBase value, JsonSerializerOptions options)
 	{
 		if (value is InlineScript scriptSort)
@@ -323,6 +29,25 @@ internal sealed class ScriptBaseConverter : JsonConverter<ScriptBase>
 
 		else
 			throw new JsonException("Unsupported script implementation");
+	}
+}
+
+internal static class ScriptSerializationHelpers
+{
+	public static ScriptBase ReadScriptSort(ref Utf8JsonReader reader, JsonSerializerOptions options)
+	{
+		var readAheadCopy = reader;
+
+		readAheadCopy.Read();
+		readAheadCopy.Read(); // {
+
+		if (readAheadCopy.TokenType != JsonTokenType.PropertyName)
+			throw new JsonException("Unexpected token type");
+
+		if (readAheadCopy.ValueTextEquals("id"))
+			return JsonSerializer.Deserialize<StoredScriptId>(ref reader, options);
+
+		return JsonSerializer.Deserialize<InlineScript>(ref reader, options);
 	}
 }
 
@@ -421,6 +146,40 @@ internal static class SortSerializationHelpers
 		{
 			writer.WritePropertyName("nested");
 			JsonSerializer.Serialize(writer, scriptSort.Nested, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+
+	public static void WriteGeoDistanceSort(Utf8JsonWriter writer, GeoDistanceSort geoDistanceSort, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("_geo_distance");
+		writer.WriteStartObject();
+
+		if (geoDistanceSort.Order.HasValue)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, geoDistanceSort.Order.Value, options);
+		}
+
+		if (geoDistanceSort.DistanceType.HasValue)
+		{
+			writer.WritePropertyName("distance_type");
+			JsonSerializer.Serialize(writer, geoDistanceSort.DistanceType.Value, options);
+		}
+
+		if (geoDistanceSort.Mode.HasValue)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, geoDistanceSort.Mode.Value, options);
+		}
+
+		if (geoDistanceSort.Field is not null && geoDistanceSort.GeoPoints is not null)
+		{
+			writer.WritePropertyName(settings.Inferrer.Field(geoDistanceSort.Field));
+			JsonSerializer.Serialize(writer, geoDistanceSort.GeoPoints, options);
 		}
 
 		writer.WriteEndObject();
@@ -632,8 +391,7 @@ public sealed class FieldSort : SortBase
 
 public sealed class FieldSortDescriptor<T> : SortDescriptorBase<FieldSortDescriptor<T>, T>
 {
-	private Field _field;
-	
+	private Field _field;	
 	private string _format;
 	private bool? _ignoreUnmappedFields;
 	private SortMode? _sortMode;
@@ -756,7 +514,17 @@ public sealed class FieldSortDescriptor<T> : SortDescriptorBase<FieldSortDescrip
 		writer.WriteEndObject();
 	}
 
-	//internal FieldSort ToFieldSort() => null;
+	internal FieldSort ToFieldSort()
+	{
+		var fieldSort = new FieldSort(_field)
+		{
+			// Nested = // HARD
+			IgnoreUnmapped = _ignoreUnmappedFields,
+			UnmappedType = _unmappedType
+		};
+
+		return fieldSort;
+	}
 }
 
 public abstract class SortDescriptorBase<TDescriptor, T> : DescriptorBase<TDescriptor> where TDescriptor : DescriptorBase<TDescriptor>
@@ -775,6 +543,63 @@ public sealed class GeoDistanceSort : SortBase
 	public DistanceUnit? Unit { get; set; }
 
 	public bool? IgnoreUnmapped { get; set; }
+}
+
+public sealed class GeoDistanceSortDescriptor<T> : DescriptorBase<GeoDistanceSortDescriptor<T>>
+{
+	private Field _field;
+	private GeoDistanceType? _geoDistanceType;
+	private SortMode? _sortMode;
+	private SortOrder? _order;
+	private IEnumerable<GeoPoint> _points;
+
+	public GeoDistanceSortDescriptor<T> DistanceType(GeoDistanceType distanceType) => Assign(distanceType, (a, v) => a._geoDistanceType = v);
+
+	public GeoDistanceSortDescriptor<T> Field(Field field) => Assign(field, (a, v) => a._field = v);
+
+	public GeoDistanceSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a._field = v);
+
+	public GeoDistanceSortDescriptor<T> Mode(SortMode? mode) => Assign(mode, (a, v) => a._sortMode = v);
+
+	public GeoDistanceSortDescriptor<T> Order(SortOrder? order) => Assign(order, (a, v) => a._order = v);
+
+	public GeoDistanceSortDescriptor<T> GeoPoints(params GeoPoint[] geoLocations) => Assign(geoLocations, (a, v) => a._points = v);
+
+	public GeoDistanceSortDescriptor<T> GeoPoints(IEnumerable<GeoPoint> geoLocations) => Assign(geoLocations, (a, v) => a._points = v);
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("_geo_distance");
+		writer.WriteStartObject();
+
+		if (_geoDistanceType.HasValue)
+		{
+			writer.WritePropertyName("distance_type");
+			JsonSerializer.Serialize(writer, _geoDistanceType.Value, options);
+		}
+
+		if (_order.HasValue)
+		{
+			writer.WritePropertyName("order");
+			JsonSerializer.Serialize(writer, _order.Value, options);
+		}
+
+		if (_sortMode.HasValue)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, _sortMode.Value, options);
+		}
+
+		if (_field is not null && _points is not null)
+		{
+			writer.WritePropertyName(settings.Inferrer.Field(_field));
+			JsonSerializer.Serialize(writer, _points, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
 }
 
 public sealed class NestedSort
@@ -909,34 +734,38 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 
 	private List<Action<FieldSortDescriptor<T>>> _fieldSortDescriptorActions;
 	private List<Action<ScriptSortDescriptor<T>>> _scriptSortDescriptorActions;
+	private List<Action<GeoDistanceSortDescriptor<T>>> _geoDistanceSortDescriptorActions;
+	private readonly List<byte> _serializationOrderTracker = new();
 
 	public SortDescriptor<T> Ascending<TValue>(Expression<Func<T, TValue>> objectPath) =>
-		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));
+		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }), a => a._serializationOrderTracker.Add(0));
 
 	public SortDescriptor<T> Descending<TValue>(Expression<Func<T, TValue>> objectPath) =>
-		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }));
+		Assign(objectPath, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }), a => a._serializationOrderTracker.Add(0));
 
-	public SortDescriptor<T> Ascending(Field field) => Assign(field, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));
+	public SortDescriptor<T> Ascending(Field field) => Assign(field, (a, v) => {  a.Add(new FieldSort(v) { Order = SortOrder.Asc }); }, a => a._serializationOrderTracker.Add(0));
 
-	public SortDescriptor<T> Descending(Field field) => Assign(field, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }));
+	public SortDescriptor<T> Descending(Field field) => Assign(field, (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }), a => a._serializationOrderTracker.Add(0));
 
 	public SortDescriptor<T> Ascending(SortSpecialField field) =>
-		Assign(field == SortSpecialField.Score ? "_score" : field == SortSpecialField.DocumentIndexOrder ? "_doc" : "_shard_doc", (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }));
+		Assign(field == SortSpecialField.Score ? "_score" : field == SortSpecialField.DocumentIndexOrder ? "_doc" : "_shard_doc", (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Asc }), a => a._serializationOrderTracker.Add(0));
 
 	public SortDescriptor<T> Descending(SortSpecialField field) =>
-		Assign(field == SortSpecialField.Score ? "_score" : field == SortSpecialField.DocumentIndexOrder ? "_doc" : "_shard_doc", (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }));
+		Assign(field == SortSpecialField.Score ? "_score" : field == SortSpecialField.DocumentIndexOrder ? "_doc" : "_shard_doc", (a, v) => a.Add(new FieldSort(v) { Order = SortOrder.Desc }), a => a._serializationOrderTracker.Add(0));
 
 	public SortDescriptor<T> Field(Action<FieldSortDescriptor<T>> configure)
 	{
 		// TODO - Future idea: Store the actions and invoke at serialisation time
 
 		//var descriptor = new FieldSortDescriptor<T>();
-		//sortSelector?.Invoke(descriptor);
+		//configure?.Invoke(descriptor);
 
 		if (_fieldSortDescriptorActions is null)
 			_fieldSortDescriptorActions = new List<Action<FieldSortDescriptor<T>>>();
 
 		_fieldSortDescriptorActions.Add(configure);
+
+		_serializationOrderTracker.Add(1);
 
 		//return AddSort(descriptor.ToFieldSort());
 
@@ -948,8 +777,17 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 	public SortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field, SortOrder order) =>
 		AddSort(new FieldSort(field) { Order = order });
 
-	//public SortDescriptor<T> GeoDistance(Action<GeoDistanceSortDescriptor<T>> sortSelector) =>
-	//	AddSort(sortSelector?.Invoke(new GeoDistanceSortDescriptor<T>()));
+	public SortDescriptor<T> GeoDistance(Action<GeoDistanceSortDescriptor<T>> configure)
+	{
+		if (_geoDistanceSortDescriptorActions is null)
+			_geoDistanceSortDescriptorActions = new List<Action<GeoDistanceSortDescriptor<T>>>();
+
+		_geoDistanceSortDescriptorActions.Add(configure);
+
+		_serializationOrderTracker.Add(2);
+
+		return this;
+	}
 
 	public SortDescriptor<T> Script(Action<ScriptSortDescriptor<T>> configure)
 	{
@@ -958,56 +796,131 @@ public sealed class SortDescriptor<T> : DescriptorPromiseBase<SortDescriptor<T>,
 
 		_scriptSortDescriptorActions.Add(configure);
 
-		return this;
+		_serializationOrderTracker.Add(3);
 
+		return this;
 	}
 
-	private SortDescriptor<T> AddSort(SortBase sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v));
+	private SortDescriptor<T> AddSort(SortBase sort) => sort == null ? this : Assign(sort, (a, v) => a.Add(v), a => a._serializationOrderTracker.Add(0));
 
 	public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartArray();
 
-		foreach (var sort in PromisedValue)
+		var sortsIndex = 0;
+		var fieldsDescriptorIndex = 0;
+		var scriptsDescriptorIndex = 0;
+		var geoDescriptorIndex = 0;
+
+		foreach (var item in _serializationOrderTracker)
 		{
-			if (sort is null)
-				continue;
-
-			if (sort is FieldSort fieldSort)
+			if (item == 0)
 			{
-				SortSerializationHelpers.WriteFieldSort(writer, fieldSort, options, settings);
-				continue;
+				var sort = PromisedValue[sortsIndex++];
+
+				if (sort is null)
+					continue;
+
+				if (sort is FieldSort fieldSort)
+				{
+					SortSerializationHelpers.WriteFieldSort(writer, fieldSort, options, settings);
+					continue;
+				}
+
+				if (sort is ScriptSort scriptSort)
+				{
+					SortSerializationHelpers.WriteScriptSort(writer, scriptSort, options);
+					continue;
+				}
+
+				if (sort is GeoDistanceSort geoDistanceSort)
+				{
+					SortSerializationHelpers.WriteGeoDistanceSort(writer, geoDistanceSort, options, settings);
+					continue;
+				}
+
+				// TODO - Other types
+				throw new NotImplementedException("The sort type is not currently supported in this release.");
 			}
-
-			if (sort is ScriptSort scriptSort)
+			else if (item == 1)
 			{
-				SortSerializationHelpers.WriteScriptSort(writer, scriptSort, options);
-				continue;
-			}
-
-			// TODO - Other types
-			throw new NotImplementedException("The sort type is not currently supported in this release.");
-		}
-
-		if (_fieldSortDescriptorActions is not null)
-		{
-			foreach (var action in _fieldSortDescriptorActions)
-			{
+				var action = _fieldSortDescriptorActions[fieldsDescriptorIndex++];
 				var descriptor = new FieldSortDescriptor<T>();
 				action(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 			}
-		}
-
-		if (_scriptSortDescriptorActions is not null)
-		{
-			foreach (var action in _scriptSortDescriptorActions)
+			else if (item == 2)
 			{
+				var action = _geoDistanceSortDescriptorActions[geoDescriptorIndex++];
+				var descriptor = new GeoDistanceSortDescriptor<T>();
+				action(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+			}
+			else if (item == 3)
+			{
+				var action = _scriptSortDescriptorActions[scriptsDescriptorIndex++];
 				var descriptor = new ScriptSortDescriptor<T>();
 				action(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 			}
 		}
+
+		//foreach (var sort in PromisedValue)
+		//{
+		//	if (sort is null)
+		//		continue;
+
+		//	if (sort is FieldSort fieldSort)
+		//	{
+		//		SortSerializationHelpers.WriteFieldSort(writer, fieldSort, options, settings);
+		//		continue;
+		//	}
+
+		//	if (sort is ScriptSort scriptSort)
+		//	{
+		//		SortSerializationHelpers.WriteScriptSort(writer, scriptSort, options);
+		//		continue;
+		//	}
+
+		//	if (sort is GeoDistanceSort geoDistanceSort)
+		//	{
+		//		SortSerializationHelpers.WriteGeoDistanceSort(writer, geoDistanceSort, options, settings);
+		//		continue;
+		//	}
+
+		//	// TODO - Other types
+		//	throw new NotImplementedException("The sort type is not currently supported in this release.");
+		//}
+
+		//if (_fieldSortDescriptorActions is not null)
+		//{
+		//	foreach (var action in _fieldSortDescriptorActions)
+		//	{
+		//		var descriptor = new FieldSortDescriptor<T>();
+		//		action(descriptor);
+		//		JsonSerializer.Serialize(writer, descriptor, options);
+		//	}
+		//}
+
+		//if (_geoDistanceSortDescriptorActions is not null)
+		//{
+		//	foreach (var action in _geoDistanceSortDescriptorActions)
+		//	{
+		//		var descriptor = new GeoDistanceSortDescriptor<T>();
+		//		action(descriptor);
+		//		JsonSerializer.Serialize(writer, descriptor, options);
+		//	}
+		//}
+
+		//if (_scriptSortDescriptorActions is not null)
+		//{
+		//	foreach (var action in _scriptSortDescriptorActions)
+		//	{
+		//		var descriptor = new ScriptSortDescriptor<T>();
+		//		action(descriptor);
+		//		JsonSerializer.Serialize(writer, descriptor, options);
+		//	}
+		//}
 
 		writer.WriteEndArray();
 	}

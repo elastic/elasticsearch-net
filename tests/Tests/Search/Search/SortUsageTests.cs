@@ -22,39 +22,39 @@ public class SortUsageTests : SearchUsageTestBase
 		{
 			sort = new object[]
 			{
-					new { startedOn = new { order = "asc" } },
-					new { name = new { order = "desc" } },
-					new { _score = new { order = "desc" } },
-					new { _doc = new { order = "asc" } },
-					new Dictionary<string, object>
+				new { startedOn = new { order = "asc" } },
+				new { name = new { order = "desc" } },
+				new { _score = new { order = "desc" } },
+				new { _doc = new { order = "asc" } },
+				new Dictionary<string, object>
+				{
 					{
+						"tags.added", new
 						{
-							"tags.added", new
+							missing = "_last",
+							order = "desc",
+							mode = "avg",
+							nested = new
 							{
-								missing = "_last",
-								order = "desc",
-								mode = "avg",
-								nested = new
+								path = "tags",
+								filter = new
 								{
-									path = "tags",
-									filter = new
-									{
-										match_all = new { }
-									}
-								},
-								unmapped_type = "date",
-								ignore_unmapped = true
-							}
+									match_all = new { }
+								}
+							},
+							unmapped_type = "date",
+							ignore_unmapped = true
 						}
-					},
-					new
+					}
+				},
+				new
+				{
+					numberOfCommits = new
 					{
-						numberOfCommits = new
-						{
-							missing = -1,
-							order = "desc"
-						}
-					},
+						missing = -1,
+						order = "desc"
+					}
+				},
 				//new
 				//{
 				//	_geo_distance = new
@@ -78,25 +78,26 @@ public class SortUsageTests : SearchUsageTestBase
 				//		unit = "cm"
 				//	}
 				//},
-				//new
-				//{
-				//	_geo_distance = new
-				//	{
-				//		locationPoint = new[]
-				//		{
-				//			new
-				//			{
-				//				lat = 70.0,
-				//				lon = -70.0
-				//			},
-				//			new
-				//			{
-				//				lat = -12.0,
-				//				lon = 12.0
-				//			}
-				//		}
-				//	}
-				//},
+				new
+				{
+					_geo_distance = new
+					{
+						locationPoint = new[]
+						{
+							new
+							{
+								lat = 70.0,
+								lon = -70.0
+							}
+							,
+							new
+							{
+								lat = -12.0,
+								lon = 12.0
+							}
+						}
+					}
+				},
 				new
 				{
 					_script = new
@@ -139,18 +140,18 @@ public class SortUsageTests : SearchUsageTestBase
 				.Order(SortOrder.Desc)
 				.Missing(-1)
 			)
-			//.GeoDistance(g => g
-			//	.Field(p => p.LocationPoint)
-			//	.DistanceType(GeoDistanceType.Arc)
-			//	.Order(SortOrder.Ascending)
-			//	.Unit(DistanceUnit.Centimeters)
-			//	.Mode(SortMode.Min)
-			//	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
-			//)
-			//.GeoDistance(g => g
-			//	.Field(p => p.LocationPoint)
-			//	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
-			//)
+			////.GeoDistance(g => g
+			////	.Field(p => p.LocationPoint)
+			////	.DistanceType(GeoDistanceType.Arc)
+			////	.Order(SortOrder.Ascending)
+			////	.Unit(DistanceUnit.Centimeters)
+			////	.Mode(SortMode.Min)
+			////	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+			////)
+			.GeoDistance(g => g
+				.Field(p => p.LocationPoint)
+				.GeoPoints(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+			)
 			.Script(sc => sc
 				.Type(ScriptSortType.Number)
 				.Ascending()
@@ -199,11 +200,11 @@ public class SortUsageTests : SearchUsageTestBase
 				//	Mode = SortMode.Min,
 				//	Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 				//},
-				//new GeoDistanceSort
-				//{
-				//	Field = "locationPoint",
-				//	Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
-				//},
+				new GeoDistanceSort
+				{
+					Field = "locationPoint",
+					GeoPoints = new GeoPoint[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+				},
 				new ScriptSort
 				{
 					Type = ScriptSortType.Number,
