@@ -40,6 +40,13 @@ namespace Elastic.Clients.Elasticsearch
 			return Self;
 		}
 
+		protected TDescriptor Assign<TNewValue>(TNewValue value, Action<TValue, TNewValue> assigner, Action<TDescriptor> descriptorAction)
+		{
+			assigner(PromisedValue, value);
+			descriptorAction(Self);
+			return Self;
+		}
+
 		/// <summary>
 		/// Hides the <see cref="Equals" /> method.
 		/// </summary>

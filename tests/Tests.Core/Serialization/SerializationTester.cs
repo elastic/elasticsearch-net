@@ -9,6 +9,7 @@ using Elastic.Transport.Extensions;
 using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
+using System.IO;
 
 namespace Tests.Core.Serialization
 {
@@ -58,6 +59,20 @@ namespace Tests.Core.Serialization
 			s += Environment.NewLine;
 			s += base.ToString();
 			return s;
+		}
+	}
+
+	public static class JsonDocumentExtensions
+	{
+		public static string ToJsonString(this JsonDocument jdoc)
+		{
+			using (var stream = new MemoryStream())
+			{
+				var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = true });
+				jdoc.WriteTo(writer);
+				writer.Flush();
+				return Encoding.UTF8.GetString(stream.ToArray());
+			}
 		}
 	}
 
@@ -164,7 +179,7 @@ namespace Tests.Core.Serialization
 
 			return TokenMatches(expectedJsonDocument, result);
 
-			
+
 
 			// TODO
 			//return expectedJsonDocument.RootElement.ValueKind == JsonValueKind.Array
@@ -211,8 +226,8 @@ namespace Tests.Core.Serialization
 			if (item > -1)
 				message += $". This is while comparing the {item.ToOrdinal()} item";
 
-			//if (expectedJson.RootElement.ValueKind == JsonValueKind.String)
-			//	return MatchString(expectedJson.GetString(), actualJson, result, message);
+			if (expectedJson.RootElement.ValueKind == JsonValueKind.String)
+				return MatchString(expectedJson.ToJsonString(), actualJson, result, message);
 
 			return MatchJson(expectedJson, actualJson, result, message);
 		}
