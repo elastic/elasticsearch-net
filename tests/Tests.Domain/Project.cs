@@ -8,6 +8,7 @@ using System;
 using Tests.Configuration;
 using Tests.Domain.Helpers;
 using System.Linq;
+using Elastic.Clients.Elasticsearch;
 
 namespace Tests.Domain;
 
@@ -31,7 +32,8 @@ public class Project
 	public Labels Labels { get; set; }
 	public DateTime LastActivity { get; set; }
 	public Developer LeadDeveloper { get; set; }
-	//public SimpleGeoPoint LocationPoint { get; set; }
+	public GeoPoint LocationPoint { get; set; } // Was SimpleGeoPoint
+
 	//public IGeoShape LocationShape { get; set; }
 
 	//public IGeoShape ArbitraryShape { get; set; }
