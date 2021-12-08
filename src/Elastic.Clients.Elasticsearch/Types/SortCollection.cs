@@ -210,7 +210,26 @@ internal sealed class SortCollectionConverter : JsonConverter<SortCollection>
 					continue;
 				}
 
-				// TODO - Other properties
+				if (reader.ValueTextEquals("unit"))
+				{
+					var unit = JsonSerializer.Deserialize<DistanceUnit>(ref reader, options);
+					geoDistanceSort.Unit = unit;
+					continue;
+				}
+
+				if (reader.ValueTextEquals("distance_type"))
+				{
+					var geoDistanceType = JsonSerializer.Deserialize<GeoDistanceType>(ref reader, options);
+					geoDistanceSort.DistanceType = geoDistanceType;
+					continue;
+				}
+
+				if (reader.ValueTextEquals("ignore_unmapped"))
+				{
+					var ignoreUnmapped = JsonSerializer.Deserialize<bool>(ref reader, options);
+					geoDistanceSort.IgnoreUnmapped = ignoreUnmapped;
+					continue;
+				}
 
 				// If we get this far, we must be on the field name for the sort
 

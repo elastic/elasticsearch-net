@@ -4,11 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -17,7 +14,9 @@ public sealed class GeoPoints : List<GeoPoint>
 {
 	public GeoPoints() { }
 
-	public GeoPoints(GeoPoint[] array) => AddRange(array);
+	public GeoPoints(IEnumerable<GeoPoint> geoPoints) => AddRange(geoPoints);
+
+	public GeoPoints(params GeoPoint[] geoPoints) => AddRange(geoPoints);
 
 	public static implicit operator GeoPoints(GeoPoint[] array) => new(array);
 }

@@ -55,29 +55,21 @@ public class SortUsageTests : SearchUsageTestBase
 						order = "desc"
 					}
 				},
-				//new
-				//{
-				//	_geo_distance = new
-				//	{
-				//		locationPoint = new[]
-				//		{
-				//			new
-				//			{
-				//				lat = 70.0,
-				//				lon = -70.0
-				//			},
-				//			new
-				//			{
-				//				lat = -12.0,
-				//				lon = 12.0
-				//			}
-				//		},
-				//		order = "asc",
-				//		mode = "min",
-				//		distance_type = "arc",
-				//		unit = "cm"
-				//	}
-				//},
+				new
+				{
+					_geo_distance = new
+					{
+						locationPoint = new
+						{
+							lat = 70.0,
+							lon = -70.0
+						},
+						order = "asc",
+						mode = "min",
+						distance_type = "arc",
+						unit = "cm"
+					}
+				},
 				new
 				{
 					_geo_distance = new
@@ -140,14 +132,14 @@ public class SortUsageTests : SearchUsageTestBase
 				.Order(SortOrder.Desc)
 				.Missing(-1)
 			)
-			////.GeoDistance(g => g
-			////	.Field(p => p.LocationPoint)
-			////	.DistanceType(GeoDistanceType.Arc)
-			////	.Order(SortOrder.Ascending)
-			////	.Unit(DistanceUnit.Centimeters)
-			////	.Mode(SortMode.Min)
-			////	.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
-			////)
+			.GeoDistance(g => g
+				.Field(p => p.LocationPoint)
+				.DistanceType(GeoDistanceType.Arc)
+				.Order(SortOrder.Asc)
+				.Unit(DistanceUnit.Centimeters)
+				.Mode(SortMode.Min)
+				.GeoPoints(new GeoLocation(70, -70))
+			)
 			.GeoDistance(g => g
 				.Field(p => p.LocationPoint)
 				.GeoPoints(new GeoLocation(70, -70), new GeoLocation(-12, 12))
@@ -191,15 +183,15 @@ public class SortUsageTests : SearchUsageTestBase
 					Order = SortOrder.Desc,
 					Missing = -1
 				},
-				//new GeoDistanceSort
-				//{
-				//	Field = "locationPoint",
-				//	Order = SortOrder.Asc,
-				//	DistanceType = GeoDistanceType.Arc,
-				//	Unit = DistanceUnit.Centimeters,
-				//	Mode = SortMode.Min,
-				//	Points = new[] { new GeoLocation(70, -70), new GeoLocation(-12, 12) }
-				//},
+				new GeoDistanceSort
+				{
+					Field = "locationPoint",
+					Order = SortOrder.Asc,
+					DistanceType = GeoDistanceType.Arc,
+					Unit = DistanceUnit.Centimeters,
+					Mode = SortMode.Min,
+					GeoPoints = new GeoPoint[] { new GeoLocation(70, -70) }
+				},
 				new GeoDistanceSort
 				{
 					Field = "locationPoint",
