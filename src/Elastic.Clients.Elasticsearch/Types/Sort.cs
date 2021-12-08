@@ -176,6 +176,18 @@ internal static class SortSerializationHelpers
 			JsonSerializer.Serialize(writer, geoDistanceSort.Mode.Value, options);
 		}
 
+		if (geoDistanceSort.Unit.HasValue)
+		{
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, geoDistanceSort.Unit.Value, options);
+		}
+
+		if (geoDistanceSort.IgnoreUnmapped.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			JsonSerializer.Serialize(writer, geoDistanceSort.IgnoreUnmapped.Value, options);
+		}
+
 		if (geoDistanceSort.Field is not null && geoDistanceSort.GeoPoints is not null)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(geoDistanceSort.Field));
@@ -216,7 +228,7 @@ public sealed class ScriptSortDescriptor<T> : SortDescriptorBase<ScriptSortDescr
 	private InlineScriptDescriptor _inlineScriptDescriptor;
 	private Action<InlineScriptDescriptor> _inlineScriptDescriptorAction;
 
-	// TODO - Stored Script
+	// TODO - Stored Script - Is that supported??
 
 	/// <summary>
 	/// Sorts by ascending sort order.
@@ -551,7 +563,9 @@ public sealed class GeoDistanceSortDescriptor<T> : DescriptorBase<GeoDistanceSor
 	private GeoDistanceType? _geoDistanceType;
 	private SortMode? _sortMode;
 	private SortOrder? _order;
-	private IEnumerable<GeoPoint> _points;
+	private DistanceUnit? _distanceUnit;
+	private GeoPoints _points;
+	private bool? _ignoreUnmappedFields;
 
 	public GeoDistanceSortDescriptor<T> DistanceType(GeoDistanceType distanceType) => Assign(distanceType, (a, v) => a._geoDistanceType = v);
 
@@ -559,13 +573,17 @@ public sealed class GeoDistanceSortDescriptor<T> : DescriptorBase<GeoDistanceSor
 
 	public GeoDistanceSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> objectPath) => Assign(objectPath, (a, v) => a._field = v);
 
-	public GeoDistanceSortDescriptor<T> Mode(SortMode? mode) => Assign(mode, (a, v) => a._sortMode = v);
+	public GeoDistanceSortDescriptor<T> GeoPoints(params GeoPoint[] geoPoints) => Assign(geoPoints, (a, v) => a._points = v);
 
-	public GeoDistanceSortDescriptor<T> Order(SortOrder? order) => Assign(order, (a, v) => a._order = v);
+	public GeoDistanceSortDescriptor<T> GeoPoints(IEnumerable<GeoPoint> geoPoints) => Assign(geoPoints, (a, v) => a._points = new GeoPoints(v));
 
-	public GeoDistanceSortDescriptor<T> GeoPoints(params GeoPoint[] geoLocations) => Assign(geoLocations, (a, v) => a._points = v);
+	public GeoDistanceSortDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(ignore, (a, v) => a._ignoreUnmappedFields = v);
 
-	public GeoDistanceSortDescriptor<T> GeoPoints(IEnumerable<GeoPoint> geoLocations) => Assign(geoLocations, (a, v) => a._points = v);
+	public GeoDistanceSortDescriptor<T> Mode(SortMode mode) => Assign(mode, (a, v) => a._sortMode = v);
+
+	public GeoDistanceSortDescriptor<T> Order(SortOrder order) => Assign(order, (a, v) => a._order = v);
+
+	public GeoDistanceSortDescriptor<T> Unit(DistanceUnit mode) => Assign(mode, (a, v) => a._distanceUnit = v);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -577,6 +595,18 @@ public sealed class GeoDistanceSortDescriptor<T> : DescriptorBase<GeoDistanceSor
 		{
 			writer.WritePropertyName("distance_type");
 			JsonSerializer.Serialize(writer, _geoDistanceType.Value, options);
+		}
+
+		if (_distanceUnit.HasValue)
+		{
+			writer.WritePropertyName("unit");
+			JsonSerializer.Serialize(writer, _distanceUnit.Value, options);
+		}
+
+		if (_ignoreUnmappedFields.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			JsonSerializer.Serialize(writer, _ignoreUnmappedFields.Value, options);
 		}
 
 		if (_order.HasValue)
