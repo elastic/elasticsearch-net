@@ -150,23 +150,26 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		public async Task CreateIndicesAsync()
 		{
-			var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
-			indexTemplateResponse.ShouldBeValid();
+			//var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
+			//indexTemplateResponse.ShouldBeValid();
 
-			//var tasks = new[]
-			//{
-			//	CreateProjectIndexAsync(),
-			//	CreateDeveloperIndexAsync()
-			//};
-			//await Task.WhenAll(tasks)
-			//	.ContinueWith(t =>
-			//	{
-			//		foreach (var r in t.Result)
-			//			r.ShouldBeValid();
-			//	}).ConfigureAwait(false);
+			await CreateProjectIndexAsync();
+
+			var tasks = new[]
+			{
+				SeedIndexDataAsync(),
+				
+				//CreateDeveloperIndexAsync()
+			};
+			await Task.WhenAll(tasks)
+				.ContinueWith(t =>
+				{
+					//foreach (var r in t.Result)
+					//	r.ShouldBeValid();
+				}).ConfigureAwait(false);
 		}
 
-		//private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync(typeof(Project));
+		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync<Project>(IndexName.From<Project>(), i => i.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
 					//.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
 					// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
 					// TODO 8.0 remove with once the overloads are gone too
@@ -238,26 +241,31 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//		}).ConfigureAwait(false);
 		//}
 
-		//		private async Task SeedIndexDataAsync()
-		//		{
-		//			var tasks = new Task[]
-		//			{
-		//				Client.IndexManyAsync(Project.Projects),
-		//				Client.IndexManyAsync(Developer.Developers),
-		//				Client.IndexDocumentAsync(new ProjectPercolation
-		//				{
-		//					Id = "1",
-		//					Query = new MatchAllQuery()
-		//				}),
-		//				Client.BulkAsync(b => b
-		//					.IndexMany(
-		//						CommitActivity.CommitActivities,
-		//						(d, c) => d.Document(c).Routing(c.ProjectName)
-		//					)
-		//				) };
-		//			await Task.WhenAll(tasks).ConfigureAwait(false);
-		//			await Client.Indices.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation))).ConfigureAwait(false);
-		//		}
+		private async Task SeedIndexDataAsync()
+		{
+			foreach (var p in Project.Projects) // Limited to 10 for testing
+			{
+				await Client.IndexAsync(p, Infer.Index<Project>());
+			}
+
+			//var tasks = new Task[]
+			//{
+			//			Client.IndexManyAsync(Project.Projects),
+			//			Client.IndexManyAsync(Developer.Developers),
+			//			Client.IndexDocumentAsync(new ProjectPercolation
+			//			{
+			//				Id = "1",
+			//				Query = new MatchAllQuery()
+			//			}),
+			//			Client.BulkAsync(b => b
+			//				.IndexMany(
+			//					CommitActivity.CommitActivities,
+			//					(d, c) => d.Document(c).Routing(c.ProjectName)
+			//				)
+			//			) };
+			//await Task.WhenAll(tasks).ConfigureAwait(false);
+			//await Client.IndexManagement.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation))).ConfigureAwait(false);
+		}
 
 		//		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(
 		//			new PutIndexTemplateRequest(TestsIndexTemplateName)
