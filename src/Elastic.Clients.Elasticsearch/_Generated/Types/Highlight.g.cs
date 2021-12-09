@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.HighlighterType? Type { get; set; }
+		public string? Type { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("boundary_chars")]
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal HighlightDescriptor(Action<HighlightDescriptor<T>> configure) => configure.Invoke(this);
 		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField> FieldsValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; private set; }
+		internal string? TypeValue { get; private set; }
 
 		internal string? BoundaryCharsValue { get; private set; }
 
@@ -159,7 +159,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal Action<QueryDsl.QueryContainerDescriptor<T>> HighlightQueryDescriptorAction { get; private set; }
 
 		public HighlightDescriptor<T> Fields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField>> selector) => Assign(selector, (a, v) => a.FieldsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.HighlightField>()));
-		public HighlightDescriptor<T> Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public HighlightDescriptor<T> Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
 		public HighlightDescriptor<T> BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
 		public HighlightDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
 		public HighlightDescriptor<T> BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
