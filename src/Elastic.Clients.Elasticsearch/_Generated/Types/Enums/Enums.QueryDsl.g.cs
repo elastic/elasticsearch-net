@@ -464,110 +464,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	[JsonConverter(typeof(SimpleQueryStringFlagConverter))]
-	public enum SimpleQueryStringFlag
+	public partial class SimpleQueryStringFlag
 	{
-		Whitespace,
-		Slop,
-		Prefix,
-		Precedence,
-		Phrase,
-		Or,
-		Not,
-		None,
-		Near,
-		Fuzzy,
-		Escape,
-		And,
-		All
-	}
-
-	public class SimpleQueryStringFlagConverter : JsonConverter<SimpleQueryStringFlag>
-	{
-		public override SimpleQueryStringFlag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "WHITESPACE":
-					return SimpleQueryStringFlag.Whitespace;
-				case "SLOP":
-					return SimpleQueryStringFlag.Slop;
-				case "PREFIX":
-					return SimpleQueryStringFlag.Prefix;
-				case "PRECEDENCE":
-					return SimpleQueryStringFlag.Precedence;
-				case "PHRASE":
-					return SimpleQueryStringFlag.Phrase;
-				case "OR":
-					return SimpleQueryStringFlag.Or;
-				case "NOT":
-					return SimpleQueryStringFlag.Not;
-				case "NONE":
-					return SimpleQueryStringFlag.None;
-				case "NEAR":
-					return SimpleQueryStringFlag.Near;
-				case "FUZZY":
-					return SimpleQueryStringFlag.Fuzzy;
-				case "ESCAPE":
-					return SimpleQueryStringFlag.Escape;
-				case "AND":
-					return SimpleQueryStringFlag.And;
-				case "ALL":
-					return SimpleQueryStringFlag.All;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, SimpleQueryStringFlag value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case SimpleQueryStringFlag.Whitespace:
-					writer.WriteStringValue("WHITESPACE");
-					return;
-				case SimpleQueryStringFlag.Slop:
-					writer.WriteStringValue("SLOP");
-					return;
-				case SimpleQueryStringFlag.Prefix:
-					writer.WriteStringValue("PREFIX");
-					return;
-				case SimpleQueryStringFlag.Precedence:
-					writer.WriteStringValue("PRECEDENCE");
-					return;
-				case SimpleQueryStringFlag.Phrase:
-					writer.WriteStringValue("PHRASE");
-					return;
-				case SimpleQueryStringFlag.Or:
-					writer.WriteStringValue("OR");
-					return;
-				case SimpleQueryStringFlag.Not:
-					writer.WriteStringValue("NOT");
-					return;
-				case SimpleQueryStringFlag.None:
-					writer.WriteStringValue("NONE");
-					return;
-				case SimpleQueryStringFlag.Near:
-					writer.WriteStringValue("NEAR");
-					return;
-				case SimpleQueryStringFlag.Fuzzy:
-					writer.WriteStringValue("FUZZY");
-					return;
-				case SimpleQueryStringFlag.Escape:
-					writer.WriteStringValue("ESCAPE");
-					return;
-				case SimpleQueryStringFlag.And:
-					writer.WriteStringValue("AND");
-					return;
-				case SimpleQueryStringFlag.All:
-					writer.WriteStringValue("ALL");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
+		public const string Whitespace = "WHITESPACE";
+		public const string Slop = "SLOP";
+		public const string Prefix = "PREFIX";
+		public const string Precedence = "PRECEDENCE";
+		public const string Phrase = "PHRASE";
+		public const string Or = "OR";
+		public const string Not = "NOT";
+		public const string None = "NONE";
+		public const string Near = "NEAR";
+		public const string Fuzzy = "FUZZY";
+		public const string Escape = "ESCAPE";
+		public const string And = "AND";
+		public const string All = "ALL";
 	}
 
 	[JsonConverter(typeof(TextQueryTypeConverter))]

@@ -34,7 +34,7 @@ public class ScriptSerialisationTests : SourceSerializerTestBase
 
 	private void AssertInlineScript(InlineScript inlineScript)
 	{
-		inlineScript.Lang.Should().Be("painless");
+		inlineScript.Language.Should().Be(BuiltinScriptLanguage.Painless);
 		inlineScript.Source.Should().Be("doc['field_name'].value * params.factor");
 		inlineScript.Options.Should().HaveCount(1);
 		inlineScript.Options.TryGetValue("option0", out var optionValue).Should().BeTrue();
