@@ -9,6 +9,9 @@ using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Ingest;
+using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Transport;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Domain;
@@ -153,7 +156,25 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			//var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
 			//indexTemplateResponse.ShouldBeValid();
 
-			await CreateProjectIndexAsync();
+			var transport = Client.Transport;
+
+			var requestData = new
+			{
+				aliases = new Dictionary<string, object>
+				{
+					{ "projects-only", new { } }
+				},
+				mappings = new
+				{
+					properties = new Dictionary<string, object>
+					{
+						{ "name", new { type = "keyword" } },
+						{ "state", new { type = "keyword" } }
+					}
+				}
+			};
+
+			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, "project", PostData.Serializable(requestData));
 
 			var tasks = new[]
 			{
@@ -169,7 +190,41 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				}).ConfigureAwait(false);
 		}
 
-		private Task<CreateIndexResponse> CreateProjectIndexAsync() => Client.IndexManagement.CreateIndexAsync<Project>(IndexName.From<Project>(), i => i.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
+		//private async Task<CreateIndexResponse> CreateProjectIndexAsync()
+		//{
+		//	//var properties = new Properties
+		//	//{
+		//	//	{ Infer.Property(Infer.Field<Project>(p => p.Name).Name),  new KeywordProperty() }
+		//	//};
+
+		//	var request = new CreateIndexRequest(IndexName.From<Project>())
+		//	{
+		//		Mappings = new TypeMapping
+		//		{
+		//			//Properties = properties
+		//		},
+		//		Aliases = new Dictionary<Name, Alias>
+		//		{
+		//			{
+		//				ProjectsAliasFilter,
+		//				new Alias()
+		//				{
+		//					//Filter = new TermQuery()
+		//					//{
+		//					//	 Field = Infer.Field<Project>(f => f.Join)
+		//					//}
+		//				}
+		//			}
+		//		}
+		//	};
+
+			
+
+		//	//return await Client.IndexManagement.CreateIndexAsync(request);
+		//}
+
+
+			//=> Client.IndexManagement.CreateIndexAsync<Project>(IndexName.From<Project>(), i => i.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
 					//.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
 					// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
 					// TODO 8.0 remove with once the overloads are gone too

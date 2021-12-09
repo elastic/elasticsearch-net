@@ -43,7 +43,7 @@ public class SortUsageTests : SearchUsageTestBase
 								}
 							},
 							unmapped_type = "date",
-							ignore_unmapped = true
+							//ignore_unmapped = true
 						}
 					}
 				},
@@ -112,7 +112,7 @@ public class SortUsageTests : SearchUsageTestBase
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
 		.Sort(ss => ss
 			.Ascending(p => p.StartedOn)
-			.Descending(p => p.Name)
+			.Descending(p => p.Name.Suffix("keyword"))
 			.Descending(SortSpecialField.Score)
 			.Ascending(SortSpecialField.DocumentIndexOrder)
 			.Field(f => f
@@ -121,7 +121,7 @@ public class SortUsageTests : SearchUsageTestBase
 				.MissingLast()
 				.UnmappedType(FieldType.Date)
 				.Mode(SortMode.Avg)
-				.IgnoreUnmappedFields()
+				//.IgnoreUnmappedFields() // not support by server
 				.Nested(n => n
 					.Path(p => p.Tags)
 					.Filter(q => q.MatchAll())
@@ -175,7 +175,7 @@ public class SortUsageTests : SearchUsageTestBase
 						Path = Field<Project>(p => p.Tags),
 						Filter = new MatchAllQuery()
 					},
-					IgnoreUnmapped = true
+					//IgnoreUnmapped = true
 				},
 				new FieldSort
 				{

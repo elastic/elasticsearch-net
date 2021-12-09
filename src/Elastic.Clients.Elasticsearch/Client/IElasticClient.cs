@@ -32,5 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 		///     Out of the box <see cref="RequestResponseSerializer" /> and this point to the same instance.
 		/// </summary>
 		Serializer SourceSerializer { get; }
+
+		ITransport Transport { get; }
 	}
 }

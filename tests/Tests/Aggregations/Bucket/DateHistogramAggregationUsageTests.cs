@@ -13,7 +13,7 @@ using static Elastic.Clients.Elasticsearch.Infer;
 
 namespace Tests.Aggregations.Bucket;
 
-public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
+public class DateHistogramAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster> //ProjectsOnlyAggregationUsageTestBase - Reenable this once we have aliases supported
 {
 	public DateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
