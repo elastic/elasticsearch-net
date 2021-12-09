@@ -246,8 +246,6 @@ public sealed class ScriptSortDescriptor<T> : SortDescriptorBase<ScriptSortDescr
 	private InlineScriptDescriptor _inlineScriptDescriptor;
 	private Action<InlineScriptDescriptor> _inlineScriptDescriptorAction;
 
-	// TODO - Stored Script - Is that supported??
-
 	/// <summary>
 	/// Sorts by ascending sort order.
 	/// </summary>
@@ -272,11 +270,18 @@ public sealed class ScriptSortDescriptor<T> : SortDescriptorBase<ScriptSortDescr
 
 	public ScriptSortDescriptor<T> Script(ScriptBase script) => Assign(script, (a, v) => a._script = v);
 
-	public ScriptSortDescriptor<T> Script(InlineScriptDescriptor descriptor) =>
+	// TODO - Decide on naming.
+	// If we have multiple descriptors with the same method name, they may conflict
+
+	public ScriptSortDescriptor<T> InlineScript(InlineScriptDescriptor descriptor) =>
 		Assign(descriptor, (a, v) => a._inlineScriptDescriptor = v);
 
-	public ScriptSortDescriptor<T> Script(Action<InlineScriptDescriptor> configure) =>
+	public ScriptSortDescriptor<T> InlineScript(Action<InlineScriptDescriptor> configure) =>
 		Assign(configure, (a, v) => a._inlineScriptDescriptorAction = v);
+
+	public ScriptSortDescriptor<T> InlineScript(Action<ScriptSortDescriptor<T>> configure) => this;
+
+	// TODO - Stored Script?
 
 	public ScriptSortDescriptor<T> Type(ScriptSortType? type) => Assign(type, (a, v) => a._scriptSortType = v);
 

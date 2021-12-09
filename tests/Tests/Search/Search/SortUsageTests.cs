@@ -147,7 +147,7 @@ public class SortUsageTests : SearchUsageTestBase
 			.Script(sc => sc
 				.Type(ScriptSortType.Number)
 				.Ascending()
-				.Script(script => script
+				.InlineScript(script => script
 					.Source("doc['numberOfCommits'].value * params.factor")
 					.Params(p => p.Add("factor", 1.1))
 				)
