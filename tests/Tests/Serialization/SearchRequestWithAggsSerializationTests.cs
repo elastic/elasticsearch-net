@@ -1,4 +1,5 @@
-﻿using Tests.Domain;
+using System.Collections.Generic;
+using Tests.Domain;
 
 namespace Tests.Serialization;
 
