@@ -108,7 +108,7 @@ public class Project
 			//})
 			.RuleFor(p => p.VersionControl, VersionControlConstant);
 
-	public static IList<Project> Projects { get; } = Generator.Clone().Generate(100);
+	public static IList<Project> Projects { get; } = Generator.Clone().Generate(10);
 
 	public static Project First { get; } = Projects.First();
 
