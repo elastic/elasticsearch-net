@@ -464,7 +464,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public partial class SimpleQueryStringFlag
+	public partial struct SimpleQueryStringFlag
 	{
 		public const string Whitespace = "WHITESPACE";
 		public const string Slop = "SLOP";
