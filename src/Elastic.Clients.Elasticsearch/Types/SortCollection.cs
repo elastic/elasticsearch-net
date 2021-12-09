@@ -274,7 +274,8 @@ internal sealed class SortCollectionConverter : JsonConverter<SortCollection>
 
 				if (reader.ValueTextEquals("script"))
 				{
-					var script = ScriptSerializationHelpers.ReadScriptSort(ref reader, options);
+					reader.Read(); // is this needed?
+					var script = JsonSerializer.Deserialize<ScriptBase>(ref reader, options);
 					scriptSort.Script = script;
 					continue;
 				}
