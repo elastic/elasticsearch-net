@@ -73,6 +73,7 @@ public partial class ElasticClient
 	public Inferrer Infer => _transport.Settings.Inferrer;
 	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
 	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
+	public ITransport Transport => _transport;
 
 	private ProductCheckStatus _productCheckStatus;
 

@@ -32,5 +32,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public class Properties : IsADictionaryBase<string, IPropertiesVariant>
 	{
+		public void Add(PropertyName name, IPropertiesVariant property) => BackingDictionary.Add(name.Name /*Sanitize(name)*/, property);
+
+		//protected override string Sanitize(string key) => base.Sanitize(key);
+
+		//protected override PropertyName Sanitize(PropertyName key) => _settings?.Inferrer.PropertyName(key) ?? key;
 	}
 }

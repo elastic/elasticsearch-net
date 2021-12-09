@@ -58,20 +58,6 @@ public abstract class AggregationUsageTestBase<TCluster>
 
 	protected override string ExpectedUrlPathAndQuery => $"/project/_search";
 
-	[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
-
-	[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
-
-	[U] protected override void SerializesInitializer() => base.SerializesInitializer();
-
-	[U] protected override void SerializesFluent() => base.SerializesFluent();
-
-	[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
-
-	[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
-
-	[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
-
 	protected override LazyResponses ClientUsage() => Calls(
 		(client, f) => client.Search(f),
 		(client, f) => client.SearchAsync(f),
