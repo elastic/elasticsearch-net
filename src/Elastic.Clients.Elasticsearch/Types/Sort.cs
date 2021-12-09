@@ -17,7 +17,35 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class ScriptBaseConverter : JsonConverter<ScriptBase>
 {
-	public override ScriptBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override ScriptBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var readAheadCopy = reader;
+
+		if (readAheadCopy.TokenType == JsonTokenType.String)
+		{
+			var source = reader.GetString();
+			return new InlineScript(source);
+		}
+
+		readAheadCopy.Read(); // {
+
+		if (readAheadCopy.TokenType != JsonTokenType.PropertyName)
+			throw new JsonException("Unexpected token type");
+
+		if (readAheadCopy.ValueTextEquals("params"))
+		{
+			while (readAheadCopy.Read() && readAheadCopy.TokenType != JsonTokenType.EndObject)
+			{
+			}
+
+			readAheadCopy.Read();
+		}
+
+		if (readAheadCopy.ValueTextEquals("id"))
+			return JsonSerializer.Deserialize<StoredScriptId>(ref reader, options);
+
+		return JsonSerializer.Deserialize<InlineScript>(ref reader, options);
+	}
 
 	public override void Write(Utf8JsonWriter writer, ScriptBase value, JsonSerializerOptions options)
 	{
@@ -32,23 +60,13 @@ internal sealed class ScriptBaseConverter : JsonConverter<ScriptBase>
 	}
 }
 
-internal static class ScriptSerializationHelpers
+
+
+// TODO - We can have an option that marks a type as having a custom converter
+// so that this attribute is added
+[JsonConverter(typeof(ScriptBaseConverter))]
+public abstract partial class ScriptBase
 {
-	public static ScriptBase ReadScriptSort(ref Utf8JsonReader reader, JsonSerializerOptions options)
-	{
-		var readAheadCopy = reader;
-
-		readAheadCopy.Read();
-		readAheadCopy.Read(); // {
-
-		if (readAheadCopy.TokenType != JsonTokenType.PropertyName)
-			throw new JsonException("Unexpected token type");
-
-		if (readAheadCopy.ValueTextEquals("id"))
-			return JsonSerializer.Deserialize<StoredScriptId>(ref reader, options);
-
-		return JsonSerializer.Deserialize<InlineScript>(ref reader, options);
-	}
 }
 
 internal static class SortSerializationHelpers
