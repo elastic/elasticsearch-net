@@ -70,102 +70,19 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(BuiltinHighlighterTypeConverter))]
-	public enum BuiltinHighlighterType
+	public partial struct BuiltinHighlighterType
 	{
-		Unified,
-		Plain,
-		FastVector
+		public const string Unified = "unified";
+		public const string Plain = "plain";
+		public const string FastVector = "fvh";
 	}
 
-	public class BuiltinHighlighterTypeConverter : JsonConverter<BuiltinHighlighterType>
+	public partial struct BuiltinScriptLanguage
 	{
-		public override BuiltinHighlighterType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "unified":
-					return BuiltinHighlighterType.Unified;
-				case "plain":
-					return BuiltinHighlighterType.Plain;
-				case "fvh":
-					return BuiltinHighlighterType.FastVector;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, BuiltinHighlighterType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case BuiltinHighlighterType.Unified:
-					writer.WriteStringValue("unified");
-					return;
-				case BuiltinHighlighterType.Plain:
-					writer.WriteStringValue("plain");
-					return;
-				case BuiltinHighlighterType.FastVector:
-					writer.WriteStringValue("fvh");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(BuiltinScriptLanguageConverter))]
-	public enum BuiltinScriptLanguage
-	{
-		Painless,
-		Mustache,
-		Java,
-		Expression
-	}
-
-	public class BuiltinScriptLanguageConverter : JsonConverter<BuiltinScriptLanguage>
-	{
-		public override BuiltinScriptLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "painless":
-					return BuiltinScriptLanguage.Painless;
-				case "mustache":
-					return BuiltinScriptLanguage.Mustache;
-				case "java":
-					return BuiltinScriptLanguage.Java;
-				case "expression":
-					return BuiltinScriptLanguage.Expression;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, BuiltinScriptLanguage value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case BuiltinScriptLanguage.Painless:
-					writer.WriteStringValue("painless");
-					return;
-				case BuiltinScriptLanguage.Mustache:
-					writer.WriteStringValue("mustache");
-					return;
-				case BuiltinScriptLanguage.Java:
-					writer.WriteStringValue("java");
-					return;
-				case BuiltinScriptLanguage.Expression:
-					writer.WriteStringValue("expression");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
+		public const string Painless = "painless";
+		public const string Mustache = "mustache";
+		public const string Java = "java";
+		public const string Expression = "expression";
 	}
 
 	[JsonConverter(typeof(ConflictsConverter))]

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
-		public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
+		public string? Language { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("options")]
@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal InlineScriptDescriptor(Action<InlineScriptDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.ScriptLanguage? LangValue { get; private set; }
+		internal string? LanguageValue { get; private set; }
 
 		internal Dictionary<string, string>? OptionsValue { get; private set; }
 
@@ -54,17 +54,17 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Dictionary<string, object>? ParamsValue { get; private set; }
 
-		public InlineScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? lang) => Assign(lang, (a, v) => a.LangValue = v);
+		public InlineScriptDescriptor Language(string? language) => Assign(language, (a, v) => a.LanguageValue = v);
 		public InlineScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.OptionsValue = v?.Invoke(new FluentDictionary<string, string>()));
 		public InlineScriptDescriptor Source(string source) => Assign(source, (a, v) => a.SourceValue = v);
 		public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (LangValue is not null)
+			if (LanguageValue is not null)
 			{
 				writer.WritePropertyName("lang");
-				JsonSerializer.Serialize(writer, LangValue, options);
+				JsonSerializer.Serialize(writer, LanguageValue, options);
 			}
 
 			if (OptionsValue is not null)

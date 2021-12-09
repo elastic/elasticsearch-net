@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.HighlighterType? Type { get; set; }
+		public string? Type { get; set; }
 	}
 
 	public sealed partial class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>>
@@ -158,7 +158,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.HighlighterTagsSchema? TagsSchemaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.HighlighterType? TypeValue { get; private set; }
+		internal string? TypeValue { get; private set; }
 
 		internal QueryDsl.QueryContainerDescriptor<T> HighlightQueryDescriptor { get; private set; }
 
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
 		public HighlightFieldDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
 		public HighlightFieldDescriptor<T> TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
-		public HighlightFieldDescriptor<T> Type(Elastic.Clients.Elasticsearch.HighlighterType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public HighlightFieldDescriptor<T> Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
