@@ -12,11 +12,13 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public IndexRequest() : this(typeof(TDocument)) { }
 
-		public IndexRequest(TDocument document) : this(typeof(TDocument)) => Document = document;
+		//public IndexRequest(TDocument document) : this(typeof(TDocument)) => Document = document;
 
 		public IndexRequest(TDocument document, Id id) : this(typeof(TDocument), id) => Document = document;
 
 		protected override HttpMethod? DynamicHttpMethod => GetHttpMethod(this);
+
+		public IndexRequest(TDocument document, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(document)) => Document = document;
 
 		internal IRequest<IndexRequestParameters> Self => this;
 
