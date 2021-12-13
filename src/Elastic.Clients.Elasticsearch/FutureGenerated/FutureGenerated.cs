@@ -733,11 +733,14 @@ namespace Elastic.Clients.Elasticsearch
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			var operations = (IStreamSerializable)Operations;
-
 			operations.Serialize(stream, settings, formatting);
 		}
 
-		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None) => throw new NotImplementedException();
+		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var operations = (IStreamSerializable)Operations;
+			return operations.SerializeAsync(stream, settings, formatting);
+		}
 	}
 
 	public sealed partial class BulkRequestDescriptor<TSource> : IStreamSerializable
@@ -750,7 +753,7 @@ namespace Elastic.Clients.Elasticsearch
 
 			configure?.Invoke(descriptor);
 
-			_operations.Add(descriptor.ToBulkIndexOperation());
+			_operations.Add(descriptor);
 
 			return this;
 		}
@@ -761,7 +764,11 @@ namespace Elastic.Clients.Elasticsearch
 			operations.Serialize(stream, settings, formatting);
 		}
 
-		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None) => throw new NotImplementedException();
+		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var operations = (IStreamSerializable)_operations;
+			return operations.SerializeAsync(stream, settings, formatting);
+		}
 	}
 
 	internal interface IStreamSerializable

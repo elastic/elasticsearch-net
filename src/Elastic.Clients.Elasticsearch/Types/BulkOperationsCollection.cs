@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 
@@ -27,6 +28,10 @@ namespace Elastic.Clients.Elasticsearch
 
 	//	public TDocument Document { get; set; }
 	//}
+
+	public interface IBulkOperation
+	{
+	}
 
 	public sealed class BulkIndexOperation<T> : BulkOperationBase
 	{
@@ -59,26 +64,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
 			}
 
-			// TODO - We may be able to simplify here and simply serialise 'this' once we remove the ISelfSerializable etc.
-
-			//internalWriter.WriteStartObject();
-
-			//if (Index is not null)
-			//{
-			//	internalWriter.WritePropertyName("_index");
-
-			//	if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			//	{
-			//		JsonSerializer.Serialize(internalWriter, Index, dhls.Options);
-			//	}
-			//	else
-			//	{
-			//		JsonSerializer.Serialize(internalWriter, Index); // Unable to handle options if this were to ever be the case
-			//	}
-			//}
-
-			//internalWriter.WriteEndObject();
-
 			internalWriter.WriteEndObject();
 			internalWriter.Flush();
 
@@ -87,38 +72,151 @@ namespace Elastic.Clients.Elasticsearch
 			settings.SourceSerializer.Serialize(Document, stream);
 		}
 
-		protected override Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None) => throw new NotImplementedException();
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+
+			stream.WriteByte(_newline);
+
+			await settings.SourceSerializer.SerializeAsync(Document, stream, formatting).ConfigureAwait(false);
+		}
 	}
 
-	public sealed class BulkIndexOperationDescriptor<T> : DescriptorBase<BulkIndexOperationDescriptor<T>>
+	public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkIndexOperationDescriptor<TSource>, TSource>
 	{
-		private readonly T _document;
+		private static byte _newline => (byte)'\n';
 
-		private IndexName _index;
+		private readonly TSource _document;
 
-		public BulkIndexOperationDescriptor(T source) => _document = source;
+		public BulkIndexOperationDescriptor(TSource source) => _document = source;
 
-		public BulkIndexOperationDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a._index = v);
-
-		// We don't expect this descriptor to be directly serialised
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		protected override string Operation => "index";
+		
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
-			//var ms = new MemoryStream();
-			//settings.RequestResponseSerializer.Serialize(this, ms);
-			//ms.Position = 0;
+			var requestResponseSerializer = settings.RequestResponseSerializer;
 
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkIndexOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkIndexOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			stream.WriteByte(_newline);
+
+			settings.SourceSerializer.Serialize(_document, stream);
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkIndexOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkIndexOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+
+			stream.WriteByte(_newline);
+
+			await settings.SourceSerializer.SerializeAsync(_document, stream).ConfigureAwait(false);
+		}
+
+		protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
 			// TODO
 		}
-
-		internal BulkIndexOperation<T> ToBulkIndexOperation()
-		{
-			var operation = new BulkIndexOperation<T>(_document) { Index = _index ?? typeof(T) };
-
-			return operation;
-		}
 	}
 
-	public abstract class BulkOperationBase : IStreamSerializable
+	public abstract class BulkOperationDescriptorBase<T, TSource> : DescriptorBase<T>, IBulkOperation, IStreamSerializable where T : BulkOperationDescriptorBase<T, TSource>
+	{
+		private long? _version;
+		private IndexName _index;
+
+		protected abstract string Operation { get; }
+
+		public BulkOperationDescriptorBase<T, TSource> Index(IndexName index) => Assign(index, (a, v) => a._index = v);
+
+		public BulkOperationDescriptorBase<T, TSource> Version(long version) => Assign(version, (a, v) => a._version = v);
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+
+			SerializeInternal(writer, options, settings);
+
+			if (_index is not null)
+			{
+				writer.WritePropertyName("_index");
+				JsonSerializer.Serialize(writer, _index, options);
+			}
+			else
+			{
+				writer.WritePropertyName("_index");
+				var index = settings.Inferrer.IndexName<TSource>();
+				JsonSerializer.Serialize(writer, index, options);
+			}
+
+			if (_version.HasValue)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, _version.Value, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		protected abstract void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+
+		protected abstract void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting);
+
+		protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default);
+
+		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => Serialize(stream, settings, formatting);
+
+		Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => SerializeAsync(stream, settings, formatting);
+	}
+
+	public abstract class BulkOperationBase : IBulkOperation, IStreamSerializable
 	{
 		[JsonPropertyName("_id")]
 		public Id Id { get; set; }
@@ -175,16 +273,16 @@ namespace Elastic.Clients.Elasticsearch
 	///// is ordered and lines up with <see cref="BulkRequest.Operations"/> allowing one to zip the two together.
 	///// </summary>
 	///// <typeparam name="TOperation"></typeparam>
-	public sealed class BulkOperationsCollection : IList<BulkOperationBase>, IList, IStreamSerializable
-	//where TOperation : BulkOperationBase
+	public sealed class BulkOperationsCollection : IList<IBulkOperation>, IList, IStreamSerializable
+	//where TOperation : IBulkOperation
 	{
 		private readonly object _lock = new();
 
-		public BulkOperationsCollection() => Items = new List<BulkOperationBase>();
+		public BulkOperationsCollection() => Items = new List<IBulkOperation>();
 
-		public BulkOperationsCollection(IEnumerable<BulkOperationBase> operations)
+		public BulkOperationsCollection(IEnumerable<IBulkOperation> operations)
 		{
-			Items = new List<BulkOperationBase>();
+			Items = new List<IBulkOperation>();
 			Items.AddRange(operations);
 		}
 
@@ -197,7 +295,7 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		public BulkOperationBase this[int index]
+		public IBulkOperation this[int index]
 		{
 			get
 			{
@@ -218,7 +316,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		bool IList.IsFixedSize => false;
 
-		bool ICollection<BulkOperationBase>.IsReadOnly => false;
+		bool ICollection<IBulkOperation>.IsReadOnly => false;
 
 		bool IList.IsReadOnly => false;
 
@@ -230,11 +328,11 @@ namespace Elastic.Clients.Elasticsearch
 			set
 			{
 				VerifyValueType(value);
-				this[index] = (BulkOperationBase)value;
+				this[index] = (IBulkOperation)value;
 			}
 		}
 
-		private List<BulkOperationBase> Items { get; }
+		private List<IBulkOperation> Items { get; }
 
 		object ICollection.SyncRoot => _lock;
 
@@ -244,7 +342,7 @@ namespace Elastic.Clients.Elasticsearch
 				((IList)Items).CopyTo(array, index);
 		}
 
-		public void Add(BulkOperationBase item)
+		public void Add(IBulkOperation item)
 		{
 			lock (_lock)
 				Items.Add(item);
@@ -256,19 +354,19 @@ namespace Elastic.Clients.Elasticsearch
 				Items.Clear();
 		}
 
-		public bool Contains(BulkOperationBase item)
+		public bool Contains(IBulkOperation item)
 		{
 			lock (_lock)
 				return Items.Contains(item);
 		}
 
-		public void CopyTo(BulkOperationBase[] array, int index)
+		public void CopyTo(IBulkOperation[] array, int index)
 		{
 			lock (_lock)
 				Items.CopyTo(array, index);
 		}
 
-		public bool Remove(BulkOperationBase item)
+		public bool Remove(IBulkOperation item)
 		{
 			lock (_lock)
 			{
@@ -283,7 +381,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		IEnumerator IEnumerable.GetEnumerator() => ((IList)Items).GetEnumerator();
 
-		public IEnumerator<BulkOperationBase> GetEnumerator()
+		public IEnumerator<IBulkOperation> GetEnumerator()
 		{
 			lock (_lock)
 				return Items.GetEnumerator();
@@ -295,7 +393,7 @@ namespace Elastic.Clients.Elasticsearch
 
 			lock (_lock)
 			{
-				Add((BulkOperationBase)value);
+				Add((IBulkOperation)value);
 				return Count - 1;
 			}
 		}
@@ -303,36 +401,36 @@ namespace Elastic.Clients.Elasticsearch
 		bool IList.Contains(object value)
 		{
 			VerifyValueType(value);
-			return Contains((BulkOperationBase)value);
+			return Contains((IBulkOperation)value);
 		}
 
 		int IList.IndexOf(object value)
 		{
 			VerifyValueType(value);
-			return IndexOf((BulkOperationBase)value);
+			return IndexOf((IBulkOperation)value);
 		}
 
 		void IList.Insert(int index, object value)
 		{
 			VerifyValueType(value);
-			Insert(index, (BulkOperationBase)value);
+			Insert(index, (IBulkOperation)value);
 		}
 
 		void IList.Remove(object value)
 		{
 			VerifyValueType(value);
-			Remove((BulkOperationBase)value);
+			Remove((IBulkOperation)value);
 		}
 
-		public static implicit operator BulkOperationsCollection(List<BulkOperationBase> items) => new(items);
+		public static implicit operator BulkOperationsCollection(List<IBulkOperation> items) => new(items);
 
-		public int IndexOf(BulkOperationBase item)
+		public int IndexOf(IBulkOperation item)
 		{
 			lock (_lock)
 				return InternalIndexOf(item);
 		}
 
-		public void Insert(int index, BulkOperationBase item)
+		public void Insert(int index, IBulkOperation item)
 		{
 			lock (_lock)
 			{
@@ -354,13 +452,13 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		public void AddRange(IEnumerable<BulkOperationBase> items)
+		public void AddRange(IEnumerable<IBulkOperation> items)
 		{
 			lock (_lock)
 				Items.AddRange(items);
 		}
 
-		private int InternalIndexOf(BulkOperationBase item)
+		private int InternalIndexOf(IBulkOperation item)
 		{
 			var count = Items.Count;
 
@@ -372,7 +470,7 @@ namespace Elastic.Clients.Elasticsearch
 			return -1;
 		}
 
-		private void InsertItem(int index, BulkOperationBase item) => Items.Insert(index, item);
+		private void InsertItem(int index, IBulkOperation item) => Items.Insert(index, item);
 
 		private void RemoveItem(int index) => Items.RemoveAt(index);
 
@@ -380,11 +478,11 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			if (value == null)
 			{
-				if (typeof(BulkOperationBase).IsValueType)
+				if (typeof(IBulkOperation).IsValueType)
 					throw new ArgumentException("value is null and a value type");
 			}
-			else if (value is not BulkOperationBase)
-				throw new ArgumentException($"object is of type {value.GetType().FullName} but collection is of {typeof(BulkOperationBase).FullName}");
+			else if (value is not IBulkOperation)
+				throw new ArgumentException($"object is of type {value.GetType().FullName} but collection is of {typeof(IBulkOperation).FullName}");
 		}
 
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
@@ -399,6 +497,16 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None) => throw new NotImplementedException();
+		public async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			foreach (var op in this)
+			{
+				if (op is not IStreamSerializable serializable)
+					throw new InvalidOperationException("");
+
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+				stream.WriteByte((byte)'\n');
+			}
+		}
 	}
 }

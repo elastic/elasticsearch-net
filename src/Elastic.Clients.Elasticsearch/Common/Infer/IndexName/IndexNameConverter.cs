@@ -14,9 +14,9 @@ namespace Elastic.Clients.Elasticsearch
 	/// </summary>
 	internal class IndexNameConverter : JsonConverter<IndexName?>
 	{
-		private readonly ITransportConfiguration _settings;
+		private readonly IElasticsearchClientSettings _settings;
 
-		public IndexNameConverter(ITransportConfiguration settings) => _settings = settings;
+		public IndexNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
 		public override IndexName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch
 				return;
 			}
 
-			writer.WriteStringValue(value.GetString(_settings));
+			writer.WriteStringValue(_settings.Inferrer.IndexName(value));
 		}
 	}
 }

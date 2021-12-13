@@ -131,7 +131,15 @@ namespace Elastic.Clients.Elasticsearch
 		public override Task SerializeAsync<T>(T data, Stream stream,
 			SerializationFormatting formatting = SerializationFormatting.None,
 			CancellationToken cancellationToken = default
-		) => JsonSerializer.SerializeAsync(stream, data, Options, cancellationToken);
+		)
+		{
+			if (data is IStreamSerializable streamSerializable)
+			{
+				return streamSerializable.SerializeAsync(stream, _settings, formatting);
+			}
+
+			return JsonSerializer.SerializeAsync(stream, data, Options, cancellationToken);
+		}
 	}
 
 	//public class SystemTextJsonSerializer : IElasticsearchSerializer
