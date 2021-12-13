@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public string PropertyName(PropertyName property) => FieldResolver.Resolve(property);
 
-		public string IndexName<T>() where T : class => IndexNameResolver.Resolve<T>();
+		public string IndexName<T>() => IndexNameResolver.Resolve<T>();
 
 		public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
@@ -315,7 +315,7 @@ namespace Elastic.Clients.Elasticsearch
 			_connectionSettings = connectionSettings;
 		}
 
-		public string Resolve<T>() where T : class => Resolve(typeof(T));
+		public string Resolve<T>() => Resolve(typeof(T));
 
 		public string Resolve(IndexName i)
 		{

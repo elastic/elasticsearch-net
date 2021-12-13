@@ -8,6 +8,8 @@ namespace PlaygroundV7x
 	{
 		private static async Task Main()
 		{
+
+
 			var aggs = new AggregationDictionary
 			{
 				{ "startDates", new TermsAggregation("startDates") { Field = "startedOn" } },
@@ -29,6 +31,8 @@ namespace PlaygroundV7x
 
 			var client = new ElasticClient();
 
+			var response = client.Index(new Person(), e => e.Index("test"));
+
 			var settingsResponse = await client.Indices.CreateAsync("a", i => i.Settings(s => s.Analysis(a => a.TokenFilters(tf => tf
 				.Shingle("my-shingle", s => s.MinShingleSize(2))
 				.Snowball("my_snowball", s => s.Version("v1"))))));
@@ -37,11 +41,7 @@ namespace PlaygroundV7x
 
 			//var r1 = await c1.PingAsync();
 
-			if (settingsResponse.IsValid)
-			{
-
-			}
-
+			
 
 
 #pragma warning disable IDE0039 // Use local function
@@ -102,7 +102,7 @@ namespace PlaygroundV7x
 			_ = await client.SearchAsync<Person>(new SearchDescriptor<Person>());
 			_ = await client.CountAsync(new CountDescriptor<Person>());
 			
-			var response = await client.SearchAsync<Person>(search);
+			//var response = await client.SearchAsync<Person>(search);
 
 			var r = await client.Indices.CreateAsync("", c => c.Settings(s => s.Analysis(a => a.CharFilters(cf => cf
 				.HtmlStrip("name", h => h)
