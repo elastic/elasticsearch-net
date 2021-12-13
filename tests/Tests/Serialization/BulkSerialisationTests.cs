@@ -10,7 +10,7 @@ namespace Tests.Serialization
 	public class BulkSerialisationTests : SourceSerializerTestBase
 	{
 		[U]
-		public void BulkRequestSerialisationTest()
+		public async Task BulkRequest_SerialisationTest()
 		{
 			var expectedJson = @"{""index"":{""_index"":""project""}}
 {""lastActivity"":""0001-01-01T00:00:00"",""leadDeveloper"":{""gender"":0,""firstName"":""Steve"",""id"":0,""lastName"":""Gordon""},""numberOfContributors"":0,""startedOn"":""0001-01-01T00:00:00"",""state"":""BellyUp"",""type"":""project"",""visibility"":0}
@@ -31,12 +31,12 @@ namespace Tests.Serialization
 				Operations = operations
 			};
 
-			var serialisedJson = SerializeAndGetJsonString(request);
+			var serialisedJson = await SerializeAndGetJsonStringAsync(request);
 			serialisedJson.Should().Be(expectedJson);
 		}
 
 		[U]
-		public void BulkRequestDescriptorSerialisationTest()
+		public async Task BulkRequest_DescriptorSerialisationTest()
 		{
 			var expectedJson = @"{""index"":{""_index"":""project""}}
 {""lastActivity"":""0001-01-01T00:00:00"",""leadDeveloper"":{""gender"":0,""firstName"":""Steve"",""id"":0,""lastName"":""Gordon""},""numberOfContributors"":0,""startedOn"":""0001-01-01T00:00:00"",""state"":""BellyUp"",""type"":""project"",""visibility"":0}
@@ -50,12 +50,12 @@ namespace Tests.Serialization
 			request.Index(FixedProject, b => b.Index("project"));
 			request.Index(FixedProject);
 
-			var serialisedJson = SerializeAndGetJsonString(request);
+			var serialisedJson = await SerializeAndGetJsonStringAsync(request);
 			serialisedJson.Should().Be(expectedJson);
 		}
 
 		[U]
-		public async Task BulkRequestDescriptorSerialisationTest_Async()
+		public async Task BulkRequest_IndexMany_DescriptorSerialisationTest()
 		{
 			var expectedJson = @"{""index"":{""_index"":""project""}}
 {""lastActivity"":""0001-01-01T00:00:00"",""leadDeveloper"":{""gender"":0,""firstName"":""Steve"",""id"":0,""lastName"":""Gordon""},""numberOfContributors"":0,""startedOn"":""0001-01-01T00:00:00"",""state"":""BellyUp"",""type"":""project"",""visibility"":0}
@@ -66,8 +66,7 @@ namespace Tests.Serialization
 			expectedJson = expectedJson.Replace("\r\n", "\n", System.StringComparison.Ordinal);
 
 			var request = new BulkRequestDescriptor<Project>();
-			request.Index(FixedProject, b => b.Index("project"));
-			request.Index(FixedProject);
+			request.IndexMany(new [] { FixedProject, FixedProject });
 
 			var serialisedJson = await SerializeAndGetJsonStringAsync(request);
 			serialisedJson.Should().Be(expectedJson);

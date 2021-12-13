@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
 
@@ -17,7 +18,7 @@ namespace Playground
 
 		private static void Main()
 		{
-			
+
 
 			//var ec = new Client();
 
@@ -97,9 +98,18 @@ namespace Playground
 
 
 
-			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
-				.Authentication(new BasicAuthentication("elastic", "-5qxtEZQ=NWx1v+PUjCJ"))
-				.CertificateFingerprint("bdbbcebde100130339ec62f7f4ff7008ae81ddaa0586178090d2a41ba5a6e6a1"));
+			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
+				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
+				.ServerCertificateValidationCallback((a, b, c, d) => true));
+				//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
+
+			var people = new Person[] { new Person { FirstName = "Steve" } };
+
+			var bulkAll = new BulkAllObservable<Person>(client, new BulkAllRequest<Person>(people) { Index = "people-test" });
+
+			var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
+
+
 
 			client.Search<Person>(s => s
 				.Size(1)
