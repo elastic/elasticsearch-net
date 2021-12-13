@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading.Tasks;
 using Tests.Domain;
 
 namespace Tests.Serialization;
@@ -36,5 +37,14 @@ public abstract class SourceSerializerTestBase
 		stream.Position = 0;
 		var reader = new StreamReader(stream);
 		return reader.ReadToEnd();
+	}
+
+	protected static async Task<string> SerializeAndGetJsonStringAsync<T>(T data)
+	{
+		var stream = new MemoryStream();
+		await _requestResponseSerializer.SerializeAsync(data, stream);
+		stream.Position = 0;
+		var reader = new StreamReader(stream);
+		return await reader.ReadToEndAsync();
 	}
 }
