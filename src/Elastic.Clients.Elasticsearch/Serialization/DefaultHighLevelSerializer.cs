@@ -19,6 +19,7 @@ namespace Elastic.Clients.Elasticsearch
 	internal class DefaultHighLevelSerializer : Serializer
 	{
 		private static readonly UTF8Encoding Encoding = new(false);
+		private readonly IElasticsearchClientSettings _settings;
 
 		public DefaultHighLevelSerializer(JsonSerializerOptions? options = null) => Options =
 			options ?? new JsonSerializerOptions
@@ -33,7 +34,8 @@ namespace Elastic.Clients.Elasticsearch
 			};
 
 		// ctor added so we can pass down settings. TODO: review this design, perhaps have a method AddConverter which can be called instead?
-		public DefaultHighLevelSerializer(IElasticsearchClientSettings settings) =>
+		public DefaultHighLevelSerializer(IElasticsearchClientSettings settings)
+		{
 			Options = new JsonSerializerOptions
 			{
 				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
@@ -59,6 +61,8 @@ namespace Elastic.Clients.Elasticsearch
 				},
 				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 			};
+			_settings = settings;
+		}
 
 		internal JsonSerializerOptions Options { get; }
 
@@ -113,6 +117,12 @@ namespace Elastic.Clients.Elasticsearch
 		public override void Serialize<T>(T data, Stream writableStream,
 			SerializationFormatting formatting = SerializationFormatting.None)
 		{
+			if (data is IStreamSerializable streamSerializable)
+			{
+				streamSerializable.Serialize(writableStream, _settings, formatting);
+				return;
+			}
+
 			var json = JsonSerializer.Serialize(data, Options);
 			using var writer = new StreamWriter(writableStream, Encoding, 4096, true);
 			writer.Write(json);
