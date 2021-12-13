@@ -747,6 +747,8 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private readonly BulkOperationsCollection _operations = new();
 
+		public BulkRequestDescriptor<TSource> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+
 		public BulkRequestDescriptor<TSource> Index(TSource document, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkIndexOperationDescriptor<TSource>(document);
@@ -758,6 +760,9 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
+		public BulkRequestDescriptor<TSource> IndexMany<T>(IEnumerable<T> @objects, Action<BulkIndexOperationDescriptor<T>> bulkIndexSelector = null) =>
+			AddOperations(@objects, bulkIndexSelector, o => new BulkIndexOperationDescriptor<T>(o));
+
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			var operations = (IStreamSerializable)_operations;
@@ -768,6 +773,33 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var operations = (IStreamSerializable)_operations;
 			return operations.SerializeAsync(stream, settings, formatting);
+		}
+
+		private BulkRequestDescriptor<TSource> AddOperations<T, TDescriptor>(
+			IEnumerable<T> objects,
+			Action<TDescriptor> bulkIndexSelector,
+			Func<T, TDescriptor> defaultSelector
+		) where TDescriptor : IBulkOperation
+		{
+			if (@objects == null)
+				return this;
+
+			var objectsList = @objects.ToList();
+			var operations = new List<IBulkOperation>(objectsList.Count());
+
+			foreach (var o in objectsList)
+			{
+				var descriptor = defaultSelector(o);
+
+				if (bulkIndexSelector is not null)
+				{
+					bulkIndexSelector(descriptor);
+				}
+
+				operations.Add(descriptor);
+			}
+
+			return Assign(operations, (a, v) => a._operations.AddRange(v));
 		}
 	}
 
