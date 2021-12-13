@@ -17,6 +17,7 @@ using System.Collections;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using System.Linq.Expressions;
+using System.IO;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
@@ -723,6 +724,51 @@ namespace Elastic.Clients.Elasticsearch
 	public enum FieldType
 	{
 		Date,
+	}
+
+	public partial class BulkRequest<TSource> : IStreamSerializable
+	{
+		public BulkOperationsCollection Operations { get; set; }
+
+		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var operations = (IStreamSerializable)Operations;
+
+			operations.Serialize(stream, settings, formatting);
+		}
+
+		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None) => throw new NotImplementedException();
+	}
+
+	public sealed partial class BulkRequestDescriptor<TSource> : IStreamSerializable
+	{
+		private readonly BulkOperationsCollection _operations = new();
+
+		public BulkRequestDescriptor<TSource> Index(TSource document, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
+		{
+			var descriptor = new BulkIndexOperationDescriptor<TSource>(document);
+
+			configure?.Invoke(descriptor);
+
+			_operations.Add(descriptor.ToBulkIndexOperation());
+
+			return this;
+		}
+
+		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var operations = (IStreamSerializable)_operations;
+			operations.Serialize(stream, settings, formatting);
+		}
+
+		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None) => throw new NotImplementedException();
+	}
+
+	internal interface IStreamSerializable
+	{
+		void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
+
+		Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 	}
 
 	internal class FieldTypeConverter : JsonConverter<FieldType>
