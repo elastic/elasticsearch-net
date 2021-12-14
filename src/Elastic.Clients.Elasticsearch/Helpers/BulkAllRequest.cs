@@ -24,19 +24,35 @@ public sealed class BulkAllRequest<T>
 
 	public int? BackOffRetries { get; set; }
 
-	public Time BackOffTime { get; set; }
+	public Time? BackOffTime { get; set; }
 
-	public ProducerConsumerBackPressure BackPressure { get; set; }
+	public ProducerConsumerBackPressure? BackPressure { get; set; }
 
-	public Action<BulkRequestDescriptor<T>, IList<T>> BufferToBulk { get; set; }
+	public Action<BulkRequestDescriptor<T>, IList<T>>? BufferToBulk { get; set; }
 
 	public bool ContinueAfterDroppedDocuments { get; set; }
 
 	public int? Size { get; set; }
 
-	public Action<BulkResponse> BulkResponseCallback { get; set; }
+	public Action<ResponseItem, T> DroppedDocumentCallback { get; set; }
+
+	public Func<ResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+
+	public Action<BulkResponse>? BulkResponseCallback { get; set; }
 
 	public int? MaxDegreeOfParallelism { get; set; }
+
+	public Time? Timeout { get; set; }
+
+	public string? Pipeline { get; set; }
+
+	public WaitForActiveShards? WaitForActiveShards { get; set; }
+
+	public Routing? Routing { get; set; }
+
+	public bool RefreshOnCompleted { get; set; }
+
+	public Indices RefreshIndices { get; set; }
 
 	//public Action<BulkResponseItemBase, T> DroppedDocumentCallback { get; set; }
 }

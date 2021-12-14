@@ -8,6 +8,8 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public interface IRequest
 	{
+		[JsonIgnore] string? Accept { get; }
+
 		[JsonIgnore] string? ContentType { get; }
 
 		[JsonIgnore] HttpMethod HttpMethod { get; }
@@ -71,6 +73,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore] protected IRequest<TParameters> RequestState => this;
 
+		protected virtual string? Accept { get; } = null;
+
 		protected virtual string? ContentType { get; } = null;
 
 		internal abstract ApiUrls ApiUrls { get; }
@@ -82,6 +86,8 @@ namespace Elastic.Clients.Elasticsearch
 		//[JsonIgnore] bool IRequest.CanBeEmpty => CanBeEmpty;
 
 		//[JsonIgnore] bool IRequest.IsEmpty => IsEmpty;
+
+		[JsonIgnore] string? IRequest.Accept => Accept;
 
 		[JsonIgnore] string? IRequest.ContentType => ContentType;
 

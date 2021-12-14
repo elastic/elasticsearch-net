@@ -427,6 +427,9 @@ public partial class ElasticClient
 		if (request.ContentType is not null)
 			ForceContentType(request, request.ContentType);
 
+		if (request.Accept is not null)
+			ForceAccept(request, request.Accept);
+
 		var url = request.GetUrl(ElasticsearchClientSettings);
 
 		// TODO: Left while we decide if we prefer this
@@ -474,6 +477,14 @@ public partial class ElasticClient
 		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 		configuration.Accept = contentType;
 		configuration.ContentType = contentType;
+		request.RequestParameters.RequestConfiguration = configuration;
+	}
+
+	private static void ForceAccept<TRequest>(TRequest request, string acceptType)
+		where TRequest : class, IRequest
+	{
+		var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
+		configuration.Accept = acceptType;
 		request.RequestParameters.RequestConfiguration = configuration;
 	}
 
