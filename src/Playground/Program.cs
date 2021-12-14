@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Clients.Elasticsearch.Helpers;
@@ -16,7 +17,7 @@ namespace Playground
 			public QueryContainer? Query { get; set; }
 		}
 
-		private static void Main()
+		private static async Task Main()
 		{
 
 
@@ -100,16 +101,18 @@ namespace Playground
 
 			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
 				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
-				.ServerCertificateValidationCallback((a, b, c, d) => true));
+				.ServerCertificateValidationCallback((a, b, c, d) => true)
+				.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
 				//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
 
 			var people = new Person[] { new Person { FirstName = "Steve" } };
 
-			var bulkAll = new BulkAllObservable<Person>(client, new BulkAllRequest<Person>(people) { Index = "people-test" });
+			//var bulkAll = new BulkAllObservable<Person>(client, new BulkAllRequest<Person>(people) { Index = "people-test" });
+			//var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 
-			var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
-
-
+			var request = await client.BulkAsync<Person>(b => b
+				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
+				.Delete(100));
 
 			client.Search<Person>(s => s
 				.Size(1)

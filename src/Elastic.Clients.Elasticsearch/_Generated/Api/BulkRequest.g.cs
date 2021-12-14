@@ -18,11 +18,9 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
@@ -121,7 +119,6 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkRequestDescriptor<TSource> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public BulkRequestDescriptor<TSource> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public BulkRequestDescriptor<TSource> RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

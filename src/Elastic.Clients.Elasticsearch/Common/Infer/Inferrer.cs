@@ -24,9 +24,9 @@ namespace Elastic.Clients.Elasticsearch
 			_elasticsearchClientSettings = elasticsearchClientSettings;
 			IdResolver = new IdResolver(elasticsearchClientSettings);
 			IndexNameResolver = new IndexNameResolver(elasticsearchClientSettings);
-			//RelationNameResolver = new RelationNameResolver(connectionSettings);
+			RelationNameResolver = new RelationNameResolver(elasticsearchClientSettings);
 			FieldResolver = new FieldResolver(elasticsearchClientSettings);
-			//RoutingResolver = new RoutingResolver(connectionSettings, IdResolver);
+			RoutingResolver = new RoutingResolver(elasticsearchClientSettings, IdResolver);
 
 			//CreateMultiHitDelegates =
 			//	new ConcurrentDictionary<Type,
@@ -45,12 +45,10 @@ namespace Elastic.Clients.Elasticsearch
 		//	CreateSearchResponseDelegates { get; }
 
 		private FieldResolver FieldResolver { get; }
-
 		private IdResolver IdResolver { get; }
-
 		private IndexNameResolver IndexNameResolver { get; }
-		//private RelationNameResolver RelationNameResolver { get; }
-		//private RoutingResolver RoutingResolver { get; }
+		private RelationNameResolver RelationNameResolver { get; }
+		private RoutingResolver RoutingResolver { get; }
 
 		public string Resolve(IUrlParameter urlParameter) => urlParameter.GetString(_elasticsearchClientSettings);
 
@@ -66,13 +64,322 @@ namespace Elastic.Clients.Elasticsearch
 
 		public string Id(Type type, object instance) => IdResolver.Resolve(type, instance);
 
-		//public string RelationName<T>() where T : class => RelationNameResolver.Resolve<T>();
+		public string RelationName<T>() where T : class => RelationNameResolver.Resolve<T>();
 
-		//public string RelationName(RelationName type) => RelationNameResolver.Resolve(type);
+		public string RelationName(RelationName type) => RelationNameResolver.Resolve(type);
 
-		//public string Routing<T>(T document) => RoutingResolver.Resolve(document);
+		public string Routing<T>(T document) => RoutingResolver.Resolve(document);
 
-		//public string Routing(Type type, object instance) => RoutingResolver.Resolve(type, instance);
+		public string Routing(Type type, object instance) => RoutingResolver.Resolve(type, instance);
+	}
+
+	public class RelationNameResolver
+	{
+		private readonly IElasticsearchClientSettings _connectionSettings;
+		private readonly ConcurrentDictionary<Type, string> _relationNames = new ConcurrentDictionary<Type, string>();
+
+		public RelationNameResolver(IElasticsearchClientSettings connectionSettings)
+		{
+			connectionSettings.ThrowIfNull(nameof(connectionSettings));
+			_connectionSettings = connectionSettings;
+		}
+
+		public string Resolve<T>() where T : class => Resolve(typeof(T));
+
+		public string Resolve(RelationName t) => t?.Name ?? ResolveType(t?.Type);
+
+		private string ResolveType(Type type)
+		{
+			if (type == null)
+				return null;
+
+			if (_relationNames.TryGetValue(type, out var typeName))
+				return typeName;
+
+			if (_connectionSettings.DefaultRelationNames.TryGetValue(type, out typeName))
+			{
+				_relationNames.TryAdd(type, typeName);
+				return typeName;
+			}
+
+			var att = ElasticsearchTypeAttribute.From(type);
+			if (att != null && !att.RelationName.IsNullOrEmpty())
+				typeName = att.RelationName;
+			else
+				typeName = type.Name.ToLowerInvariant();
+
+			_relationNames.TryAdd(type, typeName);
+			return typeName;
+		}
+	}
+
+	public class RoutingResolver
+	{
+		private static readonly ConcurrentDictionary<Type, Func<object, JoinField>> PropertyGetDelegates =
+			new ConcurrentDictionary<Type, Func<object, JoinField>>();
+
+		private static readonly MethodInfo MakeDelegateMethodInfo =
+			typeof(RoutingResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
+
+
+		private readonly IElasticsearchClientSettings _connectionSettings;
+		private readonly IdResolver _idResolver;
+
+		private readonly ConcurrentDictionary<Type, Func<object, string>>
+			_localRouteDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+
+		public RoutingResolver(IElasticsearchClientSettings connectionSettings, IdResolver idResolver)
+		{
+			_connectionSettings = connectionSettings;
+			_idResolver = idResolver;
+		}
+
+		private PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName) =>
+			type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+
+		internal static Func<object, object> MakeDelegate<T, TReturn>(MethodInfo @get)
+		{
+			var f = (Func<T, TReturn>)@get.CreateDelegate(typeof(Func<T, TReturn>));
+			return t => f((T)t);
+		}
+
+		public string Resolve<T>(T @object) => @object == null ? null : Resolve(@object.GetType(), @object);
+
+		public string Resolve(Type type, object @object)
+		{
+			if (TryConnectionSettingsRoute(type, @object, out var route))
+				return route;
+
+			var joinField = GetJoinFieldFromObject(type, @object);
+			return joinField?.Match(p => _idResolver.Resolve(@object), c => ResolveId(c.ParentId, _connectionSettings));
+		}
+
+		private bool TryConnectionSettingsRoute(Type type, object @object, out string route)
+		{
+			route = null;
+			if (!_connectionSettings.RouteProperties.TryGetValue(type, out var propertyName))
+				return false;
+
+			if (_localRouteDelegates.TryGetValue(type, out var cachedLookup))
+			{
+				route = cachedLookup(@object);
+				return true;
+			}
+			var property = GetPropertyCaseInsensitive(type, propertyName);
+			var func = CreateGetterFunc(type, property);
+			cachedLookup = o =>
+			{
+				var v = func(o);
+				return v?.ToString();
+			};
+			_localRouteDelegates.TryAdd(type, cachedLookup);
+			route = cachedLookup(@object);
+			return true;
+		}
+
+		private string ResolveId(Id id, IElasticsearchClientSettings settings) =>
+			id.Document != null ? settings.Inferrer.Id(id.Document) : id.StringOrLongValue;
+
+		private static JoinField GetJoinFieldFromObject(Type type, object @object)
+		{
+			if (type == null || @object == null)
+				return null;
+
+			if (PropertyGetDelegates.TryGetValue(type, out var cachedLookup))
+				return cachedLookup(@object);
+
+			var joinProperty = GetJoinFieldProperty(type);
+			if (joinProperty == null)
+			{
+				PropertyGetDelegates.TryAdd(type, o => null);
+				return null;
+			}
+
+			var func = CreateGetterFunc(type, joinProperty);
+			cachedLookup = o =>
+			{
+				var v = func(o);
+				return v as JoinField;
+			};
+			PropertyGetDelegates.TryAdd(type, cachedLookup);
+			return cachedLookup(@object);
+		}
+
+		private static Func<object, object> CreateGetterFunc(Type type, PropertyInfo joinProperty)
+		{
+			var getMethod = joinProperty.GetMethod;
+			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
+			var func = (Func<object, object>)generic.Invoke(null, new object[] { getMethod });
+			return func;
+		}
+
+		private static PropertyInfo GetJoinFieldProperty(Type type)
+		{
+			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+			try
+			{
+				var joinField = properties.SingleOrDefault(p => p.PropertyType == typeof(JoinField));
+				return joinField;
+			}
+			catch (InvalidOperationException e)
+			{
+				throw new ArgumentException($"{type.Name} has more than one JoinField property", e);
+			}
+		}
+	}
+
+	public class JoinField
+	{
+		internal Child ChildOption { get; }
+		internal Parent ParentOption { get; }
+		internal int Tag { get; }
+
+		public JoinField(Parent parentName)
+		{
+			ParentOption = parentName;
+			Tag = 0;
+		}
+
+		public JoinField(Child child)
+		{
+			ChildOption = child;
+			Tag = 1;
+		}
+
+		public static JoinField Root<TParent>() => new Parent(typeof(TParent));
+
+		public static JoinField Root(RelationName parent) => new Parent(parent);
+
+		public static JoinField Link(RelationName child, Id parentId) => new Child(child, parentId);
+
+		public static JoinField Link<TChild, TParentDocument>(TParentDocument parent) where TParentDocument : class =>
+			new Child(typeof(TChild), Id.From(parent));
+
+		public static JoinField Link<TChild>(Id parentId) => new Child(typeof(TChild), parentId);
+
+		public static implicit operator JoinField(Parent parent) => new JoinField(parent);
+
+		public static implicit operator JoinField(string parentName) => new JoinField(new Parent(parentName));
+
+		public static implicit operator JoinField(Type parentType) => new JoinField(new Parent(parentType));
+
+		public static implicit operator JoinField(Child child) => new JoinField(child);
+
+		public T Match<T>(Func<Parent, T> first, Func<Child, T> second)
+		{
+			switch (Tag)
+			{
+				case 0:
+					return first(ParentOption);
+				case 1:
+					return second(ChildOption);
+				default:
+					throw new Exception($"Unrecognized tag value: {Tag}");
+			}
+		}
+
+		public void Match(Action<Parent> first, Action<Child> second)
+		{
+			switch (Tag)
+			{
+				case 0:
+					first(ParentOption);
+					break;
+				case 1:
+					second(ChildOption);
+					break;
+				default:
+					throw new Exception($"Unrecognized tag value: {Tag}");
+			}
+		}
+
+		public class Parent
+		{
+			public Parent(RelationName name) => Name = name;
+
+			public RelationName Name { get; }
+		}
+
+		public class Child
+		{
+			public Child(RelationName name, Id parent)
+			{
+				Name = name;
+				ParentId = parent;
+			}
+
+			public RelationName Name { get; }
+			public Id ParentId { get; }
+		}
+	}
+
+	public class RelationName : IEquatable<RelationName>, IUrlParameter
+	{
+		private RelationName(string type) => Name = type;
+
+		private RelationName(Type type) => Type = type;
+
+		public string Name { get; }
+		public Type Type { get; }
+
+		internal string DebugDisplay => Type == null ? Name : $"{nameof(RelationName)} for typeof: {Type?.Name}";
+
+		private static int TypeHashCode { get; } = typeof(RelationName).GetHashCode();
+
+		public bool Equals(RelationName other) => EqualsMarker(other);
+
+		string IUrlParameter.GetString(ITransportConfiguration settings)
+		{
+			if (settings is not IElasticsearchClientSettings nestSettings)
+				throw new ArgumentNullException(nameof(settings),
+					$"Can not resolve {nameof(RelationName)} if no {nameof(IElasticsearchClientSettings)} is provided");
+
+			return nestSettings.Inferrer.RelationName(this);
+		}
+
+		public static RelationName From<T>() => typeof(T);
+
+		public static RelationName Create(Type type) => GetRelationNameForType(type);
+
+		public static RelationName Create<T>() where T : class => GetRelationNameForType(typeof(T));
+
+		private static RelationName GetRelationNameForType(Type type) => new RelationName(type);
+
+		public static implicit operator RelationName(string typeName) => typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
+
+		public static implicit operator RelationName(Type type) => type == null ? null : new RelationName(type);
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				var result = TypeHashCode;
+				result = (result * 397) ^ (Name?.GetHashCode() ?? Type?.GetHashCode() ?? 0);
+				return result;
+			}
+		}
+
+		public static bool operator ==(RelationName left, RelationName right) => Equals(left, right);
+
+		public static bool operator !=(RelationName left, RelationName right) => !Equals(left, right);
+
+		public override bool Equals(object obj) =>
+			obj is string s ? EqualsString(s) : obj is RelationName r && EqualsMarker(r);
+
+		public bool EqualsMarker(RelationName other)
+		{
+			if (!Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
+				return EqualsString(other.Name);
+			if (Type != null && other?.Type != null)
+				return Type == other.Type;
+
+			return false;
+		}
+
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == Name;
+
+		public override string ToString() => DebugDisplay;
+
 	}
 
 	internal class FieldResolver

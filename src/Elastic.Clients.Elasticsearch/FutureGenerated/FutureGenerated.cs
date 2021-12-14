@@ -726,6 +726,22 @@ namespace Elastic.Clients.Elasticsearch
 		Date,
 	}
 
+	public partial class CountRequest<TDocument> : CountRequest
+	{
+		//protected CountRequest<TDocument> TypedSelf => this;
+
+		///<summary>/{index}/_count</summary>
+		public CountRequest() : base(typeof(TDocument))
+		{
+		}
+
+		///<summary>/{index}/_count</summary>
+		///<param name = "index">Optional, accepts null</param>
+		public CountRequest(Indices index) : base(index)
+		{
+		}
+	}
+
 	public partial class BulkRequest<TSource> : IStreamSerializable
 	{
 		public BulkOperationsCollection Operations { get; set; }
@@ -760,8 +776,32 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
+		public BulkRequestDescriptor<TSource> Delete(Id id)
+		{
+			var descriptor = new BulkDeleteOperationDescriptor<TSource>();
+			descriptor.Id(id);
+
+			_operations.Add(descriptor);
+
+			return this;
+		}
+
+		public BulkRequestDescriptor<TSource> Delete(Action<BulkDeleteOperationDescriptor<TSource>> configure)
+		{
+			var descriptor = new BulkDeleteOperationDescriptor<TSource>();
+
+			configure?.Invoke(descriptor);
+
+			_operations.Add(descriptor);
+
+			return this;
+		}
+
 		public BulkRequestDescriptor<TSource> IndexMany<T>(IEnumerable<T> @objects, Action<BulkIndexOperationDescriptor<T>> bulkIndexSelector = null) =>
 			AddOperations(@objects, bulkIndexSelector, o => new BulkIndexOperationDescriptor<T>(o));
+
+		public BulkRequestDescriptor<TSource> DeleteMany<T>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor<T>> bulkIndexSelector = null) =>
+			AddOperations(ids, bulkIndexSelector, id => new BulkDeleteOperationDescriptor<T>(id));
 
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
@@ -852,7 +892,20 @@ namespace Elastic.Clients.Elasticsearch
 		public string GetString() => Value ?? string.Empty;
 	}
 
-	// COULD ALSO BE AN ENUM AS IN EXISTING NEST?
+	public partial struct OpType : IStringable
+	{
+		public static OpType Index = new("index");
+		public static OpType Create = new("create");
+
+		public OpType(string value) => Value = value;
+
+		public string Value { get; }
+
+		public static implicit operator OpType(string v) => new(v);
+
+		public string GetString() => Value ?? string.Empty;
+	}
+
 	public partial struct Refresh : IStringable
 	{
 		public static Refresh WaitFor = new("wait_for");
