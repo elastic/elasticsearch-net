@@ -65,6 +65,8 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		protected override string ContentType => "application/x-ndjson";
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -105,6 +107,8 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
 		{
 		}
+
+		protected override string ContentType => "application/x-ndjson";
 
 		internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TSource>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
