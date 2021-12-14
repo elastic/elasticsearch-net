@@ -65,8 +65,6 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		protected override string ContentType => "application/x-ndjson";
-
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -108,7 +106,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		protected override string ContentType => "application/x-ndjson";
+		
 
 		internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TSource>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
@@ -116,7 +114,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override bool SupportsBody => true;
 		public BulkRequestDescriptor<TSource> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 		public BulkRequestDescriptor<TSource> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-		public BulkRequestDescriptor<TSource> Routing(string? routing) => Qs("routing", routing);
+		public BulkRequestDescriptor<TSource> Routing(Routing? routing) => Qs("routing", routing);
 		public BulkRequestDescriptor<TSource> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
 		public BulkRequestDescriptor<TSource> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public BulkRequestDescriptor<TSource> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);

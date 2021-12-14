@@ -746,6 +746,10 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public BulkOperationsCollection Operations { get; set; }
 
+		protected override string ContentType => "application/x-ndjson";
+
+		protected override string Accept => "application/json";
+
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			var operations = (IStreamSerializable)Operations;
@@ -757,6 +761,32 @@ namespace Elastic.Clients.Elasticsearch
 			var operations = (IStreamSerializable)Operations;
 			return operations.SerializeAsync(stream, settings, formatting);
 		}
+	}
+
+	public abstract partial class ResponseItem
+	{
+		public bool IsValid
+		{
+			get
+			{
+				if (Error is not null)
+					return false;
+
+				return Operation.ToLowerInvariant() switch
+				{
+					"delete" => Status == 200 || Status == 404,
+					"update" or "index" or "create" => Status == 200 || Status == 201,
+					_ => false,
+				};
+			}
+		}
+	}
+
+	public sealed partial class BulkRequestDescriptor<TSource>
+	{
+		protected override string ContentType => "application/x-ndjson";
+
+		protected override string Accept => "application/json";
 	}
 
 	public partial class BulkResponse
@@ -793,7 +823,7 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
-		public BulkRequestDescriptor<TSource> Update<TPartial>(BulkUpdateOperation<TSource, TPartial> update)
+		public BulkRequestDescriptor<TSource> Update(BulkUpdateOperationBase update)
 		{
 			_operations.Add(update);
 			return this;

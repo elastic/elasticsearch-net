@@ -34,6 +34,9 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("_index")]
 		public string Index { get; init; }
 
+		[JsonIgnore]
+		public abstract string Operation { get; }
+
 		[JsonInclude]
 		[JsonPropertyName("status")]
 		public int Status { get; init; }
@@ -57,10 +60,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_version")]
