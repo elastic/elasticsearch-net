@@ -649,46 +649,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(OpTypeConverter))]
-	public enum OpType
-	{
-		Index,
-		Create
-	}
-
-	public class OpTypeConverter : JsonConverter<OpType>
-	{
-		public override OpType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "index":
-					return OpType.Index;
-				case "create":
-					return OpType.Create;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, OpType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case OpType.Index:
-					writer.WriteStringValue("index");
-					return;
-				case OpType.Create:
-					writer.WriteStringValue("create");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(ResultConverter))]
 	public enum Result
 	{

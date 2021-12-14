@@ -47,6 +47,7 @@ public class IndexApiTests
 
 	protected override HttpMethod HttpMethod => HttpMethod.PUT;
 	protected override bool IncludeNullInExpected => false;
+	protected override bool SupportsDeserialization => false;
 
 	protected override IndexRequest<Project> Initializer => new(Document)
 	{

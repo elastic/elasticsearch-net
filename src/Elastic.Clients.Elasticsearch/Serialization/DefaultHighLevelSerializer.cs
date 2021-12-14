@@ -53,7 +53,7 @@ namespace Elastic.Clients.Elasticsearch
 					new SelfSerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					//new FieldConverterFactory(settings),
-					//new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+					new JsonStringEnumConverter(),  //required for source serialisation
 					
 					new DictionaryConverter(),
 					//new BucketsConverterFactory(),

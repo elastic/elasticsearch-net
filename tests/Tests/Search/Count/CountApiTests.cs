@@ -12,7 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 namespace Tests.Search.Count
 {
 	public class CountApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest<Project>>
 	{
 		public CountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -43,7 +43,7 @@ namespace Tests.Search.Count
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override CountRequest Initializer => new()
+		protected override CountRequest<Project> Initializer => new()
 		{
 			Query = new QueryContainer(new MatchQuery
 			{
@@ -115,7 +115,7 @@ namespace Tests.Search.Count
 	//}
 
 	public class CountApiV2Tests
-		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest<Project>>
 	{
 		public CountApiV2Tests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -145,7 +145,7 @@ namespace Tests.Search.Count
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override CountRequest Initializer => new()
+		protected override CountRequest<Project> Initializer => new()
 		{
 			Query = new QueryContainer(new MatchQuery
 			{
