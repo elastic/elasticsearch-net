@@ -111,6 +111,7 @@ namespace Playground
 			//var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 
 			var request = await client.BulkAsync<Person>(b => b
+				.Create(new Person { FirstName = "Rhiannon" })
 				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
 				.Delete(100));
 
