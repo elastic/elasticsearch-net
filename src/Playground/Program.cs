@@ -103,22 +103,33 @@ namespace Playground
 				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
 				.ServerCertificateValidationCallback((a, b, c, d) => true)
 				.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
-				//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
+			//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
 
-			var people = new Person[] { new Person { FirstName = "Steve" } };
+			var people = new PersonV2[]
+			{
+				new PersonV2 { FirstName = "Martijn" },
+				new PersonV2 { FirstName = "Steve" },
+				new PersonV2 { FirstName = "Russ" },
+				new PersonV2 { FirstName = "Philip" },
+				new PersonV2 { FirstName = "Nigel" },
+				new PersonV2 { FirstName = "Fernando" },
+				new PersonV2 { FirstName = "Enrico" },
+				new PersonV2 { FirstName = "Sylvain" },
+				new PersonV2 { FirstName = "Laurent" },
+				new PersonV2 { FirstName = "Seth" },
+				new PersonV2 { FirstName = "Tomas" }
+			};
 
-			//var bulkAll = new BulkAllObservable<Person>(client, new BulkAllRequest<Person>(people) { Index = "people-test" });
-			//var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
+			var bulkAll = new BulkAllObservable<PersonV2>(client, new BulkAllRequest<PersonV2>(people) { Index = "people-v2-test" });
+			var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 
 			var request = await client.BulkAsync<Person>(b => b
+				.Index("people-test")
 				.Create(new Person { FirstName = "Rhiannon" })
 				.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
 				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
-				.Update(new BulkUpdateOperation<Person, Person>()
-				{
-					Id = 200,
-					PartialDocument = new Person { LastName = "Gordon" }
-				})
+				.Update(BulkUpdateOperation.WithPartial(200, new Person { LastName = "Gordon" }))
+				.Update(BulkUpdateOperation.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
 				.Delete(100));
 
 			client.Search<Person>(s => s

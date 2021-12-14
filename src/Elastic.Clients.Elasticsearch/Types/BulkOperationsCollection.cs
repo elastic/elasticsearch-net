@@ -96,22 +96,22 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed class IndexResponseItem : ResponseItem
 	{
-		public string Operation { get; } = "index";
+		public override string Operation => "index";
 	}
 
 	public sealed class DeleteResponseItem : ResponseItem
 	{
-		public string Operation { get; } = "delete";
+		public override string Operation => "delete";
 	}
 
 	public sealed class CreateResponseItem : ResponseItem
 	{
-		public string Operation { get; } = "create";
+		public override string Operation => "create";
 	}
 
 	public sealed class UpdateResponseItem : ResponseItem
 	{
-		public string Operation { get; } = "update";
+		public override string Operation => "update";
 	}
 
 	public sealed class BulkIndexOperation<T> : BulkOperationBase
@@ -131,8 +131,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public T Document { get; set; }
-
-		protected override Type ClrType => typeof(T);
 
 		protected override string Operation => "index";
 
@@ -207,8 +205,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public T Document { get; set; }
 
-		protected override Type ClrType => typeof(T);
-
 		protected override string Operation => "create";
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
@@ -264,7 +260,43 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkOperationBase
+	public static class BulkUpdateOperation
+	{
+		public static BulkUpdateOperationWithPartial<TPartial> WithPartial<TPartial>(Id id, TPartial partialDocument) => new(id, partialDocument);
+
+		public static BulkUpdateOperationWithPartial<TPartial> WithPartial<TPartial>(Id id, IndexName index, TPartial partialDocument) => new(id, index, partialDocument);
+
+		public static BulkUpdateOperationWithScript WithScript(Id id, IndexName index, ScriptBase script) => new(id, index, script);
+	}
+
+	public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdateOperationBase
+	{
+		[JsonPropertyName("pipeline")]
+		public string? Pipeline { get; set; }
+
+		[JsonPropertyName("dynamic_templates")]
+		public Dictionary<string, string>? DynamicTemplates { get; set; }
+
+		[JsonIgnore]
+		public TDocument IdFrom { get; set; }
+
+		protected override string Operation => "update";
+
+		protected override void BeforeSerialize(IElasticsearchClientSettings settings)
+		{
+			if (Id is null && IdFrom is not null)
+				Id = settings.Inferrer.Id<TDocument>(IdFrom);
+
+			if (Index is null)
+				Index = settings.Inferrer.IndexName<TDocument>();
+		}
+ 
+		protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => throw new NotImplementedException();
+
+		internal override BulkUpdateBodyBase GetBody() => new BulkUpdateBody<TDocument, TPartialDocument> { /** TODO **/  };
+	}
+
+	public abstract class BulkUpdateOperationBase : BulkOperationBase
 	{
 		private static byte _newline => (byte)'\n';
 
@@ -274,23 +306,17 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("require_alias")]
 		public bool? RequireAlias { get; set; }
 
-		[JsonIgnore]
-		public TDocument IdFrom { get; set; }
-
-		[JsonIgnore]
-		public TPartialDocument PartialDocument { get; set; }
-
-		protected override Type ClrType => typeof(TDocument);
-
 		protected override string Operation => "update";
+
+		protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
+
+		protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
+
+		internal abstract BulkUpdateBodyBase GetBody();
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
-			if (Id is null && IdFrom is not null)
-				Id = settings.Inferrer.Id<TDocument>(IdFrom);
-
-			if (Index is null)
-				Index = settings.Inferrer.IndexName<TDocument>();
+			BeforeSerialize(settings);
 
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 
@@ -301,11 +327,11 @@ namespace Elastic.Clients.Elasticsearch
 
 			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
 			{
-				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this, dhls.Options);
+				WriteOperation(internalWriter, dhls.Options);
 			}
 			else
 			{
-				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+				WriteOperation(internalWriter);
 			}
 
 			internalWriter.WriteEndObject();
@@ -313,22 +339,14 @@ namespace Elastic.Clients.Elasticsearch
 
 			stream.WriteByte(_newline);
 
-			var body = new BulkUpdateBody<TDocument, TPartialDocument>()
-			{
-				Upsert = IdFrom,
-				PartialUpdate = PartialDocument
-			};
+			var body = GetBody();
 
-			settings.SourceSerializer.Serialize(body, stream, formatting);
+			settings.RequestResponseSerializer.Serialize(body, stream, formatting);
 		}
 
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
-			if (Id is null && IdFrom is not null)
-				Id = settings.Inferrer.Id<TDocument>(IdFrom);
-
-			if (Index is null)
-				Index = settings.Inferrer.IndexName<TDocument>();
+			BeforeSerialize(settings);
 
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 
@@ -339,29 +357,151 @@ namespace Elastic.Clients.Elasticsearch
 
 			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
 			{
-				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this, dhls.Options);
+				WriteOperation(internalWriter, dhls.Options);
 			}
 			else
 			{
-				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+				WriteOperation(internalWriter);
 			}
 
 			internalWriter.WriteEndObject();
-			await internalWriter.FlushAsync().ConfigureAwait(false);
+			internalWriter.Flush();
 
 			stream.WriteByte(_newline);
 
-			var body = new BulkUpdateBody<TDocument, TPartialDocument>()
-			{
-				Upsert = IdFrom,
-				PartialUpdate = PartialDocument
-			};
+			var body = GetBody();
 
 			await settings.SourceSerializer.SerializeAsync(body, stream, formatting).ConfigureAwait(false);
 		}
 	}
 
-	internal class BulkUpdateBody<TDocument, TPartialUpdate>
+	public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdateOperationBase
+	{
+		public BulkUpdateOperationWithPartial(Id id, TPartialDocument partialDocument)
+		{
+			Id = id;
+			PartialDocument = partialDocument;
+		}
+
+		public BulkUpdateOperationWithPartial(Id id, IndexName index, TPartialDocument partialDocument)
+		{
+			Id = id;
+			Index = index;
+			PartialDocument = partialDocument;
+		}
+
+		[JsonIgnore]
+		public TPartialDocument PartialDocument { get; set; }
+
+		protected override string Operation => "update";
+
+		protected override void BeforeSerialize(IElasticsearchClientSettings settings)
+		{
+			if (Index is null)
+				Index = settings.Inferrer.IndexName<TPartialDocument>();
+		}
+
+		protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize<BulkUpdateOperationWithPartial<TPartialDocument>>(writer, this, options);
+		internal override BulkUpdateBodyBase GetBody() => new PartialBulkUpdateBody<TPartialDocument> { PartialUpdate = PartialDocument };
+	}
+
+	public sealed class BulkUpdateOperationWithScript : BulkUpdateOperationBase
+	{
+		public BulkUpdateOperationWithScript(Id id, IndexName index, ScriptBase script)
+		{
+			Id = id;
+			Index = index;
+			Script = script;
+		}
+
+		[JsonIgnore]
+		public ScriptBase Script { get; set; }
+
+		//protected override Type ClrType => typeof(TPartialDocument);
+
+		protected override string Operation => "update";
+
+		protected override void BeforeSerialize(IElasticsearchClientSettings settings)
+		{
+		}
+
+		protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize<BulkUpdateOperationWithScript>(writer, this, options);
+
+		internal override BulkUpdateBodyBase GetBody() => new ScriptedBulkUpdateBody { Script = Script };
+	}
+
+	internal abstract class BulkUpdateBodyBase : ISelfSerializable
+	{
+		[JsonPropertyName("if_seq_no")]
+		public long? IfSequenceNumber { get; set; }
+
+		[JsonPropertyName("if_primary_term")]
+		public long? IfPrimaryTerm { get; set; }
+
+		protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+
+		void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+
+			if (IfSequenceNumber.HasValue)
+			{
+				writer.WritePropertyName("if_seq_no");
+				writer.WriteNumberValue(IfSequenceNumber.Value);
+			}
+
+			if (IfPrimaryTerm.HasValue)
+			{
+				writer.WritePropertyName("if_primary_term");
+				writer.WriteNumberValue(IfPrimaryTerm.Value);
+			}
+
+			Serialize(writer, options, settings);
+
+			writer.WriteEndObject();
+		}
+	}
+
+	internal class ScriptedBulkUpdateBody : BulkUpdateBodyBase
+	{
+		public ScriptBase Script { get; set; }
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (Script is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, Script, options);
+			}
+		}
+	}
+
+	internal class PartialBulkUpdateBody<TPartialUpdate> : BulkUpdateBodyBase
+	{
+		public bool? DocAsUpsert { get; set; }
+
+		public TPartialUpdate PartialUpdate { get; set; }
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (DocAsUpsert.HasValue)
+			{
+				writer.WritePropertyName("doc_as_upsert");
+				writer.WriteBooleanValue(DocAsUpsert.Value);
+			}
+
+			if (PartialUpdate is not null)
+			{
+				writer.WritePropertyName("doc");
+				SourceSerialisation.Serialize(PartialUpdate, writer, settings.SourceSerializer);
+			}
+		}
+
+		//[DataMember(Name = "_source")]
+		//internal Union<bool, ISourceFilter> Source { get; set; }
+	}
+
+	internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBodyBase
 	{
 		[JsonPropertyName("doc_as_upsert")]
 		public bool? DocAsUpsert { get; set; }
@@ -380,11 +520,10 @@ namespace Elastic.Clients.Elasticsearch
 		//[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		public TDocument Upsert { get; set; }
 
-		[JsonPropertyName("if_seq_no")]
-		public long? IfSequenceNumber { get; set; }
-
-		[JsonPropertyName("if_primary_term")]
-		public long? IfPrimaryTerm { get; set; }
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			// TODO
+		}
 
 		//[DataMember(Name = "_source")]
 		//internal Union<bool, ISourceFilter> Source { get; set; }
@@ -393,8 +532,6 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed class BulkDeleteOperation<T> : BulkOperationBase
 	{
-		protected override Type ClrType => typeof(T);
-
 		protected override string Operation => "delete";
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
@@ -752,12 +889,8 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WritePropertyName("_index");
 				JsonSerializer.Serialize(writer, _index, options);
 			}
-			else
-			{
-				writer.WritePropertyName("_index");
-				var index = settings.Inferrer.IndexName<TSource>();
-				JsonSerializer.Serialize(writer, index, options);
-			}
+
+			// TODO - Maybe infer differently
 
 			if (_routing is not null)
 			{
@@ -814,7 +947,7 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("version_type")]
 		public VersionType? VersionType { get; set; }
 
-		protected abstract Type ClrType { get; }
+		//protected abstract Type ClrType { get; }
 
 		protected abstract string Operation { get; }
 
@@ -853,7 +986,6 @@ namespace Elastic.Clients.Elasticsearch
 	///// </summary>
 	///// <typeparam name="TOperation"></typeparam>
 	public sealed class BulkOperationsCollection : IList<IBulkOperation>, IList, IStreamSerializable
-	//where TOperation : IBulkOperation
 	{
 		private readonly object _lock = new();
 
