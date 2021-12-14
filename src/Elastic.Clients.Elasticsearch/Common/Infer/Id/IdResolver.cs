@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 			return t => f((T)t);
 		}
 
-		public string Resolve<T>(T @object) where T : class =>
+		public string Resolve<T>(T @object) =>
 			_elasticsearchClientSettings.DefaultDisableIdInference || @object == null
 				? null
 				: Resolve(@object.GetType(), @object);
