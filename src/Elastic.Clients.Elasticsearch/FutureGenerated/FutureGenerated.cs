@@ -771,6 +771,17 @@ namespace Elastic.Clients.Elasticsearch
 
 		public BulkRequestDescriptor<TSource> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 
+		public BulkRequestDescriptor<TSource> Create(TSource document, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
+		{
+			var descriptor = new BulkCreateOperationDescriptor<TSource>(document);
+
+			configure?.Invoke(descriptor);
+
+			_operations.Add(descriptor);
+
+			return this;
+		}
+
 		public BulkRequestDescriptor<TSource> Index(TSource document, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkIndexOperationDescriptor<TSource>(document);
@@ -803,8 +814,11 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
-		public BulkRequestDescriptor<TSource> IndexMany<T>(IEnumerable<T> @objects, Action<BulkIndexOperationDescriptor<T>> bulkIndexSelector = null) =>
-			AddOperations(@objects, bulkIndexSelector, o => new BulkIndexOperationDescriptor<T>(o));
+		public BulkRequestDescriptor<TSource> CreateMany<T>(IEnumerable<T> documents, Action<BulkCreateOperationDescriptor<T>> bulkIndexSelector = null) =>
+			AddOperations(documents, bulkIndexSelector, o => new BulkCreateOperationDescriptor<T>(o));
+
+		public BulkRequestDescriptor<TSource> IndexMany<T>(IEnumerable<T> documents, Action<BulkIndexOperationDescriptor<T>> bulkIndexSelector = null) =>
+			AddOperations(documents, bulkIndexSelector, o => new BulkIndexOperationDescriptor<T>(o));
 
 		public BulkRequestDescriptor<TSource> DeleteMany<T>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor<T>> bulkIndexSelector = null) =>
 			AddOperations(ids, bulkIndexSelector, id => new BulkDeleteOperationDescriptor<T>(id));
