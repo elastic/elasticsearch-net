@@ -32,10 +32,6 @@ namespace Elastic.Clients.Elasticsearch
 		public long? IngestTook { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("items")]
-		public IReadOnlyCollection<Dictionary<Elastic.Clients.Elasticsearch.OperationType, Elastic.Clients.Elasticsearch.ResponseItem>> Items { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("took")]
 		public long Took { get; init; }
 	}

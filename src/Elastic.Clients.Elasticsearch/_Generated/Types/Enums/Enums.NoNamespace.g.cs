@@ -597,58 +597,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	[JsonConverter(typeof(OperationTypeConverter))]
-	public enum OperationType
-	{
-		Update,
-		Index,
-		Delete,
-		Create
-	}
-
-	public class OperationTypeConverter : JsonConverter<OperationType>
-	{
-		public override OperationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "update":
-					return OperationType.Update;
-				case "index":
-					return OperationType.Index;
-				case "delete":
-					return OperationType.Delete;
-				case "create":
-					return OperationType.Create;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, OperationType value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case OperationType.Update:
-					writer.WriteStringValue("update");
-					return;
-				case OperationType.Index:
-					writer.WriteStringValue("index");
-					return;
-				case OperationType.Delete:
-					writer.WriteStringValue("delete");
-					return;
-				case OperationType.Create:
-					writer.WriteStringValue("create");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(ResultConverter))]
 	public enum Result
 	{
