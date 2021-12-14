@@ -520,14 +520,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 	public class CatDatafeedsRequestParameters : RequestParameters<CatDatafeedsRequestParameters>
 	{
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
-		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
-		public bool? AllowNoDatafeeds
-		{
-			get => Q<bool? >("allow_no_datafeeds");
-			set => Q("allow_no_datafeeds", value);
-		}
-
-		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoMatch
 		{
 			get => Q<bool? >("allow_no_match");
@@ -577,14 +569,6 @@ namespace Elasticsearch.Net.Specification.CatApi
 	///<summary>Request options for Jobs <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html</para></summary>
 	public class CatJobsRequestParameters : RequestParameters<CatJobsRequestParameters>
 	{
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		[Obsolete("Scheduled to be removed in 8.0, deprecated")]
-		public bool? AllowNoJobs
-		{
-			get => Q<bool? >("allow_no_jobs");
-			set => Q("allow_no_jobs", value);
-		}
-
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoMatch
 		{

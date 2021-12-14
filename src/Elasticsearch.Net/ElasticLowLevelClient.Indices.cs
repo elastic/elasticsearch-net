@@ -968,22 +968,5 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		[MapsApi("indices.validate_query", "index, body")]
 		public Task<TResponse> ValidateQueryAsync<TResponse>(string index, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_validate/query"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_validate/query <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
-		///<param name = "index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
-		///<param name = "type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		///<param name = "body">The query definition specified with the Query DSL</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse ValidateQueryUsingType<TResponse>(string index, string type, PostData body, ValidateQueryRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_validate/query"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_validate/query <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</para></summary>
-		///<param name = "index">A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</param>
-		///<param name = "type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		///<param name = "body">The query definition specified with the Query DSL</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("indices.validate_query", "index, type, body")]
-		public Task<TResponse> ValidateQueryUsingTypeAsync<TResponse>(string index, string type, PostData body, ValidateQueryRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_validate/query"), ctx, body, RequestParams(requestParameters));
 	}
 }

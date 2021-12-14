@@ -276,15 +276,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_flush"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</para></summary>
 		///<param name = "jobId">The ID of the job to forecast for</param>
+		///<param name = "body">Query parameters can be specified in the body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ForecastJob<TResponse>(string jobId, ForecastJobRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_forecast"), null, RequestParams(requestParameters));
+		public TResponse ForecastJob<TResponse>(string jobId, PostData body, ForecastJobRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_forecast"), body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_forecast <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html</para></summary>
 		///<param name = "jobId">The ID of the job to forecast for</param>
+		///<param name = "body">Query parameters can be specified in the body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("ml.forecast", "job_id")]
-		public Task<TResponse> ForecastJobAsync<TResponse>(string jobId, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_forecast"), ctx, null, RequestParams(requestParameters));
+		[MapsApi("ml.forecast", "job_id, body")]
+		public Task<TResponse> ForecastJobAsync<TResponse>(string jobId, PostData body, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_forecast"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/results/buckets/{timestamp} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name = "jobId">ID of the job to get bucket results from</param>
 		///<param name = "timestamp">The timestamp of the desired single bucket result</param>
@@ -529,6 +531,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.get_jobs", "")]
 		public Task<TResponse> GetJobsAsync<TResponse>(GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/anomaly_detectors", ctx, null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html</para></summary>
+		///<param name = "jobId">The ID of the job. May be a wildcard, comma separated list or `_all`.</param>
+		///<param name = "snapshotId">The ID of the snapshot. May be a wildcard, comma separated list or `_all`.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse GetModelSnapshotUpgradeStats<TResponse>(string jobId, string snapshotId, GetModelSnapshotUpgradeStatsRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_upgrade/_stats"), null, RequestParams(requestParameters));
+		///<summary>GET on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html</para></summary>
+		///<param name = "jobId">The ID of the job. May be a wildcard, comma separated list or `_all`.</param>
+		///<param name = "snapshotId">The ID of the snapshot. May be a wildcard, comma separated list or `_all`.</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("ml.get_model_snapshot_upgrade_stats", "job_id, snapshot_id")]
+		public Task<TResponse> GetModelSnapshotUpgradeStatsAsync<TResponse>(string jobId, string snapshotId, GetModelSnapshotUpgradeStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/anomaly_detectors/{jobId:jobId}/model_snapshots/{snapshotId:snapshotId}/_upgrade/_stats"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 		///<param name = "jobId">The ID of the job to fetch</param>
 		///<param name = "snapshotId">The ID of the snapshot to fetch</param>
@@ -583,17 +598,6 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		[MapsApi("ml.get_records", "job_id, body")]
 		public Task<TResponse> GetAnomalyRecordsAsync<TResponse>(string jobId, PostData body, GetAnomalyRecordsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/results/records"), ctx, body, RequestParams(requestParameters));
-		///<summary>GET on /_ml/trained_models/{model_id}/deployment/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-trained-model-deployment-stats.html</para></summary>
-		///<param name = "modelId">The ID of the trained model deployment stats to fetch</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse GetTrainedModelDeploymentStats<TResponse>(string modelId, GetTrainedModelDeploymentStatsRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stats"), null, RequestParams(requestParameters));
-		///<summary>GET on /_ml/trained_models/{model_id}/deployment/_stats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-trained-model-deployment-stats.html</para></summary>
-		///<param name = "modelId">The ID of the trained model deployment stats to fetch</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("ml.get_trained_model_deployment_stats", "model_id")]
-		public Task<TResponse> GetTrainedModelDeploymentStatsAsync<TResponse>(string modelId, GetTrainedModelDeploymentStatsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stats"), ctx, null, RequestParams(requestParameters));
 		///<summary>GET on /_ml/trained_models/{model_id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html</para></summary>
 		///<param name = "modelId">The ID of the trained models to fetch</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -660,15 +664,17 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "_ml/info", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_open <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 		///<param name = "jobId">The ID of the job to open</param>
+		///<param name = "body">Query parameters can be specified in the body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse OpenJob<TResponse>(string jobId, OpenJobRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_open"), null, RequestParams(requestParameters));
+		public TResponse OpenJob<TResponse>(string jobId, PostData body, OpenJobRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_open"), body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/anomaly_detectors/{job_id}/_open <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</para></summary>
 		///<param name = "jobId">The ID of the job to open</param>
+		///<param name = "body">Query parameters can be specified in the body</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("ml.open_job", "job_id")]
-		public Task<TResponse> OpenJobAsync<TResponse>(string jobId, OpenJobRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_open"), ctx, null, RequestParams(requestParameters));
+		[MapsApi("ml.open_job", "job_id, body")]
+		public Task<TResponse> OpenJobAsync<TResponse>(string jobId, PostData body, OpenJobRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/anomaly_detectors/{jobId:jobId}/_open"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/calendars/{calendar_id}/events <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</para></summary>
 		///<param name = "calendarId">The ID of the calendar to modify</param>
 		///<param name = "body">A list of events</param>
@@ -981,17 +987,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/datafeeds/{datafeedId:datafeedId}/_stop"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html</para></summary>
 		///<param name = "modelId">The unique identifier of the trained model.</param>
+		///<param name = "body">The stop deployment parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		public TResponse StopTrainedModelDeployment<TResponse>(string modelId, StopTrainedModelDeploymentRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stop"), null, RequestParams(requestParameters));
+		public TResponse StopTrainedModelDeployment<TResponse>(string modelId, PostData body, StopTrainedModelDeploymentRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stop"), body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/trained_models/{model_id}/deployment/_stop <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html</para></summary>
 		///<param name = "modelId">The unique identifier of the trained model.</param>
+		///<param name = "body">The stop deployment parameters</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[MapsApi("ml.stop_trained_model_deployment", "model_id")]
-		public Task<TResponse> StopTrainedModelDeploymentAsync<TResponse>(string modelId, StopTrainedModelDeploymentRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stop"), ctx, null, RequestParams(requestParameters));
+		[MapsApi("ml.stop_trained_model_deployment", "model_id, body")]
+		public Task<TResponse> StopTrainedModelDeploymentAsync<TResponse>(string modelId, PostData body, StopTrainedModelDeploymentRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_ml/trained_models/{modelId:modelId}/deployment/_stop"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_ml/data_frame/analytics/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html</para></summary>
 		///<param name = "id">The ID of the data frame analytics to update</param>
 		///<param name = "body">The data frame analytics settings to update</param>

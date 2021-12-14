@@ -40,6 +40,13 @@ namespace Elasticsearch.Net.Specification.TransformApi
 			get => Q<bool? >("force");
 			set => Q("force", value);
 		}
+
+		///<summary>Controls the time to wait for the transform deletion</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for Get <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html</para></summary>
@@ -102,6 +109,12 @@ namespace Elasticsearch.Net.Specification.TransformApi
 	///<summary>Request options for Preview <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html</para></summary>
 	public class PreviewTransformRequestParameters : RequestParameters<PreviewTransformRequestParameters>
 	{
+		///<summary>Controls the time to wait for the preview</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for Put <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html</para></summary>
@@ -112,6 +125,13 @@ namespace Elasticsearch.Net.Specification.TransformApi
 		{
 			get => Q<bool? >("defer_validation");
 			set => Q("defer_validation", value);
+		}
+
+		///<summary>Controls the time to wait for the transform to start</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
 		}
 	}
 
@@ -174,6 +194,13 @@ namespace Elasticsearch.Net.Specification.TransformApi
 			get => Q<bool? >("defer_validation");
 			set => Q("defer_validation", value);
 		}
+
+		///<summary>Controls the time to wait for the update</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
+		}
 	}
 
 	///<summary>Request options for Upgrades <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html</para></summary>
@@ -184,6 +211,13 @@ namespace Elasticsearch.Net.Specification.TransformApi
 		{
 			get => Q<bool? >("dry_run");
 			set => Q("dry_run", value);
+		}
+
+		///<summary>Controls the time to wait for the upgrade</summary>
+		public TimeSpan Timeout
+		{
+			get => Q<TimeSpan>("timeout");
+			set => Q("timeout", value);
 		}
 	}
 }

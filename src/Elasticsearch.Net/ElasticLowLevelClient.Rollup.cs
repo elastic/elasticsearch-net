@@ -168,25 +168,6 @@ namespace Elasticsearch.Net.Specification.RollupApi
 		[MapsApi("rollup.rollup_search", "index, body")]
 		public Task<TResponse> SearchAsync<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_rollup_search"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_rollup_search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html</para></summary>
-		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
-		///<param name = "type">The doc type inside the index</param>
-		///<param name = "body">The search request body</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse SearchUsingType<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_rollup_search"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_rollup_search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html</para></summary>
-		///<param name = "index">The indices or index-pattern(s) (containing rollup or regular data) that should be searched</param>
-		///<param name = "type">The doc type inside the index</param>
-		///<param name = "body">The search request body</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("rollup.rollup_search", "index, type, body")]
-		public Task<TResponse> SearchUsingTypeAsync<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_rollup_search"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /_rollup/job/{id}/_start <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html</para></summary>
 		///<param name = "id">The ID of the job to start</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>

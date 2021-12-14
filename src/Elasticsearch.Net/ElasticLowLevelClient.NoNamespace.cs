@@ -314,21 +314,6 @@ namespace Elasticsearch.Net
 		[MapsApi("bulk", "index, body")]
 		public Task<TResponse> BulkAsync<TResponse>(string index, PostData body, BulkRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_bulk"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_bulk <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
-		///<param name = "index">Default index for items which don&#x27;t provide one</param>
-		///<param name = "type">Default document type for items which don&#x27;t provide one</param>
-		///<param name = "body">The operation definition and data (action-data pairs), separated by newlines</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse BulkUsingType<TResponse>(string index, string type, PostData body, BulkRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/_bulk"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/_bulk <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</para></summary>
-		///<param name = "index">Default index for items which don&#x27;t provide one</param>
-		///<param name = "type">Default document type for items which don&#x27;t provide one</param>
-		///<param name = "body">The operation definition and data (action-data pairs), separated by newlines</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[MapsApi("bulk", "index, type, body")]
-		public Task<TResponse> BulkUsingTypeAsync<TResponse>(string index, string type, PostData body, BulkRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/_bulk"), ctx, body, RequestParams(requestParameters));
 		///<summary>DELETE on /_search/scroll <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html</para></summary>
 		///<param name = "body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
@@ -405,25 +390,6 @@ namespace Elasticsearch.Net
 		[MapsApi("create", "index, id, body")]
 		public Task<TResponse> CreateAsync<TResponse>(string index, string id, PostData body, CreateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/_create/{id:id}"), ctx, body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/{type}/{id}/_create <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document</param>
-		///<param name = "id">Document ID</param>
-		///<param name = "body">The document</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse CreateUsingType<TResponse>(string index, string type, string id, PostData body, CreateRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(PUT, Url($"{index:index}/{type:type}/{id:id}/_create"), body, RequestParams(requestParameters));
-		///<summary>PUT on /{index}/{type}/{id}/_create <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document</param>
-		///<param name = "id">Document ID</param>
-		///<param name = "body">The document</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("create", "index, type, id, body")]
-		public Task<TResponse> CreateUsingTypeAsync<TResponse>(string index, string type, string id, PostData body, CreateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"{index:index}/{type:type}/{id:id}/_create"), ctx, body, RequestParams(requestParameters));
 		///<summary>DELETE on /{index}/_doc/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "id">The document ID</param>
@@ -437,23 +403,6 @@ namespace Elasticsearch.Net
 		[MapsApi("delete", "index, id")]
 		public Task<TResponse> DeleteAsync<TResponse>(string index, string id, DeleteRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"{index:index}/_doc/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>DELETE on /{index}/{type}/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document</param>
-		///<param name = "id">The document ID</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse DeleteUsingType<TResponse>(string index, string type, string id, DeleteRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(DELETE, Url($"{index:index}/{type:type}/{id:id}"), null, RequestParams(requestParameters));
-		///<summary>DELETE on /{index}/{type}/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document</param>
-		///<param name = "id">The document ID</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("delete", "index, type, id")]
-		public Task<TResponse> DeleteUsingTypeAsync<TResponse>(string index, string type, string id, DeleteRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(DELETE, Url($"{index:index}/{type:type}/{id:id}"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_delete_by_query <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">The search definition using the Query DSL</param>
@@ -515,23 +464,6 @@ namespace Elasticsearch.Net
 		[MapsApi("exists_source", "index, id")]
 		public Task<TResponse> SourceExistsAsync<TResponse>(string index, string id, SourceExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"{index:index}/_source/{id:id}"), ctx, null, RequestParams(requestParameters));
-		///<summary>HEAD on /{index}/{type}/{id}/_source <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document; deprecated and optional starting with 7.0</param>
-		///<param name = "id">The document ID</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse SourceExistsUsingType<TResponse>(string index, string type, string id, SourceExistsRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(HEAD, Url($"{index:index}/{type:type}/{id:id}/_source"), null, RequestParams(requestParameters));
-		///<summary>HEAD on /{index}/{type}/{id}/_source <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document; deprecated and optional starting with 7.0</param>
-		///<param name = "id">The document ID</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("exists_source", "index, type, id")]
-		public Task<TResponse> SourceExistsUsingTypeAsync<TResponse>(string index, string type, string id, SourceExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"{index:index}/{type:type}/{id:id}/_source"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_explain/{id} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</para></summary>
 		///<param name = "index">The name of the index</param>
 		///<param name = "id">The document ID</param>
@@ -664,14 +596,14 @@ namespace Elasticsearch.Net
 		public Task<TResponse> RootNodeInfoAsync<TResponse>(RootNodeInfoRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(GET, "", ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_knn_search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</para></summary>
-		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "index">A comma-separated list of index names to search; use `_all` to perform the operation on all indices</param>
 		///<param name = "body">The search definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
 		public TResponse KnnSearch<TResponse>(string index, PostData body, KnnSearchRequestParameters requestParameters = null)
 			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/_knn_search"), body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_knn_search <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</para></summary>
-		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name = "index">A comma-separated list of index names to search; use `_all` to perform the operation on all indices</param>
 		///<param name = "body">The search definition</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		///<remarks>Note: Experimental within the Elasticsearch server, this functionality is Experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. This functionality is subject to potential breaking changes within a minor version, meaning that your referencing code may break when this library is upgraded.</remarks>
@@ -1078,25 +1010,6 @@ namespace Elasticsearch.Net
 		[MapsApi("update", "index, id, body")]
 		public Task<TResponse> UpdateAsync<TResponse>(string index, string id, PostData body, UpdateRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/_update/{id:id}"), ctx, body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document</param>
-		///<param name = "id">Document ID</param>
-		///<param name = "body">The request definition requires either `script` or partial `doc`</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		public TResponse UpdateUsingType<TResponse>(string index, string type, string id, PostData body, UpdateRequestParameters requestParameters = null)
-			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"{index:index}/{type:type}/{id:id}/_update"), body, RequestParams(requestParameters));
-		///<summary>POST on /{index}/{type}/{id}/_update <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</para></summary>
-		///<param name = "index">The name of the index</param>
-		///<param name = "type">The type of the document</param>
-		///<param name = "id">Document ID</param>
-		///<param name = "body">The request definition requires either `script` or partial `doc`</param>
-		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		[Obsolete("Deprecated in version 7.0.0: Specifying types in urls has been deprecated")]
-		[MapsApi("update", "index, type, id, body")]
-		public Task<TResponse> UpdateUsingTypeAsync<TResponse>(string index, string type, string id, PostData body, UpdateRequestParameters requestParameters = null, CancellationToken ctx = default)
-			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"{index:index}/{type:type}/{id:id}/_update"), ctx, body, RequestParams(requestParameters));
 		///<summary>POST on /{index}/_update_by_query <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</para></summary>
 		///<param name = "index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name = "body">The search definition using the Query DSL</param>
