@@ -793,6 +793,12 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
+		public BulkRequestDescriptor<TSource> Update<TPartial>(BulkUpdateOperation<TSource, TPartial> update)
+		{
+			_operations.Add(update);
+			return this;
+		}
+
 		public BulkRequestDescriptor<TSource> Delete(Id id)
 		{
 			var descriptor = new BulkDeleteOperationDescriptor<TSource>();

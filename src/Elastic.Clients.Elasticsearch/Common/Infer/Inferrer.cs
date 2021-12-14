@@ -60,11 +60,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
-		public string Id<T>(T instance) where T : class => IdResolver.Resolve(instance);
+		public string Id<T>(T instance) => IdResolver.Resolve(instance);
 
 		public string Id(Type type, object instance) => IdResolver.Resolve(type, instance);
 
-		public string RelationName<T>() where T : class => RelationNameResolver.Resolve<T>();
+		public string RelationName<T>() => RelationNameResolver.Resolve<T>();
 
 		public string RelationName(RelationName type) => RelationNameResolver.Resolve(type);
 
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 			_connectionSettings = connectionSettings;
 		}
 
-		public string Resolve<T>() where T : class => Resolve(typeof(T));
+		public string Resolve<T>() => Resolve(typeof(T));
 
 		public string Resolve(RelationName t) => t?.Name ?? ResolveType(t?.Type);
 
