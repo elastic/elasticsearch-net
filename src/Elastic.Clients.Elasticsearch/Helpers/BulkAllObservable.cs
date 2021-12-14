@@ -25,10 +25,10 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 
 	private readonly CancellationToken _compositeCancelToken;
 	private readonly CancellationTokenSource _compositeCancelTokenSource;
-	private readonly Action<ResponseItem, T> _droppedDocumentCallBack;
+	private readonly Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
 	private readonly int _maxDegreeOfParallelism;
 	private readonly BulkAllRequest<T> _partitionedBulkRequest;
-	private readonly Func<ResponseItem, T, bool> _retryPredicate;
+	private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
 
 	private readonly Action _incrementFailed = () => { };
 	private readonly Action _incrementRetries = () => { };
@@ -160,7 +160,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			return await HandleBulkRequest(buffer, page, backOffRetries, response).ConfigureAwait(false);
 
 		var retryableDocuments = new List<T>();
-		var droppedDocuments = new List<Tuple<ResponseItem, T>>();
+		var droppedDocuments = new List<Tuple<BulkResponseItemBase, T>>();
 
 		foreach (var documentWithResponse in response.Items.Zip(buffer, Tuple.Create))
 		{
@@ -186,7 +186,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		return new BulkAllResponse { Retries = backOffRetries, Page = page, /*Items = response.Items*/ };
 	}
 
-	private void HandleDroppedDocuments(List<Tuple<ResponseItem, T>> droppedDocuments, BulkResponse response)
+	private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> droppedDocuments, BulkResponse response)
 	{
 		if (droppedDocuments.Count <= 0)
 			return;
@@ -254,9 +254,9 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		return Throw(message, response.ApiCall);
 	}
 
-	private static bool RetryBulkActionPredicate(ResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
+	private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;
 
-	private static void DroppedDocumentCallbackDefault(ResponseItem bulkResponseItem, T d) { }
+	private static void DroppedDocumentCallbackDefault(BulkResponseItemBase bulkResponseItem, T d) { }
 
 	protected virtual void Dispose(bool disposing)
 	{

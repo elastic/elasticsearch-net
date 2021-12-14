@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
-		public string? Routing { get; init; }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_score")]

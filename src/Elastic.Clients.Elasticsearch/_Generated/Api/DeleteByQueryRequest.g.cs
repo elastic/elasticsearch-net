@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
@@ -164,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
@@ -246,7 +246,7 @@ namespace Elastic.Clients.Elasticsearch
 		public DeleteByQueryRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
 		public DeleteByQueryRequestDescriptor<T> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
 		public DeleteByQueryRequestDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-		public DeleteByQueryRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public DeleteByQueryRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public DeleteByQueryRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
 		public DeleteByQueryRequestDescriptor<T> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public DeleteByQueryRequestDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);

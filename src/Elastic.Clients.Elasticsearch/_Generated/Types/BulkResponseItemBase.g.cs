@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ResponseItem
+	public abstract partial class BulkResponseItemBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]
@@ -33,9 +33,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public string Index { get; init; }
-
-		[JsonIgnore]
-		public abstract string Operation { get; }
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
@@ -60,6 +57,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_type")]
+		public string? Type { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_version")]

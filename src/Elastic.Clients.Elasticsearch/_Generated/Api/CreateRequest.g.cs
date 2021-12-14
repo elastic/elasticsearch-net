@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Timeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("timeout"); set => Q("timeout", value); }
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public CreateRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 		public CreateRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-		public CreateRequestDescriptor<TDocument> Routing(string? routing) => Qs("routing", routing);
+		public CreateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public CreateRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public CreateRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		public CreateRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);

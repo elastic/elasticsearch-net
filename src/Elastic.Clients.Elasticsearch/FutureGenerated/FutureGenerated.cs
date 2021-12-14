@@ -763,8 +763,10 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public abstract partial class ResponseItem
+	public abstract partial class BulkResponseItemBase
 	{
+		public abstract string Operation { get; }
+
 		public bool IsValid
 		{
 			get
@@ -792,7 +794,7 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class BulkResponse
 	{
 		[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
-		public IReadOnlyList<ResponseItem> Items { get; init; }
+		public IReadOnlyList<BulkResponseItemBase> Items { get; init; }
 	}
 
 	public sealed partial class BulkRequestDescriptor<TSource> : IStreamSerializable

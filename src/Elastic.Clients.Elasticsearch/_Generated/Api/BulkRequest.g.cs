@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
@@ -75,7 +75,7 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
@@ -106,15 +106,13 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		
-
 		internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TSource>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
 		public BulkRequestDescriptor<TSource> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 		public BulkRequestDescriptor<TSource> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-		public BulkRequestDescriptor<TSource> Routing(Routing? routing) => Qs("routing", routing);
+		public BulkRequestDescriptor<TSource> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public BulkRequestDescriptor<TSource> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
 		public BulkRequestDescriptor<TSource> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public BulkRequestDescriptor<TSource> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
