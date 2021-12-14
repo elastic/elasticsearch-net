@@ -435,7 +435,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public BulkCreateOperationDescriptor<TSource> DynamicTemplates(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a._dynamicTemplates = v?.Invoke(new FluentDictionary<string, string>()));
 
-		protected override string Operation => "index";
+		protected override string Operation => "create";
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
