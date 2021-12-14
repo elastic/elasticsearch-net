@@ -264,6 +264,133 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkOperationBase
+	{
+		private static byte _newline => (byte)'\n';
+
+		[JsonPropertyName("retry_on_conflict")]
+		public bool? RetryOnConflict { get; set; }
+
+		[JsonPropertyName("require_alias")]
+		public bool? RequireAlias { get; set; }
+
+		[JsonIgnore]
+		public TDocument IdFrom { get; set; }
+
+		[JsonIgnore]
+		public TPartialDocument PartialDocument { get; set; }
+
+		protected override Type ClrType => typeof(TDocument);
+
+		protected override string Operation => "update";
+
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			if (Id is null && IdFrom is not null)
+				Id = settings.Inferrer.Id<TDocument>(IdFrom);
+
+			if (Index is null)
+				Index = settings.Inferrer.IndexName<TDocument>();
+
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			stream.WriteByte(_newline);
+
+			var body = new BulkUpdateBody<TDocument, TPartialDocument>()
+			{
+				Upsert = IdFrom,
+				PartialUpdate = PartialDocument
+			};
+
+			settings.SourceSerializer.Serialize(body, stream, formatting);
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			if (Id is null && IdFrom is not null)
+				Id = settings.Inferrer.Id<TDocument>(IdFrom);
+
+			if (Index is null)
+				Index = settings.Inferrer.IndexName<TDocument>();
+
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkUpdateOperation<TDocument, TPartialDocument>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+
+			stream.WriteByte(_newline);
+
+			var body = new BulkUpdateBody<TDocument, TPartialDocument>()
+			{
+				Upsert = IdFrom,
+				PartialUpdate = PartialDocument
+			};
+
+			await settings.SourceSerializer.SerializeAsync(body, stream, formatting).ConfigureAwait(false);
+		}
+	}
+
+	internal class BulkUpdateBody<TDocument, TPartialUpdate>
+	{
+		[JsonPropertyName("doc_as_upsert")]
+		public bool? DocAsUpsert { get; set; }
+
+		[JsonPropertyName("doc")]
+		//[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
+		public TPartialUpdate PartialUpdate { get; set; }
+
+		[JsonPropertyName("script")]
+		public ScriptBase Script { get; set; }
+
+		[JsonPropertyName("scripted_upsert")]
+		public bool? ScriptedUpsert { get; set; }
+
+		[JsonPropertyName("upsert")]
+		//[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
+		public TDocument Upsert { get; set; }
+
+		[JsonPropertyName("if_seq_no")]
+		public long? IfSequenceNumber { get; set; }
+
+		[JsonPropertyName("if_primary_term")]
+		public long? IfPrimaryTerm { get; set; }
+
+		//[DataMember(Name = "_source")]
+		//internal Union<bool, ISourceFilter> Source { get; set; }
+	}
+	
+
 	public sealed class BulkDeleteOperation<T> : BulkOperationBase
 	{
 		protected override Type ClrType => typeof(T);

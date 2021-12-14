@@ -112,7 +112,13 @@ namespace Playground
 
 			var request = await client.BulkAsync<Person>(b => b
 				.Create(new Person { FirstName = "Rhiannon" })
+				.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
 				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
+				.Update(new BulkUpdateOperation<Person, Person>()
+				{
+					Id = 200,
+					PartialDocument = new Person { LastName = "Gordon" }
+				})
 				.Delete(100));
 
 			client.Search<Person>(s => s
