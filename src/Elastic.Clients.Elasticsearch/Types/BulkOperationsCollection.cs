@@ -5,6 +5,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -36,6 +37,63 @@ namespace Elastic.Clients.Elasticsearch
 	{
 	}
 
+	internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<ResponseItem>>
+	{
+		public override IReadOnlyList<ResponseItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType != JsonTokenType.StartArray)
+				throw new JsonException("Unexpected token");
+
+			var responseItems = new List<ResponseItem>();
+
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+			{
+				if (reader.TokenType != JsonTokenType.StartObject)
+					throw new JsonException("Unexpected token");
+
+				reader.Read();
+
+				if (reader.TokenType != JsonTokenType.PropertyName)
+					throw new JsonException("Unexpected token");
+
+				ResponseItem responseItem;
+
+				if (reader.ValueTextEquals("index"))
+				{
+					responseItem = JsonSerializer.Deserialize<IndexResponseItem>(ref reader, options);
+				}
+				else if (reader.ValueTextEquals("delete"))
+				{
+					responseItem = JsonSerializer.Deserialize<DeleteResponseItem>(ref reader, options);
+				}
+				else if (reader.ValueTextEquals("create"))
+				{
+					responseItem = JsonSerializer.Deserialize<CreateResponseItem>(ref reader, options);
+				}
+				else if (reader.ValueTextEquals("update"))
+				{
+					responseItem = JsonSerializer.Deserialize<UpdateResponseItem>(ref reader, options);
+				}
+				else
+				{
+					throw new JsonException("Unexpected operation type");
+				}
+
+				responseItems.Add(responseItem);
+
+				reader.Read();
+
+				if (reader.TokenType != JsonTokenType.EndObject)
+					throw new JsonException("Unexpected token");
+			}
+
+			return responseItems;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IReadOnlyList<ResponseItem> value, JsonSerializerOptions options) => throw new NotImplementedException();
+	}
+
+
 	public sealed class IndexResponseItem : ResponseItem
 	{
 		public string Operation { get; } = "index";
@@ -44,6 +102,16 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class DeleteResponseItem : ResponseItem
 	{
 		public string Operation { get; } = "delete";
+	}
+
+	public sealed class CreateResponseItem : ResponseItem
+	{
+		public string Operation { get; } = "create";
+	}
+
+	public sealed class UpdateResponseItem : ResponseItem
+	{
+		public string Operation { get; } = "update";
 	}
 
 	public sealed class BulkIndexOperation<T> : BulkOperationBase
@@ -196,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkIndexOperationDescriptor<TSource> RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
 
 		protected override string Operation => "index";
-		
+
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
