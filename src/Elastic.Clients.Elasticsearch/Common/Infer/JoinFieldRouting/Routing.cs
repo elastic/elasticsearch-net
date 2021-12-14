@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch.Core
+namespace Elastic.Clients.Elasticsearch
 {
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
@@ -92,16 +92,16 @@ namespace Elastic.Clients.Elasticsearch.Core
 		/// <summary> Use the inferred routing from <paramref name="document" /> </summary>
 		public static Routing From<T>(T document) where T : class => new(document);
 
-		private string GetString(IElasticsearchClientSettings ElasticsearchClientSettings)
+		private string GetString(IElasticsearchClientSettings settings)
 		{
 			string value = null;
-			//if (DocumentGetter != null)
-			//{
-			//	var doc = DocumentGetter();
-			//	value = Elastic.Clients.ElasticsearchSettings.Inferrer.Routing(doc);
-			//}
-			//else if (Document != null)
-			//	value = Elastic.Clients.ElasticsearchSettings.Inferrer.Routing(Document);
+			if (DocumentGetter != null)
+			{
+				var doc = DocumentGetter();
+				value = settings.Inferrer.Routing(doc);
+			}
+			else if (Document != null)
+				value = settings.Inferrer.Routing(Document);
 
 			return value ?? StringOrLongValue;
 		}

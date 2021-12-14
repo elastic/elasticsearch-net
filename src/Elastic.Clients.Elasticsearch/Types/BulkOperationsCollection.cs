@@ -29,8 +29,21 @@ namespace Elastic.Clients.Elasticsearch
 	//	public TDocument Document { get; set; }
 	//}
 
+	/// <summary>
+	/// Marker interface for types which can be serialised as an operation of a bulk API request.
+	/// </summary>
 	public interface IBulkOperation
 	{
+	}
+
+	public sealed class IndexResponseItem : ResponseItem
+	{
+		public string Operation { get; } = "index";
+	}
+
+	public sealed class DeleteResponseItem : ResponseItem
+	{
+		public string Operation { get; } = "delete";
 	}
 
 	public sealed class BulkIndexOperation<T> : BulkOperationBase
@@ -38,6 +51,15 @@ namespace Elastic.Clients.Elasticsearch
 		private static byte _newline => (byte)'\n';
 
 		public BulkIndexOperation(T document) => Document = document;
+
+		[JsonPropertyName("pipeline")]
+		public string? Pipeline { get; set; }
+
+		[JsonPropertyName("require_alias")]
+		public bool? RequireAlias { get; set; }
+
+		[JsonPropertyName("dynamic_templates")]
+		public Dictionary<string, string>? DynamicTemplates { get; set; }
 
 		[JsonIgnore]
 		public T Document { get; set; }
@@ -99,13 +121,79 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public sealed class BulkDeleteOperation<T> : BulkOperationBase
+	{
+		protected override Type ClrType => typeof(T);
+
+		protected override string Operation => "delete";
+
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkDeleteOperation<T>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkDeleteOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			//stream.WriteByte(_newline);
+
+			//settings.SourceSerializer.Serialize(Document, stream);
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkDeleteOperation<T>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkDeleteOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+
+			//stream.WriteByte(_newline);
+
+			//await settings.SourceSerializer.SerializeAsync(Document, stream, formatting).ConfigureAwait(false);
+		}
+	}
+
 	public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkIndexOperationDescriptor<TSource>, TSource>
 	{
+		private string _pipeline;
+		private bool? _requireAlias;
+
 		private static byte _newline => (byte)'\n';
 
 		private readonly TSource _document;
 
 		public BulkIndexOperationDescriptor(TSource source) => _document = source;
+
+		public BulkIndexOperationDescriptor<TSource> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
+
+		public BulkIndexOperationDescriptor<TSource> RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
 
 		protected override string Operation => "index";
 		
@@ -163,26 +251,128 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			// TODO
+			if (!string.IsNullOrEmpty(_pipeline))
+			{
+				writer.WritePropertyName("pipeline");
+				JsonSerializer.Serialize(writer, _pipeline, options);
+			}
+
+			if (_requireAlias.HasValue)
+			{
+				writer.WritePropertyName("require_alias");
+				JsonSerializer.Serialize(writer, _requireAlias.Value, options);
+			}
 		}
 	}
 
-	public abstract class BulkOperationDescriptorBase<T, TSource> : DescriptorBase<T>, IBulkOperation, IStreamSerializable where T : BulkOperationDescriptorBase<T, TSource>
+	public sealed class BulkDeleteOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkDeleteOperationDescriptor<TSource>, TSource>
 	{
+		public BulkDeleteOperationDescriptor() { }
+
+		public BulkDeleteOperationDescriptor(Id id) => Id(id);
+
+		protected override string Operation => "delete";
+
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+		}
+
+		protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public abstract class BulkOperationDescriptorBase<TDescriptor, TSource> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor, TSource>
+	{
+		private Id _id;
 		private long? _version;
 		private IndexName _index;
+		private Routing _routing;
+		private VersionType? _versionType;
+		private long? _ifSequenceNo;
+		private long? _ifPrimaryTerm;
 
 		protected abstract string Operation { get; }
 
-		public BulkOperationDescriptorBase<T, TSource> Index(IndexName index) => Assign(index, (a, v) => a._index = v);
+		public TDescriptor Id(Id id) => Assign(id, (a, v) => a._id = v);
 
-		public BulkOperationDescriptorBase<T, TSource> Version(long version) => Assign(version, (a, v) => a._version = v);
+		public TDescriptor IfSequenceNumber(long? ifSequenceNumber) => Assign(ifSequenceNumber, (a, v) => a._ifSequenceNo = v);
+
+		public TDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Assign(ifPrimaryTerm, (a, v) => a._ifPrimaryTerm = v);
+
+		public TDescriptor Index(IndexName index) => Assign(index, (a, v) => a._index = v);
+
+		public TDescriptor Index<T>() => Assign(typeof(T), (a, v) => a._index = v);
+
+		public TDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a._routing = v);
+
+		public TDescriptor Version(long version) => Assign(version, (a, v) => a._version = v);
+
+		public TDescriptor VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a._versionType = v);
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 
 			SerializeInternal(writer, options, settings);
+
+			if (_id is not null)
+			{
+				writer.WritePropertyName("_id");
+				JsonSerializer.Serialize(writer, _id, options);
+			}
+
+			if (_ifPrimaryTerm.HasValue)
+			{
+				writer.WritePropertyName("if_primary_term");
+				JsonSerializer.Serialize(writer, _ifPrimaryTerm.Value, options);
+			}
+
+			if (_ifSequenceNo.HasValue)
+			{
+				writer.WritePropertyName("if_seq_no");
+				JsonSerializer.Serialize(writer, _ifSequenceNo.Value, options);
+			}
 
 			if (_index is not null)
 			{
@@ -196,10 +386,22 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, index, options);
 			}
 
+			if (_routing is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, _routing, options);
+			}
+
 			if (_version.HasValue)
 			{
 				writer.WritePropertyName("version");
 				JsonSerializer.Serialize(writer, _version.Value, options);
+			}
+
+			if (_versionType.HasValue)
+			{
+				writer.WritePropertyName("version_type");
+				JsonSerializer.Serialize(writer, _versionType.Value, options);
 			}
 
 			writer.WriteEndObject();
@@ -221,13 +423,17 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("_id")]
 		public Id Id { get; set; }
 
+		[JsonPropertyName("if_primary_term")]
+		public long? IfPrimaryTerm { get; set; }
+
+		[JsonPropertyName("if_seq_no")]
+		public long? IfSequenceNumber { get; set; }
+
 		[JsonPropertyName("_index")]
 		public IndexName Index { get; set; }
 
-		[JsonPropertyName("retry_on_conflict")]
-		public int? RetriesOnConflict { get; set; }
-
-		//public Routing Routing { get; set; }
+		[JsonPropertyName("routing")]
+		public Routing Routing { get; set; }
 
 		[JsonPropertyName("version")]
 		public long? Version { get; set; }
