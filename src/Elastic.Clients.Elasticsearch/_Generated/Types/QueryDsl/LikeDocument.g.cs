@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public string? Routing { get; init; }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]

@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public string? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stop_words")]
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; private set; }
 
-		internal string? RoutingValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; private set; }
 
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public MoreLikeThisQueryDescriptor<T> MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
 		public MoreLikeThisQueryDescriptor<T> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
 		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
-		public MoreLikeThisQueryDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public MoreLikeThisQueryDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public MoreLikeThisQueryDescriptor<T> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
 		public MoreLikeThisQueryDescriptor<T> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
 		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);

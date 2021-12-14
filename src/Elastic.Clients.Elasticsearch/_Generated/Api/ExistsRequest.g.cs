@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.SourceConfigParam?>("_source"); set => Q("_source", value); }
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch
 		public ExistsRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
 		public ExistsRequestDescriptor<T> Realtime(bool? realtime) => Qs("realtime", realtime);
 		public ExistsRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
-		public ExistsRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public ExistsRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public ExistsRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
 		public ExistsRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public ExistsRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);

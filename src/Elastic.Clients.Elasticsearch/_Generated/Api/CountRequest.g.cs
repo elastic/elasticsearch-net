@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch
 		public CountRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
 		public CountRequestDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
 		public CountRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
-		public CountRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public CountRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public CountRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		public CountRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }

@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
@@ -180,7 +180,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
 		[JsonIgnore]
-		public string? Routing { get => Q<string?>("routing"); set => Q("routing", value); }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 		[JsonIgnore]
 		public Elastic.Clients.Elasticsearch.Time? Scroll { get => Q<Elastic.Clients.Elasticsearch.Time?>("scroll"); set => Q("scroll", value); }
@@ -374,7 +374,7 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
 		public SearchRequestDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 		public SearchRequestDescriptor<T> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
-		public SearchRequestDescriptor<T> Routing(string? routing) => Qs("routing", routing);
+		public SearchRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public SearchRequestDescriptor<T> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public SearchRequestDescriptor<T> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
 		public SearchRequestDescriptor<T> SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
