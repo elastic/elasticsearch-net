@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		[JsonInclude]
 		[JsonPropertyName("index_routing")]
-		public string? IndexRouting { get; set; }
+		public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("is_hidden")]
@@ -62,11 +62,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public string? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search_routing")]
-		public string? SearchRouting { get; set; }
+		public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 	}
 
 	public sealed partial class AddActionDescriptor<T> : DescriptorBase<AddActionDescriptor<T>>
@@ -86,15 +86,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		internal Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; private set; }
 
-		internal string? IndexRoutingValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; private set; }
 
 		internal bool? IsHiddenValue { get; private set; }
 
 		internal bool? IsWriteIndexValue { get; private set; }
 
-		internal string? RoutingValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; private set; }
 
-		internal string? SearchRoutingValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; private set; }
 
 		internal QueryDsl.QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
 
@@ -125,11 +125,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		public AddActionDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public AddActionDescriptor<T> Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
-		public AddActionDescriptor<T> IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
+		public AddActionDescriptor<T> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
 		public AddActionDescriptor<T> IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHiddenValue = v);
 		public AddActionDescriptor<T> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
-		public AddActionDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public AddActionDescriptor<T> SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
+		public AddActionDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public AddActionDescriptor<T> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

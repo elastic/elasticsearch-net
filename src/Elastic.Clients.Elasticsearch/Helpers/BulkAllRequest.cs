@@ -34,9 +34,9 @@ public sealed class BulkAllRequest<T>
 
 	public int? Size { get; set; }
 
-	public Action<ResponseItem, T> DroppedDocumentCallback { get; set; }
+	public Action<BulkResponseItemBase, T> DroppedDocumentCallback { get; set; }
 
-	public Func<ResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+	public Func<BulkResponseItemBase, T, bool> RetryDocumentPredicate { get; set; }
 
 	public Action<BulkResponse>? BulkResponseCallback { get; set; }
 
@@ -53,6 +53,4 @@ public sealed class BulkAllRequest<T>
 	public bool RefreshOnCompleted { get; set; }
 
 	public Indices RefreshIndices { get; set; }
-
-	//public Action<BulkResponseItemBase, T> DroppedDocumentCallback { get; set; }
 }

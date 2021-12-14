@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public string? Routing { get; set; }
+		public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? PreferenceValue { get; private set; }
 
-		internal string? RoutingValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; private set; }
 
 		internal long? VersionValue { get; private set; }
 
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public PercolateQueryDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
 		public PercolateQueryDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		public PercolateQueryDescriptor<T> Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
-		public PercolateQueryDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public PercolateQueryDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public PercolateQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 		public PercolateQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public PercolateQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
