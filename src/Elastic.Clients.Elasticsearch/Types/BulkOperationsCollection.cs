@@ -189,6 +189,81 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public sealed class BulkCreateOperation<T> : BulkOperationBase
+	{
+		private static byte _newline => (byte)'\n';
+
+		public BulkCreateOperation(T document) => Document = document;
+
+		[JsonPropertyName("pipeline")]
+		public string? Pipeline { get; set; }
+
+		[JsonPropertyName("require_alias")]
+		public bool? RequireAlias { get; set; }
+
+		[JsonPropertyName("dynamic_templates")]
+		public Dictionary<string, string>? DynamicTemplates { get; set; }
+
+		[JsonIgnore]
+		public T Document { get; set; }
+
+		protected override Type ClrType => typeof(T);
+
+		protected override string Operation => "create";
+
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			stream.WriteByte(_newline);
+
+			settings.SourceSerializer.Serialize(Document, stream);
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+
+			stream.WriteByte(_newline);
+
+			await settings.SourceSerializer.SerializeAsync(Document, stream, formatting).ConfigureAwait(false);
+		}
+	}
+
 	public sealed class BulkDeleteOperation<T> : BulkOperationBase
 	{
 		protected override Type ClrType => typeof(T);
@@ -252,6 +327,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private string _pipeline;
 		private bool? _requireAlias;
+		private Dictionary<string, string> _dynamicTemplates;
 
 		private static byte _newline => (byte)'\n';
 
@@ -262,6 +338,8 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkIndexOperationDescriptor<TSource> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
 
 		public BulkIndexOperationDescriptor<TSource> RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
+
+		public BulkIndexOperationDescriptor<TSource> DynamicTemplates(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a._dynamicTemplates = v?.Invoke(new FluentDictionary<string, string>()));
 
 		protected override string Operation => "index";
 
@@ -329,6 +407,106 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("require_alias");
 				JsonSerializer.Serialize(writer, _requireAlias.Value, options);
+			}
+
+			if (_dynamicTemplates is not null)
+			{
+				writer.WritePropertyName("dynamic_templates");
+				JsonSerializer.Serialize(writer, _dynamicTemplates, options);
+			}
+		}
+	}
+
+	public sealed class BulkCreateOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkCreateOperationDescriptor<TSource>, TSource>
+	{
+		private string _pipeline;
+		private bool? _requireAlias;
+		private Dictionary<string, string> _dynamicTemplates;
+
+		private static byte _newline => (byte)'\n';
+
+		private readonly TSource _document;
+
+		public BulkCreateOperationDescriptor(TSource source) => _document = source;
+
+		public BulkCreateOperationDescriptor<TSource> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
+
+		public BulkCreateOperationDescriptor<TSource> RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
+
+		public BulkCreateOperationDescriptor<TSource> DynamicTemplates(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a._dynamicTemplates = v?.Invoke(new FluentDictionary<string, string>()));
+
+		protected override string Operation => "index";
+
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			stream.WriteByte(_newline);
+
+			settings.SourceSerializer.Serialize(_document, stream);
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
+		{
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+			}
+			else
+			{
+				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+			}
+
+			internalWriter.WriteEndObject();
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+
+			stream.WriteByte(_newline);
+
+			await settings.SourceSerializer.SerializeAsync(_document, stream).ConfigureAwait(false);
+		}
+
+		protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!string.IsNullOrEmpty(_pipeline))
+			{
+				writer.WritePropertyName("pipeline");
+				JsonSerializer.Serialize(writer, _pipeline, options);
+			}
+
+			if (_requireAlias.HasValue)
+			{
+				writer.WritePropertyName("require_alias");
+				JsonSerializer.Serialize(writer, _requireAlias.Value, options);
+			}
+
+			if (_dynamicTemplates is not null)
+			{
+				writer.WritePropertyName("dynamic_templates");
+				JsonSerializer.Serialize(writer, _dynamicTemplates, options);
 			}
 		}
 	}
