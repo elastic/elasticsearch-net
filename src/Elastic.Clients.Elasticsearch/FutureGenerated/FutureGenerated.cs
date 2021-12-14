@@ -759,6 +759,12 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class BulkResponse
+	{
+		[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
+		public IReadOnlyList<ResponseItem> Items { get; init; }
+	}
+
 	public sealed partial class BulkRequestDescriptor<TSource> : IStreamSerializable
 	{
 		private readonly BulkOperationsCollection _operations = new();
