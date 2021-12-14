@@ -242,7 +242,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 		///<summary>The max memory able to be used by the forecast. Default is 20mb.</summary>
 		public string MaxModelMemory
 		{
@@ -507,6 +507,19 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 		}
 	}
 
+	///<summary>Request options for GetModelSnapshotUpgradeStats <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html</para></summary>
+	public class GetModelSnapshotUpgradeStatsRequestParameters : RequestParameters<GetModelSnapshotUpgradeStatsRequestParameters>
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		public override bool SupportsBody => false;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs or no snapshots. (This includes the `_all` string.)</summary>
+		public bool? AllowNoMatch
+		{
+			get => Q<bool? >("allow_no_match");
+			set => Q("allow_no_match", value);
+		}
+	}
+
 	///<summary>Request options for GetModelSnapshots <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</para></summary>
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters>
 	{
@@ -644,7 +657,7 @@ namespace Elasticsearch.Net.Specification.MachineLearningApi
 	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters>
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		public override bool SupportsBody => false;
+		public override bool SupportsBody => true;
 	}
 
 	///<summary>Request options for PostCalendarEvents <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html</para></summary>
