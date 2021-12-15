@@ -37,6 +37,8 @@ internal abstract class UnionFactory<T>
 
 
 
+// Maybe rename as SerializableDescriptorBase and move other items to DescriptorBase
+
 public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializable
 	where TDescriptor : DescriptorBase<TDescriptor>
 {

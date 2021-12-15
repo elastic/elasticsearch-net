@@ -99,11 +99,11 @@ namespace Playground
 
 
 
-			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
-				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
+			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("http://localhost:9200"))
+				//.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
 				.ServerCertificateValidationCallback((a, b, c, d) => true)
 				.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
-			//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
+				//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
 
 			var people = new PersonV2[]
 			{
@@ -120,7 +120,9 @@ namespace Playground
 				new PersonV2 { FirstName = "Tomas" }
 			};
 
-			var bulkAll = new BulkAllObservable<PersonV2>(client, new BulkAllRequest<PersonV2>(people) { Index = "people-v2-test" });
+			//var bulkAll = new BulkAllObservable<PersonV2>(client, new BulkAllRequest<PersonV2>(people) { Index = "people-v2-test" });
+			
+			var bulkAll = client.BulkAll(people, b => b.Index("people-v2-test"));
 			var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 
 			var request = await client.BulkAsync<Person>(b => b
@@ -128,6 +130,7 @@ namespace Playground
 				.Create(new Person { FirstName = "Rhiannon" })
 				.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
 				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
+				.Update(new BulkUpdateOperation<Person, Person>())
 				.Update(BulkUpdateOperation.WithPartial(200, new Person { LastName = "Gordon" }))
 				.Update(BulkUpdateOperation.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
 				.Delete(100));
