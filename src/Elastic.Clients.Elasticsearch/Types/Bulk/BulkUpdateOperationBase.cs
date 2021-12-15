@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -25,8 +25,6 @@ namespace Elastic.Clients.Elasticsearch
 		protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
 
 		protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
-
-		internal abstract BulkUpdateBodyBase GetBody();
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{

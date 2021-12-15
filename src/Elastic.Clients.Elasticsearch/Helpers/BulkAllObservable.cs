@@ -27,7 +27,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 	private readonly CancellationTokenSource _compositeCancelTokenSource;
 	private readonly Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
 	private readonly int _maxDegreeOfParallelism;
-	private readonly BulkAllRequest<T> _partitionedBulkRequest;
+	private readonly IBulkAllRequest<T> _partitionedBulkRequest;
 	private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
 
 	private readonly Action _incrementFailed = () => { };
@@ -35,7 +35,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 
 	private readonly Action<BulkResponse> _bulkResponseCallback;
 
-	public BulkAllObservable(IElasticClient client, BulkAllRequest<T> partitionedBulkRequest, CancellationToken cancellationToken = default)
+	public BulkAllObservable(IElasticClient client, IBulkAllRequest<T> partitionedBulkRequest, CancellationToken cancellationToken = default)
 	{
 		_client = client;
 		_partitionedBulkRequest = partitionedBulkRequest;
@@ -48,7 +48,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		_maxDegreeOfParallelism = _partitionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 		_compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 		_compositeCancelToken = _compositeCancelTokenSource.Token;
-	}
+	}	
 
 	private void BulkAll(IObserver<BulkAllResponse> observer)
 	{

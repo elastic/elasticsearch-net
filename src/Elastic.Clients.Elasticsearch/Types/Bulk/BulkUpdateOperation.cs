@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch
  
 		protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => throw new NotImplementedException();
 
-		internal override BulkUpdateBodyBase GetBody() => new BulkUpdateBody<TDocument, TPartialDocument> { /** TODO **/  };
+		protected override object GetBody() => new BulkUpdateBody<TDocument, TPartialDocument> { /** TODO **/  };
 	}
 
 	public static class BulkUpdateOperation
