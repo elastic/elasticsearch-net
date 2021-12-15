@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -10,7 +10,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public abstract class BulkOperationDescriptorBase<TDescriptor, TSource> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor, TSource>
+	public abstract class BulkOperationDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor>
 	{
 		private Id _id;
 		private long? _version;
@@ -68,8 +68,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, _index, options);
 			}
 
-			// TODO - Maybe infer differently
-
 			if (_routing is not null)
 			{
 				writer.WritePropertyName("routing");
@@ -100,5 +98,11 @@ namespace Elastic.Clients.Elasticsearch
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => Serialize(stream, settings, formatting);
 
 		Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => SerializeAsync(stream, settings, formatting);
+
+		protected abstract object GetBody();
+
+		protected virtual Id GetIdForOperation(Inferrer inferrer) => _id ?? new Id(GetBody());
+
+		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => _routing ?? new Routing(GetBody());
 	}
 }

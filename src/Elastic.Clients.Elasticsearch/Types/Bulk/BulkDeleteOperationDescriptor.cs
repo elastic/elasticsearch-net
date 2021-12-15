@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -10,13 +10,15 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed class BulkDeleteOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkDeleteOperationDescriptor<TSource>, TSource>
+	public sealed class BulkDeleteOperationDescriptor : BulkOperationDescriptorBase<BulkDeleteOperationDescriptor>
 	{
 		public BulkDeleteOperationDescriptor() { }
 
 		public BulkDeleteOperationDescriptor(Id id) => Id(id);
 
 		protected override string Operation => "delete";
+
+		protected override object GetBody() => null;
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
@@ -29,11 +31,11 @@ namespace Elastic.Clients.Elasticsearch
 
 			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
 			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, dhls.Options);
 			}
 			else
 			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this); // Unable to handle options if this were to ever be the case
 			}
 
 			internalWriter.WriteEndObject();
@@ -51,11 +53,11 @@ namespace Elastic.Clients.Elasticsearch
 
 			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
 			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, dhls.Options);
 			}
 			else
 			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this); // Unable to handle options if this were to ever be the case
 			}
 
 			internalWriter.WriteEndObject();

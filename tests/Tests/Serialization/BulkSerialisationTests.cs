@@ -26,7 +26,7 @@ namespace Tests.Serialization
 				new BulkIndexOperation<Project>(FixedProject)
 			};
 
-			var request = new BulkRequest<Project>
+			var request = new BulkRequest
 			{
 				Operations = operations
 			};
@@ -46,7 +46,7 @@ namespace Tests.Serialization
 
 			expectedJson = expectedJson.Replace("\r\n", "\n", System.StringComparison.Ordinal);
 
-			var request = new BulkRequestDescriptor<Project>();
+			var request = new BulkRequestDescriptor();
 			request.Index(FixedProject, b => b.Index("project"));
 			request.Index(FixedProject);
 
@@ -65,7 +65,7 @@ namespace Tests.Serialization
 
 			expectedJson = expectedJson.Replace("\r\n", "\n", System.StringComparison.Ordinal);
 
-			var request = new BulkRequestDescriptor<Project>();
+			var request = new BulkRequestDescriptor();
 			request.IndexMany(new [] { FixedProject, FixedProject });
 
 			var serialisedJson = await SerializeAndGetJsonStringAsync(request);

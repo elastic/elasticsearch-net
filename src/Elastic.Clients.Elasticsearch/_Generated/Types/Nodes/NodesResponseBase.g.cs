@@ -28,6 +28,6 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 	{
 		[JsonInclude]
 		[JsonPropertyName("_nodes")]
-		public Elastic.Clients.Elasticsearch.NodeStatistics NodeStats { get; init; }
+		public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
 	}
 }

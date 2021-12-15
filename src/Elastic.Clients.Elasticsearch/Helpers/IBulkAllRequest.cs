@@ -12,7 +12,7 @@ namespace Elastic.Clients.Elasticsearch.Helpers
 		int? BackOffRetries { get; }
 		Time? BackOffTime { get; }
 		ProducerConsumerBackPressure? BackPressure { get; }
-		Action<BulkRequestDescriptor<T>, IList<T>>? BufferToBulk { get; }
+		Action<BulkRequestDescriptor, IList<T>>? BufferToBulk { get; }
 		Action<BulkResponse>? BulkResponseCallback { get; }
 		bool ContinueAfterDroppedDocuments { get; }
 		IEnumerable<T> Documents { get; }

@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public partial class BulkRequest<TSource> : PlainRequestBase<BulkRequestParameters>
+	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>
 	{
 		public BulkRequest()
 		{
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		[JsonIgnore]
 		public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 	}
 
-	public sealed partial class BulkRequestDescriptor<TSource> : RequestDescriptorBase<BulkRequestDescriptor<TSource>, BulkRequestParameters>
+	public sealed partial class BulkRequestDescriptor : RequestDescriptorBase<BulkRequestDescriptor, BulkRequestParameters>
 	{
 		public BulkRequestDescriptor()
 		{
@@ -106,19 +106,19 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TSource>> configure) => configure.Invoke(this);
+		internal BulkRequestDescriptor(Action<BulkRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public BulkRequestDescriptor<TSource> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
-		public BulkRequestDescriptor<TSource> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-		public BulkRequestDescriptor<TSource> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public BulkRequestDescriptor<TSource> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
-		public BulkRequestDescriptor<TSource> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public BulkRequestDescriptor<TSource> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public BulkRequestDescriptor<TSource> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public BulkRequestDescriptor<TSource> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public BulkRequestDescriptor<TSource> RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
+		public BulkRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
+		public BulkRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
+		public BulkRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+		public BulkRequestDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
+		public BulkRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public BulkRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public BulkRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public BulkRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public BulkRequestDescriptor RequireAlias(bool? requireAlias) => Qs("require_alias", requireAlias);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
