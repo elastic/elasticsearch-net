@@ -33,10 +33,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		IngestNamespace Ingest { get; }
 
-		BulkResponse Bulk<TSource>(BulkRequest<TSource> request);
-		Task<BulkResponse> BulkAsync<TSource>(BulkRequest<TSource> request, CancellationToken cancellationToken = default);
-		BulkResponse Bulk<TSource>(Action<BulkRequestDescriptor<TSource>> configureRequest = null);
-		Task<BulkResponse> BulkAsync<TSource>(Action<BulkRequestDescriptor<TSource>> configureRequest = null, CancellationToken cancellationToken = default);
+		BulkResponse Bulk(BulkRequest request);
+		Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default);
+		BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest = null);
+		Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 		ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request);
 		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default);
 		ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest = null);

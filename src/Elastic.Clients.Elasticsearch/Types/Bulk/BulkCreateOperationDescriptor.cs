@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -12,7 +12,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed class BulkCreateOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkCreateOperationDescriptor<TSource>, TSource>
+	public sealed class BulkCreateOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkCreateOperationDescriptor<TSource>>
 	{
 		private string _pipeline;
 		private bool? _requireAlias;
@@ -55,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch
 
 			stream.WriteByte(_newline);
 
-			settings.SourceSerializer.Serialize(_document, stream);
+			settings.SourceSerializer.Serialize(GetBody(), stream);
 		}
 
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
@@ -81,7 +81,7 @@ namespace Elastic.Clients.Elasticsearch
 
 			stream.WriteByte(_newline);
 
-			await settings.SourceSerializer.SerializeAsync(_document, stream).ConfigureAwait(false);
+			await settings.SourceSerializer.SerializeAsync(GetBody(), stream).ConfigureAwait(false);
 		}
 
 		protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -104,5 +104,7 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, _dynamicTemplates, options);
 			}
 		}
+
+		protected override object GetBody() => _document;
 	}
 }

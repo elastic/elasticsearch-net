@@ -4,6 +4,7 @@
 
 using Elastic.Clients.Elasticsearch;
 using Tests.Core.Extensions;
+using Xunit;
 
 namespace Tests.Core.Serialization
 {

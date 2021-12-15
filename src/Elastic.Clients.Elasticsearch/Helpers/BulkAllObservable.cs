@@ -120,7 +120,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 
 		var ops = buffer.Select(o => new BulkIndexOperation<T>(o)).Cast<IBulkOperation>().ToList();
 
-		var response = await _client.BulkAsync<T>(s =>
+		var response = await _client.BulkAsync(s =>
 		{
 			s.Index(request.Index);
 			s.Timeout(request.Timeout);

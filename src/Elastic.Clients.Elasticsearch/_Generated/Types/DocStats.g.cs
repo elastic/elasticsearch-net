@@ -32,6 +32,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("deleted")]
-		public long Deleted { get; init; }
+		public long? Deleted { get; init; }
 	}
 }

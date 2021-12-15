@@ -742,7 +742,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class BulkRequest<TSource> : IStreamSerializable
+	public partial class BulkRequest : IStreamSerializable
 	{
 		public BulkOperationsCollection Operations { get; set; }
 
@@ -784,7 +784,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class BulkRequestDescriptor<TSource>
+	public sealed partial class BulkRequestDescriptor
 	{
 		protected override string ContentType => "application/x-ndjson";
 
@@ -795,15 +795,34 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
 		public IReadOnlyList<BulkResponseItemBase> Items { get; init; }
+
+		[JsonIgnore]
+		public IEnumerable<BulkResponseItemBase> ItemsWithErrors => !Items.HasAny()
+			? Enumerable.Empty<BulkResponseItemBase>()
+			: Items.Where(i => !i.IsValid);
+
+		public override bool IsValid => base.IsValid && !Errors && !ItemsWithErrors.HasAny();
+
+		protected override void DebugIsValid(StringBuilder sb)
+		{
+			if (Items == null)
+				return;
+
+			sb.AppendLine($"# Invalid Bulk items:");
+			foreach (var i in Items.Select((item, i) => new { item, i }).Where(i => !i.item.IsValid))
+				sb.AppendLine($"  operation[{i.i}]: {i.item}");
+		}
 	}
 
-	public sealed partial class BulkRequestDescriptor<TSource> : IStreamSerializable
+	public sealed partial class BulkRequestDescriptor : IStreamSerializable
 	{
 		private readonly BulkOperationsCollection _operations = new();
 
-		public BulkRequestDescriptor<TSource> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public BulkRequestDescriptor Index(string index) => Assign(index, (a, v) => a.RouteValues.Optional("index", IndexName.Parse(v)));
 
-		public BulkRequestDescriptor<TSource> Create(TSource document, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
+		public BulkRequestDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+
+		public BulkRequestDescriptor Create<TSource>(TSource document, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkCreateOperationDescriptor<TSource>(document);
 
@@ -814,52 +833,55 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
-		public BulkRequestDescriptor<TSource> Index(TSource document, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
+		public BulkRequestDescriptor Index<TSource>(TSource document, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkIndexOperationDescriptor<TSource>(document);
-
 			configure?.Invoke(descriptor);
-
 			_operations.Add(descriptor);
-
 			return this;
 		}
 
-		public BulkRequestDescriptor<TSource> Update(BulkUpdateOperationBase update)
+		public BulkRequestDescriptor Update(BulkUpdateOperationBase update)
 		{
 			_operations.Add(update);
 			return this;
 		}
 
-		public BulkRequestDescriptor<TSource> Delete(Id id)
+		public BulkRequestDescriptor Update<TSource, TPartialDocument>(Action<BulkUpdateOperationDescriptor<TSource, TPartialDocument>> configure)
 		{
-			var descriptor = new BulkDeleteOperationDescriptor<TSource>();
-			descriptor.Id(id);
-
-			_operations.Add(descriptor);
-
-			return this;
-		}
-
-		public BulkRequestDescriptor<TSource> Delete(Action<BulkDeleteOperationDescriptor<TSource>> configure)
-		{
-			var descriptor = new BulkDeleteOperationDescriptor<TSource>();
-
+			var descriptor = new BulkUpdateOperationDescriptor<TSource, TPartialDocument>();
 			configure?.Invoke(descriptor);
-
 			_operations.Add(descriptor);
-
 			return this;
 		}
 
-		public BulkRequestDescriptor<TSource> CreateMany<T>(IEnumerable<T> documents, Action<BulkCreateOperationDescriptor<T>> bulkIndexSelector = null) =>
-			AddOperations(documents, bulkIndexSelector, o => new BulkCreateOperationDescriptor<T>(o));
+		public BulkRequestDescriptor Update<T>(Action<BulkUpdateOperationDescriptor<T, T>> configure) =>
+			Update<T, T>(configure);
 
-		public BulkRequestDescriptor<TSource> IndexMany<T>(IEnumerable<T> documents, Action<BulkIndexOperationDescriptor<T>> bulkIndexSelector = null) =>
-			AddOperations(documents, bulkIndexSelector, o => new BulkIndexOperationDescriptor<T>(o));
+		public BulkRequestDescriptor Delete(Id id)
+		{
+			var descriptor = new BulkDeleteOperationDescriptor();
+			descriptor.Id(id);
+			_operations.Add(descriptor);
+			return this;
+		}
 
-		public BulkRequestDescriptor<TSource> DeleteMany<T>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor<T>> bulkIndexSelector = null) =>
-			AddOperations(ids, bulkIndexSelector, id => new BulkDeleteOperationDescriptor<T>(id));
+		public BulkRequestDescriptor Delete(Action<BulkDeleteOperationDescriptor> configure)
+		{
+			var descriptor = new BulkDeleteOperationDescriptor();
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
+			return this;
+		}
+
+		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents, Action<BulkCreateOperationDescriptor<TSource>> bulkIndexSelector = null) =>
+			AddOperations(documents, bulkIndexSelector, o => new BulkCreateOperationDescriptor<TSource>(o));
+
+		public BulkRequestDescriptor IndexMany<TSource>(IEnumerable<TSource> documents, Action<BulkIndexOperationDescriptor<TSource>> bulkIndexSelector = null) =>
+			AddOperations(documents, bulkIndexSelector, o => new BulkIndexOperationDescriptor<TSource>(o));
+
+		public BulkRequestDescriptor DeleteMany<TSource>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor> bulkIndexSelector = null) =>
+			AddOperations(ids, bulkIndexSelector, id => new BulkDeleteOperationDescriptor(id));
 
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
@@ -873,10 +895,10 @@ namespace Elastic.Clients.Elasticsearch
 			return operations.SerializeAsync(stream, settings, formatting);
 		}
 
-		private BulkRequestDescriptor<TSource> AddOperations<T, TDescriptor>(
-			IEnumerable<T> objects,
+		private BulkRequestDescriptor AddOperations<TSource, TDescriptor>(
+			IEnumerable<TSource> objects,
 			Action<TDescriptor> bulkIndexSelector,
-			Func<T, TDescriptor> defaultSelector
+			Func<TSource, TDescriptor> defaultSelector
 		) where TDescriptor : IBulkOperation
 		{
 			if (@objects == null)

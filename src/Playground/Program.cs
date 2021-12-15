@@ -124,13 +124,16 @@ namespace Playground
 			
 			var bulkAll = client.BulkAll(people, b => b.Index("people-v2-test"));
 			var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
+					
 
-			var request = await client.BulkAsync<Person>(b => b
+			var bulkAllv2 = client.Helpers.BulkAllObservable(people, b => b.Index("people-v2-test"));
+			var observer2 = bulkAllv2.Wait(TimeSpan.FromMinutes(1), n => { });
+
+			var request = await client.BulkAsync(b => b
 				.Index("people-test")
 				.Create(new Person { FirstName = "Rhiannon" })
 				.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
 				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
-				.Update(new BulkUpdateOperation<Person, Person>())
 				.Update(BulkUpdateOperation.WithPartial(200, new Person { LastName = "Gordon" }))
 				.Update(BulkUpdateOperation.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
 				.Delete(100));

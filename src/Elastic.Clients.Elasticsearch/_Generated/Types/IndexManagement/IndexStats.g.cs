@@ -51,6 +51,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("indices")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats? Indices { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("merges")]
 		public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; init; }
 
@@ -95,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("shards")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardsTotalStats? Shards { get; init; }
+		[JsonPropertyName("shard_stats")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardsTotalStats? ShardStats { get; init; }
 	}
 }

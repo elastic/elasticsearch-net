@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	{
 		[JsonInclude]
 		[JsonPropertyName("primaries")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Primaries { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats? Primaries { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats Total { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats? Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("uuid")]
