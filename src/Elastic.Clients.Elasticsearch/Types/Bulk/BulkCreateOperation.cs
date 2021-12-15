@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -28,59 +28,50 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public T Document { get; set; }
-
-		protected override string Operation => "create";
-
+		
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
-			var requestResponseSerializer = settings.RequestResponseSerializer;
-
-			var internalWriter = new Utf8JsonWriter(stream);
-
-			internalWriter.WriteStartObject();
-			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this, dhls.Options);
-			}
-			else
-			{
-				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
-			}
-
-			internalWriter.WriteEndObject();
-			internalWriter.Flush();
-
+			using var writer = new Utf8JsonWriter(stream);
+			SerializeInternal(settings, writer);
+			writer.Flush();
 			stream.WriteByte(_newline);
-
-			settings.SourceSerializer.Serialize(Document, stream);
+			settings.SourceSerializer.Serialize(GetBody(), stream, formatting);
 		}
 
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
+			await using var writer = new Utf8JsonWriter(stream);
+			SerializeInternal(settings, writer);
+			await writer.FlushAsync().ConfigureAwait(false);
+			stream.WriteByte(_newline);
+			await settings.SourceSerializer.SerializeAsync(GetBody(), stream, formatting).ConfigureAwait(false);
+		}
+
+		private void SerializeInternal(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 
-			var internalWriter = new Utf8JsonWriter(stream);
-
-			internalWriter.WriteStartObject();
-			internalWriter.WritePropertyName(Operation);
+			writer.WriteStartObject();
+			writer.WritePropertyName(Operation);
 
 			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
 			{
-				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this, dhls.Options);
+				JsonSerializer.Serialize<BulkCreateOperation<T>>(writer, this, dhls.Options);
 			}
 			else
 			{
-				JsonSerializer.Serialize<BulkCreateOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+				JsonSerializer.Serialize<BulkCreateOperation<T>>(writer, this); // Unable to handle options if this were to ever be the case
 			}
 
-			internalWriter.WriteEndObject();
-			await internalWriter.FlushAsync().ConfigureAwait(false);
-
-			stream.WriteByte(_newline);
-
-			await settings.SourceSerializer.SerializeAsync(Document, stream, formatting).ConfigureAwait(false);
+			writer.WriteEndObject();
 		}
+
+		protected override string Operation => "create";
+
+		protected override object GetBody() => Document;
+
+		protected override Id GetIdForOperation(Inferrer inferrer) => Id ?? new Id(Document);
+
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 }
