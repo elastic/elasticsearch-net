@@ -26,7 +26,7 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>
 
 	public ProducerConsumerBackPressure? BackPressure { get; set; }
 
-	public Action<BulkRequestDescriptor<T>, IList<T>>? BufferToBulk { get; set; }
+	public Action<BulkRequestDescriptor, IList<T>>? BufferToBulk { get; set; }
 
 	public bool ContinueAfterDroppedDocuments { get; set; }
 
@@ -66,7 +66,7 @@ public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestD
 	private int? _maxDegreeOfParallism;
 	private int? _size;
 	private bool _refreshOnCompleted;
-	private Action<BulkRequestDescriptor<T>, IList<T>> _bufferToBulk;
+	private Action<BulkRequestDescriptor, IList<T>> _bufferToBulk;
 	private Func<BulkResponseItemBase, T, bool> _retryDocumentPredicate;
 	private Action<BulkResponseItemBase, T> _droppedDocumentCallback;
 	private Routing _routing;
@@ -85,7 +85,7 @@ public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestD
 	int? IBulkAllRequest<T>.BackOffRetries => _backOffRetries;
 	Time? IBulkAllRequest<T>.BackOffTime => _backOffTime;
 	ProducerConsumerBackPressure? IBulkAllRequest<T>.BackPressure => _backPressure;
-	Action<BulkRequestDescriptor<T>, IList<T>>? IBulkAllRequest<T>.BufferToBulk => _bufferToBulk;
+	Action<BulkRequestDescriptor, IList<T>>? IBulkAllRequest<T>.BufferToBulk => _bufferToBulk;
 	Action<BulkResponse>? IBulkAllRequest<T>.BulkResponseCallback => _bulkResponseCallback;
 	bool IBulkAllRequest<T>.ContinueAfterDroppedDocuments => _continueAfterDroppedDocuments;
 	IEnumerable<T> IBulkAllRequest<T>.Documents => _documents;
@@ -108,7 +108,7 @@ public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestD
 	public BulkAllRequestDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
 			Assign(new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency), (a, v) => a._backPressure = v);
 
-	public BulkAllRequestDescriptor<T> BufferToBulk(Action<BulkRequestDescriptor<T>, IList<T>> modifier) => Assign(modifier, (a, v) => a._bufferToBulk = v);
+	public BulkAllRequestDescriptor<T> BufferToBulk(Action<BulkRequestDescriptor, IList<T>> modifier) => Assign(modifier, (a, v) => a._bufferToBulk = v);
 
 	public BulkAllRequestDescriptor<T> BulkResponseCallback(Action<BulkResponse> callback) =>
 			Assign(callback, (a, v) => a._bulkResponseCallback = v);

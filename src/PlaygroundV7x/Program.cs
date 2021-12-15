@@ -58,7 +58,6 @@ namespace PlaygroundV7x
 			var matchQueryThree = new QueryContainerDescriptor<Person>().Match(m => m.Field(f => f.FirstName).Query("Steve"));
 
 
-
 			//var a = client.IndexMany<Person>(new Person[0] { }, a => a.)
 
 			var matchAll = new QueryContainer(new MatchAllQuery() { Name = "test_query", IsVerbatim = true });

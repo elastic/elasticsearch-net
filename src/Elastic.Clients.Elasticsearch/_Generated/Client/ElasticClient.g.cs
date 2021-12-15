@@ -40,32 +40,32 @@ namespace Elastic.Clients.Elasticsearch
 			Ingest = new IngestNamespace(this);
 		}
 
-		public BulkResponse Bulk<TSource>(BulkRequest<TSource> request)
+		public BulkResponse Bulk(BulkRequest request)
 		{
 			request.BeforeRequest();
-			return DoRequest<BulkRequest<TSource>, BulkResponse>(request);
+			return DoRequest<BulkRequest, BulkResponse>(request);
 		}
 
-		public Task<BulkResponse> BulkAsync<TSource>(BulkRequest<TSource> request, CancellationToken cancellationToken = default)
+		public Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 		{
 			request.BeforeRequest();
-			return DoRequestAsync<BulkRequest<TSource>, BulkResponse>(request, cancellationToken);
+			return DoRequestAsync<BulkRequest, BulkResponse>(request, cancellationToken);
 		}
 
-		public BulkResponse Bulk<TSource>(Action<BulkRequestDescriptor<TSource>> configureRequest = null)
+		public BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest = null)
 		{
-			var descriptor = new BulkRequestDescriptor<TSource>();
+			var descriptor = new BulkRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
-			return DoRequest<BulkRequestDescriptor<TSource>, BulkResponse>(descriptor);
+			return DoRequest<BulkRequestDescriptor, BulkResponse>(descriptor);
 		}
 
-		public Task<BulkResponse> BulkAsync<TSource>(Action<BulkRequestDescriptor<TSource>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new BulkRequestDescriptor<TSource>();
+			var descriptor = new BulkRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
-			return DoRequestAsync<BulkRequestDescriptor<TSource>, BulkResponse>(descriptor);
+			return DoRequestAsync<BulkRequestDescriptor, BulkResponse>(descriptor);
 		}
 
 		public ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)

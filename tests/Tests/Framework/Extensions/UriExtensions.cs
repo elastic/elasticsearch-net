@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Tests.Framework.Extensions
 {
@@ -26,6 +28,8 @@ namespace Tests.Framework.Extensions
 
 			ComparePaths(actualUri, expectedUri, origin);
 		}
+
+		
 
 		private static Uri CreateUri(Uri baseUri, Dictionary<string, string> newQueryString)
 		{

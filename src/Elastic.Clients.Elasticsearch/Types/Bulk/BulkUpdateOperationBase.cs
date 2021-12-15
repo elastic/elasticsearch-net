@@ -5,6 +5,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 
@@ -19,6 +20,82 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonPropertyName("require_alias")]
 		public bool? RequireAlias { get; set; }
+
+		protected override string Operation => "update";
+
+		protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
+
+		/// <summary>
+		/// Serialise the operation into the NDJSON stream.
+		/// </summary>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
+		protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
+
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			BeforeSerialize(settings);
+
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				WriteOperation(internalWriter, dhls.Options);
+			}
+			else
+			{
+				WriteOperation(internalWriter);
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			stream.WriteByte(_newline);
+
+			var body = GetBody();
+			settings.RequestResponseSerializer.Serialize(body, stream, formatting);
+			stream.Flush();
+		}
+
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			BeforeSerialize(settings);
+
+			var requestResponseSerializer = settings.RequestResponseSerializer;
+
+			var internalWriter = new Utf8JsonWriter(stream);
+
+			internalWriter.WriteStartObject();
+			internalWriter.WritePropertyName(Operation);
+
+			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			{
+				WriteOperation(internalWriter, dhls.Options);
+			}
+			else
+			{
+				WriteOperation(internalWriter);
+			}
+
+			internalWriter.WriteEndObject();
+			internalWriter.Flush();
+
+			stream.WriteByte(_newline);
+
+			var body = GetBody();
+			await settings.RequestResponseSerializer.SerializeAsync(body, stream, formatting).ConfigureAwait(false);
+			await stream.FlushAsync().ConfigureAwait(false);
+		}
+	}
+
+	public abstract class BulkUpdateOperationDescriptorBase<TSource> : BulkOperationDescriptorBase<BulkUpdateOperationDescriptorBase<TSource>>
+	{
+		private static byte _newline => (byte)'\n';
 
 		protected override string Operation => "update";
 
@@ -56,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch
 			settings.RequestResponseSerializer.Serialize(body, stream, formatting);
 		}
 
-		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
 		{
 			BeforeSerialize(settings);
 
