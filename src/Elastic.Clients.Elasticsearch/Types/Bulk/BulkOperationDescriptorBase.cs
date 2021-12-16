@@ -12,17 +12,20 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public abstract class BulkOperationDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor>
 	{
-		private Id _id;
+		//private Id _id;
 		private long? _version;
 		private IndexName _index;
-		private Routing _routing;
+		//private Routing _routing;
 		private VersionType? _versionType;
 		private long? _ifSequenceNo;
 		private long? _ifPrimaryTerm;
 
+		protected Id IdValue { get; set; }
+		protected Routing RoutingValue { get; set; }
+
 		protected abstract string Operation { get; }
 
-		public TDescriptor Id(Id id) => Assign(id, (a, v) => a._id = v);
+		public TDescriptor Id(Id id) => Assign(id, (a, v) => a.IdValue = v);
 
 		public TDescriptor IfSequenceNumber(long? ifSequenceNumber) => Assign(ifSequenceNumber, (a, v) => a._ifSequenceNo = v);
 
@@ -32,7 +35,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TDescriptor Index<T>() => Assign(typeof(T), (a, v) => a._index = v);
 
-		public TDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a._routing = v);
+		public TDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 
 		public TDescriptor Version(long version) => Assign(version, (a, v) => a._version = v);
 
@@ -40,14 +43,17 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			IdValue = GetIdForOperation(settings.Inferrer);
+			RoutingValue = GetRoutingForOperation(settings.Inferrer);
+
 			writer.WriteStartObject();
 
 			SerializeInternal(writer, options, settings);
 
-			if (_id is not null)
+			if (IdValue is not null)
 			{
 				writer.WritePropertyName("_id");
-				JsonSerializer.Serialize(writer, _id, options);
+				JsonSerializer.Serialize(writer, IdValue, options);
 			}
 
 			if (_ifPrimaryTerm.HasValue)
@@ -68,10 +74,10 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, _index, options);
 			}
 
-			if (_routing is not null)
+			if (RoutingValue is not null)
 			{
 				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, _routing, options);
+				JsonSerializer.Serialize(writer, RoutingValue, options);
 			}
 
 			if (_version.HasValue)
@@ -101,8 +107,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected abstract object GetBody();
 
-		protected virtual Id GetIdForOperation(Inferrer inferrer) => _id ?? new Id(GetBody());
+		protected virtual Id GetIdForOperation(Inferrer inferrer) => IdValue ?? new Id(GetBody());
 
-		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => _routing ?? new Routing(GetBody());
+		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => RoutingValue ?? new Routing(GetBody());
 	}
 }

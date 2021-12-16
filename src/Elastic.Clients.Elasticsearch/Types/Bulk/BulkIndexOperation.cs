@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch
 		public T Document { get; set; }
 
 		protected override string Operation => "index";
-
+		
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
@@ -84,5 +84,9 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		protected override object GetBody() => Document;
+
+		protected override Id GetIdForOperation(Inferrer inferrer) => Id ?? new Id(Document);
+
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 }

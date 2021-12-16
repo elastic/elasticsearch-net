@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -60,11 +61,11 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 
 	protected override void BeforeSerialize(IElasticsearchClientSettings settings)
 	{
-		if (Id is null && IdFrom is not null)
-			Id = settings.Inferrer.Id<TDocument>(IdFrom);
+		//if (Id is null && IdFrom is not null)
+		//	Id = settings.Inferrer.Id<TDocument>(IdFrom);
 
-		if (Index is null)
-			Index = settings.Inferrer.IndexName<TDocument>();
+		//if (Index is null)
+		//	Index = settings.Inferrer.IndexName<TDocument>();
 	}
 
 	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize(writer, this, options);
@@ -79,6 +80,23 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 		IfSequenceNumber = IfSequenceNumber,
 		//Source = Source
 	};
+
+	protected override Id GetIdForOperation(Inferrer inferrer) =>
+		Id ?? new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
+
+	protected override Routing GetRoutingForOperation(Inferrer inferrer)
+	{
+		if (Routing != null)
+			return Routing;
+
+		if (IdFrom != null)
+			return new Routing(IdFrom);
+
+		if (Upsert != null)
+			return new Routing(Upsert);
+
+		return null;
+	}
 }
 
 public static class BulkUpdateOperation
@@ -125,22 +143,20 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	{
 		var requestResponseSerializer = settings.RequestResponseSerializer;
 
-		var internalWriter = new Utf8JsonWriter(stream);
+		var writer = new Utf8JsonWriter(stream);
 
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+
+		JsonSerializerOptions options = null;
 
 		if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-		{
-			JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(internalWriter, this, dhls.Options);
-		}
-		else
-		{
-			JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(internalWriter, this); // Unable to handle options if this were to ever be the case
-		}
+			options = dhls.Options;
 
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
+		JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(writer, this, options);
+
+		writer.WriteEndObject();
+		writer.Flush();
 
 		stream.WriteByte(_newline);
 
@@ -152,7 +168,17 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		}
 		else
 		{
-			// TODO - Manually serialise
+			writer = new Utf8JsonWriter(stream);
+			writer.WriteStartObject();
+
+			if (_scriptAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new InlineScriptDescriptor(_scriptAction), options);
+			}
+
+			writer.WriteEndObject();
+			writer.Flush();
 		}
 	}
 
@@ -160,34 +186,42 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	{
 		var requestResponseSerializer = settings.RequestResponseSerializer;
 
-		var internalWriter = new Utf8JsonWriter(stream);
+		var writer = new Utf8JsonWriter(stream);
 
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+
+		JsonSerializerOptions options = null;
 
 		if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-		{
-			JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(internalWriter, this, dhls.Options);
-		}
-		else
-		{
-			JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(internalWriter, this); // Unable to handle options if this were to ever be the case
-		}
+			options = dhls.Options;
 
-		internalWriter.WriteEndObject();
-		await internalWriter.FlushAsync(cancellationToken).ConfigureAwait(false);
+		JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(writer, this, options);
+
+		writer.WriteEndObject();
+		await writer.FlushAsync(cancellationToken).ConfigureAwait(false);
 
 		stream.WriteByte(_newline);
 
 		var body = GetBody();
-
+		
 		if (body is not null)
 		{
 			await settings.RequestResponseSerializer.SerializeAsync(body, stream, formatting, cancellationToken).ConfigureAwait(false);
 		}
 		else
 		{
-			// TODO - Manually serialise
+			writer = new Utf8JsonWriter(stream);
+			writer.WriteStartObject();
+
+			if (_scriptAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new InlineScriptDescriptor(_scriptAction), options);
+			}
+
+			writer.WriteEndObject();
+			await writer.FlushAsync(cancellationToken).ConfigureAwait(false);
 		}
 	}
 
@@ -195,4 +229,21 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	{
 		// TODO
 	}
+
+	//protected override Id GetIdForOperation(Inferrer inferrer) =>
+	//	Id ?? new Id(new[] { _document, Upsert }.FirstOrDefault(o => o != null));
+
+	//protected override Routing GetRoutingForOperation(Inferrer inferrer)
+	//{
+	//	if (Routing != null)
+	//		return Routing;
+
+	//	if (IdFrom != null)
+	//		return new Routing(IdFrom);
+
+	//	if (Upsert != null)
+	//		return new Routing(Upsert);
+
+	//	return null;
+	//}
 }

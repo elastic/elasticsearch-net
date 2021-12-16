@@ -2,10 +2,13 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	[JsonConverter(typeof(RoutingConverter))]
 	[DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{
@@ -166,5 +169,46 @@ namespace Elastic.Clients.Elasticsearch
 		//	var resolved = inferrer.Resolve(this);
 		//	return !resolved.IsNullOrEmpty();
 		//}
+	}
+
+	internal sealed class RoutingConverter : JsonConverter<Routing>
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public RoutingConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override Routing? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+			reader.TokenType == JsonTokenType.Number
+				? new Routing(reader.GetInt64())
+				: new Routing(reader.GetString());
+
+		public override void Write(Utf8JsonWriter writer, Routing value, JsonSerializerOptions options)
+		{
+			if (value is null)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (value.Document is not null)
+			{
+				var documentId = _settings.Inferrer.Routing(value.Document.GetType(), value.Document);
+				writer.WriteStringValue(documentId);
+			}
+			else if (value.DocumentGetter is not null)
+			{
+				var doc = value.DocumentGetter();
+				var documentId = _settings.Inferrer.Routing(doc.GetType(), doc);
+				writer.WriteStringValue(documentId);
+			}
+			else if (value.LongValue.HasValue)
+			{
+				writer.WriteNumberValue(value.LongValue.Value);
+			}
+			else
+			{
+				writer.WriteStringValue(value.StringValue);
+			}
+		}
 	}
 }
