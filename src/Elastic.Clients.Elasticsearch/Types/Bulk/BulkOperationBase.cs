@@ -36,11 +36,21 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 
-		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) =>
-			Serialize(stream, settings, formatting);
+		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			Id = GetIdForOperation(settings.Inferrer);
+			Routing = GetRoutingForOperation(settings.Inferrer);
 
-		Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) =>
-			SerializeAsync(stream, settings, formatting);
+			Serialize(stream, settings, formatting);
+		}
+
+		Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+		{
+			Id = GetIdForOperation(settings.Inferrer);
+			Routing = GetRoutingForOperation(settings.Inferrer);
+
+			return SerializeAsync(stream, settings, formatting);
+		}
 
 		protected abstract string Operation { get; }
 
