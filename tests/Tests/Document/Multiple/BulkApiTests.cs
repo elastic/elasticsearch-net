@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch.Ingest;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
@@ -20,36 +22,6 @@ public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse
 	// We have specific tests for the serialisation behaviour.
 	// The roundtrip flow does not work through STJ.
 	protected override object ExpectJson => null;
-
-	//protected override object ExpectJson => new[]
-	//{
-	//		new Dictionary<string, object>
-	//			{ { "index", new { _id = Project.Instance.Name, pipeline = "pipeline", routing = Project.Instance.Name } } },
-	//		Project.InstanceAnonymous,
-	//		new Dictionary<string, object> { { "update", new { _id = Project.Instance.Name } } },
-	//		new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
-	//		new Dictionary<string, object>
-	//			{ { "create", new { _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
-	//		Project.InstanceAnonymous,
-	//		new Dictionary<string, object>
-	//			{ { "delete", new { _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
-	//		new Dictionary<string, object>
-	//			{ { "create", new { _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
-	//		Project.InstanceAnonymous,
-	//		new Dictionary<string, object>
-	//			{ { "update", new { _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
-	//		new Dictionary<string, object>
-	//		{
-	//			{
-	//				"script", new
-	//				{
-	//					source = "ctx._source.numberOfCommits = params.commits",
-	//					@params = new { commits = 30 },
-	//					lang = "painless"
-	//				}
-	//			}
-	//		},
-	//	};
 
 	protected override int ExpectStatusCode => 200;
 
@@ -119,24 +91,32 @@ public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse
 		(client, r) => client.BulkAsync(r)
 	);
 
-	//protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-	//{
-	//	var pipelineResponse = client.Ingest.PutPipeline("default-pipeline", p => p
-	//		.Processors(pr => pr
-	//			.Set<Project>(t => t.Field(f => f.Description).Value("Default"))
-	//		)
-	//	);
-	//	pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
+	protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+	{
+		// TODO - REPLACE WITH FLUENT
 
-	//	pipelineResponse = client.Ingest.PutPipeline("pipeline", p => p
-	//		.Processors(pr => pr
-	//			.Set<Project>(t => t.Field(f => f.Description).Value("Overridden"))
-	//		)
-	//	);
-	//	pipelineResponse.ShouldBeValid($"Failed to set up pipeline named 'pipeline' required for bulk");
+		var pipelineResponse = client.Ingest.PutPipeline(new IngestPutPipelineRequest("default-pipeline")
+		{
+			Processors = new ProcessorContainer[]
+			{
+				new ProcessorContainer(new SetProcessor { Field = "descriptor", Value = "Default" } )
+			}
+		});
 
-	//	base.IntegrationSetup(client, values);
-	//}
+		pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
+
+		pipelineResponse = client.Ingest.PutPipeline(new IngestPutPipelineRequest("pipeline")
+		{
+			Processors = new ProcessorContainer[]
+			{
+				new ProcessorContainer(new SetProcessor { Field = "descriptor", Value = "Overridden" } )
+			}
+		});
+
+		pipelineResponse.ShouldBeValid($"Failed to set up pipeline named 'pipeline' required for bulk");
+
+		base.IntegrationSetup(client, values);
+	}
 
 	protected override void ExpectResponse(BulkResponse response)
 	{
@@ -147,7 +127,6 @@ public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse
 		foreach (var item in response.Items)
 		{
 			item.Index.Should().Be(CallIsolatedValue);
-			item.Type.Should().Be("_doc");
 			item.Status.Should().BeGreaterThan(100);
 			item.Version.Should().BeGreaterThan(0);
 			item.Id.Should().NotBeNullOrWhiteSpace();
@@ -160,9 +139,9 @@ public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse
 			item.Result.Should().NotBeNullOrEmpty();
 		}
 
-		// TODO - Re-enable once Source endpoint is generated
+		// TODO - Re-enable once Source endpoint is generated and implemented
 
-		//var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue)).Body;
+		var project1 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name); //.Body;
 		//project1.LeadDeveloper.FirstName.Should().Be("martijn");
 		//project1.Description.Should().Be("Overridden");
 

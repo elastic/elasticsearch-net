@@ -106,5 +106,9 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		protected override object GetBody() => _document;
+
+		protected override Id GetIdForOperation(Inferrer inferrer) => IdValue ?? new Id(_document);
+
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => RoutingValue ?? new Routing(_document);
 	}
 }
