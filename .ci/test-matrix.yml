@@ -1,7 +1,7 @@
 ---
 
 STACK_VERSION:
-  - 7.16-SNAPSHOT
+  - 7.17-SNAPSHOT
 
 TEST_SUITE:
   - free
