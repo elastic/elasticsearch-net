@@ -3,6 +3,8 @@
 //// See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using Tests.Core.Serialization;
 
 namespace Tests.Core.Extensions
@@ -47,6 +49,23 @@ namespace Tests.Core.Extensions
 		)
 		{
 			var roundTripResult = tester.Serializes(@object, expectedJson, preserveNullInExpected);
+			roundTripResult.ShouldBeValid(message);
+		}
+
+		public static void AssertSerializeNdjson<T>(this SerializationTester tester, T @object, IReadOnlyList<object> expectedJson, string message = null,
+			bool preserveNullInExpected = false
+		)
+		{
+			var roundTripResult = tester.SerializesNdJson(@object, expectedJson, preserveNullInExpected);
+			roundTripResult.ShouldBeValid(message);
+		}
+
+		public static void AssertSerialize<T>(this SerializationTester tester, string actualJsonString, object expectedJson, string message = null,
+			bool preserveNullInExpected = false
+		)
+		{
+			var roundTripResult = tester.Serializes(actualJsonString, expectedJson, preserveNullInExpected);
+
 			roundTripResult.ShouldBeValid(message);
 		}
 	}
