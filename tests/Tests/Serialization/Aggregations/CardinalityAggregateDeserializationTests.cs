@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization;
 
-public class CardinalityAggregateDeserializationTests : SourceSerializerTestBase
+public class CardinalityAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserializeAggregate()

@@ -6,7 +6,7 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Tests.Serialization;
 
-public class MinAggregationDeserializationTests : SourceSerializerTestBase
+public class MinAggregationDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserialize()

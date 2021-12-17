@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -14,6 +14,8 @@ internal static class Utf8JsonReaderExtensions
 		var bytes = new List<byte>(); // probably use an array and grow as needed
 
 		var depth = 0;
+
+		//reader.
 
 		do
 		{

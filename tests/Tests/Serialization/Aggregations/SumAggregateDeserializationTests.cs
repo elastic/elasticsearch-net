@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization;
 
-public class SumAggregateDeserializationTests : SourceSerializerTestBase
+public class SumAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserializeAggregate()

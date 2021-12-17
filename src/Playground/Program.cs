@@ -127,8 +127,8 @@ namespace Playground
 			var observer = bulkAll.Wait(TimeSpan.FromMinutes(1), n => { });
 					
 
-			var bulkAllv2 = client.Helpers.BulkAllObservable(people, b => b.Index("people-v2-test"));
-			var observer2 = bulkAllv2.Wait(TimeSpan.FromMinutes(1), n => { });
+			//var bulkAllv2 = client.Helpers.BulkAllObservable(people, b => b.Index("people-v2-test"));
+			//var observer2 = bulkAllv2.Wait(TimeSpan.FromMinutes(1), n => { });
 
 
 			

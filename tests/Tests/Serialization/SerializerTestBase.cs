@@ -4,19 +4,19 @@
 
 using System.IO;
 using System.Threading.Tasks;
-using Tests.Domain;
+using Tests.Domain.Extensions;
 
 namespace Tests.Serialization;
 
-public abstract class SourceSerializerTestBase
+public abstract class SerializerTestBase
 {
 	protected static readonly Serializer _requestResponseSerializer;
 	protected static readonly IElasticsearchClientSettings _settings;
 
-	static SourceSerializerTestBase()
+	static SerializerTestBase()
 	{
 		var settings = new ElasticsearchClientSettings();
-		settings.DefaultMappingFor<Project>(m => m.IndexName("project"));
+		settings.ApplyDomainSettings();
 
 		var client = new ElasticClient(settings);
 		
@@ -42,6 +42,8 @@ public abstract class SourceSerializerTestBase
 		var reader = new StreamReader(stream);
 		return reader.ReadToEnd();
 	}
+
+	
 
 	/// <summary>
 	/// Serialises the <paramref name="data"/> using the sync and async request/response serializer methods, comparing the results.

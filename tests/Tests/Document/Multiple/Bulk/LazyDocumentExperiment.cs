@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -30,11 +30,19 @@ public class LazyDocumentExperiment
 		var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
 		var get = JsonSerializer.Deserialize<Get>(ms);
 
-		var readJson = Encoding.UTF8.GetString(get.Source.Bytes);
-
 		get.Found.Should().BeTrue();
 		get.SequenceNumber.Should().Be(3);
-		readJson.Should().Be(@"{""field1"":""value1"",""field2"":""value2"",""field3"":[""item1"",""item2"",""item3""],""field4"":{""subitemfield1"":""subitemvalue1""}}");
+
+		var client = new ElasticClient();
+		var stream = new MemoryStream(get.Source.Bytes);
+		var myType = client.SourceSerializer.Deserialize<MyType>(stream);
+		myType.Field1.Should().Be("value1");
+	}
+
+	private class MyType
+	{
+		[JsonPropertyName("field1")]
+		public string Field1 { get; set; }
 	}
 
 	public class Get
@@ -50,8 +58,33 @@ public class LazyDocumentExperiment
 	}
 
 	[JsonConverter(typeof(LazyDocumentConverter))]
-	public class LazyDocument
+	public class LazyDocument /*: IDisposable*/
 	{
+		//private bool _disposedValue;
+
+		//public LazyDocument(JsonDocument doc) => Doc = doc;
+
+		//public JsonDocument Doc { get; }
+
+		//protected virtual void Dispose(bool disposing)
+		//{
+		//	if (!_disposedValue)
+		//	{
+		//		if (disposing)
+		//		{
+		//			Doc.Dispose();
+		//		}
+
+		//		_disposedValue = true;
+		//	}
+		//}
+
+		//public void Dispose()
+		//{
+		//	Dispose(disposing: true);
+		//	GC.SuppressFinalize(this);
+		//}
+
 		public LazyDocument(byte[] bytes) => Bytes = bytes;
 
 		public byte[] Bytes { get; }
@@ -61,8 +94,20 @@ public class LazyDocumentExperiment
 	{
 		public override LazyDocument Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			var bytes = reader.GetBytesUntilEndOfObject();
-			return new LazyDocument(bytes);
+			// At this stage we're just getting the bytes from valid JSON
+
+			using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
+
+			using var stream = new MemoryStream();
+
+			var writer = new Utf8JsonWriter(stream);
+			jsonDoc.WriteTo(writer);
+			writer.Flush();
+
+			return new LazyDocument(stream.ToArray());
+
+			//var bytes = reader.GetBytesUntilEndOfObject();
+			//return new LazyDocument(bytes);
 		}
 
 		public override void Write(Utf8JsonWriter writer, LazyDocument value, JsonSerializerOptions options) => throw new NotImplementedException();
