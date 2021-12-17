@@ -167,11 +167,14 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 
 		// TODO - Re-enable once Source endpoint is generated and implemented
 
-		var project1 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name).Body;
+		var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue)).Body;
 		project1.LeadDeveloper.FirstName.Should().Be("martijn");
 		project1.Description.Should().Be("Overridden");
 
-		var project2 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name + "2", p => p.Routing(Project.Instance.Name)).Body;
+		var project2 = Client.Source<Project>(Project.Instance.Name + "2", p => p
+			.Index(CallIsolatedValue)
+			.Routing(Project.Instance.Name)).Body;
+
 		project2.Description.Should().Be("Default");
 		project2.NumberOfCommits.Should().Be(30);
 	}

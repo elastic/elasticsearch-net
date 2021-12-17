@@ -256,32 +256,6 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
 		}
 
-		public GetSourceResponse<TDocument> GetSource<TDocument>(GetSourceRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<GetSourceRequest, GetSourceResponse<TDocument>>(request);
-		}
-
-		public Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<GetSourceRequest, GetSourceResponse<TDocument>>(request, cancellationToken);
-		}
-
-		public GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest = null)
-		{
-			var descriptor = new GetSourceRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			return DoRequest<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>>(descriptor);
-		}
-
-		public Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new GetSourceRequestDescriptor<TDocument>(index, id);
-			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>>(descriptor);
-		}
-
 		public IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
 		{
 			request.BeforeRequest();
@@ -390,6 +364,32 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
+		}
+
+		public SourceResponse<TDocument> Source<TDocument>(SourceRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<SourceRequest, SourceResponse<TDocument>>(request);
+		}
+
+		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(SourceRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<SourceRequest, SourceResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public SourceResponse<TDocument> Source<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+		}
+
+		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
+			configureRequest?.Invoke(descriptor);
+			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
 
 		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)
