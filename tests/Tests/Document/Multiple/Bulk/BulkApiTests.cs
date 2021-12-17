@@ -77,32 +77,32 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 			Pipeline = "default-pipeline",
 			Operations = new List<IBulkOperation>
 			{
-					new BulkIndexOperation<Project>(Project.Instance) { Pipeline = "pipeline" },
-					new BulkUpdateOperation<Project, object>(Project.Instance.Name)
+				new BulkIndexOperation<Project>(Project.Instance) { Pipeline = "pipeline" },
+				new BulkUpdateOperation<Project, object>(Project.Instance.Name)
+				{
+					Doc = new { leadDeveloper = new { firstName = "martijn" } }
+				},
+				new BulkCreateOperation<Project>(Project.Instance)
+				{
+					Id = Project.Instance.Name + "1",
+				},
+				new BulkDeleteOperation<Project>(Project.Instance.Name + "1")
+				{
+					Routing = Project.Instance.Name
+				},
+				new BulkCreateOperation<Project>(Project.Instance)
+				{
+					Id = Project.Instance.Name + "2",
+				},
+				new BulkUpdateOperation<Project, object>(Project.Instance.Name + "2")
+				{
+					Routing = Project.Instance.Name,
+					Script = new InlineScript("ctx._source.numberOfCommits = params.commits")
 					{
-						Doc = new { leadDeveloper = new { firstName = "martijn" } }
-					},
-					new BulkCreateOperation<Project>(Project.Instance)
-					{
-						Id = Project.Instance.Name + "1",
-					},
-					new BulkDeleteOperation<Project>(Project.Instance.Name + "1")
-					{
-						Routing = Project.Instance.Name
-					},
-					new BulkCreateOperation<Project>(Project.Instance)
-					{
-						Id = Project.Instance.Name + "2",
-					},
-					new BulkUpdateOperation<Project, object>(Project.Instance.Name + "2")
-					{
-						Routing = Project.Instance.Name,
-						Script = new InlineScript("ctx._source.numberOfCommits = params.commits")
-						{
-							Params = new Dictionary<string, object> { { "commits", 30 } },
-							Language = "painless"
-						}
+						Params = new Dictionary<string, object> { { "commits", 30 } },
+						Language = "painless"
 					}
+				}
 			}
 		};
 
@@ -125,7 +125,7 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 		{
 			Processors = new ProcessorContainer[]
 			{
-				new ProcessorContainer(new SetProcessor { Field = "descriptor", Value = "Default" } )
+				new ProcessorContainer(new SetProcessor { Field = "description", Value = "Default" } )
 			}
 		});
 
@@ -135,7 +135,7 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 		{
 			Processors = new ProcessorContainer[]
 			{
-				new ProcessorContainer(new SetProcessor { Field = "descriptor", Value = "Overridden" } )
+				new ProcessorContainer(new SetProcessor { Field = "description", Value = "Overridden" } )
 			}
 		});
 
@@ -167,15 +167,12 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 
 		// TODO - Re-enable once Source endpoint is generated and implemented
 
-		var project1 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name); //.Body;
-																							//project1.LeadDeveloper.FirstName.Should().Be("martijn");
-																							//project1.Description.Should().Be("Overridden");
+		var project1 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name).Body;
+		project1.LeadDeveloper.FirstName.Should().Be("martijn");
+		project1.Description.Should().Be("Overridden");
 
-		//var project2 = Client.Source<Project>(Project.Instance.Name + "2", p => p
-		//	.Index(CallIsolatedValue)
-		//	.Routing(Project.Instance.Name)
-		//).Body;
-		//project2.Description.Should().Be("Default");
-		//project2.NumberOfCommits.Should().Be(30);
+		var project2 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name + "2", p => p.Routing(Project.Instance.Name)).Body;
+		project2.Description.Should().Be("Default");
+		project2.NumberOfCommits.Should().Be(30);
 	}
 }
