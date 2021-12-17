@@ -60,6 +60,54 @@ namespace Tests.Framework.EndpointTests
 			});
 	}
 
+	public abstract class NdJsonApiIntegrationTestBase<TCluster, TResponse, TDescriptor, TInitializer>
+		: NdJsonApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
+		where TResponse : class, IResponse
+		where TDescriptor : class
+		where TInitializer : class
+	{
+		protected NdJsonApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		public override IElasticClient Client => Cluster.Client;
+		protected abstract bool ExpectIsValid { get; }
+		protected abstract int ExpectStatusCode { get; }
+		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
+
+		protected virtual void ExpectResponse(TResponse response) { }
+
+		[I]
+		public virtual async Task ReturnsExpectedStatusCode() =>
+			await AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(ExpectStatusCode));
+
+		[I]
+		public virtual async Task ReturnsExpectedIsValid() =>
+			await AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(ExpectIsValid));
+
+		[I] public virtual async Task ReturnsExpectedResponse() => await AssertOnAllResponses(ExpectResponse);
+
+		protected override Task AssertOnAllResponses(Action<TResponse> assert) =>
+			base.AssertOnAllResponses(r =>
+			{
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
+					&& r.ApiCall.OriginalException is not TransportException)
+				{
+					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					throw new ResponseAssertionException(e.SourceException, r).Demystify();
+				}
+
+				try
+				{
+					assert(r);
+				}
+				catch (Exception e)
+				{
+					var ex = ExceptionDispatchInfo.Capture(e.Demystify());
+					throw new ResponseAssertionException(ex.SourceException, r).Demystify();
+				}
+			});
+	}
+
 	public class ResponseAssertionException : Exception
 	{
 		public ResponseAssertionException(Exception innerException, IResponse response)

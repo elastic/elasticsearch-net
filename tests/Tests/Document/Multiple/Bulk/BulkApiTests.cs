@@ -4,58 +4,50 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Elastic.Clients.Elasticsearch.Ingest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
-using Tests.Serialization;
 
 namespace Tests.Document.Multiple;
 
-public class BulkApiIndexSerializationTests : SerializerTestBase
-{
-	// TODO: THESE COULD BE IMPROVED BY PROVIDING A BASE CLASS THAT HANDLES PROPER SERIALISATION CHECKS
-	// String verification is brittle if the serialisation approach changes internally and potentially order is different
-	// Future improvement is to refactor these to combine with the integration tests as per a "normal" serialisation request
-	// We can add methods to the ApiIntegrationTestBase to achieve that cleanly and conditionally verify the collection for ndjson requests
-
-	[U]
-	public void IndexFluent()
-	{
-		var expected = new List<string>()
-		{
-			{ $@"{{""index"":{{""_id"":""{Project.Instance.Name}"",""routing"":""{Project.Instance.Name}"",""pipeline"":""pipeline""}}}}" }
-		};
-
-		var request = new BulkRequestDescriptor().Index(Project.Instance, b => b.Pipeline("pipeline"));
-
-		var stream = new MemoryStream();
-		_requestResponseSerializer.Serialize(request, stream);
-		stream.Position = 0;
-
-		var reader = new StreamReader(stream);
-
-		foreach (var expectedItem in expected)
-		{
-			var item = reader.ReadLine();
-			item.Should().NotBeNull();
-			item.Should().Be(expectedItem);
-		}
-	}
-}
-
-public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse, BulkRequestDescriptor, BulkRequest>
+public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkResponse, BulkRequestDescriptor, BulkRequest>
 {
 	public BulkApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	protected override bool ExpectIsValid => true;
 
-	// We have specific tests for the serialisation behaviour.
-	// The roundtrip flow does not work through STJ.
-	protected override object ExpectJson => null;
+	protected override IReadOnlyList<object> ExpectNdjson => new List<object>
+	{
+		new Dictionary<string, object>
+			{ { "index", new { _id = Project.Instance.Name, pipeline = "pipeline", routing = Project.Instance.Name } } },
+		Project.InstanceAnonymous,
+		new Dictionary<string, object> { { "update", new { _id = Project.Instance.Name } } },
+		new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
+		new Dictionary<string, object>
+			{ { "create", new { _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
+		Project.InstanceAnonymous,
+		new Dictionary<string, object>
+			{ { "delete", new { _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
+		new Dictionary<string, object>
+			{ { "create", new { _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
+		Project.InstanceAnonymous,
+		new Dictionary<string, object>
+			{ { "update", new { _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
+		new Dictionary<string, object>
+		{
+			{
+				"script", new
+				{
+					source = "ctx._source.numberOfCommits = params.commits",
+					@params = new { commits = 30 },
+					lang = "painless"
+				}
+			}
+		}
+	};
 
 	protected override int ExpectStatusCode => 200;
 

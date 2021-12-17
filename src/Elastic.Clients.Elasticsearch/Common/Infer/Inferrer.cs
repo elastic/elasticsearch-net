@@ -11,6 +11,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Collections;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -228,6 +230,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(JoinFieldConverter))]
 	public class JoinField
 	{
 		internal Child ChildOption { get; }
@@ -313,6 +316,23 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	internal sealed class JoinFieldConverter : JsonConverter<JoinField>
+	{
+		public override JoinField? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, JoinField value, JsonSerializerOptions options)
+		{
+			switch (value.Tag)
+			{
+				case 0:
+					JsonSerializer.Serialize(writer, value.ParentOption.Name, options);
+					break; 
+			}
+
+			// TODO - Finish this
+		}
+	}
+
+	[JsonConverter(typeof(RelationNameConverter))]
 	public class RelationName : IEquatable<RelationName>, IUrlParameter
 	{
 		private RelationName(string type) => Name = type;
@@ -380,6 +400,26 @@ namespace Elastic.Clients.Elasticsearch
 
 		public override string ToString() => DebugDisplay;
 
+	}
+
+	internal sealed class RelationNameConverter : JsonConverter<RelationName>
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public RelationNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override RelationName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, RelationName value, JsonSerializerOptions options)
+		{
+			if (value is null)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			var relationName = _settings.Inferrer.RelationName(value);
+			writer.WriteStringValue(relationName);
+		}
 	}
 
 	internal class FieldResolver

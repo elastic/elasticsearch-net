@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// <summary> Use the inferred routing from <paramref name="document" /> </summary>
 		public static Routing From<T>(T document) where T : class => new(document);
 
-		private string GetString(IElasticsearchClientSettings settings)
+		internal string GetString(IElasticsearchClientSettings settings)
 		{
 			string value = null;
 			if (DocumentGetter != null)
@@ -193,6 +193,13 @@ namespace Elastic.Clients.Elasticsearch
 			if (value.Document is not null)
 			{
 				var documentId = _settings.Inferrer.Routing(value.Document.GetType(), value.Document);
+
+				if (documentId is null)
+				{
+					writer.WriteNullValue();
+					return;
+				}
+
 				writer.WriteStringValue(documentId);
 			}
 			else if (value.DocumentGetter is not null)
