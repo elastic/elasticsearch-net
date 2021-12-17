@@ -59,10 +59,6 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("_type")]
-		public string? Type { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_version")]
 		public long? Version { get; init; }
 

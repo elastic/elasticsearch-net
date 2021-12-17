@@ -42,7 +42,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
-		internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls IndexManagementAnalyze = new ApiUrls(new[] { "/_analyze", "/{index}/_analyze" });
 		internal static ApiUrls IndexManagementCreate = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
@@ -102,6 +101,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
+		internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
 	}
 }
