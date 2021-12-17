@@ -54,6 +54,7 @@ namespace Elastic.Clients.Elasticsearch
 					new CustomJsonWriterConverterFactory(settings),
 					new RoutingConverter(settings),
 					new SelfSerializableConverterFactory(settings),
+					new SelfDeserializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					//new FieldConverterFactory(settings),
 					new JsonStringEnumConverter(),  //required for source serialisation
