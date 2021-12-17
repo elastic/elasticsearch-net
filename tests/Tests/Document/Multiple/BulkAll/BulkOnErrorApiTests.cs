@@ -17,7 +17,6 @@ public class BulkOnErrorApiTests : BulkAllApiTestsBase
 {
 	private const int Size = 100,
 		Pages = 3,
-		NumberOfShards = 1,
 		FailAfterPage = 2,
 		// last page will have some errors we don't need a 100 exceptions printed on console out though :)
 		NumberOfDocuments = Size * (Pages - 1) + 2;
@@ -127,16 +126,15 @@ public class BulkOnErrorApiTests : BulkAllApiTestsBase
 			handle.WaitOne(TimeSpan.FromSeconds(60));
 			seenPages.Should().Be(0);
 			var clientException = ex.Should().NotBeNull().And.BeOfType<TransportException>().Subject;
-			clientException.Message.Should().StartWith("BulkAll halted after failed product check");
+			clientException.Message.Should().StartWith("BulkAll halted after attempted bulk failed over all the active nodes");
 		}
 	}
 
-	private BulkAllObservable<SmallObject> KickOff(
-		string index,
-		IEnumerable<SmallObject> documents,
-		Action<BulkAllRequestDescriptor<SmallObject>> selector = null
-	)
-	{;
+	private BulkAllObservable<SmallObject> KickOff(string index, IEnumerable<SmallObject> documents, Action<BulkAllRequestDescriptor<SmallObject>> selector = null)
+	{
+		if (selector is null)
+			selector = f => { };
+
 		var observableBulk = Client.BulkAll(documents, f => selector(f
 			.MaxDegreeOfParallelism(8)
 			.BackOffTime(TimeSpan.FromSeconds(10))
@@ -148,13 +146,33 @@ public class BulkOnErrorApiTests : BulkAllApiTestsBase
 		return observableBulk;
 	}
 
-	private static Task<IEnumerable<SmallObject>> CreateIndexAndReturnDocuments(string index)
+	private async Task<IEnumerable<SmallObject>> CreateIndexAndReturnDocuments(string index)
 	{
 		//await CreateIndexAsync(index, NumberOfShards, m => m
 		//	.Properties(p => p
 		//		.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false))
 		//	)
 		//);
+
+		var json = @"{
+    ""settings"": {
+        ""index"": {
+            ""number_of_shards"": 1,
+            ""number_of_replicas"": 0
+        }
+    },
+    ""mappings"": {
+        ""properties"": {
+            ""number"": {
+                ""type"": ""float"",
+                ""coerce"": false,
+                ""ignore_malformed"": false
+            }
+        }
+    }
+}";
+
+		var response = await Client.Transport.RequestAsync<StringResponse>(HttpMethod.PUT, index, PostData.String(json));
 
 		var documents = CreateLazyStreamOfDocuments(NumberOfDocuments)
 			.Select(s =>
@@ -166,6 +184,6 @@ public class BulkOnErrorApiTests : BulkAllApiTestsBase
 				return s;
 			});
 
-		return Task.FromResult(documents);
+		return documents;
 	}
 }
