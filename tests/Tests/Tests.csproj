@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Core\Tests.Core.csproj" />
     <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
-    <ProjectReference Include="$(SolutionRoot)\Tests.ClusterLauncher\Tests.ClusterLauncher.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.ClusterLauncher\Tests.ClusterLauncher.csproj" />
 
     <PackageReference Include="Elastic.Transport.VirtualizedCluster" Version="0.2.2" />
     <PackageReference Include="FSharp.Core" Version="4.7.0" />

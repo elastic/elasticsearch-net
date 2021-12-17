@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Helpers;
-using Elastic.Clients.Elasticsearch.Mapping;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Multiple;
@@ -148,6 +147,8 @@ public class BulkOnErrorApiTests : BulkAllApiTestsBase
 
 	private async Task<IEnumerable<SmallObject>> CreateIndexAndReturnDocuments(string index)
 	{
+		// TODO - Move back to this setup once mappings are fully supported
+
 		//await CreateIndexAsync(index, NumberOfShards, m => m
 		//	.Properties(p => p
 		//		.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false))

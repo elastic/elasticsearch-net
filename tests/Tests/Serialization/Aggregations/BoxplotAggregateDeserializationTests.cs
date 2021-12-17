@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization;
 
-public class BoxplotAggregateDeserializationTests : SourceSerializerTestBase
+public class BoxplotAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserializeAggregate()

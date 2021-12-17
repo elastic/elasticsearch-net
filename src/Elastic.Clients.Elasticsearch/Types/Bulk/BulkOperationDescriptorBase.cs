@@ -48,8 +48,6 @@ namespace Elastic.Clients.Elasticsearch
 
 			writer.WriteStartObject();
 
-			SerializeInternal(writer, options, settings);
-
 			if (IdValue is not null)
 			{
 				writer.WritePropertyName("_id");
@@ -91,6 +89,8 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WritePropertyName("version_type");
 				JsonSerializer.Serialize(writer, _versionType.Value, options);
 			}
+
+			SerializeInternal(writer, options, settings);
 
 			writer.WriteEndObject();
 		}

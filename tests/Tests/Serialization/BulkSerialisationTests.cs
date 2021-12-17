@@ -7,7 +7,7 @@ using Tests.Domain;
 
 namespace Tests.Serialization
 {
-	public class BulkSerialisationTests : SourceSerializerTestBase
+	public class BulkSerialisationTests : SerializerTestBase
 	{
 		[U]
 		public async Task BulkRequest_SerialisationTest()

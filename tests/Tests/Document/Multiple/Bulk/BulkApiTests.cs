@@ -4,14 +4,48 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Elastic.Clients.Elasticsearch.Ingest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using Tests.Serialization;
 
 namespace Tests.Document.Multiple;
+
+public class BulkApiIndexSerializationTests : SerializerTestBase
+{
+	// TODO: THESE COULD BE IMPROVED BY PROVIDING A BASE CLASS THAT HANDLES PROPER SERIALISATION CHECKS
+	// String verification is brittle if the serialisation approach changes internally and potentially order is different
+	// Future improvement is to refactor these to combine with the integration tests as per a "normal" serialisation request
+	// We can add methods to the ApiIntegrationTestBase to achieve that cleanly and conditionally verify the collection for ndjson requests
+
+	[U]
+	public void IndexFluent()
+	{
+		var expected = new List<string>()
+		{
+			{ $@"{{""index"":{{""_id"":""{Project.Instance.Name}"",""routing"":""{Project.Instance.Name}"",""pipeline"":""pipeline""}}}}" }
+		};
+
+		var request = new BulkRequestDescriptor().Index(Project.Instance, b => b.Pipeline("pipeline"));
+
+		var stream = new MemoryStream();
+		_requestResponseSerializer.Serialize(request, stream);
+		stream.Position = 0;
+
+		var reader = new StreamReader(stream);
+
+		foreach (var expectedItem in expected)
+		{
+			var item = reader.ReadLine();
+			item.Should().NotBeNull();
+			item.Should().Be(expectedItem);
+		}
+	}
+}
 
 public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse, BulkRequestDescriptor, BulkRequest>
 {
@@ -142,8 +176,8 @@ public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, BulkResponse
 		// TODO - Re-enable once Source endpoint is generated and implemented
 
 		var project1 = Client.GetSource<Project>(CallIsolatedValue, Project.Instance.Name); //.Body;
-		//project1.LeadDeveloper.FirstName.Should().Be("martijn");
-		//project1.Description.Should().Be("Overridden");
+																							//project1.LeadDeveloper.FirstName.Should().Be("martijn");
+																							//project1.Description.Should().Be("Overridden");
 
 		//var project2 = Client.Source<Project>(Project.Instance.Name + "2", p => p
 		//	.Index(CallIsolatedValue)

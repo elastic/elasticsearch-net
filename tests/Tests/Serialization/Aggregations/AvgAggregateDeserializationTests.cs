@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization;
 
-public class AvgAggregateDeserializationTests : SourceSerializerTestBase
+public class AvgAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserialize_AvgAggregate()
