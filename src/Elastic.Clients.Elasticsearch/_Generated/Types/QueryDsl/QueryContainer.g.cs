@@ -342,6 +342,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return new QueryContainer(variant);
 			}
 
+			if (propertyName == "wrapper")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery?>(ref reader, options);
+				return new QueryContainer(variant);
+			}
+
 			throw new JsonException();
 		}
 
@@ -498,6 +504,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				case Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
+				case Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
 			}
 
 			writer.WriteEndObject();
@@ -635,6 +644,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void TermsSet(Action<TermsSetQueryDescriptor<T>> configure) => Set(configure, "terms_set");
 		public void Wildcard(WildcardQuery variant) => Set(variant, "wildcard");
 		public void Wildcard(Action<WildcardQueryDescriptor<T>> configure) => Set(configure, "wildcard");
+		public void Wrapper(WrapperQuery variant) => Set(variant, "wrapper");
+		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -1088,6 +1099,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				var descriptor = new WildcardQueryDescriptor<T>();
 				((Action<WildcardQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
+			}
+
+			if (ContainedVariantName == "wrapper")
+			{
+				var descriptor = new WrapperQueryDescriptor();
+				((Action<WrapperQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

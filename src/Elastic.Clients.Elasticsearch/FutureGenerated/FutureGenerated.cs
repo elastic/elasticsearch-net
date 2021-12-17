@@ -718,7 +718,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class GetSourceResponse<TDocument> : ISelfDeserializable
+	public partial class ElasticClient
+	{
+		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null)
+		{
+			var descriptor = new SourceRequestDescriptor<TDocument>(documentWithId: id.Document, index: id?.Self?.Index, id: id?.Self?.Id);
+			configure?.Invoke(descriptor);
+			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+		}
+	}
+
+	public partial interface IElasticClient
+	{
+		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null);
+	}
+
+	public sealed partial class SourceRequestDescriptor<T>
+	{
+		public SourceRequestDescriptor(T documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(T), id ?? Id.From(documentWithId)) { }
+
+		/// <summary>
+		/// The name of the index.
+		/// </summary>
+		public SourceRequestDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+
+		/// <summary>
+		/// A shortcut into calling Index(typeof(TOther)).
+		/// </summary>
+		public SourceRequestDescriptor<T> Index<TOther>() => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+	}
+
+	public partial class SourceResponse<TDocument> : ISelfDeserializable
 	{
 		public TDocument Body { get; set; }
 
