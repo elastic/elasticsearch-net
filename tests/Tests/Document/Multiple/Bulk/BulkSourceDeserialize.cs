@@ -58,17 +58,10 @@ public class BulkSourceDeserialize
 		item1.SeqNo.Should().Be(3);
 		item1.PrimaryTerm.Should().Be(1);
 		item1.Found.Should().Be(true);
-		item1.Source.Should().HaveCount(2);
 
-		item1.Source.TryGetValue("field1", out var field1Value).Should().BeTrue();
-		field1Value.Should().BeOfType<string>().Subject.Should().Be("value1");
-
-		// TODO - We need a way to store and access the sources bytes as a LazyDocument with STJ
-
-		//var simpleObject = bulkResponse.Items[0].GetResponse<SimpleObject>();
-		//simpleObject.Found.Should().BeTrue();
-		//simpleObject.Source.field1.Should().Be("value1");
-		//simpleObject.Source.field2.Should().Be("value2");
+		var simpleObject = bulkResponse.Items[0].Get.Source.As<SimpleObject>();
+		simpleObject.field1.Should().Be("value1");
+		simpleObject.field2.Should().Be("value2");
 	}
 
 	private class SimpleObject

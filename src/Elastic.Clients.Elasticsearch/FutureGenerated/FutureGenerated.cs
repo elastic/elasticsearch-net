@@ -733,6 +733,16 @@ namespace Elastic.Clients.Elasticsearch
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null);
 	}
 
+	public abstract partial class BulkResponseItemBase
+	{
+		// TODO
+
+		/// <summary>
+		/// Deserialize the <see cref="Get"/> property as a GetResponse<TDocument> type, where TDocument is the document type.
+		/// </summary>
+		//public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class => Get.Source?.AsUsingRequestResponseSerializer<GetResponse<TDocument>>();
+	}
+
 	public sealed partial class SourceRequestDescriptor<T>
 	{
 		public SourceRequestDescriptor(T documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(T), id ?? Id.From(documentWithId)) { }
