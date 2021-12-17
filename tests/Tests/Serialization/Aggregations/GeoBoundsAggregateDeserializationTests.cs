@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization;
 
-public class GeoBoundsAggregateDeserializationTests : SourceSerializerTestBase
+public class GeoBoundsAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserializeAggregate()

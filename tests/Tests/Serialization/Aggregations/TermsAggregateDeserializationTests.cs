@@ -7,7 +7,7 @@ using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace Tests.Serialization;
 
-public class TermsAggregateDeserializationTests : SourceSerializerTestBase
+public class TermsAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserialize_BasicStringTermsAggregate()

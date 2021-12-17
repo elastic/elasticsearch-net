@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Tests.Serialization;
 
-public class SearchResponseDeserialisationTests : SourceSerializerTestBase
+public class SearchResponseDeserialisationTests : SerializerTestBase
 {
 	[U]
 	public void Should_HandleTsdbSortRoundTrip()

@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization;
 
-public class ExtendedStatsAggregateDeserializationTests : SourceSerializerTestBase
+public class ExtendedStatsAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserializeAggregate()

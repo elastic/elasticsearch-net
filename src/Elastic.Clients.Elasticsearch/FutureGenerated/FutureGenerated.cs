@@ -792,13 +792,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class BulkRequestDescriptor
-	{
-		protected override string ContentType => "application/x-ndjson";
-
-		protected override string Accept => "application/json";
-	}
-
 	public partial class BulkResponse
 	{
 		[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
@@ -824,6 +817,10 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class BulkRequestDescriptor : IStreamSerializable
 	{
+		protected override string ContentType => "application/x-ndjson";
+
+		protected override string Accept => "application/json";
+
 		private readonly BulkOperationsCollection _operations = new();
 
 		public BulkRequestDescriptor Index(string index) => Assign(index, (a, v) => a.RouteValues.Optional("index", IndexName.Parse(v)));

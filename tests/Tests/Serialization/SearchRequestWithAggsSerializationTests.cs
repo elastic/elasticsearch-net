@@ -3,7 +3,7 @@ using Tests.Domain;
 
 namespace Tests.Serialization;
 
-public class SearchRequestWithAggsSerializationTests : SourceSerializerTestBase
+public class SearchRequestWithAggsSerializationTests : SerializerTestBase
 {
 	private const string SearchJson = @"{""aggregations"":{""my-terms-agg"":{""terms"":{""field"":""name""}}}}";
 

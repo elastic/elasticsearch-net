@@ -4,7 +4,7 @@ using Tests.Domain;
 
 namespace Tests.Serialization;
 
-public class QueryContainerWithFieldNameQuerySerializationTests : SourceSerializerTestBase
+public class QueryContainerWithFieldNameQuerySerializationTests : SerializerTestBase
 {
 	private const string BasicMatchQueryJson = @"{""match"":{""name"":{""query"":""NEST""}}}";
 

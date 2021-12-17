@@ -4,7 +4,7 @@
 
 namespace Tests.Serialization.Scripting;
 
-public class ScriptSerialisationTests : SourceSerializerTestBase
+public class ScriptSerialisationTests : SerializerTestBase
 {
 	[U]
 	public void CanDeserialize_InlineScript_WhenParamsComeLast()
