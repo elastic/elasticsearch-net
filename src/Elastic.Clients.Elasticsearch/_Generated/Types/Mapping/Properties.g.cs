@@ -32,5 +32,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public class Properties : IsADictionaryBase<string, IPropertiesVariant>
 	{
+		public Properties(Dictionary<string, IPropertiesVariant> properties) : base(properties) { }
 	}
 }

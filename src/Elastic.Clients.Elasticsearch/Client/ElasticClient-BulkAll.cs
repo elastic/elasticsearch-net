@@ -11,7 +11,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial interface IElasticClient
 {
-	HelpersNamespace Helpers { get; }
+	//HelpersNamespace Helpers { get; }
 
 	BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default);
 
@@ -20,7 +20,7 @@ public partial interface IElasticClient
 
 public partial class ElasticClient
 {
-	public HelpersNamespace Helpers { get; private set; }
+	//public HelpersNamespace Helpers { get; private set; }
 
 	public BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
     {
@@ -33,19 +33,19 @@ public partial class ElasticClient
         new(this, request, cancellationToken);
 }
 
-public class HelpersNamespace : NamespacedClientProxy
-{
-	private readonly ElasticClient _client;
+//public class HelpersNamespace : NamespacedClientProxy
+//{
+//	private readonly ElasticClient _client;
 
-	internal HelpersNamespace(ElasticClient client) : base(client) => _client = client;
+//	internal HelpersNamespace(ElasticClient client) : base(client) => _client = client;
 
-	public BulkAllObservable<T> BulkAllObservable<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkAllRequestDescriptor<T>(documents);
-		configure?.Invoke(descriptor);
-		return BulkAllObservable<T>(descriptor, cancellationToken);
-	}
+//	public BulkAllObservable<T> BulkAllObservable<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
+//	{
+//		var descriptor = new BulkAllRequestDescriptor<T>(documents);
+//		configure?.Invoke(descriptor);
+//		return BulkAllObservable<T>(descriptor, cancellationToken);
+//	}
 
-	public BulkAllObservable<T> BulkAllObservable<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
-		new(_client, request, cancellationToken);
-}
+//	public BulkAllObservable<T> BulkAllObservable<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
+//		new(_client, request, cancellationToken);
+//}
