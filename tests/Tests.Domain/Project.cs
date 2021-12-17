@@ -9,6 +9,8 @@ using Tests.Configuration;
 using Tests.Domain.Helpers;
 using System.Linq;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
+using Tests.Domain.Extensions;
 
 namespace Tests.Domain;
 
@@ -27,7 +29,7 @@ public class Project
 		? InstanceAnonymousSourceSerializer
 		: InstanceAnonymousDefault;
 
-	//public JoinField Join => JoinField.Root<Project>();
+	public JoinField Join => JoinField.Root<Project>();
 
 	public Labels Labels { get; set; }
 	public DateTime LastActivity { get; set; }
@@ -126,7 +128,7 @@ public class Project
 	{
 		name = First.Name,
 		type = TypeName,
-		//join = Instance.Join.ToAnonymousObject(),
+		join = Instance.Join.ToAnonymousObject(),
 		state = "BellyUp",
 		visibility = "Public",
 		startedOn = "2015-01-01T00:00:00",
@@ -141,7 +143,7 @@ public class Project
 	{
 		name = First.Name,
 		type = TypeName,
-		//join = Instance.Join.ToAnonymousObject(),
+		join = Instance.Join.ToAnonymousObject(),
 		state = "BellyUp",
 		visibility = "Public",
 		startedOn = "2015-01-01T00:00:00",
@@ -155,4 +157,16 @@ public class Project
 
 
 	// @formatter:on — enable formatter after this line
+}
+
+public static class AnonymizerExtensions
+{
+	private static readonly Inferrer Infer = new Inferrer(new ElasticsearchClientSettings(new InMemoryConnection()).ApplyDomainSettings());
+
+	public static object ToAnonymousObject(this JoinField field) =>
+		field.Match<object>(p => Infer.RelationName(p.Name), c => new
+		{
+			parent = Infer.Id(c.ParentId),
+			name = Infer.RelationName(c.Name)
+		});
 }

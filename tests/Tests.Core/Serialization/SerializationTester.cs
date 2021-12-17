@@ -132,6 +132,39 @@ namespace Tests.Core.Serialization
 			return result;
 		}
 
+		public SerializationResult SerializesNdJson<T>(T @object, IReadOnlyList<object> expectedJson, bool preserveNullInExpected = false)
+		{
+			var stream = new MemoryStream();
+
+			Serializer.Serialize(@object, stream);
+
+			stream.Position = 0;
+			var reader = new StreamReader(stream);
+
+			var counter = 0;
+			string line;
+
+			var finalResult = new RoundTripResult<T> { Success = true };
+
+			while ((line = reader.ReadLine()) is not null)
+			{
+				var result = new RoundTripResult<T> { Success = false };
+				result.Serialized = line;
+
+				var expected = expectedJson[counter];
+				var expectedJsonToken = ExpectedJsonToJsonDocument(expected, preserveNullInExpected);
+
+				if (!TokenMatches(expectedJsonToken, result))
+				{
+					finalResult.Success = false;
+				}
+
+				counter++;
+			}
+
+			return finalResult;
+		}
+
 		public DeserializationResult<T> Deserializes<T>(object expectedJson, bool preserveNullInExpected = false)
 		{
 			var expectedJsonString = ExpectedJsonString(expectedJson, preserveNullInExpected);
@@ -186,6 +219,8 @@ namespace Tests.Core.Serialization
 			//	? ArrayMatches((JArray)expectedJsonDocument, result)
 			//	: TokenMatches(expectedJsonDocument, result);
 		}
+
+		
 
 		private string SerializeUsingClientDefault<T>(T @object) =>
 			@object switch

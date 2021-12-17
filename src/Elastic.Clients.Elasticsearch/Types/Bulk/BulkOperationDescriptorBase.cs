@@ -74,8 +74,15 @@ namespace Elastic.Clients.Elasticsearch
 
 			if (RoutingValue is not null)
 			{
-				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, RoutingValue, options);
+				// TODO - This flow is a bit inefficient and annoying just to get "clean" JSON
+
+				var value = RoutingValue.GetString(settings);
+
+				if (!string.IsNullOrEmpty(value))
+				{
+					writer.WritePropertyName("routing");
+					JsonSerializer.Serialize(writer, value, options);
+				}
 			}
 
 			if (_version.HasValue)
