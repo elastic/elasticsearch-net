@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.16
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.17
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -139,6 +139,12 @@ foreach (var query in queries)
     var descriptor = descriptors.First(d => query.IsAssignableFrom(d));
     foreach (var boolProperty in query.GetProperties().Where(p => p.PropertyType == typeof(bool?)))
     {
+        if (_descriptorPropertySkipList.TryGetValue(descriptor.Name, out var skips))
+        {
+            if (skips.Contains(boolProperty.Name))
+                continue;
+        }
+
         var descriptorMethod = descriptor.GetMethod(boolProperty.Name);
         if (descriptorMethod == null)
             throw new Exception($"No method for property {boolProperty.Name} on {descriptor.Name}");

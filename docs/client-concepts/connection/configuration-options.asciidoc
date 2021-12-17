@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.16
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.17
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -33,6 +33,8 @@ Api Key to send with all requests to Elasticsearch
 `BasicAuthentication`::
 
 Basic Authentication credentials to send with all requests to Elasticsearch
+
+`CertificateFingerprint`::
 
 `ClientCertificate`::
 
@@ -71,6 +73,8 @@ Disables the meta header which is included on all requests by default. This head
 `DisablePing`::
 
 When a node is used for the very first time or when it's used for the first time after it has been marked dead a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible. You can disable these pings globally here if you rather have it fail on the possible slower original request
+
+`EnableApiVersioningHeader`::
 
 `EnableDebugMode`::
 

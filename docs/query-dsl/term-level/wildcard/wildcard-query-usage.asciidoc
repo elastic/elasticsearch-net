@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.16
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/7.17
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -53,6 +53,49 @@ new WildcardQuery
       "boost": 1.1,
       "rewrite": "top_terms_boost_10",
       "value": "p*oj"
+    }
+  }
+}
+----
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Wildcard(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Wildcard("p*oj")
+    .Rewrite(MultiTermQueryRewrite.TopTermsBoost(10))
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new WildcardQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Wildcard = "p*oj",
+    Rewrite = MultiTermQueryRewrite.TopTermsBoost(10)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "wildcard": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "rewrite": "top_terms_boost_10",
+      "wildcard": "p*oj"
     }
   }
 }
