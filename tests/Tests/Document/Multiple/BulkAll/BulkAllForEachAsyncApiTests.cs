@@ -25,9 +25,9 @@ public class BulkAllForEachAsyncApiTests : BulkAllApiTestsBase
 		var numberOfDocuments = size * pages;
 		var documents = CreateLazyStreamOfDocuments(numberOfDocuments);
 
-		var tokenSource = new CancellationTokenSource();
+		using var tokenSource = new CancellationTokenSource();
 
-		var observableBulk = Client.Helpers.BulkAllObservable(documents, f => f
+		var observableBulk = Client.BulkAll(documents, f => f
 				.MaxDegreeOfParallelism(8)
 				.BackOffTime(TimeSpan.FromSeconds(10))
 				.BackOffRetries(2)

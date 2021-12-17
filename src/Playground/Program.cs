@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
@@ -128,6 +129,9 @@ namespace Playground
 
 			var bulkAllv2 = client.Helpers.BulkAllObservable(people, b => b.Index("people-v2-test"));
 			var observer2 = bulkAllv2.Wait(TimeSpan.FromMinutes(1), n => { });
+
+
+			
 
 			var request = await client.BulkAsync(b => b
 				.Index("people-test")
