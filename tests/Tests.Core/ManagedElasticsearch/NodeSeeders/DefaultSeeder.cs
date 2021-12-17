@@ -298,9 +298,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		private async Task SeedIndexDataAsync()
 		{
+			// TODO - Bulk API!
 			foreach (var p in Project.Projects) // Limited to 10 for testing
 			{
-				await Client.IndexAsync(p, Infer.Index<Project>());
+				await Client.CreateAsync(p, Infer.Index<Project>(), p.Name);
 			}
 
 			//var tasks = new Task[]

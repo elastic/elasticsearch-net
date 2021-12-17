@@ -17,9 +17,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
-			// TODO: Cache/Reuse
-
-			//var converter = (JsonConverter)Activator.CreateInstance(typeof(SelfSerializableJsonConverter));
 			_converter;
 
 		private class SelfSerializableJsonConverter : JsonConverter<ISelfSerializable>
@@ -34,26 +31,37 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	//internal sealed class SelfDeserializableConverterFactory : JsonConverterFactory
-	//{
-	//	public override bool CanConvert(Type typeToConvert)
-	//	{
-	//		var canSerialize = typeof(ISelfDeserializable).IsAssignableFrom(typeToConvert);
-	//		return canSerialize;
-	//	}
 
-	//	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
-	//		(JsonConverter)Activator.CreateInstance(typeof(SelfDeserializableJsonConverter));
 
-	//	private class SelfDeserializableJsonConverter<T> : JsonConverter<T>
-	//	{
-	//		private readonly IElasticsearchClientSettings _settings;
+	internal sealed class SelfDeserializableConverterFactory : JsonConverterFactory
+	{
+		private readonly IElasticsearchClientSettings _settings;
 
-	//		public SelfDeserializableJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
+		public SelfDeserializableConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
 
-	//		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ((ISelfDeserializable<T>)typeToConvert).Deserialize(ref reader, typeToConvert, options, _settings);
+		public override bool CanConvert(Type typeToConvert)
+		{
+			var canSerialize = typeof(ISelfDeserializable).IsAssignableFrom(typeToConvert);
+			return canSerialize;
+		}
 
-	//		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) => throw new NotImplementedException();
-	//	}
-	//}
+		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
+			(JsonConverter)Activator.CreateInstance(typeof(SelfDeserializableJsonConverter), _settings);
+
+		private class SelfDeserializableJsonConverter : JsonConverter<ISelfDeserializable>
+		{
+			private readonly IElasticsearchClientSettings _settings;
+
+			public SelfDeserializableJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+			public override ISelfDeserializable? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)// => ((ISelfDeserializable)typeToConvert).Deserialize(ref reader, typeToConvert, options, _settings);
+			{
+				var instance = (ISelfDeserializable)Activator.CreateInstance(typeToConvert);
+				instance.Deserialize(ref reader, options, _settings);
+				return instance;
+			}
+
+			public override void Write(Utf8JsonWriter writer, ISelfDeserializable value, JsonSerializerOptions options) => throw new NotImplementedException();
+		}
+	}
 }

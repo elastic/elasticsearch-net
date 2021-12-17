@@ -20,9 +20,9 @@ internal interface ISelfSerializable
 	void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 }
 
-internal interface ISelfDeserializable<T>
+internal interface ISelfDeserializable
 {
-	T Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+	void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 }
 
 internal interface IFactoryDeserializable<T>
