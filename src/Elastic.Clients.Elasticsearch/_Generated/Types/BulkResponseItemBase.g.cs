@@ -68,6 +68,6 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("get")]
-		public Elastic.Clients.Elasticsearch.InlineGet<Dictionary<string, object>>? Get { get; init; }
+		public Elastic.Clients.Elasticsearch.InlineGet<LazyDocument>? Get { get; init; }
 	}
 }
