@@ -49,6 +49,7 @@ namespace Elastic.Clients.Elasticsearch
 					new IdConverter(settings),
 					new FieldConverter(settings),
 					new SortCollectionConverter(settings),
+					new LazyDocumentConverter(settings),
 					new RelationNameConverter(settings),
 					//new FieldNameQueryConverterFactory(settings),
 					new CustomJsonWriterConverterFactory(settings),
