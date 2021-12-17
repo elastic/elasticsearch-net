@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
 
@@ -31,6 +32,15 @@ namespace PlaygroundV7x
 
 			var client = new ElasticClient();
 
+			//var responseBulk = client.Bulk(new BulkRequest
+			//{
+			//	Operations = new List<IBulkOperation>
+			//{
+			//	new BulkIndexOperation<Person>(new Person()) { Index = "people" } ,
+			//	new BulkIndexOperation<Person>(new Person()) { Index = "people", IfSequenceNumber = -1, IfPrimaryTerm = 0 }
+			//}
+			//});
+
 			var response = client.Index(new Person(), e => e.Index("test"));
 
 			var settingsResponse = await client.Indices.CreateAsync("a", i => i.Settings(s => s.Analysis(a => a.TokenFilters(tf => tf
@@ -41,7 +51,7 @@ namespace PlaygroundV7x
 
 			//var r1 = await c1.PingAsync();
 
-			
+
 
 
 #pragma warning disable IDE0039 // Use local function
@@ -84,7 +94,7 @@ namespace PlaygroundV7x
 
 			spanQuery = new QueryContainer(new SpanNearQuery()
 			{
-				Clauses = new [] { new SpanQuery() { SpanGap = new SpanGapQuery() { Field = "test", Width = 10 } } }
+				Clauses = new[] { new SpanQuery() { SpanGap = new SpanGapQuery() { Field = "test", Width = 10 } } }
 			});
 
 			//var spanQueryRaw = new SpanQuery()
@@ -100,7 +110,7 @@ namespace PlaygroundV7x
 
 			_ = await client.SearchAsync<Person>(new SearchDescriptor<Person>());
 			_ = await client.CountAsync(new CountDescriptor<Person>());
-			
+
 			//var response = await client.SearchAsync<Person>(search);
 
 			var r = await client.Indices.CreateAsync("", c => c.Settings(s => s.Analysis(a => a.CharFilters(cf => cf
