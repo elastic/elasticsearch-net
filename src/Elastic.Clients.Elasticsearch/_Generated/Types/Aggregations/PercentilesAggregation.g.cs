@@ -239,13 +239,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
 	}
 
-	public sealed partial class PercentilesAggregationDescriptor<T> : DescriptorBase<PercentilesAggregationDescriptor<T>>
+	public sealed partial class PercentilesAggregationDescriptor<TDocument> : DescriptorBase<PercentilesAggregationDescriptor<TDocument>>
 	{
 		public PercentilesAggregationDescriptor()
 		{
 		}
 
-		internal PercentilesAggregationDescriptor(Action<PercentilesAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal PercentilesAggregationDescriptor(Action<PercentilesAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? KeyedValue { get; private set; }
 
 		internal IEnumerable<double>? PercentsValue { get; private set; }
@@ -272,56 +272,56 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Action<TDigestDescriptor> TDigestDescriptorAction { get; private set; }
 
-		public PercentilesAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public PercentilesAggregationDescriptor<T> Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
-		public PercentilesAggregationDescriptor<T> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
+		public PercentilesAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
 		{
 			HdrDescriptor = null;
 			HdrDescriptorAction = null;
 			return Assign(hdr, (a, v) => a.HdrValue = v);
 		}
 
-		public PercentilesAggregationDescriptor<T> Hdr(Aggregations.HdrMethodDescriptor descriptor)
+		public PercentilesAggregationDescriptor<TDocument> Hdr(Aggregations.HdrMethodDescriptor descriptor)
 		{
 			HdrValue = null;
 			HdrDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HdrDescriptor = v);
 		}
 
-		public PercentilesAggregationDescriptor<T> Hdr(Action<Aggregations.HdrMethodDescriptor> configure)
+		public PercentilesAggregationDescriptor<TDocument> Hdr(Action<Aggregations.HdrMethodDescriptor> configure)
 		{
 			HdrValue = null;
 			HdrDescriptorAction = null;
 			return Assign(configure, (a, v) => a.HdrDescriptorAction = v);
 		}
 
-		public PercentilesAggregationDescriptor<T> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
+		public PercentilesAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 		{
 			TDigestDescriptor = null;
 			TDigestDescriptorAction = null;
 			return Assign(tDigest, (a, v) => a.TDigestValue = v);
 		}
 
-		public PercentilesAggregationDescriptor<T> TDigest(Aggregations.TDigestDescriptor descriptor)
+		public PercentilesAggregationDescriptor<TDocument> TDigest(Aggregations.TDigestDescriptor descriptor)
 		{
 			TDigestValue = null;
 			TDigestDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.TDigestDescriptor = v);
 		}
 
-		public PercentilesAggregationDescriptor<T> TDigest(Action<Aggregations.TDigestDescriptor> configure)
+		public PercentilesAggregationDescriptor<TDocument> TDigest(Action<Aggregations.TDigestDescriptor> configure)
 		{
 			TDigestValue = null;
 			TDigestDescriptorAction = null;
 			return Assign(configure, (a, v) => a.TDigestDescriptorAction = v);
 		}
 
-		public PercentilesAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public PercentilesAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercentilesAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercentilesAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public PercentilesAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public PercentilesAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public PercentilesAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -180,13 +180,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.GeoLocation? Location { get; set; }
 	}
 
-	public sealed partial class GeoCentroidAggregationDescriptor<T> : DescriptorBase<GeoCentroidAggregationDescriptor<T>>
+	public sealed partial class GeoCentroidAggregationDescriptor<TDocument> : DescriptorBase<GeoCentroidAggregationDescriptor<TDocument>>
 	{
 		public GeoCentroidAggregationDescriptor()
 		{
 		}
 
-		internal GeoCentroidAggregationDescriptor(Action<GeoCentroidAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal GeoCentroidAggregationDescriptor(Action<GeoCentroidAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal long? CountValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.GeoLocation? LocationValue { get; private set; }
@@ -199,13 +199,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public GeoCentroidAggregationDescriptor<T> Count(long? count) => Assign(count, (a, v) => a.CountValue = v);
-		public GeoCentroidAggregationDescriptor<T> Location(Elastic.Clients.Elasticsearch.GeoLocation? location) => Assign(location, (a, v) => a.LocationValue = v);
-		public GeoCentroidAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GeoCentroidAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GeoCentroidAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public GeoCentroidAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public GeoCentroidAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public GeoCentroidAggregationDescriptor<TDocument> Count(long? count) => Assign(count, (a, v) => a.CountValue = v);
+		public GeoCentroidAggregationDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation? location) => Assign(location, (a, v) => a.LocationValue = v);
+		public GeoCentroidAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoCentroidAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoCentroidAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public GeoCentroidAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public GeoCentroidAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

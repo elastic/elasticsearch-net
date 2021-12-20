@@ -39,23 +39,23 @@ namespace Elastic.Clients.Elasticsearch
 		public int Max { get; set; }
 	}
 
-	public sealed partial class SlicedScrollDescriptor<T> : DescriptorBase<SlicedScrollDescriptor<T>>
+	public sealed partial class SlicedScrollDescriptor<TDocument> : DescriptorBase<SlicedScrollDescriptor<TDocument>>
 	{
 		public SlicedScrollDescriptor()
 		{
 		}
 
-		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor<T>> configure) => configure.Invoke(this);
+		internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal int IdValue { get; private set; }
 
 		internal int MaxValue { get; private set; }
 
-		public SlicedScrollDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SlicedScrollDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SlicedScrollDescriptor<T> Id(int id) => Assign(id, (a, v) => a.IdValue = v);
-		public SlicedScrollDescriptor<T> Max(int max) => Assign(max, (a, v) => a.MaxValue = v);
+		public SlicedScrollDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SlicedScrollDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SlicedScrollDescriptor<TDocument> Id(int id) => Assign(id, (a, v) => a.IdValue = v);
+		public SlicedScrollDescriptor<TDocument> Max(int max) => Assign(max, (a, v) => a.MaxValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

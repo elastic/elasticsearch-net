@@ -187,13 +187,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public sealed partial class FiltersAggregationDescriptor<T> : DescriptorBase<FiltersAggregationDescriptor<T>>
+	public sealed partial class FiltersAggregationDescriptor<TDocument> : DescriptorBase<FiltersAggregationDescriptor<TDocument>>
 	{
 		public FiltersAggregationDescriptor()
 		{
 		}
 
-		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; private set; }
 
 		internal bool? OtherBucketValue { get; private set; }
@@ -206,36 +206,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public FiltersAggregationDescriptor<T> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters) => Assign(filters, (a, v) => a.FiltersValue = v);
-		public FiltersAggregationDescriptor<T> OtherBucket(bool? otherBucket = true) => Assign(otherBucket, (a, v) => a.OtherBucketValue = v);
-		public FiltersAggregationDescriptor<T> OtherBucketKey(string? otherBucketKey) => Assign(otherBucketKey, (a, v) => a.OtherBucketKeyValue = v);
-		public FiltersAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public FiltersAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters) => Assign(filters, (a, v) => a.FiltersValue = v);
+		public FiltersAggregationDescriptor<TDocument> OtherBucket(bool? otherBucket = true) => Assign(otherBucket, (a, v) => a.OtherBucketValue = v);
+		public FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? otherBucketKey) => Assign(otherBucketKey, (a, v) => a.OtherBucketKeyValue = v);
+		public FiltersAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public FiltersAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public FiltersAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public FiltersAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public FiltersAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public FiltersAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -280,7 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

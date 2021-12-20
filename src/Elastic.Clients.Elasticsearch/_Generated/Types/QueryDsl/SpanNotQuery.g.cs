@@ -51,13 +51,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public int? Pre { get; set; }
 	}
 
-	public sealed partial class SpanNotQueryDescriptor<T> : DescriptorBase<SpanNotQueryDescriptor<T>>
+	public sealed partial class SpanNotQueryDescriptor<TDocument> : DescriptorBase<SpanNotQueryDescriptor<TDocument>>
 	{
 		public SpanNotQueryDescriptor()
 		{
 		}
 
-		internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal int? DistValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; private set; }
@@ -72,61 +72,61 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal SpanQueryDescriptor<T> ExcludeDescriptor { get; private set; }
+		internal SpanQueryDescriptor<TDocument> ExcludeDescriptor { get; private set; }
 
-		internal SpanQueryDescriptor<T> IncludeDescriptor { get; private set; }
+		internal SpanQueryDescriptor<TDocument> IncludeDescriptor { get; private set; }
 
-		internal Action<SpanQueryDescriptor<T>> ExcludeDescriptorAction { get; private set; }
+		internal Action<SpanQueryDescriptor<TDocument>> ExcludeDescriptorAction { get; private set; }
 
-		internal Action<SpanQueryDescriptor<T>> IncludeDescriptorAction { get; private set; }
+		internal Action<SpanQueryDescriptor<TDocument>> IncludeDescriptorAction { get; private set; }
 
-		public SpanNotQueryDescriptor<T> Dist(int? dist) => Assign(dist, (a, v) => a.DistValue = v);
-		public SpanNotQueryDescriptor<T> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
+		public SpanNotQueryDescriptor<TDocument> Dist(int? dist) => Assign(dist, (a, v) => a.DistValue = v);
+		public SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
 		{
 			ExcludeDescriptor = null;
 			ExcludeDescriptorAction = null;
 			return Assign(exclude, (a, v) => a.ExcludeValue = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Exclude(QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanNotQueryDescriptor<TDocument> Exclude(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ExcludeDescriptor = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Exclude(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanNotQueryDescriptor<TDocument> Exclude(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ExcludeDescriptorAction = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
+		public SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
 		{
 			IncludeDescriptor = null;
 			IncludeDescriptorAction = null;
 			return Assign(include, (a, v) => a.IncludeValue = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Include(QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanNotQueryDescriptor<TDocument> Include(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.IncludeDescriptor = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Include(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanNotQueryDescriptor<TDocument> Include(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
 			return Assign(configure, (a, v) => a.IncludeDescriptorAction = v);
 		}
 
-		public SpanNotQueryDescriptor<T> Post(int? post) => Assign(post, (a, v) => a.PostValue = v);
-		public SpanNotQueryDescriptor<T> Pre(int? pre) => Assign(pre, (a, v) => a.PreValue = v);
-		public SpanNotQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public SpanNotQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public SpanNotQueryDescriptor<TDocument> Post(int? post) => Assign(post, (a, v) => a.PostValue = v);
+		public SpanNotQueryDescriptor<TDocument> Pre(int? pre) => Assign(pre, (a, v) => a.PreValue = v);
+		public SpanNotQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanNotQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -144,7 +144,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ExcludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(ExcludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(ExcludeDescriptorAction), options);
 			}
 			else
 			{
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (IncludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(IncludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(IncludeDescriptorAction), options);
 			}
 			else
 			{

@@ -159,13 +159,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public sealed partial class BoxplotAggregationDescriptor<T> : DescriptorBase<BoxplotAggregationDescriptor<T>>
+	public sealed partial class BoxplotAggregationDescriptor<TDocument> : DescriptorBase<BoxplotAggregationDescriptor<TDocument>>
 	{
 		public BoxplotAggregationDescriptor()
 		{
 		}
 
-		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal double? CompressionValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
@@ -176,12 +176,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public BoxplotAggregationDescriptor<T> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
-		public BoxplotAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public BoxplotAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public BoxplotAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public BoxplotAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public BoxplotAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public BoxplotAggregationDescriptor<TDocument> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
+		public BoxplotAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public BoxplotAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public BoxplotAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public BoxplotAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public BoxplotAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

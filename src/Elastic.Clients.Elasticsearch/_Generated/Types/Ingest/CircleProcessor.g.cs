@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class CircleProcessorDescriptor<T> : DescriptorBase<CircleProcessorDescriptor<T>>
+	public sealed partial class CircleProcessorDescriptor<TDocument> : DescriptorBase<CircleProcessorDescriptor<TDocument>>
 	{
 		public CircleProcessorDescriptor()
 		{
 		}
 
-		internal CircleProcessorDescriptor(Action<CircleProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal CircleProcessorDescriptor(Action<CircleProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal double ErrorDistanceValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
@@ -74,17 +74,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public CircleProcessorDescriptor<T> ErrorDistance(double errorDistance) => Assign(errorDistance, (a, v) => a.ErrorDistanceValue = v);
-		public CircleProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CircleProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CircleProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public CircleProcessorDescriptor<T> ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType shapeType) => Assign(shapeType, (a, v) => a.ShapeTypeValue = v);
-		public CircleProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public CircleProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public CircleProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public CircleProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public CircleProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public CircleProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public CircleProcessorDescriptor<TDocument> ErrorDistance(double errorDistance) => Assign(errorDistance, (a, v) => a.ErrorDistanceValue = v);
+		public CircleProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CircleProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CircleProcessorDescriptor<TDocument> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public CircleProcessorDescriptor<TDocument> ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType shapeType) => Assign(shapeType, (a, v) => a.ShapeTypeValue = v);
+		public CircleProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public CircleProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public CircleProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public CircleProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public CircleProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public CircleProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

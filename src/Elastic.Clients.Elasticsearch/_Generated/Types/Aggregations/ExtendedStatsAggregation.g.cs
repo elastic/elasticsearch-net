@@ -176,13 +176,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Sigma { get; set; }
 	}
 
-	public sealed partial class ExtendedStatsAggregationDescriptor<T> : DescriptorBase<ExtendedStatsAggregationDescriptor<T>>
+	public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : DescriptorBase<ExtendedStatsAggregationDescriptor<TDocument>>
 	{
 		public ExtendedStatsAggregationDescriptor()
 		{
 		}
 
-		internal ExtendedStatsAggregationDescriptor(Action<ExtendedStatsAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal ExtendedStatsAggregationDescriptor(Action<ExtendedStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal double? SigmaValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
@@ -195,13 +195,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public ExtendedStatsAggregationDescriptor<T> Sigma(double? sigma) => Assign(sigma, (a, v) => a.SigmaValue = v);
-		public ExtendedStatsAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public ExtendedStatsAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ExtendedStatsAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ExtendedStatsAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public ExtendedStatsAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public ExtendedStatsAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public ExtendedStatsAggregationDescriptor<TDocument> Sigma(double? sigma) => Assign(sigma, (a, v) => a.SigmaValue = v);
+		public ExtendedStatsAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public ExtendedStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ExtendedStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ExtendedStatsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public ExtendedStatsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public ExtendedStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

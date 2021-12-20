@@ -294,13 +294,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public sealed partial class HistogramAggregationDescriptor<T> : DescriptorBase<HistogramAggregationDescriptor<T>>
+	public sealed partial class HistogramAggregationDescriptor<TDocument> : DescriptorBase<HistogramAggregationDescriptor<TDocument>>
 	{
 		public HistogramAggregationDescriptor()
 		{
 		}
 
-		internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal double? IntervalValue { get; private set; }
@@ -325,64 +325,64 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal HistogramOrderDescriptor OrderDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
 		internal Action<HistogramOrderDescriptor> OrderDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public HistogramAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public HistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public HistogramAggregationDescriptor<T> Interval(double? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
-		public HistogramAggregationDescriptor<T> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
-		public HistogramAggregationDescriptor<T> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public HistogramAggregationDescriptor<T> Offset(double? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
-		public HistogramAggregationDescriptor<T> Order(Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? order)
+		public HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HistogramAggregationDescriptor<TDocument> Interval(double? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
+		public HistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
+		public HistogramAggregationDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public HistogramAggregationDescriptor<TDocument> Offset(double? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
+		public HistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? order)
 		{
 			OrderDescriptor = null;
 			OrderDescriptorAction = null;
 			return Assign(order, (a, v) => a.OrderValue = v);
 		}
 
-		public HistogramAggregationDescriptor<T> Order(Aggregations.HistogramOrderDescriptor descriptor)
+		public HistogramAggregationDescriptor<TDocument> Order(Aggregations.HistogramOrderDescriptor descriptor)
 		{
 			OrderValue = null;
 			OrderDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.OrderDescriptor = v);
 		}
 
-		public HistogramAggregationDescriptor<T> Order(Action<Aggregations.HistogramOrderDescriptor> configure)
+		public HistogramAggregationDescriptor<TDocument> Order(Action<Aggregations.HistogramOrderDescriptor> configure)
 		{
 			OrderValue = null;
 			OrderDescriptorAction = null;
 			return Assign(configure, (a, v) => a.OrderDescriptorAction = v);
 		}
 
-		public HistogramAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public HistogramAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public HistogramAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public HistogramAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public HistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public HistogramAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public HistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public HistogramAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public HistogramAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public HistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public HistogramAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public HistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -467,7 +467,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

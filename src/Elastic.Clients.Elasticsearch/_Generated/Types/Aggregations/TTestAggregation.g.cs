@@ -149,13 +149,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 	}
 
-	public sealed partial class TTestAggregationDescriptor<T> : DescriptorBase<TTestAggregationDescriptor<T>>
+	public sealed partial class TTestAggregationDescriptor<TDocument> : DescriptorBase<TTestAggregationDescriptor<TDocument>>
 	{
 		public TTestAggregationDescriptor()
 		{
 		}
 
-		internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? aValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; private set; }
@@ -164,58 +164,58 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal TestPopulationDescriptor<T> aDescriptor { get; private set; }
+		internal TestPopulationDescriptor<TDocument> aDescriptor { get; private set; }
 
-		internal TestPopulationDescriptor<T> bDescriptor { get; private set; }
+		internal TestPopulationDescriptor<TDocument> bDescriptor { get; private set; }
 
-		internal Action<TestPopulationDescriptor<T>> aDescriptorAction { get; private set; }
+		internal Action<TestPopulationDescriptor<TDocument>> aDescriptorAction { get; private set; }
 
-		internal Action<TestPopulationDescriptor<T>> bDescriptorAction { get; private set; }
+		internal Action<TestPopulationDescriptor<TDocument>> bDescriptorAction { get; private set; }
 
-		public TTestAggregationDescriptor<T> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
+		public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
 		{
 			aDescriptor = null;
 			aDescriptorAction = null;
 			return Assign(a, (a, v) => a.aValue = v);
 		}
 
-		public TTestAggregationDescriptor<T> a(Aggregations.TestPopulationDescriptor<T> descriptor)
+		public TTestAggregationDescriptor<TDocument> a(Aggregations.TestPopulationDescriptor<TDocument> descriptor)
 		{
 			aValue = null;
 			aDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.aDescriptor = v);
 		}
 
-		public TTestAggregationDescriptor<T> a(Action<Aggregations.TestPopulationDescriptor<T>> configure)
+		public TTestAggregationDescriptor<TDocument> a(Action<Aggregations.TestPopulationDescriptor<TDocument>> configure)
 		{
 			aValue = null;
 			aDescriptorAction = null;
 			return Assign(configure, (a, v) => a.aDescriptorAction = v);
 		}
 
-		public TTestAggregationDescriptor<T> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
+		public TTestAggregationDescriptor<TDocument> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
 		{
 			bDescriptor = null;
 			bDescriptorAction = null;
 			return Assign(b, (a, v) => a.bValue = v);
 		}
 
-		public TTestAggregationDescriptor<T> b(Aggregations.TestPopulationDescriptor<T> descriptor)
+		public TTestAggregationDescriptor<TDocument> b(Aggregations.TestPopulationDescriptor<TDocument> descriptor)
 		{
 			bValue = null;
 			bDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.bDescriptor = v);
 		}
 
-		public TTestAggregationDescriptor<T> b(Action<Aggregations.TestPopulationDescriptor<T>> configure)
+		public TTestAggregationDescriptor<TDocument> b(Action<Aggregations.TestPopulationDescriptor<TDocument>> configure)
 		{
 			bValue = null;
 			bDescriptorAction = null;
 			return Assign(configure, (a, v) => a.bDescriptorAction = v);
 		}
 
-		public TTestAggregationDescriptor<T> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public TTestAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public TTestAggregationDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public TTestAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (aDescriptorAction is not null)
 			{
 				writer.WritePropertyName("a");
-				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<T>(aDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<TDocument>(aDescriptorAction), options);
 			}
 			else if (aValue is not null)
 			{
@@ -245,7 +245,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (bDescriptorAction is not null)
 			{
 				writer.WritePropertyName("b");
-				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<T>(bDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.TestPopulationDescriptor<TDocument>(bDescriptorAction), options);
 			}
 			else if (bValue is not null)
 			{

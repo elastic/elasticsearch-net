@@ -288,18 +288,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			return DoRequestAsync<ClusterPutComponentTemplateRequest, ClusterPutComponentTemplateResponse>(request, cancellationToken);
 		}
 
-		public ClusterPutComponentTemplateResponse PutComponentTemplate<T>(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor<T>> configureRequest = null)
+		public ClusterPutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor<TDocument>> configureRequest = null)
 		{
-			var descriptor = new ClusterPutComponentTemplateRequestDescriptor<T>(name);
+			var descriptor = new ClusterPutComponentTemplateRequestDescriptor<TDocument>(name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<ClusterPutComponentTemplateRequestDescriptor<T>, ClusterPutComponentTemplateResponse>(descriptor);
+			return DoRequest<ClusterPutComponentTemplateRequestDescriptor<TDocument>, ClusterPutComponentTemplateResponse>(descriptor);
 		}
 
-		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync<T>(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor<T>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<ClusterPutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<ClusterPutComponentTemplateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new ClusterPutComponentTemplateRequestDescriptor<T>(name);
+			var descriptor = new ClusterPutComponentTemplateRequestDescriptor<TDocument>(name);
 			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<ClusterPutComponentTemplateRequestDescriptor<T>, ClusterPutComponentTemplateResponse>(descriptor);
+			return DoRequestAsync<ClusterPutComponentTemplateRequestDescriptor<TDocument>, ClusterPutComponentTemplateResponse>(descriptor);
 		}
 
 		public ClusterPutSettingsResponse PutSettings(ClusterPutSettingsRequest request)

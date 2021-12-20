@@ -39,13 +39,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public sealed partial class IndexTemplateMappingDescriptor<T> : DescriptorBase<IndexTemplateMappingDescriptor<T>>
+	public sealed partial class IndexTemplateMappingDescriptor<TDocument> : DescriptorBase<IndexTemplateMappingDescriptor<TDocument>>
 	{
 		public IndexTemplateMappingDescriptor()
 		{
 		}
 
-		internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor<T>> configure) => configure.Invoke(this);
+		internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
@@ -54,49 +54,49 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 
 		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
 
-		internal IndexManagement.IndexSettingsDescriptor<T> SettingsDescriptor { get; private set; }
+		internal IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
 
 		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
-		internal Action<IndexManagement.IndexSettingsDescriptor<T>> SettingsDescriptorAction { get; private set; }
+		internal Action<IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
 
-		public IndexTemplateMappingDescriptor<T> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
-		public IndexTemplateMappingDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		public IndexTemplateMappingDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
+		public IndexTemplateMappingDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
 			MappingsDescriptor = null;
 			MappingsDescriptorAction = null;
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
+		public IndexTemplateMappingDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+		public IndexTemplateMappingDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		public IndexTemplateMappingDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
 			SettingsDescriptor = null;
 			SettingsDescriptorAction = null;
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexTemplateMappingDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public IndexTemplateMappingDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexTemplateMappingDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{

@@ -55,13 +55,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsFuzzyDescriptor<T> : DescriptorBase<IntervalsFuzzyDescriptor<T>>
+	public sealed partial class IntervalsFuzzyDescriptor<TDocument> : DescriptorBase<IntervalsFuzzyDescriptor<TDocument>>
 	{
 		public IntervalsFuzzyDescriptor()
 		{
 		}
 
-		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<T>> configure) => configure.Invoke(this);
+		internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
@@ -74,13 +74,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; private set; }
 
-		public IntervalsFuzzyDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public IntervalsFuzzyDescriptor<T> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public IntervalsFuzzyDescriptor<T> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public IntervalsFuzzyDescriptor<T> Term(string term) => Assign(term, (a, v) => a.TermValue = v);
-		public IntervalsFuzzyDescriptor<T> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
-		public IntervalsFuzzyDescriptor<T> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
-		public IntervalsFuzzyDescriptor<T> UseField<TValue>(Expression<Func<T, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> Term(string term) => Assign(term, (a, v) => a.TermValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? transpositions = true) => Assign(transpositions, (a, v) => a.TranspositionsValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsFuzzyDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

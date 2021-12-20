@@ -218,99 +218,99 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	}
 
-	public sealed partial class DeleteByQueryRequestDescriptor<T> : RequestDescriptorBase<DeleteByQueryRequestDescriptor<T>, DeleteByQueryRequestParameters>
+	public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryRequestParameters>
 	{
 		public DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
 
-		public DeleteByQueryRequestDescriptor()
+		public DeleteByQueryRequestDescriptor() : this(typeof(TDocument))
 		{
 		}
 
-		internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public DeleteByQueryRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public DeleteByQueryRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public DeleteByQueryRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public DeleteByQueryRequestDescriptor<T> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
-		public DeleteByQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public DeleteByQueryRequestDescriptor<T> Df(string? df) => Qs("df", df);
-		public DeleteByQueryRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public DeleteByQueryRequestDescriptor<T> From(long? from) => Qs("from", from);
-		public DeleteByQueryRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public DeleteByQueryRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
-		public DeleteByQueryRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
-		public DeleteByQueryRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
-		public DeleteByQueryRequestDescriptor<T> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
-		public DeleteByQueryRequestDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-		public DeleteByQueryRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public DeleteByQueryRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
-		public DeleteByQueryRequestDescriptor<T> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
-		public DeleteByQueryRequestDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
-		public DeleteByQueryRequestDescriptor<T> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
-		public DeleteByQueryRequestDescriptor<T> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
-		public DeleteByQueryRequestDescriptor<T> Slices(long? slices) => Qs("slices", slices);
-		public DeleteByQueryRequestDescriptor<T> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
-		public DeleteByQueryRequestDescriptor<T> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
-		public DeleteByQueryRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public DeleteByQueryRequestDescriptor<T> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public DeleteByQueryRequestDescriptor<T> Version(bool? version) => Qs("version", version);
-		public DeleteByQueryRequestDescriptor<T> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public DeleteByQueryRequestDescriptor<T> WaitForCompletion(bool? waitForCompletion) => Qs("wait_for_completion", waitForCompletion);
+		public DeleteByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public DeleteByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public DeleteByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
+		public DeleteByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public DeleteByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
+		public DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DeleteByQueryRequestDescriptor<TDocument> From(long? from) => Qs("from", from);
+		public DeleteByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public DeleteByQueryRequestDescriptor<TDocument> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public DeleteByQueryRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+		public DeleteByQueryRequestDescriptor<TDocument> Refresh(bool? refresh) => Qs("refresh", refresh);
+		public DeleteByQueryRequestDescriptor<TDocument> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
+		public DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+		public DeleteByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+		public DeleteByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
+		public DeleteByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public DeleteByQueryRequestDescriptor<TDocument> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
+		public DeleteByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Time? searchTimeout) => Qs("search_timeout", searchTimeout);
+		public DeleteByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
+		public DeleteByQueryRequestDescriptor<TDocument> Slices(long? slices) => Qs("slices", slices);
+		public DeleteByQueryRequestDescriptor<TDocument> Sort(IEnumerable<string>? sort) => Qs("sort", sort);
+		public DeleteByQueryRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Qs("stats", stats);
+		public DeleteByQueryRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public DeleteByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public DeleteByQueryRequestDescriptor<TDocument> Version(bool? version) => Qs("version", version);
+		public DeleteByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public DeleteByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion) => Qs("wait_for_completion", waitForCompletion);
 		internal long? MaxDocsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal SlicedScrollDescriptor<T> SliceDescriptor { get; private set; }
+		internal SlicedScrollDescriptor<TDocument> SliceDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		internal Action<SlicedScrollDescriptor<T>> SliceDescriptorAction { get; private set; }
+		internal Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; private set; }
 
-		public DeleteByQueryRequestDescriptor<T> MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsValue = v);
-		public DeleteByQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public DeleteByQueryRequestDescriptor<TDocument> MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsValue = v);
+		public DeleteByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public DeleteByQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public DeleteByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+		public DeleteByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
 		{
 			SliceDescriptor = null;
 			SliceDescriptorAction = null;
 			return Assign(slice, (a, v) => a.SliceValue = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Slice(SlicedScrollDescriptor<T> descriptor)
+		public DeleteByQueryRequestDescriptor<TDocument> Slice(SlicedScrollDescriptor<TDocument> descriptor)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SliceDescriptor = v);
 		}
 
-		public DeleteByQueryRequestDescriptor<T> Slice(Action<SlicedScrollDescriptor<T>> configure)
+		public DeleteByQueryRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
@@ -334,7 +334,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else if (QueryValue is not null)
 			{
@@ -350,7 +350,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (SliceDescriptorAction is not null)
 			{
 				writer.WritePropertyName("slice");
-				JsonSerializer.Serialize(writer, new SlicedScrollDescriptor<T>(SliceDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
 			}
 			else if (SliceValue is not null)
 			{

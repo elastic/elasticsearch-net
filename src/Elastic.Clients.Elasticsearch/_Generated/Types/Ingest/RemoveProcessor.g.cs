@@ -37,13 +37,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? IgnoreMissing { get; set; }
 	}
 
-	public sealed partial class RemoveProcessorDescriptor<T> : DescriptorBase<RemoveProcessorDescriptor<T>>
+	public sealed partial class RemoveProcessorDescriptor<TDocument> : DescriptorBase<RemoveProcessorDescriptor<TDocument>>
 	{
 		public RemoveProcessorDescriptor()
 		{
 		}
 
-		internal RemoveProcessorDescriptor(Action<RemoveProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal RemoveProcessorDescriptor(Action<RemoveProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Fields FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -56,13 +56,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public RemoveProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Fields field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RemoveProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RemoveProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public RemoveProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public RemoveProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public RemoveProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public RemoveProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public RemoveProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RemoveProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RemoveProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public RemoveProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public RemoveProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public RemoveProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public RemoveProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

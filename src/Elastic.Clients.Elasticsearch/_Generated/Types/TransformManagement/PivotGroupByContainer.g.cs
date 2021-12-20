@@ -99,13 +99,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 	}
 
-	public sealed partial class PivotGroupByContainerDescriptor<T> : DescriptorBase<PivotGroupByContainerDescriptor<T>>
+	public sealed partial class PivotGroupByContainerDescriptor<TDocument> : DescriptorBase<PivotGroupByContainerDescriptor<TDocument>>
 	{
 		public PivotGroupByContainerDescriptor()
 		{
 		}
 
-		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<T>> configure) => configure.Invoke(this);
+		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
@@ -133,13 +133,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		}
 
 		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<T>> configure) => Set(configure, "date_histogram");
+		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
 		public void GeotileGrid(Aggregations.GeoTileGridAggregation variant) => Set(variant, "geotile_grid");
-		public void GeotileGrid(Action<Aggregations.GeoTileGridAggregationDescriptor<T>> configure) => Set(configure, "geotile_grid");
+		public void GeotileGrid(Action<Aggregations.GeoTileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
 		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<T>> configure) => Set(configure, "histogram");
+		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
 		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<Aggregations.TermsAggregationDescriptor<T>> configure) => Set(configure, "terms");
+		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -159,8 +159,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			writer.WriteStartObject();
 			if (ContainedVariantName == "date_histogram")
 			{
-				var descriptor = new Aggregations.DateHistogramAggregationDescriptor<T>();
-				((Action<Aggregations.DateHistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new Aggregations.DateHistogramAggregationDescriptor<TDocument>();
+				((Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -168,8 +168,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 			if (ContainedVariantName == "geotile_grid")
 			{
-				var descriptor = new Aggregations.GeoTileGridAggregationDescriptor<T>();
-				((Action<Aggregations.GeoTileGridAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new Aggregations.GeoTileGridAggregationDescriptor<TDocument>();
+				((Action<Aggregations.GeoTileGridAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -177,8 +177,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 			if (ContainedVariantName == "histogram")
 			{
-				var descriptor = new Aggregations.HistogramAggregationDescriptor<T>();
-				((Action<Aggregations.HistogramAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new Aggregations.HistogramAggregationDescriptor<TDocument>();
+				((Action<Aggregations.HistogramAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -186,8 +186,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 			if (ContainedVariantName == "terms")
 			{
-				var descriptor = new Aggregations.TermsAggregationDescriptor<T>();
-				((Action<Aggregations.TermsAggregationDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new Aggregations.TermsAggregationDescriptor<TDocument>();
+				((Action<Aggregations.TermsAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

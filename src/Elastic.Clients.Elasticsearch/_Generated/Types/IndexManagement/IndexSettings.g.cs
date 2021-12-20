@@ -251,13 +251,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public sealed partial class IndexSettingsDescriptor<T> : DescriptorBase<IndexSettingsDescriptor<T>>
+	public sealed partial class IndexSettingsDescriptor<TDocument> : DescriptorBase<IndexSettingsDescriptor<TDocument>>
 	{
 		public IndexSettingsDescriptor()
 		{
 		}
 
-		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor<T>> configure) => configure.Invoke(this);
+		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; private set; }
 
 		internal string? ModeValue { get; private set; }
@@ -370,11 +370,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
 
-		internal IndexSettingsDescriptor<T> IndexDescriptor { get; private set; }
+		internal IndexSettingsDescriptor<TDocument> IndexDescriptor { get; private set; }
 
 		internal SoftDeletesDescriptor SoftDeletesDescriptor { get; private set; }
 
-		internal IndexSegmentSortDescriptor<T> SortDescriptor { get; private set; }
+		internal IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; private set; }
 
 		internal IndexSettingBlocksDescriptor BlocksDescriptor { get; private set; }
 
@@ -386,13 +386,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; private set; }
 
-		internal IndexSettingsDescriptor<T> SettingsDescriptor { get; private set; }
+		internal IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
 
-		internal Action<IndexSettingsDescriptor<T>> IndexDescriptorAction { get; private set; }
+		internal Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; private set; }
 
 		internal Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; private set; }
 
-		internal Action<IndexSegmentSortDescriptor<T>> SortDescriptorAction { get; private set; }
+		internal Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
 
 		internal Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; private set; }
 
@@ -404,238 +404,238 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; private set; }
 
-		internal Action<IndexSettingsDescriptor<T>> SettingsDescriptorAction { get; private set; }
+		internal Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
 
-		public IndexSettingsDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
+		public IndexSettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
 		{
 			IndexDescriptor = null;
 			IndexDescriptorAction = null;
 			return Assign(index, (a, v) => a.IndexValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Index(IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexSettingsDescriptor<TDocument> Index(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			IndexValue = null;
 			IndexDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.IndexDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Index(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexSettingsDescriptor<TDocument> Index(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			IndexValue = null;
 			IndexDescriptorAction = null;
 			return Assign(configure, (a, v) => a.IndexDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> Mode(string? mode) => Assign(mode, (a, v) => a.ModeValue = v);
-		public IndexSettingsDescriptor<T> RoutingPath(IEnumerable<string>? routingPath) => Assign(routingPath, (a, v) => a.RoutingPathValue = v);
-		public IndexSettingsDescriptor<T> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
+		public IndexSettingsDescriptor<TDocument> Mode(string? mode) => Assign(mode, (a, v) => a.ModeValue = v);
+		public IndexSettingsDescriptor<TDocument> RoutingPath(IEnumerable<string>? routingPath) => Assign(routingPath, (a, v) => a.RoutingPathValue = v);
+		public IndexSettingsDescriptor<TDocument> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
 		{
 			SoftDeletesDescriptor = null;
 			SoftDeletesDescriptorAction = null;
 			return Assign(softDeletes, (a, v) => a.SoftDeletesValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> SoftDeletes(IndexManagement.SoftDeletesDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> SoftDeletes(IndexManagement.SoftDeletesDescriptor descriptor)
 		{
 			SoftDeletesValue = null;
 			SoftDeletesDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SoftDeletesDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> SoftDeletes(Action<IndexManagement.SoftDeletesDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> SoftDeletes(Action<IndexManagement.SoftDeletesDescriptor> configure)
 		{
 			SoftDeletesValue = null;
 			SoftDeletesDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SoftDeletesDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? sort)
+		public IndexSettingsDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
 			return Assign(sort, (a, v) => a.SortValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Sort(IndexManagement.IndexSegmentSortDescriptor<T> descriptor)
+		public IndexSettingsDescriptor<TDocument> Sort(IndexManagement.IndexSegmentSortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Sort(Action<IndexManagement.IndexSegmentSortDescriptor<T>> configure)
+		public IndexSettingsDescriptor<TDocument> Sort(Action<IndexManagement.IndexSegmentSortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShardsValue = v);
-		public IndexSettingsDescriptor<T> NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicasValue = v);
-		public IndexSettingsDescriptor<T> NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShardsValue = v);
-		public IndexSettingsDescriptor<T> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a.CheckOnStartupValue = v);
-		public IndexSettingsDescriptor<T> Codec(string? codec) => Assign(codec, (a, v) => a.CodecValue = v);
-		public IndexSettingsDescriptor<T> RoutingPartitionSize(int? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSizeValue = v);
-		public IndexSettingsDescriptor<T> SoftDeletesRetentionLeasePeriod(Elastic.Clients.Elasticsearch.Time? softDeletesRetentionLeasePeriod) => Assign(softDeletesRetentionLeasePeriod, (a, v) => a.SoftDeletesRetentionLeasePeriodValue = v);
-		public IndexSettingsDescriptor<T> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a.LoadFixedBitsetFiltersEagerlyValue = v);
-		public IndexSettingsDescriptor<T> Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a.HiddenValue = v);
-		public IndexSettingsDescriptor<T> AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicasValue = v);
-		public IndexSettingsDescriptor<T> MergeSchedulerMaxThreadCount(int? mergeSchedulerMaxThreadCount) => Assign(mergeSchedulerMaxThreadCount, (a, v) => a.MergeSchedulerMaxThreadCountValue = v);
-		public IndexSettingsDescriptor<T> SearchIdleAfter(Elastic.Clients.Elasticsearch.Time? searchIdleAfter) => Assign(searchIdleAfter, (a, v) => a.SearchIdleAfterValue = v);
-		public IndexSettingsDescriptor<T> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
-		public IndexSettingsDescriptor<T> MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a.MaxResultWindowValue = v);
-		public IndexSettingsDescriptor<T> MaxInnerResultWindow(int? maxInnerResultWindow) => Assign(maxInnerResultWindow, (a, v) => a.MaxInnerResultWindowValue = v);
-		public IndexSettingsDescriptor<T> MaxRescoreWindow(int? maxRescoreWindow) => Assign(maxRescoreWindow, (a, v) => a.MaxRescoreWindowValue = v);
-		public IndexSettingsDescriptor<T> MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch) => Assign(maxDocvalueFieldsSearch, (a, v) => a.MaxDocvalueFieldsSearchValue = v);
-		public IndexSettingsDescriptor<T> MaxScriptFields(int? maxScriptFields) => Assign(maxScriptFields, (a, v) => a.MaxScriptFieldsValue = v);
-		public IndexSettingsDescriptor<T> MaxNgramDiff(int? maxNgramDiff) => Assign(maxNgramDiff, (a, v) => a.MaxNgramDiffValue = v);
-		public IndexSettingsDescriptor<T> MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a.MaxShingleDiffValue = v);
-		public IndexSettingsDescriptor<T> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
+		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShardsValue = v);
+		public IndexSettingsDescriptor<TDocument> NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicasValue = v);
+		public IndexSettingsDescriptor<TDocument> NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShardsValue = v);
+		public IndexSettingsDescriptor<TDocument> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a.CheckOnStartupValue = v);
+		public IndexSettingsDescriptor<TDocument> Codec(string? codec) => Assign(codec, (a, v) => a.CodecValue = v);
+		public IndexSettingsDescriptor<TDocument> RoutingPartitionSize(int? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSizeValue = v);
+		public IndexSettingsDescriptor<TDocument> SoftDeletesRetentionLeasePeriod(Elastic.Clients.Elasticsearch.Time? softDeletesRetentionLeasePeriod) => Assign(softDeletesRetentionLeasePeriod, (a, v) => a.SoftDeletesRetentionLeasePeriodValue = v);
+		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a.LoadFixedBitsetFiltersEagerlyValue = v);
+		public IndexSettingsDescriptor<TDocument> Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a.HiddenValue = v);
+		public IndexSettingsDescriptor<TDocument> AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicasValue = v);
+		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxThreadCount(int? mergeSchedulerMaxThreadCount) => Assign(mergeSchedulerMaxThreadCount, (a, v) => a.MergeSchedulerMaxThreadCountValue = v);
+		public IndexSettingsDescriptor<TDocument> SearchIdleAfter(Elastic.Clients.Elasticsearch.Time? searchIdleAfter) => Assign(searchIdleAfter, (a, v) => a.SearchIdleAfterValue = v);
+		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a.MaxResultWindowValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxInnerResultWindow(int? maxInnerResultWindow) => Assign(maxInnerResultWindow, (a, v) => a.MaxInnerResultWindowValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxRescoreWindow(int? maxRescoreWindow) => Assign(maxRescoreWindow, (a, v) => a.MaxRescoreWindowValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch) => Assign(maxDocvalueFieldsSearch, (a, v) => a.MaxDocvalueFieldsSearchValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxScriptFields(int? maxScriptFields) => Assign(maxScriptFields, (a, v) => a.MaxScriptFieldsValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxNgramDiff(int? maxNgramDiff) => Assign(maxNgramDiff, (a, v) => a.MaxNgramDiffValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a.MaxShingleDiffValue = v);
+		public IndexSettingsDescriptor<TDocument> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
 		{
 			BlocksDescriptor = null;
 			BlocksDescriptorAction = null;
 			return Assign(blocks, (a, v) => a.BlocksValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
 		{
 			BlocksValue = null;
 			BlocksDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.BlocksDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
 		{
 			BlocksValue = null;
 			BlocksDescriptorAction = null;
 			return Assign(configure, (a, v) => a.BlocksDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> BlocksReadOnly(bool? blocksReadOnly = true) => Assign(blocksReadOnly, (a, v) => a.BlocksReadOnlyValue = v);
-		public IndexSettingsDescriptor<T> BlocksReadOnlyAllowDelete(bool? blocksReadOnlyAllowDelete = true) => Assign(blocksReadOnlyAllowDelete, (a, v) => a.BlocksReadOnlyAllowDeleteValue = v);
-		public IndexSettingsDescriptor<T> BlocksRead(bool? blocksRead = true) => Assign(blocksRead, (a, v) => a.BlocksReadValue = v);
-		public IndexSettingsDescriptor<T> BlocksWrite(Union<bool?, string?>? blocksWrite) => Assign(blocksWrite, (a, v) => a.BlocksWriteValue = v);
-		public IndexSettingsDescriptor<T> BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadataValue = v);
-		public IndexSettingsDescriptor<T> MaxRefreshListeners(int? maxRefreshListeners) => Assign(maxRefreshListeners, (a, v) => a.MaxRefreshListenersValue = v);
-		public IndexSettingsDescriptor<T> AnalyzeMaxTokenCount(int? analyzeMaxTokenCount) => Assign(analyzeMaxTokenCount, (a, v) => a.AnalyzeMaxTokenCountValue = v);
-		public IndexSettingsDescriptor<T> HighlightMaxAnalyzedOffset(int? highlightMaxAnalyzedOffset) => Assign(highlightMaxAnalyzedOffset, (a, v) => a.HighlightMaxAnalyzedOffsetValue = v);
-		public IndexSettingsDescriptor<T> MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a.MaxTermsCountValue = v);
-		public IndexSettingsDescriptor<T> MaxRegexLength(int? maxRegexLength) => Assign(maxRegexLength, (a, v) => a.MaxRegexLengthValue = v);
-		public IndexSettingsDescriptor<T> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
+		public IndexSettingsDescriptor<TDocument> BlocksReadOnly(bool? blocksReadOnly = true) => Assign(blocksReadOnly, (a, v) => a.BlocksReadOnlyValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksReadOnlyAllowDelete(bool? blocksReadOnlyAllowDelete = true) => Assign(blocksReadOnlyAllowDelete, (a, v) => a.BlocksReadOnlyAllowDeleteValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksRead(bool? blocksRead = true) => Assign(blocksRead, (a, v) => a.BlocksReadValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksWrite(Union<bool?, string?>? blocksWrite) => Assign(blocksWrite, (a, v) => a.BlocksWriteValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadataValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxRefreshListeners(int? maxRefreshListeners) => Assign(maxRefreshListeners, (a, v) => a.MaxRefreshListenersValue = v);
+		public IndexSettingsDescriptor<TDocument> AnalyzeMaxTokenCount(int? analyzeMaxTokenCount) => Assign(analyzeMaxTokenCount, (a, v) => a.AnalyzeMaxTokenCountValue = v);
+		public IndexSettingsDescriptor<TDocument> HighlightMaxAnalyzedOffset(int? highlightMaxAnalyzedOffset) => Assign(highlightMaxAnalyzedOffset, (a, v) => a.HighlightMaxAnalyzedOffsetValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a.MaxTermsCountValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxRegexLength(int? maxRegexLength) => Assign(maxRegexLength, (a, v) => a.MaxRegexLengthValue = v);
+		public IndexSettingsDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
 		{
 			RoutingDescriptor = null;
 			RoutingDescriptorAction = null;
 			return Assign(routing, (a, v) => a.RoutingValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
 		{
 			RoutingValue = null;
 			RoutingDescriptorAction = null;
 			return Assign(configure, (a, v) => a.RoutingDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes) => Assign(gcDeletes, (a, v) => a.GcDeletesValue = v);
-		public IndexSettingsDescriptor<T> DefaultPipeline(string? defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipelineValue = v);
-		public IndexSettingsDescriptor<T> FinalPipeline(string? finalPipeline) => Assign(finalPipeline, (a, v) => a.FinalPipelineValue = v);
-		public IndexSettingsDescriptor<T> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
+		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes) => Assign(gcDeletes, (a, v) => a.GcDeletesValue = v);
+		public IndexSettingsDescriptor<TDocument> DefaultPipeline(string? defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipelineValue = v);
+		public IndexSettingsDescriptor<TDocument> FinalPipeline(string? finalPipeline) => Assign(finalPipeline, (a, v) => a.FinalPipelineValue = v);
+		public IndexSettingsDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
 		{
 			LifecycleDescriptor = null;
 			LifecycleDescriptorAction = null;
 			return Assign(lifecycle, (a, v) => a.LifecycleValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
 		{
 			LifecycleValue = null;
 			LifecycleDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LifecycleDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
 		{
 			LifecycleValue = null;
 			LifecycleDescriptorAction = null;
 			return Assign(configure, (a, v) => a.LifecycleDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> LifecycleName(string? lifecycleName) => Assign(lifecycleName, (a, v) => a.LifecycleNameValue = v);
-		public IndexSettingsDescriptor<T> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
-		public IndexSettingsDescriptor<T> CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a.CreationDateValue = v);
-		public IndexSettingsDescriptor<T> Uuid(string? uuid) => Assign(uuid, (a, v) => a.UuidValue = v);
-		public IndexSettingsDescriptor<T> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
+		public IndexSettingsDescriptor<TDocument> LifecycleName(string? lifecycleName) => Assign(lifecycleName, (a, v) => a.LifecycleNameValue = v);
+		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
+		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a.CreationDateValue = v);
+		public IndexSettingsDescriptor<TDocument> Uuid(string? uuid) => Assign(uuid, (a, v) => a.UuidValue = v);
+		public IndexSettingsDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
 		{
 			VersionDescriptor = null;
 			VersionDescriptorAction = null;
 			return Assign(version, (a, v) => a.VersionValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Version(IndexManagement.IndexVersioningDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> Version(IndexManagement.IndexVersioningDescriptor descriptor)
 		{
 			VersionValue = null;
 			VersionDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.VersionDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Version(Action<IndexManagement.IndexVersioningDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> Version(Action<IndexManagement.IndexVersioningDescriptor> configure)
 		{
 			VersionValue = null;
 			VersionDescriptorAction = null;
 			return Assign(configure, (a, v) => a.VersionDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
-		public IndexSettingsDescriptor<T> Format(Union<string?, int?>? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public IndexSettingsDescriptor<T> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
-		public IndexSettingsDescriptor<T> TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a.TranslogDurabilityValue = v);
-		public IndexSettingsDescriptor<T> TranslogFlushThresholdSize(string? translogFlushThresholdSize) => Assign(translogFlushThresholdSize, (a, v) => a.TranslogFlushThresholdSizeValue = v);
-		public IndexSettingsDescriptor<T> QueryStringLenient(Union<bool?, string?>? queryStringLenient) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
-		public IndexSettingsDescriptor<T> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
-		public IndexSettingsDescriptor<T> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
-		public IndexSettingsDescriptor<T> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
+		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
+		public IndexSettingsDescriptor<TDocument> Format(Union<string?, int?>? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
+		public IndexSettingsDescriptor<TDocument> TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a.TranslogDurabilityValue = v);
+		public IndexSettingsDescriptor<TDocument> TranslogFlushThresholdSize(string? translogFlushThresholdSize) => Assign(translogFlushThresholdSize, (a, v) => a.TranslogFlushThresholdSizeValue = v);
+		public IndexSettingsDescriptor<TDocument> QueryStringLenient(Union<bool?, string?>? queryStringLenient) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
+		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
+		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
+		public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
 		{
 			AnalysisDescriptor = null;
 			AnalysisDescriptorAction = null;
 			return Assign(analysis, (a, v) => a.AnalysisValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
+		public IndexSettingsDescriptor<TDocument> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
 		{
 			AnalysisValue = null;
 			AnalysisDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AnalysisDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
+		public IndexSettingsDescriptor<TDocument> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
 		{
 			AnalysisValue = null;
 			AnalysisDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AnalysisDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		public IndexSettingsDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
 			SettingsDescriptor = null;
 			SettingsDescriptorAction = null;
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public IndexSettingsDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public IndexSettingsDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public IndexSettingsDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public IndexSettingsDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
@@ -653,7 +653,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (IndexDescriptorAction is not null)
 			{
 				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(IndexDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(IndexDescriptorAction), options);
 			}
 			else if (IndexValue is not null)
 			{
@@ -697,7 +697,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSegmentSortDescriptor<T>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSegmentSortDescriptor<TDocument>(SortDescriptorAction), options);
 			}
 			else if (SortValue is not null)
 			{
@@ -1063,7 +1063,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{

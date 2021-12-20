@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexDeleteTemplateRequestDescriptor()
+		internal IndexDeleteTemplateRequestDescriptor()
 		{
 		}
 

@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? Score { get; set; }
 	}
 
-	public sealed partial class HasParentQueryDescriptor<T> : DescriptorBase<HasParentQueryDescriptor<T>>
+	public sealed partial class HasParentQueryDescriptor<TDocument> : DescriptorBase<HasParentQueryDescriptor<TDocument>>
 	{
 		public HasParentQueryDescriptor()
 		{
 		}
 
-		internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? IgnoreUnmappedValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
@@ -70,61 +70,61 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal InnerHitsDescriptor<T> InnerHitsDescriptor { get; private set; }
+		internal InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; private set; }
 
-		internal QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal Action<InnerHitsDescriptor<T>> InnerHitsDescriptorAction { get; private set; }
+		internal Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		public HasParentQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public HasParentQueryDescriptor<T> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		public HasParentQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
+		public HasParentQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
 		{
 			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
 		}
 
-		public HasParentQueryDescriptor<T> InnerHits(InnerHitsDescriptor<T> descriptor)
+		public HasParentQueryDescriptor<TDocument> InnerHits(InnerHitsDescriptor<TDocument> descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
 		}
 
-		public HasParentQueryDescriptor<T> InnerHits(Action<InnerHitsDescriptor<T>> configure)
+		public HasParentQueryDescriptor<TDocument> InnerHits(Action<InnerHitsDescriptor<TDocument>> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
 		}
 
-		public HasParentQueryDescriptor<T> ParentType(string parentType) => Assign(parentType, (a, v) => a.ParentTypeValue = v);
-		public HasParentQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		public HasParentQueryDescriptor<TDocument> ParentType(string parentType) => Assign(parentType, (a, v) => a.ParentTypeValue = v);
+		public HasParentQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public HasParentQueryDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public HasParentQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public HasParentQueryDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public HasParentQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public HasParentQueryDescriptor<T> Score(bool? score = true) => Assign(score, (a, v) => a.ScoreValue = v);
-		public HasParentQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public HasParentQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public HasParentQueryDescriptor<TDocument> Score(bool? score = true) => Assign(score, (a, v) => a.ScoreValue = v);
+		public HasParentQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public HasParentQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -142,7 +142,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (InnerHitsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<T>(InnerHitsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
 			}
 			else if (InnerHitsValue is not null)
 			{
@@ -160,7 +160,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else
 			{

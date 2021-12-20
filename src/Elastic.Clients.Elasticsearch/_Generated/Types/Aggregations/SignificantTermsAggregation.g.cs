@@ -397,13 +397,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 	}
 
-	public sealed partial class SignificantTermsAggregationDescriptor<T> : DescriptorBase<SignificantTermsAggregationDescriptor<T>>
+	public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : DescriptorBase<SignificantTermsAggregationDescriptor<TDocument>>
 	{
 		public SignificantTermsAggregationDescriptor()
 		{
 		}
 
-		internal SignificantTermsAggregationDescriptor(Action<SignificantTermsAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal SignificantTermsAggregationDescriptor(Action<SignificantTermsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? BackgroundFilterValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquareValue { get; private set; }
@@ -436,7 +436,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> BackgroundFilterDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> BackgroundFilterDescriptor { get; private set; }
 
 		internal ChiSquareHeuristicDescriptor ChiSquareDescriptor { get; private set; }
 
@@ -448,9 +448,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal ScriptedHeuristicDescriptor ScriptHeuristicDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> BackgroundFilterDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> BackgroundFilterDescriptorAction { get; private set; }
 
 		internal Action<ChiSquareHeuristicDescriptor> ChiSquareDescriptorAction { get; private set; }
 
@@ -462,165 +462,165 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Action<ScriptedHeuristicDescriptor> ScriptHeuristicDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? backgroundFilter)
+		public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? backgroundFilter)
 		{
 			BackgroundFilterDescriptor = null;
 			BackgroundFilterDescriptorAction = null;
 			return Assign(backgroundFilter, (a, v) => a.BackgroundFilterValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			BackgroundFilterValue = null;
 			BackgroundFilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.BackgroundFilterDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			BackgroundFilterValue = null;
 			BackgroundFilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.BackgroundFilterDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? chiSquare)
+		public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? chiSquare)
 		{
 			ChiSquareDescriptor = null;
 			ChiSquareDescriptorAction = null;
 			return Assign(chiSquare, (a, v) => a.ChiSquareValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ChiSquare(Aggregations.ChiSquareHeuristicDescriptor descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Aggregations.ChiSquareHeuristicDescriptor descriptor)
 		{
 			ChiSquareValue = null;
 			ChiSquareDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ChiSquareDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ChiSquare(Action<Aggregations.ChiSquareHeuristicDescriptor> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Action<Aggregations.ChiSquareHeuristicDescriptor> configure)
 		{
 			ChiSquareValue = null;
 			ChiSquareDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ChiSquareDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude) => Assign(exclude, (a, v) => a.ExcludeValue = v);
-		public SignificantTermsAggregationDescriptor<T> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
-		public SignificantTermsAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SignificantTermsAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SignificantTermsAggregationDescriptor<T> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? gnd)
+		public SignificantTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude) => Assign(exclude, (a, v) => a.ExcludeValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? gnd)
 		{
 			GndDescriptor = null;
 			GndDescriptorAction = null;
 			return Assign(gnd, (a, v) => a.GndValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Gnd(Aggregations.GoogleNormalizedDistanceHeuristicDescriptor descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> Gnd(Aggregations.GoogleNormalizedDistanceHeuristicDescriptor descriptor)
 		{
 			GndValue = null;
 			GndDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.GndDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Gnd(Action<Aggregations.GoogleNormalizedDistanceHeuristicDescriptor> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> Gnd(Action<Aggregations.GoogleNormalizedDistanceHeuristicDescriptor> configure)
 		{
 			GndValue = null;
 			GndDescriptorAction = null;
 			return Assign(configure, (a, v) => a.GndDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Include(IEnumerable<string>? include) => Assign(include, (a, v) => a.IncludeValue = v);
-		public SignificantTermsAggregationDescriptor<T> MinDocCount(long? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
-		public SignificantTermsAggregationDescriptor<T> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? mutualInformation)
+		public SignificantTermsAggregationDescriptor<TDocument> Include(IEnumerable<string>? include) => Assign(include, (a, v) => a.IncludeValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> MinDocCount(long? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? mutualInformation)
 		{
 			MutualInformationDescriptor = null;
 			MutualInformationDescriptorAction = null;
 			return Assign(mutualInformation, (a, v) => a.MutualInformationValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> MutualInformation(Aggregations.MutualInformationHeuristicDescriptor descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Aggregations.MutualInformationHeuristicDescriptor descriptor)
 		{
 			MutualInformationValue = null;
 			MutualInformationDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MutualInformationDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> MutualInformation(Action<Aggregations.MutualInformationHeuristicDescriptor> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Action<Aggregations.MutualInformationHeuristicDescriptor> configure)
 		{
 			MutualInformationValue = null;
 			MutualInformationDescriptorAction = null;
 			return Assign(configure, (a, v) => a.MutualInformationDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? percentage)
+		public SignificantTermsAggregationDescriptor<TDocument> Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? percentage)
 		{
 			PercentageDescriptor = null;
 			PercentageDescriptorAction = null;
 			return Assign(percentage, (a, v) => a.PercentageValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Percentage(Aggregations.PercentageScoreHeuristicDescriptor descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> Percentage(Aggregations.PercentageScoreHeuristicDescriptor descriptor)
 		{
 			PercentageValue = null;
 			PercentageDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PercentageDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Percentage(Action<Aggregations.PercentageScoreHeuristicDescriptor> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> Percentage(Action<Aggregations.PercentageScoreHeuristicDescriptor> configure)
 		{
 			PercentageValue = null;
 			PercentageDescriptorAction = null;
 			return Assign(configure, (a, v) => a.PercentageDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? scriptHeuristic)
+		public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? scriptHeuristic)
 		{
 			ScriptHeuristicDescriptor = null;
 			ScriptHeuristicDescriptorAction = null;
 			return Assign(scriptHeuristic, (a, v) => a.ScriptHeuristicValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ScriptHeuristic(Aggregations.ScriptedHeuristicDescriptor descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Aggregations.ScriptedHeuristicDescriptor descriptor)
 		{
 			ScriptHeuristicValue = null;
 			ScriptHeuristicDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptHeuristicDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ScriptHeuristic(Action<Aggregations.ScriptedHeuristicDescriptor> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Action<Aggregations.ScriptedHeuristicDescriptor> configure)
 		{
 			ScriptHeuristicValue = null;
 			ScriptHeuristicDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ScriptHeuristicDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> ShardMinDocCount(long? shardMinDocCount) => Assign(shardMinDocCount, (a, v) => a.ShardMinDocCountValue = v);
-		public SignificantTermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public SignificantTermsAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public SignificantTermsAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public SignificantTermsAggregationDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount) => Assign(shardMinDocCount, (a, v) => a.ShardMinDocCountValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public SignificantTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public SignificantTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public SignificantTermsAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public SignificantTermsAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public SignificantTermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -634,7 +634,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (BackgroundFilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("background_filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(BackgroundFilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(BackgroundFilterDescriptorAction), options);
 			}
 			else if (BackgroundFilterValue is not null)
 			{
@@ -785,7 +785,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

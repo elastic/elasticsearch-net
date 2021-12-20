@@ -46,7 +46,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexMigrateToDataStreamRequestDescriptor()
+		internal IndexMigrateToDataStreamRequestDescriptor()
 		{
 		}
 

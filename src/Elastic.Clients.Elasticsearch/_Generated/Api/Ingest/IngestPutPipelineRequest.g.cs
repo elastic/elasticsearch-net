@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
-		public IngestPutPipelineRequestDescriptor()
+		internal IngestPutPipelineRequestDescriptor()
 		{
 		}
 

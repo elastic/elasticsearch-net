@@ -41,13 +41,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
-	public sealed partial class ScriptScoreQueryDescriptor<T> : DescriptorBase<ScriptScoreQueryDescriptor<T>>
+	public sealed partial class ScriptScoreQueryDescriptor<TDocument> : DescriptorBase<ScriptScoreQueryDescriptor<TDocument>>
 	{
 		public ScriptScoreQueryDescriptor()
 		{
 		}
 
-		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal float? MinScoreValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
@@ -58,35 +58,35 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		public ScriptScoreQueryDescriptor<T> MinScore(float? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
-		public ScriptScoreQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
+		public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public ScriptScoreQueryDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public ScriptScoreQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public ScriptScoreQueryDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public ScriptScoreQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public ScriptScoreQueryDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public ScriptScoreQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public ScriptScoreQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public ScriptScoreQueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ScriptScoreQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else
 			{

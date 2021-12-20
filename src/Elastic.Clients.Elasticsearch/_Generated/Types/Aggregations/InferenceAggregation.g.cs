@@ -175,13 +175,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfig { get; set; }
 	}
 
-	public sealed partial class InferenceAggregationDescriptor<T> : DescriptorBase<InferenceAggregationDescriptor<T>>
+	public sealed partial class InferenceAggregationDescriptor<TDocument> : DescriptorBase<InferenceAggregationDescriptor<TDocument>>
 	{
 		public InferenceAggregationDescriptor()
 		{
 		}
 
-		internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Name ModelIdValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? InferenceConfigValue { get; private set; }
@@ -194,36 +194,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal InferenceConfigContainerDescriptor<T> InferenceConfigDescriptor { get; private set; }
+		internal InferenceConfigContainerDescriptor<TDocument> InferenceConfigDescriptor { get; private set; }
 
-		internal Action<InferenceConfigContainerDescriptor<T>> InferenceConfigDescriptorAction { get; private set; }
+		internal Action<InferenceConfigContainerDescriptor<TDocument>> InferenceConfigDescriptorAction { get; private set; }
 
-		public InferenceAggregationDescriptor<T> ModelId(Elastic.Clients.Elasticsearch.Name modelId) => Assign(modelId, (a, v) => a.ModelIdValue = v);
-		public InferenceAggregationDescriptor<T> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
+		public InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Name modelId) => Assign(modelId, (a, v) => a.ModelIdValue = v);
+		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigContainer? inferenceConfig)
 		{
 			InferenceConfigDescriptor = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(inferenceConfig, (a, v) => a.InferenceConfigValue = v);
 		}
 
-		public InferenceAggregationDescriptor<T> InferenceConfig(Aggregations.InferenceConfigContainerDescriptor<T> descriptor)
+		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Aggregations.InferenceConfigContainerDescriptor<TDocument> descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.InferenceConfigDescriptor = v);
 		}
 
-		public InferenceAggregationDescriptor<T> InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor<T>> configure)
+		public InferenceAggregationDescriptor<TDocument> InferenceConfig(Action<Aggregations.InferenceConfigContainerDescriptor<TDocument>> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
 			return Assign(configure, (a, v) => a.InferenceConfigDescriptorAction = v);
 		}
 
-		public InferenceAggregationDescriptor<T> BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
-		public InferenceAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public InferenceAggregationDescriptor<T> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
-		public InferenceAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public InferenceAggregationDescriptor<TDocument> BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
+		public InferenceAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
+		public InferenceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -239,7 +239,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor<T>(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.InferenceConfigContainerDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{

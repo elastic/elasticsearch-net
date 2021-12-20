@@ -31,17 +31,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class TopMetricsValueDescriptor<T> : DescriptorBase<TopMetricsValueDescriptor<T>>
+	public sealed partial class TopMetricsValueDescriptor<TDocument> : DescriptorBase<TopMetricsValueDescriptor<TDocument>>
 	{
 		public TopMetricsValueDescriptor()
 		{
 		}
 
-		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<T>> configure) => configure.Invoke(this);
+		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
-		public TopMetricsValueDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TopMetricsValueDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

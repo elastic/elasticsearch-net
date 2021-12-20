@@ -39,13 +39,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 	}
 
-	public sealed partial class MatrixAggregationBaseDescriptor<T> : DescriptorBase<MatrixAggregationBaseDescriptor<T>>
+	public sealed partial class MatrixAggregationBaseDescriptor<TDocument> : DescriptorBase<MatrixAggregationBaseDescriptor<TDocument>>
 	{
 		public MatrixAggregationBaseDescriptor()
 		{
 		}
 
-		internal MatrixAggregationBaseDescriptor(Action<MatrixAggregationBaseDescriptor<T>> configure) => configure.Invoke(this);
+		internal MatrixAggregationBaseDescriptor(Action<MatrixAggregationBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; private set; }
 
 		internal Dictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; private set; }
@@ -54,11 +54,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal string? NameValue { get; private set; }
 
-		public MatrixAggregationBaseDescriptor<T> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MatrixAggregationBaseDescriptor<T> Fields<TValue>(Expression<Func<T, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MatrixAggregationBaseDescriptor<T> Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>()));
-		public MatrixAggregationBaseDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public MatrixAggregationBaseDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		public MatrixAggregationBaseDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public MatrixAggregationBaseDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public MatrixAggregationBaseDescriptor<TDocument> Missing(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>> selector) => Assign(selector, (a, v) => a.MissingValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, double>()));
+		public MatrixAggregationBaseDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public MatrixAggregationBaseDescriptor<TDocument> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -513,13 +513,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class QueryContainerDescriptor<T> : DescriptorBase<QueryContainerDescriptor<T>>
+	public sealed partial class QueryContainerDescriptor<TDocument> : DescriptorBase<QueryContainerDescriptor<TDocument>>
 	{
 		public QueryContainerDescriptor()
 		{
 		}
 
-		internal QueryContainerDescriptor(Action<QueryContainerDescriptor<T>> configure) => configure.Invoke(this);
+		internal QueryContainerDescriptor(Action<QueryContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
@@ -549,19 +549,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Bool(BoolQuery variant) => Set(variant, "bool");
 		public void Bool(Action<BoolQueryDescriptor> configure) => Set(configure, "bool");
 		public void Boosting(BoostingQuery variant) => Set(variant, "boosting");
-		public void Boosting(Action<BoostingQueryDescriptor<T>> configure) => Set(configure, "boosting");
+		public void Boosting(Action<BoostingQueryDescriptor<TDocument>> configure) => Set(configure, "boosting");
 		public void CombinedFields(CombinedFieldsQuery variant) => Set(variant, "combined_fields");
-		public void CombinedFields(Action<CombinedFieldsQueryDescriptor<T>> configure) => Set(configure, "combined_fields");
+		public void CombinedFields(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => Set(configure, "combined_fields");
 		public void ConstantScore(ConstantScoreQuery variant) => Set(variant, "constant_score");
-		public void ConstantScore(Action<ConstantScoreQueryDescriptor<T>> configure) => Set(configure, "constant_score");
+		public void ConstantScore(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
 		public void DisMax(DisMaxQuery variant) => Set(variant, "dis_max");
 		public void DisMax(Action<DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
 		public void Exists(ExistsQuery variant) => Set(variant, "exists");
-		public void Exists(Action<ExistsQueryDescriptor<T>> configure) => Set(configure, "exists");
+		public void Exists(Action<ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
 		public void FunctionScore(FunctionScoreQuery variant) => Set(variant, "function_score");
-		public void FunctionScore(Action<FunctionScoreQueryDescriptor<T>> configure) => Set(configure, "function_score");
+		public void FunctionScore(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => Set(configure, "function_score");
 		public void Fuzzy(FuzzyQuery variant) => Set(variant, "fuzzy");
-		public void Fuzzy(Action<FuzzyQueryDescriptor<T>> configure) => Set(configure, "fuzzy");
+		public void Fuzzy(Action<FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
 		public void GeoBoundingBox(GeoBoundingBoxQuery variant) => Set(variant, "geo_bounding_box");
 		public void GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
 		public void GeoDistance(GeoDistanceQuery variant) => Set(variant, "geo_distance");
@@ -571,79 +571,79 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void GeoShape(GeoShapeQuery variant) => Set(variant, "geo_shape");
 		public void GeoShape(Action<GeoShapeQueryDescriptor> configure) => Set(configure, "geo_shape");
 		public void HasChild(HasChildQuery variant) => Set(variant, "has_child");
-		public void HasChild(Action<HasChildQueryDescriptor<T>> configure) => Set(configure, "has_child");
+		public void HasChild(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
 		public void HasParent(HasParentQuery variant) => Set(variant, "has_parent");
-		public void HasParent(Action<HasParentQueryDescriptor<T>> configure) => Set(configure, "has_parent");
+		public void HasParent(Action<HasParentQueryDescriptor<TDocument>> configure) => Set(configure, "has_parent");
 		public void Ids(IdsQuery variant) => Set(variant, "ids");
 		public void Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
 		public void Intervals(IntervalsQuery variant) => Set(variant, "intervals");
-		public void Intervals(Action<IntervalsQueryDescriptor<T>> configure) => Set(configure, "intervals");
+		public void Intervals(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
 		public void Match(MatchQuery variant) => Set(variant, "match");
-		public void Match(Action<MatchQueryDescriptor<T>> configure) => Set(configure, "match");
+		public void Match(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
 		public void MatchAll(MatchAllQuery variant) => Set(variant, "match_all");
 		public void MatchAll(Action<MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
 		public void MatchBoolPrefix(MatchBoolPrefixQuery variant) => Set(variant, "match_bool_prefix");
-		public void MatchBoolPrefix(Action<MatchBoolPrefixQueryDescriptor<T>> configure) => Set(configure, "match_bool_prefix");
+		public void MatchBoolPrefix(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_bool_prefix");
 		public void MatchNone(MatchNoneQuery variant) => Set(variant, "match_none");
 		public void MatchNone(Action<MatchNoneQueryDescriptor> configure) => Set(configure, "match_none");
 		public void MatchPhrase(MatchPhraseQuery variant) => Set(variant, "match_phrase");
-		public void MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> configure) => Set(configure, "match_phrase");
+		public void MatchPhrase(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase");
 		public void MatchPhrasePrefix(MatchPhrasePrefixQuery variant) => Set(variant, "match_phrase_prefix");
-		public void MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> configure) => Set(configure, "match_phrase_prefix");
+		public void MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase_prefix");
 		public void MoreLikeThis(MoreLikeThisQuery variant) => Set(variant, "more_like_this");
-		public void MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> configure) => Set(configure, "more_like_this");
+		public void MoreLikeThis(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => Set(configure, "more_like_this");
 		public void MultiMatch(MultiMatchQuery variant) => Set(variant, "multi_match");
-		public void MultiMatch(Action<MultiMatchQueryDescriptor<T>> configure) => Set(configure, "multi_match");
+		public void MultiMatch(Action<MultiMatchQueryDescriptor<TDocument>> configure) => Set(configure, "multi_match");
 		public void Nested(NestedQuery variant) => Set(variant, "nested");
-		public void Nested(Action<NestedQueryDescriptor<T>> configure) => Set(configure, "nested");
+		public void Nested(Action<NestedQueryDescriptor<TDocument>> configure) => Set(configure, "nested");
 		public void ParentId(ParentIdQuery variant) => Set(variant, "parent_id");
 		public void ParentId(Action<ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
 		public void Percolate(PercolateQuery variant) => Set(variant, "percolate");
-		public void Percolate(Action<PercolateQueryDescriptor<T>> configure) => Set(configure, "percolate");
+		public void Percolate(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
 		public void Pinned(PinnedQuery variant) => Set(variant, "pinned");
-		public void Pinned(Action<PinnedQueryDescriptor<T>> configure) => Set(configure, "pinned");
+		public void Pinned(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
 		public void Prefix(PrefixQuery variant) => Set(variant, "prefix");
-		public void Prefix(Action<PrefixQueryDescriptor<T>> configure) => Set(configure, "prefix");
+		public void Prefix(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
 		public void QueryString(QueryStringQuery variant) => Set(variant, "query_string");
-		public void QueryString(Action<QueryStringQueryDescriptor<T>> configure) => Set(configure, "query_string");
+		public void QueryString(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
 		public void RankFeature(RankFeatureQuery variant) => Set(variant, "rank_feature");
-		public void RankFeature(Action<RankFeatureQueryDescriptor<T>> configure) => Set(configure, "rank_feature");
+		public void RankFeature(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
 		public void Regexp(RegexpQuery variant) => Set(variant, "regexp");
-		public void Regexp(Action<RegexpQueryDescriptor<T>> configure) => Set(configure, "regexp");
+		public void Regexp(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
 		public void Script(ScriptQuery variant) => Set(variant, "script");
 		public void Script(Action<ScriptQueryDescriptor> configure) => Set(configure, "script");
 		public void ScriptScore(ScriptScoreQuery variant) => Set(variant, "script_score");
-		public void ScriptScore(Action<ScriptScoreQueryDescriptor<T>> configure) => Set(configure, "script_score");
+		public void ScriptScore(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
 		public void Shape(ShapeQuery variant) => Set(variant, "shape");
 		public void Shape(Action<ShapeQueryDescriptor> configure) => Set(configure, "shape");
 		public void SimpleQueryString(SimpleQueryStringQuery variant) => Set(variant, "simple_query_string");
-		public void SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> configure) => Set(configure, "simple_query_string");
+		public void SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
 		public void SpanContaining(SpanContainingQuery variant) => Set(variant, "span_containing");
-		public void SpanContaining(Action<SpanContainingQueryDescriptor<T>> configure) => Set(configure, "span_containing");
+		public void SpanContaining(Action<SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
 		public void FieldMaskingSpan(SpanFieldMaskingQuery variant) => Set(variant, "field_masking_span");
-		public void FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor<T>> configure) => Set(configure, "field_masking_span");
+		public void FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
 		public void SpanFirst(SpanFirstQuery variant) => Set(variant, "span_first");
-		public void SpanFirst(Action<SpanFirstQueryDescriptor<T>> configure) => Set(configure, "span_first");
+		public void SpanFirst(Action<SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
 		public void SpanMulti(SpanMultiTermQuery variant) => Set(variant, "span_multi");
-		public void SpanMulti(Action<SpanMultiTermQueryDescriptor<T>> configure) => Set(configure, "span_multi");
+		public void SpanMulti(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
 		public void SpanNear(SpanNearQuery variant) => Set(variant, "span_near");
 		public void SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
 		public void SpanNot(SpanNotQuery variant) => Set(variant, "span_not");
-		public void SpanNot(Action<SpanNotQueryDescriptor<T>> configure) => Set(configure, "span_not");
+		public void SpanNot(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
 		public void SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
 		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
 		public void SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
-		public void SpanTerm(Action<SpanTermQueryDescriptor<T>> configure) => Set(configure, "span_term");
+		public void SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 		public void SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
-		public void SpanWithin(Action<SpanWithinQueryDescriptor<T>> configure) => Set(configure, "span_within");
+		public void SpanWithin(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
 		public void Term(TermQuery variant) => Set(variant, "term");
-		public void Term(Action<TermQueryDescriptor<T>> configure) => Set(configure, "term");
+		public void Term(Action<TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
 		public void Terms(TermsQuery variant) => Set(variant, "terms");
 		public void Terms(Action<TermsQueryDescriptor> configure) => Set(configure, "terms");
 		public void TermsSet(TermsSetQuery variant) => Set(variant, "terms_set");
-		public void TermsSet(Action<TermsSetQueryDescriptor<T>> configure) => Set(configure, "terms_set");
+		public void TermsSet(Action<TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
 		public void Wildcard(WildcardQuery variant) => Set(variant, "wildcard");
-		public void Wildcard(Action<WildcardQueryDescriptor<T>> configure) => Set(configure, "wildcard");
+		public void Wildcard(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 		public void Wrapper(WrapperQuery variant) => Set(variant, "wrapper");
 		public void Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -674,8 +674,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "boosting")
 			{
-				var descriptor = new BoostingQueryDescriptor<T>();
-				((Action<BoostingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new BoostingQueryDescriptor<TDocument>();
+				((Action<BoostingQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -683,8 +683,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "combined_fields")
 			{
-				var descriptor = new CombinedFieldsQueryDescriptor<T>();
-				((Action<CombinedFieldsQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new CombinedFieldsQueryDescriptor<TDocument>();
+				((Action<CombinedFieldsQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -692,8 +692,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "constant_score")
 			{
-				var descriptor = new ConstantScoreQueryDescriptor<T>();
-				((Action<ConstantScoreQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new ConstantScoreQueryDescriptor<TDocument>();
+				((Action<ConstantScoreQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -710,8 +710,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "exists")
 			{
-				var descriptor = new ExistsQueryDescriptor<T>();
-				((Action<ExistsQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new ExistsQueryDescriptor<TDocument>();
+				((Action<ExistsQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -719,8 +719,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "function_score")
 			{
-				var descriptor = new FunctionScoreQueryDescriptor<T>();
-				((Action<FunctionScoreQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new FunctionScoreQueryDescriptor<TDocument>();
+				((Action<FunctionScoreQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -728,8 +728,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "fuzzy")
 			{
-				var descriptor = new FuzzyQueryDescriptor<T>();
-				((Action<FuzzyQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new FuzzyQueryDescriptor<TDocument>();
+				((Action<FuzzyQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -773,8 +773,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "has_child")
 			{
-				var descriptor = new HasChildQueryDescriptor<T>();
-				((Action<HasChildQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new HasChildQueryDescriptor<TDocument>();
+				((Action<HasChildQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -782,8 +782,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "has_parent")
 			{
-				var descriptor = new HasParentQueryDescriptor<T>();
-				((Action<HasParentQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new HasParentQueryDescriptor<TDocument>();
+				((Action<HasParentQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -800,8 +800,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "intervals")
 			{
-				var descriptor = new IntervalsQueryDescriptor<T>();
-				((Action<IntervalsQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new IntervalsQueryDescriptor<TDocument>();
+				((Action<IntervalsQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -809,8 +809,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "match")
 			{
-				var descriptor = new MatchQueryDescriptor<T>();
-				((Action<MatchQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new MatchQueryDescriptor<TDocument>();
+				((Action<MatchQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -827,8 +827,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "match_bool_prefix")
 			{
-				var descriptor = new MatchBoolPrefixQueryDescriptor<T>();
-				((Action<MatchBoolPrefixQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new MatchBoolPrefixQueryDescriptor<TDocument>();
+				((Action<MatchBoolPrefixQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -845,8 +845,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "match_phrase")
 			{
-				var descriptor = new MatchPhraseQueryDescriptor<T>();
-				((Action<MatchPhraseQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new MatchPhraseQueryDescriptor<TDocument>();
+				((Action<MatchPhraseQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -854,8 +854,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "match_phrase_prefix")
 			{
-				var descriptor = new MatchPhrasePrefixQueryDescriptor<T>();
-				((Action<MatchPhrasePrefixQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new MatchPhrasePrefixQueryDescriptor<TDocument>();
+				((Action<MatchPhrasePrefixQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -863,8 +863,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "more_like_this")
 			{
-				var descriptor = new MoreLikeThisQueryDescriptor<T>();
-				((Action<MoreLikeThisQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new MoreLikeThisQueryDescriptor<TDocument>();
+				((Action<MoreLikeThisQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -872,8 +872,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "multi_match")
 			{
-				var descriptor = new MultiMatchQueryDescriptor<T>();
-				((Action<MultiMatchQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new MultiMatchQueryDescriptor<TDocument>();
+				((Action<MultiMatchQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -881,8 +881,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "nested")
 			{
-				var descriptor = new NestedQueryDescriptor<T>();
-				((Action<NestedQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new NestedQueryDescriptor<TDocument>();
+				((Action<NestedQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -899,8 +899,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "percolate")
 			{
-				var descriptor = new PercolateQueryDescriptor<T>();
-				((Action<PercolateQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new PercolateQueryDescriptor<TDocument>();
+				((Action<PercolateQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -908,8 +908,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "pinned")
 			{
-				var descriptor = new PinnedQueryDescriptor<T>();
-				((Action<PinnedQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new PinnedQueryDescriptor<TDocument>();
+				((Action<PinnedQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -917,8 +917,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "prefix")
 			{
-				var descriptor = new PrefixQueryDescriptor<T>();
-				((Action<PrefixQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new PrefixQueryDescriptor<TDocument>();
+				((Action<PrefixQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -926,8 +926,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "query_string")
 			{
-				var descriptor = new QueryStringQueryDescriptor<T>();
-				((Action<QueryStringQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new QueryStringQueryDescriptor<TDocument>();
+				((Action<QueryStringQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -935,8 +935,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "rank_feature")
 			{
-				var descriptor = new RankFeatureQueryDescriptor<T>();
-				((Action<RankFeatureQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new RankFeatureQueryDescriptor<TDocument>();
+				((Action<RankFeatureQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -944,8 +944,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "regexp")
 			{
-				var descriptor = new RegexpQueryDescriptor<T>();
-				((Action<RegexpQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new RegexpQueryDescriptor<TDocument>();
+				((Action<RegexpQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -962,8 +962,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "script_score")
 			{
-				var descriptor = new ScriptScoreQueryDescriptor<T>();
-				((Action<ScriptScoreQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new ScriptScoreQueryDescriptor<TDocument>();
+				((Action<ScriptScoreQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -980,8 +980,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "simple_query_string")
 			{
-				var descriptor = new SimpleQueryStringQueryDescriptor<T>();
-				((Action<SimpleQueryStringQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SimpleQueryStringQueryDescriptor<TDocument>();
+				((Action<SimpleQueryStringQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -989,8 +989,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_containing")
 			{
-				var descriptor = new SpanContainingQueryDescriptor<T>();
-				((Action<SpanContainingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanContainingQueryDescriptor<TDocument>();
+				((Action<SpanContainingQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -998,8 +998,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "field_masking_span")
 			{
-				var descriptor = new SpanFieldMaskingQueryDescriptor<T>();
-				((Action<SpanFieldMaskingQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanFieldMaskingQueryDescriptor<TDocument>();
+				((Action<SpanFieldMaskingQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1007,8 +1007,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_first")
 			{
-				var descriptor = new SpanFirstQueryDescriptor<T>();
-				((Action<SpanFirstQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanFirstQueryDescriptor<TDocument>();
+				((Action<SpanFirstQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1016,8 +1016,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_multi")
 			{
-				var descriptor = new SpanMultiTermQueryDescriptor<T>();
-				((Action<SpanMultiTermQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanMultiTermQueryDescriptor<TDocument>();
+				((Action<SpanMultiTermQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1034,8 +1034,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_not")
 			{
-				var descriptor = new SpanNotQueryDescriptor<T>();
-				((Action<SpanNotQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanNotQueryDescriptor<TDocument>();
+				((Action<SpanNotQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1052,8 +1052,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_term")
 			{
-				var descriptor = new SpanTermQueryDescriptor<T>();
-				((Action<SpanTermQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanTermQueryDescriptor<TDocument>();
+				((Action<SpanTermQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1061,8 +1061,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "span_within")
 			{
-				var descriptor = new SpanWithinQueryDescriptor<T>();
-				((Action<SpanWithinQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SpanWithinQueryDescriptor<TDocument>();
+				((Action<SpanWithinQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1070,8 +1070,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "term")
 			{
-				var descriptor = new TermQueryDescriptor<T>();
-				((Action<TermQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new TermQueryDescriptor<TDocument>();
+				((Action<TermQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1088,8 +1088,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "terms_set")
 			{
-				var descriptor = new TermsSetQueryDescriptor<T>();
-				((Action<TermsSetQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new TermsSetQueryDescriptor<TDocument>();
+				((Action<TermsSetQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -1097,8 +1097,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			if (ContainedVariantName == "wildcard")
 			{
-				var descriptor = new WildcardQueryDescriptor<T>();
-				((Action<WildcardQueryDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new WildcardQueryDescriptor<TDocument>();
+				((Action<WildcardQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

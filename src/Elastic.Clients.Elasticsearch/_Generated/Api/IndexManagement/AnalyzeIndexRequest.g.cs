@@ -79,9 +79,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Analysis.Tokenizer? Tokenizer { get; set; }
 	}
 
-	public sealed partial class AnalyzeIndexRequestDescriptor<T> : RequestDescriptorBase<AnalyzeIndexRequestDescriptor<T>, AnalyzeIndexRequestParameters>
+	public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDescriptorBase<AnalyzeIndexRequestDescriptor<TDocument>, AnalyzeIndexRequestParameters>
 	{
-		public AnalyzeIndexRequestDescriptor()
+		public AnalyzeIndexRequestDescriptor() : this(typeof(TDocument))
 		{
 		}
 
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal AnalyzeIndexRequestDescriptor(Action<AnalyzeIndexRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal AnalyzeIndexRequestDescriptor(Action<AnalyzeIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementAnalyze;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
@@ -111,16 +111,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.Analysis.Tokenizer? TokenizerValue { get; private set; }
 
-		public AnalyzeIndexRequestDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Attributes(IEnumerable<string>? attributes) => Assign(attributes, (a, v) => a.AttributesValue = v);
-		public AnalyzeIndexRequestDescriptor<T> CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter) => Assign(charFilter, (a, v) => a.CharFilterValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Normalizer(string? normalizer) => Assign(normalizer, (a, v) => a.NormalizerValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Text(Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? text) => Assign(text, (a, v) => a.TextValue = v);
-		public AnalyzeIndexRequestDescriptor<T> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.Tokenizer? tokenizer) => Assign(tokenizer, (a, v) => a.TokenizerValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Attributes(IEnumerable<string>? attributes) => Assign(attributes, (a, v) => a.AttributesValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> CharFilter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.CharFilter>? charFilter) => Assign(charFilter, (a, v) => a.CharFilterValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Filter(IEnumerable<Elastic.Clients.Elasticsearch.Analysis.TokenFilter>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Normalizer(string? normalizer) => Assign(normalizer, (a, v) => a.NormalizerValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.IndexManagement.Analyze.TextToAnalyze? text) => Assign(text, (a, v) => a.TextValue = v);
+		public AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.Tokenizer? tokenizer) => Assign(tokenizer, (a, v) => a.TokenizerValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

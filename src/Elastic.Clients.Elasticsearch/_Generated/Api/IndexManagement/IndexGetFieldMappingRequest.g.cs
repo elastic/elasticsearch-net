@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public sealed partial class IndexGetFieldMappingRequestDescriptor<T> : RequestDescriptorBase<IndexGetFieldMappingRequestDescriptor<T>, IndexGetFieldMappingRequestParameters>
+	public sealed partial class IndexGetFieldMappingRequestDescriptor<TDocument> : RequestDescriptorBase<IndexGetFieldMappingRequestDescriptor<TDocument>, IndexGetFieldMappingRequestParameters>
 	{
 		public IndexGetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 		{
@@ -82,19 +82,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexGetFieldMappingRequestDescriptor()
+		internal IndexGetFieldMappingRequestDescriptor()
 		{
 		}
 
-		internal IndexGetFieldMappingRequestDescriptor(Action<IndexGetFieldMappingRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal IndexGetFieldMappingRequestDescriptor(Action<IndexGetFieldMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public IndexGetFieldMappingRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public IndexGetFieldMappingRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public IndexGetFieldMappingRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public IndexGetFieldMappingRequestDescriptor<T> IncludeDefaults(bool? includeDefaults) => Qs("include_defaults", includeDefaults);
-		public IndexGetFieldMappingRequestDescriptor<T> Local(bool? local) => Qs("local", local);
+		public IndexGetFieldMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public IndexGetFieldMappingRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndexGetFieldMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public IndexGetFieldMappingRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults) => Qs("include_defaults", includeDefaults);
+		public IndexGetFieldMappingRequestDescriptor<TDocument> Local(bool? local) => Qs("local", local);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

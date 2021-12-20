@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public ShrinkIndexRequestDescriptor()
+		internal ShrinkIndexRequestDescriptor()
 		{
 		}
 

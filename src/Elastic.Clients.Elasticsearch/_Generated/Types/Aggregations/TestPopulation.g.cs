@@ -39,41 +39,41 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Filter { get; set; }
 	}
 
-	public sealed partial class TestPopulationDescriptor<T> : DescriptorBase<TestPopulationDescriptor<T>>
+	public sealed partial class TestPopulationDescriptor<TDocument> : DescriptorBase<TestPopulationDescriptor<TDocument>>
 	{
 		public TestPopulationDescriptor()
 		{
 		}
 
-		internal TestPopulationDescriptor(Action<TestPopulationDescriptor<T>> configure) => configure.Invoke(this);
+		internal TestPopulationDescriptor(Action<TestPopulationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public TestPopulationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TestPopulationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TestPopulationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public TestPopulationDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public TestPopulationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public TestPopulationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public TestPopulationDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public TestPopulationDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public TestPopulationDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public TestPopulationDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -99,7 +99,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

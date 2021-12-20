@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexPutMappingRequestDescriptor()
+		internal IndexPutMappingRequestDescriptor()
 		{
 		}
 

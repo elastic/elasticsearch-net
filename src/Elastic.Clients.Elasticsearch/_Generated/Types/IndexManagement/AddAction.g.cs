@@ -69,13 +69,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 	}
 
-	public sealed partial class AddActionDescriptor<T> : DescriptorBase<AddActionDescriptor<T>>
+	public sealed partial class AddActionDescriptor<TDocument> : DescriptorBase<AddActionDescriptor<TDocument>>
 	{
 		public AddActionDescriptor()
 		{
 		}
 
-		internal AddActionDescriptor(Action<AddActionDescriptor<T>> configure) => configure.Invoke(this);
+		internal AddActionDescriptor(Action<AddActionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; private set; }
@@ -96,40 +96,40 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 
 		internal Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public AddActionDescriptor<T> Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias) => Assign(alias, (a, v) => a.AliasValue = v);
-		public AddActionDescriptor<T> Aliases(IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
-		public AddActionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		public AddActionDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias) => Assign(alias, (a, v) => a.AliasValue = v);
+		public AddActionDescriptor<TDocument> Aliases(IEnumerable<Elastic.Clients.Elasticsearch.IndexAlias>? aliases) => Assign(aliases, (a, v) => a.AliasesValue = v);
+		public AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public AddActionDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public AddActionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public AddActionDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public AddActionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
-		public AddActionDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
-		public AddActionDescriptor<T> Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
-		public AddActionDescriptor<T> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
-		public AddActionDescriptor<T> IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHiddenValue = v);
-		public AddActionDescriptor<T> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
-		public AddActionDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public AddActionDescriptor<T> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
+		public AddActionDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
+		public AddActionDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices) => Assign(indices, (a, v) => a.IndicesValue = v);
+		public AddActionDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
+		public AddActionDescriptor<TDocument> IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHiddenValue = v);
+		public AddActionDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
+		public AddActionDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public AddActionDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -153,7 +153,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

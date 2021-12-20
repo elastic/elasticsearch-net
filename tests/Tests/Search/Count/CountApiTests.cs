@@ -60,64 +60,12 @@ namespace Tests.Search.Count
 			(c, r) => c.Count(r),
 			(c, r) => c.CountAsync(r)
 		);
-	}
+	}	
 
-	//public class OriginalCountApiTests
-	//	: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest<Project>>
-	//{
-	//	public OriginalCountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-	//	protected override bool ExpectIsValid => true;
-
-	//	protected override object ExpectJson => new
-	//	{
-	//		query = new
-	//		{
-	//			match = new
-	//			{
-	//				name = new
-	//				{
-	//					query = "NEST"
-	//				}
-	//			}
-	//		}
-	//	};
-
-	//	protected override int ExpectStatusCode => 200;
-
-	//	protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
-	//		.Query(q => q
-	//			.Match(m => m
-	//				.Field(p => p.Name)
-	//				.Query("NEST")
-	//			)
-	//		);
-
-	//	protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-	//	protected override CountRequest<Project> Initializer => new CountRequest<Project>()
-	//	{
-	//		Query = new QueryContainer(new MatchQuery
-	//		{
-	//			Field = "name",
-	//			Query = "NEST"
-	//		})
-	//	};
-
-	//	protected override string ExpectedUrlPathAndQuery => "/project/_count";
-
-	//	protected override LazyResponses ClientUsage() => Calls(
-	//		(c, f) => c.Count(f),
-	//		(c, f) => c.CountAsync(f),
-	//		(c, r) => c.Count(r),
-	//		(c, r) => c.CountAsync(r)
-	//	);
-	//}
-
-	public class CountApiV2Tests
+	public class CountApi_FluentMatch_ApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest<Project>>
 	{
-		public CountApiV2Tests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CountApi_FluentMatch_ApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 

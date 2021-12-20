@@ -55,13 +55,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 	}
 
-	public sealed partial class IntervalsMatchDescriptor<T> : DescriptorBase<IntervalsMatchDescriptor<T>>
+	public sealed partial class IntervalsMatchDescriptor<TDocument> : DescriptorBase<IntervalsMatchDescriptor<TDocument>>
 	{
 		public IntervalsMatchDescriptor()
 		{
 		}
 
-		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<T>> configure) => configure.Invoke(this);
+		internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal int? MaxGapsValue { get; private set; }
@@ -78,27 +78,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; private set; }
 
-		public IntervalsMatchDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public IntervalsMatchDescriptor<T> MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
-		public IntervalsMatchDescriptor<T> Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
-		public IntervalsMatchDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public IntervalsMatchDescriptor<T> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
-		public IntervalsMatchDescriptor<T> UseField<TValue>(Expression<Func<T, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
-		public IntervalsMatchDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+		public IntervalsMatchDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsMatchDescriptor<TDocument> MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
+		public IntervalsMatchDescriptor<TDocument> Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
+		public IntervalsMatchDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsMatchDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public IntervalsMatchDescriptor<T> Filter(QueryDsl.IntervalsFilterDescriptor descriptor)
+		public IntervalsMatchDescriptor<TDocument> Filter(QueryDsl.IntervalsFilterDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public IntervalsMatchDescriptor<T> Filter(Action<QueryDsl.IntervalsFilterDescriptor> configure)
+		public IntervalsMatchDescriptor<TDocument> Filter(Action<QueryDsl.IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;

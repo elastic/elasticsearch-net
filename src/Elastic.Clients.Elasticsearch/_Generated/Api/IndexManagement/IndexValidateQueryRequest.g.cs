@@ -118,9 +118,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
-	public sealed partial class IndexValidateQueryRequestDescriptor<T> : RequestDescriptorBase<IndexValidateQueryRequestDescriptor<T>, IndexValidateQueryRequestParameters>
+	public sealed partial class IndexValidateQueryRequestDescriptor<TDocument> : RequestDescriptorBase<IndexValidateQueryRequestDescriptor<TDocument>, IndexValidateQueryRequestParameters>
 	{
-		public IndexValidateQueryRequestDescriptor()
+		public IndexValidateQueryRequestDescriptor() : this(typeof(TDocument))
 		{
 		}
 
@@ -128,43 +128,43 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		internal IndexValidateQueryRequestDescriptor(Action<IndexValidateQueryRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal IndexValidateQueryRequestDescriptor(Action<IndexValidateQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementValidateQuery;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public IndexValidateQueryRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public IndexValidateQueryRequestDescriptor<T> AllShards(bool? allShards) => Qs("all_shards", allShards);
-		public IndexValidateQueryRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public IndexValidateQueryRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public IndexValidateQueryRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public IndexValidateQueryRequestDescriptor<T> Df(string? df) => Qs("df", df);
-		public IndexValidateQueryRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public IndexValidateQueryRequestDescriptor<T> Explain(bool? explain) => Qs("explain", explain);
-		public IndexValidateQueryRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public IndexValidateQueryRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
-		public IndexValidateQueryRequestDescriptor<T> Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
-		public IndexValidateQueryRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
+		public IndexValidateQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public IndexValidateQueryRequestDescriptor<TDocument> AllShards(bool? allShards) => Qs("all_shards", allShards);
+		public IndexValidateQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public IndexValidateQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public IndexValidateQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public IndexValidateQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
+		public IndexValidateQueryRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndexValidateQueryRequestDescriptor<TDocument> Explain(bool? explain) => Qs("explain", explain);
+		public IndexValidateQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public IndexValidateQueryRequestDescriptor<TDocument> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public IndexValidateQueryRequestDescriptor<TDocument> Rewrite(bool? rewrite) => Qs("rewrite", rewrite);
+		public IndexValidateQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		public IndexValidateQueryRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public IndexValidateQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public IndexValidateQueryRequestDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public IndexValidateQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public IndexValidateQueryRequestDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public IndexValidateQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -182,7 +182,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else if (QueryValue is not null)
 			{

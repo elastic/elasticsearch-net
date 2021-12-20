@@ -35,13 +35,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 	}
 
-	public sealed partial class FormatMetricAggregationBaseDescriptor<T> : DescriptorBase<FormatMetricAggregationBaseDescriptor<T>>
+	public sealed partial class FormatMetricAggregationBaseDescriptor<TDocument> : DescriptorBase<FormatMetricAggregationBaseDescriptor<TDocument>>
 	{
 		public FormatMetricAggregationBaseDescriptor()
 		{
 		}
 
-		internal FormatMetricAggregationBaseDescriptor(Action<FormatMetricAggregationBaseDescriptor<T>> configure) => configure.Invoke(this);
+		internal FormatMetricAggregationBaseDescriptor(Action<FormatMetricAggregationBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? FormatValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
@@ -54,13 +54,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal string? NameValue { get; private set; }
 
-		public FormatMetricAggregationBaseDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public FormatMetricAggregationBaseDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FormatMetricAggregationBaseDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FormatMetricAggregationBaseDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public FormatMetricAggregationBaseDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public FormatMetricAggregationBaseDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public FormatMetricAggregationBaseDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		public FormatMetricAggregationBaseDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public FormatMetricAggregationBaseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FormatMetricAggregationBaseDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FormatMetricAggregationBaseDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public FormatMetricAggregationBaseDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public FormatMetricAggregationBaseDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public FormatMetricAggregationBaseDescriptor<TDocument> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

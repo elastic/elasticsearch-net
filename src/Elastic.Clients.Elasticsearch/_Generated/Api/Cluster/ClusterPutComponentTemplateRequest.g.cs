@@ -74,22 +74,22 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Dictionary<string, object>? Meta { get; set; }
 	}
 
-	public sealed partial class ClusterPutComponentTemplateRequestDescriptor<T> : RequestDescriptorBase<ClusterPutComponentTemplateRequestDescriptor<T>, ClusterPutComponentTemplateRequestParameters>
+	public sealed partial class ClusterPutComponentTemplateRequestDescriptor<TDocument> : RequestDescriptorBase<ClusterPutComponentTemplateRequestDescriptor<TDocument>, ClusterPutComponentTemplateRequestParameters>
 	{
 		public ClusterPutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor()
+		internal ClusterPutComponentTemplateRequestDescriptor()
 		{
 		}
 
-		internal ClusterPutComponentTemplateRequestDescriptor(Action<ClusterPutComponentTemplateRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal ClusterPutComponentTemplateRequestDescriptor(Action<ClusterPutComponentTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPutComponentTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public ClusterPutComponentTemplateRequestDescriptor<T> Create(bool? create) => Qs("create", create);
-		public ClusterPutComponentTemplateRequestDescriptor<T> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Create(bool? create) => Qs("create", create);
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexState TemplateValue { get; private set; }
 
 		internal Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? AliasesValue { get; private set; }
@@ -102,84 +102,84 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal IndexManagement.IndexStateDescriptor<T> TemplateDescriptor { get; private set; }
+		internal IndexManagement.IndexStateDescriptor<TDocument> TemplateDescriptor { get; private set; }
 
 		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
 
-		internal IndexManagement.IndexSettingsDescriptor<T> SettingsDescriptor { get; private set; }
+		internal IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
 
-		internal Action<IndexManagement.IndexStateDescriptor<T>> TemplateDescriptorAction { get; private set; }
+		internal Action<IndexManagement.IndexStateDescriptor<TDocument>> TemplateDescriptorAction { get; private set; }
 
 		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
-		internal Action<IndexManagement.IndexSettingsDescriptor<T>> SettingsDescriptorAction { get; private set; }
+		internal Action<IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState template)
 		{
 			TemplateDescriptor = null;
 			TemplateDescriptorAction = null;
 			return Assign(template, (a, v) => a.TemplateValue = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Template(IndexManagement.IndexStateDescriptor<T> descriptor)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Template(IndexManagement.IndexStateDescriptor<TDocument> descriptor)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.TemplateDescriptor = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Template(Action<IndexManagement.IndexStateDescriptor<T>> configure)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Template(Action<IndexManagement.IndexStateDescriptor<TDocument>> configure)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
 			return Assign(configure, (a, v) => a.TemplateDescriptorAction = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Aliases(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>, FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>()));
-		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>, FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>()));
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
 			MappingsDescriptor = null;
 			MappingsDescriptorAction = null;
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
 			SettingsDescriptor = null;
 			SettingsDescriptorAction = null;
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
 		}
 
-		public ClusterPutComponentTemplateRequestDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public ClusterPutComponentTemplateRequestDescriptor<T> Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.MetaValue = v);
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public ClusterPutComponentTemplateRequestDescriptor<TDocument> Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.MetaValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			else if (TemplateDescriptorAction is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexStateDescriptor<T>(TemplateDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexStateDescriptor<TDocument>(TemplateDescriptorAction), options);
 			}
 			else
 			{
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{

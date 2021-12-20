@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class UserAgentProcessorDescriptor<T> : DescriptorBase<UserAgentProcessorDescriptor<T>>
+	public sealed partial class UserAgentProcessorDescriptor<TDocument> : DescriptorBase<UserAgentProcessorDescriptor<TDocument>>
 	{
 		public UserAgentProcessorDescriptor()
 		{
 		}
 
-		internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal UserAgentProcessorDescriptor(Action<UserAgentProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal bool IgnoreMissingValue { get; private set; }
@@ -74,17 +74,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public UserAgentProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public UserAgentProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public UserAgentProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public UserAgentProcessorDescriptor<T> Options(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty> options) => Assign(options, (a, v) => a.OptionsValue = v);
-		public UserAgentProcessorDescriptor<T> RegexFile(string regexFile) => Assign(regexFile, (a, v) => a.RegexFileValue = v);
-		public UserAgentProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public UserAgentProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public UserAgentProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public UserAgentProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public UserAgentProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public UserAgentProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public UserAgentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public UserAgentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public UserAgentProcessorDescriptor<TDocument> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public UserAgentProcessorDescriptor<TDocument> Options(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty> options) => Assign(options, (a, v) => a.OptionsValue = v);
+		public UserAgentProcessorDescriptor<TDocument> RegexFile(string regexFile) => Assign(regexFile, (a, v) => a.RegexFileValue = v);
+		public UserAgentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public UserAgentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public UserAgentProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public UserAgentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public UserAgentProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public UserAgentProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
