@@ -3,28 +3,22 @@
 // See the LICENSE file in the project root for more information
 
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBodyBase
 	{
-		[JsonPropertyName("doc_as_upsert")]
 		public bool? DocAsUpsert { get; set; }
-
-		[JsonPropertyName("doc")]
-		//[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
+				
 		public TPartialUpdate PartialUpdate { get; set; }
 
-		[JsonPropertyName("script")]
 		public ScriptBase Script { get; set; }
 
-		[JsonPropertyName("scripted_upsert")]
 		public bool? ScriptedUpsert { get; set; }
 
-		[JsonPropertyName("upsert")]
-		//[JsonFormatter(typeof(CollapsedSourceFormatter<>))]
 		public TDocument Upsert { get; set; }
+
+		public Union<bool, SourceFilter> Source { get; set; }
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -32,7 +26,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("doc");
 				SourceSerialisation.Serialize(PartialUpdate, writer, settings.SourceSerializer);
-				return;
 			}
 
 			if (Script is not null)
@@ -53,11 +46,17 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, DocAsUpsert.Value, options);
 			}
 
-			// TODO - Finish this! Upsert
-		}
+			if (Upsert is not null)
+			{
+				writer.WritePropertyName("upsert");
+				SourceSerialisation.Serialize(Upsert, writer, settings.SourceSerializer);
+			}
 
-		// TODO
-		//[DataMember(Name = "_source")]
-		//internal Union<bool, ISourceFilter> Source { get; set; }
+			if (Source is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, Source, options);
+			}
+		}
 	}
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,6 +22,12 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 	private TPartialDocument _document;
 	private TDocument _idFrom;
+	private TDocument _upsert;
+	private bool? _docAsUpsert;
+	private bool? _scriptedUpsert;
+	private int? _retriesOnConflict;
+	private ScriptBase _script;
+	private Union<bool, SourceFilter> _source;
 
 	private Action<InlineScriptDescriptor> _scriptAction;
 
@@ -28,9 +35,29 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument document) => Assign(document, (a, v) => a._document = v);
 
-	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> IdFrom(TDocument idFrom) => Assign(idFrom, (a, v) => a._idFrom = v);
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? partialDocumentAsUpsert = true) =>
+		Assign(partialDocumentAsUpsert, (a, v) => a._docAsUpsert = v);
+
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> IdFrom(TDocument idFrom, bool useAsUpsert = false)
+	{
+		Assign(idFrom, (a, v) => a._idFrom = v);
+		return useAsUpsert ? Upsert(idFrom) : this;
+	}
+
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> RetriesOnConflict(int? retriesOnConflict) =>
+		Assign(retriesOnConflict, (a, v) => a._retriesOnConflict = v);
 
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(Action<InlineScriptDescriptor> configure) => Assign(configure, (a, v) => a._scriptAction = v);
+
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(ScriptBase script) => Assign(script, (a, v) => a._script = v);
+
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) =>
+		Assign(scriptedUpsert, (a, v) => a._scriptedUpsert = v);
+
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Source(Union<bool, SourceFilter> source) =>
+		Assign(source, (a, v) => a._source = v);
+
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Upsert(TDocument document) => Assign(document, (a, v) => a._upsert = v);
 
 	protected override object GetBody()
 	{
@@ -40,13 +67,13 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		return new BulkUpdateBody<TDocument, TPartialDocument>
 		{
 			PartialUpdate = _document,
-			//Script = Script,
-			//Upsert = Upsert,
-			//DocAsUpsert = DocAsUpsert,
-			//ScriptedUpsert = ScriptedUpsert,
-			//IfPrimaryTerm = IfPrimaryTerm,
-			//IfSequenceNumber = IfSequenceNumber,
-			//Source = Source
+			Script = _script,
+			Upsert = _upsert,
+			DocAsUpsert = _docAsUpsert,
+			ScriptedUpsert = _scriptedUpsert,
+			IfPrimaryTerm = IfPrimaryTermValue,
+			IfSequenceNumber = IfSequenceNoValue,
+			Source = _source
 		};
 	}
 
@@ -73,6 +100,8 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 		var body = GetBody();
 
+		// In the simple path, we have a BulkUpdateBody we can simply serialise.
+		// Only if we have some deferred delegates to configure descriptors so we need to manually serialise the data.
 		if (body is not null)
 		{
 			settings.RequestResponseSerializer.Serialize(body, stream, formatting);
@@ -82,14 +111,49 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 			writer = new Utf8JsonWriter(stream);
 			writer.WriteStartObject();
 
-			if (_scriptAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new InlineScriptDescriptor(_scriptAction), options);
-			}
+			WriteBody(settings, writer, options);
 
 			writer.WriteEndObject();
 			writer.Flush();
+		}
+	}
+
+	private void WriteBody(IElasticsearchClientSettings settings, Utf8JsonWriter writer, JsonSerializerOptions options)
+	{
+		if (_scriptAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new InlineScriptDescriptor(_scriptAction), options);
+		}
+
+		if (_document is not null)
+		{
+			writer.WritePropertyName("doc");
+			SourceSerialisation.Serialize(_document, writer, settings.SourceSerializer);
+		}
+
+		if (_scriptedUpsert.HasValue)
+		{
+			writer.WritePropertyName("scripted_upsert");
+			JsonSerializer.Serialize(writer, _scriptedUpsert.Value, options);
+		}
+
+		if (_docAsUpsert.HasValue)
+		{
+			writer.WritePropertyName("doc_as_upsert");
+			JsonSerializer.Serialize(writer, _docAsUpsert.Value, options);
+		}
+
+		if (_upsert is not null)
+		{
+			writer.WritePropertyName("upsert");
+			SourceSerialisation.Serialize(_upsert, writer, settings.SourceSerializer);
+		}
+
+		if (_source is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, Source, options);
 		}
 	}
 
@@ -115,7 +179,9 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		stream.WriteByte(_newline);
 
 		var body = GetBody();
-		
+
+		// In the simple path, we have a BulkUpdateBody we can simply serialise.
+		// Only if we have some deferred delegates to configure descriptors so we need to manually serialise the data.
 		if (body is not null)
 		{
 			await settings.RequestResponseSerializer.SerializeAsync(body, stream, formatting, cancellationToken).ConfigureAwait(false);
@@ -125,11 +191,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 			writer = new Utf8JsonWriter(stream);
 			writer.WriteStartObject();
 
-			if (_scriptAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new InlineScriptDescriptor(_scriptAction), options);
-			}
+			WriteBody(settings, writer, options);
 
 			writer.WriteEndObject();
 			await writer.FlushAsync(cancellationToken).ConfigureAwait(false);
@@ -138,23 +200,27 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 	protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		// TODO
+		if (_retriesOnConflict.HasValue)
+		{
+			writer.WritePropertyName("retry_on_conflict");
+			writer.WriteNumberValue(_retriesOnConflict.Value);
+		}
 	}
 
-	//protected override Id GetIdForOperation(Inferrer inferrer) =>
-	//	Id ?? new Id(new[] { _document, Upsert }.FirstOrDefault(o => o != null));
+	protected override Id GetIdForOperation(Inferrer inferrer) =>
+		IdValue ?? new Id(new object[] { _document, _upsert }.FirstOrDefault(o => o != null));
 
-	//protected override Routing GetRoutingForOperation(Inferrer inferrer)
-	//{
-	//	if (Routing != null)
-	//		return Routing;
+	protected override Routing GetRoutingForOperation(Inferrer inferrer)
+	{
+		if (Routing != null)
+			return RoutingValue;
 
-	//	if (IdFrom != null)
-	//		return new Routing(IdFrom);
+		if (IdFrom != null)
+			return new Routing(_idFrom);
 
-	//	if (Upsert != null)
-	//		return new Routing(Upsert);
+		if (Upsert != null)
+			return new Routing(_upsert);
 
-	//	return null;
-	//}
+		return null;
+	}
 }

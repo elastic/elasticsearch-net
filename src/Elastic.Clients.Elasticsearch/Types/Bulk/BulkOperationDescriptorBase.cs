@@ -12,24 +12,22 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public abstract class BulkOperationDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor>
 	{
-		//private Id _id;
 		private long? _version;
 		private IndexName _index;
-		//private Routing _routing;
 		private VersionType? _versionType;
-		private long? _ifSequenceNo;
-		private long? _ifPrimaryTerm;
 
 		protected Id IdValue { get; set; }
 		protected Routing RoutingValue { get; set; }
+		protected long? IfSequenceNoValue { get; set; }
+		protected long? IfPrimaryTermValue { get; set; }
 
 		protected abstract string Operation { get; }
 
 		public TDescriptor Id(Id id) => Assign(id, (a, v) => a.IdValue = v);
 
-		public TDescriptor IfSequenceNumber(long? ifSequenceNumber) => Assign(ifSequenceNumber, (a, v) => a._ifSequenceNo = v);
+		public TDescriptor IfSequenceNumber(long? ifSequenceNumber) => Assign(ifSequenceNumber, (a, v) => a.IfSequenceNoValue = v);
 
-		public TDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Assign(ifPrimaryTerm, (a, v) => a._ifPrimaryTerm = v);
+		public TDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Assign(ifPrimaryTerm, (a, v) => a.IfPrimaryTermValue = v);
 
 		public TDescriptor Index(IndexName index) => Assign(index, (a, v) => a._index = v);
 
@@ -54,16 +52,16 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, IdValue, options);
 			}
 
-			if (_ifPrimaryTerm.HasValue)
+			if (IfPrimaryTermValue.HasValue)
 			{
 				writer.WritePropertyName("if_primary_term");
-				JsonSerializer.Serialize(writer, _ifPrimaryTerm.Value, options);
+				JsonSerializer.Serialize(writer, IfPrimaryTermValue.Value, options);
 			}
 
-			if (_ifSequenceNo.HasValue)
+			if (IfSequenceNoValue.HasValue)
 			{
 				writer.WritePropertyName("if_seq_no");
-				JsonSerializer.Serialize(writer, _ifSequenceNo.Value, options);
+				JsonSerializer.Serialize(writer, IfSequenceNoValue.Value, options);
 			}
 
 			if (_index is not null)
@@ -102,6 +100,9 @@ namespace Elastic.Clients.Elasticsearch
 			writer.WriteEndObject();
 		}
 
+		/// <summary>
+		/// Must be overridden in derived operations to write their own properties to the <see cref="Utf8JsonWriter"/>.
+		/// </summary>
 		protected abstract void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 
 		protected abstract void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting);
