@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			using var writer = new Utf8JsonWriter(stream);
-			SerializeInternal(settings, writer);
+			SerializeOperation(settings, writer);
 			writer.Flush();
 			stream.WriteByte(_newline);
 			settings.SourceSerializer.Serialize(GetBody(), stream, formatting);
@@ -41,13 +41,13 @@ namespace Elastic.Clients.Elasticsearch
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			await using var writer = new Utf8JsonWriter(stream);
-			SerializeInternal(settings, writer);
+			SerializeOperation(settings, writer);
 			await writer.FlushAsync().ConfigureAwait(false);
 			stream.WriteByte(_newline);
 			await settings.SourceSerializer.SerializeAsync(GetBody(), stream, formatting).ConfigureAwait(false);
 		}
 
-		private void SerializeInternal(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+		private void SerializeOperation(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 
