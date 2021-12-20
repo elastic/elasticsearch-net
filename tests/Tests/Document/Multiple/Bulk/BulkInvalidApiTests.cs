@@ -18,7 +18,7 @@ public class BulkInvalidApiTests : ApiIntegrationTestBase<WritableCluster, BulkR
 
 	protected override bool ExpectIsValid => false;
 
-	protected override object ExpectJson { get; } = new object[]
+	protected override IReadOnlyList<object> ExpectNdjson => new object[]
 	{
 			new Dictionary<string, object> { { "update", new { _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
@@ -35,7 +35,6 @@ public class BulkInvalidApiTests : ApiIntegrationTestBase<WritableCluster, BulkR
 #pragma warning restore CS0618 // Type or member is obsolete
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
-
 
 	protected override BulkRequest Initializer => new(CallIsolatedValue)
 	{

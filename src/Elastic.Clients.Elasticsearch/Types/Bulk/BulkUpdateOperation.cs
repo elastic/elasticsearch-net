@@ -2,15 +2,10 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -57,15 +52,13 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 	[JsonIgnore]
 	public TDocument Upsert { get; set; }
 
+	[JsonIgnore]
+	public Union<bool, SourceFilter> Source { get; set; }
+
 	protected override string Operation => "update";
 
 	protected override void BeforeSerialize(IElasticsearchClientSettings settings)
 	{
-		//if (Id is null && IdFrom is not null)
-		//	Id = settings.Inferrer.Id<TDocument>(IdFrom);
-
-		//if (Index is null)
-		//	Index = settings.Inferrer.IndexName<TDocument>();
 	}
 
 	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize(writer, this, options);
@@ -78,7 +71,7 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 		ScriptedUpsert = ScriptedUpsert,
 		IfPrimaryTerm = IfPrimaryTerm,
 		IfSequenceNumber = IfSequenceNumber,
-		//Source = Source
+		Source = Source
 	};
 
 	protected override Id GetIdForOperation(Inferrer inferrer) =>

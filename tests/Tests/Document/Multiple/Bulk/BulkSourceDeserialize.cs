@@ -14,35 +14,35 @@ public class BulkSourceDeserialize
 	public void CanDeserialize()
 	{
 		var json = @"{
-							""took"": 61,
-							""errors"": false,
-							""items"": [{
-								""update"": {
-									""_index"": ""test"",
-									""_type"": ""_doc"",
-									""_id"": ""1"",
-									""_version"": 2,
-									""result"": ""updated"",
-									""_shards"": {
-										""total"": 2,
-										""successful"": 1,
-										""failed"": 0
-									},
-									""_seq_no"": 3,
-									""_primary_term"": 1,
-									""get"": {
-										""_seq_no"": 3,
-										""_primary_term"": 1,
-										""found"": true,
-										""_source"": {
-											""field1"": ""value1"",
-											""field2"": ""value2""
-										}
-									},
-									""status"": 200
+					""took"": 61,
+					""errors"": false,
+					""items"": [{
+						""update"": {
+							""_index"": ""test"",
+							""_type"": ""_doc"",
+							""_id"": ""1"",
+							""_version"": 2,
+							""result"": ""updated"",
+							""_shards"": {
+								""total"": 2,
+								""successful"": 1,
+								""failed"": 0
+							},
+							""_seq_no"": 3,
+							""_primary_term"": 1,
+							""get"": {
+								""_seq_no"": 3,
+								""_primary_term"": 1,
+								""found"": true,
+								""_source"": {
+									""field1"": ""value1"",
+									""field2"": ""value2""
 								}
-							}]
-						}";
+							},
+							""status"": 200
+						}
+					}]
+				}";
 
 		var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
@@ -60,13 +60,13 @@ public class BulkSourceDeserialize
 		item1.Found.Should().Be(true);
 
 		var simpleObject = bulkResponse.Items[0].Get.Source.As<SimpleObject>();
-		simpleObject.field1.Should().Be("value1");
-		simpleObject.field2.Should().Be("value2");
+		simpleObject.Field1.Should().Be("value1");
+		simpleObject.Field2.Should().Be("value2");
 	}
 
 	private class SimpleObject
 	{
-		public string field1 { get; set; }
-		public string field2 { get; set; }
+		public string Field1 { get; set; }
+		public string Field2 { get; set; }
 	}
 }
