@@ -57,13 +57,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class EnrichProcessorDescriptor<T> : DescriptorBase<EnrichProcessorDescriptor<T>>
+	public sealed partial class EnrichProcessorDescriptor<TDocument> : DescriptorBase<EnrichProcessorDescriptor<TDocument>>
 	{
 		public EnrichProcessorDescriptor()
 		{
 		}
 
-		internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal EnrichProcessorDescriptor(Action<EnrichProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -86,19 +86,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public EnrichProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public EnrichProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public EnrichProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public EnrichProcessorDescriptor<T> MaxMatches(int? maxMatches) => Assign(maxMatches, (a, v) => a.MaxMatchesValue = v);
-		public EnrichProcessorDescriptor<T> Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
-		public EnrichProcessorDescriptor<T> PolicyName(string policyName) => Assign(policyName, (a, v) => a.PolicyNameValue = v);
-		public EnrichProcessorDescriptor<T> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation) => Assign(shapeRelation, (a, v) => a.ShapeRelationValue = v);
-		public EnrichProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public EnrichProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public EnrichProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public EnrichProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public EnrichProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public EnrichProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public EnrichProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public EnrichProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public EnrichProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public EnrichProcessorDescriptor<TDocument> MaxMatches(int? maxMatches) => Assign(maxMatches, (a, v) => a.MaxMatchesValue = v);
+		public EnrichProcessorDescriptor<TDocument> Override(bool? overrideValue = true) => Assign(overrideValue, (a, v) => a.OverrideValue = v);
+		public EnrichProcessorDescriptor<TDocument> PolicyName(string policyName) => Assign(policyName, (a, v) => a.PolicyNameValue = v);
+		public EnrichProcessorDescriptor<TDocument> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation) => Assign(shapeRelation, (a, v) => a.ShapeRelationValue = v);
+		public EnrichProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public EnrichProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public EnrichProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public EnrichProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public EnrichProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public EnrichProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

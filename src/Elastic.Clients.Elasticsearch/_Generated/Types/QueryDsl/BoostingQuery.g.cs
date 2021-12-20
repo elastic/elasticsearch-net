@@ -41,13 +41,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Positive { get; set; }
 	}
 
-	public sealed partial class BoostingQueryDescriptor<T> : DescriptorBase<BoostingQueryDescriptor<T>>
+	public sealed partial class BoostingQueryDescriptor<TDocument> : DescriptorBase<BoostingQueryDescriptor<TDocument>>
 	{
 		public BoostingQueryDescriptor()
 		{
 		}
 
-		internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal double NegativeBoostValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer NegativeValue { get; private set; }
@@ -58,59 +58,59 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal QueryContainerDescriptor<T> NegativeDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> NegativeDescriptor { get; private set; }
 
-		internal QueryContainerDescriptor<T> PositiveDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> PositiveDescriptor { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> NegativeDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> NegativeDescriptorAction { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> PositiveDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> PositiveDescriptorAction { get; private set; }
 
-		public BoostingQueryDescriptor<T> NegativeBoost(double negativeBoost) => Assign(negativeBoost, (a, v) => a.NegativeBoostValue = v);
-		public BoostingQueryDescriptor<T> Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer negative)
+		public BoostingQueryDescriptor<TDocument> NegativeBoost(double negativeBoost) => Assign(negativeBoost, (a, v) => a.NegativeBoostValue = v);
+		public BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer negative)
 		{
 			NegativeDescriptor = null;
 			NegativeDescriptorAction = null;
 			return Assign(negative, (a, v) => a.NegativeValue = v);
 		}
 
-		public BoostingQueryDescriptor<T> Negative(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoostingQueryDescriptor<TDocument> Negative(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.NegativeDescriptor = v);
 		}
 
-		public BoostingQueryDescriptor<T> Negative(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoostingQueryDescriptor<TDocument> Negative(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			NegativeValue = null;
 			NegativeDescriptorAction = null;
 			return Assign(configure, (a, v) => a.NegativeDescriptorAction = v);
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer positive)
+		public BoostingQueryDescriptor<TDocument> Positive(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer positive)
 		{
 			PositiveDescriptor = null;
 			PositiveDescriptorAction = null;
 			return Assign(positive, (a, v) => a.PositiveValue = v);
 		}
 
-		public BoostingQueryDescriptor<T> Positive(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public BoostingQueryDescriptor<TDocument> Positive(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PositiveDescriptor = v);
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public BoostingQueryDescriptor<TDocument> Positive(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			PositiveValue = null;
 			PositiveDescriptorAction = null;
 			return Assign(configure, (a, v) => a.PositiveDescriptorAction = v);
 		}
 
-		public BoostingQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public BoostingQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public BoostingQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public BoostingQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (NegativeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("negative");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(NegativeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(NegativeDescriptorAction), options);
 			}
 			else
 			{
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (PositiveDescriptorAction is not null)
 			{
 				writer.WritePropertyName("positive");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(PositiveDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(PositiveDescriptorAction), options);
 			}
 			else
 			{

@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexPutTemplateRequestDescriptor()
+		internal IndexPutTemplateRequestDescriptor()
 		{
 		}
 

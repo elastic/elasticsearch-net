@@ -39,13 +39,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
 	}
 
-	public sealed partial class SpanFieldMaskingQueryDescriptor<T> : DescriptorBase<SpanFieldMaskingQueryDescriptor<T>>
+	public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : DescriptorBase<SpanFieldMaskingQueryDescriptor<TDocument>>
 	{
 		public SpanFieldMaskingQueryDescriptor()
 		{
 		}
 
-		internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; private set; }
@@ -54,35 +54,35 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal SpanQueryDescriptor<T> QueryDescriptor { get; private set; }
+		internal SpanQueryDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal Action<SpanQueryDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<SpanQueryDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		public SpanFieldMaskingQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SpanFieldMaskingQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SpanFieldMaskingQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery query)
+		public SpanFieldMaskingQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SpanFieldMaskingQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SpanFieldMaskingQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public SpanFieldMaskingQueryDescriptor<T> Query(QueryDsl.SpanQueryDescriptor<T> descriptor)
+		public SpanFieldMaskingQueryDescriptor<TDocument> Query(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public SpanFieldMaskingQueryDescriptor<T> Query(Action<QueryDsl.SpanQueryDescriptor<T>> configure)
+		public SpanFieldMaskingQueryDescriptor<TDocument> Query(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public SpanFieldMaskingQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public SpanFieldMaskingQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public SpanFieldMaskingQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanFieldMaskingQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else
 			{

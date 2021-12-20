@@ -47,13 +47,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? SearchRouting { get; set; }
 	}
 
-	public sealed partial class AliasDefinitionDescriptor<T> : DescriptorBase<AliasDefinitionDescriptor<T>>
+	public sealed partial class AliasDefinitionDescriptor<TDocument> : DescriptorBase<AliasDefinitionDescriptor<TDocument>>
 	{
 		public AliasDefinitionDescriptor()
 		{
 		}
 
-		internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor<T>> configure) => configure.Invoke(this);
+		internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
 		internal string? IndexRoutingValue { get; private set; }
@@ -64,35 +64,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal string? SearchRoutingValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public AliasDefinitionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		public AliasDefinitionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public AliasDefinitionDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public AliasDefinitionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public AliasDefinitionDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public AliasDefinitionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
-		public AliasDefinitionDescriptor<T> IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
-		public AliasDefinitionDescriptor<T> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
-		public AliasDefinitionDescriptor<T> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public AliasDefinitionDescriptor<T> SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
+		public AliasDefinitionDescriptor<TDocument> IndexRouting(string? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
+		public AliasDefinitionDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
+		public AliasDefinitionDescriptor<TDocument> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public AliasDefinitionDescriptor<TDocument> SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

@@ -57,13 +57,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? ResourceName { get; set; }
 	}
 
-	public sealed partial class AttachmentProcessorDescriptor<T> : DescriptorBase<AttachmentProcessorDescriptor<T>>
+	public sealed partial class AttachmentProcessorDescriptor<TDocument> : DescriptorBase<AttachmentProcessorDescriptor<TDocument>>
 	{
 		public AttachmentProcessorDescriptor()
 		{
 		}
 
-		internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal AttachmentProcessorDescriptor(Action<AttachmentProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -86,20 +86,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public AttachmentProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AttachmentProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public AttachmentProcessorDescriptor<T> IndexedChars(long? indexedChars) => Assign(indexedChars, (a, v) => a.IndexedCharsValue = v);
-		public AttachmentProcessorDescriptor<T> IndexedCharsField(Elastic.Clients.Elasticsearch.Field? indexedCharsField) => Assign(indexedCharsField, (a, v) => a.IndexedCharsFieldValue = v);
-		public AttachmentProcessorDescriptor<T> IndexedCharsField<TValue>(Expression<Func<T, TValue>> indexedCharsField) => Assign(indexedCharsField, (a, v) => a.IndexedCharsFieldValue = v);
-		public AttachmentProcessorDescriptor<T> Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
-		public AttachmentProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public AttachmentProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public AttachmentProcessorDescriptor<T> ResourceName(string? resourceName) => Assign(resourceName, (a, v) => a.ResourceNameValue = v);
-		public AttachmentProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public AttachmentProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public AttachmentProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public AttachmentProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public AttachmentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AttachmentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AttachmentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public AttachmentProcessorDescriptor<TDocument> IndexedChars(long? indexedChars) => Assign(indexedChars, (a, v) => a.IndexedCharsValue = v);
+		public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Elastic.Clients.Elasticsearch.Field? indexedCharsField) => Assign(indexedCharsField, (a, v) => a.IndexedCharsFieldValue = v);
+		public AttachmentProcessorDescriptor<TDocument> IndexedCharsField<TValue>(Expression<Func<TDocument, TValue>> indexedCharsField) => Assign(indexedCharsField, (a, v) => a.IndexedCharsFieldValue = v);
+		public AttachmentProcessorDescriptor<TDocument> Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
+		public AttachmentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public AttachmentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public AttachmentProcessorDescriptor<TDocument> ResourceName(string? resourceName) => Assign(resourceName, (a, v) => a.ResourceNameValue = v);
+		public AttachmentProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public AttachmentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public AttachmentProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public AttachmentProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

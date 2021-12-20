@@ -65,13 +65,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public long? Version { get; set; }
 	}
 
-	public sealed partial class PercolateQueryDescriptor<T> : DescriptorBase<PercolateQueryDescriptor<T>>
+	public sealed partial class PercolateQueryDescriptor<TDocument> : DescriptorBase<PercolateQueryDescriptor<TDocument>>
 	{
 		public PercolateQueryDescriptor()
 		{
 		}
 
-		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal object? DocumentValue { get; private set; }
 
 		internal IEnumerable<object>? DocumentsValue { get; private set; }
@@ -94,18 +94,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public PercolateQueryDescriptor<T> Document(object? document) => Assign(document, (a, v) => a.DocumentValue = v);
-		public PercolateQueryDescriptor<T> Documents(IEnumerable<object>? documents) => Assign(documents, (a, v) => a.DocumentsValue = v);
-		public PercolateQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercolateQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercolateQueryDescriptor<T> Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
-		public PercolateQueryDescriptor<T> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
-		public PercolateQueryDescriptor<T> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
-		public PercolateQueryDescriptor<T> Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
-		public PercolateQueryDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public PercolateQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public PercolateQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public PercolateQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public PercolateQueryDescriptor<TDocument> Document(object? document) => Assign(document, (a, v) => a.DocumentValue = v);
+		public PercolateQueryDescriptor<TDocument> Documents(IEnumerable<object>? documents) => Assign(documents, (a, v) => a.DocumentsValue = v);
+		public PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercolateQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
+		public PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
+		public PercolateQueryDescriptor<TDocument> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		public PercolateQueryDescriptor<TDocument> Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
+		public PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public PercolateQueryDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public PercolateQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public PercolateQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

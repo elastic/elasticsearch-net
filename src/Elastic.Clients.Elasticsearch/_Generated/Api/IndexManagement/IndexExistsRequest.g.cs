@@ -80,7 +80,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexExistsRequestDescriptor()
+		internal IndexExistsRequestDescriptor()
 		{
 		}
 

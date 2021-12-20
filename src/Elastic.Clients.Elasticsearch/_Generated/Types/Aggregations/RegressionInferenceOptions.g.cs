@@ -35,20 +35,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? NumTopFeatureImportanceValues { get; set; }
 	}
 
-	public sealed partial class RegressionInferenceOptionsDescriptor<T> : DescriptorBase<RegressionInferenceOptionsDescriptor<T>>
+	public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : DescriptorBase<RegressionInferenceOptionsDescriptor<TDocument>>
 	{
 		public RegressionInferenceOptionsDescriptor()
 		{
 		}
 
-		internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<T>> configure) => configure.Invoke(this);
+		internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; private set; }
 
 		internal int? NumTopFeatureImportanceValuesValue { get; private set; }
 
-		public RegressionInferenceOptionsDescriptor<T> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
-		public RegressionInferenceOptionsDescriptor<T> ResultsField<TValue>(Expression<Func<T, TValue>> resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
-		public RegressionInferenceOptionsDescriptor<T> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues) => Assign(numTopFeatureImportanceValues, (a, v) => a.NumTopFeatureImportanceValuesValue = v);
+		public RegressionInferenceOptionsDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
+		public RegressionInferenceOptionsDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
+		public RegressionInferenceOptionsDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues) => Assign(numTopFeatureImportanceValues, (a, v) => a.NumTopFeatureImportanceValuesValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
-		public ClusterDeleteComponentTemplateRequestDescriptor()
+		internal ClusterDeleteComponentTemplateRequestDescriptor()
 		{
 		}
 

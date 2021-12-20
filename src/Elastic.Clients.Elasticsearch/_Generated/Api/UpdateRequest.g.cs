@@ -141,7 +141,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public UpdateRequestDescriptor()
+		internal UpdateRequestDescriptor()
 		{
 		}
 

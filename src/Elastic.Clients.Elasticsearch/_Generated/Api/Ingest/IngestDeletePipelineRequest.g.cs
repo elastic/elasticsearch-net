@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		{
 		}
 
-		public IngestDeletePipelineRequestDescriptor()
+		internal IngestDeletePipelineRequestDescriptor()
 		{
 		}
 

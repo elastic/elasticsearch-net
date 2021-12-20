@@ -143,13 +143,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Wildcard { get; set; }
 	}
 
-	public sealed partial class WildcardQueryDescriptor<T> : FieldNameQueryDescriptorBase<WildcardQueryDescriptor<T>, T>
+	public sealed partial class WildcardQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<WildcardQueryDescriptor<TDocument>, TDocument>
 	{
 		public WildcardQueryDescriptor()
 		{
 		}
 
-		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? CaseInsensitiveValue { get; private set; }
 
 		internal string? RewriteValue { get; private set; }
@@ -162,12 +162,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public WildcardQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public WildcardQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public WildcardQueryDescriptor<T> Value(string? value) => Assign(value, (a, v) => a.ValueValue = v);
-		public WildcardQueryDescriptor<T> Wildcard(string? wildcard) => Assign(wildcard, (a, v) => a.WildcardValue = v);
-		public WildcardQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public WildcardQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public WildcardQueryDescriptor<TDocument> Value(string? value) => Assign(value, (a, v) => a.ValueValue = v);
+		public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard) => Assign(wildcard, (a, v) => a.WildcardValue = v);
+		public WildcardQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public WildcardQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

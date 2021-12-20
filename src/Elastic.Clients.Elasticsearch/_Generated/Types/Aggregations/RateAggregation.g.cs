@@ -197,13 +197,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 	}
 
-	public sealed partial class RateAggregationDescriptor<T> : DescriptorBase<RateAggregationDescriptor<T>>
+	public sealed partial class RateAggregationDescriptor<TDocument> : DescriptorBase<RateAggregationDescriptor<TDocument>>
 	{
 		public RateAggregationDescriptor()
 		{
 		}
 
-		internal RateAggregationDescriptor(Action<RateAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal RateAggregationDescriptor(Action<RateAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? UnitValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.RateMode? ModeValue { get; private set; }
@@ -218,14 +218,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public RateAggregationDescriptor<T> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit) => Assign(unit, (a, v) => a.UnitValue = v);
-		public RateAggregationDescriptor<T> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
-		public RateAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public RateAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RateAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RateAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public RateAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public RateAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit) => Assign(unit, (a, v) => a.UnitValue = v);
+		public RateAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode) => Assign(mode, (a, v) => a.ModeValue = v);
+		public RateAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public RateAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RateAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RateAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public RateAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public RateAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

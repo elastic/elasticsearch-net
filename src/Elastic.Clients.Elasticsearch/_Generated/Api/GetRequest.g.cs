@@ -98,30 +98,30 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 
-	public sealed partial class GetRequestDescriptor<T> : RequestDescriptorBase<GetRequestDescriptor<T>, GetRequestParameters>
+	public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptorBase<GetRequestDescriptor<TDocument>, GetRequestParameters>
 	{
 		public GetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 		{
 		}
 
-		public GetRequestDescriptor()
+		internal GetRequestDescriptor()
 		{
 		}
 
-		internal GetRequestDescriptor(Action<GetRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal GetRequestDescriptor(Action<GetRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public GetRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
-		public GetRequestDescriptor<T> Realtime(bool? realtime) => Qs("realtime", realtime);
-		public GetRequestDescriptor<T> Refresh(bool? refresh) => Qs("refresh", refresh);
-		public GetRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public GetRequestDescriptor<T> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
-		public GetRequestDescriptor<T> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public GetRequestDescriptor<T> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public GetRequestDescriptor<T> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
-		public GetRequestDescriptor<T> Version(long? version) => Qs("version", version);
-		public GetRequestDescriptor<T> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
+		public GetRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+		public GetRequestDescriptor<TDocument> Realtime(bool? realtime) => Qs("realtime", realtime);
+		public GetRequestDescriptor<TDocument> Refresh(bool? refresh) => Qs("refresh", refresh);
+		public GetRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+		public GetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
+		public GetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public GetRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public GetRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
+		public GetRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
+		public GetRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

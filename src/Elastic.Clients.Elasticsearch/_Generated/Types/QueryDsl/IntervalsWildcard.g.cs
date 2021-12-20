@@ -43,23 +43,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsWildcardDescriptor<T> : DescriptorBase<IntervalsWildcardDescriptor<T>>
+	public sealed partial class IntervalsWildcardDescriptor<TDocument> : DescriptorBase<IntervalsWildcardDescriptor<TDocument>>
 	{
 		public IntervalsWildcardDescriptor()
 		{
 		}
 
-		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<T>> configure) => configure.Invoke(this);
+		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal string PatternValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; private set; }
 
-		public IntervalsWildcardDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public IntervalsWildcardDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
-		public IntervalsWildcardDescriptor<T> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
-		public IntervalsWildcardDescriptor<T> UseField<TValue>(Expression<Func<T, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsWildcardDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsWildcardDescriptor<TDocument> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
+		public IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsWildcardDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

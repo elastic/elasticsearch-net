@@ -378,13 +378,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public sealed partial class DateHistogramAggregationDescriptor<T> : DescriptorBase<DateHistogramAggregationDescriptor<T>>
+	public sealed partial class DateHistogramAggregationDescriptor<TDocument> : DescriptorBase<DateHistogramAggregationDescriptor<TDocument>>
 	{
 		public DateHistogramAggregationDescriptor()
 		{
 		}
 
-		internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
@@ -417,68 +417,68 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal HistogramOrderDescriptor OrderDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
 		internal Action<HistogramOrderDescriptor> OrderDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public DateHistogramAggregationDescriptor<T> CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval) => Assign(calendarInterval, (a, v) => a.CalendarIntervalValue = v);
-		public DateHistogramAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateHistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateHistogramAggregationDescriptor<T> FixedInterval(Elastic.Clients.Elasticsearch.Time? fixedInterval) => Assign(fixedInterval, (a, v) => a.FixedIntervalValue = v);
-		public DateHistogramAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public DateHistogramAggregationDescriptor<T> Interval(Elastic.Clients.Elasticsearch.Time? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
-		public DateHistogramAggregationDescriptor<T> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
-		public DateHistogramAggregationDescriptor<T> Missing(string? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public DateHistogramAggregationDescriptor<T> Offset(Elastic.Clients.Elasticsearch.Time? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
-		public DateHistogramAggregationDescriptor<T> Order(Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? order)
+		public DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval) => Assign(calendarInterval, (a, v) => a.CalendarIntervalValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Time? fixedInterval) => Assign(fixedInterval, (a, v) => a.FixedIntervalValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Interval(Elastic.Clients.Elasticsearch.Time? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Missing(string? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Time? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? order)
 		{
 			OrderDescriptor = null;
 			OrderDescriptorAction = null;
 			return Assign(order, (a, v) => a.OrderValue = v);
 		}
 
-		public DateHistogramAggregationDescriptor<T> Order(Aggregations.HistogramOrderDescriptor descriptor)
+		public DateHistogramAggregationDescriptor<TDocument> Order(Aggregations.HistogramOrderDescriptor descriptor)
 		{
 			OrderValue = null;
 			OrderDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.OrderDescriptor = v);
 		}
 
-		public DateHistogramAggregationDescriptor<T> Order(Action<Aggregations.HistogramOrderDescriptor> configure)
+		public DateHistogramAggregationDescriptor<TDocument> Order(Action<Aggregations.HistogramOrderDescriptor> configure)
 		{
 			OrderValue = null;
 			OrderDescriptorAction = null;
 			return Assign(configure, (a, v) => a.OrderDescriptorAction = v);
 		}
 
-		public DateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public DateHistogramAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public DateHistogramAggregationDescriptor<T> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
-		public DateHistogramAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public DateHistogramAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public DateHistogramAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public DateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public DateHistogramAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public DateHistogramAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public DateHistogramAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public DateHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -587,7 +587,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

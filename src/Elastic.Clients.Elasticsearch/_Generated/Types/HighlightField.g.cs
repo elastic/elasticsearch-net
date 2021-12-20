@@ -111,13 +111,13 @@ namespace Elastic.Clients.Elasticsearch
 		public string? Type { get; set; }
 	}
 
-	public sealed partial class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>>
+	public sealed partial class HighlightFieldDescriptor<TDocument> : DescriptorBase<HighlightFieldDescriptor<TDocument>>
 	{
 		public HighlightFieldDescriptor()
 		{
 		}
 
-		internal HighlightFieldDescriptor(Action<HighlightFieldDescriptor<T>> configure) => configure.Invoke(this);
+		internal HighlightFieldDescriptor(Action<HighlightFieldDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? BoundaryCharsValue { get; private set; }
 
 		internal int? BoundaryMaxScanValue { get; private set; }
@@ -160,53 +160,53 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal string? TypeValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> HighlightQueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> HighlightQueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> HighlightQueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> HighlightQueryDescriptorAction { get; private set; }
 
-		public HighlightFieldDescriptor<T> BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
-		public HighlightFieldDescriptor<T> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
-		public HighlightFieldDescriptor<T> BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
-		public HighlightFieldDescriptor<T> BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
-		public HighlightFieldDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public HighlightFieldDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public HighlightFieldDescriptor<T> ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a.ForceSourceValue = v);
-		public HighlightFieldDescriptor<T> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
-		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
-		public HighlightFieldDescriptor<T> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
-		public HighlightFieldDescriptor<T> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
+		public HighlightFieldDescriptor<TDocument> BoundaryChars(string? boundaryChars) => Assign(boundaryChars, (a, v) => a.BoundaryCharsValue = v);
+		public HighlightFieldDescriptor<TDocument> BoundaryMaxScan(int? boundaryMaxScan) => Assign(boundaryMaxScan, (a, v) => a.BoundaryMaxScanValue = v);
+		public HighlightFieldDescriptor<TDocument> BoundaryScanner(Elastic.Clients.Elasticsearch.BoundaryScanner? boundaryScanner) => Assign(boundaryScanner, (a, v) => a.BoundaryScannerValue = v);
+		public HighlightFieldDescriptor<TDocument> BoundaryScannerLocale(string? boundaryScannerLocale) => Assign(boundaryScannerLocale, (a, v) => a.BoundaryScannerLocaleValue = v);
+		public HighlightFieldDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HighlightFieldDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HighlightFieldDescriptor<TDocument> ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a.ForceSourceValue = v);
+		public HighlightFieldDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
+		public HighlightFieldDescriptor<TDocument> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
+		public HighlightFieldDescriptor<TDocument> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
+		public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
 		{
 			HighlightQueryDescriptor = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(highlightQuery, (a, v) => a.HighlightQueryValue = v);
 		}
 
-		public HighlightFieldDescriptor<T> HighlightQuery(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public HighlightFieldDescriptor<TDocument> HighlightQuery(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.HighlightQueryDescriptor = v);
 		}
 
-		public HighlightFieldDescriptor<T> HighlightQuery(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			HighlightQueryValue = null;
 			HighlightQueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.HighlightQueryDescriptorAction = v);
 		}
 
-		public HighlightFieldDescriptor<T> MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
-		public HighlightFieldDescriptor<T> MatchedFields<TValue>(Expression<Func<T, TValue>> matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
-		public HighlightFieldDescriptor<T> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
-		public HighlightFieldDescriptor<T> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
-		public HighlightFieldDescriptor<T> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);
-		public HighlightFieldDescriptor<T> Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public HighlightFieldDescriptor<T> PhraseLimit(int? phraseLimit) => Assign(phraseLimit, (a, v) => a.PhraseLimitValue = v);
-		public HighlightFieldDescriptor<T> PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a.PostTagsValue = v);
-		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
-		public HighlightFieldDescriptor<T> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
-		public HighlightFieldDescriptor<T> TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
-		public HighlightFieldDescriptor<T> Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public HighlightFieldDescriptor<TDocument> MatchedFields(Elastic.Clients.Elasticsearch.Fields? matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
+		public HighlightFieldDescriptor<TDocument> MatchedFields<TValue>(Expression<Func<TDocument, TValue>> matchedFields) => Assign(matchedFields, (a, v) => a.MatchedFieldsValue = v);
+		public HighlightFieldDescriptor<TDocument> MaxFragmentLength(int? maxFragmentLength) => Assign(maxFragmentLength, (a, v) => a.MaxFragmentLengthValue = v);
+		public HighlightFieldDescriptor<TDocument> NoMatchSize(int? noMatchSize) => Assign(noMatchSize, (a, v) => a.NoMatchSizeValue = v);
+		public HighlightFieldDescriptor<TDocument> NumberOfFragments(int? numberOfFragments) => Assign(numberOfFragments, (a, v) => a.NumberOfFragmentsValue = v);
+		public HighlightFieldDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.HighlighterOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
+		public HighlightFieldDescriptor<TDocument> PhraseLimit(int? phraseLimit) => Assign(phraseLimit, (a, v) => a.PhraseLimitValue = v);
+		public HighlightFieldDescriptor<TDocument> PostTags(IEnumerable<string>? postTags) => Assign(postTags, (a, v) => a.PostTagsValue = v);
+		public HighlightFieldDescriptor<TDocument> PreTags(IEnumerable<string>? preTags) => Assign(preTags, (a, v) => a.PreTagsValue = v);
+		public HighlightFieldDescriptor<TDocument> RequireFieldMatch(bool? requireFieldMatch = true) => Assign(requireFieldMatch, (a, v) => a.RequireFieldMatchValue = v);
+		public HighlightFieldDescriptor<TDocument> TagsSchema(Elastic.Clients.Elasticsearch.HighlighterTagsSchema? tagsSchema) => Assign(tagsSchema, (a, v) => a.TagsSchemaValue = v);
+		public HighlightFieldDescriptor<TDocument> Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (HighlightQueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("highlight_query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(HighlightQueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
 			}
 			else if (HighlightQueryValue is not null)
 			{

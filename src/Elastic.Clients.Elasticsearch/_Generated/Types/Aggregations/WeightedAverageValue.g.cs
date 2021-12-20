@@ -39,23 +39,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	}
 
-	public sealed partial class WeightedAverageValueDescriptor<T> : DescriptorBase<WeightedAverageValueDescriptor<T>>
+	public sealed partial class WeightedAverageValueDescriptor<TDocument> : DescriptorBase<WeightedAverageValueDescriptor<TDocument>>
 	{
 		public WeightedAverageValueDescriptor()
 		{
 		}
 
-		internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor<T>> configure) => configure.Invoke(this);
+		internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal double? MissingValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
 
-		public WeightedAverageValueDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public WeightedAverageValueDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public WeightedAverageValueDescriptor<T> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public WeightedAverageValueDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public WeightedAverageValueDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public WeightedAverageValueDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

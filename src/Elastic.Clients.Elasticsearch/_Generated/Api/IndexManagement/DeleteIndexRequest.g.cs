@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public DeleteIndexRequestDescriptor()
+		internal DeleteIndexRequestDescriptor()
 		{
 		}
 

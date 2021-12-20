@@ -360,13 +360,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 	}
 
-	public sealed partial class ProcessorContainerDescriptor<T> : DescriptorBase<ProcessorContainerDescriptor<T>>
+	public sealed partial class ProcessorContainerDescriptor<TDocument> : DescriptorBase<ProcessorContainerDescriptor<TDocument>>
 	{
 		public ProcessorContainerDescriptor()
 		{
 		}
 
-		internal ProcessorContainerDescriptor(Action<ProcessorContainerDescriptor<T>> configure) => configure.Invoke(this);
+		internal ProcessorContainerDescriptor(Action<ProcessorContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
@@ -394,71 +394,71 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		}
 
 		public void Attachment(AttachmentProcessor variant) => Set(variant, "attachment");
-		public void Attachment(Action<AttachmentProcessorDescriptor<T>> configure) => Set(configure, "attachment");
+		public void Attachment(Action<AttachmentProcessorDescriptor<TDocument>> configure) => Set(configure, "attachment");
 		public void Append(AppendProcessor variant) => Set(variant, "append");
-		public void Append(Action<AppendProcessorDescriptor<T>> configure) => Set(configure, "append");
+		public void Append(Action<AppendProcessorDescriptor<TDocument>> configure) => Set(configure, "append");
 		public void Csv(CsvProcessor variant) => Set(variant, "csv");
-		public void Csv(Action<CsvProcessorDescriptor<T>> configure) => Set(configure, "csv");
+		public void Csv(Action<CsvProcessorDescriptor<TDocument>> configure) => Set(configure, "csv");
 		public void Convert(ConvertProcessor variant) => Set(variant, "convert");
-		public void Convert(Action<ConvertProcessorDescriptor<T>> configure) => Set(configure, "convert");
+		public void Convert(Action<ConvertProcessorDescriptor<TDocument>> configure) => Set(configure, "convert");
 		public void Date(DateProcessor variant) => Set(variant, "date");
-		public void Date(Action<DateProcessorDescriptor<T>> configure) => Set(configure, "date");
+		public void Date(Action<DateProcessorDescriptor<TDocument>> configure) => Set(configure, "date");
 		public void DateIndexName(DateIndexNameProcessor variant) => Set(variant, "date_index_name");
-		public void DateIndexName(Action<DateIndexNameProcessorDescriptor<T>> configure) => Set(configure, "date_index_name");
+		public void DateIndexName(Action<DateIndexNameProcessorDescriptor<TDocument>> configure) => Set(configure, "date_index_name");
 		public void DotExpander(DotExpanderProcessor variant) => Set(variant, "dot_expander");
-		public void DotExpander(Action<DotExpanderProcessorDescriptor<T>> configure) => Set(configure, "dot_expander");
+		public void DotExpander(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => Set(configure, "dot_expander");
 		public void Enrich(EnrichProcessor variant) => Set(variant, "enrich");
-		public void Enrich(Action<EnrichProcessorDescriptor<T>> configure) => Set(configure, "enrich");
+		public void Enrich(Action<EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
 		public void Fail(FailProcessor variant) => Set(variant, "fail");
 		public void Fail(Action<FailProcessorDescriptor> configure) => Set(configure, "fail");
 		public void Foreach(ForeachProcessor variant) => Set(variant, "foreach");
-		public void Foreach(Action<ForeachProcessorDescriptor<T>> configure) => Set(configure, "foreach");
+		public void Foreach(Action<ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
 		public void Json(JsonProcessor variant) => Set(variant, "json");
-		public void Json(Action<JsonProcessorDescriptor<T>> configure) => Set(configure, "json");
+		public void Json(Action<JsonProcessorDescriptor<TDocument>> configure) => Set(configure, "json");
 		public void UserAgent(UserAgentProcessor variant) => Set(variant, "user_agent");
-		public void UserAgent(Action<UserAgentProcessorDescriptor<T>> configure) => Set(configure, "user_agent");
+		public void UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
 		public void Kv(KeyValueProcessor variant) => Set(variant, "kv");
-		public void Kv(Action<KeyValueProcessorDescriptor<T>> configure) => Set(configure, "kv");
+		public void Kv(Action<KeyValueProcessorDescriptor<TDocument>> configure) => Set(configure, "kv");
 		public void Geoip(GeoIpProcessor variant) => Set(variant, "geoip");
-		public void Geoip(Action<GeoIpProcessorDescriptor<T>> configure) => Set(configure, "geoip");
+		public void Geoip(Action<GeoIpProcessorDescriptor<TDocument>> configure) => Set(configure, "geoip");
 		public void Grok(GrokProcessor variant) => Set(variant, "grok");
-		public void Grok(Action<GrokProcessorDescriptor<T>> configure) => Set(configure, "grok");
+		public void Grok(Action<GrokProcessorDescriptor<TDocument>> configure) => Set(configure, "grok");
 		public void Gsub(GsubProcessor variant) => Set(variant, "gsub");
-		public void Gsub(Action<GsubProcessorDescriptor<T>> configure) => Set(configure, "gsub");
+		public void Gsub(Action<GsubProcessorDescriptor<TDocument>> configure) => Set(configure, "gsub");
 		public void Join(JoinProcessor variant) => Set(variant, "join");
-		public void Join(Action<JoinProcessorDescriptor<T>> configure) => Set(configure, "join");
+		public void Join(Action<JoinProcessorDescriptor<TDocument>> configure) => Set(configure, "join");
 		public void Lowercase(LowercaseProcessor variant) => Set(variant, "lowercase");
-		public void Lowercase(Action<LowercaseProcessorDescriptor<T>> configure) => Set(configure, "lowercase");
+		public void Lowercase(Action<LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
 		public void Remove(RemoveProcessor variant) => Set(variant, "remove");
-		public void Remove(Action<RemoveProcessorDescriptor<T>> configure) => Set(configure, "remove");
+		public void Remove(Action<RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
 		public void Rename(RenameProcessor variant) => Set(variant, "rename");
-		public void Rename(Action<RenameProcessorDescriptor<T>> configure) => Set(configure, "rename");
+		public void Rename(Action<RenameProcessorDescriptor<TDocument>> configure) => Set(configure, "rename");
 		public void Set(SetProcessor variant) => Set(variant, "set");
-		public void Set(Action<SetProcessorDescriptor<T>> configure) => Set(configure, "set");
+		public void Set(Action<SetProcessorDescriptor<TDocument>> configure) => Set(configure, "set");
 		public void Sort(SortProcessor variant) => Set(variant, "sort");
-		public void Sort(Action<SortProcessorDescriptor<T>> configure) => Set(configure, "sort");
+		public void Sort(Action<SortProcessorDescriptor<TDocument>> configure) => Set(configure, "sort");
 		public void Split(SplitProcessor variant) => Set(variant, "split");
-		public void Split(Action<SplitProcessorDescriptor<T>> configure) => Set(configure, "split");
+		public void Split(Action<SplitProcessorDescriptor<TDocument>> configure) => Set(configure, "split");
 		public void Trim(TrimProcessor variant) => Set(variant, "trim");
-		public void Trim(Action<TrimProcessorDescriptor<T>> configure) => Set(configure, "trim");
+		public void Trim(Action<TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
 		public void Uppercase(UppercaseProcessor variant) => Set(variant, "uppercase");
-		public void Uppercase(Action<UppercaseProcessorDescriptor<T>> configure) => Set(configure, "uppercase");
+		public void Uppercase(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
 		public void Urldecode(UrlDecodeProcessor variant) => Set(variant, "urldecode");
-		public void Urldecode(Action<UrlDecodeProcessorDescriptor<T>> configure) => Set(configure, "urldecode");
+		public void Urldecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 		public void Bytes(BytesProcessor variant) => Set(variant, "bytes");
-		public void Bytes(Action<BytesProcessorDescriptor<T>> configure) => Set(configure, "bytes");
+		public void Bytes(Action<BytesProcessorDescriptor<TDocument>> configure) => Set(configure, "bytes");
 		public void Dissect(DissectProcessor variant) => Set(variant, "dissect");
-		public void Dissect(Action<DissectProcessorDescriptor<T>> configure) => Set(configure, "dissect");
+		public void Dissect(Action<DissectProcessorDescriptor<TDocument>> configure) => Set(configure, "dissect");
 		public void SetSecurityUser(SetSecurityUserProcessor variant) => Set(variant, "set_security_user");
-		public void SetSecurityUser(Action<SetSecurityUserProcessorDescriptor<T>> configure) => Set(configure, "set_security_user");
+		public void SetSecurityUser(Action<SetSecurityUserProcessorDescriptor<TDocument>> configure) => Set(configure, "set_security_user");
 		public void Pipeline(PipelineProcessor variant) => Set(variant, "pipeline");
 		public void Pipeline(Action<PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
 		public void Drop(DropProcessor variant) => Set(variant, "drop");
 		public void Drop(Action<DropProcessorDescriptor> configure) => Set(configure, "drop");
 		public void Circle(CircleProcessor variant) => Set(variant, "circle");
-		public void Circle(Action<CircleProcessorDescriptor<T>> configure) => Set(configure, "circle");
+		public void Circle(Action<CircleProcessorDescriptor<TDocument>> configure) => Set(configure, "circle");
 		public void Inference(InferenceProcessor variant) => Set(variant, "inference");
-		public void Inference(Action<InferenceProcessorDescriptor<T>> configure) => Set(configure, "inference");
+		public void Inference(Action<InferenceProcessorDescriptor<TDocument>> configure) => Set(configure, "inference");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -478,8 +478,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			writer.WriteStartObject();
 			if (ContainedVariantName == "attachment")
 			{
-				var descriptor = new AttachmentProcessorDescriptor<T>();
-				((Action<AttachmentProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new AttachmentProcessorDescriptor<TDocument>();
+				((Action<AttachmentProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -487,8 +487,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "append")
 			{
-				var descriptor = new AppendProcessorDescriptor<T>();
-				((Action<AppendProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new AppendProcessorDescriptor<TDocument>();
+				((Action<AppendProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -496,8 +496,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "csv")
 			{
-				var descriptor = new CsvProcessorDescriptor<T>();
-				((Action<CsvProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new CsvProcessorDescriptor<TDocument>();
+				((Action<CsvProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -505,8 +505,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "convert")
 			{
-				var descriptor = new ConvertProcessorDescriptor<T>();
-				((Action<ConvertProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new ConvertProcessorDescriptor<TDocument>();
+				((Action<ConvertProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -514,8 +514,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "date")
 			{
-				var descriptor = new DateProcessorDescriptor<T>();
-				((Action<DateProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new DateProcessorDescriptor<TDocument>();
+				((Action<DateProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -523,8 +523,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "date_index_name")
 			{
-				var descriptor = new DateIndexNameProcessorDescriptor<T>();
-				((Action<DateIndexNameProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new DateIndexNameProcessorDescriptor<TDocument>();
+				((Action<DateIndexNameProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -532,8 +532,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "dot_expander")
 			{
-				var descriptor = new DotExpanderProcessorDescriptor<T>();
-				((Action<DotExpanderProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new DotExpanderProcessorDescriptor<TDocument>();
+				((Action<DotExpanderProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -541,8 +541,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "enrich")
 			{
-				var descriptor = new EnrichProcessorDescriptor<T>();
-				((Action<EnrichProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new EnrichProcessorDescriptor<TDocument>();
+				((Action<EnrichProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -559,8 +559,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "foreach")
 			{
-				var descriptor = new ForeachProcessorDescriptor<T>();
-				((Action<ForeachProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new ForeachProcessorDescriptor<TDocument>();
+				((Action<ForeachProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -568,8 +568,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "json")
 			{
-				var descriptor = new JsonProcessorDescriptor<T>();
-				((Action<JsonProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new JsonProcessorDescriptor<TDocument>();
+				((Action<JsonProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -577,8 +577,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "user_agent")
 			{
-				var descriptor = new UserAgentProcessorDescriptor<T>();
-				((Action<UserAgentProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new UserAgentProcessorDescriptor<TDocument>();
+				((Action<UserAgentProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -586,8 +586,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "kv")
 			{
-				var descriptor = new KeyValueProcessorDescriptor<T>();
-				((Action<KeyValueProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new KeyValueProcessorDescriptor<TDocument>();
+				((Action<KeyValueProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -595,8 +595,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "geoip")
 			{
-				var descriptor = new GeoIpProcessorDescriptor<T>();
-				((Action<GeoIpProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new GeoIpProcessorDescriptor<TDocument>();
+				((Action<GeoIpProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -604,8 +604,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "grok")
 			{
-				var descriptor = new GrokProcessorDescriptor<T>();
-				((Action<GrokProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new GrokProcessorDescriptor<TDocument>();
+				((Action<GrokProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -613,8 +613,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "gsub")
 			{
-				var descriptor = new GsubProcessorDescriptor<T>();
-				((Action<GsubProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new GsubProcessorDescriptor<TDocument>();
+				((Action<GsubProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -622,8 +622,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "join")
 			{
-				var descriptor = new JoinProcessorDescriptor<T>();
-				((Action<JoinProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new JoinProcessorDescriptor<TDocument>();
+				((Action<JoinProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -631,8 +631,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "lowercase")
 			{
-				var descriptor = new LowercaseProcessorDescriptor<T>();
-				((Action<LowercaseProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new LowercaseProcessorDescriptor<TDocument>();
+				((Action<LowercaseProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -640,8 +640,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "remove")
 			{
-				var descriptor = new RemoveProcessorDescriptor<T>();
-				((Action<RemoveProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new RemoveProcessorDescriptor<TDocument>();
+				((Action<RemoveProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -649,8 +649,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "rename")
 			{
-				var descriptor = new RenameProcessorDescriptor<T>();
-				((Action<RenameProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new RenameProcessorDescriptor<TDocument>();
+				((Action<RenameProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -658,8 +658,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "set")
 			{
-				var descriptor = new SetProcessorDescriptor<T>();
-				((Action<SetProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SetProcessorDescriptor<TDocument>();
+				((Action<SetProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -667,8 +667,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "sort")
 			{
-				var descriptor = new SortProcessorDescriptor<T>();
-				((Action<SortProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SortProcessorDescriptor<TDocument>();
+				((Action<SortProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -676,8 +676,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "split")
 			{
-				var descriptor = new SplitProcessorDescriptor<T>();
-				((Action<SplitProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SplitProcessorDescriptor<TDocument>();
+				((Action<SplitProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -685,8 +685,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "trim")
 			{
-				var descriptor = new TrimProcessorDescriptor<T>();
-				((Action<TrimProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new TrimProcessorDescriptor<TDocument>();
+				((Action<TrimProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -694,8 +694,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "uppercase")
 			{
-				var descriptor = new UppercaseProcessorDescriptor<T>();
-				((Action<UppercaseProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new UppercaseProcessorDescriptor<TDocument>();
+				((Action<UppercaseProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -703,8 +703,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "urldecode")
 			{
-				var descriptor = new UrlDecodeProcessorDescriptor<T>();
-				((Action<UrlDecodeProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new UrlDecodeProcessorDescriptor<TDocument>();
+				((Action<UrlDecodeProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -712,8 +712,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "bytes")
 			{
-				var descriptor = new BytesProcessorDescriptor<T>();
-				((Action<BytesProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new BytesProcessorDescriptor<TDocument>();
+				((Action<BytesProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -721,8 +721,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "dissect")
 			{
-				var descriptor = new DissectProcessorDescriptor<T>();
-				((Action<DissectProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new DissectProcessorDescriptor<TDocument>();
+				((Action<DissectProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -730,8 +730,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "set_security_user")
 			{
-				var descriptor = new SetSecurityUserProcessorDescriptor<T>();
-				((Action<SetSecurityUserProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new SetSecurityUserProcessorDescriptor<TDocument>();
+				((Action<SetSecurityUserProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -757,8 +757,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "circle")
 			{
-				var descriptor = new CircleProcessorDescriptor<T>();
-				((Action<CircleProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new CircleProcessorDescriptor<TDocument>();
+				((Action<CircleProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
@@ -766,8 +766,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 			if (ContainedVariantName == "inference")
 			{
-				var descriptor = new InferenceProcessorDescriptor<T>();
-				((Action<InferenceProcessorDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new InferenceProcessorDescriptor<TDocument>();
+				((Action<InferenceProcessorDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

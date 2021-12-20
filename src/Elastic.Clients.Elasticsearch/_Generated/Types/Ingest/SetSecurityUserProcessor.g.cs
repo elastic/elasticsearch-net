@@ -37,13 +37,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public IEnumerable<string>? Properties { get; set; }
 	}
 
-	public sealed partial class SetSecurityUserProcessorDescriptor<T> : DescriptorBase<SetSecurityUserProcessorDescriptor<T>>
+	public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : DescriptorBase<SetSecurityUserProcessorDescriptor<TDocument>>
 	{
 		public SetSecurityUserProcessorDescriptor()
 		{
 		}
 
-		internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal SetSecurityUserProcessorDescriptor(Action<SetSecurityUserProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal IEnumerable<string>? PropertiesValue { get; private set; }
@@ -56,13 +56,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public SetSecurityUserProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SetSecurityUserProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SetSecurityUserProcessorDescriptor<T> Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
-		public SetSecurityUserProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public SetSecurityUserProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public SetSecurityUserProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public SetSecurityUserProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> Properties(IEnumerable<string>? properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public SetSecurityUserProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

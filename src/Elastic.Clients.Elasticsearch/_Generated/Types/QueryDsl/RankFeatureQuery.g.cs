@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 	}
 
-	public sealed partial class RankFeatureQueryDescriptor<T> : DescriptorBase<RankFeatureQueryDescriptor<T>>
+	public sealed partial class RankFeatureQueryDescriptor<TDocument> : DescriptorBase<RankFeatureQueryDescriptor<TDocument>>
 	{
 		public RankFeatureQueryDescriptor()
 		{
 		}
 
-		internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; private set; }
@@ -86,94 +86,94 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; private set; }
 
-		public RankFeatureQueryDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RankFeatureQueryDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RankFeatureQueryDescriptor<T> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? saturation)
+		public RankFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RankFeatureQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RankFeatureQueryDescriptor<TDocument> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? saturation)
 		{
 			SaturationDescriptor = null;
 			SaturationDescriptorAction = null;
 			return Assign(saturation, (a, v) => a.SaturationValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Saturation(QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
+		public RankFeatureQueryDescriptor<TDocument> Saturation(QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
 		{
 			SaturationValue = null;
 			SaturationDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SaturationDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Saturation(Action<QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
+		public RankFeatureQueryDescriptor<TDocument> Saturation(Action<QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
 		{
 			SaturationValue = null;
 			SaturationDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SaturationDescriptorAction = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? log)
+		public RankFeatureQueryDescriptor<TDocument> Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? log)
 		{
 			LogDescriptor = null;
 			LogDescriptorAction = null;
 			return Assign(log, (a, v) => a.LogValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Log(QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
+		public RankFeatureQueryDescriptor<TDocument> Log(QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
 		{
 			LogValue = null;
 			LogDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LogDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Log(Action<QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
+		public RankFeatureQueryDescriptor<TDocument> Log(Action<QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
 		{
 			LogValue = null;
 			LogDescriptorAction = null;
 			return Assign(configure, (a, v) => a.LogDescriptorAction = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? linear)
+		public RankFeatureQueryDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? linear)
 		{
 			LinearDescriptor = null;
 			LinearDescriptorAction = null;
 			return Assign(linear, (a, v) => a.LinearValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Linear(QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
+		public RankFeatureQueryDescriptor<TDocument> Linear(QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
 		{
 			LinearValue = null;
 			LinearDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.LinearDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Linear(Action<QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
+		public RankFeatureQueryDescriptor<TDocument> Linear(Action<QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
 		{
 			LinearValue = null;
 			LinearDescriptorAction = null;
 			return Assign(configure, (a, v) => a.LinearDescriptorAction = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
+		public RankFeatureQueryDescriptor<TDocument> Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
 		{
 			SigmoidDescriptor = null;
 			SigmoidDescriptorAction = null;
 			return Assign(sigmoid, (a, v) => a.SigmoidValue = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Sigmoid(QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
+		public RankFeatureQueryDescriptor<TDocument> Sigmoid(QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
 		{
 			SigmoidValue = null;
 			SigmoidDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SigmoidDescriptor = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Sigmoid(Action<QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
+		public RankFeatureQueryDescriptor<TDocument> Sigmoid(Action<QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
 		{
 			SigmoidValue = null;
 			SigmoidDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SigmoidDescriptorAction = v);
 		}
 
-		public RankFeatureQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public RankFeatureQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public RankFeatureQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public RankFeatureQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

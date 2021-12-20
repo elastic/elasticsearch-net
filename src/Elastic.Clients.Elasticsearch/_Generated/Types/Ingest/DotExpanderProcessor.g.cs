@@ -37,13 +37,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Path { get; set; }
 	}
 
-	public sealed partial class DotExpanderProcessorDescriptor<T> : DescriptorBase<DotExpanderProcessorDescriptor<T>>
+	public sealed partial class DotExpanderProcessorDescriptor<TDocument> : DescriptorBase<DotExpanderProcessorDescriptor<TDocument>>
 	{
 		public DotExpanderProcessorDescriptor()
 		{
 		}
 
-		internal DotExpanderProcessorDescriptor(Action<DotExpanderProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal DotExpanderProcessorDescriptor(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal string? PathValue { get; private set; }
@@ -56,13 +56,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public DotExpanderProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DotExpanderProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DotExpanderProcessorDescriptor<T> Path(string? path) => Assign(path, (a, v) => a.PathValue = v);
-		public DotExpanderProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public DotExpanderProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public DotExpanderProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public DotExpanderProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> Path(string? path) => Assign(path, (a, v) => a.PathValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public DotExpanderProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

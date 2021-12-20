@@ -176,13 +176,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Compression { get; set; }
 	}
 
-	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<T> : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<T>>
+	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocument> : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<TDocument>>
 	{
 		public MedianAbsoluteDeviationAggregationDescriptor()
 		{
 		}
 
-		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal double? CompressionValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
@@ -195,13 +195,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

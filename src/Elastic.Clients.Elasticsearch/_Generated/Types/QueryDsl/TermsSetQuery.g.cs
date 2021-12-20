@@ -123,13 +123,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<string> Terms { get; set; }
 	}
 
-	public sealed partial class TermsSetQueryDescriptor<T> : FieldNameQueryDescriptorBase<TermsSetQueryDescriptor<T>, T>
+	public sealed partial class TermsSetQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<TermsSetQueryDescriptor<TDocument>, TDocument>
 	{
 		public TermsSetQueryDescriptor()
 		{
 		}
 
-		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScriptValue { get; private set; }
@@ -140,12 +140,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public TermsSetQueryDescriptor<T> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
-		public TermsSetQueryDescriptor<T> MinimumShouldMatchField<TValue>(Expression<Func<T, TValue>> minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
-		public TermsSetQueryDescriptor<T> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript) => Assign(minimumShouldMatchScript, (a, v) => a.MinimumShouldMatchScriptValue = v);
-		public TermsSetQueryDescriptor<T> Terms(IEnumerable<string> terms) => Assign(terms, (a, v) => a.TermsValue = v);
-		public TermsSetQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public TermsSetQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript) => Assign(minimumShouldMatchScript, (a, v) => a.MinimumShouldMatchScriptValue = v);
+		public TermsSetQueryDescriptor<TDocument> Terms(IEnumerable<string> terms) => Assign(terms, (a, v) => a.TermsValue = v);
+		public TermsSetQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

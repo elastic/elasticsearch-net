@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public OpenPointInTimeRequestDescriptor()
+		internal OpenPointInTimeRequestDescriptor()
 		{
 		}
 
