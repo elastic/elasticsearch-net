@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexExistsAliasRequestDescriptor()
+		internal IndexExistsAliasRequestDescriptor()
 		{
 		}
 

@@ -43,23 +43,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 	}
 
-	public sealed partial class IntervalsPrefixDescriptor<T> : DescriptorBase<IntervalsPrefixDescriptor<T>>
+	public sealed partial class IntervalsPrefixDescriptor<TDocument> : DescriptorBase<IntervalsPrefixDescriptor<TDocument>>
 	{
 		public IntervalsPrefixDescriptor()
 		{
 		}
 
-		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor<T>> configure) => configure.Invoke(this);
+		internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal string PrefixValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; private set; }
 
-		public IntervalsPrefixDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public IntervalsPrefixDescriptor<T> Prefix(string prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
-		public IntervalsPrefixDescriptor<T> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
-		public IntervalsPrefixDescriptor<T> UseField<TValue>(Expression<Func<T, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsPrefixDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public IntervalsPrefixDescriptor<TDocument> Prefix(string prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
+		public IntervalsPrefixDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsPrefixDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

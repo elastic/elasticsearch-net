@@ -76,8 +76,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	/// <summary>
 	/// Concept only, not yet used
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public abstract class AggregationDescriptorBase<T> : DescriptorBase<T>, IAggregationContainerDescriptor where T : DescriptorBase<T>
+	/// <typeparam name="TDocument"></typeparam>
+	public abstract class AggregationDescriptorBase<TDocument> : DescriptorBase<TDocument>, IAggregationContainerDescriptor where TDocument : DescriptorBase<TDocument>
 	{
 		string IAggregationContainerDescriptor.NameValue => NameValue;
 
@@ -140,22 +140,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class DateHistogramAggregationDescriptor<T>
-	{
-		//internal AggregationDictionary? AggregationsValue { get; private set; }
 
-		//internal Action<AggregationContainerDescriptor<T>>? AggregationsDescriptorAction { get; private set; }
-
-		//public DateHistogramAggregationDescriptor<T> Aggregations(AggregationDictionary aggregations) => Assign(aggregations, (a, v) => a.AggregationsValue = v);
-
-		//public DateHistogramAggregationDescriptor<T> Aggregations(Action<AggregationContainerDescriptor<T>> aggregations) => Assign(aggregations, (a, v) => a.AggregationsDescriptorAction = v);
-	}
-
-	public partial class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>>
+	public partial class AggregationContainerDescriptor<TDocument> : DescriptorBase<AggregationContainerDescriptor<TDocument>>
 	{
 		internal AggregationDictionary Aggregations { get; set; }
 
-		private AggregationContainerDescriptor<T> SetContainer(string key, AggregationContainer container)
+		private AggregationContainerDescriptor<TDocument> SetContainer(string key, AggregationContainer container)
 		{
 			if (Self.Aggregations == null)
 				Self.Aggregations = new AggregationDictionary();
@@ -165,9 +155,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return this;
 		}
 
-		public AggregationContainerDescriptor<T> Average(string name, Action<AverageAggregationDescriptor<T>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+		public AggregationContainerDescriptor<TDocument> Average(string name, Action<AverageAggregationDescriptor<TDocument>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
 
-		public AggregationContainerDescriptor<T> WeightedAverage(string name, Action<WeightedAverageAggregationDescriptor<T>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+		public AggregationContainerDescriptor<TDocument> WeightedAverage(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 	}
@@ -743,19 +733,19 @@ namespace Elastic.Clients.Elasticsearch
 		//public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class => Get.Source?.AsUsingRequestResponseSerializer<GetResponse<TDocument>>();
 	}
 
-	public sealed partial class SourceRequestDescriptor<T>
+	public sealed partial class SourceRequestDescriptor<TDocument>
 	{
-		public SourceRequestDescriptor(T documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(T), id ?? Id.From(documentWithId)) { }
+		public SourceRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
 
 		/// <summary>
 		/// The name of the index.
 		/// </summary>
-		public SourceRequestDescriptor<T> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+		public SourceRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 
 		/// <summary>
 		/// A shortcut into calling Index(typeof(TOther)).
 		/// </summary>
-		public SourceRequestDescriptor<T> Index<TOther>() => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+		public SourceRequestDescriptor<TDocument> Index<TOther>() => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
 	}
 
 	public partial class SourceResponse<TDocument> : ISelfDeserializable
@@ -1255,11 +1245,11 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class SearchRequestDescriptor<T>
+	public sealed partial class SearchRequestDescriptor<TDocument>
 	{
-		internal Type ClrType => typeof(T);
+		internal Type ClrType => typeof(TDocument);
 
-		public SearchRequestDescriptor<T> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public SearchRequestDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 
 		internal override void BeforeRequest()
 		{
@@ -1303,11 +1293,11 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public sealed partial class CountRequestDescriptor<T>
+	public sealed partial class CountRequestDescriptor<TDocument>
 	{
-		public CountRequestDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> configure)
+		public CountRequestDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> configure)
 		{
-			var container = configure?.Invoke(new QueryContainerDescriptor<T>());
+			var container = configure?.Invoke(new QueryContainerDescriptor<TDocument>());
 			return Assign(container, (a, v) => a.QueryValue = v);
 		}
 	}
@@ -1493,12 +1483,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	}
 	//}
 
-	public sealed partial class QueryContainerDescriptor<T>
+	public sealed partial class QueryContainerDescriptor<TDocument>
 	{
 		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
 
-		public void Term<TValue>(Expression<Func<T, TValue>> field, object value, double? boost = null, string name = null) =>
-			Term(t => t.Field(field).Value(value)/*.Boost(boost)*/.Name(name));
+		public void Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null, string name = null) =>
+			Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 	}
 
 

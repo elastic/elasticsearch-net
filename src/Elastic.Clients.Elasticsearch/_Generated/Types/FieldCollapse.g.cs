@@ -39,23 +39,23 @@ namespace Elastic.Clients.Elasticsearch
 		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	public sealed partial class FieldCollapseDescriptor<T> : DescriptorBase<FieldCollapseDescriptor<T>>
+	public sealed partial class FieldCollapseDescriptor<TDocument> : DescriptorBase<FieldCollapseDescriptor<TDocument>>
 	{
 		public FieldCollapseDescriptor()
 		{
 		}
 
-		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<T>> configure) => configure.Invoke(this);
+		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? InnerHitsValue { get; private set; }
 
 		internal int? MaxConcurrentGroupSearchesValue { get; private set; }
 
-		public FieldCollapseDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldCollapseDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldCollapseDescriptor<T> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits) => Assign(innerHits, (a, v) => a.InnerHitsValue = v);
-		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
+		public FieldCollapseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<TDocument> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits) => Assign(innerHits, (a, v) => a.InnerHitsValue = v);
+		public FieldCollapseDescriptor<TDocument> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

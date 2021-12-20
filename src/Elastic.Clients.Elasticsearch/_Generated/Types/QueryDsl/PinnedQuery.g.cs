@@ -65,13 +65,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class PinnedQueryDescriptor<T> : DescriptorBase<PinnedQueryDescriptor<T>>
+	public sealed partial class PinnedQueryDescriptor<TDocument> : DescriptorBase<PinnedQueryDescriptor<TDocument>>
 	{
 		public PinnedQueryDescriptor()
 		{
 		}
 
-		internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal PinnedQueryDescriptor(Action<PinnedQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }

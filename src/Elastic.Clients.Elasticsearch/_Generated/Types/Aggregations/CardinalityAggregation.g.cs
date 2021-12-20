@@ -180,13 +180,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Rehash { get; set; }
 	}
 
-	public sealed partial class CardinalityAggregationDescriptor<T> : DescriptorBase<CardinalityAggregationDescriptor<T>>
+	public sealed partial class CardinalityAggregationDescriptor<TDocument> : DescriptorBase<CardinalityAggregationDescriptor<TDocument>>
 	{
 		public CardinalityAggregationDescriptor()
 		{
 		}
 
-		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal int? PrecisionThresholdValue { get; private set; }
 
 		internal bool? RehashValue { get; private set; }
@@ -199,13 +199,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int? precisionThreshold) => Assign(precisionThreshold, (a, v) => a.PrecisionThresholdValue = v);
-		public CardinalityAggregationDescriptor<T> Rehash(bool? rehash = true) => Assign(rehash, (a, v) => a.RehashValue = v);
-		public CardinalityAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CardinalityAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CardinalityAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public CardinalityAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public CardinalityAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? precisionThreshold) => Assign(precisionThreshold, (a, v) => a.PrecisionThresholdValue = v);
+		public CardinalityAggregationDescriptor<TDocument> Rehash(bool? rehash = true) => Assign(rehash, (a, v) => a.RehashValue = v);
+		public CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CardinalityAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CardinalityAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public CardinalityAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public CardinalityAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

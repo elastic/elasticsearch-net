@@ -90,13 +90,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		}
 	}
 
-	public sealed partial class ActionDescriptor<T> : DescriptorBase<ActionDescriptor<T>>
+	public sealed partial class ActionDescriptor<TDocument> : DescriptorBase<ActionDescriptor<TDocument>>
 	{
 		public ActionDescriptor()
 		{
 		}
 
-		internal ActionDescriptor(Action<ActionDescriptor<T>> configure) => configure.Invoke(this);
+		internal ActionDescriptor(Action<ActionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 		}
 
 		public void Add(AddAction variant) => Set(variant, "add");
-		public void Add(Action<AddActionDescriptor<T>> configure) => Set(configure, "add");
+		public void Add(Action<AddActionDescriptor<TDocument>> configure) => Set(configure, "add");
 		public void Remove(RemoveAction variant) => Set(variant, "remove");
 		public void Remove(Action<RemoveActionDescriptor> configure) => Set(configure, "remove");
 		public void RemoveIndex(RemoveIndexAction variant) => Set(variant, "remove_index");
@@ -148,8 +148,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases
 			writer.WriteStartObject();
 			if (ContainedVariantName == "add")
 			{
-				var descriptor = new AddActionDescriptor<T>();
-				((Action<AddActionDescriptor<T>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				var descriptor = new AddActionDescriptor<TDocument>();
+				((Action<AddActionDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

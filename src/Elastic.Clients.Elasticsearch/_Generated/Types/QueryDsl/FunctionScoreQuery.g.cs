@@ -53,13 +53,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 	}
 
-	public sealed partial class FunctionScoreQueryDescriptor<T> : DescriptorBase<FunctionScoreQueryDescriptor<T>>
+	public sealed partial class FunctionScoreQueryDescriptor<TDocument> : DescriptorBase<FunctionScoreQueryDescriptor<TDocument>>
 	{
 		public FunctionScoreQueryDescriptor()
 		{
 		}
 
-		internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostModeValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? FunctionsValue { get; private set; }
@@ -76,38 +76,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		public FunctionScoreQueryDescriptor<T> BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? boostMode) => Assign(boostMode, (a, v) => a.BoostModeValue = v);
-		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions) => Assign(functions, (a, v) => a.FunctionsValue = v);
-		public FunctionScoreQueryDescriptor<T> MaxBoost(double? maxBoost) => Assign(maxBoost, (a, v) => a.MaxBoostValue = v);
-		public FunctionScoreQueryDescriptor<T> MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
-		public FunctionScoreQueryDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public FunctionScoreQueryDescriptor<TDocument> BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? boostMode) => Assign(boostMode, (a, v) => a.BoostModeValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> Functions(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreContainer>? functions) => Assign(functions, (a, v) => a.FunctionsValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> MaxBoost(double? maxBoost) => Assign(maxBoost, (a, v) => a.MaxBoostValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public FunctionScoreQueryDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public FunctionScoreQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public FunctionScoreQueryDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public FunctionScoreQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public FunctionScoreQueryDescriptor<T> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
-		public FunctionScoreQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public FunctionScoreQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public FunctionScoreQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else if (QueryValue is not null)
 			{

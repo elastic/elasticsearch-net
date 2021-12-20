@@ -31,17 +31,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	}
 
-	public sealed partial class GeoLineSortDescriptor<T> : DescriptorBase<GeoLineSortDescriptor<T>>
+	public sealed partial class GeoLineSortDescriptor<TDocument> : DescriptorBase<GeoLineSortDescriptor<TDocument>>
 	{
 		public GeoLineSortDescriptor()
 		{
 		}
 
-		internal GeoLineSortDescriptor(Action<GeoLineSortDescriptor<T>> configure) => configure.Invoke(this);
+		internal GeoLineSortDescriptor(Action<GeoLineSortDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
-		public GeoLineSortDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GeoLineSortDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoLineSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoLineSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

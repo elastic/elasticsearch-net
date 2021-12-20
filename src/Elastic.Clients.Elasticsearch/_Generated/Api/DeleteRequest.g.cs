@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public DeleteRequestDescriptor()
+		internal DeleteRequestDescriptor()
 		{
 		}
 

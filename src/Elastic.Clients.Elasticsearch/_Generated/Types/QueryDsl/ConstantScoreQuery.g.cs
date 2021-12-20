@@ -33,46 +33,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Filter { get; set; }
 	}
 
-	public sealed partial class ConstantScoreQueryDescriptor<T> : DescriptorBase<ConstantScoreQueryDescriptor<T>>
+	public sealed partial class ConstantScoreQueryDescriptor<TDocument> : DescriptorBase<ConstantScoreQueryDescriptor<TDocument>>
 	{
 		public ConstantScoreQueryDescriptor()
 		{
 		}
 
-		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer FilterValue { get; private set; }
 
 		internal float? BoostValue { get; private set; }
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public ConstantScoreQueryDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
+		public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public ConstantScoreQueryDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public ConstantScoreQueryDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public ConstantScoreQueryDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
-		public ConstantScoreQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public ConstantScoreQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ConstantScoreQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else
 			{

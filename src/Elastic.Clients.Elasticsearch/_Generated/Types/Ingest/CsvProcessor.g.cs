@@ -61,13 +61,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool Trim { get; set; }
 	}
 
-	public sealed partial class CsvProcessorDescriptor<T> : DescriptorBase<CsvProcessorDescriptor<T>>
+	public sealed partial class CsvProcessorDescriptor<TDocument> : DescriptorBase<CsvProcessorDescriptor<TDocument>>
 	{
 		public CsvProcessorDescriptor()
 		{
 		}
 
-		internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal object EmptyValueValue { get; private set; }
 
 		internal string? DescriptionValue { get; private set; }
@@ -92,20 +92,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public CsvProcessorDescriptor<T> EmptyValue(object emptyValue) => Assign(emptyValue, (a, v) => a.EmptyValueValue = v);
-		public CsvProcessorDescriptor<T> Description(string? description) => Assign(description, (a, v) => a.DescriptionValue = v);
-		public CsvProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CsvProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CsvProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public CsvProcessorDescriptor<T> Quote(string? quote) => Assign(quote, (a, v) => a.QuoteValue = v);
-		public CsvProcessorDescriptor<T> Separator(string? separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
-		public CsvProcessorDescriptor<T> TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields) => Assign(targetFields, (a, v) => a.TargetFieldsValue = v);
-		public CsvProcessorDescriptor<T> TargetFields<TValue>(Expression<Func<T, TValue>> targetFields) => Assign(targetFields, (a, v) => a.TargetFieldsValue = v);
-		public CsvProcessorDescriptor<T> Trim(bool trim = true) => Assign(trim, (a, v) => a.TrimValue = v);
-		public CsvProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public CsvProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public CsvProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public CsvProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public CsvProcessorDescriptor<TDocument> EmptyValue(object emptyValue) => Assign(emptyValue, (a, v) => a.EmptyValueValue = v);
+		public CsvProcessorDescriptor<TDocument> Description(string? description) => Assign(description, (a, v) => a.DescriptionValue = v);
+		public CsvProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CsvProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public CsvProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public CsvProcessorDescriptor<TDocument> Quote(string? quote) => Assign(quote, (a, v) => a.QuoteValue = v);
+		public CsvProcessorDescriptor<TDocument> Separator(string? separator) => Assign(separator, (a, v) => a.SeparatorValue = v);
+		public CsvProcessorDescriptor<TDocument> TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields) => Assign(targetFields, (a, v) => a.TargetFieldsValue = v);
+		public CsvProcessorDescriptor<TDocument> TargetFields<TValue>(Expression<Func<TDocument, TValue>> targetFields) => Assign(targetFields, (a, v) => a.TargetFieldsValue = v);
+		public CsvProcessorDescriptor<TDocument> Trim(bool trim = true) => Assign(trim, (a, v) => a.TrimValue = v);
+		public CsvProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public CsvProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public CsvProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public CsvProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

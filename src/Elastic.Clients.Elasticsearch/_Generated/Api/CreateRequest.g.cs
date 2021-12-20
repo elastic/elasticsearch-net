@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public CreateRequestDescriptor()
+		internal CreateRequestDescriptor()
 		{
 		}
 

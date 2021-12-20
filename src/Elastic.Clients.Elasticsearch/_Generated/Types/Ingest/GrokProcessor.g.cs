@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? TraceMatch { get; set; }
 	}
 
-	public sealed partial class GrokProcessorDescriptor<T> : DescriptorBase<GrokProcessorDescriptor<T>>
+	public sealed partial class GrokProcessorDescriptor<TDocument> : DescriptorBase<GrokProcessorDescriptor<TDocument>>
 	{
 		public GrokProcessorDescriptor()
 		{
 		}
 
-		internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal bool? IgnoreMissingValue { get; private set; }
@@ -74,16 +74,16 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public GrokProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GrokProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GrokProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public GrokProcessorDescriptor<T> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.PatternDefinitionsValue = v?.Invoke(new FluentDictionary<string, string>()));
-		public GrokProcessorDescriptor<T> Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.PatternsValue = v);
-		public GrokProcessorDescriptor<T> TraceMatch(bool? traceMatch = true) => Assign(traceMatch, (a, v) => a.TraceMatchValue = v);
-		public GrokProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public GrokProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public GrokProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public GrokProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public GrokProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GrokProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GrokProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public GrokProcessorDescriptor<TDocument> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.PatternDefinitionsValue = v?.Invoke(new FluentDictionary<string, string>()));
+		public GrokProcessorDescriptor<TDocument> Patterns(IEnumerable<string> patterns) => Assign(patterns, (a, v) => a.PatternsValue = v);
+		public GrokProcessorDescriptor<TDocument> TraceMatch(bool? traceMatch = true) => Assign(traceMatch, (a, v) => a.TraceMatchValue = v);
+		public GrokProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public GrokProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public GrokProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public GrokProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

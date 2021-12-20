@@ -45,13 +45,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string Pattern { get; set; }
 	}
 
-	public sealed partial class DissectProcessorDescriptor<T> : DescriptorBase<DissectProcessorDescriptor<T>>
+	public sealed partial class DissectProcessorDescriptor<TDocument> : DescriptorBase<DissectProcessorDescriptor<TDocument>>
 	{
 		public DissectProcessorDescriptor()
 		{
 		}
 
-		internal DissectProcessorDescriptor(Action<DissectProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal DissectProcessorDescriptor(Action<DissectProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string AppendSeparatorValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
@@ -68,15 +68,15 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public DissectProcessorDescriptor<T> AppendSeparator(string appendSeparator) => Assign(appendSeparator, (a, v) => a.AppendSeparatorValue = v);
-		public DissectProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DissectProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DissectProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public DissectProcessorDescriptor<T> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
-		public DissectProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public DissectProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public DissectProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public DissectProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public DissectProcessorDescriptor<TDocument> AppendSeparator(string appendSeparator) => Assign(appendSeparator, (a, v) => a.AppendSeparatorValue = v);
+		public DissectProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DissectProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DissectProcessorDescriptor<TDocument> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public DissectProcessorDescriptor<TDocument> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
+		public DissectProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public DissectProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public DissectProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public DissectProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

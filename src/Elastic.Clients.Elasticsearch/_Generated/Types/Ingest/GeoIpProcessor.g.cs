@@ -53,13 +53,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class GeoIpProcessorDescriptor<T> : DescriptorBase<GeoIpProcessorDescriptor<T>>
+	public sealed partial class GeoIpProcessorDescriptor<TDocument> : DescriptorBase<GeoIpProcessorDescriptor<TDocument>>
 	{
 		public GeoIpProcessorDescriptor()
 		{
 		}
 
-		internal GeoIpProcessorDescriptor(Action<GeoIpProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal GeoIpProcessorDescriptor(Action<GeoIpProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string DatabaseFileValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
@@ -80,18 +80,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public GeoIpProcessorDescriptor<T> DatabaseFile(string databaseFile) => Assign(databaseFile, (a, v) => a.DatabaseFileValue = v);
-		public GeoIpProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GeoIpProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public GeoIpProcessorDescriptor<T> FirstOnly(bool firstOnly = true) => Assign(firstOnly, (a, v) => a.FirstOnlyValue = v);
-		public GeoIpProcessorDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public GeoIpProcessorDescriptor<T> Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
-		public GeoIpProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public GeoIpProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public GeoIpProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public GeoIpProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public GeoIpProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public GeoIpProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public GeoIpProcessorDescriptor<TDocument> DatabaseFile(string databaseFile) => Assign(databaseFile, (a, v) => a.DatabaseFileValue = v);
+		public GeoIpProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoIpProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public GeoIpProcessorDescriptor<TDocument> FirstOnly(bool firstOnly = true) => Assign(firstOnly, (a, v) => a.FirstOnlyValue = v);
+		public GeoIpProcessorDescriptor<TDocument> IgnoreMissing(bool ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public GeoIpProcessorDescriptor<TDocument> Properties(IEnumerable<string> properties) => Assign(properties, (a, v) => a.PropertiesValue = v);
+		public GeoIpProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public GeoIpProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public GeoIpProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public GeoIpProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public GeoIpProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public GeoIpProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

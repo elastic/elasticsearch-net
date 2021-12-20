@@ -155,13 +155,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class ValueCountAggregationDescriptor<T> : DescriptorBase<ValueCountAggregationDescriptor<T>>
+	public sealed partial class ValueCountAggregationDescriptor<TDocument> : DescriptorBase<ValueCountAggregationDescriptor<TDocument>>
 	{
 		public ValueCountAggregationDescriptor()
 		{
 		}
 
-		internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? FormatValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
@@ -172,12 +172,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public ValueCountAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public ValueCountAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ValueCountAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ValueCountAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public ValueCountAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public ValueCountAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public ValueCountAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public ValueCountAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ValueCountAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public ValueCountAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public ValueCountAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public ValueCountAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

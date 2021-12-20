@@ -170,13 +170,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? InitialBuffer { get; set; }
 	}
 
-	public sealed partial class VariableWidthHistogramAggregationDescriptor<T> : DescriptorBase<VariableWidthHistogramAggregationDescriptor<T>>
+	public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : DescriptorBase<VariableWidthHistogramAggregationDescriptor<TDocument>>
 	{
 		public VariableWidthHistogramAggregationDescriptor()
 		{
 		}
 
-		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal int? BucketsValue { get; private set; }
@@ -187,12 +187,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public VariableWidthHistogramAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public VariableWidthHistogramAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public VariableWidthHistogramAggregationDescriptor<T> Buckets(int? buckets) => Assign(buckets, (a, v) => a.BucketsValue = v);
-		public VariableWidthHistogramAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public VariableWidthHistogramAggregationDescriptor<T> InitialBuffer(int? initialBuffer) => Assign(initialBuffer, (a, v) => a.InitialBufferValue = v);
-		public VariableWidthHistogramAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public VariableWidthHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets) => Assign(buckets, (a, v) => a.BucketsValue = v);
+		public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
+		public VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? initialBuffer) => Assign(initialBuffer, (a, v) => a.InitialBufferValue = v);
+		public VariableWidthHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -33,46 +33,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	}
 
-	public sealed partial class ScriptScoreFunctionDescriptor<T> : DescriptorBase<ScriptScoreFunctionDescriptor<T>>
+	public sealed partial class ScriptScoreFunctionDescriptor<TDocument> : DescriptorBase<ScriptScoreFunctionDescriptor<TDocument>>
 	{
 		public ScriptScoreFunctionDescriptor()
 		{
 		}
 
-		internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor<T>> configure) => configure.Invoke(this);
+		internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Script ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
 		internal double? WeightValue { get; private set; }
 
-		internal QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
+		internal QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
+		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public ScriptScoreFunctionDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public ScriptScoreFunctionDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		public ScriptScoreFunctionDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public ScriptScoreFunctionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public ScriptScoreFunctionDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public ScriptScoreFunctionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public ScriptScoreFunctionDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public ScriptScoreFunctionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
-		public ScriptScoreFunctionDescriptor<T> Weight(double? weight) => Assign(weight, (a, v) => a.WeightValue = v);
+		public ScriptScoreFunctionDescriptor<TDocument> Weight(double? weight) => Assign(weight, (a, v) => a.WeightValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

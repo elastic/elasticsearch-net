@@ -49,13 +49,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string? Timezone { get; set; }
 	}
 
-	public sealed partial class DateProcessorDescriptor<T> : DescriptorBase<DateProcessorDescriptor<T>>
+	public sealed partial class DateProcessorDescriptor<TDocument> : DescriptorBase<DateProcessorDescriptor<TDocument>>
 	{
 		public DateProcessorDescriptor()
 		{
 		}
 
-		internal DateProcessorDescriptor(Action<DateProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal DateProcessorDescriptor(Action<DateProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal IEnumerable<string> FormatsValue { get; private set; }
@@ -74,17 +74,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public DateProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DateProcessorDescriptor<T> Formats(IEnumerable<string> formats) => Assign(formats, (a, v) => a.FormatsValue = v);
-		public DateProcessorDescriptor<T> Locale(string? locale) => Assign(locale, (a, v) => a.LocaleValue = v);
-		public DateProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public DateProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public DateProcessorDescriptor<T> Timezone(string? timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
-		public DateProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public DateProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public DateProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public DateProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public DateProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DateProcessorDescriptor<TDocument> Formats(IEnumerable<string> formats) => Assign(formats, (a, v) => a.FormatsValue = v);
+		public DateProcessorDescriptor<TDocument> Locale(string? locale) => Assign(locale, (a, v) => a.LocaleValue = v);
+		public DateProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public DateProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public DateProcessorDescriptor<TDocument> Timezone(string? timezone) => Assign(timezone, (a, v) => a.TimezoneValue = v);
+		public DateProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public DateProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public DateProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public DateProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

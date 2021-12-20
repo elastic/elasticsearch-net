@@ -70,22 +70,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 	}
 
-	public sealed partial class IndexPutAliasRequestDescriptor<T> : RequestDescriptorBase<IndexPutAliasRequestDescriptor<T>, IndexPutAliasRequestParameters>
+	public sealed partial class IndexPutAliasRequestDescriptor<TDocument> : RequestDescriptorBase<IndexPutAliasRequestDescriptor<TDocument>, IndexPutAliasRequestParameters>
 	{
 		public IndexPutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 		{
 		}
 
-		public IndexPutAliasRequestDescriptor()
+		internal IndexPutAliasRequestDescriptor()
 		{
 		}
 
-		internal IndexPutAliasRequestDescriptor(Action<IndexPutAliasRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal IndexPutAliasRequestDescriptor(Action<IndexPutAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public IndexPutAliasRequestDescriptor<T> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public IndexPutAliasRequestDescriptor<T> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public IndexPutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public IndexPutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; private set; }
@@ -96,35 +96,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> FilterDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> FilterDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public IndexPutAliasRequestDescriptor<T> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		public IndexPutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
 			return Assign(filter, (a, v) => a.FilterValue = v);
 		}
 
-		public IndexPutAliasRequestDescriptor<T> Filter(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public IndexPutAliasRequestDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
 		}
 
-		public IndexPutAliasRequestDescriptor<T> Filter(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public IndexPutAliasRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
-		public IndexPutAliasRequestDescriptor<T> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
-		public IndexPutAliasRequestDescriptor<T> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
-		public IndexPutAliasRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public IndexPutAliasRequestDescriptor<T> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
+		public IndexPutAliasRequestDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting) => Assign(indexRouting, (a, v) => a.IndexRoutingValue = v);
+		public IndexPutAliasRequestDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
+		public IndexPutAliasRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public IndexPutAliasRequestDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -136,7 +136,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

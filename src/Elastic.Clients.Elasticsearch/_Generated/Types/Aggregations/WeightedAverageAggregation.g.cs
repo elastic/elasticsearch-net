@@ -170,13 +170,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 	}
 
-	public sealed partial class WeightedAverageAggregationDescriptor<T> : DescriptorBase<WeightedAverageAggregationDescriptor<T>>
+	public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : DescriptorBase<WeightedAverageAggregationDescriptor<TDocument>>
 	{
 		public WeightedAverageAggregationDescriptor()
 		{
 		}
 
-		internal WeightedAverageAggregationDescriptor(Action<WeightedAverageAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal WeightedAverageAggregationDescriptor(Action<WeightedAverageAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? FormatValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? ValueValue { get; private set; }
@@ -187,59 +187,59 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal WeightedAverageValueDescriptor<T> ValueDescriptor { get; private set; }
+		internal WeightedAverageValueDescriptor<TDocument> ValueDescriptor { get; private set; }
 
-		internal WeightedAverageValueDescriptor<T> WeightDescriptor { get; private set; }
+		internal WeightedAverageValueDescriptor<TDocument> WeightDescriptor { get; private set; }
 
-		internal Action<WeightedAverageValueDescriptor<T>> ValueDescriptorAction { get; private set; }
+		internal Action<WeightedAverageValueDescriptor<TDocument>> ValueDescriptorAction { get; private set; }
 
-		internal Action<WeightedAverageValueDescriptor<T>> WeightDescriptorAction { get; private set; }
+		internal Action<WeightedAverageValueDescriptor<TDocument>> WeightDescriptorAction { get; private set; }
 
-		public WeightedAverageAggregationDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public WeightedAverageAggregationDescriptor<T> Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
+		public WeightedAverageAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public WeightedAverageAggregationDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 		{
 			ValueDescriptor = null;
 			ValueDescriptorAction = null;
 			return Assign(value, (a, v) => a.ValueValue = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Value(Aggregations.WeightedAverageValueDescriptor<T> descriptor)
+		public WeightedAverageAggregationDescriptor<TDocument> Value(Aggregations.WeightedAverageValueDescriptor<TDocument> descriptor)
 		{
 			ValueValue = null;
 			ValueDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ValueDescriptor = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Value(Action<Aggregations.WeightedAverageValueDescriptor<T>> configure)
+		public WeightedAverageAggregationDescriptor<TDocument> Value(Action<Aggregations.WeightedAverageValueDescriptor<TDocument>> configure)
 		{
 			ValueValue = null;
 			ValueDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ValueDescriptorAction = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
-		public WeightedAverageAggregationDescriptor<T> Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? weight)
+		public WeightedAverageAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
+		public WeightedAverageAggregationDescriptor<TDocument> Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? weight)
 		{
 			WeightDescriptor = null;
 			WeightDescriptorAction = null;
 			return Assign(weight, (a, v) => a.WeightValue = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Weight(Aggregations.WeightedAverageValueDescriptor<T> descriptor)
+		public WeightedAverageAggregationDescriptor<TDocument> Weight(Aggregations.WeightedAverageValueDescriptor<TDocument> descriptor)
 		{
 			WeightValue = null;
 			WeightDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.WeightDescriptor = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Weight(Action<Aggregations.WeightedAverageValueDescriptor<T>> configure)
+		public WeightedAverageAggregationDescriptor<TDocument> Weight(Action<Aggregations.WeightedAverageValueDescriptor<TDocument>> configure)
 		{
 			WeightValue = null;
 			WeightDescriptorAction = null;
 			return Assign(configure, (a, v) => a.WeightDescriptorAction = v);
 		}
 
-		public WeightedAverageAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public WeightedAverageAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -259,7 +259,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ValueDescriptorAction is not null)
 			{
 				writer.WritePropertyName("value");
-				JsonSerializer.Serialize(writer, new Aggregations.WeightedAverageValueDescriptor<T>(ValueDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.WeightedAverageValueDescriptor<TDocument>(ValueDescriptorAction), options);
 			}
 			else if (ValueValue is not null)
 			{
@@ -281,7 +281,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (WeightDescriptorAction is not null)
 			{
 				writer.WritePropertyName("weight");
-				JsonSerializer.Serialize(writer, new Aggregations.WeightedAverageValueDescriptor<T>(WeightDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.WeightedAverageValueDescriptor<TDocument>(WeightDescriptorAction), options);
 			}
 			else if (WeightValue is not null)
 			{

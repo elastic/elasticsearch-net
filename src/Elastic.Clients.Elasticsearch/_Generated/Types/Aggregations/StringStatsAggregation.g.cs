@@ -159,13 +159,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? ShowDistribution { get; set; }
 	}
 
-	public sealed partial class StringStatsAggregationDescriptor<T> : DescriptorBase<StringStatsAggregationDescriptor<T>>
+	public sealed partial class StringStatsAggregationDescriptor<TDocument> : DescriptorBase<StringStatsAggregationDescriptor<TDocument>>
 	{
 		public StringStatsAggregationDescriptor()
 		{
 		}
 
-		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? ShowDistributionValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
@@ -176,12 +176,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public StringStatsAggregationDescriptor<T> ShowDistribution(bool? showDistribution = true) => Assign(showDistribution, (a, v) => a.ShowDistributionValue = v);
-		public StringStatsAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public StringStatsAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public StringStatsAggregationDescriptor<T> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public StringStatsAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public StringStatsAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true) => Assign(showDistribution, (a, v) => a.ShowDistributionValue = v);
+		public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public StringStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public StringStatsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public StringStatsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public StringStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -124,47 +124,47 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	}
 
-	public sealed partial class ReverseNestedAggregationDescriptor<T> : DescriptorBase<ReverseNestedAggregationDescriptor<T>>
+	public sealed partial class ReverseNestedAggregationDescriptor<TDocument> : DescriptorBase<ReverseNestedAggregationDescriptor<TDocument>>
 	{
 		public ReverseNestedAggregationDescriptor()
 		{
 		}
 
-		internal ReverseNestedAggregationDescriptor(Action<ReverseNestedAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal ReverseNestedAggregationDescriptor(Action<ReverseNestedAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? PathValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public ReverseNestedAggregationDescriptor<T> Path(Elastic.Clients.Elasticsearch.Field? path) => Assign(path, (a, v) => a.PathValue = v);
-		public ReverseNestedAggregationDescriptor<T> Path<TValue>(Expression<Func<T, TValue>> path) => Assign(path, (a, v) => a.PathValue = v);
-		public ReverseNestedAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public ReverseNestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path) => Assign(path, (a, v) => a.PathValue = v);
+		public ReverseNestedAggregationDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path) => Assign(path, (a, v) => a.PathValue = v);
+		public ReverseNestedAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public ReverseNestedAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public ReverseNestedAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public ReverseNestedAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public ReverseNestedAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public ReverseNestedAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public ReverseNestedAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -191,7 +191,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

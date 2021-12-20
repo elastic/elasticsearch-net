@@ -105,13 +105,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 	}
 
-	public sealed partial class MoreLikeThisQueryDescriptor<T> : DescriptorBase<MoreLikeThisQueryDescriptor<T>>
+	public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : DescriptorBase<MoreLikeThisQueryDescriptor<TDocument>>
 	{
 		public MoreLikeThisQueryDescriptor()
 		{
 		}
 
-		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? AnalyzerValue { get; private set; }
 
 		internal double? BoostTermsValue { get; private set; }
@@ -154,27 +154,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public MoreLikeThisQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MoreLikeThisQueryDescriptor<T> BoostTerms(double? boostTerms) => Assign(boostTerms, (a, v) => a.BoostTermsValue = v);
-		public MoreLikeThisQueryDescriptor<T> FailOnUnsupportedField(bool? failOnUnsupportedField = true) => Assign(failOnUnsupportedField, (a, v) => a.FailOnUnsupportedFieldValue = v);
-		public MoreLikeThisQueryDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MoreLikeThisQueryDescriptor<T> Include(bool? include = true) => Assign(include, (a, v) => a.IncludeValue = v);
-		public MoreLikeThisQueryDescriptor<T> Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like) => Assign(like, (a, v) => a.LikeValue = v);
-		public MoreLikeThisQueryDescriptor<T> MaxDocFreq(int? maxDocFreq) => Assign(maxDocFreq, (a, v) => a.MaxDocFreqValue = v);
-		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTermsValue = v);
-		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLengthValue = v);
-		public MoreLikeThisQueryDescriptor<T> MinDocFreq(int? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
-		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public MoreLikeThisQueryDescriptor<T> MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
-		public MoreLikeThisQueryDescriptor<T> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
-		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
-		public MoreLikeThisQueryDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public MoreLikeThisQueryDescriptor<T> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
-		public MoreLikeThisQueryDescriptor<T> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
-		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public MoreLikeThisQueryDescriptor<T> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Assign(versionType, (a, v) => a.VersionTypeValue = v);
-		public MoreLikeThisQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public MoreLikeThisQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> BoostTerms(double? boostTerms) => Assign(boostTerms, (a, v) => a.BoostTermsValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> FailOnUnsupportedField(bool? failOnUnsupportedField = true) => Assign(failOnUnsupportedField, (a, v) => a.FailOnUnsupportedFieldValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Include(bool? include = true) => Assign(include, (a, v) => a.IncludeValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like) => Assign(like, (a, v) => a.LikeValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MaxDocFreq(int? maxDocFreq) => Assign(maxDocFreq, (a, v) => a.MaxDocFreqValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTermsValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLengthValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MinDocFreq(int? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
+		public MoreLikeThisQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Assign(versionType, (a, v) => a.VersionTypeValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -129,13 +129,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 	}
 
-	public sealed partial class QueryStringQueryDescriptor<T> : DescriptorBase<QueryStringQueryDescriptor<T>>
+	public sealed partial class QueryStringQueryDescriptor<TDocument> : DescriptorBase<QueryStringQueryDescriptor<TDocument>>
 	{
 		public QueryStringQueryDescriptor()
 		{
 		}
 
-		internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? AllowLeadingWildcardValue { get; private set; }
 
 		internal string? AnalyzerValue { get; private set; }
@@ -190,34 +190,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) => Assign(allowLeadingWildcard, (a, v) => a.AllowLeadingWildcardValue = v);
-		public QueryStringQueryDescriptor<T> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
-		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public QueryStringQueryDescriptor<T> DefaultField(Elastic.Clients.Elasticsearch.Field? defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
-		public QueryStringQueryDescriptor<T> DefaultField<TValue>(Expression<Func<T, TValue>> defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
-		public QueryStringQueryDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
-		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) => Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrementsValue = v);
-		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(escape, (a, v) => a.EscapeValue = v);
-		public QueryStringQueryDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public QueryStringQueryDescriptor<T> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public QueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
-		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
-		public QueryStringQueryDescriptor<T> FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
-		public QueryStringQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
-		public QueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
-		public QueryStringQueryDescriptor<T> MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
-		public QueryStringQueryDescriptor<T> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public QueryStringQueryDescriptor<T> PhraseSlop(double? phraseSlop) => Assign(phraseSlop, (a, v) => a.PhraseSlopValue = v);
-		public QueryStringQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public QueryStringQueryDescriptor<T> QuoteAnalyzer(string? quoteAnalyzer) => Assign(quoteAnalyzer, (a, v) => a.QuoteAnalyzerValue = v);
-		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string? quoteFieldSuffix) => Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffixValue = v);
-		public QueryStringQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
-		public QueryStringQueryDescriptor<T> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
-		public QueryStringQueryDescriptor<T> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public QueryStringQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public QueryStringQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public QueryStringQueryDescriptor<TDocument> AllowLeadingWildcard(bool? allowLeadingWildcard = true) => Assign(allowLeadingWildcard, (a, v) => a.AllowLeadingWildcardValue = v);
+		public QueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		public QueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
+		public QueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public QueryStringQueryDescriptor<TDocument> DefaultField(Elastic.Clients.Elasticsearch.Field? defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
+		public QueryStringQueryDescriptor<TDocument> DefaultField<TValue>(Expression<Func<TDocument, TValue>> defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
+		public QueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
+		public QueryStringQueryDescriptor<TDocument> EnablePositionIncrements(bool? enablePositionIncrements = true) => Assign(enablePositionIncrements, (a, v) => a.EnablePositionIncrementsValue = v);
+		public QueryStringQueryDescriptor<TDocument> Escape(bool? escape = true) => Assign(escape, (a, v) => a.EscapeValue = v);
+		public QueryStringQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public QueryStringQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
+		public QueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
+		public QueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
+		public QueryStringQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
+		public QueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
+		public QueryStringQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public QueryStringQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
+		public QueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public QueryStringQueryDescriptor<TDocument> PhraseSlop(double? phraseSlop) => Assign(phraseSlop, (a, v) => a.PhraseSlopValue = v);
+		public QueryStringQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public QueryStringQueryDescriptor<TDocument> QuoteAnalyzer(string? quoteAnalyzer) => Assign(quoteAnalyzer, (a, v) => a.QuoteAnalyzerValue = v);
+		public QueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix) => Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffixValue = v);
+		public QueryStringQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public QueryStringQueryDescriptor<TDocument> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
+		public QueryStringQueryDescriptor<TDocument> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
+		public QueryStringQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
+		public QueryStringQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public QueryStringQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

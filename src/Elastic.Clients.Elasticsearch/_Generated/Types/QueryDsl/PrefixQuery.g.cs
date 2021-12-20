@@ -123,13 +123,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? CaseInsensitive { get; set; }
 	}
 
-	public sealed partial class PrefixQueryDescriptor<T> : FieldNameQueryDescriptorBase<PrefixQueryDescriptor<T>, T>
+	public sealed partial class PrefixQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<PrefixQueryDescriptor<TDocument>, TDocument>
 	{
 		public PrefixQueryDescriptor()
 		{
 		}
 
-		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string? RewriteValue { get; private set; }
 
 		internal string ValueValue { get; private set; }
@@ -140,11 +140,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public PrefixQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public PrefixQueryDescriptor<T> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public PrefixQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public PrefixQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public PrefixQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public PrefixQueryDescriptor<TDocument> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
+		public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public PrefixQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public PrefixQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

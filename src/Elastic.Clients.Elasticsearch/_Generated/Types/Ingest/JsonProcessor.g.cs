@@ -41,13 +41,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 	}
 
-	public sealed partial class JsonProcessorDescriptor<T> : DescriptorBase<JsonProcessorDescriptor<T>>
+	public sealed partial class JsonProcessorDescriptor<TDocument> : DescriptorBase<JsonProcessorDescriptor<TDocument>>
 	{
 		public JsonProcessorDescriptor()
 		{
 		}
 
-		internal JsonProcessorDescriptor(Action<JsonProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal JsonProcessorDescriptor(Action<JsonProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool AddToRootValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
@@ -62,15 +62,15 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public JsonProcessorDescriptor<T> AddToRoot(bool addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRootValue = v);
-		public JsonProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public JsonProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public JsonProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public JsonProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public JsonProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public JsonProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public JsonProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public JsonProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public JsonProcessorDescriptor<TDocument> AddToRoot(bool addToRoot = true) => Assign(addToRoot, (a, v) => a.AddToRootValue = v);
+		public JsonProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public JsonProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public JsonProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public JsonProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public JsonProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public JsonProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public JsonProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public JsonProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

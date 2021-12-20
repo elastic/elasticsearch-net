@@ -39,23 +39,23 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? IncludeUnmapped { get; set; }
 	}
 
-	public sealed partial class FieldAndFormatDescriptor<T> : DescriptorBase<FieldAndFormatDescriptor<T>>
+	public sealed partial class FieldAndFormatDescriptor<TDocument> : DescriptorBase<FieldAndFormatDescriptor<TDocument>>
 	{
 		public FieldAndFormatDescriptor()
 		{
 		}
 
-		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<T>> configure) => configure.Invoke(this);
+		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
 
 		internal bool? IncludeUnmappedValue { get; private set; }
 
-		public FieldAndFormatDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldAndFormatDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldAndFormatDescriptor<T> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public FieldAndFormatDescriptor<T> IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a.IncludeUnmappedValue = v);
+		public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldAndFormatDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public FieldAndFormatDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a.IncludeUnmappedValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

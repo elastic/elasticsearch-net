@@ -155,13 +155,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class RegexpQueryDescriptor<T> : FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, T>
+	public sealed partial class RegexpQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<RegexpQueryDescriptor<TDocument>, TDocument>
 	{
 		public RegexpQueryDescriptor()
 		{
 		}
 
-		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? CaseInsensitiveValue { get; private set; }
 
 		internal string? FlagsValue { get; private set; }
@@ -176,13 +176,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public RegexpQueryDescriptor<T> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public RegexpQueryDescriptor<T> Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
-		public RegexpQueryDescriptor<T> MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
-		public RegexpQueryDescriptor<T> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public RegexpQueryDescriptor<T> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public RegexpQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public RegexpQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
+		public RegexpQueryDescriptor<TDocument> Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
+		public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
+		public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
+		public RegexpQueryDescriptor<TDocument> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
+		public RegexpQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public RegexpQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

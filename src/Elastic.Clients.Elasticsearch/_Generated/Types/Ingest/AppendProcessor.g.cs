@@ -41,13 +41,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public bool? AllowDuplicates { get; set; }
 	}
 
-	public sealed partial class AppendProcessorDescriptor<T> : DescriptorBase<AppendProcessorDescriptor<T>>
+	public sealed partial class AppendProcessorDescriptor<TDocument> : DescriptorBase<AppendProcessorDescriptor<TDocument>>
 	{
 		public AppendProcessorDescriptor()
 		{
 		}
 
-		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal IEnumerable<object> ValueValue { get; private set; }
@@ -62,14 +62,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public AppendProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AppendProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AppendProcessorDescriptor<T> Value(IEnumerable<object> value) => Assign(value, (a, v) => a.ValueValue = v);
-		public AppendProcessorDescriptor<T> AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicatesValue = v);
-		public AppendProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public AppendProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public AppendProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public AppendProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public AppendProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AppendProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public AppendProcessorDescriptor<TDocument> Value(IEnumerable<object> value) => Assign(value, (a, v) => a.ValueValue = v);
+		public AppendProcessorDescriptor<TDocument> AllowDuplicates(bool? allowDuplicates = true) => Assign(allowDuplicates, (a, v) => a.AllowDuplicatesValue = v);
+		public AppendProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public AppendProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public AppendProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public AppendProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -68,23 +68,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 	}
 
-	public sealed partial class CreateIndexRequestDescriptor<T> : RequestDescriptorBase<CreateIndexRequestDescriptor<T>, CreateIndexRequestParameters>
+	public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptorBase<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
 	{
 		public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 
-		public CreateIndexRequestDescriptor()
+		public CreateIndexRequestDescriptor() : this(typeof(TDocument))
 		{
 		}
 
-		internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		public CreateIndexRequestDescriptor<T> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
-		public CreateIndexRequestDescriptor<T> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		public CreateIndexRequestDescriptor<T> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public CreateIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public CreateIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public CreateIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		internal Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; private set; }
@@ -93,49 +93,49 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Mapping.TypeMappingDescriptor MappingsDescriptor { get; private set; }
 
-		internal IndexSettingsDescriptor<T> SettingsDescriptor { get; private set; }
+		internal IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
 
 		internal Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; private set; }
 
-		internal Action<IndexSettingsDescriptor<T>> SettingsDescriptorAction { get; private set; }
+		internal Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
 
-		public CreateIndexRequestDescriptor<T> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
-		public CreateIndexRequestDescriptor<T> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+		public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector) => Assign(selector, (a, v) => a.AliasesValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>()));
+		public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 		{
 			MappingsDescriptor = null;
 			MappingsDescriptorAction = null;
 			return Assign(mappings, (a, v) => a.MappingsValue = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Mappings(Mapping.TypeMappingDescriptor descriptor)
+		public CreateIndexRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor descriptor)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MappingsDescriptor = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+		public CreateIndexRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor> configure)
 		{
 			MappingsValue = null;
 			MappingsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.MappingsDescriptorAction = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		public CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
 			SettingsDescriptor = null;
 			SettingsDescriptorAction = null;
 			return Assign(settings, (a, v) => a.SettingsValue = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Settings(IndexManagement.IndexSettingsDescriptor<T> descriptor)
+		public CreateIndexRequestDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
 		}
 
-		public CreateIndexRequestDescriptor<T> Settings(Action<IndexManagement.IndexSettingsDescriptor<T>> configure)
+		public CreateIndexRequestDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
@@ -175,7 +175,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SettingsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<T>(SettingsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 			}
 			else if (SettingsValue is not null)
 			{

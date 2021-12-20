@@ -67,17 +67,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Dictionary<string, object>? Meta { get; set; }
 	}
 
-	public sealed partial class IndexPutIndexTemplateRequestDescriptor<T> : RequestDescriptorBase<IndexPutIndexTemplateRequestDescriptor<T>, IndexPutIndexTemplateRequestParameters>
+	public sealed partial class IndexPutIndexTemplateRequestDescriptor<TDocument> : RequestDescriptorBase<IndexPutIndexTemplateRequestDescriptor<TDocument>, IndexPutIndexTemplateRequestParameters>
 	{
 		public IndexPutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 		{
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor()
+		internal IndexPutIndexTemplateRequestDescriptor()
 		{
 		}
 
-		internal IndexPutIndexTemplateRequestDescriptor(Action<IndexPutIndexTemplateRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal IndexPutIndexTemplateRequestDescriptor(Action<IndexPutIndexTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
@@ -95,61 +95,61 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T> TemplateDescriptor { get; private set; }
+		internal IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; private set; }
 
 		internal DataStreamDescriptor DataStreamDescriptor { get; private set; }
 
-		internal Action<IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T>> TemplateDescriptorAction { get; private set; }
+		internal Action<IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; private set; }
 
 		internal Action<DataStreamDescriptor> DataStreamDescriptorAction { get; private set; }
 
-		public IndexPutIndexTemplateRequestDescriptor<T> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatternsValue = v);
-		public IndexPutIndexTemplateRequestDescriptor<T> ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOfValue = v);
-		public IndexPutIndexTemplateRequestDescriptor<T> Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? template)
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? indexPatterns) => Assign(indexPatterns, (a, v) => a.IndexPatternsValue = v);
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> ComposedOf(IEnumerable<Elastic.Clients.Elasticsearch.Name>? composedOf) => Assign(composedOf, (a, v) => a.ComposedOfValue = v);
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplate.IndexTemplateMapping? template)
 		{
 			TemplateDescriptor = null;
 			TemplateDescriptorAction = null;
 			return Assign(template, (a, v) => a.TemplateValue = v);
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor<T> Template(IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T> descriptor)
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Template(IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<TDocument> descriptor)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.TemplateDescriptor = v);
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor<T> Template(Action<IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T>> configure)
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Template(Action<IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<TDocument>> configure)
 		{
 			TemplateValue = null;
 			TemplateDescriptorAction = null;
 			return Assign(configure, (a, v) => a.TemplateDescriptorAction = v);
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor<T> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStream? dataStream)
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStream? dataStream)
 		{
 			DataStreamDescriptor = null;
 			DataStreamDescriptorAction = null;
 			return Assign(dataStream, (a, v) => a.DataStreamValue = v);
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor<T> DataStream(IndexManagement.DataStreamDescriptor descriptor)
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> DataStream(IndexManagement.DataStreamDescriptor descriptor)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.DataStreamDescriptor = v);
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor<T> DataStream(Action<IndexManagement.DataStreamDescriptor> configure)
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> DataStream(Action<IndexManagement.DataStreamDescriptor> configure)
 		{
 			DataStreamValue = null;
 			DataStreamDescriptorAction = null;
 			return Assign(configure, (a, v) => a.DataStreamDescriptorAction = v);
 		}
 
-		public IndexPutIndexTemplateRequestDescriptor<T> Priority(int? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
-		public IndexPutIndexTemplateRequestDescriptor<T> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public IndexPutIndexTemplateRequestDescriptor<T> Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.MetaValue = v);
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Priority(int? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Meta(Dictionary<string, object>? meta) => Assign(meta, (a, v) => a.MetaValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -173,7 +173,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (TemplateDescriptorAction is not null)
 			{
 				writer.WritePropertyName("template");
-				JsonSerializer.Serialize(writer, new IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<T>(TemplateDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.PutIndexTemplate.IndexTemplateMappingDescriptor<TDocument>(TemplateDescriptorAction), options);
 			}
 			else if (TemplateValue is not null)
 			{

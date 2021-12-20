@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public IndexDeleteDataStreamRequestDescriptor()
+		internal IndexDeleteDataStreamRequestDescriptor()
 		{
 		}
 

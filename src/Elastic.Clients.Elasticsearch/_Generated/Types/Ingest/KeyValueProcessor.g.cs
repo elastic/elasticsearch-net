@@ -73,13 +73,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		public string ValueSplit { get; set; }
 	}
 
-	public sealed partial class KeyValueProcessorDescriptor<T> : DescriptorBase<KeyValueProcessorDescriptor<T>>
+	public sealed partial class KeyValueProcessorDescriptor<TDocument> : DescriptorBase<KeyValueProcessorDescriptor<TDocument>>
 	{
 		public KeyValueProcessorDescriptor()
 		{
 		}
 
-		internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor<T>> configure) => configure.Invoke(this);
+		internal KeyValueProcessorDescriptor(Action<KeyValueProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal IEnumerable<string>? ExcludeKeysValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
@@ -110,23 +110,23 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 
 		internal string? TagValue { get; private set; }
 
-		public KeyValueProcessorDescriptor<T> ExcludeKeys(IEnumerable<string>? excludeKeys) => Assign(excludeKeys, (a, v) => a.ExcludeKeysValue = v);
-		public KeyValueProcessorDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public KeyValueProcessorDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public KeyValueProcessorDescriptor<T> FieldSplit(string fieldSplit) => Assign(fieldSplit, (a, v) => a.FieldSplitValue = v);
-		public KeyValueProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
-		public KeyValueProcessorDescriptor<T> IncludeKeys(IEnumerable<string>? includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeysValue = v);
-		public KeyValueProcessorDescriptor<T> Prefix(string? prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
-		public KeyValueProcessorDescriptor<T> StripBrackets(bool? stripBrackets = true) => Assign(stripBrackets, (a, v) => a.StripBracketsValue = v);
-		public KeyValueProcessorDescriptor<T> TargetField(Elastic.Clients.Elasticsearch.Field? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public KeyValueProcessorDescriptor<T> TargetField<TValue>(Expression<Func<T, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
-		public KeyValueProcessorDescriptor<T> TrimKey(string? trimKey) => Assign(trimKey, (a, v) => a.TrimKeyValue = v);
-		public KeyValueProcessorDescriptor<T> TrimValue(string? trimValue) => Assign(trimValue, (a, v) => a.TrimValueValue = v);
-		public KeyValueProcessorDescriptor<T> ValueSplit(string valueSplit) => Assign(valueSplit, (a, v) => a.ValueSplitValue = v);
-		public KeyValueProcessorDescriptor<T> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
-		public KeyValueProcessorDescriptor<T> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
-		public KeyValueProcessorDescriptor<T> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
-		public KeyValueProcessorDescriptor<T> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
+		public KeyValueProcessorDescriptor<TDocument> ExcludeKeys(IEnumerable<string>? excludeKeys) => Assign(excludeKeys, (a, v) => a.ExcludeKeysValue = v);
+		public KeyValueProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public KeyValueProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public KeyValueProcessorDescriptor<TDocument> FieldSplit(string fieldSplit) => Assign(fieldSplit, (a, v) => a.FieldSplitValue = v);
+		public KeyValueProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true) => Assign(ignoreMissing, (a, v) => a.IgnoreMissingValue = v);
+		public KeyValueProcessorDescriptor<TDocument> IncludeKeys(IEnumerable<string>? includeKeys) => Assign(includeKeys, (a, v) => a.IncludeKeysValue = v);
+		public KeyValueProcessorDescriptor<TDocument> Prefix(string? prefix) => Assign(prefix, (a, v) => a.PrefixValue = v);
+		public KeyValueProcessorDescriptor<TDocument> StripBrackets(bool? stripBrackets = true) => Assign(stripBrackets, (a, v) => a.StripBracketsValue = v);
+		public KeyValueProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public KeyValueProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField) => Assign(targetField, (a, v) => a.TargetFieldValue = v);
+		public KeyValueProcessorDescriptor<TDocument> TrimKey(string? trimKey) => Assign(trimKey, (a, v) => a.TrimKeyValue = v);
+		public KeyValueProcessorDescriptor<TDocument> TrimValue(string? trimValue) => Assign(trimValue, (a, v) => a.TrimValueValue = v);
+		public KeyValueProcessorDescriptor<TDocument> ValueSplit(string valueSplit) => Assign(valueSplit, (a, v) => a.ValueSplitValue = v);
+		public KeyValueProcessorDescriptor<TDocument> If(string? ifValue) => Assign(ifValue, (a, v) => a.IfValue = v);
+		public KeyValueProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public KeyValueProcessorDescriptor<TDocument> OnFailure(IEnumerable<Elastic.Clients.Elasticsearch.Ingest.ProcessorContainer>? onFailure) => Assign(onFailure, (a, v) => a.OnFailureValue = v);
+		public KeyValueProcessorDescriptor<TDocument> Tag(string? tag) => Assign(tag, (a, v) => a.TagValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

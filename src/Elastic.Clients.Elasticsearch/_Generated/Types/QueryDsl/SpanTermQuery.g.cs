@@ -93,22 +93,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class SpanTermQueryDescriptor<T> : FieldNameQueryDescriptorBase<SpanTermQueryDescriptor<T>, T>
+	public sealed partial class SpanTermQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<SpanTermQueryDescriptor<TDocument>, TDocument>
 	{
 		public SpanTermQueryDescriptor()
 		{
 		}
 
-		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string ValueValue { get; private set; }
 
 		internal float? BoostValue { get; private set; }
 
 		internal string? QueryNameValue { get; private set; }
 
-		public SpanTermQueryDescriptor<T> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public SpanTermQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public SpanTermQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public SpanTermQueryDescriptor<TDocument> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
+		public SpanTermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanTermQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));

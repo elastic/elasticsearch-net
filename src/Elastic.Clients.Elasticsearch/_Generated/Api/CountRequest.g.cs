@@ -130,9 +130,9 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? Query { get; set; }
 	}
 
-	public sealed partial class CountRequestDescriptor<T> : RequestDescriptorBase<CountRequestDescriptor<T>, CountRequestParameters>
+	public sealed partial class CountRequestDescriptor<TDocument> : RequestDescriptorBase<CountRequestDescriptor<TDocument>, CountRequestParameters>
 	{
-		public CountRequestDescriptor()
+		public CountRequestDescriptor() : this(typeof(TDocument))
 		{
 		}
 
@@ -140,45 +140,45 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal CountRequestDescriptor(Action<CountRequestDescriptor<T>> configure) => configure.Invoke(this);
+		internal CountRequestDescriptor(Action<CountRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public CountRequestDescriptor<T> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public CountRequestDescriptor<T> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public CountRequestDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
-		public CountRequestDescriptor<T> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
-		public CountRequestDescriptor<T> Df(string? df) => Qs("df", df);
-		public CountRequestDescriptor<T> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public CountRequestDescriptor<T> IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
-		public CountRequestDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public CountRequestDescriptor<T> Lenient(bool? lenient) => Qs("lenient", lenient);
-		public CountRequestDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
-		public CountRequestDescriptor<T> Preference(string? preference) => Qs("preference", preference);
-		public CountRequestDescriptor<T> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-		public CountRequestDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
-		public CountRequestDescriptor<T> QueryLuceneSyntax(string? q) => Qs("q", q);
+		public CountRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
+		public CountRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public CountRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public CountRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
+		public CountRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public CountRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
+		public CountRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
+		public CountRequestDescriptor<TDocument> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public CountRequestDescriptor<TDocument> MinScore(double? minScore) => Qs("min_score", minScore);
+		public CountRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+		public CountRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+		public CountRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
+		public CountRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
 
-		internal QueryDsl.QueryContainerDescriptor<T> QueryDescriptor { get; private set; }
+		internal QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<T>> QueryDescriptorAction { get; private set; }
+		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
-		public CountRequestDescriptor<T> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		public CountRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
 			return Assign(query, (a, v) => a.QueryValue = v);
 		}
 
-		public CountRequestDescriptor<T> Query(QueryDsl.QueryContainerDescriptor<T> descriptor)
+		public CountRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
 		}
 
-		public CountRequestDescriptor<T> Query(Action<QueryDsl.QueryContainerDescriptor<T>> configure)
+		public CountRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -196,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<T>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else if (QueryValue is not null)
 			{

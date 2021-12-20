@@ -183,13 +183,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 	}
 
-	public sealed partial class GeoLineAggregationDescriptor<T> : DescriptorBase<GeoLineAggregationDescriptor<T>>
+	public sealed partial class GeoLineAggregationDescriptor<TDocument> : DescriptorBase<GeoLineAggregationDescriptor<TDocument>>
 	{
 		public GeoLineAggregationDescriptor()
 		{
 		}
 
-		internal GeoLineAggregationDescriptor(Action<GeoLineAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal GeoLineAggregationDescriptor(Action<GeoLineAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint PointValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort SortValue { get; private set; }
@@ -202,60 +202,60 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal GeoLinePointDescriptor<T> PointDescriptor { get; private set; }
+		internal GeoLinePointDescriptor<TDocument> PointDescriptor { get; private set; }
 
-		internal GeoLineSortDescriptor<T> SortDescriptor { get; private set; }
+		internal GeoLineSortDescriptor<TDocument> SortDescriptor { get; private set; }
 
-		internal Action<GeoLinePointDescriptor<T>> PointDescriptorAction { get; private set; }
+		internal Action<GeoLinePointDescriptor<TDocument>> PointDescriptorAction { get; private set; }
 
-		internal Action<GeoLineSortDescriptor<T>> SortDescriptorAction { get; private set; }
+		internal Action<GeoLineSortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
 
-		public GeoLineAggregationDescriptor<T> Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point)
+		public GeoLineAggregationDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point)
 		{
 			PointDescriptor = null;
 			PointDescriptorAction = null;
 			return Assign(point, (a, v) => a.PointValue = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Point(Aggregations.GeoLinePointDescriptor<T> descriptor)
+		public GeoLineAggregationDescriptor<TDocument> Point(Aggregations.GeoLinePointDescriptor<TDocument> descriptor)
 		{
 			PointValue = null;
 			PointDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.PointDescriptor = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Point(Action<Aggregations.GeoLinePointDescriptor<T>> configure)
+		public GeoLineAggregationDescriptor<TDocument> Point(Action<Aggregations.GeoLinePointDescriptor<TDocument>> configure)
 		{
 			PointValue = null;
 			PointDescriptorAction = null;
 			return Assign(configure, (a, v) => a.PointDescriptorAction = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort sort)
+		public GeoLineAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
 			return Assign(sort, (a, v) => a.SortValue = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Sort(Aggregations.GeoLineSortDescriptor<T> descriptor)
+		public GeoLineAggregationDescriptor<TDocument> Sort(Aggregations.GeoLineSortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> Sort(Action<Aggregations.GeoLineSortDescriptor<T>> configure)
+		public GeoLineAggregationDescriptor<TDocument> Sort(Action<Aggregations.GeoLineSortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
 		}
 
-		public GeoLineAggregationDescriptor<T> IncludeSort(bool? includeSort = true) => Assign(includeSort, (a, v) => a.IncludeSortValue = v);
-		public GeoLineAggregationDescriptor<T> SortOrder(Elastic.Clients.Elasticsearch.SortOrder? sortOrder) => Assign(sortOrder, (a, v) => a.SortOrderValue = v);
-		public GeoLineAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public GeoLineAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? includeSort = true) => Assign(includeSort, (a, v) => a.IncludeSortValue = v);
+		public GeoLineAggregationDescriptor<TDocument> SortOrder(Elastic.Clients.Elasticsearch.SortOrder? sortOrder) => Assign(sortOrder, (a, v) => a.SortOrderValue = v);
+		public GeoLineAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public GeoLineAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -269,7 +269,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (PointDescriptorAction is not null)
 			{
 				writer.WritePropertyName("point");
-				JsonSerializer.Serialize(writer, new Aggregations.GeoLinePointDescriptor<T>(PointDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.GeoLinePointDescriptor<TDocument>(PointDescriptorAction), options);
 			}
 			else
 			{
@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new Aggregations.GeoLineSortDescriptor<T>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new Aggregations.GeoLineSortDescriptor<TDocument>(SortDescriptorAction), options);
 			}
 			else
 			{

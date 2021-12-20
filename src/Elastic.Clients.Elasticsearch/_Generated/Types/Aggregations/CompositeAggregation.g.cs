@@ -166,13 +166,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 	}
 
-	public sealed partial class CompositeAggregationDescriptor<T> : DescriptorBase<CompositeAggregationDescriptor<T>>
+	public sealed partial class CompositeAggregationDescriptor<TDocument> : DescriptorBase<CompositeAggregationDescriptor<TDocument>>
 	{
 		public CompositeAggregationDescriptor()
 		{
 		}
 
-		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal CompositeAggregationDescriptor(Action<CompositeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Dictionary<string, object>? AfterValue { get; private set; }
 
 		internal int? SizeValue { get; private set; }
@@ -183,35 +183,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public CompositeAggregationDescriptor<T> After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.AfterValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public CompositeAggregationDescriptor<T> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public CompositeAggregationDescriptor<T> Sources(IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources) => Assign(sources, (a, v) => a.SourcesValue = v);
-		public CompositeAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.AfterValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public CompositeAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public CompositeAggregationDescriptor<TDocument> Sources(IEnumerable<Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources) => Assign(sources, (a, v) => a.SourcesValue = v);
+		public CompositeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public CompositeAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public CompositeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public CompositeAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public CompositeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public CompositeAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public CompositeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -250,7 +250,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

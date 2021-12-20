@@ -53,13 +53,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class CombinedFieldsQueryDescriptor<T> : DescriptorBase<CombinedFieldsQueryDescriptor<T>>
+	public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : DescriptorBase<CombinedFieldsQueryDescriptor<TDocument>>
 	{
 		public CombinedFieldsQueryDescriptor()
 		{
 		}
 
-		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<T>> configure) => configure.Invoke(this);
+		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; private set; }
 
 		internal string QueryValue { get; private set; }
@@ -76,14 +76,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QueryNameValue { get; private set; }
 
-		public CombinedFieldsQueryDescriptor<T> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public CombinedFieldsQueryDescriptor<T> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public CombinedFieldsQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public CombinedFieldsQueryDescriptor<T> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op) => Assign(op, (a, v) => a.OperatorValue = v);
-		public CombinedFieldsQueryDescriptor<T> MimimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? mimimumShouldMatch) => Assign(mimimumShouldMatch, (a, v) => a.MimimumShouldMatchValue = v);
-		public CombinedFieldsQueryDescriptor<T> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
-		public CombinedFieldsQueryDescriptor<T> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
-		public CombinedFieldsQueryDescriptor<T> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> MimimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? mimimumShouldMatch) => Assign(mimimumShouldMatch, (a, v) => a.MimimumShouldMatchValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

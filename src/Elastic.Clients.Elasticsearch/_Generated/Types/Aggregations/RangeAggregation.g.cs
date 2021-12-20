@@ -208,13 +208,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public bool? Keyed { get; set; }
 	}
 
-	public sealed partial class RangeAggregationDescriptor<T> : DescriptorBase<RangeAggregationDescriptor<T>>
+	public sealed partial class RangeAggregationDescriptor<TDocument> : DescriptorBase<RangeAggregationDescriptor<TDocument>>
 	{
 		public RangeAggregationDescriptor()
 		{
 		}
 
-		internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor<T>> configure) => configure.Invoke(this);
+		internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal int? MissingValue { get; private set; }
@@ -229,38 +229,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> AggregationsDescriptor { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> AggregationsDescriptorAction { get; private set; }
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
-		public RangeAggregationDescriptor<T> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RangeAggregationDescriptor<T> Field<TValue>(Expression<Func<T, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public RangeAggregationDescriptor<T> Missing(int? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public RangeAggregationDescriptor<T> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges) => Assign(ranges, (a, v) => a.RangesValue = v);
-		public RangeAggregationDescriptor<T> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
-		public RangeAggregationDescriptor<T> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public RangeAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		public RangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RangeAggregationDescriptor<TDocument> Missing(int? missing) => Assign(missing, (a, v) => a.MissingValue = v);
+		public RangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges) => Assign(ranges, (a, v) => a.RangesValue = v);
+		public RangeAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public RangeAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
 			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
 		}
 
-		public RangeAggregationDescriptor<T> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T> descriptor)
+		public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
 		}
 
-		public RangeAggregationDescriptor<T> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<T>> configure)
+		public RangeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
 			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
 		}
 
-		public RangeAggregationDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public RangeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -311,7 +311,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<T>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{
