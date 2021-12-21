@@ -21,8 +21,11 @@ public class Project
 	public static string VersionControlConstant = "git";
 
 	public IEnumerable<string> Branches { get; set; }
+
 	public IList<Tag> CuratedTags { get; set; }
+
 	public string DateString { get; set; }
+
 	public string Description { get; set; }
 
 	public static object InstanceAnonymous => TestConfiguration.Instance.Random.SourceSerializer
@@ -32,26 +35,38 @@ public class Project
 	public JoinField Join => JoinField.Root<Project>();
 
 	public Labels Labels { get; set; }
+
 	public DateTime LastActivity { get; set; }
+
 	public Developer LeadDeveloper { get; set; }
+
 	public GeoPoint LocationPoint { get; set; } // Was SimpleGeoPoint
 
 	//public IGeoShape LocationShape { get; set; }
-
 	//public IGeoShape ArbitraryShape { get; set; }
+
 	public Dictionary<string, Metadata> Metadata { get; set; }
+
 	public string Name { get; set; }
+
 	public int? NumberOfCommits { get; set; }
+
 	public int NumberOfContributors { get; set; }
 
 	public Ranges Ranges { get; set; }
+
 	public int? Rank { get; set; }
+
 	public int? RequiredBranches => Branches?.Count();
 
-	//public SourceOnlyObject SourceOnly { get; set; }
+	public SourceOnlyObject SourceOnly { get; set; }
+
 	public DateTime StartedOn { get; set; }
+
 	public StateOfBeing State { get; set; }
+
 	//public CompletionField Suggest { get; set; }
+
 	public IEnumerable<Tag> Tags { get; set; }
 
 	public string Type => TypeName;
@@ -60,9 +75,7 @@ public class Project
 	public Visibility Visibility { get; set; }
 
 	public string VersionControl { get; set; }
-
-	// @formatter:off — enable formatter after this line
-	public static Faker<Project> Generator { get; } =
+		public static Faker<Project> Generator { get; } =
 		new Faker<Project>()
 			.UseSeed(TestConfiguration.Instance.Seed)
 			.RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
@@ -114,14 +127,14 @@ public class Project
 
 	public static Project First { get; } = Projects.First();
 
-	public static readonly Project Instance = new Project
+	public static readonly Project Instance = new()
 	{
 		Name = First.Name,
 		LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 		StartedOn = new DateTime(2015, 1, 1),
 		DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 		//LocationPoint = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
-		//SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
+		SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 	};
 
 	private static readonly object InstanceAnonymousDefault = new
@@ -152,16 +165,13 @@ public class Project
 		dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 		leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
 		//locationPoint = new { lat = Instance.LocationPoint.Lat, lon = Instance.LocationPoint.Lon },
-		//sourceOnly = new { notWrittenByDefaultSerializer = "written" }
+		sourceOnly = new { notWrittenByDefaultSerializer = "written" }
 	};
-
-
-	// @formatter:on — enable formatter after this line
 }
 
 public static class AnonymizerExtensions
 {
-	private static readonly Inferrer Infer = new Inferrer(new ElasticsearchClientSettings(new InMemoryConnection()).ApplyDomainSettings());
+	private static readonly Inferrer Infer = new(new ElasticsearchClientSettings(new InMemoryConnection()).ApplyDomainSettings());
 
 	public static object ToAnonymousObject(this JoinField field) =>
 		field.Match<object>(p => Infer.RelationName(p.Name), c => new

@@ -54,7 +54,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// <summary>
 		/// Provides mappings for CLR type members
 		/// </summary>
-		FluentDictionary<MemberInfo, PropertyMapping> PropertyMappings { get; }
+		FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
 
 		/// <summary>
 		///     Specify a property for a CLR type to use to infer the routing for of a document when indexed in Elasticsearch.
@@ -85,6 +85,6 @@ namespace Elastic.Clients.Elasticsearch
 		/// <summary>
 		///     The serializer use to serialize CLR types representing documents and other types related to documents.
 		/// </summary>
-		Serializer SourceSerializer { get; }
+		SerializerBase SourceSerializer { get; }
 	}
 }

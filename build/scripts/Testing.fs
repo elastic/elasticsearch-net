@@ -62,7 +62,7 @@ module Tests =
     let RunReleaseUnitTests version args =
         //xUnit always does its own build, this env var is picked up by Tests.csproj
         //if its set it will include the local package source (build/output/)
-        //and references NEST and NEST.JsonNetSerializer by the current version
+        //and references NEST and Elastic.Clients.Elasticsearch.JsonNetSerializer by the current version
         //this works by not including the local package cache (nay source) 
         //in the project file via:
         //<RestoreSources></RestoreSources>

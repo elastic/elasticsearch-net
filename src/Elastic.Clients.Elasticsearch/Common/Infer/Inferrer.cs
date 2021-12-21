@@ -504,9 +504,9 @@ namespace Elastic.Clients.Elasticsearch
 		PropertyMapping CreatePropertyMapping(MemberInfo memberInfo);
 	}
 
-	public class PropertyMapping
+	public class PropertyMapping : IPropertyMapping
 	{
-		public static PropertyMapping Ignored = new PropertyMapping { Ignore = true };
+		public static PropertyMapping Ignored = new() { Ignore = true };
 
 		/// <inheritdoc />
 		public bool Ignore { get; set; }

@@ -11,7 +11,6 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Search.PointInTime;
 
-[SkipVersion("<7.10.0", "APIs introduced in 7.10.0")]
 public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
 {
 	private const string OpenPointInTimeStep = nameof(OpenPointInTimeStep);

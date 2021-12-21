@@ -22,7 +22,7 @@ public class BulkUpdateManyTests : ApiTestBase<ReadOnlyCluster, BulkResponse, Bu
 
 	protected override Action<BulkRequestDescriptor> Fluent => d => d
 		.Index(CallIsolatedValue)
-		.UpdateMany(_updates, b => b.Script(s => s.Source("_source.counter++")));
+		.UpdateMany(_updates, (b, o) => b.Script(s => s.Source("_source.counter++")));
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 

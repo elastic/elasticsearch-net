@@ -10,7 +10,7 @@ namespace Tests.Serialization;
 
 public abstract class SerializerTestBase
 {
-	protected static readonly Serializer _requestResponseSerializer;
+	protected static readonly SerializerBase _requestResponseSerializer;
 	protected static readonly IElasticsearchClientSettings _settings;
 
 	static SerializerTestBase()

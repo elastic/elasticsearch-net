@@ -195,6 +195,11 @@
           "System.Runtime.InteropServices": "4.3.0"
         }
       },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "12.0.1",
+        "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -1310,6 +1315,13 @@
           "System.Reflection.Emit.Lightweight": "4.3.0"
         }
       },
+      "Elastic.Clients.JsonNetSerializer": {
+        "type": "Project",
+        "dependencies": {
+          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Newtonsoft.Json": "12.0.1"
+        }
+      },
       "elastic.transport": {
         "type": "Project",
         "dependencies": {
@@ -1331,6 +1343,7 @@
           "Bogus": "22.1.2",
           "Elastic.Clients.Elasticsearch": "7.0.0",
           "Elastic.Elasticsearch.Managed": "0.2.6",
+          "Newtonsoft.Json": "12.0.1",
           "Tests.Configuration": "7.0.0"
         }
       }

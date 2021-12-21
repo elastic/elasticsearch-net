@@ -11,12 +11,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.</summary>
-	internal class DefaultHighLevelSerializer : Serializer
+	internal class DefaultHighLevelSerializer : SerializerBase
 	{
 		private static readonly UTF8Encoding Encoding = new(false);
 		private readonly IElasticsearchClientSettings _settings;
@@ -44,6 +45,7 @@ namespace Elastic.Clients.Elasticsearch
 				{
 					//new InterfaceConverterFactory(settings),
 					//new ConvertAsConverterFactory(settings),
+					new CalendarIntervalConverter(),
 					new IndexNameConverter(settings),
 					new ObjectToInferredTypesConverter(),
 					new IdConverter(settings),
@@ -58,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch
 					new SelfDeserializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					//new FieldConverterFactory(settings),
-					new JsonStringEnumConverter(),  //required for source serialisation
+					//new JsonStringEnumConverter(),  //required for source serialisation
 					
 					new DictionaryConverter(),
 					//new BucketsConverterFactory(),
