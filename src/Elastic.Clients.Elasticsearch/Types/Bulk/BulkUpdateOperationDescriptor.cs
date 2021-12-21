@@ -33,6 +33,8 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 	protected override string Operation => "update";
 
+	protected override Type ClrType => typeof(TDocument);
+
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument document) => Assign(document, (a, v) => a._document = v);
 
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? partialDocumentAsUpsert = true) =>

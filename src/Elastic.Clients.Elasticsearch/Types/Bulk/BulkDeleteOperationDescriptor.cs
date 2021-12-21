@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -17,6 +18,8 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkDeleteOperationDescriptor(Id id) => Id(id);
 
 		protected override string Operation => "delete";
+
+		protected override Type ClrType => null;
 
 		protected override object GetBody() => null;
 
