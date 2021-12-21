@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Playground
 {
 	public class Person
@@ -14,5 +16,11 @@ namespace Playground
 		public string? LastName { get; init; }
 		public int? Age { get; init; }
 		public string? Email { get; init; }
+
+		[JsonProperty("customisedName")]
+		public string ShouldNotSeeThisName => "Test";
+
+		[JsonIgnore]
+		public string Ignored => "SHOULD BE IGNORED";
 	}
 }
