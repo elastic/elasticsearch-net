@@ -13,7 +13,7 @@ using static Elastic.Clients.Elasticsearch.Infer;
 
 namespace Tests.Aggregations.Bucket;
 
-public class DateHistogramAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster> //ProjectsOnlyAggregationUsageTestBase - Reenable this once we have aliases supported
+public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 {
 	public DateHistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -27,13 +27,13 @@ public class DateHistogramAggregationUsageTests : AggregationUsageTestBase<ReadO
 				calendar_interval = "month",
 				min_doc_count = 2,
 				format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", // <1> Note the inclusion of `date_optional_time` to `format`
-				//order = new { _count = "asc" },
+				order = new { _count = "asc" },
 				//extended_bounds = new
 				//{
 				//	min = FixedDate.AddYears(-1),
 				//	max = FixedDate.AddYears(1)
 				//},
-				missing = TestValueHelper.FixedDate.ToString()
+				missing = "2015-06-06T12:01:02.1230000"
 			},
 			aggregations = new
 			{
@@ -62,8 +62,8 @@ public class DateHistogramAggregationUsageTests : AggregationUsageTestBase<ReadO
 			.MinDocCount(2)
 			.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
 			//.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
-			//.Order(HistogramOrder.CountAscending)
-			.Missing(TestValueHelper.FixedDate.ToString())
+			.Order(new HistogramOrder { Count = SortOrder.Asc })
+			.Missing("2015-06-06T12:01:02.1230000")
 			.Aggregations(childAggs => childAggs
 				.Nested("project_tags", n => n
 					.Path(p => p.Tags)
@@ -86,8 +86,8 @@ public class DateHistogramAggregationUsageTests : AggregationUsageTestBase<ReadO
 			//	Minimum = FixedDate.AddYears(-1),
 			//	Maximum = FixedDate.AddYears(1),
 			//},
-			//Order = HistogramOrder.CountAscending,
-			Missing = TestValueHelper.FixedDate.ToString(),
+			Order = new HistogramOrder { Count = SortOrder.Asc }, // TODO: Not compatible with existiing NEST
+			Missing = "2015-06-06T12:01:02.1230000", // TODO: Implement Missing accepting a date!
 			Aggregations = new NestedAggregation("project_tags")
 			{
 				Path = Field<Project>(p => p.Tags),
