@@ -110,7 +110,7 @@ public class IndexIntegrationTests : IntegrationDocumentationTestBase, IClusterF
 		indexResult.ApiCall.HttpStatusCode.Should().Be(409);
 		indexResult.ServerError.Should().NotBeNull();
 		indexResult.ServerError.Error.Type.Should().Contain("conflict");
-		//indexResult.ServerError.Status.Should().Be(409); // TODO - RENABLE ONCE THIS IS SET IN ERROR RESPONSE
+		indexResult.ServerError.Status.Should().Be(409);
 	}
 
 	[I]
