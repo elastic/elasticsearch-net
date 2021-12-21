@@ -16,6 +16,7 @@ namespace Elastic.Clients.Elasticsearch
 		private long? _version;
 		private IndexName _index;
 		private VersionType? _versionType;
+		private bool _skipClrTypeInference;
 
 		protected Id IdValue { get; set; }
 		protected Routing RoutingValue { get; set; }
@@ -39,20 +40,30 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TDescriptor Version(long version) => Assign(version, (a, v) => a._version = v);
 
+		internal TDescriptor SkipClrTypeInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipClrTypeInference = v);
+
 		public TDescriptor VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a._versionType = v);
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			IdValue = GetIdForOperation(settings.Inferrer);
 			RoutingValue = GetRoutingForOperation(settings.Inferrer);
-			_index = _index ?? ClrType;
+
+			if (!_skipClrTypeInference)
+				_index ??= ClrType;
 
 			writer.WriteStartObject();
 
 			if (IdValue is not null)
 			{
-				writer.WritePropertyName("_id");
-				JsonSerializer.Serialize(writer, IdValue, options);
+				// TODO - This flow is a bit inefficient and annoying just to get "clean" JSON
+				var id = IdValue.GetString(settings);
+
+				if (!string.IsNullOrEmpty(id))
+				{
+					writer.WritePropertyName("_id");
+					writer.WriteStringValue(id);
+				}
 			}
 
 			if (IfPrimaryTermValue.HasValue)
@@ -76,13 +87,12 @@ namespace Elastic.Clients.Elasticsearch
 			if (RoutingValue is not null)
 			{
 				// TODO - This flow is a bit inefficient and annoying just to get "clean" JSON
-
 				var value = RoutingValue.GetString(settings);
 
 				if (!string.IsNullOrEmpty(value))
 				{
 					writer.WritePropertyName("routing");
-					JsonSerializer.Serialize(writer, value, options);
+					writer.WriteStringValue(value);
 				}
 			}
 

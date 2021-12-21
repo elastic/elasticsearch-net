@@ -40,6 +40,13 @@
           "Elastic.Transport": "1.0.0"
         }
       },
+      "Elastic.Clients.JsonNetSerializer": {
+        "type": "Project",
+        "dependencies": {
+          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Newtonsoft.Json": "12.0.1"
+        }
+      },
       "elastic.transport": {
         "type": "Project",
         "dependencies": {

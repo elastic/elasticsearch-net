@@ -58,9 +58,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			var nestSettings = (IElasticsearchClientSettings)settings;
-			return nestSettings.Inferrer.Id(Document) ?? StringOrLongValue;
+			var elasticClientSettings = (IElasticsearchClientSettings)settings;
+			return GetString(elasticClientSettings);
 		}
+
+		internal string GetString(IElasticsearchClientSettings settings) => settings.Inferrer.Id(Document) ?? StringOrLongValue;
 
 		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
 
