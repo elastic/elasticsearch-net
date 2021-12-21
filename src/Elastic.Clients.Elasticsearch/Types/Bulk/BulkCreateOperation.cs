@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -67,6 +68,8 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		protected override string Operation => "create";
+
+		protected override Type ClrType => typeof(T);
 
 		protected override object GetBody() => Document;
 

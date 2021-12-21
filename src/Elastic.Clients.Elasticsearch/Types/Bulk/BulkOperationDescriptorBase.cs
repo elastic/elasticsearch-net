@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -22,6 +23,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected long? IfPrimaryTermValue { get; set; }
 
 		protected abstract string Operation { get; }
+		protected abstract Type ClrType { get; }
 
 		public TDescriptor Id(Id id) => Assign(id, (a, v) => a.IdValue = v);
 
@@ -43,6 +45,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			IdValue = GetIdForOperation(settings.Inferrer);
 			RoutingValue = GetRoutingForOperation(settings.Inferrer);
+			_index = _index ?? ClrType;
 
 			writer.WriteStartObject();
 

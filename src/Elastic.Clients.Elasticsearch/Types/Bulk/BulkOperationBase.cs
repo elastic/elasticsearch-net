@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.IO;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -32,6 +33,8 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("version_type")]
 		public VersionType? VersionType { get; set; }
 
+		protected abstract Type ClrType { get; }
+
 		protected abstract void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 
 		protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
@@ -40,6 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			Id = GetIdForOperation(settings.Inferrer);
 			Routing = GetRoutingForOperation(settings.Inferrer);
+			Index = Index ?? ClrType;
 
 			Serialize(stream, settings, formatting);
 		}
@@ -48,6 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			Id = GetIdForOperation(settings.Inferrer);
 			Routing = GetRoutingForOperation(settings.Inferrer);
+			Index = Index ?? ClrType;
 
 			return SerializeAsync(stream, settings, formatting);
 		}

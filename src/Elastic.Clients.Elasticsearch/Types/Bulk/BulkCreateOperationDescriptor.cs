@@ -32,6 +32,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override string Operation => "create";
 
+		protected override Type ClrType => typeof(TSource);
+
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
