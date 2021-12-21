@@ -4,6 +4,8 @@
 
 using System;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using Elastic.Transport;
 
@@ -12,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Represents a time value
 /// </summary>
-// TODO: Converter
+[JsonConverter(typeof(TimeConverter))]
 public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 {
 	private const double MicrosecondsInATick = 0.1; // 10 ticks = 1 microsecond
@@ -356,5 +358,40 @@ public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 		// Note that the shift is sign-extended, hence the test against -1 not 1
 		var exponent = (int)((bits >> 52) & 0x7ffL);
 		return new string('#', Math.Max(2, exponent));
+	}
+}
+
+internal sealed class TimeConverter : JsonConverter<Time>
+{
+	public override Time? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var token = reader.TokenType;
+
+		switch (token)
+		{
+			case JsonTokenType.String:
+				return new Time(reader.GetString());
+			case JsonTokenType.Number:
+				var milliseconds = reader.GetInt64();
+				if (milliseconds == -1)
+					return Time.MinusOne;
+				if (milliseconds == 0)
+					return Time.Zero;
+				return new Time(milliseconds);
+			default:
+				return null;
+		}
+	}
+
+	public override void Write(Utf8JsonWriter writer, Time value, JsonSerializerOptions options)
+	{
+		if (value == Time.MinusOne)
+			writer.WriteNumberValue(-1);
+		else if (value == Time.Zero)
+			writer.WriteNumberValue(0);
+		else if (value.Factor.HasValue && value.Interval.HasValue)
+			writer.WriteStringValue(value.ToString());
+		else if (value.Milliseconds != null)
+			writer.WriteNumberValue((long)value.Milliseconds);
 	}
 }

@@ -64,8 +64,11 @@ namespace Tests.Core.Client.Settings
 
 		//private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
 		//{
-		//	if (provided != null) return provided;
-		//	if (!TestConfiguration.Instance.Random.SourceSerializer) return null;
+		//	if (provided != null)
+		//		return provided;
+
+		//	if (!TestConfiguration.Instance.Random.SourceSerializer)
+		//		return null;
 
 		//	return (builtin, values) => new TestSourceSerializerBase(builtin, values);
 		//}

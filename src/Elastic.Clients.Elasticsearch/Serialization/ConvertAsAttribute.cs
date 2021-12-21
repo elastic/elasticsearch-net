@@ -5,6 +5,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
+	public class StringEnumAttribute : Attribute { }
+
+	[AttributeUsage(AttributeTargets.Property)]
+	public class IgnoreAttribute : Attribute { }
+
 	[AttributeUsage(AttributeTargets.Interface)]
 	internal class InterfaceConverterAttribute : Attribute
 	{

@@ -13,7 +13,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// </summary>
 internal static class SourceSerialisation
 {
-	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, Serializer sourceSerializer)
+	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, SerializerBase sourceSerializer)
 	{
 		if (sourceSerializer is DefaultHighLevelSerializer defaultSerializer)
 		{

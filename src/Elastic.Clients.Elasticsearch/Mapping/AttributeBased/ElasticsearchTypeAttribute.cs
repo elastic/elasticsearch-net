@@ -98,8 +98,16 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public interface IPropertyMapping
+	{
+		bool Ignore { get; set; }
+
+		/// <summary> Overrides the property name serialized to JSON for this property</summary>
+		string Name { get; set; }
+	}
+
 	[AttributeUsage(AttributeTargets.Property)]
-	public abstract class ElasticsearchPropertyAttributeBase : Attribute, IProperty/*, IPropertyMapping, IJsonProperty*/
+	public abstract class ElasticsearchPropertyAttributeBase : Attribute, IProperty, IPropertyMapping /*, IJsonProperty*/
 	{
 		protected ElasticsearchPropertyAttributeBase(FieldType type) => Self.Type = type.GetStringValue();
 
