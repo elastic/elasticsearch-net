@@ -59,7 +59,7 @@ public class BulkInvalidVersionApiTests : ApiIntegrationTestBase<WritableCluster
 	{
 		response.ShouldNotBeValid();
 		response.ServerError.Should().NotBeNull();
-		//response.ServerError.Status.Should().Be(400); // TODO - THIS IS CURRENTLY NOT DESERIALISED DUE TO CONFLICT WITH CLUSTERHEALTHRESPONSE
+		response.ServerError.Status.Should().Be(400);
 		response.ServerError.Error.Type.Should().Be("illegal_argument_exception");
 		response.ServerError.Error.Reason.Should().StartWith("sequence numbers must be non negative.");
 	}
