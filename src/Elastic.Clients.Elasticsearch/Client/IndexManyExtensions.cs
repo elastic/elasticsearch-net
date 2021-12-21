@@ -54,7 +54,9 @@ public static class IndexManyExtensions
 	{
 		@objects.ThrowIfEmpty(nameof(objects));
 
-		var bulkRequest = new BulkRequest(index);
+		var bulkRequest = index is null
+			? new BulkRequest()
+			: new BulkRequest(index);
 
 		var indexOps = @objects
 			.Select(o => new BulkIndexOperation<T>(o))
