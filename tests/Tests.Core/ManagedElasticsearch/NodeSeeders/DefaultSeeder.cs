@@ -169,7 +169,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					properties = new Dictionary<string, object>
 					{
 						{ "name", new { type = "keyword" } },
-						{ "state", new { type = "keyword" } }
+						{ "state", new { type = "keyword" } },
+						{ "startedOn", new { type = "date", store = true } }
 					}
 				}
 			};

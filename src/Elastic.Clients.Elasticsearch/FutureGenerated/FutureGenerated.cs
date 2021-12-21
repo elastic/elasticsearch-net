@@ -932,16 +932,16 @@ namespace Elastic.Clients.Elasticsearch
 		[Obsolete("Prefer the overload without a generic argument.")]
 		public BulkRequestDescriptor Delete<TSource>(Action<BulkDeleteOperationDescriptor> configure) => Delete(configure);
 
-		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents, Action<BulkCreateOperationDescriptor<TSource>> bulkCreateSelector = null) =>
+		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents, Action<BulkCreateOperationDescriptor<TSource>, TSource> bulkCreateSelector = null) =>
 			AddOperations(documents, bulkCreateSelector, o => new BulkCreateOperationDescriptor<TSource>(o));
 
-		public BulkRequestDescriptor IndexMany<TSource>(IEnumerable<TSource> documents, Action<BulkIndexOperationDescriptor<TSource>> bulkIndexSelector = null) =>
+		public BulkRequestDescriptor IndexMany<TSource>(IEnumerable<TSource> documents, Action<BulkIndexOperationDescriptor<TSource>, TSource> bulkIndexSelector = null) =>
 			AddOperations(documents, bulkIndexSelector, o => new BulkIndexOperationDescriptor<TSource>(o));
 
-		public BulkRequestDescriptor UpdateMany<TSource>(IEnumerable<TSource> objects, Action<BulkUpdateOperationDescriptor<TSource, TSource>> bulkIndexSelector = null) =>
+		public BulkRequestDescriptor UpdateMany<TSource>(IEnumerable<TSource> objects, Action<BulkUpdateOperationDescriptor<TSource, TSource>, TSource> bulkIndexSelector = null) =>
 			AddOperations(objects, bulkIndexSelector, o => new BulkUpdateOperationDescriptor<TSource, TSource>().IdFrom(o));
 
-		public BulkRequestDescriptor DeleteMany<TSource>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor> bulkDeleteSelector = null) =>
+		public BulkRequestDescriptor DeleteMany<TSource>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor, string> bulkDeleteSelector = null) =>
 			AddOperations(ids, bulkDeleteSelector, id => new BulkDeleteOperationDescriptor(id));
 
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
@@ -958,7 +958,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private BulkRequestDescriptor AddOperations<TSource, TDescriptor>(
 			IEnumerable<TSource> objects,
-			Action<TDescriptor> configureDescriptor,
+			Action<TDescriptor, TSource> configureDescriptor,
 			Func<TSource, TDescriptor> createDescriptor
 		) where TDescriptor : IBulkOperation
 		{
@@ -974,7 +974,7 @@ namespace Elastic.Clients.Elasticsearch
 
 				if (configureDescriptor is not null)
 				{
-					configureDescriptor(descriptor);
+					configureDescriptor(descriptor, o);
 				}
 
 				operations.Add(descriptor);
@@ -1201,7 +1201,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public CreateRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 
-		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
+		public void WriteJson(Utf8JsonWriter writer, SerializerBase sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
 
 		// TODO: We should be able to generate these for optional params
 		public CreateRequestDescriptor<TDocument> Id(Id id)

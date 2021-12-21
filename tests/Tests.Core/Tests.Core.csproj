@@ -1,10 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugSymbols>True</DebugSymbols>
     <NoWarn>CAC001</NoWarn>
     <IsTestProject>False</IsTestProject>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
+    <PackageReference Include="Elastic.Clients.Elasticsearch.JsonNetSerializer" Version="$(TestPackageVersion)" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TestPackageVersion)'==''">
+    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />

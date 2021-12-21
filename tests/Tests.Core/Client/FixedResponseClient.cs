@@ -27,7 +27,7 @@ namespace Tests.Core.Client
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
 			Exception exception = null,
-			Serializer serializer = null
+			SerializerBase serializer = null
 		)
 		{
 			serializer ??= TestClient.Default.RequestResponseSerializer;

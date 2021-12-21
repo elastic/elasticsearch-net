@@ -6,13 +6,20 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
+    <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
-    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>
+
 </Project>
