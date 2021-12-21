@@ -162,16 +162,24 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			{
 				aliases = new Dictionary<string, object>
 				{
-					{ "projects-only", new { } }
+					{ "projects-alias", new { } },
+					{ "projects-only", new { filter = new { term = new { join = new { value = "project" }}}} }
 				},
 				mappings = new
 				{
+					_routing = new { required = true },
+
 					properties = new Dictionary<string, object>
 					{
 						{ "name", new { type = "keyword" } },
 						{ "state", new { type = "keyword" } },
-						{ "startedOn", new { type = "date", store = true } }
+						{ "startedOn", new { type = "date", store = true } },
+						{ "tags", new { type = "nested", properties = new { added = new { type = "date" }, name = new { type = "keyword", fields = new { vectors = new { term_vector = "with_positions_offsets_payloads", type = "text" } } } } } }
 					}
+				},
+				settings = new
+				{
+					// TODO
 				}
 			};
 
@@ -299,29 +307,14 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		private async Task SeedIndexDataAsync()
 		{
-			// TODO - Bulk API!
-			foreach (var p in Project.Projects) // Limited to 10 for testing
+			var tasks = new Task[]
 			{
-				await Client.CreateAsync(p, Infer.Index<Project>(), p.Name);
-			}
+				Client.IndexManyAsync(Project.Projects)
+			};
 
-			//var tasks = new Task[]
-			//{
-			//			Client.IndexManyAsync(Project.Projects),
-			//			Client.IndexManyAsync(Developer.Developers),
-			//			Client.IndexDocumentAsync(new ProjectPercolation
-			//			{
-			//				Id = "1",
-			//				Query = new MatchAllQuery()
-			//			}),
-			//			Client.BulkAsync(b => b
-			//				.IndexMany(
-			//					CommitActivity.CommitActivities,
-			//					(d, c) => d.Document(c).Routing(c.ProjectName)
-			//				)
-			//			) };
-			//await Task.WhenAll(tasks).ConfigureAwait(false);
-			//await Client.IndexManagement.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation))).ConfigureAwait(false);
+			await Task.WhenAll(tasks).ConfigureAwait(false);
+
+			await Client.IndexManagement.IndexRefreshAsync(new IndexRefreshRequest(Indices.Index(typeof(Project)))).ConfigureAwait(false);
 		}
 
 		//		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(
