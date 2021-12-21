@@ -57,15 +57,15 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 
 	public static IndexName From<T>(string clusterName) => From(typeof(T), clusterName);
 
-	private static IndexName From(Type type, string clusterName) => new IndexName(type, clusterName);
+	private static IndexName From(Type type, string clusterName) => new(type, clusterName);
 
-	internal static IndexName Rebuild(string index, Type type, string clusterName = null) => new IndexName(index, type, clusterName);
+	internal static IndexName Rebuild(string index, Type type, string clusterName = null) => new(index, type, clusterName);
 
-	public Indices And<T>() => new Indices(new[] { this, typeof(T) });
+	public Indices And<T>() => new(new[] { this, typeof(T) });
 
-	public Indices And<T>(string clusterName) => new Indices(new[] { this, From(typeof(T), clusterName) });
+	public Indices And<T>(string clusterName) => new(new[] { this, From(typeof(T), clusterName) });
 
-	public Indices And(IndexName index) => new Indices(new[] { this, index });
+	public Indices And(IndexName index) => new(new[] { this, index });
 
 	internal static IndexName Parse(string indexName)
 	{

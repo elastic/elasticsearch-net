@@ -28,7 +28,7 @@ public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	private const double NanosecondsInATick = 100; // 1 tick = 100 nanoseconds
 
 	private static readonly Regex ExpressionRegex =
-		new Regex(@"^
+		new(@"^
 				(?<factor>[+\-]? # open factor capture, allowing optional +- signs
 					(?:(?#numeric)(?:\d+(?:\.\d*)?)|(?:\.\d+)) #a numeric in the forms: (N, N., .N, N.N)
 					(?:(?#exponent)e[+\-]?\d+)? #an optional exponential scientific component, E also matches here (IgnoreCase)
@@ -91,11 +91,11 @@ public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 
 	private int? StaticTimeValue { get; }
 
-	public static implicit operator Time(TimeSpan span) => new Time(span);
+	public static implicit operator Time(TimeSpan span) => new(span);
 
-	public static implicit operator Time(double milliseconds) => new Time(milliseconds);
+	public static implicit operator Time(double milliseconds) => new(milliseconds);
 
-	public static implicit operator Time(string expression) => new Time(expression);
+	public static implicit operator Time(string expression) => new(expression);
 
 	private void ParseExpression(string timeUnit)
 	{
@@ -109,7 +109,32 @@ public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 
 		Factor = f;
 		var interval = match.Groups["interval"].Success ? match.Groups["interval"].Value : null;
-		Interval = interval.ToEnum<TimeUnit>();
+
+		switch (interval)
+		{
+			case "m":
+				Interval = TimeUnit.Minutes;
+				break;
+			case "s":
+				Interval = TimeUnit.Seconds;
+				break;
+			case "ms":
+				Interval = TimeUnit.Milliseconds;
+				break;
+			case "ns":
+				Interval = TimeUnit.Nanoseconds;
+				break;
+			case "h":
+				Interval = TimeUnit.Hours;
+				break;
+			case "d":
+				Interval = TimeUnit.Days;
+				break;
+			case "micros":
+				Interval = TimeUnit.Microseconds;
+				break;
+		}
+
 		if (!Interval.HasValue)
 			throw new ArgumentException($"Expression '{interval}' cannot be parsed to an interval", nameof(timeUnit));
 
@@ -160,7 +185,7 @@ public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	public static bool operator >=(Time left, Time right) => left.CompareTo(right) > 0 || left.Equals(right);
 
 	public static bool operator ==(Time left, Time right) =>
-		ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
+		ReferenceEquals(left, null) ? right is null : left.Equals(right);
 
 	public static bool operator !=(Time left, Time right) => !(left == right);
 
