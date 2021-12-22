@@ -171,7 +171,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 					properties = new Dictionary<string, object>
 					{
-						{ "name", new { type = "keyword" } },
+						{ "name", new { type = "keyword", store = true, fields = new { suggest = new { type = "completion" }, standard = new { analyzer = "standard", type = "text" } } } },
+						{ "numberOfCommits", new { type = "integer", store = true } },
 						{ "state", new { type = "keyword" } },
 						{ "startedOn", new { type = "date", store = true } },
 						{ "tags", new { type = "nested", properties = new { added = new { type = "date" }, name = new { type = "keyword", fields = new { vectors = new { term_vector = "with_positions_offsets_payloads", type = "text" } } } } } }
