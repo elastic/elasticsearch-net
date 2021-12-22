@@ -104,8 +104,9 @@ namespace Playground
 			var client = new ElasticClient(new ElasticsearchClientSettings(pool, JsonNetSerializer.Default)
 				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
 				.ServerCertificateValidationCallback((a, b, c, d) => true));
-				//.DefaultMappingFor<PersonV2>(p => p.IndexName("people-test")));
-				//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
+			//.DefaultMappingFor<PersonV2>(p => p.IndexName("people-test")));
+			//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
+
 
 			var people = new PersonV2[]
 			{
