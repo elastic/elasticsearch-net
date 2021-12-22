@@ -42,12 +42,11 @@ namespace Tests.Document.Single.Get
 
 		protected override void ExpectResponse(GetResponse<Project> response)
 		{
-			//response.Source.Should().NotBeNull();
-			//response.Source.Name.Should().Be(ProjectId);
-			//response.SeqNo.Should().BeGreaterOrEqualTo(0);
-			//response.PrimaryTerm.Should().HaveValue();
-			////response.Source.ShouldAdhereToSourceSerializerWhenSet(); // TODO
-			//response.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
+			response.Source.Should().NotBeNull();
+			response.Source.Name.Should().Be(ProjectId);
+			response.SeqNo.Should().BeGreaterOrEqualTo(0);
+			response.PrimaryTerm.Should().HaveValue();
+			response.PrimaryTerm.Should().BeGreaterOrEqualTo(1);
 		}
 	}
 
