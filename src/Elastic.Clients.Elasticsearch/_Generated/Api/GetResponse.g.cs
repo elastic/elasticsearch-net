@@ -16,12 +16,62 @@
 // ------------------------------------------------
 
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class GetResponse<TDocument> : ResponseBase
+	public partial class GetResponse<TDocument> : ResponseBase, ISelfDeserializable
 	{
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public FieldValues? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("found")]
+		public bool Found { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_id")]
+		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public long? PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public long? SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		public TDocument? Source { get; private set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_version")]
+		public long? Version { get; init; }
+
+		public void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			{
+				if (reader.TokenType == JsonTokenType.PropertyName)
+				{
+					if (reader.ValueTextEquals("_source"))
+					{
+						Source = SourceSerialisation.Deserialize<TDocument>(ref reader, settings);
+					}
+				}
+			}
+		}
 	}
 }

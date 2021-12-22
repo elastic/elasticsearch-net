@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.IO;
 using System.Text.Json;
 using Elastic.Transport;
@@ -28,12 +29,37 @@ internal static class SourceSerialisation
 			sourceSerializer.Serialize(toSerialize, ms);
 			ms.Position = 0;
 #if NET6_0_OR_GREATER
-			writer.WriteRawValue(ms.GetBuffer());
+			writer.WriteRawValue(ms.GetBuffer().AsSpan()[..(int)ms.Length], true);
 #else
 			// This is not super efficient but a variant on the suggestion at https://github.com/dotnet/runtime/issues/1784#issuecomment-608331125
 			using var document = JsonDocument.Parse(ms);
 			document.RootElement.WriteTo(writer);
 #endif
+		}
+	}
+
+	public static T Deserialize<T>(ref Utf8JsonReader reader, IElasticsearchClientSettings settings)
+	{
+		var sourceSerializer = settings.SourceSerializer;
+
+		if (sourceSerializer is DefaultHighLevelSerializer defaultSerializer)
+		{
+			// When the serializer is our own which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
+			return JsonSerializer.Deserialize<T>(ref reader, defaultSerializer.Options);
+		}
+		else
+		{
+			// TODO: This allocates more than we'd like. Review this post alpha
+
+			using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
+			using var stream = settings.MemoryStreamFactory.Create();
+
+			var writer = new Utf8JsonWriter(stream);
+			jsonDoc.WriteTo(writer);
+			writer.Flush();
+			stream.Position = 0;
+
+			return sourceSerializer.Deserialize<T>(stream);
 		}
 	}
 }
