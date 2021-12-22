@@ -24,41 +24,23 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial class GetResponse<TDocument> : ResponseBase, ISelfDeserializable
 	{
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public FieldValues? Fields { get; init; }
+		public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("found")]
-		public bool Found { get; init; }
+		public bool Found { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+		public Elastic.Clients.Elasticsearch.Id Id { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_primary_term")]
-		public long? PrimaryTerm { get; init; }
+		public long? PrimaryTerm { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_routing")]
-		public string? Routing { get; init; }
+		public string? Routing { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_seq_no")]
-		public long? SeqNo { get; init; }
+		public long? SeqNo { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_source")]
 		public TDocument? Source { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("_version")]
-		public long? Version { get; init; }
+		public long? Version { get; private set; }
 
 		public void Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -66,10 +48,61 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("_index"))
+					{
+						Index = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexName>(ref reader, options);
+						continue;
+					}
+
+					if (reader.ValueTextEquals("fields"))
+					{
+						Fields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.FieldValues?>(ref reader, options);
+						continue;
+					}
+
+					if (reader.ValueTextEquals("found"))
+					{
+						Found = JsonSerializer.Deserialize<bool>(ref reader, options);
+						continue;
+					}
+
+					if (reader.ValueTextEquals("_id"))
+					{
+						Id = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Id>(ref reader, options);
+						continue;
+					}
+
+					if (reader.ValueTextEquals("_primary_term"))
+					{
+						PrimaryTerm = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					if (reader.ValueTextEquals("_routing"))
+					{
+						Routing = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (reader.ValueTextEquals("_seq_no"))
+					{
+						SeqNo = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
 					if (reader.ValueTextEquals("_source"))
 					{
 						Source = SourceSerialisation.Deserialize<TDocument>(ref reader, settings);
+						continue;
 					}
+
+					if (reader.ValueTextEquals("_version"))
+					{
+						Version = JsonSerializer.Deserialize<long?>(ref reader, options);
+						continue;
+					}
+
+					_ = JsonSerializer.Deserialize<object>(ref reader, options);
 				}
 			}
 		}

@@ -50,80 +50,93 @@ namespace Tests.Document.Single.Get
 		}
 	}
 
-	//public class GetNonExistentDocumentApiTests
-	//	: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
-	//{
-	//	public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class GetNonExistentDocumentApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, GetRequestDescriptor<Project>, GetRequest>
+	{
+		public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override bool ExpectIsValid => false;
-	//	protected override int ExpectStatusCode => 404;
-	//	protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g.Routing(ProjectId);
-	//	protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
+		protected override Action<GetRequestDescriptor<Project>> Fluent => g => g.Routing(ProjectId);
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-	//	protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId)
-	//	{
-	//		Routing = ProjectId
-	//	};
+		protected override GetRequest Initializer => new(Infer.Index<Project>(), ProjectId)
+		{
+			Routing = ProjectId
+		};
 
-	//	protected string ProjectId => CallIsolatedValue;
+		// TODO - Update API to support this
+		//protected override GetRequest Initializer => new GetRequest<Project>(ProjectId)
+		//{
+		//	Routing = ProjectId
+		//};
 
-	//	protected override bool SupportsDeserialization => false;
-	//	protected override string UrlPath => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
+		protected string ProjectId => CallIsolatedValue;
 
-	//	protected override LazyResponses ClientUsage() => Calls(
-	//		(client, f) => client.Get(ProjectId, f),
-	//		(client, f) => client.GetAsync(ProjectId, f),
-	//		(client, r) => client.Get<Project>(r),
-	//		(client, r) => client.GetAsync<Project>(r)
-	//	);
+		protected override bool SupportsDeserialization => false;
+		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
-	//	protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(ProjectId);
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Get(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.GetAsync(Infer.Index<Project>(), ProjectId, f),
+			(client, r) => client.Get<Project>(r),
+			(client, r) => client.GetAsync<Project>(r)
+		);
 
-	//	protected override void ExpectResponse(GetResponse<Project> response)
-	//	{
-	//		response.Found.Should().BeFalse();
-	//		response.Index.Should().Be("project");
-	//		response.Type.Should().Be("_doc");
-	//		response.Id.Should().Be(CallIsolatedValue);
-	//	}
-	//}
+		// TODO - Update API to support this
+		//protected override LazyResponses ClientUsage() => Calls(
+		//	(client, f) => client.Get(ProjectId, f),
+		//	(client, f) => client.GetAsync(ProjectId, f),
+		//	(client, r) => client.Get<Project>(r),
+		//	(client, r) => client.GetAsync<Project>(r)
+		//);
 
-	//public class GetNonExistentIndexDocumentApiTests
-	//	: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
-	//{
-	//	public GetNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override GetRequestDescriptor<Project> NewDescriptor() => new(Infer.Index<Project>(), ProjectId);
 
-	//	protected string BadIndex => CallIsolatedValue + "-index";
+		protected override void ExpectResponse(GetResponse<Project> response)
+		{
+			response.Found.Should().BeFalse();
+			response.Index.Should().Be("project");
+			response.Id.Should().Be(CallIsolatedValue);
+		}
+	}
 
-	//	protected override bool ExpectIsValid => false;
-	//	protected override int ExpectStatusCode => 404;
+	public class GetNonExistentIndexDocumentApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<Project>, GetRequestDescriptor<Project>, GetRequest>
+	{
+		public GetNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => (g) => g.Index(BadIndex);
-	//	protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected string BadIndex => CallIsolatedValue + "-index";
 
-	//	protected override GetRequest<Project> Initializer => new GetRequest<Project>(BadIndex, ProjectId);
-	//	protected string ProjectId => CallIsolatedValue;
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 404;
 
-	//	protected override bool SupportsDeserialization => false;
-	//	protected override string UrlPath => $"/{BadIndex}/_doc/{U(ProjectId)}";
+		protected override Action<GetRequestDescriptor<Project>> Fluent => f => { };
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-	//	protected override LazyResponses ClientUsage() => Calls(
-	//		(client, f) => client.Get(ProjectId, f),
-	//		(client, f) => client.GetAsync(ProjectId, f),
-	//		(client, r) => client.Get<Project>(r),
-	//		(client, r) => client.GetAsync<Project>(r)
-	//	);
+		protected override GetRequest Initializer => new(BadIndex, ProjectId);
+		protected string ProjectId => CallIsolatedValue;
 
-	//	protected override GetDescriptor<Project> NewDescriptor() =>
-	//		new GetDescriptor<Project>(index: BadIndex, id: ProjectId);
+		protected override bool SupportsDeserialization => false;
+		protected override string ExpectedUrlPathAndQuery => $"/{BadIndex}/_doc/{U(ProjectId)}";
 
-	//	protected override void ExpectResponse(GetResponse<Project> response)
-	//	{
-	//		response.Found.Should().BeFalse();
-	//		response.Index.Should().BeNullOrWhiteSpace();
-	//		response.ServerError.Should().NotBeNull();
-	//	}
-	//}
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Get(BadIndex, ProjectId, f),
+			(client, f) => client.GetAsync(BadIndex, ProjectId, f),
+			(client, r) => client.Get<Project>(r),
+			(client, r) => client.GetAsync<Project>(r)
+		);
+
+		protected override GetRequestDescriptor<Project> NewDescriptor() =>
+			new(index: BadIndex, id: ProjectId);
+
+		protected override void ExpectResponse(GetResponse<Project> response)
+		{
+			response.Found.Should().BeFalse();
+			response.Index.Name.Should().BeNullOrWhiteSpace();
+			response.ServerError.Should().NotBeNull();
+		}
+	}
 
 	//public class GetApiParentTests
 	//	: ApiIntegrationTestBase<ReadOnlyCluster, GetResponse<CommitActivity>, IGetRequest, GetDescriptor<CommitActivity>, GetRequest<CommitActivity>
@@ -168,32 +181,35 @@ namespace Tests.Document.Single.Get
 	//	}
 	//}
 
-	//public class GetApiFieldsTests : GetApiTests
-	//{
-	//	public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public class GetApiFieldsTests : GetApiTests
+	{
+		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	//	protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
-	//		.Routing(GetApiTests.ProjectId)
-	//		.StoredFields(
-	//			p => p.Name,
-	//			p => p.NumberOfCommits
-	//		);
+		protected override Action<GetRequestDescriptor<Project>> Fluent => g => g
+			.Routing(ProjectId)
+			.StoredFields(Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits));
 
-	//	protected override GetRequest<Project> Initializer => new GetRequest<Project>(GetApiTests.ProjectId)
-	//	{
-	//		Routing = GetApiTests.ProjectId,
-	//		StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
-	//	};
+			// TODO - Requires fluent descriptor
+			//.StoredFields(
+			//	p => p.Name,
+			//	p => p.NumberOfCommits
+			//);
 
-	//	protected override string UrlPath => $"/project/_doc/{U(GetApiTests.ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(GetApiTests.ProjectId)}";
+		protected override GetRequest Initializer => new(Infer.Index<Project>(), ProjectId)
+		{
+			Routing = ProjectId,
+			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
+		};
 
-	//	protected override void ExpectResponse(GetResponse<Project> response)
-	//	{
-	//		response.Fields.Should().NotBeNull();
-	//		response.Fields.ValueOf<Project, string>(p => p.Name).Should().Be(GetApiTests.ProjectId);
-	//		response.Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
-	//	}
+		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{U(ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(ProjectId)}";
 
-	//	protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(GetApiTests.ProjectId);
-	//}
+		protected override void ExpectResponse(GetResponse<Project> response)
+		{
+			response.Fields.Should().NotBeNull();
+			response.Fields.ValueOf<Project, string>(p => p.Name).Should().Be(ProjectId);
+			response.Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
+		}
+
+		protected override GetRequestDescriptor<Project> NewDescriptor() => new(Infer.Index<Project>(), ProjectId);
+	}
 }
