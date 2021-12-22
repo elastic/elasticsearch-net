@@ -45,11 +45,13 @@ namespace Elastic.Clients.Elasticsearch
 				{
 					//new InterfaceConverterFactory(settings),
 					//new ConvertAsConverterFactory(settings),
+					//new SourceConverterFactory(settings),
 					new CalendarIntervalConverter(),
 					new IndexNameConverter(settings),
 					new ObjectToInferredTypesConverter(),
 					new IdConverter(settings),
 					new FieldConverter(settings),
+					new FieldValuesConverter(settings),
 					new SortCollectionConverter(settings),
 					new LazyDocumentConverter(settings),
 					new RelationNameConverter(settings),

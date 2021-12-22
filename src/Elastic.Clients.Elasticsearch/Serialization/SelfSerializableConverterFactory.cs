@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
+
 	internal sealed class SelfSerializableConverterFactory : JsonConverterFactory
 	{
 		private readonly SelfSerializableJsonConverter _converter;
@@ -54,7 +55,7 @@ namespace Elastic.Clients.Elasticsearch
 
 			public SelfDeserializableJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-			public override ISelfDeserializable? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)// => ((ISelfDeserializable)typeToConvert).Deserialize(ref reader, typeToConvert, options, _settings);
+			public override ISelfDeserializable? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 			{
 				var instance = (ISelfDeserializable)Activator.CreateInstance(typeToConvert);
 				instance.Deserialize(ref reader, options, _settings);
