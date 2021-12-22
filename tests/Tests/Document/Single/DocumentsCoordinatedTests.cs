@@ -25,10 +25,10 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			{
 				IndexDocumentStep, u =>
 					u.Calls<IndexRequestDescriptor<Project>, IndexRequest<Project>, IndexResponse>(
-						v => new IndexRequest<Project>(Project.Instance, v),
+						v => new IndexRequest<Project>(Project.Instance, v) { Routing = "route" },
 						(v, d) => d,
-						(v, c, f) => c.Index(Project.Instance, "project", f => f.Id(v)), // TODO: Should be able to set ID in the Index method and should be able to infer the index name
-						(v, c, f) => c.IndexAsync(Project.Instance, "project", f => f.Id(v)),
+						(v, c, f) => c.Index(Project.Instance, "project", f => f.Id(v).Routing("route")), // TODO: Should be able to set ID in the Index method and should be able to infer the index name + route
+						(v, c, f) => c.IndexAsync(Project.Instance, "project", f => f.Id(v).Routing("route")),
 						(_, c, r) => c.Index(r),
 						(_, c, r) => c.IndexAsync(r)
 					)
@@ -36,8 +36,8 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			{
 				DocumentExistsStep, u =>
 					u.Calls<ExistsRequestDescriptor<Project>, ExistsRequest, ExistsResponse>(
-						v => new ExistsRequest(typeof(Project), v),
-						(v, d) => d,
+						v => new ExistsRequest(typeof(Project), v) { Routing = "route" },
+						(v, d) => d.Routing("route"),
 						(v, c, f) => c.Exists(Infer.Index<Project>(), v, f), 
 						(v, c, f) => c.ExistsAsync(Infer.Index<Project>(), v, f),
 						(_, c, r) => c.Exists(r),
@@ -47,8 +47,8 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			{
 				GetDocumentStep, u =>
 					u.Calls<GetRequestDescriptor<Project>, GetRequest, GetResponse<Project>>(
-						v => new GetRequest(typeof(Project), v),
-						(v, d) => d,
+						v => new GetRequest(typeof(Project), v) { Routing = "route" },
+						(v, d) => d.Routing("route"),
 						(v, c, f) => c.Get(Infer.Index<Project>(), v, f),
 						(v, c, f) => c.GetAsync(Infer.Index<Project>(), v, f),
 						(_, c, r) => c.Get<Project>(r),
@@ -58,8 +58,8 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			{
 				DeleteDocumentStep, u =>
 					u.Calls<DeleteRequestDescriptor, DeleteRequest, DeleteResponse>(
-						v => new DeleteRequest(Infer.Index<Project>(), v),
-						(v, d) => d,
+						v => new DeleteRequest(Infer.Index<Project>(), v) { Routing = "route" },
+						(v, d) => d.Routing("route"),
 						(v, c, f) => c.Delete(Infer.Index<Project>(), v, f),
 						(v, c, f) => c.DeleteAsync(Infer.Index<Project>(), v, f),
 						(_, c, r) => c.Delete(r),
