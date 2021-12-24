@@ -39,8 +39,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 		public string? MaxSize { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("max_size_bytes")]
+		public Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytes { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("max_primary_shard_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_primary_shard_size_bytes")]
+		public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeBytes { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_age_millis")]
+		public Elastic.Clients.Elasticsearch.EpochMillis? MaxAgeMillis { get; set; }
 	}
 
 	public sealed partial class RolloverConditionsDescriptor : DescriptorBase<RolloverConditionsDescriptor>
@@ -56,12 +68,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 
 		internal string? MaxSizeValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytesValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeBytesValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.EpochMillis? MaxAgeMillisValue { get; private set; }
 
 		public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Time? maxAge) => Assign(maxAge, (a, v) => a.MaxAgeValue = v);
 		public RolloverConditionsDescriptor MaxDocs(long? maxDocs) => Assign(maxDocs, (a, v) => a.MaxDocsValue = v);
 		public RolloverConditionsDescriptor MaxSize(string? maxSize) => Assign(maxSize, (a, v) => a.MaxSizeValue = v);
+		public RolloverConditionsDescriptor MaxSizeBytes(Elastic.Clients.Elasticsearch.ByteSize? maxSizeBytes) => Assign(maxSizeBytes, (a, v) => a.MaxSizeBytesValue = v);
 		public RolloverConditionsDescriptor MaxPrimaryShardSize(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSize) => Assign(maxPrimaryShardSize, (a, v) => a.MaxPrimaryShardSizeValue = v);
+		public RolloverConditionsDescriptor MaxPrimaryShardSizeBytes(Elastic.Clients.Elasticsearch.ByteSize? maxPrimaryShardSizeBytes) => Assign(maxPrimaryShardSizeBytes, (a, v) => a.MaxPrimaryShardSizeBytesValue = v);
+		public RolloverConditionsDescriptor MaxAgeMillis(Elastic.Clients.Elasticsearch.EpochMillis? maxAgeMillis) => Assign(maxAgeMillis, (a, v) => a.MaxAgeMillisValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -83,10 +104,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Rollover
 				writer.WriteStringValue(MaxSizeValue);
 			}
 
+			if (MaxSizeBytesValue is not null)
+			{
+				writer.WritePropertyName("max_size_bytes");
+				JsonSerializer.Serialize(writer, MaxSizeBytesValue, options);
+			}
+
 			if (MaxPrimaryShardSizeValue is not null)
 			{
 				writer.WritePropertyName("max_primary_shard_size");
 				JsonSerializer.Serialize(writer, MaxPrimaryShardSizeValue, options);
+			}
+
+			if (MaxPrimaryShardSizeBytesValue is not null)
+			{
+				writer.WritePropertyName("max_primary_shard_size_bytes");
+				JsonSerializer.Serialize(writer, MaxPrimaryShardSizeBytesValue, options);
+			}
+
+			if (MaxAgeMillisValue is not null)
+			{
+				writer.WritePropertyName("max_age_millis");
+				JsonSerializer.Serialize(writer, MaxAgeMillisValue, options);
 			}
 
 			writer.WriteEndObject();

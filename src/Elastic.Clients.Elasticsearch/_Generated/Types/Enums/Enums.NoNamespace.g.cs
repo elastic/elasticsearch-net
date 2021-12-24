@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 		Chars
 	}
 
-	public class BoundaryScannerConverter : JsonConverter<BoundaryScanner>
+	internal sealed class BoundaryScannerConverter : JsonConverter<BoundaryScanner>
 	{
 		public override BoundaryScanner Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch
 		Abort
 	}
 
-	public class ConflictsConverter : JsonConverter<Conflicts>
+	internal sealed class ConflictsConverter : JsonConverter<Conflicts>
 	{
 		public override Conflicts Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -139,7 +139,7 @@ namespace Elastic.Clients.Elasticsearch
 		Centimeters
 	}
 
-	public class DistanceUnitConverter : JsonConverter<DistanceUnit>
+	internal sealed class DistanceUnitConverter : JsonConverter<DistanceUnit>
 	{
 		public override DistanceUnit Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -217,7 +217,7 @@ namespace Elastic.Clients.Elasticsearch
 		All
 	}
 
-	public class ExpandWildcardConverter : JsonConverter<ExpandWildcard>
+	internal sealed class ExpandWildcardConverter : JsonConverter<ExpandWildcard>
 	{
 		public override ExpandWildcard Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch
 		Arc
 	}
 
-	public class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
+	internal sealed class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
 	{
 		public override GeoDistanceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -314,7 +314,7 @@ namespace Elastic.Clients.Elasticsearch
 		Contains
 	}
 
-	public class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation>
+	internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation>
 	{
 		public override GeoShapeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -365,7 +365,7 @@ namespace Elastic.Clients.Elasticsearch
 		Green
 	}
 
-	public class HealthStatusConverter : JsonConverter<HealthStatus>
+	internal sealed class HealthStatusConverter : JsonConverter<HealthStatus>
 	{
 		public override HealthStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -410,7 +410,7 @@ namespace Elastic.Clients.Elasticsearch
 		Default
 	}
 
-	public class HighlighterEncoderConverter : JsonConverter<HighlighterEncoder>
+	internal sealed class HighlighterEncoderConverter : JsonConverter<HighlighterEncoder>
 	{
 		public override HighlighterEncoder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -450,7 +450,7 @@ namespace Elastic.Clients.Elasticsearch
 		Simple
 	}
 
-	public class HighlighterFragmenterConverter : JsonConverter<HighlighterFragmenter>
+	internal sealed class HighlighterFragmenterConverter : JsonConverter<HighlighterFragmenter>
 	{
 		public override HighlighterFragmenter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -489,7 +489,7 @@ namespace Elastic.Clients.Elasticsearch
 		Score
 	}
 
-	public class HighlighterOrderConverter : JsonConverter<HighlighterOrder>
+	internal sealed class HighlighterOrderConverter : JsonConverter<HighlighterOrder>
 	{
 		public override HighlighterOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -523,7 +523,7 @@ namespace Elastic.Clients.Elasticsearch
 		Styled
 	}
 
-	public class HighlighterTagsSchemaConverter : JsonConverter<HighlighterTagsSchema>
+	internal sealed class HighlighterTagsSchemaConverter : JsonConverter<HighlighterTagsSchema>
 	{
 		public override HighlighterTagsSchema Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -559,7 +559,7 @@ namespace Elastic.Clients.Elasticsearch
 		Cluster
 	}
 
-	public class LevelConverter : JsonConverter<Level>
+	internal sealed class LevelConverter : JsonConverter<Level>
 	{
 		public override Level Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -607,7 +607,7 @@ namespace Elastic.Clients.Elasticsearch
 		Created
 	}
 
-	public class ResultConverter : JsonConverter<Result>
+	internal sealed class ResultConverter : JsonConverter<Result>
 	{
 		public override Result Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -665,7 +665,7 @@ namespace Elastic.Clients.Elasticsearch
 		Avg
 	}
 
-	public class ScoreModeConverter : JsonConverter<ScoreMode>
+	internal sealed class ScoreModeConverter : JsonConverter<ScoreMode>
 	{
 		public override ScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -720,7 +720,7 @@ namespace Elastic.Clients.Elasticsearch
 		DfsQueryThenFetch
 	}
 
-	public class SearchTypeConverter : JsonConverter<SearchType>
+	internal sealed class SearchTypeConverter : JsonConverter<SearchType>
 	{
 		public override SearchType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -763,7 +763,7 @@ namespace Elastic.Clients.Elasticsearch
 		Avg
 	}
 
-	public class SortModeConverter : JsonConverter<SortMode>
+	internal sealed class SortModeConverter : JsonConverter<SortMode>
 	{
 		public override SortMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -818,7 +818,7 @@ namespace Elastic.Clients.Elasticsearch
 		Asc
 	}
 
-	public class SortOrderConverter : JsonConverter<SortOrder>
+	internal sealed class SortOrderConverter : JsonConverter<SortOrder>
 	{
 		public override SortOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -859,7 +859,7 @@ namespace Elastic.Clients.Elasticsearch
 		Always
 	}
 
-	public class SuggestModeConverter : JsonConverter<SuggestMode>
+	internal sealed class SuggestModeConverter : JsonConverter<SuggestMode>
 	{
 		public override SuggestMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -909,7 +909,7 @@ namespace Elastic.Clients.Elasticsearch
 		Days
 	}
 
-	public class TimeUnitConverter : JsonConverter<TimeUnit>
+	internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 	{
 		public override TimeUnit Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -974,7 +974,7 @@ namespace Elastic.Clients.Elasticsearch
 		Eq
 	}
 
-	public class TotalHitsRelationConverter : JsonConverter<TotalHitsRelation>
+	internal sealed class TotalHitsRelationConverter : JsonConverter<TotalHitsRelation>
 	{
 		public override TotalHitsRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1016,7 +1016,7 @@ namespace Elastic.Clients.Elasticsearch
 		External
 	}
 
-	public class VersionTypeConverter : JsonConverter<VersionType>
+	internal sealed class VersionTypeConverter : JsonConverter<VersionType>
 	{
 		public override VersionType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1070,7 +1070,7 @@ namespace Elastic.Clients.Elasticsearch
 		High
 	}
 
-	public class WaitForEventsConverter : JsonConverter<WaitForEvents>
+	internal sealed class WaitForEventsConverter : JsonConverter<WaitForEvents>
 	{
 		public override WaitForEvents Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

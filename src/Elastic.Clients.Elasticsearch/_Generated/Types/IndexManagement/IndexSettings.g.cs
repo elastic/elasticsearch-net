@@ -43,6 +43,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletes { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("soft_deletes.enabled")]
+		public bool? SoftDeletesEnabled { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("soft_deletes.retention_lease.period")]
+		public Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriod { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
 
@@ -71,10 +79,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int? RoutingPartitionSize { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("soft_deletes.retention_lease.period")]
-		public Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriod { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
 		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
 
@@ -89,6 +93,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("merge.scheduler.max_thread_count")]
 		public int? MergeSchedulerMaxThreadCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("merge.scheduler.max_merge_count")]
+		public int? MergeSchedulerMaxMergeCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("search.idle.after")]
@@ -203,6 +211,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? CreationDate { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("creation_date_string")]
+		public string? CreationDateString { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("uuid")]
 		public string? Uuid { get; set; }
 
@@ -266,6 +278,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; private set; }
 
+		internal bool? SoftDeletesEnabledValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriodValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; private set; }
 
 		internal Union<int?, string?>? NumberOfShardsValue { get; private set; }
@@ -280,8 +296,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal int? RoutingPartitionSizeValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Time? SoftDeletesRetentionLeasePeriodValue { get; private set; }
-
 		internal bool? LoadFixedBitsetFiltersEagerlyValue { get; private set; }
 
 		internal Union<bool?, string?>? HiddenValue { get; private set; }
@@ -289,6 +303,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal string? AutoExpandReplicasValue { get; private set; }
 
 		internal int? MergeSchedulerMaxThreadCountValue { get; private set; }
+
+		internal int? MergeSchedulerMaxMergeCountValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Time? SearchIdleAfterValue { get; private set; }
 
@@ -345,6 +361,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; private set; }
 
 		internal string? CreationDateValue { get; private set; }
+
+		internal string? CreationDateStringValue { get; private set; }
 
 		internal string? UuidValue { get; private set; }
 
@@ -450,6 +468,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.SoftDeletesDescriptorAction = v);
 		}
 
+		public IndexSettingsDescriptor<TDocument> SoftDeletesEnabled(bool? softDeletesEnabled = true) => Assign(softDeletesEnabled, (a, v) => a.SoftDeletesEnabledValue = v);
+		public IndexSettingsDescriptor<TDocument> SoftDeletesRetentionLeasePeriod(Elastic.Clients.Elasticsearch.Time? softDeletesRetentionLeasePeriod) => Assign(softDeletesRetentionLeasePeriod, (a, v) => a.SoftDeletesRetentionLeasePeriodValue = v);
 		public IndexSettingsDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? sort)
 		{
 			SortDescriptor = null;
@@ -477,11 +497,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a.CheckOnStartupValue = v);
 		public IndexSettingsDescriptor<TDocument> Codec(string? codec) => Assign(codec, (a, v) => a.CodecValue = v);
 		public IndexSettingsDescriptor<TDocument> RoutingPartitionSize(int? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> SoftDeletesRetentionLeasePeriod(Elastic.Clients.Elasticsearch.Time? softDeletesRetentionLeasePeriod) => Assign(softDeletesRetentionLeasePeriod, (a, v) => a.SoftDeletesRetentionLeasePeriodValue = v);
 		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a.LoadFixedBitsetFiltersEagerlyValue = v);
 		public IndexSettingsDescriptor<TDocument> Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a.HiddenValue = v);
 		public IndexSettingsDescriptor<TDocument> AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicasValue = v);
 		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxThreadCount(int? mergeSchedulerMaxThreadCount) => Assign(mergeSchedulerMaxThreadCount, (a, v) => a.MergeSchedulerMaxThreadCountValue = v);
+		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxMergeCount(int? mergeSchedulerMaxMergeCount) => Assign(mergeSchedulerMaxMergeCount, (a, v) => a.MergeSchedulerMaxMergeCountValue = v);
 		public IndexSettingsDescriptor<TDocument> SearchIdleAfter(Elastic.Clients.Elasticsearch.Time? searchIdleAfter) => Assign(searchIdleAfter, (a, v) => a.SearchIdleAfterValue = v);
 		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
 		public IndexSettingsDescriptor<TDocument> MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a.MaxResultWindowValue = v);
@@ -570,6 +590,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> LifecycleName(string? lifecycleName) => Assign(lifecycleName, (a, v) => a.LifecycleNameValue = v);
 		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
 		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a.CreationDateValue = v);
+		public IndexSettingsDescriptor<TDocument> CreationDateString(string? creationDateString) => Assign(creationDateString, (a, v) => a.CreationDateStringValue = v);
 		public IndexSettingsDescriptor<TDocument> Uuid(string? uuid) => Assign(uuid, (a, v) => a.UuidValue = v);
 		public IndexSettingsDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
 		{
@@ -689,6 +710,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SoftDeletesValue, options);
 			}
 
+			if (SoftDeletesEnabledValue.HasValue)
+			{
+				writer.WritePropertyName("soft_deletes.enabled");
+				writer.WriteBooleanValue(SoftDeletesEnabledValue.Value);
+			}
+
+			if (SoftDeletesRetentionLeasePeriodValue is not null)
+			{
+				writer.WritePropertyName("soft_deletes.retention_lease.period");
+				JsonSerializer.Serialize(writer, SoftDeletesRetentionLeasePeriodValue, options);
+			}
+
 			if (SortDescriptor is not null)
 			{
 				writer.WritePropertyName("sort");
@@ -741,12 +774,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				writer.WriteNumberValue(RoutingPartitionSizeValue.Value);
 			}
 
-			if (SoftDeletesRetentionLeasePeriodValue is not null)
-			{
-				writer.WritePropertyName("soft_deletes.retention_lease.period");
-				JsonSerializer.Serialize(writer, SoftDeletesRetentionLeasePeriodValue, options);
-			}
-
 			if (LoadFixedBitsetFiltersEagerlyValue.HasValue)
 			{
 				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
@@ -769,6 +796,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("merge.scheduler.max_thread_count");
 				writer.WriteNumberValue(MergeSchedulerMaxThreadCountValue.Value);
+			}
+
+			if (MergeSchedulerMaxMergeCountValue.HasValue)
+			{
+				writer.WritePropertyName("merge.scheduler.max_merge_count");
+				writer.WriteNumberValue(MergeSchedulerMaxMergeCountValue.Value);
 			}
 
 			if (SearchIdleAfterValue is not null)
@@ -967,6 +1000,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("creation_date");
 				JsonSerializer.Serialize(writer, CreationDateValue, options);
+			}
+
+			if (CreationDateStringValue is not null)
+			{
+				writer.WritePropertyName("creation_date_string");
+				JsonSerializer.Serialize(writer, CreationDateStringValue, options);
 			}
 
 			if (UuidValue is not null)

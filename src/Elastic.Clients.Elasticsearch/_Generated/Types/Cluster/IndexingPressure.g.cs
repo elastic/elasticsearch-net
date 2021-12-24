@@ -24,30 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 {
-	public partial class OperatingSystemMemoryInfo
+	public partial class IndexingPressure
 	{
 		[JsonInclude]
-		[JsonPropertyName("free_in_bytes")]
-		public long FreeInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("free_percent")]
-		public int FreePercent { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("total_in_bytes")]
-		public long TotalInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("used_in_bytes")]
-		public long UsedInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("used_percent")]
-		public int UsedPercent { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("adjusted_total_in_bytes")]
-		public long? AdjustedTotalInBytes { get; init; }
+		[JsonPropertyName("memory")]
+		public Elastic.Clients.Elasticsearch.Cluster.Stats.IndexingPressureMemory Memory { get; init; }
 	}
 }
