@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public class ObjectToInferredTypesConverter : JsonConverter<object>
+	internal sealed class ObjectToInferredTypesConverter : JsonConverter<object>
 	{
 		public override object Read(
 			ref Utf8JsonReader reader,

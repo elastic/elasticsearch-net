@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public class LazyDocumentConverter : JsonConverter<LazyDocument>
+	internal sealed class LazyDocumentConverter : JsonConverter<LazyDocument>
 	{
 		private readonly IElasticsearchClientSettings _settings;
 
