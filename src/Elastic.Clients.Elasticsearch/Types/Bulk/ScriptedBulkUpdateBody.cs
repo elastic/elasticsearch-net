@@ -10,7 +10,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public ScriptBase Script { get; set; }
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (Script is not null)
 			{

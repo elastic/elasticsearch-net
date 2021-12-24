@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkIndexOperationDescriptor<TSource>>
 	{
 		private string _pipeline;
-		private bool? _requireAlias;
+		
 		private Dictionary<string, string> _dynamicTemplates;
 
 		private static byte _newline => (byte)'\n';
@@ -24,9 +24,16 @@ namespace Elastic.Clients.Elasticsearch
 
 		public BulkIndexOperationDescriptor(TSource source) => _document = source;
 
+		public BulkIndexOperationDescriptor(TSource source, bool skipInference) : this(source) => SkipClrTypeInference(skipInference);
+
+		public BulkIndexOperationDescriptor(TSource source, IndexName index) : this(source)
+		{
+			IndexNameValue = index;
+			_ = SkipIndexNameInference();
+		}
+
 		public BulkIndexOperationDescriptor<TSource> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
 
-		public BulkIndexOperationDescriptor<TSource> RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
 
 		public BulkIndexOperationDescriptor<TSource> DynamicTemplates(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a._dynamicTemplates = v?.Invoke(new FluentDictionary<string, string>()));
 
@@ -92,12 +99,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("pipeline");
 				JsonSerializer.Serialize(writer, _pipeline, options);
-			}
-
-			if (_requireAlias.HasValue)
-			{
-				writer.WritePropertyName("require_alias");
-				JsonSerializer.Serialize(writer, _requireAlias.Value, options);
 			}
 
 			if (_dynamicTemplates is not null)

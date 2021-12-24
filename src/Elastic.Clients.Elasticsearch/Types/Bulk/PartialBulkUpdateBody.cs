@@ -1,4 +1,4 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
@@ -12,7 +12,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TPartialUpdate PartialUpdate { get; set; }
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (DocAsUpsert.HasValue)
 			{
@@ -26,8 +26,5 @@ namespace Elastic.Clients.Elasticsearch
 				SourceSerialisation.Serialize(PartialUpdate, writer, settings.SourceSerializer);
 			}
 		}
-
-		//[DataMember(Name = "_source")]
-		//internal Union<bool, ISourceFilter> Source { get; set; }
 	}
 }

@@ -2,7 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -58,10 +57,18 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 
 	protected override string Operation => "update";
 
-	protected override Type ClrType => typeof(TDocument);
-
 	protected override void BeforeSerialize(IElasticsearchClientSettings settings)
 	{
+		Id ??= new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
+
+		if (Routing is null)
+		{
+			if (IdFrom != null)
+				Routing ??= new Routing(IdFrom);
+
+			if (Upsert != null)
+				Routing ??= new Routing(Upsert);
+		}
 	}
 
 	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize(writer, this, options);
@@ -76,23 +83,6 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 		IfSequenceNumber = IfSequenceNumber,
 		Source = Source
 	};
-
-	protected override Id GetIdForOperation(Inferrer inferrer) =>
-		Id ?? new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
-
-	protected override Routing GetRoutingForOperation(Inferrer inferrer)
-	{
-		if (Routing != null)
-			return Routing;
-
-		if (IdFrom != null)
-			return new Routing(IdFrom);
-
-		if (Upsert != null)
-			return new Routing(Upsert);
-
-		return null;
-	}
 }
 
 public static class BulkUpdateOperation

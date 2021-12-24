@@ -2,27 +2,52 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	public sealed class BulkIndexOperation<T> : BulkOperationBase
 	{
-		private static byte _newline => (byte)'\n';
+		private readonly bool _skipInference;
+		private readonly bool _skipIndexNameInference;
 
+		/// <summary>
+		/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
+		/// as source data.
+		/// </summary>
+		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
 		public BulkIndexOperation(T document) => Document = document;
+
+		/// <summary>
+		/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
+		/// as source data and optional inference.
+		/// </summary>
+		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
+		/// <param name="skipInference">Whether to skip inference of the index, id and routing values from the <typeparamref name="T"/> document type.</param>
+		public BulkIndexOperation(T document, bool skipInference) : this(document) => _skipInference = skipInference;
+
+		/// <summary>
+		/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
+		/// as source data.
+		/// </summary>
+		/// <remarks>When an <see cref="IndexName"/> is provided, even if the value is <c>null</c>, no further inference will occur.
+		/// <para>Setting null using this overload is considered explicit intent not to set an index for the operation. In this case
+		/// it is expected that the bulk request will have defined an index to operate on.</para>
+		/// </remarks>
+		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
+		/// <param name="index">The <see cref="IndexName"/> which can represent an index, alias or data stream.</param>
+		public BulkIndexOperation(T document, IndexName index) : this(document)
+		{
+			Index = index;
+			_skipIndexNameInference = true;
+		}
 
 		[JsonPropertyName("pipeline")]
 		public string? Pipeline { get; set; }
-
-		[JsonPropertyName("require_alias")]
-		public bool? RequireAlias { get; set; }
 
 		[JsonPropertyName("dynamic_templates")]
 		public Dictionary<string, string>? DynamicTemplates { get; set; }
@@ -32,64 +57,79 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override string Operation => "index";
 
-		protected override Type ClrType => typeof(T);
-
-		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		private void SetValues(IElasticsearchClientSettings settings)
 		{
-			var requestResponseSerializer = settings.RequestResponseSerializer;
+			// This allocates but avoids serialising "routing":null etc. into the operation action
+			// Unfortunately, the alternative is we always set to new Routing(Document) which is then
+			// never null even if the inferrer will be unable to return a value for the Routing during serialization
 
-			var internalWriter = new Utf8JsonWriter(stream);
+			if (_skipInference)
+				return;
 
-			internalWriter.WriteStartObject();
-			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			if (settings.ExperimentalEnableSerializeNullInferredValues)
 			{
-				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this, dhls.Options);
+				Routing ??= new Routing(Document);
 			}
-			else
+			else if (Routing is null)
 			{
-				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
+				var routing = new Routing(Document);
+				if (!string.IsNullOrEmpty(routing.GetString(settings)))
+					Routing = routing;
 			}
 
-			internalWriter.WriteEndObject();
-			internalWriter.Flush();
+			if (settings.ExperimentalEnableSerializeNullInferredValues)
+			{
+				Id ??= new Id(Document);
+			}
+			else if (Id is null)
+			{
+				var id = new Id(Document);
+				if (!string.IsNullOrEmpty(id.GetString(settings)))
+					Id = id;
+			}
 
-			stream.WriteByte(_newline);
+			if (!_skipIndexNameInference)
+				Index ??= typeof(T);
+		}
 
+		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
+		{
+			SetValues(settings);
+			var writer = new Utf8JsonWriter(stream);
+			SerializeOperationAction(writer, settings);
+			writer.Flush();
+			stream.WriteByte(SerializationConstants.Newline);
 			settings.SourceSerializer.Serialize(Document, stream);
 		}
 
-		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings)
+		{
+			SetValues(settings);
+			var internalWriter = new Utf8JsonWriter(stream);
+			SerializeOperationAction(internalWriter, settings);
+			await internalWriter.FlushAsync().ConfigureAwait(false);
+			stream.WriteByte(SerializationConstants.Newline);
+			await settings.SourceSerializer.SerializeAsync(Document, stream).ConfigureAwait(false);
+		}
+
+		private void SerializeOperationAction(Utf8JsonWriter writer, IElasticsearchClientSettings settings)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
 
-			var internalWriter = new Utf8JsonWriter(stream);
+			writer.WriteStartObject();
+			writer.WritePropertyName(Operation);
 
-			internalWriter.WriteStartObject();
-			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
+			switch (requestResponseSerializer)
 			{
-				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this, dhls.Options);
+				case DefaultHighLevelSerializer dhls:
+					JsonSerializer.Serialize<BulkIndexOperation<T>>(writer, this, dhls.Options);
+					break;
+				default:
+					JsonSerializer.Serialize<BulkIndexOperation<T>>(writer, this); // Unable to handle options if this were to ever be the case
+					break;
 			}
-			else
-			{
-				JsonSerializer.Serialize<BulkIndexOperation<T>>(internalWriter, this); // Unable to handle options if this were to ever be the case
-			}
 
-			internalWriter.WriteEndObject();
-			await internalWriter.FlushAsync().ConfigureAwait(false);
-
-			stream.WriteByte(_newline);
-
-			await settings.SourceSerializer.SerializeAsync(Document, stream, formatting).ConfigureAwait(false);
+			writer.WriteEndObject();
 		}
-
-		protected override object GetBody() => Document;
-
-		protected override Id GetIdForOperation(Inferrer inferrer) => Id ?? new Id(Document);
-
-		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(Document);
 	}
 }

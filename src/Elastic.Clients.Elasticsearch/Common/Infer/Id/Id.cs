@@ -8,7 +8,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch
 {
 	[DebuggerDisplay("{DebugDisplay,nq}")]
-	[JsonConverter(typeof(Id))]
+	[JsonConverter(typeof(IdConverter))]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
 		public Id(string id)
@@ -46,14 +46,11 @@ namespace Elastic.Clients.Elasticsearch
 			else if (Tag != other.Tag)
 				return false;
 
-			switch (Tag)
+			return Tag switch
 			{
-				case 0:
-				case 1:
-					return StringOrLongValue == other.StringOrLongValue;
-				default:
-					return Document?.Equals(other.Document) ?? false;
-			}
+				0 or 1 => StringOrLongValue == other.StringOrLongValue,
+				_ => Document?.Equals(other.Document) ?? false,
+			};
 		}
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
