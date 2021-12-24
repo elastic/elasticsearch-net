@@ -17,9 +17,9 @@ namespace Elastic.Clients.Elasticsearch
 		string IClrPropertyMapping<TDocument>.NewName { get; set; }
 		Expression<Func<TDocument, object>> IClrPropertyMapping<TDocument>.Property { get; set; }
 
-		//IPropertyMapping IClrPropertyMapping<TDocument>.ToPropertyMapping() => Self.Ignore
-		//	? PropertyMapping.Ignored
-		//	: new PropertyMapping { Name = Self.NewName };
+		IPropertyMapping IClrPropertyMapping<TDocument>.ToPropertyMapping() => Self.Ignore
+			? PropertyMapping.Ignored
+			: new PropertyMapping { Name = Self.NewName };
 	}
 
 	public interface IClrPropertyMapping<TDocument> where TDocument : class
@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 		string NewName { get; set; }
 		Expression<Func<TDocument, object>> Property { get; set; }
 
-		//IPropertyMapping ToPropertyMapping();
+		IPropertyMapping ToPropertyMapping();
 	}
 
 	public class IgnoreClrPropertyMapping<TDocument> : ClrPropertyMappingBase<TDocument> where TDocument : class

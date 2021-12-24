@@ -144,6 +144,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			if (request.WaitForActiveShards.HasValue)
 				s.WaitForActiveShards(request.WaitForActiveShards.ToString());
 
+			// TODO - Once meta data header is reintroduced
 			//switch (_partitionedBulkRequest)
 			//{
 			//	case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:

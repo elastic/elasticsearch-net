@@ -20,7 +20,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public Union<bool, SourceFilter> Source { get; set; }
 
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (PartialUpdate is not null)
 			{

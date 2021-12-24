@@ -20,8 +20,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		public ScriptBase Script { get; set; }
 
-		protected override Type ClrType => null;
-
 		protected override string Operation => "update";
 
 		protected override void BeforeSerialize(IElasticsearchClientSettings settings)
