@@ -7,6 +7,7 @@
       Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and 
       responses. Uses and exposes Elasticsearch.Net.
     </Description>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <IsPackable>true</IsPackable>
