@@ -34,7 +34,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Avg
 	}
 
-	public class ChildScoreModeConverter : JsonConverter<ChildScoreMode>
+	internal sealed class ChildScoreModeConverter : JsonConverter<ChildScoreMode>
 	{
 		public override ChildScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		And
 	}
 
-	public class CombinedFieldsOperatorConverter : JsonConverter<CombinedFieldsOperator>
+	internal sealed class CombinedFieldsOperatorConverter : JsonConverter<CombinedFieldsOperator>
 	{
 		public override CombinedFieldsOperator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		All
 	}
 
-	public class CombinedFieldsZeroTermsConverter : JsonConverter<CombinedFieldsZeroTerms>
+	internal sealed class CombinedFieldsZeroTermsConverter : JsonConverter<CombinedFieldsZeroTerms>
 	{
 		public override CombinedFieldsZeroTerms Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -177,7 +177,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Ln
 	}
 
-	public class FieldValueFactorModifierConverter : JsonConverter<FieldValueFactorModifier>
+	internal sealed class FieldValueFactorModifierConverter : JsonConverter<FieldValueFactorModifier>
 	{
 		public override FieldValueFactorModifier Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Avg
 	}
 
-	public class FunctionBoostModeConverter : JsonConverter<FunctionBoostMode>
+	internal sealed class FunctionBoostModeConverter : JsonConverter<FunctionBoostMode>
 	{
 		public override FunctionBoostMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -325,7 +325,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Avg
 	}
 
-	public class FunctionScoreModeConverter : JsonConverter<FunctionScoreMode>
+	internal sealed class FunctionScoreModeConverter : JsonConverter<FunctionScoreMode>
 	{
 		public override FunctionScoreMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -386,7 +386,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		Coerce
 	}
 
-	public class GeoValidationMethodConverter : JsonConverter<GeoValidationMethod>
+	internal sealed class GeoValidationMethodConverter : JsonConverter<GeoValidationMethod>
 	{
 		public override GeoValidationMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -431,7 +431,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		And
 	}
 
-	public class OperatorConverter : JsonConverter<Operator>
+	internal sealed class OperatorConverter : JsonConverter<Operator>
 	{
 		public override Operator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -492,7 +492,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		BestFields
 	}
 
-	public class TextQueryTypeConverter : JsonConverter<TextQueryType>
+	internal sealed class TextQueryTypeConverter : JsonConverter<TextQueryType>
 	{
 		public override TextQueryType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -552,7 +552,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		All
 	}
 
-	public class ZeroTermsQueryConverter : JsonConverter<ZeroTermsQuery>
+	internal sealed class ZeroTermsQueryConverter : JsonConverter<ZeroTermsQuery>
 	{
 		public override ZeroTermsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

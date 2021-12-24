@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Checksum
 	}
 
-	public class IndexCheckOnStartupConverter : JsonConverter<IndexCheckOnStartup>
+	internal sealed class IndexCheckOnStartupConverter : JsonConverter<IndexCheckOnStartup>
 	{
 		public override IndexCheckOnStartup Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		All
 	}
 
-	public class IndexRoutingAllocationOptionsConverter : JsonConverter<IndexRoutingAllocationOptions>
+	internal sealed class IndexRoutingAllocationOptionsConverter : JsonConverter<IndexRoutingAllocationOptions>
 	{
 		public override IndexRoutingAllocationOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -131,7 +131,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		All
 	}
 
-	public class IndexRoutingRebalanceOptionsConverter : JsonConverter<IndexRoutingRebalanceOptions>
+	internal sealed class IndexRoutingRebalanceOptionsConverter : JsonConverter<IndexRoutingRebalanceOptions>
 	{
 		public override IndexRoutingRebalanceOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Array
 	}
 
-	public class NumericFielddataFormatConverter : JsonConverter<NumericFielddataFormat>
+	internal sealed class NumericFielddataFormatConverter : JsonConverter<NumericFielddataFormat>
 	{
 		public override NumericFielddataFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -221,7 +221,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		First
 	}
 
-	public class SegmentSortMissingConverter : JsonConverter<SegmentSortMissing>
+	internal sealed class SegmentSortMissingConverter : JsonConverter<SegmentSortMissing>
 	{
 		public override SegmentSortMissing Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Max
 	}
 
-	public class SegmentSortModeConverter : JsonConverter<SegmentSortMode>
+	internal sealed class SegmentSortModeConverter : JsonConverter<SegmentSortMode>
 	{
 		public override SegmentSortMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -301,7 +301,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Asc
 	}
 
-	public class SegmentSortOrderConverter : JsonConverter<SegmentSortOrder>
+	internal sealed class SegmentSortOrderConverter : JsonConverter<SegmentSortOrder>
 	{
 		public override SegmentSortOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -341,7 +341,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		Disabled
 	}
 
-	public class StringFielddataFormatConverter : JsonConverter<StringFielddataFormat>
+	internal sealed class StringFielddataFormatConverter : JsonConverter<StringFielddataFormat>
 	{
 		public override StringFielddataFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

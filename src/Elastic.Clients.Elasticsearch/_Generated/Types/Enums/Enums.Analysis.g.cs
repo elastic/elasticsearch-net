@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Float
 	}
 
-	public class DelimitedPayloadEncodingConverter : JsonConverter<DelimitedPayloadEncoding>
+	internal sealed class DelimitedPayloadEncodingConverter : JsonConverter<DelimitedPayloadEncoding>
 	{
 		public override DelimitedPayloadEncoding Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Back
 	}
 
-	public class EdgeNGramSideConverter : JsonConverter<EdgeNGramSide>
+	internal sealed class EdgeNGramSideConverter : JsonConverter<EdgeNGramSide>
 	{
 		public override EdgeNGramSide Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -117,7 +117,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		NonIgnorable
 	}
 
-	public class IcuCollationAlternateConverter : JsonConverter<IcuCollationAlternate>
+	internal sealed class IcuCollationAlternateConverter : JsonConverter<IcuCollationAlternate>
 	{
 		public override IcuCollationAlternate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -157,7 +157,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Lower
 	}
 
-	public class IcuCollationCaseFirstConverter : JsonConverter<IcuCollationCaseFirst>
+	internal sealed class IcuCollationCaseFirstConverter : JsonConverter<IcuCollationCaseFirst>
 	{
 		public override IcuCollationCaseFirst Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -197,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Identical
 	}
 
-	public class IcuCollationDecompositionConverter : JsonConverter<IcuCollationDecomposition>
+	internal sealed class IcuCollationDecompositionConverter : JsonConverter<IcuCollationDecomposition>
 	{
 		public override IcuCollationDecomposition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -240,7 +240,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Identical
 	}
 
-	public class IcuCollationStrengthConverter : JsonConverter<IcuCollationStrength>
+	internal sealed class IcuCollationStrengthConverter : JsonConverter<IcuCollationStrength>
 	{
 		public override IcuCollationStrength Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -295,7 +295,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Compose
 	}
 
-	public class IcuNormalizationModeConverter : JsonConverter<IcuNormalizationMode>
+	internal sealed class IcuNormalizationModeConverter : JsonConverter<IcuNormalizationMode>
 	{
 		public override IcuNormalizationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -336,7 +336,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Nfc
 	}
 
-	public class IcuNormalizationTypeConverter : JsonConverter<IcuNormalizationType>
+	internal sealed class IcuNormalizationTypeConverter : JsonConverter<IcuNormalizationType>
 	{
 		public override IcuNormalizationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -381,7 +381,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Forward
 	}
 
-	public class IcuTransformDirectionConverter : JsonConverter<IcuTransformDirection>
+	internal sealed class IcuTransformDirectionConverter : JsonConverter<IcuTransformDirection>
 	{
 		public override IcuTransformDirection Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -421,7 +421,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Exclude
 	}
 
-	public class KeepTypesModeConverter : JsonConverter<KeepTypesMode>
+	internal sealed class KeepTypesModeConverter : JsonConverter<KeepTypesMode>
 	{
 		public override KeepTypesMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -462,7 +462,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Extended
 	}
 
-	public class KuromojiTokenizationModeConverter : JsonConverter<KuromojiTokenizationMode>
+	internal sealed class KuromojiTokenizationModeConverter : JsonConverter<KuromojiTokenizationMode>
 	{
 		public override KuromojiTokenizationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -539,7 +539,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Arabic
 	}
 
-	public class LanguageConverter : JsonConverter<Language>
+	internal sealed class LanguageConverter : JsonConverter<Language>
 	{
 		public override Language Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -740,7 +740,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Discard
 	}
 
-	public class NoriDecompoundModeConverter : JsonConverter<NoriDecompoundMode>
+	internal sealed class NoriDecompoundModeConverter : JsonConverter<NoriDecompoundMode>
 	{
 		public override NoriDecompoundMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -795,7 +795,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		BeiderMorse
 	}
 
-	public class PhoneticEncoderConverter : JsonConverter<PhoneticEncoder>
+	internal sealed class PhoneticEncoderConverter : JsonConverter<PhoneticEncoder>
 	{
 		public override PhoneticEncoder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -895,7 +895,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Any
 	}
 
-	public class PhoneticLanguageConverter : JsonConverter<PhoneticLanguage>
+	internal sealed class PhoneticLanguageConverter : JsonConverter<PhoneticLanguage>
 	{
 		public override PhoneticLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -986,7 +986,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Ashkenazi
 	}
 
-	public class PhoneticNameTypeConverter : JsonConverter<PhoneticNameType>
+	internal sealed class PhoneticNameTypeConverter : JsonConverter<PhoneticNameType>
 	{
 		public override PhoneticNameType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1031,7 +1031,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Approx
 	}
 
-	public class PhoneticRuleTypeConverter : JsonConverter<PhoneticRuleType>
+	internal sealed class PhoneticRuleTypeConverter : JsonConverter<PhoneticRuleType>
 	{
 		public override PhoneticRuleType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1091,7 +1091,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Armenian
 	}
 
-	public class SnowballLanguageConverter : JsonConverter<SnowballLanguage>
+	internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage>
 	{
 		public override SnowballLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1231,7 +1231,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Solr
 	}
 
-	public class SynonymFormatConverter : JsonConverter<SynonymFormat>
+	internal sealed class SynonymFormatConverter : JsonConverter<SynonymFormat>
 	{
 		public override SynonymFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -1275,7 +1275,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		Custom
 	}
 
-	public class TokenCharConverter : JsonConverter<TokenChar>
+	internal sealed class TokenCharConverter : JsonConverter<TokenChar>
 	{
 		public override TokenChar Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

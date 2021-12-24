@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		Primary
 	}
 
-	public class ShardStoreAllocationConverter : JsonConverter<ShardStoreAllocation>
+	internal sealed class ShardStoreAllocationConverter : JsonConverter<ShardStoreAllocation>
 	{
 		public override ShardStoreAllocation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 		All
 	}
 
-	public class ShardStoreStatusConverter : JsonConverter<ShardStoreStatus>
+	internal sealed class ShardStoreStatusConverter : JsonConverter<ShardStoreStatus>
 	{
 		public override ShardStoreStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

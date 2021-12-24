@@ -22,32 +22,31 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.Stats
+namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class OperatingSystemMemoryInfo
+	public partial class DataStreamTimestamp
 	{
 		[JsonInclude]
-		[JsonPropertyName("free_in_bytes")]
-		public long FreeInBytes { get; init; }
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("free_percent")]
-		public int FreePercent { get; init; }
+	public sealed partial class DataStreamTimestampDescriptor : DescriptorBase<DataStreamTimestampDescriptor>
+	{
+		public DataStreamTimestampDescriptor()
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("total_in_bytes")]
-		public long TotalInBytes { get; init; }
+		internal DataStreamTimestampDescriptor(Action<DataStreamTimestampDescriptor> configure) => configure.Invoke(this);
+		internal bool EnabledValue { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("used_in_bytes")]
-		public long UsedInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("used_percent")]
-		public int UsedPercent { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("adjusted_total_in_bytes")]
-		public long? AdjustedTotalInBytes { get; init; }
+		public DataStreamTimestampDescriptor Enabled(bool enabled = true) => Assign(enabled, (a, v) => a.EnabledValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue);
+			writer.WriteEndObject();
+		}
 	}
 }

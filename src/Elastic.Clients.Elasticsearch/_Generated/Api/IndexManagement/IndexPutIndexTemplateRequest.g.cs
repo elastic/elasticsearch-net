@@ -27,6 +27,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public class IndexPutIndexTemplateRequestParameters : RequestParameters<IndexPutIndexTemplateRequestParameters>
 	{
+		[JsonIgnore]
+		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	}
 
 	public partial class IndexPutIndexTemplateRequest : PlainRequestBase<IndexPutIndexTemplateRequestParameters>
@@ -38,6 +40,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
+		[JsonIgnore]
+		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
 		[JsonInclude]
 		[JsonPropertyName("index_patterns")]
 		public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
@@ -81,6 +86,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
+		public IndexPutIndexTemplateRequestDescriptor<TDocument> Create(bool? create) => Qs("create", create);
 		internal Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; private set; }

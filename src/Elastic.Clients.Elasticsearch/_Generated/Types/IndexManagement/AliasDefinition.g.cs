@@ -45,6 +45,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("search_routing")]
 		public string? SearchRouting { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("is_hidden")]
+		public bool? IsHidden { get; set; }
 	}
 
 	public sealed partial class AliasDefinitionDescriptor<TDocument> : DescriptorBase<AliasDefinitionDescriptor<TDocument>>
@@ -63,6 +67,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal string? RoutingValue { get; private set; }
 
 		internal string? SearchRoutingValue { get; private set; }
+
+		internal bool? IsHiddenValue { get; private set; }
 
 		internal QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
@@ -93,6 +99,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public AliasDefinitionDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true) => Assign(isWriteIndex, (a, v) => a.IsWriteIndexValue = v);
 		public AliasDefinitionDescriptor<TDocument> Routing(string? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public AliasDefinitionDescriptor<TDocument> SearchRouting(string? searchRouting) => Assign(searchRouting, (a, v) => a.SearchRoutingValue = v);
+		public AliasDefinitionDescriptor<TDocument> IsHidden(bool? isHidden = true) => Assign(isHidden, (a, v) => a.IsHiddenValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -134,6 +141,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("search_routing");
 				writer.WriteStringValue(SearchRoutingValue);
+			}
+
+			if (IsHiddenValue.HasValue)
+			{
+				writer.WritePropertyName("is_hidden");
+				writer.WriteBooleanValue(IsHiddenValue.Value);
 			}
 
 			writer.WriteEndObject();

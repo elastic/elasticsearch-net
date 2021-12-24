@@ -44,6 +44,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
+
+		[JsonIgnore]
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
 	public partial class IndexForcemergeRequest : PlainRequestBase<IndexForcemergeRequestParameters>
@@ -76,6 +79,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonIgnore]
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
+
+		[JsonIgnore]
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 
 	public sealed partial class IndexForcemergeRequestDescriptor : RequestDescriptorBase<IndexForcemergeRequestDescriptor, IndexForcemergeRequestParameters>
@@ -98,6 +104,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexForcemergeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
 		public IndexForcemergeRequestDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		public IndexForcemergeRequestDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes) => Qs("only_expunge_deletes", onlyExpungeDeletes);
+		public IndexForcemergeRequestDescriptor WaitForCompletion(bool? waitForCompletion) => Qs("wait_for_completion", waitForCompletion);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

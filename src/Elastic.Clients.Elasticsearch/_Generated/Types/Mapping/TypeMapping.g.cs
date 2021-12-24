@@ -85,6 +85,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		[JsonInclude]
 		[JsonPropertyName("enabled")]
 		public bool? Enabled { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("_data_stream_timestamp")]
+		public Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestamp { get; set; }
 	}
 
 	public sealed partial class TypeMappingDescriptor : DescriptorBase<TypeMappingDescriptor>
@@ -124,6 +128,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		internal bool? EnabledValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestampValue { get; private set; }
+
 		internal AllFieldDescriptor AllFieldDescriptor { get; private set; }
 
 		internal FieldNamesFieldDescriptor FieldNamesDescriptor { get; private set; }
@@ -136,6 +142,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		internal SourceFieldDescriptor SourceDescriptor { get; private set; }
 
+		internal DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; private set; }
+
 		internal Action<AllFieldDescriptor> AllFieldDescriptorAction { get; private set; }
 
 		internal Action<FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; private set; }
@@ -147,6 +155,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal Action<SizeFieldDescriptor> SizeDescriptorAction { get; private set; }
 
 		internal Action<SourceFieldDescriptor> SourceDescriptorAction { get; private set; }
+
+		internal Action<DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; private set; }
 
 		public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
 		{
@@ -283,6 +293,27 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		public TypeMappingDescriptor Runtime(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector) => Assign(selector, (a, v) => a.RuntimeValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>()));
 		public TypeMappingDescriptor Enabled(bool? enabled = true) => Assign(enabled, (a, v) => a.EnabledValue = v);
+		public TypeMappingDescriptor DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? dataStreamTimestamp)
+		{
+			DataStreamTimestampDescriptor = null;
+			DataStreamTimestampDescriptorAction = null;
+			return Assign(dataStreamTimestamp, (a, v) => a.DataStreamTimestampValue = v);
+		}
+
+		public TypeMappingDescriptor DataStreamTimestamp(Mapping.DataStreamTimestampDescriptor descriptor)
+		{
+			DataStreamTimestampValue = null;
+			DataStreamTimestampDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.DataStreamTimestampDescriptor = v);
+		}
+
+		public TypeMappingDescriptor DataStreamTimestamp(Action<Mapping.DataStreamTimestampDescriptor> configure)
+		{
+			DataStreamTimestampValue = null;
+			DataStreamTimestampDescriptorAction = null;
+			return Assign(configure, (a, v) => a.DataStreamTimestampDescriptorAction = v);
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -434,6 +465,22 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			{
 				writer.WritePropertyName("enabled");
 				writer.WriteBooleanValue(EnabledValue.Value);
+			}
+
+			if (DataStreamTimestampDescriptor is not null)
+			{
+				writer.WritePropertyName("_data_stream_timestamp");
+				JsonSerializer.Serialize(writer, DataStreamTimestampDescriptor, options);
+			}
+			else if (DataStreamTimestampDescriptorAction is not null)
+			{
+				writer.WritePropertyName("_data_stream_timestamp");
+				JsonSerializer.Serialize(writer, new Mapping.DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
+			}
+			else if (DataStreamTimestampValue is not null)
+			{
+				writer.WritePropertyName("_data_stream_timestamp");
+				JsonSerializer.Serialize(writer, DataStreamTimestampValue, options);
 			}
 
 			writer.WriteEndObject();

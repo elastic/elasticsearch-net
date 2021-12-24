@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		Auto
 	}
 
-	public class ConvertTypeConverter : JsonConverter<ConvertType>
+	internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 	{
 		public override ConvertType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -101,7 +101,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		GeoShape
 	}
 
-	public class ShapeTypeConverter : JsonConverter<ShapeType>
+	internal sealed class ShapeTypeConverter : JsonConverter<ShapeType>
 	{
 		public override ShapeType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 		Build
 	}
 
-	public class UserAgentPropertyConverter : JsonConverter<UserAgentProperty>
+	internal sealed class UserAgentPropertyConverter : JsonConverter<UserAgentProperty>
 	{
 		public override UserAgentProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
