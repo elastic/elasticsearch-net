@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		False
 	}
 
-	public class DynamicMappingConverter : JsonConverter<DynamicMapping>
+	internal sealed class DynamicMappingConverter : JsonConverter<DynamicMapping>
 	{
 		public override DynamicMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -83,7 +83,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Left
 	}
 
-	public class GeoOrientationConverter : JsonConverter<GeoOrientation>
+	internal sealed class GeoOrientationConverter : JsonConverter<GeoOrientation>
 	{
 		public override GeoOrientation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Recursive
 	}
 
-	public class GeoStrategyConverter : JsonConverter<GeoStrategy>
+	internal sealed class GeoStrategyConverter : JsonConverter<GeoStrategy>
 	{
 		public override GeoStrategy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Docs
 	}
 
-	public class IndexOptionsConverter : JsonConverter<IndexOptions>
+	internal sealed class IndexOptionsConverter : JsonConverter<IndexOptions>
 	{
 		public override IndexOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Regex
 	}
 
-	public class MatchTypeConverter : JsonConverter<MatchType>
+	internal sealed class MatchTypeConverter : JsonConverter<MatchType>
 	{
 		public override MatchType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -255,7 +255,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Continue
 	}
 
-	public class OnScriptErrorConverter : JsonConverter<OnScriptError>
+	internal sealed class OnScriptErrorConverter : JsonConverter<OnScriptError>
 	{
 		public override OnScriptError Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -300,7 +300,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Boolean
 	}
 
-	public class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType>
+	internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType>
 	{
 		public override RuntimeFieldType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -370,7 +370,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		No
 	}
 
-	public class TermVectorOptionConverter : JsonConverter<TermVectorOption>
+	internal sealed class TermVectorOptionConverter : JsonConverter<TermVectorOption>
 	{
 		public override TermVectorOption Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -437,7 +437,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		Counter
 	}
 
-	public class TimeSeriesMetricTypeConverter : JsonConverter<TimeSeriesMetricType>
+	internal sealed class TimeSeriesMetricTypeConverter : JsonConverter<TimeSeriesMetricType>
 	{
 		public override TimeSeriesMetricType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

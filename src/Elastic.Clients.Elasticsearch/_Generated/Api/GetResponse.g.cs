@@ -101,8 +101,6 @@ namespace Elastic.Clients.Elasticsearch
 						Version = JsonSerializer.Deserialize<long?>(ref reader, options);
 						continue;
 					}
-
-					_ = JsonSerializer.Deserialize<object>(ref reader, options);
 				}
 			}
 		}

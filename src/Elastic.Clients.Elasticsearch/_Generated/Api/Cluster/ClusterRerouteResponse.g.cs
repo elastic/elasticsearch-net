@@ -24,6 +24,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 	public partial class ClusterRerouteResponse : ResponseBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("explanations")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Reroute.RerouteExplanation>? Explanations { get; init; }
 

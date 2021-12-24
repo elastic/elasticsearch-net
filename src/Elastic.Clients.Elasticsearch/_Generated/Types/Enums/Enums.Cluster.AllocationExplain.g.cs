@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		Always
 	}
 
-	public class AllocationExplainDecisionConverter : JsonConverter<AllocationExplainDecision>
+	internal sealed class AllocationExplainDecisionConverter : JsonConverter<AllocationExplainDecision>
 	{
 		public override AllocationExplainDecision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -89,7 +89,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		AllocationDelayed
 	}
 
-	public class DecisionConverter : JsonConverter<Decision>
+	internal sealed class DecisionConverter : JsonConverter<Decision>
 	{
 		public override Decision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -172,7 +172,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		AllocationFailed
 	}
 
-	public class UnassignedInformationReasonConverter : JsonConverter<UnassignedInformationReason>
+	internal sealed class UnassignedInformationReasonConverter : JsonConverter<UnassignedInformationReason>
 	{
 		public override UnassignedInformationReason Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

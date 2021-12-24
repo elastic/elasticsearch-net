@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 		Failure
 	}
 
-	public class ActionStatusOptionsConverter : JsonConverter<ActionStatusOptions>
+	internal sealed class ActionStatusOptionsConverter : JsonConverter<ActionStatusOptions>
 	{
 		public override ActionStatusOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

@@ -26,7 +26,7 @@ namespace Tests.Cluster.ClusterHealth
 		// TODO - Update these assertions once cluster is seeded
 		protected override void ExpectResponse(ClusterHealthResponse response)
 		{
-			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.ClusterName.Value.Should().NotBeNullOrWhiteSpace();
 			response.Status.Should().NotBe(HealthStatus.Red);
 			response.TimedOut.Should().BeFalse();
 			response.NumberOfNodes.Should().BeGreaterOrEqualTo(1);

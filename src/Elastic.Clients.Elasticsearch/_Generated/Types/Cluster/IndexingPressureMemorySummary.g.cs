@@ -24,30 +24,38 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 {
-	public partial class OperatingSystemMemoryInfo
+	public partial class IndexingPressureMemorySummary
 	{
 		[JsonInclude]
-		[JsonPropertyName("free_in_bytes")]
-		public long FreeInBytes { get; init; }
+		[JsonPropertyName("all_in_bytes")]
+		public long AllInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("free_percent")]
-		public int FreePercent { get; init; }
+		[JsonPropertyName("combined_coordinating_and_primary_in_bytes")]
+		public long CombinedCoordinatingAndPrimaryInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("total_in_bytes")]
-		public long TotalInBytes { get; init; }
+		[JsonPropertyName("coordinating_in_bytes")]
+		public long CoordinatingInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("used_in_bytes")]
-		public long UsedInBytes { get; init; }
+		[JsonPropertyName("coordinating_rejections")]
+		public long? CoordinatingRejections { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("used_percent")]
-		public int UsedPercent { get; init; }
+		[JsonPropertyName("primary_in_bytes")]
+		public long PrimaryInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("adjusted_total_in_bytes")]
-		public long? AdjustedTotalInBytes { get; init; }
+		[JsonPropertyName("primary_rejections")]
+		public long? PrimaryRejections { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("replica_in_bytes")]
+		public long ReplicaInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("replica_rejections")]
+		public long? ReplicaRejections { get; init; }
 	}
 }

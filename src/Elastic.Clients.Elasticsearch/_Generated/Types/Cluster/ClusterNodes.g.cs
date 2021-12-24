@@ -69,5 +69,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		[JsonInclude]
 		[JsonPropertyName("versions")]
 		public IReadOnlyCollection<string> Versions { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("indexing_pressure")]
+		public Elastic.Clients.Elasticsearch.Cluster.Stats.IndexingPressure IndexingPressure { get; init; }
 	}
 }

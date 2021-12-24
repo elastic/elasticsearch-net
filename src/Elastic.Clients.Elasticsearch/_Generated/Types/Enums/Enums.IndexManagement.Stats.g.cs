@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 		Initializing
 	}
 
-	public class ShardRoutingStateConverter : JsonConverter<ShardRoutingState>
+	internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingState>
 	{
 		public override ShardRoutingState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

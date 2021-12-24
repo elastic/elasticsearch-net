@@ -37,7 +37,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Day
 	}
 
-	public class CalendarIntervalConverter : JsonConverter<CalendarInterval>
+	internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval>
 	{
 		public override CalendarInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		InsertZeros
 	}
 
-	public class GapPolicyConverter : JsonConverter<GapPolicy>
+	internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
 	{
 		public override GapPolicy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Day
 	}
 
-	public class MinimumIntervalConverter : JsonConverter<MinimumInterval>
+	internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
 	{
 		public override MinimumInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Default
 	}
 
-	public class MissingOrderConverter : JsonConverter<MissingOrder>
+	internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
 	{
 		public override MissingOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -261,7 +261,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Mean
 	}
 
-	public class NormalizeMethodConverter : JsonConverter<NormalizeMethod>
+	internal sealed class NormalizeMethodConverter : JsonConverter<NormalizeMethod>
 	{
 		public override NormalizeMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Sum
 	}
 
-	public class RateModeConverter : JsonConverter<RateMode>
+	internal sealed class RateModeConverter : JsonConverter<RateMode>
 	{
 		public override RateMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -362,7 +362,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		BytesHash
 	}
 
-	public class SamplerAggregationExecutionHintConverter : JsonConverter<SamplerAggregationExecutionHint>
+	internal sealed class SamplerAggregationExecutionHintConverter : JsonConverter<SamplerAggregationExecutionHint>
 	{
 		public override SamplerAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -407,7 +407,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		BreadthFirst
 	}
 
-	public class TermsAggregationCollectModeConverter : JsonConverter<TermsAggregationCollectMode>
+	internal sealed class TermsAggregationCollectModeConverter : JsonConverter<TermsAggregationCollectMode>
 	{
 		public override TermsAggregationCollectMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -449,7 +449,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		GlobalOrdinals
 	}
 
-	public class TermsAggregationExecutionHintConverter : JsonConverter<TermsAggregationExecutionHint>
+	internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<TermsAggregationExecutionHint>
 	{
 		public override TermsAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -500,7 +500,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Heteroscedastic
 	}
 
-	public class TTestTypeConverter : JsonConverter<TTestType>
+	internal sealed class TTestTypeConverter : JsonConverter<TTestType>
 	{
 		public override TTestType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -553,7 +553,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		Boolean
 	}
 
-	public class ValueTypeConverter : JsonConverter<ValueType>
+	internal sealed class ValueTypeConverter : JsonConverter<ValueType>
 	{
 		public override ValueType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
