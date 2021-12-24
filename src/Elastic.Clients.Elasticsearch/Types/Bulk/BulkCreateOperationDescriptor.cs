@@ -15,7 +15,6 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed class BulkCreateOperationDescriptor<TSource> : BulkOperationDescriptorBase<BulkCreateOperationDescriptor<TSource>>
 	{
 		private string _pipeline;
-		private bool? _requireAlias;
 		private Dictionary<string, string> _dynamicTemplates;
 
 		private static byte _newline => (byte)'\n';
@@ -25,8 +24,6 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkCreateOperationDescriptor(TSource source) => _document = source;
 
 		public BulkCreateOperationDescriptor<TSource> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
-
-		public BulkCreateOperationDescriptor<TSource> RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
 
 		public BulkCreateOperationDescriptor<TSource> DynamicTemplates(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a._dynamicTemplates = v?.Invoke(new FluentDictionary<string, string>()));
 
@@ -92,12 +89,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("pipeline");
 				JsonSerializer.Serialize(writer, _pipeline, options);
-			}
-
-			if (_requireAlias.HasValue)
-			{
-				writer.WritePropertyName("require_alias");
-				JsonSerializer.Serialize(writer, _requireAlias.Value, options);
 			}
 
 			if (_dynamicTemplates is not null)

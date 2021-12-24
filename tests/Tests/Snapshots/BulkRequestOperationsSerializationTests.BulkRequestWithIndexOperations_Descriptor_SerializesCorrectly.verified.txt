@@ -1,0 +1,12 @@
+{"index":{"_id":"TestName","_index":"test-index","routing":"TestName"}}
+{"name":"TestName"}
+{"index":{"_id":"OverriddenId","_index":"overridden-index","routing":"OverriddenRoute","require_alias":false,"version":1,"version_type":"external","pipeline":"my-pipeline","dynamic_templates":{"t1":"v1"}}}
+{"name":"TestName"}
+{"index":{}}
+{"forename":"Steve"}
+{"index":{}}
+{"forename":"Steve"}
+{"index":{"_index":"configured-index"}}
+{"forename":"Steve"}
+{"index":{"_id":"ConfiguredId","if_primary_term":100,"if_seq_no":10,"_index":"configured-index","routing":"ConfiguredRoute","require_alias":false,"pipeline":"my-pipeline","dynamic_templates":{"t1":"v1"}}}
+{"forename":"Steve"}

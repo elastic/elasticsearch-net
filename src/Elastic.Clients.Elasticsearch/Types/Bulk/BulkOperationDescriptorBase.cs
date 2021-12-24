@@ -14,10 +14,12 @@ namespace Elastic.Clients.Elasticsearch
 	public abstract class BulkOperationDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IBulkOperation, IStreamSerializable where TDescriptor : BulkOperationDescriptorBase<TDescriptor>
 	{
 		private long? _version;
-		private IndexName _index;
 		private VersionType? _versionType;
 		private bool _skipClrTypeInference;
+		private bool _skipIndexNameInference;
+		private bool? _requireAlias;
 
+		protected IndexName IndexNameValue { get; set; }
 		protected Id IdValue { get; set; }
 		protected Routing RoutingValue { get; set; }
 		protected long? IfSequenceNoValue { get; set; }
@@ -32,15 +34,18 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TDescriptor IfPrimaryTerm(long? ifPrimaryTerm) => Assign(ifPrimaryTerm, (a, v) => a.IfPrimaryTermValue = v);
 
-		public TDescriptor Index(IndexName index) => Assign(index, (a, v) => a._index = v);
+		public TDescriptor Index(IndexName index) => Assign(index, (a, v) => a.IndexNameValue = v);
 
-		public TDescriptor Index<T>() => Assign(typeof(T), (a, v) => a._index = v);
+		public TDescriptor Index<T>() => Assign(typeof(T), (a, v) => a.IndexNameValue = v);
+		public TDescriptor RequireAlias(bool? requireAlias = true) => Assign(requireAlias, (a, v) => a._requireAlias = v);
 
 		public TDescriptor Routing(Routing routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 
 		public TDescriptor Version(long version) => Assign(version, (a, v) => a._version = v);
 
 		internal TDescriptor SkipClrTypeInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipClrTypeInference = v);
+
+		protected TDescriptor SkipIndexNameInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipIndexNameInference = v);
 
 		public TDescriptor VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a._versionType = v);
 
@@ -49,8 +54,8 @@ namespace Elastic.Clients.Elasticsearch
 			IdValue = GetIdForOperation(settings.Inferrer);
 			RoutingValue = GetRoutingForOperation(settings.Inferrer);
 
-			if (!_skipClrTypeInference)
-				_index ??= ClrType;
+			if (!_skipClrTypeInference && !_skipIndexNameInference)
+				IndexNameValue ??= ClrType;
 
 			writer.WriteStartObject();
 
@@ -78,10 +83,10 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, IfSequenceNoValue.Value, options);
 			}
 
-			if (_index is not null)
+			if (IndexNameValue is not null)
 			{
 				writer.WritePropertyName("_index");
-				JsonSerializer.Serialize(writer, _index, options);
+				JsonSerializer.Serialize(writer, IndexNameValue, options);
 			}
 
 			if (RoutingValue is not null)
@@ -94,6 +99,12 @@ namespace Elastic.Clients.Elasticsearch
 					writer.WritePropertyName("routing");
 					writer.WriteStringValue(value);
 				}
+			}
+
+			if (_requireAlias.HasValue)
+			{
+				writer.WritePropertyName("require_alias");
+				JsonSerializer.Serialize(writer, _requireAlias.Value, options);
 			}
 
 			if (_version.HasValue)

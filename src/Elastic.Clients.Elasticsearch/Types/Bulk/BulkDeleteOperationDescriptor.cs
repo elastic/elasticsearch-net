@@ -11,7 +11,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public sealed class BulkDeleteOperationDescriptor : BulkOperationDescriptorBase<BulkDeleteOperationDescriptor>
+	public class BulkDeleteOperationDescriptor : BulkOperationDescriptorBase<BulkDeleteOperationDescriptor>
 	{
 		public BulkDeleteOperationDescriptor() { }
 
@@ -69,6 +69,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+		}
+	}
+
+	public sealed class BulkDeleteOperationDescriptor<TDocument> : BulkDeleteOperationDescriptor
+	{
+		public BulkDeleteOperationDescriptor(TDocument documentToDelete) : base (new Id(documentToDelete))
+		{
+			RoutingValue = new Routing(documentToDelete);
+			IndexNameValue = IndexName.From<TDocument>();
 		}
 	}
 }

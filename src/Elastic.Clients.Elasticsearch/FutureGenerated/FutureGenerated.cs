@@ -888,9 +888,25 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
+		public BulkRequestDescriptor Index<TSource>(TSource document, bool skipInference, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
+		{
+			var descriptor = new BulkIndexOperationDescriptor<TSource>(document, skipInference);
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
+			return this;
+		}
+
 		public BulkRequestDescriptor Index<TSource>(TSource document, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkIndexOperationDescriptor<TSource>(document);
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
+			return this;
+		}
+
+		public BulkRequestDescriptor Index<TSource>(TSource document, IndexName index, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
+		{
+			var descriptor = new BulkIndexOperationDescriptor<TSource>(document, index);
 			configure?.Invoke(descriptor);
 			_operations.Add(descriptor);
 			return this;
@@ -913,10 +929,18 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkRequestDescriptor Update<T>(Action<BulkUpdateOperationDescriptor<T, T>> configure) =>
 			Update<T, T>(configure);
 
-		public BulkRequestDescriptor Delete(Id id)
+		public BulkRequestDescriptor Delete(Id id, Action<BulkDeleteOperationDescriptor> configure = null)
 		{
-			var descriptor = new BulkDeleteOperationDescriptor();
-			descriptor.Id(id);
+			var descriptor = new BulkDeleteOperationDescriptor(id);
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
+			return this;
+		}
+
+		public BulkRequestDescriptor Delete(string id, Action<BulkDeleteOperationDescriptor> configure = null)
+		{
+			var descriptor = new BulkDeleteOperationDescriptor(id);
+			configure?.Invoke(descriptor);
 			_operations.Add(descriptor);
 			return this;
 		}
@@ -929,7 +953,14 @@ namespace Elastic.Clients.Elasticsearch
 			return this;
 		}
 
-		[Obsolete("Prefer the overload without a generic argument.")]
+		public BulkRequestDescriptor Delete<TSource>(TSource documentToDelete, Action<BulkDeleteOperationDescriptor> configure = null)
+		{
+			var descriptor = new BulkDeleteOperationDescriptor(new Id(documentToDelete));
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
+			return this;
+		}
+
 		public BulkRequestDescriptor Delete<TSource>(Action<BulkDeleteOperationDescriptor> configure) => Delete(configure);
 
 		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents, Action<BulkCreateOperationDescriptor<TSource>, TSource> bulkCreateSelector = null) =>
@@ -984,10 +1015,26 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	/// <summary>
+	/// Used to mark types which expect to directly serialise into a stream. This supports non-json compliant output such as NDJSON.
+	/// </summary>
 	internal interface IStreamSerializable
 	{
+		/// <summary>
+		/// Serialize the object into the supplied <see cref="Stream"/>.
+		/// </summary>
+		/// <param name="stream"></param>
+		/// <param name="settings"></param>
+		/// <param name="formatting"></param>
 		void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 
+		/// <summary>
+		/// Asynchronously serialize the object into the supplied <see cref="Stream"/>.
+		/// </summary>
+		/// <param name="stream"></param>
+		/// <param name="settings"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None);
 	}
 

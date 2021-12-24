@@ -86,5 +86,14 @@ namespace Elastic.Clients.Elasticsearch
 		///     The serializer use to serialize CLR types representing documents and other types related to documents.
 		/// </summary>
 		SerializerBase SourceSerializer { get; }
+
+		/// <summary>
+		/// This is an advanced setting which controls serialization behaviour for inferred properies such as ID, routing and index name.
+		/// <para>When enabled, it may reduce allocations on serialisation paths where the cost can be more significant, such as in bulk operations.</para>
+		/// <para>As a by-product it may cause null values to be included in the serialized data and impact payload size. This will only be a concern should some
+		/// typed not have inferrence mappings defined for the required properties.</para>
+		/// </summary>
+		/// <remarks>This is marked as experiemental and may be removed or renamed in the future once its impact is evaluated.</remarks>
+		bool ExperimentalEnableSerializeNullInferredValues { get; }
 	}
 }

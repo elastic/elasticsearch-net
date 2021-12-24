@@ -1,0 +1,4 @@
+{"delete":{"_id":"123"}}
+{"delete":{"_id":"ConfiguredId","if_primary_term":100,"if_seq_no":10,"_index":"configured-index","routing":"ConfiguredRoute","require_alias":false,"version":1,"version_type":"external"}}
+{"delete":{"_id":"TestName"}}
+{"delete":{"_id":"OverriddenId","if_primary_term":100,"if_seq_no":10,"_index":"overridden-index","routing":"OverriddenRoute","require_alias":false,"version":1,"version_type":"external"}}

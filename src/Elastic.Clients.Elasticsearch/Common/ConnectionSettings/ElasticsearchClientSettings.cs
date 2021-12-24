@@ -93,6 +93,7 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new();
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
 		private readonly SerializerBase _sourceSerializer;
+		private bool _experimentalEnableSerializeNullInferredValues;
 
 		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -143,6 +144,8 @@ namespace Elastic.Clients.Elasticsearch
 		FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
 		SerializerBase IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
 
+		 bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
+
 		/// <summary>
 		///     The default index to use for a request when no index has been explicitly specified
 		///     and no default indices are specified for the given CLR type specified for the request.
@@ -160,6 +163,9 @@ namespace Elastic.Clients.Elasticsearch
 		/// </example>
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer) =>
 			Assign(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
+
+		public TConnectionSettings ExperimentalEnableSerializeNullInferredValues(bool enabled = true) =>
+			Assign(enabled, (a, v) => a._experimentalEnableSerializeNullInferredValues = v);
 
 		/// <summary>
 		///     Disables automatic Id inference for given CLR types.
@@ -226,24 +232,24 @@ namespace Elastic.Clients.Elasticsearch
 
 				var memberInfo = memberInfoResolver.Members[0];
 
-				//if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
-				//{
-				//	var newName = mapping.NewName;
-				//	var mappedAs = propertyMapping.Name;
-				//	var typeName = typeof(TDocument).Name;
-				//	if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
-				//		throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
-				//	if (mappedAs.IsNullOrEmpty())
-				//		throw new ArgumentException(
-				//			$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
-				//	if (newName.IsNullOrEmpty())
-				//		throw new ArgumentException(
-				//			$"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
+				if (_propertyMappings.TryGetValue(memberInfo, out var propertyMapping))
+				{
+					var newName = mapping.NewName;
+					var mappedAs = propertyMapping.Name;
+					var typeName = typeof(TDocument).Name;
+					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
+						throw new ArgumentException($"Property mapping '{e}' on type is already ignored");
+					if (mappedAs.IsNullOrEmpty())
+						throw new ArgumentException(
+							$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' it already has an ignore mapping");
+					if (newName.IsNullOrEmpty())
+						throw new ArgumentException(
+							$"Property mapping '{e}' on type {typeName} can not be ignored it already has a mapping to '{mappedAs}'");
 
-				//	throw new ArgumentException(
-				//		$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
-				//}
-				//_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
+					throw new ArgumentException(
+						$"Property mapping '{e}' on type {typeName} can not be mapped to '{newName}' already mapped as '{mappedAs}'");
+				}
+				_propertyMappings[memberInfo] = mapping.ToPropertyMapping();
 			}
 		}
 
@@ -290,18 +296,22 @@ namespace Elastic.Clients.Elasticsearch
 		///     The mapping can infer the index and relation name for a given CLR type.
 		/// </summary>
 		public TConnectionSettings DefaultMappingFor(Type documentType,
-			Action<ClrTypeMappingDescriptor> selector) =>
-			//var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
-			//if (!inferMapping.IndexName.IsNullOrEmpty())
-			//	_defaultIndices[inferMapping.ClrType] = inferMapping.IndexName;
+			Action<ClrTypeMappingDescriptor> selector)
+		{
+			var inferMapping = new ClrTypeMappingDescriptor(documentType);
 
-			//if (!inferMapping.RelationName.IsNullOrEmpty())
-			//	_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
+			selector(inferMapping);
+			if (!inferMapping._indexName.IsNullOrEmpty())
+				_defaultIndices[inferMapping._clrType] = inferMapping._indexName;
 
-			//if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
-			//	_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
+			if (!inferMapping._relationName.IsNullOrEmpty())
+				_defaultRelationNames[inferMapping._clrType] = inferMapping._relationName;
 
-			(TConnectionSettings)this;
+			if (!string.IsNullOrWhiteSpace(inferMapping._idProperty))
+				_idProperties[inferMapping._clrType] = inferMapping._idProperty;
+
+			return (TConnectionSettings)this;
+		}
 
 		/// <summary>
 		///     Specify how the mapping is inferred for a given CLR type.

@@ -7,6 +7,11 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	internal static class SerializationConstants
+	{
+		public const byte Newline = (byte)'\n';
+	}
+
 	internal static class AggregationContainerSerializationHelper
 	{
 		public static AggregationContainer ReadContainer<T>(ref Utf8JsonReader reader, JsonSerializerOptions options) where T : AggregationBase
