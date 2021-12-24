@@ -1,0 +1,5 @@
+{
+  Aggregations: {
+    my-agg-name: {}
+  }
+}
