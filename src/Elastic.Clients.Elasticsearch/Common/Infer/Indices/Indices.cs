@@ -140,7 +140,7 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 	}
 }
 
-public class IndicesJsonConverter : JsonConverter<Indices>
+internal sealed class IndicesJsonConverter : JsonConverter<Indices>
 {
 	private readonly IElasticsearchClientSettings _settings;
 
