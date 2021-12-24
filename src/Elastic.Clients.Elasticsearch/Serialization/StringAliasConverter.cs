@@ -39,7 +39,7 @@ internal sealed class StringAliasConverter<T> : JsonConverter<T>
 }
 
 
-public class EnumStructConverter<T> : JsonConverter<T>
+internal sealed class EnumStructConverter<T> : JsonConverter<T>
 {
 	// TODO: Rename if not valid
 
