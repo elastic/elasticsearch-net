@@ -2,12 +2,16 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
+using VerifyXunit;
+
 namespace Tests.Serialization;
 
+[UsesVerify]
 public class AvgAggregateDeserializationTests : SerializerTestBase
 {
 	[U]
-	public void CanDeserialize_AvgAggregate()
+	public async Task CanDeserialize_AvgAggregate()
 	{
 		var json = @"{""aggregations"":{""avg#my-agg-name"":{""value"":75}}}";
 
@@ -15,15 +19,11 @@ public class AvgAggregateDeserializationTests : SerializerTestBase
 
 		var search = _requestResponseSerializer.Deserialize<BasicSearchResponse>(stream);
 
-		search.Aggregations.Should().HaveCount(1);
-
-		var agg = search.Aggregations.Avg("my-agg-name");
-		agg.Value.HasValue.Should().BeTrue();
-		agg.Value.Should().Be(75);
+		await Verifier.Verify(search);
 	}
 
 	[U]
-	public void CanDeserialize_AvgAggregate_WithNullValue()
+	public async Task CanDeserialize_AvgAggregate_WithNullValue()
 	{
 		var json = @"{""aggregations"":{""avg#my-agg-name"":{""value"":null}}}";
 
@@ -31,9 +31,6 @@ public class AvgAggregateDeserializationTests : SerializerTestBase
 
 		var search = _requestResponseSerializer.Deserialize<BasicSearchResponse>(stream);
 
-		search.Aggregations.Should().HaveCount(1);
-
-		var agg = search.Aggregations.Avg("my-agg-name");
-		agg.Value.HasValue.Should().BeFalse();
+		await Verifier.Verify(search);
 	}
 }
