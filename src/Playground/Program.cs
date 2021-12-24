@@ -101,7 +101,7 @@ namespace Playground
 
 
 			var pool = new SingleNodeConnectionPool(new Uri("https://localhost:9600"));
-			var client = new ElasticClient(new ElasticsearchClientSettings(pool, JsonNetSerializer.Default)
+			var client = new ElasticClient(new ElasticsearchClientSettings(pool)
 				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
 				.ServerCertificateValidationCallback((a, b, c, d) => true)
 			    .DefaultMappingFor<PersonV2>(p => p.IndexName("people-test")));
