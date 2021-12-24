@@ -277,7 +277,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 				// Bucket-based Aggregates
 
-				if (nameParts[0] == "terms")
+				if (nameParts[0] == "terms" || nameParts[0] == "lterms")
 				{
 					if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(ref reader, options, out var agg))
 					{
