@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -35,26 +36,35 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 						(r, values) => values.ExtendedValue("pitId", r.Id.ToString()) // Converting to a string here is okay as the Id can be implicitly created from it
 					)
 			},
-			//{
-			//	SearchPointInTimeStep, u =>
-			//		u.Calls<SearchRequestDescriptor<Project>, SearchRequest<Project>, SearchResponse<Project>>(
-			//			v => new SearchRequest<Project>
-			//			{
-			//				Size = 1,
-			//				Query = new QueryContainer(new MatchAllQuery()),
-			//				PointInTime = new Nest.PointInTime(v, "1m")
-			//			},
-			//			(v, d) => d
-			//				.Size(1)
-			//				.Query(q => q.MatchAll())
-			//				.PointInTime(v, p => p.KeepAlive("1m")),
-			//			(v, c, f) => c.Search(f),
-			//			(v, c, f) => c.SearchAsync(f),
-			//			(v, c, r) => c.Search<Project>(r),
-			//			(v, c, r) => c.SearchAsync<Project>(r),
-			//			uniqueValueSelector: values => values.ExtendedValue<string>("pitId")
-			//		)
-			//},
+			{
+				SearchPointInTimeStep, u =>
+					u.Calls<SearchRequestDescriptor<Project>, SearchRequest<Project>, SearchResponse<Project>>(
+						v => new SearchRequest<Project>
+						{
+							Size = 1,
+							Query = new QueryContainer(new MatchAllQuery()),
+							Pit = new PointInTimeReference
+							{
+								Id = v,
+								KeepAlive = "1m"
+							}
+						},
+						(v, d) => d
+							.Size(1)
+							.Query(q => q.MatchAll())
+							//.Pit(v, p => p.KeepAlive("1m")),
+							.Pit(new PointInTimeReference
+							{
+								Id = v,
+								KeepAlive = "1m"
+							}),
+						(v, c, f) => c.Search(f),
+						(v, c, f) => c.SearchAsync(f),
+						(v, c, r) => c.Search<Project>(r),
+						(v, c, r) => c.SearchAsync<Project>(r),
+						uniqueValueSelector: values => values.ExtendedValue<string>("pitId")
+					)
+			},
 			//{
 			//	SearchPointInTimeWithSortStep, ">=7.12.0", u =>
 			//		u.Calls<SearchRequestDescriptor<Project>, SearchRequest<Project>, SearchResponse<Project>>(
@@ -102,18 +112,19 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 		r.Id.ToString().Should().NotBeNullOrEmpty();
 	});
 
-	//[I] public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, r =>
-	//{
-	//	r.ShouldBeValid();
-	//	r.PointInTimeId.Should().NotBeNullOrEmpty();
-	//	r.Total.Should().BeGreaterThan(0);
-	//	r.Hits.Count.Should().BeGreaterThan(0);
-	//	r.HitsMetadata.Total.Value.Should().Be(r.Total);
-	//	r.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.EqualTo);
-	//	r.Hits.First().Should().NotBeNull();
-	//	r.Hits.First().Source.Should().NotBeNull();
-	//	r.Took.Should().BeGreaterOrEqualTo(0);
-	//});
+	[I]
+	public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, r =>
+	{
+		r.ShouldBeValid();
+		r.PitId.Should().NotBeNull(); // TODO - Having this typed as Id is a pain for usability - Review this in the spec
+		r.Total.Should().BeGreaterThan(0);
+		r.Hits.Count.Should().BeGreaterThan(0);
+		r.HitsMetadata.Total.Value.Should().Be(r.Total);
+		r.HitsMetadata.Total.Relation.Should().Be(TotalHitsRelation.Eq);
+		//r.Hits.First().Should().NotBeNull();
+		//r.Hits.First().Source.Should().NotBeNull();
+		r.Took.Should().BeGreaterOrEqualTo(0);
+	});
 
 	//[I] public async Task SearchPointInTimeWithSortResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeWithSortStep, r =>
 	//{

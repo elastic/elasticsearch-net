@@ -562,9 +562,10 @@ public sealed class FieldSortDescriptor<T> : SortDescriptorBase<FieldSortDescrip
 	}
 }
 
+public interface ISort { }
+
 public abstract class SortDescriptorBase<TDescriptor, T> : DescriptorBase<TDescriptor> where TDescriptor : DescriptorBase<TDescriptor>
 {
-	
 }
 
 public sealed class GeoDistanceSort : SortBase

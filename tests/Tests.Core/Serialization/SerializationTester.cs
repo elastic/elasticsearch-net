@@ -132,6 +132,8 @@ namespace Tests.Core.Serialization
 			return result;
 		}
 
+		public string SerializeUsingClient<T>(T @object) => SerializeUsingClientDefault(@object);
+
 		public SerializationResult SerializesNdJson<T>(T @object, IReadOnlyList<object> expectedJson, bool preserveNullInExpected = false)
 		{
 			var stream = new MemoryStream();
