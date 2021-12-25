@@ -145,8 +145,8 @@ namespace Playground
 				.Create(new Person { FirstName = "Rhiannon" })
 				.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
 				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
-				.Update(BulkUpdateOperation.WithPartial(200, new Person { LastName = "Gordon" }))
-				.Update(BulkUpdateOperation.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
+				.Update(BulkUpdateOperationFactory.WithPartial(200, new Person { LastName = "Gordon" }))
+				.Update(BulkUpdateOperationFactory.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
 				.Delete(100));
 
 			client.Search<Person>(s => s
