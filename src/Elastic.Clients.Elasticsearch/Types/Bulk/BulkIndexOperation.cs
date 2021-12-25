@@ -16,14 +16,14 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly bool _skipIndexNameInference;
 
 		/// <summary>
-		/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
+		/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
 		/// as source data.
 		/// </summary>
 		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
 		public BulkIndexOperation(T document) => Document = document;
 
 		/// <summary>
-		/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
+		/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
 		/// as source data and optional inference.
 		/// </summary>
 		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
@@ -31,7 +31,7 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkIndexOperation(T document, bool skipInference) : this(document) => _skipInference = skipInference;
 
 		/// <summary>
-		/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
+		/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
 		/// as source data.
 		/// </summary>
 		/// <remarks>When an <see cref="IndexName"/> is provided, even if the value is <c>null</c>, no further inference will occur.
