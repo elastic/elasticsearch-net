@@ -17,11 +17,21 @@ namespace Playground
 		public class Thing
 		{
 			public QueryContainer? Query { get; set; }
+
 		}
 
 		private static async Task Main()
 		{
+			var uri = new Uri(@"https://example.com/level%5F1/../level%5F2", new UriCreationOptions
+			{
+				DangerousDisablePathAndQueryCanonicalization = true
+			});
+			var uriString = uri.AbsoluteUri;
 
+			// uri = new Uri(@"https://example.com/level%5F1/../level%5F2");
+			var a = uri.GetComponents(UriComponents.Path, UriFormat.SafeUnescaped);
+
+			Console.ReadKey();
 
 			//var ec = new Client();
 
