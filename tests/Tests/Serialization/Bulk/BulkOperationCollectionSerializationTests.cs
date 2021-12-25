@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VerifyXunit;
@@ -148,6 +149,57 @@ namespace Tests.Serialization.Bulk
 						RequireAlias = false,
 						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
 					}
+				}
+			};
+
+			await request.SerializeAsync(ms, settings);
+
+			ms.Position = 0;
+			var reader = new StreamReader(ms);
+			var ndjson = reader.ReadToEnd();
+
+			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
+			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
+			// Use: POST configured-index/_bulk
+			await Verifier.Verify(ndjson);
+		}
+
+		[U]
+		public async Task BulkRequestWithUpdateOperations_ObjectInitializer_SerializesCorrectly()
+		{
+			var settings = new ElasticsearchClientSettings();
+			settings.DefaultMappingFor<Inferrable>(m => m.IdProperty(p => p.Name).RoutingProperty(r => r.Name).IndexName("test-index"));
+
+			var ms = new MemoryStream();
+
+			var request = new BulkRequest
+			{
+				Operations = new BulkOperationsCollection
+				{
+					BulkUpdateOperationFactory.WithScript("123", "test-index", new StoredScriptId("my-script-id")
+					{
+						Params = new Dictionary<string, object> { { "param1", "paramvalue1" } }
+					}),
+					BulkUpdateOperationFactory.WithScript("123", new InlineScript("ctx._source.counter += params.param1")
+					{
+						Language = BuiltinScriptLanguage.Painless,
+						Params = new Dictionary<string, object>{ { "param1", 1 } },
+						Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
+					}),
+					BulkUpdateOperationFactory.WithScript("123", new InlineScript("ctx._source.counter += params.param1")
+					{
+						Language = BuiltinScriptLanguage.Painless,
+						Params = new Dictionary<string, object>{ { "param1", 1 } },
+						Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
+					}, Inferrable.Instance),
+					BulkUpdateOperationFactory.WithScript("123", "configured-index", new InlineScript("ctx._source.counter += params.param1")
+					{
+						Language = BuiltinScriptLanguage.Painless,
+						Params = new Dictionary<string, object>{ { "param1", 1 } },
+						Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
+					}, Inferrable.Instance),
+					// TODO - Partial
+					// TODO - Full operation
 				}
 			};
 

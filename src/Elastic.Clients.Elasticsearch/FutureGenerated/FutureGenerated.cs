@@ -842,6 +842,11 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial class StoredScriptId
+	{
+		public StoredScriptId(Id id) => Id = id;
+	}
+
 	public partial class BulkResponse
 	{
 		[JsonConverter(typeof(BulkResponseItemConverter)), JsonPropertyName("items")]
