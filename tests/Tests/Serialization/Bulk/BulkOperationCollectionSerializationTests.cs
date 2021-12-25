@@ -111,6 +111,59 @@ namespace Tests.Serialization.Bulk
 		}
 
 		[U]
+		public async Task BulkRequestWithCreateOperations_ObjectInitializer_SerializesCorrectly()
+		{
+			var settings = new ElasticsearchClientSettings();
+			settings.DefaultMappingFor<Inferrable>(m => m.IdProperty(p => p.Name).RoutingProperty(r => r.Name).IndexName("test-index"));
+
+			var ms = new MemoryStream();
+
+			var request = new BulkRequest
+			{
+				Operations = new BulkOperationsCollection
+				{
+					new BulkCreateOperation<Inferrable>(Inferrable.Instance),
+					new BulkCreateOperation<Inferrable>(Inferrable.Instance)
+					{
+						Id = "OverriddenId",
+						Routing = "OverriddenRoute",
+						Index = "overridden-index",
+						Pipeline = "my-pipeline",
+						RequireAlias = false,
+						Version = 1,
+						VersionType = VersionType.External,
+						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
+					},
+					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance, true),
+					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance, index: null),
+					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance) { Index = "configured-index" },
+					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance)
+					{
+						Id = "ConfiguredId",
+						Routing = "ConfiguredRoute",
+						Index = "configured-index",
+						IfPrimaryTerm = 100,
+						IfSequenceNumber = 10,
+						Pipeline = "my-pipeline",
+						RequireAlias = false,
+						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
+					}
+				}
+			};
+
+			await request.SerializeAsync(ms, settings);
+
+			ms.Position = 0;
+			var reader = new StreamReader(ms);
+			var ndjson = reader.ReadToEnd();
+
+			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
+			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
+			// Use: POST configured-index/_bulk
+			await Verifier.Verify(ndjson);
+		}
+
+		[U]
 		public async Task BulkRequestWithIndexOperations_Descriptor_SerializesCorrectly()
 		{
 			var settings = new ElasticsearchClientSettings();
@@ -184,6 +237,50 @@ namespace Tests.Serialization.Bulk
 					.Version(1)
 					.VersionType(VersionType.External))
 				);
+
+			await fluentRequest.SerializeAsync(ms, settings);
+
+			ms.Position = 0;
+			var reader = new StreamReader(ms);
+			var ndjson = reader.ReadToEnd();
+
+			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
+			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
+			// Use: POST configured-index/_bulk
+			await Verifier.Verify(ndjson);
+		}
+
+		[U]
+		public async Task BulkRequestWithCreateOperations_Descriptor_SerializesCorrectly()
+		{
+			var settings = new ElasticsearchClientSettings();
+			settings.DefaultMappingFor<Inferrable>(m => m.IdProperty(p => p.Name).RoutingProperty(r => r.Name).IndexName("test-index"));
+
+			var ms = new MemoryStream();
+
+			var fluentRequest = new BulkRequestDescriptor(b => b
+				.Create(Inferrable.Instance)
+				.Create(Inferrable.Instance, i => i
+					.Id("OverriddenId")
+					.Routing("OverriddenRoute")
+					.Index("overridden-index")
+					.Pipeline("my-pipeline")
+					.RequireAlias(false)
+					.Version(1)
+					.VersionType(VersionType.External)
+					.DynamicTemplates(d => d.Add("t1", "v1")))
+				.Create(NonInferrable.Instance, true)
+				.Create(NonInferrable.Instance, index: null)
+				.Create(NonInferrable.Instance, "configured-index")
+				.Create(NonInferrable.Instance, i => i
+					.Id("ConfiguredId")
+					.Routing("ConfiguredRoute")
+					.Index("configured-index")
+					.IfPrimaryTerm(100)
+					.IfSequenceNumber(10)
+					.Pipeline("my-pipeline")
+					.RequireAlias(false)
+					.DynamicTemplates(d => d.Add("t1", "v1"))));
 
 			await fluentRequest.SerializeAsync(ms, settings);
 

@@ -877,14 +877,27 @@ namespace Elastic.Clients.Elasticsearch
 
 		public BulkRequestDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 
+		public BulkRequestDescriptor Create<TSource>(TSource document, bool skipInference, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
+		{
+			var descriptor = new BulkCreateOperationDescriptor<TSource>(document, skipInference);
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
+			return this;
+		}
+
 		public BulkRequestDescriptor Create<TSource>(TSource document, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkCreateOperationDescriptor<TSource>(document);
-
 			configure?.Invoke(descriptor);
-
 			_operations.Add(descriptor);
+			return this;
+		}
 
+		public BulkRequestDescriptor Create<TSource>(TSource document, IndexName index, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
+		{
+			var descriptor = new BulkCreateOperationDescriptor<TSource>(document, index);
+			configure?.Invoke(descriptor);
+			_operations.Add(descriptor);
 			return this;
 		}
 
