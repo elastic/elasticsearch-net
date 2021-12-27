@@ -57,7 +57,8 @@ namespace Tests.Framework.EndpointTests
 		{
 			if (VerifyResponseObjects)
 			{
-				await AssertOnAllResponses(async r => await Verifier.Verify(r));
+				var responses = await Responses;
+				await Verifier.Verify(responses);
 			}
 		}
 

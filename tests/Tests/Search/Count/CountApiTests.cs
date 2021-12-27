@@ -21,7 +21,7 @@ namespace Tests.Search.Count
 
 		protected override bool VerifyJson => true;
 
-		protected override bool VerifyResponseObjects => true;
+		//protected override bool VerifyResponseObjects => true;
 
 		protected override object ExpectJson => new
 		{
