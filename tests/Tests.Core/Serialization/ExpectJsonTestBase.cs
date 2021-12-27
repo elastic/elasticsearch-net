@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Tests.Core.Extensions;
 using Xunit;
@@ -27,6 +28,8 @@ namespace Tests.Core.Serialization
 
 			Tester.AssertSerializeNdjson(@object, ExpectNdjson, preserveNullInExpected: IncludeNullInExpected);
 		}
+
+		protected string SerializeUsingClient<T>(T @object) => Tester.SerializeUsingClient(@object);
 
 		protected void RoundTripsOrSerializes<T>(T @object)
 		{

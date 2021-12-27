@@ -116,7 +116,7 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 	public async Task SearchPointInTimeResponse() => await Assert<SearchResponse<Project>>(SearchPointInTimeStep, r =>
 	{
 		r.ShouldBeValid();
-		r.PitId.Should().NotBeNull();
+		r.PitId.Should().NotBeNull(); // TODO - Having this typed as Id is a pain for usability - Review this in the spec
 		r.Total.Should().BeGreaterThan(0);
 		r.Hits.Count.Should().BeGreaterThan(0);
 		r.HitsMetadata.Total.Value.Should().Be(r.Total);

@@ -10,10 +10,12 @@ using Elastic.Transport.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Extensions;
+using VerifyXunit;
 using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Tests.Framework.EndpointTests
 {
+	[UsesVerify]
 	public abstract class ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
@@ -24,11 +26,40 @@ namespace Tests.Framework.EndpointTests
 		protected ApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = null;
+		protected virtual bool VerifyJson { get; } = false;
+		protected virtual bool VerifyResponseObjects { get; } = false;
 
 		protected override IReadOnlyList<object> ExpectNdjson { get; } = null;
 
 		protected abstract HttpMethod HttpMethod { get; }
 		protected abstract string ExpectedUrlPathAndQuery { get; }
+
+		[U]
+		protected virtual async Task VerifyInitializerJson()
+		{
+			if (VerifyJson)
+				await Verifier.VerifyJson(SerializeUsingClient(Initializer));
+		}
+
+		[U]
+		protected virtual async Task VerifyDescriptorJson()
+		{
+			if (VerifyJson)
+			{
+				var descriptor = NewDescriptor();
+				Fluent?.Invoke(descriptor);
+				await Verifier.VerifyJson(SerializeUsingClient(descriptor));
+			}
+		}
+
+		[U]
+		protected virtual async Task VerifyResponses()
+		{
+			if (VerifyResponseObjects)
+			{
+				await AssertOnAllResponses(async r => await Verifier.Verify(r));
+			}
+		}
 
 		[U] protected virtual async Task HitsTheCorrectUrl() => await AssertOnAllResponses(r => AssertUrl(r.ApiCall.Uri));
 
