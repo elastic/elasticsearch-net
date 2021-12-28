@@ -27,8 +27,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexCheckOnStartupConverter))]
 	public enum IndexCheckOnStartup
 	{
+		[EnumMember(Value = "true")]
 		True,
+		[EnumMember(Value = "false")]
 		False,
+		[EnumMember(Value = "checksum")]
 		Checksum
 	}
 
@@ -73,9 +76,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexRoutingAllocationOptionsConverter))]
 	public enum IndexRoutingAllocationOptions
 	{
+		[EnumMember(Value = "primaries")]
 		Primaries,
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "new_primaries")]
 		NewPrimaries,
+		[EnumMember(Value = "all")]
 		All
 	}
 
@@ -125,9 +132,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(IndexRoutingRebalanceOptionsConverter))]
 	public enum IndexRoutingRebalanceOptions
 	{
+		[EnumMember(Value = "replicas")]
 		Replicas,
+		[EnumMember(Value = "primaries")]
 		Primaries,
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "all")]
 		All
 	}
 
@@ -177,7 +188,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(NumericFielddataFormatConverter))]
 	public enum NumericFielddataFormat
 	{
+		[EnumMember(Value = "disabled")]
 		Disabled,
+		[EnumMember(Value = "array")]
 		Array
 	}
 
@@ -217,7 +230,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(SegmentSortMissingConverter))]
 	public enum SegmentSortMissing
 	{
+		[EnumMember(Value = "_last")]
 		Last,
+		[EnumMember(Value = "_first")]
 		First
 	}
 
@@ -257,7 +272,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(SegmentSortModeConverter))]
 	public enum SegmentSortMode
 	{
+		[EnumMember(Value = "min")]
 		Min,
+		[EnumMember(Value = "max")]
 		Max
 	}
 
@@ -297,7 +314,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(SegmentSortOrderConverter))]
 	public enum SegmentSortOrder
 	{
+		[EnumMember(Value = "desc")]
 		Desc,
+		[EnumMember(Value = "asc")]
 		Asc
 	}
 
@@ -337,7 +356,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	[JsonConverter(typeof(StringFielddataFormatConverter))]
 	public enum StringFielddataFormat
 	{
+		[EnumMember(Value = "paged_bytes")]
 		PagedBytes,
+		[EnumMember(Value = "disabled")]
 		Disabled
 	}
 

@@ -110,7 +110,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			};
 
 			//if (TestConfiguration.Instance.InRange(">=6.5.0"))
-			//	clusterConfiguration += new RemoteClusterConfiguration
+			//clusterConfiguration += new RemoteClusterConfiguration
 			//	{
 			//		{ RemoteClusterName, "127.0.0.1:9300" }
 			//	};
@@ -153,10 +153,19 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		public async Task CreateIndicesAsync()
 		{
-			//var indexTemplateResponse = await CreateIndexTemplateAsync().ConfigureAwait(false);
-			//indexTemplateResponse.ShouldBeValid();
-
 			var transport = Client.Transport;
+
+			var req = new
+			{
+				index_patterns = new[] { "*" },
+				settings = new Dictionary<string, object>
+				{
+					{ "index.number_of_replicas", 0 },
+					{ "index.number_of_shards", 1 }
+				}
+			};
+
+			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_template/{TestsIndexTemplateName}", PostData.Serializable(req));
 
 			var requestData = new
 			{
@@ -185,6 +194,25 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			};
 
 			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, "project", PostData.Serializable(requestData));
+
+			var requestDataDeveloper = new
+			{
+				mappings = new
+				{
+					_routing = new { required = true },
+
+					properties = new Dictionary<string, object>
+					{
+						{ "onlineHandle", new { type = "keyword" } }
+					}
+				},
+				settings = new
+				{
+					// TODO
+				}
+			};
+
+			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, "devs", PostData.Serializable(requestDataDeveloper));
 
 			var tasks = new[]
 			{
@@ -228,27 +256,27 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//		}
 		//	};
 
-			
+
 
 		//	//return await Client.IndexManagement.CreateIndexAsync(request);
 		//}
 
 
-			//=> Client.IndexManagement.CreateIndexAsync<Project>(IndexName.From<Project>(), i => i.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
-					//.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
-					// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
-					// TODO 8.0 remove with once the overloads are gone too
-					//.Mappings(ProjectMappings)
-					//.Aliases(aliases => aliases
-					//	.Alias(ProjectsAliasName)
-					//	.Alias(ProjectsAliasFilter, a => a
-					//		.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
-					//	)
-					//	.Alias(CommitsAliasFilter, a => a
-					//		.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
-					//	)
-					//)
-				//);
+		//=> Client.IndexManagement.CreateIndexAsync<Project>(IndexName.From<Project>(), i => i.Settings(s => s.NumberOfShards(1).NumberOfReplicas(0)));
+		//.Settings(settings => settings.Analysis(ProjectAnalysisSettings))
+		// this uses obsolete overload somewhat on purpose to make sure it works just as the rest
+		// TODO 8.0 remove with once the overloads are gone too
+		//.Mappings(ProjectMappings)
+		//.Aliases(aliases => aliases
+		//	.Alias(ProjectsAliasName)
+		//	.Alias(ProjectsAliasFilter, a => a
+		//		.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
+		//	)
+		//	.Alias(CommitsAliasFilter, a => a
+		//		.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
+		//	)
+		//)
+		//);
 
 		//public static ITypeMapping ProjectMappings(MappingsDescriptor map) => map
 		//	.Map<Project>(ProjectTypeMappings);
@@ -280,12 +308,20 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		//	return mapping;
 		//}
 
-		private Task<IndexPutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.IndexManagement.IndexPutIndexTemplateAsync(
-			new IndexPutIndexTemplateRequest(TestsIndexTemplateName)
-			{
-				IndexPatterns = new[] { "*" },
-				// Settings = IndexSettings TODO
-			});
+		//private async Task<IndexPutIndexTemplateResponse> CreateIndexTemplateAsync()
+		//{
+		//	var req = new
+		//	{
+		//		IndexPatterns = new[] { "*" },
+		//		Settings = new Dictionary<string, object>
+		//		{
+		//			{ "index.number_of_replicas", 0 },
+		//			{ "index.number_of_shards", 0 }
+		//		}
+		//	};
+
+		//	_ = await Client.Transport.RequestAsync<BytesResponse>(HttpMethod.PUT, "_template/nest_tests", PostData.Serializable(req));
+		//}
 
 		//public async Task CreateIndicesAsync()
 		//{

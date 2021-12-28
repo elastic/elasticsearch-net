@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -36,9 +37,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			var unassignedShards = 0;
 			var delayedUnassignedShards = 0;
 			var pendingTasks = 0;
-			var InFlightFetch = 0;
+			var inFlightFetch = 0;
 			EpochMillis taskMaxWaitingTimeInQueue = null;
 			Percentage activeShardsAsPercentage = null;
+			Dictionary<IndexName, Health.IndexHealthStats> indices = null;
 
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
@@ -97,13 +99,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 							break;
 						case "number_of_in_flight_fetch":
 							reader.Read();
-							InFlightFetch = reader.GetInt32();
+							inFlightFetch = reader.GetInt32();
 							break;
 						case "task_max_waiting_in_queue_millis":
 							taskMaxWaitingTimeInQueue = JsonSerializer.Deserialize<EpochMillis>(ref reader, options);
 							break;
 						case "active_shards_percent_as_number":
 							activeShardsAsPercentage = JsonSerializer.Deserialize<Percentage>(ref reader, options);
+							break;
+						case "indices":
+							indices = JsonSerializer.Deserialize<Dictionary<IndexName, Health.IndexHealthStats>>(ref reader, options);
 							break;
 					}
 				}
@@ -123,9 +128,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 				UnassignedShards = unassignedShards,
 				DelayedUnassignedShards = delayedUnassignedShards,
 				NumberOfPendingTasks = pendingTasks,
-				NumberOfInFlightFetch = InFlightFetch,
+				NumberOfInFlightFetch = inFlightFetch,
 				TaskMaxWaitingInQueueMillis = taskMaxWaitingTimeInQueue,
-				ActiveShardsPercentAsNumber = activeShardsAsPercentage
+				ActiveShardsPercentAsNumber = activeShardsAsPercentage,
+				Indices = indices
 			};
 
 			reader.Read();

@@ -19,7 +19,7 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 	private const string SearchPointInTimeWithSortStep = nameof(SearchPointInTimeWithSortStep);
 	private const string ClosePointInTimeStep = nameof(ClosePointInTimeStep);
 
-	public PointInTimeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsageV2(cluster, usage)
+	public PointInTimeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
 			{
 				OpenPointInTimeStep, u =>
@@ -52,12 +52,7 @@ public class PointInTimeApiTests : CoordinatedIntegrationTestBase<ReadOnlyCluste
 						(v, d) => d
 							.Size(1)
 							.Query(q => q.MatchAll())
-							//.Pit(v, p => p.KeepAlive("1m")),
-							.Pit(new PointInTimeReference
-							{
-								Id = v,
-								KeepAlive = "1m"
-							}),
+							.Pit(v, p => p.KeepAlive("1m")),
 						(v, c, f) => c.Search(f),
 						(v, c, f) => c.SearchAsync(f),
 						(v, c, r) => c.Search<Project>(r),

@@ -20,9 +20,9 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	: IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 {
-	private readonly CoordinatedUsageV2 _coordinatedUsage;
+	private readonly CoordinatedUsage _coordinatedUsage;
 
-	protected CoordinatedIntegrationTestBase(CoordinatedUsageV2 coordinatedUsage) => _coordinatedUsage = coordinatedUsage;
+	protected CoordinatedIntegrationTestBase(CoordinatedUsage coordinatedUsage) => _coordinatedUsage = coordinatedUsage;
 
 	protected async Task Assert<TResponse>(string name, Action<TResponse> assert)
 		where TResponse : class, IResponse

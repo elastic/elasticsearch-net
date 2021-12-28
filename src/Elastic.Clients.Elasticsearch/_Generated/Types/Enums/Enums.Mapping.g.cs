@@ -27,9 +27,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(DynamicMappingConverter))]
 	public enum DynamicMapping
 	{
+		[EnumMember(Value = "true")]
 		True,
+		[EnumMember(Value = "strict")]
 		Strict,
+		[EnumMember(Value = "runtime")]
 		Runtime,
+		[EnumMember(Value = "false")]
 		False
 	}
 
@@ -79,7 +83,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(GeoOrientationConverter))]
 	public enum GeoOrientation
 	{
+		[EnumMember(Value = "right")]
 		Right,
+		[EnumMember(Value = "left")]
 		Left
 	}
 
@@ -119,7 +125,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(GeoStrategyConverter))]
 	public enum GeoStrategy
 	{
+		[EnumMember(Value = "term")]
 		Term,
+		[EnumMember(Value = "recursive")]
 		Recursive
 	}
 
@@ -159,9 +167,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(IndexOptionsConverter))]
 	public enum IndexOptions
 	{
+		[EnumMember(Value = "positions")]
 		Positions,
+		[EnumMember(Value = "offsets")]
 		Offsets,
+		[EnumMember(Value = "freqs")]
 		Freqs,
+		[EnumMember(Value = "docs")]
 		Docs
 	}
 
@@ -211,7 +223,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(MatchTypeConverter))]
 	public enum MatchType
 	{
+		[EnumMember(Value = "simple")]
 		Simple,
+		[EnumMember(Value = "regex")]
 		Regex
 	}
 
@@ -251,7 +265,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(OnScriptErrorConverter))]
 	public enum OnScriptError
 	{
+		[EnumMember(Value = "fail")]
 		Fail,
+		[EnumMember(Value = "continue")]
 		Continue
 	}
 
@@ -291,12 +307,19 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(RuntimeFieldTypeConverter))]
 	public enum RuntimeFieldType
 	{
+		[EnumMember(Value = "long")]
 		Long,
+		[EnumMember(Value = "keyword")]
 		Keyword,
+		[EnumMember(Value = "ip")]
 		Ip,
+		[EnumMember(Value = "geo_point")]
 		GeoPoint,
+		[EnumMember(Value = "double")]
 		Double,
+		[EnumMember(Value = "date")]
 		Date,
+		[EnumMember(Value = "boolean")]
 		Boolean
 	}
 
@@ -361,12 +384,19 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(TermVectorOptionConverter))]
 	public enum TermVectorOption
 	{
+		[EnumMember(Value = "yes")]
 		Yes,
+		[EnumMember(Value = "with_positions_payloads")]
 		WithPositionsPayloads,
+		[EnumMember(Value = "with_positions_offsets_payloads")]
 		WithPositionsOffsetsPayloads,
+		[EnumMember(Value = "with_positions_offsets")]
 		WithPositionsOffsets,
+		[EnumMember(Value = "with_positions")]
 		WithPositions,
+		[EnumMember(Value = "with_offsets")]
 		WithOffsets,
+		[EnumMember(Value = "no")]
 		No
 	}
 
@@ -431,9 +461,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 	[JsonConverter(typeof(TimeSeriesMetricTypeConverter))]
 	public enum TimeSeriesMetricType
 	{
+		[EnumMember(Value = "summary")]
 		Summary,
+		[EnumMember(Value = "histogram")]
 		Histogram,
+		[EnumMember(Value = "gauge")]
 		Gauge,
+		[EnumMember(Value = "counter")]
 		Counter
 	}
 

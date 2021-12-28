@@ -27,8 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(DelimitedPayloadEncodingConverter))]
 	public enum DelimitedPayloadEncoding
 	{
+		[EnumMember(Value = "int")]
 		Integer,
+		[EnumMember(Value = "identity")]
 		Identity,
+		[EnumMember(Value = "float")]
 		Float
 	}
 
@@ -73,7 +76,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(EdgeNGramSideConverter))]
 	public enum EdgeNGramSide
 	{
+		[EnumMember(Value = "front")]
 		Front,
+		[EnumMember(Value = "back")]
 		Back
 	}
 
@@ -113,7 +118,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuCollationAlternateConverter))]
 	public enum IcuCollationAlternate
 	{
+		[EnumMember(Value = "shifted")]
 		Shifted,
+		[EnumMember(Value = "non-ignorable")]
 		NonIgnorable
 	}
 
@@ -153,7 +160,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuCollationCaseFirstConverter))]
 	public enum IcuCollationCaseFirst
 	{
+		[EnumMember(Value = "upper")]
 		Upper,
+		[EnumMember(Value = "lower")]
 		Lower
 	}
 
@@ -193,7 +202,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuCollationDecompositionConverter))]
 	public enum IcuCollationDecomposition
 	{
+		[EnumMember(Value = "no")]
 		No,
+		[EnumMember(Value = "identical")]
 		Identical
 	}
 
@@ -233,10 +244,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuCollationStrengthConverter))]
 	public enum IcuCollationStrength
 	{
+		[EnumMember(Value = "tertiary")]
 		Tertiary,
+		[EnumMember(Value = "secondary")]
 		Secondary,
+		[EnumMember(Value = "quaternary")]
 		Quaternary,
+		[EnumMember(Value = "primary")]
 		Primary,
+		[EnumMember(Value = "identical")]
 		Identical
 	}
 
@@ -291,7 +307,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuNormalizationModeConverter))]
 	public enum IcuNormalizationMode
 	{
+		[EnumMember(Value = "decompose")]
 		Decompose,
+		[EnumMember(Value = "compose")]
 		Compose
 	}
 
@@ -331,8 +349,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuNormalizationTypeConverter))]
 	public enum IcuNormalizationType
 	{
+		[EnumMember(Value = "nfkc_cf")]
 		NfkcCf,
+		[EnumMember(Value = "nfkc")]
 		Nfkc,
+		[EnumMember(Value = "nfc")]
 		Nfc
 	}
 
@@ -377,7 +398,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(IcuTransformDirectionConverter))]
 	public enum IcuTransformDirection
 	{
+		[EnumMember(Value = "reverse")]
 		Reverse,
+		[EnumMember(Value = "forward")]
 		Forward
 	}
 
@@ -417,7 +440,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(KeepTypesModeConverter))]
 	public enum KeepTypesMode
 	{
+		[EnumMember(Value = "include")]
 		Include,
+		[EnumMember(Value = "exclude")]
 		Exclude
 	}
 
@@ -457,8 +482,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(KuromojiTokenizationModeConverter))]
 	public enum KuromojiTokenizationMode
 	{
+		[EnumMember(Value = "search")]
 		Search,
+		[EnumMember(Value = "normal")]
 		Normal,
+		[EnumMember(Value = "extended")]
 		Extended
 	}
 
@@ -503,39 +531,73 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(LanguageConverter))]
 	public enum Language
 	{
+		[EnumMember(Value = "Turkish")]
 		Turkish,
+		[EnumMember(Value = "Thai")]
 		Thai,
+		[EnumMember(Value = "Swedish")]
 		Swedish,
+		[EnumMember(Value = "Spanish")]
 		Spanish,
+		[EnumMember(Value = "Sorani")]
 		Sorani,
+		[EnumMember(Value = "Russian")]
 		Russian,
+		[EnumMember(Value = "Romanian")]
 		Romanian,
+		[EnumMember(Value = "Portuguese")]
 		Portuguese,
+		[EnumMember(Value = "Persian")]
 		Persian,
+		[EnumMember(Value = "Norwegian")]
 		Norwegian,
+		[EnumMember(Value = "Latvian")]
 		Latvian,
+		[EnumMember(Value = "Italian")]
 		Italian,
+		[EnumMember(Value = "Irish")]
 		Irish,
+		[EnumMember(Value = "Indonesian")]
 		Indonesian,
+		[EnumMember(Value = "Hungarian")]
 		Hungarian,
+		[EnumMember(Value = "Hindi")]
 		Hindi,
+		[EnumMember(Value = "Greek")]
 		Greek,
+		[EnumMember(Value = "German")]
 		German,
+		[EnumMember(Value = "Galician")]
 		Galician,
+		[EnumMember(Value = "French")]
 		French,
+		[EnumMember(Value = "Finnish")]
 		Finnish,
+		[EnumMember(Value = "Estonian")]
 		Estonian,
+		[EnumMember(Value = "English")]
 		English,
+		[EnumMember(Value = "Dutch")]
 		Dutch,
+		[EnumMember(Value = "Danish")]
 		Danish,
+		[EnumMember(Value = "Czech")]
 		Czech,
+		[EnumMember(Value = "Cjk")]
 		Cjk,
+		[EnumMember(Value = "Chinese")]
 		Chinese,
+		[EnumMember(Value = "Catalan")]
 		Catalan,
+		[EnumMember(Value = "Bulgarian")]
 		Bulgarian,
+		[EnumMember(Value = "Brazilian")]
 		Brazilian,
+		[EnumMember(Value = "Basque")]
 		Basque,
+		[EnumMember(Value = "Armenian")]
 		Armenian,
+		[EnumMember(Value = "Arabic")]
 		Arabic
 	}
 
@@ -735,8 +797,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(NoriDecompoundModeConverter))]
 	public enum NoriDecompoundMode
 	{
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "mixed")]
 		Mixed,
+		[EnumMember(Value = "discard")]
 		Discard
 	}
 
@@ -781,17 +846,29 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(PhoneticEncoderConverter))]
 	public enum PhoneticEncoder
 	{
+		[EnumMember(Value = "soundex")]
 		Soundex,
+		[EnumMember(Value = "refined_soundex")]
 		RefinedSoundex,
+		[EnumMember(Value = "nysiis")]
 		Nysiis,
+		[EnumMember(Value = "metaphone")]
 		Metaphone,
+		[EnumMember(Value = "koelnerphonetik")]
 		Koelnerphonetik,
+		[EnumMember(Value = "haasephonetik")]
 		Haasephonetik,
+		[EnumMember(Value = "double_metaphone")]
 		DoubleMetaphone,
+		[EnumMember(Value = "daitch_mokotoff")]
 		DaitchMokotoff,
+		[EnumMember(Value = "cologne")]
 		Cologne,
+		[EnumMember(Value = "caverphone2")]
 		Caverphone2,
+		[EnumMember(Value = "caverphone1")]
 		Caverphone1,
+		[EnumMember(Value = "beider_morse")]
 		BeiderMorse
 	}
 
@@ -881,17 +958,29 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(PhoneticLanguageConverter))]
 	public enum PhoneticLanguage
 	{
+		[EnumMember(Value = "spanish")]
 		Spanish,
+		[EnumMember(Value = "russian")]
 		Russian,
+		[EnumMember(Value = "romanian")]
 		Romanian,
+		[EnumMember(Value = "polish")]
 		Polish,
+		[EnumMember(Value = "hungarian")]
 		Hungarian,
+		[EnumMember(Value = "hebrew")]
 		Hebrew,
+		[EnumMember(Value = "german")]
 		German,
+		[EnumMember(Value = "french")]
 		French,
+		[EnumMember(Value = "english")]
 		English,
+		[EnumMember(Value = "cyrillic")]
 		Cyrillic,
+		[EnumMember(Value = "common")]
 		Common,
+		[EnumMember(Value = "any")]
 		Any
 	}
 
@@ -981,8 +1070,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(PhoneticNameTypeConverter))]
 	public enum PhoneticNameType
 	{
+		[EnumMember(Value = "sephardic")]
 		Sephardic,
+		[EnumMember(Value = "generic")]
 		Generic,
+		[EnumMember(Value = "ashkenazi")]
 		Ashkenazi
 	}
 
@@ -1027,7 +1119,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(PhoneticRuleTypeConverter))]
 	public enum PhoneticRuleType
 	{
+		[EnumMember(Value = "exact")]
 		Exact,
+		[EnumMember(Value = "approx")]
 		Approx
 	}
 
@@ -1067,27 +1161,49 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(SnowballLanguageConverter))]
 	public enum SnowballLanguage
 	{
+		[EnumMember(Value = "Turkish")]
 		Turkish,
+		[EnumMember(Value = "Swedish")]
 		Swedish,
+		[EnumMember(Value = "Spanish")]
 		Spanish,
+		[EnumMember(Value = "Russian")]
 		Russian,
+		[EnumMember(Value = "Romanian")]
 		Romanian,
+		[EnumMember(Value = "Portuguese")]
 		Portuguese,
+		[EnumMember(Value = "Porter")]
 		Porter,
+		[EnumMember(Value = "Norwegian")]
 		Norwegian,
+		[EnumMember(Value = "Lovins")]
 		Lovins,
+		[EnumMember(Value = "Kp")]
 		Kp,
+		[EnumMember(Value = "Italian")]
 		Italian,
+		[EnumMember(Value = "Hungarian")]
 		Hungarian,
+		[EnumMember(Value = "German2")]
 		German2,
+		[EnumMember(Value = "German")]
 		German,
+		[EnumMember(Value = "French")]
 		French,
+		[EnumMember(Value = "Finnish")]
 		Finnish,
+		[EnumMember(Value = "English")]
 		English,
+		[EnumMember(Value = "Dutch")]
 		Dutch,
+		[EnumMember(Value = "Danish")]
 		Danish,
+		[EnumMember(Value = "Catalan")]
 		Catalan,
+		[EnumMember(Value = "Basque")]
 		Basque,
+		[EnumMember(Value = "Armenian")]
 		Armenian
 	}
 
@@ -1227,7 +1343,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(SynonymFormatConverter))]
 	public enum SynonymFormat
 	{
+		[EnumMember(Value = "wordnet")]
 		Wordnet,
+		[EnumMember(Value = "solr")]
 		Solr
 	}
 
@@ -1267,11 +1385,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	[JsonConverter(typeof(TokenCharConverter))]
 	public enum TokenChar
 	{
+		[EnumMember(Value = "whitespace")]
 		Whitespace,
+		[EnumMember(Value = "symbol")]
 		Symbol,
+		[EnumMember(Value = "punctuation")]
 		Punctuation,
+		[EnumMember(Value = "letter")]
 		Letter,
+		[EnumMember(Value = "digit")]
 		Digit,
+		[EnumMember(Value = "custom")]
 		Custom
 	}
 
