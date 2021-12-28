@@ -89,9 +89,8 @@ namespace Tests.Cluster.ClusterHealth
 			issueIndex.Status.Should().Be(HealthStatus.Green);
 			issueIndex.NumberOfShards.Should().Be(10);
 
-			// TODO: The types for these properties are only stubs for now
-			//response.TaskMaxWaitingInQueueMillis.Should().Be(56);
-			//response.ActiveShardsPercentAsNumber.Should().Be(100.0);
+			response.TaskMaxWaitingInQueueMillis.Should().Be(56);
+			response.ActiveShardsPercentAsNumber.Should().Be(100.0);
 		}
 	}
 }

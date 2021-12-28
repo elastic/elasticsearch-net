@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("active_shards_percent_as_number")]
-		public Elastic.Clients.Elasticsearch.Percentage ActiveShardsPercentAsNumber { get; init; }
+		public double ActiveShardsPercentAsNumber { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
@@ -77,7 +77,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("task_max_waiting_in_queue_millis")]
-		public Elastic.Clients.Elasticsearch.EpochMillis TaskMaxWaitingInQueueMillis { get; init; }
+		public long TaskMaxWaitingInQueueMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]
