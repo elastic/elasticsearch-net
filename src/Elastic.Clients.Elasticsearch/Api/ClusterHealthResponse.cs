@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Cluster.Health;
 
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
@@ -40,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			var inFlightFetch = 0;
 			EpochMillis taskMaxWaitingTimeInQueue = null;
 			Percentage activeShardsAsPercentage = null;
-			Dictionary<IndexName, Health.IndexHealthStats> indices = null;
+			ReadOnlyIndexNameDictionary<IndexHealthStats> indices = null;
 
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
@@ -108,7 +109,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 							activeShardsAsPercentage = JsonSerializer.Deserialize<Percentage>(ref reader, options);
 							break;
 						case "indices":
-							indices = JsonSerializer.Deserialize<Dictionary<IndexName, Health.IndexHealthStats>>(ref reader, options);
+							indices = JsonSerializer.Deserialize<ReadOnlyIndexNameDictionary<IndexHealthStats>>(ref reader, options);
 							break;
 					}
 				}

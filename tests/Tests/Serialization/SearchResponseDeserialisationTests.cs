@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Tests.Core.Extensions;
 
 namespace Tests.Serialization;
 

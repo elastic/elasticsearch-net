@@ -144,6 +144,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				return new QueryContainer(variant);
 			}
 
+			if (propertyName == "knn")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery?>(ref reader, options);
+				return new QueryContainer(variant);
+			}
+
 			if (propertyName == "match")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery?>(ref reader, options);
@@ -405,6 +411,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				case Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
+				case Elastic.Clients.Elasticsearch.QueryDsl.KnnQuery variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
 				case Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
@@ -578,6 +587,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
 		public void Intervals(IntervalsQuery variant) => Set(variant, "intervals");
 		public void Intervals(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
+		public void Knn(KnnQuery variant) => Set(variant, "knn");
+		public void Knn(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 		public void Match(MatchQuery variant) => Set(variant, "match");
 		public void Match(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
 		public void MatchAll(MatchAllQuery variant) => Set(variant, "match_all");
@@ -802,6 +813,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				var descriptor = new IntervalsQueryDescriptor<TDocument>();
 				((Action<IntervalsQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
+				JsonSerializer.Serialize(writer, descriptor, options);
+				Finalise();
+				return;
+			}
+
+			if (ContainedVariantName == "knn")
+			{
+				var descriptor = new KnnQueryDescriptor<TDocument>();
+				((Action<KnnQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;

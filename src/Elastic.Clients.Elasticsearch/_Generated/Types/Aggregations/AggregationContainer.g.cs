@@ -83,9 +83,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>("bucket_sort", ref reader, options);
 			}
 
+			if (propertyName == "bucket_count_ks_test")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation?>("bucket_count_ks_test", ref reader, options);
+			}
+
+			if (propertyName == "bucket_correlation")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation?>("bucket_correlation", ref reader, options);
+			}
+
 			if (propertyName == "cardinality")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>("cardinality", ref reader, options);
+			}
+
+			if (propertyName == "categorize_text")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation?>("categorize_text", ref reader, options);
 			}
 
 			if (propertyName == "children")
@@ -450,9 +465,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_sort", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> BucketCountKsTest(string name, Action<BucketKsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_count_ks_test", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> BucketCorrelation(string name, Action<BucketCorrelationAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_correlation", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Cardinality(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> CategorizeText(string name, Action<CategorizeTextAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("categorize_text", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Children(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)

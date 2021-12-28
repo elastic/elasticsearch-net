@@ -67,6 +67,10 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<string>? Ignored { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("ignored_field_values")]
+		public Dictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("_shard")]
 		public string? Shard { get; init; }
 
