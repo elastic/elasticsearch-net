@@ -277,352 +277,411 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 				// Bucket-based Aggregates
 
-				if (nameParts[0] == "terms" || nameParts[0] == "lterms")
-				{
-					if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(ref reader, options, out var agg))
-					{
-						dictionary.Add(nameParts[1], agg);
-					}
-				}
-				else if (nameParts[0] == "adjacency_matrix")
-				{
-					var agg = JsonSerializer.Deserialize<AdjacencyMatrixAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "auto_date_histogram")
-				{
-					var agg = JsonSerializer.Deserialize<AutoDateHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "children")
-				{
-					var agg = JsonSerializer.Deserialize<ChildrenAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "composite")
-				{
-					var agg = JsonSerializer.Deserialize<CompositeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "date_histogram")
-				{
-					var agg = JsonSerializer.Deserialize<DateHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "date_range")
-				{
-					var agg = JsonSerializer.Deserialize<DateRangeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "diversified_sampler")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "filter")
-				{
-					var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "filters")
-				{
-					var agg = JsonSerializer.Deserialize<FiltersAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "geo_distance")
-				{
-					var agg = JsonSerializer.Deserialize<GeoDistanceAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "geohash_grid")
-				{
-					var agg = JsonSerializer.Deserialize<GeoHashGridAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "geotile_grid")
-				{
-					var agg = JsonSerializer.Deserialize<GeoTileGridAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "global")
-				{
-					var agg = JsonSerializer.Deserialize<GlobalAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "histogram")
-				{
-					var agg = JsonSerializer.Deserialize<HistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "ip_range")
-				{
-					var agg = JsonSerializer.Deserialize<IpRangeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "missing")
-				{
-					var agg = JsonSerializer.Deserialize<MissingAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "multi-terms")
-				{
-					var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "nested")
-				{
-					var agg = JsonSerializer.Deserialize<NestedAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "parent")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "range")
-				{
-					var agg = JsonSerializer.Deserialize<RangeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "rare_terms")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "reverse_nested")
-				{
-					var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "sampler")
-				{
-					var agg = JsonSerializer.Deserialize<SamplerAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "significant_terms")
-				{
-					// TODO - As per terms
-				}
-				else if (nameParts[0] == "significant_text")
-				{
-					// TODO
-					throw new Exception("The aggregate in response is not yet supported");
-				}
-				else if (nameParts[0] == "variable_width_histogram")
-				{
-					var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "variable_width_histogram")
-				{
-					var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
+				var aggregateName = nameParts[0];
 
-				// Metrics-based Aggregates
+				switch (aggregateName)
+				{
+					case "terms":
+					case "lterms":
+						{
+							if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(ref reader, options, out var agg))
+							{
+								dictionary.Add(nameParts[1], agg);
+							}
 
-				else if (nameParts[0] == "avg")
-				{
-					var agg = JsonSerializer.Deserialize<AvgAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "boxplot")
-				{
-					var agg = JsonSerializer.Deserialize<BoxPlotAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "cardinality")
-				{
-					var agg = JsonSerializer.Deserialize<CardinalityAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "extended_stats")
-				{
-					var agg = JsonSerializer.Deserialize<ExtendedStatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "geo_bounds")
-				{
-					var agg = JsonSerializer.Deserialize<GeoBoundsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "geo_centroid")
-				{
-					var agg = JsonSerializer.Deserialize<GeoCentroidAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "geo_line")
-				{
-					var agg = JsonSerializer.Deserialize<GeoLineAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "matrix_stats")
-				{
-					var agg = JsonSerializer.Deserialize<MatrixStatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "max")
-				{
-					var agg = JsonSerializer.Deserialize<MaxAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "median_absolute_deviation")
-				{
-					var agg = JsonSerializer.Deserialize<MedianAbsoluteDeviationAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "min")
-				{
-					var agg = JsonSerializer.Deserialize<MinAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "percentile_ranks")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "percentiles")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "rate")
-				{
-					var agg = JsonSerializer.Deserialize<RateAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "scripted_metric")
-				{
-					var agg = JsonSerializer.Deserialize<ScriptedMetricAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "stats")
-				{
-					var agg = JsonSerializer.Deserialize<StatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "string_stats")
-				{
-					var agg = JsonSerializer.Deserialize<StringStatsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "sum")
-				{
-					var agg = JsonSerializer.Deserialize<SumAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "t_test")
-				{
-					var agg = JsonSerializer.Deserialize<TTestAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "top_hits")
-				{
-					var agg = JsonSerializer.Deserialize<TopHitsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "top_metrics")
-				{
-					var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "value_count")
-				{
-					var agg = JsonSerializer.Deserialize<ValueCountAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "weighted_avg")
-				{
-					var agg = JsonSerializer.Deserialize<WeightedAvgAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
+							break;
+						}
 
-				// Pipeline-based Aggregates
+					case "adjacency_matrix":
+						{
+							var agg = JsonSerializer.Deserialize<AdjacencyMatrixAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
-				else if (nameParts[0] == "avg_bucket")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "bucket_script")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "bucket_count_ks_test")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "bucket_correlation")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "bucket_selector")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "bucket_sort")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "cumulative_cardinality")
-				{
-					var agg = JsonSerializer.Deserialize<CumulativeCardinalityAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "cumulative_sum")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "derivative")
-				{
-					var agg = JsonSerializer.Deserialize<DerivativeAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "extended_stats_bucket")
-				{
-					var agg = JsonSerializer.Deserialize<ExtendedStatsBucketAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "inference")
-				{
-					var agg = JsonSerializer.Deserialize<InferenceAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "max_bucket")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "min_bucket")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "moving_avg")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "moving_fn")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "moving_percentiles")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "normalize")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "percentiles_bucket")
-				{
-					var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "serial_diff")
-				{
-					// TODO
-				}
-				else if (nameParts[0] == "stats_bucket")
-				{
-					var agg = JsonSerializer.Deserialize<StatsBucketAggregate>(ref reader, options);
-					dictionary.Add(nameParts[1], agg);
-				}
-				else if (nameParts[0] == "sum_bucket")
-				{
-					// TODO
+					case "auto_date_histogram":
+						{
+							var agg = JsonSerializer.Deserialize<AutoDateHistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "children":
+						{
+							var agg = JsonSerializer.Deserialize<ChildrenAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "composite":
+						{
+							var agg = JsonSerializer.Deserialize<CompositeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "date_histogram":
+						{
+							var agg = JsonSerializer.Deserialize<DateHistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "date_range":
+						{
+							var agg = JsonSerializer.Deserialize<DateRangeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "diversified_sampler":
+						break;
+					case "filter":
+						{
+							var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "filters":
+						{
+							var agg = JsonSerializer.Deserialize<FiltersAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "geo_distance":
+						{
+							var agg = JsonSerializer.Deserialize<GeoDistanceAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "geohash_grid":
+						{
+							var agg = JsonSerializer.Deserialize<GeoHashGridAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "geotile_grid":
+						{
+							var agg = JsonSerializer.Deserialize<GeoTileGridAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "global":
+						{
+							var agg = JsonSerializer.Deserialize<GlobalAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "histogram":
+						{
+							var agg = JsonSerializer.Deserialize<HistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "ip_range":
+						{
+							var agg = JsonSerializer.Deserialize<IpRangeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "missing":
+						{
+							var agg = JsonSerializer.Deserialize<MissingAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "multi-terms":
+						{
+							var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "nested":
+						{
+							var agg = JsonSerializer.Deserialize<NestedAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "parent":
+						break;
+					case "range":
+						{
+							var agg = JsonSerializer.Deserialize<RangeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "rare_terms":
+						break;
+					case "reverse_nested":
+						{
+							var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "sampler":
+						{
+							var agg = JsonSerializer.Deserialize<SamplerAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "significant_terms":
+						break;
+
+					case "significant_text":
+						// TODO
+						throw new Exception("The aggregate in response is not yet supported");
+
+					case "variable_width_histogram":
+						{
+							var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "avg":
+						{
+							var agg = JsonSerializer.Deserialize<AvgAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "boxplot":
+						{
+							var agg = JsonSerializer.Deserialize<BoxPlotAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "cardinality":
+						{
+							var agg = JsonSerializer.Deserialize<CardinalityAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "extended_stats":
+						{
+							var agg = JsonSerializer.Deserialize<ExtendedStatsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "geo_bounds":
+						{
+							var agg = JsonSerializer.Deserialize<GeoBoundsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "geo_centroid":
+						{
+							var agg = JsonSerializer.Deserialize<GeoCentroidAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "geo_line":
+						{
+							var agg = JsonSerializer.Deserialize<GeoLineAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "matrix_stats":
+						{
+							var agg = JsonSerializer.Deserialize<MatrixStatsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "max":
+						{
+							var agg = JsonSerializer.Deserialize<MaxAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "median_absolute_deviation":
+						{
+							var agg = JsonSerializer.Deserialize<MedianAbsoluteDeviationAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "min":
+						{
+							var agg = JsonSerializer.Deserialize<MinAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "percentile_ranks":
+						break;
+					case "tdigest_percentile_ranks":
+						{
+							var agg = JsonSerializer.Deserialize<TDigestPercentileRanksAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "percentiles":
+						break;
+					case "rate":
+						{
+							var agg = JsonSerializer.Deserialize<RateAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "scripted_metric":
+						{
+							var agg = JsonSerializer.Deserialize<ScriptedMetricAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "stats":
+						{
+							var agg = JsonSerializer.Deserialize<StatsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "string_stats":
+						{
+							var agg = JsonSerializer.Deserialize<StringStatsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "sum":
+						{
+							var agg = JsonSerializer.Deserialize<SumAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "t_test":
+						{
+							var agg = JsonSerializer.Deserialize<TTestAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "top_hits":
+						{
+							var agg = JsonSerializer.Deserialize<TopHitsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "top_metrics":
+						{
+							var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "value_count":
+						{
+							var agg = JsonSerializer.Deserialize<ValueCountAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "weighted_avg":
+						{
+							var agg = JsonSerializer.Deserialize<WeightedAvgAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "avg_bucket":
+						break;
+					case "bucket_script":
+						break;
+					case "bucket_count_ks_test":
+						break;
+					case "bucket_correlation":
+						break;
+					case "bucket_selector":
+						break;
+					case "bucket_sort":
+						break;
+					case "cumulative_cardinality":
+						{
+							var agg = JsonSerializer.Deserialize<CumulativeCardinalityAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "cumulative_sum":
+						break;
+					case "derivative":
+						{
+							var agg = JsonSerializer.Deserialize<DerivativeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "extended_stats_bucket":
+						{
+							var agg = JsonSerializer.Deserialize<ExtendedStatsBucketAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "inference":
+						{
+							var agg = JsonSerializer.Deserialize<InferenceAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "max_bucket":
+						break;
+					case "min_bucket":
+						break;
+					case "moving_avg":
+						break;
+					case "moving_fn":
+						break;
+					case "moving_percentiles":
+						break;
+					case "normalize":
+						break;
+					case "percentiles_bucket":
+						{
+							var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "serial_diff":
+						break;
+					case "stats_bucket":
+						{
+							var agg = JsonSerializer.Deserialize<StatsBucketAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
+
+					case "sum_bucket":
+						break;
 				}
 			}
 
@@ -1308,6 +1367,21 @@ namespace Elastic.Clients.Elasticsearch
 				TypedKeys = true;
 			}
 		}
+
+		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
+		{
+			if (Pit is not null && !string.IsNullOrEmpty(Pit.Id.StringOrLongValue ?? string.Empty) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
+		}
+	}
+
+	public sealed partial class PointInTimeReferenceDescriptor
+	{
+		public PointInTimeReferenceDescriptor(Id id) => IdValue = id;
 	}
 
 	public sealed partial class SearchRequestDescriptor<TDocument>
@@ -1315,6 +1389,14 @@ namespace Elastic.Clients.Elasticsearch
 		internal Type ClrType => typeof(TDocument);
 
 		public SearchRequestDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+
+		public SearchRequestDescriptor<TDocument> Pit(Id id, Action<PointInTimeReferenceDescriptor> configure)
+		{
+			PitValue = null;
+			PitDescriptorAction = null;
+			configure += a => a.Id(id);
+			return Assign(configure, (a, v) => a.PitDescriptorAction = v);
+		}
 
 		internal override void BeforeRequest()
 		{
@@ -1324,13 +1406,15 @@ namespace Elastic.Clients.Elasticsearch
 			}
 		}
 
-		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
-			//if (Self.PointInTime is object && !string.IsNullOrEmpty(Self.PointInTime.Id) && routeValues.ContainsKey("index"))
-			//{
-			//	routeValues.Remove("index");
-			//}
+		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
+		{
+			if ((Self.PitValue is not null || Self.PitDescriptor is not null || Self.PitDescriptorAction is not null) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
 
-			base.ResolveUrl(routeValues, settings);
+			return base.ResolveUrl(routeValues, settings);
+		}
 
 		//internal AggregationContainerDescriptor<T> AggregationContainerDescriptor { get; private set; }
 		//internal Action<AggregationContainerDescriptor<T>> AggregationContainerDescriptorAction { get; private set; }

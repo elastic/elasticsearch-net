@@ -27,12 +27,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[JsonConverter(typeof(ConvertTypeConverter))]
 	public enum ConvertType
 	{
+		[EnumMember(Value = "string")]
 		String,
+		[EnumMember(Value = "long")]
 		Long,
+		[EnumMember(Value = "integer")]
 		Integer,
+		[EnumMember(Value = "float")]
 		Float,
+		[EnumMember(Value = "double")]
 		Double,
+		[EnumMember(Value = "boolean")]
 		Boolean,
+		[EnumMember(Value = "auto")]
 		Auto
 	}
 
@@ -97,7 +104,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[JsonConverter(typeof(ShapeTypeConverter))]
 	public enum ShapeType
 	{
+		[EnumMember(Value = "shape")]
 		Shape,
+		[EnumMember(Value = "geo_shape")]
 		GeoShape
 	}
 
@@ -137,15 +146,25 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	[JsonConverter(typeof(UserAgentPropertyConverter))]
 	public enum UserAgentProperty
 	{
+		[EnumMember(Value = "PATCH")]
 		Patch,
+		[EnumMember(Value = "OS_NAME")]
 		OsName,
+		[EnumMember(Value = "OS_MINOR")]
 		OsMinor,
+		[EnumMember(Value = "OS_MAJOR")]
 		OsMajor,
+		[EnumMember(Value = "OS")]
 		Os,
+		[EnumMember(Value = "NAME")]
 		Name,
+		[EnumMember(Value = "MINOR")]
 		Minor,
+		[EnumMember(Value = "MAJOR")]
 		Major,
+		[EnumMember(Value = "DEVICE")]
 		Device,
+		[EnumMember(Value = "BUILD")]
 		Build
 	}
 

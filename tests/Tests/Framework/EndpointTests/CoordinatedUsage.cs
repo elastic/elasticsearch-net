@@ -13,7 +13,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Framework.EndpointTests
 {
-	public class CoordinatedUsageV2 : KeyedCollection<string, LazyResponses>
+	public class CoordinatedUsage : KeyedCollection<string, LazyResponses>
 	{
 		public static readonly IResponse VoidResponse = new PingResponse();
 
@@ -21,7 +21,7 @@ namespace Tests.Framework.EndpointTests
 
 		private readonly bool _testOnlyOne;
 
-		public CoordinatedUsageV2(ITestCluster cluster, EndpointUsage usage, string prefix = null, bool testOnlyOne = false)
+		public CoordinatedUsage(ITestCluster cluster, EndpointUsage usage, string prefix = null, bool testOnlyOne = false)
 		{
 			_cluster = cluster;
 			_testOnlyOne = testOnlyOne;
@@ -55,13 +55,13 @@ namespace Tests.Framework.EndpointTests
 
 		protected override string GetKeyForItem(LazyResponses item) => item.Name;
 
-		public void Add(string name, Func<CoordinatedUsageV2, Func<string, LazyResponses>> create)
+		public void Add(string name, Func<CoordinatedUsage, Func<string, LazyResponses>> create)
 		{
 			var responses = create(this)(name);
 			Add(responses);
 		}
 
-		public void Add(string name, string versionRange, Func<CoordinatedUsageV2, Func<string, LazyResponses>> create)
+		public void Add(string name, string versionRange, Func<CoordinatedUsage, Func<string, LazyResponses>> create)
 		{
 			if (!TestConfiguration.Instance.InRange(versionRange))
 			{

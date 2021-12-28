@@ -27,8 +27,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 	[JsonConverter(typeof(ShardStoreAllocationConverter))]
 	public enum ShardStoreAllocation
 	{
+		[EnumMember(Value = "unused")]
 		Unused,
+		[EnumMember(Value = "replica")]
 		Replica,
+		[EnumMember(Value = "primary")]
 		Primary
 	}
 
@@ -73,9 +76,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.ShardStores
 	[JsonConverter(typeof(ShardStoreStatusConverter))]
 	public enum ShardStoreStatus
 	{
+		[EnumMember(Value = "yellow")]
 		Yellow,
+		[EnumMember(Value = "red")]
 		Red,
+		[EnumMember(Value = "green")]
 		Green,
+		[EnumMember(Value = "all")]
 		All
 	}
 

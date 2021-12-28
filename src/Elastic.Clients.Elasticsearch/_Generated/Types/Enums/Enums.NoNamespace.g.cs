@@ -27,8 +27,11 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(BoundaryScannerConverter))]
 	public enum BoundaryScanner
 	{
+		[EnumMember(Value = "word")]
 		Word,
+		[EnumMember(Value = "sentence")]
 		Sentence,
+		[EnumMember(Value = "chars")]
 		Chars
 	}
 
@@ -88,7 +91,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(ConflictsConverter))]
 	public enum Conflicts
 	{
+		[EnumMember(Value = "proceed")]
 		Proceed,
+		[EnumMember(Value = "abort")]
 		Abort
 	}
 
@@ -128,14 +133,23 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(DistanceUnitConverter))]
 	public enum DistanceUnit
 	{
+		[EnumMember(Value = "yd")]
 		Yards,
+		[EnumMember(Value = "nmi")]
 		NauticMiles,
+		[EnumMember(Value = "mm")]
 		Millimeters,
+		[EnumMember(Value = "mi")]
 		Miles,
+		[EnumMember(Value = "m")]
 		Meters,
+		[EnumMember(Value = "km")]
 		Kilometers,
+		[EnumMember(Value = "in")]
 		Inches,
+		[EnumMember(Value = "ft")]
 		Feet,
+		[EnumMember(Value = "cm")]
 		Centimeters
 	}
 
@@ -210,10 +224,15 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(ExpandWildcardConverter))]
 	public enum ExpandWildcard
 	{
+		[EnumMember(Value = "open")]
 		Open,
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "hidden")]
 		Hidden,
+		[EnumMember(Value = "closed")]
 		Closed,
+		[EnumMember(Value = "all")]
 		All
 	}
 
@@ -268,7 +287,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(GeoDistanceTypeConverter))]
 	public enum GeoDistanceType
 	{
+		[EnumMember(Value = "plane")]
 		Plane,
+		[EnumMember(Value = "arc")]
 		Arc
 	}
 
@@ -308,9 +329,13 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(GeoShapeRelationConverter))]
 	public enum GeoShapeRelation
 	{
+		[EnumMember(Value = "within")]
 		Within,
+		[EnumMember(Value = "intersects")]
 		Intersects,
+		[EnumMember(Value = "disjoint")]
 		Disjoint,
+		[EnumMember(Value = "contains")]
 		Contains
 	}
 
@@ -360,8 +385,11 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(HealthStatusConverter))]
 	public enum HealthStatus
 	{
+		[EnumMember(Value = "yellow")]
 		Yellow,
+		[EnumMember(Value = "red")]
 		Red,
+		[EnumMember(Value = "green")]
 		Green
 	}
 
@@ -406,7 +434,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(HighlighterEncoderConverter))]
 	public enum HighlighterEncoder
 	{
+		[EnumMember(Value = "html")]
 		Html,
+		[EnumMember(Value = "default")]
 		Default
 	}
 
@@ -446,7 +476,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(HighlighterFragmenterConverter))]
 	public enum HighlighterFragmenter
 	{
+		[EnumMember(Value = "span")]
 		Span,
+		[EnumMember(Value = "simple")]
 		Simple
 	}
 
@@ -486,6 +518,7 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(HighlighterOrderConverter))]
 	public enum HighlighterOrder
 	{
+		[EnumMember(Value = "score")]
 		Score
 	}
 
@@ -520,6 +553,7 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(HighlighterTagsSchemaConverter))]
 	public enum HighlighterTagsSchema
 	{
+		[EnumMember(Value = "styled")]
 		Styled
 	}
 
@@ -554,8 +588,11 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(LevelConverter))]
 	public enum Level
 	{
+		[EnumMember(Value = "shards")]
 		Shards,
+		[EnumMember(Value = "indices")]
 		Indices,
+		[EnumMember(Value = "cluster")]
 		Cluster
 	}
 
@@ -600,10 +637,15 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(ResultConverter))]
 	public enum Result
 	{
+		[EnumMember(Value = "updated")]
 		Updated,
+		[EnumMember(Value = "not_found")]
 		NotFound,
+		[EnumMember(Value = "noop")]
 		NoOp,
+		[EnumMember(Value = "deleted")]
 		Deleted,
+		[EnumMember(Value = "created")]
 		Created
 	}
 
@@ -658,10 +700,15 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(ScoreModeConverter))]
 	public enum ScoreMode
 	{
+		[EnumMember(Value = "total")]
 		Total,
+		[EnumMember(Value = "multiply")]
 		Multiply,
+		[EnumMember(Value = "min")]
 		Min,
+		[EnumMember(Value = "max")]
 		Max,
+		[EnumMember(Value = "avg")]
 		Avg
 	}
 
@@ -716,7 +763,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SearchTypeConverter))]
 	public enum SearchType
 	{
+		[EnumMember(Value = "query_then_fetch")]
 		QueryThenFetch,
+		[EnumMember(Value = "dfs_query_then_fetch")]
 		DfsQueryThenFetch
 	}
 
@@ -756,10 +805,15 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SortModeConverter))]
 	public enum SortMode
 	{
+		[EnumMember(Value = "sum")]
 		Sum,
+		[EnumMember(Value = "min")]
 		Min,
+		[EnumMember(Value = "median")]
 		Median,
+		[EnumMember(Value = "max")]
 		Max,
+		[EnumMember(Value = "avg")]
 		Avg
 	}
 
@@ -814,7 +868,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SortOrderConverter))]
 	public enum SortOrder
 	{
+		[EnumMember(Value = "desc")]
 		Desc,
+		[EnumMember(Value = "asc")]
 		Asc
 	}
 
@@ -854,8 +910,11 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(SuggestModeConverter))]
 	public enum SuggestMode
 	{
+		[EnumMember(Value = "popular")]
 		Popular,
+		[EnumMember(Value = "missing")]
 		Missing,
+		[EnumMember(Value = "always")]
 		Always
 	}
 
@@ -900,12 +959,19 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(TimeUnitConverter))]
 	public enum TimeUnit
 	{
+		[EnumMember(Value = "s")]
 		Seconds,
+		[EnumMember(Value = "nanos")]
 		Nanoseconds,
+		[EnumMember(Value = "ms")]
 		Milliseconds,
+		[EnumMember(Value = "micros")]
 		Microseconds,
+		[EnumMember(Value = "m")]
 		Minutes,
+		[EnumMember(Value = "h")]
 		Hours,
+		[EnumMember(Value = "d")]
 		Days
 	}
 
@@ -970,7 +1036,9 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(TotalHitsRelationConverter))]
 	public enum TotalHitsRelation
 	{
+		[EnumMember(Value = "gte")]
 		Gte,
+		[EnumMember(Value = "eq")]
 		Eq
 	}
 
@@ -1010,9 +1078,13 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(VersionTypeConverter))]
 	public enum VersionType
 	{
+		[EnumMember(Value = "internal")]
 		Internal,
+		[EnumMember(Value = "force")]
 		Force,
+		[EnumMember(Value = "external_gte")]
 		ExternalGte,
+		[EnumMember(Value = "external")]
 		External
 	}
 
@@ -1062,11 +1134,17 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(WaitForEventsConverter))]
 	public enum WaitForEvents
 	{
+		[EnumMember(Value = "urgent")]
 		Urgent,
+		[EnumMember(Value = "normal")]
 		Normal,
+		[EnumMember(Value = "low")]
 		Low,
+		[EnumMember(Value = "languid")]
 		Languid,
+		[EnumMember(Value = "immediate")]
 		Immediate,
+		[EnumMember(Value = "high")]
 		High
 	}
 

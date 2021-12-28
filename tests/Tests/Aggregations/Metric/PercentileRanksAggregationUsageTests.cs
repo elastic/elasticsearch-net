@@ -68,7 +68,7 @@ public class PercentileRanksAggregationUsageTests : AggregationUsageTestBase<Rea
 		response.ShouldBeValid();
 		var commitsOutlier = response.Aggregations.TDigestPercentiles("commits_outlier");
 		commitsOutlier.Should().NotBeNull();
-		//commitsOutlier.Items.Should().NotBeNullOrEmpty();
+		//commitsOutlier.Values.Should().NotBeNullOrEmpty();
 		//foreach (var item in commitsOutlier.Items)
 		//	item.Should().NotBeNull();
 	}
