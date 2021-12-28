@@ -45,6 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
+		[TestAttribute]
 		public Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats>? Indices { get; init; }
 
 		[JsonInclude]

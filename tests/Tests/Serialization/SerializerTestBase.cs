@@ -87,6 +87,8 @@ public abstract class SerializerTestBase
 		_settings = client.ElasticsearchClientSettings;
 	}
 
+	protected static Inferrer Inferrer => _settings.Inferrer;
+
 	protected static Stream WrapInStream(string json)
 	{
 		var stream = new MemoryStream();

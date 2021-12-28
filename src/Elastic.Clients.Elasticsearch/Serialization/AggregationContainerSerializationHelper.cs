@@ -1,12 +1,98 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
+	internal sealed class TestAttribute : Attribute { }
+
+	internal sealed class ResolvableDictionaryFormatterFactory : JsonConverterFactory
+	{
+		public override bool CanConvert(Type typeToConvert) => false;
+
+		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	}
+
+	internal sealed class ReadOnlyIndexNameDictionaryConverterFactory : JsonConverterFactory
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public ReadOnlyIndexNameDictionaryConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override bool CanConvert(Type typeToConvert)
+		{
+			if (!typeToConvert.IsGenericType)
+				return false;
+
+			var canConvert = typeof(ReadOnlyIndexNameDictionary<>) == typeToConvert.GetGenericTypeDefinition();
+			return canConvert;
+		}
+
+		public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
+		{
+			var valueType = type.GetGenericArguments()[0];
+			return (JsonConverter)Activator.CreateInstance(typeof(ReadOnlyIndexNameDictionaryConverter<>).MakeGenericType(valueType), _settings);
+		}
+
+		private class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<ReadOnlyIndexNameDictionary<TValue>>
+		{
+			private readonly IElasticsearchClientSettings _settings;
+
+			public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+			public override ReadOnlyIndexNameDictionary<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+			{
+				var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
+
+				var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
+
+				return readOnlyDictionary;
+			}
+
+			public override void Write(Utf8JsonWriter writer, ReadOnlyIndexNameDictionary<TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
+		}
+	}
+
+	public sealed class ReadOnlyIndexNameDictionary<TValue> : IReadOnlyDictionary<IndexName, TValue>
+	{
+		private readonly Dictionary<IndexName, TValue> _backingDictionary;
+		private readonly IElasticsearchClientSettings _settings;
+
+		internal ReadOnlyIndexNameDictionary(Dictionary<IndexName, TValue> source, IElasticsearchClientSettings settings)
+		{
+			_settings = settings;
+
+			var finalDictionary = new Dictionary<IndexName, TValue>(source.Count);
+
+			if (source == null)
+				return;
+
+			foreach (var key in source.Keys)
+				finalDictionary[Sanitize(key)] = source[key];
+
+			_backingDictionary = finalDictionary;
+		}
+
+		private string Sanitize(IndexName key) => key?.GetString(_settings);
+
+		public TValue this[IndexName key] => _backingDictionary[key];
+		public IEnumerable<IndexName> Keys => _backingDictionary.Keys;
+		public IEnumerable<TValue> Values => _backingDictionary.Values;
+		public int Count => _backingDictionary.Count;
+		public bool ContainsKey(IndexName key) => _backingDictionary.ContainsKey(key);
+		public IEnumerator<KeyValuePair<IndexName, TValue>> GetEnumerator() => _backingDictionary.GetEnumerator();
+		public bool TryGetValue(IndexName key, out TValue value) => _backingDictionary.TryGetValue(key, out value);
+		IEnumerator IEnumerable.GetEnumerator() => _backingDictionary.GetEnumerator();
+	}
+
+
+
 	internal static class SerializationConstants
 	{
 		public const byte Newline = (byte)'\n';

@@ -46,6 +46,7 @@ namespace Elastic.Clients.Elasticsearch
 					//new InterfaceConverterFactory(settings),
 					//new ConvertAsConverterFactory(settings),
 					//new SourceConverterFactory(settings),
+					new ReadOnlyIndexNameDictionaryConverterFactory(settings),
 					new CalendarIntervalConverter(),
 					new IndexNameConverter(settings),
 					new ObjectToInferredTypesConverter(),
