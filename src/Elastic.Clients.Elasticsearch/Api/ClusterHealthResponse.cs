@@ -39,8 +39,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			var delayedUnassignedShards = 0;
 			var pendingTasks = 0;
 			var inFlightFetch = 0;
-			EpochMillis taskMaxWaitingTimeInQueue = null;
-			Percentage activeShardsAsPercentage = null;
+			long taskMaxWaitingTimeInQueue = default;
+			double activeShardsAsPercentage = default;
 			ReadOnlyIndexNameDictionary<IndexHealthStats> indices = null;
 
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
@@ -103,10 +103,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 							inFlightFetch = reader.GetInt32();
 							break;
 						case "task_max_waiting_in_queue_millis":
-							taskMaxWaitingTimeInQueue = JsonSerializer.Deserialize<EpochMillis>(ref reader, options);
+							taskMaxWaitingTimeInQueue = JsonSerializer.Deserialize<long>(ref reader, options);
 							break;
 						case "active_shards_percent_as_number":
-							activeShardsAsPercentage = JsonSerializer.Deserialize<Percentage>(ref reader, options);
+							activeShardsAsPercentage = JsonSerializer.Deserialize<double>(ref reader, options);
 							break;
 						case "indices":
 							indices = JsonSerializer.Deserialize<ReadOnlyIndexNameDictionary<IndexHealthStats>>(ref reader, options);

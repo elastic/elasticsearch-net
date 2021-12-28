@@ -33,7 +33,6 @@ public class ClusterHealthShardsApiTests
 		(client, r) => client.Cluster.HealthAsync(r)
 	);
 
-	// TODO - Update these assertions once cluster is seeded
 	protected override void ExpectResponse(ClusterHealthResponse response)
 	{
 		response.ClusterName.Value.Should().NotBeNullOrWhiteSpace();
@@ -43,10 +42,10 @@ public class ClusterHealthShardsApiTests
 		response.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
 		response.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
 		response.ActiveShards.Should().BeGreaterOrEqualTo(1);
-		//response.ActiveShardsPercentAsNumber.Should().BePositive();
+		response.ActiveShardsPercentAsNumber.Should().BePositive();
 		response.DelayedUnassignedShards.Should().Be(0);
 		response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
-		//response.TaskMaxWaitTimeInQueueInMilliseconds.Should().BeGreaterOrEqualTo(0);
+		response.TaskMaxWaitingInQueueMillis.Should().BeGreaterOrEqualTo(0);
 
 		response.Indices.Should()
 			.NotBeEmpty()
