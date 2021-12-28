@@ -59,6 +59,12 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	
+	/// <summary>
+	/// A specialised readonly dictionary for <typeparamref name="TValue"/> data, keyed by <see cref="IndexName"/>.
+	/// <para>This supports inferrence enabled lookups by ensuring keys are sanitized when storing the values and when performing lookups.</para>
+	/// </summary>
+	/// <typeparam name="TValue"></typeparam>
 	public sealed class ReadOnlyIndexNameDictionary<TValue> : IReadOnlyDictionary<IndexName, TValue>
 	{
 		private readonly Dictionary<IndexName, TValue> _backingDictionary;
@@ -68,30 +74,30 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			_settings = settings;
 
-			var finalDictionary = new Dictionary<IndexName, TValue>(source.Count);
+			var backingDictionary = new Dictionary<IndexName, TValue>(source.Count);
 
 			if (source == null)
 				return;
 
 			foreach (var key in source.Keys)
-				finalDictionary[Sanitize(key)] = source[key];
+				backingDictionary[Sanitize(key)] = source[key];
 
-			_backingDictionary = finalDictionary;
+			_backingDictionary = backingDictionary;
 		}
 
 		private string Sanitize(IndexName key) => key?.GetString(_settings);
 
-		public TValue this[IndexName key] => _backingDictionary[key];
+		public TValue this[IndexName key] => _backingDictionary.TryGetValue(Sanitize(key), out var v) ? v : default;
+		public TValue this[string key] => _backingDictionary.TryGetValue(key, out var v) ? v : default;
+
 		public IEnumerable<IndexName> Keys => _backingDictionary.Keys;
 		public IEnumerable<TValue> Values => _backingDictionary.Values;
 		public int Count => _backingDictionary.Count;
-		public bool ContainsKey(IndexName key) => _backingDictionary.ContainsKey(key);
+		public bool ContainsKey(IndexName key) => _backingDictionary.ContainsKey(Sanitize(key));
 		public IEnumerator<KeyValuePair<IndexName, TValue>> GetEnumerator() => _backingDictionary.GetEnumerator();
-		public bool TryGetValue(IndexName key, out TValue value) => _backingDictionary.TryGetValue(key, out value);
+		public bool TryGetValue(IndexName key, out TValue value) => _backingDictionary.TryGetValue(Sanitize(key), out value);
 		IEnumerator IEnumerable.GetEnumerator() => _backingDictionary.GetEnumerator();
 	}
-
-
 
 	internal static class SerializationConstants
 	{

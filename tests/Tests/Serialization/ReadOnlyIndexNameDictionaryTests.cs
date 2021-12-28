@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Tests.Domain;
 using Tests.Core.Extensions;
 
@@ -7,7 +7,7 @@ namespace Tests.Serialization;
 public class ReadOnlyIndexNameDictionaryTests : SerializerTestBase
 {
 	[U]
-	public void Test()
+	public void DeserializesCorrectly_AndCanLookupByInferredName()
 	{
 		var json = @"{""indices"":{""devs"":{""status"":""yellow""},""project"":{""status"":""green""}}}";
 
