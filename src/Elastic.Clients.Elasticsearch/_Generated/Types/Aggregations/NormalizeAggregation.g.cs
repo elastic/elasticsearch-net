@@ -50,17 +50,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("buckets_path"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.BucketsPath = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("format"))
 					{
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -78,6 +67,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.GapPolicy = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("buckets_path"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.BucketsPath = value;
 						}
 
 						continue;
@@ -117,12 +117,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Method, options);
 			}
 
-			if (value.BucketsPath is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, value.BucketsPath, options);
-			}
-
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -133,6 +127,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("gap_policy");
 				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+			}
+
+			if (value.BucketsPath is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, value.BucketsPath, options);
 			}
 
 			writer.WriteEndObject();
@@ -167,18 +167,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal NormalizeAggregationDescriptor(Action<NormalizeAggregationDescriptor> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? MethodValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
-
 		internal string? FormatValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
+
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
 		public NormalizeAggregationDescriptor Method(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? method) => Assign(method, (a, v) => a.MethodValue = v);
-		public NormalizeAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
 		public NormalizeAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public NormalizeAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
+		public NormalizeAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
 		public NormalizeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -191,12 +191,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, MethodValue, options);
 			}
 
-			if (BucketsPathValue is not null)
-			{
-				writer.WritePropertyName("buckets_path");
-				JsonSerializer.Serialize(writer, BucketsPathValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(FormatValue))
 			{
 				writer.WritePropertyName("format");
@@ -207,6 +201,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("gap_policy");
 				JsonSerializer.Serialize(writer, GapPolicyValue, options);
+			}
+
+			if (BucketsPathValue is not null)
+			{
+				writer.WritePropertyName("buckets_path");
+				JsonSerializer.Serialize(writer, BucketsPathValue, options);
 			}
 
 			writer.WriteEndObject();

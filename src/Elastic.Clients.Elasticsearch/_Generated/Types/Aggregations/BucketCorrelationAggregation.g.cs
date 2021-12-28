@@ -24,49 +24,27 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	internal sealed class PercentilesBucketAggregationConverter : JsonConverter<PercentilesBucketAggregation>
+	internal sealed class BucketCorrelationAggregationConverter : JsonConverter<BucketCorrelationAggregation>
 	{
-		public override PercentilesBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override BucketCorrelationAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			reader.Read();
 			var aggName = reader.GetString();
-			if (aggName != "percentiles_bucket")
+			if (aggName != "bucket_correlation")
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new PercentilesBucketAggregation(aggName);
+			var agg = new BucketCorrelationAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("percents"))
+					if (reader.ValueTextEquals("function"))
 					{
-						var value = JsonSerializer.Deserialize<IEnumerable<double>?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Percents = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("format"))
-					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("gap_policy"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
+							agg.Function = value;
 						}
 
 						continue;
@@ -106,29 +84,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, PercentilesBucketAggregation value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, BucketCorrelationAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("percentiles_bucket");
+			writer.WritePropertyName("bucket_correlation");
 			writer.WriteStartObject();
-			if (value.Percents is not null)
-			{
-				writer.WritePropertyName("percents");
-				JsonSerializer.Serialize(writer, value.Percents, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.GapPolicy is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, value.GapPolicy, options);
-			}
-
+			writer.WritePropertyName("function");
+			JsonSerializer.Serialize(writer, value.Function, options);
 			if (value.BucketsPath is not null)
 			{
 				writer.WritePropertyName("buckets_path");
@@ -146,61 +108,77 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	[JsonConverter(typeof(PercentilesBucketAggregationConverter))]
-	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase
+	[JsonConverter(typeof(BucketCorrelationAggregationConverter))]
+	public partial class BucketCorrelationAggregation : Aggregations.BucketPathAggregationBase
 	{
-		public PercentilesBucketAggregation(string name) : base(name)
+		public BucketCorrelationAggregation(string name) : base(name)
 		{
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("percents")]
-		public IEnumerable<double>? Percents { get; set; }
+		[JsonPropertyName("function")]
+		public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Function { get; set; }
 	}
 
-	public sealed partial class PercentilesBucketAggregationDescriptor : DescriptorBase<PercentilesBucketAggregationDescriptor>
+	public sealed partial class BucketCorrelationAggregationDescriptor : DescriptorBase<BucketCorrelationAggregationDescriptor>
 	{
-		public PercentilesBucketAggregationDescriptor()
+		public BucketCorrelationAggregationDescriptor()
 		{
 		}
 
-		internal PercentilesBucketAggregationDescriptor(Action<PercentilesBucketAggregationDescriptor> configure) => configure.Invoke(this);
-		internal IEnumerable<double>? PercentsValue { get; private set; }
-
-		internal string? FormatValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
+		internal BucketCorrelationAggregationDescriptor(Action<BucketCorrelationAggregationDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction FunctionValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public PercentilesBucketAggregationDescriptor Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
-		public PercentilesBucketAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public PercentilesBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
-		public PercentilesBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
-		public PercentilesBucketAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		internal BucketCorrelationFunctionDescriptor FunctionDescriptor { get; private set; }
+
+		internal Action<BucketCorrelationFunctionDescriptor> FunctionDescriptorAction { get; private set; }
+
+		public BucketCorrelationAggregationDescriptor Function(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction function)
+		{
+			FunctionDescriptor = null;
+			FunctionDescriptorAction = null;
+			return Assign(function, (a, v) => a.FunctionValue = v);
+		}
+
+		public BucketCorrelationAggregationDescriptor Function(Aggregations.BucketCorrelationFunctionDescriptor descriptor)
+		{
+			FunctionValue = null;
+			FunctionDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.FunctionDescriptor = v);
+		}
+
+		public BucketCorrelationAggregationDescriptor Function(Action<Aggregations.BucketCorrelationFunctionDescriptor> configure)
+		{
+			FunctionValue = null;
+			FunctionDescriptorAction = null;
+			return Assign(configure, (a, v) => a.FunctionDescriptorAction = v);
+		}
+
+		public BucketCorrelationAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
+		public BucketCorrelationAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("percentiles_bucket");
+			writer.WritePropertyName("bucket_correlation");
 			writer.WriteStartObject();
-			if (PercentsValue is not null)
+			if (FunctionDescriptor is not null)
 			{
-				writer.WritePropertyName("percents");
-				JsonSerializer.Serialize(writer, PercentsValue, options);
+				writer.WritePropertyName("function");
+				JsonSerializer.Serialize(writer, FunctionDescriptor, options);
 			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
+			else if (FunctionDescriptorAction is not null)
 			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
+				writer.WritePropertyName("function");
+				JsonSerializer.Serialize(writer, new Aggregations.BucketCorrelationFunctionDescriptor(FunctionDescriptorAction), options);
 			}
-
-			if (GapPolicyValue is not null)
+			else
 			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, GapPolicyValue, options);
+				writer.WritePropertyName("function");
+				JsonSerializer.Serialize(writer, FunctionValue, options);
 			}
 
 			if (BucketsPathValue is not null)
