@@ -27,9 +27,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	[JsonConverter(typeof(ShardRoutingStateConverter))]
 	public enum ShardRoutingState
 	{
+		[EnumMember(Value = "UNASSIGNED")]
 		Unassigned,
+		[EnumMember(Value = "STARTED")]
 		Started,
+		[EnumMember(Value = "RELOCATING")]
 		Relocating,
+		[EnumMember(Value = "INITIALIZING")]
 		Initializing
 	}
 

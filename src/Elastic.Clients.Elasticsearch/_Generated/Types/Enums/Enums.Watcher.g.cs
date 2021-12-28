@@ -27,9 +27,13 @@ namespace Elastic.Clients.Elasticsearch.Watcher
 	[JsonConverter(typeof(ActionStatusOptionsConverter))]
 	public enum ActionStatusOptions
 	{
+		[EnumMember(Value = "throttled")]
 		Throttled,
+		[EnumMember(Value = "success")]
 		Success,
+		[EnumMember(Value = "simulated")]
 		Simulated,
+		[EnumMember(Value = "failure")]
 		Failure
 	}
 

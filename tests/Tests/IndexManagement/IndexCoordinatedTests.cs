@@ -17,7 +17,7 @@ public class IndexCoordinatedTests : CoordinatedIntegrationTestBase<WritableClus
 	private const string DeleteIndexStep = nameof(DeleteIndexStep);
 
 	public IndexCoordinatedTests(WritableCluster cluster, EndpointUsage usage) : base(
-		new CoordinatedUsageV2(cluster, usage)
+		new CoordinatedUsage(cluster, usage)
 		{
 				{
 					CreateIndexStep, u =>

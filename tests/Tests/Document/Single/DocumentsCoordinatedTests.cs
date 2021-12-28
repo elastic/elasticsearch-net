@@ -20,7 +20,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 	private const string DeleteDocumentStep = nameof(DeleteDocumentStep);
 
 	public DocumentsCoordinatedTests(WritableCluster cluster, EndpointUsage usage) : base(
-		new CoordinatedUsageV2(cluster, usage)
+		new CoordinatedUsage(cluster, usage)
 		{
 			{
 				IndexDocumentStep, u =>

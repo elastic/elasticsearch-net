@@ -27,9 +27,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	[JsonConverter(typeof(AllocationExplainDecisionConverter))]
 	public enum AllocationExplainDecision
 	{
+		[EnumMember(Value = "YES")]
 		Yes,
+		[EnumMember(Value = "THROTTLE")]
 		Throttle,
+		[EnumMember(Value = "NO")]
 		No,
+		[EnumMember(Value = "ALWAYS")]
 		Always
 	}
 
@@ -79,13 +83,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	[JsonConverter(typeof(DecisionConverter))]
 	public enum Decision
 	{
+		[EnumMember(Value = "yes")]
 		Yes,
+		[EnumMember(Value = "worse_balance")]
 		WorseBalance,
+		[EnumMember(Value = "throttled")]
 		Throttled,
+		[EnumMember(Value = "no_valid_shard_copy")]
 		NoValidShardCopy,
+		[EnumMember(Value = "no_attempt")]
 		NoAttempt,
+		[EnumMember(Value = "no")]
 		No,
+		[EnumMember(Value = "awaiting_info")]
 		AwaitingInfo,
+		[EnumMember(Value = "allocation_delayed")]
 		AllocationDelayed
 	}
 
@@ -155,20 +167,35 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	[JsonConverter(typeof(UnassignedInformationReasonConverter))]
 	public enum UnassignedInformationReason
 	{
+		[EnumMember(Value = "REROUTE_CANCELLED")]
 		RerouteCancelled,
+		[EnumMember(Value = "REPLICA_ADDED")]
 		ReplicaAdded,
+		[EnumMember(Value = "REINITIALIZED")]
 		Reinitialized,
+		[EnumMember(Value = "REALLOCATED_REPLICA")]
 		ReallocatedReplica,
+		[EnumMember(Value = "PRIMARY_FAILED")]
 		PrimaryFailed,
+		[EnumMember(Value = "NODE_LEFT")]
 		NodeLeft,
+		[EnumMember(Value = "NEW_INDEX_RESTORED")]
 		NewIndexRestored,
+		[EnumMember(Value = "MANUAL_ALLOCATION")]
 		ManualAllocation,
+		[EnumMember(Value = "INDEX_REOPENED")]
 		IndexReopened,
+		[EnumMember(Value = "INDEX_CREATED")]
 		IndexCreated,
+		[EnumMember(Value = "FORCED_EMPTY_PRIMARY")]
 		ForcedEmptyPrimary,
+		[EnumMember(Value = "EXISTING_INDEX_RESTORED")]
 		ExistingIndexRestored,
+		[EnumMember(Value = "DANGLING_INDEX_IMPORTED")]
 		DanglingIndexImported,
+		[EnumMember(Value = "CLUSTER_RECOVERED")]
 		ClusterRecovered,
+		[EnumMember(Value = "ALLOCATION_FAILED")]
 		AllocationFailed
 	}
 

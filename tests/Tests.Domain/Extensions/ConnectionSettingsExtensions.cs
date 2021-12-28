@@ -6,8 +6,7 @@ namespace Tests.Domain.Extensions
 {
 	public static class ConnectionSettingsExtensions
 	{
-		public static ElasticsearchClientSettings ApplyDomainSettings(this ElasticsearchClientSettings settings) =>
-			settings
+		public static ElasticsearchClientSettings ApplyDomainSettings(this ElasticsearchClientSettings settings) =>	settings
 				.Authentication(new BasicAuthentication("elastic", "password"))
 
 				.DefaultIndex("default-index")
@@ -21,14 +20,17 @@ namespace Tests.Domain.Extensions
 					.IndexName(TestValueHelper.ProjectsIndex)
 					.RelationName("commits")
 				)
+
 				.DefaultMappingFor<Developer>(map => map
 					.IndexName("devs")
 					.Ignore(p => p.PrivateValue)
 					.PropertyName(p => p.OnlineHandle, "nickname")
 				)
+
 				.DefaultMappingFor<ProjectPercolation>(map => map
 					.IndexName("queries")
 				);
+
 				//.DefaultMappingFor<Metric>(map => map
 				//	.IndexName("server-metrics")
 				//)

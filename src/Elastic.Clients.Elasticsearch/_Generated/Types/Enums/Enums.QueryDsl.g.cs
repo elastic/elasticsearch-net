@@ -27,10 +27,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(ChildScoreModeConverter))]
 	public enum ChildScoreMode
 	{
+		[EnumMember(Value = "sum")]
 		Sum,
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "min")]
 		Min,
+		[EnumMember(Value = "max")]
 		Max,
+		[EnumMember(Value = "avg")]
 		Avg
 	}
 
@@ -85,7 +90,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(CombinedFieldsOperatorConverter))]
 	public enum CombinedFieldsOperator
 	{
+		[EnumMember(Value = "or")]
 		Or,
+		[EnumMember(Value = "and")]
 		And
 	}
 
@@ -125,7 +132,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(CombinedFieldsZeroTermsConverter))]
 	public enum CombinedFieldsZeroTerms
 	{
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "all")]
 		All
 	}
 
@@ -165,15 +174,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FieldValueFactorModifierConverter))]
 	public enum FieldValueFactorModifier
 	{
+		[EnumMember(Value = "square")]
 		Square,
+		[EnumMember(Value = "sqrt")]
 		Sqrt,
+		[EnumMember(Value = "reciprocal")]
 		Reciprocal,
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "log2p")]
 		Log2p,
+		[EnumMember(Value = "log1p")]
 		Log1p,
+		[EnumMember(Value = "log")]
 		Log,
+		[EnumMember(Value = "ln2p")]
 		Ln2p,
+		[EnumMember(Value = "ln1p")]
 		Ln1p,
+		[EnumMember(Value = "ln")]
 		Ln
 	}
 
@@ -253,11 +272,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FunctionBoostModeConverter))]
 	public enum FunctionBoostMode
 	{
+		[EnumMember(Value = "sum")]
 		Sum,
+		[EnumMember(Value = "replace")]
 		Replace,
+		[EnumMember(Value = "multiply")]
 		Multiply,
+		[EnumMember(Value = "min")]
 		Min,
+		[EnumMember(Value = "max")]
 		Max,
+		[EnumMember(Value = "avg")]
 		Avg
 	}
 
@@ -317,11 +342,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(FunctionScoreModeConverter))]
 	public enum FunctionScoreMode
 	{
+		[EnumMember(Value = "sum")]
 		Sum,
+		[EnumMember(Value = "multiply")]
 		Multiply,
+		[EnumMember(Value = "min")]
 		Min,
+		[EnumMember(Value = "max")]
 		Max,
+		[EnumMember(Value = "first")]
 		First,
+		[EnumMember(Value = "avg")]
 		Avg
 	}
 
@@ -381,8 +412,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(GeoValidationMethodConverter))]
 	public enum GeoValidationMethod
 	{
+		[EnumMember(Value = "strict")]
 		Strict,
+		[EnumMember(Value = "ignore_malformed")]
 		IgnoreMalformed,
+		[EnumMember(Value = "coerce")]
 		Coerce
 	}
 
@@ -427,7 +461,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(OperatorConverter))]
 	public enum Operator
 	{
+		[EnumMember(Value = "or")]
 		Or,
+		[EnumMember(Value = "and")]
 		And
 	}
 
@@ -484,11 +520,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(TextQueryTypeConverter))]
 	public enum TextQueryType
 	{
+		[EnumMember(Value = "phrase_prefix")]
 		PhrasePrefix,
+		[EnumMember(Value = "phrase")]
 		Phrase,
+		[EnumMember(Value = "most_fields")]
 		MostFields,
+		[EnumMember(Value = "cross_fields")]
 		CrossFields,
+		[EnumMember(Value = "bool_prefix")]
 		BoolPrefix,
+		[EnumMember(Value = "best_fields")]
 		BestFields
 	}
 
@@ -548,7 +590,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	[JsonConverter(typeof(ZeroTermsQueryConverter))]
 	public enum ZeroTermsQuery
 	{
+		[EnumMember(Value = "none")]
 		None,
+		[EnumMember(Value = "all")]
 		All
 	}
 
