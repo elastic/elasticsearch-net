@@ -18,6 +18,8 @@ namespace Elastic.Clients.Elasticsearch
 	/// </remarks>
 	public abstract class BulkOperationBase : IBulkOperation, IStreamSerializable
 	{
+		internal BulkOperationBase() { }
+
 		/// <summary>
 		/// The document ID.
 		/// <para>Required for update and delete operations.</para>

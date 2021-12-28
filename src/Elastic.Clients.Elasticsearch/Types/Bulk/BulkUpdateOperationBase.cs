@@ -13,6 +13,8 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public abstract class BulkUpdateOperationBase : BulkOperationBase
 	{
+		protected internal BulkUpdateOperationBase() : base() { }
+
 		private static byte _newline => (byte)'\n';
 
 		[JsonPropertyName("retry_on_conflict")]
