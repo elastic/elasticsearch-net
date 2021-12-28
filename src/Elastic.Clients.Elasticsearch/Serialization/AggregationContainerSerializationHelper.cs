@@ -16,7 +16,37 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public override bool CanConvert(Type typeToConvert) => false;
 
+		
+
 		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+	}
+
+	//internal sealed class ReadOnlyDictionaryConverter
+
+	internal sealed class MyConverter : JsonConverterAttribute
+	{
+		public MyConverter(Type valueType) => ValueType = valueType;
+
+		public Type ValueType { get; }
+
+		public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateConverter<>).MakeGenericType(ValueType));
+	}
+
+	internal sealed class IntermediateConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
+	{
+		public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var converter = options.GetConverter(typeof(ReadOnlyIndexNameDictionary<>).MakeGenericType(typeof(TValue)));
+
+			if (converter is ReadOnlyIndexNameDictionaryConverter<TValue> specialisedConverter)
+			{
+				return specialisedConverter.Read(ref reader, typeToConvert, options);
+			}
+
+			return null;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IReadOnlyDictionary<IndexName, TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
 	}
 
 	internal sealed class ReadOnlyIndexNameDictionaryConverterFactory : JsonConverterFactory
@@ -40,26 +70,46 @@ namespace Elastic.Clients.Elasticsearch
 			return (JsonConverter)Activator.CreateInstance(typeof(ReadOnlyIndexNameDictionaryConverter<>).MakeGenericType(valueType), _settings);
 		}
 
-		private class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<ReadOnlyIndexNameDictionary<TValue>>
-		{
-			private readonly IElasticsearchClientSettings _settings;
+		//private class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<ReadOnlyIndexNameDictionary<TValue>>
+		//{
+		//	private readonly IElasticsearchClientSettings _settings;
 
-			public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
+		//	public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-			public override ReadOnlyIndexNameDictionary<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-			{
-				var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
+		//	public override ReadOnlyIndexNameDictionary<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		//	{
+		//		var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
 
-				var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
+		//		var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
 
-				return readOnlyDictionary;
-			}
+		//		return readOnlyDictionary;
 
-			public override void Write(Utf8JsonWriter writer, ReadOnlyIndexNameDictionary<TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
-		}
+				
+		//	}
+
+		//	public override void Write(Utf8JsonWriter writer, ReadOnlyIndexNameDictionary<TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
+		//}
 	}
 
-	
+	internal sealed class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public ReadOnlyIndexNameDictionaryConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var initialDictionary = JsonSerializer.Deserialize<Dictionary<IndexName, TValue>>(ref reader, options);
+
+			var readOnlyDictionary = new ReadOnlyIndexNameDictionary<TValue>(initialDictionary, _settings);
+
+			return readOnlyDictionary;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IReadOnlyDictionary<IndexName, TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
+	}
+
+
 	/// <summary>
 	/// A specialised readonly dictionary for <typeparamref name="TValue"/> data, keyed by <see cref="IndexName"/>.
 	/// <para>This supports inferrence enabled lookups by ensuring keys are sanitized when storing the values and when performing lookups.</para>
@@ -128,7 +178,7 @@ namespace Elastic.Clients.Elasticsearch
 			return container;
 		}
 	}
-		
+
 	internal static class UtilExtensions
 	{
 		private const long MillisecondsInAWeek = MillisecondsInADay * 7;
