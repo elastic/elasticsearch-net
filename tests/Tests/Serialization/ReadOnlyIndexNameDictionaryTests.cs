@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Tests.Domain;
 using Tests.Core.Extensions;
+using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch.Cluster.Health;
 
 namespace Tests.Serialization;
 
@@ -24,6 +26,9 @@ public class ReadOnlyIndexNameDictionaryTests : SerializerTestBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public ReadOnlyIndexNameDictionary<Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats> Indices { get; init; }
+		[MyConverter(typeof(IndexHealthStats))]
+
+		//[JsonConverter(typeof(ReadOnlyIndexNameDictionaryConverterFactory))]
+		public IReadOnlyDictionary<IndexName, IndexHealthStats> Indices { get; init; }
 	}
 }
