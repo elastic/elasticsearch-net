@@ -8,6 +8,7 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests;
 using Tests.Framework.EndpointTests.TestState;
+using Tests.Core.Extensions;
 using HttpMethod = Elastic.Transport.HttpMethod;
 
 namespace Tests.Cluster.ClusterHealth;
@@ -50,8 +51,6 @@ public class ClusterHealthShardsApiTests
 		response.Indices.Should()
 			.NotBeEmpty()
 			.And.ContainKey(Infer.Index<Developer>());
-
-		//var indexHealth = response.Indices[Infer.Index<Developer>()];
 
 		response.Indices.Should()
 			.NotBeEmpty()

@@ -24,58 +24,36 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public abstract partial class PipelineAggregationBase : Aggregations.BucketPathAggregationBase
+	public abstract partial class BucketPathAggregationBase : Aggregations.AggregationBase
 	{
-		protected PipelineAggregationBase(string name) : base(name)
+		protected BucketPathAggregationBase(string name) : base(name)
 		{
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gap_policy")]
-		public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+		[JsonPropertyName("buckets_path")]
+		public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 	}
 
-	public sealed partial class PipelineAggregationBaseDescriptor : DescriptorBase<PipelineAggregationBaseDescriptor>
+	public sealed partial class BucketPathAggregationBaseDescriptor : DescriptorBase<BucketPathAggregationBaseDescriptor>
 	{
-		public PipelineAggregationBaseDescriptor()
+		public BucketPathAggregationBaseDescriptor()
 		{
 		}
 
-		internal PipelineAggregationBaseDescriptor(Action<PipelineAggregationBaseDescriptor> configure) => configure.Invoke(this);
-		internal string? FormatValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
-
+		internal BucketPathAggregationBaseDescriptor(Action<BucketPathAggregationBaseDescriptor> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
 		internal string? NameValue { get; private set; }
 
-		public PipelineAggregationBaseDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public PipelineAggregationBaseDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
-		public PipelineAggregationBaseDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
-		public PipelineAggregationBaseDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public PipelineAggregationBaseDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
+		public BucketPathAggregationBaseDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
+		public BucketPathAggregationBaseDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public BucketPathAggregationBaseDescriptor Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (GapPolicyValue is not null)
-			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, GapPolicyValue, options);
-			}
-
 			if (BucketsPathValue is not null)
 			{
 				writer.WritePropertyName("buckets_path");

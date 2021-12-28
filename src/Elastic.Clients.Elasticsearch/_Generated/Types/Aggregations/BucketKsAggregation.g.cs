@@ -24,49 +24,49 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	internal sealed class PercentilesBucketAggregationConverter : JsonConverter<PercentilesBucketAggregation>
+	internal sealed class BucketKsAggregationConverter : JsonConverter<BucketKsAggregation>
 	{
-		public override PercentilesBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override BucketKsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 				throw new JsonException("Unexpected JSON detected.");
 			reader.Read();
 			var aggName = reader.GetString();
-			if (aggName != "percentiles_bucket")
+			if (aggName != "bucket_count_ks_test")
 				throw new JsonException("Unexpected JSON detected.");
-			var agg = new PercentilesBucketAggregation(aggName);
+			var agg = new BucketKsAggregation(aggName);
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("percents"))
+					if (reader.ValueTextEquals("alternative"))
+					{
+						var value = JsonSerializer.Deserialize<IEnumerable<string>?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Alternative = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("fractions"))
 					{
 						var value = JsonSerializer.Deserialize<IEnumerable<double>?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Percents = value;
+							agg.Fractions = value;
 						}
 
 						continue;
 					}
 
-					if (reader.ValueTextEquals("format"))
+					if (reader.ValueTextEquals("sampling_method"))
 					{
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Format = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("gap_policy"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.GapPolicy = value;
+							agg.SamplingMethod = value;
 						}
 
 						continue;
@@ -106,27 +106,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return agg;
 		}
 
-		public override void Write(Utf8JsonWriter writer, PercentilesBucketAggregation value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, BucketKsAggregation value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("percentiles_bucket");
+			writer.WritePropertyName("bucket_count_ks_test");
 			writer.WriteStartObject();
-			if (value.Percents is not null)
+			if (value.Alternative is not null)
 			{
-				writer.WritePropertyName("percents");
-				JsonSerializer.Serialize(writer, value.Percents, options);
+				writer.WritePropertyName("alternative");
+				JsonSerializer.Serialize(writer, value.Alternative, options);
 			}
 
-			if (!string.IsNullOrEmpty(value.Format))
+			if (value.Fractions is not null)
 			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
+				writer.WritePropertyName("fractions");
+				JsonSerializer.Serialize(writer, value.Fractions, options);
 			}
 
-			if (value.GapPolicy is not null)
+			if (!string.IsNullOrEmpty(value.SamplingMethod))
 			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, value.GapPolicy, options);
+				writer.WritePropertyName("sampling_method");
+				writer.WriteStringValue(value.SamplingMethod);
 			}
 
 			if (value.BucketsPath is not null)
@@ -146,61 +146,69 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	[JsonConverter(typeof(PercentilesBucketAggregationConverter))]
-	public partial class PercentilesBucketAggregation : Aggregations.PipelineAggregationBase
+	[JsonConverter(typeof(BucketKsAggregationConverter))]
+	public partial class BucketKsAggregation : Aggregations.BucketPathAggregationBase
 	{
-		public PercentilesBucketAggregation(string name) : base(name)
+		public BucketKsAggregation(string name) : base(name)
 		{
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("percents")]
-		public IEnumerable<double>? Percents { get; set; }
+		[JsonPropertyName("alternative")]
+		public IEnumerable<string>? Alternative { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fractions")]
+		public IEnumerable<double>? Fractions { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sampling_method")]
+		public string? SamplingMethod { get; set; }
 	}
 
-	public sealed partial class PercentilesBucketAggregationDescriptor : DescriptorBase<PercentilesBucketAggregationDescriptor>
+	public sealed partial class BucketKsAggregationDescriptor : DescriptorBase<BucketKsAggregationDescriptor>
 	{
-		public PercentilesBucketAggregationDescriptor()
+		public BucketKsAggregationDescriptor()
 		{
 		}
 
-		internal PercentilesBucketAggregationDescriptor(Action<PercentilesBucketAggregationDescriptor> configure) => configure.Invoke(this);
-		internal IEnumerable<double>? PercentsValue { get; private set; }
+		internal BucketKsAggregationDescriptor(Action<BucketKsAggregationDescriptor> configure) => configure.Invoke(this);
+		internal IEnumerable<string>? AlternativeValue { get; private set; }
 
-		internal string? FormatValue { get; private set; }
+		internal IEnumerable<double>? FractionsValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; private set; }
+		internal string? SamplingMethodValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public PercentilesBucketAggregationDescriptor Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
-		public PercentilesBucketAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public PercentilesBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
-		public PercentilesBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
-		public PercentilesBucketAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public BucketKsAggregationDescriptor Alternative(IEnumerable<string>? alternative) => Assign(alternative, (a, v) => a.AlternativeValue = v);
+		public BucketKsAggregationDescriptor Fractions(IEnumerable<double>? fractions) => Assign(fractions, (a, v) => a.FractionsValue = v);
+		public BucketKsAggregationDescriptor SamplingMethod(string? samplingMethod) => Assign(samplingMethod, (a, v) => a.SamplingMethodValue = v);
+		public BucketKsAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
+		public BucketKsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("percentiles_bucket");
+			writer.WritePropertyName("bucket_count_ks_test");
 			writer.WriteStartObject();
-			if (PercentsValue is not null)
+			if (AlternativeValue is not null)
 			{
-				writer.WritePropertyName("percents");
-				JsonSerializer.Serialize(writer, PercentsValue, options);
+				writer.WritePropertyName("alternative");
+				JsonSerializer.Serialize(writer, AlternativeValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(FormatValue))
+			if (FractionsValue is not null)
 			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
+				writer.WritePropertyName("fractions");
+				JsonSerializer.Serialize(writer, FractionsValue, options);
 			}
 
-			if (GapPolicyValue is not null)
+			if (!string.IsNullOrEmpty(SamplingMethodValue))
 			{
-				writer.WritePropertyName("gap_policy");
-				JsonSerializer.Serialize(writer, GapPolicyValue, options);
+				writer.WritePropertyName("sampling_method");
+				writer.WriteStringValue(SamplingMethodValue);
 			}
 
 			if (BucketsPathValue is not null)
