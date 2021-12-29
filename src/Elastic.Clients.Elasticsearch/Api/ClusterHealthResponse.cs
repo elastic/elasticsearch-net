@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			var inFlightFetch = 0;
 			long taskMaxWaitingTimeInQueue = default;
 			double activeShardsAsPercentage = default;
-			ReadOnlyIndexNameDictionary<IndexHealthStats> indices = null;
+			ReadOnlyIndexNameDictionary<IndexHealthStats> indices = default;
 
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
