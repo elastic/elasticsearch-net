@@ -23,9 +23,9 @@ namespace Elastic.Clients.Elasticsearch
 
 	//internal sealed class ReadOnlyDictionaryConverter
 
-	internal sealed class MyConverter : JsonConverterAttribute
+	internal sealed class ReadOnlyIndexNameDictionaryConverter : JsonConverterAttribute
 	{
-		public MyConverter(Type valueType) => ValueType = valueType;
+		public ReadOnlyIndexNameDictionaryConverter(Type valueType) => ValueType = valueType;
 
 		public Type ValueType { get; }
 
@@ -115,27 +115,40 @@ namespace Elastic.Clients.Elasticsearch
 	/// <para>This supports inferrence enabled lookups by ensuring keys are sanitized when storing the values and when performing lookups.</para>
 	/// </summary>
 	/// <typeparam name="TValue"></typeparam>
-	public sealed class ReadOnlyIndexNameDictionary<TValue> : IReadOnlyDictionary<IndexName, TValue>
+	public struct ReadOnlyIndexNameDictionary<TValue> : IReadOnlyDictionary<IndexName, TValue>
 	{
 		private readonly Dictionary<IndexName, TValue> _backingDictionary;
-		private readonly IElasticsearchClientSettings _settings;
+		private readonly IElasticsearchClientSettings? _settings;
+
+		public ReadOnlyIndexNameDictionary()
+		{
+			_backingDictionary = new Dictionary<IndexName,TValue>(0);
+			_settings = null;
+		}
 
 		internal ReadOnlyIndexNameDictionary(Dictionary<IndexName, TValue> source, IElasticsearchClientSettings settings)
 		{
 			_settings = settings;
 
-			var backingDictionary = new Dictionary<IndexName, TValue>(source.Count);
+			// This is an "optimised version" which doesn't cause a second dictionary to be allocated.
+			// Since we expect this to be used only for deserialisation, the keys received will already have been strings,
+			// so no further sanitisation is required.
+
+			//var backingDictionary = new Dictionary<IndexName, TValue>(source.Count);
 
 			if (source == null)
+			{
+				_backingDictionary = new Dictionary<IndexName, TValue>(0);
 				return;
+			}
 
-			foreach (var key in source.Keys)
-				backingDictionary[Sanitize(key)] = source[key];
+			//foreach (var key in source.Keys)
+			//	backingDictionary[Sanitize(key)] = source[key];
 
-			_backingDictionary = backingDictionary;
+			_backingDictionary = source;
 		}
 
-		private string Sanitize(IndexName key) => key?.GetString(_settings);
+		private string Sanitize(IndexName key) => _settings is not null ? key?.GetString(_settings) : string.Empty;
 
 		public TValue this[IndexName key] => _backingDictionary.TryGetValue(Sanitize(key), out var v) ? v : default;
 		public TValue this[string key] => _backingDictionary.TryGetValue(key, out var v) ? v : default;
@@ -148,6 +161,8 @@ namespace Elastic.Clients.Elasticsearch
 		public bool TryGetValue(IndexName key, out TValue value) => _backingDictionary.TryGetValue(Sanitize(key), out value);
 		IEnumerator IEnumerable.GetEnumerator() => _backingDictionary.GetEnumerator();
 	}
+
+	
 
 	internal static class SerializationConstants
 	{
