@@ -18,6 +18,8 @@ public class ClusterGetSettingsApiTests
 	protected override HttpMethod HttpMethod => HttpMethod.GET;
 	protected override string ExpectedUrlPathAndQuery => "/_cluster/settings";
 
+	protected override ClusterGetSettingsRequest Initializer { get; } = new();
+
 	protected override LazyResponses ClientUsage() => Calls(
 		(client, f) => client.Cluster.GetSettings(),
 		(client, f) => client.Cluster.GetSettingsAsync(),

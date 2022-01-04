@@ -65,7 +65,7 @@ internal class DefaultHighLevelSerializer : SerializerBase
 					new SelfDeserializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					//new FieldConverterFactory(settings),
-					//new JsonStringEnumConverter(),  //required for source serialisation
+					new JsonStringEnumConverter(),  //required for source serialisation
 					
 					new DictionaryConverter(),
 					//new BucketsConverterFactory(),
