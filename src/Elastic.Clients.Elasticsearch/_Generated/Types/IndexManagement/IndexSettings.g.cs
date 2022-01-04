@@ -224,7 +224,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("verified_before_close")]
-		public Union<bool?, string?>? VerifiedBeforeClose { get; set; }
+		public bool? VerifiedBeforeClose { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("format")]
@@ -244,7 +244,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("query_string.lenient")]
-		public Union<bool?, string?>? QueryStringLenient { get; set; }
+		public bool? QueryStringLenient { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("priority")]
@@ -368,7 +368,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; private set; }
 
-		internal Union<bool?, string?>? VerifiedBeforeCloseValue { get; private set; }
+		internal bool? VerifiedBeforeCloseValue { get; private set; }
 
 		internal Union<string?, int?>? FormatValue { get; private set; }
 
@@ -378,7 +378,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal string? TranslogFlushThresholdSizeValue { get; private set; }
 
-		internal Union<bool?, string?>? QueryStringLenientValue { get; private set; }
+		internal bool? QueryStringLenientValue { get; private set; }
 
 		internal Union<int?, string?>? PriorityValue { get; private set; }
 
@@ -613,12 +613,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.VersionDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
+		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(bool? verifiedBeforeClose = true) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
 		public IndexSettingsDescriptor<TDocument> Format(Union<string?, int?>? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
 		public IndexSettingsDescriptor<TDocument> TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a.TranslogDurabilityValue = v);
 		public IndexSettingsDescriptor<TDocument> TranslogFlushThresholdSize(string? translogFlushThresholdSize) => Assign(translogFlushThresholdSize, (a, v) => a.TranslogFlushThresholdSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> QueryStringLenient(Union<bool?, string?>? queryStringLenient) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
+		public IndexSettingsDescriptor<TDocument> QueryStringLenient(bool? queryStringLenient = true) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
 		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
 		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
 		public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
@@ -1030,10 +1030,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
-			if (VerifiedBeforeCloseValue is not null)
+			if (VerifiedBeforeCloseValue.HasValue)
 			{
 				writer.WritePropertyName("verified_before_close");
-				JsonSerializer.Serialize(writer, VerifiedBeforeCloseValue, options);
+				writer.WriteBooleanValue(VerifiedBeforeCloseValue.Value);
 			}
 
 			if (FormatValue is not null)
@@ -1060,10 +1060,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				writer.WriteStringValue(TranslogFlushThresholdSizeValue);
 			}
 
-			if (QueryStringLenientValue is not null)
+			if (QueryStringLenientValue.HasValue)
 			{
 				writer.WritePropertyName("query_string.lenient");
-				JsonSerializer.Serialize(writer, QueryStringLenientValue, options);
+				writer.WriteBooleanValue(QueryStringLenientValue.Value);
 			}
 
 			if (PriorityValue is not null)

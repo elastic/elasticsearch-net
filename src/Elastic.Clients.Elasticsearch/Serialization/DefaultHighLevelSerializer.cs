@@ -47,6 +47,7 @@ internal class DefaultHighLevelSerializer : SerializerBase
 					//new ConvertAsConverterFactory(settings),
 					//new SourceConverterFactory(settings),
 					//new ReadOnlyIndexNameDictionaryConverter(settings),
+					new SourceConverterFactory(settings),
 					new ReadOnlyIndexNameDictionaryConverterFactory(settings),
 					new CalendarIntervalConverter(),
 					new IndexNameConverter(settings),
