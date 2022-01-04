@@ -80,7 +80,7 @@ public class Project
 			.UseSeed(TestConfiguration.Instance.Seed)
 			.RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
 			.RuleFor(p => p.Description, f => f.Lorem.Paragraphs())
-			//.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
+			.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
 			.RuleFor(p => p.Visibility, f => f.PickRandom<Visibility>())
 			.RuleFor(p => p.StartedOn, p => p.Date.Past())
 			.RuleFor(p => p.DateString, (p, d) => d.StartedOn.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"))
