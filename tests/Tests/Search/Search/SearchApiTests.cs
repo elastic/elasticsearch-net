@@ -23,6 +23,8 @@ namespace Tests.Search.Search
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override bool VerifyJson => true;
+
 		protected override object ExpectJson => new
 		{
 			from = 10,

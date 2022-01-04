@@ -1,0 +1,21 @@
+{
+  aggregations: {
+    startDates: {
+      terms: {
+        field: startedOn
+      }
+    }
+  },
+  from: 10,
+  post_filter: {
+    term: {
+      state: {
+        value: Stable
+      }
+    }
+  },
+  query: {
+    match_all: {}
+  },
+  size: 20
+}
