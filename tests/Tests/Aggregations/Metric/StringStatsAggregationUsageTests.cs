@@ -44,6 +44,6 @@ public class StringStatsAggregationUsageTests : AggregationUsageTestBase<ReadOnl
 		commitStats.MaxLength.Should().BeGreaterThan(0);
 		commitStats.MinLength.Should().BeGreaterThan(0);
 		commitStats.Count.Should().BeGreaterThan(0);
-		commitStats.Distribution.Should().NotBeNull().And.BeEmpty();
+		commitStats.Distribution.Should().BeNull();
 	}
 }
