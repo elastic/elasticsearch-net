@@ -84,6 +84,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
+		[SourceConverter]
 		public TDocument? Source { get; init; }
 
 		[JsonInclude]

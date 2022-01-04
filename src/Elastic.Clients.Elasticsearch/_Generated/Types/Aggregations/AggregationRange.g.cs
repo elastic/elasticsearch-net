@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	{
 		[JsonInclude]
 		[JsonPropertyName("from")]
-		public Union<double?, string?>? From { get; set; }
+		public object? From { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("key")]
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("to")]
-		public Union<double?, string?>? To { get; set; }
+		public object? To { get; set; }
 	}
 
 	public sealed partial class AggregationRangeDescriptor : DescriptorBase<AggregationRangeDescriptor>
@@ -46,15 +46,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal AggregationRangeDescriptor(Action<AggregationRangeDescriptor> configure) => configure.Invoke(this);
-		internal Union<double?, string?>? FromValue { get; private set; }
+		internal object? FromValue { get; private set; }
 
 		internal string? KeyValue { get; private set; }
 
-		internal Union<double?, string?>? ToValue { get; private set; }
+		internal object? ToValue { get; private set; }
 
-		public AggregationRangeDescriptor From(Union<double?, string?>? from) => Assign(from, (a, v) => a.FromValue = v);
+		public AggregationRangeDescriptor From(object? from) => Assign(from, (a, v) => a.FromValue = v);
 		public AggregationRangeDescriptor Key(string? key) => Assign(key, (a, v) => a.KeyValue = v);
-		public AggregationRangeDescriptor To(Union<double?, string?>? to) => Assign(to, (a, v) => a.ToValue = v);
+		public AggregationRangeDescriptor To(object? to) => Assign(to, (a, v) => a.ToValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

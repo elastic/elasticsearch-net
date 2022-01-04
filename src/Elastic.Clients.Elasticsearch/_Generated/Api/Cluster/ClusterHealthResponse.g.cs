@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Cluster.Health;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
@@ -46,7 +45,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IReadOnlyDictionary<IndexName, IndexHealthStats>? Indices { get; init; }
+		public Elastic.Clients.Elasticsearch.ReadOnlyIndexNameDictionary<Elastic.Clients.Elasticsearch.Cluster.Health.IndexHealthStats>? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("initializing_shards")]

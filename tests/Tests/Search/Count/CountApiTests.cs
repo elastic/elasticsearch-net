@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information
 
 using System;
-using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -20,8 +19,6 @@ namespace Tests.Search.Count
 		protected override bool ExpectIsValid => true;
 
 		protected override bool VerifyJson => true;
-
-		//protected override bool VerifyResponseObjects => true;
 
 		protected override object ExpectJson => new
 		{
@@ -66,10 +63,10 @@ namespace Tests.Search.Count
 			(c, r) => c.CountAsync(r)
 		);
 
-		protected override void ExpectResponse(CountResponse response) => response.Count.Should().BeGreaterThan(0);
+		protected override void ExpectResponse(CountResponse response) => response.Count.Should().BeGreaterOrEqualTo(0);
 	}
 
-		public class CountApi_FluentMatch_ApiTests
+	public class CountApi_FluentMatch_ApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor<Project>, CountRequest<Project>>
 	{
 		public CountApi_FluentMatch_ApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

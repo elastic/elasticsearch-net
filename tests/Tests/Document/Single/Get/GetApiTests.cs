@@ -133,7 +133,7 @@ namespace Tests.Document.Single.Get
 		protected override void ExpectResponse(GetResponse<Project> response)
 		{
 			response.Found.Should().BeFalse();
-			response.Index.Name.Should().BeNullOrWhiteSpace();
+			response.Index.Should().BeNull();
 			response.ServerError.Should().NotBeNull();
 		}
 	}
