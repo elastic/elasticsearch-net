@@ -47,15 +47,19 @@ public class ClusterHealthShardsApiTests
 		response.NumberOfInFlightFetch.Should().BeGreaterOrEqualTo(0);
 		response.TaskMaxWaitingInQueueMillis.Should().BeGreaterOrEqualTo(0);
 
-		response.Indices.Should()
+		response.Indices.HasValue.Should().BeTrue();
+
+		var indices = response.Indices.Value;
+
+		indices.Should()
 			.NotBeEmpty()
 			.And.ContainKey(Infer.Index<Developer>());
 
-		response.Indices.Should()
+		indices.Should()
 			.NotBeEmpty()
 			.And.ContainKey("devs");
 
-		var indexHealth = response.Indices["devs"];
+		var indexHealth = indices["devs"];
 		indexHealth.ActivePrimaryShards.Should().BeGreaterThan(0);
 		indexHealth.ActiveShards.Should().BeGreaterThan(0);
 		indexHealth.Shards["0"].Status.Should().Be(HealthStatus.Green);

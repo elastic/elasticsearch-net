@@ -203,6 +203,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 						continue;
 					}
+
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
+						continue;
+					}
 				}
 			}
 
@@ -333,6 +344,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.Size.Value);
 			}
 
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
 			writer.WriteEndObject();
 			if (value.Meta is not null)
 			{
@@ -418,6 +435,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
 	}
 
 	public sealed partial class TermsAggregationDescriptor<TDocument> : DescriptorBase<TermsAggregationDescriptor<TDocument>>
@@ -457,6 +478,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal int? SizeValue { get; private set; }
 
+		internal string? FormatValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
@@ -481,6 +504,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(showTermDocCountError, (a, v) => a.ShowTermDocCountErrorValue = v);
 		public TermsAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public TermsAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public TermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -596,6 +620,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
 			}
 
 			writer.WriteEndObject();

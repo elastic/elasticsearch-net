@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -36,6 +37,8 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public override IReadOnlyDictionary<IndexName, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
+			
+
 			var converter = options.GetConverter(typeof(ReadOnlyIndexNameDictionary<>).MakeGenericType(typeof(TValue)));
 
 			if (converter is ReadOnlyIndexNameDictionaryConverter<TValue> specialisedConverter)
@@ -54,7 +57,7 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly IElasticsearchClientSettings _settings;
 
 		public ReadOnlyIndexNameDictionaryConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
-
+				 
 		public override bool CanConvert(Type typeToConvert)
 		{
 			if (!typeToConvert.IsGenericType)
@@ -89,6 +92,81 @@ namespace Elastic.Clients.Elasticsearch
 
 		//	public override void Write(Utf8JsonWriter writer, ReadOnlyIndexNameDictionary<TValue> value, JsonSerializerOptions options) => throw new NotImplementedException();
 		//}
+	}
+
+
+	internal sealed class SourceConverterAttribute : JsonConverterAttribute
+	{
+		public override JsonConverter? CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(IntermediateSourceConverter<>).MakeGenericType(typeToConvert));
+	}
+
+	internal sealed class IntermediateSourceConverter<T> : JsonConverter<T>
+	{
+		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var converter = options.GetConverter(typeof(SourceMarker<>).MakeGenericType(typeToConvert));
+
+			if (converter is SourceConverter<T> sourceConverter)
+			{
+				var source = sourceConverter.Read(ref reader, typeToConvert, options);
+				return source.Source;
+			}
+
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+		{
+			var converter = options.GetConverter(typeof(SourceMarker<>).MakeGenericType(typeof(T)));
+
+			if (converter is SourceConverter<T> sourceConverter)
+			{
+				sourceConverter.Write(writer, new SourceMarker<T> { Source = value }, options);
+			}
+		}
+	}
+
+	internal sealed class SourceConverterFactory : JsonConverterFactory
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public SourceConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override bool CanConvert(Type typeToConvert)
+		{
+			if (!typeToConvert.IsGenericType)
+				return false;
+
+			var canConvert = typeof(SourceMarker<>) == typeToConvert.GetGenericTypeDefinition();
+			return canConvert;
+		}
+
+		public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
+		{
+			var valueType = type.GetGenericArguments()[0];
+			return (JsonConverter)Activator.CreateInstance(typeof(SourceConverter<>).MakeGenericType(valueType), _settings);
+		}
+	}
+
+	internal interface ISourceMarker<T> { }
+
+	internal sealed class SourceMarker<T>
+	{
+		public T Source { get; set; }
+	}
+
+	internal sealed class SourceConverter<T> : JsonConverter<SourceMarker<T>>
+	{
+		private readonly IElasticsearchClientSettings _settings;
+
+		public SourceConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+		public override SourceMarker<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new()
+		{
+			Source = SourceSerialisation.Deserialize<T>(ref reader, _settings)
+		};
+
+		public override void Write(Utf8JsonWriter writer, SourceMarker<T> value, JsonSerializerOptions options) => SourceSerialisation.Serialize<T>(value.Source, writer, _settings);
 	}
 
 	internal sealed class ReadOnlyIndexNameDictionaryConverter<TValue> : JsonConverter<IReadOnlyDictionary<IndexName, TValue>>
