@@ -112,7 +112,7 @@ public class SortUsageTests : SearchUsageTestBase
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
 		.Sort(ss => ss
 			.Ascending(p => p.StartedOn)
-			.Descending(p => p.Name.Suffix("keyword"))
+			.Descending(p => p.Name)
 			.Descending(SortSpecialField.Score)
 			.Ascending(SortSpecialField.DocumentIndexOrder)
 			.Field(f => f
@@ -121,7 +121,7 @@ public class SortUsageTests : SearchUsageTestBase
 				.MissingLast()
 				.UnmappedType(FieldType.Date)
 				.Mode(SortMode.Avg)
-				//.IgnoreUnmappedFields() // not support by server
+				//.IgnoreUnmappedFields() // not supported by server
 				.Nested(n => n
 					.Path(p => p.Tags)
 					.Filter(q => q.MatchAll())

@@ -1,0 +1,6 @@
+{
+  query: {
+    match_all: {}
+  },
+  seq_no_primary_term: true
+}
