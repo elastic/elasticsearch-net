@@ -12,30 +12,37 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Document.Multiple;
 
-// TODO - A way to test the serialised results
-
-public class BulkUpdateManyTests : ApiTestBase<ReadOnlyCluster, BulkResponse, BulkRequestDescriptor, BulkRequest>
+public class BulkUpdateManyTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkResponse, BulkRequestDescriptor, BulkRequest>
 {
 	private readonly List<Project> _updates = Project.Projects.Take(10).ToList();
 
-	public BulkUpdateManyTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public BulkUpdateManyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+	protected override IReadOnlyList<object> ExpectNdjson => _updates.SelectMany(ProjectToBulkJson).ToList();
+
+	private IEnumerable<object> ProjectToBulkJson(Project p)
+	{
+		yield return new Dictionary<string, object> { { "update", new { _id = p.Name, routing = p.Name } } };
+		yield return new { script = new { source = "ctx._source.numberOfContributors++" } };
+	}
 
 	protected override Action<BulkRequestDescriptor> Fluent => d => d
-		.Index(CallIsolatedValue)
-		.UpdateMany(_updates, (b, o) => b.Script(s => s.Source("_source.counter++")));
+		.Index(Infer.Index<Project>())
+		.UpdateMany(_updates, (b, o) => b.Script(s => s.Source("ctx._source.numberOfContributors++")));
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-	protected override BulkRequest Initializer => new(CallIsolatedValue)
+	protected override BulkRequest Initializer => new(Infer.Index<Project>())
 	{
 		Operations = _updates
-			.Select(u => new BulkUpdateOperation<Project, Project>(u) { Script = new InlineScript("_source.counter++") })
+			.Select(u => new BulkUpdateOperation<Project, Project>(u) { Script = new InlineScript("ctx._source.numberOfContributors++") })
 			.ToList<IBulkOperation>()
 	};
 
 	protected override bool SupportsDeserialization => false;
-
-	protected override string ExpectedUrlPathAndQuery => $"/{CallIsolatedValue}/_bulk";
+	protected override string ExpectedUrlPathAndQuery => $"/project/_bulk";
+	protected override bool ExpectIsValid => true;
+	protected override int ExpectStatusCode => 200;
 
 	protected override LazyResponses ClientUsage() => Calls(
 		(client, f) => client.Bulk(f),
@@ -43,4 +50,10 @@ public class BulkUpdateManyTests : ApiTestBase<ReadOnlyCluster, BulkResponse, Bu
 		(client, r) => client.Bulk(r),
 		(client, r) => client.BulkAsync(r)
 	);
+
+	protected override void ExpectResponse(BulkResponse response)
+	{
+		response.Took.Should().BeGreaterThan(0);
+		response.Errors.Should().BeFalse();
+	}
 }

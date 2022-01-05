@@ -79,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch
 		/// </summary>
 		protected abstract string Operation { get; }
 
+		protected abstract Type ClrType { get; }
+
 		/// <summary>
 		/// Derived operations should override this control how the operation and its payload will be serialised into the HTTP request content <see cref="Stream"/>.
 		/// This supports newline delimited JSON data.
@@ -94,6 +96,14 @@ namespace Elastic.Clients.Elasticsearch
 		/// <param name="stream">The writable stream for the HTTP request.</param>
 		/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> for the current client instance.</param>
 		protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings);
+
+		void IBulkOperation.PrepareIndex(IndexName bulkRequestIndex)
+		{
+			Index ??= bulkRequestIndex ?? ClrType;
+
+			if (bulkRequestIndex is not null && Index.Equals(bulkRequestIndex))
+				Index = null;
+		}
 
 		/// <inheritdoc />
 		void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => Serialize(stream, settings);

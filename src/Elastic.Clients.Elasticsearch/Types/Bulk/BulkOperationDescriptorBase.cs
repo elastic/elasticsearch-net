@@ -15,8 +15,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private long? _version;
 		private VersionType? _versionType;
-		private bool _skipClrTypeInference;
-		private bool _skipIndexNameInference;
 		private bool? _requireAlias;
 
 		protected IndexName IndexNameValue { get; set; }
@@ -24,7 +22,6 @@ namespace Elastic.Clients.Elasticsearch
 		protected Routing RoutingValue { get; set; }
 		protected long? IfSequenceNoValue { get; set; }
 		protected long? IfPrimaryTermValue { get; set; }
-
 		protected abstract string Operation { get; }
 		protected abstract Type ClrType { get; }
 
@@ -43,19 +40,12 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TDescriptor Version(long version) => Assign(version, (a, v) => a._version = v);
 
-		public TDescriptor SkipClrTypeInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipClrTypeInference = v);
-
-		protected TDescriptor SkipIndexNameInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipIndexNameInference = v);
-
 		public TDescriptor VersionType(VersionType? versionType) => Assign(versionType, (a, v) => a._versionType = v);
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			IdValue = GetIdForOperation(settings.Inferrer);
 			RoutingValue = GetRoutingForOperation(settings.Inferrer);
-
-			if (!_skipClrTypeInference && !_skipIndexNameInference)
-				IndexNameValue ??= ClrType;
 
 			writer.WriteStartObject();
 
@@ -142,5 +132,13 @@ namespace Elastic.Clients.Elasticsearch
 		protected virtual Id GetIdForOperation(Inferrer inferrer) => IdValue ?? new Id(GetBody());
 
 		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => RoutingValue ?? new Routing(GetBody());
+
+		void IBulkOperation.PrepareIndex(IndexName bulkRequestIndex)
+		{
+			IndexNameValue ??= bulkRequestIndex ?? ClrType;
+
+			if (bulkRequestIndex is not null && IndexNameValue.Equals(bulkRequestIndex))
+				IndexNameValue = null;
+		}
 	}
 }
