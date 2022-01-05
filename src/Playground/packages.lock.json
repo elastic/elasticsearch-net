@@ -43,7 +43,7 @@
       "Elastic.Clients.JsonNetSerializer": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Newtonsoft.Json": "12.0.1"
         }
       },

@@ -1182,7 +1182,7 @@
       "Elastic.Clients.JsonNetSerializer": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Newtonsoft.Json": "12.0.1"
         }
       },
@@ -1206,7 +1206,7 @@
         "type": "Project",
         "dependencies": {
           "DiffPlex": "1.4.1",
-          "Elastic.Clients.JsonNetSerializer": "7.0.0",
+          "Elastic.Clients.JsonNetSerializer": "8.0.0",
           "Elastic.Elasticsearch.Xunit": "0.3.0",
           "FluentAssertions": "5.10.3",
           "JunitXml.TestLogger": "2.1.78",
@@ -1214,7 +1214,7 @@
           "Microsoft.NET.Test.Sdk": "17.0.0",
           "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
           "Proc": "0.6.1",
-          "Tests.Domain": "7.0.0",
+          "Tests.Domain": "8.0.0",
           "xunit": "2.4.1"
         }
       },
@@ -1222,10 +1222,10 @@
         "type": "Project",
         "dependencies": {
           "Bogus": "22.1.2",
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Elastic.Elasticsearch.Managed": "0.2.6",
           "Newtonsoft.Json": "12.0.1",
-          "Tests.Configuration": "7.0.0"
+          "Tests.Configuration": "8.0.0"
         }
       }
     },
@@ -2415,7 +2415,7 @@
       "Elastic.Clients.JsonNetSerializer": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Newtonsoft.Json": "12.0.1"
         }
       },
@@ -2438,7 +2438,7 @@
         "type": "Project",
         "dependencies": {
           "DiffPlex": "1.4.1",
-          "Elastic.Clients.JsonNetSerializer": "7.0.0",
+          "Elastic.Clients.JsonNetSerializer": "8.0.0",
           "Elastic.Elasticsearch.Xunit": "0.3.0",
           "FluentAssertions": "5.10.3",
           "JunitXml.TestLogger": "2.1.78",
@@ -2446,7 +2446,7 @@
           "Microsoft.NET.Test.Sdk": "17.0.0",
           "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
           "Proc": "0.6.1",
-          "Tests.Domain": "7.0.0",
+          "Tests.Domain": "8.0.0",
           "xunit": "2.4.1"
         }
       },
@@ -2454,10 +2454,10 @@
         "type": "Project",
         "dependencies": {
           "Bogus": "22.1.2",
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Elastic.Elasticsearch.Managed": "0.2.6",
           "Newtonsoft.Json": "12.0.1",
-          "Tests.Configuration": "7.0.0"
+          "Tests.Configuration": "8.0.0"
         }
       }
     },
@@ -3647,7 +3647,7 @@
       "Elastic.Clients.JsonNetSerializer": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Newtonsoft.Json": "12.0.1"
         }
       },
@@ -3670,7 +3670,7 @@
         "type": "Project",
         "dependencies": {
           "DiffPlex": "1.4.1",
-          "Elastic.Clients.JsonNetSerializer": "7.0.0",
+          "Elastic.Clients.JsonNetSerializer": "8.0.0",
           "Elastic.Elasticsearch.Xunit": "0.3.0",
           "FluentAssertions": "5.10.3",
           "JunitXml.TestLogger": "2.1.78",
@@ -3678,7 +3678,7 @@
           "Microsoft.NET.Test.Sdk": "17.0.0",
           "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
           "Proc": "0.6.1",
-          "Tests.Domain": "7.0.0",
+          "Tests.Domain": "8.0.0",
           "xunit": "2.4.1"
         }
       },
@@ -3686,10 +3686,10 @@
         "type": "Project",
         "dependencies": {
           "Bogus": "22.1.2",
-          "Elastic.Clients.Elasticsearch": "7.0.0",
+          "Elastic.Clients.Elasticsearch": "8.0.0",
           "Elastic.Elasticsearch.Managed": "0.2.6",
           "Newtonsoft.Json": "12.0.1",
-          "Tests.Configuration": "7.0.0"
+          "Tests.Configuration": "8.0.0"
         }
       }
     }
