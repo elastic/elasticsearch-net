@@ -86,7 +86,7 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 				{
 					Id = Project.Instance.Name + "1",
 				},
-				new BulkDeleteOperation<Project>(Project.Instance.Name + "1")
+				new BulkDeleteOperation(Project.Instance.Name + "1")
 				{
 					Routing = Project.Instance.Name
 				},

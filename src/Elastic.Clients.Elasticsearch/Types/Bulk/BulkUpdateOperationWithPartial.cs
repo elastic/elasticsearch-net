@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -24,6 +25,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore]
 		public TPartialDocument PartialDocument { get; set; }
+
+		protected override Type ClrType => null;
 
 		protected override string Operation => "update";
 

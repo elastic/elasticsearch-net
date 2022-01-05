@@ -24,13 +24,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public BulkIndexOperationDescriptor(TSource source) => _document = source;
 
-		public BulkIndexOperationDescriptor(TSource source, bool skipInference) : this(source) => SkipClrTypeInference(skipInference);
-
-		public BulkIndexOperationDescriptor(TSource source, IndexName index) : this(source)
-		{
-			IndexNameValue = index;
-			_ = SkipIndexNameInference();
-		}
+		public BulkIndexOperationDescriptor(TSource source, IndexName index) : this(source) => IndexNameValue = index;
 
 		public BulkIndexOperationDescriptor<TSource> Pipeline(string pipeline) => Assign(pipeline, (a, v) => a._pipeline = v);
 

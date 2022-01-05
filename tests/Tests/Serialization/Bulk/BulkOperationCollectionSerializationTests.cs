@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using VerifyTests;
 using VerifyXunit;
 
 namespace Tests.Serialization.Bulk
@@ -12,6 +13,18 @@ namespace Tests.Serialization.Bulk
 	[UsesVerify]
 	public class BulkRequestOperationsSerializationTests
 	{
+		// NOTE: The verified output from these tests should be valid if pasted into a bulk API call via Kibana.
+		// Although it may fail due to version concurrency not being the expected values, it should be parsed correctly.
+		// Use: POST configured-index/_bulk
+
+		private readonly VerifySettings _verifySettings;
+
+		public BulkRequestOperationsSerializationTests()
+		{
+			_verifySettings = new VerifySettings();
+			_verifySettings.DisableRequireUniquePrefix();
+		}
+
 		[U]
 		public async Task BulkRequestWithIndexOperations_ObjectInitializer_SerializesCorrectly()
 		{
@@ -34,11 +47,10 @@ namespace Tests.Serialization.Bulk
 						RequireAlias = false,
 						Version = 1,
 						VersionType = VersionType.External,
-						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
+						DynamicTemplates = new Dictionary<string, string>{ { "t1", "v1" } }
 					},
-					new BulkIndexOperation<NonInferrable>(NonInferrable.Instance, true),
-					new BulkIndexOperation<NonInferrable>(NonInferrable.Instance, index: null),
-					new BulkIndexOperation<NonInferrable>(NonInferrable.Instance) { Index = "configured-index" },
+					new BulkIndexOperation<NonInferrable>(NonInferrable.Instance),
+					new BulkIndexOperation<NonInferrable>(NonInferrable.Instance, index: "configured-index"),
 					new BulkIndexOperation<NonInferrable>(NonInferrable.Instance)
 					{
 						Id = "ConfiguredId",
@@ -48,7 +60,7 @@ namespace Tests.Serialization.Bulk
 						IfSequenceNumber = 10,
 						Pipeline = "my-pipeline",
 						RequireAlias = false,
-						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
+						DynamicTemplates = new Dictionary<string, string>{ { "t1", "v1" } }
 					}
 				}
 			};
@@ -59,10 +71,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			request.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		[U]
@@ -73,7 +91,7 @@ namespace Tests.Serialization.Bulk
 
 			var ms = new MemoryStream();
 
-			var request = new BulkRequest
+			var request = new BulkRequest("index-from-request")
 			{
 				Operations = new BulkOperationsCollection
 				{
@@ -105,10 +123,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			request.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		[U]
@@ -119,7 +143,7 @@ namespace Tests.Serialization.Bulk
 
 			var ms = new MemoryStream();
 
-			var request = new BulkRequest
+			var request = new BulkRequest("index-from-request")
 			{
 				Operations = new BulkOperationsCollection
 				{
@@ -133,11 +157,10 @@ namespace Tests.Serialization.Bulk
 						RequireAlias = false,
 						Version = 1,
 						VersionType = VersionType.External,
-						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
+						DynamicTemplates = new Dictionary<string, string>{ { "t1", "v1" } }
 					},
-					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance, true),
-					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance, index: null),
-					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance) { Index = "configured-index" },
+					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance),
+					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance, index: "configured-index"),
 					new BulkCreateOperation<NonInferrable>(NonInferrable.Instance)
 					{
 						Id = "ConfiguredId",
@@ -147,7 +170,7 @@ namespace Tests.Serialization.Bulk
 						IfSequenceNumber = 10,
 						Pipeline = "my-pipeline",
 						RequireAlias = false,
-						DynamicTemplates = new System.Collections.Generic.Dictionary<string, string>{ { "t1", "v1" } }
+						DynamicTemplates = new Dictionary<string, string>{ { "t1", "v1" } }
 					}
 				}
 			};
@@ -158,10 +181,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			request.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		[U]
@@ -172,7 +201,7 @@ namespace Tests.Serialization.Bulk
 
 			var ms = new MemoryStream();
 
-			var request = new BulkRequest
+			var request = new BulkRequest("index-from-request")
 			{
 				Operations = new BulkOperationsCollection
 				{
@@ -209,10 +238,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			request.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		[U]
@@ -224,6 +259,7 @@ namespace Tests.Serialization.Bulk
 			var ms = new MemoryStream();
 
 			var fluentRequest = new BulkRequestDescriptor(b => b
+				.Index("index-from-request")
 				.Index(Inferrable.Instance)
 				.Index(Inferrable.Instance, i => i
 					.Id("OverriddenId")
@@ -234,8 +270,7 @@ namespace Tests.Serialization.Bulk
 					.Version(1)
 					.VersionType(VersionType.External)
 					.DynamicTemplates(d => d.Add("t1","v1")))
-				.Index(NonInferrable.Instance, true)
-				.Index(NonInferrable.Instance, index: null)
+				.Index(NonInferrable.Instance)
 				.Index(NonInferrable.Instance, "configured-index")
 				.Index(NonInferrable.Instance, i => i
 					.Id("ConfiguredId")
@@ -253,10 +288,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			fluentRequest.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		[U]
@@ -268,6 +309,7 @@ namespace Tests.Serialization.Bulk
 			var ms = new MemoryStream();
 
 			var fluentRequest = new BulkRequestDescriptor(b => b
+				.Index("index-from-request")
 				.Delete("123")
 				.Delete("123", i => i
 					.Id("ConfiguredId")
@@ -296,10 +338,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			fluentRequest.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		[U]
@@ -311,6 +359,7 @@ namespace Tests.Serialization.Bulk
 			var ms = new MemoryStream();
 
 			var fluentRequest = new BulkRequestDescriptor(b => b
+				.Index("index-from-request")
 				.Create(Inferrable.Instance)
 				.Create(Inferrable.Instance, i => i
 					.Id("OverriddenId")
@@ -321,8 +370,7 @@ namespace Tests.Serialization.Bulk
 					.Version(1)
 					.VersionType(VersionType.External)
 					.DynamicTemplates(d => d.Add("t1", "v1")))
-				.Create(NonInferrable.Instance, true)
-				.Create(NonInferrable.Instance, index: null)
+				.Create(NonInferrable.Instance)
 				.Create(NonInferrable.Instance, "configured-index")
 				.Create(NonInferrable.Instance, i => i
 					.Id("ConfiguredId")
@@ -340,10 +388,16 @@ namespace Tests.Serialization.Bulk
 			var reader = new StreamReader(ms);
 			var ndjson = reader.ReadToEnd();
 
-			// NOTE: The verified output from this test should be valid if pasted into a bulk API call via Kibana.
-			// Although it may fail due to version concurrency not being the expected values it should be parsed correctly.
-			// Use: POST configured-index/_bulk
-			await Verifier.Verify(ndjson);
+			await Verifier.Verify(ndjson, _verifySettings);
+
+			ms = new MemoryStream();
+			fluentRequest.Serialize(ms, settings);
+
+			ms.Position = 0;
+			reader = new StreamReader(ms);
+			ndjson = reader.ReadToEnd();
+
+			await Verifier.Verify(ndjson, _verifySettings);
 		}
 
 		private class Inferrable

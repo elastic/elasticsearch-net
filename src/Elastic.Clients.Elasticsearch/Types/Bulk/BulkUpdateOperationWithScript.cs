@@ -28,6 +28,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override string Operation => "update";
 
+		protected override Type ClrType => null;
+
 		protected override void BeforeSerialize(IElasticsearchClientSettings settings)
 		{
 		}

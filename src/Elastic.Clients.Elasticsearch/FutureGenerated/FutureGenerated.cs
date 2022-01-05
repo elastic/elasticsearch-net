@@ -853,6 +853,8 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class BulkRequest : IStreamSerializable
 	{
+		protected IRequest Self => this;
+
 		public BulkOperationsCollection Operations { get; set; }
 
 		protected override string ContentType => "application/x-ndjson";
@@ -864,25 +866,43 @@ namespace Elastic.Clients.Elasticsearch
 			if (Operations is null)
 				return;
 
-			var operations = (IStreamSerializable)Operations;
-			operations.Serialize(stream, settings, formatting);
+			var index = Self.RouteValues.Get<IndexName>("index");
+
+			foreach (var op in Operations)
+			{
+				if (op is not IStreamSerializable serializable)
+					throw new InvalidOperationException("");
+
+				op.PrepareIndex(index);
+
+				serializable.Serialize(stream, settings, formatting);
+				stream.WriteByte((byte)'\n');
+			}
 		}
 
-		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		public async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
 			if (Operations is null)
-				return Task.CompletedTask;
+				return;
 
-			var operations = (IStreamSerializable)Operations;
-			return operations.SerializeAsync(stream, settings, formatting);
+			var index = Self.RouteValues.Get<IndexName>("index");
+
+			foreach (var op in Operations)
+			{
+				if (op is not IStreamSerializable serializable)
+					throw new InvalidOperationException("");
+
+				op.PrepareIndex(index);
+
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+				stream.WriteByte((byte)'\n');
+			}
 		}
 	}
 
 	public abstract partial class BulkResponseItemBase
 	{
 		public abstract string Operation { get; }
-
-		//public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class => Get?.AsUsingRequestResponseSerializer<GetResponse<TDocument>>();
 
 		public bool IsValid
 		{
@@ -940,15 +960,7 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkRequestDescriptor Index(string index) => Assign(index, (a, v) => a.RouteValues.Optional("index", IndexName.Parse(v)));
 
 		public BulkRequestDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
-
-		public BulkRequestDescriptor Create<TSource>(TSource document, bool skipInference, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
-		{
-			var descriptor = new BulkCreateOperationDescriptor<TSource>(document, skipInference);
-			configure?.Invoke(descriptor);
-			_operations.Add(descriptor);
-			return this;
-		}
-
+			
 		public BulkRequestDescriptor Create<TSource>(TSource document, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkCreateOperationDescriptor<TSource>(document);
@@ -960,14 +972,6 @@ namespace Elastic.Clients.Elasticsearch
 		public BulkRequestDescriptor Create<TSource>(TSource document, IndexName index, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
 		{
 			var descriptor = new BulkCreateOperationDescriptor<TSource>(document, index);
-			configure?.Invoke(descriptor);
-			_operations.Add(descriptor);
-			return this;
-		}
-
-		public BulkRequestDescriptor Index<TSource>(TSource document, bool skipInference, Action<BulkIndexOperationDescriptor<TSource>> configure = null)
-		{
-			var descriptor = new BulkIndexOperationDescriptor<TSource>(document, skipInference);
 			configure?.Invoke(descriptor);
 			_operations.Add(descriptor);
 			return this;
@@ -1054,14 +1058,40 @@ namespace Elastic.Clients.Elasticsearch
 
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
-			var operations = (IStreamSerializable)_operations;
-			operations.Serialize(stream, settings, formatting);
+			if (_operations is null)
+				return;
+
+			var index = Self.RouteValues.Get<IndexName>("index");
+
+			foreach (var op in _operations)
+			{
+				if (op is not IStreamSerializable serializable)
+					throw new InvalidOperationException("");
+
+				op.PrepareIndex(index);
+
+				serializable.Serialize(stream, settings, formatting);
+				stream.WriteByte((byte)'\n');
+			}
 		}
 
-		public Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+		public async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
-			var operations = (IStreamSerializable)_operations;
-			return operations.SerializeAsync(stream, settings, formatting);
+			if (_operations is null)
+				return;
+
+			var index = Self.RouteValues.Get<IndexName>("index");
+
+			foreach (var op in _operations)
+			{
+				if (op is not IStreamSerializable serializable)
+					throw new InvalidOperationException("");
+
+				op.PrepareIndex(index);
+
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+				stream.WriteByte((byte)'\n');
+			}
 		}
 
 		private BulkRequestDescriptor AddOperations<TSource, TDescriptor>(

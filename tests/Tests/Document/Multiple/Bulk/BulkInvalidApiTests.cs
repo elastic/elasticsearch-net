@@ -27,25 +27,23 @@ public class BulkInvalidApiTests : ApiIntegrationTestBase<WritableCluster, BulkR
 
 	protected override int ExpectStatusCode => 200;
 
-#pragma warning disable CS0618 // Type or member is obsolete
 	protected override Action<BulkRequestDescriptor> Fluent => d => d
 		.Index(CallIsolatedValue)
 		.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 		.Delete<Project>(b => b.Id(Project.Instance.Name + "1"));
-#pragma warning restore CS0618 // Type or member is obsolete
 
 	protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 	protected override BulkRequest Initializer => new(CallIsolatedValue)
 	{
 		Operations = new List<IBulkOperation>
+		{
+			new BulkUpdateOperation<Project, object>(Project.Instance.Name)
 			{
-				new BulkUpdateOperation<Project, object>(Project.Instance.Name)
-				{
-					Doc = new { leadDeveloper = new { firstName = "martijn" } }
-				},
-				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
-			}
+				Doc = new { leadDeveloper = new { firstName = "martijn" } }
+			},
+			new BulkDeleteOperation(Project.Instance.Name + "1"),
+		}
 	};
 
 	protected override bool SupportsDeserialization => false;

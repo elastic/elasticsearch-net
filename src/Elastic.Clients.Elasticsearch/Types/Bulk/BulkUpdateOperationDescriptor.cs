@@ -210,17 +210,17 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	}
 
 	protected override Id GetIdForOperation(Inferrer inferrer) =>
-		IdValue ?? new Id(new object[] { _document, _upsert }.FirstOrDefault(o => o != null));
+		IdValue ?? new Id(new object[] { _idFrom, _upsert }.FirstOrDefault(o => o != null));
 
 	protected override Routing GetRoutingForOperation(Inferrer inferrer)
 	{
-		if (Routing != null)
+		if (RoutingValue is not null)
 			return RoutingValue;
 
-		if (IdFrom != null)
+		if (_idFrom != null)
 			return new Routing(_idFrom);
 
-		if (Upsert != null)
+		if (_upsert != null)
 			return new Routing(_upsert);
 
 		return null;
