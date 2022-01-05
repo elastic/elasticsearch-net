@@ -11,6 +11,8 @@ namespace PlaygroundV7x
 		{
 
 
+
+
 			var aggs = new AggregationDictionary
 			{
 				{ "startDates", new TermsAggregation("startDates") { Field = "startedOn" } },
@@ -31,6 +33,25 @@ namespace PlaygroundV7x
 			};
 
 			var client = new ElasticClient();
+
+			var people = new List<Person>()
+			{
+				new Person{ FirstName = "Steve", LastName = "Gordon"},
+				new Person{ FirstName = "Steve", LastName = "Gordon"},
+				new Person{ FirstName = "Steve", LastName = "Gordon"},
+				new Person{ FirstName = "Steve", LastName = "Gordon"},
+				new Person{ FirstName = "Steve", LastName = "Gordon"},
+			};
+
+			//using var bulk = client.BulkAll(people, r => r.Index("testing-v7"));
+			//var result = bulk.Wait(TimeSpan.FromSeconds(60), a => { Console.WriteLine(a.Items.Count); });
+			//var a1 = result.TotalNumberOfRetries;
+			//var b1 = result.TotalNumberOfFailedBuffers;
+
+			using var bulk2 = client.BulkAll(people, r => r);
+			var result2 = bulk2.Wait(TimeSpan.FromSeconds(60), a => { Console.WriteLine(a.Items.Count); });
+			var a12 = result2.TotalNumberOfRetries;
+			var b12 = result2.TotalNumberOfFailedBuffers;
 
 			//var responseBulk = client.Bulk(new BulkRequest
 			//{

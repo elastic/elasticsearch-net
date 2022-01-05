@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TDescriptor Version(long version) => Assign(version, (a, v) => a._version = v);
 
-		internal TDescriptor SkipClrTypeInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipClrTypeInference = v);
+		public TDescriptor SkipClrTypeInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipClrTypeInference = v);
 
 		protected TDescriptor SkipIndexNameInference(bool skipInference = true) => Assign(skipInference, (a, v) => a._skipIndexNameInference = v);
 

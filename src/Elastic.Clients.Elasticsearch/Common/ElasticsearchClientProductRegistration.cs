@@ -1,12 +1,14 @@
+using System;
 using Elastic.Transport;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
 
-// TODO - Rename once we remove the Elastic.Clients.Elasticsearch branding!
 internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProductRegistration
 {
-	public static ElasticsearchClientProductRegistration DefaultForElasticClientsElasticsearch { get; } = new();
+	public ElasticsearchClientProductRegistration(Type markerType) : base(markerType) { }
+
+	public static ElasticsearchClientProductRegistration DefaultForElasticClientsElasticsearch { get; } = new(typeof(IElasticClient));
 
 	/// <summary>
 	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ResponseBase.IsValid" />, we do not want the low level client throwing

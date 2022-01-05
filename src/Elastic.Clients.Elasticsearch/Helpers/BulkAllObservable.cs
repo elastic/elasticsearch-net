@@ -91,22 +91,18 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		if (indices == null)
 			return;
 
-		var refresh = _client.IndexManagement.IndexRefresh(new IndexManagement.IndexRefreshRequest(indices));
+		var rc = _partitionedBulkRequest switch
+		{
+			IHelperCallable helperCallable when helperCallable.ParentMetaData is not null => helperCallable.ParentMetaData,
+			_ => RequestMetaDataFactory.BulkHelperRequestMetaData(),
+		};
 
-		//.RequestConfiguration(rc =>
-		//{
-		//	//switch (_partitionedBulkRequest)
-		//	//{
-		//	//	case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
-		//	//		rc.RequestMetaData(helperCallable.ParentMetaData);
-		//	//		break;
-		//	//	default:
-		//	//		rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData());
-		//	//		break;
-		//	//}
+		var request = new IndexManagement.IndexRefreshRequest(indices);
 
-		//	return rc;
-		//}));
+		if (rc is not null)
+			request.RequestConfiguration = new RequestConfiguration { RequestMetaData = rc };
+
+		var refresh = _client.IndexManagement.IndexRefresh(request);
 
 		if (!refresh.IsValid)
 			throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
@@ -117,8 +113,6 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		_compositeCancelToken.ThrowIfCancellationRequested();
 
 		var request = _partitionedBulkRequest;
-
-		var ops = buffer.Select(o => new BulkIndexOperation<T>(o)).Cast<IBulkOperation>().ToList();
 
 		var response = await _client.BulkAsync(s =>
 		{
@@ -144,16 +138,15 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			if (request.WaitForActiveShards.HasValue)
 				s.WaitForActiveShards(request.WaitForActiveShards.ToString());
 
-			// TODO - Once meta data header is reintroduced
-			//switch (_partitionedBulkRequest)
-			//{
-			//	case IHelperCallable helperCallable when helperCallable.ParentMetaData is object:
-			//		s.RequestConfiguration(rc => rc.RequestMetaData(helperCallable.ParentMetaData));
-			//		break;
-			//	default:
-			//		s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData()));
-			//		break;
-			//}
+			switch (_partitionedBulkRequest)
+			{
+				case IHelperCallable helperCallable when helperCallable.ParentMetaData is not null:
+					s.RequestConfiguration(rc => rc.RequestMetaData(helperCallable.ParentMetaData));
+					break;
+				default:
+					s.RequestConfiguration(rc => rc.RequestMetaData(RequestMetaDataFactory.BulkHelperRequestMetaData()));
+					break;
+			}
 
 		}, _compositeCancelToken).ConfigureAwait(false);
 
@@ -209,9 +202,6 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
 		switch (failureReason)
 		{
-			//case PipelineFailure.FailedProductCheck:
-			//	throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after failed product check");
-
 			case PipelineFailure.MaxRetriesReached:
 				if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
 					throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after attempted bulk failed over all the active nodes");
@@ -239,8 +229,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 				return;
 
 			throw ThrowOnBadBulk(response,
-				$"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})"
-			);
+				$"{nameof(BulkAll)} halted after {nameof(PipelineFailure)}.{reason} from _bulk and exhausting retries ({backOffRetries})");
 		}
 	}
 

@@ -9,13 +9,10 @@
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="Elastic.Clients.Elasticsearch.JsonNetSerializer" Version="$(TestPackageVersion)" />
   </ItemGroup>
-  
-  <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />  
+    <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj" />  
   </ItemGroup>
 
   <ItemGroup>

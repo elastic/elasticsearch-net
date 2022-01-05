@@ -5,10 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
-public sealed class BulkAllRequest<T> : IBulkAllRequest<T>
+public sealed class BulkAllRequest<T> : IBulkAllRequest<T>, IHelperCallable
 {
 	public BulkAllRequest(IEnumerable<T> documents)
 	{
@@ -51,10 +52,13 @@ public sealed class BulkAllRequest<T> : IBulkAllRequest<T>
 	public bool RefreshOnCompleted { get; set; }
 
 	public Indices? RefreshIndices { get; set; }
+	internal RequestMetaData ParentMetaData { get; set; }
+
+	RequestMetaData IHelperCallable.ParentMetaData { get => ParentMetaData; set => ParentMetaData = value; }
 }
 
 
-public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>
+public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestDescriptor<T>>, IBulkAllRequest<T>, IHelperCallable
 {
 	private readonly IEnumerable<T> _documents;
 
@@ -75,6 +79,7 @@ public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestD
 	private Indices _refreshIndices;
 	private Time _timeout;
 	private WaitForActiveShards? _waitForActiveShards;
+	private RequestMetaData _requestMetaData;
 
 	public BulkAllRequestDescriptor(IEnumerable<T> documents)
 	{
@@ -100,6 +105,7 @@ public sealed class BulkAllRequestDescriptor<T> : DescriptorBase<BulkAllRequestD
 	int? IBulkAllRequest<T>.Size => _size;
 	Time? IBulkAllRequest<T>.Timeout => _timeout;
 	WaitForActiveShards? IBulkAllRequest<T>.WaitForActiveShards => _waitForActiveShards;
+	RequestMetaData IHelperCallable.ParentMetaData { get => _requestMetaData; set => _requestMetaData = value; }
 
 	public BulkAllRequestDescriptor<T> BackOffRetries(int? backOffRetries) => Assign(backOffRetries, (a, v) => a._backOffRetries = v);
 
