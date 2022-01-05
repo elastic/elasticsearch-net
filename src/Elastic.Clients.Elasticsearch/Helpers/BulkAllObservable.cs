@@ -125,10 +125,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			}
 			else
 			{
-				if (request.Index is not null)
-					s.IndexMany(buffer, (b, s) => b.SkipClrTypeInference());
-				else
-					s.IndexMany(buffer);
+				s.IndexMany(buffer);
 			}
 
 			if (!string.IsNullOrEmpty(request.Pipeline))

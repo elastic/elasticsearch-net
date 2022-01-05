@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -12,23 +13,12 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public sealed class BulkIndexOperation<T> : BulkOperationBase
 	{
-		private readonly bool _skipInference;
-		private readonly bool _skipIndexNameInference;
-
 		/// <summary>
 		/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
 		/// as source data.
 		/// </summary>
 		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
 		public BulkIndexOperation(T document) => Document = document;
-
-		/// <summary>
-		/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
-		/// as source data and optional inference.
-		/// </summary>
-		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
-		/// <param name="skipInference">Whether to skip inference of the index, id and routing values from the <typeparamref name="T"/> document type.</param>
-		public BulkIndexOperation(T document, bool skipInference) : this(document) => _skipInference = skipInference;
 
 		/// <summary>
 		/// Creates an instance of <see cref="BulkIndexOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
@@ -40,11 +30,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// </remarks>
 		/// <param name="document">The <typeparamref name="T"/> document to index.</param>
 		/// <param name="index">The <see cref="IndexName"/> which can represent an index, alias or data stream.</param>
-		public BulkIndexOperation(T document, IndexName index) : this(document)
-		{
-			Index = index;
-			_skipIndexNameInference = true;
-		}
+		public BulkIndexOperation(T document, IndexName index) : this(document) => Index = index;
 
 		[JsonPropertyName("pipeline")]
 		public string? Pipeline { get; set; }
@@ -57,14 +43,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override string Operation => "index";
 
+		protected override Type ClrType => typeof(T);
+
 		private void SetValues(IElasticsearchClientSettings settings)
 		{
 			// This allocates but avoids serialising "routing":null etc. into the operation action
 			// Unfortunately, the alternative is we always set to new Routing(Document) which is then
 			// never null even if the inferrer will be unable to return a value for the Routing during serialization
-
-			if (_skipInference)
-				return;
 
 			if (settings.ExperimentalEnableSerializeNullInferredValues)
 			{
@@ -87,9 +72,6 @@ namespace Elastic.Clients.Elasticsearch
 				if (!string.IsNullOrEmpty(id.GetString(settings)))
 					Id = id;
 			}
-
-			if (!_skipIndexNameInference)
-				Index ??= typeof(T);
 		}
 
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)

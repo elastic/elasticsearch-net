@@ -34,7 +34,7 @@ public class BulkAllForEachAsyncApiTests : BulkAllApiTestsBase
 				.Size(size)
 				.RefreshOnCompleted()
 				.Index(index)
-				.BufferToBulk((r, buffer) => r.IndexMany(buffer, (d, s) => d.SkipClrTypeInference()))
+				.BufferToBulk((r, buffer) => r.IndexMany(buffer))
 			, tokenSource.Token);
 
 		await observableBulk
