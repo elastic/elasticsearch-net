@@ -5,8 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
+using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework.DocumentationTests;
 using Tests.Framework.EndpointTests;
@@ -22,18 +25,23 @@ namespace Tests.Document.Single.Create
 
 		protected override bool ExpectIsValid => true;
 
+		// We need to sanitise the name before we can do this
+		protected override bool VerifyJson => false;
+
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson =>
 			new
 			{
 				name = CallIsolatedValue,
 				type = Project.TypeName,
-				//join = Document.Join.ToAnonymousObject(),
+				join = Document.Join.ToAnonymousObject(),
 				state = "Stable",
 				visibility = "Public",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
 				numberOfContributors = 0,
-				//sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
+				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
 				curatedTags = new[] { new { name = "x", added = FixedDate } },
 			};
 
@@ -65,7 +73,7 @@ namespace Tests.Document.Single.Create
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } },
-			//SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
+			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -111,60 +119,58 @@ namespace Tests.Document.Single.Create
 		}
 	}
 
-	//[JsonNetSerializerOnly]
-	//public class CreateJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
-	//{
-	//	public CreateJObjectIntegrationTests(WritableCluster cluster) : base(cluster) { }
+	[JsonNetSerializerOnly]
+	public class CreateJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
+	{
+		public CreateJObjectIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
-	//	[I]
-	//	public void Create()
-	//	{
-	//		var index = RandomString();
-	//		var jObjects = Enumerable.Range(1, 1000)
-	//			.Select(i =>
-	//				new JObject
-	//				{
-	//					{ "id", i },
-	//					{ "name", $"name {i}" },
-	//					{ "value", Math.Pow(i, 2) },
-	//					{ "date", new DateTime(2016, 1, 1) },
-	//					{
-	//						"child", new JObject
-	//						{
-	//							{ "child_name", $"child_name {i}{i}" },
-	//							{ "child_value", 3 }
-	//						}
-	//					}
-	//				});
+		[I]
+		public void Create()
+		{
+			var index = RandomString();
+			var jObjects = Enumerable.Range(1, 1000)
+				.Select(i =>
+					new JObject
+					{
+						{ "id", i },
+						{ "name", $"name {i}" },
+						{ "value", Math.Pow(i, 2) },
+						{ "date", new DateTime(2016, 1, 1) },
+						{
+							"child", new JObject
+							{
+								{ "child_name", $"child_name {i}{i}" },
+								{ "child_value", 3 }
+							}
+						}
+					});
 
-	//		var jObject = jObjects.First();
+			var jObject = jObjects.First();
 
-	//		var createResponse = Client.Create(jObject, f => f
-	//			.Index(index)
-	//			.Id(jObject["id"].Value<int>())
-	//		);
+			var createResponse = Client.Create(jObject, f => f
+				.Index(index)
+				.Id(jObject["id"].Value<int>())
+			);
 
-	//		createResponse.ShouldBeValid();
-	//		createResponse.ApiCall.HttpStatusCode.Should().Be(201);
-	//		createResponse.Result.Should().Be(Result.Created);
-	//		createResponse.Index.Should().Be(index);
-	//		createResponse.Type.Should().Be("_doc");
+			createResponse.ShouldBeValid();
+			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+			createResponse.Result.Should().Be(Result.Created);
+			createResponse.Index.Should().Be(index);
 
-	//		var bulkResponse = Client.Bulk(b => b
-	//			.Index(index)
-	//			.CreateMany(jObjects.Skip(1), (bi, d) => bi
-	//				.Document(d)
-	//				.Id(d["id"].Value<int>())
-	//			)
-	//		);
+			var bulkResponse = Client.Bulk(b => b
+				.Index(index)
+				.CreateMany(jObjects.Skip(1), (bi, d) => bi
+					.Id(d["id"].Value<int>())
+				)
+			);
 
-	//		foreach (var item in bulkResponse.Items)
-	//		{
-	//			item.IsValid.Should().BeTrue();
-	//			item.Status.Should().Be(201);
-	//		}
-	//	}
-	//}
+			foreach (var item in bulkResponse.Items)
+			{
+				item.IsValid.Should().BeTrue();
+				item.Status.Should().Be(201);
+			}
+		}
+	}
 
 	public class CreateAnonymousTypesIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{

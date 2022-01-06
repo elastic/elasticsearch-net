@@ -112,7 +112,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 			var req = new
 			{
-				settings = clusterConfiguration
+				transient = clusterConfiguration
 			};
 
 			_ = await Client.Transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_cluster/settings", PostData.Serializable(req));
@@ -137,9 +137,12 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			var req = new
 			{
 				description = "A pipeline registered by the NEST test framework",
-				processors = new Dictionary<string, object>
+				processors = new object[]
 				{
-					{ "set", new { field = "metadata", value= new { x = "y" } } }
+					new Dictionary<string, object>
+					{
+						{ "set", new { field = "metadata", value= new { x = "y" } } }
+					}
 				}
 			};
 
