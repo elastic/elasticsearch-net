@@ -21,24 +21,26 @@ internal static class SourceSerialisation
 	{
 		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{
-			// When the serializer is our own which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
+			// When the serializer is our own, which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
+			// In most cases this is not the case as it's wrapped in the DiagnosticsSerializerProxy
+			// Ideally, we'd short-circuit here if we know there are no listeners or avoid wrapping the default source serializer.
 			JsonSerializer.Serialize(writer, toSerialize, defaultSerializer.Options);
+			return;
 		}
-		else
-		{
-			// We cannot use STJ since the implementation may use another serializer.
-			// This path is a little less optimal
-			using var ms = new MemoryStream();
-			sourceSerializer.Serialize(toSerialize, ms);
-			ms.Position = 0;
+
+		// We may be using a custom serializer or most likely, we're registered via DiagnosticsSerializerProxy
+		// We cannot use STJ since the implementation may use another serializer.
+		// This path is a little less optimal
+		using var ms = new MemoryStream();
+		sourceSerializer.Serialize(toSerialize, ms);
+		ms.Position = 0;
 #if NET6_0_OR_GREATER
-			writer.WriteRawValue(ms.GetBuffer().AsSpan()[..(int)ms.Length], true);
+		writer.WriteRawValue(ms.GetBuffer().AsSpan()[..(int)ms.Length], true);
 #else
-			// This is not super efficient but a variant on the suggestion at https://github.com/dotnet/runtime/issues/1784#issuecomment-608331125
-			using var document = JsonDocument.Parse(ms);
-			document.RootElement.WriteTo(writer);
+		// This is not super efficient but a variant on the suggestion at https://github.com/dotnet/runtime/issues/1784#issuecomment-608331125
+		using var document = JsonDocument.Parse(ms);
+		document.RootElement.WriteTo(writer);
 #endif
-		}
 	}
 
 	public static T Deserialize<T>(ref Utf8JsonReader reader, IElasticsearchClientSettings settings)

@@ -122,20 +122,26 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 
 		var req = new
 		{
-			processors = new Dictionary<string, object>
+			processors = new object[]
+			{
+				new Dictionary<string, object>
 				{
 					{ "set", new { field = "description", value = "Default" } }
 				}
+			}
 		};
 
 		_ = Client.Transport.Request<BytesResponse>(HttpMethod.PUT, $"_ingest/pipeline/default-pipeline", PostData.Serializable(req));
 
 		req = new
 		{
-			processors = new Dictionary<string, object>
+			processors = new object[]
+			{
+				new Dictionary<string, object>
 				{
 					{ "set", new { field = "description", value = "Overridden" } }
 				}
+			}
 		};
 
 		_ = Client.Transport.Request<BytesResponse>(HttpMethod.PUT, $"_ingest/pipeline/pipeline", PostData.Serializable(req));

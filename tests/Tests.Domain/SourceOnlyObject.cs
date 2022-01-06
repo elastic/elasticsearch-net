@@ -13,10 +13,12 @@ public class SourceOnlyObject
 {
 	[Ignore]
 	[IgnoreDataMember]
+	[JsonIgnore]
 	public string NotReadByDefaultSerializer { get; set; }
 
 	[Ignore]
 	[IgnoreDataMember]
+	[JsonIgnore]
 	public string NotWrittenByDefaultSerializer { get; set; }
 }
 

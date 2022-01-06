@@ -1337,14 +1337,18 @@ namespace Elastic.Clients.Elasticsearch
 	//	//public CountRequestDescriptor Query(Action<QueryContainerDescriptor> configureContainer) => Assign(query, (a, v) => a._query = v);
 	//}
 
-	public sealed partial class CreateRequest<TDocument>
+	public sealed partial class CreateRequest<TDocument> : ICustomJsonWriter
 	{
 
 		public CreateRequest(Id id) : this(typeof(TDocument), id)
 		{
 		}
 
-		public CreateRequest(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) => Document = documentWithId;
+		public CreateRequest(TDocument documentWithId, IndexName index = null, Id id = null)
+			: this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) =>
+				Document = documentWithId;
+
+		public void WriteJson(Utf8JsonWriter writer, SerializerBase sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 	}
 
 	public sealed partial class CreateRequestDescriptor<TDocument> : ICustomJsonWriter
@@ -1367,14 +1371,13 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class CreateRequestDescriptor<TDocument>
 	{
-		// TODO: Codegen
 		public CreateRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
 	}
 
 	public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	{
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument document) => this;  // TODO
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument document) => this;
 	}
 
 	public sealed partial class DeleteRequest<TDocument> : DeleteRequest

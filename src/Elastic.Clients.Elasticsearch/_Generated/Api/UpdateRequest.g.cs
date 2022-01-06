@@ -112,6 +112,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("doc")]
+		[SourceConverter]
 		public TPartialDocument? Doc { get; set; }
 
 		[JsonInclude]
@@ -195,7 +196,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (DocValue is not null)
 			{
 				writer.WritePropertyName("doc");
-				JsonSerializer.Serialize(writer, DocValue, options);
+				SourceSerialisation.Serialize(DocValue, writer, settings);
 			}
 
 			if (DocAsUpsertValue.HasValue)
