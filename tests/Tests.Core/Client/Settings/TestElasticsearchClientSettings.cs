@@ -6,13 +6,14 @@ using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Extensions;
+using Tests.Core.Client.Serializers;
 
 namespace Tests.Core.Client.Settings
 {
 	public class TestElasticsearchClientSettings : ElasticsearchClientSettings
 	{
 		public static readonly bool RunningMitmProxy = Process.GetProcessesByName("mitmproxy").Any();
-		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
+		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any() || Process.GetProcessesByName("fiddler everywhere").Any();
 
 		public TestElasticsearchClientSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
@@ -20,13 +21,13 @@ namespace Tests.Core.Client.Settings
 			bool forceInMemory = false,
 			int port = 9200,
 			byte[] response = null
-		) : base(CreatePool(createPool, port), TestConfiguration.Instance.CreateConnection(forceInMemory, response)) =>
+		) : base(CreatePool(createPool, port), TestConfiguration.Instance.CreateConnection(forceInMemory, response), CreateSerializerFactory(sourceSerializerFactory)) =>
 			ApplyTestSettings();
 
 		public static string LocalOrProxyHost => RunningFiddler || RunningMitmProxy ? "ipv4.fiddler" : LocalHost;
 
 		private static int ConnectionLimitDefault =>
-			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out var x)
+			int.TryParse(Environment.GetEnvironmentVariable("ELASTICSEARCH_CLIENT_NUMBER_OF_CONNECTIONS"), out var x)
 				? x
 				: TransportConfiguration.DefaultConnectionLimit;
 
@@ -62,16 +63,16 @@ namespace Tests.Core.Client.Settings
 			return Proxy(new Uri("http://127.0.0.1:8080"), null, (string)null);
 		}
 
-		//private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
-		//{
-		//	if (provided != null)
-		//		return provided;
+		private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
+		{
+			if (provided != null)
+				return provided;
 
-		//	if (!TestConfiguration.Instance.Random.SourceSerializer)
-		//		return null;
+			if (!TestConfiguration.Instance.Random.SourceSerializer)
+				return null;
 
-		//	return (builtin, values) => new TestSourceSerializerBase(builtin, values);
-		//}
+			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
+		}
 
 		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			int port = 9200)

@@ -18,7 +18,7 @@ namespace Tests.Core.Client.Serializers
 			: base(builtinSerializer, connectionSettings) { }
 
 		protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
-			new JsonSerializerSettings
+			new()
 			{
 				NullValueHandling = NullValueHandling.Ignore,
 				DefaultValueHandling = DefaultValueHandling.Include
