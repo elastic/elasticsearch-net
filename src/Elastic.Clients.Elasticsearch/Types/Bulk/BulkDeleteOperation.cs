@@ -37,19 +37,10 @@ namespace Elastic.Clients.Elasticsearch
 		private void SerializeInternal(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				JsonSerializer.Serialize<BulkDeleteOperation>(writer, this, dhls.Options);
-			}
-			else
-			{
-				JsonSerializer.Serialize<BulkDeleteOperation>(writer, this); // Unable to handle options if this were to ever be the case
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			JsonSerializer.Serialize<BulkDeleteOperation>(writer, this, options);
 			writer.WriteEndObject();
 		}
 

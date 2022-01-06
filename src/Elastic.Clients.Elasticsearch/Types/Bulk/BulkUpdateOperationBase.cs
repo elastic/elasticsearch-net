@@ -41,16 +41,8 @@ namespace Elastic.Clients.Elasticsearch
 
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				WriteOperation(internalWriter, dhls.Options);
-			}
-			else
-			{
-				WriteOperation(internalWriter);
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			WriteOperation(internalWriter, options);
 			internalWriter.WriteEndObject();
 			internalWriter.Flush();
 
@@ -79,20 +71,10 @@ namespace Elastic.Clients.Elasticsearch
 		private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
-
 			writer.WriteStartObject();
 			writer.WritePropertyName(Operation);
-
-			switch (requestResponseSerializer)
-			{
-				case DefaultHighLevelSerializer dhls:
-					WriteOperation(writer, dhls.Options);
-					break;
-				default:
-					WriteOperation(writer);
-					break;
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			WriteOperation(writer, options);
 			writer.WriteEndObject();
 		}
 
@@ -119,23 +101,13 @@ namespace Elastic.Clients.Elasticsearch
 
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				WriteOperation(internalWriter, dhls.Options);
-			}
-			else
-			{
-				WriteOperation(internalWriter);
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			WriteOperation(internalWriter, options);
 			internalWriter.WriteEndObject();
 			internalWriter.Flush();
 
 			stream.WriteByte(_newline);
-
 			var body = GetBody();
-
 			settings.RequestResponseSerializer.Serialize(body, stream, formatting);
 		}
 
@@ -150,14 +122,8 @@ namespace Elastic.Clients.Elasticsearch
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
 
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				WriteOperation(internalWriter, dhls.Options);
-			}
-			else
-			{
-				WriteOperation(internalWriter);
-			}
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			WriteOperation(internalWriter, options);
 
 			internalWriter.WriteEndObject();
 			internalWriter.Flush();
