@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch
 	public class RelationNameResolver
 	{
 		private readonly IElasticsearchClientSettings _connectionSettings;
-		private readonly ConcurrentDictionary<Type, string> _relationNames = new ConcurrentDictionary<Type, string>();
+		private readonly ConcurrentDictionary<Type, string> _relationNames = new();
 
 		public RelationNameResolver(IElasticsearchClientSettings connectionSettings)
 		{
@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch
 	public class RoutingResolver
 	{
 		private static readonly ConcurrentDictionary<Type, Func<object, JoinField>> PropertyGetDelegates =
-			new ConcurrentDictionary<Type, Func<object, JoinField>>();
+			new();
 
 		private static readonly MethodInfo MakeDelegateMethodInfo =
 			typeof(RoutingResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
@@ -128,7 +128,7 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly IdResolver _idResolver;
 
 		private readonly ConcurrentDictionary<Type, Func<object, string>>
-			_localRouteDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+			_localRouteDelegates = new();
 
 		public RoutingResolver(IElasticsearchClientSettings connectionSettings, IdResolver idResolver)
 		{
@@ -260,13 +260,13 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static JoinField Link<TChild>(Id parentId) => new Child(typeof(TChild), parentId);
 
-		public static implicit operator JoinField(Parent parent) => new JoinField(parent);
+		public static implicit operator JoinField(Parent parent) => new(parent);
 
-		public static implicit operator JoinField(string parentName) => new JoinField(new Parent(parentName));
+		public static implicit operator JoinField(string parentName) => new(new Parent(parentName));
 
-		public static implicit operator JoinField(Type parentType) => new JoinField(new Parent(parentType));
+		public static implicit operator JoinField(Type parentType) => new(new Parent(parentType));
 
-		public static implicit operator JoinField(Child child) => new JoinField(child);
+		public static implicit operator JoinField(Child child) => new(child);
 
 		public T Match<T>(Func<Parent, T> first, Func<Child, T> second)
 		{
@@ -363,7 +363,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static RelationName Create<T>() where T : class => GetRelationNameForType(typeof(T));
 
-		private static RelationName GetRelationNameForType(Type type) => new RelationName(type);
+		private static RelationName GetRelationNameForType(Type type) => new(type);
 
 		public static implicit operator RelationName(string typeName) => typeName.IsNullOrEmpty() ? null : new RelationName(typeName);
 
@@ -424,8 +424,8 @@ namespace Elastic.Clients.Elasticsearch
 
 	internal class FieldResolver
 	{
-		protected readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
-		protected readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
+		protected readonly ConcurrentDictionary<Field, string> Fields = new();
+		protected readonly ConcurrentDictionary<PropertyName, string> Properties = new();
 		private readonly IElasticsearchClientSettings _settings;
 
 		public FieldResolver(IElasticsearchClientSettings settings)
@@ -518,7 +518,7 @@ namespace Elastic.Clients.Elasticsearch
 	/// <inheritdoc />
 	public class PropertyMappingProvider : IPropertyMappingProvider
 	{
-		protected readonly ConcurrentDictionary<string, PropertyMapping> Properties = new ConcurrentDictionary<string, PropertyMapping>();
+		protected readonly ConcurrentDictionary<string, PropertyMapping> Properties = new();
 
 		/// <inheritdoc />
 		public virtual PropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
@@ -551,7 +551,7 @@ namespace Elastic.Clients.Elasticsearch
 	internal class FieldExpressionVisitor : ExpressionVisitor
 	{
 		private readonly IElasticsearchClientSettings _settings;
-		private readonly Stack<string> _stack = new Stack<string>();
+		private readonly Stack<string> _stack = new();
 
 		public FieldExpressionVisitor(IElasticsearchClientSettings settings) => _settings = settings;
 

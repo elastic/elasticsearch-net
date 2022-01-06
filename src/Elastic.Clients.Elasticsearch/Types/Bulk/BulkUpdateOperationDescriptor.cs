@@ -88,11 +88,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
 
-		JsonSerializerOptions options = null;
-
-		if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			options = dhls.Options;
-
+		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
 		JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(writer, this, options);
 
 		writer.WriteEndObject();
@@ -168,11 +164,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
 
-		JsonSerializerOptions options = null;
-
-		if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			options = dhls.Options;
-
+		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
 		JsonSerializer.Serialize<BulkUpdateOperationDescriptor<TDocument, TPartialDocument>>(writer, this, options);
 
 		writer.WriteEndObject();

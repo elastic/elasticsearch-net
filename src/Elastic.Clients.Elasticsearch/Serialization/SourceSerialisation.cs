@@ -19,7 +19,7 @@ internal static class SourceSerialisation
 
 	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, SerializerBase sourceSerializer)
 	{
-		if (sourceSerializer is DefaultHighLevelSerializer defaultSerializer)
+		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{
 			// When the serializer is our own which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
 			JsonSerializer.Serialize(writer, toSerialize, defaultSerializer.Options);
@@ -45,7 +45,7 @@ internal static class SourceSerialisation
 	{
 		var sourceSerializer = settings.SourceSerializer;
 
-		if (sourceSerializer is DefaultHighLevelSerializer defaultSerializer)
+		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{
 			// When the serializer is our own which uses STJ we can avoid unneccesary allocations and serialise straight into the writer
 			return JsonSerializer.Deserialize<T>(ref reader, defaultSerializer.Options);
