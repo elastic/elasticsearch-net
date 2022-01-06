@@ -26,21 +26,11 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
-
 			var internalWriter = new Utf8JsonWriter(stream);
-
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, dhls.Options);
-			}
-			else
-			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this); // Unable to handle options if this were to ever be the case
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, options);
 			internalWriter.WriteEndObject();
 			internalWriter.Flush();
 		}
@@ -48,21 +38,11 @@ namespace Elastic.Clients.Elasticsearch
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
-
 			var internalWriter = new Utf8JsonWriter(stream);
-
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, dhls.Options);
-			}
-			else
-			{
-				JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this); // Unable to handle options if this were to ever be the case
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			JsonSerializer.Serialize<BulkDeleteOperationDescriptor>(internalWriter, this, options);
 			internalWriter.WriteEndObject();
 			await internalWriter.FlushAsync().ConfigureAwait(false);
 		}

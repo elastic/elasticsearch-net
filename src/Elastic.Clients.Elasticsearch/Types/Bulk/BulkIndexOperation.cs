@@ -100,17 +100,8 @@ namespace Elastic.Clients.Elasticsearch
 
 			writer.WriteStartObject();
 			writer.WritePropertyName(Operation);
-
-			switch (requestResponseSerializer)
-			{
-				case DefaultHighLevelSerializer dhls:
-					JsonSerializer.Serialize<BulkIndexOperation<T>>(writer, this, dhls.Options);
-					break;
-				default:
-					JsonSerializer.Serialize<BulkIndexOperation<T>>(writer, this); // Unable to handle options if this were to ever be the case
-					break;
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			JsonSerializer.Serialize<BulkIndexOperation<T>>(writer, this, options);
 			writer.WriteEndObject();
 		}
 	}

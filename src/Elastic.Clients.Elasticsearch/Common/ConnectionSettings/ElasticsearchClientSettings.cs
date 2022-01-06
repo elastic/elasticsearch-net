@@ -105,19 +105,17 @@ namespace Elastic.Clients.Elasticsearch
 			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory)
 			: base(connectionPool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
 		{
-			var defaultSerializer = new DefaultHighLevelSerializer(this);
-			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
+			var defaultSerializer = new DefaultRequestResponseSerializer(this);
+			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? new DefaultSourceSerializer(this);
 			//var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
 
 			_propertyMappingProvider = /*propertyMappingProvider ?? serializerAsMappingProvider ??*/ new PropertyMappingProvider();
 
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
-			//_sourceSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(sourceSerializer, "source");
-			_sourceSerializer = sourceSerializer;
+			_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source");
 
-			//UseThisRequestResponseSerializer = new JsonFormatterAwareDiagnosticsSerializerProxy(defaultSerializer);
-			UseThisRequestResponseSerializer = defaultSerializer;
-
+			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
+			
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();

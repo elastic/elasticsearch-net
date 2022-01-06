@@ -1,6 +1,6 @@
 {"index":{"_id":"TestName","routing":"TestName"}}
 {"name":"TestName"}
-{"index":{"pipeline":"my-pipeline","dynamic_templates":{"t1":"v1"},"_id":"OverriddenId","_index":"overridden-index","require_alias":false,"routing":"OverriddenRoute","version":1,"version_type":"External"}}
+{"index":{"pipeline":"my-pipeline","dynamic_templates":{"t1":"v1"},"_id":"OverriddenId","_index":"overridden-index","require_alias":false,"routing":"OverriddenRoute","version":1,"version_type":"external"}}
 {"name":"TestName"}
 {"index":{}}
 {"forename":"Steve"}

@@ -8,7 +8,7 @@ namespace Tests;
 
 public abstract class SerialisationTestBase<TResponse>
 {
-	private readonly SerializerBase _serializer = new DefaultHighLevelSerializer(new ElasticsearchClientSettings());
+	private readonly SerializerBase _serializer = new DefaultRequestResponseSerializer(new ElasticsearchClientSettings());
 
 	protected abstract string ResponseJson { get; }
 

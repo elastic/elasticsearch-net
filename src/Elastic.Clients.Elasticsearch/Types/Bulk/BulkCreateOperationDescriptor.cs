@@ -36,52 +36,28 @@ namespace Elastic.Clients.Elasticsearch
 		protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
-
 			var internalWriter = new Utf8JsonWriter(stream);
-
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
-			}
-			else
-			{
-				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this, options);
 			internalWriter.WriteEndObject();
 			internalWriter.Flush();
-
 			stream.WriteByte(_newline);
-
 			settings.SourceSerializer.Serialize(GetBody(), stream);
 		}
 
 		protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
 		{
 			var requestResponseSerializer = settings.RequestResponseSerializer;
-
 			var internalWriter = new Utf8JsonWriter(stream);
-
 			internalWriter.WriteStartObject();
 			internalWriter.WritePropertyName(Operation);
-
-			if (requestResponseSerializer is DefaultHighLevelSerializer dhls)
-			{
-				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this, dhls.Options);
-			}
-			else
-			{
-				JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this); // Unable to handle options if this were to ever be the case
-			}
-
+			requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+			JsonSerializer.Serialize<BulkCreateOperationDescriptor<TSource>>(internalWriter, this, options);
 			internalWriter.WriteEndObject();
 			await internalWriter.FlushAsync().ConfigureAwait(false);
-
 			stream.WriteByte(_newline);
-
 			await settings.SourceSerializer.SerializeAsync(GetBody(), stream).ConfigureAwait(false);
 		}
 
