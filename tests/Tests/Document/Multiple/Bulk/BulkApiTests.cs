@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using Elastic.Clients.Elasticsearch.Ingest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -121,25 +120,45 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 	{
 		// TODO - REPLACE WITH FLUENT
 
-		var pipelineResponse = client.Ingest.PutPipeline(new IngestPutPipelineRequest("default-pipeline")
+		var req = new
 		{
-			Processors = new ProcessorContainer[]
-			{
-				new ProcessorContainer(new SetProcessor { Field = "description", Value = "Default" } )
-			}
-		});
+			processors = new Dictionary<string, object>
+				{
+					{ "set", new { field = "description", value = "Default" } }
+				}
+		};
 
-		pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
+		_ = Client.Transport.Request<BytesResponse>(HttpMethod.PUT, $"_ingest/pipeline/default-pipeline", PostData.Serializable(req));
 
-		pipelineResponse = client.Ingest.PutPipeline(new IngestPutPipelineRequest("pipeline")
+		req = new
 		{
-			Processors = new ProcessorContainer[]
-			{
-				new ProcessorContainer(new SetProcessor { Field = "description", Value = "Overridden" } )
-			}
-		});
+			processors = new Dictionary<string, object>
+				{
+					{ "set", new { field = "description", value = "Overridden" } }
+				}
+		};
 
-		pipelineResponse.ShouldBeValid($"Failed to set up pipeline named 'pipeline' required for bulk");
+		_ = Client.Transport.Request<BytesResponse>(HttpMethod.PUT, $"_ingest/pipeline/pipeline", PostData.Serializable(req));
+
+		//var pipelineResponse = client.Ingest.PutPipeline(new IngestPutPipelineRequest("pipeline")
+		//{
+		//	Processors = new ProcessorContainer[]
+		//	{
+		//		new ProcessorContainer(new SetProcessor { Field = "description", Value = "Default" } )
+		//	}
+		//});
+
+		//pipelineResponse.ShouldBeValid("Failed to set up pipeline named 'default-pipeline' required for bulk {p");
+
+		//pipelineResponse = client.Ingest.PutPipeline(new IngestPutPipelineRequest("pipeline")
+		//{
+		//	Processors = new ProcessorContainer[]
+		//	{
+		//		new ProcessorContainer(new SetProcessor { Field = "description", Value = "Overridden" } )
+		//	}
+		//});
+
+		//pipelineResponse.ShouldBeValid($"Failed to set up pipeline named 'pipeline' required for bulk");
 
 		base.IntegrationSetup(client, values);
 	}

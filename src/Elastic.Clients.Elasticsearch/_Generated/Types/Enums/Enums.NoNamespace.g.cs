@@ -88,48 +88,6 @@ namespace Elastic.Clients.Elasticsearch
 		public const string Expression = "expression";
 	}
 
-	[JsonConverter(typeof(ConflictsConverter))]
-	public enum Conflicts
-	{
-		[EnumMember(Value = "proceed")]
-		Proceed,
-		[EnumMember(Value = "abort")]
-		Abort
-	}
-
-	internal sealed class ConflictsConverter : JsonConverter<Conflicts>
-	{
-		public override Conflicts Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "proceed":
-					return Conflicts.Proceed;
-				case "abort":
-					return Conflicts.Abort;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, Conflicts value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case Conflicts.Proceed:
-					writer.WriteStringValue("proceed");
-					return;
-				case Conflicts.Abort:
-					writer.WriteStringValue("abort");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
 	[JsonConverter(typeof(DistanceUnitConverter))]
 	public enum DistanceUnit
 	{
@@ -319,62 +277,6 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case GeoDistanceType.Arc:
 					writer.WriteStringValue("arc");
-					return;
-			}
-
-			writer.WriteNullValue();
-		}
-	}
-
-	[JsonConverter(typeof(GeoShapeRelationConverter))]
-	public enum GeoShapeRelation
-	{
-		[EnumMember(Value = "within")]
-		Within,
-		[EnumMember(Value = "intersects")]
-		Intersects,
-		[EnumMember(Value = "disjoint")]
-		Disjoint,
-		[EnumMember(Value = "contains")]
-		Contains
-	}
-
-	internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation>
-	{
-		public override GeoShapeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var enumString = reader.GetString();
-			switch (enumString)
-			{
-				case "within":
-					return GeoShapeRelation.Within;
-				case "intersects":
-					return GeoShapeRelation.Intersects;
-				case "disjoint":
-					return GeoShapeRelation.Disjoint;
-				case "contains":
-					return GeoShapeRelation.Contains;
-			}
-
-			ThrowHelper.ThrowJsonException();
-			return default;
-		}
-
-		public override void Write(Utf8JsonWriter writer, GeoShapeRelation value, JsonSerializerOptions options)
-		{
-			switch (value)
-			{
-				case GeoShapeRelation.Within:
-					writer.WriteStringValue("within");
-					return;
-				case GeoShapeRelation.Intersects:
-					writer.WriteStringValue("intersects");
-					return;
-				case GeoShapeRelation.Disjoint:
-					writer.WriteStringValue("disjoint");
-					return;
-				case GeoShapeRelation.Contains:
-					writer.WriteStringValue("contains");
 					return;
 			}
 

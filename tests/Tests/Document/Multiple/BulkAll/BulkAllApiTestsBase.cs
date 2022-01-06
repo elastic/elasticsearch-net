@@ -26,29 +26,29 @@ public abstract class BulkAllApiTestsBase : IClusterFixture<IntrusiveOperationCl
 			yield return new SmallObject() { Id = i };
 	}
 
-	protected async Task CreateIndexAsync(string indexName, int numberOfShards, TypeMapping mappings = null)
-	{
-		var result = await Client.IndexManagement.CreateIndexAsync(new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(indexName)
-		{
-			Settings = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings
-			{
-				NumberOfReplicas = 0,
-				NumberOfShards = numberOfShards
-			},
-			Mappings = mappings
-		});
+	//protected async Task CreateIndexAsync(string indexName, int numberOfShards, TypeMapping mappings = null)
+	//{
+	//	var result = await Client.IndexManagement.CreateIndexAsync(new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(indexName)
+	//	{
+	//		Settings = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings
+	//		{
+	//			NumberOfReplicas = 0,
+	//			NumberOfShards = numberOfShards
+	//		},
+	//		Mappings = mappings
+	//	});
 
-		//var result = await Client.IndexManagement.CreateIndexAsync(indexName, s => s
-		//	.Settings(settings => settings
-		//		.NumberOfShards(numberOfShards)
-		//		.NumberOfReplicas(0)
-		//	)
-		//	.Map(mappings)
-		//);
+	//	//var result = await Client.IndexManagement.CreateIndexAsync(indexName, s => s
+	//	//	.Settings(settings => settings
+	//	//		.NumberOfShards(numberOfShards)
+	//	//		.NumberOfReplicas(0)
+	//	//	)
+	//	//	.Map(mappings)
+	//	//);
 
-		result.Should().NotBeNull();
-		result.ShouldBeValid();
-	}
+	//	result.Should().NotBeNull();
+	//	result.ShouldBeValid();
+	//}
 
 	protected static void OnError(ref Exception ex, Exception e, EventWaitHandle handle)
 	{
