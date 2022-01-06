@@ -16,7 +16,7 @@ public static class TestConfig
 			(sourceFile, projectDirectory, type, method) =>
 			{
 				return new(
-					directory: Path.Combine(projectDirectory, "Snapshots"),
+					directory: Path.Combine(projectDirectory, "_VerifySnapshots"),
 					typeName: type.Name,
 					methodName: method.Name);
 			});

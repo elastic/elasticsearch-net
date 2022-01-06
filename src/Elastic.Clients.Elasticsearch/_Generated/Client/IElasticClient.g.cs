@@ -17,7 +17,6 @@
 
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Ingest;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,8 +29,6 @@ namespace Elastic.Clients.Elasticsearch
 		ClusterNamespace Cluster { get; }
 
 		IndexManagementNamespace IndexManagement { get; }
-
-		IngestNamespace Ingest { get; }
 
 		BulkResponse Bulk(BulkRequest request);
 		Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default);
@@ -49,10 +46,6 @@ namespace Elastic.Clients.Elasticsearch
 		Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default);
 		CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest = null);
 		Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
-		DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request);
-		Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default);
-		DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest = null);
-		Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
 		DeleteResponse Delete(DeleteRequest request);
 		Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default);
 		DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null);

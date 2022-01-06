@@ -1,4 +1,4 @@
-var req1 = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest("test");
+var req1 = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteRequest("test");
 
 ////var list = new List<IndexName>();
 ////IEnumerable<IndexName> items = new IndexName[] { "a", "b" };

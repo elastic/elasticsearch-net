@@ -97,12 +97,12 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 			_ => RequestMetaDataFactory.BulkHelperRequestMetaData(),
 		};
 
-		var request = new IndexManagement.IndexRefreshRequest(indices);
+		var request = new IndexManagement.RefreshRequest(indices);
 
 		if (rc is not null)
 			request.RequestConfiguration = new RequestConfiguration { RequestMetaData = rc };
 
-		var refresh = _client.IndexManagement.IndexRefresh(request);
+		var refresh = _client.IndexManagement.Refresh(request);
 
 		if (!refresh.IsValid)
 			throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);

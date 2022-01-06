@@ -17,7 +17,6 @@
 
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Ingest;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,13 +30,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		public IndexManagementNamespace IndexManagement { get; private set; }
 
-		public IngestNamespace Ingest { get; private set; }
-
 		private partial void SetupNamespaces()
 		{
 			Cluster = new ClusterNamespace(this);
 			IndexManagement = new IndexManagementNamespace(this);
-			Ingest = new IngestNamespace(this);
 		}
 
 		public BulkResponse Bulk(BulkRequest request)
@@ -150,32 +146,6 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.Document(document);
 			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
-		}
-
-		public DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<DeleteByQueryRequest, DeleteByQueryResponse>(request);
-		}
-
-		public Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<DeleteByQueryRequest, DeleteByQueryResponse>(request, cancellationToken);
-		}
-
-		public DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest = null)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			return DoRequest<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse>(descriptor);
-		}
-
-		public Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
-			configureRequest?.Invoke(descriptor);
-			return DoRequestAsync<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse>(descriptor);
 		}
 
 		public DeleteResponse Delete(DeleteRequest request)

@@ -6,14 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Ingest;
-using Elastic.Clients.Elasticsearch.Mapping;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Transport;
 using Tests.Core.Client;
-using Tests.Core.Extensions;
 using Tests.Domain;
 
 namespace Tests.Core.ManagedElasticsearch.NodeSeeders
@@ -23,9 +18,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		public const string CommitsAliasFilter = "commits-only";
 		public const string ProjectsAliasFilter = "projects-only";
 		public const string ProjectsAliasName = "projects-alias";
-		public const string TestsIndexTemplateName = "nest_tests";
+		public const string TestsIndexTemplateName = "elasticsearch_client_tests";
 		public const string RemoteClusterName = "remote-cluster";
-		public const string PipelineName = "nest-pipeline";
+		public const string PipelineName = "elasticsearch-client-pipeline";
 
 		private readonly IndexSettings _defaultIndexSettings = new()
 		{
@@ -76,10 +71,10 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
 		private bool AlreadySeeded()
 		{
-			var response = Client.IndexManagement.IndexExistsTemplate(new IndexExistsTemplateRequest(TestsIndexTemplateName));
-			return response.Exists;
+			var response = Client.Transport.Request<BytesResponse>(HttpMethod.HEAD, $"_template/{TestsIndexTemplateName}", PostData.Empty);
+			return response.Success;
 		}
-		
+
 		private async Task SeedNodeAsync(bool alreadySeeded)
 		{
 			await CleanupCluster(alreadySeeded).ConfigureAwait(false);
@@ -115,36 +110,55 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			//		{ RemoteClusterName, "127.0.0.1:9300" }
 			//	};
 
-			var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
+			var req = new
 			{
-				Transient = clusterConfiguration
-			}).ConfigureAwait(false);
+				settings = clusterConfiguration
+			};
 
-			putSettingsResponse.ShouldBeValid();
+			_ = await Client.Transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_cluster/settings", PostData.Serializable(req));
+
+			//var putSettingsResponse = await Client.Cluster.PutSettingsAsync(new ClusterPutSettingsRequest
+			//{
+			//	Transient = clusterConfiguration
+			//}).ConfigureAwait(false);
+			//putSettingsResponse.ShouldBeValid();
 		}
 
 		public async Task PutPipeline()
 		{
-			// TODO: Resume fluent version
-			var putProcessors = await Client.Ingest.PutPipelineAsync(PipelineName, pi => pi
-				.Description("A pipeline registered by the NEST test framework")
-				.Processors(new[] { new ProcessorContainer(new SetProcessor { Field = "metadata", Value = new { x = "y" } }) })
-			).ConfigureAwait(false);
+			//// TODO: Resume fluent version
+			//var putProcessors = await Client.Ingest.PutPipelineAsync(PipelineName, pi => pi
+			//	.Description("A pipeline registered by the NEST test framework")
+			//	.Processors(new[] { new ProcessorContainer(new SetProcessor { Field = "metadata", Value = new { x = "y" } }) })
+			//).ConfigureAwait(false);
 
-			putProcessors.ShouldBeValid();
+			//putProcessors.ShouldBeValid();
+
+			var req = new
+			{
+				description = "A pipeline registered by the NEST test framework",
+				processors = new Dictionary<string, object>
+				{
+					{ "set", new { field = "metadata", value= new { x = "y" } } }
+				}
+			};
+
+			_ = await Client.Transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_ingest/pipeline/{PipelineName}", PostData.Serializable(req));
 		}
 
 		public async Task DeleteIndicesAndTemplatesAsync(bool alreadySeeded)
 		{
 			var tasks = new List<Task>
 			{
-				Client.IndexManagement.DeleteIndexAsync(typeof(Project)),
-				Client.IndexManagement.DeleteIndexAsync(typeof(Developer)),
-				Client.IndexManagement.DeleteIndexAsync(typeof(ProjectPercolation))
+				Client.IndexManagement.DeleteAsync(typeof(Project)),
+				Client.IndexManagement.DeleteAsync(typeof(Developer)),
+				Client.IndexManagement.DeleteAsync(typeof(ProjectPercolation))
 			};
 
 			if (alreadySeeded)
-				tasks.Add(Client.IndexManagement.IndexDeleteIndexTemplateAsync(TestsIndexTemplateName));
+			{
+				tasks.Add(Client.Transport.RequestAsync<BytesResponse>(HttpMethod.DELETE, $"_template/{TestsIndexTemplateName}", PostData.Empty));
+			}
 
 			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
 		}
@@ -352,7 +366,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 			await Task.WhenAll(tasks).ConfigureAwait(false);
 
-			await Client.IndexManagement.IndexRefreshAsync(new IndexRefreshRequest(Indices.Index(typeof(Project)))).ConfigureAwait(false);
+			await Client.IndexManagement.RefreshAsync(new RefreshRequest(Indices.Index(typeof(Project)))).ConfigureAwait(false);
 		}
 
 		//		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(
