@@ -50,6 +50,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("keyed"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Keyed = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("missing"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -74,32 +96,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("format"))
-					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
 						}
 
 						continue;
@@ -150,6 +150,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
+			if (value.Keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value.Keyed.Value);
+			}
+
 			if (value.Missing.HasValue)
 			{
 				writer.WritePropertyName("missing");
@@ -166,18 +178,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
 			}
 
 			writer.WriteEndObject();
@@ -209,6 +209,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public bool? Keyed { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("missing")]
 		public int? Missing { get; set; }
 
@@ -218,15 +226,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		public ScriptBase? Script { get; set; }
 	}
 
 	public sealed partial class RangeAggregationDescriptor<TDocument> : DescriptorBase<RangeAggregationDescriptor<TDocument>>
@@ -238,55 +238,55 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
+		internal string? FormatValue { get; private set; }
+
+		internal bool? KeyedValue { get; private set; }
+
 		internal int? MissingValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
-
-		internal bool? KeyedValue { get; private set; }
-
-		internal string? FormatValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
 		public RangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public RangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public RangeAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public RangeAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public RangeAggregationDescriptor<TDocument> Missing(int? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public RangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? ranges) => Assign(ranges, (a, v) => a.RangesValue = v);
-		public RangeAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public RangeAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public RangeAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public RangeAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public RangeAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public RangeAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
 		}
 
-		public RangeAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public RangeAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -320,6 +320,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			if (KeyedValue.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(KeyedValue.Value);
+			}
+
 			if (MissingValue.HasValue)
 			{
 				writer.WritePropertyName("missing");
@@ -340,24 +352,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
 			}
 
 			writer.WriteEndObject();

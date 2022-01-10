@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "common_grams";
-		[JsonInclude]
 		[JsonPropertyName("common_words")]
 		public IReadOnlyCollection<string>? CommonWords { get; init; }
 
@@ -44,5 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("query_mode")]
 		public bool? QueryMode { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "common_grams";
 	}
 }

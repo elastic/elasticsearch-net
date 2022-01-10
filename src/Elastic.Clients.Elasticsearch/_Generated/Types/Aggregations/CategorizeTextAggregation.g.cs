@@ -39,45 +39,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("field"))
+					if (reader.ValueTextEquals("categorization_analyzer"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Field = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("max_unique_tokens"))
-					{
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.MaxUniqueTokens = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("max_matched_tokens"))
-					{
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.MaxMatchedTokens = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("similarity_threshold"))
-					{
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.SimilarityThreshold = value;
+							agg.CategorizationAnalyzer = value;
 						}
 
 						continue;
@@ -94,34 +61,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("categorization_analyzer"))
+					if (reader.ValueTextEquals("field"))
 					{
-						var value = JsonSerializer.Deserialize<Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field>(ref reader, options);
 						if (value is not null)
 						{
-							agg.CategorizationAnalyzer = value;
+							agg.Field = value;
 						}
 
 						continue;
 					}
 
-					if (reader.ValueTextEquals("shard_size"))
+					if (reader.ValueTextEquals("max_matched_tokens"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.ShardSize = value;
+							agg.MaxMatchedTokens = value;
 						}
 
 						continue;
 					}
 
-					if (reader.ValueTextEquals("size"))
+					if (reader.ValueTextEquals("max_unique_tokens"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Size = value;
+							agg.MaxUniqueTokens = value;
 						}
 
 						continue;
@@ -144,6 +111,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.ShardMinDocCount = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("shard_size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardSize = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("similarity_threshold"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.SimilarityThreshold = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
 						}
 
 						continue;
@@ -177,24 +177,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("categorize_text");
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-			if (value.MaxUniqueTokens.HasValue)
+			if (value.CategorizationAnalyzer is not null)
 			{
-				writer.WritePropertyName("max_unique_tokens");
-				writer.WriteNumberValue(value.MaxUniqueTokens.Value);
-			}
-
-			if (value.MaxMatchedTokens.HasValue)
-			{
-				writer.WritePropertyName("max_matched_tokens");
-				writer.WriteNumberValue(value.MaxMatchedTokens.Value);
-			}
-
-			if (value.SimilarityThreshold.HasValue)
-			{
-				writer.WritePropertyName("similarity_threshold");
-				writer.WriteNumberValue(value.SimilarityThreshold.Value);
+				writer.WritePropertyName("categorization_analyzer");
+				JsonSerializer.Serialize(writer, value.CategorizationAnalyzer, options);
 			}
 
 			if (value.CategorizationFilters is not null)
@@ -203,22 +189,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.CategorizationFilters, options);
 			}
 
-			if (value.CategorizationAnalyzer is not null)
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, value.Field, options);
+			if (value.MaxMatchedTokens.HasValue)
 			{
-				writer.WritePropertyName("categorization_analyzer");
-				JsonSerializer.Serialize(writer, value.CategorizationAnalyzer, options);
+				writer.WritePropertyName("max_matched_tokens");
+				writer.WriteNumberValue(value.MaxMatchedTokens.Value);
 			}
 
-			if (value.ShardSize.HasValue)
+			if (value.MaxUniqueTokens.HasValue)
 			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(value.ShardSize.Value);
-			}
-
-			if (value.Size.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(value.Size.Value);
+				writer.WritePropertyName("max_unique_tokens");
+				writer.WriteNumberValue(value.MaxUniqueTokens.Value);
 			}
 
 			if (value.MinDocCount.HasValue)
@@ -231,6 +213,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("shard_min_doc_count");
 				writer.WriteNumberValue(value.ShardMinDocCount.Value);
+			}
+
+			if (value.ShardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value.ShardSize.Value);
+			}
+
+			if (value.SimilarityThreshold.HasValue)
+			{
+				writer.WritePropertyName("similarity_threshold");
+				writer.WriteNumberValue(value.SimilarityThreshold.Value);
+			}
+
+			if (value.Size.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(value.Size.Value);
 			}
 
 			writer.WriteEndObject();
@@ -252,36 +252,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_unique_tokens")]
-		public int? MaxUniqueTokens { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_matched_tokens")]
-		public int? MaxMatchedTokens { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("similarity_threshold")]
-		public int? SimilarityThreshold { get; set; }
+		[JsonPropertyName("categorization_analyzer")]
+		public Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>? CategorizationAnalyzer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("categorization_filters")]
 		public IEnumerable<string>? CategorizationFilters { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("categorization_analyzer")]
-		public Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>? CategorizationAnalyzer { get; set; }
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
+		[JsonPropertyName("max_matched_tokens")]
+		public int? MaxMatchedTokens { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
+		[JsonPropertyName("max_unique_tokens")]
+		public int? MaxUniqueTokens { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -290,6 +278,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("shard_min_doc_count")]
 		public int? ShardMinDocCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("similarity_threshold")]
+		public int? SimilarityThreshold { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
 	}
 
 	public sealed partial class CategorizeTextAggregationDescriptor<TDocument> : DescriptorBase<CategorizeTextAggregationDescriptor<TDocument>>
@@ -299,63 +299,49 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal CategorizeTextAggregationDescriptor(Action<CategorizeTextAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
-
-		internal int? MaxUniqueTokensValue { get; private set; }
-
-		internal int? MaxMatchedTokensValue { get; private set; }
-
-		internal int? SimilarityThresholdValue { get; private set; }
+		internal Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>? CategorizationAnalyzerValue { get; private set; }
 
 		internal IEnumerable<string>? CategorizationFiltersValue { get; private set; }
 
-		internal Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>? CategorizationAnalyzerValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
-		internal int? ShardSizeValue { get; private set; }
+		internal int? MaxMatchedTokensValue { get; private set; }
 
-		internal int? SizeValue { get; private set; }
+		internal int? MaxUniqueTokensValue { get; private set; }
 
 		internal int? MinDocCountValue { get; private set; }
 
 		internal int? ShardMinDocCountValue { get; private set; }
 
+		internal int? ShardSizeValue { get; private set; }
+
+		internal int? SimilarityThresholdValue { get; private set; }
+
+		internal int? SizeValue { get; private set; }
+
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
+		public CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>? categorizationAnalyzer) => Assign(categorizationAnalyzer, (a, v) => a.CategorizationAnalyzerValue = v);
+		public CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters(IEnumerable<string>? categorizationFilters) => Assign(categorizationFilters, (a, v) => a.CategorizationFiltersValue = v);
 		public CategorizeTextAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
 		public CategorizeTextAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CategorizeTextAggregationDescriptor<TDocument> MaxUniqueTokens(int? maxUniqueTokens) => Assign(maxUniqueTokens, (a, v) => a.MaxUniqueTokensValue = v);
 		public CategorizeTextAggregationDescriptor<TDocument> MaxMatchedTokens(int? maxMatchedTokens) => Assign(maxMatchedTokens, (a, v) => a.MaxMatchedTokensValue = v);
-		public CategorizeTextAggregationDescriptor<TDocument> SimilarityThreshold(int? similarityThreshold) => Assign(similarityThreshold, (a, v) => a.SimilarityThresholdValue = v);
-		public CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters(IEnumerable<string>? categorizationFilters) => Assign(categorizationFilters, (a, v) => a.CategorizationFiltersValue = v);
-		public CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(Union<string?, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer?>? categorizationAnalyzer) => Assign(categorizationAnalyzer, (a, v) => a.CategorizationAnalyzerValue = v);
-		public CategorizeTextAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public CategorizeTextAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public CategorizeTextAggregationDescriptor<TDocument> MaxUniqueTokens(int? maxUniqueTokens) => Assign(maxUniqueTokens, (a, v) => a.MaxUniqueTokensValue = v);
 		public CategorizeTextAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
 		public CategorizeTextAggregationDescriptor<TDocument> ShardMinDocCount(int? shardMinDocCount) => Assign(shardMinDocCount, (a, v) => a.ShardMinDocCountValue = v);
+		public CategorizeTextAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
+		public CategorizeTextAggregationDescriptor<TDocument> SimilarityThreshold(int? similarityThreshold) => Assign(similarityThreshold, (a, v) => a.SimilarityThresholdValue = v);
+		public CategorizeTextAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public CategorizeTextAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("categorize_text");
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (MaxUniqueTokensValue.HasValue)
+			if (CategorizationAnalyzerValue is not null)
 			{
-				writer.WritePropertyName("max_unique_tokens");
-				writer.WriteNumberValue(MaxUniqueTokensValue.Value);
-			}
-
-			if (MaxMatchedTokensValue.HasValue)
-			{
-				writer.WritePropertyName("max_matched_tokens");
-				writer.WriteNumberValue(MaxMatchedTokensValue.Value);
-			}
-
-			if (SimilarityThresholdValue.HasValue)
-			{
-				writer.WritePropertyName("similarity_threshold");
-				writer.WriteNumberValue(SimilarityThresholdValue.Value);
+				writer.WritePropertyName("categorization_analyzer");
+				JsonSerializer.Serialize(writer, CategorizationAnalyzerValue, options);
 			}
 
 			if (CategorizationFiltersValue is not null)
@@ -364,22 +350,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, CategorizationFiltersValue, options);
 			}
 
-			if (CategorizationAnalyzerValue is not null)
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (MaxMatchedTokensValue.HasValue)
 			{
-				writer.WritePropertyName("categorization_analyzer");
-				JsonSerializer.Serialize(writer, CategorizationAnalyzerValue, options);
+				writer.WritePropertyName("max_matched_tokens");
+				writer.WriteNumberValue(MaxMatchedTokensValue.Value);
 			}
 
-			if (ShardSizeValue.HasValue)
+			if (MaxUniqueTokensValue.HasValue)
 			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(ShardSizeValue.Value);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
+				writer.WritePropertyName("max_unique_tokens");
+				writer.WriteNumberValue(MaxUniqueTokensValue.Value);
 			}
 
 			if (MinDocCountValue.HasValue)
@@ -392,6 +374,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("shard_min_doc_count");
 				writer.WriteNumberValue(ShardMinDocCountValue.Value);
+			}
+
+			if (ShardSizeValue.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(ShardSizeValue.Value);
+			}
+
+			if (SimilarityThresholdValue.HasValue)
+			{
+				writer.WritePropertyName("similarity_threshold");
+				writer.WriteNumberValue(SimilarityThresholdValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			writer.WriteEndObject();

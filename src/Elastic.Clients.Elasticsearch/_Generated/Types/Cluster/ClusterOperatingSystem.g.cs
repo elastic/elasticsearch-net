@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int AllocatedProcessors { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("architectures")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemArchitecture>? Architectures { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("available_processors")]
 		public int AvailableProcessors { get; init; }
 
@@ -45,9 +49,5 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		[JsonInclude]
 		[JsonPropertyName("pretty_names")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemPrettyName> PrettyNames { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("architectures")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.Stats.ClusterOperatingSystemArchitecture>? Architectures { get; init; }
 	}
 }

@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KuromojiIterationMarkCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "kuromoji_iteration_mark";
-		[JsonInclude]
 		[JsonPropertyName("normalize_kana")]
 		public bool NormalizeKana { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("normalize_kanji")]
 		public bool NormalizeKanji { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_iteration_mark";
 	}
 }

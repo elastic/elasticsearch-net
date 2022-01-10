@@ -285,7 +285,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.SortCollection? Sort { get; set; }
+		public SortCollection? Sort { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("_source")]
@@ -420,7 +420,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.SortCollection? SortValue { get; private set; }
+		internal SortCollection? SortValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
 
@@ -458,7 +458,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal SlicedScrollDescriptor<TDocument> SliceDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.SortDescriptor<TDocument> SortDescriptor { get; private set; }
+		internal SortDescriptor<TDocument> SortDescriptor { get; private set; }
 
 		internal SuggesterDescriptor SuggestDescriptor { get; private set; }
 
@@ -476,7 +476,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.SortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
+		internal Action<SortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
 
 		internal Action<SuggesterDescriptor> SuggestDescriptorAction { get; private set; }
 
@@ -620,21 +620,21 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.SliceDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortCollection? sort)
+		public SearchRequestDescriptor<TDocument> Sort(SortCollection? sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
 			return Assign(sort, (a, v) => a.SortValue = v);
 		}
 
-		public SearchRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortDescriptor<TDocument> descriptor)
+		public SearchRequestDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
 		}
 
-		public SearchRequestDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortDescriptor<TDocument>> configure)
+		public SearchRequestDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
@@ -868,7 +868,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortDescriptor<TDocument>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
 			}
 			else if (SortValue is not null)
 			{

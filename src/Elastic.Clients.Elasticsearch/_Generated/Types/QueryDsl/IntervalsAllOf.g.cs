@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonIgnore]
 		string QueryDsl.IIntervalsQueryVariant.IntervalsQueryVariantName => "all_of";
 		[JsonInclude]
+		[JsonPropertyName("filter")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("intervals")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> Intervals { get; set; }
 
@@ -41,10 +45,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonInclude]
 		[JsonPropertyName("ordered")]
 		public bool? Ordered { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("filter")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 	}
 
 	public sealed partial class IntervalsAllOfDescriptor : DescriptorBase<IntervalsAllOfDescriptor>
@@ -54,21 +54,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
+
 		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; private set; }
 
 		internal int? MaxGapsValue { get; private set; }
 
 		internal bool? OrderedValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
-
 		internal IntervalsFilterDescriptor FilterDescriptor { get; private set; }
 
 		internal Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; private set; }
 
-		public IntervalsAllOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals) => Assign(intervals, (a, v) => a.IntervalsValue = v);
-		public IntervalsAllOfDescriptor MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
-		public IntervalsAllOfDescriptor Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
 		public IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 		{
 			FilterDescriptor = null;
@@ -90,23 +87,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
 		}
 
+		public IntervalsAllOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals) => Assign(intervals, (a, v) => a.IntervalsValue = v);
+		public IntervalsAllOfDescriptor MaxGaps(int? maxGaps) => Assign(maxGaps, (a, v) => a.MaxGapsValue = v);
+		public IntervalsAllOfDescriptor Ordered(bool? ordered = true) => Assign(ordered, (a, v) => a.OrderedValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("intervals");
-			JsonSerializer.Serialize(writer, IntervalsValue, options);
-			if (MaxGapsValue.HasValue)
-			{
-				writer.WritePropertyName("max_gaps");
-				writer.WriteNumberValue(MaxGapsValue.Value);
-			}
-
-			if (OrderedValue.HasValue)
-			{
-				writer.WritePropertyName("ordered");
-				writer.WriteBooleanValue(OrderedValue.Value);
-			}
-
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
@@ -121,6 +107,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			writer.WritePropertyName("intervals");
+			JsonSerializer.Serialize(writer, IntervalsValue, options);
+			if (MaxGapsValue.HasValue)
+			{
+				writer.WritePropertyName("max_gaps");
+				writer.WriteNumberValue(MaxGapsValue.Value);
+			}
+
+			if (OrderedValue.HasValue)
+			{
+				writer.WritePropertyName("ordered");
+				writer.WriteBooleanValue(OrderedValue.Value);
 			}
 
 			writer.WriteEndObject();

@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class GeoLine
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("coordinates")]
 		public IReadOnlyCollection<IReadOnlyCollection<double>> Coordinates { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
 	}
 }

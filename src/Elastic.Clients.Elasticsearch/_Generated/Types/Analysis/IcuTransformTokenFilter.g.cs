@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class IcuTransformTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "icu_transform";
-		[JsonInclude]
 		[JsonPropertyName("dir")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection Dir { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
 		public string Id { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_transform";
 	}
 }

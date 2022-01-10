@@ -27,51 +27,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class ExtendedStatsAggregate : Aggregations.StatsAggregate
 	{
 		[JsonInclude]
-		[JsonPropertyName("sum_of_squares")]
-		public double? SumOfSquares { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance")]
-		public double? Variance { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance_population")]
-		public double? VariancePopulation { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance_sampling")]
-		public double? VarianceSampling { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("std_deviation")]
 		public double? StdDeviation { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("std_deviation_bounds")]
-		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("sum_of_squares_as_string")]
-		public string? SumOfSquaresAsString { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance_as_string")]
-		public string? VarianceAsString { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance_population_as_string")]
-		public string? VariancePopulationAsString { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance_sampling_as_string")]
-		public string? VarianceSamplingAsString { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("std_deviation_as_string")]
 		public string? StdDeviationAsString { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("std_deviation_bounds")]
+		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("std_deviation_bounds_as_string")]
 		public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("sum_of_squares")]
+		public double? SumOfSquares { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("sum_of_squares_as_string")]
+		public string? SumOfSquaresAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance")]
+		public double? Variance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_as_string")]
+		public string? VarianceAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_population")]
+		public double? VariancePopulation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_population_as_string")]
+		public string? VariancePopulationAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_sampling")]
+		public double? VarianceSampling { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance_sampling_as_string")]
+		public string? VarianceSamplingAsString { get; init; }
 	}
 }

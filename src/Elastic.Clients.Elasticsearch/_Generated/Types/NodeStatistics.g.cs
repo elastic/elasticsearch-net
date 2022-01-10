@@ -27,19 +27,19 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class NodeStatistics
 	{
 		[JsonInclude]
-		[JsonPropertyName("failures")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; init; }
+		[JsonPropertyName("failed")]
+		public int Failed { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("total")]
-		public int Total { get; init; }
+		[JsonPropertyName("failures")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("successful")]
 		public int Successful { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("failed")]
-		public int Failed { get; init; }
+		[JsonPropertyName("total")]
+		public int Total { get; init; }
 	}
 }

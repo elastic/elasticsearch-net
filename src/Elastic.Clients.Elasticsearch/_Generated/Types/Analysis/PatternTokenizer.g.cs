@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PatternTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern";
-		[JsonInclude]
 		[JsonPropertyName("flags")]
 		public string Flags { get; init; }
 
@@ -40,5 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("pattern")]
 		public string Pattern { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern";
 	}
 }

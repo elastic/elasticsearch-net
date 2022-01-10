@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class CustomAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "custom";
-		[JsonInclude]
 		[JsonPropertyName("char_filter")]
 		public IReadOnlyCollection<string>? CharFilter { get; init; }
 
@@ -48,5 +45,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("tokenizer")]
 		public string Tokenizer { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "custom";
 	}
 }

@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class FetchProfileDebug
 	{
 		[JsonInclude]
-		[JsonPropertyName("stored_fields")]
-		public IReadOnlyCollection<string>? StoredFields { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("fast_path")]
 		public int? FastPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("stored_fields")]
+		public IReadOnlyCollection<string>? StoredFields { get; init; }
 	}
 }

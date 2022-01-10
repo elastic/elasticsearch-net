@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class MultiplexerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "multiplexer";
-		[JsonInclude]
 		[JsonPropertyName("filters")]
 		public IReadOnlyCollection<string> Filters { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "multiplexer";
 	}
 }

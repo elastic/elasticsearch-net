@@ -51,19 +51,19 @@ namespace Elastic.Clients.Elasticsearch
 		public string JavaVersion { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("licensed")]
 		public bool Licensed { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string Version { get; init; }
 	}
 }

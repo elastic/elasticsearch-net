@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class StopTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "stop";
-		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
 		public bool? IgnoreCase { get; init; }
 
@@ -44,5 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stop";
 	}
 }

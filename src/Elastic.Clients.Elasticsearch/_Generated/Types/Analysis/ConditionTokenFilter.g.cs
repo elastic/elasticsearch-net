@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class ConditionTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "condition";
-		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IReadOnlyCollection<string> Filter { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase Script { get; init; }
+		public ScriptBase Script { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "condition";
 	}
 }

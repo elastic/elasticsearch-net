@@ -27,13 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class FingerprintAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "fingerprint";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("max_output_size")]
 		public int MaxOutputSize { get; init; }
 
@@ -52,5 +45,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "fingerprint";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
 	}
 }

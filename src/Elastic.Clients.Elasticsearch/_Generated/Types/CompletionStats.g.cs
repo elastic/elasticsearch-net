@@ -27,15 +27,15 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class CompletionStats
 	{
 		[JsonInclude]
-		[JsonPropertyName("size_in_bytes")]
-		public long SizeInBytes { get; init; }
+		[JsonPropertyName("fields")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes { get; init; }
 	}
 }

@@ -69,16 +69,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public int? MinDocFreq { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("minimum_should_match")]
-		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("min_term_freq")]
 		public int? MinTermFreq { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_word_length")]
 		public int? MinWordLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]
@@ -132,11 +132,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal int? MinDocFreqValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
-
 		internal int? MinTermFreqValue { get; private set; }
 
 		internal int? MinWordLengthValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
 
 		internal Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; private set; }
 
@@ -150,9 +150,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		public MoreLikeThisQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> BoostTerms(double? boostTerms) => Assign(boostTerms, (a, v) => a.BoostTermsValue = v);
@@ -164,17 +164,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public MoreLikeThisQueryDescriptor<TDocument> MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTermsValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLengthValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> MinDocFreq(int? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
 		public MoreLikeThisQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Assign(versionType, (a, v) => a.VersionTypeValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -234,12 +234,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(MinDocFreqValue.Value);
 			}
 
-			if (MinimumShouldMatchValue is not null)
-			{
-				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-			}
-
 			if (MinTermFreqValue.HasValue)
 			{
 				writer.WritePropertyName("min_term_freq");
@@ -250,6 +244,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("min_word_length");
 				writer.WriteNumberValue(MinWordLengthValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 			}
 
 			if (PerFieldAnalyzerValue is not null)
@@ -288,16 +288,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, VersionTypeValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

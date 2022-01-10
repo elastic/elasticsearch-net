@@ -27,15 +27,15 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class NestedIdentity
 	{
 		[JsonInclude]
+		[JsonPropertyName("_nested")]
+		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]
 		public int Offset { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_nested")]
-		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
 	}
 }

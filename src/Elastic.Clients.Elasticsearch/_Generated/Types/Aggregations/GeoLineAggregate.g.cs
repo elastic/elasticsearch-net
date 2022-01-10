@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class GeoLineAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("geometry")]
 		public Elastic.Clients.Elasticsearch.GeoLine Geometry { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
 	}
 }

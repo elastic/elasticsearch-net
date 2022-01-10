@@ -43,6 +43,14 @@ namespace Elastic.Clients.Elasticsearch
 		public long BuildScorerCount { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("compute_max_score")]
+		public long ComputeMaxScore { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("compute_max_score_count")]
+		public long ComputeMaxScoreCount { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("create_weight")]
 		public long CreateWeight { get; init; }
 
@@ -57,14 +65,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("match_count")]
 		public long MatchCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("shallow_advance")]
-		public long ShallowAdvance { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("shallow_advance_count")]
-		public long ShallowAdvanceCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("next_doc")]
@@ -83,19 +83,19 @@ namespace Elastic.Clients.Elasticsearch
 		public long ScoreCount { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("compute_max_score")]
-		public long ComputeMaxScore { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("compute_max_score_count")]
-		public long ComputeMaxScoreCount { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("set_min_competitive_score")]
 		public long SetMinCompetitiveScore { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("set_min_competitive_score_count")]
 		public long SetMinCompetitiveScoreCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("shallow_advance")]
+		public long ShallowAdvance { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("shallow_advance_count")]
+		public long ShallowAdvanceCount { get; init; }
 	}
 }

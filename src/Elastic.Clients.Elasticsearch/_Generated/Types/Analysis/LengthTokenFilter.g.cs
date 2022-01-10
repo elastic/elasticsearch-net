@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class LengthTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "length";
-		[JsonInclude]
 		[JsonPropertyName("max")]
 		public int Max { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min")]
 		public int Min { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "length";
 	}
 }

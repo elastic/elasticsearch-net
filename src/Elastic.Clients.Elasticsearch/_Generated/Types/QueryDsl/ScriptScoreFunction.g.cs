@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "script_score";
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase Script { get; set; }
+		public ScriptBase Script { get; set; }
 	}
 
 	public sealed partial class ScriptScoreFunctionDescriptor<TDocument> : DescriptorBase<ScriptScoreFunctionDescriptor<TDocument>>
@@ -40,35 +40,35 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.ScriptBase ScriptValue { get; private set; }
+		internal ScriptBase ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
 		internal double? WeightValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
-		public ScriptScoreFunctionDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase script)
+		public ScriptScoreFunctionDescriptor<TDocument> Script(ScriptBase script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public ScriptScoreFunctionDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public ScriptScoreFunctionDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public ScriptScoreFunctionDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public ScriptScoreFunctionDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -108,7 +108,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else
 			{

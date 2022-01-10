@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class DelimitedPayloadTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "delimited_payload";
-		[JsonInclude]
 		[JsonPropertyName("delimiter")]
 		public string Delimiter { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("encoding")]
 		public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Encoding { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "delimited_payload";
 	}
 }

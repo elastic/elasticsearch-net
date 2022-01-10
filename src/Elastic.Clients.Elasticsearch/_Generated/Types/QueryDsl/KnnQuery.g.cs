@@ -54,16 +54,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IEnumerable<double> QueryVectorValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		public KnnQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
 		public KnnQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public KnnQueryDescriptor<TDocument> NumCandidates(int numCandidates) => Assign(numCandidates, (a, v) => a.NumCandidatesValue = v);
 		public KnnQueryDescriptor<TDocument> QueryVector(IEnumerable<double> queryVector) => Assign(queryVector, (a, v) => a.QueryVectorValue = v);
-		public KnnQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public KnnQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public KnnQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -73,16 +73,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WriteNumberValue(NumCandidatesValue);
 			writer.WritePropertyName("query_vector");
 			JsonSerializer.Serialize(writer, QueryVectorValue, options);
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

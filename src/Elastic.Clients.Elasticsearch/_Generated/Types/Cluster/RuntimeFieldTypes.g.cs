@@ -27,24 +27,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	public partial class RuntimeFieldTypes
 	{
 		[JsonInclude]
-		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
+		[JsonPropertyName("chars_max")]
+		public int CharsMax { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("chars_total")]
+		public int CharsTotal { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("doc_max")]
+		public int DocMax { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc_total")]
+		public int DocTotal { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public int IndexCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("scriptless_count")]
-		public int ScriptlessCount { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("shadowed_count")]
-		public int ShadowedCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -59,12 +63,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int LinesTotal { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("chars_max")]
-		public int CharsMax { get; init; }
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("chars_total")]
-		public int CharsTotal { get; init; }
+		[JsonPropertyName("scriptless_count")]
+		public int ScriptlessCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("shadowed_count")]
+		public int ShadowedCount { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("source_max")]
@@ -73,13 +81,5 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		[JsonInclude]
 		[JsonPropertyName("source_total")]
 		public int SourceTotal { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_max")]
-		public int DocMax { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_total")]
-		public int DocTotal { get; init; }
 	}
 }

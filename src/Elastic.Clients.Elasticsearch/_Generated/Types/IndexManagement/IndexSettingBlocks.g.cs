@@ -27,6 +27,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexSettingBlocks
 	{
 		[JsonInclude]
+		[JsonPropertyName("metadata")]
+		public bool? Metadata { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("read")]
+		public bool? Read { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("read_only")]
 		public bool? ReadOnly { get; set; }
 
@@ -35,16 +43,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? ReadOnlyAllowDelete { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("read")]
-		public bool? Read { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("write")]
 		public Union<bool?, string?>? Write { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("metadata")]
-		public bool? Metadata { get; set; }
 	}
 
 	public sealed partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor>
@@ -54,24 +54,36 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
+		internal bool? MetadataValue { get; private set; }
+
+		internal bool? ReadValue { get; private set; }
+
 		internal bool? ReadOnlyValue { get; private set; }
 
 		internal bool? ReadOnlyAllowDeleteValue { get; private set; }
 
-		internal bool? ReadValue { get; private set; }
-
 		internal Union<bool?, string?>? WriteValue { get; private set; }
 
-		internal bool? MetadataValue { get; private set; }
-
+		public IndexSettingBlocksDescriptor Metadata(bool? metadata = true) => Assign(metadata, (a, v) => a.MetadataValue = v);
+		public IndexSettingBlocksDescriptor Read(bool? read = true) => Assign(read, (a, v) => a.ReadValue = v);
 		public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true) => Assign(readOnly, (a, v) => a.ReadOnlyValue = v);
 		public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true) => Assign(readOnlyAllowDelete, (a, v) => a.ReadOnlyAllowDeleteValue = v);
-		public IndexSettingBlocksDescriptor Read(bool? read = true) => Assign(read, (a, v) => a.ReadValue = v);
 		public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write) => Assign(write, (a, v) => a.WriteValue = v);
-		public IndexSettingBlocksDescriptor Metadata(bool? metadata = true) => Assign(metadata, (a, v) => a.MetadataValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (MetadataValue.HasValue)
+			{
+				writer.WritePropertyName("metadata");
+				writer.WriteBooleanValue(MetadataValue.Value);
+			}
+
+			if (ReadValue.HasValue)
+			{
+				writer.WritePropertyName("read");
+				writer.WriteBooleanValue(ReadValue.Value);
+			}
+
 			if (ReadOnlyValue.HasValue)
 			{
 				writer.WritePropertyName("read_only");
@@ -84,22 +96,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				writer.WriteBooleanValue(ReadOnlyAllowDeleteValue.Value);
 			}
 
-			if (ReadValue.HasValue)
-			{
-				writer.WritePropertyName("read");
-				writer.WriteBooleanValue(ReadValue.Value);
-			}
-
 			if (WriteValue is not null)
 			{
 				writer.WritePropertyName("write");
 				JsonSerializer.Serialize(writer, WriteValue, options);
-			}
-
-			if (MetadataValue.HasValue)
-			{
-				writer.WritePropertyName("metadata");
-				writer.WriteBooleanValue(MetadataValue.Value);
 			}
 
 			writer.WriteEndObject();

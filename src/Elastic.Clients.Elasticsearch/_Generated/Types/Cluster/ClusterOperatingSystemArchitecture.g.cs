@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	public partial class ClusterOperatingSystemArchitecture
 	{
 		[JsonInclude]
-		[JsonPropertyName("count")]
-		public int Count { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("arch")]
 		public string Arch { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public int Count { get; init; }
 	}
 }

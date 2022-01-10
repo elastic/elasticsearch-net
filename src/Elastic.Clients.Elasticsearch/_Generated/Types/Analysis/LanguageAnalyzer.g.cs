@@ -27,13 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class LanguageAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "language";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("language")]
 		public Elastic.Clients.Elasticsearch.Analysis.Language Language { get; init; }
 
@@ -48,5 +41,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "language";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
 	}
 }

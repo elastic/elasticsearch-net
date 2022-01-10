@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class WordDelimiterTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "word_delimiter";
-		[JsonInclude]
 		[JsonPropertyName("catenate_all")]
 		public bool? CatenateAll { get; init; }
 
@@ -73,6 +70,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("stem_english_possessive")]
 		public bool? StemEnglishPossessive { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "word_delimiter";
 		[JsonInclude]
 		[JsonPropertyName("type_table")]
 		public IReadOnlyCollection<string>? TypeTable { get; init; }

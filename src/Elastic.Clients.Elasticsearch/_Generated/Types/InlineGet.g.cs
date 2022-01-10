@@ -27,18 +27,6 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class InlineGet<TDocument>
 	{
 		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<string, object>? Fields { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("found")]
-		public bool Found { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_seq_no")]
-		public long? SeqNo { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long? PrimaryTerm { get; init; }
 
@@ -47,8 +35,20 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Routing? Routing { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("_seq_no")]
+		public long? SeqNo { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("_source")]
 		[SourceConverter]
 		public TDocument Source { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("found")]
+		public bool Found { get; init; }
 	}
 }

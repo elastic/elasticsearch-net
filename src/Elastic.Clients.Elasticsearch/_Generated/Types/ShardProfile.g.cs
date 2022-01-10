@@ -31,15 +31,15 @@ namespace Elastic.Clients.Elasticsearch
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfile> Aggregations { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("fetch")]
+		public Elastic.Clients.Elasticsearch.FetchProfile? Fetch { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public string Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("searches")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchProfile> Searches { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("fetch")]
-		public Elastic.Clients.Elasticsearch.FetchProfile? Fetch { get; init; }
 	}
 }

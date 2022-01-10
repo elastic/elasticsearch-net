@@ -27,27 +27,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 	public partial class ShardFileSizeInfo
 	{
 		[JsonInclude]
-		[JsonPropertyName("description")]
-		public string Description { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("size_in_bytes")]
-		public long SizeInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_size_in_bytes")]
-		public long? MinSizeInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_size_in_bytes")]
-		public long? MaxSizeInBytes { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("average_size_in_bytes")]
 		public long? AverageSizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long? Count { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("description")]
+		public string Description { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_size_in_bytes")]
+		public long? MaxSizeInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_size_in_bytes")]
+		public long? MinSizeInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("size_in_bytes")]
+		public long SizeInBytes { get; init; }
 	}
 }

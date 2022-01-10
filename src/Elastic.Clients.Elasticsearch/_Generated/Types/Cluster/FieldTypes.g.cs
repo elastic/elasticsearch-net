@@ -27,16 +27,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	public partial class FieldTypes
 	{
 		[JsonInclude]
-		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("count")]
 		public int Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_count")]
 		public int IndexCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("script_count")]

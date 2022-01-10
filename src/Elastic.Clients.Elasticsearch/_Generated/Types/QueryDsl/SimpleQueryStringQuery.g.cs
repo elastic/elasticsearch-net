@@ -29,12 +29,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonIgnore]
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "simple_query_string";
 		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
@@ -88,9 +88,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? AnalyzerValue { get; private set; }
-
 		internal bool? AnalyzeWildcardValue { get; private set; }
+
+		internal string? AnalyzerValue { get; private set; }
 
 		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
 
@@ -114,12 +114,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string? QuoteFieldSuffixValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
 
-		public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
+		internal float? BoostValue { get; private set; }
+
 		public SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
+		public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
@@ -131,21 +131,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix) => Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffixValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
 			if (AnalyzeWildcardValue.HasValue)
 			{
 				writer.WritePropertyName("analyze_wildcard");
 				writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
 			}
 
 			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
@@ -210,16 +210,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteStringValue(QuoteFieldSuffixValue);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

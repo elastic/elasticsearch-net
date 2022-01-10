@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	public partial class IndexingPressureMemory
 	{
 		[JsonInclude]
-		[JsonPropertyName("limit_in_bytes")]
-		public long LimitInBytes { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("current")]
 		public Elastic.Clients.Elasticsearch.Cluster.Stats.IndexingPressureMemorySummary Current { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("limit_in_bytes")]
+		public long LimitInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]

@@ -36,27 +36,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
-					if (property == "value")
-					{
-						variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
-						continue;
-					}
-
 					if (property == "case_insensitive")
 					{
 						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						continue;
 					}
 
-					if (property == "boost")
+					if (property == "value")
 					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+						variant.Value = JsonSerializer.Deserialize<object>(ref reader, options);
 						continue;
 					}
 
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 				}
@@ -69,24 +69,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal override void WriteInternal(Utf8JsonWriter writer, TermQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.Value, options);
 			if (value.CaseInsensitive.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
 				writer.WriteBooleanValue(value.CaseInsensitive.Value);
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, value.Value, options);
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
 			writer.WriteEndObject();
@@ -99,12 +99,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonIgnore]
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "term";
 		[JsonInclude]
-		[JsonPropertyName("value")]
-		public object Value { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("case_insensitive")]
 		public bool? CaseInsensitive { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object Value { get; set; }
 	}
 
 	public sealed partial class TermQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<TermQueryDescriptor<TDocument>, TDocument>
@@ -114,40 +114,40 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal object ValueValue { get; private set; }
-
 		internal bool? CaseInsensitiveValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
+		internal object ValueValue { get; private set; }
 
 		internal string? QueryNameValue { get; private set; }
 
-		public TermQueryDescriptor<TDocument> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
+		internal float? BoostValue { get; private set; }
+
 		public TermQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public TermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public TermQueryDescriptor<TDocument> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
 		public TermQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public TermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, ValueValue, options);
 			if (CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
 				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

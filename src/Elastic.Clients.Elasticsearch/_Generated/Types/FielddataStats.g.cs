@@ -31,15 +31,15 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Evictions { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("memory_size")]
 		public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_size_in_bytes")]
 		public long MemorySizeInBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; init; }
 	}
 }

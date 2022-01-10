@@ -44,9 +44,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer MatchValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		internal QueryContainerDescriptor<TDocument> MatchDescriptor { get; private set; }
 
@@ -73,8 +73,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Assign(configure, (a, v) => a.MatchDescriptorAction = v);
 		}
 
-		public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public SpanMultiTermQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -94,16 +94,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, MatchValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

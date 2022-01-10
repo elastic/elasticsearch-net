@@ -27,10 +27,6 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class CoordsGeoBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("top")]
-		public double Top { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("bottom")]
 		public double Bottom { get; init; }
 
@@ -41,5 +37,9 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("right")]
 		public double Right { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("top")]
+		public double Top { get; init; }
 	}
 }

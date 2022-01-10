@@ -29,12 +29,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonIgnore]
 		string QueryDsl.IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "field_value_factor";
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("factor")]
 		public double? Factor { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing")]
@@ -52,9 +52,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
-
 		internal double? FactorValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal double? MissingValue { get; private set; }
 
@@ -68,9 +68,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor) => Assign(factor, (a, v) => a.FactorValue = v);
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor) => Assign(factor, (a, v) => a.FactorValue = v);
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier) => Assign(modifier, (a, v) => a.ModifierValue = v);
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
@@ -98,14 +98,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (FactorValue.HasValue)
 			{
 				writer.WritePropertyName("factor");
 				writer.WriteNumberValue(FactorValue.Value);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (MissingValue.HasValue)
 			{
 				writer.WritePropertyName("missing");

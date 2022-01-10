@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
+		public ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
@@ -48,30 +48,30 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 		internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
 		internal string? FormatValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		public RuntimeFieldDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public RuntimeFieldDescriptor Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public RuntimeFieldDescriptor Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public RuntimeFieldDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public RuntimeFieldDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{

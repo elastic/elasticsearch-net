@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class SnowballTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "snowball";
-		[JsonInclude]
 		[JsonPropertyName("language")]
 		public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "snowball";
 	}
 }

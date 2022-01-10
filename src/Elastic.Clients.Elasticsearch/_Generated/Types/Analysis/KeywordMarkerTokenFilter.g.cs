@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KeywordMarkerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "keyword_marker";
-		[JsonInclude]
 		[JsonPropertyName("ignore_case")]
 		public bool? IgnoreCase { get; init; }
 
@@ -44,5 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("keywords_pattern")]
 		public string? KeywordsPattern { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keyword_marker";
 	}
 }

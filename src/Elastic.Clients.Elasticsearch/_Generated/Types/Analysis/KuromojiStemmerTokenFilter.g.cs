@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KuromojiStemmerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "kuromoji_stemmer";
-		[JsonInclude]
 		[JsonPropertyName("minimum_length")]
 		public int MinimumLength { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_stemmer";
 	}
 }

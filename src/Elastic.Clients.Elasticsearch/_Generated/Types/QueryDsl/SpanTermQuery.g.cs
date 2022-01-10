@@ -42,15 +42,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 				}
@@ -65,16 +65,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			writer.WriteStartObject();
 			writer.WritePropertyName("value");
 			writer.WriteStringValue(value.Value);
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
 			writer.WriteEndObject();
@@ -102,29 +102,29 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal string ValueValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
 		public SpanTermQueryDescriptor<TDocument> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public SpanTermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public SpanTermQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public SpanTermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
 			writer.WritePropertyName("value");
 			writer.WriteStringValue(ValueValue);
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

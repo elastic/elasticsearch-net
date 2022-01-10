@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class DutchAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "dutch";
-		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "dutch";
 	}
 }

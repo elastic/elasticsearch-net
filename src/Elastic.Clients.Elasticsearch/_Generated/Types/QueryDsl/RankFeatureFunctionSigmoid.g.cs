@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class RankFeatureFunctionSigmoid : QueryDsl.RankFeatureFunction
 	{
 		[JsonInclude]
-		[JsonPropertyName("pivot")]
-		public float Pivot { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("exponent")]
 		public float Exponent { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("pivot")]
+		public float Pivot { get; set; }
 	}
 
 	public sealed partial class RankFeatureFunctionSigmoidDescriptor : DescriptorBase<RankFeatureFunctionSigmoidDescriptor>
@@ -42,19 +42,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
-		internal float PivotValue { get; private set; }
-
 		internal float ExponentValue { get; private set; }
 
-		public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot) => Assign(pivot, (a, v) => a.PivotValue = v);
+		internal float PivotValue { get; private set; }
+
 		public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent) => Assign(exponent, (a, v) => a.ExponentValue = v);
+		public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot) => Assign(pivot, (a, v) => a.PivotValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("pivot");
-			writer.WriteNumberValue(PivotValue);
 			writer.WritePropertyName("exponent");
 			writer.WriteNumberValue(ExponentValue);
+			writer.WritePropertyName("pivot");
+			writer.WriteNumberValue(PivotValue);
 			writer.WriteEndObject();
 		}
 	}

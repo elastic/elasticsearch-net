@@ -121,7 +121,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
+		public ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("scripted_upsert")]
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal bool? DocAsUpsertValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal bool? ScriptedUpsertValue { get; private set; }
 
@@ -177,28 +177,28 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal TDocument? UpsertValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true) => Assign(detectNoop, (a, v) => a.DetectNoopValue = v);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc) => Assign(doc, (a, v) => a.DocValue = v);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(docAsUpsert, (a, v) => a.DocAsUpsertValue = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -237,7 +237,7 @@ namespace Elastic.Clients.Elasticsearch
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{

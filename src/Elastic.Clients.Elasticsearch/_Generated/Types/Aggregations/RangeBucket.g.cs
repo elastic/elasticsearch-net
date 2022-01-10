@@ -31,12 +31,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? From { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("to")]
-		public double? To { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("from_as_string")]
 		public string? FromAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("to")]
+		public double? To { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("to_as_string")]

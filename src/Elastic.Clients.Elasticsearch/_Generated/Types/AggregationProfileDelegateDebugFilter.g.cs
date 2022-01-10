@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class AggregationProfileDelegateDebugFilter
 	{
 		[JsonInclude]
-		[JsonPropertyName("results_from_metadata")]
-		public int? ResultsFromMetadata { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("query")]
 		public string? Query { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("results_from_metadata")]
+		public int? ResultsFromMetadata { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("specialized_for")]

@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class TopRightBottomLeftGeoBounds
 	{
 		[JsonInclude]
-		[JsonPropertyName("top_right")]
-		public Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("bottom_left")]
 		public Elastic.Clients.Elasticsearch.GeoLocation BottomLeft { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("top_right")]
+		public Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; init; }
 	}
 }

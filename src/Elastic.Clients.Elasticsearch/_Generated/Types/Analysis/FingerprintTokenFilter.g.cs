@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class FingerprintTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "fingerprint";
-		[JsonInclude]
 		[JsonPropertyName("max_output_size")]
 		public int MaxOutputSize { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("separator")]
 		public string Separator { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "fingerprint";
 	}
 }

@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class TruncateTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "truncate";
-		[JsonInclude]
 		[JsonPropertyName("length")]
 		public int Length { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "truncate";
 	}
 }

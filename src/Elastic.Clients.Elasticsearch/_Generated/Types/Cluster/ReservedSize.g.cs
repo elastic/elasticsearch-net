@@ -35,11 +35,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public string Path { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("total")]
-		public long Total { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("shards")]
 		public IReadOnlyCollection<string> Shards { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public long Total { get; init; }
 	}
 }

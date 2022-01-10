@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KeepTypesTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "keep_types";
-		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keep_types";
 		[JsonInclude]
 		[JsonPropertyName("types")]
 		public IReadOnlyCollection<string>? Types { get; init; }

@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class CharGroupTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "char_group";
+		[JsonPropertyName("max_token_length")]
+		public int? MaxTokenLength { get; init; }
+
 		[JsonInclude]
 		[JsonPropertyName("tokenize_on_chars")]
 		public IReadOnlyCollection<string> TokenizeOnChars { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("max_token_length")]
-		public int? MaxTokenLength { get; init; }
+		[JsonPropertyName("type")]
+		public string Type => "char_group";
 	}
 }

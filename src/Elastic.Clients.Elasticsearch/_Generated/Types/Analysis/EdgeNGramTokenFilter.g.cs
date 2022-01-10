@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class EdgeNGramTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "edge_ngram";
-		[JsonInclude]
 		[JsonPropertyName("max_gram")]
 		public int MaxGram { get; init; }
 
@@ -38,11 +35,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public int MinGram { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("preserve_original")]
+		public bool? PreserveOriginal { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("side")]
 		public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("preserve_original")]
-		public bool? PreserveOriginal { get; init; }
+		[JsonPropertyName("type")]
+		public string Type => "edge_ngram";
 	}
 }
