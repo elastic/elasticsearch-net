@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+		public Elastic.Clients.Elasticsearch.ScriptBase Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("ignore_failure")]
@@ -42,17 +42,55 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Script ScriptValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.ScriptBase ScriptValue { get; private set; }
 
 		internal bool? IgnoreFailureValue { get; private set; }
 
-		public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Assign(script, (a, v) => a.ScriptValue = v);
+		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+
+		public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.ScriptBase script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			return Assign(script, (a, v) => a.ScriptValue = v);
+		}
+
+		public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+		}
+
+		public ScriptFieldDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+		}
+
 		public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (IgnoreFailureValue.HasValue)
 			{
 				writer.WritePropertyName("ignore_failure");

@@ -768,6 +768,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 namespace Elastic.Clients.Elasticsearch
 {
+	public partial class InlineScript
+	{
+		public InlineScript(string source) => Source = source;
+	}
+
 	public sealed partial class InlineScriptDescriptor
 	{
 		public InlineScriptDescriptor(string source) => SourceValue = source;
@@ -1254,15 +1259,12 @@ namespace Elastic.Clients.Elasticsearch
 		public string GetString() => Value ?? string.Empty;
 	}
 
-	public partial class InlineScript
-	{
-		public InlineScript(string source) => Source = source;
-	}
 
-	public partial class Script
-	{
-		public static implicit operator Script(InlineScript inlineScript) => new (inlineScript);
-	}
+
+	//public partial class Script
+	//{
+	//	public static implicit operator Script(InlineScript inlineScript) => new (inlineScript);
+	//}
 
 	public class DocType { }
 
