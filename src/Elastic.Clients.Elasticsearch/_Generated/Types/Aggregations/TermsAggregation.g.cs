@@ -105,17 +105,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Missing?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("missing_order"))
 					{
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
@@ -290,12 +279,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.MinDocCount.Value);
 			}
 
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
 			if (value.MissingOrder is not null)
 			{
 				writer.WritePropertyName("missing_order");
@@ -401,10 +384,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? MinDocCount { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("missing_order")]
 		public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
@@ -460,8 +439,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal int? MinDocCountValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
-
 		internal Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; private set; }
 
 		internal bool? MissingBucketValue { get; private set; }
@@ -499,7 +476,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include) => Assign(include, (a, v) => a.IncludeValue = v);
 		public TermsAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
-		public TermsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder) => Assign(missingOrder, (a, v) => a.MissingOrderValue = v);
 		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true) => Assign(missingBucket, (a, v) => a.MissingBucketValue = v);
 		public TermsAggregationDescriptor<TDocument> ValueType(string? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
@@ -590,12 +566,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("min_doc_count");
 				writer.WriteNumberValue(MinDocCountValue.Value);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (MissingOrderValue is not null)

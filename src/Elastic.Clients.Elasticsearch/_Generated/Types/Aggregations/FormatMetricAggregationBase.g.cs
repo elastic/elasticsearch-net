@@ -46,8 +46,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
-
 		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
@@ -61,7 +59,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public FormatMetricAggregationBaseDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public FormatMetricAggregationBaseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public FormatMetricAggregationBaseDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FormatMetricAggregationBaseDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public FormatMetricAggregationBaseDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
 		{
 			ScriptDescriptor = null;
@@ -98,12 +95,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptDescriptor is not null)
