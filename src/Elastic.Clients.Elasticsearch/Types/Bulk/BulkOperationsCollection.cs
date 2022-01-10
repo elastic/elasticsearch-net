@@ -12,9 +12,9 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch
 {
 	///// <summary>
-	///// This class is used by <see cref="IBulkRequest.Operations" /> which needs thread safe adding <see cref="ICollection{T}.Add" /> as well as expose
+	///// This class is used by <see cref="IBulkRequest.Operations" /> which needs thread-safe adding <see cref="ICollection{T}.Add" />, as well as expose
 	///// an equivalent of <see cref="List{T}.AddRange"/>. Because operations from Elasticsearch are executed in order none of the types in
-	///// System.Collection.Concurrent can't be used for this. We need to preserve insert order and exposed indexed index because <see cref="BulkResponse.Items"/>
+	///// System.Collection.Concurrent can be used for this. We need to preserve insert order and exposed indexed index because <see cref="BulkResponse.Items"/>
 	///// is ordered and lines up with <see cref="BulkRequest.Operations"/> allowing one to zip the two together.
 	///// </summary>
 	///// <typeparam name="TOperation"></typeparam>
