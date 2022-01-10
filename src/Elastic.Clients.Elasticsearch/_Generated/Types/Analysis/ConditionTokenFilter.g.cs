@@ -35,6 +35,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script Script { get; init; }
+		public Elastic.Clients.Elasticsearch.ScriptBase Script { get; init; }
 	}
 }
