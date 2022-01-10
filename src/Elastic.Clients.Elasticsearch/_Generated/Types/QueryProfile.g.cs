@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.QueryBreakdown Breakdown { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryProfile>? Children { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description { get; init; }
 
@@ -41,9 +45,5 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("children")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryProfile>? Children { get; init; }
 	}
 }

@@ -35,20 +35,8 @@ namespace Elastic.Clients.Elasticsearch
 		public string Index { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("status")]
-		public int Status { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("error")]
-		public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_primary_term")]
 		public long? PrimaryTerm { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("result")]
-		public string? Result { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
@@ -63,11 +51,23 @@ namespace Elastic.Clients.Elasticsearch
 		public long? Version { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("error")]
+		public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]
 		public bool? ForcedRefresh { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("get")]
 		public Elastic.Clients.Elasticsearch.InlineGet<LazyDocument>? Get { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("result")]
+		public string? Result { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("status")]
+		public int Status { get; init; }
 	}
 }

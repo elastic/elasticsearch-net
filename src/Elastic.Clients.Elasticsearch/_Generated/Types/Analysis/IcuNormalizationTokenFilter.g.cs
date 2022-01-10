@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class IcuNormalizationTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "icu_normalizer";
-		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_normalizer";
 	}
 }

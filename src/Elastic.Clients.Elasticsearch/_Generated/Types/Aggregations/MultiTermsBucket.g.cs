@@ -27,15 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class MultiTermsBucket : Aggregations.MultiBucketBase
 	{
 		[JsonInclude]
+		[JsonPropertyName("doc_count_error_upper_bound")]
+		public long? DocCountErrorUpperBound { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("key")]
 		public IReadOnlyCollection<object> Key { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key_as_string")]
 		public string? KeyAsString { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("doc_count_error_upper_bound")]
-		public long? DocCountErrorUpperBound { get; init; }
 	}
 }

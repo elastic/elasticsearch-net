@@ -27,27 +27,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class StandardDeviationBoundsAsString
 	{
 		[JsonInclude]
-		[JsonPropertyName("upper")]
-		public string Upper { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("lower")]
 		public string Lower { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("upper_population")]
-		public string UpperPopulation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lower_population")]
 		public string LowerPopulation { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("upper_sampling")]
-		public string UpperSampling { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("lower_sampling")]
 		public string LowerSampling { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper")]
+		public string Upper { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper_population")]
+		public string UpperPopulation { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("upper_sampling")]
+		public string UpperSampling { get; init; }
 	}
 }

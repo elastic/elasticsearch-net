@@ -27,27 +27,27 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class ErrorCause
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type { get; init; }
+		[JsonPropertyName("caused_by")]
+		public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reason")]
 		public string Reason { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("stack_trace")]
-		public string? StackTrace { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("caused_by")]
-		public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("root_cause")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("stack_trace")]
+		public string? StackTrace { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("suppressed")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
 	}
 }

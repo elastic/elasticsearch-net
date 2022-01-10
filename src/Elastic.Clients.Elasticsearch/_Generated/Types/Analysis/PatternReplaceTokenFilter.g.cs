@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PatternReplaceTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
-		[JsonInclude]
 		[JsonPropertyName("flags")]
 		public string Flags { get; init; }
 
@@ -40,5 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("replacement")]
 		public string Replacement { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern_replace";
 	}
 }

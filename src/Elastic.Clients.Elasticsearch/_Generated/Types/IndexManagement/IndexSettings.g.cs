@@ -27,16 +27,200 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexSettings
 	{
 		[JsonInclude]
+		[JsonPropertyName("analysis")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyze.max_token_count")]
+		public int? AnalyzeMaxTokenCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("auto_expand_replicas")]
+		public string? AutoExpandReplicas { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.metadata")]
+		public bool? BlocksMetadata { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.read")]
+		public bool? BlocksRead { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.read_only")]
+		public bool? BlocksReadOnly { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.read_only_allow_delete")]
+		public bool? BlocksReadOnlyAllowDelete { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("blocks.write")]
+		public Union<bool?, string?>? BlocksWrite { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("check_on_startup")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("codec")]
+		public string? Codec { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("creation_date")]
+		public string? CreationDate { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("creation_date_string")]
+		public string? CreationDateString { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("default_pipeline")]
+		public string? DefaultPipeline { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("final_pipeline")]
+		public string? FinalPipeline { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("format")]
+		public Union<string?, int?>? Format { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("gc_deletes")]
+		public Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("hidden")]
+		public Union<bool?, string?>? Hidden { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("highlight.max_analyzed_offset")]
+		public int? HighlightMaxAnalyzedOffset { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("index")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lifecycle")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("lifecycle.name")]
+		public string? LifecycleName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
+		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_docvalue_fields_search")]
+		public int? MaxDocvalueFieldsSearch { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_inner_result_window")]
+		public int? MaxInnerResultWindow { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_ngram_diff")]
+		public int? MaxNgramDiff { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_refresh_listeners")]
+		public int? MaxRefreshListeners { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_regex_length")]
+		public int? MaxRegexLength { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_rescore_window")]
+		public int? MaxRescoreWindow { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_result_window")]
+		public int? MaxResultWindow { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_script_fields")]
+		public int? MaxScriptFields { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_shingle_diff")]
+		public int? MaxShingleDiff { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_slices_per_scroll")]
+		public int? MaxSlicesPerScroll { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_terms_count")]
+		public int? MaxTermsCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("merge.scheduler.max_merge_count")]
+		public int? MergeSchedulerMaxMergeCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("merge.scheduler.max_thread_count")]
+		public int? MergeSchedulerMaxThreadCount { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public string? Mode { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("number_of_replicas")]
+		public Union<int?, string?>? NumberOfReplicas { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_routing_shards")]
+		public int? NumberOfRoutingShards { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("number_of_shards")]
+		public Union<int?, string?>? NumberOfShards { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("priority")]
+		public Union<int?, string?>? Priority { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("provided_name")]
+		public Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("query_string.lenient")]
+		public bool? QueryStringLenient { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("refresh_interval")]
+		public Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("routing_partition_size")]
+		public int? RoutingPartitionSize { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("routing_path")]
 		public IEnumerable<string>? RoutingPath { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("search.idle.after")]
+		public Elastic.Clients.Elasticsearch.Time? SearchIdleAfter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("settings")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("soft_deletes")]
@@ -55,184 +239,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("number_of_shards")]
-		public Union<int?, string?>? NumberOfShards { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("number_of_replicas")]
-		public Union<int?, string?>? NumberOfReplicas { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("number_of_routing_shards")]
-		public int? NumberOfRoutingShards { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("check_on_startup")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("codec")]
-		public string? Codec { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("routing_partition_size")]
-		public int? RoutingPartitionSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("load_fixed_bitset_filters_eagerly")]
-		public bool? LoadFixedBitsetFiltersEagerly { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("hidden")]
-		public Union<bool?, string?>? Hidden { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("auto_expand_replicas")]
-		public string? AutoExpandReplicas { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("merge.scheduler.max_thread_count")]
-		public int? MergeSchedulerMaxThreadCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("merge.scheduler.max_merge_count")]
-		public int? MergeSchedulerMaxMergeCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("search.idle.after")]
-		public Elastic.Clients.Elasticsearch.Time? SearchIdleAfter { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("refresh_interval")]
-		public Elastic.Clients.Elasticsearch.Time? RefreshInterval { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_result_window")]
-		public int? MaxResultWindow { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_inner_result_window")]
-		public int? MaxInnerResultWindow { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_rescore_window")]
-		public int? MaxRescoreWindow { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_docvalue_fields_search")]
-		public int? MaxDocvalueFieldsSearch { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_script_fields")]
-		public int? MaxScriptFields { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_ngram_diff")]
-		public int? MaxNgramDiff { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_shingle_diff")]
-		public int? MaxShingleDiff { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("blocks")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("blocks.read_only")]
-		public bool? BlocksReadOnly { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("blocks.read_only_allow_delete")]
-		public bool? BlocksReadOnlyAllowDelete { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("blocks.read")]
-		public bool? BlocksRead { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("blocks.write")]
-		public Union<bool?, string?>? BlocksWrite { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("blocks.metadata")]
-		public bool? BlocksMetadata { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_refresh_listeners")]
-		public int? MaxRefreshListeners { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("analyze.max_token_count")]
-		public int? AnalyzeMaxTokenCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("highlight.max_analyzed_offset")]
-		public int? HighlightMaxAnalyzedOffset { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_terms_count")]
-		public int? MaxTermsCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_regex_length")]
-		public int? MaxRegexLength { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("routing")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("gc_deletes")]
-		public Elastic.Clients.Elasticsearch.Time? GcDeletes { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("default_pipeline")]
-		public string? DefaultPipeline { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("final_pipeline")]
-		public string? FinalPipeline { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("lifecycle")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("lifecycle.name")]
-		public string? LifecycleName { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("provided_name")]
-		public Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("creation_date")]
-		public string? CreationDate { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("creation_date_string")]
-		public string? CreationDateString { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("uuid")]
-		public string? Uuid { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("verified_before_close")]
-		public bool? VerifiedBeforeClose { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public Union<string?, int?>? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_slices_per_scroll")]
-		public int? MaxSlicesPerScroll { get; set; }
+		[JsonPropertyName("top_metrics_max_size")]
+		public int? TopMetricsMaxSize { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("translog.durability")]
@@ -243,24 +251,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public string? TranslogFlushThresholdSize { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("query_string.lenient")]
-		public bool? QueryStringLenient { get; set; }
+		[JsonPropertyName("uuid")]
+		public string? Uuid { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("priority")]
-		public Union<int?, string?>? Priority { get; set; }
+		[JsonPropertyName("verified_before_close")]
+		public bool? VerifiedBeforeClose { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("top_metrics_max_size")]
-		public int? TopMetricsMaxSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("analysis")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("settings")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
+		[JsonPropertyName("version")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
 	}
 
 	public sealed partial class IndexSettingsDescriptor<TDocument> : DescriptorBase<IndexSettingsDescriptor<TDocument>>
@@ -270,11 +270,103 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; private set; }
+
+		internal int? AnalyzeMaxTokenCountValue { get; private set; }
+
+		internal string? AutoExpandReplicasValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; private set; }
+
+		internal bool? BlocksMetadataValue { get; private set; }
+
+		internal bool? BlocksReadValue { get; private set; }
+
+		internal bool? BlocksReadOnlyValue { get; private set; }
+
+		internal bool? BlocksReadOnlyAllowDeleteValue { get; private set; }
+
+		internal Union<bool?, string?>? BlocksWriteValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; private set; }
+
+		internal string? CodecValue { get; private set; }
+
+		internal string? CreationDateValue { get; private set; }
+
+		internal string? CreationDateStringValue { get; private set; }
+
+		internal string? DefaultPipelineValue { get; private set; }
+
+		internal string? FinalPipelineValue { get; private set; }
+
+		internal Union<string?, int?>? FormatValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; private set; }
+
+		internal Union<bool?, string?>? HiddenValue { get; private set; }
+
+		internal int? HighlightMaxAnalyzedOffsetValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; private set; }
+
+		internal string? LifecycleNameValue { get; private set; }
+
+		internal bool? LoadFixedBitsetFiltersEagerlyValue { get; private set; }
+
+		internal int? MaxDocvalueFieldsSearchValue { get; private set; }
+
+		internal int? MaxInnerResultWindowValue { get; private set; }
+
+		internal int? MaxNgramDiffValue { get; private set; }
+
+		internal int? MaxRefreshListenersValue { get; private set; }
+
+		internal int? MaxRegexLengthValue { get; private set; }
+
+		internal int? MaxRescoreWindowValue { get; private set; }
+
+		internal int? MaxResultWindowValue { get; private set; }
+
+		internal int? MaxScriptFieldsValue { get; private set; }
+
+		internal int? MaxShingleDiffValue { get; private set; }
+
+		internal int? MaxSlicesPerScrollValue { get; private set; }
+
+		internal int? MaxTermsCountValue { get; private set; }
+
+		internal int? MergeSchedulerMaxMergeCountValue { get; private set; }
+
+		internal int? MergeSchedulerMaxThreadCountValue { get; private set; }
 
 		internal string? ModeValue { get; private set; }
 
+		internal Union<int?, string?>? NumberOfReplicasValue { get; private set; }
+
+		internal int? NumberOfRoutingShardsValue { get; private set; }
+
+		internal Union<int?, string?>? NumberOfShardsValue { get; private set; }
+
+		internal Union<int?, string?>? PriorityValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; private set; }
+
+		internal bool? QueryStringLenientValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; private set; }
+
+		internal int? RoutingPartitionSizeValue { get; private set; }
+
 		internal IEnumerable<string>? RoutingPathValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.Time? SearchIdleAfterValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; private set; }
 
@@ -284,146 +376,113 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; private set; }
 
-		internal Union<int?, string?>? NumberOfShardsValue { get; private set; }
-
-		internal Union<int?, string?>? NumberOfReplicasValue { get; private set; }
-
-		internal int? NumberOfRoutingShardsValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; private set; }
-
-		internal string? CodecValue { get; private set; }
-
-		internal int? RoutingPartitionSizeValue { get; private set; }
-
-		internal bool? LoadFixedBitsetFiltersEagerlyValue { get; private set; }
-
-		internal Union<bool?, string?>? HiddenValue { get; private set; }
-
-		internal string? AutoExpandReplicasValue { get; private set; }
-
-		internal int? MergeSchedulerMaxThreadCountValue { get; private set; }
-
-		internal int? MergeSchedulerMaxMergeCountValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Time? SearchIdleAfterValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; private set; }
-
-		internal int? MaxResultWindowValue { get; private set; }
-
-		internal int? MaxInnerResultWindowValue { get; private set; }
-
-		internal int? MaxRescoreWindowValue { get; private set; }
-
-		internal int? MaxDocvalueFieldsSearchValue { get; private set; }
-
-		internal int? MaxScriptFieldsValue { get; private set; }
-
-		internal int? MaxNgramDiffValue { get; private set; }
-
-		internal int? MaxShingleDiffValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; private set; }
-
-		internal bool? BlocksReadOnlyValue { get; private set; }
-
-		internal bool? BlocksReadOnlyAllowDeleteValue { get; private set; }
-
-		internal bool? BlocksReadValue { get; private set; }
-
-		internal Union<bool?, string?>? BlocksWriteValue { get; private set; }
-
-		internal bool? BlocksMetadataValue { get; private set; }
-
-		internal int? MaxRefreshListenersValue { get; private set; }
-
-		internal int? AnalyzeMaxTokenCountValue { get; private set; }
-
-		internal int? HighlightMaxAnalyzedOffsetValue { get; private set; }
-
-		internal int? MaxTermsCountValue { get; private set; }
-
-		internal int? MaxRegexLengthValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; private set; }
-
-		internal string? DefaultPipelineValue { get; private set; }
-
-		internal string? FinalPipelineValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; private set; }
-
-		internal string? LifecycleNameValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; private set; }
-
-		internal string? CreationDateValue { get; private set; }
-
-		internal string? CreationDateStringValue { get; private set; }
-
-		internal string? UuidValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; private set; }
-
-		internal bool? VerifiedBeforeCloseValue { get; private set; }
-
-		internal Union<string?, int?>? FormatValue { get; private set; }
-
-		internal int? MaxSlicesPerScrollValue { get; private set; }
+		internal int? TopMetricsMaxSizeValue { get; private set; }
 
 		internal string? TranslogDurabilityValue { get; private set; }
 
 		internal string? TranslogFlushThresholdSizeValue { get; private set; }
 
-		internal bool? QueryStringLenientValue { get; private set; }
+		internal string? UuidValue { get; private set; }
 
-		internal Union<int?, string?>? PriorityValue { get; private set; }
+		internal bool? VerifiedBeforeCloseValue { get; private set; }
 
-		internal int? TopMetricsMaxSizeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; private set; }
+		internal IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
+		internal IndexSettingBlocksDescriptor BlocksDescriptor { get; private set; }
 
 		internal IndexSettingsDescriptor<TDocument> IndexDescriptor { get; private set; }
+
+		internal IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; private set; }
+
+		internal IndexRoutingDescriptor RoutingDescriptor { get; private set; }
+
+		internal IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
 
 		internal SoftDeletesDescriptor SoftDeletesDescriptor { get; private set; }
 
 		internal IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; private set; }
 
-		internal IndexSettingBlocksDescriptor BlocksDescriptor { get; private set; }
-
-		internal IndexRoutingDescriptor RoutingDescriptor { get; private set; }
-
-		internal IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; private set; }
-
 		internal IndexVersioningDescriptor VersionDescriptor { get; private set; }
 
-		internal IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; private set; }
+		internal Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; private set; }
 
-		internal IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
+		internal Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; private set; }
 
 		internal Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; private set; }
+
+		internal Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; private set; }
+
+		internal Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; private set; }
+
+		internal Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
 
 		internal Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; private set; }
 
 		internal Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
 
-		internal Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; private set; }
-
-		internal Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; private set; }
-
-		internal Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; private set; }
-
 		internal Action<IndexVersioningDescriptor> VersionDescriptorAction { get; private set; }
 
-		internal Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; private set; }
+		public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			return Assign(analysis, (a, v) => a.AnalysisValue = v);
+		}
 
-		internal Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
+		public IndexSettingsDescriptor<TDocument> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AnalysisDescriptor = v);
+		}
 
+		public IndexSettingsDescriptor<TDocument> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AnalysisDescriptorAction = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> AnalyzeMaxTokenCount(int? analyzeMaxTokenCount) => Assign(analyzeMaxTokenCount, (a, v) => a.AnalyzeMaxTokenCountValue = v);
+		public IndexSettingsDescriptor<TDocument> AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicasValue = v);
+		public IndexSettingsDescriptor<TDocument> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
+		{
+			BlocksDescriptor = null;
+			BlocksDescriptorAction = null;
+			return Assign(blocks, (a, v) => a.BlocksValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
+		{
+			BlocksValue = null;
+			BlocksDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.BlocksDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
+		{
+			BlocksValue = null;
+			BlocksDescriptorAction = null;
+			return Assign(configure, (a, v) => a.BlocksDescriptorAction = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadataValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksRead(bool? blocksRead = true) => Assign(blocksRead, (a, v) => a.BlocksReadValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksReadOnly(bool? blocksReadOnly = true) => Assign(blocksReadOnly, (a, v) => a.BlocksReadOnlyValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksReadOnlyAllowDelete(bool? blocksReadOnlyAllowDelete = true) => Assign(blocksReadOnlyAllowDelete, (a, v) => a.BlocksReadOnlyAllowDeleteValue = v);
+		public IndexSettingsDescriptor<TDocument> BlocksWrite(Union<bool?, string?>? blocksWrite) => Assign(blocksWrite, (a, v) => a.BlocksWriteValue = v);
+		public IndexSettingsDescriptor<TDocument> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a.CheckOnStartupValue = v);
+		public IndexSettingsDescriptor<TDocument> Codec(string? codec) => Assign(codec, (a, v) => a.CodecValue = v);
+		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a.CreationDateValue = v);
+		public IndexSettingsDescriptor<TDocument> CreationDateString(string? creationDateString) => Assign(creationDateString, (a, v) => a.CreationDateStringValue = v);
+		public IndexSettingsDescriptor<TDocument> DefaultPipeline(string? defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipelineValue = v);
+		public IndexSettingsDescriptor<TDocument> FinalPipeline(string? finalPipeline) => Assign(finalPipeline, (a, v) => a.FinalPipelineValue = v);
+		public IndexSettingsDescriptor<TDocument> Format(Union<string?, int?>? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes) => Assign(gcDeletes, (a, v) => a.GcDeletesValue = v);
+		public IndexSettingsDescriptor<TDocument> Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a.HiddenValue = v);
+		public IndexSettingsDescriptor<TDocument> HighlightMaxAnalyzedOffset(int? highlightMaxAnalyzedOffset) => Assign(highlightMaxAnalyzedOffset, (a, v) => a.HighlightMaxAnalyzedOffsetValue = v);
 		public IndexSettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
 		{
 			IndexDescriptor = null;
@@ -445,8 +504,95 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.IndexDescriptorAction = v);
 		}
 
+		public IndexSettingsDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
+		{
+			LifecycleDescriptor = null;
+			LifecycleDescriptorAction = null;
+			return Assign(lifecycle, (a, v) => a.LifecycleValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
+		{
+			LifecycleValue = null;
+			LifecycleDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.LifecycleDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
+		{
+			LifecycleValue = null;
+			LifecycleDescriptorAction = null;
+			return Assign(configure, (a, v) => a.LifecycleDescriptorAction = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> LifecycleName(string? lifecycleName) => Assign(lifecycleName, (a, v) => a.LifecycleNameValue = v);
+		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a.LoadFixedBitsetFiltersEagerlyValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch) => Assign(maxDocvalueFieldsSearch, (a, v) => a.MaxDocvalueFieldsSearchValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxInnerResultWindow(int? maxInnerResultWindow) => Assign(maxInnerResultWindow, (a, v) => a.MaxInnerResultWindowValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxNgramDiff(int? maxNgramDiff) => Assign(maxNgramDiff, (a, v) => a.MaxNgramDiffValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxRefreshListeners(int? maxRefreshListeners) => Assign(maxRefreshListeners, (a, v) => a.MaxRefreshListenersValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxRegexLength(int? maxRegexLength) => Assign(maxRegexLength, (a, v) => a.MaxRegexLengthValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxRescoreWindow(int? maxRescoreWindow) => Assign(maxRescoreWindow, (a, v) => a.MaxRescoreWindowValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a.MaxResultWindowValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxScriptFields(int? maxScriptFields) => Assign(maxScriptFields, (a, v) => a.MaxScriptFieldsValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a.MaxShingleDiffValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
+		public IndexSettingsDescriptor<TDocument> MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a.MaxTermsCountValue = v);
+		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxMergeCount(int? mergeSchedulerMaxMergeCount) => Assign(mergeSchedulerMaxMergeCount, (a, v) => a.MergeSchedulerMaxMergeCountValue = v);
+		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxThreadCount(int? mergeSchedulerMaxThreadCount) => Assign(mergeSchedulerMaxThreadCount, (a, v) => a.MergeSchedulerMaxThreadCountValue = v);
 		public IndexSettingsDescriptor<TDocument> Mode(string? mode) => Assign(mode, (a, v) => a.ModeValue = v);
+		public IndexSettingsDescriptor<TDocument> NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicasValue = v);
+		public IndexSettingsDescriptor<TDocument> NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShardsValue = v);
+		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShardsValue = v);
+		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
+		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
+		public IndexSettingsDescriptor<TDocument> QueryStringLenient(bool? queryStringLenient = true) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
+		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
+		public IndexSettingsDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
+		{
+			RoutingDescriptor = null;
+			RoutingDescriptorAction = null;
+			return Assign(routing, (a, v) => a.RoutingValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
+		{
+			RoutingValue = null;
+			RoutingDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
+		{
+			RoutingValue = null;
+			RoutingDescriptorAction = null;
+			return Assign(configure, (a, v) => a.RoutingDescriptorAction = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> RoutingPartitionSize(int? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSizeValue = v);
 		public IndexSettingsDescriptor<TDocument> RoutingPath(IEnumerable<string>? routingPath) => Assign(routingPath, (a, v) => a.RoutingPathValue = v);
+		public IndexSettingsDescriptor<TDocument> SearchIdleAfter(Elastic.Clients.Elasticsearch.Time? searchIdleAfter) => Assign(searchIdleAfter, (a, v) => a.SearchIdleAfterValue = v);
+		public IndexSettingsDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		{
+			SettingsDescriptor = null;
+			SettingsDescriptorAction = null;
+			return Assign(settings, (a, v) => a.SettingsValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
+		}
+
 		public IndexSettingsDescriptor<TDocument> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
 		{
 			SoftDeletesDescriptor = null;
@@ -491,107 +637,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShardsValue = v);
-		public IndexSettingsDescriptor<TDocument> NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicasValue = v);
-		public IndexSettingsDescriptor<TDocument> NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShardsValue = v);
-		public IndexSettingsDescriptor<TDocument> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a.CheckOnStartupValue = v);
-		public IndexSettingsDescriptor<TDocument> Codec(string? codec) => Assign(codec, (a, v) => a.CodecValue = v);
-		public IndexSettingsDescriptor<TDocument> RoutingPartitionSize(int? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a.LoadFixedBitsetFiltersEagerlyValue = v);
-		public IndexSettingsDescriptor<TDocument> Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a.HiddenValue = v);
-		public IndexSettingsDescriptor<TDocument> AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicasValue = v);
-		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxThreadCount(int? mergeSchedulerMaxThreadCount) => Assign(mergeSchedulerMaxThreadCount, (a, v) => a.MergeSchedulerMaxThreadCountValue = v);
-		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxMergeCount(int? mergeSchedulerMaxMergeCount) => Assign(mergeSchedulerMaxMergeCount, (a, v) => a.MergeSchedulerMaxMergeCountValue = v);
-		public IndexSettingsDescriptor<TDocument> SearchIdleAfter(Elastic.Clients.Elasticsearch.Time? searchIdleAfter) => Assign(searchIdleAfter, (a, v) => a.SearchIdleAfterValue = v);
-		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a.MaxResultWindowValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxInnerResultWindow(int? maxInnerResultWindow) => Assign(maxInnerResultWindow, (a, v) => a.MaxInnerResultWindowValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxRescoreWindow(int? maxRescoreWindow) => Assign(maxRescoreWindow, (a, v) => a.MaxRescoreWindowValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch) => Assign(maxDocvalueFieldsSearch, (a, v) => a.MaxDocvalueFieldsSearchValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxScriptFields(int? maxScriptFields) => Assign(maxScriptFields, (a, v) => a.MaxScriptFieldsValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxNgramDiff(int? maxNgramDiff) => Assign(maxNgramDiff, (a, v) => a.MaxNgramDiffValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a.MaxShingleDiffValue = v);
-		public IndexSettingsDescriptor<TDocument> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
-		{
-			BlocksDescriptor = null;
-			BlocksDescriptorAction = null;
-			return Assign(blocks, (a, v) => a.BlocksValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
-		{
-			BlocksValue = null;
-			BlocksDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.BlocksDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
-		{
-			BlocksValue = null;
-			BlocksDescriptorAction = null;
-			return Assign(configure, (a, v) => a.BlocksDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> BlocksReadOnly(bool? blocksReadOnly = true) => Assign(blocksReadOnly, (a, v) => a.BlocksReadOnlyValue = v);
-		public IndexSettingsDescriptor<TDocument> BlocksReadOnlyAllowDelete(bool? blocksReadOnlyAllowDelete = true) => Assign(blocksReadOnlyAllowDelete, (a, v) => a.BlocksReadOnlyAllowDeleteValue = v);
-		public IndexSettingsDescriptor<TDocument> BlocksRead(bool? blocksRead = true) => Assign(blocksRead, (a, v) => a.BlocksReadValue = v);
-		public IndexSettingsDescriptor<TDocument> BlocksWrite(Union<bool?, string?>? blocksWrite) => Assign(blocksWrite, (a, v) => a.BlocksWriteValue = v);
-		public IndexSettingsDescriptor<TDocument> BlocksMetadata(bool? blocksMetadata = true) => Assign(blocksMetadata, (a, v) => a.BlocksMetadataValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxRefreshListeners(int? maxRefreshListeners) => Assign(maxRefreshListeners, (a, v) => a.MaxRefreshListenersValue = v);
-		public IndexSettingsDescriptor<TDocument> AnalyzeMaxTokenCount(int? analyzeMaxTokenCount) => Assign(analyzeMaxTokenCount, (a, v) => a.AnalyzeMaxTokenCountValue = v);
-		public IndexSettingsDescriptor<TDocument> HighlightMaxAnalyzedOffset(int? highlightMaxAnalyzedOffset) => Assign(highlightMaxAnalyzedOffset, (a, v) => a.HighlightMaxAnalyzedOffsetValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a.MaxTermsCountValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxRegexLength(int? maxRegexLength) => Assign(maxRegexLength, (a, v) => a.MaxRegexLengthValue = v);
-		public IndexSettingsDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
-		{
-			RoutingDescriptor = null;
-			RoutingDescriptorAction = null;
-			return Assign(routing, (a, v) => a.RoutingValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
-		{
-			RoutingValue = null;
-			RoutingDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
-		{
-			RoutingValue = null;
-			RoutingDescriptorAction = null;
-			return Assign(configure, (a, v) => a.RoutingDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes) => Assign(gcDeletes, (a, v) => a.GcDeletesValue = v);
-		public IndexSettingsDescriptor<TDocument> DefaultPipeline(string? defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipelineValue = v);
-		public IndexSettingsDescriptor<TDocument> FinalPipeline(string? finalPipeline) => Assign(finalPipeline, (a, v) => a.FinalPipelineValue = v);
-		public IndexSettingsDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
-		{
-			LifecycleDescriptor = null;
-			LifecycleDescriptorAction = null;
-			return Assign(lifecycle, (a, v) => a.LifecycleValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
-		{
-			LifecycleValue = null;
-			LifecycleDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.LifecycleDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
-		{
-			LifecycleValue = null;
-			LifecycleDescriptorAction = null;
-			return Assign(configure, (a, v) => a.LifecycleDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> LifecycleName(string? lifecycleName) => Assign(lifecycleName, (a, v) => a.LifecycleNameValue = v);
-		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
-		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a.CreationDateValue = v);
-		public IndexSettingsDescriptor<TDocument> CreationDateString(string? creationDateString) => Assign(creationDateString, (a, v) => a.CreationDateStringValue = v);
+		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
+		public IndexSettingsDescriptor<TDocument> TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a.TranslogDurabilityValue = v);
+		public IndexSettingsDescriptor<TDocument> TranslogFlushThresholdSize(string? translogFlushThresholdSize) => Assign(translogFlushThresholdSize, (a, v) => a.TranslogFlushThresholdSizeValue = v);
 		public IndexSettingsDescriptor<TDocument> Uuid(string? uuid) => Assign(uuid, (a, v) => a.UuidValue = v);
+		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(bool? verifiedBeforeClose = true) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
 		public IndexSettingsDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
 		{
 			VersionDescriptor = null;
@@ -613,59 +663,143 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.VersionDescriptorAction = v);
 		}
 
-		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(bool? verifiedBeforeClose = true) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
-		public IndexSettingsDescriptor<TDocument> Format(Union<string?, int?>? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
-		public IndexSettingsDescriptor<TDocument> TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a.TranslogDurabilityValue = v);
-		public IndexSettingsDescriptor<TDocument> TranslogFlushThresholdSize(string? translogFlushThresholdSize) => Assign(translogFlushThresholdSize, (a, v) => a.TranslogFlushThresholdSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> QueryStringLenient(bool? queryStringLenient = true) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
-		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
-		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
-		{
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = null;
-			return Assign(analysis, (a, v) => a.AnalysisValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.AnalysisDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			return Assign(configure, (a, v) => a.AnalysisDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
-		{
-			SettingsDescriptor = null;
-			SettingsDescriptorAction = null;
-			return Assign(settings, (a, v) => a.SettingsValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
-		{
-			SettingsValue = null;
-			SettingsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
-		{
-			SettingsValue = null;
-			SettingsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (AnalysisDescriptor is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
+			}
+			else if (AnalysisDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsAnalysisDescriptor(AnalysisDescriptorAction), options);
+			}
+			else if (AnalysisValue is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisValue, options);
+			}
+
+			if (AnalyzeMaxTokenCountValue.HasValue)
+			{
+				writer.WritePropertyName("analyze.max_token_count");
+				writer.WriteNumberValue(AnalyzeMaxTokenCountValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(AutoExpandReplicasValue))
+			{
+				writer.WritePropertyName("auto_expand_replicas");
+				writer.WriteStringValue(AutoExpandReplicasValue);
+			}
+
+			if (BlocksDescriptor is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, BlocksDescriptor, options);
+			}
+			else if (BlocksDescriptorAction is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingBlocksDescriptor(BlocksDescriptorAction), options);
+			}
+			else if (BlocksValue is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, BlocksValue, options);
+			}
+
+			if (BlocksMetadataValue.HasValue)
+			{
+				writer.WritePropertyName("blocks.metadata");
+				writer.WriteBooleanValue(BlocksMetadataValue.Value);
+			}
+
+			if (BlocksReadValue.HasValue)
+			{
+				writer.WritePropertyName("blocks.read");
+				writer.WriteBooleanValue(BlocksReadValue.Value);
+			}
+
+			if (BlocksReadOnlyValue.HasValue)
+			{
+				writer.WritePropertyName("blocks.read_only");
+				writer.WriteBooleanValue(BlocksReadOnlyValue.Value);
+			}
+
+			if (BlocksReadOnlyAllowDeleteValue.HasValue)
+			{
+				writer.WritePropertyName("blocks.read_only_allow_delete");
+				writer.WriteBooleanValue(BlocksReadOnlyAllowDeleteValue.Value);
+			}
+
+			if (BlocksWriteValue is not null)
+			{
+				writer.WritePropertyName("blocks.write");
+				JsonSerializer.Serialize(writer, BlocksWriteValue, options);
+			}
+
+			if (CheckOnStartupValue is not null)
+			{
+				writer.WritePropertyName("check_on_startup");
+				JsonSerializer.Serialize(writer, CheckOnStartupValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(CodecValue))
+			{
+				writer.WritePropertyName("codec");
+				writer.WriteStringValue(CodecValue);
+			}
+
+			if (CreationDateValue is not null)
+			{
+				writer.WritePropertyName("creation_date");
+				JsonSerializer.Serialize(writer, CreationDateValue, options);
+			}
+
+			if (CreationDateStringValue is not null)
+			{
+				writer.WritePropertyName("creation_date_string");
+				JsonSerializer.Serialize(writer, CreationDateStringValue, options);
+			}
+
+			if (DefaultPipelineValue is not null)
+			{
+				writer.WritePropertyName("default_pipeline");
+				JsonSerializer.Serialize(writer, DefaultPipelineValue, options);
+			}
+
+			if (FinalPipelineValue is not null)
+			{
+				writer.WritePropertyName("final_pipeline");
+				JsonSerializer.Serialize(writer, FinalPipelineValue, options);
+			}
+
+			if (FormatValue is not null)
+			{
+				writer.WritePropertyName("format");
+				JsonSerializer.Serialize(writer, FormatValue, options);
+			}
+
+			if (GcDeletesValue is not null)
+			{
+				writer.WritePropertyName("gc_deletes");
+				JsonSerializer.Serialize(writer, GcDeletesValue, options);
+			}
+
+			if (HiddenValue is not null)
+			{
+				writer.WritePropertyName("hidden");
+				JsonSerializer.Serialize(writer, HiddenValue, options);
+			}
+
+			if (HighlightMaxAnalyzedOffsetValue.HasValue)
+			{
+				writer.WritePropertyName("highlight.max_analyzed_offset");
+				writer.WriteNumberValue(HighlightMaxAnalyzedOffsetValue.Value);
+			}
+
 			if (IndexDescriptor is not null)
 			{
 				writer.WritePropertyName("index");
@@ -682,16 +816,208 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
+			if (LifecycleDescriptor is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+			}
+			else if (LifecycleDescriptorAction is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsLifecycleDescriptor(LifecycleDescriptorAction), options);
+			}
+			else if (LifecycleValue is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, LifecycleValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(LifecycleNameValue))
+			{
+				writer.WritePropertyName("lifecycle.name");
+				writer.WriteStringValue(LifecycleNameValue);
+			}
+
+			if (LoadFixedBitsetFiltersEagerlyValue.HasValue)
+			{
+				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
+				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
+			}
+
+			if (MaxDocvalueFieldsSearchValue.HasValue)
+			{
+				writer.WritePropertyName("max_docvalue_fields_search");
+				writer.WriteNumberValue(MaxDocvalueFieldsSearchValue.Value);
+			}
+
+			if (MaxInnerResultWindowValue.HasValue)
+			{
+				writer.WritePropertyName("max_inner_result_window");
+				writer.WriteNumberValue(MaxInnerResultWindowValue.Value);
+			}
+
+			if (MaxNgramDiffValue.HasValue)
+			{
+				writer.WritePropertyName("max_ngram_diff");
+				writer.WriteNumberValue(MaxNgramDiffValue.Value);
+			}
+
+			if (MaxRefreshListenersValue.HasValue)
+			{
+				writer.WritePropertyName("max_refresh_listeners");
+				writer.WriteNumberValue(MaxRefreshListenersValue.Value);
+			}
+
+			if (MaxRegexLengthValue.HasValue)
+			{
+				writer.WritePropertyName("max_regex_length");
+				writer.WriteNumberValue(MaxRegexLengthValue.Value);
+			}
+
+			if (MaxRescoreWindowValue.HasValue)
+			{
+				writer.WritePropertyName("max_rescore_window");
+				writer.WriteNumberValue(MaxRescoreWindowValue.Value);
+			}
+
+			if (MaxResultWindowValue.HasValue)
+			{
+				writer.WritePropertyName("max_result_window");
+				writer.WriteNumberValue(MaxResultWindowValue.Value);
+			}
+
+			if (MaxScriptFieldsValue.HasValue)
+			{
+				writer.WritePropertyName("max_script_fields");
+				writer.WriteNumberValue(MaxScriptFieldsValue.Value);
+			}
+
+			if (MaxShingleDiffValue.HasValue)
+			{
+				writer.WritePropertyName("max_shingle_diff");
+				writer.WriteNumberValue(MaxShingleDiffValue.Value);
+			}
+
+			if (MaxSlicesPerScrollValue.HasValue)
+			{
+				writer.WritePropertyName("max_slices_per_scroll");
+				writer.WriteNumberValue(MaxSlicesPerScrollValue.Value);
+			}
+
+			if (MaxTermsCountValue.HasValue)
+			{
+				writer.WritePropertyName("max_terms_count");
+				writer.WriteNumberValue(MaxTermsCountValue.Value);
+			}
+
+			if (MergeSchedulerMaxMergeCountValue.HasValue)
+			{
+				writer.WritePropertyName("merge.scheduler.max_merge_count");
+				writer.WriteNumberValue(MergeSchedulerMaxMergeCountValue.Value);
+			}
+
+			if (MergeSchedulerMaxThreadCountValue.HasValue)
+			{
+				writer.WritePropertyName("merge.scheduler.max_thread_count");
+				writer.WriteNumberValue(MergeSchedulerMaxThreadCountValue.Value);
+			}
+
 			if (!string.IsNullOrEmpty(ModeValue))
 			{
 				writer.WritePropertyName("mode");
 				writer.WriteStringValue(ModeValue);
 			}
 
+			if (NumberOfReplicasValue is not null)
+			{
+				writer.WritePropertyName("number_of_replicas");
+				JsonSerializer.Serialize(writer, NumberOfReplicasValue, options);
+			}
+
+			if (NumberOfRoutingShardsValue.HasValue)
+			{
+				writer.WritePropertyName("number_of_routing_shards");
+				writer.WriteNumberValue(NumberOfRoutingShardsValue.Value);
+			}
+
+			if (NumberOfShardsValue is not null)
+			{
+				writer.WritePropertyName("number_of_shards");
+				JsonSerializer.Serialize(writer, NumberOfShardsValue, options);
+			}
+
+			if (PriorityValue is not null)
+			{
+				writer.WritePropertyName("priority");
+				JsonSerializer.Serialize(writer, PriorityValue, options);
+			}
+
+			if (ProvidedNameValue is not null)
+			{
+				writer.WritePropertyName("provided_name");
+				JsonSerializer.Serialize(writer, ProvidedNameValue, options);
+			}
+
+			if (QueryStringLenientValue.HasValue)
+			{
+				writer.WritePropertyName("query_string.lenient");
+				writer.WriteBooleanValue(QueryStringLenientValue.Value);
+			}
+
+			if (RefreshIntervalValue is not null)
+			{
+				writer.WritePropertyName("refresh_interval");
+				JsonSerializer.Serialize(writer, RefreshIntervalValue, options);
+			}
+
+			if (RoutingDescriptor is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, RoutingDescriptor, options);
+			}
+			else if (RoutingDescriptorAction is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingDescriptor(RoutingDescriptorAction), options);
+			}
+			else if (RoutingValue is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, RoutingValue, options);
+			}
+
+			if (RoutingPartitionSizeValue.HasValue)
+			{
+				writer.WritePropertyName("routing_partition_size");
+				writer.WriteNumberValue(RoutingPartitionSizeValue.Value);
+			}
+
 			if (RoutingPathValue is not null)
 			{
 				writer.WritePropertyName("routing_path");
 				JsonSerializer.Serialize(writer, RoutingPathValue, options);
+			}
+
+			if (SearchIdleAfterValue is not null)
+			{
+				writer.WritePropertyName("search.idle.after");
+				JsonSerializer.Serialize(writer, SearchIdleAfterValue, options);
+			}
+
+			if (SettingsDescriptor is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+			}
+			else if (SettingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+			}
+			else if (SettingsValue is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, SettingsValue, options);
 			}
 
 			if (SoftDeletesDescriptor is not null)
@@ -738,280 +1064,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
-			if (NumberOfShardsValue is not null)
+			if (TopMetricsMaxSizeValue.HasValue)
 			{
-				writer.WritePropertyName("number_of_shards");
-				JsonSerializer.Serialize(writer, NumberOfShardsValue, options);
+				writer.WritePropertyName("top_metrics_max_size");
+				writer.WriteNumberValue(TopMetricsMaxSizeValue.Value);
 			}
 
-			if (NumberOfReplicasValue is not null)
+			if (!string.IsNullOrEmpty(TranslogDurabilityValue))
 			{
-				writer.WritePropertyName("number_of_replicas");
-				JsonSerializer.Serialize(writer, NumberOfReplicasValue, options);
+				writer.WritePropertyName("translog.durability");
+				writer.WriteStringValue(TranslogDurabilityValue);
 			}
 
-			if (NumberOfRoutingShardsValue.HasValue)
+			if (!string.IsNullOrEmpty(TranslogFlushThresholdSizeValue))
 			{
-				writer.WritePropertyName("number_of_routing_shards");
-				writer.WriteNumberValue(NumberOfRoutingShardsValue.Value);
-			}
-
-			if (CheckOnStartupValue is not null)
-			{
-				writer.WritePropertyName("check_on_startup");
-				JsonSerializer.Serialize(writer, CheckOnStartupValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(CodecValue))
-			{
-				writer.WritePropertyName("codec");
-				writer.WriteStringValue(CodecValue);
-			}
-
-			if (RoutingPartitionSizeValue.HasValue)
-			{
-				writer.WritePropertyName("routing_partition_size");
-				writer.WriteNumberValue(RoutingPartitionSizeValue.Value);
-			}
-
-			if (LoadFixedBitsetFiltersEagerlyValue.HasValue)
-			{
-				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
-				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
-			}
-
-			if (HiddenValue is not null)
-			{
-				writer.WritePropertyName("hidden");
-				JsonSerializer.Serialize(writer, HiddenValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(AutoExpandReplicasValue))
-			{
-				writer.WritePropertyName("auto_expand_replicas");
-				writer.WriteStringValue(AutoExpandReplicasValue);
-			}
-
-			if (MergeSchedulerMaxThreadCountValue.HasValue)
-			{
-				writer.WritePropertyName("merge.scheduler.max_thread_count");
-				writer.WriteNumberValue(MergeSchedulerMaxThreadCountValue.Value);
-			}
-
-			if (MergeSchedulerMaxMergeCountValue.HasValue)
-			{
-				writer.WritePropertyName("merge.scheduler.max_merge_count");
-				writer.WriteNumberValue(MergeSchedulerMaxMergeCountValue.Value);
-			}
-
-			if (SearchIdleAfterValue is not null)
-			{
-				writer.WritePropertyName("search.idle.after");
-				JsonSerializer.Serialize(writer, SearchIdleAfterValue, options);
-			}
-
-			if (RefreshIntervalValue is not null)
-			{
-				writer.WritePropertyName("refresh_interval");
-				JsonSerializer.Serialize(writer, RefreshIntervalValue, options);
-			}
-
-			if (MaxResultWindowValue.HasValue)
-			{
-				writer.WritePropertyName("max_result_window");
-				writer.WriteNumberValue(MaxResultWindowValue.Value);
-			}
-
-			if (MaxInnerResultWindowValue.HasValue)
-			{
-				writer.WritePropertyName("max_inner_result_window");
-				writer.WriteNumberValue(MaxInnerResultWindowValue.Value);
-			}
-
-			if (MaxRescoreWindowValue.HasValue)
-			{
-				writer.WritePropertyName("max_rescore_window");
-				writer.WriteNumberValue(MaxRescoreWindowValue.Value);
-			}
-
-			if (MaxDocvalueFieldsSearchValue.HasValue)
-			{
-				writer.WritePropertyName("max_docvalue_fields_search");
-				writer.WriteNumberValue(MaxDocvalueFieldsSearchValue.Value);
-			}
-
-			if (MaxScriptFieldsValue.HasValue)
-			{
-				writer.WritePropertyName("max_script_fields");
-				writer.WriteNumberValue(MaxScriptFieldsValue.Value);
-			}
-
-			if (MaxNgramDiffValue.HasValue)
-			{
-				writer.WritePropertyName("max_ngram_diff");
-				writer.WriteNumberValue(MaxNgramDiffValue.Value);
-			}
-
-			if (MaxShingleDiffValue.HasValue)
-			{
-				writer.WritePropertyName("max_shingle_diff");
-				writer.WriteNumberValue(MaxShingleDiffValue.Value);
-			}
-
-			if (BlocksDescriptor is not null)
-			{
-				writer.WritePropertyName("blocks");
-				JsonSerializer.Serialize(writer, BlocksDescriptor, options);
-			}
-			else if (BlocksDescriptorAction is not null)
-			{
-				writer.WritePropertyName("blocks");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingBlocksDescriptor(BlocksDescriptorAction), options);
-			}
-			else if (BlocksValue is not null)
-			{
-				writer.WritePropertyName("blocks");
-				JsonSerializer.Serialize(writer, BlocksValue, options);
-			}
-
-			if (BlocksReadOnlyValue.HasValue)
-			{
-				writer.WritePropertyName("blocks.read_only");
-				writer.WriteBooleanValue(BlocksReadOnlyValue.Value);
-			}
-
-			if (BlocksReadOnlyAllowDeleteValue.HasValue)
-			{
-				writer.WritePropertyName("blocks.read_only_allow_delete");
-				writer.WriteBooleanValue(BlocksReadOnlyAllowDeleteValue.Value);
-			}
-
-			if (BlocksReadValue.HasValue)
-			{
-				writer.WritePropertyName("blocks.read");
-				writer.WriteBooleanValue(BlocksReadValue.Value);
-			}
-
-			if (BlocksWriteValue is not null)
-			{
-				writer.WritePropertyName("blocks.write");
-				JsonSerializer.Serialize(writer, BlocksWriteValue, options);
-			}
-
-			if (BlocksMetadataValue.HasValue)
-			{
-				writer.WritePropertyName("blocks.metadata");
-				writer.WriteBooleanValue(BlocksMetadataValue.Value);
-			}
-
-			if (MaxRefreshListenersValue.HasValue)
-			{
-				writer.WritePropertyName("max_refresh_listeners");
-				writer.WriteNumberValue(MaxRefreshListenersValue.Value);
-			}
-
-			if (AnalyzeMaxTokenCountValue.HasValue)
-			{
-				writer.WritePropertyName("analyze.max_token_count");
-				writer.WriteNumberValue(AnalyzeMaxTokenCountValue.Value);
-			}
-
-			if (HighlightMaxAnalyzedOffsetValue.HasValue)
-			{
-				writer.WritePropertyName("highlight.max_analyzed_offset");
-				writer.WriteNumberValue(HighlightMaxAnalyzedOffsetValue.Value);
-			}
-
-			if (MaxTermsCountValue.HasValue)
-			{
-				writer.WritePropertyName("max_terms_count");
-				writer.WriteNumberValue(MaxTermsCountValue.Value);
-			}
-
-			if (MaxRegexLengthValue.HasValue)
-			{
-				writer.WritePropertyName("max_regex_length");
-				writer.WriteNumberValue(MaxRegexLengthValue.Value);
-			}
-
-			if (RoutingDescriptor is not null)
-			{
-				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-			}
-			else if (RoutingDescriptorAction is not null)
-			{
-				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingDescriptor(RoutingDescriptorAction), options);
-			}
-			else if (RoutingValue is not null)
-			{
-				writer.WritePropertyName("routing");
-				JsonSerializer.Serialize(writer, RoutingValue, options);
-			}
-
-			if (GcDeletesValue is not null)
-			{
-				writer.WritePropertyName("gc_deletes");
-				JsonSerializer.Serialize(writer, GcDeletesValue, options);
-			}
-
-			if (DefaultPipelineValue is not null)
-			{
-				writer.WritePropertyName("default_pipeline");
-				JsonSerializer.Serialize(writer, DefaultPipelineValue, options);
-			}
-
-			if (FinalPipelineValue is not null)
-			{
-				writer.WritePropertyName("final_pipeline");
-				JsonSerializer.Serialize(writer, FinalPipelineValue, options);
-			}
-
-			if (LifecycleDescriptor is not null)
-			{
-				writer.WritePropertyName("lifecycle");
-				JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
-			}
-			else if (LifecycleDescriptorAction is not null)
-			{
-				writer.WritePropertyName("lifecycle");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsLifecycleDescriptor(LifecycleDescriptorAction), options);
-			}
-			else if (LifecycleValue is not null)
-			{
-				writer.WritePropertyName("lifecycle");
-				JsonSerializer.Serialize(writer, LifecycleValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(LifecycleNameValue))
-			{
-				writer.WritePropertyName("lifecycle.name");
-				writer.WriteStringValue(LifecycleNameValue);
-			}
-
-			if (ProvidedNameValue is not null)
-			{
-				writer.WritePropertyName("provided_name");
-				JsonSerializer.Serialize(writer, ProvidedNameValue, options);
-			}
-
-			if (CreationDateValue is not null)
-			{
-				writer.WritePropertyName("creation_date");
-				JsonSerializer.Serialize(writer, CreationDateValue, options);
-			}
-
-			if (CreationDateStringValue is not null)
-			{
-				writer.WritePropertyName("creation_date_string");
-				JsonSerializer.Serialize(writer, CreationDateStringValue, options);
+				writer.WritePropertyName("translog.flush_threshold_size");
+				writer.WriteStringValue(TranslogFlushThresholdSizeValue);
 			}
 
 			if (UuidValue is not null)
 			{
 				writer.WritePropertyName("uuid");
 				JsonSerializer.Serialize(writer, UuidValue, options);
+			}
+
+			if (VerifiedBeforeCloseValue.HasValue)
+			{
+				writer.WritePropertyName("verified_before_close");
+				writer.WriteBooleanValue(VerifiedBeforeCloseValue.Value);
 			}
 
 			if (VersionDescriptor is not null)
@@ -1028,86 +1108,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("version");
 				JsonSerializer.Serialize(writer, VersionValue, options);
-			}
-
-			if (VerifiedBeforeCloseValue.HasValue)
-			{
-				writer.WritePropertyName("verified_before_close");
-				writer.WriteBooleanValue(VerifiedBeforeCloseValue.Value);
-			}
-
-			if (FormatValue is not null)
-			{
-				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, FormatValue, options);
-			}
-
-			if (MaxSlicesPerScrollValue.HasValue)
-			{
-				writer.WritePropertyName("max_slices_per_scroll");
-				writer.WriteNumberValue(MaxSlicesPerScrollValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(TranslogDurabilityValue))
-			{
-				writer.WritePropertyName("translog.durability");
-				writer.WriteStringValue(TranslogDurabilityValue);
-			}
-
-			if (!string.IsNullOrEmpty(TranslogFlushThresholdSizeValue))
-			{
-				writer.WritePropertyName("translog.flush_threshold_size");
-				writer.WriteStringValue(TranslogFlushThresholdSizeValue);
-			}
-
-			if (QueryStringLenientValue.HasValue)
-			{
-				writer.WritePropertyName("query_string.lenient");
-				writer.WriteBooleanValue(QueryStringLenientValue.Value);
-			}
-
-			if (PriorityValue is not null)
-			{
-				writer.WritePropertyName("priority");
-				JsonSerializer.Serialize(writer, PriorityValue, options);
-			}
-
-			if (TopMetricsMaxSizeValue.HasValue)
-			{
-				writer.WritePropertyName("top_metrics_max_size");
-				writer.WriteNumberValue(TopMetricsMaxSizeValue.Value);
-			}
-
-			if (AnalysisDescriptor is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
-			}
-			else if (AnalysisDescriptorAction is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsAnalysisDescriptor(AnalysisDescriptorAction), options);
-			}
-			else if (AnalysisValue is not null)
-			{
-				writer.WritePropertyName("analysis");
-				JsonSerializer.Serialize(writer, AnalysisValue, options);
-			}
-
-			if (SettingsDescriptor is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-			}
-			else if (SettingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
-			}
-			else if (SettingsValue is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, SettingsValue, options);
 			}
 
 			writer.WriteEndObject();

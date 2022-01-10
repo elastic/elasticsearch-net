@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class DateHistogramBucket : Aggregations.MultiBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("key_as_string")]
-		public string? KeyAsString { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("key")]
 		public Elastic.Clients.Elasticsearch.EpochMillis Key { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("key_as_string")]
+		public string? KeyAsString { get; init; }
 	}
 }

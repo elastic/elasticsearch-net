@@ -43,11 +43,11 @@ namespace Elastic.Clients.Elasticsearch
 		public int? NextReaderCount { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("process_count")]
-		public int? ProcessCount { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("process")]
 		public int? Process { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("process_count")]
+		public int? ProcessCount { get; init; }
 	}
 }

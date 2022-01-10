@@ -27,8 +27,16 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class FetchProfile
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type { get; init; }
+		[JsonPropertyName("breakdown")]
+		public Elastic.Clients.Elasticsearch.FetchProfileBreakdown Breakdown { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FetchProfile>? Children { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("debug")]
+		public Elastic.Clients.Elasticsearch.FetchProfileDebug? Debug { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
@@ -39,15 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 		public long TimeInNanos { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("breakdown")]
-		public Elastic.Clients.Elasticsearch.FetchProfileBreakdown Breakdown { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("debug")]
-		public Elastic.Clients.Elasticsearch.FetchProfileDebug? Debug { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("children")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FetchProfile>? Children { get; init; }
+		[JsonPropertyName("type")]
+		public string Type { get; init; }
 	}
 }

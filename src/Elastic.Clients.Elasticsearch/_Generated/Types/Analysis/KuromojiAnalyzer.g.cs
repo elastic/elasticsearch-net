@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KuromojiAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "kuromoji";
-		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji";
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
 		public string? UserDictionary { get; init; }

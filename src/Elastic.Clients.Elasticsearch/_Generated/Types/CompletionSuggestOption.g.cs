@@ -27,18 +27,6 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class CompletionSuggestOption<TDocument>
 	{
 		[JsonInclude]
-		[JsonPropertyName("collate_match")]
-		public bool? CollateMatch { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("contexts")]
-		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Context>>? Contexts { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public Dictionary<string, object>? Fields { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public string Id { get; init; }
 
@@ -58,6 +46,18 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonPropertyName("_source")]
 		[SourceConverter]
 		public TDocument Source { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("collate_match")]
+		public bool? CollateMatch { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("contexts")]
+		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Context>>? Contexts { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public Dictionary<string, object>? Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("text")]

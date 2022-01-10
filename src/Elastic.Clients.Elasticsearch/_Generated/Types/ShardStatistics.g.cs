@@ -31,19 +31,19 @@ namespace Elastic.Clients.Elasticsearch
 		public int Failed { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("successful")]
-		public int Successful { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("total")]
-		public int Total { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("failures")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("skipped")]
 		public int? Skipped { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("successful")]
+		public int Successful { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public int Total { get; init; }
 	}
 }

@@ -83,6 +83,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("include"))
 					{
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
@@ -105,12 +116,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("missing_order"))
+					if (reader.ValueTextEquals("missing"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<object?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.MissingOrder = value;
+							agg.Missing = value;
 						}
 
 						continue;
@@ -127,12 +138,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("value_type"))
+					if (reader.ValueTextEquals("missing_order"))
 					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.ValueType = value;
+							agg.MissingOrder = value;
 						}
 
 						continue;
@@ -151,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -193,12 +204,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("format"))
+					if (reader.ValueTextEquals("value_type"))
 					{
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Format = value;
+							agg.ValueType = value;
 						}
 
 						continue;
@@ -267,6 +278,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
 			if (value.Include is not null)
 			{
 				writer.WritePropertyName("include");
@@ -279,10 +296,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.MinDocCount.Value);
 			}
 
-			if (value.MissingOrder is not null)
+			if (value.Missing is not null)
 			{
-				writer.WritePropertyName("missing_order");
-				JsonSerializer.Serialize(writer, value.MissingOrder, options);
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, value.Missing, options);
 			}
 
 			if (value.MissingBucket.HasValue)
@@ -291,10 +308,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(value.MissingBucket.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.ValueType))
+			if (value.MissingOrder is not null)
 			{
-				writer.WritePropertyName("value_type");
-				writer.WriteStringValue(value.ValueType);
+				writer.WritePropertyName("missing_order");
+				JsonSerializer.Serialize(writer, value.MissingOrder, options);
 			}
 
 			if (value.Order is not null)
@@ -327,10 +344,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.Size.Value);
 			}
 
-			if (!string.IsNullOrEmpty(value.Format))
+			if (!string.IsNullOrEmpty(value.ValueType))
 			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
+				writer.WritePropertyName("value_type");
+				writer.WriteStringValue(value.ValueType);
 			}
 
 			writer.WriteEndObject();
@@ -376,6 +393,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("include")]
 		public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
@@ -384,16 +405,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? MinDocCount { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing_order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
+		[JsonPropertyName("missing")]
+		public object? Missing { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("missing_bucket")]
 		public bool? MissingBucket { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("value_type")]
-		public string? ValueType { get; set; }
+		[JsonPropertyName("missing_order")]
+		public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
@@ -401,7 +422,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
+		public ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
@@ -416,8 +437,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public int? Size { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
+		[JsonPropertyName("value_type")]
+		public string? ValueType { get; set; }
 	}
 
 	public sealed partial class TermsAggregationDescriptor<TDocument> : DescriptorBase<TermsAggregationDescriptor<TDocument>>
@@ -435,19 +456,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
+		internal string? FormatValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; private set; }
 
 		internal int? MinDocCountValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; private set; }
+		internal object? MissingValue { get; private set; }
 
 		internal bool? MissingBucketValue { get; private set; }
 
-		internal string? ValueTypeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? OrderValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal int? ShardSizeValue { get; private set; }
 
@@ -455,17 +478,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal int? SizeValue { get; private set; }
 
-		internal string? FormatValue { get; private set; }
+		internal string? ValueTypeValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
@@ -474,27 +497,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
 		public TermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public TermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public TermsAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include) => Assign(include, (a, v) => a.IncludeValue = v);
 		public TermsAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
-		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder) => Assign(missingOrder, (a, v) => a.MissingOrderValue = v);
+		public TermsAggregationDescriptor<TDocument> Missing(object? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true) => Assign(missingBucket, (a, v) => a.MissingBucketValue = v);
-		public TermsAggregationDescriptor<TDocument> ValueType(string? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
+		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder) => Assign(missingOrder, (a, v) => a.MissingOrderValue = v);
 		public TermsAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public TermsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public TermsAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public TermsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public TermsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public TermsAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public TermsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -504,7 +528,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(showTermDocCountError, (a, v) => a.ShowTermDocCountErrorValue = v);
 		public TermsAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public TermsAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public TermsAggregationDescriptor<TDocument> ValueType(string? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
 		public TermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -556,6 +580,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
 			if (IncludeValue is not null)
 			{
 				writer.WritePropertyName("include");
@@ -568,10 +598,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(MinDocCountValue.Value);
 			}
 
-			if (MissingOrderValue is not null)
+			if (MissingValue is not null)
 			{
-				writer.WritePropertyName("missing_order");
-				JsonSerializer.Serialize(writer, MissingOrderValue, options);
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (MissingBucketValue.HasValue)
@@ -580,10 +610,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteBooleanValue(MissingBucketValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(ValueTypeValue))
+			if (MissingOrderValue is not null)
 			{
-				writer.WritePropertyName("value_type");
-				writer.WriteStringValue(ValueTypeValue);
+				writer.WritePropertyName("missing_order");
+				JsonSerializer.Serialize(writer, MissingOrderValue, options);
 			}
 
 			if (OrderValue is not null)
@@ -600,7 +630,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{
@@ -626,10 +656,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(SizeValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(FormatValue))
+			if (!string.IsNullOrEmpty(ValueTypeValue))
 			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
+				writer.WritePropertyName("value_type");
+				writer.WriteStringValue(ValueTypeValue);
 			}
 
 			writer.WriteEndObject();

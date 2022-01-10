@@ -27,27 +27,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class VariableWidthHistogramBucket : Aggregations.MultiBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("min")]
-		public double Min { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("key")]
 		public double Key { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("max")]
-		public double Max { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_as_string")]
-		public string? MinAsString { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("key_as_string")]
 		public string? KeyAsString { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("max")]
+		public double Max { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("max_as_string")]
 		public string? MaxAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min")]
+		public double Min { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_as_string")]
+		public string? MinAsString { get; init; }
 	}
 }

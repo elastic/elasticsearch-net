@@ -27,18 +27,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class StopAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "stop";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords_path")]
 		public string? StopwordsPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stop";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
 	}
 }

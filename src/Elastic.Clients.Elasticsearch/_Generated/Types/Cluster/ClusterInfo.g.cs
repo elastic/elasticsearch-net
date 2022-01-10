@@ -31,8 +31,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.NodeDiskUsage> Nodes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("shard_sizes")]
-		public Dictionary<string, long> ShardSizes { get; init; }
+		[JsonPropertyName("reserved_sizes")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ReservedSize> ReservedSizes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_data_set_sizes")]
@@ -43,7 +43,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public Dictionary<string, string> ShardPaths { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("reserved_sizes")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.ReservedSize> ReservedSizes { get; init; }
+		[JsonPropertyName("shard_sizes")]
+		public Dictionary<string, long> ShardSizes { get; init; }
 	}
 }

@@ -29,24 +29,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonIgnore]
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "combined_fields";
 		[JsonInclude]
+		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("fields")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Field> Fields { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("query")]
-		public string Query { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
-		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+		[JsonPropertyName("minimum_should_match")]
+		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("operator")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("minimum_should_match")]
-		public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+		[JsonPropertyName("query")]
+		public string Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("zero_terms_query")]
@@ -60,41 +60,45 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; private set; }
-
-		internal string QueryValue { get; private set; }
-
 		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; private set; }
+		internal IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
+		internal string QueryValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; private set; }
 
 		internal string? QueryNameValue { get; private set; }
 
-		public CombinedFieldsQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
+		internal float? BoostValue { get; private set; }
+
 		public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
 		public CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op) => Assign(op, (a, v) => a.OperatorValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
 		public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
 			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
 				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 			}
 
 			if (OperatorValue is not null)
@@ -103,28 +107,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, OperatorValue, options);
 			}
 
-			if (MinimumShouldMatchValue is not null)
-			{
-				writer.WritePropertyName("minimum_should_match");
-				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-			}
-
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
 			if (ZeroTermsQueryValue is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
 				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

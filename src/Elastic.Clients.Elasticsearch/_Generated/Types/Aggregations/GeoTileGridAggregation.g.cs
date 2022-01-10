@@ -39,6 +39,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("bounds"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoBounds?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Bounds = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("field"))
 					{
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
@@ -78,17 +89,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.Size = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("bounds"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoBounds?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Bounds = value;
 						}
 
 						continue;
@@ -133,6 +133,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geotile_grid");
 			writer.WriteStartObject();
+			if (value.Bounds is not null)
+			{
+				writer.WritePropertyName("bounds");
+				JsonSerializer.Serialize(writer, value.Bounds, options);
+			}
+
 			if (value.Field is not null)
 			{
 				writer.WritePropertyName("field");
@@ -155,12 +161,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(value.Size.Value);
-			}
-
-			if (value.Bounds is not null)
-			{
-				writer.WritePropertyName("bounds");
-				JsonSerializer.Serialize(writer, value.Bounds, options);
 			}
 
 			writer.WriteEndObject();
@@ -190,6 +190,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonIgnore]
 		string TransformManagement.IPivotGroupByContainerVariant.PivotGroupByContainerVariantName => "geotile_grid";
 		[JsonInclude]
+		[JsonPropertyName("bounds")]
+		public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
@@ -204,10 +208,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		[JsonInclude]
 		[JsonPropertyName("size")]
 		public int? Size { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("bounds")]
-		public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 	}
 
 	public sealed partial class GeoTileGridAggregationDescriptor<TDocument> : DescriptorBase<GeoTileGridAggregationDescriptor<TDocument>>
@@ -217,6 +217,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal GeoTileGridAggregationDescriptor(Action<GeoTileGridAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal double? PrecisionValue { get; private set; }
@@ -224,8 +226,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal int? ShardSizeValue { get; private set; }
 
 		internal int? SizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
@@ -235,12 +235,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
+		public GeoTileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds) => Assign(bounds, (a, v) => a.BoundsValue = v);
 		public GeoTileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoTileGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public GeoTileGridAggregationDescriptor<TDocument> Precision(double? precision) => Assign(precision, (a, v) => a.PrecisionValue = v);
 		public GeoTileGridAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public GeoTileGridAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public GeoTileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds) => Assign(bounds, (a, v) => a.BoundsValue = v);
 		public GeoTileGridAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -268,6 +268,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geotile_grid");
 			writer.WriteStartObject();
+			if (BoundsValue is not null)
+			{
+				writer.WritePropertyName("bounds");
+				JsonSerializer.Serialize(writer, BoundsValue, options);
+			}
+
 			if (FieldValue is not null)
 			{
 				writer.WritePropertyName("field");
@@ -290,12 +296,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(SizeValue.Value);
-			}
-
-			if (BoundsValue is not null)
-			{
-				writer.WritePropertyName("bounds");
-				JsonSerializer.Serialize(writer, BoundsValue, options);
 			}
 
 			writer.WriteEndObject();

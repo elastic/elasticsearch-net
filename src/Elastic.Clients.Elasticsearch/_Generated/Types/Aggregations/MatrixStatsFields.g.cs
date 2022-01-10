@@ -27,35 +27,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class MatrixStatsFields
 	{
 		[JsonInclude]
-		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Field Name { get; init; }
+		[JsonPropertyName("correlation")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, double> Correlation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("count")]
 		public long Count { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("mean")]
-		public double Mean { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("variance")]
-		public double Variance { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("skewness")]
-		public double Skewness { get; init; }
+		[JsonPropertyName("covariance")]
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, double> Covariance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("kurtosis")]
 		public double Kurtosis { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("covariance")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, double> Covariance { get; init; }
+		[JsonPropertyName("mean")]
+		public double Mean { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("correlation")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, double> Correlation { get; init; }
+		[JsonPropertyName("name")]
+		public Elastic.Clients.Elasticsearch.Field Name { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("skewness")]
+		public double Skewness { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("variance")]
+		public double Variance { get; init; }
 	}
 }

@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class StemmerTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "stemmer";
-		[JsonInclude]
 		[JsonPropertyName("language")]
 		public string Language { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stemmer";
 	}
 }

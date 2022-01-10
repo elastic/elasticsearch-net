@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PredicateTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
+		[JsonPropertyName("script")]
+		public ScriptBase Script { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type => "predicate_token_filter";
-		[JsonInclude]
-		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase Script { get; init; }
 	}
 }

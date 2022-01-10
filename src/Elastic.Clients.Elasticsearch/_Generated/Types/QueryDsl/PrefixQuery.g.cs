@@ -36,6 +36,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
 					var property = reader.GetString();
+					if (property == "case_insensitive")
+					{
+						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						continue;
+					}
+
 					if (property == "rewrite")
 					{
 						variant.Rewrite = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -48,21 +54,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "case_insensitive")
+					if (property == "_name")
 					{
-						variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 
 					if (property == "boost")
 					{
 						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
-
-					if (property == "_name")
-					{
-						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 						continue;
 					}
 				}
@@ -75,6 +75,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal override void WriteInternal(Utf8JsonWriter writer, PrefixQuery value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
+			if (value.CaseInsensitive.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
 			if (value.Rewrite is not null)
 			{
 				writer.WritePropertyName("rewrite");
@@ -83,22 +89,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("value");
 			writer.WriteStringValue(value.Value);
-			if (value.CaseInsensitive.HasValue)
+			if (!string.IsNullOrEmpty(value.QueryName))
 			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
 			}
 
 			writer.WriteEndObject();
@@ -111,16 +111,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		[JsonIgnore]
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "prefix";
 		[JsonInclude]
+		[JsonPropertyName("case_insensitive")]
+		public bool? CaseInsensitive { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("rewrite")]
 		public string? Rewrite { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("value")]
 		public string Value { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("case_insensitive")]
-		public bool? CaseInsensitive { get; set; }
 	}
 
 	public sealed partial class PrefixQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<PrefixQueryDescriptor<TDocument>, TDocument>
@@ -130,25 +130,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal bool? CaseInsensitiveValue { get; private set; }
+
 		internal string? RewriteValue { get; private set; }
 
 		internal string ValueValue { get; private set; }
 
-		internal bool? CaseInsensitiveValue { get; private set; }
+		internal string? QueryNameValue { get; private set; }
 
 		internal float? BoostValue { get; private set; }
 
-		internal string? QueryNameValue { get; private set; }
-
+		public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
 		public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
 		public PrefixQueryDescriptor<TDocument> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public PrefixQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public PrefixQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public PrefixQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
+			if (CaseInsensitiveValue.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+			}
+
 			if (RewriteValue is not null)
 			{
 				writer.WritePropertyName("rewrite");
@@ -157,22 +163,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("value");
 			writer.WriteStringValue(ValueValue);
-			if (CaseInsensitiveValue.HasValue)
+			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
 			}
 
 			if (BoostValue.HasValue)
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
 			}
 
 			writer.WriteEndObject();

@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class IcuCollationTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "icu_collation";
-		[JsonInclude]
 		[JsonPropertyName("alternate")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate Alternate { get; init; }
 
@@ -65,6 +62,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("strength")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength Strength { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_collation";
 		[JsonInclude]
 		[JsonPropertyName("variableTop")]
 		public string? Variabletop { get; init; }

@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KeepWordsTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "keep";
-		[JsonInclude]
 		[JsonPropertyName("keep_words")]
 		public IReadOnlyCollection<string>? KeepWords { get; init; }
 
@@ -40,5 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("keep_words_path")]
 		public string? KeepWordsPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keep";
 	}
 }

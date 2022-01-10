@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class NGramTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "ngram";
-		[JsonInclude]
 		[JsonPropertyName("max_gram")]
 		public int? MaxGram { get; init; }
 
@@ -40,5 +37,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool? PreserveOriginal { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "ngram";
 	}
 }

@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class RegressionInferenceOptions
 	{
 		[JsonInclude]
-		[JsonPropertyName("results_field")]
-		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("num_top_feature_importance_values")]
 		public int? NumTopFeatureImportanceValues { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("results_field")]
+		public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 	}
 
 	public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : DescriptorBase<RegressionInferenceOptionsDescriptor<TDocument>>
@@ -42,26 +42,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; private set; }
-
 		internal int? NumTopFeatureImportanceValuesValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; private set; }
+
+		public RegressionInferenceOptionsDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues) => Assign(numTopFeatureImportanceValues, (a, v) => a.NumTopFeatureImportanceValuesValue = v);
 		public RegressionInferenceOptionsDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
 		public RegressionInferenceOptionsDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField) => Assign(resultsField, (a, v) => a.ResultsFieldValue = v);
-		public RegressionInferenceOptionsDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues) => Assign(numTopFeatureImportanceValues, (a, v) => a.NumTopFeatureImportanceValuesValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ResultsFieldValue is not null)
-			{
-				writer.WritePropertyName("results_field");
-				JsonSerializer.Serialize(writer, ResultsFieldValue, options);
-			}
-
 			if (NumTopFeatureImportanceValuesValue.HasValue)
 			{
 				writer.WritePropertyName("num_top_feature_importance_values");
 				writer.WriteNumberValue(NumTopFeatureImportanceValuesValue.Value);
+			}
+
+			if (ResultsFieldValue is not null)
+			{
+				writer.WritePropertyName("results_field");
+				JsonSerializer.Serialize(writer, ResultsFieldValue, options);
 			}
 
 			writer.WriteEndObject();

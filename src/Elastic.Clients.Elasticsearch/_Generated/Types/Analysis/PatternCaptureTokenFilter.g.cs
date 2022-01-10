@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PatternCaptureTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_capture";
-		[JsonInclude]
 		[JsonPropertyName("patterns")]
 		public IReadOnlyCollection<string> Patterns { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]
 		public bool PreserveOriginal { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern_capture";
 	}
 }

@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class FieldCollapse
 	{
 		[JsonInclude]
+		[JsonPropertyName("collapse")]
+		public Elastic.Clients.Elasticsearch.FieldCollapse? Collapse { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -37,10 +41,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("max_concurrent_group_searches")]
 		public int? MaxConcurrentGroupSearches { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("collapse")]
-		public Elastic.Clients.Elasticsearch.FieldCollapse? Collapse { get; set; }
 	}
 
 	public sealed partial class FieldCollapseDescriptor<TDocument> : DescriptorBase<FieldCollapseDescriptor<TDocument>>
@@ -50,22 +50,18 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? InnerHitsValue { get; private set; }
 
 		internal int? MaxConcurrentGroupSearchesValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
-
 		internal FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; private set; }
 
 		internal Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; private set; }
 
-		public FieldCollapseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldCollapseDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldCollapseDescriptor<TDocument> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits) => Assign(innerHits, (a, v) => a.InnerHitsValue = v);
-		public FieldCollapseDescriptor<TDocument> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
 		public FieldCollapseDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
@@ -87,23 +83,13 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.CollapseDescriptorAction = v);
 		}
 
+		public FieldCollapseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public FieldCollapseDescriptor<TDocument> InnerHits(IEnumerable<Elastic.Clients.Elasticsearch.InnerHits>? innerHits) => Assign(innerHits, (a, v) => a.InnerHitsValue = v);
+		public FieldCollapseDescriptor<TDocument> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) => Assign(maxConcurrentGroupSearches, (a, v) => a.MaxConcurrentGroupSearchesValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (InnerHitsValue is not null)
-			{
-				writer.WritePropertyName("inner_hits");
-				JsonSerializer.Serialize(writer, InnerHitsValue, options);
-			}
-
-			if (MaxConcurrentGroupSearchesValue.HasValue)
-			{
-				writer.WritePropertyName("max_concurrent_group_searches");
-				writer.WriteNumberValue(MaxConcurrentGroupSearchesValue.Value);
-			}
-
 			if (CollapseDescriptor is not null)
 			{
 				writer.WritePropertyName("collapse");
@@ -118,6 +104,20 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("collapse");
 				JsonSerializer.Serialize(writer, CollapseValue, options);
+			}
+
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (InnerHitsValue is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, InnerHitsValue, options);
+			}
+
+			if (MaxConcurrentGroupSearchesValue.HasValue)
+			{
+				writer.WritePropertyName("max_concurrent_group_searches");
+				writer.WriteNumberValue(MaxConcurrentGroupSearchesValue.Value);
 			}
 
 			writer.WriteEndObject();

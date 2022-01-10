@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class IcuNormalizationCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "icu_normalizer";
-		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? Mode { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? Name { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_normalizer";
 	}
 }

@@ -39,17 +39,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("field"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("buckets"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -61,12 +50,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("shard_size"))
+					if (reader.ValueTextEquals("field"))
 					{
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.ShardSize = value;
+							agg.Field = value;
 						}
 
 						continue;
@@ -78,6 +67,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.InitialBuffer = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("shard_size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.ShardSize = value;
 						}
 
 						continue;
@@ -111,28 +111,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("variable_width_histogram");
 			writer.WriteStartObject();
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
 			if (value.Buckets.HasValue)
 			{
 				writer.WritePropertyName("buckets");
 				writer.WriteNumberValue(value.Buckets.Value);
 			}
 
-			if (value.ShardSize.HasValue)
+			if (value.Field is not null)
 			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(value.ShardSize.Value);
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			if (value.InitialBuffer.HasValue)
 			{
 				writer.WritePropertyName("initial_buffer");
 				writer.WriteNumberValue(value.InitialBuffer.Value);
+			}
+
+			if (value.ShardSize.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(value.ShardSize.Value);
 			}
 
 			writer.WriteEndObject();
@@ -154,20 +154,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("buckets")]
 		public int? Buckets { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("shard_size")]
-		public int? ShardSize { get; set; }
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("initial_buffer")]
 		public int? InitialBuffer { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("shard_size")]
+		public int? ShardSize { get; set; }
 	}
 
 	public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : DescriptorBase<VariableWidthHistogramAggregationDescriptor<TDocument>>
@@ -177,49 +177,49 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
-
 		internal int? BucketsValue { get; private set; }
 
-		internal int? ShardSizeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal int? InitialBufferValue { get; private set; }
 
+		internal int? ShardSizeValue { get; private set; }
+
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
+		public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets) => Assign(buckets, (a, v) => a.BucketsValue = v);
 		public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public VariableWidthHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets) => Assign(buckets, (a, v) => a.BucketsValue = v);
-		public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? initialBuffer) => Assign(initialBuffer, (a, v) => a.InitialBufferValue = v);
+		public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public VariableWidthHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("variable_width_histogram");
 			writer.WriteStartObject();
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (BucketsValue.HasValue)
 			{
 				writer.WritePropertyName("buckets");
 				writer.WriteNumberValue(BucketsValue.Value);
 			}
 
-			if (ShardSizeValue.HasValue)
+			if (FieldValue is not null)
 			{
-				writer.WritePropertyName("shard_size");
-				writer.WriteNumberValue(ShardSizeValue.Value);
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
 			if (InitialBufferValue.HasValue)
 			{
 				writer.WritePropertyName("initial_buffer");
 				writer.WriteNumberValue(InitialBufferValue.Value);
+			}
+
+			if (ShardSizeValue.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(ShardSizeValue.Value);
 			}
 
 			writer.WriteEndObject();

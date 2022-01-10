@@ -50,12 +50,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("format"))
+					{
+						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Format = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("interval"))
 					{
 						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Interval = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("keyed"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Keyed = value;
 						}
 
 						continue;
@@ -107,32 +129,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("format"))
-					{
-						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Format = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
 						}
 
 						continue;
@@ -183,10 +183,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
+			if (!string.IsNullOrEmpty(value.Format))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(value.Format);
+			}
+
 			if (value.Interval.HasValue)
 			{
 				writer.WritePropertyName("interval");
 				writer.WriteNumberValue(value.Interval.Value);
+			}
+
+			if (value.Keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value.Keyed.Value);
 			}
 
 			if (value.MinDocCount.HasValue)
@@ -217,18 +229,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, value.Script, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Format))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(value.Format);
-			}
-
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
 			}
 
 			writer.WriteEndObject();
@@ -262,8 +262,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("format")]
+		public string? Format { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("interval")]
 		public double? Interval { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public bool? Keyed { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
@@ -283,15 +291,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public string? Format { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
+		public ScriptBase? Script { get; set; }
 	}
 
 	public sealed partial class HistogramAggregationDescriptor<TDocument> : DescriptorBase<HistogramAggregationDescriptor<TDocument>>
@@ -303,7 +303,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
+		internal string? FormatValue { get; private set; }
+
 		internal double? IntervalValue { get; private set; }
+
+		internal bool? KeyedValue { get; private set; }
 
 		internal int? MinDocCountValue { get; private set; }
 
@@ -313,11 +317,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.HistogramOrder? OrderValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
-
-		internal string? FormatValue { get; private set; }
-
-		internal bool? KeyedValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
@@ -325,19 +325,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal HistogramOrderDescriptor OrderDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
 		internal Action<HistogramOrderDescriptor> OrderDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
 		public HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public HistogramAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public HistogramAggregationDescriptor<TDocument> Interval(double? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
+		public HistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public HistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
 		public HistogramAggregationDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public HistogramAggregationDescriptor<TDocument> Offset(double? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
@@ -362,29 +364,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.OrderDescriptorAction = v);
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public HistogramAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public HistogramAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public HistogramAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
 		}
 
-		public HistogramAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public HistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -418,10 +418,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
 			if (IntervalValue.HasValue)
 			{
 				writer.WritePropertyName("interval");
 				writer.WriteNumberValue(IntervalValue.Value);
+			}
+
+			if (KeyedValue.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			if (MinDocCountValue.HasValue)
@@ -466,24 +478,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			writer.WriteEndObject();

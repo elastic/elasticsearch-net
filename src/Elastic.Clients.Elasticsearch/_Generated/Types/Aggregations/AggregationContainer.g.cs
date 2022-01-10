@@ -68,6 +68,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation?>("boxplot", ref reader, options);
 			}
 
+			if (propertyName == "bucket_correlation")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation?>("bucket_correlation", ref reader, options);
+			}
+
+			if (propertyName == "bucket_count_ks_test")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation?>("bucket_count_ks_test", ref reader, options);
+			}
+
 			if (propertyName == "bucket_script")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation?>("bucket_script", ref reader, options);
@@ -81,16 +91,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "bucket_sort")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>("bucket_sort", ref reader, options);
-			}
-
-			if (propertyName == "bucket_count_ks_test")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation?>("bucket_count_ks_test", ref reader, options);
-			}
-
-			if (propertyName == "bucket_correlation")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation?>("bucket_correlation", ref reader, options);
 			}
 
 			if (propertyName == "cardinality")
@@ -173,14 +173,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>("geo_distance", ref reader, options);
 			}
 
-			if (propertyName == "geohash_grid")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregation?>("geohash_grid", ref reader, options);
-			}
-
 			if (propertyName == "geo_line")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>("geo_line", ref reader, options);
+			}
+
+			if (propertyName == "geohash_grid")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregation?>("geohash_grid", ref reader, options);
 			}
 
 			if (propertyName == "geotile_grid")
@@ -198,14 +198,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
 			}
 
-			if (propertyName == "ip_range")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>("ip_range", ref reader, options);
-			}
-
 			if (propertyName == "inference")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>("inference", ref reader, options);
+			}
+
+			if (propertyName == "ip_range")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>("ip_range", ref reader, options);
 			}
 
 			if (propertyName == "matrix_stats")
@@ -243,14 +243,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>("missing", ref reader, options);
 			}
 
-			if (propertyName == "moving_percentiles")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation?>("moving_percentiles", ref reader, options);
-			}
-
 			if (propertyName == "moving_fn")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation?>("moving_fn", ref reader, options);
+			}
+
+			if (propertyName == "moving_percentiles")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation?>("moving_percentiles", ref reader, options);
 			}
 
 			if (propertyName == "multi_terms")
@@ -358,6 +358,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation?>("sum_bucket", ref reader, options);
 			}
 
+			if (propertyName == "t_test")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>("t_test", ref reader, options);
+			}
+
 			if (propertyName == "terms")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>("terms", ref reader, options);
@@ -366,11 +371,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "top_hits")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation?>("top_hits", ref reader, options);
-			}
-
-			if (propertyName == "t_test")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>("t_test", ref reader, options);
 			}
 
 			if (propertyName == "top_metrics")
@@ -383,14 +383,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>("value_count", ref reader, options);
 			}
 
-			if (propertyName == "weighted_avg")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>("weighted_avg", ref reader, options);
-			}
-
 			if (propertyName == "variable_width_histogram")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation?>("variable_width_histogram", ref reader, options);
+			}
+
+			if (propertyName == "weighted_avg")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>("weighted_avg", ref reader, options);
 			}
 
 			throw new JsonException();
@@ -450,6 +450,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("boxplot", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> BucketCorrelation(string name, Action<BucketCorrelationAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_correlation", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> BucketCountKsTest(string name, Action<BucketKsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_count_ks_test", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> BucketScript(string name, Action<BucketScriptAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_script", configure));
@@ -463,16 +473,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> BucketSort(string name, Action<BucketSortAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_sort", configure));
-		}
-
-		public AggregationContainerDescriptor<TDocument> BucketCountKsTest(string name, Action<BucketKsAggregationDescriptor> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_count_ks_test", configure));
-		}
-
-		public AggregationContainerDescriptor<TDocument> BucketCorrelation(string name, Action<BucketCorrelationAggregationDescriptor> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("bucket_correlation", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Cardinality(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
@@ -555,14 +555,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("geo_distance", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> GeohashGrid(string name, Action<GeoHashGridAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("geohash_grid", configure));
-		}
-
 		public AggregationContainerDescriptor<TDocument> GeoLine(string name, Action<GeoLineAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("geo_line", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> GeohashGrid(string name, Action<GeoHashGridAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("geohash_grid", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> GeotileGrid(string name, Action<GeoTileGridAggregationDescriptor<TDocument>> configure)
@@ -580,14 +580,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> IpRange(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
-		}
-
 		public AggregationContainerDescriptor<TDocument> Inference(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("inference", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> IpRange(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> MatrixStats(string name, Action<MatrixStatsAggregationDescriptor<TDocument>> configure)
@@ -625,14 +625,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("missing", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> MovingPercentiles(string name, Action<MovingPercentilesAggregationDescriptor> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("moving_percentiles", configure));
-		}
-
 		public AggregationContainerDescriptor<TDocument> MovingFn(string name, Action<MovingFunctionAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("moving_fn", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> MovingPercentiles(string name, Action<MovingPercentilesAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("moving_percentiles", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> MultiTerms(string name, Action<MultiTermsAggregationDescriptor<TDocument>> configure)
@@ -740,6 +740,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("sum_bucket", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> TTest(string name, Action<TTestAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("t_test", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Terms(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
@@ -748,11 +753,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> TopHits(string name, Action<TopHitsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("top_hits", configure));
-		}
-
-		public AggregationContainerDescriptor<TDocument> TTest(string name, Action<TTestAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("t_test", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> TopMetrics(string name, Action<TopMetricsAggregationDescriptor<TDocument>> configure)
@@ -765,14 +765,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("value_count", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
-		}
-
 		public AggregationContainerDescriptor<TDocument> VariableWidthHistogram(string name, Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("variable_width_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
 		}
 	}
 }

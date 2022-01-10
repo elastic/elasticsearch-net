@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PhoneticTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "phonetic";
-		[JsonInclude]
 		[JsonPropertyName("encoder")]
 		public Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Encoder { get; init; }
 
@@ -52,5 +49,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("rule_type")]
 		public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleType { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "phonetic";
 	}
 }

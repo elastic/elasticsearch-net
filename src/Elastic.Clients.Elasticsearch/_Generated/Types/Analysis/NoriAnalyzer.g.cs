@@ -27,13 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class NoriAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "nori";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("decompound_mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; init; }
 
@@ -42,7 +35,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		public IReadOnlyCollection<string>? Stoptags { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "nori";
+		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
 		public string? UserDictionary { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
 	}
 }

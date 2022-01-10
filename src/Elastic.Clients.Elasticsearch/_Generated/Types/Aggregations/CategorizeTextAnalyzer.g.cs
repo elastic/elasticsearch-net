@@ -31,12 +31,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public IEnumerable<string>? CharFilter { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("tokenizer")]
-		public string? Tokenizer { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IEnumerable<string>? Filter { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("tokenizer")]
+		public string? Tokenizer { get; set; }
 	}
 
 	public sealed partial class CategorizeTextAnalyzerDescriptor : DescriptorBase<CategorizeTextAnalyzerDescriptor>
@@ -48,13 +48,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal CategorizeTextAnalyzerDescriptor(Action<CategorizeTextAnalyzerDescriptor> configure) => configure.Invoke(this);
 		internal IEnumerable<string>? CharFilterValue { get; private set; }
 
-		internal string? TokenizerValue { get; private set; }
-
 		internal IEnumerable<string>? FilterValue { get; private set; }
 
+		internal string? TokenizerValue { get; private set; }
+
 		public CategorizeTextAnalyzerDescriptor CharFilter(IEnumerable<string>? charFilter) => Assign(charFilter, (a, v) => a.CharFilterValue = v);
-		public CategorizeTextAnalyzerDescriptor Tokenizer(string? tokenizer) => Assign(tokenizer, (a, v) => a.TokenizerValue = v);
 		public CategorizeTextAnalyzerDescriptor Filter(IEnumerable<string>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
+		public CategorizeTextAnalyzerDescriptor Tokenizer(string? tokenizer) => Assign(tokenizer, (a, v) => a.TokenizerValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -64,16 +64,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, CharFilterValue, options);
 			}
 
-			if (!string.IsNullOrEmpty(TokenizerValue))
-			{
-				writer.WritePropertyName("tokenizer");
-				writer.WriteStringValue(TokenizerValue);
-			}
-
 			if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(TokenizerValue))
+			{
+				writer.WritePropertyName("tokenizer");
+				writer.WriteStringValue(TokenizerValue);
 			}
 
 			writer.WriteEndObject();

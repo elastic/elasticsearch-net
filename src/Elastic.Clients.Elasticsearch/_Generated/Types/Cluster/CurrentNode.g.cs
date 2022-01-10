@@ -27,16 +27,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	public partial class CurrentNode
 	{
 		[JsonInclude]
+		[JsonPropertyName("attributes")]
+		public Dictionary<string, string> Attributes { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
 		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("attributes")]
-		public Dictionary<string, string> Attributes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("transport_address")]

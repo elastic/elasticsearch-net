@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class ElisionTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "elision";
-		[JsonInclude]
 		[JsonPropertyName("articles")]
 		public IReadOnlyCollection<string> Articles { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("articles_case")]
 		public bool ArticlesCase { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "elision";
 	}
 }

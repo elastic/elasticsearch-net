@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "edge_ngram";
-		[JsonInclude]
 		[JsonPropertyName("custom_token_chars")]
 		public string? CustomTokenChars { get; init; }
 
@@ -44,5 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("token_chars")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "edge_ngram";
 	}
 }

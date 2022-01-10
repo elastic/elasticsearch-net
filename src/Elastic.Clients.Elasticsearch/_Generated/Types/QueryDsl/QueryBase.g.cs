@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public abstract partial class QueryBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("boost")]
-		public float? Boost { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("_name")]
 		public string? QueryName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("boost")]
+		public float? Boost { get; set; }
 	}
 
 	public sealed partial class QueryBaseDescriptor : DescriptorBase<QueryBaseDescriptor>
@@ -42,25 +42,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal QueryBaseDescriptor(Action<QueryBaseDescriptor> configure) => configure.Invoke(this);
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
 
-		public QueryBaseDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		internal float? BoostValue { get; private set; }
+
 		public QueryBaseDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public QueryBaseDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

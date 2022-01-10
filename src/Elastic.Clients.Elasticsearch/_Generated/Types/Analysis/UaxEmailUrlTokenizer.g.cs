@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class UaxEmailUrlTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "uax_url_email";
-		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int? MaxTokenLength { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "uax_url_email";
 	}
 }

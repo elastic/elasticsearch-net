@@ -27,15 +27,15 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class PhraseSuggestOption
 	{
 		[JsonInclude]
-		[JsonPropertyName("text")]
-		public string Text { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("highlighted")]
 		public string Highlighted { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("score")]
 		public double Score { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("text")]
+		public string Text { get; init; }
 	}
 }

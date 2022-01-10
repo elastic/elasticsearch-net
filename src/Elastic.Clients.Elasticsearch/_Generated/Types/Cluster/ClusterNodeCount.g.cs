@@ -35,40 +35,32 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int Data { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("ingest")]
-		public int Ingest { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("master")]
-		public int Master { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("total")]
-		public int Total { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("voting_only")]
-		public int VotingOnly { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("data_cold")]
 		public int DataCold { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("data_frozen")]
-		public int? DataFrozen { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("data_content")]
 		public int DataContent { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("data_warm")]
-		public int DataWarm { get; init; }
+		[JsonPropertyName("data_frozen")]
+		public int? DataFrozen { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("data_hot")]
 		public int DataHot { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("data_warm")]
+		public int DataWarm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("ingest")]
+		public int Ingest { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("master")]
+		public int Master { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("ml")]
@@ -79,7 +71,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public int RemoteClusterClient { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("total")]
+		public int Total { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("transform")]
 		public int Transform { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("voting_only")]
+		public int VotingOnly { get; init; }
 	}
 }

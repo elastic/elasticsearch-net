@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class StemmerOverrideTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "stemmer_override";
-		[JsonInclude]
 		[JsonPropertyName("rules")]
 		public IReadOnlyCollection<string>? Rules { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("rules_path")]
 		public string? RulesPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "stemmer_override";
 	}
 }

@@ -33,12 +33,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public bool? AllowLeadingWildcard { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("analyzer")]
-		public string? Analyzer { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("analyze_wildcard")]
 		public bool? AnalyzeWildcard { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("analyzer")]
+		public string? Analyzer { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("auto_generate_synonyms_phrase_query")]
@@ -138,9 +138,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool? AllowLeadingWildcardValue { get; private set; }
 
-		internal string? AnalyzerValue { get; private set; }
-
 		internal bool? AnalyzeWildcardValue { get; private set; }
+
+		internal string? AnalyzerValue { get; private set; }
 
 		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
 
@@ -186,13 +186,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
 
+		internal float? BoostValue { get; private set; }
+
 		public QueryStringQueryDescriptor<TDocument> AllowLeadingWildcard(bool? allowLeadingWildcard = true) => Assign(allowLeadingWildcard, (a, v) => a.AllowLeadingWildcardValue = v);
-		public QueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public QueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
+		public QueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public QueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
 		public QueryStringQueryDescriptor<TDocument> DefaultField(Elastic.Clients.Elasticsearch.Field? defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
 		public QueryStringQueryDescriptor<TDocument> DefaultField<TValue>(Expression<Func<TDocument, TValue>> defaultField) => Assign(defaultField, (a, v) => a.DefaultFieldValue = v);
@@ -216,8 +216,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public QueryStringQueryDescriptor<TDocument> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
 		public QueryStringQueryDescriptor<TDocument> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
 		public QueryStringQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public QueryStringQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public QueryStringQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public QueryStringQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -227,16 +227,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteBooleanValue(AllowLeadingWildcardValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(AnalyzerValue))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(AnalyzerValue);
-			}
-
 			if (AnalyzeWildcardValue.HasValue)
 			{
 				writer.WritePropertyName("analyze_wildcard");
 				writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
 			}
 
 			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
@@ -367,16 +367,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, TypeValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

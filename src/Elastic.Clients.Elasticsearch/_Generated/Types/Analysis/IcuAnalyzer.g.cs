@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class IcuAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "icu_analyzer";
-		[JsonInclude]
 		[JsonPropertyName("method")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_analyzer";
 	}
 }

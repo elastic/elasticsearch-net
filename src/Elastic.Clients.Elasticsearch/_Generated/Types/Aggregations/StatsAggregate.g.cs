@@ -27,36 +27,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class StatsAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("count")]
-		public long Count { get; init; }
+		[JsonPropertyName("avg")]
+		public double? Avg { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("min")]
-		public double? Min { get; init; }
+		[JsonPropertyName("avg_as_string")]
+		public string? AvgAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max")]
 		public double? Max { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("avg")]
-		public double? Avg { get; init; }
+		[JsonPropertyName("max_as_string")]
+		public string? MaxAsString { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("sum")]
-		public double Sum { get; init; }
+		[JsonPropertyName("min")]
+		public double? Min { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("min_as_string")]
 		public string? MinAsString { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("max_as_string")]
-		public string? MaxAsString { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("avg_as_string")]
-		public string? AvgAsString { get; init; }
+		[JsonPropertyName("sum")]
+		public double Sum { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sum_as_string")]

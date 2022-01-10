@@ -27,23 +27,23 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class AggregationProfileDelegateDebug
 	{
 		[JsonInclude]
-		[JsonPropertyName("segments_with_doc_count_field")]
-		public int? SegmentsWithDocCountField { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("segments_with_deleted_docs")]
-		public int? SegmentsWithDeletedDocs { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("filters")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebugFilter>? Filters { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_collected")]
+		public int? SegmentsCollected { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("segments_counted")]
 		public int? SegmentsCounted { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("segments_collected")]
-		public int? SegmentsCollected { get; init; }
+		[JsonPropertyName("segments_with_deleted_docs")]
+		public int? SegmentsWithDeletedDocs { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_with_doc_count_field")]
+		public int? SegmentsWithDocCountField { get; init; }
 	}
 }
