@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -422,7 +422,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
@@ -470,7 +470,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? OrderValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
 
 		internal int? ShardSizeValue { get; private set; }
 
@@ -484,7 +484,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
@@ -500,7 +504,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true) => Assign(missingBucket, (a, v) => a.MissingBucketValue = v);
 		public TermsAggregationDescriptor<TDocument> ValueType(string? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
 		public TermsAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public TermsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public TermsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			return Assign(script, (a, v) => a.ScriptValue = v);
+		}
+
+		public TermsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+		}
+
+		public TermsAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+		}
+
 		public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
 		public TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(showTermDocCountError, (a, v) => a.ShowTermDocCountErrorValue = v);
 		public TermsAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
@@ -598,7 +622,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, OrderValue, options);
 			}
 
-			if (ScriptValue is not null)
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);

@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
@@ -48,17 +48,41 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal TestPopulationDescriptor(Action<TestPopulationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+
 		internal QueryDsl.QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
 
 		public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
 		public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TestPopulationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public TestPopulationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			return Assign(script, (a, v) => a.ScriptValue = v);
+		}
+
+		public TestPopulationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+		}
+
+		public TestPopulationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+		}
+
 		public TestPopulationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
@@ -85,7 +109,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-			if (ScriptValue is not null)
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);

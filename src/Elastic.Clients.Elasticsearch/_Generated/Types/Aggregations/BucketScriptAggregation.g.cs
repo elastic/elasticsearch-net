@@ -41,7 +41,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				{
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
 	}
 
 	public sealed partial class BucketScriptAggregationDescriptor : DescriptorBase<BucketScriptAggregationDescriptor>
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal BucketScriptAggregationDescriptor(Action<BucketScriptAggregationDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
 
@@ -175,7 +175,31 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public BucketScriptAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+
+		public BucketScriptAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			return Assign(script, (a, v) => a.ScriptValue = v);
+		}
+
+		public BucketScriptAggregationDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+		}
+
+		public BucketScriptAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+		}
+
 		public BucketScriptAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public BucketScriptAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
 		public BucketScriptAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
@@ -185,7 +209,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("bucket_script");
 			writer.WriteStartObject();
-			if (ScriptValue is not null)
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
