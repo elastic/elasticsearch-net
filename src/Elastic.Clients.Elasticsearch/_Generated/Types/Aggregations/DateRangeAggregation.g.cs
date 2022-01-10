@@ -61,17 +61,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Missing?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("ranges"))
 					{
 						var value = JsonSerializer.Deserialize<IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>?>(ref reader, options);
@@ -156,12 +145,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteStringValue(value.Format);
 			}
 
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
 			if (value.Ranges is not null)
 			{
 				writer.WritePropertyName("ranges");
@@ -213,10 +196,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public string? Format { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("ranges")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
 
@@ -240,8 +219,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal string? FormatValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
-
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; private set; }
 
 		internal string? TimeZoneValue { get; private set; }
@@ -259,7 +236,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DateRangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DateRangeAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public DateRangeAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public DateRangeAggregationDescriptor<TDocument> Ranges(IEnumerable<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges) => Assign(ranges, (a, v) => a.RangesValue = v);
 		public DateRangeAggregationDescriptor<TDocument> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
 		public DateRangeAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
@@ -300,12 +276,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("format");
 				writer.WriteStringValue(FormatValue);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (RangesValue is not null)

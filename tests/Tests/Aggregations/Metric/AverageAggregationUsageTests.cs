@@ -28,11 +28,11 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			avg = new
 			{
 				field = "numberOfCommits",
-				//missing = 10.0,
-				//script = new
-				//{
-				//	source = "_value * 1.2",
-				//}
+				missing = 10.0,
+				script = new
+				{
+					source = "_value * 1.2",
+				}
 			}
 		}
 	};
@@ -43,8 +43,8 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 				.Add("foo", "bar")
 			)
 			.Field(p => p.NumberOfCommits)
-			//.Missing(10)
-			//.Script(ss => ss.Source("_value * 1.2"))
+			.Missing(10)
+			.Script(ss => ss.Source("_value * 1.2"))
 		);
 
 	protected override AggregationDictionary InitializerAggs =>
@@ -54,8 +54,8 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 			{
 				{ "foo", "bar" }
 			},
-			//Missing = 10,
-			//Script = new InlineScript("_value * 1.2")
+			Missing = 10,
+			Script = new InlineScript("_value * 1.2")
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)

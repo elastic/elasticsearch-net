@@ -39,6 +39,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("missing"))
+					{
+						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Missing = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("format"))
 					{
 						var value = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -56,17 +67,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.Field = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("missing"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Missing?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
 						}
 
 						continue;
@@ -111,6 +111,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("avg");
 			writer.WriteStartObject();
+			if (value.Missing.HasValue)
+			{
+				writer.WritePropertyName("missing");
+				writer.WriteNumberValue(value.Missing.Value);
+			}
+
 			if (!string.IsNullOrEmpty(value.Format))
 			{
 				writer.WritePropertyName("format");
@@ -121,12 +127,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, value.Field, options);
-			}
-
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
 			}
 
 			if (value.Script is not null)
@@ -153,6 +153,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AverageAggregation(string name) : base(name)
 		{
 		}
+
+		[JsonInclude]
+		[JsonPropertyName("missing")]
+		public double? Missing { get; set; }
 	}
 
 	public sealed partial class AverageAggregationDescriptor<TDocument> : DescriptorBase<AverageAggregationDescriptor<TDocument>>
@@ -162,11 +166,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal AverageAggregationDescriptor(Action<AverageAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal double? MissingValue { get; private set; }
+
 		internal string? FormatValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
 
@@ -176,10 +180,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
+		public AverageAggregationDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public AverageAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public AverageAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public AverageAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public AverageAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public AverageAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
 		{
 			ScriptDescriptor = null;
@@ -207,6 +211,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("avg");
 			writer.WriteStartObject();
+			if (MissingValue.HasValue)
+			{
+				writer.WritePropertyName("missing");
+				writer.WriteNumberValue(MissingValue.Value);
+			}
+
 			if (!string.IsNullOrEmpty(FormatValue))
 			{
 				writer.WritePropertyName("format");
@@ -217,12 +227,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("field");
 				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (ScriptDescriptor is not null)
