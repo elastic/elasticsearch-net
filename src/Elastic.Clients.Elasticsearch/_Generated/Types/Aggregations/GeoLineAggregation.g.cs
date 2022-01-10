@@ -39,12 +39,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("include_sort"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.IncludeSort = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("point"))
 					{
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Point = value;
+						}
+
+						continue;
+					}
+
+					if (reader.ValueTextEquals("size"))
+					{
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Size = value;
 						}
 
 						continue;
@@ -61,34 +83,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("include_sort"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.IncludeSort = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("sort_order"))
 					{
 						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortOrder?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.SortOrder = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("size"))
-					{
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Size = value;
 						}
 
 						continue;
@@ -122,26 +122,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("geo_line");
 			writer.WriteStartObject();
-			writer.WritePropertyName("point");
-			JsonSerializer.Serialize(writer, value.Point, options);
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, value.Sort, options);
 			if (value.IncludeSort.HasValue)
 			{
 				writer.WritePropertyName("include_sort");
 				writer.WriteBooleanValue(value.IncludeSort.Value);
 			}
 
-			if (value.SortOrder is not null)
-			{
-				writer.WritePropertyName("sort_order");
-				JsonSerializer.Serialize(writer, value.SortOrder, options);
-			}
-
+			writer.WritePropertyName("point");
+			JsonSerializer.Serialize(writer, value.Point, options);
 			if (value.Size.HasValue)
 			{
 				writer.WritePropertyName("size");
 				writer.WriteNumberValue(value.Size.Value);
+			}
+
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, value.Sort, options);
+			if (value.SortOrder is not null)
+			{
+				writer.WritePropertyName("sort_order");
+				JsonSerializer.Serialize(writer, value.SortOrder, options);
 			}
 
 			writer.WriteEndObject();
@@ -163,24 +163,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
+		[JsonPropertyName("include_sort")]
+		public bool? IncludeSort { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("point")]
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public int? Size { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Sort { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("include_sort")]
-		public bool? IncludeSort { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("sort_order")]
 		public Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("size")]
-		public int? Size { get; set; }
 	}
 
 	public sealed partial class GeoLineAggregationDescriptor<TDocument> : DescriptorBase<GeoLineAggregationDescriptor<TDocument>>
@@ -190,15 +190,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal GeoLineAggregationDescriptor(Action<GeoLineAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal bool? IncludeSortValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint PointValue { get; private set; }
+
+		internal int? SizeValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort SortValue { get; private set; }
 
-		internal bool? IncludeSortValue { get; private set; }
-
 		internal Elastic.Clients.Elasticsearch.SortOrder? SortOrderValue { get; private set; }
-
-		internal int? SizeValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
@@ -210,6 +210,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Action<GeoLineSortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
 
+		public GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? includeSort = true) => Assign(includeSort, (a, v) => a.IncludeSortValue = v);
 		public GeoLineAggregationDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point)
 		{
 			PointDescriptor = null;
@@ -231,6 +232,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.PointDescriptorAction = v);
 		}
 
+		public GeoLineAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public GeoLineAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort sort)
 		{
 			SortDescriptor = null;
@@ -252,15 +254,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
 		}
 
-		public GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? includeSort = true) => Assign(includeSort, (a, v) => a.IncludeSortValue = v);
 		public GeoLineAggregationDescriptor<TDocument> SortOrder(Elastic.Clients.Elasticsearch.SortOrder? sortOrder) => Assign(sortOrder, (a, v) => a.SortOrderValue = v);
-		public GeoLineAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public GeoLineAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("geo_line");
 			writer.WriteStartObject();
+			if (IncludeSortValue.HasValue)
+			{
+				writer.WritePropertyName("include_sort");
+				writer.WriteBooleanValue(IncludeSortValue.Value);
+			}
+
 			if (PointDescriptor is not null)
 			{
 				writer.WritePropertyName("point");
@@ -275,6 +281,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("point");
 				JsonSerializer.Serialize(writer, PointValue, options);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			if (SortDescriptor is not null)
@@ -293,22 +305,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
-			if (IncludeSortValue.HasValue)
-			{
-				writer.WritePropertyName("include_sort");
-				writer.WriteBooleanValue(IncludeSortValue.Value);
-			}
-
 			if (SortOrderValue is not null)
 			{
 				writer.WritePropertyName("sort_order");
 				JsonSerializer.Serialize(writer, SortOrderValue, options);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			writer.WriteEndObject();

@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
+		public ScriptBase? Script { get; set; }
 	}
 
 	public sealed partial class WeightedAverageValueDescriptor<TDocument> : DescriptorBase<WeightedAverageValueDescriptor<TDocument>>
@@ -50,30 +50,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal double? MissingValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public WeightedAverageValueDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public WeightedAverageValueDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public WeightedAverageValueDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public WeightedAverageValueDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public WeightedAverageValueDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public WeightedAverageValueDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public WeightedAverageValueDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{

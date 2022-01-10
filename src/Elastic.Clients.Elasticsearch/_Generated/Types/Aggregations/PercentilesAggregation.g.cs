@@ -39,6 +39,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
+					if (reader.ValueTextEquals("hdr"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HdrMethod?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Hdr = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("keyed"))
 					{
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
@@ -56,17 +67,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.Percents = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("hdr"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HdrMethod?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Hdr = value;
 						}
 
 						continue;
@@ -107,7 +107,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -144,6 +144,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("percentiles");
 			writer.WriteStartObject();
+			if (value.Hdr is not null)
+			{
+				writer.WritePropertyName("hdr");
+				JsonSerializer.Serialize(writer, value.Hdr, options);
+			}
+
 			if (value.Keyed.HasValue)
 			{
 				writer.WritePropertyName("keyed");
@@ -154,12 +160,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("percents");
 				JsonSerializer.Serialize(writer, value.Percents, options);
-			}
-
-			if (value.Hdr is not null)
-			{
-				writer.WritePropertyName("hdr");
-				JsonSerializer.Serialize(writer, value.Hdr, options);
 			}
 
 			if (value.TDigest is not null)
@@ -206,16 +206,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
+		[JsonPropertyName("hdr")]
+		public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("keyed")]
 		public bool? Keyed { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("percents")]
 		public IEnumerable<double>? Percents { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("hdr")]
-		public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("tdigest")]
@@ -229,11 +229,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal PercentilesAggregationDescriptor(Action<PercentilesAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; private set; }
+
 		internal bool? KeyedValue { get; private set; }
 
 		internal IEnumerable<double>? PercentsValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigestValue { get; private set; }
 
@@ -241,7 +241,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
@@ -249,16 +249,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal TDigestDescriptor TDigestDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal Action<HdrMethodDescriptor> HdrDescriptorAction { get; private set; }
 
 		internal Action<TDigestDescriptor> TDigestDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
-		public PercentilesAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
-		public PercentilesAggregationDescriptor<TDocument> Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
 		public PercentilesAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? hdr)
 		{
 			HdrDescriptor = null;
@@ -280,6 +278,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.HdrDescriptorAction = v);
 		}
 
+		public PercentilesAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public PercentilesAggregationDescriptor<TDocument> Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
 		public PercentilesAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 		{
 			TDigestDescriptor = null;
@@ -304,21 +304,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public PercentilesAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public PercentilesAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public PercentilesAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercentilesAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public PercentilesAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public PercentilesAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public PercentilesAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public PercentilesAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public PercentilesAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -331,18 +331,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("percentiles");
 			writer.WriteStartObject();
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
-			}
-
-			if (PercentsValue is not null)
-			{
-				writer.WritePropertyName("percents");
-				JsonSerializer.Serialize(writer, PercentsValue, options);
-			}
-
 			if (HdrDescriptor is not null)
 			{
 				writer.WritePropertyName("hdr");
@@ -357,6 +345,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("hdr");
 				JsonSerializer.Serialize(writer, HdrValue, options);
+			}
+
+			if (KeyedValue.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(KeyedValue.Value);
+			}
+
+			if (PercentsValue is not null)
+			{
+				writer.WritePropertyName("percents");
+				JsonSerializer.Serialize(writer, PercentsValue, options);
 			}
 
 			if (TDigestDescriptor is not null)
@@ -395,7 +395,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{

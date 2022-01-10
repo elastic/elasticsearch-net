@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 	public partial class IndexRoutingAllocation
 	{
 		[JsonInclude]
+		[JsonPropertyName("disk")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? Disk { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("enable")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
 
@@ -37,10 +41,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("initial_recovery")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("disk")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? Disk { get; set; }
 	}
 
 	public sealed partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor>
@@ -50,25 +50,46 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		}
 
 		internal IndexRoutingAllocationDescriptor(Action<IndexRoutingAllocationDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? DiskValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? EnableValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? IncludeValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecoveryValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? DiskValue { get; private set; }
+		internal IndexRoutingAllocationDiskDescriptor DiskDescriptor { get; private set; }
 
 		internal IndexRoutingAllocationIncludeDescriptor IncludeDescriptor { get; private set; }
 
 		internal IndexRoutingAllocationInitialRecoveryDescriptor InitialRecoveryDescriptor { get; private set; }
 
-		internal IndexRoutingAllocationDiskDescriptor DiskDescriptor { get; private set; }
+		internal Action<IndexRoutingAllocationDiskDescriptor> DiskDescriptorAction { get; private set; }
 
 		internal Action<IndexRoutingAllocationIncludeDescriptor> IncludeDescriptorAction { get; private set; }
 
 		internal Action<IndexRoutingAllocationInitialRecoveryDescriptor> InitialRecoveryDescriptorAction { get; private set; }
 
-		internal Action<IndexRoutingAllocationDiskDescriptor> DiskDescriptorAction { get; private set; }
+		public IndexRoutingAllocationDescriptor Disk(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? disk)
+		{
+			DiskDescriptor = null;
+			DiskDescriptorAction = null;
+			return Assign(disk, (a, v) => a.DiskValue = v);
+		}
+
+		public IndexRoutingAllocationDescriptor Disk(IndexManagement.IndexRoutingAllocationDiskDescriptor descriptor)
+		{
+			DiskValue = null;
+			DiskDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.DiskDescriptor = v);
+		}
+
+		public IndexRoutingAllocationDescriptor Disk(Action<IndexManagement.IndexRoutingAllocationDiskDescriptor> configure)
+		{
+			DiskValue = null;
+			DiskDescriptorAction = null;
+			return Assign(configure, (a, v) => a.DiskDescriptorAction = v);
+		}
 
 		public IndexRoutingAllocationDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? enable) => Assign(enable, (a, v) => a.EnableValue = v);
 		public IndexRoutingAllocationDescriptor Include(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? include)
@@ -113,30 +134,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.InitialRecoveryDescriptorAction = v);
 		}
 
-		public IndexRoutingAllocationDescriptor Disk(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? disk)
-		{
-			DiskDescriptor = null;
-			DiskDescriptorAction = null;
-			return Assign(disk, (a, v) => a.DiskValue = v);
-		}
-
-		public IndexRoutingAllocationDescriptor Disk(IndexManagement.IndexRoutingAllocationDiskDescriptor descriptor)
-		{
-			DiskValue = null;
-			DiskDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.DiskDescriptor = v);
-		}
-
-		public IndexRoutingAllocationDescriptor Disk(Action<IndexManagement.IndexRoutingAllocationDiskDescriptor> configure)
-		{
-			DiskValue = null;
-			DiskDescriptorAction = null;
-			return Assign(configure, (a, v) => a.DiskDescriptorAction = v);
-		}
-
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (DiskDescriptor is not null)
+			{
+				writer.WritePropertyName("disk");
+				JsonSerializer.Serialize(writer, DiskDescriptor, options);
+			}
+			else if (DiskDescriptorAction is not null)
+			{
+				writer.WritePropertyName("disk");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingAllocationDiskDescriptor(DiskDescriptorAction), options);
+			}
+			else if (DiskValue is not null)
+			{
+				writer.WritePropertyName("disk");
+				JsonSerializer.Serialize(writer, DiskValue, options);
+			}
+
 			if (EnableValue is not null)
 			{
 				writer.WritePropertyName("enable");
@@ -173,22 +189,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("initial_recovery");
 				JsonSerializer.Serialize(writer, InitialRecoveryValue, options);
-			}
-
-			if (DiskDescriptor is not null)
-			{
-				writer.WritePropertyName("disk");
-				JsonSerializer.Serialize(writer, DiskDescriptor, options);
-			}
-			else if (DiskDescriptorAction is not null)
-			{
-				writer.WritePropertyName("disk");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingAllocationDiskDescriptor(DiskDescriptorAction), options);
-			}
-			else if (DiskValue is not null)
-			{
-				writer.WritePropertyName("disk");
-				JsonSerializer.Serialize(writer, DiskValue, options);
 			}
 
 			writer.WriteEndObject();

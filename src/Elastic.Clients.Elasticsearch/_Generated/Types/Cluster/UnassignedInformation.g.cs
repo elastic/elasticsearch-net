@@ -27,16 +27,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	public partial class UnassignedInformation
 	{
 		[JsonInclude]
+		[JsonPropertyName("allocation_status")]
+		public string? AllocationStatus { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("at")]
 		public string At { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("last_allocation_status")]
-		public string? LastAllocationStatus { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("reason")]
-		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformationReason Reason { get; init; }
+		[JsonPropertyName("delayed")]
+		public bool? Delayed { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("details")]
@@ -47,11 +47,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		public int? FailedAllocationAttempts { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("delayed")]
-		public bool? Delayed { get; init; }
+		[JsonPropertyName("last_allocation_status")]
+		public string? LastAllocationStatus { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("allocation_status")]
-		public string? AllocationStatus { get; init; }
+		[JsonPropertyName("reason")]
+		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.UnassignedInformationReason Reason { get; init; }
 	}
 }

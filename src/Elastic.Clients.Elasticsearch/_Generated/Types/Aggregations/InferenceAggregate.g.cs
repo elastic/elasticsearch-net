@@ -27,16 +27,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class InferenceAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("value")]
-		public object? Value { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("feature_importance")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("top_classes")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>? TopClasses { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("value")]
+		public object? Value { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("warning")]

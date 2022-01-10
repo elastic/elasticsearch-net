@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class CustomNormalizer : INormalizersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "custom";
-		[JsonInclude]
 		[JsonPropertyName("char_filter")]
 		public IReadOnlyCollection<string>? CharFilter { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("filter")]
 		public IReadOnlyCollection<string>? Filter { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "custom";
 	}
 }

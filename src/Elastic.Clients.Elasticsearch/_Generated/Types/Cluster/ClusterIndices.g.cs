@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	public partial class ClusterIndices
 	{
 		[JsonInclude]
+		[JsonPropertyName("analysis")]
+		public Elastic.Clients.Elasticsearch.Cluster.Stats.CharFilterTypes Analysis { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("completion")]
 		public Elastic.Clients.Elasticsearch.CompletionStats Completion { get; init; }
 
@@ -43,6 +47,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		public Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("mappings")]
+		public Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypesMappings Mappings { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("query_cache")]
 		public Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; init; }
 
@@ -57,14 +65,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		[JsonInclude]
 		[JsonPropertyName("store")]
 		public Elastic.Clients.Elasticsearch.StoreStats Store { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("mappings")]
-		public Elastic.Clients.Elasticsearch.Cluster.Stats.FieldTypesMappings Mappings { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("analysis")]
-		public Elastic.Clients.Elasticsearch.Cluster.Stats.CharFilterTypes Analysis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("versions")]

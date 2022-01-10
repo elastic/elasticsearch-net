@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class SynonymGraphTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "synonym_graph";
-		[JsonInclude]
 		[JsonPropertyName("expand")]
 		public bool? Expand { get; init; }
 
@@ -53,6 +50,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("tokenizer")]
 		public string? Tokenizer { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "synonym_graph";
 		[JsonInclude]
 		[JsonPropertyName("updateable")]
 		public bool? Updateable { get; init; }

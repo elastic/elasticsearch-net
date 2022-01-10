@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class Collector
 	{
 		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Collector>? Children { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("name")]
 		public string Name { get; init; }
 
@@ -37,9 +41,5 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("time_in_nanos")]
 		public long TimeInNanos { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("children")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Collector>? Children { get; init; }
 	}
 }

@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KuromojiPartOfSpeechTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "kuromoji_part_of_speech";
-		[JsonInclude]
 		[JsonPropertyName("stoptags")]
 		public IReadOnlyCollection<string> Stoptags { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "kuromoji_part_of_speech";
 	}
 }

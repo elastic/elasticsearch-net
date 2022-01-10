@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public abstract partial class SignificantTermsBucketBase : Aggregations.MultiBucketBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("score")]
-		public double Score { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("bg_count")]
 		public long BgCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("score")]
+		public double Score { get; init; }
 	}
 }

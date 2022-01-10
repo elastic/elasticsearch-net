@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("sort"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.SortCollection?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<SortCollection?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Sort = value;
@@ -167,7 +167,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.SortCollection? Sort { get; set; }
+		public SortCollection? Sort { get; set; }
 	}
 
 	public sealed partial class BucketSortAggregationDescriptor<TDocument> : DescriptorBase<BucketSortAggregationDescriptor<TDocument>>
@@ -183,32 +183,32 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal int? SizeValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.SortCollection? SortValue { get; private set; }
+		internal SortCollection? SortValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.SortDescriptor<TDocument> SortDescriptor { get; private set; }
+		internal SortDescriptor<TDocument> SortDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.SortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
+		internal Action<SortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
 
 		public BucketSortAggregationDescriptor<TDocument> From(int? from) => Assign(from, (a, v) => a.FromValue = v);
 		public BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
 		public BucketSortAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public BucketSortAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortCollection? sort)
+		public BucketSortAggregationDescriptor<TDocument> Sort(SortCollection? sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
 			return Assign(sort, (a, v) => a.SortValue = v);
 		}
 
-		public BucketSortAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortDescriptor<TDocument> descriptor)
+		public BucketSortAggregationDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
 		}
 
-		public BucketSortAggregationDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortDescriptor<TDocument>> configure)
+		public BucketSortAggregationDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
@@ -247,7 +247,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortDescriptor<TDocument>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
 			}
 			else if (SortValue is not null)
 			{

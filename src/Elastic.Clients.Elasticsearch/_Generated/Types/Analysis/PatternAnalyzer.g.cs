@@ -27,13 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PatternAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("flags")]
 		public string? Flags { get; init; }
 
@@ -48,5 +41,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "pattern";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
 	}
 }

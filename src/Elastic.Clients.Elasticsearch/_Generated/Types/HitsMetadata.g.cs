@@ -27,15 +27,15 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class HitsMetadata<T>
 	{
 		[JsonInclude]
-		[JsonPropertyName("total")]
-		public Elastic.Clients.Elasticsearch.TotalHits? Total { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("hits")]
 		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Hit<T>> Hits { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_score")]
 		public double? MaxScore { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("total")]
+		public Elastic.Clients.Elasticsearch.TotalHits? Total { get; init; }
 	}
 }

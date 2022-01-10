@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class NoriTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "nori_tokenizer";
-		[JsonInclude]
 		[JsonPropertyName("decompound_mode")]
 		public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; init; }
 
@@ -37,6 +34,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("discard_punctuation")]
 		public bool? DiscardPunctuation { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "nori_tokenizer";
 		[JsonInclude]
 		[JsonPropertyName("user_dictionary")]
 		public string? UserDictionary { get; init; }

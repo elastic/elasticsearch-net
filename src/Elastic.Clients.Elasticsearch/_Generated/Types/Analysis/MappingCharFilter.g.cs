@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class MappingCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "mapping";
-		[JsonInclude]
 		[JsonPropertyName("mappings")]
 		public IReadOnlyCollection<string> Mappings { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("mappings_path")]
 		public string? MappingsPath { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "mapping";
 	}
 }

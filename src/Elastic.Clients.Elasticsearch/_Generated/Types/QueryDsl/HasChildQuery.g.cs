@@ -78,9 +78,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal string TypeValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		internal InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; private set; }
 
@@ -137,8 +137,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		public HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
 		public HasChildQueryDescriptor<TDocument> Type(string type) => Assign(type, (a, v) => a.TypeValue = v);
-		public HasChildQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public HasChildQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public HasChildQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -200,16 +200,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("type");
 			JsonSerializer.Serialize(writer, TypeValue, options);
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

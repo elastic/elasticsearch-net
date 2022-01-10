@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class HunspellTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "hunspell";
-		[JsonInclude]
 		[JsonPropertyName("dedup")]
 		public bool Dedup { get; init; }
 
@@ -44,5 +41,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("longest_only")]
 		public bool LongestOnly { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "hunspell";
 	}
 }

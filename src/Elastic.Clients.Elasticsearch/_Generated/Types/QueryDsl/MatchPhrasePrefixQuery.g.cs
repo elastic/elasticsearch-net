@@ -66,15 +66,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 				}
@@ -113,16 +113,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
 			}
 
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
 			writer.WriteEndObject();
@@ -172,17 +172,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		public MatchPhrasePrefixQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
 		public MatchPhrasePrefixQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
 		public MatchPhrasePrefixQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
 		public MatchPhrasePrefixQueryDescriptor<TDocument> Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
 		public MatchPhrasePrefixQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
-		public MatchPhrasePrefixQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public MatchPhrasePrefixQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public MatchPhrasePrefixQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));
@@ -213,16 +213,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

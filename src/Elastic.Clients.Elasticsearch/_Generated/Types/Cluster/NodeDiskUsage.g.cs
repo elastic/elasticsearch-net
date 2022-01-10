@@ -27,15 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	public partial class NodeDiskUsage
 	{
 		[JsonInclude]
-		[JsonPropertyName("node_name")]
-		public Elastic.Clients.Elasticsearch.Name NodeName { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("least_available")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage LeastAvailable { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("most_available")]
 		public Elastic.Clients.Elasticsearch.Cluster.AllocationExplain.DiskUsage MostAvailable { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("node_name")]
+		public Elastic.Clients.Elasticsearch.Name NodeName { get; init; }
 	}
 }

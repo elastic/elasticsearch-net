@@ -51,16 +51,16 @@ namespace Elastic.Clients.Elasticsearch
 		public bool? ForceSource { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("fragmenter")]
-		public Elastic.Clients.Elasticsearch.HighlighterFragmenter? Fragmenter { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("fragment_offset")]
 		public int? FragmentOffset { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fragment_size")]
 		public int? FragmentSize { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("fragmenter")]
+		public Elastic.Clients.Elasticsearch.HighlighterFragmenter? Fragmenter { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("highlight_query")]
@@ -130,11 +130,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal bool? ForceSourceValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.HighlighterFragmenter? FragmenterValue { get; private set; }
-
 		internal int? FragmentOffsetValue { get; private set; }
 
 		internal int? FragmentSizeValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.HighlighterFragmenter? FragmenterValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? HighlightQueryValue { get; private set; }
 
@@ -171,9 +171,9 @@ namespace Elastic.Clients.Elasticsearch
 		public HighlightFieldDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public HighlightFieldDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public HighlightFieldDescriptor<TDocument> ForceSource(bool? forceSource = true) => Assign(forceSource, (a, v) => a.ForceSourceValue = v);
-		public HighlightFieldDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
 		public HighlightFieldDescriptor<TDocument> FragmentOffset(int? fragmentOffset) => Assign(fragmentOffset, (a, v) => a.FragmentOffsetValue = v);
 		public HighlightFieldDescriptor<TDocument> FragmentSize(int? fragmentSize) => Assign(fragmentSize, (a, v) => a.FragmentSizeValue = v);
+		public HighlightFieldDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.HighlighterFragmenter? fragmenter) => Assign(fragmenter, (a, v) => a.FragmenterValue = v);
 		public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? highlightQuery)
 		{
 			HighlightQueryDescriptor = null;
@@ -246,12 +246,6 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteBooleanValue(ForceSourceValue.Value);
 			}
 
-			if (FragmenterValue is not null)
-			{
-				writer.WritePropertyName("fragmenter");
-				JsonSerializer.Serialize(writer, FragmenterValue, options);
-			}
-
 			if (FragmentOffsetValue.HasValue)
 			{
 				writer.WritePropertyName("fragment_offset");
@@ -262,6 +256,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("fragment_size");
 				writer.WriteNumberValue(FragmentSizeValue.Value);
+			}
+
+			if (FragmenterValue is not null)
+			{
+				writer.WritePropertyName("fragmenter");
+				JsonSerializer.Serialize(writer, FragmenterValue, options);
 			}
 
 			if (HighlightQueryDescriptor is not null)

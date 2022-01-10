@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class WordDelimiterGraphTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "word_delimiter_graph";
-		[JsonInclude]
 		[JsonPropertyName("adjust_offsets")]
 		public bool? AdjustOffsets { get; init; }
 
@@ -81,6 +78,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonPropertyName("stem_english_possessive")]
 		public bool? StemEnglishPossessive { get; init; }
 
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "word_delimiter_graph";
 		[JsonInclude]
 		[JsonPropertyName("type_table")]
 		public IReadOnlyCollection<string>? TypeTable { get; init; }

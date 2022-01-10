@@ -66,17 +66,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		public BoolQueryDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
 		public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
 		public BoolQueryDescriptor Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must) => Assign(must, (a, v) => a.MustValue = v);
 		public BoolQueryDescriptor MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot) => Assign(mustNot, (a, v) => a.MustNotValue = v);
 		public BoolQueryDescriptor Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should) => Assign(should, (a, v) => a.ShouldValue = v);
-		public BoolQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public BoolQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public BoolQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -110,16 +110,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ShouldValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

@@ -27,20 +27,20 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class StoreStats
 	{
 		[JsonInclude]
-		[JsonPropertyName("size")]
-		public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("size_in_bytes")]
-		public int SizeInBytes { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("reserved")]
 		public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("reserved_in_bytes")]
 		public int ReservedInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("size_in_bytes")]
+		public int SizeInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total_data_set_size")]

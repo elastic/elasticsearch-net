@@ -39,10 +39,6 @@ namespace Elastic.Clients.Elasticsearch
 		public long PrimaryTerm { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("result")]
-		public Elastic.Clients.Elasticsearch.Result Result { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_seq_no")]
 		public long SeqNo { get; init; }
 
@@ -57,5 +53,9 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]
 		public bool? ForcedRefresh { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("result")]
+		public Elastic.Clients.Elasticsearch.Result Result { get; init; }
 	}
 }

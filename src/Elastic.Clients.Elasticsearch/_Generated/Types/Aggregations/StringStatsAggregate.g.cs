@@ -27,39 +27,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class StringStatsAggregate : Aggregations.AggregateBase
 	{
 		[JsonInclude]
-		[JsonPropertyName("count")]
-		public long Count { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("min_length")]
-		public int? MinLength { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("max_length")]
-		public int? MaxLength { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("avg_length")]
 		public double? AvgLength { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("entropy")]
-		public double? Entropy { get; init; }
+		[JsonPropertyName("avg_length_as_string")]
+		public string? AvgLengthAsString { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("count")]
+		public long Count { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("distribution")]
 		public string? Distribution { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("min_length_as_string")]
-		public string? MinLengthAsString { get; init; }
+		[JsonPropertyName("entropy")]
+		public double? Entropy { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_length")]
+		public int? MaxLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_length_as_string")]
 		public string? MaxLengthAsString { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("avg_length_as_string")]
-		public string? AvgLengthAsString { get; init; }
+		[JsonPropertyName("min_length")]
+		public int? MinLength { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("min_length_as_string")]
+		public string? MinLengthAsString { get; init; }
 	}
 }

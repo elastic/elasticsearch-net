@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class IcuTokenizer : Analysis.TokenizerBase, ITokenFilterDefinitionsVariant, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "icu_tokenizer";
-		[JsonInclude]
 		[JsonPropertyName("rule_files")]
 		public string RuleFiles { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "icu_tokenizer";
 	}
 }

@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class PathHierarchyTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "path_hierarchy";
-		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
 		public int BufferSize { get; init; }
 
@@ -48,5 +45,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("skip")]
 		public int Skip { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "path_hierarchy";
 	}
 }

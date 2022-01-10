@@ -94,6 +94,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("keyed"))
+					{
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Keyed = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("min_doc_count"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -151,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -166,17 +177,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.TimeZone = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
 						}
 
 						continue;
@@ -251,6 +251,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Interval, options);
 			}
 
+			if (value.Keyed.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value.Keyed.Value);
+			}
+
 			if (value.MinDocCount.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -291,12 +297,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("time_zone");
 				writer.WriteStringValue(value.TimeZone);
-			}
-
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
 			}
 
 			writer.WriteEndObject();
@@ -346,6 +346,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Time? Interval { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("keyed")]
+		public bool? Keyed { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
 		public int? MinDocCount { get; set; }
 
@@ -367,15 +371,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
+		public ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("time_zone")]
 		public string? TimeZone { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
 	}
 
 	public sealed partial class DateHistogramAggregationDescriptor<TDocument> : DescriptorBase<DateHistogramAggregationDescriptor<TDocument>>
@@ -395,6 +395,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Time? IntervalValue { get; private set; }
 
+		internal bool? KeyedValue { get; private set; }
+
 		internal int? MinDocCountValue { get; private set; }
 
 		internal string? MissingValue { get; private set; }
@@ -405,11 +407,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? ParamsValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal string? TimeZoneValue { get; private set; }
-
-		internal bool? KeyedValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
@@ -417,13 +417,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal HistogramOrderDescriptor OrderDescriptor { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
 		internal Action<HistogramOrderDescriptor> OrderDescriptorAction { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
@@ -433,6 +433,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Time? fixedInterval) => Assign(fixedInterval, (a, v) => a.FixedIntervalValue = v);
 		public DateHistogramAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public DateHistogramAggregationDescriptor<TDocument> Interval(Elastic.Clients.Elasticsearch.Time? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
+		public DateHistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
 		public DateHistogramAggregationDescriptor<TDocument> Missing(string? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Time? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
@@ -458,21 +459,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public DateHistogramAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
-		public DateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public DateHistogramAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public DateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public DateHistogramAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public DateHistogramAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public DateHistogramAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -480,7 +481,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public DateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone) => Assign(timeZone, (a, v) => a.TimeZoneValue = v);
-		public DateHistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -538,6 +538,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, IntervalValue, options);
 			}
 
+			if (KeyedValue.HasValue)
+			{
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(KeyedValue.Value);
+			}
+
 			if (MinDocCountValue.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -586,7 +592,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{
@@ -598,12 +604,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("time_zone");
 				writer.WriteStringValue(TimeZoneValue);
-			}
-
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			writer.WriteEndObject();

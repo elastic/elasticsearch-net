@@ -27,11 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	public partial class TopMetrics
 	{
 		[JsonInclude]
-		[JsonPropertyName("sort")]
-		public IReadOnlyCollection<object>? Sort { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("metrics")]
 		public Dictionary<string, object>? Metrics { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort")]
+		public IReadOnlyCollection<object>? Sort { get; init; }
 	}
 }

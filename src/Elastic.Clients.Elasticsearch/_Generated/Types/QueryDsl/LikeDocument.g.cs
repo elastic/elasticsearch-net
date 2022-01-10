@@ -27,20 +27,20 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class LikeDocument
 	{
 		[JsonInclude]
-		[JsonPropertyName("doc")]
-		public object? Doc { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("fields")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_index")]
 		public Elastic.Clients.Elasticsearch.IndexName? Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("doc")]
+		public object? Doc { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("fields")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("per_field_analyzer")]

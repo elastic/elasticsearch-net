@@ -39,12 +39,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("window"))
+					if (reader.ValueTextEquals("keyed"))
 					{
-						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Window = value;
+							agg.Keyed = value;
 						}
 
 						continue;
@@ -61,12 +61,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("keyed"))
+					if (reader.ValueTextEquals("window"))
 					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
 						if (value is not null)
 						{
-							agg.Keyed = value;
+							agg.Window = value;
 						}
 
 						continue;
@@ -133,10 +133,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("moving_percentiles");
 			writer.WriteStartObject();
-			if (value.Window.HasValue)
+			if (value.Keyed.HasValue)
 			{
-				writer.WritePropertyName("window");
-				writer.WriteNumberValue(value.Window.Value);
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(value.Keyed.Value);
 			}
 
 			if (value.Shift.HasValue)
@@ -145,10 +145,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.Shift.Value);
 			}
 
-			if (value.Keyed.HasValue)
+			if (value.Window.HasValue)
 			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
+				writer.WritePropertyName("window");
+				writer.WriteNumberValue(value.Window.Value);
 			}
 
 			if (!string.IsNullOrEmpty(value.Format))
@@ -188,16 +188,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("window")]
-		public int? Window { get; set; }
+		[JsonPropertyName("keyed")]
+		public bool? Keyed { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shift")]
 		public int? Shift { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
+		[JsonPropertyName("window")]
+		public int? Window { get; set; }
 	}
 
 	public sealed partial class MovingPercentilesAggregationDescriptor : DescriptorBase<MovingPercentilesAggregationDescriptor>
@@ -207,11 +207,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal MovingPercentilesAggregationDescriptor(Action<MovingPercentilesAggregationDescriptor> configure) => configure.Invoke(this);
-		internal int? WindowValue { get; private set; }
+		internal bool? KeyedValue { get; private set; }
 
 		internal int? ShiftValue { get; private set; }
 
-		internal bool? KeyedValue { get; private set; }
+		internal int? WindowValue { get; private set; }
 
 		internal string? FormatValue { get; private set; }
 
@@ -221,9 +221,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public MovingPercentilesAggregationDescriptor Window(int? window) => Assign(window, (a, v) => a.WindowValue = v);
-		public MovingPercentilesAggregationDescriptor Shift(int? shift) => Assign(shift, (a, v) => a.ShiftValue = v);
 		public MovingPercentilesAggregationDescriptor Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
+		public MovingPercentilesAggregationDescriptor Shift(int? shift) => Assign(shift, (a, v) => a.ShiftValue = v);
+		public MovingPercentilesAggregationDescriptor Window(int? window) => Assign(window, (a, v) => a.WindowValue = v);
 		public MovingPercentilesAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy) => Assign(gapPolicy, (a, v) => a.GapPolicyValue = v);
 		public MovingPercentilesAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath) => Assign(bucketsPath, (a, v) => a.BucketsPathValue = v);
@@ -233,10 +233,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("moving_percentiles");
 			writer.WriteStartObject();
-			if (WindowValue.HasValue)
+			if (KeyedValue.HasValue)
 			{
-				writer.WritePropertyName("window");
-				writer.WriteNumberValue(WindowValue.Value);
+				writer.WritePropertyName("keyed");
+				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			if (ShiftValue.HasValue)
@@ -245,10 +245,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(ShiftValue.Value);
 			}
 
-			if (KeyedValue.HasValue)
+			if (WindowValue.HasValue)
 			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
+				writer.WritePropertyName("window");
+				writer.WriteNumberValue(WindowValue.Value);
 			}
 
 			if (!string.IsNullOrEmpty(FormatValue))

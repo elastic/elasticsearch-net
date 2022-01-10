@@ -27,20 +27,57 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class Hit<TDocument>
 	{
 		[JsonInclude]
-		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+		[JsonPropertyName("_explanation")]
+		public Elastic.Clients.Elasticsearch.Explanation? Explanation { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_id")]
 		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("_ignored")]
+		public IReadOnlyCollection<string>? Ignored { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_index")]
+		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_nested")]
+		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_node")]
+		public string? Node { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_primary_term")]
+		public long? PrimaryTerm { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_routing")]
+		public string? Routing { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("_score")]
 		public double? Score { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("_explanation")]
-		public Elastic.Clients.Elasticsearch.Explanation? Explanation { get; init; }
+		[JsonPropertyName("_seq_no")]
+		public long? SeqNo { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_shard")]
+		public string? Shard { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_source")]
+		[SourceConverter]
+		public TDocument? Source { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_version")]
+		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fields")]
@@ -51,53 +88,16 @@ namespace Elastic.Clients.Elasticsearch
 		public Dictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("ignored_field_values")]
+		public Dictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("inner_hits")]
 		public Dictionary<string, Elastic.Clients.Elasticsearch.InnerHitsResult>? InnerHits { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("matched_queries")]
 		public IReadOnlyCollection<string>? MatchedQueries { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_nested")]
-		public Elastic.Clients.Elasticsearch.NestedIdentity? Nested { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_ignored")]
-		public IReadOnlyCollection<string>? Ignored { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("ignored_field_values")]
-		public Dictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_shard")]
-		public string? Shard { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_node")]
-		public string? Node { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_routing")]
-		public string? Routing { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_source")]
-		[SourceConverter]
-		public TDocument? Source { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_seq_no")]
-		public long? SeqNo { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_primary_term")]
-		public long? PrimaryTerm { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("_version")]
-		public long? Version { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]

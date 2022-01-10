@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class KeywordTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "keyword";
-		[JsonInclude]
 		[JsonPropertyName("buffer_size")]
 		public int BufferSize { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "keyword";
 	}
 }

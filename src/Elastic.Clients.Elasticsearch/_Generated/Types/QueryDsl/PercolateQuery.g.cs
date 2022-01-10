@@ -90,9 +90,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal long? VersionValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
+
+		internal float? BoostValue { get; private set; }
 
 		public PercolateQueryDescriptor<TDocument> Document(object? document) => Assign(document, (a, v) => a.DocumentValue = v);
 		public PercolateQueryDescriptor<TDocument> Documents(IEnumerable<object>? documents) => Assign(documents, (a, v) => a.DocumentsValue = v);
@@ -104,8 +104,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public PercolateQueryDescriptor<TDocument> Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
 		public PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
 		public PercolateQueryDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public PercolateQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public PercolateQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public PercolateQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -153,16 +153,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

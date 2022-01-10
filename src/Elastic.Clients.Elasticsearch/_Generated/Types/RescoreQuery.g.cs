@@ -27,12 +27,12 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class RescoreQuery
 	{
 		[JsonInclude]
-		[JsonPropertyName("rescore_query")]
-		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("query_weight")]
 		public double? QueryWeight { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("rescore_query")]
+		public Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer Query { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("rescore_query_weight")]
@@ -50,9 +50,9 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
-
 		internal double? QueryWeightValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
 
 		internal double? RescoreQueryWeightValue { get; private set; }
 
@@ -62,6 +62,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
 
+		public RescoreQueryDescriptor<TDocument> QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a.QueryWeightValue = v);
 		public RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
@@ -83,12 +84,17 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
 		}
 
-		public RescoreQueryDescriptor<TDocument> QueryWeight(double? queryWeight) => Assign(queryWeight, (a, v) => a.QueryWeightValue = v);
 		public RescoreQueryDescriptor<TDocument> RescoreQueryWeight(double? rescoreQueryWeight) => Assign(rescoreQueryWeight, (a, v) => a.RescoreQueryWeightValue = v);
 		public RescoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.ScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (QueryWeightValue.HasValue)
+			{
+				writer.WritePropertyName("query_weight");
+				writer.WriteNumberValue(QueryWeightValue.Value);
+			}
+
 			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("rescore_query");
@@ -103,12 +109,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("rescore_query");
 				JsonSerializer.Serialize(writer, QueryValue, options);
-			}
-
-			if (QueryWeightValue.HasValue)
-			{
-				writer.WritePropertyName("query_weight");
-				writer.WriteNumberValue(QueryWeightValue.Value);
 			}
 
 			if (RescoreQueryWeightValue.HasValue)

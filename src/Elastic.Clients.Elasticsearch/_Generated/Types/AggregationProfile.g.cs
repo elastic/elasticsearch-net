@@ -31,6 +31,14 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.AggregationBreakdown Breakdown { get; init; }
 
 		[JsonInclude]
+		[JsonPropertyName("children")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfile>? Children { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("debug")]
+		public Union<Elastic.Clients.Elasticsearch.AggregationProfileDebug?, Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebug?>? Debug { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("description")]
 		public string Description { get; init; }
 
@@ -41,13 +49,5 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("type")]
 		public string Type { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("debug")]
-		public Union<Elastic.Clients.Elasticsearch.AggregationProfileDebug?, Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebug?>? Debug { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("children")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfile>? Children { get; init; }
 	}
 }

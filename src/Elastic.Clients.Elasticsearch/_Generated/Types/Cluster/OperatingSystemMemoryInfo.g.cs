@@ -27,6 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 	public partial class OperatingSystemMemoryInfo
 	{
 		[JsonInclude]
+		[JsonPropertyName("adjusted_total_in_bytes")]
+		public long? AdjustedTotalInBytes { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("free_in_bytes")]
 		public long FreeInBytes { get; init; }
 
@@ -45,9 +49,5 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Stats
 		[JsonInclude]
 		[JsonPropertyName("used_percent")]
 		public int UsedPercent { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("adjusted_total_in_bytes")]
-		public long? AdjustedTotalInBytes { get; init; }
 	}
 }

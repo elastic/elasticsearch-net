@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class StandardAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "standard";
-		[JsonInclude]
 		[JsonPropertyName("max_token_length")]
 		public int? MaxTokenLength { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "standard";
 	}
 }

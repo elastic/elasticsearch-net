@@ -27,14 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "limit";
-		[JsonInclude]
 		[JsonPropertyName("consume_all_tokens")]
 		public bool ConsumeAllTokens { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_token_count")]
 		public int MaxTokenCount { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "limit";
 	}
 }

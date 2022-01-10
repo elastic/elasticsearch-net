@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "script";
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase Script { get; set; }
+		public ScriptBase Script { get; set; }
 	}
 
 	public sealed partial class ScriptQueryDescriptor : DescriptorBase<ScriptQueryDescriptor>
@@ -40,39 +40,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		internal ScriptQueryDescriptor(Action<ScriptQueryDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.ScriptBase ScriptValue { get; private set; }
-
-		internal float? BoostValue { get; private set; }
+		internal ScriptBase ScriptValue { get; private set; }
 
 		internal string? QueryNameValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal float? BoostValue { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
-		public ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.ScriptBase script)
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+
+		public ScriptQueryDescriptor Script(ScriptBase script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public ScriptQueryDescriptor Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public ScriptQueryDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public ScriptQueryDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
 		}
 
-		public ScriptQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public ScriptQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public ScriptQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -84,7 +84,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else
 			{
@@ -92,16 +92,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

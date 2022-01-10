@@ -27,9 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class ShingleTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "shingle";
-		[JsonInclude]
 		[JsonPropertyName("filler_token")]
 		public string? FillerToken { get; init; }
 
@@ -52,5 +49,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 		[JsonInclude]
 		[JsonPropertyName("token_separator")]
 		public string? TokenSeparator { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "shingle";
 	}
 }

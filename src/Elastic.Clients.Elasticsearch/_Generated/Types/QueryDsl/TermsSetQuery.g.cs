@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 					if (property == "minimum_should_match_script")
 					{
-						variant.MinimumShouldMatchScript = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						variant.MinimumShouldMatchScript = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						continue;
 					}
 
@@ -54,15 +54,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 						continue;
 					}
 
-					if (property == "boost")
-					{
-						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-						continue;
-					}
-
 					if (property == "_name")
 					{
 						variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+						continue;
+					}
+
+					if (property == "boost")
+					{
+						variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
 						continue;
 					}
 				}
@@ -89,16 +89,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("terms");
 			JsonSerializer.Serialize(writer, value.Terms, options);
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
 			if (!string.IsNullOrEmpty(value.QueryName))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
 			}
 
 			writer.WriteEndObject();
@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("minimum_should_match_script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? MinimumShouldMatchScript { get; set; }
+		public ScriptBase? MinimumShouldMatchScript { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("terms")]
@@ -132,35 +132,35 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? MinimumShouldMatchScriptValue { get; private set; }
+		internal ScriptBase? MinimumShouldMatchScriptValue { get; private set; }
 
 		internal IEnumerable<string> TermsValue { get; private set; }
 
-		internal float? BoostValue { get; private set; }
-
 		internal string? QueryNameValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; private set; }
+		internal float? BoostValue { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; private set; }
+		internal ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; private set; }
+
+		internal Action<ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; private set; }
 
 		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
 		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
-		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.ScriptBase? minimumShouldMatchScript)
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(ScriptBase? minimumShouldMatchScript)
 		{
 			MinimumShouldMatchScriptDescriptor = null;
 			MinimumShouldMatchScriptDescriptorAction = null;
 			return Assign(minimumShouldMatchScript, (a, v) => a.MinimumShouldMatchScriptValue = v);
 		}
 
-		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(ScriptDescriptor descriptor)
 		{
 			MinimumShouldMatchScriptValue = null;
 			MinimumShouldMatchScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.MinimumShouldMatchScriptDescriptor = v);
 		}
 
-		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Action<ScriptDescriptor> configure)
 		{
 			MinimumShouldMatchScriptValue = null;
 			MinimumShouldMatchScriptDescriptorAction = null;
@@ -168,8 +168,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 
 		public TermsSetQueryDescriptor<TDocument> Terms(IEnumerable<string> terms) => Assign(terms, (a, v) => a.TermsValue = v);
-		public TermsSetQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
+		public TermsSetQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WritePropertyName(settings.Inferrer.Field(_field));
@@ -188,7 +188,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (MinimumShouldMatchScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("minimum_should_match_script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(MinimumShouldMatchScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(MinimumShouldMatchScriptDescriptorAction), options);
 			}
 			else if (MinimumShouldMatchScriptValue is not null)
 			{
@@ -198,16 +198,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("terms");
 			JsonSerializer.Serialize(writer, TermsValue, options);
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

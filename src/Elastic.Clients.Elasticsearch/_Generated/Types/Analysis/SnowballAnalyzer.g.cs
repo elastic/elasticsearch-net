@@ -27,18 +27,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis
 	public partial class SnowballAnalyzer : IAnalyzersVariant
 	{
 		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "snowball";
-		[JsonInclude]
-		[JsonPropertyName("version")]
-		public string? Version { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("language")]
 		public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]
 		public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("type")]
+		public string Type => "snowball";
+		[JsonInclude]
+		[JsonPropertyName("version")]
+		public string? Version { get; init; }
 	}
 }

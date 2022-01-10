@@ -27,6 +27,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	public partial class DiskUsage
 	{
 		[JsonInclude]
+		[JsonPropertyName("free_bytes")]
+		public long FreeBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("free_disk_percent")]
+		public double FreeDiskPercent { get; init; }
+
+		[JsonInclude]
 		[JsonPropertyName("path")]
 		public string Path { get; init; }
 
@@ -37,14 +45,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 		[JsonInclude]
 		[JsonPropertyName("used_bytes")]
 		public long UsedBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("free_bytes")]
-		public long FreeBytes { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("free_disk_percent")]
-		public double FreeDiskPercent { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("used_disk_percent")]

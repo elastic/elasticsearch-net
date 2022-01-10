@@ -51,12 +51,12 @@ namespace Elastic.Clients.Elasticsearch
 		public int FixedBitSetMemoryInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("index_writer_memory")]
-		public Elastic.Clients.Elasticsearch.ByteSize? IndexWriterMemory { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("index_writer_max_memory_in_bytes")]
 		public int? IndexWriterMaxMemoryInBytes { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("index_writer_memory")]
+		public Elastic.Clients.Elasticsearch.ByteSize? IndexWriterMemory { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("index_writer_memory_in_bytes")]
@@ -91,28 +91,28 @@ namespace Elastic.Clients.Elasticsearch
 		public int PointsMemoryInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("stored_memory")]
-		public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; init; }
-
-		[JsonInclude]
 		[JsonPropertyName("stored_fields_memory_in_bytes")]
 		public int StoredFieldsMemoryInBytes { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("terms_memory_in_bytes")]
-		public int TermsMemoryInBytes { get; init; }
+		[JsonPropertyName("stored_memory")]
+		public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("terms_memory")]
-		public Elastic.Clients.Elasticsearch.ByteSize? TermsMemory { get; init; }
+		[JsonPropertyName("term_vectors_memory_in_bytes")]
+		public int TermVectorsMemoryInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("term_vectory_memory")]
 		public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; init; }
 
 		[JsonInclude]
-		[JsonPropertyName("term_vectors_memory_in_bytes")]
-		public int TermVectorsMemoryInBytes { get; init; }
+		[JsonPropertyName("terms_memory")]
+		public Elastic.Clients.Elasticsearch.ByteSize? TermsMemory { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("terms_memory_in_bytes")]
+		public int TermsMemoryInBytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version_map_memory")]

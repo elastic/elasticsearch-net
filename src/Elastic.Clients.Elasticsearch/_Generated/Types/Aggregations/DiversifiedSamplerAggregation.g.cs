@@ -50,6 +50,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
+					if (reader.ValueTextEquals("field"))
+					{
+						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
+						if (value is not null)
+						{
+							agg.Field = value;
+						}
+
+						continue;
+					}
+
 					if (reader.ValueTextEquals("max_docs_per_value"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -63,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("script"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ScriptBase?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<ScriptBase?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Script = value;
@@ -78,17 +89,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						if (value is not null)
 						{
 							agg.ShardSize = value;
-						}
-
-						continue;
-					}
-
-					if (reader.ValueTextEquals("field"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Field = value;
 						}
 
 						continue;
@@ -139,6 +139,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.ExecutionHint, options);
 			}
 
+			if (value.Field is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, value.Field, options);
+			}
+
 			if (value.MaxDocsPerValue.HasValue)
 			{
 				writer.WritePropertyName("max_docs_per_value");
@@ -155,12 +161,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("shard_size");
 				writer.WriteNumberValue(value.ShardSize.Value);
-			}
-
-			if (value.Field is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, value.Field, options);
 			}
 
 			writer.WriteEndObject();
@@ -192,20 +192,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("field")]
+		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("max_docs_per_value")]
 		public int? MaxDocsPerValue { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.ScriptBase? Script { get; set; }
+		public ScriptBase? Script { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("shard_size")]
 		public int? ShardSize { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	}
 
 	public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> : DescriptorBase<DiversifiedSamplerAggregationDescriptor<TDocument>>
@@ -217,43 +217,45 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal DiversifiedSamplerAggregationDescriptor(Action<DiversifiedSamplerAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHintValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+
 		internal int? MaxDocsPerValueValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+		internal ScriptBase? ScriptValue { get; private set; }
 
 		internal int? ShardSizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; private set; }
+		internal ScriptDescriptor ScriptDescriptor { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
 
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
 		public DiversifiedSamplerAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
+		public DiversifiedSamplerAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
+		public DiversifiedSamplerAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DiversifiedSamplerAggregationDescriptor<TDocument> MaxDocsPerValue(int? maxDocsPerValue) => Assign(maxDocsPerValue, (a, v) => a.MaxDocsPerValueValue = v);
-		public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script)
+		public DiversifiedSamplerAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
 			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+		public DiversifiedSamplerAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
 			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
 		}
 
-		public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+		public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
@@ -261,8 +263,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public DiversifiedSamplerAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public DiversifiedSamplerAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public DiversifiedSamplerAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public DiversifiedSamplerAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
@@ -296,6 +296,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, ExecutionHintValue, options);
 			}
 
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
 			if (MaxDocsPerValueValue.HasValue)
 			{
 				writer.WritePropertyName("max_docs_per_value");
@@ -310,7 +316,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ScriptDescriptorAction is not null)
 			{
 				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 			else if (ScriptValue is not null)
 			{
@@ -322,12 +328,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("shard_size");
 				writer.WriteNumberValue(ShardSizeValue.Value);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
 			writer.WriteEndObject();
