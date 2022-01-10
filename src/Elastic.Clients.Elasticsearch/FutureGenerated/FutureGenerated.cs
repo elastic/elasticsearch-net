@@ -282,6 +282,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				switch (aggregateName)
 				{
 					case "terms":
+					case "sterms":
 					case "lterms":
 						{
 							if (TermsAggregateSerializationHelper.TryDeserialiseTermsAggregate(ref reader, options, out var agg))
@@ -767,6 +768,45 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 namespace Elastic.Clients.Elasticsearch
 {
+	public sealed partial class InlineScriptDescriptor
+	{
+		public InlineScriptDescriptor(string source) => SourceValue = source;
+	}
+
+	public sealed partial class ScriptDescriptor : DescriptorBase<ScriptDescriptor>
+	{
+		internal ScriptDescriptor(Action<ScriptDescriptor> configure) => configure.Invoke(this);
+
+		internal InlineScriptDescriptor InlineScriptDescriptor { get; private set; }
+
+		internal StoredScriptId StoredScriptId { get; private set; }
+
+		/// <summary>
+		/// A script that has been stored in Elasticsearch with the specified <paramref name="id"/>.
+		/// </summary>
+		public ScriptDescriptor Id(string id) => Assign(id, (a, v) => a.StoredScriptId = new StoredScriptId(v));
+
+		/// <summary>
+		/// An inline script to execute.
+		/// </summary>
+		public ScriptDescriptor Source(string script) => Assign(script, (a, v) => a.InlineScriptDescriptor = new InlineScriptDescriptor(v));
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (InlineScriptDescriptor is not null)
+			{
+				JsonSerializer.Serialize(writer, InlineScriptDescriptor, options);
+				return;
+			}
+
+			if (StoredScriptId is not null)
+			{
+				JsonSerializer.Serialize(writer, StoredScriptId, options);
+				return;
+			}
+		}
+	}
+
 	public partial class ElasticClient
 	{
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null)

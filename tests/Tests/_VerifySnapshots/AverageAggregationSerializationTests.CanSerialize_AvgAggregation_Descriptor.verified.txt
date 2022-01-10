@@ -1,0 +1,11 @@
+{
+  aggregations: {
+    test_average: {
+      avg: {
+        script: {
+          source: emit(Math.min(100, doc['grade'].value * 1.2))
+        }
+      }
+    }
+  }
+}

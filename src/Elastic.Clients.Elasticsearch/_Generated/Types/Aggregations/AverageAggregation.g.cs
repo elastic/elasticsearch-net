@@ -168,7 +168,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Script? ScriptValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.ScriptBase? ScriptValue { get; private set; }
+
+		internal Action<ScriptDescriptor>? ScriptDescriptorAction { get; private set; }
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
@@ -176,7 +178,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AverageAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
 		public AverageAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public AverageAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public AverageAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public AverageAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptBase? script) => Assign(script, (a, v) => a.ScriptValue = v);
+		public AverageAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure) => Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
 		public AverageAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
@@ -205,6 +208,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
 			}
 
 			writer.WriteEndObject();
