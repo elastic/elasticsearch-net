@@ -83,17 +83,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("missing"))
-					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.Missing?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Missing = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("precision"))
 					{
 						var value = JsonSerializer.Deserialize<double?>(ref reader, options);
@@ -179,12 +168,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.MaxDocCount.Value);
 			}
 
-			if (value.Missing is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, value.Missing, options);
-			}
-
 			if (value.Precision.HasValue)
 			{
 				writer.WritePropertyName("precision");
@@ -238,10 +221,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public long? MaxDocCount { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("missing")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Missing? Missing { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("precision")]
 		public double? Precision { get; set; }
 
@@ -265,8 +244,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal long? MaxDocCountValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.Missing? MissingValue { get; private set; }
-
 		internal double? PrecisionValue { get; private set; }
 
 		internal string? ValueTypeValue { get; private set; }
@@ -284,7 +261,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public RareTermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public RareTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include) => Assign(include, (a, v) => a.IncludeValue = v);
 		public RareTermsAggregationDescriptor<TDocument> MaxDocCount(long? maxDocCount) => Assign(maxDocCount, (a, v) => a.MaxDocCountValue = v);
-		public RareTermsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.Missing? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public RareTermsAggregationDescriptor<TDocument> Precision(double? precision) => Assign(precision, (a, v) => a.PrecisionValue = v);
 		public RareTermsAggregationDescriptor<TDocument> ValueType(string? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
 		public RareTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -336,12 +312,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("max_doc_count");
 				writer.WriteNumberValue(MaxDocCountValue.Value);
-			}
-
-			if (MissingValue is not null)
-			{
-				writer.WritePropertyName("missing");
-				JsonSerializer.Serialize(writer, MissingValue, options);
 			}
 
 			if (PrecisionValue.HasValue)
