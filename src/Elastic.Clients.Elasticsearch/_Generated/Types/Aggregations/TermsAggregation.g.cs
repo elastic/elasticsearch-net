@@ -151,7 +151,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					if (reader.ValueTextEquals("order"))
 					{
-						var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder?>(ref reader, options);
+						var value = JsonSerializer.Deserialize<IEnumerable<TermsOrder>?>(ref reader, options);
 						if (value is not null)
 						{
 							agg.Order = value;
@@ -418,7 +418,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("order")]
-		public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? Order { get; set; }
+		public IEnumerable<TermsOrder>? Order { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
@@ -468,7 +468,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; private set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? OrderValue { get; private set; }
+		internal IEnumerable<TermsOrder>? OrderValue { get; private set; }
 
 		internal ScriptBase? ScriptValue { get; private set; }
 
@@ -503,7 +503,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public TermsAggregationDescriptor<TDocument> Missing(object? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true) => Assign(missingBucket, (a, v) => a.MissingBucketValue = v);
 		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder) => Assign(missingOrder, (a, v) => a.MissingOrderValue = v);
-		public TermsAggregationDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationOrder? order) => Assign(order, (a, v) => a.OrderValue = v);
+		public TermsAggregationDescriptor<TDocument> Order(IEnumerable<TermsOrder>? order) => Assign(order, (a, v) => a.OrderValue = v);
+		public TermsAggregationDescriptor<TDocument> Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure) => Assign(configure, (a, v) => a.OrderValue = v?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value);
 		public TermsAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
