@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class InlineScript : ScriptBase
+	public partial class InlineScript : ScriptBase, ISelfSerializable
 	{
 		[JsonInclude]
 		[JsonPropertyName("lang")]
@@ -37,6 +37,34 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("source")]
 		public string Source { get; set; }
+
+		void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+
+			if (Language is not null)
+			{
+				writer.WritePropertyName("lang");
+				JsonSerializer.Serialize(writer, Language, options);
+			}
+
+			if (Options is not null)
+			{
+				writer.WritePropertyName("options");
+				JsonSerializer.Serialize(writer, Options, options);
+			}
+
+			writer.WritePropertyName("source");
+			writer.WriteStringValue(Source);
+
+			if (Params is not null)
+			{
+				writer.WritePropertyName("params");
+				SourceSerialisation.SerializeParams(Params, writer, settings);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 
 	public sealed partial class InlineScriptDescriptor : DescriptorBase<InlineScriptDescriptor>

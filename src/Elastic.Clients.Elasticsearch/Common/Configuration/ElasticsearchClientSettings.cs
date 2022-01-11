@@ -94,6 +94,7 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
 		private readonly SerializerBase _sourceSerializer;
 		private bool _experimentalEnableSerializeNullInferredValues;
+		private ExperimentalSettings _experimentalSettings = new ();
 
 		private bool _defaultDisableAllInference;
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -142,7 +143,9 @@ namespace Elastic.Clients.Elasticsearch
 		FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
 		SerializerBase IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
 
-		 bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
+		ExperimentalSettings IElasticsearchClientSettings.Experimental => _experimentalSettings;
+
+		bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
 
 		/// <summary>
 		///     The default index to use for a request when no index has been explicitly specified
@@ -164,6 +167,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		public TConnectionSettings ExperimentalEnableSerializeNullInferredValues(bool enabled = true) =>
 			Assign(enabled, (a, v) => a._experimentalEnableSerializeNullInferredValues = v);
+
+		public TConnectionSettings Experimental(ExperimentalSettings settings) =>
+			Assign(settings, (a, v) => a._experimentalSettings = v);
 
 		/// <summary>
 		///     Disables automatic Id inference for given CLR types.
