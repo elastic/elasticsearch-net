@@ -98,8 +98,7 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		states.Buckets.Items.Count.Should().BeGreaterThan(0);
 		foreach (var item in states.Buckets.Items)
 		{
-			//item.Key.Should().NotBeNullOrEmpty();
-			item.KeyAsString.Should().NotBeNullOrEmpty();
+			item.Key.Should().NotBeNullOrEmpty();
 			item.DocCount.Should().BeGreaterOrEqualTo(1);
 		}
 		states.Meta.Should().NotBeNull().And.HaveCount(1);
