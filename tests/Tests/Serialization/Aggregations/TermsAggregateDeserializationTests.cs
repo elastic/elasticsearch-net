@@ -143,7 +143,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 
 		search.Aggregations.Should().HaveCount(1);
 
-		var termsAgg = search.Aggregations.Terms("my-agg-name");
+		var termsAgg = search.Aggregations.Terms<double>("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 		termsAgg.Buckets.Items.Should().HaveCount(2);
