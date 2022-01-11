@@ -136,10 +136,8 @@ namespace Elastic.Clients.Elasticsearch
 					if (item.Value is null)
 					{
 						writer.WriteNullValue();
-						return;
 					}
-
-					if (_valueConverter != null)
+					else if (_valueConverter != null)
 						_valueConverter.Write(writer, item.Value, options);
 					else
 						JsonSerializer.Serialize(writer, item.Value, item.Value.GetType(), options);

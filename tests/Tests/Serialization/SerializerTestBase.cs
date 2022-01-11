@@ -71,6 +71,46 @@ public abstract class VerifySerializerTestBase : VerifyBase
 	}
 }
 
+public abstract class InstanceSerializerTestBase
+{
+	protected readonly SerializerBase _requestResponseSerializer;
+	protected readonly SerializerBase _sourceSerializer;
+	protected readonly IElasticsearchClientSettings _settings;
+
+	protected InstanceSerializerTestBase(ElasticsearchClientSettings settings, bool applyDomainSettings = false)
+	{
+		if (applyDomainSettings)
+			settings.ApplyDomainSettings();
+
+		var client = new ElasticClient(settings);
+
+		_requestResponseSerializer = client.RequestResponseSerializer;
+		_sourceSerializer = client.SourceSerializer;
+
+		_settings = client.ElasticsearchClientSettings;
+	}
+
+	protected string SerializeAndGetJsonString<T>(T data)
+	{
+		var stream = new MemoryStream();
+		_requestResponseSerializer.Serialize(data, stream);
+		stream.Position = 0;
+		var reader = new StreamReader(stream);
+		return reader.ReadToEnd();
+	}
+
+	protected string SerializeAndGetJsonString<T>(T data, ElasticsearchClientSettings settings)
+	{
+		var client = new ElasticClient(settings);
+		var serializer = client.RequestResponseSerializer;
+		var stream = new MemoryStream();
+		serializer.Serialize(data, stream);
+		stream.Position = 0;
+		var reader = new StreamReader(stream);
+		return reader.ReadToEnd();
+	}
+}
+
 public abstract class SerializerTestBase
 {
 	protected static readonly SerializerBase _requestResponseSerializer;
