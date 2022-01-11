@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -17,6 +16,8 @@ namespace Tests.Aggregations.Bucket;
 public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 {
 	public TermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+	protected override bool VerifyJson => true;
 
 	protected override object AggregationJson => new
 	{
@@ -33,16 +34,16 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 				size = 5,
 				shard_size = 100,
 				execution_hint = "map",
-				//missing = "n/a",
-				//script = new
-				//{
-				//	source = "'State of Being: '+_value",
-				//},
-				//order = new object[]
-				//{
-				//	new { _key = "asc" },
-				//	new { _count = "desc" }
-				//}
+				missing = "n/a",
+				script = new
+				{
+					source = "'State of Being: '+_value",
+				},
+				order = new object[]
+				{
+					new { _key = "asc" },
+					new { _count = "desc" }
+				}
 			}
 		}
 	};
@@ -54,12 +55,12 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			.Size(5)
 			.ShardSize(100)
 			.ExecutionHint(TermsAggregationExecutionHint.Map)
-			//.Missing("n/a")
-			//.Script(ss => ss.Source("'State of Being: '+_value"))
-			//.Order(o => o
-			//	.KeyAscending()
-			//	.CountDescending()
-			//)
+			.Missing("n/a")
+			.Script(ss => ss.Source("'State of Being: '+_value"))
+			.Order(o => o
+				.KeyAscending()
+				.CountDescending()
+			)
 			.Meta(m => m
 				.Add("foo", "bar")
 			)
@@ -73,13 +74,13 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 			Size = 5,
 			ShardSize = 100,
 			ExecutionHint = TermsAggregationExecutionHint.Map,
-			//Missing = "n/a",
-			//Script = new InlineScript("'State of Being: '+_value"),
-			//Order = new List<TermsAggregationOrder>
-			//{
-			//		TermsOrder.KeyAscending,
-			//		TermsOrder.CountDescending
-			//},
+			Missing = "n/a",
+			Script = new InlineScript("'State of Being: '+_value"),
+			Order = new List<TermsOrder>
+			{
+				TermsOrder.KeyAscending,
+				TermsOrder.CountDescending
+			},
 			Meta = new Dictionary<string, object>
 			{
 				{ "foo", "bar" }
@@ -94,12 +95,13 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		states.DocCountErrorUpperBound.Should().HaveValue();
 		states.SumOtherDocCount.Should().BeGreaterOrEqualTo(0);
 		states.Buckets.Should().NotBeNull();
-		//states.Buckets.Count.Should().BeGreaterThan(0);
-		//foreach (var item in states.Buckets)
-		//{
-		//	item.Key.Should().NotBeNullOrEmpty();
-		//	item.DocCount.Should().BeGreaterOrEqualTo(1);
-		//}
+		states.Buckets.Items.Count.Should().BeGreaterThan(0);
+		foreach (var item in states.Buckets.Items)
+		{
+			//item.Key.Should().NotBeNullOrEmpty();
+			item.KeyAsString.Should().NotBeNullOrEmpty();
+			item.DocCount.Should().BeGreaterOrEqualTo(1);
+		}
 		states.Meta.Should().NotBeNull().And.HaveCount(1);
 		states.Meta["foo"].Should().Be("bar");
 	}
