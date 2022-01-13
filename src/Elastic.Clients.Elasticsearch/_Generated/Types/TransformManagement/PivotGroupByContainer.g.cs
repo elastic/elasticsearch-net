@@ -54,18 +54,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				return new PivotGroupByContainer(variant);
 			}
 
-			if (propertyName == "geotile_grid")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation?>(ref reader, options);
-				return new PivotGroupByContainer(variant);
-			}
-
-			if (propertyName == "histogram")
-			{
-				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-				return new PivotGroupByContainer(variant);
-			}
-
 			if (propertyName == "terms")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
@@ -82,12 +70,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			switch (value.Variant)
 			{
 				case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregation variant:
-					JsonSerializer.Serialize(writer, variant, options);
-					break;
-				case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 				case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant:
@@ -134,10 +116,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
 		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public void GeotileGrid(Aggregations.GeoTileGridAggregation variant) => Set(variant, "geotile_grid");
-		public void GeotileGrid(Action<Aggregations.GeoTileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
-		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
-		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
 		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
 		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -161,24 +139,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			{
 				var descriptor = new Aggregations.DateHistogramAggregationDescriptor<TDocument>();
 				((Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "geotile_grid")
-			{
-				var descriptor = new Aggregations.GeoTileGridAggregationDescriptor<TDocument>();
-				((Action<Aggregations.GeoTileGridAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "histogram")
-			{
-				var descriptor = new Aggregations.HistogramAggregationDescriptor<TDocument>();
-				((Action<Aggregations.HistogramAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
 				JsonSerializer.Serialize(writer, descriptor, options);
 				Finalise();
 				return;
