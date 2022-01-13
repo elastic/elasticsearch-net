@@ -24,14 +24,14 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		var termsAgg = search.Aggregations.StringTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
-		termsAgg.Buckets.Items.Should().HaveCount(2);
+		termsAgg.Buckets.Should().HaveCount(2);
 
-		var firstBucket = termsAgg.Buckets.Items.First();
+		var firstBucket = termsAgg.Buckets.First();
 		firstBucket.Key.Should().Be("electronic");
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountError.Should().Be(2);
 
-		var secondBucket = termsAgg.Buckets.Items.Last();
+		var secondBucket = termsAgg.Buckets.Last();
 		secondBucket.Key.Should().Be("rock");
 		secondBucket.DocCount.Should().Be(3);
 		secondBucket.DocCountError.Should().BeNull();
@@ -52,15 +52,15 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		var termsAgg = search.Aggregations.LongTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
-		termsAgg.Buckets.Items.Should().HaveCount(2);
+		termsAgg.Buckets.Should().HaveCount(2);
 
-		var firstBucket = termsAgg.Buckets.Items.First();
+		var firstBucket = termsAgg.Buckets.First();
 		firstBucket.Key.Should().Be(10);
 		firstBucket.KeyAsString.Should().Be("10");
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountError.Should().Be(2);
 
-		var secondBucket = termsAgg.Buckets.Items.Last();
+		var secondBucket = termsAgg.Buckets.Last();
 		secondBucket.Key.Should().Be(15);
 		secondBucket.KeyAsString.Should().Be("15");
 		secondBucket.DocCount.Should().Be(3);
@@ -82,15 +82,15 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		var termsAgg = search.Aggregations.DoubleTerms("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
-		termsAgg.Buckets.Items.Should().HaveCount(2);
+		termsAgg.Buckets.Should().HaveCount(2);
 
-		var firstBucket = termsAgg.Buckets.Items.First();
+		var firstBucket = termsAgg.Buckets.First();
 		firstBucket.Key.Should().Be(10.5);
 		firstBucket.KeyAsString.Should().Be("10.5");
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountError.Should().Be(2);
 
-		var secondBucket = termsAgg.Buckets.Items.Last();
+		var secondBucket = termsAgg.Buckets.Last();
 		secondBucket.Key.Should().Be(15.5);
 		secondBucket.KeyAsString.Should().Be("15.5");
 		secondBucket.DocCount.Should().Be(3);
@@ -114,7 +114,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
 
-		var firstBucket = termsAgg.Buckets.Items.First();
+		var firstBucket = termsAgg.Buckets.First();
 		firstBucket.Key.Should().HaveCount(2);
 		firstBucket.Key.First().Should().BeOfType<string>().Subject.Should().Be("key-1");
 		firstBucket.Key.Last().Should().BeOfType<string>().Subject.Should().Be("key-2");
@@ -122,7 +122,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountErrorUpperBound.Should().Be(2);
 
-		var secondBucket = termsAgg.Buckets.Items.Last();
+		var secondBucket = termsAgg.Buckets.Last();
 		secondBucket.Key.Should().HaveCount(2);
 		secondBucket.Key.First().Should().BeOfType<string>().Subject.Should().Be("key-3");
 		secondBucket.Key.Last().Should().BeOfType<string>().Subject.Should().Be("key-4");
@@ -146,15 +146,15 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 		var termsAgg = search.Aggregations.Terms<double>("my-agg-name");
 		termsAgg.DocCountErrorUpperBound.Should().Be(10);
 		termsAgg.SumOtherDocCount.Should().Be(200);
-		termsAgg.Buckets.Items.Should().HaveCount(2);
+		termsAgg.Buckets.Should().HaveCount(2);
 
-		var firstBucket = termsAgg.Buckets.Items.First();
+		var firstBucket = termsAgg.Buckets.First();
 		firstBucket.Key.Should().Be(10.5);
 		firstBucket.KeyAsString.Should().Be("10.5");
 		firstBucket.DocCount.Should().Be(5);
 		firstBucket.DocCountError.Should().Be(2);
 
-		var secondBucket = termsAgg.Buckets.Items.Last();
+		var secondBucket = termsAgg.Buckets.Last();
 		secondBucket.Key.Should().Be(15.5);
 		secondBucket.KeyAsString.Should().Be("15.5");
 		secondBucket.DocCount.Should().Be(3);
@@ -179,7 +179,7 @@ public class TermsAggregateDeserializationTests : SerializerTestBase
 			var agg = search.Aggregations.EmptyTerms("my-agg-name");
 			agg.DocCountErrorUpperBound.Should().Be(10);
 			agg.SumOtherDocCount.Should().Be(200);
-			agg.Buckets.Items.Should().HaveCount(0);
+			agg.Buckets.Should().HaveCount(0);
 		}
 	}
 
