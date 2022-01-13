@@ -50,17 +50,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("percents"))
 					{
 						var value = JsonSerializer.Deserialize<IEnumerable<double>?>(ref reader, options);
@@ -150,12 +139,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Hdr, options);
 			}
 
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
-			}
-
 			if (value.Percents is not null)
 			{
 				writer.WritePropertyName("percents");
@@ -210,10 +193,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("percents")]
 		public IEnumerable<double>? Percents { get; set; }
 
@@ -230,8 +209,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal PercentilesAggregationDescriptor(Action<PercentilesAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; private set; }
-
-		internal bool? KeyedValue { get; private set; }
 
 		internal IEnumerable<double>? PercentsValue { get; private set; }
 
@@ -278,7 +255,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Assign(configure, (a, v) => a.HdrDescriptorAction = v);
 		}
 
-		public PercentilesAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public PercentilesAggregationDescriptor<TDocument> Percents(IEnumerable<double>? percents) => Assign(percents, (a, v) => a.PercentsValue = v);
 		public PercentilesAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? tDigest)
 		{
@@ -345,12 +321,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("hdr");
 				JsonSerializer.Serialize(writer, HdrValue, options);
-			}
-
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			if (PercentsValue is not null)

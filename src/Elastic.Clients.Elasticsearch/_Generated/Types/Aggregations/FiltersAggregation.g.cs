@@ -50,17 +50,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("other_bucket"))
 					{
 						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
@@ -128,12 +117,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, value.Filters, options);
 			}
 
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
-			}
-
 			if (value.OtherBucket.HasValue)
 			{
 				writer.WritePropertyName("other_bucket");
@@ -175,10 +158,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? Filters { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("other_bucket")]
 		public bool? OtherBucket { get; set; }
 
@@ -196,8 +175,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal FiltersAggregationDescriptor(Action<FiltersAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FiltersValue { get; private set; }
 
-		internal bool? KeyedValue { get; private set; }
-
 		internal bool? OtherBucketValue { get; private set; }
 
 		internal string? OtherBucketKeyValue { get; private set; }
@@ -211,7 +188,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
 		public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filters) => Assign(filters, (a, v) => a.FiltersValue = v);
-		public FiltersAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public FiltersAggregationDescriptor<TDocument> OtherBucket(bool? otherBucket = true) => Assign(otherBucket, (a, v) => a.OtherBucketValue = v);
 		public FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? otherBucketKey) => Assign(otherBucketKey, (a, v) => a.OtherBucketKeyValue = v);
 		public FiltersAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -245,12 +221,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("filters");
 				JsonSerializer.Serialize(writer, FiltersValue, options);
-			}
-
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			if (OtherBucketValue.HasValue)
