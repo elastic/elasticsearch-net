@@ -72,17 +72,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						continue;
 					}
 
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("min_doc_count"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -195,12 +184,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				writer.WriteNumberValue(value.Interval.Value);
 			}
 
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
-			}
-
 			if (value.MinDocCount.HasValue)
 			{
 				writer.WritePropertyName("min_doc_count");
@@ -270,10 +253,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public double? Interval { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("min_doc_count")]
 		public int? MinDocCount { get; set; }
 
@@ -307,8 +286,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal double? IntervalValue { get; private set; }
 
-		internal bool? KeyedValue { get; private set; }
-
 		internal int? MinDocCountValue { get; private set; }
 
 		internal double? MissingValue { get; private set; }
@@ -339,7 +316,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public HistogramAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
 		public HistogramAggregationDescriptor<TDocument> Interval(double? interval) => Assign(interval, (a, v) => a.IntervalValue = v);
-		public HistogramAggregationDescriptor<TDocument> Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public HistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
 		public HistogramAggregationDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
 		public HistogramAggregationDescriptor<TDocument> Offset(double? offset) => Assign(offset, (a, v) => a.OffsetValue = v);
@@ -428,12 +404,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("interval");
 				writer.WriteNumberValue(IntervalValue.Value);
-			}
-
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
 			}
 
 			if (MinDocCountValue.HasValue)

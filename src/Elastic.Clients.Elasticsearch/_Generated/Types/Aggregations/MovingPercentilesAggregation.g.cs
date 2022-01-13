@@ -39,17 +39,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
 				{
-					if (reader.ValueTextEquals("keyed"))
-					{
-						var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-						if (value is not null)
-						{
-							agg.Keyed = value;
-						}
-
-						continue;
-					}
-
 					if (reader.ValueTextEquals("shift"))
 					{
 						var value = JsonSerializer.Deserialize<int?>(ref reader, options);
@@ -133,12 +122,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("moving_percentiles");
 			writer.WriteStartObject();
-			if (value.Keyed.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(value.Keyed.Value);
-			}
-
 			if (value.Shift.HasValue)
 			{
 				writer.WritePropertyName("shift");
@@ -188,10 +171,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		[JsonInclude]
-		[JsonPropertyName("keyed")]
-		public bool? Keyed { get; set; }
-
-		[JsonInclude]
 		[JsonPropertyName("shift")]
 		public int? Shift { get; set; }
 
@@ -207,8 +186,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		internal MovingPercentilesAggregationDescriptor(Action<MovingPercentilesAggregationDescriptor> configure) => configure.Invoke(this);
-		internal bool? KeyedValue { get; private set; }
-
 		internal int? ShiftValue { get; private set; }
 
 		internal int? WindowValue { get; private set; }
@@ -221,7 +198,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		internal Dictionary<string, object>? MetaValue { get; private set; }
 
-		public MovingPercentilesAggregationDescriptor Keyed(bool? keyed = true) => Assign(keyed, (a, v) => a.KeyedValue = v);
 		public MovingPercentilesAggregationDescriptor Shift(int? shift) => Assign(shift, (a, v) => a.ShiftValue = v);
 		public MovingPercentilesAggregationDescriptor Window(int? window) => Assign(window, (a, v) => a.WindowValue = v);
 		public MovingPercentilesAggregationDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
@@ -233,12 +209,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("moving_percentiles");
 			writer.WriteStartObject();
-			if (KeyedValue.HasValue)
-			{
-				writer.WritePropertyName("keyed");
-				writer.WriteBooleanValue(KeyedValue.Value);
-			}
-
 			if (ShiftValue.HasValue)
 			{
 				writer.WritePropertyName("shift");
