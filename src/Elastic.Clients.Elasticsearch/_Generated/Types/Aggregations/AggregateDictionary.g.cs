@@ -67,7 +67,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate? ReverseNested(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate? Global(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate? Filter(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate? Children(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate? Parent(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate? Sampler(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate? UnmappedSampler(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregate? GeoHashGrid(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GeoHashGridAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregate? GeoTileGrid(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GeoTileGridAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate? Range(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate?>(key);
@@ -89,7 +92,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.RateAggregate? Rate(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate? CumulativeCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate? MatrixStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate?>(key);
-		public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate? Children(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate? GeoLine(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate?>(key);
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : AggregateBase => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;

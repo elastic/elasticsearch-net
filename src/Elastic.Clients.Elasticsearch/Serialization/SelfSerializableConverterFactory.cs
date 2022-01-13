@@ -26,9 +26,41 @@ namespace Elastic.Clients.Elasticsearch
 
 			public SelfSerializableJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-			public override ISelfSerializable? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+			public override ISelfSerializable? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => default;
 
 			public override void Write(Utf8JsonWriter writer, ISelfSerializable value, JsonSerializerOptions options) => value.Serialize(writer, options, _settings);
+		}
+	}
+
+	internal sealed class SelfTwoWaySerializableConverterFactory : JsonConverterFactory
+	{
+		private readonly SelfSerializableJsonConverter _converter;
+
+		public SelfTwoWaySerializableConverterFactory(IElasticsearchClientSettings settings) => _converter = new SelfSerializableJsonConverter(settings);
+
+		public override bool CanConvert(Type typeToConvert)
+		{
+			var canSerialize = typeof(ISelfTwoWaySerializable).IsAssignableFrom(typeToConvert);
+			return canSerialize;
+		}
+
+		public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
+			_converter;
+
+		private class SelfSerializableJsonConverter : JsonConverter<ISelfTwoWaySerializable>
+		{
+			private readonly IElasticsearchClientSettings _settings;
+
+			public SelfSerializableJsonConverter(IElasticsearchClientSettings settings) => _settings = settings;
+
+			public override ISelfTwoWaySerializable? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+			{
+				var instance = (ISelfTwoWaySerializable)Activator.CreateInstance(typeToConvert, true);
+				instance.Deserialize(ref reader, options, _settings);
+				return instance;
+			}
+
+			public override void Write(Utf8JsonWriter writer, ISelfTwoWaySerializable value, JsonSerializerOptions options) => value.Serialize(writer, options, _settings);
 		}
 	}
 

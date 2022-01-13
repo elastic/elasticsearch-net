@@ -2,71 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Threading.Tasks;
-using Elastic.Clients.JsonNetSerializer;
-using VerifyXunit;
-
 namespace Tests.Serialization.Scripting;
-
-[UsesVerify]
-public class ScriptParamsSerializationTests : InstanceSerializerTestBase
-{
-	public ScriptParamsSerializationTests()
-		: base(new ElasticsearchClientSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), sourceSerializer: JsonNetSerializer.Default)) { }
-
-	[U]
-	public async Task SerializesParamsUsingRequestResponseSerializer_WhenUseSourceSerializerForScriptParameters_IsTrue()
-	{
-		// In this test, we expect the null to be serialized by the default JsonNetSerializer
-
-		var script = new InlineScript("source")
-		{
-			Params = new System.Collections.Generic.Dictionary<string, object> { { "person", new Person { Forename = "has_null_surname", Surname = null } } }
-		};
-
-		var json = SerializeAndGetJsonString(script, new ElasticsearchClientSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), sourceSerializer: JsonNetSerializer.Default)
-				.Experimental(new ExperimentalSettings { UseSourceSerializerForScriptParameters = true }));
-
-		await Verifier.VerifyJson(json);
-	}
-
-	[U]
-	public async Task SerializesParamsUsingRequestResponseSerializer_WhenUseSourceSerializerForScriptParameters_IsFalse()
-	{
-		// In this test, we expect the nulls to be ignore when the setting is disabled so the request response serializer is used.
-
-		var script = new InlineScript("source")
-		{
-			Params = new System.Collections.Generic.Dictionary<string, object> { { "person", new Person { Forename = "has_null_surname", Surname = null } } }
-		};
-
-		var json = SerializeAndGetJsonString(script);
-
-		await Verifier.VerifyJson(json);
-	}
-
-	[U]
-	public async Task SerializesRawJson()
-	{
-		// In this test, we expect the nulls to be ignore when the setting is disabled so the request response serializer is used.
-
-		var script = new InlineScript("source")
-		{
-			Params = new System.Collections.Generic.Dictionary<string, object> { { "person", new RawJsonString(@"{ ""forename"": ""raw_json"" }") } }
-		};
-
-		var json = SerializeAndGetJsonString(script);
-
-		await Verifier.VerifyJson(json);
-	}
-
-	private class Person
-	{
-		public string Forename { get; set; }
-		public string Surname { get; set; }
-	}
-}
 
 public class ScriptSerialisationTests : SerializerTestBase
 {
@@ -94,9 +30,9 @@ public class ScriptSerialisationTests : SerializerTestBase
 		AssertInlineScript(inlineScript);
 	}
 
-	private void AssertInlineScript(InlineScript inlineScript)
+	private static void AssertInlineScript(InlineScript inlineScript)
 	{
-		inlineScript.Language.Should().Be(BuiltinScriptLanguage.Painless);
+		inlineScript.Language.Should().Be(ScriptLanguage.Painless);
 		inlineScript.Source.Should().Be("doc['field_name'].value * params.factor");
 		inlineScript.Options.Should().HaveCount(1);
 		inlineScript.Options.TryGetValue("option0", out var optionValue).Should().BeTrue();

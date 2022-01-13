@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		[JsonInclude]
 		[JsonPropertyName("distribution")]
-		public string? Distribution { get; init; }
+		public Dictionary<string, double>? Distribution { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("entropy")]
