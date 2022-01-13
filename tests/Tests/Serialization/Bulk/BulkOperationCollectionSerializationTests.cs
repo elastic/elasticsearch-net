@@ -211,19 +211,19 @@ namespace Tests.Serialization.Bulk
 					}),
 					BulkUpdateOperationFactory.WithScript("123", new InlineScript("ctx._source.counter += params.param1")
 					{
-						Language = BuiltinScriptLanguage.Painless,
+						Language = ScriptLanguage.Painless,
 						Params = new Dictionary<string, object>{ { "param1", 1 } },
 						Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
 					}),
 					BulkUpdateOperationFactory.WithScript("123", new InlineScript("ctx._source.counter += params.param1")
 					{
-						Language = BuiltinScriptLanguage.Painless,
+						Language = ScriptLanguage.Painless,
 						Params = new Dictionary<string, object>{ { "param1", 1 } },
 						Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
 					}, Inferrable.Instance),
 					BulkUpdateOperationFactory.WithScript("123", "configured-index", new InlineScript("ctx._source.counter += params.param1")
 					{
-						Language = BuiltinScriptLanguage.Painless,
+						Language = ScriptLanguage.Painless,
 						Params = new Dictionary<string, object>{ { "param1", 1 } },
 						Options = new Dictionary<string, string>{ { "option1", "optionvalue1" } }
 					}, Inferrable.Instance),

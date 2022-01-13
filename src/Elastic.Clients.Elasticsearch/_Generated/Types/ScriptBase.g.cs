@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
-				JsonSerializer.Serialize(writer, ParamsValue, options);
+				SourceSerialisation.SerializeParams(ParamsValue, writer, settings);
 			}
 
 			writer.WriteEndObject();

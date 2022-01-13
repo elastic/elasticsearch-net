@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class ChildrenAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregateBucket>
+	public partial class ChildrenAggregate : Aggregations.SingleBucketAggregateBase
 	{
 	}
 }
