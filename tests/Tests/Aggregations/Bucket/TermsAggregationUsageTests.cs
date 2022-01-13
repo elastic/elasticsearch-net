@@ -95,8 +95,8 @@ public class TermsAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClust
 		states.DocCountErrorUpperBound.Should().HaveValue();
 		states.SumOtherDocCount.Should().BeGreaterOrEqualTo(0);
 		states.Buckets.Should().NotBeNull();
-		states.Buckets.Items.Count.Should().BeGreaterThan(0);
-		foreach (var item in states.Buckets.Items)
+		states.Buckets.Count.Should().BeGreaterThan(0);
+		foreach (var item in states.Buckets)
 		{
 			item.Key.Should().NotBeNullOrEmpty();
 			item.DocCount.Should().BeGreaterOrEqualTo(1);

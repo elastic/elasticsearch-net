@@ -26,8 +26,5 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	public abstract partial class MultiBucketAggregateBase<TBucket> : Aggregations.AggregateBase
 	{
-		[JsonInclude]
-		[JsonPropertyName("buckets")]
-		public Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket> Buckets { get; init; }
 	}
 }
