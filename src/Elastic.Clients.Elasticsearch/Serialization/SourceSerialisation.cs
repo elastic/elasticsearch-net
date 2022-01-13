@@ -21,10 +21,7 @@ public struct RawJsonString
 internal class RawJsonConverter : JsonConverter<RawJsonString>
 {
 	public override RawJsonString Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-	public override void Write(Utf8JsonWriter writer, RawJsonString value, JsonSerializerOptions options)
-	{
-		writer.WriteRawValue(value.Json);
-	}
+	public override void Write(Utf8JsonWriter writer, RawJsonString value, JsonSerializerOptions options) => writer.WriteRawValue(value.Json);
 }
 #endif
 
@@ -43,6 +40,18 @@ internal static class SourceSerialisation
 
 		_ = settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options);
 		JsonSerializer.Serialize(writer, toSerialize, options);
+	}
+
+	public static void DeserializeParams<T>(ref Utf8JsonReader reader, IElasticsearchClientSettings settings)
+	{
+		if (settings.Experimental.UseSourceSerializerForScriptParameters)
+		{
+			Deserialize<T>(ref reader, settings);
+			return;
+		}
+
+		_ = settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options);
+		JsonSerializer.Deserialize<T>(ref reader, options);
 	}
 
 	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, IElasticsearchClientSettings settings) =>

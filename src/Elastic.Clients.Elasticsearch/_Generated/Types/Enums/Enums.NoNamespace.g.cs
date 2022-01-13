@@ -73,21 +73,6 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial struct BuiltinHighlighterType
-	{
-		public const string Unified = "unified";
-		public const string Plain = "plain";
-		public const string FastVector = "fvh";
-	}
-
-	public partial struct BuiltinScriptLanguage
-	{
-		public const string Painless = "painless";
-		public const string Mustache = "mustache";
-		public const string Java = "java";
-		public const string Expression = "expression";
-	}
-
 	[JsonConverter(typeof(DistanceUnitConverter))]
 	public enum DistanceUnit
 	{
@@ -487,6 +472,13 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	public partial struct HighlighterType
+	{
+		public const string Unified = "unified";
+		public const string Plain = "plain";
+		public const string FastVector = "fvh";
+	}
+
 	[JsonConverter(typeof(LevelConverter))]
 	public enum Level
 	{
@@ -660,6 +652,14 @@ namespace Elastic.Clients.Elasticsearch
 
 			writer.WriteNullValue();
 		}
+	}
+
+	public partial struct ScriptLanguage
+	{
+		public const string Painless = "painless";
+		public const string Mustache = "mustache";
+		public const string Java = "java";
+		public const string Expression = "expression";
 	}
 
 	[JsonConverter(typeof(SearchTypeConverter))]

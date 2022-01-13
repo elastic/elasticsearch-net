@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("flags")]
-		public string? Flags { get; set; }
+		public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? Flags { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("fuzzy_max_expansions")]
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		internal IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; private set; }
 
-		internal string? FlagsValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; private set; }
 
 		internal int? FuzzyMaxExpansionsValue { get; private set; }
 
@@ -123,7 +123,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
+		public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
 		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);

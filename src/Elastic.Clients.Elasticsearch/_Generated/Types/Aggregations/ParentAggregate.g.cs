@@ -15,21 +15,16 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class ScriptLanguage : Union<Elastic.Clients.Elasticsearch.BuiltinScriptLanguage?, string?>
+	public partial class ParentAggregate : Aggregations.SingleBucketAggregateBase
 	{
-		public ScriptLanguage(Elastic.Clients.Elasticsearch.BuiltinScriptLanguage? item) : base(item)
-		{
-		}
-
-		public ScriptLanguage(string? item) : base(item)
-		{
-		}
 	}
 }

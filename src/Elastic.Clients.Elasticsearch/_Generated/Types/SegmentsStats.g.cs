@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("max_unsafe_auto_id_timestamp")]
-		public int MaxUnsafeAutoIdTimestamp { get; init; }
+		public long MaxUnsafeAutoIdTimestamp { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory")]
