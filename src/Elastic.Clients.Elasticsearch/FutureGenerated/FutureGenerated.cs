@@ -711,7 +711,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return false;
 		}
 
-		public Elastic.Clients.Elasticsearch.Aggregations.AvgAggregate? Average(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AvgAggregate?>(key);
+		public AvgAggregate? Average(string key) => TryGet<AvgAggregate?>(key);
 
 		public TermsAggregate<string> Terms(string key) => Terms<string>(key);
 
@@ -732,51 +732,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						DocCountErrorUpperBound = empty.DocCountErrorUpperBound,
 						SumOtherDocCount = empty.SumOtherDocCount
 					};
-				//case StringTermsAggregate stringTerms:
-				//	var buckets = stringTerms.Buckets.Items.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key }).ToReadOnlyCollection();
-				//	return new TermsAggregate<TKey>
-				//	{
-				//		Buckets = new Buckets<TermsBucket<TKey>>(buckets),
-				//		Meta = stringTerms.Meta,
-				//		DocCountErrorUpperBound = stringTerms.DocCountErrorUpperBound,
-				//		SumOtherDocCount = stringTerms.SumOtherDocCount
-				//	};
-				//case DoubleTermsAggregate doubleTerms:
-				//	var doubleTermsBuckets = doubleTerms.Buckets.Items.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
-				//	return new TermsAggregate<TKey>
-				//	{
-				//		Buckets = new Buckets<TermsBucket<TKey>>(doubleTermsBuckets),
-				//		Meta = doubleTerms.Meta,
-				//		DocCountErrorUpperBound = doubleTerms.DocCountErrorUpperBound,
-				//		SumOtherDocCount = doubleTerms.SumOtherDocCount
-				//	};
-				//case LongTermsAggregate longTerms:
-				//	var longTermsBuckets = longTerms.Buckets.Items.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = b.Key, KeyAsString = b.Key.ToString() }).ToReadOnlyCollection();
-				//	return new TermsAggregate<TKey>
-				//	{
-				//		Buckets = new Buckets<TermsBucket<TKey>>(longTermsBuckets),
-				//		Meta = longTerms.Meta,
-				//		DocCountErrorUpperBound = longTerms.DocCountErrorUpperBound,
-				//		SumOtherDocCount = longTerms.SumOtherDocCount
-				//	};
+				case StringTermsAggregate stringTerms:
+					var buckets = stringTerms.Buckets.Items.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.Key }).ToReadOnlyCollection();
+					return new TermsAggregate<TKey>
+					{
+						Buckets = new Buckets<TermsBucket<TKey>>(buckets),
+						Meta = stringTerms.Meta,
+						DocCountErrorUpperBound = stringTerms.DocCountErrorUpperBound,
+						SumOtherDocCount = stringTerms.SumOtherDocCount
+					};
+				case DoubleTermsAggregate doubleTerms:
+					var doubleTermsBuckets = doubleTerms.Buckets.Items.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.KeyAsString }).ToReadOnlyCollection();
+					return new TermsAggregate<TKey>
+					{
+						Buckets = new Buckets<TermsBucket<TKey>>(doubleTermsBuckets),
+						Meta = doubleTerms.Meta,
+						DocCountErrorUpperBound = doubleTerms.DocCountErrorUpperBound,
+						SumOtherDocCount = doubleTerms.SumOtherDocCount
+					};
+				case LongTermsAggregate longTerms:
+					var longTermsBuckets = longTerms.Buckets.Items.Select(b => new TermsBucket<TKey> { DocCount = b.DocCount, DocCountError = b.DocCountError, Key = GetKeyFromBucketKey<TKey>(b.Key), KeyAsString = b.KeyAsString }).ToReadOnlyCollection();
+					return new TermsAggregate<TKey>
+					{
+						Buckets = new Buckets<TermsBucket<TKey>>(longTermsBuckets),
+						Meta = longTerms.Meta,
+						DocCountErrorUpperBound = longTerms.DocCountErrorUpperBound,
+						SumOtherDocCount = longTerms.SumOtherDocCount
+					};
 
 					// TODO - Multi-terms
 			}
 
 			return null;
-		}
-
-		private IEnumerable<TermsBucket<TKey>> GetKeyedBuckets<TKey>(IEnumerable<TermsBucketBase> items)
-		{
-			var buckets = items.Cast<TermsBucket<object>>();
-
-			foreach (var bucket in buckets)
-				yield return new TermsBucket<TKey>()
-				{
-					Key = GetKeyFromBucketKey<TKey>(bucket.Key),
-					KeyAsString = bucket.KeyAsString,
-					DocCount = bucket.DocCount
-				};
 		}
 
 		private static TKey GetKeyFromBucketKey<TKey>(object key) =>

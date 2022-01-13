@@ -19,6 +19,7 @@ internal class DefaultSourceSerializer : SystemTextJsonSourceSerializerBase
 					new DictionaryConverter(),
 					new UnionConverter(),
 					new RelationNameConverter(settings),
+					new LazyDocumentConverter(settings),
 			},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
