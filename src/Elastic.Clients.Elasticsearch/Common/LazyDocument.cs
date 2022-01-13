@@ -14,6 +14,7 @@ namespace Elastic.Clients.Elasticsearch
 	/// <summary>
 	/// A lazily deserialized document.
 	/// </summary>
+	[JsonConverter(typeof(LazyDocumentConverter))]
 	public class LazyDocument
 	{
 		private readonly SerializerBase _sourceSerializer;

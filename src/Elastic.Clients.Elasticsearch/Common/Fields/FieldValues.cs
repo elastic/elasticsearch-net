@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		private readonly Inferrer _inferrer;
 
-		protected FieldValues() { }
+		private FieldValues() { }
 
 		internal FieldValues(Inferrer inferrer, IDictionary<string, LazyDocument> container)
 			: base(container) => _inferrer = inferrer;
