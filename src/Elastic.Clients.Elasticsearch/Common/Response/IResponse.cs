@@ -8,7 +8,7 @@ namespace Elastic.Clients.Elasticsearch
 	/// <summary>
 	/// A response from Elasticsearch
 	/// </summary>
-	public interface IResponse : ITransportResponse
+	public interface IResponse : ITransportResponse<ServerError>
 	{
 		/// <summary>
 		/// A lazily computed, human readable string representation of what happened during a request for both successful and
@@ -47,17 +47,17 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonIgnore]
 		Exception? OriginalException { get; }
 
-		/// <summary>
-		/// If the response results in an error on Elasticsearch's side an <pre>error</pre> element will be returned, this is
-		/// mapped to
-		/// <see cref="ServerError" /> in Elastic.Clients.Elasticsearch.
-		/// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
-		/// <para>
-		/// You can also configure the client to always throw an <see cref="TransportException" /> using
-		/// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
-		/// </para>
-		/// </summary>
-		[JsonIgnore]
-		ServerError? ServerError { get; }
+		///// <summary>
+		///// If the response results in an error on Elasticsearch's side an <pre>error</pre> element will be returned, this is
+		///// mapped to
+		///// <see cref="ServerError" /> in Elastic.Clients.Elasticsearch.
+		///// <para>Possibly set when <see cref="IsValid" /> is false, depending on the cause of the error</para>
+		///// <para>
+		///// You can also configure the client to always throw an <see cref="TransportException" /> using
+		///// <see cref="ITransportConfiguration.ThrowExceptions" /> if the response is not valid
+		///// </para>
+		///// </summary>
+		//[JsonIgnore]
+		//ServerError? ServerError { get; }
 	}
 }

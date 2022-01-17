@@ -13,37 +13,15 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public abstract class ResponseBase : IResponse
 	{
-		private Error? _error;
 		private IApiCallDetails? _originalApiCall;
-		private ServerError? _serverError;
-		private int? _statusCode;
+		private readonly ServerError? _serverError;
+
+		protected ResponseBase() { }
+
+		protected ResponseBase(ServerError serverError) => _serverError = serverError;
 
 		/// <summary> Returns useful information about the request(s) that were part of this API call. </summary>
 		public virtual IApiCallDetails? ApiCall => _originalApiCall;
-
-		// TODO: Had to make this public to allow STJ to deserialise it - Can we avoid this?
-		[JsonInclude]
-		[JsonPropertyName("error")]
-		public Error? Error
-		{
-			get => _error;
-			internal set
-			{
-				_error = value;
-				_serverError = null;
-			}
-		}
-
-		[JsonPropertyName("status")]
-		public int? StatusCode
-		{
-			get => _statusCode;
-			set
-			{
-				_statusCode = value;
-				_serverError = null;
-			}
-		}
 
 		/// <summary>
 		/// A collection of warnings returned from Elasticsearch.
@@ -103,27 +81,17 @@ namespace Elastic.Clients.Elasticsearch
 		/// <inheritdoc />
 		public Exception? OriginalException => ApiCall?.OriginalException;
 
-		/// <inheritdoc />
-		public ServerError? ServerError
-		{
-			get
-			{
-				if (_serverError is not null)
-					return _serverError;
-				if (_error is null)
-					return null; // TODO: Would prefer to return a representation of no error, rather than null
-
-				_serverError = new ServerError(_error, _statusCode);
-				return _serverError;
-			}
-		}
-
+		
 		[JsonIgnore]
 		IApiCallDetails? ITransportResponse.ApiCall
 		{
 			get => _originalApiCall;
 			set => _originalApiCall = value;
 		}
+
+		public ServerError ServerError => _serverError;
+
+		ServerError ITransportResponse<ServerError>.ServerError { get => _serverError; init => _serverError = value; }
 
 		// TODO: We need nullable annotations here ideally as exception is not null when the return value is true.
 		public bool TryGetOriginalException(out Exception? exception)

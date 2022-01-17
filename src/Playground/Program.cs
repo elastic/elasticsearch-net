@@ -22,16 +22,19 @@ namespace Playground
 
 		private static async Task Main()
 		{
-			var uri = new Uri(@"https://example.com/level%5F1/../level%5F2", new UriCreationOptions
-			{
-				DangerousDisablePathAndQueryCanonicalization = true
-			});
-			var uriString = uri.AbsoluteUri;
+			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
+				//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
+				.ServerCertificateValidationCallback((a, b, c, d) => true)
+				.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))
+				.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
 
-			// uri = new Uri(@"https://example.com/level%5F1/../level%5F2");
-			var a = uri.GetComponents(UriComponents.Path, UriFormat.SafeUnescaped);
+			var result = await client.PingAsync();
 
-			Console.ReadKey();
+			//var health = await client.Cluster.HealthAsync(new Elastic.Clients.Elasticsearch.Cluster.ClusterHealthRequest("non-exist"));
+
+
+
+			//Console.ReadKey();
 
 			//var ec = new Client();
 
@@ -110,17 +113,17 @@ namespace Playground
 
 
 
-			var pool = new SingleNodeConnectionPool(new Uri("https://localhost:9600"));
-			var client = new ElasticClient(new ElasticsearchClientSettings(pool)
-				.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
-				.ServerCertificateValidationCallback((a, b, c, d) => true)
-			    .DefaultMappingFor<PersonV2>(p => p.IndexName("people-test")));
-			//.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
+			//var pool = new SingleNodeConnectionPool(new Uri("https://localhost:9600"));
+			//var client = new ElasticClient(new ElasticsearchClientSettings(pool)
+			//	.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
+			//	.ServerCertificateValidationCallback((a, b, c, d) => true)
+			//    .DefaultMappingFor<PersonV2>(p => p.IndexName("people-test")));
+			////.CertificateFingerprint("3842926c8a7ef04bb24ecaf8a4c44b7e24a416d682f3b818cf553fde39470451"));
 
 
-			var put = await client.IndexAsync(new PersonV2 { FirstName = "Steve" }, i => i.Id("1234657890"));
+			//var put = await client.IndexAsync(new PersonV2 { FirstName = "Steve" }, i => i.Id("1234657890"));
 
-			var get = await client.GetAsync<PersonV2>(Infer.Index<PersonV2>(), "1234657890");
+			//var get = await client.GetAsync<PersonV2>(Infer.Index<PersonV2>(), "1234657890");
 
 
 			var people = new PersonV2[]
@@ -150,20 +153,26 @@ namespace Playground
 
 			
 
-			var request = await client.BulkAsync(b => b
-				.Index("people-test")
-				.Create(new Person { FirstName = "Rhiannon" })
-				.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
-				.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
-				.Update(BulkUpdateOperationFactory.WithPartial(200, new Person { LastName = "Gordon" }))
-				.Update(BulkUpdateOperationFactory.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
-				.Delete(100));
+			//var request = await client.BulkAsync(b => b
+			//	.Index("people-test")
+			//	.Create(new Person { FirstName = "Rhiannon" })
+			//	.Create(new Person { FirstName = "Rhiannon" }, c => c.Id(200))
+			//	.Index(new Person { FirstName = "Steve" }, i => i.Id(100))
+			//	.Update(BulkUpdateOperationFactory.WithPartial(200, new Person { LastName = "Gordon" }))
+			//	.Update(BulkUpdateOperationFactory.WithScript(200, Infer.Index<Person>(), new InlineScript("ctx._source.lastName = 'Gordon'")))
+			//	.Delete(100));
 
-			client.Search<Person>(s => s
-				.Size(1)
-				.From(0)
-				.Aggregations(a => a.Terms("my-terms", t => t.Field("firstName")))
-				.Query(q => q.MatchAll()));
+			//client.Search<Person>(s => s
+			//	.Size(1)
+			//	.From(0)
+			//	.Aggregations(a => a.Terms("my-terms", t => t.Field("firstName")))
+			//	.Query(q => q.MatchAll()));
+
+			var countResult = await client.CountAsync<Person>(d => d.Query(new QueryContainer(new MatchQuery
+			{
+				Field = "name",
+				Query = "NEST"
+			})));
 
 			var serialiser = client.RequestResponseSerializer;
 
