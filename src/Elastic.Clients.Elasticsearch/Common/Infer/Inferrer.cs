@@ -108,7 +108,8 @@ namespace Elastic.Clients.Elasticsearch
 			//if (att != null && !att.RelationName.IsNullOrEmpty())
 			//	typeName = att.RelationName;
 			//else
-			//	typeName = type.Name.ToLowerInvariant();
+
+			typeName = type.Name.ToLowerInvariant();
 
 			_relationNames.TryAdd(type, typeName);
 			return typeName;
@@ -408,7 +409,17 @@ namespace Elastic.Clients.Elasticsearch
 
 		public RelationNameConverter(IElasticsearchClientSettings settings) => _settings = settings;
 
-		public override RelationName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override RelationName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType == JsonTokenType.String)
+			{
+				RelationName relationName = reader.GetString();
+				return relationName;
+			}
+
+			return null;
+		}
+
 		public override void Write(Utf8JsonWriter writer, RelationName value, JsonSerializerOptions options)
 		{
 			if (value is null)
