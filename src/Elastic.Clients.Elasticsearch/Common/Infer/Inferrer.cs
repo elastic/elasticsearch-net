@@ -104,11 +104,11 @@ namespace Elastic.Clients.Elasticsearch
 				return typeName;
 			}
 
-			var att = ElasticsearchTypeAttribute.From(type);
-			if (att != null && !att.RelationName.IsNullOrEmpty())
-				typeName = att.RelationName;
-			else
-				typeName = type.Name.ToLowerInvariant();
+			//var att = ElasticsearchTypeAttribute.From(type);
+			//if (att != null && !att.RelationName.IsNullOrEmpty())
+			//	typeName = att.RelationName;
+			//else
+			//	typeName = type.Name.ToLowerInvariant();
 
 			_relationNames.TryAdd(type, typeName);
 			return typeName;
@@ -504,11 +504,18 @@ namespace Elastic.Clients.Elasticsearch
 		PropertyMapping CreatePropertyMapping(MemberInfo memberInfo);
 	}
 
+	public interface IPropertyMapping
+	{
+		string Name { get; }
+
+		bool Ignore { get; }
+	}
+
 	public class PropertyMapping : IPropertyMapping
 	{
 		public static PropertyMapping Ignored = new() { Ignore = true };
 
-		/// <inheritdoc />
+		///// <inheritdoc />
 		public bool Ignore { get; set; }
 
 		/// <inheritdoc />
@@ -534,16 +541,18 @@ namespace Elastic.Clients.Elasticsearch
 
 		private static PropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
-			var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
-			var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
-			var ignore = memberInfo.GetCustomAttribute<IgnoreForMappingAttribute>(true);
-			if (ignore == null && propertyName == null && dataMemberProperty == null)
+			var jsonPropertyName = memberInfo.GetCustomAttribute<JsonPropertyNameAttribute>(true);
+			//var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
+
+			//var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
+			//var ignore = memberInfo.GetCustomAttribute<IgnoreForMappingAttribute>(true);
+
+			if (jsonPropertyName == null)
 				return null;
 
 			return new PropertyMapping
 			{
-				Name = propertyName?.Name ?? dataMemberProperty?.Name,
-				Ignore = ignore != null || propertyName != null && propertyName.Ignore
+				Name = jsonPropertyName?.Name
 			};
 		}
 	}
@@ -581,9 +590,9 @@ namespace Elastic.Clients.Elasticsearch
 			if (_settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 				return propertyMapping.Name;
 
-			var att = ElasticsearchPropertyAttributeBase.From(info);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				return att.Name;
+			//var att = ElasticsearchPropertyAttributeBase.From(info);
+			//if (att != null && !att.Name.IsNullOrEmpty())
+			//	return att.Name;
 
 			return _settings.PropertyMappingProvider?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
 		}

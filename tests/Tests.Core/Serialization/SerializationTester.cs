@@ -13,72 +13,10 @@ using System.IO;
 
 namespace Tests.Core.Serialization
 {
-	public class SerializationResult
-	{
-		public string DiffFromExpected { get; set; }
-		public string Serialized { get; set; }
-		public bool Success { get; set; }
-
-		private string DiffFromExpectedExcerpt =>
-			string.IsNullOrEmpty(DiffFromExpected)
-				? string.Empty
-				: DiffFromExpected?.Substring(0, DiffFromExpected.Length > 4896 ? 4896 : DiffFromExpected.Length);
-
-		public override string ToString()
-		{
-			var message = $"{GetType().Name} success: {Success}";
-			if (Success)
-				return message;
-
-			message += Environment.NewLine;
-			message += DiffFromExpectedExcerpt;
-			return message;
-		}
-	}
-
-	public class DeserializationResult<T> : SerializationResult
-	{
-		public T Result { get; set; }
-
-		public override string ToString()
-		{
-			var s = $"Deserialization has result: {Result != null}";
-			s += Environment.NewLine;
-			s += base.ToString();
-			return s;
-		}
-	}
-
-	public class RoundTripResult<T> : DeserializationResult<T>
-	{
-		public int Iterations { get; set; }
-
-		public override string ToString()
-		{
-			var s = $"RoundTrip: {Iterations.ToOrdinal()} iteration";
-			s += Environment.NewLine;
-			s += base.ToString();
-			return s;
-		}
-	}
-
-	public static class JsonDocumentExtensions
-	{
-		public static string ToJsonString(this JsonDocument jdoc)
-		{
-			using (var stream = new MemoryStream())
-			{
-				var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = true });
-				jdoc.WriteTo(writer);
-				writer.Flush();
-				return Encoding.UTF8.GetString(stream.ToArray());
-			}
-		}
-	}
-
 	public class SerializationTester
 	{
 		public SerializationTester(IElasticClient client) => Client = client;
+
 		// TODO: This needs a fair bit of cleanup and refactoring. Code is hacked for initial testing using STJ
 
 		public static SerializationTester Default { get; } = new(TestClient.DefaultInMemoryClient);
@@ -183,12 +121,29 @@ namespace Tests.Core.Serialization
 			switch (expectedJson)
 			{
 				case string s:
-					return JsonDocument.Parse(Encoding.UTF8.GetBytes(s));
+					return ParseString(s);
 				case byte[] utf8:
 					return JsonDocument.Parse(utf8);
 				default:
 					var json = ExpectedJsonString(expectedJson, preserveNullInFromJson);
 					return JsonDocument.Parse(Encoding.UTF8.GetBytes(json));
+			}
+
+			// STJ is not as accepting as Json.NET for parsing plain strings
+			// We try to parse the string assuming it may be valid JSON, if that throws an exception, we serialise the string to JSON first
+			JsonDocument ParseString(string s)
+			{
+				try
+				{
+					var jsonDoc = JsonDocument.Parse(s);
+					return jsonDoc;
+				}
+				catch (JsonException)
+				{
+					var options = ExpectedJsonSerializerSettings(preserveNullInFromJson);
+					s = JsonSerializer.Serialize(expectedJson, options);
+					return JsonDocument.Parse(s);
+				}
 			}
 		}
 
@@ -221,8 +176,6 @@ namespace Tests.Core.Serialization
 			//	? ArrayMatches((JArray)expectedJsonDocument, result)
 			//	: TokenMatches(expectedJsonDocument, result);
 		}
-
-		
 
 		private string SerializeUsingClientDefault<T>(T @object) =>
 			@object switch
