@@ -4,8 +4,12 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
+
+
+
 
 internal class DefaultSourceSerializer : SystemTextJsonSourceSerializerBase
 {
