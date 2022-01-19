@@ -110,29 +110,35 @@ public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 		Factor = f;
 		var interval = match.Groups["interval"].Success ? match.Groups["interval"].Value : null;
 
-		switch (interval)
+		if (!string.IsNullOrEmpty(interval))
 		{
-			case "m":
-				Interval = TimeUnit.Minutes;
-				break;
-			case "s":
-				Interval = TimeUnit.Seconds;
-				break;
-			case "ms":
-				Interval = TimeUnit.Milliseconds;
-				break;
-			case "ns":
-				Interval = TimeUnit.Nanoseconds;
-				break;
-			case "h":
-				Interval = TimeUnit.Hours;
-				break;
-			case "d":
-				Interval = TimeUnit.Days;
-				break;
-			case "micros":
-				Interval = TimeUnit.Microseconds;
-				break;
+			switch (interval.ToLowerInvariant())
+			{
+				case "m":
+					Interval = TimeUnit.Minutes;
+					break;
+				case "s":
+					Interval = TimeUnit.Seconds;
+					break;
+				case "ms":
+					Interval = TimeUnit.Milliseconds;
+					break;
+				case "ns":
+					Interval = TimeUnit.Nanoseconds;
+					break;
+				case "h":
+					Interval = TimeUnit.Hours;
+					break;
+				case "d":
+					Interval = TimeUnit.Days;
+					break;
+				case "micros":
+					Interval = TimeUnit.Microseconds;
+					break;
+				case "nanos":
+					Interval = TimeUnit.Nanoseconds;
+					break;
+			}
 		}
 
 		if (!Interval.HasValue)
