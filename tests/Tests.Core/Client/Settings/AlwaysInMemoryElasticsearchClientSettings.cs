@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
 
 namespace Tests.Core.Client.Settings
@@ -18,11 +19,13 @@ namespace Tests.Core.Client.Settings
 		public AlwaysInMemoryElasticsearchClientSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
+			IPropertyMappingProvider propertyMappingProvider = null,
 			int port = 9200
 		)
 			: base(
 				createPool,
 				sourceSerializerFactory,
+				propertyMappingProvider,
 				true,
 				port
 			)

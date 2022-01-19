@@ -241,12 +241,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 								return true;
 							}
 						}
-						//else if (readerCopy.TokenType == JsonTokenType.StartArray)
-						//{
-						//	var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
-						//	aggregate = agg;
-						//	return true;
-						//}
+						else if (readerCopy.TokenType == JsonTokenType.StartArray)
+						{
+							var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
+							aggregate = agg;
+							return true;
+						}
 						else
 						{
 							throw new JsonException("Unhandled token type when parsing the terms aggregate response");
@@ -1100,6 +1100,7 @@ namespace Elastic.Clients.Elasticsearch
 	public enum FieldType
 	{
 		Date,
+		Text
 	}
 
 	public partial class CountRequest<TDocument> : CountRequest

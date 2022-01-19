@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch
 		///     documents.
 		///     By default, the internal serializer will be used to serializer all types.
 		/// </summary>
-		public delegate SerializerBase SourceSerializerFactory(SerializerBase builtIn,
+		public delegate SourceSerializerBase SourceSerializerFactory(SerializerBase builtIn,
 			IElasticsearchClientSettings values);
 
 		/// <summary> The default user agent for Elastic.Clients.Elasticsearch </summary>
@@ -56,20 +56,21 @@ namespace Elastic.Clients.Elasticsearch
 		public ElasticsearchClientSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 
 		public ElasticsearchClientSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
-			: this(connectionPool, null, sourceSerializer)
-		{
-		}
+			: this(connectionPool, null, sourceSerializer) { }
 
-		public ElasticsearchClientSettings(IConnectionPool connectionPool, IConnection connection) : this(
+		public ElasticsearchClientSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+
+		public ElasticsearchClientSettings(IConnectionPool connectionPool, IConnection connection, SourceSerializerFactory sourceSerializer) : this(
 			connectionPool,
-			connection, null)
+			connection, sourceSerializer, null)
 		{
 		}
 
 		public ElasticsearchClientSettings(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			SourceSerializerFactory sourceSerializer) : base(connectionPool, connection, sourceSerializer)
+			SourceSerializerFactory sourceSerializer,
+			IPropertyMappingProvider propertyMappingProvider) : base(connectionPool, connection, sourceSerializer, propertyMappingProvider)
 		{
 		}
 	}
@@ -103,14 +104,15 @@ namespace Elastic.Clients.Elasticsearch
 		protected ElasticsearchClientSettingsBase(
 			IConnectionPool connectionPool,
 			IConnection connection,
-			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory)
+			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
+			IPropertyMappingProvider propertyMappingProvider)
 			: base(connectionPool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
 		{
 			var defaultSerializer = new DefaultRequestResponseSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? new DefaultSourceSerializer(this);
-			//var serializerAsMappingProvider = sourceSerializer as IPropertyMappingProvider;
 
-			_propertyMappingProvider = /*propertyMappingProvider ?? serializerAsMappingProvider ??*/ new PropertyMappingProvider();
+			// TODO - Is the second condition ever true?
+			_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new PropertyMappingProvider();
 
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
 			_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source");

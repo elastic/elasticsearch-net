@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
@@ -20,8 +21,44 @@ namespace Playground
 
 		}
 
+		public class UserType
+		{
+			[MyConverter]
+			public string? Name { get; set; }
+		}
+
+		internal sealed class MyConverterAttribute : JsonConverterAttribute
+		{
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8603 // Possible null reference return.
+			public override JsonConverter CreateConverter(Type typeToConvert) => (JsonConverter)Activator.CreateInstance(typeof(MyConverterConverter<>).MakeGenericType(typeToConvert));
+#pragma warning restore CS8603 // Possible null reference return.
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+		}
+
+		internal sealed class MyConverterConverter<T> : JsonConverter<T>
+		{
+			public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
+			
+			public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+			{
+				var converter = options.GetConverter(typeof(T));
+
+				writer.WritePropertyName("custom");
+
+				if (converter is JsonConverter<T> final)
+					final.Write(writer, value, options);
+			}
+
+			public override void WriteAsPropertyName(Utf8JsonWriter writer, T value, JsonSerializerOptions options) => writer.WritePropertyName("custom");
+		}
+
 		private static async Task Main()
 		{
+			var toConvert = new UserType { Name = "steve" };
+			var jsonTest = JsonSerializer.Serialize(toConvert);
+
+
 			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
 				//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
 				.ServerCertificateValidationCallback((a, b, c, d) => true)

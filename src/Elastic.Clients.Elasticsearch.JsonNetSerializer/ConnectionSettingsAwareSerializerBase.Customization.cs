@@ -7,12 +7,13 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
 using Newtonsoft.Json;
 
 namespace Elastic.Clients.JsonNetSerializer
 {
-	public abstract partial class ConnectionSettingsAwareSerializerBase : SerializerBase
+	public abstract partial class ConnectionSettingsAwareSerializerBase : SourceSerializerBase
 	{
 		// Default buffer size of StreamWriter, which is private :(
 		internal const int DefaultBufferSize = 1024;

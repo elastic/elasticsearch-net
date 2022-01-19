@@ -18,10 +18,11 @@ namespace Tests.Core.Client.Settings
 		public TestElasticsearchClientSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
+			IPropertyMappingProvider propertyMappingProvider = null,
 			bool forceInMemory = false,
 			int port = 9200,
 			byte[] response = null
-		) : base(CreatePool(createPool, port), TestConfiguration.Instance.CreateConnection(forceInMemory, response), CreateSerializerFactory(sourceSerializerFactory)) =>
+		) : base(CreatePool(createPool, port), TestConfiguration.Instance.CreateConnection(forceInMemory, response), CreateSerializerFactory(sourceSerializerFactory), propertyMappingProvider) =>
 			ApplyTestSettings();
 
 		public static string LocalOrProxyHost => RunningFiddler || RunningMitmProxy ? "ipv4.fiddler" : LocalHost;

@@ -47,15 +47,15 @@ namespace Elastic.Clients.JsonNetSerializer
 		/// <summary> Renames/Ignores a property based on the connection settings mapping or custom attributes for the property </summary>
 		private void ApplyPropertyOverrides(MemberInfo member, JsonProperty property)
 		{
-			if (!ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
-				propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
+			//if (!ConnectionSettings.PropertyMappings.TryGetValue(member, out var propertyMapping))
+			//	propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
 			var serializerMapping = ConnectionSettings.PropertyMappingProvider?.CreatePropertyMapping(member);
 
-			var nameOverride = propertyMapping?.Name ?? serializerMapping?.Name;
+			var nameOverride = /*propertyMapping?.Name ??*/ serializerMapping?.Name;
 			if (!string.IsNullOrWhiteSpace(nameOverride)) property.PropertyName = nameOverride;
 
-			var overrideIgnore = propertyMapping?.Ignore ?? serializerMapping?.Ignore;
+			var overrideIgnore = /*propertyMapping?.Ignore ??*/ serializerMapping?.Ignore;
 			if (overrideIgnore.HasValue)
 				property.Ignored = overrideIgnore.Value;
 		}
