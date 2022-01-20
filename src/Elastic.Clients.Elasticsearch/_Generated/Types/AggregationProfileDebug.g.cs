@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("delegate_debug")]
-		public Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebug? DelegateDebug { get; init; }
+		public Elastic.Clients.Elasticsearch.AggregationProfileDebug? DelegateDebug { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("empty_collectors_used")]
@@ -69,6 +69,10 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("extract_ns")]
 		public int? ExtractNs { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("filters")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebugFilter>? Filters { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("has_filter")]
@@ -89,6 +93,22 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("result_strategy")]
 		public string? ResultStrategy { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_collected")]
+		public int? SegmentsCollected { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_counted")]
+		public int? SegmentsCounted { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_with_deleted_docs")]
+		public int? SegmentsWithDeletedDocs { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("segments_with_doc_count_field")]
+		public int? SegmentsWithDocCountField { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("segments_with_multi_valued_ords")]
