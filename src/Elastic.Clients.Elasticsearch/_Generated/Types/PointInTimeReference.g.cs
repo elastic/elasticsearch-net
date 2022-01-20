@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+		public string Id { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("keep_alive")]
@@ -42,17 +42,17 @@ namespace Elastic.Clients.Elasticsearch
 		}
 
 		internal PointInTimeReferenceDescriptor(Action<PointInTimeReferenceDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Id IdValue { get; private set; }
+		internal string IdValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; private set; }
 
-		public PointInTimeReferenceDescriptor Id(Elastic.Clients.Elasticsearch.Id id) => Assign(id, (a, v) => a.IdValue = v);
+		public PointInTimeReferenceDescriptor Id(string id) => Assign(id, (a, v) => a.IdValue = v);
 		public PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Assign(keepAlive, (a, v) => a.KeepAliveValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
+			writer.WriteStringValue(IdValue);
 			if (KeepAliveValue is not null)
 			{
 				writer.WritePropertyName("keep_alive");
