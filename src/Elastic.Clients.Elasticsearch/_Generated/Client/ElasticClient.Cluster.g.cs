@@ -139,33 +139,5 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 			descriptor.BeforeRequest();
 			return DoRequestAsync<ClusterStateRequestDescriptor, ClusterStateResponse>(descriptor);
 		}
-
-		public ClusterStatsResponse Stats(ClusterStatsRequest request)
-		{
-			request.BeforeRequest();
-			return DoRequest<ClusterStatsRequest, ClusterStatsResponse>(request);
-		}
-
-		public Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)
-		{
-			request.BeforeRequest();
-			return DoRequestAsync<ClusterStatsRequest, ClusterStatsResponse>(request, cancellationToken);
-		}
-
-		public ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest = null)
-		{
-			var descriptor = new ClusterStatsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse>(descriptor);
-		}
-
-		public Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
-		{
-			var descriptor = new ClusterStatsRequestDescriptor();
-			configureRequest?.Invoke(descriptor);
-			descriptor.BeforeRequest();
-			return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse>(descriptor);
-		}
 	}
 }
