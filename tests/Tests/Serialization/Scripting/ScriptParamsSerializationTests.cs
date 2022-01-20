@@ -13,7 +13,7 @@ namespace Tests.Serialization.Scripting;
 public class ScriptParamsSerializationTests : InstanceSerializerTestBase
 {
 	public ScriptParamsSerializationTests()
-		: base(new ElasticsearchClientSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), sourceSerializer: JsonNetSerializer.Default)) { }
+		: base(new ElasticsearchClientSettings(new SingleNodePool(new Uri("http://localhost:9200")), sourceSerializer: JsonNetSerializer.Default)) { }
 
 	[U]
 	public async Task SerializesParamsUsingRequestResponseSerializer_WhenUseSourceSerializerForScriptParameters_IsTrue()
@@ -25,7 +25,7 @@ public class ScriptParamsSerializationTests : InstanceSerializerTestBase
 			Params = new System.Collections.Generic.Dictionary<string, object> { { "person", new Person { Forename = "has_null_surname", Surname = null } } }
 		};
 
-		var json = SerializeAndGetJsonString(script, new ElasticsearchClientSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), sourceSerializer: JsonNetSerializer.Default)
+		var json = SerializeAndGetJsonString(script, new ElasticsearchClientSettings(new SingleNodePool(new Uri("http://localhost:9200")), sourceSerializer: JsonNetSerializer.Default)
 				.Experimental(new ExperimentalSettings { UseSourceSerializerForScriptParameters = true }));
 
 		await Verifier.VerifyJson(json);

@@ -86,7 +86,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 */
 		public void TheNewContract()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
 				sourceSerializer: (builtin, settings) => new VanillaSerializer()); // <1> what the Func?
@@ -126,7 +126,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 */
 		public void DefaultJsonNetSerializer()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings =
 				new ElasticsearchClientSettings(pool, sourceSerializer: JsonNetSerializer.Default);
 			var client = new ElasticClient(connectionSettings);
@@ -137,7 +137,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		public void DefaultJsonNetSerializerUnsugared()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
 				sourceSerializer: (builtin, settings) => new JsonNetSerializer(builtin, settings));
@@ -150,7 +150,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 		public void DefaultJsonNetSerializerFactoryMethods()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings =
 				new ElasticsearchClientSettings(pool, sourceSerializer: (builtin, settings) => new JsonNetSerializer(
 					builtin, settings,
@@ -215,7 +215,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 */
 		[U] public void UsingJsonNetSerializer()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
 				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `IConnection` implementation that actually sends a request.
@@ -300,7 +300,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
   //       */
 		//[U] public void MySecondJsonNetSerializer()
 		//{
-		//	var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+		//	var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 		//	var connectionSettings = new ElasticsearchClientSettings(
 		//			pool,
 		//			connection: new InMemoryConnection(),

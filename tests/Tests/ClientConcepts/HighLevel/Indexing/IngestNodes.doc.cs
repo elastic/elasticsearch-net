@@ -27,7 +27,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 		*/
 		public void CustomClient()
 		{
-			var pool = new StaticConnectionPool(new [] //<1> list of ingest nodes
+			var pool = new StaticNodePool(new [] //<1> list of ingest nodes
 			{
 				new Uri("http://ingestnode1:9200"),
 				new Uri("http://ingestnode2:9200"),
@@ -44,9 +44,9 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 		* filter out the nodes that have ingest capabilities. This allows you to customise the cluster and not have to reconfigure
 		* the client.
 		*/
-		public void SniffingConnectionPool()
+		public void SniffingNodePool()
 		{
-			var pool = new SniffingConnectionPool(new [] //<1> list of cluster nodes
+			var pool = new SniffingNodePool(new [] //<1> list of cluster nodes
 			{
 				new Uri("http://node1:9200"),
 				new Uri("http://node2:9200"),

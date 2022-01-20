@@ -31,46 +31,46 @@ namespace Elastic.Clients.Elasticsearch
 		/// </summary>
 		/// <param name="uri"></param>
 		public ElasticsearchClientSettings(Uri? uri = null) : this(
-			new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
+			new SingleNodePool(uri ?? new Uri("http://localhost:9200")))
 		{
 		}
 
 		/// <summary>
 		///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
-		///     <para><see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id</para>
+		///     <para><see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
 		public ElasticsearchClientSettings(string cloudId, IAuthenticationHeader credentials) : this(
-			new CloudConnectionPool(cloudId, credentials))
+			new CloudNodePool(cloudId, credentials))
 		{
 		}
 
 		/// <summary>
-		///     Instantiate connection settings using a <see cref="SingleNodeConnectionPool" /> using the provided
+		///     Instantiate connection settings using a <see cref="SingleNodePool" /> using the provided
 		///     <see cref="InMemoryConnection" /> that never uses any IO.
 		/// </summary>
 		public ElasticsearchClientSettings(InMemoryConnection connection)
-			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection)
+			: this(new SingleNodePool(new Uri("http://localhost:9200")), connection)
 		{
 		}
 
-		public ElasticsearchClientSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+		public ElasticsearchClientSettings(INodePool nodePool) : this(nodePool, null, null) { }
 
-		public ElasticsearchClientSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)
-			: this(connectionPool, null, sourceSerializer) { }
+		public ElasticsearchClientSettings(INodePool nodePool, SourceSerializerFactory sourceSerializer)
+			: this(nodePool, null, sourceSerializer) { }
 
-		public ElasticsearchClientSettings(IConnectionPool connectionPool, IConnection connection) : this(connectionPool, connection, null) { }
+		public ElasticsearchClientSettings(INodePool nodePool, IConnection connection) : this(nodePool, connection, null) { }
 
-		public ElasticsearchClientSettings(IConnectionPool connectionPool, IConnection connection, SourceSerializerFactory sourceSerializer) : this(
-			connectionPool,
+		public ElasticsearchClientSettings(INodePool nodePool, IConnection connection, SourceSerializerFactory sourceSerializer) : this(
+			nodePool,
 			connection, sourceSerializer, null)
 		{
 		}
 
 		public ElasticsearchClientSettings(
-			IConnectionPool connectionPool,
+			INodePool nodePool,
 			IConnection connection,
 			SourceSerializerFactory sourceSerializer,
-			IPropertyMappingProvider propertyMappingProvider) : base(connectionPool, connection, sourceSerializer, propertyMappingProvider)
+			IPropertyMappingProvider propertyMappingProvider) : base(nodePool, connection, sourceSerializer, propertyMappingProvider)
 		{
 		}
 	}
@@ -102,11 +102,11 @@ namespace Elastic.Clients.Elasticsearch
 		private string _defaultIndex;
 
 		protected ElasticsearchClientSettingsBase(
-			IConnectionPool connectionPool,
+			INodePool nodePool,
 			IConnection connection,
 			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider)
-			: base(connectionPool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
+			: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
 		{
 			var defaultSerializer = new DefaultRequestResponseSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? new DefaultSourceSerializer(this);
@@ -351,39 +351,39 @@ namespace Elastic.Clients.Elasticsearch
 			Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
 
 		public ConnectionConfiguration(Uri uri = null)
-			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
+			: this(new SingleNodePool(uri ?? new Uri("http://localhost:9200")))
 		{
 		}
 
 		public ConnectionConfiguration(InMemoryConnection connection)
-			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection)
+			: this(new SingleNodePool(new Uri("http://localhost:9200")), connection)
 		{
 		}
 
 		/// <summary>
 		///     Sets up the client to communicate to Elastic Cloud using <paramref name="cloudId" />,
-		///     <para><see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id</para>
+		///     <para><see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id</para>
 		/// </summary>
 		public ConnectionConfiguration(string cloudId, IAuthenticationHeader credentials) : this(
-			new CloudConnectionPool(cloudId, credentials))
+			new CloudNodePool(cloudId, credentials))
 		{
 		}
 
-		public ConnectionConfiguration(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
+		public ConnectionConfiguration(INodePool nodePool) : this(nodePool, null, null) { }
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection) : this(connectionPool,
+		public ConnectionConfiguration(INodePool nodePool, IConnection connection) : this(nodePool,
 			connection, null)
 		{
 		}
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, SerializerBase serializer) : this(
-			connectionPool, null, serializer)
+		public ConnectionConfiguration(INodePool nodePool, SerializerBase serializer) : this(
+			nodePool, null, serializer)
 		{
 		}
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection,
+		public ConnectionConfiguration(INodePool nodePool, IConnection connection,
 			SerializerBase serializer)
-			: base(connectionPool, connection, serializer)
+			: base(nodePool, connection, serializer)
 		{
 		}
 	}
@@ -399,10 +399,10 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private bool _includeServerStackTraceOnError;
 
-		protected ConnectionConfigurationBase(IConnectionPool connectionPool, IConnection connection,
+		protected ConnectionConfigurationBase(INodePool nodePool, IConnection connection,
 			SerializerBase? serializer,
 			IProductRegistration registration = null)
-			: base(connectionPool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticClient))) =>
+			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticClient))) =>
 				UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
 		bool IConnectionConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
