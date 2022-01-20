@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("debug")]
-		public Union<Elastic.Clients.Elasticsearch.AggregationProfileDebug?, Elastic.Clients.Elasticsearch.AggregationProfileDelegateDebug?>? Debug { get; init; }
+		public Elastic.Clients.Elasticsearch.AggregationProfileDebug? Debug { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("description")]
