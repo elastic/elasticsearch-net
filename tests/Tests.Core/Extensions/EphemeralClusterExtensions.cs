@@ -16,7 +16,7 @@ namespace Tests.Core.Extensions
 		{
 			var clusterNodes = cluster.NodesUris(TestElasticsearchClientSettings.LocalOrProxyHost);
 			//we ignore the uri's that TestConnection provides and seed with the nodes the cluster dictates.
-			return new TestElasticsearchClientSettings(uris => new StaticConnectionPool(clusterNodes));
+			return new TestElasticsearchClientSettings(uris => new StaticNodePool(clusterNodes));
 		}
 
 		public static IElasticClient GetOrAddClient<TConfig>(

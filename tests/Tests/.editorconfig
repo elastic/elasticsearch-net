@@ -4,3 +4,6 @@ resharper_unused_variable_highlighting=do_not_show
 resharper_redundant_anonymous_type_property_name_highlighting=do_not_show
 dotnet_style_require_accessibility_modifiers = never:suggestion
 csharp_style_expression_bodied_methods=false
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion

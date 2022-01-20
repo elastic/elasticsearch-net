@@ -29,7 +29,7 @@ public partial class ElasticClient
 
 	/// <summary>
 	///     Creates a client configured to communicate with Elastic Cloud using the provided <paramref name="cloudId" />.
-	///     <para>See the <see cref="CloudConnectionPool" /> documentation for more information on how to obtain your Cloud Id.</para>
+	///     <para>See the <see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id.</para>
 	///     <para>
 	///         If you want more control, use the <see cref="ElasticClient(IElasticsearchClientSettings)" /> constructor and
 	///         pass

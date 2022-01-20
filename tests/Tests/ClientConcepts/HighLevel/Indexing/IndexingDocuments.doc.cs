@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 	public class Indexing : DocumentationTestBase
 	{
 		private readonly IElasticClient _client = new ElasticClient(
-			new ElasticsearchClientSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), new InMemoryConnection()));
+			new ElasticsearchClientSettings(new SingleNodePool(new Uri("http://localhost:9200")), new InMemoryConnection()));
 
 		/// hide
 		public class Person

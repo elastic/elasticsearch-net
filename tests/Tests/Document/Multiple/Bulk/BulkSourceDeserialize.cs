@@ -44,7 +44,7 @@ public class BulkSourceDeserialize
 					}]
 				}";
 
-		var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+		var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 
 		var connection = new InMemoryConnection(Encoding.UTF8.GetBytes(json));
 		var settings = new ElasticsearchClientSettings(pool, connection);
