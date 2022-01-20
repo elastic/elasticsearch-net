@@ -195,7 +195,7 @@ var nodes = new Uri[]
 	new Uri("http://myserver3:9200")
 };
 
-var pool = new StaticConnectionPool(nodes);
+var pool = new StaticNodePool(nodes);
 var settings = new ConnectionSettings(pool);
 var client = new ElasticClient(settings);
 ```

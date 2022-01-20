@@ -16,7 +16,7 @@ namespace Tests.Core.Client.Settings
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any() || Process.GetProcessesByName("fiddler everywhere").Any();
 
 		public TestElasticsearchClientSettings(
-			Func<ICollection<Uri>, IConnectionPool> createPool = null,
+			Func<ICollection<Uri>, INodePool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
 			bool forceInMemory = false,
@@ -75,12 +75,12 @@ namespace Tests.Core.Client.Settings
 			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
 		}
 
-		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null,
+		private static INodePool CreatePool(Func<ICollection<Uri>, INodePool> createPool = null,
 			int port = 9200)
 		{
-			createPool ??= uris => new StaticConnectionPool(uris);
-			var connectionPool = createPool(new[] {CreateUri(port)});
-			return connectionPool;
+			createPool ??= uris => new StaticNodePool(uris);
+			var nodePool = createPool(new[] {CreateUri(port)});
+			return nodePool;
 		}
 
 		public static Uri CreateUri(int port = 9200) => new UriBuilder("http://", LocalOrProxyHost, port).Uri;
