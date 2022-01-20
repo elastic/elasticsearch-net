@@ -1668,7 +1668,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
 		{
-			if (Pit is not null && !string.IsNullOrEmpty(Pit.Id.StringOrLongValue ?? string.Empty) && routeValues.ContainsKey("index"))
+			if (Pit is not null && !string.IsNullOrEmpty(Pit.Id ?? string.Empty) && routeValues.ContainsKey("index"))
 			{
 				routeValues.Remove("index");
 			}
@@ -1679,7 +1679,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class PointInTimeReferenceDescriptor
 	{
-		public PointInTimeReferenceDescriptor(Id id) => IdValue = id;
+		public PointInTimeReferenceDescriptor(string id) => IdValue = id;
 	}
 
 	public sealed partial class SearchRequestDescriptor<TDocument>
@@ -1688,7 +1688,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SearchRequestDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
 
-		public SearchRequestDescriptor<TDocument> Pit(Id id, Action<PointInTimeReferenceDescriptor> configure)
+		public SearchRequestDescriptor<TDocument> Pit(string id, Action<PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
