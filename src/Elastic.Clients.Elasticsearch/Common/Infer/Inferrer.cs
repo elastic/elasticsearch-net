@@ -77,13 +77,13 @@ namespace Elastic.Clients.Elasticsearch
 
 	public class RelationNameResolver
 	{
-		private readonly IElasticsearchClientSettings _connectionSettings;
+		private readonly IElasticsearchClientSettings _transportClientSettings;
 		private readonly ConcurrentDictionary<Type, string> _relationNames = new();
 
 		public RelationNameResolver(IElasticsearchClientSettings connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			_connectionSettings = connectionSettings;
+			_transportClientSettings = connectionSettings;
 		}
 
 		public string Resolve<T>() => Resolve(typeof(T));
@@ -98,7 +98,7 @@ namespace Elastic.Clients.Elasticsearch
 			if (_relationNames.TryGetValue(type, out var typeName))
 				return typeName;
 
-			if (_connectionSettings.DefaultRelationNames.TryGetValue(type, out typeName))
+			if (_transportClientSettings.DefaultRelationNames.TryGetValue(type, out typeName))
 			{
 				_relationNames.TryAdd(type, typeName);
 				return typeName;
@@ -125,7 +125,7 @@ namespace Elastic.Clients.Elasticsearch
 			typeof(RoutingResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
 
-		private readonly IElasticsearchClientSettings _connectionSettings;
+		private readonly IElasticsearchClientSettings _transportClientSettings;
 		private readonly IdResolver _idResolver;
 
 		private readonly ConcurrentDictionary<Type, Func<object, string>>
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public RoutingResolver(IElasticsearchClientSettings connectionSettings, IdResolver idResolver)
 		{
-			_connectionSettings = connectionSettings;
+			_transportClientSettings = connectionSettings;
 			_idResolver = idResolver;
 		}
 
@@ -154,13 +154,13 @@ namespace Elastic.Clients.Elasticsearch
 				return route;
 
 			var joinField = GetJoinFieldFromObject(type, @object);
-			return joinField?.Match(p => _idResolver.Resolve(@object), c => ResolveId(c.ParentId, _connectionSettings));
+			return joinField?.Match(p => _idResolver.Resolve(@object), c => ResolveId(c.ParentId, _transportClientSettings));
 		}
 
 		private bool TryConnectionSettingsRoute(Type type, object @object, out string route)
 		{
 			route = null;
-			if (!_connectionSettings.RouteProperties.TryGetValue(type, out var propertyName))
+			if (!_transportClientSettings.RouteProperties.TryGetValue(type, out var propertyName))
 				return false;
 
 			if (_localRouteDelegates.TryGetValue(type, out var cachedLookup))
@@ -674,12 +674,12 @@ namespace Elastic.Clients.Elasticsearch
 
 	internal class IndexNameResolver
 	{
-		private readonly IElasticsearchClientSettings _connectionSettings;
+		private readonly IElasticsearchClientSettings _transportClientSettings;
 
 		public IndexNameResolver(IElasticsearchClientSettings connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			_connectionSettings = connectionSettings;
+			_transportClientSettings = connectionSettings;
 		}
 
 		public string Resolve<T>() => Resolve(typeof(T));
@@ -695,8 +695,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public string Resolve(Type type)
 		{
-			var indexName = _connectionSettings.DefaultIndex;
-			var defaultIndices = _connectionSettings.DefaultIndices;
+			var indexName = _transportClientSettings.DefaultIndex;
+			var defaultIndices = _transportClientSettings.DefaultIndices;
 			if (defaultIndices != null && type != null)
 			{
 				if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))

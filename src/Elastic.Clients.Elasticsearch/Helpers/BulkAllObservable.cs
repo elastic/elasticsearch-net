@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Elastic.Transport;
 using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
@@ -177,7 +178,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 
 		request.BackPressure?.Release();
 
-		return new BulkAllResponse { Retries = backOffRetries, Page = page, /*Items = response.Items*/ };
+		return new BulkAllResponse { Retries = backOffRetries, Page = page, Items = response.Items };
 	}
 
 	private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> droppedDocuments, BulkResponse response)

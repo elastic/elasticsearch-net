@@ -12,7 +12,7 @@ namespace Tests.Serialization;
 
 public abstract class VerifySerializerTestBase : VerifyBase
 {
-	protected static readonly SerializerBase _requestResponseSerializer;
+	protected static readonly Serializer _requestResponseSerializer;
 	protected static readonly IElasticsearchClientSettings _settings;
 
 	static VerifySerializerTestBase() 
@@ -73,8 +73,8 @@ public abstract class VerifySerializerTestBase : VerifyBase
 
 public abstract class InstanceSerializerTestBase
 {
-	protected readonly SerializerBase _requestResponseSerializer;
-	protected readonly SerializerBase _sourceSerializer;
+	protected readonly Serializer _requestResponseSerializer;
+	protected readonly Serializer _sourceSerializer;
 	protected readonly IElasticsearchClientSettings _settings;
 
 	protected InstanceSerializerTestBase(ElasticsearchClientSettings settings, bool applyDomainSettings = false)
@@ -113,7 +113,7 @@ public abstract class InstanceSerializerTestBase
 
 public abstract class SerializerTestBase
 {
-	protected static readonly SerializerBase _requestResponseSerializer;
+	protected static readonly Serializer _requestResponseSerializer;
 	protected static readonly IElasticsearchClientSettings _settings;
 
 	static SerializerTestBase()

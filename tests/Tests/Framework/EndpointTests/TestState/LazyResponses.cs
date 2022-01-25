@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Tests.Framework.EndpointTests.TestState
 {

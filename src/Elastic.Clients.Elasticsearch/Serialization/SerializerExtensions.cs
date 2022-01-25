@@ -7,14 +7,14 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal static class SerializerBaseExtensions
+internal static class SerializerExtensions
 {
-	public static bool TryGetJsonSerializerOptions(this SerializerBase serializer, out JsonSerializerOptions? options)
+	public static bool TryGetJsonSerializerOptions(this Serializer serializer, out JsonSerializerOptions? options)
 	{
-		if (serializer is DiagnosticsSerializerProxy diagnosticsSerializerProxy)
-		{
-			return diagnosticsSerializerProxy.InnerSerializer.TryGetJsonSerializerOptions(out options);
-		}
+		//if (serializer is DiagnosticsSerializerProxy diagnosticsSerializerProxy)
+		//{
+		//	return diagnosticsSerializerProxy.InnerSerializer.TryGetJsonSerializerOptions(out options);
+		//}
 
 		if (serializer is DefaultRequestResponseSerializer defaultSerializer)
 		{

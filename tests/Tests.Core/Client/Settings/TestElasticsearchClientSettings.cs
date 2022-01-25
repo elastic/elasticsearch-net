@@ -72,7 +72,7 @@ namespace Tests.Core.Client.Settings
 			if (!TestConfiguration.Instance.Random.SourceSerializer)
 				return null;
 
-			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
+			return (builtin, values) => new TestSourceSerializer(builtin, values);
 		}
 
 		private static INodePool CreatePool(Func<ICollection<Uri>, INodePool> createPool = null,

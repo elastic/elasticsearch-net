@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch
 		///     Access the configured <see cref="ITransportConfiguration.RequestResponseSerializer" />
 		///     Out of the box <see cref="SourceSerializer" /> and this point to the same instance.
 		/// </summary>
-		SerializerBase RequestResponseSerializer { get; }
+		Serializer RequestResponseSerializer { get; }
 
 		/// <summary>
 		///     Access the configured <see cref="IElasticsearchClientSettings.SourceSerializer" />
 		///     Out of the box <see cref="RequestResponseSerializer" /> and this point to the same instance.
 		/// </summary>
-		SerializerBase SourceSerializer { get; }
+		Serializer SourceSerializer { get; }
 
 		ITransport Transport { get; }
 	}

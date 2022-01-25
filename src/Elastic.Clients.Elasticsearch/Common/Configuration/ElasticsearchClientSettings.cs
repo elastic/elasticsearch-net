@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch
 		///     documents.
 		///     By default, the internal serializer will be used to serializer all types.
 		/// </summary>
-		public delegate SourceSerializerBase SourceSerializerFactory(SerializerBase builtIn,
+		public delegate SourceSerializer SourceSerializerFactory(Serializer builtIn,
 			IElasticsearchClientSettings values);
 
 		/// <summary> The default user agent for Elastic.Clients.Elasticsearch </summary>
@@ -58,9 +58,9 @@ namespace Elastic.Clients.Elasticsearch
 		public ElasticsearchClientSettings(INodePool nodePool, SourceSerializerFactory sourceSerializer)
 			: this(nodePool, null, sourceSerializer) { }
 
-		public ElasticsearchClientSettings(INodePool nodePool, IConnection connection) : this(nodePool, connection, null) { }
+		public ElasticsearchClientSettings(INodePool nodePool, ITransportClient connection) : this(nodePool, connection, null) { }
 
-		public ElasticsearchClientSettings(INodePool nodePool, IConnection connection, SourceSerializerFactory sourceSerializer) : this(
+		public ElasticsearchClientSettings(INodePool nodePool, ITransportClient connection, SourceSerializerFactory sourceSerializer) : this(
 			nodePool,
 			connection, sourceSerializer, null)
 		{
@@ -68,7 +68,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public ElasticsearchClientSettings(
 			INodePool nodePool,
-			IConnection connection,
+			ITransportClient connection,
 			SourceSerializerFactory sourceSerializer,
 			IPropertyMappingProvider propertyMappingProvider) : base(nodePool, connection, sourceSerializer, propertyMappingProvider)
 		{
@@ -93,7 +93,7 @@ namespace Elastic.Clients.Elasticsearch
 		private readonly IPropertyMappingProvider _propertyMappingProvider;
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new();
 		private readonly FluentDictionary<Type, string> _routeProperties = new();
-		private readonly SerializerBase _sourceSerializer;
+		private readonly Serializer _sourceSerializer;
 		private bool _experimentalEnableSerializeNullInferredValues;
 		private ExperimentalSettings _experimentalSettings = new ();
 
@@ -103,7 +103,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		protected ElasticsearchClientSettingsBase(
 			INodePool nodePool,
-			IConnection connection,
+			ITransportClient connection,
 			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider)
 			: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
@@ -114,11 +114,14 @@ namespace Elastic.Clients.Elasticsearch
 			// TODO - Is the second condition ever true?
 			_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new PropertyMappingProvider();
 
+			// TODO - Serializer implementations should directly call diagnostics to avoid wrapping
 			//We wrap these in an internal proxy to facilitate serialization diagnostics
-			_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source");
+			//_sourceSerializer = new DiagnosticsSerializerProxy(sourceSerializer, "source");
+			_sourceSerializer = sourceSerializer;
 
-			UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
-			
+			//UseThisRequestResponseSerializer = new DiagnosticsSerializerProxy(defaultSerializer);
+			UseThisRequestResponseSerializer = defaultSerializer;
+
 			_defaultFieldNameInferrer = p => p.ToCamelCase();
 			_defaultIndices = new FluentDictionary<Type, string>();
 			_defaultRelationNames = new FluentDictionary<Type, string>();
@@ -127,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch
 			UserAgent(ElasticsearchClientSettings.DefaultUserAgent);
 		}
 
-		public SerializerBase SourceSerializer { get; }
+		public Serializer SourceSerializer { get; }
 
 		bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
 		Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
@@ -143,7 +146,7 @@ namespace Elastic.Clients.Elasticsearch
 		FluentDictionary<MemberInfo, IPropertyMapping> IElasticsearchClientSettings.PropertyMappings => _propertyMappings;
 
 		FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
-		SerializerBase IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
+		Serializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
 
 		ExperimentalSettings IElasticsearchClientSettings.Experimental => _experimentalSettings;
 
@@ -341,7 +344,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	/// <inheritdoc cref="IConnectionConfigurationValues" />
+	/// <inheritdoc cref="ITransportClientConfigurationValues" />
 	public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionConfiguration>
 	{
 		/// <summary>
@@ -371,41 +374,41 @@ namespace Elastic.Clients.Elasticsearch
 
 		public ConnectionConfiguration(INodePool nodePool) : this(nodePool, null, null) { }
 
-		public ConnectionConfiguration(INodePool nodePool, IConnection connection) : this(nodePool,
+		public ConnectionConfiguration(INodePool nodePool, ITransportClient connection) : this(nodePool,
 			connection, null)
 		{
 		}
 
-		public ConnectionConfiguration(INodePool nodePool, SerializerBase serializer) : this(
+		public ConnectionConfiguration(INodePool nodePool, Serializer serializer) : this(
 			nodePool, null, serializer)
 		{
 		}
 
-		public ConnectionConfiguration(INodePool nodePool, IConnection connection,
-			SerializerBase serializer)
+		public ConnectionConfiguration(INodePool nodePool, ITransportClient connection,
+			Serializer serializer)
 			: base(nodePool, connection, serializer)
 		{
 		}
 	}
 
-	/// <inheritdoc cref="IConnectionConfigurationValues" />
+	/// <inheritdoc cref="ITransportClientConfigurationValues" />
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public abstract class
 		ConnectionConfigurationBase<TConnectionConfiguration> : TransportConfigurationBase<TConnectionConfiguration>,
-			IConnectionConfigurationValues
+			ITransportClientConfigurationValues
 		where TConnectionConfiguration : ConnectionConfigurationBase<TConnectionConfiguration>,
-		IConnectionConfigurationValues
+		ITransportClientConfigurationValues
 	{
 		private bool _includeServerStackTraceOnError;
 
-		protected ConnectionConfigurationBase(INodePool nodePool, IConnection connection,
-			SerializerBase? serializer,
+		protected ConnectionConfigurationBase(INodePool nodePool, ITransportClient connection,
+			Serializer? serializer,
 			IProductRegistration registration = null)
 			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticClient))) =>
 				UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
-		bool IConnectionConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
+		bool ITransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
 
 		public override TConnectionConfiguration EnableDebugMode(Action<IApiCallDetails> onRequestCompleted = null) =>
 			base.EnableDebugMode(onRequestCompleted)
@@ -433,7 +436,7 @@ namespace Elastic.Clients.Elasticsearch
 		});
 	}
 
-	public interface IConnectionConfigurationValues : ITransportConfiguration
+	public interface ITransportClientConfigurationValues : ITransportConfiguration
 	{
 		/// <summary>
 		///     Forces all requests to have ?error_trace=true querystring parameter appended,

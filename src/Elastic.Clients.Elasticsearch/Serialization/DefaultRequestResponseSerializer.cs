@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// The built in internal serializer that the high level client Elastic.Clients.Elasticsearch uses.
 /// </summary>
-internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializerBase
+internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 {
 	private readonly IElasticsearchClientSettings _settings;
 

@@ -12,9 +12,9 @@ using Tests.Domain;
 
 namespace Tests.Core.Client.Serializers
 {
-	public class TestSourceSerializerBase : ConnectionSettingsAwareSerializerBase
+	public class TestSourceSerializer : ConnectionSettingsAwareSerializer
 	{
-		public TestSourceSerializerBase(SerializerBase builtinSerializer, IElasticsearchClientSettings connectionSettings)
+		public TestSourceSerializer(Serializer builtinSerializer, IElasticsearchClientSettings connectionSettings)
 			: base(builtinSerializer, connectionSettings) { }
 
 		protected override JsonSerializerSettings CreateJsonSerializerSettings() =>

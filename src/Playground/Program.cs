@@ -59,7 +59,7 @@ namespace Playground
 			var jsonTest = JsonSerializer.Serialize(toConvert);
 
 
-			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
+			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
 				//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
 				.ServerCertificateValidationCallback((a, b, c, d) => true)
 				.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))

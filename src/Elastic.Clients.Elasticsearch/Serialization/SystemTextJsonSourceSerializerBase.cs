@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -11,12 +12,19 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public abstract class SourceSerializerBase : SerializerBase
+public abstract class SourceSerializer : Serializer
 {
 }
 
-public abstract class SystemTextJsonSourceSerializerBase : SourceSerializerBase
+public abstract class SystemTextJsonSourceSerializer : SourceSerializer
 {
+	//private readonly SerializerRegistrationInformation _state;
+
+	// TODO - Implement diagnostics - Types are internal to transport, so either, return to wrapped version, or move to client / implement manually.
+	//private static DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener(Serializer.SourceName);
+
+	//protected SystemTextJsonSourceSerializer() => _state = new SerializerRegistrationInformation(GetType(), "source");
+
 	public JsonSerializerOptions Options { get; init; }
 
 	public override T Deserialize<T>(Stream stream)

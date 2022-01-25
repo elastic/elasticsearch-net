@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Elastic.Clients.JsonNetSerializer
 {
-	public abstract partial class ConnectionSettingsAwareSerializerBase : IPropertyMappingProvider
+	public abstract partial class ConnectionSettingsAwareSerializer : IPropertyMappingProvider
 	{
 		protected readonly ConcurrentDictionary<string, PropertyMapping> Properties = new();
 
