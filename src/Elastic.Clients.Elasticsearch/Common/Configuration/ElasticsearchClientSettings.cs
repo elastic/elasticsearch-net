@@ -53,21 +53,21 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public ElasticsearchClientSettings(INodePool nodePool) : this(nodePool, null, null) { }
+		public ElasticsearchClientSettings(NodePool nodePool) : this(nodePool, null, null) { }
 
-		public ElasticsearchClientSettings(INodePool nodePool, SourceSerializerFactory sourceSerializer)
+		public ElasticsearchClientSettings(NodePool nodePool, SourceSerializerFactory sourceSerializer)
 			: this(nodePool, null, sourceSerializer) { }
 
-		public ElasticsearchClientSettings(INodePool nodePool, ITransportClient connection) : this(nodePool, connection, null) { }
+		public ElasticsearchClientSettings(NodePool nodePool, ITransportClient connection) : this(nodePool, connection, null) { }
 
-		public ElasticsearchClientSettings(INodePool nodePool, ITransportClient connection, SourceSerializerFactory sourceSerializer) : this(
+		public ElasticsearchClientSettings(NodePool nodePool, ITransportClient connection, SourceSerializerFactory sourceSerializer) : this(
 			nodePool,
 			connection, sourceSerializer, null)
 		{
 		}
 
 		public ElasticsearchClientSettings(
-			INodePool nodePool,
+			NodePool nodePool,
 			ITransportClient connection,
 			SourceSerializerFactory sourceSerializer,
 			IPropertyMappingProvider propertyMappingProvider) : base(nodePool, connection, sourceSerializer, propertyMappingProvider)
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch
 		private string _defaultIndex;
 
 		protected ElasticsearchClientSettingsBase(
-			INodePool nodePool,
+			NodePool nodePool,
 			ITransportClient connection,
 			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider)
@@ -372,19 +372,19 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		public ConnectionConfiguration(INodePool nodePool) : this(nodePool, null, null) { }
+		public ConnectionConfiguration(NodePool nodePool) : this(nodePool, null, null) { }
 
-		public ConnectionConfiguration(INodePool nodePool, ITransportClient connection) : this(nodePool,
+		public ConnectionConfiguration(NodePool nodePool, ITransportClient connection) : this(nodePool,
 			connection, null)
 		{
 		}
 
-		public ConnectionConfiguration(INodePool nodePool, Serializer serializer) : this(
+		public ConnectionConfiguration(NodePool nodePool, Serializer serializer) : this(
 			nodePool, null, serializer)
 		{
 		}
 
-		public ConnectionConfiguration(INodePool nodePool, ITransportClient connection,
+		public ConnectionConfiguration(NodePool nodePool, ITransportClient connection,
 			Serializer serializer)
 			: base(nodePool, connection, serializer)
 		{
@@ -402,7 +402,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		private bool _includeServerStackTraceOnError;
 
-		protected ConnectionConfigurationBase(INodePool nodePool, ITransportClient connection,
+		protected ConnectionConfigurationBase(NodePool nodePool, ITransportClient connection,
 			Serializer? serializer,
 			IProductRegistration registration = null)
 			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticClient))) =>
