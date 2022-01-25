@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Transport.Products.Elasticsearch.Failures;
+using Elastic.Transport.Products.Elasticsearch;
 using Tests.Core.Extensions;
 
 namespace Tests.ClientConcepts.Errors
@@ -90,7 +90,7 @@ namespace Tests.ClientConcepts.Errors
 			error.AdditionalProperties.Should().ContainKeys("unknown_prop", "unknown_prop2");
 		}
 
-		private void AssertMetadata(string origin, Elastic.Transport.Products.Elasticsearch.Failures.ErrorCause errorMetadata)
+		private void AssertMetadata(string origin, Elastic.Transport.Products.Elasticsearch.ErrorCause errorMetadata)
 		{
 			errorMetadata.Should().NotBeNull(origin);
 			//errorMetadata.Grouped.Should().BeTrue(origin);
@@ -111,7 +111,7 @@ namespace Tests.ClientConcepts.Errors
 			//AssertFailedShards(origin, errorMetadata.FailedShards);
 		}
 
-		private static void AssertFailedShards(string origin, IReadOnlyCollection<Elastic.Transport.Products.Elasticsearch.Failures.ShardFailure> errorMetadataFailedShards)
+		private static void AssertFailedShards(string origin, IReadOnlyCollection<Elastic.Transport.Products.Elasticsearch.ShardFailure> errorMetadataFailedShards)
 		{
 			errorMetadataFailedShards.Should().NotBeEmpty(origin).And.HaveCount(1, origin);
 			var f = errorMetadataFailedShards.First();
@@ -122,7 +122,7 @@ namespace Tests.ClientConcepts.Errors
 			f.Shard.Should().NotBeNull(origin);
 		}
 
-		private static void AssertCausedBy(string origin, Elastic.Transport.Products.Elasticsearch.Failures.ErrorCause causedBy)
+		private static void AssertCausedBy(string origin, Elastic.Transport.Products.Elasticsearch.ErrorCause causedBy)
 		{
 			causedBy.Should().NotBeNull(origin);
 			causedBy.Type.Should().NotBeNullOrWhiteSpace(origin);

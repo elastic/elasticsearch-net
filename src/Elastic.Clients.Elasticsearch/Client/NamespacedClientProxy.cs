@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
-using Elastic.Transport.Products.Elasticsearch.Failures;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch
 {

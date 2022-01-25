@@ -8,6 +8,19 @@
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
       },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
+      },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
         "requested": "[1.0.0-preview.2, )",
@@ -75,16 +88,6 @@
         "type": "Transitive",
         "resolved": "4.5.4",
         "contentHash": "zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg=="
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1",
-          "System.Threading.Tasks.Extensions": "4.5.4"
-        }
       }
     },
     ".NETFramework,Version=v4.6.1": {
@@ -93,6 +96,19 @@
         "requested": "[4.0.0, )",
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
+      },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
@@ -212,16 +228,6 @@
         "type": "Transitive",
         "resolved": "4.5.0",
         "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1",
-          "System.Threading.Tasks.Extensions": "4.5.4"
-        }
       }
     },
     ".NETStandard,Version=v2.0": {
@@ -230,6 +236,19 @@
         "requested": "[4.0.0, )",
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
+      },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
@@ -452,16 +471,6 @@
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.5.3"
         }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1",
-          "System.Threading.Tasks.Extensions": "4.5.4"
-        }
       }
     },
     ".NETStandard,Version=v2.1": {
@@ -470,6 +479,19 @@
         "requested": "[4.0.0, )",
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
+      },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
@@ -572,16 +594,6 @@
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.5.3"
         }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1",
-          "System.Threading.Tasks.Extensions": "4.5.4"
-        }
       }
     },
     ".NETCoreApp,Version=v5.0": {
@@ -590,6 +602,18 @@
         "requested": "[4.0.0, )",
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
+      },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1"
+        }
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
@@ -652,15 +676,6 @@
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
           "System.Text.Encodings.Web": "6.0.0"
-        }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1"
         }
       }
     },
@@ -671,6 +686,18 @@
         "resolved": "4.0.0",
         "contentHash": "PCgUb5I1DIe0GsBZ2fPXr/tOgph9Gh6yoHcpsFxNmTvyOQFXxyOcjM7wPs8ylakPNdFYBUs9YeF2Wsx6K/nEDQ=="
       },
+      "Elastic.Transport": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1"
+        }
+      },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
         "requested": "[1.0.0-preview.2, )",
@@ -732,15 +759,6 @@
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
           "System.Text.Encodings.Web": "6.0.0"
-        }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1"
         }
       }
     }
