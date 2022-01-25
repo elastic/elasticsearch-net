@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 

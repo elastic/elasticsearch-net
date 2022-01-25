@@ -22,32 +22,45 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class TDigest
+	public partial class MergeScheduler
 	{
 		[JsonInclude]
-		[JsonPropertyName("compression")]
-		public int? Compression { get; set; }
+		[JsonPropertyName("max_merge_count")]
+		public int? MaxMergeCount { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("max_thread_count")]
+		public int? MaxThreadCount { get; set; }
 	}
 
-	public sealed partial class TDigestDescriptor : DescriptorBase<TDigestDescriptor>
+	public sealed partial class MergeSchedulerDescriptor : DescriptorBase<MergeSchedulerDescriptor>
 	{
-		public TDigestDescriptor()
+		public MergeSchedulerDescriptor()
 		{
 		}
 
-		internal TDigestDescriptor(Action<TDigestDescriptor> configure) => configure.Invoke(this);
-		internal int? CompressionValue { get; private set; }
+		internal MergeSchedulerDescriptor(Action<MergeSchedulerDescriptor> configure) => configure.Invoke(this);
+		internal int? MaxMergeCountValue { get; private set; }
 
-		public TDigestDescriptor Compression(int? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
+		internal int? MaxThreadCountValue { get; private set; }
+
+		public MergeSchedulerDescriptor MaxMergeCount(int? maxMergeCount) => Assign(maxMergeCount, (a, v) => a.MaxMergeCountValue = v);
+		public MergeSchedulerDescriptor MaxThreadCount(int? maxThreadCount) => Assign(maxThreadCount, (a, v) => a.MaxThreadCountValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (CompressionValue.HasValue)
+			if (MaxMergeCountValue.HasValue)
 			{
-				writer.WritePropertyName("compression");
-				writer.WriteNumberValue(CompressionValue.Value);
+				writer.WritePropertyName("max_merge_count");
+				writer.WriteNumberValue(MaxMergeCountValue.Value);
+			}
+
+			if (MaxThreadCountValue.HasValue)
+			{
+				writer.WritePropertyName("max_thread_count");
+				writer.WriteNumberValue(MaxThreadCountValue.Value);
 			}
 
 			writer.WriteEndObject();
