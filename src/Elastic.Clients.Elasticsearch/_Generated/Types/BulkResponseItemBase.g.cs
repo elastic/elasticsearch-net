@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

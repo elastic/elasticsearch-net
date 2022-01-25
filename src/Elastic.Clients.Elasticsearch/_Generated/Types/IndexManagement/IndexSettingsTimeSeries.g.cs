@@ -22,31 +22,47 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class TopMetricsValue
+	public partial class IndexSettingsTimeSeries
 	{
 		[JsonInclude]
-		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+		[JsonPropertyName("end_time")]
+		public Elastic.Clients.Elasticsearch.DateOrEpochMillis? EndTime { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("start_time")]
+		public Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTime { get; set; }
 	}
 
-	public sealed partial class TopMetricsValueDescriptor<TDocument> : DescriptorBase<TopMetricsValueDescriptor<TDocument>>
+	public sealed partial class IndexSettingsTimeSeriesDescriptor : DescriptorBase<IndexSettingsTimeSeriesDescriptor>
 	{
-		public TopMetricsValueDescriptor()
+		public IndexSettingsTimeSeriesDescriptor()
 		{
 		}
 
-		internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		internal IndexSettingsTimeSeriesDescriptor(Action<IndexSettingsTimeSeriesDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.DateOrEpochMillis? EndTimeValue { get; private set; }
 
-		public TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		internal Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTimeValue { get; private set; }
+
+		public IndexSettingsTimeSeriesDescriptor EndTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? endTime) => Assign(endTime, (a, v) => a.EndTimeValue = v);
+		public IndexSettingsTimeSeriesDescriptor StartTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? startTime) => Assign(startTime, (a, v) => a.StartTimeValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (EndTimeValue is not null)
+			{
+				writer.WritePropertyName("end_time");
+				JsonSerializer.Serialize(writer, EndTimeValue, options);
+			}
+
+			if (StartTimeValue is not null)
+			{
+				writer.WritePropertyName("start_time");
+				JsonSerializer.Serialize(writer, StartTimeValue, options);
+			}
+
 			writer.WriteEndObject();
 		}
 	}

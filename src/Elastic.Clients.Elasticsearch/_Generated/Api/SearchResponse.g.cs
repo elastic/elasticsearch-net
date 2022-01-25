@@ -15,9 +15,9 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
@@ -63,10 +63,6 @@ namespace Elastic.Clients.Elasticsearch
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
 		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("suggest")]
-		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Suggest<TDocument>>>? Suggest { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("terminated_early")]

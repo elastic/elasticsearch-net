@@ -163,12 +163,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public int? MaxTermsCount { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("merge.scheduler.max_merge_count")]
-		public int? MergeSchedulerMaxMergeCount { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("merge.scheduler.max_thread_count")]
-		public int? MergeSchedulerMaxThreadCount { get; set; }
+		[JsonPropertyName("merge")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Merge? Merge { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("mode")]
@@ -193,6 +189,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		[JsonInclude]
 		[JsonPropertyName("provided_name")]
 		public Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("queries")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Queries? Queries { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("query_string.lenient")]
@@ -223,6 +223,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("shards")]
+		public int? Shards { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("soft_deletes")]
 		public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletes { get; set; }
 
@@ -239,16 +243,32 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
 
 		[JsonInclude]
+		[JsonPropertyName("sort.field")]
+		public Elastic.Clients.Elasticsearch.Fields? SortField { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort.missing")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? SortMissing { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort.mode")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? SortMode { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("sort.order")]
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? SortOrder { get; set; }
+
+		[JsonInclude]
+		[JsonPropertyName("time_series")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
+
+		[JsonInclude]
 		[JsonPropertyName("top_metrics_max_size")]
 		public int? TopMetricsMaxSize { get; set; }
 
 		[JsonInclude]
-		[JsonPropertyName("translog.durability")]
-		public string? TranslogDurability { get; set; }
-
-		[JsonInclude]
-		[JsonPropertyName("translog.flush_threshold_size")]
-		public string? TranslogFlushThresholdSize { get; set; }
+		[JsonPropertyName("translog")]
+		public Elastic.Clients.Elasticsearch.IndexManagement.Translog? Translog { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("uuid")]
@@ -256,7 +276,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("verified_before_close")]
-		public bool? VerifiedBeforeClose { get; set; }
+		public Union<bool?, string?>? VerifiedBeforeClose { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]
@@ -338,9 +358,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal int? MaxTermsCountValue { get; private set; }
 
-		internal int? MergeSchedulerMaxMergeCountValue { get; private set; }
-
-		internal int? MergeSchedulerMaxThreadCountValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.IndexManagement.Merge? MergeValue { get; private set; }
 
 		internal string? ModeValue { get; private set; }
 
@@ -353,6 +371,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Union<int?, string?>? PriorityValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.Queries? QueriesValue { get; private set; }
 
 		internal bool? QueryStringLenientValue { get; private set; }
 
@@ -368,6 +388,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
 
+		internal int? ShardsValue { get; private set; }
+
 		internal Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; private set; }
 
 		internal bool? SoftDeletesEnabledValue { get; private set; }
@@ -376,15 +398,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Fields? SortFieldValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? SortMissingValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? SortModeValue { get; private set; }
+
+		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? SortOrderValue { get; private set; }
+
+		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; private set; }
+
 		internal int? TopMetricsMaxSizeValue { get; private set; }
 
-		internal string? TranslogDurabilityValue { get; private set; }
-
-		internal string? TranslogFlushThresholdSizeValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.IndexManagement.Translog? TranslogValue { get; private set; }
 
 		internal string? UuidValue { get; private set; }
 
-		internal bool? VerifiedBeforeCloseValue { get; private set; }
+		internal Union<bool?, string?>? VerifiedBeforeCloseValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; private set; }
 
@@ -396,6 +426,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; private set; }
 
+		internal MergeDescriptor MergeDescriptor { get; private set; }
+
+		internal QueriesDescriptor QueriesDescriptor { get; private set; }
+
 		internal IndexRoutingDescriptor RoutingDescriptor { get; private set; }
 
 		internal IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
@@ -403,6 +437,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal SoftDeletesDescriptor SoftDeletesDescriptor { get; private set; }
 
 		internal IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; private set; }
+
+		internal IndexSettingsTimeSeriesDescriptor TimeSeriesDescriptor { get; private set; }
+
+		internal TranslogDescriptor TranslogDescriptor { get; private set; }
 
 		internal IndexVersioningDescriptor VersionDescriptor { get; private set; }
 
@@ -414,6 +452,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		internal Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; private set; }
 
+		internal Action<MergeDescriptor> MergeDescriptorAction { get; private set; }
+
+		internal Action<QueriesDescriptor> QueriesDescriptorAction { get; private set; }
+
 		internal Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; private set; }
 
 		internal Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
@@ -421,6 +463,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		internal Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; private set; }
 
 		internal Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
+
+		internal Action<IndexSettingsTimeSeriesDescriptor> TimeSeriesDescriptorAction { get; private set; }
+
+		internal Action<TranslogDescriptor> TranslogDescriptorAction { get; private set; }
 
 		internal Action<IndexVersioningDescriptor> VersionDescriptorAction { get; private set; }
 
@@ -538,14 +584,54 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public IndexSettingsDescriptor<TDocument> MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a.MaxShingleDiffValue = v);
 		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
 		public IndexSettingsDescriptor<TDocument> MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a.MaxTermsCountValue = v);
-		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxMergeCount(int? mergeSchedulerMaxMergeCount) => Assign(mergeSchedulerMaxMergeCount, (a, v) => a.MergeSchedulerMaxMergeCountValue = v);
-		public IndexSettingsDescriptor<TDocument> MergeSchedulerMaxThreadCount(int? mergeSchedulerMaxThreadCount) => Assign(mergeSchedulerMaxThreadCount, (a, v) => a.MergeSchedulerMaxThreadCountValue = v);
+		public IndexSettingsDescriptor<TDocument> Merge(Elastic.Clients.Elasticsearch.IndexManagement.Merge? merge)
+		{
+			MergeDescriptor = null;
+			MergeDescriptorAction = null;
+			return Assign(merge, (a, v) => a.MergeValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Merge(IndexManagement.MergeDescriptor descriptor)
+		{
+			MergeValue = null;
+			MergeDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.MergeDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Merge(Action<IndexManagement.MergeDescriptor> configure)
+		{
+			MergeValue = null;
+			MergeDescriptorAction = null;
+			return Assign(configure, (a, v) => a.MergeDescriptorAction = v);
+		}
+
 		public IndexSettingsDescriptor<TDocument> Mode(string? mode) => Assign(mode, (a, v) => a.ModeValue = v);
 		public IndexSettingsDescriptor<TDocument> NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicasValue = v);
 		public IndexSettingsDescriptor<TDocument> NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShardsValue = v);
 		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShardsValue = v);
 		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
 		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
+		public IndexSettingsDescriptor<TDocument> Queries(Elastic.Clients.Elasticsearch.IndexManagement.Queries? queries)
+		{
+			QueriesDescriptor = null;
+			QueriesDescriptorAction = null;
+			return Assign(queries, (a, v) => a.QueriesValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Queries(IndexManagement.QueriesDescriptor descriptor)
+		{
+			QueriesValue = null;
+			QueriesDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.QueriesDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Queries(Action<IndexManagement.QueriesDescriptor> configure)
+		{
+			QueriesValue = null;
+			QueriesDescriptorAction = null;
+			return Assign(configure, (a, v) => a.QueriesDescriptorAction = v);
+		}
+
 		public IndexSettingsDescriptor<TDocument> QueryStringLenient(bool? queryStringLenient = true) => Assign(queryStringLenient, (a, v) => a.QueryStringLenientValue = v);
 		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
 		public IndexSettingsDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
@@ -593,6 +679,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
 		}
 
+		public IndexSettingsDescriptor<TDocument> Shards(int? shards) => Assign(shards, (a, v) => a.ShardsValue = v);
 		public IndexSettingsDescriptor<TDocument> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
 		{
 			SoftDeletesDescriptor = null;
@@ -637,11 +724,56 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
 		}
 
+		public IndexSettingsDescriptor<TDocument> SortField(Elastic.Clients.Elasticsearch.Fields? sortField) => Assign(sortField, (a, v) => a.SortFieldValue = v);
+		public IndexSettingsDescriptor<TDocument> SortField<TValue>(Expression<Func<TDocument, TValue>> sortField) => Assign(sortField, (a, v) => a.SortFieldValue = v);
+		public IndexSettingsDescriptor<TDocument> SortMissing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? sortMissing) => Assign(sortMissing, (a, v) => a.SortMissingValue = v);
+		public IndexSettingsDescriptor<TDocument> SortMode(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? sortMode) => Assign(sortMode, (a, v) => a.SortModeValue = v);
+		public IndexSettingsDescriptor<TDocument> SortOrder(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? sortOrder) => Assign(sortOrder, (a, v) => a.SortOrderValue = v);
+		public IndexSettingsDescriptor<TDocument> TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? timeSeries)
+		{
+			TimeSeriesDescriptor = null;
+			TimeSeriesDescriptorAction = null;
+			return Assign(timeSeries, (a, v) => a.TimeSeriesValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> TimeSeries(IndexManagement.IndexSettingsTimeSeriesDescriptor descriptor)
+		{
+			TimeSeriesValue = null;
+			TimeSeriesDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.TimeSeriesDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> TimeSeries(Action<IndexManagement.IndexSettingsTimeSeriesDescriptor> configure)
+		{
+			TimeSeriesValue = null;
+			TimeSeriesDescriptorAction = null;
+			return Assign(configure, (a, v) => a.TimeSeriesDescriptorAction = v);
+		}
+
 		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> TranslogDurability(string? translogDurability) => Assign(translogDurability, (a, v) => a.TranslogDurabilityValue = v);
-		public IndexSettingsDescriptor<TDocument> TranslogFlushThresholdSize(string? translogFlushThresholdSize) => Assign(translogFlushThresholdSize, (a, v) => a.TranslogFlushThresholdSizeValue = v);
+		public IndexSettingsDescriptor<TDocument> Translog(Elastic.Clients.Elasticsearch.IndexManagement.Translog? translog)
+		{
+			TranslogDescriptor = null;
+			TranslogDescriptorAction = null;
+			return Assign(translog, (a, v) => a.TranslogValue = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Translog(IndexManagement.TranslogDescriptor descriptor)
+		{
+			TranslogValue = null;
+			TranslogDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.TranslogDescriptor = v);
+		}
+
+		public IndexSettingsDescriptor<TDocument> Translog(Action<IndexManagement.TranslogDescriptor> configure)
+		{
+			TranslogValue = null;
+			TranslogDescriptorAction = null;
+			return Assign(configure, (a, v) => a.TranslogDescriptorAction = v);
+		}
+
 		public IndexSettingsDescriptor<TDocument> Uuid(string? uuid) => Assign(uuid, (a, v) => a.UuidValue = v);
-		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(bool? verifiedBeforeClose = true) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
+		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
 		public IndexSettingsDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
 		{
 			VersionDescriptor = null;
@@ -910,16 +1042,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				writer.WriteNumberValue(MaxTermsCountValue.Value);
 			}
 
-			if (MergeSchedulerMaxMergeCountValue.HasValue)
+			if (MergeDescriptor is not null)
 			{
-				writer.WritePropertyName("merge.scheduler.max_merge_count");
-				writer.WriteNumberValue(MergeSchedulerMaxMergeCountValue.Value);
+				writer.WritePropertyName("merge");
+				JsonSerializer.Serialize(writer, MergeDescriptor, options);
 			}
-
-			if (MergeSchedulerMaxThreadCountValue.HasValue)
+			else if (MergeDescriptorAction is not null)
 			{
-				writer.WritePropertyName("merge.scheduler.max_thread_count");
-				writer.WriteNumberValue(MergeSchedulerMaxThreadCountValue.Value);
+				writer.WritePropertyName("merge");
+				JsonSerializer.Serialize(writer, new IndexManagement.MergeDescriptor(MergeDescriptorAction), options);
+			}
+			else if (MergeValue is not null)
+			{
+				writer.WritePropertyName("merge");
+				JsonSerializer.Serialize(writer, MergeValue, options);
 			}
 
 			if (!string.IsNullOrEmpty(ModeValue))
@@ -956,6 +1092,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("provided_name");
 				JsonSerializer.Serialize(writer, ProvidedNameValue, options);
+			}
+
+			if (QueriesDescriptor is not null)
+			{
+				writer.WritePropertyName("queries");
+				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+			}
+			else if (QueriesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("queries");
+				JsonSerializer.Serialize(writer, new IndexManagement.QueriesDescriptor(QueriesDescriptorAction), options);
+			}
+			else if (QueriesValue is not null)
+			{
+				writer.WritePropertyName("queries");
+				JsonSerializer.Serialize(writer, QueriesValue, options);
 			}
 
 			if (QueryStringLenientValue.HasValue)
@@ -1020,6 +1172,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SettingsValue, options);
 			}
 
+			if (ShardsValue.HasValue)
+			{
+				writer.WritePropertyName("shards");
+				writer.WriteNumberValue(ShardsValue.Value);
+			}
+
 			if (SoftDeletesDescriptor is not null)
 			{
 				writer.WritePropertyName("soft_deletes");
@@ -1064,22 +1222,66 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SortValue, options);
 			}
 
+			if (SortFieldValue is not null)
+			{
+				writer.WritePropertyName("sort.field");
+				JsonSerializer.Serialize(writer, SortFieldValue, options);
+			}
+
+			if (SortMissingValue is not null)
+			{
+				writer.WritePropertyName("sort.missing");
+				JsonSerializer.Serialize(writer, SortMissingValue, options);
+			}
+
+			if (SortModeValue is not null)
+			{
+				writer.WritePropertyName("sort.mode");
+				JsonSerializer.Serialize(writer, SortModeValue, options);
+			}
+
+			if (SortOrderValue is not null)
+			{
+				writer.WritePropertyName("sort.order");
+				JsonSerializer.Serialize(writer, SortOrderValue, options);
+			}
+
+			if (TimeSeriesDescriptor is not null)
+			{
+				writer.WritePropertyName("time_series");
+				JsonSerializer.Serialize(writer, TimeSeriesDescriptor, options);
+			}
+			else if (TimeSeriesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("time_series");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsTimeSeriesDescriptor(TimeSeriesDescriptorAction), options);
+			}
+			else if (TimeSeriesValue is not null)
+			{
+				writer.WritePropertyName("time_series");
+				JsonSerializer.Serialize(writer, TimeSeriesValue, options);
+			}
+
 			if (TopMetricsMaxSizeValue.HasValue)
 			{
 				writer.WritePropertyName("top_metrics_max_size");
 				writer.WriteNumberValue(TopMetricsMaxSizeValue.Value);
 			}
 
-			if (!string.IsNullOrEmpty(TranslogDurabilityValue))
+			if (TranslogDescriptor is not null)
 			{
-				writer.WritePropertyName("translog.durability");
-				writer.WriteStringValue(TranslogDurabilityValue);
+				writer.WritePropertyName("translog");
+				JsonSerializer.Serialize(writer, TranslogDescriptor, options);
 			}
-
-			if (!string.IsNullOrEmpty(TranslogFlushThresholdSizeValue))
+			else if (TranslogDescriptorAction is not null)
 			{
-				writer.WritePropertyName("translog.flush_threshold_size");
-				writer.WriteStringValue(TranslogFlushThresholdSizeValue);
+				writer.WritePropertyName("translog");
+				JsonSerializer.Serialize(writer, new IndexManagement.TranslogDescriptor(TranslogDescriptorAction), options);
+			}
+			else if (TranslogValue is not null)
+			{
+				writer.WritePropertyName("translog");
+				JsonSerializer.Serialize(writer, TranslogValue, options);
 			}
 
 			if (UuidValue is not null)
@@ -1088,10 +1290,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, UuidValue, options);
 			}
 
-			if (VerifiedBeforeCloseValue.HasValue)
+			if (VerifiedBeforeCloseValue is not null)
 			{
 				writer.WritePropertyName("verified_before_close");
-				writer.WriteBooleanValue(VerifiedBeforeCloseValue.Value);
+				JsonSerializer.Serialize(writer, VerifiedBeforeCloseValue, options);
 			}
 
 			if (VersionDescriptor is not null)

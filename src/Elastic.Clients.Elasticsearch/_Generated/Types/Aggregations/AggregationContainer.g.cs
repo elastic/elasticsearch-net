@@ -93,11 +93,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation?>("nested", ref reader, options);
 			}
 
-			if (propertyName == "percentile_ranks")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation?>("percentile_ranks", ref reader, options);
-			}
-
 			if (propertyName == "stats")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>("stats", ref reader, options);
@@ -116,11 +111,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "terms")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>("terms", ref reader, options);
-			}
-
-			if (propertyName == "top_metrics")
-			{
-				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>("top_metrics", ref reader, options);
 			}
 
 			if (propertyName == "value_count")
@@ -215,11 +205,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
 		}
 
-		public AggregationContainerDescriptor<TDocument> PercentileRanks(string name, Action<PercentileRanksAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("percentile_ranks", configure));
-		}
-
 		public AggregationContainerDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("stats", configure));
@@ -238,11 +223,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Terms(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
-		}
-
-		public AggregationContainerDescriptor<TDocument> TopMetrics(string name, Action<TopMetricsAggregationDescriptor<TDocument>> configure)
-		{
-			return SetContainer(name, AggregationContainer.CreateWithAction("top_metrics", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> ValueCount(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
