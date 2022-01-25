@@ -15,10 +15,10 @@
 //{
 //	internal class FieldExpressionVisitor : ExpressionVisitor
 //	{
-//		private readonly IConnectionSettingsValues _settings;
+//		private readonly ITransportClientSettingsValues _settings;
 //		private readonly Stack<string> _stack = new Stack<string>();
 
-//		public FieldExpressionVisitor(IConnectionSettingsValues settings) => _settings = settings;
+//		public FieldExpressionVisitor(ITransportClientSettingsValues settings) => _settings = settings;
 
 //		public string Resolve(Expression expression, bool toLastToken = false)
 //		{

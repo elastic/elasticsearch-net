@@ -1613,7 +1613,7 @@ namespace Elastic.Clients.Elasticsearch
 			: this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) =>
 				Document = documentWithId;
 
-		public void WriteJson(Utf8JsonWriter writer, SerializerBase sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 	}
 
 	public sealed partial class CreateRequestDescriptor<TDocument> : ICustomJsonWriter
@@ -1624,7 +1624,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public CreateRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 
-		public void WriteJson(Utf8JsonWriter writer, SerializerBase sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
 
 		// TODO: We should be able to generate these for optional params
 		public CreateRequestDescriptor<TDocument> Id(Id id)

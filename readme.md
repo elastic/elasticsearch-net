@@ -133,7 +133,7 @@ Alternatively, simply search for `NEST` in the package manager UI.
 
 ### Connecting
 
-You can connect to your Elasticsearch cluster via a single node, or by specifying multiple nodes using a connection pool.  Using a connection pool has a few advantages over a single node connection, such as load balancing and cluster failover support.
+You can connect to your Elasticsearch cluster via a single node, or by specifying multiple nodes using a node pool.  Using a node pool has a few advantages over a single node, such as load balancing and cluster failover support.
 
 **Connecting to a single node**
 

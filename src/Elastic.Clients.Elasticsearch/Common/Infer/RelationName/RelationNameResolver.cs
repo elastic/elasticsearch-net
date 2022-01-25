@@ -9,13 +9,13 @@
 //{
 //	public class RelationNameResolver
 //	{
-//		private readonly IConnectionSettingsValues _connectionSettings;
+//		private readonly ITransportClientSettingsValues _transportClientSettings;
 //		private readonly ConcurrentDictionary<Type, string> _relationNames = new ConcurrentDictionary<Type, string>();
 
-//		public RelationNameResolver(IConnectionSettingsValues connectionSettings)
+//		public RelationNameResolver(ITransportClientSettingsValues connectionSettings)
 //		{
 //			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-//			_connectionSettings = connectionSettings;
+//			_transportClientSettings = connectionSettings;
 //		}
 
 //		public string Resolve<T>() where T : class => Resolve(typeof(T));
@@ -31,7 +31,7 @@
 //			if (_relationNames.TryGetValue(type, out typeName))
 //				return typeName;
 
-//			if (_connectionSettings.DefaultRelationNames.TryGetValue(type, out typeName))
+//			if (_transportClientSettings.DefaultRelationNames.TryGetValue(type, out typeName))
 //			{
 //				_relationNames.TryAdd(type, typeName);
 //				return typeName;

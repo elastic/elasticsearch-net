@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Elastic.Transport.Products.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework.Extensions;

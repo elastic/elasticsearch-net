@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Ephemeral;
+using Elastic.Transport.Products.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;

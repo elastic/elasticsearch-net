@@ -12,7 +12,7 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serialization
 {
-	internal class BulkOperationsNewlineDelimitedJsonSerializer : SerializerBase
+	internal class BulkOperationsNewlineDelimitedJsonSerializer : Serializer
 	{
 		private readonly IElasticsearchClientSettings _settings;
 

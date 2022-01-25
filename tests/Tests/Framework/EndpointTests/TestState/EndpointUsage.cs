@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Bogus;
+using Elastic.Transport.Products.Elasticsearch;
 using Tests.Configuration;
 using Tests.Core.Client;
 

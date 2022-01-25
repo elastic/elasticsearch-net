@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products.Elasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
 using Tests.Framework.Extensions;

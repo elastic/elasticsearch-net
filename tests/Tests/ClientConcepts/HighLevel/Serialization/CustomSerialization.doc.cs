@@ -62,7 +62,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 *
 		 * Implementing `IElasticsearchSerializer` is technically enough to inject your own `SourceSerializer`
 		 */
-		public class VanillaSerializer : SourceSerializerBase
+		public class VanillaSerializer : SourceSerializer
 		{
 			public override T Deserialize<T>(Stream stream) => throw new NotImplementedException();
 
@@ -163,12 +163,12 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		/**
 		 * ==== Derived serializers
 		 *
-		 * If you'd like to be more explicit, you can also derive from `ConnectionSettingsAwareSerializerBase`
+		 * If you'd like to be more explicit, you can also derive from `ConnectionSettingsAwareSerializer`
 		 * and override the `CreateJsonSerializerSettings` and `ModifyContractResolver` methods
 		 */
-		public class MyFirstCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
+		public class MyFirstCustomJsonNetSerializer : ConnectionSettingsAwareSerializer
 		{
-			public MyFirstCustomJsonNetSerializer(SerializerBase builtinSerializer, IElasticsearchClientSettings connectionSettings)
+			public MyFirstCustomJsonNetSerializer(Serializer builtinSerializer, IElasticsearchClientSettings connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
 
 			protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
@@ -218,7 +218,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
-				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `IConnection` implementation that actually sends a request.
+				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `ITransportClient` implementation that actually sends a request.
 				sourceSerializer: (builtin, settings) => new MyFirstCustomJsonNetSerializer(builtin, settings))
 				.DefaultIndex("my-index");
 
@@ -278,9 +278,9 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			}
 		}
 
-		//public class MySecondCustomJsonNetSerializer : ConnectionSettingsAwareSerializerBase
+		//public class MySecondCustomJsonNetSerializer : ConnectionSettingsAwareSerializer
 		//{
-		//	public MySecondCustomJsonNetSerializer(SerializerBase builtinSerializer, IElasticsearchClientSettings connectionSettings)
+		//	public MySecondCustomJsonNetSerializer(Serializer builtinSerializer, IElasticsearchClientSettings connectionSettings)
 		//		: base(builtinSerializer, connectionSettings) { }
 
 		//	protected override JsonSerializerSettings CreateJsonSerializerSettings() =>

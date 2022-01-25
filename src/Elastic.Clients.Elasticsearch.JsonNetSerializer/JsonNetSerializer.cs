@@ -10,10 +10,10 @@ using Newtonsoft.Json;
 
 namespace Elastic.Clients.JsonNetSerializer
 {
-	public class JsonNetSerializer : ConnectionSettingsAwareSerializerBase
+	public class JsonNetSerializer : ConnectionSettingsAwareSerializer
 	{
 		public JsonNetSerializer(
-			SerializerBase builtinSerializer,
+			Serializer builtinSerializer,
 			IElasticsearchClientSettings connectionSettings,
 			Func<JsonSerializerSettings> jsonSerializerSettingsFactory = null,
 			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver = null,
@@ -21,6 +21,6 @@ namespace Elastic.Clients.JsonNetSerializer
 		)
 			: base(builtinSerializer, connectionSettings, jsonSerializerSettingsFactory, modifyContractResolver, contractJsonConverters) { }
 
-		public static JsonNetSerializer Default(SerializerBase builtin, IElasticsearchClientSettings values) => new(builtin, values);
+		public static JsonNetSerializer Default(Serializer builtin, IElasticsearchClientSettings values) => new(builtin, values);
 	}
 }

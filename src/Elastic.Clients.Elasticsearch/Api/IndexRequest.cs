@@ -24,7 +24,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonIgnore] private Id? Id => Self.RouteValues.Get<Id>("id");
 
-		void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, SerializerBase sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
+		void ICustomJsonWriter.WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 
 		internal static HttpMethod GetHttpMethod(IndexRequest<TDocument> request) =>
 			request.Id?.StringOrLongValue != null || request.Self.RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Id _id;
 
-		public void WriteJson(Utf8JsonWriter writer, SerializerBase sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
+		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
 
 		// TODO: Codegen for optional params
 		public IndexRequestDescriptor<TDocument> Id(Id id) => Assign(id, (a, v) => a.RouteValues.Optional("id", v));

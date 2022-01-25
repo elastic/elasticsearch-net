@@ -27,10 +27,10 @@ namespace Elastic.Clients.JsonNetSerializer.Converters
 			//typeof(CartesianPoint),
 		};
 
-		private readonly SerializerBase _builtInSerializer;
+		private readonly Serializer _builtInSerializer;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 
-		public HandleNestTypesOnSourceJsonConverter(SerializerBase builtInSerializer, IMemoryStreamFactory memoryStreamFactory
+		public HandleNestTypesOnSourceJsonConverter(Serializer builtInSerializer, IMemoryStreamFactory memoryStreamFactory
 		)
 		{
 			_builtInSerializer = builtInSerializer;
@@ -47,7 +47,7 @@ namespace Elastic.Clients.JsonNetSerializer.Converters
 				: SerializationFormatting.None;
 
 			using (var ms = _memoryStreamFactory.Create())
-			using (var streamReader = new StreamReader(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding))
+			using (var streamReader = new StreamReader(ms, ConnectionSettingsAwareSerializer.ExpectedEncoding))
 			using (var reader = new JsonTextReader(streamReader))
 			{
 				_builtInSerializer.Serialize(value, ms, formatting);

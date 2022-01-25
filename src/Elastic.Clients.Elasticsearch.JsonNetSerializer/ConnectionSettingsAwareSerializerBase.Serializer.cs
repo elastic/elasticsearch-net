@@ -12,13 +12,13 @@ using Elastic.Clients.Elasticsearch;
 
 namespace Elastic.Clients.JsonNetSerializer
 {
-	public abstract partial class ConnectionSettingsAwareSerializerBase
+	public abstract partial class ConnectionSettingsAwareSerializer
 	{
-		protected ConnectionSettingsAwareSerializerBase(SerializerBase builtinSerializer, IElasticsearchClientSettings connectionSettings)
+		protected ConnectionSettingsAwareSerializer(Serializer builtinSerializer, IElasticsearchClientSettings connectionSettings)
 			: this(builtinSerializer, connectionSettings, null, null, null) { }
 
-		internal ConnectionSettingsAwareSerializerBase(
-			SerializerBase builtinSerializer,
+		internal ConnectionSettingsAwareSerializer(
+			Serializer builtinSerializer,
 			IElasticsearchClientSettings connectionSettings,
 			Func<JsonSerializerSettings> jsonSerializerSettingsFactory,
 			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver,
@@ -40,7 +40,7 @@ namespace Elastic.Clients.JsonNetSerializer
 			_collapsedSerializer = CreateSerializer(SerializationFormatting.None);
 		}
 
-		protected SerializerBase BuiltinSerializer { get; }
+		protected Serializer BuiltinSerializer { get; }
 
 		protected IElasticsearchClientSettings ConnectionSettings { get; }
 		protected IEnumerable<JsonConverter> ContractJsonConverters { get; }

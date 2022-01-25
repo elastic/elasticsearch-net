@@ -57,7 +57,7 @@ internal static class SourceSerialisation
 	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, IElasticsearchClientSettings settings) =>
 		Serialize<T>(toSerialize, writer, settings.SourceSerializer);
 
-	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, SerializerBase sourceSerializer)
+	public static void Serialize<T>(T toSerialize, Utf8JsonWriter writer, Serializer sourceSerializer)
 	{
 		if (sourceSerializer is DefaultSourceSerializer defaultSerializer)
 		{

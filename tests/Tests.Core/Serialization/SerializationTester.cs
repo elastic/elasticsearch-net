@@ -25,7 +25,7 @@ namespace Tests.Core.Serialization
 
 		//public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
 
-		protected SerializerBase Serializer => Client.ElasticsearchClientSettings.RequestResponseSerializer;
+		protected Serializer Serializer => Client.ElasticsearchClientSettings.RequestResponseSerializer;
 
 		public RoundTripResult<T> RoundTrips<T>(T @object) //, bool preserveNullInExpected = false)
 		{
@@ -244,7 +244,9 @@ namespace Tests.Core.Serialization
 		}
 
 		private static JsonSerializerOptions ExpectedJsonSerializerSettings(bool preserveNullInExpected = false) =>
-			new() {IgnoreNullValues = !preserveNullInExpected, Converters = {new JsonStringEnumConverter()}};
+#pragma warning disable SYSLIB0020 // Type or member is obsolete
+			new() { IgnoreNullValues = !preserveNullInExpected, Converters = { new JsonStringEnumConverter() } };
+#pragma warning restore SYSLIB0020 // Type or member is obsolete
 
 		/// <summary>
 		///     TEMP: Borrowed from

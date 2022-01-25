@@ -17,7 +17,7 @@ namespace Tests.Core.Client.Settings
 		public AlwaysInMemoryElasticsearchClientSettings(byte[] bytes) : base(forceInMemory: true, response: bytes) { }
 
 		public AlwaysInMemoryElasticsearchClientSettings(
-			Func<ICollection<Uri>, INodePool> createPool = null,
+			Func<ICollection<Uri>, NodePool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
 			int port = 9200

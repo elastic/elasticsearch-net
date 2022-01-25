@@ -1,6 +1,8 @@
-﻿// Licensed to Elasticsearch B.V under one or more agreements.
+// Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
+
+using System.Collections.Generic;
 
 namespace Elastic.Clients.Elasticsearch.Helpers;
 
@@ -13,5 +15,5 @@ public class BulkAllResponse
 	public int Retries { get; internal set; }
 
 	/// <summary>The items returned from the bulk response</summary>
-	//public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
+	public IReadOnlyCollection<BulkResponseItemBase> Items { get; internal set; } = EmptyReadOnly<BulkResponseItemBase>.Collection;
 }
