@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 using System.Linq;
-using Elastic.Transport.Products.Elasticsearch.Failures;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Tests.ClientConcepts.Errors
 {

@@ -51,10 +51,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj">
-      <Project>{14e44695-6737-49b2-8ad5-7aa77e4205d2}</Project>
-      <Name>Elastic.Transport</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj">
       <Project>{f8a7e60c-0c48-4d76-af7f-7881df5a263d}</Project>
       <Name>Elastic.Clients.Elasticsearch</Name>

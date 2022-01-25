@@ -40,7 +40,7 @@ namespace Elastic.Clients.JsonNetSerializer
 			return _serializer.Deserialize(jsonTextReader, type);
 		}
 
-		public override async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
+		public override async ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 		{
 			using var streamReader = new StreamReader(stream);
 			using var jsonTextReader = new JsonTextReader(streamReader);
@@ -48,7 +48,7 @@ namespace Elastic.Clients.JsonNetSerializer
 			return token.ToObject<T>(_serializer);
 		}
 
-		public override async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public override async ValueTask<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			using var streamReader = new StreamReader(stream);
 			using var jsonTextReader = new JsonTextReader(streamReader);

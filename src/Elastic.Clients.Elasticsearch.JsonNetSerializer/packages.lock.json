@@ -33,6 +33,18 @@
         "resolved": "12.0.1",
         "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
       },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -136,17 +148,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "1.0.0"
-        }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1",
-          "System.Threading.Tasks.Extensions": "4.5.4"
+          "Elastic.Transport": "0.3.0"
         }
       }
     },
@@ -187,6 +189,18 @@
         "requested": "[12.0.1, )",
         "resolved": "12.0.1",
         "contentHash": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg=="
+      },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.3.0",
+        "contentHash": "XjkukaPKVF3kgX1K0K8kHU84fYUXRwkE5J+23odNdQY80kOt0SbX4vdQ0xm8lp5fp0SEG6YkmzCw2TBzI/nPIg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "5.0.1",
+          "System.Text.Json": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -386,19 +400,9 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "1.0.0",
+          "Elastic.Transport": "0.3.0",
           "System.Reflection.Emit": "4.3.0",
           "System.Reflection.Emit.Lightweight": "4.3.0"
-        }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.1",
-          "System.Text.Json": "6.0.1",
-          "System.Threading.Tasks.Extensions": "4.5.4"
         }
       }
     }

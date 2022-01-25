@@ -6,7 +6,7 @@
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Elastic.Transport.Products.Elasticsearch.Failures;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Tests.ClientConcepts.Errors
 {

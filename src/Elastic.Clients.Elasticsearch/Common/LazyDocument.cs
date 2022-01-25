@@ -65,7 +65,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// <see cref="LazyDocument" /> instance.
 		/// </summary>
 		/// <typeparam name="T">The type</typeparam>
-		public Task<T> AsAsync<T>(CancellationToken ct = default)
+		public ValueTask<T> AsAsync<T>(CancellationToken ct = default)
 		{
 			using var ms = _memoryStreamFactory.Create(Bytes);
 			return _sourceSerializer.DeserializeAsync<T>(ms, ct);
@@ -76,7 +76,7 @@ namespace Elastic.Clients.Elasticsearch
 		/// <see cref="LazyDocument" /> instance.
 		/// </summary>
 		/// <param name="objectType">The type</param>
-		public Task<object> AsAsync(Type objectType, CancellationToken ct = default)
+		public ValueTask<object> AsAsync(Type objectType, CancellationToken ct = default)
 		{
 			using var ms = _memoryStreamFactory.Create(Bytes);
 			return _sourceSerializer.DeserializeAsync(objectType, ms, ct);
