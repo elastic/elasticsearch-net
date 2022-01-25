@@ -15,21 +15,38 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class Context : Union<string?, Elastic.Clients.Elasticsearch.GeoLocation?>
+	public partial class TranslogRetention
 	{
-		public Context(string? item) : base(item)
+		[JsonInclude]
+		[JsonPropertyName("size")]
+		public Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
+	}
+
+	public sealed partial class TranslogRetentionDescriptor : DescriptorBase<TranslogRetentionDescriptor>
+	{
+		public TranslogRetentionDescriptor()
 		{
 		}
 
-		public Context(Elastic.Clients.Elasticsearch.GeoLocation? item) : base(item)
+		internal TranslogRetentionDescriptor(Action<TranslogRetentionDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.ByteSize SizeValue { get; private set; }
+
+		public TranslogRetentionDescriptor Size(Elastic.Clients.Elasticsearch.ByteSize size) => Assign(size, (a, v) => a.SizeValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("size");
+			JsonSerializer.Serialize(writer, SizeValue, options);
+			writer.WriteEndObject();
 		}
 	}
 }

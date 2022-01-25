@@ -31,7 +31,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate? Cardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate?>(key);
-		public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate? TDigestPercentiles(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate? MedianAbsoluteDeviation(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MinAggregate? Min(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MinAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate? Max(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate?>(key);
@@ -49,7 +48,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate? Nested(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate? StringStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate? BoxPlot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate?>(key);
-		public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate? TopMetrics(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate?>(key);
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : AggregateBase => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 	}

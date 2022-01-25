@@ -22,12 +22,31 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class GeoHashLocation
+	public partial class CacheQueries
 	{
 		[JsonInclude]
-		[JsonPropertyName("geohash")]
-		public string Geohash { get; init; }
+		[JsonPropertyName("enabled")]
+		public bool Enabled { get; set; }
+	}
+
+	public sealed partial class CacheQueriesDescriptor : DescriptorBase<CacheQueriesDescriptor>
+	{
+		public CacheQueriesDescriptor()
+		{
+		}
+
+		internal CacheQueriesDescriptor(Action<CacheQueriesDescriptor> configure) => configure.Invoke(this);
+		internal bool EnabledValue { get; private set; }
+
+		public CacheQueriesDescriptor Enabled(bool enabled = true) => Assign(enabled, (a, v) => a.EnabledValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue);
+			writer.WriteEndObject();
+		}
 	}
 }

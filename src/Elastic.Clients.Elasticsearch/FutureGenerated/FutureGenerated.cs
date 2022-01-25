@@ -19,10 +19,10 @@ using System.IO;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class TopMetricsValue
-	{
-		public TopMetricsValue(Field field) => Field = field;
-	}
+	//public partial class TopMetricsValue
+	//{
+	//	public TopMetricsValue(Field field) => Field = field;
+	//}
 
 	public partial class Buckets<TBucket>
 	{
@@ -597,12 +597,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					//		break;
 					//	}
 
-					case "top_metrics":
-						{
-							var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
-							dictionary.Add(nameParts[1], agg);
-							break;
-						}
+					//case "top_metrics":
+					//	{
+					//		var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
+					//		dictionary.Add(nameParts[1], agg);
+					//		break;
+					//	}
 
 					case "value_count":
 						{
@@ -611,12 +611,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 							break;
 						}
 
-					//case "weighted_avg":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<WeightedAvgAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "weighted_avg":
+						{
+							var agg = JsonSerializer.Deserialize<WeightedAvgAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					case "avg_bucket":
 						break;

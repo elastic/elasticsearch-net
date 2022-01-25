@@ -329,7 +329,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("runtime_mappings")]
-		public Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+		public Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappings { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("stats")]
@@ -442,7 +442,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; private set; }
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; private set; }
+		internal Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; private set; }
 
 		internal IEnumerable<string>? StatsValue { get; private set; }
 
@@ -692,7 +692,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.PitDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<TDocument> RuntimeMappings(Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappingsValue = v);
+		public SearchRequestDescriptor<TDocument> RuntimeMappings(Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappingsValue = v);
 		public SearchRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Assign(stats, (a, v) => a.StatsValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

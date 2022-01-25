@@ -15,16 +15,21 @@
 //
 // ------------------------------------------------
 
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class TopMetricsAggregate : Aggregations.MultiBucketAggregateBase<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsBucket>
+	public partial class ByteSize : Union<long?, string?>
 	{
+		public ByteSize(long? item) : base(item)
+		{
+		}
+
+		public ByteSize(string? item) : base(item)
+		{
+		}
 	}
 }

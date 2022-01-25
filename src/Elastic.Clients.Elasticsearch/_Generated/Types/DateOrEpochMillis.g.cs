@@ -20,15 +20,15 @@ using System;
 using System.Collections.Generic;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Aggregations
+namespace Elastic.Clients.Elasticsearch
 {
-	public partial class Percentiles : Union<Dictionary<string, object>?, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>?>
+	public partial class DateOrEpochMillis : Union<string?, Elastic.Clients.Elasticsearch.EpochMillis?>
 	{
-		public Percentiles(Dictionary<string, object>? item) : base(item)
+		public DateOrEpochMillis(string? item) : base(item)
 		{
 		}
 
-		public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>? item) : base(item)
+		public DateOrEpochMillis(Elastic.Clients.Elasticsearch.EpochMillis? item) : base(item)
 		{
 		}
 	}
