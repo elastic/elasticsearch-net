@@ -68,10 +68,10 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 
 			public override object Deserialize(Type type, Stream stream) => throw new NotImplementedException();
 
-			public override Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
+			public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
 
-			public override Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
+			public override ValueTask<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken)) =>
 				throw new NotImplementedException();
 
 			public override void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented) =>
