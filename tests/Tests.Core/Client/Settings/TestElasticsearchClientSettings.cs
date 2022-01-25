@@ -16,7 +16,7 @@ namespace Tests.Core.Client.Settings
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any() || Process.GetProcessesByName("fiddler everywhere").Any();
 
 		public TestElasticsearchClientSettings(
-			Func<ICollection<Uri>, INodePool> createPool = null,
+			Func<ICollection<Uri>, NodePool> createPool = null,
 			SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
 			bool forceInMemory = false,
@@ -72,10 +72,10 @@ namespace Tests.Core.Client.Settings
 			if (!TestConfiguration.Instance.Random.SourceSerializer)
 				return null;
 
-			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
+			return (builtin, values) => new TestSourceSerializer(builtin, values);
 		}
 
-		private static INodePool CreatePool(Func<ICollection<Uri>, INodePool> createPool = null,
+		private static NodePool CreatePool(Func<ICollection<Uri>, NodePool> createPool = null,
 			int port = 9200)
 		{
 			createPool ??= uris => new StaticNodePool(uris);

@@ -10,14 +10,14 @@ namespace Tests.Core.Extensions
 {
 	public static class TestConfigurationExtensions
 	{
-		public static IConnection CreateConnection(this TestConfigurationBase configuration, bool forceInMemory = false, byte[] response = null)
+		public static ITransportClient CreateConnection(this TestConfigurationBase configuration, bool forceInMemory = false, byte[] response = null)
 		{
 			var headers = new Dictionary<string, IEnumerable<string>> { { "x-elastic-product", new[] { "Elasticsearch" } } };
 
 			return forceInMemory
 				? new InMemoryConnection(response, headers: headers)
 				: configuration.RunIntegrationTests
-					? new HttpConnection()
+					? new HttpTransportClient()
 					: new InMemoryConnection(response, headers: headers);
 		}
 

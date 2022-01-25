@@ -17,8 +17,8 @@ namespace Elastic.Clients.Elasticsearch
 	[JsonConverter(typeof(LazyDocumentConverter))]
 	public class LazyDocument
 	{
-		private readonly SerializerBase _sourceSerializer;
-		private readonly SerializerBase _requestResponseSerializer;
+		private readonly Serializer _sourceSerializer;
+		private readonly Serializer _requestResponseSerializer;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 
 		internal LazyDocument(byte[] bytes, IElasticsearchClientSettings settings)

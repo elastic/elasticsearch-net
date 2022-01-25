@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Elastic.Transport.Products.Elasticsearch;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch

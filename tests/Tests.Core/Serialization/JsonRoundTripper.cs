@@ -2,6 +2,7 @@ using System;
 using Elastic.Clients.Elasticsearch;
 using Tests.Core.Extensions;
 using FluentAssertions;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Tests.Core.Serialization
 {

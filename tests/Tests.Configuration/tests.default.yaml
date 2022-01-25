@@ -18,7 +18,7 @@ force_reseed: true
 test_against_already_running_elasticsearch: true
 
 #random_source_serializer: true
-#random_old_connection: true
+#random_old_transportClient: true
 #random_http_compresssion: true
 #seed: 74337
 

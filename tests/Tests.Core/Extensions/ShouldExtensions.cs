@@ -2,6 +2,7 @@ using Elastic.Transport;
 using FluentAssertions;
 using Elastic.Clients.Elasticsearch;
 using Tests.Core.Client;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Tests.Core.Extensions
 {

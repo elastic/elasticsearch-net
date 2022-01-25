@@ -38,7 +38,7 @@
 //				return _formatterResolver.GetFormatter<T>();
 //			}
 
-//			public IConnectionSettingsValues Settings => ((IJsonFormatterResolverWithSettings)_formatterResolver).Settings;
+//			public ITransportClientSettingsValues Settings => ((IJsonFormatterResolverWithSettings)_formatterResolver).Settings;
 //		}
 //	}
 //}

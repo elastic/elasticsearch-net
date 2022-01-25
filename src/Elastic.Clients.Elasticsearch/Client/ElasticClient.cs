@@ -72,8 +72,8 @@ public partial class ElasticClient
 
 	public IElasticsearchClientSettings ElasticsearchClientSettings => _transport.Settings;
 	public Inferrer Infer => _transport.Settings.Inferrer;
-	public SerializerBase RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
-	public SerializerBase SourceSerializer => _transport.Settings.SourceSerializer;
+	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
+	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
 	public ITransport Transport => _transport;
 
 	private ProductCheckStatus _productCheckStatus;
@@ -92,7 +92,7 @@ public partial class ElasticClient
 		IRequestParameters? parameters,
 		Action<IRequestConfiguration>? forceConfiguration = null)
 		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse<ServerError>, new()
+		where TResponse : class, ITransportResponse, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -126,7 +126,7 @@ public partial class ElasticClient
 		}
 
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
-		var response = _transport.Request<TResponse, ServerError>(request.HttpMethod, url, postData, parameters);
+		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, parameters);
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 		if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -151,7 +151,7 @@ public partial class ElasticClient
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration = null)
 		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse<ServerError>, new()
+		where TResponse : class, ITransportResponse, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -185,7 +185,7 @@ public partial class ElasticClient
 		}
 
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
-		var response = _transport.Request<TResponse, ServerError>(request.HttpMethod, url, postData, request.RequestParameters);
+		var response = _transport.Request<TResponse>(request.HttpMethod, url, postData, request.RequestParameters);
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 		if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -211,7 +211,7 @@ public partial class ElasticClient
 		IRequestParameters? parameters,
 		CancellationToken cancellationToken = default)
 		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse<ServerError>, new()
+		where TResponse : class, ITransportResponse, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -248,13 +248,13 @@ public partial class ElasticClient
 		var (url, postData) = PrepareRequest(request, null);
 
 		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
-			return _transport.RequestAsync<TResponse, ServerError>(request.HttpMethod, url, postData, parameters, cancellationToken);
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
 
 		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
-			var response = await _transport.RequestAsync<TResponse, ServerError>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 			if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -280,7 +280,7 @@ public partial class ElasticClient
 		TRequest request,
 		CancellationToken cancellationToken = default)
 		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse<ServerError>, new()
+		where TResponse : class, ITransportResponse, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -317,13 +317,13 @@ public partial class ElasticClient
 		var (url, postData) = PrepareRequest(request, null);
 
 		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
-			return _transport.RequestAsync<TResponse, ServerError>(request.HttpMethod, url, postData, request.RequestParameters, cancellationToken);
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, request.RequestParameters, cancellationToken);
 
 		return SendRequest(request, request.RequestParameters, url, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
-			var response = await _transport.RequestAsync<TResponse, ServerError>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 			if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -351,7 +351,7 @@ public partial class ElasticClient
 		Action<IRequestConfiguration>? forceConfiguration = null,
 		CancellationToken cancellationToken = default)
 		where TRequest : class, IRequest
-		where TResponse : class, ITransportResponse<ServerError>, new()
+		where TResponse : class, ITransportResponse, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
 			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
@@ -388,13 +388,13 @@ public partial class ElasticClient
 		var (url, postData) = PrepareRequest(request, forceConfiguration);
 
 		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified)
-			return _transport.RequestAsync<TResponse, ServerError>(request.HttpMethod, url, postData, parameters, cancellationToken);
+			return _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken);
 
 		return SendRequest(request, parameters, url, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, IRequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
-			var response = await _transport.RequestAsync<TResponse, ServerError>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+			var response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 			PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 			if (_productCheckStatus == ProductCheckStatus.Failed)

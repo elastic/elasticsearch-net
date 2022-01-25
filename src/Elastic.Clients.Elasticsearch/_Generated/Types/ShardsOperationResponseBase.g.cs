@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Transport.Products.Elasticsearch;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch

@@ -16,7 +16,7 @@ namespace Elastic.Clients.Elasticsearch
 	///// <summary>
 	///// The preferred way to wire in a custom response formatter is for requests to override
 	///// <see cref="RequestBase{TParameters}.RequestDefaults"/> however sometimes a request does not have
-	///// access to enough type information. This attribute will set up the see <see cref="CustomResponseBuilderBase"/>
+	///// access to enough type information. This attribute will set up the see <see cref="CustomResponseBuilder"/>
 	///// in the generated client methods instead.
 	///// </summary>
 	//[AttributeUsage(AttributeTargets.Interface)]
