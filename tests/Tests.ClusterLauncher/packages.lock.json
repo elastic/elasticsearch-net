@@ -61,7 +61,7 @@
       "Elastic.Transport": {
         "type": "Transitive",
         "resolved": "0.3.1",
-        "contentHash": "zjY9FwRW77/jDctjIOZecuvRrGRuLg0IDMulT8jQr0ycsU4Ikde8uj5pUTkkkWyEmGRgjzf477QkeKGyq8AqVQ==",
+        "contentHash": "wlu1GSbFqyZf7257oXy1aElcNOE0ZNRrxdn9Vq6iV/1/RSYYLPuVeXQyoOkLAeOB+HnNIa4gdXBHwd0EpqPOAA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -1308,7 +1308,7 @@
       "Elastic.Transport": {
         "type": "Transitive",
         "resolved": "0.3.1",
-        "contentHash": "zjY9FwRW77/jDctjIOZecuvRrGRuLg0IDMulT8jQr0ycsU4Ikde8uj5pUTkkkWyEmGRgjzf477QkeKGyq8AqVQ==",
+        "contentHash": "wlu1GSbFqyZf7257oXy1aElcNOE0ZNRrxdn9Vq6iV/1/RSYYLPuVeXQyoOkLAeOB+HnNIa4gdXBHwd0EpqPOAA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -2559,7 +2559,7 @@
       "Elastic.Transport": {
         "type": "Transitive",
         "resolved": "0.3.1",
-        "contentHash": "zjY9FwRW77/jDctjIOZecuvRrGRuLg0IDMulT8jQr0ycsU4Ikde8uj5pUTkkkWyEmGRgjzf477QkeKGyq8AqVQ==",
+        "contentHash": "wlu1GSbFqyZf7257oXy1aElcNOE0ZNRrxdn9Vq6iV/1/RSYYLPuVeXQyoOkLAeOB+HnNIa4gdXBHwd0EpqPOAA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",

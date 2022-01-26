@@ -1,11 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Elastic.Clients.Elasticsearch</PackageId>
     <Title>Elastic.Clients.Elasticsearch - Official Elasticsearch .NET Client</Title>
-    <PackageTags>elasticsearch;elastic;client;search;lucene</PackageTags>
+    <PackageTags>elasticsearch;elastic;client;search</PackageTags>
     <Description>
-      Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and 
-      responses. Uses and exposes Elasticsearch.Net.
+      This strongly-typed, client library enables working with Elasticsearch. It is the offical client maintained and supported by Elastic.
     </Description>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
