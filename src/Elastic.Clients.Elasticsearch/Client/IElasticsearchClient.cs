@@ -1,14 +1,18 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>
-	///     ElasticClient is Elastic.Clients.Elasticsearch's strongly typed client which exposes fully mapped Elasticsearch endpoints.
+	///     ElasticsearchClient is Elastic.Clients.Elasticsearch's strongly typed client which exposes fully mapped Elasticsearch endpoints.
 	/// </summary>
 	/// <remarks>
 	///     It is generally expected to be used as a singleton instance for the lifetime of the host application.
 	/// </remarks>
-	public partial interface IElasticClient
+	public partial interface IElasticsearchClient
 	{
 		/// <summary>
 		///     The configured connection settings for the client.

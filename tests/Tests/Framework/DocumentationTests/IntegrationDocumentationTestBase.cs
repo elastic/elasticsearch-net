@@ -10,7 +10,7 @@ namespace Tests.Framework.DocumentationTests
 {
 	public abstract class DocumentationTestBase
 	{
-		protected virtual IElasticClient Client => TestClient.DefaultInMemoryClient;
+		protected virtual IElasticsearchClient Client => TestClient.DefaultInMemoryClient;
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 	}
@@ -21,6 +21,6 @@ namespace Tests.Framework.DocumentationTests
 
 		protected IntegrationDocumentationTestBase(ClientTestClusterBase cluster) => Cluster = cluster;
 
-		protected override IElasticClient Client => Cluster.Client;
+		protected override IElasticsearchClient Client => Cluster.Client;
 	}
 }

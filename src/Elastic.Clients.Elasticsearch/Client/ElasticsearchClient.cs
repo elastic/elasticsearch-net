@@ -11,26 +11,26 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <inheritdoc />
-public partial class ElasticClient
+public partial class ElasticsearchClient
 {
 	private readonly ITransport<IElasticsearchClientSettings> _transport;
 
 	/// <summary>
 	///     Creates a client configured to connect to localhost:9200.
 	/// </summary>
-	public ElasticClient() : this(new ElasticsearchClientSettings(new Uri("http://localhost:9200"))) { }
+	public ElasticsearchClient() : this(new ElasticsearchClientSettings(new Uri("http://localhost:9200"))) { }
 
 	/// <summary>
 	///     Creates a client configured to connect to a node reachable at the provided <paramref name="uri" />.
 	/// </summary>
 	/// <param name="uri">The <see cref="Uri" /> to connect to.</param>
-	public ElasticClient(Uri uri) : this(new ElasticsearchClientSettings(uri)) { }
+	public ElasticsearchClient(Uri uri) : this(new ElasticsearchClientSettings(uri)) { }
 
 	/// <summary>
 	///     Creates a client configured to communicate with Elastic Cloud using the provided <paramref name="cloudId" />.
 	///     <para>See the <see cref="CloudNodePool" /> documentation for more information on how to obtain your Cloud Id.</para>
 	///     <para>
-	///         If you want more control, use the <see cref="ElasticClient(IElasticsearchClientSettings)" /> constructor and
+	///         If you want more control, use the <see cref="ElasticsearchClient(IElasticsearchClientSettings)" /> constructor and
 	///         pass
 	///         an instance of
 	///         <see cref="ElasticsearchClientSettings" /> that takes a <paramref name="cloudId" /> in its constructor as well.
@@ -38,7 +38,7 @@ public partial class ElasticClient
 	/// </summary>
 	/// <param name="cloudId">The Cloud ID of an Elastic Cloud deployment.</param>
 	/// <param name="credentials">The credentials to use for the connection.</param>
-	public ElasticClient(string cloudId, IAuthenticationHeader credentials) : this(
+	public ElasticsearchClient(string cloudId, IAuthenticationHeader credentials) : this(
 		new ElasticsearchClientSettings(cloudId, credentials))
 	{
 	}
@@ -47,7 +47,7 @@ public partial class ElasticClient
 	///     TODO
 	/// </summary>
 	/// <param name="elasticsearchClientSettings"></param>
-	public ElasticClient(IElasticsearchClientSettings elasticsearchClientSettings)
+	public ElasticsearchClient(IElasticsearchClientSettings elasticsearchClientSettings)
 		: this(new Transport<IElasticsearchClientSettings>(elasticsearchClientSettings))
 	{
 	}
@@ -56,7 +56,7 @@ public partial class ElasticClient
 	///     TODO
 	/// </summary>
 	/// <param name="transport"></param>
-	public ElasticClient(ITransport<IElasticsearchClientSettings> transport)
+	public ElasticsearchClient(ITransport<IElasticsearchClientSettings> transport)
 	{
 		transport.ThrowIfNull(nameof(transport));
 		transport.Settings.ThrowIfNull(nameof(transport.Settings));

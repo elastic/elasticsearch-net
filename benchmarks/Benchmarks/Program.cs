@@ -23,7 +23,7 @@ public class SerialisePolymorphic
 {
 
 	private readonly AggregationContainer _container1 = new AggregationContainer(new MinAggregation("testing"));
-	private readonly ElasticClient _client = new ElasticClient();
+	private readonly ElasticsearchClient _client = new ElasticsearchClient();
 
 
 	private readonly Stream _stream = new MemoryStream();

@@ -15,11 +15,11 @@ namespace Tests.ClientConcepts.Errors
 		protected ServerErrorTestsBase()
 		{
 			var settings = FixedResponseClient.CreateConnectionSettings(ResponseJson, 500);
-			HighLevelClient = new ElasticClient(settings);
+			HighLevelClient = new ElasticsearchClient(settings);
 		}
 
 		protected abstract string Json { get; }
-		private IElasticClient HighLevelClient { get; }
+		private IElasticsearchClient HighLevelClient { get; }
 
 		private string ResponseJson => string.Concat(@"{ ""error"": ", Json, @", ""status"":500 }");
 

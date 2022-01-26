@@ -12,7 +12,7 @@ namespace Tests.Core.Serialization
 {
 	public abstract class ExpectJsonTestBase
 	{
-		protected ExpectJsonTestBase(IElasticClient client) => Tester = new SerializationTester(client);
+		protected ExpectJsonTestBase(IElasticsearchClient client) => Tester = new SerializationTester(client);
 
 		protected abstract object ExpectJson { get; }
 		protected abstract IReadOnlyList<object> ExpectNdjson { get; }

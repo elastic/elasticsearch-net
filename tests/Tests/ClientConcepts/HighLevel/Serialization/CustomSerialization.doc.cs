@@ -90,7 +90,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
 				sourceSerializer: (builtin, settings) => new VanillaSerializer()); // <1> what the Func?
-			var client = new ElasticClient(connectionSettings);
+			var client = new ElasticsearchClient(connectionSettings);
 		}
 
 		/**
@@ -129,7 +129,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var connectionSettings =
 				new ElasticsearchClientSettings(pool, sourceSerializer: JsonNetSerializer.Default);
-			var client = new ElasticClient(connectionSettings);
+			var client = new ElasticsearchClient(connectionSettings);
 		}
 		/**
 		 * `JsonNetSerializer.Default` is just syntactic sugar for passing a delegate like
@@ -141,7 +141,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			var connectionSettings = new ElasticsearchClientSettings(
 				pool,
 				sourceSerializer: (builtin, settings) => new JsonNetSerializer(builtin, settings));
-			var client = new ElasticClient(connectionSettings);
+			var client = new ElasticsearchClient(connectionSettings);
 		}
 		/**
 		 * `JsonNetSerializer`'s constructor takes several methods that allow you to control the `JsonSerializerSettings` and modify
@@ -157,7 +157,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 					() => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include },
 					resolver => resolver.NamingStrategy = new SnakeCaseNamingStrategy()
 				));
-			var client = new ElasticClient(connectionSettings);
+			var client = new ElasticsearchClient(connectionSettings);
 		}
 
 		/**
@@ -225,7 +225,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			//hide
 			connectionSettings.DisableDirectStreaming();
 
-			var client = new ElasticClient(connectionSettings);
+			var client = new ElasticsearchClient(connectionSettings);
 
 			/** Now, if we index an instance of our document type */
 			var document = new MyDocument
@@ -310,7 +310,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		//	//hide
 		//	connectionSettings.DisableDirectStreaming();
 
-		//	var client = new ElasticClient(connectionSettings);
+		//	var client = new ElasticsearchClient(connectionSettings);
 
 		//	/** and indexing an instance of our document type */
 		//	var document = new MyDocument

@@ -59,7 +59,7 @@ namespace Playground
 			var jsonTest = JsonSerializer.Serialize(toConvert);
 
 
-			var client = new ElasticClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
+			var client = new ElasticsearchClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
 				//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
 				.ServerCertificateValidationCallback((a, b, c, d) => true)
 				.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))
@@ -151,7 +151,7 @@ namespace Playground
 
 
 			//var pool = new SingleNodePool(new Uri("https://localhost:9600"));
-			//var client = new ElasticClient(new ElasticsearchClientSettings(pool)
+			//var client = new ElasticsearchClient(new ElasticsearchClientSettings(pool)
 			//	.Authentication(new BasicAuthentication("elastic", "Ey5c7EYcZ=g0JtMwo-+y"))
 			//	.ServerCertificateValidationCallback((a, b, c, d) => true)
 			//    .DefaultMappingFor<PersonV2>(p => p.IndexName("people-test")));
@@ -329,7 +329,7 @@ namespace Playground
 
 			//var s = new ElasticsearchClientSettings();
 
-			//IElasticClient client = new ElasticClient(s);
+			//IElasticsearchClient client = new ElasticsearchClient(s);
 
 			//var indexName = Guid.NewGuid().ToString();
 

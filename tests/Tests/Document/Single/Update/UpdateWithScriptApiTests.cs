@@ -70,7 +70,7 @@
 //		protected override bool SupportsDeserialization => false;
 //		protected override string UrlPath => $"/project/_update/{CallIsolatedValue}?routing={U(Project.Instance.Name)}";
 
-//		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+//		protected override void IntegrationSetup(IElasticsearchClient client, CallUniqueValues values)
 //		{
 //			foreach (var id in values.Values)
 //				Client.Index(Project.Instance, i => i.Id(id).Routing(Project.Instance.Name));

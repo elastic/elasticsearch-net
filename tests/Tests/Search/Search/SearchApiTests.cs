@@ -548,7 +548,7 @@ namespace Tests.Search.Search
 	//		(c, r) => c.Tasks.ListAsync(r)
 	//	);
 
-	//	protected override void OnBeforeCall(IElasticClient client)
+	//	protected override void OnBeforeCall(IElasticsearchClient client)
 	//	{
 	//		var searchResponse = client.Search<Project>(s => s
 	//				.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))

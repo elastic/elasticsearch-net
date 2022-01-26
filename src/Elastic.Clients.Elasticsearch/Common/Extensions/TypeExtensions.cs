@@ -184,8 +184,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		internal delegate T ObjectActivator<out T>(params object[] args);
 
-		private static readonly Assembly ElasticClientsElasticsearchAssembly = typeof(TypeExtensions).Assembly;
+		private static readonly Assembly ElasticsearchClientsElasticsearchAssembly = typeof(TypeExtensions).Assembly;
 
-		public static bool IsElasticClientsElasticsearchType(this Type type) => type.Assembly == ElasticClientsElasticsearchAssembly;
+		public static bool IsElasticsearchClientsElasticsearchType(this Type type) => type.Assembly == ElasticsearchClientsElasticsearchAssembly;
 	}
 }

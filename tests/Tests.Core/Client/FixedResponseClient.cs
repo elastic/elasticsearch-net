@@ -9,7 +9,7 @@ namespace Tests.Core.Client
 {
 	public static class FixedResponseClient
 	{
-		public static IElasticClient Create(
+		public static IElasticsearchClient Create(
 			object response,
 			int statusCode = 200,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null,
@@ -18,7 +18,7 @@ namespace Tests.Core.Client
 		)
 		{
 			var settings = CreateConnectionSettings(response, statusCode, modifySettings, contentType, exception);
-			return new ElasticClient(settings);
+			return new ElasticsearchClient(settings);
 		}
 
 		public static ElasticsearchClientSettings CreateConnectionSettings(

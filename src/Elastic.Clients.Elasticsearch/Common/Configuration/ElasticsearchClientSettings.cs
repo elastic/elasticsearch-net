@@ -106,7 +106,7 @@ namespace Elastic.Clients.Elasticsearch
 			ITransportClient connection,
 			ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
 			IPropertyMappingProvider propertyMappingProvider)
-			: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticClientsElasticsearch)
+			: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
 		{
 			var defaultSerializer = new DefaultRequestResponseSerializer(this);
 			var sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? new DefaultSourceSerializer(this);
@@ -405,7 +405,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected ConnectionConfigurationBase(NodePool nodePool, ITransportClient connection,
 			Serializer? serializer,
 			IProductRegistration registration = null)
-			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticClient))) =>
+			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticsearchClient))) =>
 				UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
 		bool ITransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;

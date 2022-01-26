@@ -48,7 +48,7 @@ public class BulkSourceDeserialize
 
 		var connection = new InMemoryConnection(Encoding.UTF8.GetBytes(json));
 		var settings = new ElasticsearchClientSettings(pool, connection);
-		var client = new ElasticClient(settings);
+		var client = new ElasticsearchClient(settings);
 
 		var bulkResponse = client.Bulk(new BulkRequest());
 

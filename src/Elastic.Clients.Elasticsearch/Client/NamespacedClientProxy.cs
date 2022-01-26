@@ -1,8 +1,11 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
-using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -13,9 +16,9 @@ namespace Elastic.Clients.Elasticsearch
 	/// </remarks>
 	public class NamespacedClientProxy
 	{
-		private readonly ElasticClient _client;
+		private readonly ElasticsearchClient _client;
 
-		protected NamespacedClientProxy(ElasticClient client) => _client = client;
+		protected NamespacedClientProxy(ElasticsearchClient client) => _client = client;
 
 		internal TResponse DoRequest<TRequest, TResponse>(
 			TRequest request,

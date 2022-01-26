@@ -28,15 +28,15 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			NumberOfReplicas = 0,
 		};
 
-		public DefaultSeeder(IElasticClient client, IndexSettings indexSettings)
+		public DefaultSeeder(IElasticsearchClient client, IndexSettings indexSettings)
 		{
 			Client = client;
 			IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
-		public DefaultSeeder(IElasticClient client) : this(client, null) { }
+		public DefaultSeeder(IElasticsearchClient client) : this(client, null) { }
 
-		private IElasticClient Client { get; }
+		private IElasticsearchClient Client { get; }
 
 		private IndexSettings IndexSettings { get; }
 

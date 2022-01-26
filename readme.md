@@ -140,7 +140,7 @@ You can connect to your Elasticsearch cluster via a single node, or by specifyin
 ```csharp
 var node = new Uri("http://myserver:9200");
 var settings = new ConnectionSettings(node);
-var client = new ElasticClient(settings);
+var client = new ElasticsearchClient(settings);
 ```
 
 **Connecting to multiple nodes using a connection pool**
@@ -155,7 +155,7 @@ var nodes = new Uri[]
 
 var pool = new StaticNodePool(nodes);
 var settings = new ConnectionSettings(pool);
-var client = new ElasticClient(settings);
+var client = new ElasticsearchClient(settings);
 ```
 
 ### Indexing
@@ -270,7 +270,7 @@ var config = new ConnectionConfiguration(node);
 var client = new ElasticLowLevelClient(config);
 ```
 
-Note the main difference here is that we are instantiating an `ElasticLowLevelClient` rather than `ElasticClient`, and `ConnectionConfiguration` instead of `ConnectionSettings`.
+Note the main difference here is that we are instantiating an `ElasticLowLevelClient` rather than `ElasticsearchClient`, and `ConnectionConfiguration` instead of `ConnectionSettings`.
 
 ### Calling an API endpoint
 
