@@ -6,7 +6,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>
-	///     Provides the connection settings for Elastic.Clients.Elasticsearch's high level <see cref="ElasticClient" />
+	///     Provides the connection settings for Elastic.Clients.Elasticsearch's high level <see cref="ElasticsearchClient" />
 	/// </summary>
 	public interface IElasticsearchClientSettings : ITransportConfiguration
 	{

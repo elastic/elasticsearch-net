@@ -116,7 +116,7 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 		(client, r) => client.BulkAsync(r)
 	);
 
-	protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+	protected override void IntegrationSetup(IElasticsearchClient client, CallUniqueValues values)
 	{
 		// TODO - REPLACE WITH FLUENT
 

@@ -36,7 +36,7 @@ namespace Tests.Framework.EndpointTests
 			UniqueValues = usage.CallUniqueValues;
 		}
 
-		public virtual IElasticClient Client =>
+		public virtual IElasticsearchClient Client =>
 			TestConfiguration.Instance.RunIntegrationTests ? Cluster.Client : TestClient.DefaultInMemoryClient;
 
 		public TCluster Cluster { get; }
@@ -63,28 +63,28 @@ namespace Tests.Framework.EndpointTests
 
 		protected void ExtendedValue<T>(string key, T value) where T : class => UniqueValues.ExtendedValue(key, value);
 		
-		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
+		protected virtual void IntegrationSetup(IElasticsearchClient client, CallUniqueValues values) { }
 
-		protected virtual void IntegrationTeardown(IElasticClient client, CallUniqueValues values) { }
+		protected virtual void IntegrationTeardown(IElasticsearchClient client, CallUniqueValues values) { }
 
-		protected virtual void OnBeforeCall(IElasticClient client) { }
+		protected virtual void OnBeforeCall(IElasticsearchClient client) { }
 
-		protected virtual void OnAfterCall(IElasticClient client) { }
+		protected virtual void OnAfterCall(IElasticsearchClient client) { }
 
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
 
 		protected abstract LazyResponses ClientUsage();
 
 		protected LazyResponses Calls(
-			Func<IElasticClient, Action<TDescriptor>, TResponse> fluent,
-			Func<IElasticClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
-			Func<IElasticClient, TInitializer, TResponse> request,
-			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
+			Func<IElasticsearchClient, Action<TDescriptor>, TResponse> fluent,
+			Func<IElasticsearchClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
+			Func<IElasticsearchClient, TInitializer, TResponse> request,
+			Func<IElasticsearchClient, TInitializer, Task<TResponse>> requestAsync
 		) => new(async () =>
 		{
 			var client = Client;
 
-			void IntegrateOnly(Action<IElasticClient> act)
+			void IntegrateOnly(Action<IElasticsearchClient> act)
 			{
 				if (!TestClient.Configuration.RunIntegrationTests) return;
 

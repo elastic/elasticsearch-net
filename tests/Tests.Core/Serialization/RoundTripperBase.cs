@@ -26,7 +26,7 @@ namespace Tests.Core.Serialization
 
 				if (settingsModifier != null)
 					settings = settingsModifier(settings);
-				Tester = new SerializationTester(new ElasticClient(settings));
+				Tester = new SerializationTester(new ElasticsearchClient(settings));
 			}
 		}
 

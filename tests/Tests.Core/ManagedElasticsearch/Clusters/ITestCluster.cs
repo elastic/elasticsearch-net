@@ -8,6 +8,6 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public interface ITestCluster
 	{
-		IElasticClient Client { get; }
+		IElasticsearchClient Client { get; }
 	}
 }

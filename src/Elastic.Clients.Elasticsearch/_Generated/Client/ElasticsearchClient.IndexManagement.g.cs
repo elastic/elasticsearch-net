@@ -24,7 +24,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public class IndexManagementNamespace : NamespacedClientProxy
 	{
-		internal IndexManagementNamespace(ElasticClient client) : base(client)
+		internal IndexManagementNamespace(ElasticsearchClient client) : base(client)
 		{
 		}
 

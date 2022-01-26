@@ -146,7 +146,7 @@ module Versioning =
             let ciArgs =
                 let appVeyor = Environment.hasEnvironVar "APPVEYOR"
                 let azDevops = Environment.hasEnvironVar "TF_BUILD"
-                if  appVeyor || azDevops then ["-r"; "true"] else []
+                if  true || azDevops then ["-r"; "true"] else []
             ReposTooling.PackageValidator
                 <| [p.Package; "-v"; v; "-a"; p.AssemblyName; "-k"; officialToken] @ ciArgs
                 |> ignore 

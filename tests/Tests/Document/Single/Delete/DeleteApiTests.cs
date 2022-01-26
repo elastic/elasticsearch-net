@@ -28,7 +28,7 @@ public class DeleteApiTests
 
 	protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
-	protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+	protected override void IntegrationSetup(IElasticsearchClient client, CallUniqueValues values)
 	{
 		foreach (var id in values.Values)
 			Client.Index(Project.Instance, i => i.Id(id).Routing(id));
@@ -71,7 +71,7 @@ public class OriginalDeleteApiTests
 	protected override bool SupportsDeserialization => false;
 	protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{CallIsolatedValue}?routing={U(CallIsolatedValue)}";
 
-	protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+	protected override void IntegrationSetup(IElasticsearchClient client, CallUniqueValues values)
 	{
 		foreach (var id in values.Values)
 			Client.Index(Project.Instance, i => i.Id(id).Routing(id));
