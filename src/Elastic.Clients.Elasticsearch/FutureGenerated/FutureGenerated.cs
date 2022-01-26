@@ -1034,7 +1034,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class ElasticClient
+	public partial class ElasticsearchClient
 	{
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null)
 		{
@@ -1044,7 +1044,7 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial interface IElasticClient
+	public partial interface IElasticsearchClient
 	{
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null);
 	}
@@ -1491,7 +1491,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public class DocType { }
 
-	public partial interface IElasticClient
+	public partial interface IElasticsearchClient
 	{
 		DeleteResponse Delete<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest);
 
@@ -1510,7 +1510,7 @@ namespace Elastic.Clients.Elasticsearch
 		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null);
 	}
 
-	public partial class ElasticClient
+	public partial class ElasticsearchClient
 	{
 		public IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
 		{

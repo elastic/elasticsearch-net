@@ -9,7 +9,7 @@ using Elastic.Clients.Elasticsearch.Helpers;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial interface IElasticClient
+public partial interface IElasticsearchClient
 {
 	//HelpersNamespace Helpers { get; }
 
@@ -18,7 +18,7 @@ public partial interface IElasticClient
     BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default);
 }
 
-public partial class ElasticClient
+public partial class ElasticsearchClient
 {
 	//public HelpersNamespace Helpers { get; private set; }
 
@@ -35,9 +35,9 @@ public partial class ElasticClient
 
 //public class HelpersNamespace : NamespacedClientProxy
 //{
-//	private readonly ElasticClient _client;
+//	private readonly ElasticsearchClient _client;
 
-//	internal HelpersNamespace(ElasticClient client) : base(client) => _client = client;
+//	internal HelpersNamespace(ElasticsearchClient client) : base(client) => _client = client;
 
 //	public BulkAllObservable<T> BulkAllObservable<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
 //	{

@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial interface IElasticClient
+	public partial interface IElasticsearchClient
 	{
 		ClusterNamespace Cluster { get; }
 

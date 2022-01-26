@@ -51,16 +51,16 @@ namespace Tests.Framework.EndpointTests.TestState
 	public class SingleEndpointUsage<TResponse> : EndpointUsage
 		where TResponse : class, IResponse
 	{
-		private readonly Func<string, IElasticClient, TResponse> _fluent;
-		private readonly Func<string, IElasticClient, Task<TResponse>> _fluentAsync;
-		private readonly Func<string, IElasticClient, TResponse> _request;
-		private readonly Func<string, IElasticClient, Task<TResponse>> _requestAsync;
+		private readonly Func<string, IElasticsearchClient, TResponse> _fluent;
+		private readonly Func<string, IElasticsearchClient, Task<TResponse>> _fluentAsync;
+		private readonly Func<string, IElasticsearchClient, TResponse> _request;
+		private readonly Func<string, IElasticsearchClient, Task<TResponse>> _requestAsync;
 
 		public SingleEndpointUsage(
-			Func<string, IElasticClient, TResponse> fluent,
-			Func<string, IElasticClient, Task<TResponse>> fluentAsync,
-			Func<string, IElasticClient, TResponse> request,
-			Func<string, IElasticClient, Task<TResponse>> requestAsync,
+			Func<string, IElasticsearchClient, TResponse> fluent,
+			Func<string, IElasticsearchClient, Task<TResponse>> fluentAsync,
+			Func<string, IElasticsearchClient, TResponse> request,
+			Func<string, IElasticsearchClient, Task<TResponse>> requestAsync,
 			string valuePrefix = null
 		) : base(valuePrefix)
 		{
@@ -70,17 +70,17 @@ namespace Tests.Framework.EndpointTests.TestState
 			_requestAsync = requestAsync;
 		}
 
-		public Action<IElasticClient, CallUniqueValues> IntegrationSetup { get; set; }
-		public Action<IElasticClient, CallUniqueValues> IntegrationTeardown { get; set; }
-		public Action<IElasticClient> OnAfterCall { get; set; }
-		public Action<IElasticClient> OnBeforeCall { get; set; }
+		public Action<IElasticsearchClient, CallUniqueValues> IntegrationSetup { get; set; }
+		public Action<IElasticsearchClient, CallUniqueValues> IntegrationTeardown { get; set; }
+		public Action<IElasticsearchClient> OnAfterCall { get; set; }
+		public Action<IElasticsearchClient> OnBeforeCall { get; set; }
 
 		// ReSharper disable once StaticMemberInGenericType
 		public static Randomizer Random { get; } = new(TestConfiguration.Instance.Seed);
 
 		private LazyResponses Responses { get; set; }
 
-		public void KickOffOnce(IElasticClient client, bool oneRandomCall = false) =>
+		public void KickOffOnce(IElasticsearchClient client, bool oneRandomCall = false) =>
 			Responses = CallOnce(() => new LazyResponses(async () =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests)
@@ -115,7 +115,7 @@ namespace Tests.Framework.EndpointTests.TestState
 				return dict;
 			}));
 
-		private void Call(IElasticClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method, Func<string, TResponse> call)
+		private void Call(IElasticsearchClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method, Func<string, TResponse> call)
 		{
 			CallUniqueValues.CurrentView = method;
 			OnBeforeCall?.Invoke(client);
@@ -123,7 +123,7 @@ namespace Tests.Framework.EndpointTests.TestState
 			OnAfterCall?.Invoke(client);
 		}
 
-		private async Task CallAsync(IElasticClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method,
+		private async Task CallAsync(IElasticsearchClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method,
 			Func<string, Task<TResponse>> call
 		)
 		{

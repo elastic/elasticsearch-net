@@ -39,7 +39,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var settings = new ConnectionSettings()
 				.DefaultIndex("defaultindex"); // <1> set the default index
 
-			var client = new ElasticClient(settings);
+			var client = new ElasticsearchClient(settings);
 			var searchResponse = client.Search<Project>();
 
 			/**
@@ -70,7 +70,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.IndexName("projects")
 				);
 
-			var client = new ElasticClient(settings);
+			var client = new ElasticsearchClient(settings);
 			var searchResponse = client.Search<Project>();
 
 			/**
@@ -104,7 +104,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.IndexName("projects") // <2> a index to use when `Project` is the target POCO type
 				);
 
-			var client = new ElasticClient(settings);
+			var client = new ElasticsearchClient(settings);
 
 			var projectSearchResponse = client.Search<Project>();
 
@@ -145,7 +145,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void ExplicitIndexOnRequest()
 		{
 			var settings = new ConnectionSettings();
-			var client = new ElasticClient(settings);
+			var client = new ElasticsearchClient(settings);
 
 			var response = client.Search<Project>(s => s
 				.Index("some-other-index") //<1> Provide the index name on the request
@@ -174,7 +174,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.IndexName("projects")
 				);
 
-			var client = new ElasticClient(settings);
+			var client = new ElasticsearchClient(settings);
 
 			var response = client.Search<Project>(s => s
 				.Index("some-other-index")
@@ -212,7 +212,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		//hide
 		[U] public void ArgumentExceptionBubblesOut()
 		{
-			var client = new ElasticClient(new ConnectionSettings());
+			var client = new ElasticsearchClient(new ConnectionSettings());
 			var e = Assert.Throws<ArgumentException>(() => client.Search<Project>());
 		}
 

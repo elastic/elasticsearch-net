@@ -20,7 +20,7 @@ public abstract class VerifySerializerTestBase : VerifyBase
 		var settings = new ElasticsearchClientSettings();
 		settings.ApplyDomainSettings();
 
-		var client = new ElasticClient(settings);
+		var client = new ElasticsearchClient(settings);
 
 		_requestResponseSerializer = client.RequestResponseSerializer;
 		_settings = client.ElasticsearchClientSettings;
@@ -82,7 +82,7 @@ public abstract class InstanceSerializerTestBase
 		if (applyDomainSettings)
 			settings.ApplyDomainSettings();
 
-		var client = new ElasticClient(settings);
+		var client = new ElasticsearchClient(settings);
 
 		_requestResponseSerializer = client.RequestResponseSerializer;
 		_sourceSerializer = client.SourceSerializer;
@@ -101,7 +101,7 @@ public abstract class InstanceSerializerTestBase
 
 	protected string SerializeAndGetJsonString<T>(T data, ElasticsearchClientSettings settings)
 	{
-		var client = new ElasticClient(settings);
+		var client = new ElasticsearchClient(settings);
 		var serializer = client.RequestResponseSerializer;
 		var stream = new MemoryStream();
 		serializer.Serialize(data, stream);
@@ -121,7 +121,7 @@ public abstract class SerializerTestBase
 		var settings = new ElasticsearchClientSettings();
 		settings.ApplyDomainSettings();
 
-		var client = new ElasticClient(settings);
+		var client = new ElasticsearchClient(settings);
 		
 		_requestResponseSerializer = client.RequestResponseSerializer;
 		_settings = client.ElasticsearchClientSettings;

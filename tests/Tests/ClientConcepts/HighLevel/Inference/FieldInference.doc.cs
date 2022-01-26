@@ -423,7 +423,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.PropertyName(p => p.C, "d")
 				);
 
-			var newClient = new ElasticClient(newConnectionSettings);
+			var newClient = new ElasticsearchClient(newConnectionSettings);
 
 			fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
 			fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));

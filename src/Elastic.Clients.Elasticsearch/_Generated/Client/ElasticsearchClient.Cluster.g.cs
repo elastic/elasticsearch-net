@@ -24,7 +24,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public class ClusterNamespace : NamespacedClientProxy
 	{
-		internal ClusterNamespace(ElasticClient client) : base(client)
+		internal ClusterNamespace(ElasticsearchClient client) : base(client)
 		{
 		}
 

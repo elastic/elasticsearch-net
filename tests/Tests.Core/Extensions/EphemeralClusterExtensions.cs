@@ -19,7 +19,7 @@ namespace Tests.Core.Extensions
 			return new TestElasticsearchClientSettings(uris => new StaticNodePool(clusterNodes));
 		}
 
-		public static IElasticClient GetOrAddClient<TConfig>(
+		public static IElasticsearchClient GetOrAddClient<TConfig>(
 			this IEphemeralCluster<TConfig> cluster,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null
 		)
@@ -47,7 +47,7 @@ namespace Tests.Core.Extensions
 					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 				}
 
-				var client = new ElasticClient(settings);
+				var client = new ElasticsearchClient(settings);
 				return client;
 			});
 		}

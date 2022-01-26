@@ -34,7 +34,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 				new Uri("http://ingestnode3:9200")
 			});
 			var settings = new ElasticsearchClientSettings(pool);
-			var indexingClient = new ElasticClient(settings);
+			var indexingClient = new ElasticsearchClient(settings);
 		}
 
 		/**
@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 				new Uri("http://node3:9200")
 			});
 			var settings = new ElasticsearchClientSettings(pool).NodePredicate(n => n.HasFeature(IngestEnabled)); //<2> predicate to select only nodes with ingest capabilities
-			var indexingClient = new ElasticClient(settings);
+			var indexingClient = new ElasticsearchClient(settings);
 		}
 	}
 }

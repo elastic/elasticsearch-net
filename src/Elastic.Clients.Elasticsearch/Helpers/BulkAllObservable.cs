@@ -22,7 +22,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 	private readonly int _backOffRetries;
 	private readonly TimeSpan _backOffTime;
 	private readonly int _bulkSize;
-	private readonly IElasticClient _client;
+	private readonly IElasticsearchClient _client;
 
 	private readonly CancellationToken _compositeCancelToken;
 	private readonly CancellationTokenSource _compositeCancelTokenSource;
@@ -36,7 +36,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 
 	private readonly Action<BulkResponse> _bulkResponseCallback;
 
-	public BulkAllObservable(IElasticClient client, IBulkAllRequest<T> partitionedBulkRequest, CancellationToken cancellationToken = default)
+	public BulkAllObservable(IElasticsearchClient client, IBulkAllRequest<T> partitionedBulkRequest, CancellationToken cancellationToken = default)
 	{
 		_client = client;
 		_partitionedBulkRequest = partitionedBulkRequest;

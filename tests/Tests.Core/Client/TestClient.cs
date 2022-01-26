@@ -9,16 +9,16 @@ namespace Tests.Core.Client
 	{
 		public static readonly TestConfigurationBase Configuration = TestConfiguration.Instance;
 
-		public static readonly IElasticClient Default =
-			new ElasticClient(new TestElasticsearchClientSettings().ApplyDomainSettings());
+		public static readonly IElasticsearchClient Default =
+			new ElasticsearchClient(new TestElasticsearchClientSettings().ApplyDomainSettings());
 
-		public static readonly IElasticClient DefaultInMemoryClient =
-			new ElasticClient(new AlwaysInMemoryElasticsearchClientSettings().ApplyDomainSettings());
+		public static readonly IElasticsearchClient DefaultInMemoryClient =
+			new ElasticsearchClient(new AlwaysInMemoryElasticsearchClientSettings().ApplyDomainSettings());
 
-		public static readonly IElasticClient DisabledStreaming =
-			new ElasticClient(new TestElasticsearchClientSettings().ApplyDomainSettings().DisableDirectStreaming());
+		public static readonly IElasticsearchClient DisabledStreaming =
+			new ElasticsearchClient(new TestElasticsearchClientSettings().ApplyDomainSettings().DisableDirectStreaming());
 
-		public static IElasticClient FixedInMemoryClient(byte[] response) => new ElasticClient(
+		public static IElasticsearchClient FixedInMemoryClient(byte[] response) => new ElasticsearchClient(
 			new AlwaysInMemoryElasticsearchClientSettings(response)
 				.ApplyDomainSettings()
 				.DisableDirectStreaming()

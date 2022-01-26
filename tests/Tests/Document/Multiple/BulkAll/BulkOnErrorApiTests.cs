@@ -101,7 +101,7 @@ public class BulkOnErrorApiTests : BulkAllApiTestsBase
 		var seenPages = 0;
 		var badUris = new[] { new Uri("http://test.example:9201"), new Uri("http://test.example:9202") };
 		var pool = new StaticNodePool(badUris);
-		var badClient = new ElasticClient(new ElasticsearchClientSettings(pool));
+		var badClient = new ElasticsearchClient(new ElasticsearchClientSettings(pool));
 		var observableBulk = badClient.BulkAll(documents, f => f
 			.MaxDegreeOfParallelism(8)
 			.BackOffTime(TimeSpan.FromSeconds(10))

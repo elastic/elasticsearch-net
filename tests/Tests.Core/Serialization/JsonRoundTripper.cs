@@ -46,11 +46,11 @@ namespace Tests.Core.Serialization
 
 		public void FromRequest(IResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
 
-		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => FromRequest(call(Tester.Client));
+		public void FromRequest<T>(Func<IElasticsearchClient, T> call) where T : IResponse => FromRequest(call(Tester.Client));
 
 		public void FromResponse(IResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
 
-		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => FromResponse(call(Tester.Client));
+		public void FromResponse<T>(Func<IElasticsearchClient, T> call) where T : IResponse => FromResponse(call(Tester.Client));
 
 		private void ToSerializeTo(byte[] json)
 		{
