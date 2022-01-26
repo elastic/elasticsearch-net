@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Elastic.Clients.Elasticsearch</PackageId>
     <Title>Elastic.Clients.Elasticsearch - Official Elasticsearch .NET Client</Title>
@@ -20,11 +20,8 @@
   <ItemGroup>
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Condition="'$(TargetFramework)' == 'netstandard2.0'" Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
-    <PackageReference Include="Elastic.Transport" Version="0.3.0" />
+    <PackageReference Include="Elastic.Transport" Version="0.3.1" />
   </ItemGroup>
-  <!--<ItemGroup>
-    <ProjectReference Include="..\..\..\elastic-transport-net\src\Elastic.Transport\Elastic.Transport.csproj" />
-  </ItemGroup>-->
   <ItemGroup>
     <InternalsVisibleTo Include="Tests" Key="$(ExposedPublicKey)" />
     <InternalsVisibleTo Include="Tests.Domain" Key="$(ExposedPublicKey)" />
