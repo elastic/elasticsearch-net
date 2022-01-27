@@ -1,157 +1,98 @@
-using System.IO;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using Dia2Lib;
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Transport;
+using Nest;
+using System.Globalization;
+using System.Text;
+using System.Text.Json;
 
-namespace Benchmarks;
+var config = ManualConfig.Create(DefaultConfig.Instance);
+config.SummaryStyle = new SummaryStyle(CultureInfo.CurrentCulture, true, BenchmarkDotNet.Columns.SizeUnit.B, null);
 
-internal class Program
+BenchmarkRunner.Run<Benchmarks.BulkIngest>(config);
+
+namespace Benchmarks
 {
-	private static void Main() =>
-		//var thing = new IndicesGetString() { NameCount = 3 };
-		//thing.Setup();
-		//thing.NaiveStringCreate();
-
-		_ = BenchmarkRunner.Run<SerialisePolymorphic>();
-}
-
-
-[MemoryDiagnoser]
-public class SerialisePolymorphic
-{
-
-	private readonly AggregationContainer _container1 = new AggregationContainer(new MinAggregation("testing"));
-	private readonly ElasticsearchClient _client = new ElasticsearchClient();
-
-
-	private readonly Stream _stream = new MemoryStream();
-
-	[Benchmark]
-	public void Reflection()
+	[MemoryDiagnoser]
+	public class BulkIngest
 	{
-		_stream.Position = 0;
-		_client.RequestResponseSerializer.Serialize(_container1, _stream);
+		//private static readonly List<SampleData> Data = Enumerable.Range(0, 100).Select(r => new SampleData()).ToList();
+
+		private static readonly ElasticClient NestClient = new(new ConnectionSettings(new Uri("https://localhost:9600"))
+			.BasicAuthentication("elastic", "c236sjjbMP3nUGDxU_Z6")
+			.ServerCertificateValidationCallback((a, b, c, d) => true)
+			.EnableApiVersioningHeader());
+
+		private static readonly ElasticsearchClient AlphaClient = new(new ElasticsearchClientSettings(new Uri("https://localhost:9600"))
+			.Authentication(new BasicAuthentication("elastic", "c236sjjbMP3nUGDxU_Z6"))
+			.ServerCertificateValidationCallback((a, b, c, d) => true));
+
+		private static readonly MemoryStream Stream = new(Encoding.UTF8.GetBytes(@"{""cluster_name"":""my-test-cluster"",""status"":""yellow"",""timed_out"":false,""number_of_nodes"":1,""number_of_data_nodes"":1,""active_primary_shards"":6,""active_shards"":6,""relocating_shards"":0,""initializing_shards"":0,""unassigned_shards"":4,""delayed_unassigned_shards"":0,""number_of_pending_tasks"":0,""number_of_in_flight_fetch"":0,""task_max_waiting_in_queue_millis"":0,""active_shards_percent_as_number"":60.0}"));
+
+		[Benchmark]
+		public void Version7()
+		{
+			Stream.Position = 0;
+			_ = NestClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(Stream);
+		}
+
+		[Benchmark]
+		public void Version8()
+		{
+			Stream.Position = 0;
+			_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(Stream);
+		}
+
+		[Benchmark]
+		public void Version8_String()
+		{
+			Stream.Position = 0;
+			_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV2>(Stream);
+		}
+
+		//[Benchmark]
+		//public void Version8_String_Converter()
+		//{
+		//	Stream.Position = 0;
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV3>(Stream);
+		//}
+
+		//[Benchmark]
+		//public void Version8_String_ConverterWithBool()
+		//{
+		//	Stream.Position = 0;
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV3_BoolFlags>(Stream);
+		//}
+
+		//[Benchmark]
+		//public void Version8_String_ConverterWithSpan()
+		//{
+		//	Stream.Position = 0;
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV3_Span>(Stream);
+		//}
+
+		//[Benchmark]
+		//public void Version8_SourceWithoutUsingContext()
+		//{
+		//	Stream.Position = 0;
+		//	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV4>(Stream);
+		//}
+
+		//[Benchmark]
+		//public void Version8_SourceDirect()
+		//{
+		//	Stream.Position = 0;
+		//	_ = JsonSerializer.Deserialize(Stream, Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV4Context.Default.ClusterHealthResponseV4);
+		//}
 	}
+	
+	public class SampleData
+	{
+		public SampleData() => Value = Guid.NewGuid();
 
+		public Guid Value { get; }
+	}
 }
-
-//[MemoryDiagnoser]
-//public class IndicesGetString
-//{
-//	private readonly List<IndexName> _indices = new();
-
-//	private string _output = string.Empty;
-
-//	private readonly ElasticsearchClientSettings _settings = new();
-
-//	[Params(1,3)]
-//	public int NameCount { get; set; }
-
-//	[GlobalSetup]
-//	public void Setup()
-//	{
-//		for (var i = 0; i < NameCount; i++)
-//		{
-//			_indices.Add($"item{i}");
-//		}
-//	}
-
-//	[Benchmark(Baseline = true)]
-//	public void StringJoin()
-//	{
-//		var indices = _indices.Select(i => i.GetString(_settings)).Distinct();
-//		_output = string.Join(',', indices);
-//	}
-
-//	[Benchmark]
-//	public void NaiveStringCreate()
-//	{
-//		// This implementation doesn't ensure distinct values
-//		// Is that really an issue as it's unlikely and would still be a valid request?
-
-//		// Issue: This doesn't call the Inferrer so is not a fair test since we'd 
-
-//		var length = 0;
-
-//		var indices = _indices;
-//		for (var i = 0; i < indices.Count; i++)
-//		{
-//			length += _indices[i].Value.Length + 1;
-//		}
-
-//		length = length == 0 ? 0 : length - 1;
-
-//		_output = string.Create(length, indices, (span, state) =>
-//		{
-//			var written = 0;
-//			for (var i = 0; i < indices.Count; i++)
-//			{
-//				var value = state[i].Value.AsSpan();
-//				value.CopyTo(span[written..]);
-//				written += value.Length;
-
-//				if (i != indices.Count - 1)
-//					span[written++] = ',';
-//			}
-//		});
-//	}
-//}
-
-///// <summary>
-///// Investigate whether it's "more efficient" to use a one or many design for Indices.
-///// This avoids extra allocations in the case of a single item but is not so good for > 1 item.
-///// </summary>
-//[MemoryDiagnoser]
-//public class OneOrMany
-//{
-//	private readonly List<IndexName> _indices = new();
-
-//	private Indices? _finalIndices = null;
-//	private IndicesV2? _finalIndicesV2 = null;
-
-//	private readonly ElasticsearchClientSettings _settings = new();
-
-//	[Params(1, 3)]
-//	public int NameCount { get; set; }
-
-//	[GlobalSetup]
-//	public void Setup()
-//	{
-//		for (var i = 0; i < NameCount; i++)
-//		{
-//			_indices.Add($"item{i}");
-//		}
-//	}
-
-//	[Benchmark(Baseline = true)]
-//	public void PureHashSet() => _finalIndices = new Indices(_indices);
-
-//	[Benchmark]
-//	public void OneOrManyConcept()
-//	{
-//		if (_indices.Count == 1)
-//			_finalIndicesV2 = new IndicesV2(_indices[0]);
-//		else
-//			_finalIndicesV2 = new IndicesV2(_indices);
-//	}
-
-//	internal partial class IndicesV2
-//	{
-//		public static readonly IndicesV2 All = new("_all");
-
-//		private readonly HashSet<IndexName>? _indices;
-//		private readonly IndexName? _index;
-
-//		internal IndicesV2(IndexName index) => _index = index;
-
-//		public IndicesV2(IEnumerable<IndexName> indices)
-//		{
-//			if (_indices is null)
-//				_indices = new HashSet<IndexName>();
-
-//			_indices.UnionWith(indices);
-//		}
-//	}
-//}
