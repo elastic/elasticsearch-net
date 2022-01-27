@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
+    <PackageReference Include="NEST" Version="7.16.0" />
   </ItemGroup>
 
 </Project>
