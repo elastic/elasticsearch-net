@@ -31,7 +31,8 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				BottomRight = new GeoLocation(-34, 34),
 			},
 			Type = GeoExecution.Indexed,
-			ValidationMethod = GeoValidationMethod.Strict
+			ValidationMethod = GeoValidationMethod.Strict,
+			IgnoreUnmapped = true
 		};
 
 		protected override object QueryJson => new
@@ -54,7 +55,8 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 						lat = -34.0,
 						lon = 34.0
 					}
-				}
+				},
+				ignore_unmapped = true
 			}
 		};
 
@@ -69,6 +71,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				)
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Type(GeoExecution.Indexed)
+				.IgnoreUnmapped(true)
 			);
 	}
 
@@ -93,7 +96,8 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				WellKnownText = "BBOX (-34, 34, 34, -34)"
 			},
 			Type = GeoExecution.Indexed,
-			ValidationMethod = GeoValidationMethod.Strict
+			ValidationMethod = GeoValidationMethod.Strict,
+			IgnoreUnmapped = true
 		};
 
 		protected override object QueryJson => new
@@ -107,7 +111,8 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				locationPoint = new
 				{
 					wkt = "BBOX (-34, 34, 34, -34)"
-				}
+				},
+				ignore_unmapped = true
 			}
 		};
 
@@ -121,6 +126,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				)
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Type(GeoExecution.Indexed)
+				.IgnoreUnmapped(true)
 			);
 	}
 }
