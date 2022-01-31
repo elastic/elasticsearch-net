@@ -16,6 +16,8 @@ namespace Nest
 		IEnumerable<GeoLocation> Points { get; set; }
 
 		GeoValidationMethod? ValidationMethod { get; set; }
+
+		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public class GeoPolygonQuery : FieldNameQueryBase, IGeoPolygonQuery
@@ -23,6 +25,8 @@ namespace Nest
 		public IEnumerable<GeoLocation> Points { get; set; }
 
 		public GeoValidationMethod? ValidationMethod { get; set; }
+
+		public bool? IgnoreUnmapped { get; set; }
 		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoPolygon = this;
@@ -37,12 +41,15 @@ namespace Nest
 		protected override bool Conditionless => GeoPolygonQuery.IsConditionless(this);
 		IEnumerable<GeoLocation> IGeoPolygonQuery.Points { get; set; }
 		GeoValidationMethod? IGeoPolygonQuery.ValidationMethod { get; set; }
+		bool? IGeoPolygonQuery.IgnoreUnmapped { get; set; }
 
 		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<GeoLocation> points) => Assign(points, (a, v) => a.Points = v);
 
 		public GeoPolygonQueryDescriptor<T> Points(params GeoLocation[] points) => Assign(points, (a, v) => a.Points = v);
 
 		public GeoPolygonQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(validation, (a, v) => a.ValidationMethod = v);
+
+		public GeoPolygonQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmapped = v);
 	}
 
 	internal class GeoPolygonQueryFormatter : IJsonFormatter<IGeoPolygonQuery>
@@ -51,7 +58,8 @@ namespace Nest
 		{
 			{ "_name", 0 },
 			{ "boost", 1 },
-			{ "validation_method", 2 }
+			{ "validation_method", 2 },
+			{ "ignore_unmapped", 3 }
 		};
 
 		public IGeoPolygonQuery Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
@@ -77,6 +85,9 @@ namespace Nest
 						case 2:
 							query.ValidationMethod = formatterResolver.GetFormatter<GeoValidationMethod>()
 								.Deserialize(ref reader, formatterResolver);
+							break;
+						case 3:
+							query.IgnoreUnmapped = reader.ReadNullableBoolean();
 							break;
 					}
 				}
@@ -135,6 +146,16 @@ namespace Nest
 				writer.WritePropertyName("validation_method");
 				formatterResolver.GetFormatter<GeoValidationMethod>()
 					.Serialize(ref writer, value.ValidationMethod.Value, formatterResolver);
+				written = true;
+			}
+
+			if (value.IgnoreUnmapped != null)
+			{
+				if (written)
+					writer.WriteValueSeparator();
+
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBoolean(value.IgnoreUnmapped.Value);
 				written = true;
 			}
 
