@@ -26,6 +26,9 @@ namespace Nest
 		[EnumMember(Value = "with_positions_offsets")]
 		WithPositionsOffsets,
 
+		[EnumMember(Value = "with_positions_payloads")]
+		WithPositionsPayloads,
+
 		[EnumMember(Value = "with_positions_offsets_payloads")]
 		WithPositionsOffsetsPayloads
 	}
