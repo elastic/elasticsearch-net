@@ -48,6 +48,9 @@ namespace Nest
 		[DataMember(Name ="segments")]
 		public SegmentsStats Segments { get; set; }
 
+		[DataMember(Name = "shard_stats")]
+		public ShardTotalStats ShardStats { get; set; }
+
 		[DataMember(Name ="store")]
 		public StoreStats Store { get; set; }
 
