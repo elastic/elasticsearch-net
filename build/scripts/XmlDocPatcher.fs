@@ -32,7 +32,7 @@ module InheritDoc =
         relatedInterfaceDescriptorRequest;
         relatedInterfaceDescriptorGeneric;
         manualMapping
-    ];
+    ]
     
     let private documentedApis (file:string) =
         use reader = XmlReader.Create file
