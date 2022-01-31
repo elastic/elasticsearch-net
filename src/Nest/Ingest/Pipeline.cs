@@ -23,7 +23,7 @@ namespace Nest
 		IEnumerable<IProcessor> Processors { get; set; }
 
 		[DataMember(Name = "version")]
-		long Version { get; set; }
+		long? Version { get; set; }
 	}
 
 	public class Pipeline : IPipeline
@@ -34,7 +34,7 @@ namespace Nest
 
 		public IEnumerable<IProcessor> Processors { get; set; }
 
-		public long Version { get; set; }
+		public long? Version { get; set; }
 	}
 
 	public class PipelineDescriptor : DescriptorBase<PipelineDescriptor, IPipeline>, IPipeline
@@ -42,7 +42,7 @@ namespace Nest
 		string IPipeline.Description { get; set; }
 		IEnumerable<IProcessor> IPipeline.OnFailure { get; set; }
 		IEnumerable<IProcessor> IPipeline.Processors { get; set; }
-		long IPipeline.Version { get; set; }
+		long? IPipeline.Version { get; set; }
 
 		/// <inheritdoc />
 		public PipelineDescriptor Description(string description) => Assign(description, (a, v) => a.Description = v);
@@ -62,6 +62,6 @@ namespace Nest
 			Assign(selector, (a, v) => a.OnFailure = v?.Invoke(new ProcessorsDescriptor())?.Value);
 
 		/// <inheritdoc />
-		public PipelineDescriptor Version(long version) => Assign(version, (a, v) => a.Version = v);
+		public PipelineDescriptor Version(long? version = null) => Assign(version, (a, v) => a.Version = v);
 	}
 }
