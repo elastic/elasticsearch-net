@@ -130,22 +130,24 @@ namespace Elasticsearch.Net
 		Http = 1 << 2,
 		[EnumMember(Value = "indices")]
 		Indices = 1 << 3,
+		[EnumMember(Value = "ingest")]
+		Ingest = 1 << 4,
 		[EnumMember(Value = "jvm")]
-		Jvm = 1 << 4,
+		Jvm = 1 << 5,
 		[EnumMember(Value = "os")]
-		Os = 1 << 5,
+		Os = 1 << 6,
 		[EnumMember(Value = "process")]
-		Process = 1 << 6,
+		Process = 1 << 7,
 		[EnumMember(Value = "thread_pool")]
-		ThreadPool = 1 << 7,
+		ThreadPool = 1 << 8,
 		[EnumMember(Value = "transport")]
-		Transport = 1 << 8,
+		Transport = 1 << 9,
 		[EnumMember(Value = "discovery")]
-		Discovery = 1 << 9,
+		Discovery = 1 << 10,
 		[EnumMember(Value = "indexing_pressure")]
-		IndexingPressure = 1 << 10,
+		IndexingPressure = 1 << 11,
 		[EnumMember(Value = "_all")]
-		All = 1 << 11
+		All = 1 << 12
 	}
 
 	[Flags, StringEnum]
@@ -390,6 +392,17 @@ namespace Elasticsearch.Net
 	}
 
 	[StringEnum]
+	public enum Features
+	{
+		[EnumMember(Value = "aliases")]
+		Aliases,
+		[EnumMember(Value = "mappings")]
+		Mappings,
+		[EnumMember(Value = "settings")]
+		Settings
+	}
+
+	[StringEnum]
 	public enum IndicesShardStoresStatus
 	{
 		[EnumMember(Value = "green")]
@@ -496,6 +509,7 @@ namespace Elasticsearch.Net
 			EnumStringResolvers.TryAdd(typeof(VersionType), (e) => GetStringValue((VersionType)e));
 			EnumStringResolvers.TryAdd(typeof(Conflicts), (e) => GetStringValue((Conflicts)e));
 			EnumStringResolvers.TryAdd(typeof(OpType), (e) => GetStringValue((OpType)e));
+			EnumStringResolvers.TryAdd(typeof(Features), (e) => GetStringValue((Features)e));
 			EnumStringResolvers.TryAdd(typeof(IndicesShardStoresStatus), (e) => GetStringValue((IndicesShardStoresStatus)e));
 			EnumStringResolvers.TryAdd(typeof(WaitFor), (e) => GetStringValue((WaitFor)e));
 			EnumStringResolvers.TryAdd(typeof(Sort), (e) => GetStringValue((Sort)e));
@@ -612,6 +626,8 @@ namespace Elasticsearch.Net
 				list.Add("http");
 			if ((enumValue & NodesStatsMetric.Indices) != 0)
 				list.Add("indices");
+			if ((enumValue & NodesStatsMetric.Ingest) != 0)
+				list.Add("ingest");
 			if ((enumValue & NodesStatsMetric.Jvm) != 0)
 				list.Add("jvm");
 			if ((enumValue & NodesStatsMetric.Os) != 0)
@@ -924,6 +940,21 @@ namespace Elasticsearch.Net
 			}
 
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'OpType'");
+		}
+
+		public static string GetStringValue(this Features enumValue)
+		{
+			switch (enumValue)
+			{
+				case Features.Aliases:
+					return "aliases";
+				case Features.Mappings:
+					return "mappings";
+				case Features.Settings:
+					return "settings";
+			}
+
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'Features'");
 		}
 
 		public static string GetStringValue(this IndicesShardStoresStatus enumValue)

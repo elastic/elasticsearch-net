@@ -126,6 +126,17 @@ namespace Elasticsearch.Net.Specification.TransformApi
 		[MapsApi("transform.put_transform", "transform_id, body")]
 		public Task<TResponse> PutAsync<TResponse>(string transformId, PostData body, PutTransformRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(PUT, Url($"_transform/{transformId:transformId}"), ctx, body, RequestParams(requestParameters));
+		///<summary>POST on /_transform/{transform_id}/_reset <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html</para></summary>
+		///<param name = "transformId">The id of the transform to reset</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		public TResponse Reset<TResponse>(string transformId, ResetTransformRequestParameters requestParameters = null)
+			where TResponse : class, ITransportResponse, new() => DoRequest<TResponse>(POST, Url($"_transform/{transformId:transformId}/_reset"), null, RequestParams(requestParameters));
+		///<summary>POST on /_transform/{transform_id}/_reset <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html</para></summary>
+		///<param name = "transformId">The id of the transform to reset</param>
+		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
+		[MapsApi("transform.reset_transform", "transform_id")]
+		public Task<TResponse> ResetAsync<TResponse>(string transformId, ResetTransformRequestParameters requestParameters = null, CancellationToken ctx = default)
+			where TResponse : class, ITransportResponse, new() => DoRequestAsync<TResponse>(POST, Url($"_transform/{transformId:transformId}/_reset"), ctx, null, RequestParams(requestParameters));
 		///<summary>POST on /_transform/{transform_id}/_start <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html</para></summary>
 		///<param name = "transformId">The id of the transform to start</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
