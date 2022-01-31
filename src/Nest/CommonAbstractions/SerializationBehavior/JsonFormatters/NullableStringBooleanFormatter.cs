@@ -172,6 +172,13 @@ namespace Nest
 					return null;
 				case JsonToken.String:
 					var s = reader.ReadString();
+
+					if (s.Equals("Infinity", System.StringComparison.Ordinal))
+						return double.PositiveInfinity;
+
+					if (s.Equals("-Infinity", System.StringComparison.Ordinal))
+						return double.NegativeInfinity;
+
 					if (!double.TryParse(s, out var d))
 						throw new JsonParsingException($"Cannot parse {typeof(double).FullName} from: {s}");
 
@@ -193,5 +200,40 @@ namespace Nest
 
 			writer.WriteDouble(value.Value);
 		}
+	}
+
+	internal class StringDoubleFormatter : IJsonFormatter<double>
+	{
+		public double Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+		{
+			var token = reader.GetCurrentJsonToken();
+			switch (token)
+			{
+				case JsonToken.Null:
+					throw new JsonParsingException($"Cannot parse non-nullable double value from: {token}.");
+
+				case JsonToken.String:
+					var s = reader.ReadString();
+
+					if (s.Equals("Infinity", System.StringComparison.Ordinal))
+						return double.PositiveInfinity;
+
+					if (s.Equals("-Infinity", System.StringComparison.Ordinal))
+						return double.NegativeInfinity;
+
+					if (!double.TryParse(s, out var d))
+						throw new JsonParsingException($"Cannot parse {typeof(double).FullName} from: {s}");
+
+					return d;
+
+				case JsonToken.Number:
+					return reader.ReadDouble();
+
+				default:
+					throw new JsonParsingException($"Cannot parse {typeof(double).FullName} from: {token}");
+			}
+		}
+
+		public void Serialize(ref JsonWriter writer, double value, IJsonFormatterResolver formatterResolver) => writer.WriteDouble(value);
 	}
 }

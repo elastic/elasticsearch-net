@@ -251,27 +251,29 @@ namespace Nest
 
 		private IAggregate GetBoxplotAggregate(ref JsonReader reader, IJsonFormatterResolver formatterResolver, IReadOnlyDictionary<string, object> meta)
 		{
+			var nullableDoubleFormatter = new StringDoubleFormatter();
+
 			var boxplot = new BoxplotAggregate
 			{
-				Min = reader.ReadDouble(),
+				Min = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver),
 				Meta = meta
 			};
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "max"
 			reader.ReadNext(); // :
-			boxplot.Max = reader.ReadDouble();
+			boxplot.Max = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver);
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "q1"
 			reader.ReadNext(); // :
-			boxplot.Q1 = reader.ReadDouble();
+			boxplot.Q1 = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver);
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "q2"
 			reader.ReadNext(); // :
-			boxplot.Q2 = reader.ReadDouble();
+			boxplot.Q2 = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver);
 			reader.ReadNext(); // ,
 			reader.ReadNext(); // "q3"
 			reader.ReadNext(); // :
-			boxplot.Q3 = reader.ReadDouble();
+			boxplot.Q3 = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver);
 
 			var token = reader.GetCurrentJsonToken();
 			if (token != JsonToken.EndObject)
@@ -279,11 +281,11 @@ namespace Nest
 				reader.ReadNext(); // ,
 				reader.ReadNext(); // "lower"
 				reader.ReadNext(); // :
-				boxplot.Lower = reader.ReadDouble();
+				boxplot.Lower = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver);
 				reader.ReadNext(); // ,
 				reader.ReadNext(); // "upper"
 				reader.ReadNext(); // :
-				boxplot.Upper = reader.ReadDouble();
+				boxplot.Upper = nullableDoubleFormatter.Deserialize(ref reader, formatterResolver);
 			}
 
 			return boxplot;
