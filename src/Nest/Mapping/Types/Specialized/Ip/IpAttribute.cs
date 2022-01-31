@@ -29,9 +29,18 @@ namespace Nest
 			set => Self.NullValue = value;
 		}
 
+		public bool IgnoreMalformed
+		{
+			get => Self.IgnoreMalformed.GetValueOrDefault();
+			set => Self.IgnoreMalformed = value;
+		}
+
 		double? IIpProperty.Boost { get; set; }
 		bool? IIpProperty.Index { get; set; }
 		string IIpProperty.NullValue { get; set; }
 		private IIpProperty Self => this;
+		bool? IIpProperty.IgnoreMalformed { get; set; }
+		IInlineScript IIpProperty.Script { get; set; }
+		OnScriptError? IIpProperty.OnScriptError { get; set; }
 	}
 }
