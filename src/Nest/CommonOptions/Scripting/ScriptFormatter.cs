@@ -23,6 +23,12 @@ namespace Nest
 
 		public IScript Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
 		{
+			if (reader.GetCurrentJsonToken() == JsonToken.String)
+			{
+				var scriptValue = reader.ReadString();
+				return new InlineScript(scriptValue);
+			}
+
 			if (reader.GetCurrentJsonToken() != JsonToken.BeginObject)
 			{
 				reader.ReadNextBlock();
