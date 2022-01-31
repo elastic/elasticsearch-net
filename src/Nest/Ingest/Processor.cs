@@ -100,7 +100,5 @@ namespace Nest
 
 		/// <inheritdoc cref="IProcessor.IgnoreFailure"/>
 		public TProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailure = v);
-
 	}
-
 }

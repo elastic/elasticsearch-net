@@ -28,6 +28,9 @@ let SkipList = dict<SkipFile,SkipSection> [
     SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
     SkipFile "search.aggregation/190_percentiles_hdr_metric.yml", Section "Invalid params test"
 
+    // New range test fails to parse - SharpYaml.SyntaxErrorException: (Lin: 15, Col: 26, Chr: 352) - (Lin: 15, Col: 39, Chr: 365): While scanning a plain scalar, find unexpected ':'.
+    SkipFile "search.aggregation/40_range.yml", Section "Range aggregation on date field"
+
     // Test looks for "testnode.crt", but "ca.crt" is returned first
     SkipFile "ssl/10_basic.yml", Section "Test get SSL certificates"
     

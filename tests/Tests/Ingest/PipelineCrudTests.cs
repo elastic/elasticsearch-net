@@ -38,6 +38,7 @@ namespace Tests.Ingest
 
 			var pipeline = kv.Value;
 			pipeline.Description.Should().NotBeNull();
+			pipeline.Version.Should().BeGreaterOrEqualTo(1);
 
 			var processors = pipeline.Processors;
 			processors.Should().NotBeNull().And.HaveCount(2);
@@ -66,7 +67,8 @@ namespace Tests.Ingest
 					Field = Infer.Field<Project>(p => p.NumberOfCommits),
 					Value = 0
 				}
-			}
+			},
+			Version = 1
 		};
 
 		private IPutPipelineRequest CreateFluent(string pipelineId, PutPipelineDescriptor d) => d
@@ -79,7 +81,8 @@ namespace Tests.Ingest
 					.Field(p => p.NumberOfCommits)
 					.Value(0)
 				)
-			);
+			)
+			.Version(1);
 
 		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, GetPipelineResponse>(
 			id => new GetPipelineRequest(id),
