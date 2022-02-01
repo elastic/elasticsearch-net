@@ -9,6 +9,11 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="RestSpecification\XPack\**" />
+    <EmbeddedResource Remove="RestSpecification\XPack\**" />
+    <None Remove="RestSpecification\XPack\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.1.0-beta3-final" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="ShellProgressBar" Version="5.0.0" />
@@ -21,6 +26,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RestSpecification\Core" />
-    <Folder Include="RestSpecification\XPack" />
   </ItemGroup>
 </Project>

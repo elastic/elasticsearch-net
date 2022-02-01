@@ -281,13 +281,13 @@ namespace Elasticsearch.Net.Specification.IndicesApi
 		///<summary>HEAD on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
-		public TResponse ExistsTemplateForAll<TResponse>(string name, ExistsIndexTemplateRequestParameters requestParameters = null)
+		public TResponse TemplateV2ExistsForAll<TResponse>(string name, IndexTemplateV2ExistsRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequest<TResponse>(HEAD, Url($"_index_template/{name:name}"), null, RequestParams(requestParameters));
 		///<summary>HEAD on /_index_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The name of the template</param>
 		///<param name = "requestParameters">Request specific configuration such as querystring parameters &amp; request specific connection settings.</param>
 		[MapsApi("indices.exists_index_template", "name")]
-		public Task<TResponse> ExistsTemplateForAllAsync<TResponse>(string name, ExistsIndexTemplateRequestParameters requestParameters = null, CancellationToken ctx = default)
+		public Task<TResponse> TemplateV2ExistsForAllAsync<TResponse>(string name, IndexTemplateV2ExistsRequestParameters requestParameters = null, CancellationToken ctx = default)
 			where TResponse : class, IElasticsearchResponse, new() => DoRequestAsync<TResponse>(HEAD, Url($"_index_template/{name:name}"), ctx, null, RequestParams(requestParameters));
 		///<summary>HEAD on /_template/{name} <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 		///<param name = "name">The comma separated names of the index templates</param>
