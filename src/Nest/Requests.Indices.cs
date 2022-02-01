@@ -657,6 +657,52 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IDeleteIndexTemplateV2Request : IRequest<DeleteIndexTemplateV2RequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class DeleteIndexTemplateV2Request : PlainRequestBase<DeleteIndexTemplateV2RequestParameters>, IDeleteIndexTemplateV2Request
+	{
+		protected IDeleteIndexTemplateV2Request Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplateV2;
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteIndexTemplateV2Request(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteIndexTemplateV2Request(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IDeleteIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout
+		{
+			get => Q<Time>("timeout");
+			set => Q("timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -851,6 +897,59 @@ namespace Nest
 		{
 			get => Q<bool? >("local");
 			set => Q("local", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IIndexTemplateV2ExistsRequest : IRequest<IndexTemplateV2ExistsRequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for TemplateV2Exists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class IndexTemplateV2ExistsRequest : PlainRequestBase<IndexTemplateV2ExistsRequestParameters>, IIndexTemplateV2ExistsRequest
+	{
+		protected IIndexTemplateV2ExistsRequest Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesTemplateV2Exists;
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public IndexTemplateV2ExistsRequest(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected IndexTemplateV2ExistsRequest(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IIndexTemplateV2ExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool? FlatSettings
+		{
+			get => Q<bool? >("flat_settings");
+			set => Q("flat_settings", value);
+		}
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
 		}
 	}
 
@@ -1564,6 +1663,58 @@ namespace Nest
 	}
 
 	[InterfaceDataContract]
+	public partial interface IGetIndexTemplateV2Request : IRequest<GetIndexTemplateV2RequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for GetTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class GetIndexTemplateV2Request : PlainRequestBase<GetIndexTemplateV2RequestParameters>, IGetIndexTemplateV2Request
+	{
+		protected IGetIndexTemplateV2Request Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplateV2;
+		///<summary>/_index_template</summary>
+		public GetIndexTemplateV2Request(): base()
+		{
+		}
+
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetIndexTemplateV2Request(Name name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IGetIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool? FlatSettings
+		{
+			get => Q<bool? >("flat_settings");
+			set => Q("flat_settings", value);
+		}
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool? Local
+		{
+			get => Q<bool? >("local");
+			set => Q("local", value);
+		}
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
 	{
 		[IgnoreDataMember]
@@ -1998,6 +2149,59 @@ namespace Nest
 		{
 			get => Q<Time>("timeout");
 			set => Q("timeout", value);
+		}
+	}
+
+	[InterfaceDataContract]
+	public partial interface IPutIndexTemplateV2Request : IRequest<PutIndexTemplateV2RequestParameters>
+	{
+		[IgnoreDataMember]
+		Name Name
+		{
+			get;
+		}
+	}
+
+	///<summary>Request for PutTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class PutIndexTemplateV2Request : PlainRequestBase<PutIndexTemplateV2RequestParameters>, IPutIndexTemplateV2Request
+	{
+		protected IPutIndexTemplateV2Request Self => this;
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplateV2;
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PutIndexTemplateV2Request(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PutIndexTemplateV2Request(): base()
+		{
+		}
+
+		// values part of the url path
+		[IgnoreDataMember]
+		Name IPutIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>User defined reason for creating/updating the index template</summary>
+		public string Cause
+		{
+			get => Q<string>("cause");
+			set => Q("cause", value);
+		}
+
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public bool? Create
+		{
+			get => Q<bool? >("create");
+			set => Q("create", value);
+		}
+
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout
+		{
+			get => Q<Time>("master_timeout");
+			set => Q("master_timeout", value);
 		}
 	}
 
