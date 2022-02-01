@@ -1,2 +1,19 @@
 
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * Add IgnoreUnmapped to GeoDistanceQuery, GeoBoundingBoxQuery and GeoPolygon https://github.com/elastic/elasticsearch-net/pull/6070[#6070]  (issue: https://github.com/elastic/elasticsearch-net/issues/6066[#6066])
+- * Add shard_stats to primary index stats https://github.com/elastic/elasticsearch-net/pull/6094[#6094]  (issue: https://github.com/elastic/elasticsearch-net/issues/6079[#6079])
+
+[float]
+[[bug]]
+=== Bug Fixes
+
+- * Support version on ingest pipelines https://github.com/elastic/elasticsearch-net/pull/6085[#6085]  (issue: https://github.com/elastic/elasticsearch-net/issues/6082[#6082])
+- * Add missing fields for IpProperty https://github.com/elastic/elasticsearch-net/pull/6088[#6088]  (issue: https://github.com/elastic/elasticsearch-net/issues/6067[#6067])
+- * Support deserialisation of simple scripts https://github.com/elastic/elasticsearch-net/pull/6090[#6090]  (issue: https://github.com/elastic/elasticsearch-net/issues/5684[#5684])
+- * Add missing TermVectorOption https://github.com/elastic/elasticsearch-net/pull/6091[#6091]  (issue: https://github.com/elastic/elasticsearch-net/issues/6078[#6078])
+- * Update boxplot to handle non-numeric values https://github.com/elastic/elasticsearch-net/pull/6095[#6095]  (issue: https://github.com/elastic/elasticsearch-net/issues/6050[#6050])
+
 
