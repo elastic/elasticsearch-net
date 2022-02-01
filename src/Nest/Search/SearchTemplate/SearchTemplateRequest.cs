@@ -21,6 +21,9 @@ namespace Nest
 
 		[DataMember(Name ="source")]
 		string Source { get; set; }
+
+		[DataMember(Name = "explain")]
+		public bool? Explain { get; set; }
 	}
 
 	public partial class SearchTemplateRequest
@@ -30,6 +33,9 @@ namespace Nest
 		public IDictionary<string, object> Params { get; set; }
 
 		public string Source { get; set; }
+
+		public bool? Explain { get; set; }
+
 		protected Type ClrType { get; set; }
 		Type ITypedSearchRequest.ClrType => ClrType;
 
@@ -54,6 +60,8 @@ namespace Nest
 
 		string ISearchTemplateRequest.Source { get; set; }
 
+		bool? ISearchTemplateRequest.Explain { get; set; }
+
 		protected sealed override void RequestDefaults(SearchTemplateRequestParameters parameters) => TypedKeys();
 
 		public SearchTemplateDescriptor<TDocument> Source(string template) => Assign(template, (a, v) => a.Source = v);
@@ -64,5 +72,7 @@ namespace Nest
 
 		public SearchTemplateDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
 			Assign(paramDictionary, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
+
+		public SearchTemplateDescriptor<TDocument> Explain(bool? explain = false) => Assign(explain, (a, v) => a.Explain = v);
 	}
 }

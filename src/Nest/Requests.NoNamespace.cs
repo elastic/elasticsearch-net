@@ -3104,13 +3104,6 @@ namespace Nest
 			set => Q("expand_wildcards", value);
 		}
 
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool? Explain
-		{
-			get => Q<bool? >("explain");
-			set => Q("explain", value);
-		}
-
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
 		public bool? IgnoreThrottled
 		{
