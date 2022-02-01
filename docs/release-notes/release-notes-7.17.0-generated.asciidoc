@@ -15,5 +15,6 @@
 - * Support deserialisation of simple scripts https://github.com/elastic/elasticsearch-net/pull/6090[#6090]  (issue: https://github.com/elastic/elasticsearch-net/issues/5684[#5684])
 - * Add missing TermVectorOption https://github.com/elastic/elasticsearch-net/pull/6091[#6091]  (issue: https://github.com/elastic/elasticsearch-net/issues/6078[#6078])
 - * Update boxplot to handle non-numeric values https://github.com/elastic/elasticsearch-net/pull/6095[#6095]  (issue: https://github.com/elastic/elasticsearch-net/issues/6050[#6050])
+- * Move explain to body in search template API https://github.com/elastic/elasticsearch-net/pull/6098[#6098]  (issue: https://github.com/elastic/elasticsearch-net/issues/5040[#5040])
 
 
