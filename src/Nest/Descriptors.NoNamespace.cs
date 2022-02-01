@@ -1445,8 +1445,6 @@ namespace Nest
 		public SearchTemplateDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsminimizeroundtrips = true) => Qs("ccs_minimize_roundtrips", ccsminimizeroundtrips);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SearchTemplateDescriptor<TDocument> ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public SearchTemplateDescriptor<TDocument> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Whether specified concrete, expanded or aliased indices should be ignored when throttled</summary>
 		public SearchTemplateDescriptor<TDocument> IgnoreThrottled(bool? ignorethrottled = true) => Qs("ignore_throttled", ignorethrottled);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
