@@ -130,9 +130,11 @@ namespace Nest
 		internal static ApiUrls IndicesDelete = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesDeleteAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
 		internal static ApiUrls IndicesDeleteDataStream = new ApiUrls(new[]{"_data_stream/{name}"});
+		internal static ApiUrls IndicesDeleteTemplateV2 = new ApiUrls(new[]{"_index_template/{name}"});
 		internal static ApiUrls IndicesDeleteTemplate = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesExists = new ApiUrls(new[]{"{index}"});
 		internal static ApiUrls IndicesAliasExists = new ApiUrls(new[]{"_alias/{name}", "{index}/_alias/{name}"});
+		internal static ApiUrls IndicesTemplateV2Exists = new ApiUrls(new[]{"_index_template/{name}"});
 		internal static ApiUrls IndicesTemplateExists = new ApiUrls(new[]{"_template/{name}"});
 		internal static ApiUrls IndicesTypeExists = new ApiUrls(new[]{"{index}/_mapping/{type}"});
 		internal static ApiUrls IndicesFlush = new ApiUrls(new[]{"_flush", "{index}/_flush"});
@@ -143,6 +145,7 @@ namespace Nest
 		internal static ApiUrls IndicesGetAlias = new ApiUrls(new[]{"_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias"});
 		internal static ApiUrls IndicesGetDataStream = new ApiUrls(new[]{"_data_stream", "_data_stream/{name}"});
 		internal static ApiUrls IndicesGetFieldMapping = new ApiUrls(new[]{"_mapping/field/{fields}", "{index}/_mapping/field/{fields}"});
+		internal static ApiUrls IndicesGetTemplateV2 = new ApiUrls(new[]{"_index_template", "_index_template/{name}"});
 		internal static ApiUrls IndicesGetMapping = new ApiUrls(new[]{"_mapping", "{index}/_mapping"});
 		internal static ApiUrls IndicesGetSettings = new ApiUrls(new[]{"_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}"});
 		internal static ApiUrls IndicesGetTemplate = new ApiUrls(new[]{"_template", "_template/{name}"});
@@ -150,6 +153,7 @@ namespace Nest
 		internal static ApiUrls IndicesOpen = new ApiUrls(new[]{"{index}/_open"});
 		internal static ApiUrls IndicesPromoteDataStream = new ApiUrls(new[]{"_data_stream/_promote/{name}"});
 		internal static ApiUrls IndicesPutAlias = new ApiUrls(new[]{"{index}/_alias/{name}"});
+		internal static ApiUrls IndicesPutTemplateV2 = new ApiUrls(new[]{"_index_template/{name}"});
 		internal static ApiUrls IndicesPutMapping = new ApiUrls(new[]{"{index}/_mapping"});
 		internal static ApiUrls IndicesUpdateSettings = new ApiUrls(new[]{"_settings", "{index}/_settings"});
 		internal static ApiUrls IndicesPutTemplate = new ApiUrls(new[]{"_template/{name}"});

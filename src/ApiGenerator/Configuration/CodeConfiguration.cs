@@ -45,14 +45,8 @@ namespace ApiGenerator.Configuration
 			"autoscaling.put_autoscaling_policy.json", // experimental
 			"autoscaling.delete_autoscaling_policy.json", // experimental
 
-
-			"indices.delete_index_template.json",
-			"indices.exists_index_template.json",
-			"indices.get_index_template.json",
-			"indices.put_index_template.json",
 			"indices.simulate_index_template.json",
 			"indices.simulate_template.json",
-
 			"searchable_snapshots.stats.json",
 			"searchable_snapshots.clear_cache.json",
 			"searchable_snapshots.mount.json",
@@ -89,7 +83,8 @@ namespace ApiGenerator.Configuration
 		{
 			{ "indices.delete_index_template", "DeleteIndexTemplateV2" },
 			{ "indices.get_index_template", "GetIndexTemplateV2" },
-			{ "indices.put_index_template", "PutIndexTemplateV2" }
+			{ "indices.put_index_template", "PutIndexTemplateV2" },
+			{ "indices.exists_index_template", "IndexTemplateV2Exists" }
 		};
 
 		/// <summary>

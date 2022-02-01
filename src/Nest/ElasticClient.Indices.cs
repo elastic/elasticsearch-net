@@ -304,6 +304,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<DeleteDataStreamResponse> DeleteDataStreamAsync(IDeleteDataStreamRequest request, CancellationToken ct = default) => DoRequestAsync<IDeleteDataStreamRequest, DeleteDataStreamResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public DeleteIndexTemplateV2Response DeleteTemplateV2(Name name, Func<DeleteIndexTemplateV2Descriptor, IDeleteIndexTemplateV2Request> selector = null) => DeleteTemplateV2(selector.InvokeOrDefault(new DeleteIndexTemplateV2Descriptor(name: name)));
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<DeleteIndexTemplateV2Response> DeleteTemplateV2Async(Name name, Func<DeleteIndexTemplateV2Descriptor, IDeleteIndexTemplateV2Request> selector = null, CancellationToken ct = default) => DeleteTemplateV2Async(selector.InvokeOrDefault(new DeleteIndexTemplateV2Descriptor(name: name)), ct);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public DeleteIndexTemplateV2Response DeleteTemplateV2(IDeleteIndexTemplateV2Request request) => DoRequest<IDeleteIndexTemplateV2Request, DeleteIndexTemplateV2Response>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>DELETE</c> request to the <c>indices.delete_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<DeleteIndexTemplateV2Response> DeleteTemplateV2Async(IDeleteIndexTemplateV2Request request, CancellationToken ct = default) => DoRequestAsync<IDeleteIndexTemplateV2Request, DeleteIndexTemplateV2Response>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>DELETE</c> request to the <c>indices.delete_template</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
@@ -375,6 +399,30 @@ namespace Nest.Specification.IndicesApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
 		public Task<ExistsResponse> AliasExistsAsync(IAliasExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IAliasExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>indices.exists_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public ExistsResponse TemplateV2Exists(Name name, Func<IndexTemplateV2ExistsDescriptor, IIndexTemplateV2ExistsRequest> selector = null) => TemplateV2Exists(selector.InvokeOrDefault(new IndexTemplateV2ExistsDescriptor(name: name)));
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>indices.exists_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<ExistsResponse> TemplateV2ExistsAsync(Name name, Func<IndexTemplateV2ExistsDescriptor, IIndexTemplateV2ExistsRequest> selector = null, CancellationToken ct = default) => TemplateV2ExistsAsync(selector.InvokeOrDefault(new IndexTemplateV2ExistsDescriptor(name: name)), ct);
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>indices.exists_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public ExistsResponse TemplateV2Exists(IIndexTemplateV2ExistsRequest request) => DoRequest<IIndexTemplateV2ExistsRequest, ExistsResponse>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>HEAD</c> request to the <c>indices.exists_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<ExistsResponse> TemplateV2ExistsAsync(IIndexTemplateV2ExistsRequest request, CancellationToken ct = default) => DoRequestAsync<IIndexTemplateV2ExistsRequest, ExistsResponse>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>HEAD</c> request to the <c>indices.exists_template</c> API, read more about this API online:
 		/// <para></para>
@@ -618,6 +666,30 @@ namespace Nest.Specification.IndicesApi
 		/// </summary>
 		public Task<GetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request, CancellationToken ct = default) => DoRequestAsync<IGetFieldMappingRequest, GetFieldMappingResponse>(request, request.RequestParameters, ct);
 		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public GetIndexTemplateV2Response GetTemplateV2(Name name = null, Func<GetIndexTemplateV2Descriptor, IGetIndexTemplateV2Request> selector = null) => GetTemplateV2(selector.InvokeOrDefault(new GetIndexTemplateV2Descriptor().Name(name: name)));
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<GetIndexTemplateV2Response> GetTemplateV2Async(Name name = null, Func<GetIndexTemplateV2Descriptor, IGetIndexTemplateV2Request> selector = null, CancellationToken ct = default) => GetTemplateV2Async(selector.InvokeOrDefault(new GetIndexTemplateV2Descriptor().Name(name: name)), ct);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public GetIndexTemplateV2Response GetTemplateV2(IGetIndexTemplateV2Request request) => DoRequest<IGetIndexTemplateV2Request, GetIndexTemplateV2Response>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>GET</c> request to the <c>indices.get_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<GetIndexTemplateV2Response> GetTemplateV2Async(IGetIndexTemplateV2Request request, CancellationToken ct = default) => DoRequestAsync<IGetIndexTemplateV2Request, GetIndexTemplateV2Response>(request, request.RequestParameters, ct);
+		/// <summary>
 		/// <c>GET</c> request to the <c>indices.get_mapping</c> API, read more about this API online:
 		/// <para></para>
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</a>
@@ -787,6 +859,30 @@ namespace Nest.Specification.IndicesApi
 		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</a>
 		/// </summary>
 		public Task<PutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken ct = default) => DoRequestAsync<IPutAliasRequest, PutAliasResponse>(request, request.RequestParameters, ct);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.put_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public PutIndexTemplateV2Response PutTemplateV2(Name name, Func<PutIndexTemplateV2Descriptor, IPutIndexTemplateV2Request> selector) => PutTemplateV2(selector.InvokeOrDefault(new PutIndexTemplateV2Descriptor(name: name)));
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.put_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<PutIndexTemplateV2Response> PutTemplateV2Async(Name name, Func<PutIndexTemplateV2Descriptor, IPutIndexTemplateV2Request> selector, CancellationToken ct = default) => PutTemplateV2Async(selector.InvokeOrDefault(new PutIndexTemplateV2Descriptor(name: name)), ct);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.put_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public PutIndexTemplateV2Response PutTemplateV2(IPutIndexTemplateV2Request request) => DoRequest<IPutIndexTemplateV2Request, PutIndexTemplateV2Response>(request, request.RequestParameters);
+		/// <summary>
+		/// <c>PUT</c> request to the <c>indices.put_index_template</c> API, read more about this API online:
+		/// <para></para>
+		/// <a href = "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</a>
+		/// </summary>
+		public Task<PutIndexTemplateV2Response> PutTemplateV2Async(IPutIndexTemplateV2Request request, CancellationToken ct = default) => DoRequestAsync<IPutIndexTemplateV2Request, PutIndexTemplateV2Response>(request, request.RequestParameters, ct);
 		/// <summary>
 		/// <c>PUT</c> request to the <c>indices.put_mapping</c> API, read more about this API online:
 		/// <para></para>

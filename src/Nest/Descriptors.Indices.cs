@@ -388,6 +388,31 @@ namespace Nest
 		public DeleteDataStreamDescriptor ExpandWildcards(ExpandWildcards? expandwildcards) => Qs("expand_wildcards", expandwildcards);
 	}
 
+	///<summary>Descriptor for DeleteTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class DeleteIndexTemplateV2Descriptor : RequestDescriptorBase<DeleteIndexTemplateV2Descriptor, DeleteIndexTemplateV2RequestParameters, IDeleteIndexTemplateV2Request>, IDeleteIndexTemplateV2Request
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesDeleteTemplateV2;
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public DeleteIndexTemplateV2Descriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected DeleteIndexTemplateV2Descriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IDeleteIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteIndexTemplateV2Descriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+		///<summary>Explicit operation timeout</summary>
+		public DeleteIndexTemplateV2Descriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
 	///<summary>Descriptor for DeleteTemplate <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
 	public partial class DeleteIndexTemplateDescriptor : RequestDescriptorBase<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{
@@ -495,6 +520,33 @@ namespace Nest
 		public AliasExistsDescriptor IgnoreUnavailable(bool? ignoreunavailable = true) => Qs("ignore_unavailable", ignoreunavailable);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
+	}
+
+	///<summary>Descriptor for TemplateV2Exists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class IndexTemplateV2ExistsDescriptor : RequestDescriptorBase<IndexTemplateV2ExistsDescriptor, IndexTemplateV2ExistsRequestParameters, IIndexTemplateV2ExistsRequest>, IIndexTemplateV2ExistsRequest
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesTemplateV2Exists;
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public IndexTemplateV2ExistsDescriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected IndexTemplateV2ExistsDescriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IIndexTemplateV2ExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public IndexTemplateV2ExistsDescriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndexTemplateV2ExistsDescriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IndexTemplateV2ExistsDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
 	///<summary>Descriptor for TemplateExists <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
@@ -876,6 +928,34 @@ namespace Nest
 		public GetFieldMappingDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	}
 
+	///<summary>Descriptor for GetTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class GetIndexTemplateV2Descriptor : RequestDescriptorBase<GetIndexTemplateV2Descriptor, GetIndexTemplateV2RequestParameters, IGetIndexTemplateV2Request>, IGetIndexTemplateV2Request
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesGetTemplateV2;
+		///<summary>/_index_template</summary>
+		public GetIndexTemplateV2Descriptor(): base()
+		{
+		}
+
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">Optional, accepts null</param>
+		public GetIndexTemplateV2Descriptor(Name name): base(r => r.Optional("name", name))
+		{
+		}
+
+		// values part of the url path
+		Name IGetIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
+		///<summary>A pattern that returned template names must match</summary>
+		public GetIndexTemplateV2Descriptor Name(Name name) => Assign(name, (a, v) => a.RouteValues.Optional("name", v));
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetIndexTemplateV2Descriptor FlatSettings(bool? flatsettings = true) => Qs("flat_settings", flatsettings);
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetIndexTemplateV2Descriptor Local(bool? local = true) => Qs("local", local);
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetIndexTemplateV2Descriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
+	}
+
 	///<summary>Descriptor for GetMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</para></summary>
 	public partial class GetMappingDescriptor<TDocument> : RequestDescriptorBase<GetMappingDescriptor<TDocument>, GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{
@@ -1117,6 +1197,33 @@ namespace Nest
 		public PutAliasDescriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+	}
+
+	///<summary>Descriptor for PutTemplateV2 <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para></summary>
+	public partial class PutIndexTemplateV2Descriptor : RequestDescriptorBase<PutIndexTemplateV2Descriptor, PutIndexTemplateV2RequestParameters, IPutIndexTemplateV2Request>, IPutIndexTemplateV2Request
+	{
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndicesPutTemplateV2;
+		///<summary>/_index_template/{name}</summary>
+		///<param name = "name">this parameter is required</param>
+		public PutIndexTemplateV2Descriptor(Name name): base(r => r.Required("name", name))
+		{
+		}
+
+		///<summary>Used for serialization purposes, making sure we have a parameterless constructor</summary>
+		[SerializationConstructor]
+		protected PutIndexTemplateV2Descriptor(): base()
+		{
+		}
+
+		// values part of the url path
+		Name IPutIndexTemplateV2Request.Name => Self.RouteValues.Get<Name>("name");
+		// Request parameters
+		///<summary>User defined reason for creating/updating the index template</summary>
+		public PutIndexTemplateV2Descriptor Cause(string cause) => Qs("cause", cause);
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutIndexTemplateV2Descriptor Create(bool? create = true) => Qs("create", create);
+		///<summary>Specify timeout for connection to master</summary>
+		public PutIndexTemplateV2Descriptor MasterTimeout(Time mastertimeout) => Qs("master_timeout", mastertimeout);
 	}
 
 	///<summary>Descriptor for PutMapping <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</para></summary>
