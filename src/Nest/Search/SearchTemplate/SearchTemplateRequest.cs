@@ -73,6 +73,6 @@ namespace Nest
 		public SearchTemplateDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
 			Assign(paramDictionary, (a, v) => a.Params = v?.Invoke(new FluentDictionary<string, object>()));
 
-		public SearchTemplateDescriptor<TDocument> Explain(bool? explain = false) => Assign(explain, (a, v) => a.Explain = v);
+		public SearchTemplateDescriptor<TDocument> Explain(bool? explain = true) => Assign(explain, (a, v) => a.Explain = v);
 	}
 }
