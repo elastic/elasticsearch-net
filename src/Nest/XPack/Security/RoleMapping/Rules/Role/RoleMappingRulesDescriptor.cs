@@ -24,6 +24,8 @@ namespace Nest
 
 		public RoleMappingRulesDescriptor DistinguishedName(string name) => Add(new DistinguishedNameRule(name));
 
+		public RoleMappingRulesDescriptor Username(IEnumerable<string> usernames) => Add(new UsernameRule(usernames));
+
 		public RoleMappingRulesDescriptor Username(string username) => Add(new UsernameRule(username));
 
 		public RoleMappingRulesDescriptor Groups(params string[] groups) => Add(new GroupsRule(groups));

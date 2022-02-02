@@ -59,6 +59,13 @@ namespace Nest
 			set => BackingDictionary.Add("username", value);
 		}
 
+		[IgnoreDataMember]
+		protected IEnumerable<string> Usernames
+		{
+			get => BackingDictionary.TryGetValue("username", out var o) ? (IEnumerable<string>)o : null;
+			set => BackingDictionary.Add("username", value);
+		}
+
 		public static AnyRoleMappingRule operator |(FieldRuleBase leftContainer, FieldRuleBase rightContainer) =>
 			new AnyRoleMappingRule(new FieldRoleMappingRule(leftContainer), new FieldRoleMappingRule(rightContainer));
 
