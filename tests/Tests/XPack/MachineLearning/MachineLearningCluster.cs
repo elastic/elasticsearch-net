@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Elastic.Elasticsearch.Ephemeral;
 using Elastic.Elasticsearch.Ephemeral.Tasks;
 using Elastic.Elasticsearch.Managed.ConsoleWriters;
@@ -71,7 +72,7 @@ namespace Tests.XPack.MachineLearning
 			W($"Unzipping machine learning sample data: {to} ...");
 			using (var inStream = File.OpenRead(to))
 			using (var gzipStream = new GZipInputStream(inStream))
-			using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream))
+			using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream, Encoding.UTF8))
 			{
 				tarArchive.ExtractContents(directoryTarget);
 				tarArchive.Close();
