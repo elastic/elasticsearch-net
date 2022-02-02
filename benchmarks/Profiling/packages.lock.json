@@ -2,17 +2,17 @@
   "version": 1,
   "dependencies": {
     "net6.0": {
+      "JetBrains.Profiler.Api": {
+        "type": "Direct",
+        "requested": "[1.1.8, )",
+        "resolved": "1.1.8",
+        "contentHash": "a/zkJHzyzjIilu5cn5SnnCkPDbfUD+nLBpCaSivp0GCotBR6w7S8CaDymI5p0qFB1XUImgii1AqWYZsIK+Lh5g=="
+      },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
         "requested": "[1.0.2, )",
         "resolved": "1.0.2",
         "contentHash": "5/cSEVld+px/CuRrbohO/djfg6++eR6zGpy88MgqloXvkj//WXWpFZyu/OpkXPN0u5m+dN/EVwLNYFUxD4h2+A=="
-      },
-      "Newtonsoft.Json": {
-        "type": "Direct",
-        "requested": "[13.0.1, )",
-        "resolved": "13.0.1",
-        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
       "Elastic.Transport": {
         "type": "Transitive",
@@ -66,13 +66,6 @@
         "type": "Project",
         "dependencies": {
           "Elastic.Transport": "0.3.1"
-        }
-      },
-      "Elastic.Clients.JsonNetSerializer": {
-        "type": "Project",
-        "dependencies": {
-          "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Newtonsoft.Json": "12.0.1"
         }
       }
     }
