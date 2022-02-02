@@ -1,2 +1,8 @@
 
+[float]
+[[bug]]
+=== Bug Fixes
+
+- * Fix type for AverageResponseTime on node stats response https://github.com/elastic/elasticsearch-net/pull/6107[#6107]  (issue: https://github.com/elastic/elasticsearch-net/issues/5953[#5953])
+
 
