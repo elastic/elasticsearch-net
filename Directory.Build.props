@@ -34,6 +34,8 @@
     <SolutionRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))</SolutionRoot>
 
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode>true</RestoreLockedMode>
 
     <DefineConstants Condition="'$(TargetFramework)'=='net461' or '$(TargetFramework)'=='net472'">$(DefineConstants);FULLFRAMEWORK</DefineConstants>
     <DefineConstants Condition="$(DefineConstants.Contains(FULLFRAMEWORK)) == False">$(DefineConstants);DOTNETCORE</DefineConstants>
@@ -44,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Include unconditionally due to difference in how dotnet cli and design time builds generate package.lock.json -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2"/>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.2"/>
   </ItemGroup>
 
 </Project>
