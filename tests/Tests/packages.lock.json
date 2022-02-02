@@ -55,12 +55,9 @@
       },
       "SharpZipLib": {
         "type": "Direct",
-        "requested": "[1.0.0-alpha2, )",
-        "resolved": "1.0.0-alpha2",
-        "contentHash": "ndshrRoIzWdvoHr5ncGvSp3p/At+H2l4nT4bfWgPB0VU39TOT5/6uS6XbkO9N95Y8quO5RgLMiEBO3M0nq4pXw==",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1"
-        }
+        "requested": "[1.3.3, )",
+        "resolved": "1.3.3",
+        "contentHash": "N8+hwhsKZm25tDJfWpBSW7EGhH/R7EMuiX+KJ4C4u+fCWVc1lJ5zg1u3S1RPPVYgTqhx/C3hxrqUpi6RwK5+Tg=="
       },
       "System.Diagnostics.FileVersionInfo": {
         "type": "Direct",

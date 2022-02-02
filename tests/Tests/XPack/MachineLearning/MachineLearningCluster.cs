@@ -71,7 +71,7 @@ namespace Tests.XPack.MachineLearning
 			W($"Unzipping machine learning sample data: {to} ...");
 			using (var inStream = File.OpenRead(to))
 			using (var gzipStream = new GZipInputStream(inStream))
-			using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream))
+			using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream, System.Text.Encoding.UTF8))
 			{
 				tarArchive.ExtractContents(directoryTarget);
 				tarArchive.Close();
