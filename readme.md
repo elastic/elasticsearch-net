@@ -65,7 +65,9 @@ Any incompatibilities between minor versions are documented against the release.
 
 #### I have a `7.0` server, what client should I use?
 
-Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `7.14.0`. The reason being is that `7.14.x` will contain many bug fixes not present in the `7.0.0` version of the client.
+Always use the latest minor version of the client within that major version, so in this instance, at time of writing, this is version `7.17.0`. The reason being is that `7.17.x` will contain many bug fixes not present in the `7.0.0` version of the client.
+
+*NOTE: With the 7.11 release of Elasticsearch, we no longer release oss-only distributions, as stated in the [FAQ on license change](https://www.elastic.co/pricing/faq/licensing). The client can be pinned to a version <7.14 if connecting to a cluster running the OSS distribution. The recommendation is to upgrade to the latest default distribution of Elasticsearch, which is free to use under [Elastic License v2](https://www.elastic.co/licensing/elastic-license) at which point the compatibility section applies.*
 
 Client methods which call endpoints added to Elasticsearch since `7.0.0` will fail due to those endpoints not existing on the server.
 
