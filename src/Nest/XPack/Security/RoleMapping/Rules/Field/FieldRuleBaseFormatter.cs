@@ -39,6 +39,13 @@ namespace Nest
 					switch (value)
 					{
 						case 0:
+							if (reader.GetCurrentJsonToken() == JsonToken.BeginArray)
+							{
+								var fm = formatterResolver.GetFormatter<IEnumerable<string>>();
+								var dns = fm.Deserialize(ref reader, formatterResolver);
+								fieldRule = new UsernameRule(dns);
+								break;
+							}
 							var username = reader.ReadString();
 							fieldRule = new UsernameRule(username);
 							break;
