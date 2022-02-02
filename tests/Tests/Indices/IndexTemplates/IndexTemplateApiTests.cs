@@ -41,7 +41,7 @@ namespace Tests.Indices.IndexTemplates
 				u.Calls<PutIndexTemplateV2Descriptor, PutIndexTemplateV2Request, IPutIndexTemplateV2Request, PutIndexTemplateV2Response>(
 					v => new PutIndexTemplateV2Request(v)
 					{
-						IndexPatterns = new [] {"foo", "bar"},
+						IndexPatterns = new [] {"foo-v2-index-template", "bar-v2-index-template"},
 						Version = 2,
 						Meta = new Dictionary<string, object>
 						{
@@ -68,7 +68,7 @@ namespace Tests.Indices.IndexTemplates
 						}
 					},
 					(v, d) => d
-						.IndexPatterns("foo", "bar")
+						.IndexPatterns("foo-v2-index-template", "bar-v2-index-template")
 						.Version(2)
 						.Meta(d => d
 							.Add("foo", "bar")
@@ -95,6 +95,10 @@ namespace Tests.Indices.IndexTemplates
 					(v, c, r) => c.Indices.PutTemplateV2Async(r)
 				)
 			},
+			//{"WaitStep", u => u.Call(async (v, c) =>
+			//{
+			//	await Task.Delay(2000); // allow template to be fully created
+			//})},
 			{ExistsStep, u =>
 				u.Calls<IndexTemplateV2ExistsDescriptor, IndexTemplateV2ExistsRequest, IIndexTemplateV2ExistsRequest, ExistsResponse>(
 					v => new IndexTemplateV2ExistsRequest(v),
