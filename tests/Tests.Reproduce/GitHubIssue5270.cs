@@ -67,4 +67,58 @@ namespace Tests.Reproduce
 				.Subject["dn"].Should().BeAssignableTo<IEnumerable<string>>()
 				.Subject.Count().Should().Be(2);
 	}
+
+	public class GitHubIssue5270PartTwo
+	{
+		private static readonly byte[] ResponseBytes = Encoding.UTF8.GetBytes(@"{
+  ""test admin role mapping"" : {
+    ""enabled"" : true,
+    ""roles"" : [
+      ""apm_user""
+    ],
+    ""rules"" : {
+      ""any"" : [
+        {
+          ""field"" : {
+            ""username"" : [
+              ""admin1"",
+              ""admin2""
+            ]
+          }
+        }
+      ]
+    },
+    ""metadata"" : { }
+  }
+}");
+
+		[U]
+		public async Task GetRoleMappings()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri($"http://localhost:9200"));
+			var settings = new ConnectionSettings(pool, new InMemoryConnection(ResponseBytes));
+			var client = new ElasticClient(settings);
+
+			// ReSharper disable once MethodHasAsyncOverload
+			var roleResponse = client.Security.GetRoleMapping();
+			roleResponse.RoleMappings.Count.Should().Be(1);
+			Assert(roleResponse);
+
+			roleResponse = await client.Security.GetRoleMappingAsync();
+			roleResponse.RoleMappings.Count.Should().Be(1);
+			Assert(roleResponse);
+		}
+
+		private static void Assert(GetRoleMappingResponse roleResponse) =>
+			roleResponse.RoleMappings["test admin role mapping"]
+				.Rules.Should()
+				.BeAssignableTo<AnyRoleMappingRule>()
+				.Subject.Any.First()
+				.Should()
+				.BeAssignableTo<FieldRoleMappingRule>()
+				.Subject.Field.Should()
+				.BeAssignableTo<UsernameRule>()
+				.Subject["username"].Should().BeAssignableTo<IEnumerable<string>>()
+				.Subject.Count().Should().Be(2);
+	}
 }
