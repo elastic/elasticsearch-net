@@ -2,10 +2,14 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
+using System.Collections.Generic;
+
 namespace Nest
 {
 	public class UsernameRule : FieldRuleBase
 	{
 		public UsernameRule(string username) => Username = username;
+
+		public UsernameRule(IEnumerable<string> usernames) => Usernames = usernames;
 	}
 }
