@@ -160,7 +160,7 @@ namespace Tests.Indices.IndexTemplates
 			indexTemplate.IndexTemplate.Should().NotBeNull();
 			indexTemplate.IndexTemplate.Template.Should().NotBeNull();
 			indexTemplate.IndexTemplate.Version.Should().NotBeNull();
-			indexTemplate.IndexTemplate.Meta.Should().NotBeNull().And.ContainKey("foo-v2-index-template");
+			indexTemplate.IndexTemplate.Meta.Should().NotBeNull().And.ContainKey("foo");
 			indexTemplate.IndexTemplate.Template.Settings.Should().NotBeNull();
 			indexTemplate.IndexTemplate.Template.Aliases.Should().NotBeNull();
 			indexTemplate.IndexTemplate.Template.Mappings.Should().NotBeNull();
