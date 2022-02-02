@@ -1312,17 +1312,35 @@ namespace Elastic.Clients.Elasticsearch
 
 		public BulkRequestDescriptor Delete<TSource>(Action<BulkDeleteOperationDescriptor> configure) => Delete(configure);
 
-		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents, Action<BulkCreateOperationDescriptor<TSource>, TSource> bulkCreateSelector = null) =>
+		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents, Action<BulkCreateOperationDescriptor<TSource>, TSource> bulkCreateSelector) =>
 			AddOperations(documents, bulkCreateSelector, o => new BulkCreateOperationDescriptor<TSource>(o));
 
-		public BulkRequestDescriptor IndexMany<TSource>(IEnumerable<TSource> documents, Action<BulkIndexOperationDescriptor<TSource>, TSource> bulkIndexSelector = null) =>
+		public BulkRequestDescriptor CreateMany<TSource>(IEnumerable<TSource> documents) =>
+			AddOperations(documents, null, o => new BulkCreateOperationDescriptor<TSource>(o));
+
+		public BulkRequestDescriptor IndexMany<TSource>(IEnumerable<TSource> documents, Action<BulkIndexOperationDescriptor<TSource>, TSource> bulkIndexSelector) =>
 			AddOperations(documents, bulkIndexSelector, o => new BulkIndexOperationDescriptor<TSource>(o));
 
-		public BulkRequestDescriptor UpdateMany<TSource>(IEnumerable<TSource> objects, Action<BulkUpdateOperationDescriptor<TSource, TSource>, TSource> bulkIndexSelector = null) =>
+		public BulkRequestDescriptor IndexMany<TSource>(IEnumerable<TSource> documents) =>
+			AddOperations(documents, null, o => new BulkIndexOperationDescriptor<TSource>(o));
+
+		public BulkRequestDescriptor UpdateMany<TSource>(IEnumerable<TSource> objects, Action<BulkUpdateOperationDescriptor<TSource, TSource>, TSource> bulkIndexSelector) =>
 			AddOperations(objects, bulkIndexSelector, o => new BulkUpdateOperationDescriptor<TSource, TSource>().IdFrom(o));
 
-		public BulkRequestDescriptor DeleteMany<TSource>(IEnumerable<string> ids, Action<BulkDeleteOperationDescriptor, string> bulkDeleteSelector = null) =>
+		public BulkRequestDescriptor UpdateMany<TSource>(IEnumerable<TSource> objects) =>
+			AddOperations(objects, null, o => new BulkUpdateOperationDescriptor<TSource, TSource>().IdFrom(o));
+
+		public BulkRequestDescriptor DeleteMany<T>(IEnumerable<T> objects, Action<BulkDeleteOperationDescriptor, T> bulkDeleteSelector) =>
+			AddOperations(objects, bulkDeleteSelector, obj => new BulkDeleteOperationDescriptor(new Id(obj)));
+
+		public BulkRequestDescriptor DeleteMany(IEnumerable<Id> ids, Action<BulkDeleteOperationDescriptor, Id> bulkDeleteSelector) =>
 			AddOperations(ids, bulkDeleteSelector, id => new BulkDeleteOperationDescriptor(id));
+
+		public BulkRequestDescriptor DeleteMany<T>(IEnumerable<T> objects) =>
+			AddOperations(objects, null, obj => new BulkDeleteOperationDescriptor<T>(obj));
+
+		public BulkRequestDescriptor DeleteMany(IndexName index, IEnumerable<Id> ids) =>
+			AddOperations(ids, null, id => new BulkDeleteOperationDescriptor(id).Index(index));
 
 		public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 		{
