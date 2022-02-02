@@ -20,7 +20,7 @@ namespace Nest
 		/// </summary>
 		/// <remarks>only set when requesting human readable response</remarks>
 		[DataMember(Name ="avg_response_time")]
-		public long AverageResponseTime { get; internal set; }
+		public string AverageResponseTime { get; internal set; }
 
 		/// <summary>
 		/// The exponentially weighted moving average response time of search requests on the keyed node.
