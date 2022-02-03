@@ -1,2 +1,9 @@
 
+[float]
+[[uncategorized]]
+=== Uncategorized
+
+- * BulkDescriptor.DeleteMany requires <T> while not required for overload IEnumerable<string> ids https://github.com/elastic/elasticsearch-net/issues/3500[#3500]
+- * BulkDescriptor DeleteMany use IEnumerable<Id> https://github.com/elastic/elasticsearch-net/issues/4125[#4125]
+
 
