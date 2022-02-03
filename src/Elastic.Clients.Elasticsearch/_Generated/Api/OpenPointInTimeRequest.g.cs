@@ -61,8 +61,6 @@ namespace Elastic.Clients.Elasticsearch
 		public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time keepAlive) => Qs("keep_alive", keepAlive);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }
