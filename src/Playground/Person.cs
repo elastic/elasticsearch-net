@@ -4,6 +4,7 @@ namespace Playground
 {
 	public class Person
 	{
+		public int Id { get; set; }
 		public string? FirstName { get; init; }
 		public string? LastName { get; init; }
 		public int? Age { get; init; }

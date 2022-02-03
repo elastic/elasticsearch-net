@@ -61,11 +61,17 @@ namespace Playground
 
 			var client = new ElasticsearchClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
 				//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
-				.ServerCertificateValidationCallback((a, b, c, d) => true)
-				.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))
+				//.ServerCertificateValidationCallback((a, b, c, d) => true)
+				//.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))
 				.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
 
-			var result = await client.PingAsync();
+			var result = await client.BulkAsync(b => b.DeleteMany("people-test", new Id[] { "1", "2" }));
+
+			result = await client.BulkAsync(b => b.DeleteMany<Person>(new[] { new Person { Id = 100 }, new Person { Id = 200 } }));
+
+			result = await client.BulkAsync(b => b.DeleteMany(new[] { new Person { Id = 100 }, new Person { Id = 200 } }));
+
+			Console.ReadKey();
 
 			//var health = await client.Cluster.HealthAsync(new Elastic.Clients.Elasticsearch.Cluster.ClusterHealthRequest("non-exist"));
 
