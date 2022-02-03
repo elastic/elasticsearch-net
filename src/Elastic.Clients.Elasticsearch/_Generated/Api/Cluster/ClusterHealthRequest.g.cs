@@ -135,8 +135,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }

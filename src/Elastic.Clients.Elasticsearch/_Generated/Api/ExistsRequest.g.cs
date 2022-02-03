@@ -124,8 +124,6 @@ namespace Elastic.Clients.Elasticsearch
 		public ExistsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }

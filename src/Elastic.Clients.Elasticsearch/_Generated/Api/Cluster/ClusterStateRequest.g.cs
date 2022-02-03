@@ -122,8 +122,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }

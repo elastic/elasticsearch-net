@@ -37,8 +37,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }

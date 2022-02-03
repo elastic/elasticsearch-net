@@ -37,8 +37,6 @@ namespace Elastic.Clients.Elasticsearch
 		internal RequestBaseDescriptor(Action<RequestBaseDescriptor> configure) => configure.Invoke(this);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
 		}
 	}
 }
