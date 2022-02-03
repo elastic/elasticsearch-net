@@ -2,7 +2,7 @@
 
 This `.ci` folder is used by https://clients-ci.elastic.co
 
-Where each Elasticsearch client runs the [rest api spec test](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test)
+Where each Elasticsearch client runs the [rest api spec test](https://github.com/elastic/elasticsearch/tree/main/rest-api-spec/src/main/resources/rest-api-spec/test)
 as defined by the Elasticsearch team.
 
 Each client starts the cluster using the same `.ci/run-elasticsearch` from `run-tests` and then bootstraps there own `rest api test runner`.api
