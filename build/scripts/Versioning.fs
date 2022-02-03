@@ -43,12 +43,12 @@ module Versioning =
         let globalJson = globalJson ()
         let doc_current =
             match globalJson.doc_current with
-            | "master" -> "master"
+            | "main" -> "main"
             | s when s.EndsWith(".x") -> sprintf "%i.x" version.Major
             | _ -> sprintf "%i.%i" version.Major version.Minor
         let doc_branch =
             match globalJson.doc_current with
-            | "master" -> "master"
+            | "main" -> "main"
             | _ -> sprintf "%i.x" version.Major 
             
         let newGlobalJson = {
