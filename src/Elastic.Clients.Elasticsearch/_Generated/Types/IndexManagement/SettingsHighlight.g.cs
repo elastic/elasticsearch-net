@@ -22,24 +22,35 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SettingsHighlight
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
+		[JsonPropertyName("max_analyzed_offset")]
+		public int? MaxAnalyzedOffset { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+	public sealed partial class SettingsHighlightDescriptor : DescriptorBase<SettingsHighlightDescriptor>
+	{
+		public SettingsHighlightDescriptor()
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		internal SettingsHighlightDescriptor(Action<SettingsHighlightDescriptor> configure) => configure.Invoke(this);
+		internal int? MaxAnalyzedOffsetValue { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public SettingsHighlightDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset) => Assign(maxAnalyzedOffset, (a, v) => a.MaxAnalyzedOffsetValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MaxAnalyzedOffsetValue.HasValue)
+			{
+				writer.WritePropertyName("max_analyzed_offset");
+				writer.WriteNumberValue(MaxAnalyzedOffsetValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

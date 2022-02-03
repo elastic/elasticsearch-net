@@ -22,24 +22,35 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SettingsAnalyze
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
+		[JsonPropertyName("max_token_count")]
+		public int? MaxTokenCount { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+	public sealed partial class SettingsAnalyzeDescriptor : DescriptorBase<SettingsAnalyzeDescriptor>
+	{
+		public SettingsAnalyzeDescriptor()
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
+		internal int? MaxTokenCountValue { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public SettingsAnalyzeDescriptor MaxTokenCount(int? maxTokenCount) => Assign(maxTokenCount, (a, v) => a.MaxTokenCountValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MaxTokenCountValue.HasValue)
+			{
+				writer.WritePropertyName("max_token_count");
+				writer.WriteNumberValue(MaxTokenCountValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

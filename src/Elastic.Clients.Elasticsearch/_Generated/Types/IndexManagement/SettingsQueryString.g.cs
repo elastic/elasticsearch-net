@@ -22,24 +22,31 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SettingsQueryString
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
+		[JsonPropertyName("lenient")]
+		public bool Lenient { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+	public sealed partial class SettingsQueryStringDescriptor : DescriptorBase<SettingsQueryStringDescriptor>
+	{
+		public SettingsQueryStringDescriptor()
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		internal SettingsQueryStringDescriptor(Action<SettingsQueryStringDescriptor> configure) => configure.Invoke(this);
+		internal bool LenientValue { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public SettingsQueryStringDescriptor Lenient(bool lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("lenient");
+			writer.WriteBooleanValue(LenientValue);
+			writer.WriteEndObject();
+		}
 	}
 }

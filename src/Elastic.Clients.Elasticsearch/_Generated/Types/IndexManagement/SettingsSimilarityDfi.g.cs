@@ -22,24 +22,37 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SettingsSimilarityDfi
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		[JsonPropertyName("independence_measure")]
+		public Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public string Type => "DFI";
+	}
+
+	public sealed partial class SettingsSimilarityDfiDescriptor : DescriptorBase<SettingsSimilarityDfiDescriptor>
+	{
+		public SettingsSimilarityDfiDescriptor()
+		{
+		}
+
+		internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasureValue { get; private set; }
+
+		public SettingsSimilarityDfiDescriptor IndependenceMeasure(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure independenceMeasure) => Assign(independenceMeasure, (a, v) => a.IndependenceMeasureValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("independence_measure");
+			JsonSerializer.Serialize(writer, IndependenceMeasureValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("DFI");
+			writer.WriteEndObject();
+		}
 	}
 }
