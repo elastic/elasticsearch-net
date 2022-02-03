@@ -31,13 +31,13 @@ In those cases we tend to pull your bits locally and write tests ourselves, but 
 
 Convention:
 
-- `master` reflects the latest server version, this is typically the `current latest major + 1`
+- `main` reflects the latest server version, this is typically the `current latest major + 1`
 - `N.x` where N represents the major version component of the Elasticsearch server release its integrating with; e.g. `7.x`
 - `N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixes.
 
 Examples:
 
-- `master` for the latest server version (currently _8.x_)
+- `main` for the latest server version (currently _8.x_)
 - `7.x` for 7.x compatible client
 - `6.x` for 6.x compatible client
 - `5.x` for 5.x compatible client
@@ -50,7 +50,7 @@ We do not require rebased/squashed commits although we do very much appreciate i
 
 Please submit your [Pull Requests](https://help.github.com/articles/creating-a-pull-request/) to 
 
-- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for master
+- [`main`](https://github.com/elastic/elasticsearch-net/tree/main) branch for main
 - [`7.x`](https://github.com/elastic/elasticsearch-net/tree/7.x) branch for 7.x
 - [`6.x`](https://github.com/elastic/elasticsearch-net/tree/6.x) branch for 6.x
 - [`5.x`](https://github.com/elastic/elasticsearch-net/tree/5.x) branch for 5.x
@@ -90,7 +90,7 @@ The `Tests` project contains both xunit unit and integration tests. A `tests.yam
 - `i` for integration tests
 - `m` for mixed mode i.e. unit and integration tests
 
-The build script has a number of different build targets to run different types of tests, see the [`Targets.fs` file in the `scripts` project](https://github.com/elastic/elasticsearch-net/blob/master/build/scripts/Targets.fs) for the complete list, but the main ones are:
+The build script has a number of different build targets to run different types of tests, see the [`Targets.fs` file in the `scripts` project](https://github.com/elastic/elasticsearch-net/blob/main/build/scripts/Targets.fs) for the complete list, but the main ones are:
 
 ### Compile and run unit tests
 
@@ -123,6 +123,6 @@ You may come across an exception similar to below when running the build script
 >Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
    at <StartupCode$FAKE>.$Program.main@()
 
-The `1.x` and `master` branches have diverged dramatically as a result of changes in preparation for 2.0. This includes changes to the build process such that switching between the `master` and `1.x` branches and back again can change the versions of packages used within the build processes. To rectify this issue, try deleting the `packages` folder within the root of the solution and run the build script again.
+The `1.x` and `main` branches have diverged dramatically as a result of changes in preparation for 2.0. This includes changes to the build process such that switching between the `main` and `1.x` branches and back again can change the versions of packages used within the build processes. To rectify this issue, try deleting the `packages` folder within the root of the solution and run the build script again.
 
 If working on both 1.x and 2.x and 5.x versions of NEST, it is recommended to clone the git repository for each version into separate directories to avoid the need to switch between the divergent branches.
