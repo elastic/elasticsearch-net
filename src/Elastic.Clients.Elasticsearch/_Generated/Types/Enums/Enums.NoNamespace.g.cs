@@ -73,6 +73,181 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(DFIIndependenceMeasureConverter))]
+	public enum DFIIndependenceMeasure
+	{
+		[EnumMember(Value = "standardized")]
+		Standardized,
+		[EnumMember(Value = "saturated")]
+		Saturated,
+		[EnumMember(Value = "chisquared")]
+		Chisquared
+	}
+
+	internal sealed class DFIIndependenceMeasureConverter : JsonConverter<DFIIndependenceMeasure>
+	{
+		public override DFIIndependenceMeasure Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "standardized":
+					return DFIIndependenceMeasure.Standardized;
+				case "saturated":
+					return DFIIndependenceMeasure.Saturated;
+				case "chisquared":
+					return DFIIndependenceMeasure.Chisquared;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DFIIndependenceMeasure value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DFIIndependenceMeasure.Standardized:
+					writer.WriteStringValue("standardized");
+					return;
+				case DFIIndependenceMeasure.Saturated:
+					writer.WriteStringValue("saturated");
+					return;
+				case DFIIndependenceMeasure.Chisquared:
+					writer.WriteStringValue("chisquared");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(DFRAfterEffectConverter))]
+	public enum DFRAfterEffect
+	{
+		[EnumMember(Value = "no")]
+		No,
+		[EnumMember(Value = "l")]
+		l,
+		[EnumMember(Value = "b")]
+		b
+	}
+
+	internal sealed class DFRAfterEffectConverter : JsonConverter<DFRAfterEffect>
+	{
+		public override DFRAfterEffect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "no":
+					return DFRAfterEffect.No;
+				case "l":
+					return DFRAfterEffect.l;
+				case "b":
+					return DFRAfterEffect.b;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DFRAfterEffect value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DFRAfterEffect.No:
+					writer.WriteStringValue("no");
+					return;
+				case DFRAfterEffect.l:
+					writer.WriteStringValue("l");
+					return;
+				case DFRAfterEffect.b:
+					writer.WriteStringValue("b");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(DFRBasicModelConverter))]
+	public enum DFRBasicModel
+	{
+		[EnumMember(Value = "p")]
+		p,
+		[EnumMember(Value = "ine")]
+		Ine,
+		[EnumMember(Value = "in")]
+		In,
+		[EnumMember(Value = "if")]
+		If,
+		[EnumMember(Value = "g")]
+		g,
+		[EnumMember(Value = "d")]
+		d,
+		[EnumMember(Value = "be")]
+		Be
+	}
+
+	internal sealed class DFRBasicModelConverter : JsonConverter<DFRBasicModel>
+	{
+		public override DFRBasicModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "p":
+					return DFRBasicModel.p;
+				case "ine":
+					return DFRBasicModel.Ine;
+				case "in":
+					return DFRBasicModel.In;
+				case "if":
+					return DFRBasicModel.If;
+				case "g":
+					return DFRBasicModel.g;
+				case "d":
+					return DFRBasicModel.d;
+				case "be":
+					return DFRBasicModel.Be;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DFRBasicModel value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DFRBasicModel.p:
+					writer.WriteStringValue("p");
+					return;
+				case DFRBasicModel.Ine:
+					writer.WriteStringValue("ine");
+					return;
+				case DFRBasicModel.In:
+					writer.WriteStringValue("in");
+					return;
+				case DFRBasicModel.If:
+					writer.WriteStringValue("if");
+					return;
+				case DFRBasicModel.g:
+					writer.WriteStringValue("g");
+					return;
+				case DFRBasicModel.d:
+					writer.WriteStringValue("d");
+					return;
+				case DFRBasicModel.Be:
+					writer.WriteStringValue("be");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(DistanceUnitConverter))]
 	public enum DistanceUnit
 	{
@@ -479,6 +654,90 @@ namespace Elastic.Clients.Elasticsearch
 		public const string FastVector = "fvh";
 	}
 
+	[JsonConverter(typeof(IBDistributionConverter))]
+	public enum IBDistribution
+	{
+		[EnumMember(Value = "spl")]
+		Spl,
+		[EnumMember(Value = "ll")]
+		Ll
+	}
+
+	internal sealed class IBDistributionConverter : JsonConverter<IBDistribution>
+	{
+		public override IBDistribution Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "spl":
+					return IBDistribution.Spl;
+				case "ll":
+					return IBDistribution.Ll;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IBDistribution value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IBDistribution.Spl:
+					writer.WriteStringValue("spl");
+					return;
+				case IBDistribution.Ll:
+					writer.WriteStringValue("ll");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IBLambdaConverter))]
+	public enum IBLambda
+	{
+		[EnumMember(Value = "ttf")]
+		Ttf,
+		[EnumMember(Value = "df")]
+		Df
+	}
+
+	internal sealed class IBLambdaConverter : JsonConverter<IBLambda>
+	{
+		public override IBLambda Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "ttf":
+					return IBLambda.Ttf;
+				case "df":
+					return IBLambda.Df;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IBLambda value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IBLambda.Ttf:
+					writer.WriteStringValue("ttf");
+					return;
+				case IBLambda.Df:
+					writer.WriteStringValue("df");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(LevelConverter))]
 	public enum Level
 	{
@@ -521,6 +780,69 @@ namespace Elastic.Clients.Elasticsearch
 					return;
 				case Level.Cluster:
 					writer.WriteStringValue("cluster");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(NormalizationConverter))]
+	public enum Normalization
+	{
+		[EnumMember(Value = "z")]
+		z,
+		[EnumMember(Value = "no")]
+		No,
+		[EnumMember(Value = "h3")]
+		H3,
+		[EnumMember(Value = "h2")]
+		H2,
+		[EnumMember(Value = "h1")]
+		H1
+	}
+
+	internal sealed class NormalizationConverter : JsonConverter<Normalization>
+	{
+		public override Normalization Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "z":
+					return Normalization.z;
+				case "no":
+					return Normalization.No;
+				case "h3":
+					return Normalization.H3;
+				case "h2":
+					return Normalization.H2;
+				case "h1":
+					return Normalization.H1;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Normalization value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case Normalization.z:
+					writer.WriteStringValue("z");
+					return;
+				case Normalization.No:
+					writer.WriteStringValue("no");
+					return;
+				case Normalization.H3:
+					writer.WriteStringValue("h3");
+					return;
+				case Normalization.H2:
+					writer.WriteStringValue("h2");
+					return;
+				case Normalization.H1:
+					writer.WriteStringValue("h1");
 					return;
 			}
 

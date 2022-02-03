@@ -22,24 +22,31 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class RetentionLease
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
+		[JsonPropertyName("period")]
+		public Elastic.Clients.Elasticsearch.Time Period { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+	public sealed partial class RetentionLeaseDescriptor : DescriptorBase<RetentionLeaseDescriptor>
+	{
+		public RetentionLeaseDescriptor()
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Time PeriodValue { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Time period) => Assign(period, (a, v) => a.PeriodValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("period");
+			JsonSerializer.Serialize(writer, PeriodValue, options);
+			writer.WriteEndObject();
+		}
 	}
 }

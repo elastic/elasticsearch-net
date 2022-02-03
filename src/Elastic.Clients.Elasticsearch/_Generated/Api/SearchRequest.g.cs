@@ -692,7 +692,7 @@ namespace Elastic.Clients.Elasticsearch
 			return Assign(configure, (a, v) => a.PitDescriptorAction = v);
 		}
 
-		public SearchRequestDescriptor<TDocument> RuntimeMappings(Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? runtimeMappings) => Assign(runtimeMappings, (a, v) => a.RuntimeMappingsValue = v);
+		public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector) => Assign(selector, (a, v) => a.RuntimeMappingsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>()));
 		public SearchRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Assign(stats, (a, v) => a.StatsValue = v);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

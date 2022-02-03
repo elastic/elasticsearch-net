@@ -22,24 +22,37 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SettingsSimilarityLmj
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		[JsonPropertyName("lambda")]
+		public double Lambda { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public string Type => "LMJelinekMercer";
+	}
+
+	public sealed partial class SettingsSimilarityLmjDescriptor : DescriptorBase<SettingsSimilarityLmjDescriptor>
+	{
+		public SettingsSimilarityLmjDescriptor()
+		{
+		}
+
+		internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
+		internal double LambdaValue { get; private set; }
+
+		public SettingsSimilarityLmjDescriptor Lambda(double lambda) => Assign(lambda, (a, v) => a.LambdaValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("lambda");
+			writer.WriteNumberValue(LambdaValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("LMJelinekMercer");
+			writer.WriteEndObject();
+		}
 	}
 }

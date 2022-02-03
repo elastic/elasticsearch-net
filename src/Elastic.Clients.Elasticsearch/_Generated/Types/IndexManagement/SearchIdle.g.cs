@@ -22,24 +22,35 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SearchIdle
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
+		[JsonPropertyName("after")]
+		public Elastic.Clients.Elasticsearch.Time? After { get; set; }
+	}
 
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
+	public sealed partial class SearchIdleDescriptor : DescriptorBase<SearchIdleDescriptor>
+	{
+		public SearchIdleDescriptor()
+		{
+		}
 
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
+		internal Elastic.Clients.Elasticsearch.Time? AfterValue { get; private set; }
 
-		[JsonInclude]
-		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Time? after) => Assign(after, (a, v) => a.AfterValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (AfterValue is not null)
+			{
+				writer.WritePropertyName("after");
+				JsonSerializer.Serialize(writer, AfterValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
 	}
 }

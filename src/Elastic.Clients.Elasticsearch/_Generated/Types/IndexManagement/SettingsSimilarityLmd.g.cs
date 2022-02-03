@@ -22,24 +22,37 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Analysis
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class PatternReplaceCharFilter : Analysis.CharFilterBase, ICharFilterDefinitionsVariant
+	public partial class SettingsSimilarityLmd
 	{
 		[JsonInclude]
-		[JsonPropertyName("flags")]
-		public string? Flags { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("pattern")]
-		public string Pattern { get; init; }
-
-		[JsonInclude]
-		[JsonPropertyName("replacement")]
-		public string? Replacement { get; init; }
+		[JsonPropertyName("mu")]
+		public int Mu { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public string Type => "pattern_replace";
+		public string Type => "LMDirichlet";
+	}
+
+	public sealed partial class SettingsSimilarityLmdDescriptor : DescriptorBase<SettingsSimilarityLmdDescriptor>
+	{
+		public SettingsSimilarityLmdDescriptor()
+		{
+		}
+
+		internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
+		internal int MuValue { get; private set; }
+
+		public SettingsSimilarityLmdDescriptor Mu(int mu) => Assign(mu, (a, v) => a.MuValue = v);
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("mu");
+			writer.WriteNumberValue(MuValue);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue("LMDirichlet");
+			writer.WriteEndObject();
+		}
 	}
 }
