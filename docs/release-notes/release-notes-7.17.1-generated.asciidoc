@@ -4,5 +4,6 @@
 === Bug Fixes
 
 - * Fix type for AverageResponseTime on node stats response https://github.com/elastic/elasticsearch-net/pull/6107[#6107]  (issue: https://github.com/elastic/elasticsearch-net/issues/5953[#5953])
+- * Fix username rule when returned as array https://github.com/elastic/elasticsearch-net/pull/6110[#6110]  (issue: https://github.com/elastic/elasticsearch-net/issues/5272[#5272])
 
 
