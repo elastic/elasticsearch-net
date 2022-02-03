@@ -37,7 +37,7 @@ Language clients are forward compatible; meaning that clients support communicat
 | 5.x               | 5.x           | :x:                | :heavy_minus_sign: | :heavy_minus_sign: |
 | 6.x               | 6.x           | :white_check_mark: | [![Build status](https://ci.appveyor.com/api/projects/status/9hiqkga2jjn05ftu/branch/6.x?svg=true)](https://ci.appveyor.com/project/elastic/elasticsearch-net/branch/6.x) | :heavy_minus_sign: |
 | 7.x               | 7.x           | :white_check_mark: | [![Integration](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml/badge.svg?branch=7.x)](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml) | [![Tests](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml/badge.svg?branch=7.x)](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml) |
-| master            | master        | :x:                | [![Integration](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml/badge.svg)](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml) | [![Tests](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml/badge.svg)](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml) |
+| main            | main        | :x:                | [![Integration](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml/badge.svg)](https://github.com/elastic/elasticsearch-net/actions/workflows/integration-jobs.yml) | [![Tests](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml/badge.svg)](https://github.com/elastic/elasticsearch-net/actions/workflows/test-jobs.yml) |
 
 Please refer to the [end-of-life policy](https://www.elastic.co/support/eol) for complete information.
 
@@ -81,7 +81,7 @@ If you use this `experimental` or `beta` functionality, by taking a dependency o
 
 #### Branch Compatibility
 
-- `master` reflects the latest server version, this is typically the `current latest major + 1`
+- `main` reflects the latest server version, this is typically the `current latest major + 1`
 - `N.x` where N represents the major version component of the Elasticsearch server release its integrating with; e.g. `7.x`
 - `N.Y` where `N` is the major version and `Y` is the minor component, typically opened as integration branch for a specific minor leaving `N.x` free to do bug fixes.
 
@@ -97,11 +97,11 @@ Please consult the [current upgrading Elasticsearch guidelines](https://www.elas
 
 ### Upgrading from 1.x to 2.x
 
-Take a look at the [blog post for details around the evolution of NEST 2.x](https://www.elastic.co/blog/ga-release-of-nest-2-0-our-dot-net-client-for-elasticsearch), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/elasticsearch-net-breaking-changes.md).
+Take a look at the [blog post for details around the evolution of NEST 2.x](https://www.elastic.co/blog/ga-release-of-nest-2-0-our-dot-net-client-for-elasticsearch), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/main/docs/2.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/main/docs/2.0-breaking-changes/elasticsearch-net-breaking-changes.md).
 
 ### Upgrading from 2.x to 5.x
 
-Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.co/blog/nest-5-0-released), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/elasticsearch-net-breaking-changes.md).
+Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.co/blog/nest-5-0-released), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/main/docs/5.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/main/docs/5.0-breaking-changes/elasticsearch-net-breaking-changes.md).
 
 ### Upgrading from 5.x to 6.x
 
@@ -111,7 +111,7 @@ Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 6
 
 Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 7.0](https://www.elastic.co/blog/nest-and-elasticsearch-net-7-0-now-ga). Please also see the [7.0.0 release notes](https://github.com/elastic/elasticsearch-net/releases/tag/7.0.0).
 
-# [NEST](https://github.com/elastic/elasticsearch-net/tree/master/src/Nest)
+# [NEST](https://github.com/elastic/elasticsearch-net/tree/main/src/Nest)
 
 NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elastic/elasticsearch).
 
@@ -221,7 +221,7 @@ var response = client.Search<Tweet>(request);
 
 ### Falling back to Elasticsearch.Net
 
-NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/tree/master/src/Elasticsearch.Net) client that you can fall back to in case anything is missing:
+NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/tree/main/src/Elasticsearch.Net) client that you can fall back to in case anything is missing:
 
 ```csharp
 //.LowLevel is of type IElasticLowLevelClient
@@ -272,7 +272,7 @@ Note the main difference here is that we are instantiating an `ElasticLowLevelCl
 
 ### Calling an API endpoint
 
-Elasticsearch.Net is generated from the [official REST specification](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec), and thus maps to all Elasticsearch API endpoints.
+Elasticsearch.Net is generated from the [official REST specification](https://github.com/elastic/elasticsearch/tree/main/rest-api-spec), and thus maps to all Elasticsearch API endpoints.
 
 ```csharp
 client.GetSource("myindex","mytype","1",qs=>qs
@@ -331,13 +331,13 @@ Text within multi-line comments conforms to [asciidoc](http://asciidoc.org/), a 
 ```sh
 cd /cygdrive/c/source/elastic-docs
 
-./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc --chunk=1 --open
+./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-main/docs/index.asciidoc --chunk=1 --open
 ```
 
 The result of running this for a successful build will be:
 
 ```sh
-Building HTML from /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc
+Building HTML from /cygdrive/c/source/elasticsearch-net-main/docs/index.asciidoc
 Done
 See: /cygdrive/c/source/elasticsearch-docs/html_docs/index.html
 ```
@@ -357,4 +357,4 @@ A small HTTP server will be spun up locally on port 8000 through which you can v
 
 This software is Copyright (c) 2014-2021 by Elasticsearch BV.
 
-This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elastic/elasticsearch-net/blob/master/license.txt).
+This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elastic/elasticsearch-net/blob/main/license.txt).

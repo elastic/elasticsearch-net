@@ -23,7 +23,7 @@ let SkipList = dict<SkipFile,SkipSection> [
     // funny looking dispatch /_security/privilege/app?name
     SkipFile "privileges/10_basic.yml", All
 
-    // Sets a dictionary to null, we need to see if we can backport this from master
+    // Sets a dictionary to null, we need to see if we can backport this from main
     SkipFile "search.aggregation/240_max_buckets.yml", All
     SkipFile "search.aggregation/180_percentiles_tdigest_metric.yml", Section "Invalid params test"
     SkipFile "search.aggregation/190_percentiles_hdr_metric.yml", Section "Invalid params test"
