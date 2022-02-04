@@ -113,8 +113,8 @@ namespace Elastic.Clients.Elasticsearch
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
 		public ExistsRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-		public ExistsRequestDescriptor<TDocument> Realtime(bool? realtime) => Qs("realtime", realtime);
-		public ExistsRequestDescriptor<TDocument> Refresh(bool? refresh) => Qs("refresh", refresh);
+		public ExistsRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
+		public ExistsRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		public ExistsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public ExistsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfigParam? source) => Qs("_source", source);
 		public ExistsRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

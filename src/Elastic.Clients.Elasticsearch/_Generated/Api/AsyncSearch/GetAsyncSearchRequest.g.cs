@@ -71,7 +71,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
-		public GetAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys) => Qs("typed_keys", typedKeys);
+		public GetAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		public GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{

@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("hits")]
-		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> Hits { get; init; }
+		public Elastic.Clients.Elasticsearch.HitsMetadata<TDocument> HitsMetadata { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("max_score")]
