@@ -2,6 +2,7 @@ using System;
 
 namespace Elastic.Clients.Elasticsearch
 {
+
 	///// <summary>
 	///// Makes it explicit which API this request interface maps, the name of the interface informs
 	///// The generator how to name related types

@@ -72,8 +72,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		public ClusterAllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo) => Qs("include_disk_info", includeDiskInfo);
-		public ClusterAllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions) => Qs("include_yes_decisions", includeYesDecisions);
+		public ClusterAllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
+		public ClusterAllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
 		internal string? CurrentNodeValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; private set; }

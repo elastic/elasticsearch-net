@@ -1952,6 +1952,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
 
+		//public void MatchAll(Action<MatchAllQueryDescriptor>? selector = null) =>
+		//	Set(selector, "match_all");
+
 		public void Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null, string name = null) =>
 			Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 	}

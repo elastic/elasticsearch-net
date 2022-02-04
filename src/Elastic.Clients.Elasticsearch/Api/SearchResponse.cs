@@ -6,22 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+public partial class SearchResponse<TDocument>
 {
-	public partial class SearchResponse<TDocument>
-	{
-		[JsonIgnore]
-		public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
+	[JsonIgnore]
+	public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
 
-		[JsonIgnore]
-		public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
+	[JsonIgnore]
+	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
 
-		[JsonIgnore]
-		public long Total => HitsMetadata?.Total?.Value ?? -1;
-	}
-
-	//public partial class SearchRequest
-	//{
-	//	public IList<SortBase> Sort { get; set; }
-	//}
-}
+	[JsonIgnore]
+	public long Total => HitsMetadata?.Total?.Value ?? -1;
+}	

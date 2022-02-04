@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("aggregations")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? Aggregations { get; set; }
+		public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 
 		[JsonInclude]
 		[JsonPropertyName("collapse")]
@@ -354,6 +354,13 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public IEnumerable<string>? Stats { get; set; }
 	}
 
+	public partial class AsyncSearchSubmitRequest<TInferDocument> : AsyncSearchSubmitRequest
+	{
+		public AsyncSearchSubmitRequest() : base(typeof(TInferDocument))
+		{
+		}
+	}
+
 	public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument> : RequestDescriptorBase<AsyncSearchSubmitRequestDescriptor<TDocument>, AsyncSearchSubmitRequestParameters>
 	{
 		public AsyncSearchSubmitRequestDescriptor() : this(typeof(TDocument))
@@ -369,25 +376,25 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public AsyncSearchSubmitRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion) => Qs("keep_on_completion", keepOnCompletion);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices) => Qs("allow_no_indices", allowNoIndices);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults) => Qs("allow_partial_search_results", allowPartialSearchResults);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard) => Qs("analyze_wildcard", analyzeWildcard);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled) => Qs("ignore_throttled", ignoreThrottled);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable) => Qs("ignore_unavailable", ignoreUnavailable);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Lenient(bool? lenient) => Qs("lenient", lenient);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> RequestCache(bool? requestCache) => Qs("request_cache", requestCache);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
@@ -395,12 +402,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> TypedKeys(bool? typedKeys) => Qs("typed_keys", typedKeys);
-		public AsyncSearchSubmitRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public AsyncSearchSubmitRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public AsyncSearchSubmitRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>? AggregationsValue { get; private set; }
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
 
 		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
 
@@ -460,6 +467,8 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		internal IEnumerable<string>? StatsValue { get; private set; }
 
+		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
+
 		internal FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; private set; }
 
 		internal HighlightDescriptor<TDocument> HighlightDescriptor { get; private set; }
@@ -475,6 +484,8 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		internal SuggesterDescriptor SuggestDescriptor { get; private set; }
 
 		internal PointInTimeReferenceDescriptor PitDescriptor { get; private set; }
+
+		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
 
 		internal Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; private set; }
 
@@ -492,7 +503,27 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		internal Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; private set; }
 
-		public AsyncSearchSubmitRequestDescriptor<TDocument> Aggregations(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>> selector) => Assign(selector, (a, v) => a.AggregationsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationContainer>()));
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+		}
+
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+		}
+
+		public AsyncSearchSubmitRequestDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+		}
+
 		public AsyncSearchSubmitRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
@@ -686,7 +717,17 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (AggregationsValue is not null)
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
 			{
 				writer.WritePropertyName("aggregations");
 				JsonSerializer.Serialize(writer, AggregationsValue, options);

@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
-		public ClusterPendingTasksRequestDescriptor Local(bool? local) => Qs("local", local);
+		public ClusterPendingTasksRequestDescriptor Local(bool? local = true) => Qs("local", local);
 		public ClusterPendingTasksRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
