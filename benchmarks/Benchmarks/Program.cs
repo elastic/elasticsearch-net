@@ -46,12 +46,12 @@ namespace Benchmarks
 			_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponse>(Stream);
 		}
 
-		[Benchmark]
-		public void Version8_String()
-		{
-			Stream.Position = 0;
-			_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV2>(Stream);
-		}
+		// [Benchmark]
+		// public void Version8_String()
+		// {
+		// 	Stream.Position = 0;
+		// 	_ = AlphaClient.RequestResponseSerializer.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterHealthResponseV2>(Stream);
+		// }
 
 		//[Benchmark]
 		//public void Version8_String_Converter()

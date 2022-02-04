@@ -15,6 +15,7 @@
 //
 // ------------------------------------------------
 
+using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using System;
@@ -26,6 +27,8 @@ namespace Elastic.Clients.Elasticsearch
 {
 	public partial interface IElasticsearchClient
 	{
+		AsyncSearchNamespace AsyncSearch { get; }
+
 		ClusterNamespace Cluster { get; }
 
 		IndexManagementNamespace IndexManagement { get; }
