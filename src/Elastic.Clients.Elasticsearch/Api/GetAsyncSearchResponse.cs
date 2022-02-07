@@ -10,28 +10,28 @@ using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public partial class GetAsyncSearchResponse<TDocument>
+public partial class AsyncSearch<TDocument>
 {
 	[JsonIgnore]
-	public IReadOnlyCollection<Hit<TDocument>> Hits => Response.HitsMetadata.Hits;
+	public IReadOnlyCollection<Hit<TDocument>> Hits => HitsMetadata.Hits;
 
 	[JsonIgnore]
-	public IReadOnlyCollection<TDocument> Documents => Response.HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
+	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
 
 	[JsonIgnore]
-	public long Total => Response.HitsMetadata?.Total?.Value ?? -1;
+	public long Total => HitsMetadata?.Total?.Value ?? -1;
 }
 
 public abstract partial class AsyncSearchResponseBase
 {
 	[JsonIgnore]
-	public DateTimeOffset StartTime => DateTimeUtil.UnixEpoch.AddMilliseconds(StartTimeInMillis.Item2.Value); // TODO - Fix use of EpochMillis
+	public DateTimeOffset StartTime => StartTimeInMillis.DateTimeOffset;
 
 	[JsonIgnore]
-	public DateTimeOffset ExpirationTime => DateTimeUtil.UnixEpoch.AddMilliseconds(ExpirationTimeInMillis.Item2.Value); // TODO - Fix use of EpochMillis
+	public DateTimeOffset ExpirationTime => ExpirationTimeInMillis.DateTimeOffset;
 }
 
 public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument>
 {
-	public AsyncSearchSubmitRequestDescriptor<TDocument> MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => Query(q => q.MatchAll(selector));
+	public AsyncSearchSubmitRequestDescriptor<TDocument> MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll()) : Query(q => q.MatchAll(selector));
 }
