@@ -9,6 +9,7 @@ using Elastic.Clients.JsonNetSerializer.Converters;
 using Newtonsoft.Json;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch;
+using Newtonsoft.Json.Converters;
 
 namespace Elastic.Clients.JsonNetSerializer
 {
@@ -34,7 +35,8 @@ namespace Elastic.Clients.JsonNetSerializer
 			Converters = new List<JsonConverter>
 			{
 				new HandleNestTypesOnSourceJsonConverter(BuiltinSerializer, connectionSettings.MemoryStreamFactory),
-				new TimeSpanToStringConverter()
+				new TimeSpanToStringConverter(),
+				new StringEnumConverter()
 			};
 			_serializer = CreateSerializer(SerializationFormatting.Indented);
 			_collapsedSerializer = CreateSerializer(SerializationFormatting.None);
