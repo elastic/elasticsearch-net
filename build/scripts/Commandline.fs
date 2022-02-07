@@ -73,13 +73,13 @@ Execution hints can be provided anywhere on the command line
         let c = candidate.ToLowerInvariant()
         match c with
         | "elastic.clients.elasticsearch" | "elastic.clients.elasticsearch.jsonnetserializer" -> Some c
-        | _ -> None     
+        | _ -> None
         
     let private (|IsFormat|_|) (candidate:string) =
         let c = candidate.ToLowerInvariant()
         match c with
         | "xml" | "markdown" | "asciidoc" -> Some c
-        | _ -> None 
+        | _ -> None
 
     type MultiTarget = All | One
 
