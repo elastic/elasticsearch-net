@@ -23,9 +23,10 @@ namespace Tests.AsyncSearch
 		private const string GetStep = nameof(GetStep);
 		private const string DeleteStep = nameof(DeleteStep);
 
-		public AsyncSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
+		public AsyncSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage)
 		{
-			{SubmitStep, u =>
+			{
+				SubmitStep, u =>
 				u.Calls<AsyncSearchSubmitRequestDescriptor<Project>, AsyncSearchSubmitRequest<Project>, AsyncSearchSubmitResponse<Project>>(
 					v => new AsyncSearchSubmitRequest<Project>
 					{
@@ -73,10 +74,11 @@ namespace Tests.AsyncSearch
 					(v, c, f) => c.AsyncSearch.SubmitAsync(f),
 					(v, c, r) => c.AsyncSearch.Submit<Project>(r),
 					(v, c, r) => c.AsyncSearch.SubmitAsync<Project>(r),
-					onResponse: (r, values) => values.ExtendedValue("id", r.Id.ToString())
+					onResponse: (r, values) => values.ExtendedValue("id", r.Id)
 				)
 			},
-			{StatusStep, u =>
+			{
+				StatusStep, u =>
 				u.Calls<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequest, AsyncSearchStatusResponse<Project>>(
 					v => new AsyncSearchStatusRequest(v),
 					(v, d) => d,
@@ -87,7 +89,8 @@ namespace Tests.AsyncSearch
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
 			},
-			{GetStep, u =>
+			{
+				GetStep, u =>
 				u.Calls<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequest, GetAsyncSearchResponse<Project>>(
 					v => new GetAsyncSearchRequest(v),
 					(v, d) => d,
@@ -98,7 +101,8 @@ namespace Tests.AsyncSearch
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
 			},
-			{DeleteStep, u =>
+			{
+				DeleteStep, u =>
 				u.Calls<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequest, DeleteAsyncSearchResponse>(
 					v => new DeleteAsyncSearchRequest(v),
 					(v, d) => d,
@@ -140,10 +144,7 @@ namespace Tests.AsyncSearch
 		public async Task AsyncSearchGetResponse() => await Assert<GetAsyncSearchResponse<Project>>(GetStep, (s, r) =>
 		{
 			r.ShouldBeValid();
-
-			//r.Id.Should().NotBeNullOrEmpty(); // TODO - This should be a string (not an ID)
-			r.Id.ToString().Should().NotBeNullOrEmpty();
-
+			r.Id.Should().NotBeNullOrEmpty();
 			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
 			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
 			r.Response.Should().NotBeNull();

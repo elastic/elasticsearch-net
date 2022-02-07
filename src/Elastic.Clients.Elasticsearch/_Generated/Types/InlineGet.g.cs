@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_routing")]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get; init; }
+		public string? Routing { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_seq_no")]

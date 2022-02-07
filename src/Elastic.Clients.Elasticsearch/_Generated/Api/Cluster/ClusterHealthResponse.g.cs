@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("task_max_waiting_in_queue_millis")]
-		public long TaskMaxWaitingInQueueMillis { get; init; }
+		public Elastic.Clients.Elasticsearch.EpochMillis TaskMaxWaitingInQueueMillis { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("timed_out")]

@@ -36,6 +36,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("node_name")]
-		public Elastic.Clients.Elasticsearch.Name NodeName { get; init; }
+		public string NodeName { get; init; }
 	}
 }

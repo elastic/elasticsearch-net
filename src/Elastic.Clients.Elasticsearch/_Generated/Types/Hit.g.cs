@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+		public string Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_ignored")]
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+		public string Index { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_nested")]

@@ -28,6 +28,6 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+		public string Id { get; init; }
 	}
 }

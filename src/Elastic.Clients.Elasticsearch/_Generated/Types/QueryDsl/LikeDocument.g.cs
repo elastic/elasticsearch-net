@@ -28,11 +28,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	{
 		[JsonInclude]
 		[JsonPropertyName("_id")]
-		public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
+		public string? Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_index")]
-		public Elastic.Clients.Elasticsearch.IndexName? Index { get; init; }
+		public string? Index { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("doc")]
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 		[JsonInclude]
 		[JsonPropertyName("routing")]
-		public Elastic.Clients.Elasticsearch.Routing? Routing { get; init; }
+		public string? Routing { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("version")]

@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("field")]
-		public Elastic.Clients.Elasticsearch.Field Field { get; init; }
+		public string Field { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("offset")]

@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 	{
 		[JsonInclude]
 		[JsonPropertyName("node_id")]
-		public Elastic.Clients.Elasticsearch.Id NodeId { get; init; }
+		public string NodeId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("path")]
