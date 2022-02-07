@@ -44,6 +44,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 			var descriptor = new DeleteRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
 		}
 
@@ -51,6 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 			var descriptor = new DeleteRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
 		}
 
@@ -70,6 +72,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 			var descriptor = new ExistsRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<ExistsRequestDescriptor, ExistsResponse>(descriptor);
 		}
 
@@ -77,6 +80,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 			var descriptor = new ExistsRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
 		}
 

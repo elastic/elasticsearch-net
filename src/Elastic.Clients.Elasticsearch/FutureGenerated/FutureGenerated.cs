@@ -1695,6 +1695,8 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+
+
 	public sealed partial class PointInTimeReferenceDescriptor
 	{
 		public PointInTimeReferenceDescriptor(string id) => IdValue = id;
@@ -2448,10 +2450,10 @@ namespace Elastic.Clients.Elasticsearch
 
 	// TODO: Implement properly
 	//[JsonConverter(typeof(UnionConverter<EpochMillis>))]
-	public partial class EpochMillis
-	{
-		public EpochMillis() : base(1) { } // TODO: This is temp
-	}
+	//public partial class EpochMillis
+	//{
+	//	public EpochMillis() : base(1) { } // TODO: This is temp
+	//}
 
 	// TODO: Implement properly
 	[JsonConverter(typeof(PercentageConverter))]
@@ -2528,4 +2530,21 @@ namespace Elastic.Clients.Elasticsearch
 	//{
 	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	//}
+
+	
+}
+
+namespace Elastic.Clients.Elasticsearch.AsyncSearch
+{
+	public partial class GetAsyncSearchRequest
+	{
+		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+		internal override void BeforeRequest() => TypedKeys = true;
+	}
+
+	public sealed partial class GetAsyncSearchRequestDescriptor
+	{
+		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+		internal override void BeforeRequest() => TypedKeys(true);
+	}
 }

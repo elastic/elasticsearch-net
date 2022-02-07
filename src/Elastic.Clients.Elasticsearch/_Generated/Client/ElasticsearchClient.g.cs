@@ -140,6 +140,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new CreateRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			descriptor.Document(document);
 			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
 		}
@@ -148,6 +149,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new CreateRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			descriptor.Document(document);
 			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
 		}
@@ -168,6 +170,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new DeleteRequestDescriptor(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<DeleteRequestDescriptor, DeleteResponse>(descriptor);
 		}
 
@@ -175,6 +178,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new DeleteRequestDescriptor(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse>(descriptor);
 		}
 
@@ -194,6 +198,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
 		}
 
@@ -201,6 +206,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse>(descriptor);
 		}
 
@@ -220,6 +226,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new GetRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
 		}
 
@@ -227,6 +234,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new GetRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>>(descriptor);
 		}
 
@@ -246,6 +254,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new IndexRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			descriptor.Document(document);
 			return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
 		}
@@ -254,6 +263,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new IndexRequestDescriptor<TDocument>(index);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			descriptor.Document(document);
 			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
 		}
@@ -274,6 +284,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new OpenPointInTimeRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
 		}
 
@@ -281,6 +292,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new OpenPointInTimeRequestDescriptor(indices);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse>(descriptor);
 		}
 
@@ -356,6 +368,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
 
@@ -363,6 +376,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
 
@@ -382,6 +396,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			descriptor.Document(document);
 			descriptor.PartialDocument(partialDocument);
 			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
@@ -391,6 +406,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
 			descriptor.Document(document);
 			descriptor.PartialDocument(partialDocument);
 			return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);

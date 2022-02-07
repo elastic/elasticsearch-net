@@ -73,17 +73,17 @@ namespace Tests.AsyncSearch
 					(v, c, f) => c.AsyncSearch.SubmitAsync(f),
 					(v, c, r) => c.AsyncSearch.Submit<Project>(r),
 					(v, c, r) => c.AsyncSearch.SubmitAsync<Project>(r),
-					onResponse: (r, values) => values.ExtendedValue("id", r.Id)
+					onResponse: (r, values) => values.ExtendedValue("id", r.Id.ToString())
 				)
 			},
 			{StatusStep, u =>
-				u.Calls<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequest, AsyncSearchStatusResponse>(
+				u.Calls<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequest, AsyncSearchStatusResponse<Project>>(
 					v => new AsyncSearchStatusRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.AsyncSearch.Status(v, f),
-					(v, c, f) => c.AsyncSearch.StatusAsync(v, f),
-					(v, c, r) => c.AsyncSearch.Status(r),
-					(v, c, r) => c.AsyncSearch.StatusAsync(r),
+					(v, c, f) => c.AsyncSearch.Status<Project>(v, f),
+					(v, c, f) => c.AsyncSearch.StatusAsync<Project>(v, f),
+					(v, c, r) => c.AsyncSearch.Status<Project>(r),
+					(v, c, r) => c.AsyncSearch.StatusAsync<Project>(r),
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
 			},
@@ -140,12 +140,15 @@ namespace Tests.AsyncSearch
 		public async Task AsyncSearchGetResponse() => await Assert<GetAsyncSearchResponse<Project>>(GetStep, (s, r) =>
 		{
 			r.ShouldBeValid();
-			//r.Id.Should().NotBeNullOrEmpty();
+
+			//r.Id.Should().NotBeNullOrEmpty(); // TODO - This should be a string (not an ID)
+			r.Id.ToString().Should().NotBeNullOrEmpty();
+
 			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
 			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
 			r.Response.Should().NotBeNull();
 			r.Response.Took.Should().BeGreaterOrEqualTo(0);
-			r.Response.HitsMetadata.Should().HaveCount(10);
+			r.Response.Hits.Should().HaveCount(10);
 			var terms = r.Response.Aggregations.Terms("states");
 			terms.Should().NotBeNull();
 		});
