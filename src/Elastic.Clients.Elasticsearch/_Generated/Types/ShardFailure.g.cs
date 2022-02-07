@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName? Index { get; init; }
+		public string? Index { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node")]

@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("_scroll_id")]
-		public Elastic.Clients.Elasticsearch.Id? ScrollId { get; init; }
+		public string? ScrollId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("pit_id")]
-		public Elastic.Clients.Elasticsearch.Id? PitId { get; init; }
+		public string? PitId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]

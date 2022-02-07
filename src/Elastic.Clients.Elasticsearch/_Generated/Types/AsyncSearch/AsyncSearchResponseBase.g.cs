@@ -33,7 +33,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
+		public string? Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("is_partial")]

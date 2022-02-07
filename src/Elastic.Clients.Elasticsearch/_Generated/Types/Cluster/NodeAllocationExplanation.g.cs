@@ -40,11 +40,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("node_id")]
-		public Elastic.Clients.Elasticsearch.Id NodeId { get; init; }
+		public string NodeId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node_name")]
-		public Elastic.Clients.Elasticsearch.Name NodeName { get; init; }
+		public string NodeName { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("store")]

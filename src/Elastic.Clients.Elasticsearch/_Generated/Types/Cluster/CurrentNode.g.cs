@@ -32,11 +32,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
 
 		[JsonInclude]
 		[JsonPropertyName("id")]
-		public Elastic.Clients.Elasticsearch.Id Id { get; init; }
+		public string Id { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
-		public Elastic.Clients.Elasticsearch.Name Name { get; init; }
+		public string Name { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("transport_address")]

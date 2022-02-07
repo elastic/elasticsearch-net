@@ -1191,7 +1191,7 @@ namespace Elastic.Clients.Elasticsearch
 
 	public partial class StoredScriptId
 	{
-		public StoredScriptId(Id id) => Id = id;
+		public StoredScriptId(string id) => Id = id;
 	}
 
 	public partial class BulkResponse
