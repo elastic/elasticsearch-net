@@ -8,6 +8,7 @@ open System
 open System.Runtime.InteropServices
 open Fake.Core
 open Fake.IO
+open Octokit
 
 //this is ugly but a direct port of what used to be duplicated in our DOS and bash scripts
 module Commandline =
@@ -71,7 +72,7 @@ Execution hints can be provided anywhere on the command line
     let private (|IsProject|_|) (candidate:string) =
         let c = candidate.ToLowerInvariant()
         match c with
-        | "nest" | "elasticsearch.net" | "elastic.clients.elasticsearch.jsonnetserializer" -> Some c
+        | "elastic.clients.elasticsearch" | "elastic.clients.elasticsearch.jsonnetserializer" -> Some c
         | _ -> None     
         
     let private (|IsFormat|_|) (candidate:string) =
@@ -145,6 +146,8 @@ Execution hints can be provided anywhere on the command line
         let skipTests = args |> List.exists (fun x -> x = "skiptests") || target = "documentation"
         let skipDocs = args |> List.exists (fun x -> x = "skipdocs")
         let report = args |> List.exists (fun x -> x = "--report")
+        
+        printf "%b exist" report
 
         let parsed = {
             NonInteractive = args |> List.exists (fun x -> x = "non-interactive")
