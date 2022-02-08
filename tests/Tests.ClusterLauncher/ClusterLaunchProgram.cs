@@ -23,7 +23,7 @@ namespace Tests.ClusterLauncher
 			var clusters = GetClusters();
 			if (arguments.Length < 1)
 			{
-				Console.Error.WriteLine("cluster command needs atleast one argument to indicate the cluster to start");
+				Console.Error.WriteLine("cluster command needs at least one argument to indicate the cluster to start");
 				foreach (var c in clusters)
 					Console.WriteLine(" - " + c.Name.Replace("Cluster", "").ToLowerInvariant());
 
