@@ -11,11 +11,10 @@
         refspec: +refs/pull/*:refs/remotes/origin/pr/*
     triggers:
     - github-pull-request:
-        black-list-target-branches:
-        - '6\.(?:x|\d+?)'
         org-list:
         - elastic
         allow-whitelist-orgs-as-admins: true
         github-hooks: true
         status-context: clients-ci
         cancel-builds-on-update: true
+    publishers: []
