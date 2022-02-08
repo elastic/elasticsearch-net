@@ -1528,7 +1528,7 @@
       "tests.configuration": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.2.6"
+          "Elastic.Elasticsearch.Managed": "0.3.0"
         }
       },
       "tests.domain": {
@@ -1536,7 +1536,7 @@
         "dependencies": {
           "Bogus": "22.1.2",
           "Elastic.Clients.Elasticsearch": "8.0.0",
-          "Elastic.Elasticsearch.Managed": "0.2.6",
+          "Elastic.Elasticsearch.Managed": "0.3.0",
           "Newtonsoft.Json": "12.0.1",
           "Tests.Configuration": "8.0.0"
         }

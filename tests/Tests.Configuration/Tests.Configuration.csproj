@@ -4,6 +4,6 @@
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.2.8" />
+    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.3.0" />
   </ItemGroup>
 </Project>

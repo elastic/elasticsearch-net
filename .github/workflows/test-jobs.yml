@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.100'
+          dotnet-version: '6.0.101'
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.100'
+          dotnet-version: '6.0.101'
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
