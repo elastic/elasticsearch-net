@@ -68,10 +68,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
 
-		// private bool AlreadySeeded() => false; // TODO: Add exists for HEAD responses
 		private bool AlreadySeeded()
 		{
-			var response = Client.Transport.Request<BytesResponse>(HttpMethod.HEAD, $"_template/{TestsIndexTemplateName}", PostData.Empty);
+			var response = Client.Transport.Request<BytesResponse>(HttpMethod.HEAD, $"_template/{TestsIndexTemplateName}");
 			return response.HttpStatusCode == 200;
 		}
 
