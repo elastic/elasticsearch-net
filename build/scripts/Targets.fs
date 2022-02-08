@@ -55,7 +55,7 @@ module Main =
                 "build";
                 "nuget-pack";
                 "nuget-pack-versioned";
-                "validate-artifacts";
+                // "validate-artifacts";
                 "generate-release-notes"
             ]
         let canaryChain = [ "version"; "release"; "test-nuget-package";]
