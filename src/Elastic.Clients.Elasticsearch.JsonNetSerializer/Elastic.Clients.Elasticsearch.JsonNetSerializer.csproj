@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <PackageId>Elastic.Clients.JsonNetSerializer</PackageId>
-    <Title>Elastic.Clients.JsonNetSerializer - Elasticsearch .NET custom Json.NET serializer</Title>
+    <PackageId>Elastic.Clients.Elasticsearch.JsonNetSerializer</PackageId>
+    <Title>Elastic.Clients.Elasticsearch.JsonNetSerializer - Elasticsearch .NET custom Json.NET serializer</Title>
     <PackageTags>elasticsearch,elastic,search,lucene,nest,serializer,json</PackageTags>
-    <Description>NEST uses an internal serializer. This package enables serialization for your documents using your own custom Json.NET serializer</Description>
+    <Description>Elastic.Clients.Elasticsearch uses an internal serializer. This package enables serialization for your documents using your own custom Json.NET serializer.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
