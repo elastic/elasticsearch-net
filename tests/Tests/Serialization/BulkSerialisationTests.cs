@@ -3,12 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using VerifyXunit;
 
 namespace Tests.Serialization
 {
 	[UsesVerify]
+	[SystemTextJsonOnly]
 	public class BulkSerialisationTests : SerializerTestBase
 	{
 		[U]

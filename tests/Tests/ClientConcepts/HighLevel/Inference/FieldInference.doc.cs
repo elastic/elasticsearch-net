@@ -16,9 +16,36 @@ using static Elastic.Clients.Elasticsearch.Infer;
 using Field = Elastic.Clients.Elasticsearch.Field;
 using Tests.Core.Client.Settings;
 using System.Text.Json.Serialization;
+using Tests.Core.Xunit;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
+
+	[SystemTextJsonOnly]
+	public class FieldInference_STJ
+	{
+		///**[[field-name-attribute]]
+		//* ==== Attribute based naming
+		//*
+		//* Using NEST's property attributes you can specify a new name for the properties
+		//*/
+		public class SystemTextJsonAttribute
+		{
+			[JsonPropertyName("naam")]
+			public string Name { get; set; }
+		}
+
+		[U]
+		public void SystemTextJsonAttributes()
+		{
+			Expect("naam").WhenSerializing(Field<SystemTextJsonAttribute>(p => p.Name));
+			Expect(new
+			{
+				naam = "Martijn Laarman"
+			}).WhenSerializing(new SystemTextJsonAttribute { Name = "Martijn Laarman" });
+		}
+	}
+
 	public class FieldInference
 	{
 		/**[[field-inference]]
@@ -304,26 +331,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var fieldExpression = Field<Project>(p => p.Name + 2);
 		}
 
-		///**[[field-name-attribute]]
-		//* ==== Attribute based naming
-		//*
-		//* Using NEST's property attributes you can specify a new name for the properties
-		//*/
-		public class SystemTextJsonAttribute
-		{
-			[JsonPropertyName("naam")]
-			public string Name { get; set; }
-		}
 
-		[U]
-		public void SystemTextJsonAttributes()
-		{
-			Expect("naam").WhenSerializing(Field<SystemTextJsonAttribute>(p => p.Name));
-			Expect(new
-			{
-				naam = "Martijn Laarman"
-			}).WhenSerializing(new SystemTextJsonAttribute { Name = "Martijn Laarman" });
-		}
 
 		///**[[data-member-field-attribute]]
 		// * ==== DataMember attributes

@@ -9,7 +9,13 @@ namespace Tests.Core.Xunit
 {
 	public class JsonNetSerializerOnlyAttribute : SkipTestAttributeBase
 	{
-		public override string Reason { get; } = "Skipping this test because we are not running with JsonNetSerializer";
+		public override string Reason { get; } = "Skipping this test because we are not running with JsonNetSerializer source serializer.";
 		public override bool Skip => !TestClient.Configuration.Random.SourceSerializer;
+	}
+
+	public class SystemTextJsonOnlyAttribute : SkipTestAttributeBase
+	{
+		public override string Reason { get; } = "Skipping this test because we are not running with the System.Text.Json source serializer.";
+		public override bool Skip => TestClient.Configuration.Random.SourceSerializer;
 	}
 }
