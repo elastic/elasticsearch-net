@@ -1,6 +1,5 @@
 name: Integration
 
-
 on:
   pull_request:
     paths-ignore:
