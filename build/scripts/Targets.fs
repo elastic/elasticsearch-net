@@ -54,7 +54,7 @@ module Main =
             [ 
                 "build";
                 "nuget-pack";
-                "nuget-pack-versioned";
+                //"nuget-pack-versioned";
                 // "validate-artifacts";
                 "generate-release-notes"
             ]
