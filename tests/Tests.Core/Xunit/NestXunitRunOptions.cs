@@ -110,7 +110,6 @@ namespace Tests.Core.Xunit
 				.Append("seed:").Append(config.Seed).Append(" ");
 
 			AppendConfig(nameof(RandomConfiguration.SourceSerializer), config.Random.SourceSerializer, sb);
-			AppendConfig(nameof(RandomConfiguration.TypedKeys), config.Random.TypedKeys, sb);
 			AppendConfig(nameof(RandomConfiguration.HttpCompression), config.Random.HttpCompression, sb);
 
 			if (runningIntegrations)

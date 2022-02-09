@@ -71,9 +71,6 @@ namespace Tests.Configuration
 		/// <summary> Run tests with a custom source serializer rather than the build in one </summary>
 		public bool SourceSerializer { get; set; }
 
-		/// <summary> Randomly enable typed keys on searches (defaults to true) on NEST search requests</summary>
-		public bool TypedKeys { get; set; }
-
 		/// <summary> Randomly enable compression on the http requests</summary>
 		public bool HttpCompression { get; set; }
 	}
