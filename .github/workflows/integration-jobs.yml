@@ -23,7 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         stack_version: [
-          'latest'
+          '8.0.0-SNAPSHOT'
         ]
         
     steps:
