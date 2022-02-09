@@ -1,13 +1,14 @@
 root=true
 
-[*.cs]
-trim_trailing_whitespace=true
-insert_final_newline=true
-
 [*]
 charset = utf-8
 indent_style = tab
 indent_size = 4
+
+[*.cs]
+trim_trailing_whitespace=true
+insert_final_newline=true
+charset = utf-8
 
 [*.cshtml]
 indent_style = tab
