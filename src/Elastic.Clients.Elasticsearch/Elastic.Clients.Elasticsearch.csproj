@@ -4,7 +4,7 @@
     <Title>Elastic.Clients.Elasticsearch - Official Elasticsearch .NET Client</Title>
     <PackageTags>elasticsearch;elastic;client;search</PackageTags>
     <Description>
-      This strongly-typed, client library enables working with Elasticsearch. It is the offical client maintained and supported by Elastic.
+      This strongly-typed, client library enables working with Elasticsearch. It is the official client maintained and supported by Elastic.
     </Description>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>

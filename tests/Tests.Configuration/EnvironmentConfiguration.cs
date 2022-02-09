@@ -31,8 +31,7 @@ namespace Tests.Configuration
 			Random = new RandomConfiguration
 			{
 				SourceSerializer = RandomBoolConfig("SOURCESERIALIZER", randomizer),
-				TypedKeys = RandomBoolConfig("TYPEDKEYS", randomizer),
-				HttpCompression = RandomBoolConfig("HTTPCOMPRESSION", randomizer),
+				HttpCompression = RandomBoolConfig("HTTPCOMPRESSION", randomizer)
 			};
 		}
 
