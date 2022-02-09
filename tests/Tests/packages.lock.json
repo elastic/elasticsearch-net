@@ -21,7 +21,7 @@
         "type": "Direct",
         "requested": "[0.3.1, )",
         "resolved": "0.3.1",
-        "contentHash": "fmqUXKCf6yemYjMjhQjDlnCiWZ9/gYKuig4lM+x1Ae7xm/QTd/6cmvu6KNnCfj55XQU8ztJFPNHsNI/EomuDqA==",
+        "contentHash": "KCCR0oteS7e626gHmflJvnDnKy+Sr0dopB1fsTGhldmcz1vzCLXNySsQkktnK69FvNNgL/pikISrDk0qRffO9A==",
         "dependencies": {
           "Elastic.Transport": "0.3.1"
         }
