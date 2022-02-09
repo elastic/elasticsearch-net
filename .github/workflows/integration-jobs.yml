@@ -1,6 +1,5 @@
 name: Integration
 
-
 on:
   pull_request:
     paths-ignore:
@@ -23,7 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         stack_version: [
-          '8.0.0-SNAPSHOT'
+          '8.0.0-SNAPSHOT',
+          'latest-8'
         ]
         
     steps:
