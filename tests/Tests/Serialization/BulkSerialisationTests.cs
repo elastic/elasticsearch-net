@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.IO;
 using System.Threading.Tasks;
 using Tests.Core.Xunit;
 using Tests.Domain;
@@ -28,7 +29,21 @@ namespace Tests.Serialization
 			};
 
 			var serialisedJson = await SerializeAndGetJsonStringAsync(request);
-			await Verifier.Verify(serialisedJson);
+
+			var sr = new StringReader(serialisedJson);
+			var count = 0;
+			while(true)
+			{
+				var line = sr.ReadLine();
+				if (line is not null)
+				{
+					await Verifier.VerifyJson(line).UseMethodName($"{nameof(BulkRequest_SerialisationTest)}_{++count}");
+				}
+				else
+				{
+					break;
+				}
+			}
 		}
 
 		[U]
@@ -39,7 +54,21 @@ namespace Tests.Serialization
 			request.Index(FixedProject);
 
 			var serialisedJson = await SerializeAndGetJsonStringAsync(request);
-			await Verifier.Verify(serialisedJson);
+
+			var sr = new StringReader(serialisedJson);
+			var count = 0;
+			while (true)
+			{
+				var line = sr.ReadLine();
+				if (line is not null)
+				{
+					await Verifier.VerifyJson(line).UseMethodName($"{nameof(BulkRequest_DescriptorSerialisationTest)}_{++count}");
+				}
+				else
+				{
+					break;
+				}
+			}
 		}
 
 		[U]
@@ -49,7 +78,21 @@ namespace Tests.Serialization
 			request.IndexMany(new [] { FixedProject, FixedProject });
 
 			var serialisedJson = await SerializeAndGetJsonStringAsync(request);
-			await Verifier.Verify(serialisedJson);
+
+			var sr = new StringReader(serialisedJson);
+			var count = 0;
+			while (true)
+			{
+				var line = sr.ReadLine();
+				if (line is not null)
+				{
+					await Verifier.VerifyJson(line).UseMethodName($"{nameof(BulkRequest_IndexMany_DescriptorSerialisationTest)}_{++count}");
+				}
+				else
+				{
+					break;
+				}
+			}
 		}
 
 		private static readonly Project FixedProject = new()
