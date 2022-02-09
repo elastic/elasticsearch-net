@@ -115,8 +115,7 @@ module Main =
         target "set-version" <| fun _ -> Versioning.WriteVersion buildVersions
         
         
-        command "rest-spec-tests" [ ] <| fun _ ->
-            ReposTooling.RestSpecTests parsed.RemainingArguments
+        command "rest-spec-tests" [ ] <| fun _ -> ()
 
         command "benchmark" [ "clean"; "full-build"; ] <| fun _ -> Benchmarker.Run parsed
 
