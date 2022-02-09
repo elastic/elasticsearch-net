@@ -33,18 +33,18 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.101'
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ~/.nuget/packages
-      #     key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-nuget-
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ~/.local/share/ElasticManaged/elasticsearch-${{ matrix.stack_version }}
-      #     key: ${{ runner.os }}-elastic-managed-${{ matrix.stack_version }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-elastic-managed-
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - uses: actions/cache@v2
+        with:
+          path: ~/.local/share/ElasticManaged/elasticsearch-${{ matrix.stack_version }}
+          key: ${{ runner.os }}-elastic-managed-${{ matrix.stack_version }}
+          restore-keys: |
+            ${{ runner.os }}-elastic-managed-
             
       - run: "./build.sh integrate ${{ matrix.stack_version }} readonly,writable random:test_only_one --report"
         name: ${{ matrix.stack_version }}
