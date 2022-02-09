@@ -280,7 +280,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				var nameParts = name.Split('#');
 
 				if (nameParts.Length != 2)
-					throw new JsonException("Unable to parse typed-key from aggregation name");
+					throw new JsonException($"Unable to parse typed-key from aggregation name '{name}'");
 
 				// Bucket-based Aggregates
 
@@ -2546,5 +2546,17 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 	{
 		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
 		internal override void BeforeRequest() => TypedKeys(true);
+	}
+
+	public partial class AsyncSearchSubmitRequest
+	{
+		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+		internal override void BeforeRequest() => TypedKeys = true;	
+	}
+
+	public partial class AsyncSearchSubmitRequestDescriptor<TDocument>
+	{
+		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+		internal override void BeforeRequest() =>  TypedKeys(true);
 	}
 }
