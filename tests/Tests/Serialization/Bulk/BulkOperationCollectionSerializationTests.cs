@@ -5,12 +5,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Tests.Core.Xunit;
 using VerifyTests;
 using VerifyXunit;
 
 namespace Tests.Serialization.Bulk
 {
 	[UsesVerify]
+	[SystemTextJsonOnly]
+	// These use verify and the order of properties differs between STJ and Newtonsoft JSON - TODO - Resolve this somehow. Maybe have a set of tests specific to Newtonsoft? or fall back to old method of comparing JSON.
 	public class BulkRequestOperationsSerializationTests
 	{
 		// NOTE: The verified output from these tests should be valid if pasted into a bulk API call via Kibana.

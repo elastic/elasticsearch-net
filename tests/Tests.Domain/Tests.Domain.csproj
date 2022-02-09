@@ -15,7 +15,7 @@
     <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Configuration\Tests.Configuration.csproj" />
-    <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
+    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch\Elastic.Clients.Elasticsearch.csproj" />
   </ItemGroup>
 
 </Project>

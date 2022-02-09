@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(SolutionRoot)\tests\Tests.Domain\Tests.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj" />  
+    <ProjectReference Include="$(SolutionRoot)\src\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj" />  
   </ItemGroup>
 
   <ItemGroup>
