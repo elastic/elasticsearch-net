@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("pit_id")]
-		public Elastic.Clients.Elasticsearch.Id? PitId { get; init; }
+		public string? PitId { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("profile")]

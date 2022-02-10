@@ -32,6 +32,10 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls EqlDelete = new ApiUrls(new[] { "/_eql/search/{id}" });
+		internal static ApiUrls EqlGetStatus = new ApiUrls(new[] { "/_eql/search/status/{id}" });
+		internal static ApiUrls EqlSearch = new ApiUrls(new[] { "/{index}/_eql/search" });
+		internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });

@@ -15,17 +15,23 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class OpenPointInTimeResponse : ResponseBase
+	public partial class HitsSequence<TEvent>
 	{
 		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		[JsonPropertyName("events")]
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> Events { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("join_keys")]
+		public IReadOnlyCollection<object> JoinKeys { get; init; }
 	}
 }

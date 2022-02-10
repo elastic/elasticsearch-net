@@ -1762,6 +1762,8 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class CountRequestDescriptor<TDocument>
 	{
+		public CountRequestDescriptor<TDocument> Index(Indices indices) => Assign(indices, (a, v) => a.RouteValues.Optional("index", v));
+
 		public CountRequestDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> configure)
 		{
 			var container = configure?.Invoke(new QueryContainerDescriptor<TDocument>());
@@ -1773,6 +1775,27 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequest(Indices? indices) : base(indices)
 		{
 		}
+	}
+}
+
+namespace Elastic.Clients.Elasticsearch.Eql
+{
+	public partial class GetEqlResponse<TEvent>
+	{
+		private IReadOnlyCollection<HitsEvent<TEvent>> _events;
+		private IReadOnlyCollection<HitsSequence<TEvent>> _sequences;
+
+
+		[JsonIgnore]
+		public IReadOnlyCollection<HitsEvent<TEvent>> Events =>
+			_events ??= Hits?.Events ?? EmptyReadOnly<HitsEvent<TEvent>>.Collection;
+
+		[JsonIgnore]
+		public IReadOnlyCollection<HitsSequence<TEvent>> Sequences =>
+			_sequences ??= Hits?.Sequences ?? EmptyReadOnly<HitsSequence<TEvent>>.Collection;
+
+		[JsonIgnore]
+		public long Total => Hits?.Total.Value ?? -1;
 	}
 }
 

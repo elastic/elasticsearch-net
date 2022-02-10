@@ -4,8 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Transport;
 using Tests.Core.Client;
@@ -165,7 +167,58 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
 		}
 
-		private async Task CreateIndicesAndSeedIndexDataAsync() => await CreateIndicesAsync().ConfigureAwait(false);//await SeedIndexDataAsync().ConfigureAwait(false);
+		private async Task CreateIndicesAndSeedIndexDataAsync()
+		{
+			await CreateIndicesAsync().ConfigureAwait(false);
+			await SeedTimeSeriesDataAsync().ConfigureAwait(false);
+			//await SeedIndexDataAsync().ConfigureAwait(false);
+		}
+
+		public static readonly string IndicesWildCard = "customlogs-*";
+
+		public async Task SeedTimeSeriesDataAsync()
+		{
+			var transport = Client.Transport;
+
+			var req = new
+			{
+				mapping = new
+				{
+					properties = new Dictionary<string, object>
+				{
+					{ "timestamp", new { type = "date" } }
+				}
+				},
+				index_patterns = new[] { IndicesWildCard },
+				settings = new Dictionary<string, object>
+				{
+					{ "index.number_of_replicas", 0 },
+					{ "index.number_of_shards", 1 }
+				}
+			};
+
+			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_template/customlogs-template", PostData.Serializable(req)).ConfigureAwait(false);
+
+			var logs = Log.Generator.GenerateLazy(100_000);
+			var sw = Stopwatch.StartNew();
+			var dropped = new List<Log>();
+
+			var bulkAll = Client.BulkAll(new BulkAllRequest<Log>(logs)
+			{
+				Size = 10_000,
+				MaxDegreeOfParallelism = 10,
+				RefreshOnCompleted = true,
+				RefreshIndices = IndicesWildCard,
+				DroppedDocumentCallback = (d, l) => dropped.Add(l),
+				BufferToBulk = (b, buffer) => b.IndexMany(buffer, (i, l) => i.Index($"customlogs-{l.Timestamp:yyyy-MM-dd}"))
+			});
+
+			bulkAll.Wait(TimeSpan.FromMinutes(1), x => { });
+			Console.WriteLine($"Completed in {sw.Elapsed} with {dropped.Count} dropped logs");
+
+			var countResult = Client.Count<Log>(s => s.Index(IndicesWildCard));
+			Console.WriteLine($"Stored {countResult.Count} in {IndicesWildCard} indices");
+		}
 
 		public async Task CreateIndicesAsync()
 		{
@@ -182,6 +235,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			};
 
 			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_template/{TestsIndexTemplateName}", PostData.Serializable(req));
+			
 
 			var requestData = new
 			{
