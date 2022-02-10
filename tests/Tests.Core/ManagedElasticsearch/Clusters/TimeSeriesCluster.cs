@@ -2,18 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using Elastic.Clients.Elasticsearch;
-using Tests.Domain;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters;
 
-public class TimeSeriesCluster : XPackCluster
+public class TimeSeriesCluster : ReadOnlyCluster
 {
 	protected override void SeedNode() => new TimeSeriesSeeder(Client).SeedNode();
-
-	protected override ElasticsearchClientSettings ConnectionSettings(ElasticsearchClientSettings s)
-	{
-		s.DefaultMappingFor<Log>(m => m.IndexName(TimeSeriesSeeder.IndicesWildCard));
-		return base.ConnectionSettings(s);
-	}
 }

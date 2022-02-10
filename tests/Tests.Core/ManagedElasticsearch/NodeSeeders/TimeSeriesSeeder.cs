@@ -10,7 +10,7 @@ using Elastic.Clients.Elasticsearch.Helpers;
 using Elastic.Transport;
 using Tests.Domain;
 
-namespace Tests.Core.ManagedElasticsearch.Clusters;
+namespace Tests.Core.ManagedElasticsearch.NodeSeeders;
 
 public class TimeSeriesSeeder
 {

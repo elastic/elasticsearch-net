@@ -13,7 +13,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Eql
 {
-	public class EqlSearchApiCoordinatedTests : CoordinatedIntegrationTestBase<TimeSeriesCluster>
+	public class EqlSearchApiCoordinatedTests : CoordinatedIntegrationTestBase<ReadOnlyCluster>
 	{
 		private const string SubmitStep = nameof(SubmitStep);
 		private const string StatusStep = nameof(StatusStep);
@@ -21,7 +21,7 @@ namespace Tests.Eql
 		private const string WaitStep = nameof(WaitStep);
 		private const string DeleteStep = nameof(DeleteStep);
 
-		public EqlSearchApiCoordinatedTests(TimeSeriesCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
+		public EqlSearchApiCoordinatedTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
 		{
 			{SubmitStep, u =>
 				u.Calls<EqlSearchRequestDescriptor<Log>, EqlSearchRequest, EqlSearchResponse<Log>>(
@@ -104,12 +104,18 @@ namespace Tests.Eql
 		[I] public async Task EqlSearchStatusResponse() => await Assert<EqlGetStatusResponse>(StatusStep, r =>
 		{
 			r.ShouldBeValid();
-			//r.Id.Should().NotBeNullOrEmpty();
+			r.Id.Should().NotBeNullOrEmpty();
 			r.IsPartial.Should().BeTrue();
 			r.IsRunning.Should().BeTrue();
-			r.ExpirationTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0); // Nullable??
-			r.StartTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0); // Nullable??
-		});
+			r.ExpirationTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0);
+			r.StartTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0);
+
+			if (!r.IsRunning)
+			{
+				r.CompletionStatus.HasValue.Should().BeTrue();
+				r.CompletionStatus.Value.Should().BeGreaterOrEqualTo(0);
+			}
+		});	
 
 		[I] public async Task EqlGetResponse() => await Assert<GetEqlResponse<Log>>(GetStep, r =>
 		{
@@ -118,14 +124,14 @@ namespace Tests.Eql
 			r.IsRunning.Should().BeFalse();
 			r.Took.Should().BeGreaterOrEqualTo(0);
 			r.TimedOut.Should().BeFalse();
-			//r.Events.Count.Should().Be(10);
-			//r.EqlHitsMetadata.Total.Value.Should().Be(10);
-			//r.Total.Should().Be(10);
+			r.Events.Count.Should().Be(10);
+			r.Hits.Total.Value.Should().Be(10);
+			r.Total.Should().Be(10);
 
-			//var firstEvent = r.Events.First();
-			//firstEvent.Index.Should().StartWith("customlogs-");
-			//firstEvent.Id.Should().NotBeNullOrEmpty();
-			//firstEvent.Source.Event.Category.Should().BeOneOf(Log.EventCategories);
+			var firstEvent = r.Events.First();
+			firstEvent.Index.Should().StartWith("customlogs-");
+			firstEvent.Id.Should().NotBeNullOrEmpty();
+			firstEvent.Source.Event.Category.Should().BeOneOf(Log.EventCategories);
 		});
 
 		[I] public async Task EqlDeleteResponse() => await Assert<DeleteEqlResponse>(DeleteStep, r =>
