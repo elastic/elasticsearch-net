@@ -1762,6 +1762,8 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class CountRequestDescriptor<TDocument>
 	{
+		public CountRequestDescriptor<TDocument> Index(Indices indices) => Assign(indices, (a, v) => a.RouteValues.Optional("index", v));
+
 		public CountRequestDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> configure)
 		{
 			var container = configure?.Invoke(new QueryContainerDescriptor<TDocument>());

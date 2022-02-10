@@ -96,20 +96,20 @@ namespace Elastic.Clients.Elasticsearch.Eql
 			return DoRequestAsync<EqlSearchRequest, EqlSearchResponse<TEvent>>(request, cancellationToken);
 		}
 
-		public EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TDocument>> configureRequest = null)
+		public EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TEvent>> configureRequest = null)
 		{
-			var descriptor = new EqlSearchRequestDescriptor<TDocument>(indices);
+			var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
-			return DoRequest<EqlSearchRequestDescriptor<TDocument>, EqlSearchResponse<TEvent>>(descriptor);
+			return DoRequest<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>>(descriptor);
 		}
 
-		public Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TEvent>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new EqlSearchRequestDescriptor<TDocument>(indices);
+			var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
-			return DoRequestAsync<EqlSearchRequestDescriptor<TDocument>, EqlSearchResponse<TEvent>>(descriptor);
+			return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>>(descriptor);
 		}
 
 		public GetEqlResponse<TEvent> Get<TEvent>(GetEqlRequest request)

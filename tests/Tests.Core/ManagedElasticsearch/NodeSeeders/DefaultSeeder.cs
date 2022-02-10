@@ -168,8 +168,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		private async Task CreateIndicesAndSeedIndexDataAsync() => await CreateIndicesAsync().ConfigureAwait(false);//await SeedIndexDataAsync().ConfigureAwait(false);
 
 		public async Task CreateIndicesAsync()
-		{
-			var transport = Client.Transport;
+		{var transport = Client.Transport;
 
 			var req = new
 			{
@@ -182,6 +181,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			};
 
 			_ = await transport.RequestAsync<BytesResponse>(HttpMethod.PUT, $"_template/{TestsIndexTemplateName}", PostData.Serializable(req));
+			
 
 			var requestData = new
 			{
