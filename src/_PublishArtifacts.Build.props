@@ -15,9 +15,9 @@
       <Pack>True</Pack>
       <PackagePath>nuget-icon.png</PackagePath>
     </None>
-    <None Include="$(SolutionRoot)/license.txt">
+    <None Include="$(SolutionRoot)/LICENSE.txt">
       <Pack>True</Pack>
-      <PackagePath>license.txt</PackagePath>
+      <PackagePath>LICENSE.txt</PackagePath>
     </None>
   </ItemGroup>
 
