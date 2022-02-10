@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("index")]
-		public Elastic.Clients.Elasticsearch.IndexName Index { get; init; }
+		public string Index { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("move_explanation")]

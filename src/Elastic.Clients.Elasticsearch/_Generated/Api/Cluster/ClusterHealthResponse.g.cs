@@ -38,7 +38,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 		[JsonInclude]
 		[JsonPropertyName("cluster_name")]
-		public Elastic.Clients.Elasticsearch.Name ClusterName { get; init; }
+		public string ClusterName { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("delayed_unassigned_shards")]
