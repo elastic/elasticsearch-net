@@ -17,6 +17,7 @@
 
 using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using System;
 using System.Threading;
@@ -31,12 +32,15 @@ namespace Elastic.Clients.Elasticsearch
 
 		public ClusterNamespace Cluster { get; private set; }
 
+		public EqlNamespace Eql { get; private set; }
+
 		public IndexManagementNamespace IndexManagement { get; private set; }
 
 		private partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
 			Cluster = new ClusterNamespace(this);
+			Eql = new EqlNamespace(this);
 			IndexManagement = new IndexManagementNamespace(this);
 		}
 
