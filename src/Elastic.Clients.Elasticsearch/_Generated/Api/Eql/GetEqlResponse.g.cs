@@ -20,12 +20,9 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class OpenPointInTimeResponse : ResponseBase
+	public partial class GetEqlResponse<TEvent> : Eql.EqlSearchResponseBase<TEvent>
 	{
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string Id { get; init; }
 	}
 }

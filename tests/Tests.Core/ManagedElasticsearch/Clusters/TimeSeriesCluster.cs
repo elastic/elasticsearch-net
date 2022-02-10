@@ -3,13 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
-using static Elastic.Stack.ArtifactsApi.Products.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters;
 
-public class ReadOnlyCluster : ClientTestClusterBase
+public class TimeSeriesCluster : ReadOnlyCluster
 {
-	public ReadOnlyCluster() : base(MapperMurmur3) { }
-
-	protected override void SeedNode() => new DefaultSeeder(Client).SeedNode();
+	protected override void SeedNode() => new TimeSeriesSeeder(Client).SeedNode();
 }

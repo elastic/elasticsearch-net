@@ -35,7 +35,7 @@ public class ClusterHealthShardsApiTests
 
 	protected override void ExpectResponse(ClusterHealthResponse response)
 	{
-		response.ClusterName.Value.Should().NotBeNullOrWhiteSpace();
+		response.ClusterName.Should().NotBeNullOrWhiteSpace();
 		response.Status.Should().NotBe(HealthStatus.Red);
 		response.TimedOut.Should().BeFalse();
 		response.NumberOfNodes.Should().BeGreaterOrEqualTo(1);
