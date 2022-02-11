@@ -15,17 +15,54 @@
 //
 // ------------------------------------------------
 
-using Elastic.Transport.Products.Elasticsearch;
-using System.Collections.Generic;
+using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch.Eql.Search
 {
-	public partial class OpenPointInTimeResponse : ResponseBase
+	[JsonConverter(typeof(ResultPositionConverter))]
+	public enum ResultPosition
 	{
-		[JsonInclude]
-		[JsonPropertyName("id")]
-		public string Id { get; init; }
+		[EnumMember(Value = "tail")]
+		Tail,
+		[EnumMember(Value = "head")]
+		Head
+	}
+
+	internal sealed class ResultPositionConverter : JsonConverter<ResultPosition>
+	{
+		public override ResultPosition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "tail":
+					return ResultPosition.Tail;
+				case "head":
+					return ResultPosition.Head;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ResultPosition value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ResultPosition.Tail:
+					writer.WriteStringValue("tail");
+					return;
+				case ResultPosition.Head:
+					writer.WriteStringValue("head");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
 	}
 }
