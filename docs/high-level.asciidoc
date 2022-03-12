@@ -67,6 +67,8 @@ configuration options and components to change this behaviour
 
 * <<function-as-a-service-environments, Using the Client in a Function-as-a-Service Environment>>
 
+* <<connecting-to-elasticsearch-v8, Connecting to Elasticsearch v8.x using the v7.x client>>
+
 include::client-concepts/connection/configuration-options.asciidoc[]
 
 include::client-concepts/connection-pooling/building-blocks/connection-pooling.asciidoc[]
@@ -76,6 +78,8 @@ include::client-concepts/connection/modifying-default-connection.asciidoc[]
 include::client-concepts/certificates/working-with-certificates.asciidoc[]
 
 include::client-concepts/connection/function-as-a-service-environments.asciidoc[]
+
+include::client-concepts/connection/connecting-to-elasticsearch-v8.asciidoc[]
 
 [[serialization]]
 == Serialization
