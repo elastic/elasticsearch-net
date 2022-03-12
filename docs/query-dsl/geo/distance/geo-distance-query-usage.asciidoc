@@ -28,6 +28,7 @@ q
     .Location(34, -34)
     .Distance("200m")
     .ValidationMethod(GeoValidationMethod.IgnoreMalformed)
+    .IgnoreUnmapped(true)
 )
 ----
 
@@ -43,7 +44,8 @@ new GeoDistanceQuery
     DistanceType = GeoDistanceType.Arc,
     Location = new GeoLocation(34, -34),
     Distance = "200m",
-    ValidationMethod = GeoValidationMethod.IgnoreMalformed
+    ValidationMethod = GeoValidationMethod.IgnoreMalformed,
+    IgnoreUnmapped = true,
 }
 ----
 
@@ -60,7 +62,8 @@ new GeoDistanceQuery
     "locationPoint": {
       "lat": 34.0,
       "lon": -34.0
-    }
+    },
+    "ignore_unmapped": true
   }
 }
 ----

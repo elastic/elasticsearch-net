@@ -30,6 +30,7 @@ q
     )
     .ValidationMethod(GeoValidationMethod.Strict)
     .Type(GeoExecution.Indexed)
+    .IgnoreUnmapped(true)
 )
 ----
 
@@ -48,7 +49,8 @@ new GeoBoundingBoxQuery
         BottomRight = new GeoLocation(-34, 34),
     },
     Type = GeoExecution.Indexed,
-    ValidationMethod = GeoValidationMethod.Strict
+    ValidationMethod = GeoValidationMethod.Strict,
+    IgnoreUnmapped = true
 }
 ----
 
@@ -70,7 +72,8 @@ new GeoBoundingBoxQuery
         "lat": -34.0,
         "lon": 34.0
       }
-    }
+    },
+    "ignore_unmapped": true
   }
 }
 ----
@@ -89,6 +92,7 @@ q
     )
     .ValidationMethod(GeoValidationMethod.Strict)
     .Type(GeoExecution.Indexed)
+    .IgnoreUnmapped(true)
 )
 ----
 
@@ -106,7 +110,8 @@ new GeoBoundingBoxQuery
         WellKnownText = "BBOX (-34, 34, 34, -34)"
     },
     Type = GeoExecution.Indexed,
-    ValidationMethod = GeoValidationMethod.Strict
+    ValidationMethod = GeoValidationMethod.Strict,
+    IgnoreUnmapped = true
 }
 ----
 
@@ -121,7 +126,8 @@ new GeoBoundingBoxQuery
     "boost": 1.1,
     "locationPoint": {
       "wkt": "BBOX (-34, 34, 34, -34)"
-    }
+    },
+    "ignore_unmapped": true
   }
 }
 ----
