@@ -120,3 +120,9 @@ If you go for a vendor generated SSL certificate, it's common practice for the c
 in the certificate chain. When using such a certificate, use `CertificateValidations.AuthorityPartOfChain` which validates that
 the local CA certificate is part of the chain that was used to generate the servers key.
 
+==== Applying a CA Fingerprint
+
+During development against a newly created v8 cluster, you may also configure the client to authenticate using the CA fingerprint logged by the 
+server at initial startup. The fingerprint can be set by calling the `CertificateFingerprint` method on a ConnectionSettings instance.
+See <<connecting-to-elasticsearch-v8, Connecting to Elasticsearch v8.x using the v7.x client>> for further details.
+

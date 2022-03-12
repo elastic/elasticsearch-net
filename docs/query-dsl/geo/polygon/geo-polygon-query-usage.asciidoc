@@ -26,6 +26,7 @@ q
     .Field(p => p.LocationPoint)
     .ValidationMethod(GeoValidationMethod.Strict)
     .Points(new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70))
+    .IgnoreUnmapped(true)
 )
 ----
 
@@ -39,7 +40,8 @@ new GeoPolygonQuery
     Name = "named_query",
     ValidationMethod = GeoValidationMethod.Strict,
     Points = new[] { new GeoLocation(45, -45), new GeoLocation(-34, 34), new GeoLocation(70, -70) },
-    Field = Infer.Field<Project>(p => p.LocationPoint)
+    Field = Infer.Field<Project>(p => p.LocationPoint),
+    IgnoreUnmapped = true
 }
 ----
 
@@ -66,7 +68,8 @@ new GeoPolygonQuery
           "lon": -70.0
         }
       ]
-    }
+    },
+    "ignore_unmapped": true
   }
 }
 ----
