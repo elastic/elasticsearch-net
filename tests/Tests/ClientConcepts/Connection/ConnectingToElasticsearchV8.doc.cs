@@ -16,7 +16,8 @@ namespace Tests.ClientConcepts.Connection
 		 *
 		 * We recommend using the latest client with a corresponding major version when connecting to Elasticsearch. Until the v7 .NET client is 
 		 * generally available, you may use the v7.17.x client to communicate with a 8.x Elasticsearch cluster. There are several important considerations 
-		 * regarding configuration.
+		 * regarding configuration. Failure to correctly configure the client to connect using the security features enabled on the server will result in 
+		 * an exception being thrown during the initial client communication that will prevent further use of the client.
 		 *
 		 * :security: https://www.elastic.co/guide/en/elasticsearch/reference/8.1/configuring-stack-security.html
 		 * :security-clients: https://www.elastic.co/guide/en/elasticsearch/reference/8.1/configuring-stack-security.html#_connect_clients_to_elasticsearch_5
