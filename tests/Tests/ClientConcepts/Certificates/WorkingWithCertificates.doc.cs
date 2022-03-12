@@ -216,6 +216,23 @@ namespace Tests.ClientConcepts.Certificates
 			[I] public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 #endif
+
+		/**
+		 * ==== Applying a CA Fingerprint
+		 *
+		 * During development against a newly created v8 cluster, you may also configure the client to authenticate using the CA fingerprint logged by the 
+		 * server at initial startup. The fingerprint can be set by calling the `CertificateFingerprint` method on a ConnectionSettings instance.
+		 * See <<connecting-to-elasticsearch-v8, Connecting to Elasticsearch v8.x using the v7.x client>> for further details.
+		 */		
+		[U] public void CertificateFingerprint()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+
+			var settings = new ConnectionSettings(pool)
+				.CertificateFingerprint("94:75:CE:4F:EB:05:32:83:40:B8:18:BB:79:01:7B:E0:F0:B6:C3:01:57:DB:4D:F5:D8:B8:A6:BA:BD:6D:C5:C4");
+
+			var client = new ElasticClient(settings);
+		}
 	}
 
 #if !DOTNETCORE

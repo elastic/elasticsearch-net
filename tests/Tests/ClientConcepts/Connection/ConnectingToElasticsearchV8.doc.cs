@@ -12,14 +12,14 @@ namespace Tests.ClientConcepts.Connection
 	public class ConnectingToElasticsearchV8
 	{
 		/**[[connecting-to-elasticsearch-v8]]
-		 * === Connecting to Elasticsearch v8.x using the v7.x client
+		 * === Connecting to Elasticsearch v8.x using the v7.17.x client
 		 *
 		 * We recommend using the latest client with a corresponding major version when connecting to Elasticsearch. Until the v7 .NET client is 
 		 * generally available, you may use the v7.17.x client to communicate with a 8.x Elasticsearch cluster. There are several important considerations 
 		 * regarding configuration.
 		 *
-		 * :security: {ref_current}/modules-http.html
-		 * :security-clients: {ref_current}/modules-http.html#_connect_clients_to_elasticsearch_5
+		 * :security: https://www.elastic.co/guide/en/elasticsearch/reference/8.1/configuring-stack-security.html
+		 * :security-clients: https://www.elastic.co/guide/en/elasticsearch/reference/8.1/configuring-stack-security.html#_connect_clients_to_elasticsearch_5
 		 *
 		 * ==== Security and Certificates
 		 * Newly installed Elasticsearch v8 clusters start with security configuration {security}[enabled automatically by default]. As a result, 
@@ -33,7 +33,7 @@ namespace Tests.ClientConcepts.Connection
 		 * ===== Applying the CA Fingerprint
 		 *
 		 * The simplest configuration option during development is to connect to the server using the CA fingerprint logged by the server at initial startup. 
-		 * The fingerprint can be set by calling the `CertificateFingerprint` method on a ConnectionSettings instance.
+		 * The fingerprint can be set by calling the `CertificateFingerprint` method on a `ConnectionSettings` instance.
 		 */
 		[U] public void CertificateFingerprint()
 		{
@@ -51,11 +51,44 @@ namespace Tests.ClientConcepts.Connection
 
 		 * [[basic-authentication]]
 		 * ===== Basic Authentication
-		 * TODO
-
-		 * [[enabling-compatibility mode]]
-		 * ==== Enabling Compatibility Mode
-		 * TODO
+		 * 
+		 * Additionally, you will need to provide the basic authentication credentials for a user account configured on the server. During development, 
+		 * you may begin by using the `elastic` user and the automatically generated password captured from the server logs.
 		 */
+		[U] public void BasicAuth()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+
+			var settings = new ConnectionSettings(pool)
+				.CertificateFingerprint("94:75:CE:4F:EB:05:32:83:40:B8:18:BB:79:01:7B:E0:F0:B6:C3:01:57:DB:4D:F5:D8:B8:A6:BA:BD:6D:C5:C4")
+				.BasicAuthentication("elastic", "password");
+
+			var client = new ElasticClient(settings);
+		}
+		
+		/**
+		 * ==== Enabling Compatibility Mode
+		 *
+		 * The Elasticsearch server version 8.0 is introducing a new compatibility mode that allows you a smoother upgrade 
+		 * experience from 7 to 8. In a nutshell, you can use the latest 7.x Elasticsearch client with an 8.x Elasticsearch 
+		 * server, giving more room to coordinate the upgrade of your codebase to the next major version. 
+
+		 * If you want to leverage this functionality, please make sure that you are using the latest 7.x client and set 
+		 * the environment variable `ELASTIC_CLIENT_APIVERSIONING` to `true`. The client is handling the rest internally. 
+		 *
+		 * Compatibility mode may also be enabled directly on `ConnectionSettings` by calling `EnableApiVersioningHeader`.
+		 */
+
+		[U] public void CompatibilityMode()
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+
+			var settings = new ConnectionSettings(pool)
+				.CertificateFingerprint("94:75:CE:4F:EB:05:32:83:40:B8:18:BB:79:01:7B:E0:F0:B6:C3:01:57:DB:4D:F5:D8:B8:A6:BA:BD:6D:C5:C4")
+				.BasicAuthentication("elastic", "password")
+				.EnableApiVersioningHeader();
+
+			var client = new ElasticClient(settings);
+		}
 	}
 }
