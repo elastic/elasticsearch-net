@@ -113,37 +113,51 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescriptorBase<IndexRequestDescriptor<TDocument>, IndexRequestParameters>
 	{
-		public IndexRequestDescriptor() : this(typeof(TDocument))
-		{
-		}
-
+		internal IndexRequestDescriptor(Action<IndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 		{
 		}
 
-		public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+		internal IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 		{
 		}
 
-		internal IndexRequestDescriptor(Action<IndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public IndexRequestDescriptor(TDocument document) : this(typeof(TDocument)) => DocumentValue = document;
+		internal IndexRequestDescriptor()
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		internal TDocument DocumentValue { get; private set; }
-
 		public IndexRequestDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		public IndexRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 		public IndexRequestDescriptor<TDocument> OpType(Elastic.Clients.Elasticsearch.OpType? opType) => Qs("op_type", opType);
 		public IndexRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 		public IndexRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
+		public IndexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 		public IndexRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public IndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public IndexRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		public IndexRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public IndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public IndexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
+		public IndexRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+		{
+			RouteValues.Optional("id", id);
+			return Self;
+		}
+
+		public IndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			RouteValues.Required("index", index);
+			return Self;
+		}
+
+		private TDocument DocumentValue { get; set; }
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			SourceSerialisation.Serialize(DocumentValue, writer, settings.SourceSerializer);
 		}
 	}
 }

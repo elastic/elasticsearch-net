@@ -41,52 +41,68 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SpanFirstQueryDescriptor<TDocument> : DescriptorBase<SpanFirstQueryDescriptor<TDocument>>
 	{
-		public SpanFirstQueryDescriptor()
+		internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public SpanFirstQueryDescriptor() : base()
 		{
 		}
 
-		internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal int EndValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; private set; }
+		private SpanQueryDescriptor<TDocument> MatchDescriptor { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private Action<SpanQueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal SpanQueryDescriptor<TDocument> MatchDescriptor { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal Action<SpanQueryDescriptor<TDocument>> MatchDescriptorAction { get; private set; }
+		private int EndValue { get; set; }
 
-		public SpanFirstQueryDescriptor<TDocument> End(int end) => Assign(end, (a, v) => a.EndValue = v);
 		public SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
 		{
 			MatchDescriptor = null;
 			MatchDescriptorAction = null;
-			return Assign(match, (a, v) => a.MatchValue = v);
+			MatchValue = match;
+			return Self;
 		}
 
 		public SpanFirstQueryDescriptor<TDocument> Match(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.MatchDescriptor = v);
+			MatchDescriptor = descriptor;
+			return Self;
 		}
 
 		public SpanFirstQueryDescriptor<TDocument> Match(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
-			return Assign(configure, (a, v) => a.MatchDescriptorAction = v);
+			MatchDescriptorAction = configure;
+			return Self;
 		}
 
-		public SpanFirstQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public SpanFirstQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanFirstQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor<TDocument> End(int end)
+		{
+			EndValue = end;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("end");
-			writer.WriteNumberValue(EndValue);
 			if (MatchDescriptor is not null)
 			{
 				writer.WritePropertyName("match");
@@ -115,6 +131,106 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("end");
+			writer.WriteNumberValue(EndValue);
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class SpanFirstQueryDescriptor : DescriptorBase<SpanFirstQueryDescriptor>
+	{
+		internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor> configure) => configure.Invoke(this);
+		public SpanFirstQueryDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; set; }
+
+		private SpanQueryDescriptor MatchDescriptor { get; set; }
+
+		private Action<SpanQueryDescriptor> MatchDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private int EndValue { get; set; }
+
+		public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
+		{
+			MatchDescriptor = null;
+			MatchDescriptorAction = null;
+			MatchValue = match;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor Match(QueryDsl.SpanQueryDescriptor descriptor)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			MatchDescriptor = descriptor;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor Match(Action<QueryDsl.SpanQueryDescriptor> configure)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			MatchDescriptorAction = configure;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public SpanFirstQueryDescriptor End(int end)
+		{
+			EndValue = end;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MatchDescriptor is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, MatchDescriptor, options);
+			}
+			else if (MatchDescriptorAction is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor(MatchDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, MatchValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			writer.WritePropertyName("end");
+			writer.WriteNumberValue(EndValue);
 			writer.WriteEndObject();
 		}
 	}

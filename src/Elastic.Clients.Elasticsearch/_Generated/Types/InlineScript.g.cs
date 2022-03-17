@@ -41,23 +41,43 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class InlineScriptDescriptor : DescriptorBase<InlineScriptDescriptor>
 	{
-		public InlineScriptDescriptor()
+		internal InlineScriptDescriptor(Action<InlineScriptDescriptor> configure) => configure.Invoke(this);
+		public InlineScriptDescriptor() : base()
 		{
 		}
 
-		internal InlineScriptDescriptor(Action<InlineScriptDescriptor> configure) => configure.Invoke(this);
-		internal string? LanguageValue { get; private set; }
+		private string? LanguageValue { get; set; }
 
-		internal Dictionary<string, string>? OptionsValue { get; private set; }
+		private Dictionary<string, string>? OptionsValue { get; set; }
 
-		internal string SourceValue { get; private set; }
+		private Dictionary<string, object>? ParamsValue { get; set; }
 
-		internal Dictionary<string, object>? ParamsValue { get; private set; }
+		private string SourceValue { get; set; }
 
-		public InlineScriptDescriptor Language(string? language) => Assign(language, (a, v) => a.LanguageValue = v);
-		public InlineScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector) => Assign(selector, (a, v) => a.OptionsValue = v?.Invoke(new FluentDictionary<string, string>()));
-		public InlineScriptDescriptor Source(string source) => Assign(source, (a, v) => a.SourceValue = v);
-		public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public InlineScriptDescriptor Language(string? language)
+		{
+			LanguageValue = language;
+			return Self;
+		}
+
+		public InlineScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+		{
+			OptionsValue = selector?.Invoke(new FluentDictionary<string, string>());
+			return Self;
+		}
+
+		public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public InlineScriptDescriptor Source(string source)
+		{
+			SourceValue = source;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -73,14 +93,14 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, OptionsValue, options);
 			}
 
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
 			if (ParamsValue is not null)
 			{
 				writer.WritePropertyName("params");
 				SourceSerialisation.SerializeParams(ParamsValue, writer, settings);
 			}
 
+			writer.WritePropertyName("source");
+			writer.WriteStringValue(SourceValue);
 			writer.WriteEndObject();
 		}
 	}

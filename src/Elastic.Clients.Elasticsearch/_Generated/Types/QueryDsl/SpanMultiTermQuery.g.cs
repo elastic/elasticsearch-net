@@ -37,44 +37,57 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : DescriptorBase<SpanMultiTermQueryDescriptor<TDocument>>
 	{
-		public SpanMultiTermQueryDescriptor()
+		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public SpanMultiTermQueryDescriptor() : base()
 		{
 		}
 
-		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer MatchValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer MatchValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private QueryContainerDescriptor<TDocument> MatchDescriptor { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Action<QueryContainerDescriptor<TDocument>> MatchDescriptorAction { get; set; }
 
-		internal QueryContainerDescriptor<TDocument> MatchDescriptor { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal Action<QueryContainerDescriptor<TDocument>> MatchDescriptorAction { get; private set; }
+		private float? BoostValue { get; set; }
 
 		public SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer match)
 		{
 			MatchDescriptor = null;
 			MatchDescriptorAction = null;
-			return Assign(match, (a, v) => a.MatchValue = v);
+			MatchValue = match;
+			return Self;
 		}
 
 		public SpanMultiTermQueryDescriptor<TDocument> Match(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.MatchDescriptor = v);
+			MatchDescriptor = descriptor;
+			return Self;
 		}
 
 		public SpanMultiTermQueryDescriptor<TDocument> Match(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
-			return Assign(configure, (a, v) => a.MatchDescriptorAction = v);
+			MatchDescriptorAction = configure;
+			return Self;
 		}
 
-		public SpanMultiTermQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanMultiTermQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -87,6 +100,94 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("match");
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(MatchDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, MatchValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class SpanMultiTermQueryDescriptor : DescriptorBase<SpanMultiTermQueryDescriptor>
+	{
+		internal SpanMultiTermQueryDescriptor(Action<SpanMultiTermQueryDescriptor> configure) => configure.Invoke(this);
+		public SpanMultiTermQueryDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer MatchValue { get; set; }
+
+		private QueryContainerDescriptor MatchDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> MatchDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer match)
+		{
+			MatchDescriptor = null;
+			MatchDescriptorAction = null;
+			MatchValue = match;
+			return Self;
+		}
+
+		public SpanMultiTermQueryDescriptor Match(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			MatchDescriptor = descriptor;
+			return Self;
+		}
+
+		public SpanMultiTermQueryDescriptor Match(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			MatchValue = null;
+			MatchDescriptorAction = null;
+			MatchDescriptorAction = configure;
+			return Self;
+		}
+
+		public SpanMultiTermQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SpanMultiTermQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (MatchDescriptor is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, MatchDescriptor, options);
+			}
+			else if (MatchDescriptorAction is not null)
+			{
+				writer.WritePropertyName("match");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(MatchDescriptorAction), options);
 			}
 			else
 			{

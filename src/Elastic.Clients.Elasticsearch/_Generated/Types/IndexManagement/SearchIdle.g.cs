@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SearchIdleDescriptor : DescriptorBase<SearchIdleDescriptor>
 	{
-		public SearchIdleDescriptor()
+		internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
+		public SearchIdleDescriptor() : base()
 		{
 		}
 
-		internal SearchIdleDescriptor(Action<SearchIdleDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Time? AfterValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Time? AfterValue { get; set; }
 
-		public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Time? after) => Assign(after, (a, v) => a.AfterValue = v);
+		public SearchIdleDescriptor After(Elastic.Clients.Elasticsearch.Time? after)
+		{
+			AfterValue = after;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

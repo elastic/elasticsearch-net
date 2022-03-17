@@ -39,38 +39,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class GeoBoundingBoxQueryDescriptor : DescriptorBase<GeoBoundingBoxQueryDescriptor>
 	{
-		public GeoBoundingBoxQueryDescriptor()
+		internal GeoBoundingBoxQueryDescriptor(Action<GeoBoundingBoxQueryDescriptor> configure) => configure.Invoke(this);
+		public GeoBoundingBoxQueryDescriptor() : base()
 		{
 		}
 
-		internal GeoBoundingBoxQueryDescriptor(Action<GeoBoundingBoxQueryDescriptor> configure) => configure.Invoke(this);
-		internal bool? IgnoreUnmappedValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private bool? IgnoreUnmappedValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
-		public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod) => Assign(validationMethod, (a, v) => a.ValidationMethodValue = v);
-		public GeoBoundingBoxQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public GeoBoundingBoxQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
+		{
+			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (IgnoreUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
-			if (ValidationMethodValue is not null)
-			{
-				writer.WritePropertyName("validation_method");
-				JsonSerializer.Serialize(writer, ValidationMethodValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -81,6 +89,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			if (ValidationMethodValue is not null)
+			{
+				writer.WritePropertyName("validation_method");
+				JsonSerializer.Serialize(writer, ValidationMethodValue, options);
 			}
 
 			writer.WriteEndObject();

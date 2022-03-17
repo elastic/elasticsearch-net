@@ -143,35 +143,92 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string? Wildcard { get; set; }
 	}
 
-	public sealed partial class WildcardQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<WildcardQueryDescriptor<TDocument>, TDocument>
+	public sealed partial class WildcardQueryDescriptor<TDocument> : DescriptorBase<WildcardQueryDescriptor<TDocument>>
 	{
-		public WildcardQueryDescriptor()
+		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public WildcardQueryDescriptor() : base()
 		{
 		}
 
-		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? CaseInsensitiveValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? RewriteValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal string? ValueValue { get; private set; }
+		private bool? CaseInsensitiveValue { get; set; }
 
-		internal string? WildcardValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private string? RewriteValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string? ValueValue { get; set; }
 
-		public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public WildcardQueryDescriptor<TDocument> Value(string? value) => Assign(value, (a, v) => a.ValueValue = v);
-		public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard) => Assign(wildcard, (a, v) => a.WildcardValue = v);
-		public WildcardQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public WildcardQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		private string? WildcardValue { get; set; }
+
+		public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+		{
+			CaseInsensitiveValue = caseInsensitive;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
+		{
+			RewriteValue = rewrite;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> Value(string? value)
+		{
+			ValueValue = value;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard)
+		{
+			WildcardValue = wildcard;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
@@ -196,6 +253,91 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteStringValue(WildcardValue);
 			}
 
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class WildcardQueryDescriptor : DescriptorBase<WildcardQueryDescriptor>
+	{
+		internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
+		public WildcardQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private bool? CaseInsensitiveValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private string? RewriteValue { get; set; }
+
+		private string? ValueValue { get; set; }
+
+		private string? WildcardValue { get; set; }
+
+		public WildcardQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		{
+			CaseInsensitiveValue = caseInsensitive;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Rewrite(string? rewrite)
+		{
+			RewriteValue = rewrite;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Value(string? value)
+		{
+			ValueValue = value;
+			return Self;
+		}
+
+		public WildcardQueryDescriptor Wildcard(string? wildcard)
+		{
+			WildcardValue = wildcard;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -208,6 +350,31 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (CaseInsensitiveValue.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+			}
+
+			if (RewriteValue is not null)
+			{
+				writer.WritePropertyName("rewrite");
+				JsonSerializer.Serialize(writer, RewriteValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(ValueValue))
+			{
+				writer.WritePropertyName("value");
+				writer.WriteStringValue(ValueValue);
+			}
+
+			if (!string.IsNullOrEmpty(WildcardValue))
+			{
+				writer.WritePropertyName("wildcard");
+				writer.WriteStringValue(WildcardValue);
+			}
+
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

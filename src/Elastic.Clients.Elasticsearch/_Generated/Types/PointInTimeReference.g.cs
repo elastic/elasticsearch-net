@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class PointInTimeReferenceDescriptor : DescriptorBase<PointInTimeReferenceDescriptor>
 	{
-		public PointInTimeReferenceDescriptor()
+		internal PointInTimeReferenceDescriptor(Action<PointInTimeReferenceDescriptor> configure) => configure.Invoke(this);
+		public PointInTimeReferenceDescriptor() : base()
 		{
 		}
 
-		internal PointInTimeReferenceDescriptor(Action<PointInTimeReferenceDescriptor> configure) => configure.Invoke(this);
-		internal string IdValue { get; private set; }
+		private string IdValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Time? KeepAliveValue { get; set; }
 
-		public PointInTimeReferenceDescriptor Id(string id) => Assign(id, (a, v) => a.IdValue = v);
-		public PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Assign(keepAlive, (a, v) => a.KeepAliveValue = v);
+		public PointInTimeReferenceDescriptor Id(string id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive)
+		{
+			KeepAliveValue = keepAlive;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

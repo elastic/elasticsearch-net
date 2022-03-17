@@ -219,54 +219,136 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Query { get; set; }
 	}
 
-	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>, TDocument>
+	public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : DescriptorBase<MatchBoolPrefixQueryDescriptor<TDocument>>
 	{
-		public MatchBoolPrefixQueryDescriptor()
+		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MatchBoolPrefixQueryDescriptor() : base()
 		{
 		}
 
-		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? AnalyzerValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+		private string? AnalyzerValue { get; set; }
 
-		internal string? FuzzyRewriteValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal bool? FuzzyTranspositionsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal int? MaxExpansionsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private string? FuzzyRewriteValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; private set; }
+		private bool? FuzzyTranspositionsValue { get; set; }
 
-		internal int? PrefixLengthValue { get; private set; }
+		private int? MaxExpansionsValue { get; set; }
 
-		internal string QueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private int? PrefixLengthValue { get; set; }
 
-		public MatchBoolPrefixQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public MatchBoolPrefixQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		private string QueryValue { get; set; }
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		{
+			FuzzinessValue = fuzziness;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
+		{
+			FuzzyRewriteValue = fuzzyRewrite;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
+		{
+			MaxExpansionsValue = maxExpansions;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
+		{
+			PrefixLengthValue = prefixLength;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor<TDocument> Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
 				writer.WriteStringValue(AnalyzerValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			if (FuzzinessValue is not null)
@@ -313,10 +395,141 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("query");
 			writer.WriteStringValue(QueryValue);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class MatchBoolPrefixQueryDescriptor : DescriptorBase<MatchBoolPrefixQueryDescriptor>
+	{
+		internal MatchBoolPrefixQueryDescriptor(Action<MatchBoolPrefixQueryDescriptor> configure) => configure.Invoke(this);
+		public MatchBoolPrefixQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private string? AnalyzerValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
+
+		private string? FuzzyRewriteValue { get; set; }
+
+		private bool? FuzzyTranspositionsValue { get; set; }
+
+		private int? MaxExpansionsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
+
+		private int? PrefixLengthValue { get; set; }
+
+		private string QueryValue { get; set; }
+
+		public MatchBoolPrefixQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		{
+			FuzzinessValue = fuzziness;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
+		{
+			FuzzyRewriteValue = fuzzyRewrite;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor MaxExpansions(int? maxExpansions)
+		{
+			MaxExpansionsValue = maxExpansions;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor PrefixLength(int? prefixLength)
+		{
+			PrefixLengthValue = prefixLength;
+			return Self;
+		}
+
+		public MatchBoolPrefixQueryDescriptor Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
 			}
 
 			if (BoostValue.HasValue)
@@ -325,6 +538,51 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (FuzzinessValue is not null)
+			{
+				writer.WritePropertyName("fuzziness");
+				JsonSerializer.Serialize(writer, FuzzinessValue, options);
+			}
+
+			if (FuzzyRewriteValue is not null)
+			{
+				writer.WritePropertyName("fuzzy_rewrite");
+				JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			}
+
+			if (FuzzyTranspositionsValue.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_transpositions");
+				writer.WriteBooleanValue(FuzzyTranspositionsValue.Value);
+			}
+
+			if (MaxExpansionsValue.HasValue)
+			{
+				writer.WritePropertyName("max_expansions");
+				writer.WriteNumberValue(MaxExpansionsValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			if (OperatorValue is not null)
+			{
+				writer.WritePropertyName("operator");
+				JsonSerializer.Serialize(writer, OperatorValue, options);
+			}
+
+			if (PrefixLengthValue.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(PrefixLengthValue.Value);
+			}
+
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

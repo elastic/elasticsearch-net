@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class RankFeatureFunctionSigmoidDescriptor : DescriptorBase<RankFeatureFunctionSigmoidDescriptor>
 	{
-		public RankFeatureFunctionSigmoidDescriptor()
+		internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
+		public RankFeatureFunctionSigmoidDescriptor() : base()
 		{
 		}
 
-		internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
-		internal float ExponentValue { get; private set; }
+		private float ExponentValue { get; set; }
 
-		internal float PivotValue { get; private set; }
+		private float PivotValue { get; set; }
 
-		public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent) => Assign(exponent, (a, v) => a.ExponentValue = v);
-		public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot) => Assign(pivot, (a, v) => a.PivotValue = v);
+		public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent)
+		{
+			ExponentValue = exponent;
+			return Self;
+		}
+
+		public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot)
+		{
+			PivotValue = pivot;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

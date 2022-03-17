@@ -40,8 +40,6 @@ namespace PlaygroundV7x
 
 			client.Update<Person>("a", d => d.Index("test").Script(s => s.Source("script").Params(new Dictionary<string, object?> { { "null", new Person { FirstName = null, LastName = "test-surname" } } })));
 
-
-
 			var people = new List<Person>()
 			{
 				new Person{ FirstName = "Steve", LastName = "Gordon"},

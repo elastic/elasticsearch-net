@@ -51,35 +51,82 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class BoolQueryDescriptor : DescriptorBase<BoolQueryDescriptor>
 	{
-		public BoolQueryDescriptor()
+		internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
+		public BoolQueryDescriptor() : base()
 		{
 		}
 
-		internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? FilterValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? MustNotValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? ShouldValue { get; set; }
 
-		public BoolQueryDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter) => Assign(filter, (a, v) => a.FilterValue = v);
-		public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public BoolQueryDescriptor Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must) => Assign(must, (a, v) => a.MustValue = v);
-		public BoolQueryDescriptor MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot) => Assign(mustNot, (a, v) => a.MustNotValue = v);
-		public BoolQueryDescriptor Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should) => Assign(should, (a, v) => a.ShouldValue = v);
-		public BoolQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public BoolQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public BoolQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Filter(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? filter)
+		{
+			FilterValue = filter;
+			return Self;
+		}
+
+		public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Must(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? must)
+		{
+			MustValue = must;
+			return Self;
+		}
+
+		public BoolQueryDescriptor MustNot(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? mustNot)
+		{
+			MustNotValue = mustNot;
+			return Self;
+		}
+
+		public BoolQueryDescriptor Should(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer>? should)
+		{
+			ShouldValue = should;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
@@ -108,18 +155,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("should");
 				JsonSerializer.Serialize(writer, ShouldValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

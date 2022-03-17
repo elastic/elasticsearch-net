@@ -43,36 +43,60 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class KnnQueryDescriptor<TDocument> : DescriptorBase<KnnQueryDescriptor<TDocument>>
 	{
-		public KnnQueryDescriptor()
+		internal KnnQueryDescriptor(Action<KnnQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public KnnQueryDescriptor() : base()
 		{
 		}
 
-		internal KnnQueryDescriptor(Action<KnnQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal int NumCandidatesValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal IEnumerable<double> QueryVectorValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private int NumCandidatesValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private IEnumerable<double> QueryVectorValue { get; set; }
 
-		public KnnQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public KnnQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public KnnQueryDescriptor<TDocument> NumCandidates(int numCandidates) => Assign(numCandidates, (a, v) => a.NumCandidatesValue = v);
-		public KnnQueryDescriptor<TDocument> QueryVector(IEnumerable<double> queryVector) => Assign(queryVector, (a, v) => a.QueryVectorValue = v);
-		public KnnQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public KnnQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public KnnQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public KnnQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public KnnQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public KnnQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public KnnQueryDescriptor<TDocument> NumCandidates(int numCandidates)
+		{
+			NumCandidatesValue = numCandidates;
+			return Self;
+		}
+
+		public KnnQueryDescriptor<TDocument> QueryVector(IEnumerable<double> queryVector)
+		{
+			QueryVectorValue = queryVector;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-			writer.WritePropertyName("num_candidates");
-			writer.WriteNumberValue(NumCandidatesValue);
-			writer.WritePropertyName("query_vector");
-			JsonSerializer.Serialize(writer, QueryVectorValue, options);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -85,6 +109,96 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			writer.WritePropertyName("num_candidates");
+			writer.WriteNumberValue(NumCandidatesValue);
+			writer.WritePropertyName("query_vector");
+			JsonSerializer.Serialize(writer, QueryVectorValue, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class KnnQueryDescriptor : DescriptorBase<KnnQueryDescriptor>
+	{
+		internal KnnQueryDescriptor(Action<KnnQueryDescriptor> configure) => configure.Invoke(this);
+		public KnnQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private int NumCandidatesValue { get; set; }
+
+		private IEnumerable<double> QueryVectorValue { get; set; }
+
+		public KnnQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public KnnQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public KnnQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public KnnQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public KnnQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public KnnQueryDescriptor NumCandidates(int numCandidates)
+		{
+			NumCandidatesValue = numCandidates;
+			return Self;
+		}
+
+		public KnnQueryDescriptor QueryVector(IEnumerable<double> queryVector)
+		{
+			QueryVectorValue = queryVector;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			writer.WritePropertyName("num_candidates");
+			writer.WriteNumberValue(NumCandidatesValue);
+			writer.WritePropertyName("query_vector");
+			JsonSerializer.Serialize(writer, QueryVectorValue, options);
 			writer.WriteEndObject();
 		}
 	}

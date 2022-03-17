@@ -15,7 +15,7 @@ public class AverageAggregationSerializationTests : SerializerTestBase
 	{
 		var search = new SearchRequestDescriptor<Person>(search => search
 			.Aggregations(aggs => aggs
-				.Average("test_average", avg => avg
+				.Avg("test_average", avg => avg
 					.Script(s => s.Source("emit(Math.min(100, doc['grade'].value * 1.2))")))));
 
 		var serialisedJson = await SerializeAndGetJsonStringAsync(search);

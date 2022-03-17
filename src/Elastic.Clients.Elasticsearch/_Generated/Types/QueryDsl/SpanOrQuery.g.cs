@@ -37,25 +37,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SpanOrQueryDescriptor : DescriptorBase<SpanOrQueryDescriptor>
 	{
-		public SpanOrQueryDescriptor()
+		internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor> configure) => configure.Invoke(this);
+		public SpanOrQueryDescriptor() : base()
 		{
 		}
 
-		internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor> configure) => configure.Invoke(this);
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 
-		public SpanOrQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses) => Assign(clauses, (a, v) => a.ClausesValue = v);
-		public SpanOrQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public SpanOrQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanOrQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SpanOrQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public SpanOrQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+		{
+			ClausesValue = clauses;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("clauses");
-			JsonSerializer.Serialize(writer, ClausesValue, options);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -68,6 +81,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("clauses");
+			JsonSerializer.Serialize(writer, ClausesValue, options);
 			writer.WriteEndObject();
 		}
 	}

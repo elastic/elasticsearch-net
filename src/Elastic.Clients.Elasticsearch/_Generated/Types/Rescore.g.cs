@@ -37,41 +37,49 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class RescoreDescriptor<TDocument> : DescriptorBase<RescoreDescriptor<TDocument>>
 	{
-		public RescoreDescriptor()
+		internal RescoreDescriptor(Action<RescoreDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public RescoreDescriptor() : base()
 		{
 		}
 
-		internal RescoreDescriptor(Action<RescoreDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.RescoreQuery QueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.RescoreQuery QueryValue { get; set; }
 
-		internal int? WindowSizeValue { get; private set; }
+		private RescoreQueryDescriptor<TDocument> QueryDescriptor { get; set; }
 
-		internal RescoreQueryDescriptor<TDocument> QueryDescriptor { get; private set; }
+		private Action<RescoreQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		internal Action<RescoreQueryDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
+		private int? WindowSizeValue { get; set; }
 
 		public RescoreDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.RescoreQuery query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
-			return Assign(query, (a, v) => a.QueryValue = v);
+			QueryValue = query;
+			return Self;
 		}
 
 		public RescoreDescriptor<TDocument> Query(RescoreQueryDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+			QueryDescriptor = descriptor;
+			return Self;
 		}
 
 		public RescoreDescriptor<TDocument> Query(Action<RescoreQueryDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+			QueryDescriptorAction = configure;
+			return Self;
 		}
 
-		public RescoreDescriptor<TDocument> WindowSize(int? windowSize) => Assign(windowSize, (a, v) => a.WindowSizeValue = v);
+		public RescoreDescriptor<TDocument> WindowSize(int? windowSize)
+		{
+			WindowSizeValue = windowSize;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -84,6 +92,80 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("query");
 				JsonSerializer.Serialize(writer, new RescoreQueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryValue, options);
+			}
+
+			if (WindowSizeValue.HasValue)
+			{
+				writer.WritePropertyName("window_size");
+				writer.WriteNumberValue(WindowSizeValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class RescoreDescriptor : DescriptorBase<RescoreDescriptor>
+	{
+		internal RescoreDescriptor(Action<RescoreDescriptor> configure) => configure.Invoke(this);
+		public RescoreDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.RescoreQuery QueryValue { get; set; }
+
+		private RescoreQueryDescriptor QueryDescriptor { get; set; }
+
+		private Action<RescoreQueryDescriptor> QueryDescriptorAction { get; set; }
+
+		private int? WindowSizeValue { get; set; }
+
+		public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.RescoreQuery query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			QueryValue = query;
+			return Self;
+		}
+
+		public RescoreDescriptor Query(RescoreQueryDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptor = descriptor;
+			return Self;
+		}
+
+		public RescoreDescriptor Query(Action<RescoreQueryDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptorAction = configure;
+			return Self;
+		}
+
+		public RescoreDescriptor WindowSize(int? windowSize)
+		{
+			WindowSizeValue = windowSize;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
+			}
+			else if (QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new RescoreQueryDescriptor(QueryDescriptorAction), options);
 			}
 			else
 			{

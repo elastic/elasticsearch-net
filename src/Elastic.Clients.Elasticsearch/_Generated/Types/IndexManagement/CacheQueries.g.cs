@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class CacheQueriesDescriptor : DescriptorBase<CacheQueriesDescriptor>
 	{
-		public CacheQueriesDescriptor()
+		internal CacheQueriesDescriptor(Action<CacheQueriesDescriptor> configure) => configure.Invoke(this);
+		public CacheQueriesDescriptor() : base()
 		{
 		}
 
-		internal CacheQueriesDescriptor(Action<CacheQueriesDescriptor> configure) => configure.Invoke(this);
-		internal bool EnabledValue { get; private set; }
+		private bool EnabledValue { get; set; }
 
-		public CacheQueriesDescriptor Enabled(bool enabled = true) => Assign(enabled, (a, v) => a.EnabledValue = v);
+		public CacheQueriesDescriptor Enabled(bool enabled = true)
+		{
+			EnabledValue = enabled;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

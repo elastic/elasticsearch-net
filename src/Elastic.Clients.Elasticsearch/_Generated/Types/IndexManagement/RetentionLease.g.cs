@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class RetentionLeaseDescriptor : DescriptorBase<RetentionLeaseDescriptor>
 	{
-		public RetentionLeaseDescriptor()
+		internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
+		public RetentionLeaseDescriptor() : base()
 		{
 		}
 
-		internal RetentionLeaseDescriptor(Action<RetentionLeaseDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Time PeriodValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Time PeriodValue { get; set; }
 
-		public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Time period) => Assign(period, (a, v) => a.PeriodValue = v);
+		public RetentionLeaseDescriptor Period(Elastic.Clients.Elasticsearch.Time period)
+		{
+			PeriodValue = period;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -41,21 +41,105 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class FieldAndFormatDescriptor<TDocument> : DescriptorBase<FieldAndFormatDescriptor<TDocument>>
 	{
-		public FieldAndFormatDescriptor()
+		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public FieldAndFormatDescriptor() : base()
 		{
 		}
 
-		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		internal string? FormatValue { get; private set; }
+		private string? FormatValue { get; set; }
 
-		internal bool? IncludeUnmappedValue { get; private set; }
+		private bool? IncludeUnmappedValue { get; set; }
 
-		public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldAndFormatDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public FieldAndFormatDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true) => Assign(includeUnmapped, (a, v) => a.IncludeUnmappedValue = v);
+		public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor<TDocument> Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor<TDocument> IncludeUnmapped(bool? includeUnmapped = true)
+		{
+			IncludeUnmappedValue = includeUnmapped;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			if (IncludeUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("include_unmapped");
+				writer.WriteBooleanValue(IncludeUnmappedValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class FieldAndFormatDescriptor : DescriptorBase<FieldAndFormatDescriptor>
+	{
+		internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);
+		public FieldAndFormatDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private string? FormatValue { get; set; }
+
+		private bool? IncludeUnmappedValue { get; set; }
+
+		public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public FieldAndFormatDescriptor IncludeUnmapped(bool? includeUnmapped = true)
+		{
+			IncludeUnmappedValue = includeUnmapped;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

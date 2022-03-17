@@ -107,81 +107,198 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : DescriptorBase<MoreLikeThisQueryDescriptor<TDocument>>
 	{
-		public MoreLikeThisQueryDescriptor()
+		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MoreLikeThisQueryDescriptor() : base()
 		{
 		}
 
-		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? AnalyzerValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal double? BoostTermsValue { get; private set; }
+		private string? AnalyzerValue { get; set; }
 
-		internal bool? FailOnUnsupportedFieldValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; private set; }
+		private double? BoostTermsValue { get; set; }
 
-		internal bool? IncludeValue { get; private set; }
+		private bool? FailOnUnsupportedFieldValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 
-		internal int? MaxDocFreqValue { get; private set; }
+		private bool? IncludeValue { get; set; }
 
-		internal int? MaxQueryTermsValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 
-		internal int? MaxWordLengthValue { get; private set; }
+		private int? MaxDocFreqValue { get; set; }
 
-		internal int? MinDocFreqValue { get; private set; }
+		private int? MaxQueryTermsValue { get; set; }
 
-		internal int? MinTermFreqValue { get; private set; }
+		private int? MaxWordLengthValue { get; set; }
 
-		internal int? MinWordLengthValue { get; private set; }
+		private int? MinDocFreqValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private int? MinTermFreqValue { get; set; }
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; private set; }
+		private int? MinWordLengthValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; private set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-		internal long? VersionValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private long? VersionValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
-		public MoreLikeThisQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> BoostTerms(double? boostTerms) => Assign(boostTerms, (a, v) => a.BoostTermsValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> FailOnUnsupportedField(bool? failOnUnsupportedField = true) => Assign(failOnUnsupportedField, (a, v) => a.FailOnUnsupportedFieldValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Include(bool? include = true) => Assign(include, (a, v) => a.IncludeValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like) => Assign(like, (a, v) => a.LikeValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MaxDocFreq(int? maxDocFreq) => Assign(maxDocFreq, (a, v) => a.MaxDocFreqValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MaxQueryTerms(int? maxQueryTerms) => Assign(maxQueryTerms, (a, v) => a.MaxQueryTermsValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MaxWordLength(int? maxWordLength) => Assign(maxWordLength, (a, v) => a.MaxWordLengthValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MinDocFreq(int? minDocFreq) => Assign(minDocFreq, (a, v) => a.MinDocFreqValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? minTermFreq) => Assign(minTermFreq, (a, v) => a.MinTermFreqValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MinWordLength(int? minWordLength) => Assign(minWordLength, (a, v) => a.MinWordLengthValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector) => Assign(selector, (a, v) => a.PerFieldAnalyzerValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>()));
-		public MoreLikeThisQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords) => Assign(stopWords, (a, v) => a.StopWordsValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike) => Assign(unlike, (a, v) => a.UnlikeValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Assign(versionType, (a, v) => a.VersionTypeValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> BoostTerms(double? boostTerms)
+		{
+			BoostTermsValue = boostTerms;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> FailOnUnsupportedField(bool? failOnUnsupportedField = true)
+		{
+			FailOnUnsupportedFieldValue = failOnUnsupportedField;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Include(bool? include = true)
+		{
+			IncludeValue = include;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
+		{
+			LikeValue = like;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MaxDocFreq(int? maxDocFreq)
+		{
+			MaxDocFreqValue = maxDocFreq;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MaxQueryTerms(int? maxQueryTerms)
+		{
+			MaxQueryTermsValue = maxQueryTerms;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MaxWordLength(int? maxWordLength)
+		{
+			MaxWordLengthValue = maxWordLength;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MinDocFreq(int? minDocFreq)
+		{
+			MinDocFreqValue = minDocFreq;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? minTermFreq)
+		{
+			MinTermFreqValue = minTermFreq;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MinWordLength(int? minWordLength)
+		{
+			MinWordLengthValue = minWordLength;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
+		{
+			PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+		{
+			RoutingValue = routing;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords)
+		{
+			StopWordsValue = stopWords;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
+		{
+			UnlikeValue = unlike;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> Version(long? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+		{
+			VersionTypeValue = versionType;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
 				writer.WriteStringValue(AnalyzerValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			if (BoostTermsValue.HasValue)
@@ -288,16 +405,308 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, VersionTypeValue, options);
 			}
 
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class MoreLikeThisQueryDescriptor : DescriptorBase<MoreLikeThisQueryDescriptor>
+	{
+		internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor> configure) => configure.Invoke(this);
+		public MoreLikeThisQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private string? AnalyzerValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private double? BoostTermsValue { get; set; }
+
+		private bool? FailOnUnsupportedFieldValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+
+		private bool? IncludeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
+
+		private int? MaxDocFreqValue { get; set; }
+
+		private int? MaxQueryTermsValue { get; set; }
+
+		private int? MaxWordLengthValue { get; set; }
+
+		private int? MinDocFreqValue { get; set; }
+
+		private int? MinTermFreqValue { get; set; }
+
+		private int? MinWordLengthValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
+
+		private long? VersionValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+
+		public MoreLikeThisQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor BoostTerms(double? boostTerms)
+		{
+			BoostTermsValue = boostTerms;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor FailOnUnsupportedField(bool? failOnUnsupportedField = true)
+		{
+			FailOnUnsupportedFieldValue = failOnUnsupportedField;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Include(bool? include = true)
+		{
+			IncludeValue = include;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Like(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like> like)
+		{
+			LikeValue = like;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MaxDocFreq(int? maxDocFreq)
+		{
+			MaxDocFreqValue = maxDocFreq;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MaxQueryTerms(int? maxQueryTerms)
+		{
+			MaxQueryTermsValue = maxQueryTerms;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MaxWordLength(int? maxWordLength)
+		{
+			MaxWordLengthValue = maxWordLength;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MinDocFreq(int? minDocFreq)
+		{
+			MinDocFreqValue = minDocFreq;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MinTermFreq(int? minTermFreq)
+		{
+			MinTermFreqValue = minTermFreq;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MinWordLength(int? minWordLength)
+		{
+			MinWordLengthValue = minWordLength;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
+		{
+			PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+		{
+			RoutingValue = routing;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords)
+		{
+			StopWordsValue = stopWords;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Unlike(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.Like>? unlike)
+		{
+			UnlikeValue = unlike;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor Version(long? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		public MoreLikeThisQueryDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+		{
+			VersionTypeValue = versionType;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
 			}
 
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
+			}
+
 			if (BoostValue.HasValue)
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (BoostTermsValue.HasValue)
+			{
+				writer.WritePropertyName("boost_terms");
+				writer.WriteNumberValue(BoostTermsValue.Value);
+			}
+
+			if (FailOnUnsupportedFieldValue.HasValue)
+			{
+				writer.WritePropertyName("fail_on_unsupported_field");
+				writer.WriteBooleanValue(FailOnUnsupportedFieldValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (IncludeValue.HasValue)
+			{
+				writer.WritePropertyName("include");
+				writer.WriteBooleanValue(IncludeValue.Value);
+			}
+
+			writer.WritePropertyName("like");
+			JsonSerializer.Serialize(writer, LikeValue, options);
+			if (MaxDocFreqValue.HasValue)
+			{
+				writer.WritePropertyName("max_doc_freq");
+				writer.WriteNumberValue(MaxDocFreqValue.Value);
+			}
+
+			if (MaxQueryTermsValue.HasValue)
+			{
+				writer.WritePropertyName("max_query_terms");
+				writer.WriteNumberValue(MaxQueryTermsValue.Value);
+			}
+
+			if (MaxWordLengthValue.HasValue)
+			{
+				writer.WritePropertyName("max_word_length");
+				writer.WriteNumberValue(MaxWordLengthValue.Value);
+			}
+
+			if (MinDocFreqValue.HasValue)
+			{
+				writer.WritePropertyName("min_doc_freq");
+				writer.WriteNumberValue(MinDocFreqValue.Value);
+			}
+
+			if (MinTermFreqValue.HasValue)
+			{
+				writer.WritePropertyName("min_term_freq");
+				writer.WriteNumberValue(MinTermFreqValue.Value);
+			}
+
+			if (MinWordLengthValue.HasValue)
+			{
+				writer.WritePropertyName("min_word_length");
+				writer.WriteNumberValue(MinWordLengthValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			if (PerFieldAnalyzerValue is not null)
+			{
+				writer.WritePropertyName("per_field_analyzer");
+				JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
+			}
+
+			if (RoutingValue is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, RoutingValue, options);
+			}
+
+			if (StopWordsValue is not null)
+			{
+				writer.WritePropertyName("stop_words");
+				JsonSerializer.Serialize(writer, StopWordsValue, options);
+			}
+
+			if (UnlikeValue is not null)
+			{
+				writer.WritePropertyName("unlike");
+				JsonSerializer.Serialize(writer, UnlikeValue, options);
+			}
+
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			if (VersionTypeValue is not null)
+			{
+				writer.WritePropertyName("version_type");
+				JsonSerializer.Serialize(writer, VersionTypeValue, options);
 			}
 
 			writer.WriteEndObject();

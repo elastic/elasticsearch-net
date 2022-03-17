@@ -33,25 +33,20 @@ namespace Elastic.Clients.Elasticsearch
 	public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
 	{
 		// TODO: Codegen
-		public IndexRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
-
-		// ??
-		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+		public IndexRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentValue = documentWithId;
+			
 
 		// TODO: Codegen
-		// Perhaps not required as this should always be set via ctors
-		public IndexRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
-
-		// TODO: Codegen
-		public IndexRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+		public IndexRequestDescriptor<TDocument> Document(TDocument document)
+		{
+			DocumentValue = document;
+			return Self;
+		}
 
 		internal Id _id;
 
 		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
 
-		// TODO: Codegen for optional params
-		public IndexRequestDescriptor<TDocument> Id(Id id) => Assign(id, (a, v) => a.RouteValues.Optional("id", v));
-	
 		protected override HttpMethod? DynamicHttpMethod => _id is not null || RouteValues.ContainsId ? HttpMethod.PUT : HttpMethod.POST;
 	}
 }

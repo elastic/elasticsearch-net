@@ -140,65 +140,76 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class SumAggregationDescriptor<TDocument> : DescriptorBase<SumAggregationDescriptor<TDocument>>
 	{
-		public SumAggregationDescriptor()
+		internal SumAggregationDescriptor(Action<SumAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public SumAggregationDescriptor() : base()
 		{
 		}
 
-		internal SumAggregationDescriptor(Action<SumAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? FormatValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal Dictionary<string, object>? MetaValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private string? FormatValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public SumAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public SumAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public SumAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public SumAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public SumAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public SumAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public SumAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public SumAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public SumAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public SumAggregationDescriptor<TDocument> Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public SumAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("sum");
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -213,6 +224,135 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class SumAggregationDescriptor : DescriptorBase<SumAggregationDescriptor>
+	{
+		internal SumAggregationDescriptor(Action<SumAggregationDescriptor> configure) => configure.Invoke(this);
+		public SumAggregationDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private string? FormatValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		public SumAggregationDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public SumAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("sum");
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
 			}
 
 			writer.WriteEndObject();

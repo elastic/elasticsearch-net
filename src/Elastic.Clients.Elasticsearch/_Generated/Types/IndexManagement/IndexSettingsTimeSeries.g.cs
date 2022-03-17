@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexSettingsTimeSeriesDescriptor : DescriptorBase<IndexSettingsTimeSeriesDescriptor>
 	{
-		public IndexSettingsTimeSeriesDescriptor()
+		internal IndexSettingsTimeSeriesDescriptor(Action<IndexSettingsTimeSeriesDescriptor> configure) => configure.Invoke(this);
+		public IndexSettingsTimeSeriesDescriptor() : base()
 		{
 		}
 
-		internal IndexSettingsTimeSeriesDescriptor(Action<IndexSettingsTimeSeriesDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.DateOrEpochMillis? EndTimeValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.DateOrEpochMillis? EndTimeValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTimeValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.DateOrEpochMillis? StartTimeValue { get; set; }
 
-		public IndexSettingsTimeSeriesDescriptor EndTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? endTime) => Assign(endTime, (a, v) => a.EndTimeValue = v);
-		public IndexSettingsTimeSeriesDescriptor StartTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? startTime) => Assign(startTime, (a, v) => a.StartTimeValue = v);
+		public IndexSettingsTimeSeriesDescriptor EndTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? endTime)
+		{
+			EndTimeValue = endTime;
+			return Self;
+		}
+
+		public IndexSettingsTimeSeriesDescriptor StartTime(Elastic.Clients.Elasticsearch.DateOrEpochMillis? startTime)
+		{
+			StartTimeValue = startTime;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

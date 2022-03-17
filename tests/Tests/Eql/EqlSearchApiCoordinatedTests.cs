@@ -24,7 +24,7 @@ namespace Tests.Eql
 		public EqlSearchApiCoordinatedTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(new CoordinatedUsage(cluster, usage, testOnlyOne: true)
 		{
 			{SubmitStep, u =>
-				u.Calls<EqlSearchRequestDescriptor<Log>, EqlSearchRequest, EqlSearchResponse<Log>>(
+				u.Calls<EqlSearchRequestDescriptor, EqlSearchRequest, EqlSearchResponse<Log>>(
 					v => new EqlSearchRequest("customlogs-*")
 					{
 						Query = "any where true",
@@ -37,8 +37,8 @@ namespace Tests.Eql
 						.KeepOnCompletion()
 						.TimestampField(Infer.Field<Log>(f => f.Timestamp))
 						.WaitForCompletionTimeout("1nanos"),
-					(v, c, f) => c.Eql.Search("customlogs-*", f),
-					(v, c, f) => c.Eql.SearchAsync("customlogs-*", f),
+					(v, c, f) => c.Eql.Search<Log>("customlogs-*", f),
+					(v, c, f) => c.Eql.SearchAsync<Log>("customlogs-*", f),
 					(v, c, r) => c.Eql.Search<Log>(r),
 					(v, c, r) => c.Eql.SearchAsync<Log>(r),
 					onResponse: (r, values) => values.ExtendedValue("id", r.Id)

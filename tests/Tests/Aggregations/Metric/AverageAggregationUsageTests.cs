@@ -38,7 +38,7 @@ public class AverageAggregationUsageTests : AggregationUsageTestBase<ReadOnlyClu
 	};
 
 	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
-		.Average("average_commits", avg => avg
+		.Avg("average_commits", avg => avg
 			.Meta(m => m
 				.Add("foo", "bar")
 			)
