@@ -43,83 +43,98 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class ScriptScoreQueryDescriptor<TDocument> : DescriptorBase<ScriptScoreQueryDescriptor<TDocument>>
 	{
-		public ScriptScoreQueryDescriptor()
+		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public ScriptScoreQueryDescriptor() : base()
 		{
 		}
 
-		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal float? MinScoreValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
+		private QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
 
-		internal ScriptBase ScriptValue { get; private set; }
+		private Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private ScriptBase ScriptValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private float? MinScoreValue { get; set; }
 
-		public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
 		public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
-			return Assign(query, (a, v) => a.QueryValue = v);
+			QueryValue = query;
+			return Self;
 		}
 
 		public ScriptScoreQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+			QueryDescriptor = descriptor;
+			return Self;
 		}
 
 		public ScriptScoreQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+			QueryDescriptorAction = configure;
+			return Self;
 		}
 
 		public ScriptScoreQueryDescriptor<TDocument> Script(ScriptBase script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public ScriptScoreQueryDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public ScriptScoreQueryDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ScriptScoreQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore)
+		{
+			MinScoreValue = minScore;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (MinScoreValue.HasValue)
-			{
-				writer.WritePropertyName("min_score");
-				writer.WriteNumberValue(MinScoreValue.Value);
-			}
-
 			if (QueryDescriptor is not null)
 			{
 				writer.WritePropertyName("query");
@@ -162,6 +177,160 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (MinScoreValue.HasValue)
+			{
+				writer.WritePropertyName("min_score");
+				writer.WriteNumberValue(MinScoreValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class ScriptScoreQueryDescriptor : DescriptorBase<ScriptScoreQueryDescriptor>
+	{
+		internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor> configure) => configure.Invoke(this);
+		public ScriptScoreQueryDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
+
+		private QueryContainerDescriptor QueryDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+
+		private ScriptBase ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private float? MinScoreValue { get; set; }
+
+		public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			QueryValue = query;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptor = descriptor;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptorAction = configure;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Script(ScriptBase script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public ScriptScoreQueryDescriptor MinScore(float? minScore)
+		{
+			MinScoreValue = minScore;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
+			}
+			else if (QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryValue, options);
+			}
+
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (MinScoreValue.HasValue)
+			{
+				writer.WritePropertyName("min_score");
+				writer.WriteNumberValue(MinScoreValue.Value);
 			}
 
 			writer.WriteEndObject();

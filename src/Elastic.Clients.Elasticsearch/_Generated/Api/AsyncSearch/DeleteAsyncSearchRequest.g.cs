@@ -40,8 +40,9 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		protected override bool SupportsBody => false;
 	}
 
-	public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescriptorBase<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequestParameters>
+	public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchRequestParameters>
 	{
+		internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
 		}
@@ -50,10 +51,40 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		{
 		}
 
-		internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
+		public DeleteAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescriptorBase<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequestParameters>
+	{
+		internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
+		public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		internal DeleteAsyncSearchRequestDescriptor()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		public DeleteAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

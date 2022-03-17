@@ -41,17 +41,22 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptorBase<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
 	{
+		internal ClosePointInTimeRequestDescriptor(Action<ClosePointInTimeRequestDescriptor> configure) => configure.Invoke(this);
 		public ClosePointInTimeRequestDescriptor()
 		{
 		}
 
-		internal ClosePointInTimeRequestDescriptor(Action<ClosePointInTimeRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => true;
-		internal Elastic.Clients.Elasticsearch.Id IdValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
-		public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id) => Assign(id, (a, v) => a.IdValue = v);
+		public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

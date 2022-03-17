@@ -138,7 +138,16 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument> : RequestDescriptorBase<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
 	{
-		public UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+		internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);
+		internal UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		public UpdateRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public UpdateRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
+		public UpdateRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public UpdateRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
+		public UpdateRequestDescriptor(Id id) : this(typeof(TDocument), id)
 		{
 		}
 
@@ -146,12 +155,11 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
-		internal TDocument DocumentValue { get; private set; }
-
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Lang(string? lang) => Qs("lang", lang);
@@ -161,56 +169,123 @@ namespace Elastic.Clients.Elasticsearch
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		internal bool? DetectNoopValue { get; private set; }
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
 
-		internal TPartialDocument? DocValue { get; private set; }
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			RouteValues.Required("index", index);
+			return Self;
+		}
 
-		internal bool? DocAsUpsertValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal bool? ScriptedUpsertValue { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
-		internal TDocument? UpsertValue { get; private set; }
+		private bool? DetectNoopValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private TPartialDocument? DocValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private bool? DocAsUpsertValue { get; set; }
 
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true) => Assign(detectNoop, (a, v) => a.DetectNoopValue = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc) => Assign(doc, (a, v) => a.DocValue = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(docAsUpsert, (a, v) => a.DocAsUpsertValue = v);
+		private bool? ScriptedUpsertValue { get; set; }
+
+		private TDocument? UpsertValue { get; set; }
+
+		private TDocument DocumentValue { get; set; }
+
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) => Assign(scriptedUpsert, (a, v) => a.ScriptedUpsertValue = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert) => Assign(upsert, (a, v) => a.UpsertValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		{
+			SourceValue = source;
+			return Self;
+		}
+
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true)
+		{
+			DetectNoopValue = detectNoop;
+			return Self;
+		}
+
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc)
+		{
+			DocValue = doc;
+			return Self;
+		}
+
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true)
+		{
+			DocAsUpsertValue = docAsUpsert;
+			return Self;
+		}
+
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true)
+		{
+			ScriptedUpsertValue = scriptedUpsert;
+			return Self;
+		}
+
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert)
+		{
+			UpsertValue = upsert;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (SourceValue is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, SourceValue, options);
+			}
+
 			if (DetectNoopValue.HasValue)
 			{
 				writer.WritePropertyName("detect_noop");
@@ -229,32 +304,10 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteBooleanValue(DocAsUpsertValue.Value);
 			}
 
-			if (ScriptDescriptor is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-			}
-			else if (ScriptDescriptorAction is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
-			}
-			else if (ScriptValue is not null)
-			{
-				writer.WritePropertyName("script");
-				JsonSerializer.Serialize(writer, ScriptValue, options);
-			}
-
 			if (ScriptedUpsertValue.HasValue)
 			{
 				writer.WritePropertyName("scripted_upsert");
 				writer.WriteBooleanValue(ScriptedUpsertValue.Value);
-			}
-
-			if (SourceValue is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, SourceValue, options);
 			}
 
 			if (UpsertValue is not null)

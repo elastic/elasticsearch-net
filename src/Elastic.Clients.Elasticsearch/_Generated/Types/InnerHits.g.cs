@@ -93,142 +93,220 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class InnerHitsDescriptor<TDocument> : DescriptorBase<InnerHitsDescriptor<TDocument>>
 	{
-		public InnerHitsDescriptor()
+		internal InnerHitsDescriptor(Action<InnerHitsDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public InnerHitsDescriptor() : base()
 		{
 		}
 
-		internal InnerHitsDescriptor(Action<InnerHitsDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
+		private FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; private set; }
+		private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-		internal bool? ExplainValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
 
-		internal int? FromValue { get; private set; }
+		private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; private set; }
+		private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
-		internal bool? IgnoreUnmappedValue { get; private set; }
+		private SortCollection? SortValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Name? NameValue { get; private set; }
+		private SortDescriptor<TDocument> SortDescriptor { get; set; }
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; private set; }
+		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
 
-		internal bool? SeqNoPrimaryTermValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
-		internal int? SizeValue { get; private set; }
+		private bool? ExplainValue { get; set; }
 
-		internal SortCollection? SortValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; private set; }
+		private int? FromValue { get; set; }
 
-		internal bool? TrackScoresValue { get; private set; }
+		private bool? IgnoreUnmappedValue { get; set; }
 
-		internal bool? VersionValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
 
-		internal FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; private set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-		internal HighlightDescriptor<TDocument> HighlightDescriptor { get; private set; }
+		private bool? SeqNoPrimaryTermValue { get; set; }
 
-		internal SortDescriptor<TDocument> SortDescriptor { get; private set; }
+		private int? SizeValue { get; set; }
 
-		internal Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
 
-		internal Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; private set; }
+		private bool? TrackScoresValue { get; set; }
 
-		internal Action<SortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
+		private bool? VersionValue { get; set; }
 
-		public InnerHitsDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
 		public InnerHitsDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
 			CollapseDescriptorAction = null;
-			return Assign(collapse, (a, v) => a.CollapseValue = v);
+			CollapseValue = collapse;
+			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> Collapse(FieldCollapseDescriptor<TDocument> descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.CollapseDescriptor = v);
+			CollapseDescriptor = descriptor;
+			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
-			return Assign(configure, (a, v) => a.CollapseDescriptorAction = v);
+			CollapseDescriptorAction = configure;
+			return Self;
 		}
 
-		public InnerHitsDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields) => Assign(docvalueFields, (a, v) => a.DocvalueFieldsValue = v);
-		public InnerHitsDescriptor<TDocument> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
-		public InnerHitsDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public InnerHitsDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public InnerHitsDescriptor<TDocument> From(int? from) => Assign(from, (a, v) => a.FromValue = v);
+		public InnerHitsDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+		{
+			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
 		public InnerHitsDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
-			return Assign(highlight, (a, v) => a.HighlightValue = v);
+			HighlightValue = highlight;
+			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> Highlight(HighlightDescriptor<TDocument> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
+			HighlightDescriptor = descriptor;
+			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
-			return Assign(configure, (a, v) => a.HighlightDescriptorAction = v);
+			HighlightDescriptorAction = configure;
+			return Self;
 		}
 
-		public InnerHitsDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public InnerHitsDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name) => Assign(name, (a, v) => a.NameValue = v);
-		public InnerHitsDescriptor<TDocument> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>()));
-		public InnerHitsDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
-		public InnerHitsDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
 		public InnerHitsDescriptor<TDocument> Sort(SortCollection? sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
-			return Assign(sort, (a, v) => a.SortValue = v);
+			SortValue = sort;
+			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
+			SortDescriptor = descriptor;
+			return Self;
 		}
 
 		public InnerHitsDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
+			SortDescriptorAction = configure;
+			return Self;
 		}
 
-		public InnerHitsDescriptor<TDocument> StoredField(Elastic.Clients.Elasticsearch.Fields? storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
-		public InnerHitsDescriptor<TDocument> StoredField<TValue>(Expression<Func<TDocument, TValue>> storedField) => Assign(storedField, (a, v) => a.StoredFieldValue = v);
-		public InnerHitsDescriptor<TDocument> TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScoresValue = v);
-		public InnerHitsDescriptor<TDocument> Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
+		public InnerHitsDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		{
+			SourceValue = source;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Explain(bool? explain = true)
+		{
+			ExplainValue = explain;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> From(int? from)
+		{
+			FromValue = from;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>> selector)
+		{
+			ScriptFieldsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>());
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+		{
+			SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> StoredField(Elastic.Clients.Elasticsearch.Fields? storedField)
+		{
+			StoredFieldValue = storedField;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> StoredField<TValue>(Expression<Func<TDocument, TValue>> storedField)
+		{
+			StoredFieldValue = storedField;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> TrackScores(bool? trackScores = true)
+		{
+			TrackScoresValue = trackScores;
+			return Self;
+		}
+
+		public InnerHitsDescriptor<TDocument> Version(bool? version = true)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (SourceValue is not null)
-			{
-				writer.WritePropertyName("_source");
-				JsonSerializer.Serialize(writer, SourceValue, options);
-			}
-
 			if (CollapseDescriptor is not null)
 			{
 				writer.WritePropertyName("collapse");
@@ -251,6 +329,44 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 			}
 
+			if (HighlightDescriptor is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightDescriptor, options);
+			}
+			else if (HighlightDescriptorAction is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, new HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
+			}
+			else if (HighlightValue is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightValue, options);
+			}
+
+			if (SortDescriptor is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortDescriptor, options);
+			}
+			else if (SortDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
+			}
+			else if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
+			}
+
+			if (SourceValue is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, SourceValue, options);
+			}
+
 			if (ExplainValue.HasValue)
 			{
 				writer.WritePropertyName("explain");
@@ -267,22 +383,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("from");
 				writer.WriteNumberValue(FromValue.Value);
-			}
-
-			if (HighlightDescriptor is not null)
-			{
-				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, HighlightDescriptor, options);
-			}
-			else if (HighlightDescriptorAction is not null)
-			{
-				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, new HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
-			}
-			else if (HighlightValue is not null)
-			{
-				writer.WritePropertyName("highlight");
-				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
 			if (IgnoreUnmappedValue.HasValue)
@@ -315,6 +415,294 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteNumberValue(SizeValue.Value);
 			}
 
+			if (StoredFieldValue is not null)
+			{
+				writer.WritePropertyName("stored_field");
+				JsonSerializer.Serialize(writer, StoredFieldValue, options);
+			}
+
+			if (TrackScoresValue.HasValue)
+			{
+				writer.WritePropertyName("track_scores");
+				writer.WriteBooleanValue(TrackScoresValue.Value);
+			}
+
+			if (VersionValue.HasValue)
+			{
+				writer.WritePropertyName("version");
+				writer.WriteBooleanValue(VersionValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class InnerHitsDescriptor : DescriptorBase<InnerHitsDescriptor>
+	{
+		internal InnerHitsDescriptor(Action<InnerHitsDescriptor> configure) => configure.Invoke(this);
+		public InnerHitsDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; set; }
+
+		private FieldCollapseDescriptor CollapseDescriptor { get; set; }
+
+		private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
+
+		private HighlightDescriptor HighlightDescriptor { get; set; }
+
+		private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
+
+		private SortCollection? SortValue { get; set; }
+
+		private SortDescriptor SortDescriptor { get; set; }
+
+		private Action<SortDescriptor> SortDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+
+		private bool? ExplainValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
+
+		private int? FromValue { get; set; }
+
+		private bool? IgnoreUnmappedValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
+
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+
+		private bool? SeqNoPrimaryTermValue { get; set; }
+
+		private int? SizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
+
+		private bool? TrackScoresValue { get; set; }
+
+		private bool? VersionValue { get; set; }
+
+		public InnerHitsDescriptor Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
+		{
+			CollapseDescriptor = null;
+			CollapseDescriptorAction = null;
+			CollapseValue = collapse;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Collapse(FieldCollapseDescriptor descriptor)
+		{
+			CollapseValue = null;
+			CollapseDescriptorAction = null;
+			CollapseDescriptor = descriptor;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
+		{
+			CollapseValue = null;
+			CollapseDescriptorAction = null;
+			CollapseDescriptorAction = configure;
+			return Self;
+		}
+
+		public InnerHitsDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+		{
+			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		{
+			HighlightDescriptor = null;
+			HighlightDescriptorAction = null;
+			HighlightValue = highlight;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Highlight(HighlightDescriptor descriptor)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptor = descriptor;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Highlight(Action<HighlightDescriptor> configure)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptorAction = configure;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Sort(SortCollection? sort)
+		{
+			SortDescriptor = null;
+			SortDescriptorAction = null;
+			SortValue = sort;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Sort(SortDescriptor descriptor)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			SortDescriptor = descriptor;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Sort(Action<SortDescriptor> configure)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			SortDescriptorAction = configure;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		{
+			SourceValue = source;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Explain(bool? explain = true)
+		{
+			ExplainValue = explain;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Fields<TDocument, TValue>(Expression<Func<TDocument, TValue>> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Fields<TDocument>(Expression<Func<TDocument, object>> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public InnerHitsDescriptor From(int? from)
+		{
+			FromValue = from;
+			return Self;
+		}
+
+		public InnerHitsDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public InnerHitsDescriptor ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>> selector)
+		{
+			ScriptFieldsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>());
+			return Self;
+		}
+
+		public InnerHitsDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+		{
+			SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public InnerHitsDescriptor StoredField(Elastic.Clients.Elasticsearch.Fields? storedField)
+		{
+			StoredFieldValue = storedField;
+			return Self;
+		}
+
+		public InnerHitsDescriptor StoredField<TDocument, TValue>(Expression<Func<TDocument, TValue>> storedField)
+		{
+			StoredFieldValue = storedField;
+			return Self;
+		}
+
+		public InnerHitsDescriptor StoredField<TDocument>(Expression<Func<TDocument, object>> storedField)
+		{
+			StoredFieldValue = storedField;
+			return Self;
+		}
+
+		public InnerHitsDescriptor TrackScores(bool? trackScores = true)
+		{
+			TrackScoresValue = trackScores;
+			return Self;
+		}
+
+		public InnerHitsDescriptor Version(bool? version = true)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (CollapseDescriptor is not null)
+			{
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, CollapseDescriptor, options);
+			}
+			else if (CollapseDescriptorAction is not null)
+			{
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, new FieldCollapseDescriptor(CollapseDescriptorAction), options);
+			}
+			else if (CollapseValue is not null)
+			{
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, CollapseValue, options);
+			}
+
+			if (DocvalueFieldsValue is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
+			}
+
+			if (HighlightDescriptor is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightDescriptor, options);
+			}
+			else if (HighlightDescriptorAction is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, new HighlightDescriptor(HighlightDescriptorAction), options);
+			}
+			else if (HighlightValue is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightValue, options);
+			}
+
 			if (SortDescriptor is not null)
 			{
 				writer.WritePropertyName("sort");
@@ -323,12 +711,66 @@ namespace Elastic.Clients.Elasticsearch
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new SortDescriptor<TDocument>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
 			}
 			else if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
 				JsonSerializer.Serialize(writer, SortValue, options);
+			}
+
+			if (SourceValue is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, SourceValue, options);
+			}
+
+			if (ExplainValue.HasValue)
+			{
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(ExplainValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (FromValue.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(FromValue.Value);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			if (NameValue is not null)
+			{
+				writer.WritePropertyName("name");
+				JsonSerializer.Serialize(writer, NameValue, options);
+			}
+
+			if (ScriptFieldsValue is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+			}
+
+			if (SeqNoPrimaryTermValue.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			if (StoredFieldValue is not null)

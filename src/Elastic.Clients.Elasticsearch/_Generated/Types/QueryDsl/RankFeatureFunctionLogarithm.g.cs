@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class RankFeatureFunctionLogarithmDescriptor : DescriptorBase<RankFeatureFunctionLogarithmDescriptor>
 	{
-		public RankFeatureFunctionLogarithmDescriptor()
+		internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
+		public RankFeatureFunctionLogarithmDescriptor() : base()
 		{
 		}
 
-		internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
-		internal float ScalingFactorValue { get; private set; }
+		private float ScalingFactorValue { get; set; }
 
-		public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor) => Assign(scalingFactor, (a, v) => a.ScalingFactorValue = v);
+		public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor)
+		{
+			ScalingFactorValue = scalingFactor;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

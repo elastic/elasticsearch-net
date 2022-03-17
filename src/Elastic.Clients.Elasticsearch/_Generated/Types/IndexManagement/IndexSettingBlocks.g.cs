@@ -49,26 +49,51 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexSettingBlocksDescriptor : DescriptorBase<IndexSettingBlocksDescriptor>
 	{
-		public IndexSettingBlocksDescriptor()
+		internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
+		public IndexSettingBlocksDescriptor() : base()
 		{
 		}
 
-		internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
-		internal bool? MetadataValue { get; private set; }
+		private bool? MetadataValue { get; set; }
 
-		internal bool? ReadValue { get; private set; }
+		private bool? ReadValue { get; set; }
 
-		internal bool? ReadOnlyValue { get; private set; }
+		private bool? ReadOnlyValue { get; set; }
 
-		internal bool? ReadOnlyAllowDeleteValue { get; private set; }
+		private bool? ReadOnlyAllowDeleteValue { get; set; }
 
-		internal Union<bool?, string?>? WriteValue { get; private set; }
+		private Union<bool?, string?>? WriteValue { get; set; }
 
-		public IndexSettingBlocksDescriptor Metadata(bool? metadata = true) => Assign(metadata, (a, v) => a.MetadataValue = v);
-		public IndexSettingBlocksDescriptor Read(bool? read = true) => Assign(read, (a, v) => a.ReadValue = v);
-		public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true) => Assign(readOnly, (a, v) => a.ReadOnlyValue = v);
-		public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true) => Assign(readOnlyAllowDelete, (a, v) => a.ReadOnlyAllowDeleteValue = v);
-		public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write) => Assign(write, (a, v) => a.WriteValue = v);
+		public IndexSettingBlocksDescriptor Metadata(bool? metadata = true)
+		{
+			MetadataValue = metadata;
+			return Self;
+		}
+
+		public IndexSettingBlocksDescriptor Read(bool? read = true)
+		{
+			ReadValue = read;
+			return Self;
+		}
+
+		public IndexSettingBlocksDescriptor ReadOnly(bool? readOnly = true)
+		{
+			ReadOnlyValue = readOnly;
+			return Self;
+		}
+
+		public IndexSettingBlocksDescriptor ReadOnlyAllowDelete(bool? readOnlyAllowDelete = true)
+		{
+			ReadOnlyAllowDeleteValue = readOnlyAllowDelete;
+			return Self;
+		}
+
+		public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write)
+		{
+			WriteValue = write;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -59,28 +59,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		}
 	}
 
-	public sealed partial class IntervalsFilterDescriptor : DescriptorBase<IntervalsFilterDescriptor>
+	public sealed partial class IntervalsFilterDescriptor<TDocument> : DescriptorBase<IntervalsFilterDescriptor<TDocument>>
 	{
-		public IntervalsFilterDescriptor()
+		internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public IntervalsFilterDescriptor() : base()
 		{
 		}
 
-		internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
 
 		internal IntervalsFilter Container { get; private set; }
 
-		internal object ContainerVariantDescriptorAction { get; private set; }
+		internal IDescriptor Descriptor { get; private set; }
 
-		private void Set(object descriptorAction, string variantName)
+		internal Type DescriptorType { get; private set; }
+
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : IDescriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			ContainerVariantDescriptorAction = descriptorAction;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
 		}
 
 		private void Set(IIntervalsFilterVariant variant, string variantName)
@@ -108,8 +114,67 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class IntervalsFilterDescriptor : DescriptorBase<IntervalsFilterDescriptor>
+	{
+		internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor> configure) => configure.Invoke(this);
+		public IntervalsFilterDescriptor() : base()
+		{
+		}
+
+		internal bool ContainsVariant { get; private set; }
+
+		internal string ContainedVariantName { get; private set; }
+
+		internal IntervalsFilter Container { get; private set; }
+
+		internal IDescriptor Descriptor { get; private set; }
+
+		internal Type DescriptorType { get; private set; }
+
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : IDescriptor, new()
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
+		}
+
+		private void Set(IIntervalsFilterVariant variant, string variantName)
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new IntervalsFilter(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
 		}
 	}

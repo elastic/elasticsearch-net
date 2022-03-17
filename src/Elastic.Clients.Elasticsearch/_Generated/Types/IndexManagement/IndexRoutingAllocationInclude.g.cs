@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexRoutingAllocationIncludeDescriptor : DescriptorBase<IndexRoutingAllocationIncludeDescriptor>
 	{
-		public IndexRoutingAllocationIncludeDescriptor()
+		internal IndexRoutingAllocationIncludeDescriptor(Action<IndexRoutingAllocationIncludeDescriptor> configure) => configure.Invoke(this);
+		public IndexRoutingAllocationIncludeDescriptor() : base()
 		{
 		}
 
-		internal IndexRoutingAllocationIncludeDescriptor(Action<IndexRoutingAllocationIncludeDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 
-		internal string? TierPreferenceValue { get; private set; }
+		private string? TierPreferenceValue { get; set; }
 
-		public IndexRoutingAllocationIncludeDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
-		public IndexRoutingAllocationIncludeDescriptor TierPreference(string? tierPreference) => Assign(tierPreference, (a, v) => a.TierPreferenceValue = v);
+		public IndexRoutingAllocationIncludeDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public IndexRoutingAllocationIncludeDescriptor TierPreference(string? tierPreference)
+		{
+			TierPreferenceValue = tierPreference;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -43,29 +43,66 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class ParentIdQueryDescriptor : DescriptorBase<ParentIdQueryDescriptor>
 	{
-		public ParentIdQueryDescriptor()
+		internal ParentIdQueryDescriptor(Action<ParentIdQueryDescriptor> configure) => configure.Invoke(this);
+		public ParentIdQueryDescriptor() : base()
 		{
 		}
 
-		internal ParentIdQueryDescriptor(Action<ParentIdQueryDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal bool? IgnoreUnmappedValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal string? TypeValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private bool? IgnoreUnmappedValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string? TypeValue { get; set; }
 
-		public ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
-		public ParentIdQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public ParentIdQueryDescriptor Type(string? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public ParentIdQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public ParentIdQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ParentIdQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public ParentIdQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public ParentIdQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public ParentIdQueryDescriptor Type(string? type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (IdValue is not null)
 			{
 				writer.WritePropertyName("id");
@@ -82,18 +119,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("type");
 				JsonSerializer.Serialize(writer, TypeValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

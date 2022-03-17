@@ -43,29 +43,66 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class GeoDistanceQueryDescriptor : DescriptorBase<GeoDistanceQueryDescriptor>
 	{
-		public GeoDistanceQueryDescriptor()
+		internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor> configure) => configure.Invoke(this);
+		public GeoDistanceQueryDescriptor() : base()
 		{
 		}
 
-		internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor> configure) => configure.Invoke(this);
-		internal string? DistanceValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; private set; }
+		private string? DistanceValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 
-		public GeoDistanceQueryDescriptor Distance(string? distance) => Assign(distance, (a, v) => a.DistanceValue = v);
-		public GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType) => Assign(distanceType, (a, v) => a.DistanceTypeValue = v);
-		public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod) => Assign(validationMethod, (a, v) => a.ValidationMethodValue = v);
-		public GeoDistanceQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public GeoDistanceQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public GeoDistanceQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor Distance(string? distance)
+		{
+			DistanceValue = distance;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
+		{
+			DistanceTypeValue = distanceType;
+			return Self;
+		}
+
+		public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
+		{
+			ValidationMethodValue = validationMethod;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (DistanceValue is not null)
 			{
 				writer.WritePropertyName("distance");
@@ -82,18 +119,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("validation_method");
 				JsonSerializer.Serialize(writer, ValidationMethodValue, options);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

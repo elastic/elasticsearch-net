@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class ScriptBaseDescriptor : DescriptorBase<ScriptBaseDescriptor>
 	{
-		public ScriptBaseDescriptor()
+		internal ScriptBaseDescriptor(Action<ScriptBaseDescriptor> configure) => configure.Invoke(this);
+		public ScriptBaseDescriptor() : base()
 		{
 		}
 
-		internal ScriptBaseDescriptor(Action<ScriptBaseDescriptor> configure) => configure.Invoke(this);
-		internal Dictionary<string, object>? ParamsValue { get; private set; }
+		private Dictionary<string, object>? ParamsValue { get; set; }
 
-		public ScriptBaseDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.ParamsValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public ScriptBaseDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

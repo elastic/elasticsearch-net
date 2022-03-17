@@ -67,48 +67,120 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class PercolateQueryDescriptor<TDocument> : DescriptorBase<PercolateQueryDescriptor<TDocument>>
 	{
-		public PercolateQueryDescriptor()
+		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public PercolateQueryDescriptor() : base()
 		{
 		}
 
-		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal object? DocumentValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal IEnumerable<object>? DocumentsValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		private object? DocumentValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
+		private IEnumerable<object>? DocumentsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		internal string? NameValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 
-		internal string? PreferenceValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; private set; }
+		private string? NameValue { get; set; }
 
-		internal long? VersionValue { get; private set; }
+		private string? PreferenceValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private long? VersionValue { get; set; }
 
-		public PercolateQueryDescriptor<TDocument> Document(object? document) => Assign(document, (a, v) => a.DocumentValue = v);
-		public PercolateQueryDescriptor<TDocument> Documents(IEnumerable<object>? documents) => Assign(documents, (a, v) => a.DocumentsValue = v);
-		public PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercolateQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
-		public PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
-		public PercolateQueryDescriptor<TDocument> Name(string? name) => Assign(name, (a, v) => a.NameValue = v);
-		public PercolateQueryDescriptor<TDocument> Preference(string? preference) => Assign(preference, (a, v) => a.PreferenceValue = v);
-		public PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Assign(routing, (a, v) => a.RoutingValue = v);
-		public PercolateQueryDescriptor<TDocument> Version(long? version) => Assign(version, (a, v) => a.VersionValue = v);
-		public PercolateQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public PercolateQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public PercolateQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Document(object? document)
+		{
+			DocumentValue = document;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Documents(IEnumerable<object>? documents)
+		{
+			DocumentsValue = documents;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Name(string? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Preference(string? preference)
+		{
+			PreferenceValue = preference;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+		{
+			RoutingValue = routing;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor<TDocument> Version(long? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (DocumentsValue is not null)
 			{
 				writer.WritePropertyName("documents");
@@ -153,6 +225,120 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class PercolateQueryDescriptor : DescriptorBase<PercolateQueryDescriptor>
+	{
+		internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor> configure) => configure.Invoke(this);
+		public PercolateQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private object? DocumentValue { get; set; }
+
+		private IEnumerable<object>? DocumentsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
+
+		private string? NameValue { get; set; }
+
+		private string? PreferenceValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+
+		private long? VersionValue { get; set; }
+
+		public PercolateQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Document(object? document)
+		{
+			DocumentValue = document;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Documents(IEnumerable<object>? documents)
+		{
+			DocumentsValue = documents;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Name(string? name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Preference(string? preference)
+		{
+			PreferenceValue = preference;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+		{
+			RoutingValue = routing;
+			return Self;
+		}
+
+		public PercolateQueryDescriptor Version(long? version)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -163,6 +349,50 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (DocumentsValue is not null)
+			{
+				writer.WritePropertyName("documents");
+				JsonSerializer.Serialize(writer, DocumentsValue, options);
+			}
+
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (IdValue is not null)
+			{
+				writer.WritePropertyName("id");
+				JsonSerializer.Serialize(writer, IdValue, options);
+			}
+
+			if (IndexValue is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(NameValue))
+			{
+				writer.WritePropertyName("name");
+				writer.WriteStringValue(NameValue);
+			}
+
+			if (!string.IsNullOrEmpty(PreferenceValue))
+			{
+				writer.WritePropertyName("preference");
+				writer.WriteStringValue(PreferenceValue);
+			}
+
+			if (RoutingValue is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, RoutingValue, options);
+			}
+
+			if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
 			}
 
 			writer.WriteEndObject();

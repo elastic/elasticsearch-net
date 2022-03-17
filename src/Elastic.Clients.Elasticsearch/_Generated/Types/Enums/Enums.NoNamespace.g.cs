@@ -984,6 +984,48 @@ namespace Elastic.Clients.Elasticsearch
 		public const string Expression = "expression";
 	}
 
+	[JsonConverter(typeof(ScriptSortTypeConverter))]
+	public enum ScriptSortType
+	{
+		[EnumMember(Value = "string")]
+		String,
+		[EnumMember(Value = "number")]
+		Number
+	}
+
+	internal sealed class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
+	{
+		public override ScriptSortType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "string":
+					return ScriptSortType.String;
+				case "number":
+					return ScriptSortType.Number;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ScriptSortType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ScriptSortType.String:
+					writer.WriteStringValue("string");
+					return;
+				case ScriptSortType.Number:
+					writer.WriteStringValue("number");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(SearchTypeConverter))]
 	public enum SearchType
 	{

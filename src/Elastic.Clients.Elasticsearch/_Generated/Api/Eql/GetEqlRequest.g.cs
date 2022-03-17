@@ -50,8 +50,9 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
-	public sealed partial class GetEqlRequestDescriptor : RequestDescriptorBase<GetEqlRequestDescriptor, GetEqlRequestParameters>
+	public sealed partial class GetEqlRequestDescriptor<TDocument> : RequestDescriptorBase<GetEqlRequestDescriptor<TDocument>, GetEqlRequestParameters>
 	{
+		internal GetEqlRequestDescriptor(Action<GetEqlRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GetEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
 		}
@@ -60,12 +61,44 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		{
 		}
 
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		public GetEqlRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetEqlRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetEqlRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class GetEqlRequestDescriptor : RequestDescriptorBase<GetEqlRequestDescriptor, GetEqlRequestParameters>
+	{
 		internal GetEqlRequestDescriptor(Action<GetEqlRequestDescriptor> configure) => configure.Invoke(this);
+		public GetEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		internal GetEqlRequestDescriptor()
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public GetEqlRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
 		public GetEqlRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetEqlRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

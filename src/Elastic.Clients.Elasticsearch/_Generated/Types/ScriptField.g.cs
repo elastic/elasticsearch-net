@@ -37,39 +37,47 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class ScriptFieldDescriptor : DescriptorBase<ScriptFieldDescriptor>
 	{
-		public ScriptFieldDescriptor()
+		internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
+		public ScriptFieldDescriptor() : base()
 		{
 		}
 
-		internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
-		internal bool? IgnoreFailureValue { get; private set; }
+		private bool? IgnoreFailureValue { get; set; }
 
-		internal ScriptBase ScriptValue { get; private set; }
+		private ScriptBase ScriptValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true) => Assign(ignoreFailure, (a, v) => a.IgnoreFailureValue = v);
+		public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true)
+		{
+			IgnoreFailureValue = ignoreFailure;
+			return Self;
+		}
+
 		public ScriptFieldDescriptor Script(ScriptBase script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public ScriptFieldDescriptor Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public ScriptFieldDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

@@ -144,65 +144,76 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class BoxplotAggregationDescriptor<TDocument> : DescriptorBase<BoxplotAggregationDescriptor<TDocument>>
 	{
-		public BoxplotAggregationDescriptor()
+		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public BoxplotAggregationDescriptor() : base()
 		{
 		}
 
-		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal double? CompressionValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal Dictionary<string, object>? MetaValue { get; private set; }
+		private double? CompressionValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public BoxplotAggregationDescriptor<TDocument> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
-		public BoxplotAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public BoxplotAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public BoxplotAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public BoxplotAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public BoxplotAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public BoxplotAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public BoxplotAggregationDescriptor<TDocument> Compression(double? compression)
+		{
+			CompressionValue = compression;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("boxplot");
 			writer.WriteStartObject();
-			if (CompressionValue.HasValue)
-			{
-				writer.WritePropertyName("compression");
-				writer.WriteNumberValue(CompressionValue.Value);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -217,6 +228,135 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CompressionValue.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(CompressionValue.Value);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class BoxplotAggregationDescriptor : DescriptorBase<BoxplotAggregationDescriptor>
+	{
+		internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor> configure) => configure.Invoke(this);
+		public BoxplotAggregationDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private double? CompressionValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		public BoxplotAggregationDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Compression(double? compression)
+		{
+			CompressionValue = compression;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public BoxplotAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("boxplot");
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CompressionValue.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(CompressionValue.Value);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
 			}
 
 			writer.WriteEndObject();

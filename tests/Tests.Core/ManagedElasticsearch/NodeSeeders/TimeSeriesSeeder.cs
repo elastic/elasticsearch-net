@@ -57,7 +57,7 @@ public class TimeSeriesSeeder
 		{ });
 		Console.WriteLine($"Completed in {sw.Elapsed} with {dropped.Count} dropped logs");
 
-		var countResult = _client.Count<Log>(s => s.Index(IndicesWildCard));
+		var countResult = _client.Count(s => s.Index(IndicesWildCard));
 		Console.WriteLine($"Stored {countResult.Count} in {IndicesWildCard} indices");
 	}
 }

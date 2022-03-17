@@ -144,65 +144,76 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class StringStatsAggregationDescriptor<TDocument> : DescriptorBase<StringStatsAggregationDescriptor<TDocument>>
 	{
-		public StringStatsAggregationDescriptor()
+		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public StringStatsAggregationDescriptor() : base()
 		{
 		}
 
-		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? ShowDistributionValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal Dictionary<string, object>? MetaValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private Dictionary<string, object>? MetaValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private bool? ShowDistributionValue { get; set; }
 
-		public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true) => Assign(showDistribution, (a, v) => a.ShowDistributionValue = v);
-		public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public StringStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public StringStatsAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public StringStatsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public StringStatsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public StringStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true)
+		{
+			ShowDistributionValue = showDistribution;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("string_stats");
 			writer.WriteStartObject();
-			if (ShowDistributionValue.HasValue)
-			{
-				writer.WritePropertyName("show_distribution");
-				writer.WriteBooleanValue(ShowDistributionValue.Value);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -217,6 +228,135 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (ShowDistributionValue.HasValue)
+			{
+				writer.WritePropertyName("show_distribution");
+				writer.WriteBooleanValue(ShowDistributionValue.Value);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class StringStatsAggregationDescriptor : DescriptorBase<StringStatsAggregationDescriptor>
+	{
+		internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor> configure) => configure.Invoke(this);
+		public StringStatsAggregationDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private bool? ShowDistributionValue { get; set; }
+
+		public StringStatsAggregationDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public StringStatsAggregationDescriptor ShowDistribution(bool? showDistribution = true)
+		{
+			ShowDistributionValue = showDistribution;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("string_stats");
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (ShowDistributionValue.HasValue)
+			{
+				writer.WritePropertyName("show_distribution");
+				writer.WriteBooleanValue(ShowDistributionValue.Value);
 			}
 
 			writer.WriteEndObject();

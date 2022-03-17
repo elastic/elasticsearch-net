@@ -35,25 +35,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class WrapperQueryDescriptor : DescriptorBase<WrapperQueryDescriptor>
 	{
-		public WrapperQueryDescriptor()
+		internal WrapperQueryDescriptor(Action<WrapperQueryDescriptor> configure) => configure.Invoke(this);
+		public WrapperQueryDescriptor() : base()
 		{
 		}
 
-		internal WrapperQueryDescriptor(Action<WrapperQueryDescriptor> configure) => configure.Invoke(this);
-		internal string QueryValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string QueryValue { get; set; }
 
-		public WrapperQueryDescriptor Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public WrapperQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public WrapperQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public WrapperQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public WrapperQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public WrapperQueryDescriptor Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -66,6 +79,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
 			writer.WriteEndObject();
 		}
 	}

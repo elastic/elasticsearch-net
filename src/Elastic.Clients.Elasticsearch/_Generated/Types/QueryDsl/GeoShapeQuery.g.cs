@@ -35,29 +35,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class GeoShapeQueryDescriptor : DescriptorBase<GeoShapeQueryDescriptor>
 	{
-		public GeoShapeQueryDescriptor()
+		internal GeoShapeQueryDescriptor(Action<GeoShapeQueryDescriptor> configure) => configure.Invoke(this);
+		public GeoShapeQueryDescriptor() : base()
 		{
 		}
 
-		internal GeoShapeQueryDescriptor(Action<GeoShapeQueryDescriptor> configure) => configure.Invoke(this);
-		internal bool? IgnoreUnmappedValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private bool? IgnoreUnmappedValue { get; set; }
 
-		public GeoShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
-		public GeoShapeQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public GeoShapeQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public GeoShapeQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public GeoShapeQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public GeoShapeQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (IgnoreUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -68,6 +77,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
 			}
 
 			writer.WriteEndObject();

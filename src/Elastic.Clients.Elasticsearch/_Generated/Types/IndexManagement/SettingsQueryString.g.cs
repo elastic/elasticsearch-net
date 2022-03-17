@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsQueryStringDescriptor : DescriptorBase<SettingsQueryStringDescriptor>
 	{
-		public SettingsQueryStringDescriptor()
+		internal SettingsQueryStringDescriptor(Action<SettingsQueryStringDescriptor> configure) => configure.Invoke(this);
+		public SettingsQueryStringDescriptor() : base()
 		{
 		}
 
-		internal SettingsQueryStringDescriptor(Action<SettingsQueryStringDescriptor> configure) => configure.Invoke(this);
-		internal bool LenientValue { get; private set; }
+		private bool LenientValue { get; set; }
 
-		public SettingsQueryStringDescriptor Lenient(bool lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
+		public SettingsQueryStringDescriptor Lenient(bool lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

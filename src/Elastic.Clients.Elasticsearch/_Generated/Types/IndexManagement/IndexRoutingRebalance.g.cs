@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexRoutingRebalanceDescriptor : DescriptorBase<IndexRoutingRebalanceDescriptor>
 	{
-		public IndexRoutingRebalanceDescriptor()
+		internal IndexRoutingRebalanceDescriptor(Action<IndexRoutingRebalanceDescriptor> configure) => configure.Invoke(this);
+		public IndexRoutingRebalanceDescriptor() : base()
 		{
 		}
 
-		internal IndexRoutingRebalanceDescriptor(Action<IndexRoutingRebalanceDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions EnableValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions EnableValue { get; set; }
 
-		public IndexRoutingRebalanceDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions enable) => Assign(enable, (a, v) => a.EnableValue = v);
+		public IndexRoutingRebalanceDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions enable)
+		{
+			EnableValue = enable;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

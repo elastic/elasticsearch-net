@@ -45,24 +45,131 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexSegmentSortDescriptor<TDocument> : DescriptorBase<IndexSegmentSortDescriptor<TDocument>>
 	{
-		public IndexSegmentSortDescriptor()
+		internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public IndexSegmentSortDescriptor() : base()
 		{
 		}
 
-		internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Fields? FieldValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fields? FieldValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
 
-		public IndexSegmentSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public IndexSegmentSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public IndexSegmentSortDescriptor<TDocument> Missing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public IndexSegmentSortDescriptor<TDocument> Mode(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode) => Assign(mode, (a, v) => a.ModeValue = v);
-		public IndexSegmentSortDescriptor<TDocument> Order(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order) => Assign(order, (a, v) => a.OrderValue = v);
+		public IndexSegmentSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor<TDocument> Missing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor<TDocument> Mode(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor<TDocument> Order(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (ModeValue is not null)
+			{
+				writer.WritePropertyName("mode");
+				JsonSerializer.Serialize(writer, ModeValue, options);
+			}
+
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, OrderValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class IndexSegmentSortDescriptor : DescriptorBase<IndexSegmentSortDescriptor>
+	{
+		internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor> configure) => configure.Invoke(this);
+		public IndexSegmentSortDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Fields? FieldValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
+
+		public IndexSegmentSortDescriptor Field(Elastic.Clients.Elasticsearch.Fields? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor Missing(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor Mode(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		public IndexSegmentSortDescriptor Order(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

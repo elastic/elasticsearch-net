@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class SuggesterDescriptor : DescriptorBase<SuggesterDescriptor>
 	{
-		public SuggesterDescriptor()
+		internal SuggesterDescriptor(Action<SuggesterDescriptor> configure) => configure.Invoke(this);
+		public SuggesterDescriptor() : base()
 		{
 		}
 
-		internal SuggesterDescriptor(Action<SuggesterDescriptor> configure) => configure.Invoke(this);
-		internal string? TextValue { get; private set; }
+		private string? TextValue { get; set; }
 
-		public SuggesterDescriptor Text(string? text) => Assign(text, (a, v) => a.TextValue = v);
+		public SuggesterDescriptor Text(string? text)
+		{
+			TextValue = text;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -41,7 +41,7 @@ public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<Rea
 	};
 
 	protected override Action<AggregationContainerDescriptor<Project>> FluentAggs => a => a
-		.WeightedAverage("weighted_avg_commits", avg => avg
+		.WeightedAvg("weighted_avg_commits", avg => avg
 			.Value(v => v.Field(p => p.NumberOfCommits).Missing(0))
 			//.Weight(w => w.Script("(doc['numberOfContributors']?.value ?: 0) + 1"))
 			.Weight(s => s.Script(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1")))

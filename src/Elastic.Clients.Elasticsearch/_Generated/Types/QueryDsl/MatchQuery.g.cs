@@ -267,59 +267,150 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
-	public sealed partial class MatchQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<MatchQueryDescriptor<TDocument>, TDocument>
+	public sealed partial class MatchQueryDescriptor<TDocument> : DescriptorBase<MatchQueryDescriptor<TDocument>>
 	{
-		public MatchQueryDescriptor()
+		internal MatchQueryDescriptor(Action<MatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MatchQueryDescriptor() : base()
 		{
 		}
 
-		internal MatchQueryDescriptor(Action<MatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? AnalyzerValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+		private string? AnalyzerValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 
-		internal string? FuzzyRewriteValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal bool? FuzzyTranspositionsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal bool? LenientValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
-		internal int? MaxExpansionsValue { get; private set; }
+		private string? FuzzyRewriteValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private bool? FuzzyTranspositionsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; private set; }
+		private bool? LenientValue { get; set; }
 
-		internal int? PrefixLengthValue { get; private set; }
+		private int? MaxExpansionsValue { get; set; }
 
-		internal string QueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private int? PrefixLengthValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string QueryValue { get; set; }
 
-		public MatchQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public MatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public MatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
-		public MatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
-		public MatchQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
-		public MatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
-		public MatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public MatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
-		public MatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public MatchQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public MatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
-		public MatchQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public MatchQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+
+		public MatchQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		{
+			FuzzinessValue = fuzziness;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
+		{
+			FuzzyRewriteValue = fuzzyRewrite;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Lenient(bool? lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
+		{
+			MaxExpansionsValue = maxExpansions;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
+		{
+			PrefixLengthValue = prefixLength;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public MatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+		{
+			ZeroTermsQueryValue = zeroTermsQuery;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
@@ -330,6 +421,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
 				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			if (FuzzinessValue is not null)
@@ -388,10 +485,171 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class MatchQueryDescriptor : DescriptorBase<MatchQueryDescriptor>
+	{
+		internal MatchQueryDescriptor(Action<MatchQueryDescriptor> configure) => configure.Invoke(this);
+		public MatchQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private string? AnalyzerValue { get; set; }
+
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
+
+		private string? FuzzyRewriteValue { get; set; }
+
+		private bool? FuzzyTranspositionsValue { get; set; }
+
+		private bool? LenientValue { get; set; }
+
+		private int? MaxExpansionsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
+
+		private int? PrefixLengthValue { get; set; }
+
+		private string QueryValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+
+		public MatchQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		{
+			FuzzinessValue = fuzziness;
+			return Self;
+		}
+
+		public MatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
+		{
+			FuzzyRewriteValue = fuzzyRewrite;
+			return Self;
+		}
+
+		public MatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Lenient(bool? lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
+		public MatchQueryDescriptor MaxExpansions(int? maxExpansions)
+		{
+			MaxExpansionsValue = maxExpansions;
+			return Self;
+		}
+
+		public MatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public MatchQueryDescriptor PrefixLength(int? prefixLength)
+		{
+			PrefixLengthValue = prefixLength;
+			return Self;
+		}
+
+		public MatchQueryDescriptor Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public MatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+		{
+			ZeroTermsQueryValue = zeroTermsQuery;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
+			}
+
+			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
+			{
+				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
 			}
 
 			if (BoostValue.HasValue)
@@ -400,6 +658,63 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (FuzzinessValue is not null)
+			{
+				writer.WritePropertyName("fuzziness");
+				JsonSerializer.Serialize(writer, FuzzinessValue, options);
+			}
+
+			if (FuzzyRewriteValue is not null)
+			{
+				writer.WritePropertyName("fuzzy_rewrite");
+				JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			}
+
+			if (FuzzyTranspositionsValue.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_transpositions");
+				writer.WriteBooleanValue(FuzzyTranspositionsValue.Value);
+			}
+
+			if (LenientValue.HasValue)
+			{
+				writer.WritePropertyName("lenient");
+				writer.WriteBooleanValue(LenientValue.Value);
+			}
+
+			if (MaxExpansionsValue.HasValue)
+			{
+				writer.WritePropertyName("max_expansions");
+				writer.WriteNumberValue(MaxExpansionsValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			if (OperatorValue is not null)
+			{
+				writer.WritePropertyName("operator");
+				JsonSerializer.Serialize(writer, OperatorValue, options);
+			}
+
+			if (PrefixLengthValue.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(PrefixLengthValue.Value);
+			}
+
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryValue, options);
+			if (ZeroTermsQueryValue is not null)
+			{
+				writer.WritePropertyName("zero_terms_query");
+				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
+			}
+
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

@@ -32,17 +32,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class TermsQueryDescriptor : DescriptorBase<TermsQueryDescriptor>
 	{
-		public TermsQueryDescriptor()
+		internal TermsQueryDescriptor(Action<TermsQueryDescriptor> configure) => configure.Invoke(this);
+		public TermsQueryDescriptor() : base()
 		{
 		}
 
-		internal TermsQueryDescriptor(Action<TermsQueryDescriptor> configure) => configure.Invoke(this);
-		internal string? QueryNameValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		public TermsQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public TermsQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public TermsQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public TermsQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

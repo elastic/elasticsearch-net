@@ -32,8 +32,8 @@ namespace Tests.Document.Single.Get
 		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get(Infer.Index<Project>(), ProjectId, f),
-			(client, f) => client.GetAsync(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.Get<Project>(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.GetAsync<Project>(Infer.Index<Project>(), ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);
@@ -77,8 +77,8 @@ namespace Tests.Document.Single.Get
 		protected override string ExpectedUrlPathAndQuery => $"/project/_doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get(Infer.Index<Project>(), ProjectId, f),
-			(client, f) => client.GetAsync(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.Get<Project>(Infer.Index<Project>(), ProjectId, f),
+			(client, f) => client.GetAsync<Project>(Infer.Index<Project>(), ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);
@@ -121,8 +121,8 @@ namespace Tests.Document.Single.Get
 		protected override string ExpectedUrlPathAndQuery => $"/{BadIndex}/_doc/{U(ProjectId)}";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(client, f) => client.Get(BadIndex, ProjectId, f),
-			(client, f) => client.GetAsync(BadIndex, ProjectId, f),
+			(client, f) => client.Get<Project>(BadIndex, ProjectId, f),
+			(client, f) => client.GetAsync<Project>(BadIndex, ProjectId, f),
 			(client, r) => client.Get<Project>(r),
 			(client, r) => client.GetAsync<Project>(r)
 		);

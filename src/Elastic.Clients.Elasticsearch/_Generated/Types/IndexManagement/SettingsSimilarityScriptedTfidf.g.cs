@@ -37,36 +37,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityScriptedTfidfDescriptor : DescriptorBase<SettingsSimilarityScriptedTfidfDescriptor>
 	{
-		public SettingsSimilarityScriptedTfidfDescriptor()
+		internal SettingsSimilarityScriptedTfidfDescriptor(Action<SettingsSimilarityScriptedTfidfDescriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityScriptedTfidfDescriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityScriptedTfidfDescriptor(Action<SettingsSimilarityScriptedTfidfDescriptor> configure) => configure.Invoke(this);
-		internal ScriptBase ScriptValue { get; private set; }
+		private ScriptBase ScriptValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 		public SettingsSimilarityScriptedTfidfDescriptor Script(ScriptBase script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public SettingsSimilarityScriptedTfidfDescriptor Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityScriptedTfidfDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

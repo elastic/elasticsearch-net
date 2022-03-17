@@ -10,8 +10,8 @@ namespace Elastic.Clients.Elasticsearch;
 internal static class Fluent
 {
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	internal static TDescriptor Assign<TDescriptor, TInterface, TValue>(TDescriptor self, TValue value, Action<TInterface, TValue> assign)
-		where TDescriptor : class, TInterface
+	internal static TDescriptor Assign<TDescriptor, TValue>(TDescriptor self, TValue value, Action<TDescriptor, TValue> assign)
+		where TDescriptor : DescriptorBase<TDescriptor>
 	{
 		assign(self, value);
 		return self;

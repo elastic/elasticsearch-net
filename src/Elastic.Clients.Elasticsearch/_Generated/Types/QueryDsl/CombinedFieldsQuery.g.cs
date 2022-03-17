@@ -55,42 +55,94 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : DescriptorBase<CombinedFieldsQueryDescriptor<TDocument>>
 	{
-		public CombinedFieldsQueryDescriptor()
+		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public CombinedFieldsQueryDescriptor() : base()
 		{
 		}
 
-		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; private set; }
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; set; }
 
-		internal string QueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private string QueryValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
 
-		public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op) => Assign(op, (a, v) => a.OperatorValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
+		{
+			ZeroTermsQueryValue = zeroTermsQuery;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
 				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WritePropertyName("fields");
@@ -115,16 +167,122 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class CombinedFieldsQueryDescriptor : DescriptorBase<CombinedFieldsQueryDescriptor>
+	{
+		internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor> configure) => configure.Invoke(this);
+		public CombinedFieldsQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Field> FieldsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
+
+		private string QueryValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
+
+		public CombinedFieldsQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
+		{
+			ZeroTermsQueryValue = zeroTermsQuery;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
 			}
 
+			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
+			{
+				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
 			if (BoostValue.HasValue)
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			if (OperatorValue is not null)
+			{
+				writer.WritePropertyName("operator");
+				JsonSerializer.Serialize(writer, OperatorValue, options);
+			}
+
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
+			if (ZeroTermsQueryValue is not null)
+			{
+				writer.WritePropertyName("zero_terms_query");
+				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
 			writer.WriteEndObject();

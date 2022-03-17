@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class HistogramOrderDescriptor : DescriptorBase<HistogramOrderDescriptor>
 	{
-		public HistogramOrderDescriptor()
+		internal HistogramOrderDescriptor(Action<HistogramOrderDescriptor> configure) => configure.Invoke(this);
+		public HistogramOrderDescriptor() : base()
 		{
 		}
 
-		internal HistogramOrderDescriptor(Action<HistogramOrderDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.SortOrder? CountValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.SortOrder? CountValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.SortOrder? KeyValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.SortOrder? KeyValue { get; set; }
 
-		public HistogramOrderDescriptor Count(Elastic.Clients.Elasticsearch.SortOrder? count) => Assign(count, (a, v) => a.CountValue = v);
-		public HistogramOrderDescriptor Key(Elastic.Clients.Elasticsearch.SortOrder? key) => Assign(key, (a, v) => a.KeyValue = v);
+		public HistogramOrderDescriptor Count(Elastic.Clients.Elasticsearch.SortOrder? count)
+		{
+			CountValue = count;
+			return Self;
+		}
+
+		public HistogramOrderDescriptor Key(Elastic.Clients.Elasticsearch.SortOrder? key)
+		{
+			KeyValue = key;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

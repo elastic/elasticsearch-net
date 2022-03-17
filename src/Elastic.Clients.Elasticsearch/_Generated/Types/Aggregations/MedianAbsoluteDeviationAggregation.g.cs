@@ -161,74 +161,84 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocument> : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor<TDocument>>
 	{
-		public MedianAbsoluteDeviationAggregationDescriptor()
+		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MedianAbsoluteDeviationAggregationDescriptor() : base()
 		{
 		}
 
-		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal double? CompressionValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal string? FormatValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private double? CompressionValue { get; set; }
 
-		internal Dictionary<string, object>? MetaValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private string? FormatValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private Dictionary<string, object>? MetaValue { get; set; }
 
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression) => Assign(compression, (a, v) => a.CompressionValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression)
+		{
+			CompressionValue = compression;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("median_absolute_deviation");
 			writer.WriteStartObject();
-			if (CompressionValue.HasValue)
-			{
-				writer.WritePropertyName("compression");
-				writer.WriteNumberValue(CompressionValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(FormatValue))
-			{
-				writer.WritePropertyName("format");
-				writer.WriteStringValue(FormatValue);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -243,6 +253,155 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CompressionValue.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(CompressionValue.Value);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : DescriptorBase<MedianAbsoluteDeviationAggregationDescriptor>
+	{
+		internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor> configure) => configure.Invoke(this);
+		public MedianAbsoluteDeviationAggregationDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private double? CompressionValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private string? FormatValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		public MedianAbsoluteDeviationAggregationDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Compression(double? compression)
+		{
+			CompressionValue = compression;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public MedianAbsoluteDeviationAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("median_absolute_deviation");
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CompressionValue.HasValue)
+			{
+				writer.WritePropertyName("compression");
+				writer.WriteNumberValue(CompressionValue.Value);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
 			}
 
 			writer.WriteEndObject();

@@ -345,22 +345,24 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescriptorBase<SearchRequestDescriptor<TDocument>, SearchRequestParameters>
 	{
+		internal SearchRequestDescriptor(Action<SearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public SearchRequestDescriptor() : this(typeof(TDocument))
 		{
 		}
 
-		public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		public SearchRequestDescriptor(Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 		{
 		}
 
-		internal SearchRequestDescriptor(Action<SearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
+		public SearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public SearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 		public SearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public SearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-		public SearchRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public SearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public SearchRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
 		public SearchRequestDescriptor<TDocument> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		public SearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 		public SearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
@@ -371,9 +373,11 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		public SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		public SearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
-		public SearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 		public SearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+		public SearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
+		public SearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
 		public SearchRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
+		public SearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 		public SearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 		public SearchRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
 		public SearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
@@ -382,322 +386,459 @@ namespace Elastic.Clients.Elasticsearch
 		public SearchRequestDescriptor<TDocument> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		public SearchRequestDescriptor<TDocument> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
 		public SearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		public SearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-		public SearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-		public SearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-		public SearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
+		public SearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
 
-		internal Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-		internal bool? ExplainValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-		internal int? FromValue { get; private set; }
+		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHitsValue { get; private set; }
+		private FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
 
-		internal IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; private set; }
+		private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
 
-		internal double? MinScoreValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilterValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
 
-		internal bool? ProfileValue { get; private set; }
+		private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; private set; }
+		private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilterValue { get; set; }
 
-		internal Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; private set; }
+		private QueryDsl.QueryContainerDescriptor<TDocument> PostFilterDescriptor { get; set; }
 
-		internal IEnumerable<object>? SearchAfterValue { get; private set; }
+		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
 
-		internal int? SizeValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; private set; }
+		private QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
 
-		internal SortCollection? SortValue { get; private set; }
+		private Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Suggester? SuggestValue { get; private set; }
+		private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 
-		internal long? TerminateAfterValue { get; private set; }
+		private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
 
-		internal string? TimeoutValue { get; private set; }
+		private SortCollection? SortValue { get; set; }
 
-		internal bool? TrackScoresValue { get; private set; }
+		private SortDescriptor<TDocument> SortDescriptor { get; set; }
 
-		internal bool? VersionValue { get; private set; }
+		private Action<SortDescriptor<TDocument>> SortDescriptorAction { get; set; }
 
-		internal bool? SeqNoPrimaryTermValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; private set; }
+		private bool? ExplainValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; private set; }
+		private int? FromValue { get; set; }
 
-		internal Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; private set; }
+		private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 
-		internal IEnumerable<string>? StatsValue { get; private set; }
+		private double? MinScoreValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; set; }
 
-		internal FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; private set; }
+		private PointInTimeReferenceDescriptor PitDescriptor { get; set; }
 
-		internal HighlightDescriptor<TDocument> HighlightDescriptor { get; private set; }
+		private Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 
-		internal QueryDsl.QueryContainerDescriptor<TDocument> PostFilterDescriptor { get; private set; }
+		private bool? ProfileValue { get; set; }
 
-		internal QueryDsl.QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
 
-		internal SlicedScrollDescriptor<TDocument> SliceDescriptor { get; private set; }
+		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 
-		internal SortDescriptor<TDocument> SortDescriptor { get; private set; }
+		private IEnumerable<object>? SearchAfterValue { get; set; }
 
-		internal SuggesterDescriptor SuggestDescriptor { get; private set; }
+		private bool? SeqNoPrimaryTermValue { get; set; }
 
-		internal PointInTimeReferenceDescriptor PitDescriptor { get; private set; }
+		private int? SizeValue { get; set; }
 
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
+		private IEnumerable<string>? StatsValue { get; set; }
 
-		internal Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 
-		internal Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.Suggester? SuggestValue { get; set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> PostFilterDescriptorAction { get; private set; }
+		private SuggesterDescriptor SuggestDescriptor { get; set; }
 
-		internal Action<QueryDsl.QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
+		private Action<SuggesterDescriptor> SuggestDescriptorAction { get; set; }
 
-		internal Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; private set; }
+		private long? TerminateAfterValue { get; set; }
 
-		internal Action<SortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
+		private string? TimeoutValue { get; set; }
 
-		internal Action<SuggesterDescriptor> SuggestDescriptorAction { get; private set; }
+		private bool? TrackScoresValue { get; set; }
 
-		internal Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHitsValue { get; set; }
 
-		private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
+		private bool? VersionValue { get; set; }
+
 		public SearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
-			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+			AggregationsValue = aggregations;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+			AggregationsDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+			AggregationsDescriptorAction = configure;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
 		{
 			CollapseDescriptor = null;
 			CollapseDescriptorAction = null;
-			return Assign(collapse, (a, v) => a.CollapseValue = v);
+			CollapseValue = collapse;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Collapse(FieldCollapseDescriptor<TDocument> descriptor)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.CollapseDescriptor = v);
+			CollapseDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
 		{
 			CollapseValue = null;
 			CollapseDescriptorAction = null;
-			return Assign(configure, (a, v) => a.CollapseDescriptorAction = v);
+			CollapseDescriptorAction = configure;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Explain(bool? explain = true) => Assign(explain, (a, v) => a.ExplainValue = v);
-		public SearchRequestDescriptor<TDocument> From(int? from) => Assign(from, (a, v) => a.FromValue = v);
+		public SearchRequestDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+		{
+			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
 		public SearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
 		{
 			HighlightDescriptor = null;
 			HighlightDescriptorAction = null;
-			return Assign(highlight, (a, v) => a.HighlightValue = v);
+			HighlightValue = highlight;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Highlight(HighlightDescriptor<TDocument> descriptor)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
+			HighlightDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Highlight(Action<HighlightDescriptor<TDocument>> configure)
 		{
 			HighlightValue = null;
 			HighlightDescriptorAction = null;
-			return Assign(configure, (a, v) => a.HighlightDescriptorAction = v);
+			HighlightDescriptorAction = configure;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits) => Assign(trackTotalHits, (a, v) => a.TrackTotalHitsValue = v);
-		public SearchRequestDescriptor<TDocument> IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost) => Assign(indicesBoost, (a, v) => a.IndicesBoostValue = v);
-		public SearchRequestDescriptor<TDocument> DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields) => Assign(docvalueFields, (a, v) => a.DocvalueFieldsValue = v);
-		public SearchRequestDescriptor<TDocument> MinScore(double? minScore) => Assign(minScore, (a, v) => a.MinScoreValue = v);
 		public SearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter)
 		{
 			PostFilterDescriptor = null;
 			PostFilterDescriptorAction = null;
-			return Assign(postFilter, (a, v) => a.PostFilterValue = v);
+			PostFilterValue = postFilter;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> PostFilter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			PostFilterValue = null;
 			PostFilterDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.PostFilterDescriptor = v);
+			PostFilterDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> PostFilter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			PostFilterValue = null;
 			PostFilterDescriptorAction = null;
-			return Assign(configure, (a, v) => a.PostFilterDescriptorAction = v);
+			PostFilterDescriptorAction = configure;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Profile(bool? profile = true) => Assign(profile, (a, v) => a.ProfileValue = v);
 		public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
-			return Assign(query, (a, v) => a.QueryValue = v);
+			QueryValue = query;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+			QueryDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+			QueryDescriptorAction = configure;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore) => Assign(rescore, (a, v) => a.RescoreValue = v);
-		public SearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector) => Assign(selector, (a, v) => a.ScriptFieldsValue = v?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>()));
-		public SearchRequestDescriptor<TDocument> SearchAfter(IEnumerable<object>? searchAfter) => Assign(searchAfter, (a, v) => a.SearchAfterValue = v);
-		public SearchRequestDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
+		public SearchRequestDescriptor<TDocument> Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore)
+		{
+			RescoreValue = rescore;
+			return Self;
+		}
+
 		public SearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
 		{
 			SliceDescriptor = null;
 			SliceDescriptorAction = null;
-			return Assign(slice, (a, v) => a.SliceValue = v);
+			SliceValue = slice;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Slice(SlicedScrollDescriptor<TDocument> descriptor)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SliceDescriptor = v);
+			SliceDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
 		{
 			SliceValue = null;
 			SliceDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SliceDescriptorAction = v);
+			SliceDescriptorAction = configure;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Sort(SortCollection? sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
-			return Assign(sort, (a, v) => a.SortValue = v);
+			SortValue = sort;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Sort(SortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
+			SortDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Sort(Action<SortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
+			SortDescriptorAction = configure;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source) => Assign(source, (a, v) => a.SourceValue = v);
-		public SearchRequestDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public SearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
+		public SearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
 		{
-			SuggestDescriptor = null;
-			SuggestDescriptorAction = null;
-			return Assign(suggest, (a, v) => a.SuggestValue = v);
+			SourceValue = source;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Suggest(SuggesterDescriptor descriptor)
+		public SearchRequestDescriptor<TDocument> Explain(bool? explain = true)
 		{
-			SuggestValue = null;
-			SuggestDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SuggestDescriptor = v);
+			ExplainValue = explain;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> Suggest(Action<SuggesterDescriptor> configure)
+		public SearchRequestDescriptor<TDocument> From(int? from)
 		{
-			SuggestValue = null;
-			SuggestDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SuggestDescriptorAction = v);
+			FromValue = from;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Assign(terminateAfter, (a, v) => a.TerminateAfterValue = v);
-		public SearchRequestDescriptor<TDocument> Timeout(string? timeout) => Assign(timeout, (a, v) => a.TimeoutValue = v);
-		public SearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true) => Assign(trackScores, (a, v) => a.TrackScoresValue = v);
-		public SearchRequestDescriptor<TDocument> Version(bool? version = true) => Assign(version, (a, v) => a.VersionValue = v);
-		public SearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true) => Assign(seqNoPrimaryTerm, (a, v) => a.SeqNoPrimaryTermValue = v);
-		public SearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Assign(storedFields, (a, v) => a.StoredFieldsValue = v);
-		public SearchRequestDescriptor<TDocument> StoredFields<TValue>(Expression<Func<TDocument, TValue>> storedFields) => Assign(storedFields, (a, v) => a.StoredFieldsValue = v);
+		public SearchRequestDescriptor<TDocument> IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+		{
+			IndicesBoostValue = indicesBoost;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> MinScore(double? minScore)
+		{
+			MinScoreValue = minScore;
+			return Self;
+		}
+
 		public SearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.PointInTimeReference? pit)
 		{
 			PitDescriptor = null;
 			PitDescriptorAction = null;
-			return Assign(pit, (a, v) => a.PitValue = v);
+			PitValue = pit;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Pit(PointInTimeReferenceDescriptor descriptor)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.PitDescriptor = v);
+			PitDescriptor = descriptor;
+			return Self;
 		}
 
 		public SearchRequestDescriptor<TDocument> Pit(Action<PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
-			return Assign(configure, (a, v) => a.PitDescriptorAction = v);
+			PitDescriptorAction = configure;
+			return Self;
 		}
 
-		public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector) => Assign(selector, (a, v) => a.RuntimeMappingsValue = v?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>()));
-		public SearchRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats) => Assign(stats, (a, v) => a.StatsValue = v);
+		public SearchRequestDescriptor<TDocument> Profile(bool? profile = true)
+		{
+			ProfileValue = profile;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		{
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
+		{
+			ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> SearchAfter(IEnumerable<object>? searchAfter)
+		{
+			SearchAfterValue = searchAfter;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+		{
+			SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Stats(IEnumerable<string>? stats)
+		{
+			StatsValue = stats;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+		{
+			StoredFieldsValue = storedFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> StoredFields<TValue>(Expression<Func<TDocument, TValue>> storedFields)
+		{
+			StoredFieldsValue = storedFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
+		{
+			SuggestDescriptor = null;
+			SuggestDescriptorAction = null;
+			SuggestValue = suggest;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Suggest(SuggesterDescriptor descriptor)
+		{
+			SuggestValue = null;
+			SuggestDescriptorAction = null;
+			SuggestDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Suggest(Action<SuggesterDescriptor> configure)
+		{
+			SuggestValue = null;
+			SuggestDescriptorAction = null;
+			SuggestDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter)
+		{
+			TerminateAfterValue = terminateAfter;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Timeout(string? timeout)
+		{
+			TimeoutValue = timeout;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true)
+		{
+			TrackScoresValue = trackScores;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits)
+		{
+			TrackTotalHitsValue = trackTotalHits;
+			return Self;
+		}
+
+		public SearchRequestDescriptor<TDocument> Version(bool? version = true)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			AfterStartObject(writer, options, settings);
 			if (AggregationsDescriptor is not null)
 			{
 				writer.WritePropertyName("aggregations");
@@ -730,16 +871,16 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, CollapseValue, options);
 			}
 
-			if (ExplainValue.HasValue)
+			if (DocvalueFieldsValue is not null)
 			{
-				writer.WritePropertyName("explain");
-				writer.WriteBooleanValue(ExplainValue.Value);
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 			}
 
-			if (FromValue.HasValue)
+			if (FieldsValue is not null)
 			{
-				writer.WritePropertyName("from");
-				writer.WriteNumberValue(FromValue.Value);
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
 			}
 
 			if (HighlightDescriptor is not null)
@@ -758,30 +899,6 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, HighlightValue, options);
 			}
 
-			if (TrackTotalHitsValue is not null)
-			{
-				writer.WritePropertyName("track_total_hits");
-				JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
-			}
-
-			if (IndicesBoostValue is not null)
-			{
-				writer.WritePropertyName("indices_boost");
-				JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-			}
-
-			if (DocvalueFieldsValue is not null)
-			{
-				writer.WritePropertyName("docvalue_fields");
-				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
-			}
-
-			if (MinScoreValue.HasValue)
-			{
-				writer.WritePropertyName("min_score");
-				writer.WriteNumberValue(MinScoreValue.Value);
-			}
-
 			if (PostFilterDescriptor is not null)
 			{
 				writer.WritePropertyName("post_filter");
@@ -796,12 +913,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("post_filter");
 				JsonSerializer.Serialize(writer, PostFilterValue, options);
-			}
-
-			if (ProfileValue.HasValue)
-			{
-				writer.WritePropertyName("profile");
-				writer.WriteBooleanValue(ProfileValue.Value);
 			}
 
 			if (QueryDescriptor is not null)
@@ -824,24 +935,6 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				writer.WritePropertyName("rescore");
 				JsonSerializer.Serialize(writer, RescoreValue, options);
-			}
-
-			if (ScriptFieldsValue is not null)
-			{
-				writer.WritePropertyName("script_fields");
-				JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-			}
-
-			if (SearchAfterValue is not null)
-			{
-				writer.WritePropertyName("search_after");
-				JsonSerializer.Serialize(writer, SearchAfterValue, options);
-			}
-
-			if (SizeValue.HasValue)
-			{
-				writer.WritePropertyName("size");
-				writer.WriteNumberValue(SizeValue.Value);
 			}
 
 			if (SliceDescriptor is not null)
@@ -882,10 +975,92 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, SourceValue, options);
 			}
 
-			if (FieldsValue is not null)
+			if (ExplainValue.HasValue)
 			{
-				writer.WritePropertyName("fields");
-				JsonSerializer.Serialize(writer, FieldsValue, options);
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(ExplainValue.Value);
+			}
+
+			if (FromValue.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(FromValue.Value);
+			}
+
+			if (IndicesBoostValue is not null)
+			{
+				writer.WritePropertyName("indices_boost");
+				JsonSerializer.Serialize(writer, IndicesBoostValue, options);
+			}
+
+			if (MinScoreValue.HasValue)
+			{
+				writer.WritePropertyName("min_score");
+				writer.WriteNumberValue(MinScoreValue.Value);
+			}
+
+			if (PitDescriptor is not null)
+			{
+				writer.WritePropertyName("pit");
+				JsonSerializer.Serialize(writer, PitDescriptor, options);
+			}
+			else if (PitDescriptorAction is not null)
+			{
+				writer.WritePropertyName("pit");
+				JsonSerializer.Serialize(writer, new PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+			}
+			else if (PitValue is not null)
+			{
+				writer.WritePropertyName("pit");
+				JsonSerializer.Serialize(writer, PitValue, options);
+			}
+
+			if (ProfileValue.HasValue)
+			{
+				writer.WritePropertyName("profile");
+				writer.WriteBooleanValue(ProfileValue.Value);
+			}
+
+			if (RuntimeMappingsValue is not null)
+			{
+				writer.WritePropertyName("runtime_mappings");
+				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+			}
+
+			if (ScriptFieldsValue is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+			}
+
+			if (SearchAfterValue is not null)
+			{
+				writer.WritePropertyName("search_after");
+				JsonSerializer.Serialize(writer, SearchAfterValue, options);
+			}
+
+			if (SeqNoPrimaryTermValue.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (StatsValue is not null)
+			{
+				writer.WritePropertyName("stats");
+				JsonSerializer.Serialize(writer, StatsValue, options);
+			}
+
+			if (StoredFieldsValue is not null)
+			{
+				writer.WritePropertyName("stored_fields");
+				JsonSerializer.Serialize(writer, StoredFieldsValue, options);
 			}
 
 			if (SuggestDescriptor is not null)
@@ -922,22 +1097,682 @@ namespace Elastic.Clients.Elasticsearch
 				writer.WriteBooleanValue(TrackScoresValue.Value);
 			}
 
+			if (TrackTotalHitsValue is not null)
+			{
+				writer.WritePropertyName("track_total_hits");
+				JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
+			}
+
 			if (VersionValue.HasValue)
 			{
 				writer.WritePropertyName("version");
 				writer.WriteBooleanValue(VersionValue.Value);
 			}
 
-			if (SeqNoPrimaryTermValue.HasValue)
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class SearchRequestDescriptor : RequestDescriptorBase<SearchRequestDescriptor, SearchRequestParameters>
+	{
+		internal SearchRequestDescriptor(Action<SearchRequestDescriptor> configure) => configure.Invoke(this);
+		public SearchRequestDescriptor(Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		{
+		}
+
+		public SearchRequestDescriptor()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => true;
+		public SearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+		public SearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
+		public SearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public SearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
+		public SearchRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
+		public SearchRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+		public SearchRequestDescriptor BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
+		public SearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
+		public SearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
+		public SearchRequestDescriptor Df(string? df) => Qs("df", df);
+		public SearchRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
+		public SearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public SearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
+		public SearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
+		public SearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
+		public SearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+		public SearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
+		public SearchRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+		public SearchRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
+		public SearchRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
+		public SearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+		public SearchRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Time? scroll) => Qs("scroll", scroll);
+		public SearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType) => Qs("search_type", searchType);
+		public SearchRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Field? suggestField) => Qs("suggest_field", suggestField);
+		public SearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
+		public SearchRequestDescriptor SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
+		public SearchRequestDescriptor SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
+		public SearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public SearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+
+		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.FieldCollapse? CollapseValue { get; set; }
+
+		private FieldCollapseDescriptor CollapseDescriptor { get; set; }
+
+		private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Highlight? HighlightValue { get; set; }
+
+		private HighlightDescriptor HighlightDescriptor { get; set; }
+
+		private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? PostFilterValue { get; set; }
+
+		private QueryDsl.QueryContainerDescriptor PostFilterDescriptor { get; set; }
+
+		private Action<QueryDsl.QueryContainerDescriptor> PostFilterDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? QueryValue { get; set; }
+
+		private QueryDsl.QueryContainerDescriptor QueryDescriptor { get; set; }
+
+		private Action<QueryDsl.QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? RescoreValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
+
+		private SlicedScrollDescriptor SliceDescriptor { get; set; }
+
+		private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
+
+		private SortCollection? SortValue { get; set; }
+
+		private SortDescriptor SortDescriptor { get; set; }
+
+		private Action<SortDescriptor> SortDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.SourceConfig? SourceValue { get; set; }
+
+		private bool? ExplainValue { get; set; }
+
+		private int? FromValue { get; set; }
+
+		private IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+
+		private double? MinScoreValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.PointInTimeReference? PitValue { get; set; }
+
+		private PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+
+		private Action<PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
+
+		private bool? ProfileValue { get; set; }
+
+		private Dictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>? RuntimeMappingsValue { get; set; }
+
+		private Dictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
+
+		private IEnumerable<object>? SearchAfterValue { get; set; }
+
+		private bool? SeqNoPrimaryTermValue { get; set; }
+
+		private int? SizeValue { get; set; }
+
+		private IEnumerable<string>? StatsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Suggester? SuggestValue { get; set; }
+
+		private SuggesterDescriptor SuggestDescriptor { get; set; }
+
+		private Action<SuggesterDescriptor> SuggestDescriptorAction { get; set; }
+
+		private long? TerminateAfterValue { get; set; }
+
+		private string? TimeoutValue { get; set; }
+
+		private bool? TrackScoresValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.TrackHits? TrackTotalHitsValue { get; set; }
+
+		private bool? VersionValue { get; set; }
+
+		public SearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			AggregationsValue = aggregations;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			AggregationsDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.FieldCollapse? collapse)
+		{
+			CollapseDescriptor = null;
+			CollapseDescriptorAction = null;
+			CollapseValue = collapse;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Collapse(FieldCollapseDescriptor descriptor)
+		{
+			CollapseValue = null;
+			CollapseDescriptorAction = null;
+			CollapseDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
+		{
+			CollapseValue = null;
+			CollapseDescriptorAction = null;
+			CollapseDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor DocvalueFields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
+		{
+			DocvalueFieldsValue = docvalueFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Highlight? highlight)
+		{
+			HighlightDescriptor = null;
+			HighlightDescriptorAction = null;
+			HighlightValue = highlight;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Highlight(HighlightDescriptor descriptor)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Highlight(Action<HighlightDescriptor> configure)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? postFilter)
+		{
+			PostFilterDescriptor = null;
+			PostFilterDescriptorAction = null;
+			PostFilterValue = postFilter;
+			return Self;
+		}
+
+		public SearchRequestDescriptor PostFilter(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			PostFilterValue = null;
+			PostFilterDescriptorAction = null;
+			PostFilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor PostFilter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			PostFilterValue = null;
+			PostFilterDescriptorAction = null;
+			PostFilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			QueryValue = query;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Rescore(IEnumerable<Elastic.Clients.Elasticsearch.Rescore>? rescore)
+		{
+			RescoreValue = rescore;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? slice)
+		{
+			SliceDescriptor = null;
+			SliceDescriptorAction = null;
+			SliceValue = slice;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Slice(SlicedScrollDescriptor descriptor)
+		{
+			SliceValue = null;
+			SliceDescriptorAction = null;
+			SliceDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Slice(Action<SlicedScrollDescriptor> configure)
+		{
+			SliceValue = null;
+			SliceDescriptorAction = null;
+			SliceDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Sort(SortCollection? sort)
+		{
+			SortDescriptor = null;
+			SortDescriptorAction = null;
+			SortValue = sort;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Sort(SortDescriptor descriptor)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			SortDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Sort(Action<SortDescriptor> configure)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			SortDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.SourceConfig? source)
+		{
+			SourceValue = source;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Explain(bool? explain = true)
+		{
+			ExplainValue = explain;
+			return Self;
+		}
+
+		public SearchRequestDescriptor From(int? from)
+		{
+			FromValue = from;
+			return Self;
+		}
+
+		public SearchRequestDescriptor IndicesBoost(IEnumerable<Dictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+		{
+			IndicesBoostValue = indicesBoost;
+			return Self;
+		}
+
+		public SearchRequestDescriptor MinScore(double? minScore)
+		{
+			MinScoreValue = minScore;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.PointInTimeReference? pit)
+		{
+			PitDescriptor = null;
+			PitDescriptorAction = null;
+			PitValue = pit;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Pit(PointInTimeReferenceDescriptor descriptor)
+		{
+			PitValue = null;
+			PitDescriptorAction = null;
+			PitDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Pit(Action<PointInTimeReferenceDescriptor> configure)
+		{
+			PitValue = null;
+			PitDescriptorAction = null;
+			PitDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Profile(bool? profile = true)
+		{
+			ProfileValue = profile;
+			return Self;
+		}
+
+		public SearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>> selector)
+		{
+			RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, IEnumerable<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>>());
+			return Self;
+		}
+
+		public SearchRequestDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
+		{
+			ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
+			return Self;
+		}
+
+		public SearchRequestDescriptor SearchAfter(IEnumerable<object>? searchAfter)
+		{
+			SearchAfterValue = searchAfter;
+			return Self;
+		}
+
+		public SearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+		{
+			SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Stats(IEnumerable<string>? stats)
+		{
+			StatsValue = stats;
+			return Self;
+		}
+
+		public SearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+		{
+			StoredFieldsValue = storedFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor StoredFields<TDocument, TValue>(Expression<Func<TDocument, TValue>> storedFields)
+		{
+			StoredFieldsValue = storedFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor StoredFields<TDocument>(Expression<Func<TDocument, object>> storedFields)
+		{
+			StoredFieldsValue = storedFields;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Suggester? suggest)
+		{
+			SuggestDescriptor = null;
+			SuggestDescriptorAction = null;
+			SuggestValue = suggest;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Suggest(SuggesterDescriptor descriptor)
+		{
+			SuggestValue = null;
+			SuggestDescriptorAction = null;
+			SuggestDescriptor = descriptor;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Suggest(Action<SuggesterDescriptor> configure)
+		{
+			SuggestValue = null;
+			SuggestDescriptorAction = null;
+			SuggestDescriptorAction = configure;
+			return Self;
+		}
+
+		public SearchRequestDescriptor TerminateAfter(long? terminateAfter)
+		{
+			TerminateAfterValue = terminateAfter;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Timeout(string? timeout)
+		{
+			TimeoutValue = timeout;
+			return Self;
+		}
+
+		public SearchRequestDescriptor TrackScores(bool? trackScores = true)
+		{
+			TrackScoresValue = trackScores;
+			return Self;
+		}
+
+		public SearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.TrackHits? trackTotalHits)
+		{
+			TrackTotalHitsValue = trackTotalHits;
+			return Self;
+		}
+
+		public SearchRequestDescriptor Version(bool? version = true)
+		{
+			VersionValue = version;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (AggregationsDescriptor is not null)
 			{
-				writer.WritePropertyName("seq_no_primary_term");
-				writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
 			}
 
-			if (StoredFieldsValue is not null)
+			if (CollapseDescriptor is not null)
 			{
-				writer.WritePropertyName("stored_fields");
-				JsonSerializer.Serialize(writer, StoredFieldsValue, options);
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, CollapseDescriptor, options);
+			}
+			else if (CollapseDescriptorAction is not null)
+			{
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, new FieldCollapseDescriptor(CollapseDescriptorAction), options);
+			}
+			else if (CollapseValue is not null)
+			{
+				writer.WritePropertyName("collapse");
+				JsonSerializer.Serialize(writer, CollapseValue, options);
+			}
+
+			if (DocvalueFieldsValue is not null)
+			{
+				writer.WritePropertyName("docvalue_fields");
+				JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (HighlightDescriptor is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightDescriptor, options);
+			}
+			else if (HighlightDescriptorAction is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, new HighlightDescriptor(HighlightDescriptorAction), options);
+			}
+			else if (HighlightValue is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightValue, options);
+			}
+
+			if (PostFilterDescriptor is not null)
+			{
+				writer.WritePropertyName("post_filter");
+				JsonSerializer.Serialize(writer, PostFilterDescriptor, options);
+			}
+			else if (PostFilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("post_filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(PostFilterDescriptorAction), options);
+			}
+			else if (PostFilterValue is not null)
+			{
+				writer.WritePropertyName("post_filter");
+				JsonSerializer.Serialize(writer, PostFilterValue, options);
+			}
+
+			if (QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
+			}
+			else if (QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			}
+			else if (QueryValue is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryValue, options);
+			}
+
+			if (RescoreValue is not null)
+			{
+				writer.WritePropertyName("rescore");
+				JsonSerializer.Serialize(writer, RescoreValue, options);
+			}
+
+			if (SliceDescriptor is not null)
+			{
+				writer.WritePropertyName("slice");
+				JsonSerializer.Serialize(writer, SliceDescriptor, options);
+			}
+			else if (SliceDescriptorAction is not null)
+			{
+				writer.WritePropertyName("slice");
+				JsonSerializer.Serialize(writer, new SlicedScrollDescriptor(SliceDescriptorAction), options);
+			}
+			else if (SliceValue is not null)
+			{
+				writer.WritePropertyName("slice");
+				JsonSerializer.Serialize(writer, SliceValue, options);
+			}
+
+			if (SortDescriptor is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortDescriptor, options);
+			}
+			else if (SortDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, new SortDescriptor(SortDescriptorAction), options);
+			}
+			else if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
+			}
+
+			if (SourceValue is not null)
+			{
+				writer.WritePropertyName("_source");
+				JsonSerializer.Serialize(writer, SourceValue, options);
+			}
+
+			if (ExplainValue.HasValue)
+			{
+				writer.WritePropertyName("explain");
+				writer.WriteBooleanValue(ExplainValue.Value);
+			}
+
+			if (FromValue.HasValue)
+			{
+				writer.WritePropertyName("from");
+				writer.WriteNumberValue(FromValue.Value);
+			}
+
+			if (IndicesBoostValue is not null)
+			{
+				writer.WritePropertyName("indices_boost");
+				JsonSerializer.Serialize(writer, IndicesBoostValue, options);
+			}
+
+			if (MinScoreValue.HasValue)
+			{
+				writer.WritePropertyName("min_score");
+				writer.WriteNumberValue(MinScoreValue.Value);
 			}
 
 			if (PitDescriptor is not null)
@@ -956,16 +1791,98 @@ namespace Elastic.Clients.Elasticsearch
 				JsonSerializer.Serialize(writer, PitValue, options);
 			}
 
+			if (ProfileValue.HasValue)
+			{
+				writer.WritePropertyName("profile");
+				writer.WriteBooleanValue(ProfileValue.Value);
+			}
+
 			if (RuntimeMappingsValue is not null)
 			{
 				writer.WritePropertyName("runtime_mappings");
 				JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
 			}
 
+			if (ScriptFieldsValue is not null)
+			{
+				writer.WritePropertyName("script_fields");
+				JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+			}
+
+			if (SearchAfterValue is not null)
+			{
+				writer.WritePropertyName("search_after");
+				JsonSerializer.Serialize(writer, SearchAfterValue, options);
+			}
+
+			if (SeqNoPrimaryTermValue.HasValue)
+			{
+				writer.WritePropertyName("seq_no_primary_term");
+				writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
+			}
+
 			if (StatsValue is not null)
 			{
 				writer.WritePropertyName("stats");
 				JsonSerializer.Serialize(writer, StatsValue, options);
+			}
+
+			if (StoredFieldsValue is not null)
+			{
+				writer.WritePropertyName("stored_fields");
+				JsonSerializer.Serialize(writer, StoredFieldsValue, options);
+			}
+
+			if (SuggestDescriptor is not null)
+			{
+				writer.WritePropertyName("suggest");
+				JsonSerializer.Serialize(writer, SuggestDescriptor, options);
+			}
+			else if (SuggestDescriptorAction is not null)
+			{
+				writer.WritePropertyName("suggest");
+				JsonSerializer.Serialize(writer, new SuggesterDescriptor(SuggestDescriptorAction), options);
+			}
+			else if (SuggestValue is not null)
+			{
+				writer.WritePropertyName("suggest");
+				JsonSerializer.Serialize(writer, SuggestValue, options);
+			}
+
+			if (TerminateAfterValue.HasValue)
+			{
+				writer.WritePropertyName("terminate_after");
+				writer.WriteNumberValue(TerminateAfterValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(TimeoutValue))
+			{
+				writer.WritePropertyName("timeout");
+				writer.WriteStringValue(TimeoutValue);
+			}
+
+			if (TrackScoresValue.HasValue)
+			{
+				writer.WritePropertyName("track_scores");
+				writer.WriteBooleanValue(TrackScoresValue.Value);
+			}
+
+			if (TrackTotalHitsValue is not null)
+			{
+				writer.WritePropertyName("track_total_hits");
+				JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
+			}
+
+			if (VersionValue.HasValue)
+			{
+				writer.WritePropertyName("version");
+				writer.WriteBooleanValue(VersionValue.Value);
 			}
 
 			writer.WriteEndObject();

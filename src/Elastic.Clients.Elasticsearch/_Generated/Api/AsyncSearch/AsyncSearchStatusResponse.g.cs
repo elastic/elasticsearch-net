@@ -22,11 +22,11 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public partial class AsyncSearchStatusResponse<TDocument> : AsyncSearch.AsyncSearchResponseBase
+	public partial class AsyncSearchStatusResponse : AsyncSearch.AsyncSearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("completion_status")]
-		public int CompletionStatus { get; init; }
+		public int? CompletionStatus { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_shards")]
