@@ -141,7 +141,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 
-	public partial class AggregationContainerDescriptor<TDocument> : DescriptorBase<AggregationContainerDescriptor<TDocument>>
+	public partial class AggregationContainerDescriptor
+	{
+		internal AggregationDictionary Aggregations { get; set; }
+
+		private AggregationContainerDescriptor SetContainer(string key, AggregationContainer container)
+		{
+			if (Self.Aggregations == null)
+				Self.Aggregations = new AggregationDictionary();
+
+			Self.Aggregations[key] = container;
+
+			return this;
+		}
+
+		//public AggregationContainerDescriptor Average(string name, Action<AverageAggregationDescriptor> configure) => SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+
+		//public AggregationContainerDescriptor WeightedAverage(string name, Action<WeightedAverageAggregationDescriptor> configure) => SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
+	}
+
+	public partial class AggregationContainerDescriptor<TDocument>
 	{
 		internal AggregationDictionary Aggregations { get; set; }
 
@@ -155,9 +176,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return this;
 		}
 
-		public AggregationContainerDescriptor<TDocument> Average(string name, Action<AverageAggregationDescriptor<TDocument>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+		//public AggregationContainerDescriptor Average(string name, Action<AverageAggregationDescriptor> configure) => SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
 
-		public AggregationContainerDescriptor<TDocument> WeightedAverage(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure) => SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+		//public AggregationContainerDescriptor WeightedAverage(string name, Action<WeightedAverageAggregationDescriptor> configure) => SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => JsonSerializer.Serialize(writer, Aggregations, options);
 	}
@@ -782,6 +803,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 namespace Elastic.Clients.Elasticsearch
 {
+	public sealed partial class SearchRequestDescriptor<TDocument>
+	{
+		public SearchRequestDescriptor<TDocument> Index(Indices indices)
+		{
+			Self.RouteValues.Optional("index", indices);
+			return Self;
+		}
+	}
+
 	public partial class InlineScript : ISelfTwoWaySerializable
 	{
 		void ISelfTwoWaySerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
@@ -814,10 +844,10 @@ namespace Elastic.Clients.Elasticsearch
 
 		void ISelfTwoWaySerializable.Deserialize(ref Utf8JsonReader reader, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			while(reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 			{
 				if (reader.TokenType == JsonTokenType.PropertyName)
-				{					
+				{
 					if (reader.ValueTextEquals("lang"))
 					{
 						reader.Read();
@@ -1038,7 +1068,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null)
 		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(documentWithId: id.Document, index: id?.Self?.Index, id: id?.Self?.Id);
+			var descriptor = new SourceRequestDescriptor<TDocument>(document: id.Document, index: id?.Self?.Index, id: id?.Self?.Id);
 			configure?.Invoke(descriptor);
 			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
@@ -1059,19 +1089,22 @@ namespace Elastic.Clients.Elasticsearch
 		//public GetResponse<TDocument> GetResponse<TDocument>() where TDocument : class => Get.Source?.AsUsingRequestResponseSerializer<GetResponse<TDocument>>();
 	}
 
-	public sealed partial class SourceRequestDescriptor<TDocument>
+	// TODO - Should be added as a rule to the descriptor generator
+	//public sealed partial class SourceRequestDescriptor<TDocument>
+	//{
+	//	public SourceRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
+	//}
+
+	public partial class SourceRequestDescriptor
 	{
-		public SourceRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
-
-		/// <summary>
-		/// The name of the index.
-		/// </summary>
-		public SourceRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
-
 		/// <summary>
 		/// A shortcut into calling Index(typeof(TOther)).
 		/// </summary>
-		public SourceRequestDescriptor<TDocument> Index<TOther>() => Assign(typeof(TOther), (a, v) => a.RouteValues.Required("index", (IndexName)v));
+		public SourceRequestDescriptor Index<TOther>()
+		{
+			RouteValues.Required("index", (IndexName)typeof(TOther));
+			return Self;
+		}
 	}
 
 	public partial class SourceResponse<TDocument> : ISelfDeserializable
@@ -1225,9 +1258,11 @@ namespace Elastic.Clients.Elasticsearch
 
 		private readonly BulkOperationsCollection _operations = new();
 
-		public BulkRequestDescriptor Index(string index) => Assign(index, (a, v) => a.RouteValues.Optional("index", IndexName.Parse(v)));
-
-		public BulkRequestDescriptor Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
+		public BulkRequestDescriptor Index(string index)
+		{
+			RouteValues.Optional("index", IndexName.Parse(index));
+			return Self;
+		}
 
 		public BulkRequestDescriptor Create<TSource>(TSource document, Action<BulkCreateOperationDescriptor<TSource>> configure = null)
 		{
@@ -1404,7 +1439,8 @@ namespace Elastic.Clients.Elasticsearch
 				operations.Add(descriptor);
 			}
 
-			return Assign(operations, (a, v) => a._operations.AddRange(v));
+			_operations.AddRange(operations);
+			return Self;
 		}
 	}
 
@@ -1526,6 +1562,10 @@ namespace Elastic.Clients.Elasticsearch
 		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default);
 
 		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null);
+
+		CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null);
+
+		Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
 	}
 
 	public partial class ElasticsearchClient
@@ -1546,14 +1586,14 @@ namespace Elastic.Clients.Elasticsearch
 
 		public CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest)
 		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(documentWithId: document);
+			var descriptor = new CreateRequestDescriptor<TDocument>(document);
 			configureRequest?.Invoke(descriptor);
 			return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
 		}
 
 		public Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 		{
-			var descriptor = new CreateRequestDescriptor<TDocument>(documentWithId: document);
+			var descriptor = new CreateRequestDescriptor<TDocument>(document);
 			configureRequest?.Invoke(descriptor);
 			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
 		}
@@ -1585,35 +1625,58 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
 		}
-	}
 
-	public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteRequestDescriptor<TDocument>, DeleteRequestParameters>
-	{
-		public DeleteRequestDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
+		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor> configureRequest = null)
 		{
+			var descriptor = new SourceRequestDescriptor(typeof(TDocument), new Id(typeof(TDocument)));
+			configureRequest?.Invoke(descriptor);
+			return DoRequest<SourceRequestDescriptor, SourceResponse<TDocument>>(descriptor);
 		}
 
-		public DeleteRequestDescriptor(Id id) : this(typeof(TDocument), id)
+		public CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null)
 		{
+			var descriptor = new CountRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
 		}
 
-		public DeleteRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
-
-		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override bool SupportsBody => false;
-		public DeleteRequestDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
-		public DeleteRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
-		public DeleteRequestDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
-		public DeleteRequestDescriptor<TDocument> Routing(string? routing) => Qs("routing", routing);
-		public DeleteRequestDescriptor<TDocument> Timeout(Time? timeout) => Qs("timeout", timeout);
-		public DeleteRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
-		public DeleteRequestDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
-		public DeleteRequestDescriptor<TDocument> WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-		public DeleteRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
-		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => throw new NotImplementedException();
+		public Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new CountRequestDescriptor<TDocument>();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<CountRequestDescriptor<TDocument>, CountResponse>(descriptor);
+		}
 	}
+
+	//public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteRequestDescriptor<TDocument>, DeleteRequestParameters>
+	//{
+	//	public DeleteRequestDescriptor(IndexName index, Id id) : base(r => r.Required("index", index).Required("id", id))
+	//	{
+	//	}
+
+	//	public DeleteRequestDescriptor(Id id) : this(typeof(TDocument), id)
+	//	{
+	//	}
+
+	//	public DeleteRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
+
+	//	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
+	//	protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+	//	protected override bool SupportsBody => false;
+	//	public DeleteRequestDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
+	//	public DeleteRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+	//	public DeleteRequestDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	//	public DeleteRequestDescriptor<TDocument> Routing(string? routing) => Qs("routing", routing);
+	//	public DeleteRequestDescriptor<TDocument> Timeout(Time? timeout) => Qs("timeout", timeout);
+	//	public DeleteRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
+	//	public DeleteRequestDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
+	//	public DeleteRequestDescriptor<TDocument> WaitForActiveShards(WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
+	//	public DeleteRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+	//	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => throw new NotImplementedException();
+	//}
 
 	//public sealed partial class CountRequestDescriptor
 	//{
@@ -1634,32 +1697,40 @@ namespace Elastic.Clients.Elasticsearch
 		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(Document, writer, sourceSerializer);
 	}
 
-	public sealed partial class CreateRequestDescriptor<TDocument> : ICustomJsonWriter
-	{
-		public CreateRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
+	//public sealed partial class CreateRequestDescriptor<TDocument> : ICustomJsonWriter
+	//{
+	//	public CreateRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Elasticsearch.Id.From(documentWithId)) => DocumentFromPath(documentWithId);
 
-		private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+	//	private void DocumentFromPath(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
 
-		public CreateRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
+	//	public CreateRequestDescriptor<TDocument> Index(IndexName index) => Assign(index, (a, v) => a.RouteValues.Required("index", v));
 
-		public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
+	//	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer)
+	//	{
+	//		SourceSerialisation.Serialize(DocumentValue, writer, sourceSerializer);
+	//	}
 
-		// TODO: We should be able to generate these for optional params
-		public CreateRequestDescriptor<TDocument> Id(Id id)
-		{
-			RouteValues.Optional("id", id);
-			return this;
-		}
-	}
+	//	// TODO: We should be able to generate these for optional params
+	//	public CreateRequestDescriptor<TDocument> Id(Id id)
+	//	{
+	//		RouteValues.Optional("id", id);
+	//		return this;
+	//	}
+	//}
 
-	public sealed partial class CreateRequestDescriptor<TDocument>
-	{
-		public CreateRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
-	}
+	//public sealed partial class CreateRequestDescriptor<TDocument>
+	//{
+	//	public CreateRequestDescriptor<TDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+	//}
 
 	public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	{
-		public UpdateRequestDescriptor<TDocument, TPartialDocument> Document(TDocument document) => Assign(document, (a, v) => a.DocumentValue = v);
+		public UpdateRequestDescriptor<TDocument, TPartialDocument> Document(TDocument document)
+		{
+			DocumentValue = document;
+			return Self;
+		}
+
 		public UpdateRequestDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument document) => this;
 	}
 
@@ -1702,18 +1773,21 @@ namespace Elastic.Clients.Elasticsearch
 		public PointInTimeReferenceDescriptor(string id) => IdValue = id;
 	}
 
-	public sealed partial class SearchRequestDescriptor<TDocument>
+	public sealed partial class SearchRequestDescriptor
 	{
-		internal Type ClrType => typeof(TDocument);
+		public SearchRequestDescriptor Index(Indices index)
+		{
+			RouteValues.Optional("index", index);
+			return Self;
+		}
 
-		public SearchRequestDescriptor<TDocument> Index(Indices index) => Assign(index, (a, v) => a.RouteValues.Optional("index", v));
-
-		public SearchRequestDescriptor<TDocument> Pit(string id, Action<PointInTimeReferenceDescriptor> configure)
+		public SearchRequestDescriptor Pit(string id, Action<PointInTimeReferenceDescriptor> configure)
 		{
 			PitValue = null;
 			PitDescriptorAction = null;
 			configure += a => a.Id(id);
-			return Assign(configure, (a, v) => a.PitDescriptorAction = v);
+			PitDescriptorAction = configure;
+			return Self;
 		}
 
 		internal override void BeforeRequest()
@@ -1755,21 +1829,57 @@ namespace Elastic.Clients.Elasticsearch
 		//	return Assign(descriptor, (a, v) => a.AggregationContainerDescriptor = v);
 		//}
 
-		private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-		{
-		}
+		//private partial void AfterStartObject(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		//{
+		//}
 	}
 
-	public sealed partial class CountRequestDescriptor<TDocument>
+	public sealed partial class SearchRequestDescriptor<TDocument>
 	{
-		public CountRequestDescriptor<TDocument> Index(Indices indices) => Assign(indices, (a, v) => a.RouteValues.Optional("index", v));
-
-		public CountRequestDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> configure)
+		public SearchRequestDescriptor<TDocument> Pit(string id, Action<PointInTimeReferenceDescriptor> configure)
 		{
-			var container = configure?.Invoke(new QueryContainerDescriptor<TDocument>());
-			return Assign(container, (a, v) => a.QueryValue = v);
+			PitValue = null;
+			PitDescriptorAction = null;
+			configure += a => a.Id(id);
+			PitDescriptorAction = configure;
+			return Self;
+		}
+
+		internal override void BeforeRequest()
+		{
+			if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null)
+			{
+				TypedKeys(true);
+			}
+		}
+
+		protected override string ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
+		{
+			if ((Self.PitValue is not null || Self.PitDescriptor is not null || Self.PitDescriptorAction is not null) && routeValues.ContainsKey("index"))
+			{
+				routeValues.Remove("index");
+			}
+
+			return base.ResolveUrl(routeValues, settings);
 		}
 	}
+
+	public sealed partial class CountRequestDescriptor
+	{
+		public CountRequestDescriptor Index(Indices indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
+		public CountRequestDescriptor Query(Func<QueryContainerDescriptor, QueryContainer> configure)
+		{
+			var container = configure?.Invoke(new QueryContainerDescriptor());
+			QueryValue = container;
+			return Self;
+		}
+	}
+
 	public partial class SearchRequest<TInferDocument>
 	{
 		public SearchRequest(Indices? indices) : base(indices)
@@ -1973,16 +2083,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	//	}
 	//}
 
+
+
+	public sealed partial class QueryContainerDescriptor/*<TDocument>*/
+	{
+		public void MatchAll() =>
+			Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
+
+		// TODO - NAME IS MISSING
+
+		//public void Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null, string name = null) =>
+		//	Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
+
+		public void Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
+				Term(t => t.Field(field).Value(value).Boost(boost));
+	}
+
 	public sealed partial class QueryContainerDescriptor<TDocument>
 	{
-		public void MatchAll() => Set(new MatchAllQuery(), "match_all");
+		public void MatchAll() =>
+			Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
 
-		//public void MatchAll(Action<MatchAllQueryDescriptor>? selector = null) =>
-		//	Set(selector, "match_all");
-
-		public void Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null, string name = null) =>
-			Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
+		public void Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
+			Term(t => t.Field(field).Value(value).Boost(boost));
 	}
+
+
 
 
 	//public sealed partial class QueryContainerDescriptor
@@ -2554,7 +2680,7 @@ namespace Elastic.Clients.Elasticsearch
 	//	public string GetString(ITransportConfiguration settings) => throw new NotImplementedException();
 	//}
 
-	
+
 }
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
@@ -2565,7 +2691,22 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		internal override void BeforeRequest() => TypedKeys = true;
 	}
 
+	public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument>
+	{
+		public AsyncSearchSubmitRequestDescriptor<TDocument> MatchAll()
+		{
+			Query(new MatchAllQuery());
+			return Self;
+		}
+	}
+
 	public sealed partial class GetAsyncSearchRequestDescriptor
+	{
+		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+		internal override void BeforeRequest() => TypedKeys(true);
+	}
+
+	public sealed partial class GetAsyncSearchRequestDescriptor<TDocument>
 	{
 		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
 		internal override void BeforeRequest() => TypedKeys(true);
@@ -2574,12 +2715,12 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 	public partial class AsyncSearchSubmitRequest
 	{
 		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
-		internal override void BeforeRequest() => TypedKeys = true;	
+		internal override void BeforeRequest() => TypedKeys = true;
 	}
 
-	public partial class AsyncSearchSubmitRequestDescriptor<TDocument>
+	public partial class AsyncSearchSubmitRequestDescriptor/*<TDocument>*/
 	{
 		// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
-		internal override void BeforeRequest() =>  TypedKeys(true);
+		internal override void BeforeRequest() => TypedKeys(true);
 	}
 }

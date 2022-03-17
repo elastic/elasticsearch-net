@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexRoutingAllocationInitialRecoveryDescriptor : DescriptorBase<IndexRoutingAllocationInitialRecoveryDescriptor>
 	{
-		public IndexRoutingAllocationInitialRecoveryDescriptor()
+		internal IndexRoutingAllocationInitialRecoveryDescriptor(Action<IndexRoutingAllocationInitialRecoveryDescriptor> configure) => configure.Invoke(this);
+		public IndexRoutingAllocationInitialRecoveryDescriptor() : base()
 		{
 		}
 
-		internal IndexRoutingAllocationInitialRecoveryDescriptor(Action<IndexRoutingAllocationInitialRecoveryDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Id? IdValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 
-		public IndexRoutingAllocationInitialRecoveryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id) => Assign(id, (a, v) => a.IdValue = v);
+		public IndexRoutingAllocationInitialRecoveryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+		{
+			IdValue = id;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

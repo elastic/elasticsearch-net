@@ -33,36 +33,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSearchDescriptor : DescriptorBase<SettingsSearchDescriptor>
 	{
-		public SettingsSearchDescriptor()
+		internal SettingsSearchDescriptor(Action<SettingsSearchDescriptor> configure) => configure.Invoke(this);
+		public SettingsSearchDescriptor() : base()
 		{
 		}
 
-		internal SettingsSearchDescriptor(Action<SettingsSearchDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle IdleValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle IdleValue { get; set; }
 
-		internal SearchIdleDescriptor IdleDescriptor { get; private set; }
+		private SearchIdleDescriptor IdleDescriptor { get; set; }
 
-		internal Action<SearchIdleDescriptor> IdleDescriptorAction { get; private set; }
+		private Action<SearchIdleDescriptor> IdleDescriptorAction { get; set; }
 
 		public SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle idle)
 		{
 			IdleDescriptor = null;
 			IdleDescriptorAction = null;
-			return Assign(idle, (a, v) => a.IdleValue = v);
+			IdleValue = idle;
+			return Self;
 		}
 
 		public SettingsSearchDescriptor Idle(IndexManagement.SearchIdleDescriptor descriptor)
 		{
 			IdleValue = null;
 			IdleDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.IdleDescriptor = v);
+			IdleDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSearchDescriptor Idle(Action<IndexManagement.SearchIdleDescriptor> configure)
 		{
 			IdleValue = null;
 			IdleDescriptorAction = null;
-			return Assign(configure, (a, v) => a.IdleDescriptorAction = v);
+			IdleDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

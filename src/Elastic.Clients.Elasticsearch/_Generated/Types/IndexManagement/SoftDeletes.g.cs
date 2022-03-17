@@ -37,39 +37,47 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SoftDeletesDescriptor : DescriptorBase<SoftDeletesDescriptor>
 	{
-		public SoftDeletesDescriptor()
+		internal SoftDeletesDescriptor(Action<SoftDeletesDescriptor> configure) => configure.Invoke(this);
+		public SoftDeletesDescriptor() : base()
 		{
 		}
 
-		internal SoftDeletesDescriptor(Action<SoftDeletesDescriptor> configure) => configure.Invoke(this);
-		internal bool EnabledValue { get; private set; }
+		private bool EnabledValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLeaseValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLeaseValue { get; set; }
 
-		internal RetentionLeaseDescriptor RetentionLeaseDescriptor { get; private set; }
+		private RetentionLeaseDescriptor RetentionLeaseDescriptor { get; set; }
 
-		internal Action<RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; private set; }
+		private Action<RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
 
-		public SoftDeletesDescriptor Enabled(bool enabled = true) => Assign(enabled, (a, v) => a.EnabledValue = v);
+		public SoftDeletesDescriptor Enabled(bool enabled = true)
+		{
+			EnabledValue = enabled;
+			return Self;
+		}
+
 		public SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? retentionLease)
 		{
 			RetentionLeaseDescriptor = null;
 			RetentionLeaseDescriptorAction = null;
-			return Assign(retentionLease, (a, v) => a.RetentionLeaseValue = v);
+			RetentionLeaseValue = retentionLease;
+			return Self;
 		}
 
 		public SoftDeletesDescriptor RetentionLease(IndexManagement.RetentionLeaseDescriptor descriptor)
 		{
 			RetentionLeaseValue = null;
 			RetentionLeaseDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.RetentionLeaseDescriptor = v);
+			RetentionLeaseDescriptor = descriptor;
+			return Self;
 		}
 
 		public SoftDeletesDescriptor RetentionLease(Action<IndexManagement.RetentionLeaseDescriptor> configure)
 		{
 			RetentionLeaseValue = null;
 			RetentionLeaseDescriptorAction = null;
-			return Assign(configure, (a, v) => a.RetentionLeaseDescriptorAction = v);
+			RetentionLeaseDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

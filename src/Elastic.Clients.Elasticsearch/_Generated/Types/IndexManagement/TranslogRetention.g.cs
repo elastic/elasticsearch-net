@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class TranslogRetentionDescriptor : DescriptorBase<TranslogRetentionDescriptor>
 	{
-		public TranslogRetentionDescriptor()
+		internal TranslogRetentionDescriptor(Action<TranslogRetentionDescriptor> configure) => configure.Invoke(this);
+		public TranslogRetentionDescriptor() : base()
 		{
 		}
 
-		internal TranslogRetentionDescriptor(Action<TranslogRetentionDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.ByteSize SizeValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.ByteSize SizeValue { get; set; }
 
-		public TranslogRetentionDescriptor Size(Elastic.Clients.Elasticsearch.ByteSize size) => Assign(size, (a, v) => a.SizeValue = v);
+		public TranslogRetentionDescriptor Size(Elastic.Clients.Elasticsearch.ByteSize size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

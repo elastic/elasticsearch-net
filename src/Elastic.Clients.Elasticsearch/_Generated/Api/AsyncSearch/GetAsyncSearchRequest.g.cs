@@ -56,8 +56,9 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		public Elastic.Clients.Elasticsearch.Time? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	}
 
-	public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptorBase<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequestParameters>
+	public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : RequestDescriptorBase<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchRequestParameters>
 	{
+		internal GetAsyncSearchRequestDescriptor(Action<GetAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
 		}
@@ -66,13 +67,46 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 		{
 		}
 
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		public GetAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
+		public GetAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
+		public GetAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptorBase<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequestParameters>
+	{
 		internal GetAsyncSearchRequestDescriptor(Action<GetAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
+		public GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		internal GetAsyncSearchRequestDescriptor()
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
 		public GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time? keepAlive) => Qs("keep_alive", keepAlive);
 		public GetAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		public GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Time? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+		public GetAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

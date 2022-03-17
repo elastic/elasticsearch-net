@@ -108,17 +108,45 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 
-	public sealed partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
+	public sealed partial class ClusterHealthRequestDescriptor<TDocument> : RequestDescriptorBase<ClusterHealthRequestDescriptor<TDocument>, ClusterHealthRequestParameters>
 	{
+		internal ClusterHealthRequestDescriptor(Action<ClusterHealthRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ClusterHealthRequestDescriptor()
 		{
 		}
 
-		public ClusterHealthRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		public ClusterHealthRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClusterHealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
+		public ClusterHealthRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+		public ClusterHealthRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterHealthRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
+		public ClusterHealthRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public ClusterHealthRequestDescriptor<TDocument> WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
+		public ClusterHealthRequestDescriptor<TDocument> WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
+		public ClusterHealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
+		public ClusterHealthRequestDescriptor<TDocument> WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
+		public ClusterHealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
+		public ClusterHealthRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class ClusterHealthRequestDescriptor : RequestDescriptorBase<ClusterHealthRequestDescriptor, ClusterHealthRequestParameters>
+	{
+		internal ClusterHealthRequestDescriptor(Action<ClusterHealthRequestDescriptor> configure) => configure.Invoke(this);
+		public ClusterHealthRequestDescriptor()
 		{
 		}
 
-		internal ClusterHealthRequestDescriptor(Action<ClusterHealthRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -129,10 +157,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterHealthRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
 		public ClusterHealthRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		public ClusterHealthRequestDescriptor WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
-		public ClusterHealthRequestDescriptor WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 		public ClusterHealthRequestDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 		public ClusterHealthRequestDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
+		public ClusterHealthRequestDescriptor WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 		public ClusterHealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
+		public ClusterHealthRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

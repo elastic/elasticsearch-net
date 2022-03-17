@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class RankFeatureFunctionSaturationDescriptor : DescriptorBase<RankFeatureFunctionSaturationDescriptor>
 	{
-		public RankFeatureFunctionSaturationDescriptor()
+		internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
+		public RankFeatureFunctionSaturationDescriptor() : base()
 		{
 		}
 
-		internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
-		internal float? PivotValue { get; private set; }
+		private float? PivotValue { get; set; }
 
-		public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot) => Assign(pivot, (a, v) => a.PivotValue = v);
+		public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot)
+		{
+			PivotValue = pivot;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

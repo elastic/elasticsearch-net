@@ -37,14 +37,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityLmdDescriptor : DescriptorBase<SettingsSimilarityLmdDescriptor>
 	{
-		public SettingsSimilarityLmdDescriptor()
+		internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityLmdDescriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
-		internal int MuValue { get; private set; }
+		private int MuValue { get; set; }
 
-		public SettingsSimilarityLmdDescriptor Mu(int mu) => Assign(mu, (a, v) => a.MuValue = v);
+		public SettingsSimilarityLmdDescriptor Mu(int mu)
+		{
+			MuValue = mu;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -2,15 +2,16 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-
 using System;
 using System.Threading.Tasks;
 using Elastic.Clients.JsonNetSerializer;
+using Tests.Core.Xunit;
 using VerifyXunit;
 
 namespace Tests.Serialization.Scripting;
 
 [UsesVerify]
+[SystemTextJsonOnly]
 public class ScriptParamsSerializationTests : InstanceSerializerTestBase
 {
 	public ScriptParamsSerializationTests()

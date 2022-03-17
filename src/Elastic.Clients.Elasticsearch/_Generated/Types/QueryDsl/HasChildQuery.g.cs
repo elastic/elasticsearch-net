@@ -59,95 +59,130 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class HasChildQueryDescriptor<TDocument> : DescriptorBase<HasChildQueryDescriptor<TDocument>>
 	{
-		public HasChildQueryDescriptor()
+		internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public HasChildQueryDescriptor() : base()
 		{
 		}
 
-		internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? IgnoreUnmappedValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; private set; }
+		private InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 
-		internal int? MaxChildrenValue { get; private set; }
+		private Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
 
-		internal int? MinChildrenValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; private set; }
+		private QueryContainerDescriptor<TDocument> QueryDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; private set; }
+		private Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
-		internal string TypeValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private bool? IgnoreUnmappedValue { get; set; }
 
-		internal InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; private set; }
+		private int? MaxChildrenValue { get; set; }
 
-		internal QueryContainerDescriptor<TDocument> QueryDescriptor { get; private set; }
+		private int? MinChildrenValue { get; set; }
 
-		internal Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 
-		internal Action<QueryContainerDescriptor<TDocument>> QueryDescriptorAction { get; private set; }
+		private string TypeValue { get; set; }
 
-		public HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(ignoreUnmapped, (a, v) => a.IgnoreUnmappedValue = v);
 		public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
 		{
 			InnerHitsDescriptor = null;
 			InnerHitsDescriptorAction = null;
-			return Assign(innerHits, (a, v) => a.InnerHitsValue = v);
+			InnerHitsValue = innerHits;
+			return Self;
 		}
 
 		public HasChildQueryDescriptor<TDocument> InnerHits(InnerHitsDescriptor<TDocument> descriptor)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.InnerHitsDescriptor = v);
+			InnerHitsDescriptor = descriptor;
+			return Self;
 		}
 
 		public HasChildQueryDescriptor<TDocument> InnerHits(Action<InnerHitsDescriptor<TDocument>> configure)
 		{
 			InnerHitsValue = null;
 			InnerHitsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.InnerHitsDescriptorAction = v);
+			InnerHitsDescriptorAction = configure;
+			return Self;
 		}
 
-		public HasChildQueryDescriptor<TDocument> MaxChildren(int? maxChildren) => Assign(maxChildren, (a, v) => a.MaxChildrenValue = v);
-		public HasChildQueryDescriptor<TDocument> MinChildren(int? minChildren) => Assign(minChildren, (a, v) => a.MinChildrenValue = v);
 		public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
 		{
 			QueryDescriptor = null;
 			QueryDescriptorAction = null;
-			return Assign(query, (a, v) => a.QueryValue = v);
+			QueryValue = query;
+			return Self;
 		}
 
 		public HasChildQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueryDescriptor = v);
+			QueryDescriptor = descriptor;
+			return Self;
 		}
 
 		public HasChildQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueryDescriptorAction = v);
+			QueryDescriptorAction = configure;
+			return Self;
 		}
 
-		public HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode) => Assign(scoreMode, (a, v) => a.ScoreModeValue = v);
-		public HasChildQueryDescriptor<TDocument> Type(string type) => Assign(type, (a, v) => a.TypeValue = v);
-		public HasChildQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public HasChildQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public HasChildQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor<TDocument> MaxChildren(int? maxChildren)
+		{
+			MaxChildrenValue = maxChildren;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor<TDocument> MinChildren(int? minChildren)
+		{
+			MinChildrenValue = minChildren;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
+		{
+			ScoreModeValue = scoreMode;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor<TDocument> Type(string type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (IgnoreUnmappedValue.HasValue)
-			{
-				writer.WritePropertyName("ignore_unmapped");
-				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-			}
-
 			if (InnerHitsDescriptor is not null)
 			{
 				writer.WritePropertyName("inner_hits");
@@ -162,18 +197,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("inner_hits");
 				JsonSerializer.Serialize(writer, InnerHitsValue, options);
-			}
-
-			if (MaxChildrenValue.HasValue)
-			{
-				writer.WritePropertyName("max_children");
-				writer.WriteNumberValue(MaxChildrenValue.Value);
-			}
-
-			if (MinChildrenValue.HasValue)
-			{
-				writer.WritePropertyName("min_children");
-				writer.WriteNumberValue(MinChildrenValue.Value);
 			}
 
 			if (QueryDescriptor is not null)
@@ -192,14 +215,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, QueryValue, options);
 			}
 
-			if (ScoreModeValue is not null)
-			{
-				writer.WritePropertyName("score_mode");
-				JsonSerializer.Serialize(writer, ScoreModeValue, options);
-			}
-
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -212,6 +227,232 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			if (MaxChildrenValue.HasValue)
+			{
+				writer.WritePropertyName("max_children");
+				writer.WriteNumberValue(MaxChildrenValue.Value);
+			}
+
+			if (MinChildrenValue.HasValue)
+			{
+				writer.WritePropertyName("min_children");
+				writer.WriteNumberValue(MinChildrenValue.Value);
+			}
+
+			if (ScoreModeValue is not null)
+			{
+				writer.WritePropertyName("score_mode");
+				JsonSerializer.Serialize(writer, ScoreModeValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			JsonSerializer.Serialize(writer, TypeValue, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class HasChildQueryDescriptor : DescriptorBase<HasChildQueryDescriptor>
+	{
+		internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor> configure) => configure.Invoke(this);
+		public HasChildQueryDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.InnerHits? InnerHitsValue { get; set; }
+
+		private InnerHitsDescriptor InnerHitsDescriptor { get; set; }
+
+		private Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer QueryValue { get; set; }
+
+		private QueryContainerDescriptor QueryDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> QueryDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private bool? IgnoreUnmappedValue { get; set; }
+
+		private int? MaxChildrenValue { get; set; }
+
+		private int? MinChildrenValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
+
+		private string TypeValue { get; set; }
+
+		public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.InnerHits? innerHits)
+		{
+			InnerHitsDescriptor = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsValue = innerHits;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor InnerHits(InnerHitsDescriptor descriptor)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptor = descriptor;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor InnerHits(Action<InnerHitsDescriptor> configure)
+		{
+			InnerHitsValue = null;
+			InnerHitsDescriptorAction = null;
+			InnerHitsDescriptorAction = configure;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer query)
+		{
+			QueryDescriptor = null;
+			QueryDescriptorAction = null;
+			QueryValue = query;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptor = descriptor;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			QueryValue = null;
+			QueryDescriptorAction = null;
+			QueryDescriptorAction = configure;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+		{
+			IgnoreUnmappedValue = ignoreUnmapped;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor MaxChildren(int? maxChildren)
+		{
+			MaxChildrenValue = maxChildren;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor MinChildren(int? minChildren)
+		{
+			MinChildrenValue = minChildren;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? scoreMode)
+		{
+			ScoreModeValue = scoreMode;
+			return Self;
+		}
+
+		public HasChildQueryDescriptor Type(string type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (InnerHitsDescriptor is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, InnerHitsDescriptor, options);
+			}
+			else if (InnerHitsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(InnerHitsDescriptorAction), options);
+			}
+			else if (InnerHitsValue is not null)
+			{
+				writer.WritePropertyName("inner_hits");
+				JsonSerializer.Serialize(writer, InnerHitsValue, options);
+			}
+
+			if (QueryDescriptor is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryDescriptor, options);
+			}
+			else if (QueryDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("query");
+				JsonSerializer.Serialize(writer, QueryValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (IgnoreUnmappedValue.HasValue)
+			{
+				writer.WritePropertyName("ignore_unmapped");
+				writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+			}
+
+			if (MaxChildrenValue.HasValue)
+			{
+				writer.WritePropertyName("max_children");
+				writer.WriteNumberValue(MaxChildrenValue.Value);
+			}
+
+			if (MinChildrenValue.HasValue)
+			{
+				writer.WritePropertyName("min_children");
+				writer.WriteNumberValue(MinChildrenValue.Value);
+			}
+
+			if (ScoreModeValue is not null)
+			{
+				writer.WritePropertyName("score_mode");
+				JsonSerializer.Serialize(writer, ScoreModeValue, options);
+			}
+
+			writer.WritePropertyName("type");
+			JsonSerializer.Serialize(writer, TypeValue, options);
 			writer.WriteEndObject();
 		}
 	}

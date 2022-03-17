@@ -44,8 +44,9 @@ namespace Elastic.Clients.Elasticsearch
 		public Elastic.Clients.Elasticsearch.Time KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Time>("keep_alive"); set => Q("keep_alive", value); }
 	}
 
-	public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptorBase<OpenPointInTimeRequestDescriptor, OpenPointInTimeRequestParameters>
+	public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : RequestDescriptorBase<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeRequestParameters>
 	{
+		internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
@@ -54,11 +55,42 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Time keepAlive) => Qs("keep_alive", keepAlive);
+		public OpenPointInTimeRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+		{
+			RouteValues.Required("index", indices);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptorBase<OpenPointInTimeRequestDescriptor, OpenPointInTimeRequestParameters>
+	{
 		internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor> configure) => configure.Invoke(this);
+		public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		{
+		}
+
+		internal OpenPointInTimeRequestDescriptor()
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Time keepAlive) => Qs("keep_alive", keepAlive);
+		public OpenPointInTimeRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+		{
+			RouteValues.Required("index", indices);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

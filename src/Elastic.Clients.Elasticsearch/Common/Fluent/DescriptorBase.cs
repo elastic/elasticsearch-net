@@ -54,7 +54,7 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializab
 {
 	private readonly TDescriptor _self;
 
-	protected DescriptorBase() => _self = (TDescriptor)this;
+	internal DescriptorBase() => _self = (TDescriptor)this;
 
 	[IgnoreDataMember]
 	protected TDescriptor Self => _self;
@@ -92,35 +92,35 @@ public abstract class DescriptorBase<TDescriptor> : IDescriptor, ISelfSerializab
 	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
 }
 
-public abstract class QueryDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IQuery
-		where TDescriptor : QueryDescriptorBase<TDescriptor>, IQuery
-{
-	internal string _name;
+//public abstract class QueryDescriptorBase<TDescriptor> : DescriptorBase<TDescriptor>, IQuery
+//		where TDescriptor : QueryDescriptorBase<TDescriptor>, IQuery
+//{
+//	internal string _name;
 
-	///// <inheritdoc cref="IQuery.Conditionless"/>
-	//protected abstract bool Conditionless { get; }
+//	///// <inheritdoc cref="IQuery.Conditionless"/>
+//	//protected abstract bool Conditionless { get; }
 
-	//double? IQuery.Boost { get; set; }
+//	//double? IQuery.Boost { get; set; }
 
-	//bool IQuery.Conditionless => Conditionless;
+//	//bool IQuery.Conditionless => Conditionless;
 
-	//bool IQuery.IsStrict { get; set; }
+//	//bool IQuery.IsStrict { get; set; }
 
-	//bool IQuery.IsVerbatim { get; set; }
+//	//bool IQuery.IsVerbatim { get; set; }
 
-	bool IQuery.IsWritable => true; /*Self.IsVerbatim || !Self.Conditionless;*/
+//	bool IQuery.IsWritable => true; /*Self.IsVerbatim || !Self.Conditionless;*/
 
-	public TDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
+//	public TDescriptor Name(string name) => Assign(name, (a, v) => a._name = v);
 
-	///// <inheritdoc cref="IQuery.Boost"/>
-	//public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
+//	///// <inheritdoc cref="IQuery.Boost"/>
+//	//public TDescriptor Boost(double? boost) => Assign(boost, (a, v) => a.Boost = v);
 
-	///// <inheritdoc cref="IQuery.IsVerbatim"/>
-	//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
+//	///// <inheritdoc cref="IQuery.IsVerbatim"/>
+//	//public TDescriptor Verbatim(bool verbatim = true) => Assign(verbatim, (a, v) => a.IsVerbatim = v);
 
-	///// <inheritdoc cref="IQuery.IsStrict"/>
-	//public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
-}
+//	///// <inheritdoc cref="IQuery.IsStrict"/>
+//	//public TDescriptor Strict(bool strict = true) => Assign(strict, (a, v) => a.IsStrict = v);
+//}
 
 //internal abstract class QueryDescriptorConverterBase<T> : JsonConverter<T> where T : QueryDescriptorBase<T>
 //{
@@ -143,18 +143,17 @@ public abstract class QueryDescriptorBase<TDescriptor> : DescriptorBase<TDescrip
 //	internal abstract void WriteInternal(Utf8JsonWriter writer, T value, JsonSerializerOptions options);
 //}
 
-public abstract class FieldNameQueryDescriptorBase<TDescriptor, T> : QueryDescriptorBase<TDescriptor>
-		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, T>
-{
-	internal Field _field;
+//public abstract class FieldNameQueryDescriptorBase<TDescriptor> : QueryDescriptorBase<TDescriptor>
+//		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor>
+//{
+//	internal Field _field;
 
-	//bool IQuery.IsStrict { get; set; }
+//	//bool IQuery.IsStrict { get; set; }
 
+//	//bool IQuery.IsVerbatim { get; set; }
 
-	//bool IQuery.IsVerbatim { get; set; }
+//	public TDescriptor Field(Field field) => Assign(field, (a, v) => a._field = v);
 
-	public TDescriptor Field(Field field) => Assign(field, (a, v) => a._field = v);
-
-	public TDescriptor Field<TValue>(Expression<Func<TDescriptor, TValue>> objectPath) =>
-		Assign(objectPath, (a, v) => a._field = v);
-}
+//	public TDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> objectPath) =>
+//		Assign(objectPath, (a, v) => a._field = v);
+//}

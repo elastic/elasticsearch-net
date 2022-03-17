@@ -35,29 +35,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class IdsQueryDescriptor : DescriptorBase<IdsQueryDescriptor>
 	{
-		public IdsQueryDescriptor()
+		internal IdsQueryDescriptor(Action<IdsQueryDescriptor> configure) => configure.Invoke(this);
+		public IdsQueryDescriptor() : base()
 		{
 		}
 
-		internal IdsQueryDescriptor(Action<IdsQueryDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Ids? ValuesValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Ids? ValuesValue { get; set; }
 
-		public IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? values) => Assign(values, (a, v) => a.ValuesValue = v);
-		public IdsQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public IdsQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public IdsQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public IdsQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? values)
+		{
+			ValuesValue = values;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			if (ValuesValue is not null)
-			{
-				writer.WritePropertyName("values");
-				JsonSerializer.Serialize(writer, ValuesValue, options);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -68,6 +77,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (ValuesValue is not null)
+			{
+				writer.WritePropertyName("values");
+				JsonSerializer.Serialize(writer, ValuesValue, options);
 			}
 
 			writer.WriteEndObject();

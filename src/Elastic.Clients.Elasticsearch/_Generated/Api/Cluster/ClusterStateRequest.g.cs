@@ -94,13 +94,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public Elastic.Clients.Elasticsearch.Time? WaitForTimeout { get => Q<Elastic.Clients.Elasticsearch.Time?>("wait_for_timeout"); set => Q("wait_for_timeout", value); }
 	}
 
-	public sealed partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
+	public sealed partial class ClusterStateRequestDescriptor<TDocument> : RequestDescriptorBase<ClusterStateRequestDescriptor<TDocument>, ClusterStateRequestParameters>
 	{
+		internal ClusterStateRequestDescriptor(Action<ClusterStateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ClusterStateRequestDescriptor()
-		{
-		}
-
-		public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
 		{
 		}
 
@@ -108,7 +105,45 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		{
 		}
 
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		public ClusterStateRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ClusterStateRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClusterStateRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ClusterStateRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ClusterStateRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+		public ClusterStateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
+		public ClusterStateRequestDescriptor<TDocument> WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
+		public ClusterStateRequestDescriptor<TDocument> WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
+		public ClusterStateRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
+		{
+			RouteValues.Optional("metric", metric);
+			return Self;
+		}
+
+		public ClusterStateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class ClusterStateRequestDescriptor : RequestDescriptorBase<ClusterStateRequestDescriptor, ClusterStateRequestParameters>
+	{
 		internal ClusterStateRequestDescriptor(Action<ClusterStateRequestDescriptor> configure) => configure.Invoke(this);
+		public ClusterStateRequestDescriptor()
+		{
+		}
+
+		public ClusterStateRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("metric", metric).Optional("index", indices))
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterState;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
@@ -120,6 +155,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 		public ClusterStateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public ClusterStateRequestDescriptor WaitForMetadataVersion(long? waitForMetadataVersion) => Qs("wait_for_metadata_version", waitForMetadataVersion);
 		public ClusterStateRequestDescriptor WaitForTimeout(Elastic.Clients.Elasticsearch.Time? waitForTimeout) => Qs("wait_for_timeout", waitForTimeout);
+		public ClusterStateRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
+		{
+			RouteValues.Optional("metric", metric);
+			return Self;
+		}
+
+		public ClusterStateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

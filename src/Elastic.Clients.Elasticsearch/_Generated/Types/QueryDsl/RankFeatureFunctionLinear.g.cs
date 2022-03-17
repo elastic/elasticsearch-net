@@ -30,11 +30,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class RankFeatureFunctionLinearDescriptor : DescriptorBase<RankFeatureFunctionLinearDescriptor>
 	{
-		public RankFeatureFunctionLinearDescriptor()
+		internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
+		public RankFeatureFunctionLinearDescriptor() : base()
 		{
 		}
 
-		internal RankFeatureFunctionLinearDescriptor(Action<RankFeatureFunctionLinearDescriptor> configure) => configure.Invoke(this);
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

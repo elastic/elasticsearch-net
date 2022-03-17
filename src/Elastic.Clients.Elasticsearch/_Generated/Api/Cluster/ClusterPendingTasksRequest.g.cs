@@ -48,11 +48,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public sealed partial class ClusterPendingTasksRequestDescriptor : RequestDescriptorBase<ClusterPendingTasksRequestDescriptor, ClusterPendingTasksRequestParameters>
 	{
+		internal ClusterPendingTasksRequestDescriptor(Action<ClusterPendingTasksRequestDescriptor> configure) => configure.Invoke(this);
 		public ClusterPendingTasksRequestDescriptor()
 		{
 		}
 
-		internal ClusterPendingTasksRequestDescriptor(Action<ClusterPendingTasksRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterPendingTasks;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;

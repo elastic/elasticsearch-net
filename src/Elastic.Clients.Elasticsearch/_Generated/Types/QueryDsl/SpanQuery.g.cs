@@ -146,26 +146,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SpanQueryDescriptor<TDocument> : DescriptorBase<SpanQueryDescriptor<TDocument>>
 	{
-		public SpanQueryDescriptor()
+		internal SpanQueryDescriptor(Action<SpanQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public SpanQueryDescriptor() : base()
 		{
 		}
 
-		internal SpanQueryDescriptor(Action<SpanQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
 
 		internal SpanQuery Container { get; private set; }
 
-		internal object ContainerVariantDescriptorAction { get; private set; }
+		internal IDescriptor Descriptor { get; private set; }
 
-		private void Set(object descriptorAction, string variantName)
+		internal Type DescriptorType { get; private set; }
+
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : IDescriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			ContainerVariantDescriptorAction = descriptorAction;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
 		}
 
 		private void Set(ISpanQueryVariant variant, string variantName)
@@ -175,6 +181,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			Container = new SpanQuery(variant);
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
 		}
 
 		public void FieldMaskingSpan(SpanFieldMaskingQuery variant) => Set(variant, "field_masking_span");
@@ -195,6 +221,47 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public void SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 		public void SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
 		public void SpanWithin(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
+	}
+
+	public sealed partial class SpanQueryDescriptor : DescriptorBase<SpanQueryDescriptor>
+	{
+		internal SpanQueryDescriptor(Action<SpanQueryDescriptor> configure) => configure.Invoke(this);
+		public SpanQueryDescriptor() : base()
+		{
+		}
+
+		internal bool ContainsVariant { get; private set; }
+
+		internal string ContainedVariantName { get; private set; }
+
+		internal SpanQuery Container { get; private set; }
+
+		internal IDescriptor Descriptor { get; private set; }
+
+		internal Type DescriptorType { get; private set; }
+
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : IDescriptor, new()
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
+		}
+
+		private void Set(ISpanQueryVariant variant, string variantName)
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new SpanQuery(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -211,95 +278,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
-			if (ContainedVariantName == "field_masking_span")
-			{
-				var descriptor = new SpanFieldMaskingQueryDescriptor<TDocument>();
-				((Action<SpanFieldMaskingQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_containing")
-			{
-				var descriptor = new SpanContainingQueryDescriptor<TDocument>();
-				((Action<SpanContainingQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_first")
-			{
-				var descriptor = new SpanFirstQueryDescriptor<TDocument>();
-				((Action<SpanFirstQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_multi")
-			{
-				var descriptor = new SpanMultiTermQueryDescriptor<TDocument>();
-				((Action<SpanMultiTermQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_near")
-			{
-				var descriptor = new SpanNearQueryDescriptor();
-				((Action<SpanNearQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_not")
-			{
-				var descriptor = new SpanNotQueryDescriptor<TDocument>();
-				((Action<SpanNotQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_or")
-			{
-				var descriptor = new SpanOrQueryDescriptor();
-				((Action<SpanOrQueryDescriptor>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_term")
-			{
-				var descriptor = new SpanTermQueryDescriptor<TDocument>();
-				((Action<SpanTermQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "span_within")
-			{
-				var descriptor = new SpanWithinQueryDescriptor<TDocument>();
-				((Action<SpanWithinQueryDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
-			writer.WriteEndObject();
-			void Finalise()
-			{
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-			}
 		}
+
+		public void FieldMaskingSpan(SpanFieldMaskingQuery variant) => Set(variant, "field_masking_span");
+		public void FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "field_masking_span");
+		public void FieldMaskingSpan<TDocument>(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
+		public void SpanContaining(SpanContainingQuery variant) => Set(variant, "span_containing");
+		public void SpanContaining(Action<SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
+		public void SpanContaining<TDocument>(Action<SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
+		public void SpanFirst(SpanFirstQuery variant) => Set(variant, "span_first");
+		public void SpanFirst(Action<SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
+		public void SpanFirst<TDocument>(Action<SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
+		public void SpanMulti(SpanMultiTermQuery variant) => Set(variant, "span_multi");
+		public void SpanMulti(Action<SpanMultiTermQueryDescriptor> configure) => Set(configure, "span_multi");
+		public void SpanMulti<TDocument>(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
+		public void SpanNear(SpanNearQuery variant) => Set(variant, "span_near");
+		public void SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
+		public void SpanNot(SpanNotQuery variant) => Set(variant, "span_not");
+		public void SpanNot(Action<SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
+		public void SpanNot<TDocument>(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
+		public void SpanOr(SpanOrQuery variant) => Set(variant, "span_or");
+		public void SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
+		public void SpanTerm(SpanTermQuery variant) => Set(variant, "span_term");
+		public void SpanTerm(Action<SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
+		public void SpanTerm<TDocument>(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
+		public void SpanWithin(SpanWithinQuery variant) => Set(variant, "span_within");
+		public void SpanWithin(Action<SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
+		public void SpanWithin<TDocument>(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
 	}
 }

@@ -41,44 +41,57 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 
 	public sealed partial class RuntimeFieldDescriptor : DescriptorBase<RuntimeFieldDescriptor>
 	{
-		public RuntimeFieldDescriptor()
+		internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
+		public RuntimeFieldDescriptor() : base()
 		{
 		}
 
-		internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
-		internal string? FormatValue { get; private set; }
+		private string? FormatValue { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
 
-		public RuntimeFieldDescriptor Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
+		public RuntimeFieldDescriptor Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
 		public RuntimeFieldDescriptor Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public RuntimeFieldDescriptor Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public RuntimeFieldDescriptor Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type) => Assign(type, (a, v) => a.TypeValue = v);
+		public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
