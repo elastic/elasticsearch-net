@@ -41,41 +41,49 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class IntervalsAnyOfDescriptor : DescriptorBase<IntervalsAnyOfDescriptor>
 	{
-		public IntervalsAnyOfDescriptor()
+		internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor> configure) => configure.Invoke(this);
+		public IntervalsAnyOfDescriptor() : base()
 		{
 		}
 
-		internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; private set; }
+		private IntervalsFilterDescriptor FilterDescriptor { get; set; }
 
-		internal IntervalsFilterDescriptor FilterDescriptor { get; private set; }
+		private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 
-		internal Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> IntervalsValue { get; set; }
 
 		public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
-			return Assign(filter, (a, v) => a.FilterValue = v);
+			FilterValue = filter;
+			return Self;
 		}
 
 		public IntervalsAnyOfDescriptor Filter(QueryDsl.IntervalsFilterDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+			FilterDescriptor = descriptor;
+			return Self;
 		}
 
 		public IntervalsAnyOfDescriptor Filter(Action<QueryDsl.IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+			FilterDescriptorAction = configure;
+			return Self;
 		}
 
-		public IntervalsAnyOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals) => Assign(intervals, (a, v) => a.IntervalsValue = v);
+		public IntervalsAnyOfDescriptor Intervals(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsContainer> intervals)
+		{
+			IntervalsValue = intervals;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

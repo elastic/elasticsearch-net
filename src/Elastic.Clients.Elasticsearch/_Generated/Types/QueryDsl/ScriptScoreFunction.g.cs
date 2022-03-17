@@ -35,71 +35,98 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class ScriptScoreFunctionDescriptor<TDocument> : DescriptorBase<ScriptScoreFunctionDescriptor<TDocument>>
 	{
-		public ScriptScoreFunctionDescriptor()
-		{
-		}
-
 		internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal ScriptBase ScriptValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
-
-		internal double? WeightValue { get; private set; }
-
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
-
-		internal QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
-
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
-
-		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
-
-		public ScriptScoreFunctionDescriptor<TDocument> Script(ScriptBase script)
+		public ScriptScoreFunctionDescriptor() : base()
 		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public ScriptScoreFunctionDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
-		}
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
-		public ScriptScoreFunctionDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
-		}
+		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+
+		private ScriptBase ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private double? WeightValue { get; set; }
 
 		public ScriptScoreFunctionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
-			return Assign(filter, (a, v) => a.FilterValue = v);
+			FilterValue = filter;
+			return Self;
 		}
 
 		public ScriptScoreFunctionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+			FilterDescriptor = descriptor;
+			return Self;
 		}
 
 		public ScriptScoreFunctionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+			FilterDescriptorAction = configure;
+			return Self;
 		}
 
-		public ScriptScoreFunctionDescriptor<TDocument> Weight(double? weight) => Assign(weight, (a, v) => a.WeightValue = v);
+		public ScriptScoreFunctionDescriptor<TDocument> Script(ScriptBase script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor<TDocument> Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor<TDocument> Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -116,6 +143,94 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
+			if (WeightValue.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteNumberValue(WeightValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class ScriptScoreFunctionDescriptor : DescriptorBase<ScriptScoreFunctionDescriptor>
+	{
+		internal ScriptScoreFunctionDescriptor(Action<ScriptScoreFunctionDescriptor> configure) => configure.Invoke(this);
+		public ScriptScoreFunctionDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+		private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+		private ScriptBase ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private double? WeightValue { get; set; }
+
+		public ScriptScoreFunctionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterValue = filter;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor Script(ScriptBase script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public ScriptScoreFunctionDescriptor Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
@@ -124,12 +239,28 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
 			}
 
 			if (WeightValue.HasValue)

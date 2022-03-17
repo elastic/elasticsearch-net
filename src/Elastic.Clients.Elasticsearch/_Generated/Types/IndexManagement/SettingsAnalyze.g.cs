@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsAnalyzeDescriptor : DescriptorBase<SettingsAnalyzeDescriptor>
 	{
-		public SettingsAnalyzeDescriptor()
+		internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
+		public SettingsAnalyzeDescriptor() : base()
 		{
 		}
 
-		internal SettingsAnalyzeDescriptor(Action<SettingsAnalyzeDescriptor> configure) => configure.Invoke(this);
-		internal int? MaxTokenCountValue { get; private set; }
+		private int? MaxTokenCountValue { get; set; }
 
-		public SettingsAnalyzeDescriptor MaxTokenCount(int? maxTokenCount) => Assign(maxTokenCount, (a, v) => a.MaxTokenCountValue = v);
+		public SettingsAnalyzeDescriptor MaxTokenCount(int? maxTokenCount)
+		{
+			MaxTokenCountValue = maxTokenCount;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

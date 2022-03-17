@@ -57,23 +57,94 @@ namespace Playground
 			public override void WriteAsPropertyName(Utf8JsonWriter writer, T value, JsonSerializerOptions options) => writer.WritePropertyName("custom");
 		}
 
+		private class TestData
+		{
+			public DateTime MyDate { get; set; }
+
+			
+		}
+
+		private class TestDataTwo
+		{
+			public int AValue { get; set; }
+		}
+
 		private static async Task Main()
 		{
 			var toConvert = new UserType { Name = "steve" };
 			var jsonTest = JsonSerializer.Serialize(toConvert);
 
 
-			var client = new ElasticsearchClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
-				//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
-				//.ServerCertificateValidationCallback((a, b, c, d) => true)
-				//.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))
-				.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
+			//var client = new ElasticsearchClient(new ElasticsearchClientSettings(new Uri("http://localhost:9600"))
+			//	//.CertificateFingerprint("028567742bb754e19ddc8eab752b70d6534f98dccdb681863f57f9b0564170c0")
+			//	//.ServerCertificateValidationCallback((a, b, c, d) => true)
+			//	//.Authentication(new BasicAuthentication("elastic", "HSPvzLR7cSt8PwXJRWjl"))
+			//	.DefaultMappingFor<Person>(p => p.IndexName("people-test")));
 
-			var result = await client.BulkAsync(b => b.DeleteMany("people-test", new Id[] { "1", "2" }));
+			var client = new ElasticsearchClient("800:ZXUtd2VzdC0xLmF3cy5mb3VuZC5pbyQzMjRmYmVlYzY4NWI0NTQ0OTg0MTIwNTFkYTYzY2YzYSQ4ZjM2OGVjZmFlZWU0ODUzYjVmOGYxYTNmMTIxMmJjZQ==",
+				new BasicAuthentication("elastic", "mqmCxz5MOm6p6Q3aMuoJd5Ot"));
 
-			result = await client.BulkAsync(b => b.DeleteMany<Person>(new[] { new Person { Id = 100 }, new Person { Id = 200 } }));
+			//var result = client.SearchAsync<TestData>(a => a.Index("test").Query(q => q.MatchAll())
+			//	.Aggregations(a => a.DateHistogram("date-agg", d => d.Field<TestData>(f => f.MyDate))));
 
-			result = await client.BulkAsync(b => b.DeleteMany(new[] { new Person { Id = 100 }, new Person { Id = 200 } }));
+			var dateHistogramDescriptor = new DateHistogramAggregationDescriptor()
+				.Field<TestData>(f => f.MyDate);
+
+			//var stream = new MemoryStream();
+			//client.RequestResponseSerializer.Serialize(dateHistogramDescriptor, stream);
+			//stream.Position = 0;
+			//var reader = new StreamReader(stream);
+			//var jsonString = reader.ReadToEnd();
+
+			//dateHistogramDescriptor = new DateHistogramAggregationDescriptor()
+			//	.Field<TestData>(f => f.MyDate); // should be cached
+
+			//stream = new MemoryStream();
+			//client.RequestResponseSerializer.Serialize(dateHistogramDescriptor, stream);
+			//stream.Position = 0;
+			//reader = new StreamReader(stream);
+			//jsonString = reader.ReadToEnd();
+
+			//Console.ReadKey();
+
+			var dateHistogramDescriptorTwo = new DateHistogramAggregationDescriptor()
+				.Field<TestData, DateTime>(f => f.MyDate);
+
+			//var stream = new MemoryStream();
+			//client.RequestResponseSerializer.Serialize(dateHistogramDescriptorTwo, stream);
+			//stream.Position = 0;
+			//var reader = new StreamReader(stream);
+			//var jsonString = reader.ReadToEnd();
+
+			//Console.ReadKey();
+
+			//var dateHistogramDescriptorGeneric = new DateHistogramAggregationDescriptor<TestData>()
+			//	.Format("").Field(f => f.MyDate);
+
+			
+
+			//var testDescriptorNonGeneric = new TestDescriptor()
+			//	.Format("test")
+			//	.Field<TestData>(f => f.MyDate) // object
+			//	.Field<TestData, DateTime>(f => f.MyDate); // generic value
+
+			//var testDescriptor = new TestDescriptor<TestData>()
+			//	.Format("test")
+			//	.Field(f => f.MyDate);
+
+			//var stream = new MemoryStream();
+			//client.RequestResponseSerializer.Serialize(dateHistogramDescriptorGeneric, stream);
+			//stream.Position = 0;
+			//var reader = new StreamReader(stream);
+			//var jsonString = reader.ReadToEnd();
+
+
+
+			//var result = await client.BulkAsync(b => b.DeleteMany("people-test", new Id[] { "1", "2" }));
+
+			//result = await client.BulkAsync(b => b.DeleteMany<Person>(new[] { new Person { Id = 100 }, new Person { Id = 200 } }));
+
+			//result = await client.BulkAsync(b => b.DeleteMany(new[] { new Person { Id = 100 }, new Person { Id = 200 } }));
 
 			Console.ReadKey();
 
@@ -215,7 +286,7 @@ namespace Playground
 			//	.Aggregations(a => a.Terms("my-terms", t => t.Field("firstName")))
 			//	.Query(q => q.MatchAll()));
 
-			var countResult = await client.CountAsync<Person>(d => d.Query(new QueryContainer(new MatchQuery
+			var countResult = await client.CountAsync(d => d.Query(new QueryContainer(new MatchQuery
 			{
 				Field = "name",
 				Query = "NEST"
@@ -229,38 +300,38 @@ namespace Playground
 			//var qc = new QueryContainer(new BoolQuery { QueryName = "a_bool_query", Must = new[] { new QueryContainer(new TermQuery { Boost = 0.5f, Field = "the_field", Value = "the_value", CaseInsensitive = true }) } });
 			//var thing = new Thing { Query = qc };
 
-			var thing = new IndexRequest<Person>(new Person() { FirstName = "Steve", LastName = "Gordon", Age = 37 });
+			//var thing = new IndexRequest<Person>(new Person() { FirstName = "Steve", LastName = "Gordon", Age = 37 });
 
-			var aggs = new AggregationDictionary
-			{
-				{ "startDates", new TermsAggregation("startDates") { Field = "startedOn" } },
-				{ "endDates", new DateHistogramAggregation("endDates") { Field = "endedOn" } }
-			};
+			//var aggs = new AggregationDictionary
+			//{
+			//	{ "startDates", new TermsAggregation("startDates") { Field = "startedOn" } },
+			//	{ "endDates", new DateHistogramAggregation("endDates") { Field = "endedOn" } }
+			//};
 
-			var search = new SearchRequest()
-			{
-				From = 10,
-				Size = 20,
-				Query = new QueryContainer(new MatchAllQuery()),
-				Aggregations = aggs,
-				PostFilter = new QueryContainer(new TermQuery
-				{
-					Field = "state",
-					Value = "Stable"
-				})
-			};
+			//var search = new SearchRequest()
+			//{
+			//	From = 10,
+			//	Size = 20,
+			//	Query = new QueryContainer(new MatchAllQuery()),
+			//	Aggregations = aggs,
+			//	PostFilter = new QueryContainer(new TermQuery
+			//	{
+			//		Field = "state",
+			//		Value = "Stable"
+			//	})
+			//};
 
-			var stream = new MemoryStream();
-			serialiser.Serialize(search, stream);
-			stream.Position = 0;
-			var json = Encoding.UTF8.GetString(stream.ToArray());
+			//var stream = new MemoryStream();
+			//serialiser.Serialize(search, stream);
+			//stream.Position = 0;
+			//var json = Encoding.UTF8.GetString(stream.ToArray());
 
-			stream.Position = 0;
+			//stream.Position = 0;
 
-			if (json.Length > 0)
-			{
-				var deserialised = serialiser.Deserialize<Thing>(stream);
-			}
+			//if (json.Length > 0)
+			//{
+			//	var deserialised = serialiser.Deserialize<Thing>(stream);
+			//}
 
 			//var response = client.Ping();
 

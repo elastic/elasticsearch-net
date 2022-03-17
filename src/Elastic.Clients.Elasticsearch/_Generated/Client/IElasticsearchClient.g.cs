@@ -46,8 +46,8 @@ namespace Elastic.Clients.Elasticsearch
 		Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 		CountResponse Count(CountRequest request);
 		Task<CountResponse> CountAsync(CountRequest request, CancellationToken cancellationToken = default);
-		CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null);
-		Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
+		CountResponse Count(Action<CountRequestDescriptor> configureRequest = null);
+		Task<CountResponse> CountAsync(Action<CountRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 		CreateResponse Create<TDocument>(CreateRequest<TDocument> request);
 		Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default);
 		CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest = null);
@@ -58,8 +58,8 @@ namespace Elastic.Clients.Elasticsearch
 		Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 		ExistsResponse Exists(ExistsRequest request);
 		Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default);
-		ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest = null);
-		Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
+		ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest = null);
+		Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default);
 		GetResponse<TDocument> Get<TDocument>(GetRequest request);
 		Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequest request, CancellationToken cancellationToken = default);
 		GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest = null);

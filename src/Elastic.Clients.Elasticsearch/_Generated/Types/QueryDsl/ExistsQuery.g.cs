@@ -35,26 +35,44 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class ExistsQueryDescriptor<TDocument> : DescriptorBase<ExistsQueryDescriptor<TDocument>>
 	{
-		public ExistsQueryDescriptor()
+		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public ExistsQueryDescriptor() : base()
 		{
 		}
 
-		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		public ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ExistsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public ExistsQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public ExistsQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public ExistsQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -67,6 +85,72 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class ExistsQueryDescriptor : DescriptorBase<ExistsQueryDescriptor>
+	{
+		internal ExistsQueryDescriptor(Action<ExistsQueryDescriptor> configure) => configure.Invoke(this);
+		public ExistsQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		public ExistsQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public ExistsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
 			writer.WriteEndObject();
 		}
 	}

@@ -35,7 +35,7 @@ public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<Writable
 			},
 			{
 				DocumentExistsStep, u =>
-					u.Calls<ExistsRequestDescriptor<Project>, ExistsRequest, ExistsResponse>(
+					u.Calls<ExistsRequestDescriptor, ExistsRequest, ExistsResponse>(
 						v => new ExistsRequest(typeof(Project), v) { Routing = "route" },
 						(v, d) => d.Routing("route"),
 						(v, c, f) => c.Exists(Infer.Index<Project>(), v, f), 

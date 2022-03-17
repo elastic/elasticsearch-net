@@ -57,198 +57,219 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityDescriptor : DescriptorBase<SettingsSimilarityDescriptor>
 	{
-		public SettingsSimilarityDescriptor()
+		internal SettingsSimilarityDescriptor(Action<SettingsSimilarityDescriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityDescriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityDescriptor(Action<SettingsSimilarityDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? Bm25Value { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? Bm25Value { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi? DfiValue { get; private set; }
+		private SettingsSimilarityBm25Descriptor Bm25Descriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr? DfrValue { get; private set; }
+		private Action<SettingsSimilarityBm25Descriptor> Bm25DescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb? IbValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi? DfiValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd? LmdValue { get; private set; }
+		private SettingsSimilarityDfiDescriptor DfiDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj? LmjValue { get; private set; }
+		private Action<SettingsSimilarityDfiDescriptor> DfiDescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? ScriptedTfidfValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr? DfrValue { get; set; }
 
-		internal SettingsSimilarityBm25Descriptor Bm25Descriptor { get; private set; }
+		private SettingsSimilarityDfrDescriptor DfrDescriptor { get; set; }
 
-		internal SettingsSimilarityDfiDescriptor DfiDescriptor { get; private set; }
+		private Action<SettingsSimilarityDfrDescriptor> DfrDescriptorAction { get; set; }
 
-		internal SettingsSimilarityDfrDescriptor DfrDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb? IbValue { get; set; }
 
-		internal SettingsSimilarityIbDescriptor IbDescriptor { get; private set; }
+		private SettingsSimilarityIbDescriptor IbDescriptor { get; set; }
 
-		internal SettingsSimilarityLmdDescriptor LmdDescriptor { get; private set; }
+		private Action<SettingsSimilarityIbDescriptor> IbDescriptorAction { get; set; }
 
-		internal SettingsSimilarityLmjDescriptor LmjDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd? LmdValue { get; set; }
 
-		internal SettingsSimilarityScriptedTfidfDescriptor ScriptedTfidfDescriptor { get; private set; }
+		private SettingsSimilarityLmdDescriptor LmdDescriptor { get; set; }
 
-		internal Action<SettingsSimilarityBm25Descriptor> Bm25DescriptorAction { get; private set; }
+		private Action<SettingsSimilarityLmdDescriptor> LmdDescriptorAction { get; set; }
 
-		internal Action<SettingsSimilarityDfiDescriptor> DfiDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj? LmjValue { get; set; }
 
-		internal Action<SettingsSimilarityDfrDescriptor> DfrDescriptorAction { get; private set; }
+		private SettingsSimilarityLmjDescriptor LmjDescriptor { get; set; }
 
-		internal Action<SettingsSimilarityIbDescriptor> IbDescriptorAction { get; private set; }
+		private Action<SettingsSimilarityLmjDescriptor> LmjDescriptorAction { get; set; }
 
-		internal Action<SettingsSimilarityLmdDescriptor> LmdDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? ScriptedTfidfValue { get; set; }
 
-		internal Action<SettingsSimilarityLmjDescriptor> LmjDescriptorAction { get; private set; }
+		private SettingsSimilarityScriptedTfidfDescriptor ScriptedTfidfDescriptor { get; set; }
 
-		internal Action<SettingsSimilarityScriptedTfidfDescriptor> ScriptedTfidfDescriptorAction { get; private set; }
+		private Action<SettingsSimilarityScriptedTfidfDescriptor> ScriptedTfidfDescriptorAction { get; set; }
 
 		public SettingsSimilarityDescriptor Bm25(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? bm25)
 		{
 			Bm25Descriptor = null;
 			Bm25DescriptorAction = null;
-			return Assign(bm25, (a, v) => a.Bm25Value = v);
+			Bm25Value = bm25;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Bm25(IndexManagement.SettingsSimilarityBm25Descriptor descriptor)
 		{
 			Bm25Value = null;
 			Bm25DescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.Bm25Descriptor = v);
+			Bm25Descriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Bm25(Action<IndexManagement.SettingsSimilarityBm25Descriptor> configure)
 		{
 			Bm25Value = null;
 			Bm25DescriptorAction = null;
-			return Assign(configure, (a, v) => a.Bm25DescriptorAction = v);
+			Bm25DescriptorAction = configure;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Dfi(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi? dfi)
 		{
 			DfiDescriptor = null;
 			DfiDescriptorAction = null;
-			return Assign(dfi, (a, v) => a.DfiValue = v);
+			DfiValue = dfi;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Dfi(IndexManagement.SettingsSimilarityDfiDescriptor descriptor)
 		{
 			DfiValue = null;
 			DfiDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.DfiDescriptor = v);
+			DfiDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Dfi(Action<IndexManagement.SettingsSimilarityDfiDescriptor> configure)
 		{
 			DfiValue = null;
 			DfiDescriptorAction = null;
-			return Assign(configure, (a, v) => a.DfiDescriptorAction = v);
+			DfiDescriptorAction = configure;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Dfr(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr? dfr)
 		{
 			DfrDescriptor = null;
 			DfrDescriptorAction = null;
-			return Assign(dfr, (a, v) => a.DfrValue = v);
+			DfrValue = dfr;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Dfr(IndexManagement.SettingsSimilarityDfrDescriptor descriptor)
 		{
 			DfrValue = null;
 			DfrDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.DfrDescriptor = v);
+			DfrDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Dfr(Action<IndexManagement.SettingsSimilarityDfrDescriptor> configure)
 		{
 			DfrValue = null;
 			DfrDescriptorAction = null;
-			return Assign(configure, (a, v) => a.DfrDescriptorAction = v);
+			DfrDescriptorAction = configure;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Ib(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb? ib)
 		{
 			IbDescriptor = null;
 			IbDescriptorAction = null;
-			return Assign(ib, (a, v) => a.IbValue = v);
+			IbValue = ib;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Ib(IndexManagement.SettingsSimilarityIbDescriptor descriptor)
 		{
 			IbValue = null;
 			IbDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.IbDescriptor = v);
+			IbDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Ib(Action<IndexManagement.SettingsSimilarityIbDescriptor> configure)
 		{
 			IbValue = null;
 			IbDescriptorAction = null;
-			return Assign(configure, (a, v) => a.IbDescriptorAction = v);
+			IbDescriptorAction = configure;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Lmd(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd? lmd)
 		{
 			LmdDescriptor = null;
 			LmdDescriptorAction = null;
-			return Assign(lmd, (a, v) => a.LmdValue = v);
+			LmdValue = lmd;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Lmd(IndexManagement.SettingsSimilarityLmdDescriptor descriptor)
 		{
 			LmdValue = null;
 			LmdDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.LmdDescriptor = v);
+			LmdDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Lmd(Action<IndexManagement.SettingsSimilarityLmdDescriptor> configure)
 		{
 			LmdValue = null;
 			LmdDescriptorAction = null;
-			return Assign(configure, (a, v) => a.LmdDescriptorAction = v);
+			LmdDescriptorAction = configure;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Lmj(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj? lmj)
 		{
 			LmjDescriptor = null;
 			LmjDescriptorAction = null;
-			return Assign(lmj, (a, v) => a.LmjValue = v);
+			LmjValue = lmj;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Lmj(IndexManagement.SettingsSimilarityLmjDescriptor descriptor)
 		{
 			LmjValue = null;
 			LmjDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.LmjDescriptor = v);
+			LmjDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor Lmj(Action<IndexManagement.SettingsSimilarityLmjDescriptor> configure)
 		{
 			LmjValue = null;
 			LmjDescriptorAction = null;
-			return Assign(configure, (a, v) => a.LmjDescriptorAction = v);
+			LmjDescriptorAction = configure;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor ScriptedTfidf(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? scriptedTfidf)
 		{
 			ScriptedTfidfDescriptor = null;
 			ScriptedTfidfDescriptorAction = null;
-			return Assign(scriptedTfidf, (a, v) => a.ScriptedTfidfValue = v);
+			ScriptedTfidfValue = scriptedTfidf;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor ScriptedTfidf(IndexManagement.SettingsSimilarityScriptedTfidfDescriptor descriptor)
 		{
 			ScriptedTfidfValue = null;
 			ScriptedTfidfDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptedTfidfDescriptor = v);
+			ScriptedTfidfDescriptor = descriptor;
+			return Self;
 		}
 
 		public SettingsSimilarityDescriptor ScriptedTfidf(Action<IndexManagement.SettingsSimilarityScriptedTfidfDescriptor> configure)
 		{
 			ScriptedTfidfValue = null;
 			ScriptedTfidfDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptedTfidfDescriptorAction = v);
+			ScriptedTfidfDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

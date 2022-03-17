@@ -33,15 +33,61 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class MultiTermLookupDescriptor<TDocument> : DescriptorBase<MultiTermLookupDescriptor<TDocument>>
 	{
-		public MultiTermLookupDescriptor()
+		internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MultiTermLookupDescriptor() : base()
 		{
 		}
 
-		internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		public MultiTermLookupDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public MultiTermLookupDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
+		public MultiTermLookupDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MultiTermLookupDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class MultiTermLookupDescriptor : DescriptorBase<MultiTermLookupDescriptor>
+	{
+		internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor> configure) => configure.Invoke(this);
+		public MultiTermLookupDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		public MultiTermLookupDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MultiTermLookupDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public MultiTermLookupDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

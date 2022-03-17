@@ -123,63 +123,100 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public IEnumerable<string> Terms { get; set; }
 	}
 
-	public sealed partial class TermsSetQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<TermsSetQueryDescriptor<TDocument>, TDocument>
+	public sealed partial class TermsSetQueryDescriptor<TDocument> : DescriptorBase<TermsSetQueryDescriptor<TDocument>>
 	{
-		public TermsSetQueryDescriptor()
+		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public TermsSetQueryDescriptor() : base()
 		{
 		}
 
-		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; private set; }
+		private ScriptBase? MinimumShouldMatchScriptValue { get; set; }
 
-		internal ScriptBase? MinimumShouldMatchScriptValue { get; private set; }
+		private ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
 
-		internal IEnumerable<string> TermsValue { get; private set; }
+		private Action<ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal Action<ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; set; }
 
-		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
-		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField) => Assign(minimumShouldMatchField, (a, v) => a.MinimumShouldMatchFieldValue = v);
+		private IEnumerable<string> TermsValue { get; set; }
+
 		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(ScriptBase? minimumShouldMatchScript)
 		{
 			MinimumShouldMatchScriptDescriptor = null;
 			MinimumShouldMatchScriptDescriptorAction = null;
-			return Assign(minimumShouldMatchScript, (a, v) => a.MinimumShouldMatchScriptValue = v);
+			MinimumShouldMatchScriptValue = minimumShouldMatchScript;
+			return Self;
 		}
 
 		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(ScriptDescriptor descriptor)
 		{
 			MinimumShouldMatchScriptValue = null;
 			MinimumShouldMatchScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.MinimumShouldMatchScriptDescriptor = v);
+			MinimumShouldMatchScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Action<ScriptDescriptor> configure)
 		{
 			MinimumShouldMatchScriptValue = null;
 			MinimumShouldMatchScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.MinimumShouldMatchScriptDescriptorAction = v);
+			MinimumShouldMatchScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public TermsSetQueryDescriptor<TDocument> Terms(IEnumerable<string> terms) => Assign(terms, (a, v) => a.TermsValue = v);
-		public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public TermsSetQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField)
+		{
+			MinimumShouldMatchFieldValue = minimumShouldMatchField;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
+		{
+			MinimumShouldMatchFieldValue = minimumShouldMatchField;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor<TDocument> Terms(IEnumerable<string> terms)
+		{
+			TermsValue = terms;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
-			if (MinimumShouldMatchFieldValue is not null)
-			{
-				writer.WritePropertyName("minimum_should_match_field");
-				JsonSerializer.Serialize(writer, MinimumShouldMatchFieldValue, options);
-			}
-
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
 			if (MinimumShouldMatchScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("minimum_should_match_script");
@@ -196,8 +233,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, MinimumShouldMatchScriptValue, options);
 			}
 
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -210,6 +245,162 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (MinimumShouldMatchFieldValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_field");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchFieldValue, options);
+			}
+
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, TermsValue, options);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class TermsSetQueryDescriptor : DescriptorBase<TermsSetQueryDescriptor>
+	{
+		internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor> configure) => configure.Invoke(this);
+		public TermsSetQueryDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? MinimumShouldMatchScriptValue { get; set; }
+
+		private ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; set; }
+
+		private IEnumerable<string> TermsValue { get; set; }
+
+		public TermsSetQueryDescriptor MinimumShouldMatchScript(ScriptBase? minimumShouldMatchScript)
+		{
+			MinimumShouldMatchScriptDescriptor = null;
+			MinimumShouldMatchScriptDescriptorAction = null;
+			MinimumShouldMatchScriptValue = minimumShouldMatchScript;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor MinimumShouldMatchScript(ScriptDescriptor descriptor)
+		{
+			MinimumShouldMatchScriptValue = null;
+			MinimumShouldMatchScriptDescriptorAction = null;
+			MinimumShouldMatchScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor MinimumShouldMatchScript(Action<ScriptDescriptor> configure)
+		{
+			MinimumShouldMatchScriptValue = null;
+			MinimumShouldMatchScriptDescriptorAction = null;
+			MinimumShouldMatchScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField)
+		{
+			MinimumShouldMatchFieldValue = minimumShouldMatchField;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor MinimumShouldMatchField<TDocument, TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
+		{
+			MinimumShouldMatchFieldValue = minimumShouldMatchField;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor MinimumShouldMatchField<TDocument>(Expression<Func<TDocument, object>> minimumShouldMatchField)
+		{
+			MinimumShouldMatchFieldValue = minimumShouldMatchField;
+			return Self;
+		}
+
+		public TermsSetQueryDescriptor Terms(IEnumerable<string> terms)
+		{
+			TermsValue = terms;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (MinimumShouldMatchScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_script");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchScriptDescriptor, options);
+			}
+			else if (MinimumShouldMatchScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(MinimumShouldMatchScriptDescriptorAction), options);
+			}
+			else if (MinimumShouldMatchScriptValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_script");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchScriptValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (MinimumShouldMatchFieldValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match_field");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchFieldValue, options);
+			}
+
+			writer.WritePropertyName("terms");
+			JsonSerializer.Serialize(writer, TermsValue, options);
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

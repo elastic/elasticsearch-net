@@ -45,29 +45,66 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SpanNearQueryDescriptor : DescriptorBase<SpanNearQueryDescriptor>
 	{
-		public SpanNearQueryDescriptor()
+		internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor> configure) => configure.Invoke(this);
+		public SpanNearQueryDescriptor() : base()
 		{
 		}
 
-		internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor> configure) => configure.Invoke(this);
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal bool? InOrderValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal int? SlopValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private bool? InOrderValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private int? SlopValue { get; set; }
 
-		public SpanNearQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses) => Assign(clauses, (a, v) => a.ClausesValue = v);
-		public SpanNearQueryDescriptor InOrder(bool? inOrder = true) => Assign(inOrder, (a, v) => a.InOrderValue = v);
-		public SpanNearQueryDescriptor Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
-		public SpanNearQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public SpanNearQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SpanNearQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SpanNearQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public SpanNearQueryDescriptor Clauses(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
+		{
+			ClausesValue = clauses;
+			return Self;
+		}
+
+		public SpanNearQueryDescriptor InOrder(bool? inOrder = true)
+		{
+			InOrderValue = inOrder;
+			return Self;
+		}
+
+		public SpanNearQueryDescriptor Slop(int? slop)
+		{
+			SlopValue = slop;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			writer.WritePropertyName("clauses");
 			JsonSerializer.Serialize(writer, ClausesValue, options);
 			if (InOrderValue.HasValue)
@@ -80,18 +117,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("slop");
 				writer.WriteNumberValue(SlopValue.Value);
-			}
-
-			if (!string.IsNullOrEmpty(QueryNameValue))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(QueryNameValue);
-			}
-
-			if (BoostValue.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			writer.WriteEndObject();

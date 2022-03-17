@@ -20,23 +20,51 @@ namespace Tests.Search.Count
 
 		protected override bool VerifyJson => true;
 
-		protected override object ExpectJson => new
-		{
-			query = new
-			{
-				match = new
-				{
-					name = new
-					{
-						query = "NEST"
-					}
-				}
-			}
-		};
-
 		protected override int ExpectStatusCode => 200;
 
 		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
+			.Query(new QueryContainer(new MatchQuery
+			{
+				Field = "name",
+				Query = "NEST"
+			}));
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override CountRequest<Project> Initializer => new()
+		{
+			Query = new QueryContainer(new MatchQuery
+			{
+				Field = "name",
+				Query = "NEST"
+			})
+		};
+
+		protected override string ExpectedUrlPathAndQuery => "/project/_count";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Count(f),
+			(c, f) => c.CountAsync(f),
+			(c, r) => c.Count(r),
+			(c, r) => c.CountAsync(r)
+		);
+
+		protected override void ExpectResponse(CountResponse response) => response.Count.Should().BeGreaterOrEqualTo(0);
+	}
+
+	public class CountApiTests_NonGenericDescriptor
+		: ApiIntegrationTestBase<ReadOnlyCluster, CountResponse, CountRequestDescriptor, CountRequest<Project>>
+	{
+		public CountApiTests_NonGenericDescriptor(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override bool VerifyJson => true;
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Action<CountRequestDescriptor> Fluent => c => c
+			.Indices("project")
 			.Query(new QueryContainer(new MatchQuery
 			{
 				Field = "name",
@@ -73,26 +101,14 @@ namespace Tests.Search.Count
 
 		protected override bool ExpectIsValid => true;
 
-		protected override object ExpectJson => new
-		{
-			query = new
-			{
-				match = new
-				{
-					name = new
-					{
-						query = "NEST"
-					}
-				}
-			}
-		};
+		protected override bool VerifyJson => true;
 
 		protected override int ExpectStatusCode => 200;
 
 		protected override Action<CountRequestDescriptor<Project>> Fluent => c => c
 			.Query(q => q
 				.Match(m => m
-					.Field("name")
+					.Field(f => f.Name)
 					.Query("NEST")));
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
