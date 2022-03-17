@@ -69,7 +69,7 @@ namespace Tests.Search.Search
 				)
 			)
 			.PostFilter(f => f
-				.Term(p => p.State, StateOfBeing.Stable)
+				.Term(p => p.State, StateOfBeing.Stable) // TODO - REVIEW THIS
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -93,8 +93,8 @@ namespace Tests.Search.Search
 		protected override string ExpectedUrlPathAndQuery => $"/project/_search";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			(c, f) => c.Search(f),
-			(c, f) => c.SearchAsync(f),
+			(c, f) => c.Search<Project>(f),
+			(c, f) => c.SearchAsync<Project>(f),
 			(c, r) => c.Search<Project>(r),
 			(c, r) => c.SearchAsync<Project>(r)
 		);

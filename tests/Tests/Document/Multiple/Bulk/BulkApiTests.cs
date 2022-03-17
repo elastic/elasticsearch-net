@@ -190,8 +190,6 @@ public class BulkApiTests : NdJsonApiIntegrationTestBase<WritableCluster, BulkRe
 			item.Result.Should().NotBeNullOrEmpty();
 		}
 
-		// TODO - Re-enable once Source endpoint is generated and implemented
-
 		var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue)).Body;
 		project1.LeadDeveloper.FirstName.Should().Be("martijn");
 		project1.Description.Should().Be("Overridden");

@@ -107,37 +107,64 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public object Value { get; set; }
 	}
 
-	public sealed partial class TermQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<TermQueryDescriptor<TDocument>, TDocument>
+	public sealed partial class TermQueryDescriptor<TDocument> : DescriptorBase<TermQueryDescriptor<TDocument>>
 	{
-		public TermQueryDescriptor()
+		internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public TermQueryDescriptor() : base()
 		{
 		}
 
-		internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? CaseInsensitiveValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal object ValueValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private bool? CaseInsensitiveValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		public TermQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public TermQueryDescriptor<TDocument> Value(object value) => Assign(value, (a, v) => a.ValueValue = v);
-		public TermQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public TermQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		private object ValueValue { get; set; }
+
+		public TermQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public TermQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public TermQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+		{
+			CaseInsensitiveValue = caseInsensitive;
+			return Self;
+		}
+
+		public TermQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermQueryDescriptor<TDocument> Value(object value)
+		{
+			ValueValue = value;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
-			if (CaseInsensitiveValue.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-			}
-
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, ValueValue, options);
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -150,6 +177,104 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (CaseInsensitiveValue.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+			}
+
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class TermQueryDescriptor : DescriptorBase<TermQueryDescriptor>
+	{
+		internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
+		public TermQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private bool? CaseInsensitiveValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private object ValueValue { get; set; }
+
+		public TermQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public TermQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public TermQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		{
+			CaseInsensitiveValue = caseInsensitive;
+			return Self;
+		}
+
+		public TermQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermQueryDescriptor Value(object value)
+		{
+			ValueValue = value;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (CaseInsensitiveValue.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+			}
+
+			writer.WritePropertyName("value");
+			JsonSerializer.Serialize(writer, ValueValue, options);
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

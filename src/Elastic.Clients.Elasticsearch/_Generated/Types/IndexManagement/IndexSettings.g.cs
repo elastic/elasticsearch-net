@@ -241,605 +241,882 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexSettingsDescriptor<TDocument> : DescriptorBase<IndexSettingsDescriptor<TDocument>>
 	{
-		public IndexSettingsDescriptor()
-		{
-		}
-
 		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? AnalyzeValue { get; private set; }
-
-		internal string? AutoExpandReplicasValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; private set; }
-
-		internal string? CodecValue { get; private set; }
-
-		internal string? CreationDateValue { get; private set; }
-
-		internal string? CreationDateStringValue { get; private set; }
-
-		internal string? DefaultPipelineValue { get; private set; }
-
-		internal string? FinalPipelineValue { get; private set; }
-
-		internal Union<string?, int?>? FormatValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; private set; }
-
-		internal Union<bool?, string?>? HiddenValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? HighlightValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; private set; }
-
-		internal bool? LoadFixedBitsetFiltersEagerlyValue { get; private set; }
-
-		internal int? MaxDocvalueFieldsSearchValue { get; private set; }
-
-		internal int? MaxInnerResultWindowValue { get; private set; }
-
-		internal int? MaxNgramDiffValue { get; private set; }
-
-		internal int? MaxRefreshListenersValue { get; private set; }
-
-		internal int? MaxRegexLengthValue { get; private set; }
-
-		internal int? MaxRescoreWindowValue { get; private set; }
-
-		internal int? MaxResultWindowValue { get; private set; }
-
-		internal int? MaxScriptFieldsValue { get; private set; }
-
-		internal int? MaxShingleDiffValue { get; private set; }
-
-		internal int? MaxSlicesPerScrollValue { get; private set; }
-
-		internal int? MaxTermsCountValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.Merge? MergeValue { get; private set; }
-
-		internal string? ModeValue { get; private set; }
-
-		internal Union<int?, string?>? NumberOfReplicasValue { get; private set; }
-
-		internal int? NumberOfRoutingShardsValue { get; private set; }
-
-		internal Union<int?, string?>? NumberOfShardsValue { get; private set; }
-
-		internal Union<int?, string?>? PriorityValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.Queries? QueriesValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryStringValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; private set; }
-
-		internal int? RoutingPartitionSizeValue { get; private set; }
-
-		internal IEnumerable<string>? RoutingPathValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; private set; }
-
-		internal int? ShardsValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? SimilarityValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; private set; }
-
-		internal int? TopMetricsMaxSizeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.Translog? TranslogValue { get; private set; }
-
-		internal string? UuidValue { get; private set; }
-
-		internal Union<bool?, string?>? VerifiedBeforeCloseValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; private set; }
-
-		internal IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; private set; }
-
-		internal SettingsAnalyzeDescriptor AnalyzeDescriptor { get; private set; }
-
-		internal IndexSettingBlocksDescriptor BlocksDescriptor { get; private set; }
-
-		internal SettingsHighlightDescriptor HighlightDescriptor { get; private set; }
-
-		internal IndexSettingsDescriptor<TDocument> IndexDescriptor { get; private set; }
-
-		internal IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; private set; }
-
-		internal MergeDescriptor MergeDescriptor { get; private set; }
-
-		internal QueriesDescriptor QueriesDescriptor { get; private set; }
-
-		internal SettingsQueryStringDescriptor QueryStringDescriptor { get; private set; }
-
-		internal IndexRoutingDescriptor RoutingDescriptor { get; private set; }
-
-		internal SettingsSearchDescriptor SearchDescriptor { get; private set; }
-
-		internal IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; private set; }
-
-		internal SettingsSimilarityDescriptor SimilarityDescriptor { get; private set; }
-
-		internal SoftDeletesDescriptor SoftDeletesDescriptor { get; private set; }
-
-		internal IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; private set; }
-
-		internal IndexSettingsTimeSeriesDescriptor TimeSeriesDescriptor { get; private set; }
-
-		internal TranslogDescriptor TranslogDescriptor { get; private set; }
-
-		internal IndexVersioningDescriptor VersionDescriptor { get; private set; }
-
-		internal Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; private set; }
-
-		internal Action<SettingsAnalyzeDescriptor> AnalyzeDescriptorAction { get; private set; }
-
-		internal Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; private set; }
-
-		internal Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; private set; }
-
-		internal Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; private set; }
-
-		internal Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; private set; }
-
-		internal Action<MergeDescriptor> MergeDescriptorAction { get; private set; }
-
-		internal Action<QueriesDescriptor> QueriesDescriptorAction { get; private set; }
-
-		internal Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; private set; }
-
-		internal Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; private set; }
-
-		internal Action<SettingsSearchDescriptor> SearchDescriptorAction { get; private set; }
-
-		internal Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; private set; }
-
-		internal Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; private set; }
-
-		internal Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; private set; }
-
-		internal Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; private set; }
-
-		internal Action<IndexSettingsTimeSeriesDescriptor> TimeSeriesDescriptorAction { get; private set; }
-
-		internal Action<TranslogDescriptor> TranslogDescriptorAction { get; private set; }
-
-		internal Action<IndexVersioningDescriptor> VersionDescriptorAction { get; private set; }
-
-		public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
+		public IndexSettingsDescriptor() : base()
 		{
-			AnalysisDescriptor = null;
-			AnalysisDescriptorAction = null;
-			return Assign(analysis, (a, v) => a.AnalysisValue = v);
 		}
 
-		public IndexSettingsDescriptor<TDocument> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.AnalysisDescriptor = v);
-		}
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
-		{
-			AnalysisValue = null;
-			AnalysisDescriptorAction = null;
-			return Assign(configure, (a, v) => a.AnalysisDescriptorAction = v);
-		}
+		private IndexSettingsDescriptor<TDocument> IndexDescriptor { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? analyze)
-		{
-			AnalyzeDescriptor = null;
-			AnalyzeDescriptorAction = null;
-			return Assign(analyze, (a, v) => a.AnalyzeValue = v);
-		}
+		private Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Analyze(IndexManagement.SettingsAnalyzeDescriptor descriptor)
-		{
-			AnalyzeValue = null;
-			AnalyzeDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.AnalyzeDescriptor = v);
-		}
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Analyze(Action<IndexManagement.SettingsAnalyzeDescriptor> configure)
-		{
-			AnalyzeValue = null;
-			AnalyzeDescriptorAction = null;
-			return Assign(configure, (a, v) => a.AnalyzeDescriptorAction = v);
-		}
+		private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> AutoExpandReplicas(string? autoExpandReplicas) => Assign(autoExpandReplicas, (a, v) => a.AutoExpandReplicasValue = v);
-		public IndexSettingsDescriptor<TDocument> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
-		{
-			BlocksDescriptor = null;
-			BlocksDescriptorAction = null;
-			return Assign(blocks, (a, v) => a.BlocksValue = v);
-		}
+		private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
-		{
-			BlocksValue = null;
-			BlocksDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.BlocksDescriptor = v);
-		}
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
-		{
-			BlocksValue = null;
-			BlocksDescriptorAction = null;
-			return Assign(configure, (a, v) => a.BlocksDescriptorAction = v);
-		}
+		private IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup) => Assign(checkOnStartup, (a, v) => a.CheckOnStartupValue = v);
-		public IndexSettingsDescriptor<TDocument> Codec(string? codec) => Assign(codec, (a, v) => a.CodecValue = v);
-		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate) => Assign(creationDate, (a, v) => a.CreationDateValue = v);
-		public IndexSettingsDescriptor<TDocument> CreationDateString(string? creationDateString) => Assign(creationDateString, (a, v) => a.CreationDateStringValue = v);
-		public IndexSettingsDescriptor<TDocument> DefaultPipeline(string? defaultPipeline) => Assign(defaultPipeline, (a, v) => a.DefaultPipelineValue = v);
-		public IndexSettingsDescriptor<TDocument> FinalPipeline(string? finalPipeline) => Assign(finalPipeline, (a, v) => a.FinalPipelineValue = v);
-		public IndexSettingsDescriptor<TDocument> Format(Union<string?, int?>? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes) => Assign(gcDeletes, (a, v) => a.GcDeletesValue = v);
-		public IndexSettingsDescriptor<TDocument> Hidden(Union<bool?, string?>? hidden) => Assign(hidden, (a, v) => a.HiddenValue = v);
-		public IndexSettingsDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? highlight)
-		{
-			HighlightDescriptor = null;
-			HighlightDescriptorAction = null;
-			return Assign(highlight, (a, v) => a.HighlightValue = v);
-		}
+		private Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Highlight(IndexManagement.SettingsHighlightDescriptor descriptor)
-		{
-			HighlightValue = null;
-			HighlightDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.HighlightDescriptor = v);
-		}
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; set; }
 
-		public IndexSettingsDescriptor<TDocument> Highlight(Action<IndexManagement.SettingsHighlightDescriptor> configure)
-		{
-			HighlightValue = null;
-			HighlightDescriptorAction = null;
-			return Assign(configure, (a, v) => a.HighlightDescriptorAction = v);
-		}
+		private IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; set; }
+
+		private Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? AnalyzeValue { get; set; }
+
+		private SettingsAnalyzeDescriptor AnalyzeDescriptor { get; set; }
+
+		private Action<SettingsAnalyzeDescriptor> AnalyzeDescriptorAction { get; set; }
+
+		private string? AutoExpandReplicasValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; set; }
+
+		private IndexSettingBlocksDescriptor BlocksDescriptor { get; set; }
+
+		private Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; set; }
+
+		private string? CodecValue { get; set; }
+
+		private string? CreationDateValue { get; set; }
+
+		private string? CreationDateStringValue { get; set; }
+
+		private string? DefaultPipelineValue { get; set; }
+
+		private string? FinalPipelineValue { get; set; }
+
+		private Union<string?, int?>? FormatValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; set; }
+
+		private Union<bool?, string?>? HiddenValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? HighlightValue { get; set; }
+
+		private SettingsHighlightDescriptor HighlightDescriptor { get; set; }
+
+		private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
+
+		private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
+
+		private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+
+		private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
+
+		private int? MaxDocvalueFieldsSearchValue { get; set; }
+
+		private int? MaxInnerResultWindowValue { get; set; }
+
+		private int? MaxNgramDiffValue { get; set; }
+
+		private int? MaxRefreshListenersValue { get; set; }
+
+		private int? MaxRegexLengthValue { get; set; }
+
+		private int? MaxRescoreWindowValue { get; set; }
+
+		private int? MaxResultWindowValue { get; set; }
+
+		private int? MaxScriptFieldsValue { get; set; }
+
+		private int? MaxShingleDiffValue { get; set; }
+
+		private int? MaxSlicesPerScrollValue { get; set; }
+
+		private int? MaxTermsCountValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Merge? MergeValue { get; set; }
+
+		private MergeDescriptor MergeDescriptor { get; set; }
+
+		private Action<MergeDescriptor> MergeDescriptorAction { get; set; }
+
+		private string? ModeValue { get; set; }
+
+		private Union<int?, string?>? NumberOfReplicasValue { get; set; }
+
+		private int? NumberOfRoutingShardsValue { get; set; }
+
+		private Union<int?, string?>? NumberOfShardsValue { get; set; }
+
+		private Union<int?, string?>? PriorityValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Queries? QueriesValue { get; set; }
+
+		private QueriesDescriptor QueriesDescriptor { get; set; }
+
+		private Action<QueriesDescriptor> QueriesDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryStringValue { get; set; }
+
+		private SettingsQueryStringDescriptor QueryStringDescriptor { get; set; }
+
+		private Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; set; }
+
+		private IndexRoutingDescriptor RoutingDescriptor { get; set; }
+
+		private Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; set; }
+
+		private int? RoutingPartitionSizeValue { get; set; }
+
+		private IEnumerable<string>? RoutingPathValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; set; }
+
+		private SettingsSearchDescriptor SearchDescriptor { get; set; }
+
+		private Action<SettingsSearchDescriptor> SearchDescriptorAction { get; set; }
+
+		private int? ShardsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? SimilarityValue { get; set; }
+
+		private SettingsSimilarityDescriptor SimilarityDescriptor { get; set; }
+
+		private Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; set; }
+
+		private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
+
+		private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; set; }
+
+		private IndexSettingsTimeSeriesDescriptor TimeSeriesDescriptor { get; set; }
+
+		private Action<IndexSettingsTimeSeriesDescriptor> TimeSeriesDescriptorAction { get; set; }
+
+		private int? TopMetricsMaxSizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Translog? TranslogValue { get; set; }
+
+		private TranslogDescriptor TranslogDescriptor { get; set; }
+
+		private Action<TranslogDescriptor> TranslogDescriptorAction { get; set; }
+
+		private string? UuidValue { get; set; }
+
+		private Union<bool?, string?>? VerifiedBeforeCloseValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; set; }
+
+		private IndexVersioningDescriptor VersionDescriptor { get; set; }
+
+		private Action<IndexVersioningDescriptor> VersionDescriptorAction { get; set; }
 
 		public IndexSettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
 		{
 			IndexDescriptor = null;
 			IndexDescriptorAction = null;
-			return Assign(index, (a, v) => a.IndexValue = v);
+			IndexValue = index;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Index(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			IndexValue = null;
 			IndexDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.IndexDescriptor = v);
+			IndexDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Index(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			IndexValue = null;
 			IndexDescriptorAction = null;
-			return Assign(configure, (a, v) => a.IndexDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
-		{
-			LifecycleDescriptor = null;
-			LifecycleDescriptorAction = null;
-			return Assign(lifecycle, (a, v) => a.LifecycleValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
-		{
-			LifecycleValue = null;
-			LifecycleDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.LifecycleDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
-		{
-			LifecycleValue = null;
-			LifecycleDescriptorAction = null;
-			return Assign(configure, (a, v) => a.LifecycleDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true) => Assign(loadFixedBitsetFiltersEagerly, (a, v) => a.LoadFixedBitsetFiltersEagerlyValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch) => Assign(maxDocvalueFieldsSearch, (a, v) => a.MaxDocvalueFieldsSearchValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxInnerResultWindow(int? maxInnerResultWindow) => Assign(maxInnerResultWindow, (a, v) => a.MaxInnerResultWindowValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxNgramDiff(int? maxNgramDiff) => Assign(maxNgramDiff, (a, v) => a.MaxNgramDiffValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxRefreshListeners(int? maxRefreshListeners) => Assign(maxRefreshListeners, (a, v) => a.MaxRefreshListenersValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxRegexLength(int? maxRegexLength) => Assign(maxRegexLength, (a, v) => a.MaxRegexLengthValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxRescoreWindow(int? maxRescoreWindow) => Assign(maxRescoreWindow, (a, v) => a.MaxRescoreWindowValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxResultWindow(int? maxResultWindow) => Assign(maxResultWindow, (a, v) => a.MaxResultWindowValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxScriptFields(int? maxScriptFields) => Assign(maxScriptFields, (a, v) => a.MaxScriptFieldsValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxShingleDiff(int? maxShingleDiff) => Assign(maxShingleDiff, (a, v) => a.MaxShingleDiffValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll) => Assign(maxSlicesPerScroll, (a, v) => a.MaxSlicesPerScrollValue = v);
-		public IndexSettingsDescriptor<TDocument> MaxTermsCount(int? maxTermsCount) => Assign(maxTermsCount, (a, v) => a.MaxTermsCountValue = v);
-		public IndexSettingsDescriptor<TDocument> Merge(Elastic.Clients.Elasticsearch.IndexManagement.Merge? merge)
-		{
-			MergeDescriptor = null;
-			MergeDescriptorAction = null;
-			return Assign(merge, (a, v) => a.MergeValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Merge(IndexManagement.MergeDescriptor descriptor)
-		{
-			MergeValue = null;
-			MergeDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.MergeDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Merge(Action<IndexManagement.MergeDescriptor> configure)
-		{
-			MergeValue = null;
-			MergeDescriptorAction = null;
-			return Assign(configure, (a, v) => a.MergeDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Mode(string? mode) => Assign(mode, (a, v) => a.ModeValue = v);
-		public IndexSettingsDescriptor<TDocument> NumberOfReplicas(Union<int?, string?>? numberOfReplicas) => Assign(numberOfReplicas, (a, v) => a.NumberOfReplicasValue = v);
-		public IndexSettingsDescriptor<TDocument> NumberOfRoutingShards(int? numberOfRoutingShards) => Assign(numberOfRoutingShards, (a, v) => a.NumberOfRoutingShardsValue = v);
-		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards) => Assign(numberOfShards, (a, v) => a.NumberOfShardsValue = v);
-		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority) => Assign(priority, (a, v) => a.PriorityValue = v);
-		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName) => Assign(providedName, (a, v) => a.ProvidedNameValue = v);
-		public IndexSettingsDescriptor<TDocument> Queries(Elastic.Clients.Elasticsearch.IndexManagement.Queries? queries)
-		{
-			QueriesDescriptor = null;
-			QueriesDescriptorAction = null;
-			return Assign(queries, (a, v) => a.QueriesValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Queries(IndexManagement.QueriesDescriptor descriptor)
-		{
-			QueriesValue = null;
-			QueriesDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueriesDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Queries(Action<IndexManagement.QueriesDescriptor> configure)
-		{
-			QueriesValue = null;
-			QueriesDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueriesDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> QueryString(Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? queryString)
-		{
-			QueryStringDescriptor = null;
-			QueryStringDescriptorAction = null;
-			return Assign(queryString, (a, v) => a.QueryStringValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> QueryString(IndexManagement.SettingsQueryStringDescriptor descriptor)
-		{
-			QueryStringValue = null;
-			QueryStringDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.QueryStringDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> QueryString(Action<IndexManagement.SettingsQueryStringDescriptor> configure)
-		{
-			QueryStringValue = null;
-			QueryStringDescriptorAction = null;
-			return Assign(configure, (a, v) => a.QueryStringDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval) => Assign(refreshInterval, (a, v) => a.RefreshIntervalValue = v);
-		public IndexSettingsDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
-		{
-			RoutingDescriptor = null;
-			RoutingDescriptorAction = null;
-			return Assign(routing, (a, v) => a.RoutingValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
-		{
-			RoutingValue = null;
-			RoutingDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.RoutingDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
-		{
-			RoutingValue = null;
-			RoutingDescriptorAction = null;
-			return Assign(configure, (a, v) => a.RoutingDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> RoutingPartitionSize(int? routingPartitionSize) => Assign(routingPartitionSize, (a, v) => a.RoutingPartitionSizeValue = v);
-		public IndexSettingsDescriptor<TDocument> RoutingPath(IEnumerable<string>? routingPath) => Assign(routingPath, (a, v) => a.RoutingPathValue = v);
-		public IndexSettingsDescriptor<TDocument> Search(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? search)
-		{
-			SearchDescriptor = null;
-			SearchDescriptorAction = null;
-			return Assign(search, (a, v) => a.SearchValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Search(IndexManagement.SettingsSearchDescriptor descriptor)
-		{
-			SearchValue = null;
-			SearchDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SearchDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Search(Action<IndexManagement.SettingsSearchDescriptor> configure)
-		{
-			SearchValue = null;
-			SearchDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SearchDescriptorAction = v);
+			IndexDescriptorAction = configure;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 		{
 			SettingsDescriptor = null;
 			SettingsDescriptorAction = null;
-			return Assign(settings, (a, v) => a.SettingsValue = v);
+			SettingsValue = settings;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Settings(IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SettingsDescriptor = v);
+			SettingsDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Settings(Action<IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 		{
 			SettingsValue = null;
 			SettingsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SettingsDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Shards(int? shards) => Assign(shards, (a, v) => a.ShardsValue = v);
-		public IndexSettingsDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? similarity)
-		{
-			SimilarityDescriptor = null;
-			SimilarityDescriptorAction = null;
-			return Assign(similarity, (a, v) => a.SimilarityValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Similarity(IndexManagement.SettingsSimilarityDescriptor descriptor)
-		{
-			SimilarityValue = null;
-			SimilarityDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SimilarityDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> Similarity(Action<IndexManagement.SettingsSimilarityDescriptor> configure)
-		{
-			SimilarityValue = null;
-			SimilarityDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SimilarityDescriptorAction = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
-		{
-			SoftDeletesDescriptor = null;
-			SoftDeletesDescriptorAction = null;
-			return Assign(softDeletes, (a, v) => a.SoftDeletesValue = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> SoftDeletes(IndexManagement.SoftDeletesDescriptor descriptor)
-		{
-			SoftDeletesValue = null;
-			SoftDeletesDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SoftDeletesDescriptor = v);
-		}
-
-		public IndexSettingsDescriptor<TDocument> SoftDeletes(Action<IndexManagement.SoftDeletesDescriptor> configure)
-		{
-			SoftDeletesValue = null;
-			SoftDeletesDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SoftDeletesDescriptorAction = v);
+			SettingsDescriptorAction = configure;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? sort)
 		{
 			SortDescriptor = null;
 			SortDescriptorAction = null;
-			return Assign(sort, (a, v) => a.SortValue = v);
+			SortValue = sort;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Sort(IndexManagement.IndexSegmentSortDescriptor<TDocument> descriptor)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SortDescriptor = v);
+			SortDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Sort(Action<IndexManagement.IndexSegmentSortDescriptor<TDocument>> configure)
 		{
 			SortValue = null;
 			SortDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SortDescriptorAction = v);
+			SortDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			AnalysisValue = analysis;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? analyze)
+		{
+			AnalyzeDescriptor = null;
+			AnalyzeDescriptorAction = null;
+			AnalyzeValue = analyze;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Analyze(IndexManagement.SettingsAnalyzeDescriptor descriptor)
+		{
+			AnalyzeValue = null;
+			AnalyzeDescriptorAction = null;
+			AnalyzeDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Analyze(Action<IndexManagement.SettingsAnalyzeDescriptor> configure)
+		{
+			AnalyzeValue = null;
+			AnalyzeDescriptorAction = null;
+			AnalyzeDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> AutoExpandReplicas(string? autoExpandReplicas)
+		{
+			AutoExpandReplicasValue = autoExpandReplicas;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
+		{
+			BlocksDescriptor = null;
+			BlocksDescriptorAction = null;
+			BlocksValue = blocks;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
+		{
+			BlocksValue = null;
+			BlocksDescriptorAction = null;
+			BlocksDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
+		{
+			BlocksValue = null;
+			BlocksDescriptorAction = null;
+			BlocksDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup)
+		{
+			CheckOnStartupValue = checkOnStartup;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Codec(string? codec)
+		{
+			CodecValue = codec;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> CreationDate(string? creationDate)
+		{
+			CreationDateValue = creationDate;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> CreationDateString(string? creationDateString)
+		{
+			CreationDateStringValue = creationDateString;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> DefaultPipeline(string? defaultPipeline)
+		{
+			DefaultPipelineValue = defaultPipeline;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> FinalPipeline(string? finalPipeline)
+		{
+			FinalPipelineValue = finalPipeline;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Format(Union<string?, int?>? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes)
+		{
+			GcDeletesValue = gcDeletes;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Hidden(Union<bool?, string?>? hidden)
+		{
+			HiddenValue = hidden;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? highlight)
+		{
+			HighlightDescriptor = null;
+			HighlightDescriptorAction = null;
+			HighlightValue = highlight;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Highlight(IndexManagement.SettingsHighlightDescriptor descriptor)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Highlight(Action<IndexManagement.SettingsHighlightDescriptor> configure)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
+		{
+			LifecycleDescriptor = null;
+			LifecycleDescriptorAction = null;
+			LifecycleValue = lifecycle;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
+		{
+			LifecycleValue = null;
+			LifecycleDescriptorAction = null;
+			LifecycleDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
+		{
+			LifecycleValue = null;
+			LifecycleDescriptorAction = null;
+			LifecycleDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true)
+		{
+			LoadFixedBitsetFiltersEagerlyValue = loadFixedBitsetFiltersEagerly;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch)
+		{
+			MaxDocvalueFieldsSearchValue = maxDocvalueFieldsSearch;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxInnerResultWindow(int? maxInnerResultWindow)
+		{
+			MaxInnerResultWindowValue = maxInnerResultWindow;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxNgramDiff(int? maxNgramDiff)
+		{
+			MaxNgramDiffValue = maxNgramDiff;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxRefreshListeners(int? maxRefreshListeners)
+		{
+			MaxRefreshListenersValue = maxRefreshListeners;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxRegexLength(int? maxRegexLength)
+		{
+			MaxRegexLengthValue = maxRegexLength;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxRescoreWindow(int? maxRescoreWindow)
+		{
+			MaxRescoreWindowValue = maxRescoreWindow;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxResultWindow(int? maxResultWindow)
+		{
+			MaxResultWindowValue = maxResultWindow;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxScriptFields(int? maxScriptFields)
+		{
+			MaxScriptFieldsValue = maxScriptFields;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxShingleDiff(int? maxShingleDiff)
+		{
+			MaxShingleDiffValue = maxShingleDiff;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxSlicesPerScroll(int? maxSlicesPerScroll)
+		{
+			MaxSlicesPerScrollValue = maxSlicesPerScroll;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> MaxTermsCount(int? maxTermsCount)
+		{
+			MaxTermsCountValue = maxTermsCount;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Merge(Elastic.Clients.Elasticsearch.IndexManagement.Merge? merge)
+		{
+			MergeDescriptor = null;
+			MergeDescriptorAction = null;
+			MergeValue = merge;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Merge(IndexManagement.MergeDescriptor descriptor)
+		{
+			MergeValue = null;
+			MergeDescriptorAction = null;
+			MergeDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Merge(Action<IndexManagement.MergeDescriptor> configure)
+		{
+			MergeValue = null;
+			MergeDescriptorAction = null;
+			MergeDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Mode(string? mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> NumberOfReplicas(Union<int?, string?>? numberOfReplicas)
+		{
+			NumberOfReplicasValue = numberOfReplicas;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> NumberOfRoutingShards(int? numberOfRoutingShards)
+		{
+			NumberOfRoutingShardsValue = numberOfRoutingShards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> NumberOfShards(Union<int?, string?>? numberOfShards)
+		{
+			NumberOfShardsValue = numberOfShards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Priority(Union<int?, string?>? priority)
+		{
+			PriorityValue = priority;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName)
+		{
+			ProvidedNameValue = providedName;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Queries(Elastic.Clients.Elasticsearch.IndexManagement.Queries? queries)
+		{
+			QueriesDescriptor = null;
+			QueriesDescriptorAction = null;
+			QueriesValue = queries;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Queries(IndexManagement.QueriesDescriptor descriptor)
+		{
+			QueriesValue = null;
+			QueriesDescriptorAction = null;
+			QueriesDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Queries(Action<IndexManagement.QueriesDescriptor> configure)
+		{
+			QueriesValue = null;
+			QueriesDescriptorAction = null;
+			QueriesDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> QueryString(Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? queryString)
+		{
+			QueryStringDescriptor = null;
+			QueryStringDescriptorAction = null;
+			QueryStringValue = queryString;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> QueryString(IndexManagement.SettingsQueryStringDescriptor descriptor)
+		{
+			QueryStringValue = null;
+			QueryStringDescriptorAction = null;
+			QueryStringDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> QueryString(Action<IndexManagement.SettingsQueryStringDescriptor> configure)
+		{
+			QueryStringValue = null;
+			QueryStringDescriptorAction = null;
+			QueryStringDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval)
+		{
+			RefreshIntervalValue = refreshInterval;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
+		{
+			RoutingDescriptor = null;
+			RoutingDescriptorAction = null;
+			RoutingValue = routing;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Routing(IndexManagement.IndexRoutingDescriptor descriptor)
+		{
+			RoutingValue = null;
+			RoutingDescriptorAction = null;
+			RoutingDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
+		{
+			RoutingValue = null;
+			RoutingDescriptorAction = null;
+			RoutingDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> RoutingPartitionSize(int? routingPartitionSize)
+		{
+			RoutingPartitionSizeValue = routingPartitionSize;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> RoutingPath(IEnumerable<string>? routingPath)
+		{
+			RoutingPathValue = routingPath;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Search(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? search)
+		{
+			SearchDescriptor = null;
+			SearchDescriptorAction = null;
+			SearchValue = search;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Search(IndexManagement.SettingsSearchDescriptor descriptor)
+		{
+			SearchValue = null;
+			SearchDescriptorAction = null;
+			SearchDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Search(Action<IndexManagement.SettingsSearchDescriptor> configure)
+		{
+			SearchValue = null;
+			SearchDescriptorAction = null;
+			SearchDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Shards(int? shards)
+		{
+			ShardsValue = shards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? similarity)
+		{
+			SimilarityDescriptor = null;
+			SimilarityDescriptorAction = null;
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Similarity(IndexManagement.SettingsSimilarityDescriptor descriptor)
+		{
+			SimilarityValue = null;
+			SimilarityDescriptorAction = null;
+			SimilarityDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> Similarity(Action<IndexManagement.SettingsSimilarityDescriptor> configure)
+		{
+			SimilarityValue = null;
+			SimilarityDescriptorAction = null;
+			SimilarityDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
+		{
+			SoftDeletesDescriptor = null;
+			SoftDeletesDescriptorAction = null;
+			SoftDeletesValue = softDeletes;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> SoftDeletes(IndexManagement.SoftDeletesDescriptor descriptor)
+		{
+			SoftDeletesValue = null;
+			SoftDeletesDescriptorAction = null;
+			SoftDeletesDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> SoftDeletes(Action<IndexManagement.SoftDeletesDescriptor> configure)
+		{
+			SoftDeletesValue = null;
+			SoftDeletesDescriptorAction = null;
+			SoftDeletesDescriptorAction = configure;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? timeSeries)
 		{
 			TimeSeriesDescriptor = null;
 			TimeSeriesDescriptorAction = null;
-			return Assign(timeSeries, (a, v) => a.TimeSeriesValue = v);
+			TimeSeriesValue = timeSeries;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> TimeSeries(IndexManagement.IndexSettingsTimeSeriesDescriptor descriptor)
 		{
 			TimeSeriesValue = null;
 			TimeSeriesDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.TimeSeriesDescriptor = v);
+			TimeSeriesDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> TimeSeries(Action<IndexManagement.IndexSettingsTimeSeriesDescriptor> configure)
 		{
 			TimeSeriesValue = null;
 			TimeSeriesDescriptorAction = null;
-			return Assign(configure, (a, v) => a.TimeSeriesDescriptorAction = v);
+			TimeSeriesDescriptorAction = configure;
+			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize) => Assign(topMetricsMaxSize, (a, v) => a.TopMetricsMaxSizeValue = v);
+		public IndexSettingsDescriptor<TDocument> TopMetricsMaxSize(int? topMetricsMaxSize)
+		{
+			TopMetricsMaxSizeValue = topMetricsMaxSize;
+			return Self;
+		}
+
 		public IndexSettingsDescriptor<TDocument> Translog(Elastic.Clients.Elasticsearch.IndexManagement.Translog? translog)
 		{
 			TranslogDescriptor = null;
 			TranslogDescriptorAction = null;
-			return Assign(translog, (a, v) => a.TranslogValue = v);
+			TranslogValue = translog;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Translog(IndexManagement.TranslogDescriptor descriptor)
 		{
 			TranslogValue = null;
 			TranslogDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.TranslogDescriptor = v);
+			TranslogDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Translog(Action<IndexManagement.TranslogDescriptor> configure)
 		{
 			TranslogValue = null;
 			TranslogDescriptorAction = null;
-			return Assign(configure, (a, v) => a.TranslogDescriptorAction = v);
+			TranslogDescriptorAction = configure;
+			return Self;
 		}
 
-		public IndexSettingsDescriptor<TDocument> Uuid(string? uuid) => Assign(uuid, (a, v) => a.UuidValue = v);
-		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose) => Assign(verifiedBeforeClose, (a, v) => a.VerifiedBeforeCloseValue = v);
+		public IndexSettingsDescriptor<TDocument> Uuid(string? uuid)
+		{
+			UuidValue = uuid;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor<TDocument> VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose)
+		{
+			VerifiedBeforeCloseValue = verifiedBeforeClose;
+			return Self;
+		}
+
 		public IndexSettingsDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
 		{
 			VersionDescriptor = null;
 			VersionDescriptorAction = null;
-			return Assign(version, (a, v) => a.VersionValue = v);
+			VersionValue = version;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Version(IndexManagement.IndexVersioningDescriptor descriptor)
 		{
 			VersionValue = null;
 			VersionDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.VersionDescriptor = v);
+			VersionDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexSettingsDescriptor<TDocument> Version(Action<IndexManagement.IndexVersioningDescriptor> configure)
 		{
 			VersionValue = null;
 			VersionDescriptorAction = null;
-			return Assign(configure, (a, v) => a.VersionDescriptorAction = v);
+			VersionDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (IndexDescriptor is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexDescriptor, options);
+			}
+			else if (IndexDescriptorAction is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(IndexDescriptorAction), options);
+			}
+			else if (IndexValue is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexValue, options);
+			}
+
+			if (SettingsDescriptor is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+			}
+			else if (SettingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+			}
+			else if (SettingsValue is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, SettingsValue, options);
+			}
+
+			if (SortDescriptor is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortDescriptor, options);
+			}
+			else if (SortDescriptorAction is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSegmentSortDescriptor<TDocument>(SortDescriptorAction), options);
+			}
+			else if (SortValue is not null)
+			{
+				writer.WritePropertyName("sort");
+				JsonSerializer.Serialize(writer, SortValue, options);
+			}
+
 			if (AnalysisDescriptor is not null)
 			{
 				writer.WritePropertyName("analysis");
@@ -962,22 +1239,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			{
 				writer.WritePropertyName("highlight");
 				JsonSerializer.Serialize(writer, HighlightValue, options);
-			}
-
-			if (IndexDescriptor is not null)
-			{
-				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, IndexDescriptor, options);
-			}
-			else if (IndexDescriptorAction is not null)
-			{
-				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(IndexDescriptorAction), options);
-			}
-			else if (IndexValue is not null)
-			{
-				writer.WritePropertyName("index");
-				JsonSerializer.Serialize(writer, IndexValue, options);
 			}
 
 			if (LifecycleDescriptor is not null)
@@ -1202,22 +1463,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SearchValue, options);
 			}
 
-			if (SettingsDescriptor is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-			}
-			else if (SettingsDescriptorAction is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
-			}
-			else if (SettingsValue is not null)
-			{
-				writer.WritePropertyName("settings");
-				JsonSerializer.Serialize(writer, SettingsValue, options);
-			}
-
 			if (ShardsValue.HasValue)
 			{
 				writer.WritePropertyName("shards");
@@ -1256,6 +1501,938 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 				JsonSerializer.Serialize(writer, SoftDeletesValue, options);
 			}
 
+			if (TimeSeriesDescriptor is not null)
+			{
+				writer.WritePropertyName("time_series");
+				JsonSerializer.Serialize(writer, TimeSeriesDescriptor, options);
+			}
+			else if (TimeSeriesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("time_series");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsTimeSeriesDescriptor(TimeSeriesDescriptorAction), options);
+			}
+			else if (TimeSeriesValue is not null)
+			{
+				writer.WritePropertyName("time_series");
+				JsonSerializer.Serialize(writer, TimeSeriesValue, options);
+			}
+
+			if (TopMetricsMaxSizeValue.HasValue)
+			{
+				writer.WritePropertyName("top_metrics_max_size");
+				writer.WriteNumberValue(TopMetricsMaxSizeValue.Value);
+			}
+
+			if (TranslogDescriptor is not null)
+			{
+				writer.WritePropertyName("translog");
+				JsonSerializer.Serialize(writer, TranslogDescriptor, options);
+			}
+			else if (TranslogDescriptorAction is not null)
+			{
+				writer.WritePropertyName("translog");
+				JsonSerializer.Serialize(writer, new IndexManagement.TranslogDescriptor(TranslogDescriptorAction), options);
+			}
+			else if (TranslogValue is not null)
+			{
+				writer.WritePropertyName("translog");
+				JsonSerializer.Serialize(writer, TranslogValue, options);
+			}
+
+			if (UuidValue is not null)
+			{
+				writer.WritePropertyName("uuid");
+				JsonSerializer.Serialize(writer, UuidValue, options);
+			}
+
+			if (VerifiedBeforeCloseValue is not null)
+			{
+				writer.WritePropertyName("verified_before_close");
+				JsonSerializer.Serialize(writer, VerifiedBeforeCloseValue, options);
+			}
+
+			if (VersionDescriptor is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionDescriptor, options);
+			}
+			else if (VersionDescriptorAction is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexVersioningDescriptor(VersionDescriptorAction), options);
+			}
+			else if (VersionValue is not null)
+			{
+				writer.WritePropertyName("version");
+				JsonSerializer.Serialize(writer, VersionValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class IndexSettingsDescriptor : DescriptorBase<IndexSettingsDescriptor>
+	{
+		internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor> configure) => configure.Invoke(this);
+		public IndexSettingsDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; set; }
+
+		private IndexSettingsDescriptor IndexDescriptor { get; set; }
+
+		private Action<IndexSettingsDescriptor> IndexDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
+
+		private IndexSettingsDescriptor SettingsDescriptor { get; set; }
+
+		private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; set; }
+
+		private IndexSegmentSortDescriptor SortDescriptor { get; set; }
+
+		private Action<IndexSegmentSortDescriptor> SortDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; set; }
+
+		private IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; set; }
+
+		private Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? AnalyzeValue { get; set; }
+
+		private SettingsAnalyzeDescriptor AnalyzeDescriptor { get; set; }
+
+		private Action<SettingsAnalyzeDescriptor> AnalyzeDescriptorAction { get; set; }
+
+		private string? AutoExpandReplicasValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; set; }
+
+		private IndexSettingBlocksDescriptor BlocksDescriptor { get; set; }
+
+		private Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; set; }
+
+		private string? CodecValue { get; set; }
+
+		private string? CreationDateValue { get; set; }
+
+		private string? CreationDateStringValue { get; set; }
+
+		private string? DefaultPipelineValue { get; set; }
+
+		private string? FinalPipelineValue { get; set; }
+
+		private Union<string?, int?>? FormatValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Time? GcDeletesValue { get; set; }
+
+		private Union<bool?, string?>? HiddenValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? HighlightValue { get; set; }
+
+		private SettingsHighlightDescriptor HighlightDescriptor { get; set; }
+
+		private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
+
+		private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
+
+		private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+
+		private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
+
+		private int? MaxDocvalueFieldsSearchValue { get; set; }
+
+		private int? MaxInnerResultWindowValue { get; set; }
+
+		private int? MaxNgramDiffValue { get; set; }
+
+		private int? MaxRefreshListenersValue { get; set; }
+
+		private int? MaxRegexLengthValue { get; set; }
+
+		private int? MaxRescoreWindowValue { get; set; }
+
+		private int? MaxResultWindowValue { get; set; }
+
+		private int? MaxScriptFieldsValue { get; set; }
+
+		private int? MaxShingleDiffValue { get; set; }
+
+		private int? MaxSlicesPerScrollValue { get; set; }
+
+		private int? MaxTermsCountValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Merge? MergeValue { get; set; }
+
+		private MergeDescriptor MergeDescriptor { get; set; }
+
+		private Action<MergeDescriptor> MergeDescriptorAction { get; set; }
+
+		private string? ModeValue { get; set; }
+
+		private Union<int?, string?>? NumberOfReplicasValue { get; set; }
+
+		private int? NumberOfRoutingShardsValue { get; set; }
+
+		private Union<int?, string?>? NumberOfShardsValue { get; set; }
+
+		private Union<int?, string?>? PriorityValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Queries? QueriesValue { get; set; }
+
+		private QueriesDescriptor QueriesDescriptor { get; set; }
+
+		private Action<QueriesDescriptor> QueriesDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryStringValue { get; set; }
+
+		private SettingsQueryStringDescriptor QueryStringDescriptor { get; set; }
+
+		private Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Time? RefreshIntervalValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; set; }
+
+		private IndexRoutingDescriptor RoutingDescriptor { get; set; }
+
+		private Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; set; }
+
+		private int? RoutingPartitionSizeValue { get; set; }
+
+		private IEnumerable<string>? RoutingPathValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; set; }
+
+		private SettingsSearchDescriptor SearchDescriptor { get; set; }
+
+		private Action<SettingsSearchDescriptor> SearchDescriptorAction { get; set; }
+
+		private int? ShardsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? SimilarityValue { get; set; }
+
+		private SettingsSimilarityDescriptor SimilarityDescriptor { get; set; }
+
+		private Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; set; }
+
+		private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
+
+		private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; set; }
+
+		private IndexSettingsTimeSeriesDescriptor TimeSeriesDescriptor { get; set; }
+
+		private Action<IndexSettingsTimeSeriesDescriptor> TimeSeriesDescriptorAction { get; set; }
+
+		private int? TopMetricsMaxSizeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.Translog? TranslogValue { get; set; }
+
+		private TranslogDescriptor TranslogDescriptor { get; set; }
+
+		private Action<TranslogDescriptor> TranslogDescriptorAction { get; set; }
+
+		private string? UuidValue { get; set; }
+
+		private Union<bool?, string?>? VerifiedBeforeCloseValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; set; }
+
+		private IndexVersioningDescriptor VersionDescriptor { get; set; }
+
+		private Action<IndexVersioningDescriptor> VersionDescriptorAction { get; set; }
+
+		public IndexSettingsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
+		{
+			IndexDescriptor = null;
+			IndexDescriptorAction = null;
+			IndexValue = index;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Index(IndexManagement.IndexSettingsDescriptor descriptor)
+		{
+			IndexValue = null;
+			IndexDescriptorAction = null;
+			IndexDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Index(Action<IndexManagement.IndexSettingsDescriptor> configure)
+		{
+			IndexValue = null;
+			IndexDescriptorAction = null;
+			IndexDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+		{
+			SettingsDescriptor = null;
+			SettingsDescriptorAction = null;
+			SettingsValue = settings;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Settings(IndexManagement.IndexSettingsDescriptor descriptor)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			SettingsDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Settings(Action<IndexManagement.IndexSettingsDescriptor> configure)
+		{
+			SettingsValue = null;
+			SettingsDescriptorAction = null;
+			SettingsDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Sort(Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? sort)
+		{
+			SortDescriptor = null;
+			SortDescriptorAction = null;
+			SortValue = sort;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Sort(IndexManagement.IndexSegmentSortDescriptor descriptor)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			SortDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Sort(Action<IndexManagement.IndexSegmentSortDescriptor> configure)
+		{
+			SortValue = null;
+			SortDescriptorAction = null;
+			SortDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Analysis(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? analysis)
+		{
+			AnalysisDescriptor = null;
+			AnalysisDescriptorAction = null;
+			AnalysisValue = analysis;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Analysis(IndexManagement.IndexSettingsAnalysisDescriptor descriptor)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Analysis(Action<IndexManagement.IndexSettingsAnalysisDescriptor> configure)
+		{
+			AnalysisValue = null;
+			AnalysisDescriptorAction = null;
+			AnalysisDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? analyze)
+		{
+			AnalyzeDescriptor = null;
+			AnalyzeDescriptorAction = null;
+			AnalyzeValue = analyze;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Analyze(IndexManagement.SettingsAnalyzeDescriptor descriptor)
+		{
+			AnalyzeValue = null;
+			AnalyzeDescriptorAction = null;
+			AnalyzeDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Analyze(Action<IndexManagement.SettingsAnalyzeDescriptor> configure)
+		{
+			AnalyzeValue = null;
+			AnalyzeDescriptorAction = null;
+			AnalyzeDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor AutoExpandReplicas(string? autoExpandReplicas)
+		{
+			AutoExpandReplicasValue = autoExpandReplicas;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Blocks(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? blocks)
+		{
+			BlocksDescriptor = null;
+			BlocksDescriptorAction = null;
+			BlocksValue = blocks;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Blocks(IndexManagement.IndexSettingBlocksDescriptor descriptor)
+		{
+			BlocksValue = null;
+			BlocksDescriptorAction = null;
+			BlocksDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Blocks(Action<IndexManagement.IndexSettingBlocksDescriptor> configure)
+		{
+			BlocksValue = null;
+			BlocksDescriptorAction = null;
+			BlocksDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor CheckOnStartup(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? checkOnStartup)
+		{
+			CheckOnStartupValue = checkOnStartup;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Codec(string? codec)
+		{
+			CodecValue = codec;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor CreationDate(string? creationDate)
+		{
+			CreationDateValue = creationDate;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor CreationDateString(string? creationDateString)
+		{
+			CreationDateStringValue = creationDateString;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor DefaultPipeline(string? defaultPipeline)
+		{
+			DefaultPipelineValue = defaultPipeline;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor FinalPipeline(string? finalPipeline)
+		{
+			FinalPipelineValue = finalPipeline;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Format(Union<string?, int?>? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor GcDeletes(Elastic.Clients.Elasticsearch.Time? gcDeletes)
+		{
+			GcDeletesValue = gcDeletes;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Hidden(Union<bool?, string?>? hidden)
+		{
+			HiddenValue = hidden;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Highlight(Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? highlight)
+		{
+			HighlightDescriptor = null;
+			HighlightDescriptorAction = null;
+			HighlightValue = highlight;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Highlight(IndexManagement.SettingsHighlightDescriptor descriptor)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Highlight(Action<IndexManagement.SettingsHighlightDescriptor> configure)
+		{
+			HighlightValue = null;
+			HighlightDescriptorAction = null;
+			HighlightDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? lifecycle)
+		{
+			LifecycleDescriptor = null;
+			LifecycleDescriptorAction = null;
+			LifecycleValue = lifecycle;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Lifecycle(IndexManagement.IndexSettingsLifecycleDescriptor descriptor)
+		{
+			LifecycleValue = null;
+			LifecycleDescriptorAction = null;
+			LifecycleDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Lifecycle(Action<IndexManagement.IndexSettingsLifecycleDescriptor> configure)
+		{
+			LifecycleValue = null;
+			LifecycleDescriptorAction = null;
+			LifecycleDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor LoadFixedBitsetFiltersEagerly(bool? loadFixedBitsetFiltersEagerly = true)
+		{
+			LoadFixedBitsetFiltersEagerlyValue = loadFixedBitsetFiltersEagerly;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxDocvalueFieldsSearch(int? maxDocvalueFieldsSearch)
+		{
+			MaxDocvalueFieldsSearchValue = maxDocvalueFieldsSearch;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxInnerResultWindow(int? maxInnerResultWindow)
+		{
+			MaxInnerResultWindowValue = maxInnerResultWindow;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxNgramDiff(int? maxNgramDiff)
+		{
+			MaxNgramDiffValue = maxNgramDiff;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxRefreshListeners(int? maxRefreshListeners)
+		{
+			MaxRefreshListenersValue = maxRefreshListeners;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxRegexLength(int? maxRegexLength)
+		{
+			MaxRegexLengthValue = maxRegexLength;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxRescoreWindow(int? maxRescoreWindow)
+		{
+			MaxRescoreWindowValue = maxRescoreWindow;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxResultWindow(int? maxResultWindow)
+		{
+			MaxResultWindowValue = maxResultWindow;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxScriptFields(int? maxScriptFields)
+		{
+			MaxScriptFieldsValue = maxScriptFields;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxShingleDiff(int? maxShingleDiff)
+		{
+			MaxShingleDiffValue = maxShingleDiff;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxSlicesPerScroll(int? maxSlicesPerScroll)
+		{
+			MaxSlicesPerScrollValue = maxSlicesPerScroll;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor MaxTermsCount(int? maxTermsCount)
+		{
+			MaxTermsCountValue = maxTermsCount;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Merge(Elastic.Clients.Elasticsearch.IndexManagement.Merge? merge)
+		{
+			MergeDescriptor = null;
+			MergeDescriptorAction = null;
+			MergeValue = merge;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Merge(IndexManagement.MergeDescriptor descriptor)
+		{
+			MergeValue = null;
+			MergeDescriptorAction = null;
+			MergeDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Merge(Action<IndexManagement.MergeDescriptor> configure)
+		{
+			MergeValue = null;
+			MergeDescriptorAction = null;
+			MergeDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Mode(string? mode)
+		{
+			ModeValue = mode;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor NumberOfReplicas(Union<int?, string?>? numberOfReplicas)
+		{
+			NumberOfReplicasValue = numberOfReplicas;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor NumberOfRoutingShards(int? numberOfRoutingShards)
+		{
+			NumberOfRoutingShardsValue = numberOfRoutingShards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor NumberOfShards(Union<int?, string?>? numberOfShards)
+		{
+			NumberOfShardsValue = numberOfShards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Priority(Union<int?, string?>? priority)
+		{
+			PriorityValue = priority;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor ProvidedName(Elastic.Clients.Elasticsearch.Name? providedName)
+		{
+			ProvidedNameValue = providedName;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Queries(Elastic.Clients.Elasticsearch.IndexManagement.Queries? queries)
+		{
+			QueriesDescriptor = null;
+			QueriesDescriptorAction = null;
+			QueriesValue = queries;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Queries(IndexManagement.QueriesDescriptor descriptor)
+		{
+			QueriesValue = null;
+			QueriesDescriptorAction = null;
+			QueriesDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Queries(Action<IndexManagement.QueriesDescriptor> configure)
+		{
+			QueriesValue = null;
+			QueriesDescriptorAction = null;
+			QueriesDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor QueryString(Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? queryString)
+		{
+			QueryStringDescriptor = null;
+			QueryStringDescriptorAction = null;
+			QueryStringValue = queryString;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor QueryString(IndexManagement.SettingsQueryStringDescriptor descriptor)
+		{
+			QueryStringValue = null;
+			QueryStringDescriptorAction = null;
+			QueryStringDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor QueryString(Action<IndexManagement.SettingsQueryStringDescriptor> configure)
+		{
+			QueryStringValue = null;
+			QueryStringDescriptorAction = null;
+			QueryStringDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor RefreshInterval(Elastic.Clients.Elasticsearch.Time? refreshInterval)
+		{
+			RefreshIntervalValue = refreshInterval;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Routing(Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? routing)
+		{
+			RoutingDescriptor = null;
+			RoutingDescriptorAction = null;
+			RoutingValue = routing;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Routing(IndexManagement.IndexRoutingDescriptor descriptor)
+		{
+			RoutingValue = null;
+			RoutingDescriptorAction = null;
+			RoutingDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Routing(Action<IndexManagement.IndexRoutingDescriptor> configure)
+		{
+			RoutingValue = null;
+			RoutingDescriptorAction = null;
+			RoutingDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor RoutingPartitionSize(int? routingPartitionSize)
+		{
+			RoutingPartitionSizeValue = routingPartitionSize;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor RoutingPath(IEnumerable<string>? routingPath)
+		{
+			RoutingPathValue = routingPath;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Search(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? search)
+		{
+			SearchDescriptor = null;
+			SearchDescriptorAction = null;
+			SearchValue = search;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Search(IndexManagement.SettingsSearchDescriptor descriptor)
+		{
+			SearchValue = null;
+			SearchDescriptorAction = null;
+			SearchDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Search(Action<IndexManagement.SettingsSearchDescriptor> configure)
+		{
+			SearchValue = null;
+			SearchDescriptorAction = null;
+			SearchDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Shards(int? shards)
+		{
+			ShardsValue = shards;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? similarity)
+		{
+			SimilarityDescriptor = null;
+			SimilarityDescriptorAction = null;
+			SimilarityValue = similarity;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Similarity(IndexManagement.SettingsSimilarityDescriptor descriptor)
+		{
+			SimilarityValue = null;
+			SimilarityDescriptorAction = null;
+			SimilarityDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Similarity(Action<IndexManagement.SettingsSimilarityDescriptor> configure)
+		{
+			SimilarityValue = null;
+			SimilarityDescriptorAction = null;
+			SimilarityDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? softDeletes)
+		{
+			SoftDeletesDescriptor = null;
+			SoftDeletesDescriptorAction = null;
+			SoftDeletesValue = softDeletes;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor SoftDeletes(IndexManagement.SoftDeletesDescriptor descriptor)
+		{
+			SoftDeletesValue = null;
+			SoftDeletesDescriptorAction = null;
+			SoftDeletesDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor SoftDeletes(Action<IndexManagement.SoftDeletesDescriptor> configure)
+		{
+			SoftDeletesValue = null;
+			SoftDeletesDescriptorAction = null;
+			SoftDeletesDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor TimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? timeSeries)
+		{
+			TimeSeriesDescriptor = null;
+			TimeSeriesDescriptorAction = null;
+			TimeSeriesValue = timeSeries;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor TimeSeries(IndexManagement.IndexSettingsTimeSeriesDescriptor descriptor)
+		{
+			TimeSeriesValue = null;
+			TimeSeriesDescriptorAction = null;
+			TimeSeriesDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor TimeSeries(Action<IndexManagement.IndexSettingsTimeSeriesDescriptor> configure)
+		{
+			TimeSeriesValue = null;
+			TimeSeriesDescriptorAction = null;
+			TimeSeriesDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor TopMetricsMaxSize(int? topMetricsMaxSize)
+		{
+			TopMetricsMaxSizeValue = topMetricsMaxSize;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Translog(Elastic.Clients.Elasticsearch.IndexManagement.Translog? translog)
+		{
+			TranslogDescriptor = null;
+			TranslogDescriptorAction = null;
+			TranslogValue = translog;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Translog(IndexManagement.TranslogDescriptor descriptor)
+		{
+			TranslogValue = null;
+			TranslogDescriptorAction = null;
+			TranslogDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Translog(Action<IndexManagement.TranslogDescriptor> configure)
+		{
+			TranslogValue = null;
+			TranslogDescriptorAction = null;
+			TranslogDescriptorAction = configure;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Uuid(string? uuid)
+		{
+			UuidValue = uuid;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor VerifiedBeforeClose(Union<bool?, string?>? verifiedBeforeClose)
+		{
+			VerifiedBeforeCloseValue = verifiedBeforeClose;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Version(Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? version)
+		{
+			VersionDescriptor = null;
+			VersionDescriptorAction = null;
+			VersionValue = version;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Version(IndexManagement.IndexVersioningDescriptor descriptor)
+		{
+			VersionValue = null;
+			VersionDescriptorAction = null;
+			VersionDescriptor = descriptor;
+			return Self;
+		}
+
+		public IndexSettingsDescriptor Version(Action<IndexManagement.IndexVersioningDescriptor> configure)
+		{
+			VersionValue = null;
+			VersionDescriptorAction = null;
+			VersionDescriptorAction = configure;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (IndexDescriptor is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexDescriptor, options);
+			}
+			else if (IndexDescriptorAction is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor(IndexDescriptorAction), options);
+			}
+			else if (IndexValue is not null)
+			{
+				writer.WritePropertyName("index");
+				JsonSerializer.Serialize(writer, IndexValue, options);
+			}
+
+			if (SettingsDescriptor is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+			}
+			else if (SettingsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsDescriptor(SettingsDescriptorAction), options);
+			}
+			else if (SettingsValue is not null)
+			{
+				writer.WritePropertyName("settings");
+				JsonSerializer.Serialize(writer, SettingsValue, options);
+			}
+
 			if (SortDescriptor is not null)
 			{
 				writer.WritePropertyName("sort");
@@ -1264,12 +2441,396 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SortDescriptorAction is not null)
 			{
 				writer.WritePropertyName("sort");
-				JsonSerializer.Serialize(writer, new IndexManagement.IndexSegmentSortDescriptor<TDocument>(SortDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSegmentSortDescriptor(SortDescriptorAction), options);
 			}
 			else if (SortValue is not null)
 			{
 				writer.WritePropertyName("sort");
 				JsonSerializer.Serialize(writer, SortValue, options);
+			}
+
+			if (AnalysisDescriptor is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisDescriptor, options);
+			}
+			else if (AnalysisDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsAnalysisDescriptor(AnalysisDescriptorAction), options);
+			}
+			else if (AnalysisValue is not null)
+			{
+				writer.WritePropertyName("analysis");
+				JsonSerializer.Serialize(writer, AnalysisValue, options);
+			}
+
+			if (AnalyzeDescriptor is not null)
+			{
+				writer.WritePropertyName("analyze");
+				JsonSerializer.Serialize(writer, AnalyzeDescriptor, options);
+			}
+			else if (AnalyzeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("analyze");
+				JsonSerializer.Serialize(writer, new IndexManagement.SettingsAnalyzeDescriptor(AnalyzeDescriptorAction), options);
+			}
+			else if (AnalyzeValue is not null)
+			{
+				writer.WritePropertyName("analyze");
+				JsonSerializer.Serialize(writer, AnalyzeValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(AutoExpandReplicasValue))
+			{
+				writer.WritePropertyName("auto_expand_replicas");
+				writer.WriteStringValue(AutoExpandReplicasValue);
+			}
+
+			if (BlocksDescriptor is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, BlocksDescriptor, options);
+			}
+			else if (BlocksDescriptorAction is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingBlocksDescriptor(BlocksDescriptorAction), options);
+			}
+			else if (BlocksValue is not null)
+			{
+				writer.WritePropertyName("blocks");
+				JsonSerializer.Serialize(writer, BlocksValue, options);
+			}
+
+			if (CheckOnStartupValue is not null)
+			{
+				writer.WritePropertyName("check_on_startup");
+				JsonSerializer.Serialize(writer, CheckOnStartupValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(CodecValue))
+			{
+				writer.WritePropertyName("codec");
+				writer.WriteStringValue(CodecValue);
+			}
+
+			if (CreationDateValue is not null)
+			{
+				writer.WritePropertyName("creation_date");
+				JsonSerializer.Serialize(writer, CreationDateValue, options);
+			}
+
+			if (CreationDateStringValue is not null)
+			{
+				writer.WritePropertyName("creation_date_string");
+				JsonSerializer.Serialize(writer, CreationDateStringValue, options);
+			}
+
+			if (DefaultPipelineValue is not null)
+			{
+				writer.WritePropertyName("default_pipeline");
+				JsonSerializer.Serialize(writer, DefaultPipelineValue, options);
+			}
+
+			if (FinalPipelineValue is not null)
+			{
+				writer.WritePropertyName("final_pipeline");
+				JsonSerializer.Serialize(writer, FinalPipelineValue, options);
+			}
+
+			if (FormatValue is not null)
+			{
+				writer.WritePropertyName("format");
+				JsonSerializer.Serialize(writer, FormatValue, options);
+			}
+
+			if (GcDeletesValue is not null)
+			{
+				writer.WritePropertyName("gc_deletes");
+				JsonSerializer.Serialize(writer, GcDeletesValue, options);
+			}
+
+			if (HiddenValue is not null)
+			{
+				writer.WritePropertyName("hidden");
+				JsonSerializer.Serialize(writer, HiddenValue, options);
+			}
+
+			if (HighlightDescriptor is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightDescriptor, options);
+			}
+			else if (HighlightDescriptorAction is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, new IndexManagement.SettingsHighlightDescriptor(HighlightDescriptorAction), options);
+			}
+			else if (HighlightValue is not null)
+			{
+				writer.WritePropertyName("highlight");
+				JsonSerializer.Serialize(writer, HighlightValue, options);
+			}
+
+			if (LifecycleDescriptor is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+			}
+			else if (LifecycleDescriptorAction is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexSettingsLifecycleDescriptor(LifecycleDescriptorAction), options);
+			}
+			else if (LifecycleValue is not null)
+			{
+				writer.WritePropertyName("lifecycle");
+				JsonSerializer.Serialize(writer, LifecycleValue, options);
+			}
+
+			if (LoadFixedBitsetFiltersEagerlyValue.HasValue)
+			{
+				writer.WritePropertyName("load_fixed_bitset_filters_eagerly");
+				writer.WriteBooleanValue(LoadFixedBitsetFiltersEagerlyValue.Value);
+			}
+
+			if (MaxDocvalueFieldsSearchValue.HasValue)
+			{
+				writer.WritePropertyName("max_docvalue_fields_search");
+				writer.WriteNumberValue(MaxDocvalueFieldsSearchValue.Value);
+			}
+
+			if (MaxInnerResultWindowValue.HasValue)
+			{
+				writer.WritePropertyName("max_inner_result_window");
+				writer.WriteNumberValue(MaxInnerResultWindowValue.Value);
+			}
+
+			if (MaxNgramDiffValue.HasValue)
+			{
+				writer.WritePropertyName("max_ngram_diff");
+				writer.WriteNumberValue(MaxNgramDiffValue.Value);
+			}
+
+			if (MaxRefreshListenersValue.HasValue)
+			{
+				writer.WritePropertyName("max_refresh_listeners");
+				writer.WriteNumberValue(MaxRefreshListenersValue.Value);
+			}
+
+			if (MaxRegexLengthValue.HasValue)
+			{
+				writer.WritePropertyName("max_regex_length");
+				writer.WriteNumberValue(MaxRegexLengthValue.Value);
+			}
+
+			if (MaxRescoreWindowValue.HasValue)
+			{
+				writer.WritePropertyName("max_rescore_window");
+				writer.WriteNumberValue(MaxRescoreWindowValue.Value);
+			}
+
+			if (MaxResultWindowValue.HasValue)
+			{
+				writer.WritePropertyName("max_result_window");
+				writer.WriteNumberValue(MaxResultWindowValue.Value);
+			}
+
+			if (MaxScriptFieldsValue.HasValue)
+			{
+				writer.WritePropertyName("max_script_fields");
+				writer.WriteNumberValue(MaxScriptFieldsValue.Value);
+			}
+
+			if (MaxShingleDiffValue.HasValue)
+			{
+				writer.WritePropertyName("max_shingle_diff");
+				writer.WriteNumberValue(MaxShingleDiffValue.Value);
+			}
+
+			if (MaxSlicesPerScrollValue.HasValue)
+			{
+				writer.WritePropertyName("max_slices_per_scroll");
+				writer.WriteNumberValue(MaxSlicesPerScrollValue.Value);
+			}
+
+			if (MaxTermsCountValue.HasValue)
+			{
+				writer.WritePropertyName("max_terms_count");
+				writer.WriteNumberValue(MaxTermsCountValue.Value);
+			}
+
+			if (MergeDescriptor is not null)
+			{
+				writer.WritePropertyName("merge");
+				JsonSerializer.Serialize(writer, MergeDescriptor, options);
+			}
+			else if (MergeDescriptorAction is not null)
+			{
+				writer.WritePropertyName("merge");
+				JsonSerializer.Serialize(writer, new IndexManagement.MergeDescriptor(MergeDescriptorAction), options);
+			}
+			else if (MergeValue is not null)
+			{
+				writer.WritePropertyName("merge");
+				JsonSerializer.Serialize(writer, MergeValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(ModeValue))
+			{
+				writer.WritePropertyName("mode");
+				writer.WriteStringValue(ModeValue);
+			}
+
+			if (NumberOfReplicasValue is not null)
+			{
+				writer.WritePropertyName("number_of_replicas");
+				JsonSerializer.Serialize(writer, NumberOfReplicasValue, options);
+			}
+
+			if (NumberOfRoutingShardsValue.HasValue)
+			{
+				writer.WritePropertyName("number_of_routing_shards");
+				writer.WriteNumberValue(NumberOfRoutingShardsValue.Value);
+			}
+
+			if (NumberOfShardsValue is not null)
+			{
+				writer.WritePropertyName("number_of_shards");
+				JsonSerializer.Serialize(writer, NumberOfShardsValue, options);
+			}
+
+			if (PriorityValue is not null)
+			{
+				writer.WritePropertyName("priority");
+				JsonSerializer.Serialize(writer, PriorityValue, options);
+			}
+
+			if (ProvidedNameValue is not null)
+			{
+				writer.WritePropertyName("provided_name");
+				JsonSerializer.Serialize(writer, ProvidedNameValue, options);
+			}
+
+			if (QueriesDescriptor is not null)
+			{
+				writer.WritePropertyName("queries");
+				JsonSerializer.Serialize(writer, QueriesDescriptor, options);
+			}
+			else if (QueriesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("queries");
+				JsonSerializer.Serialize(writer, new IndexManagement.QueriesDescriptor(QueriesDescriptorAction), options);
+			}
+			else if (QueriesValue is not null)
+			{
+				writer.WritePropertyName("queries");
+				JsonSerializer.Serialize(writer, QueriesValue, options);
+			}
+
+			if (QueryStringDescriptor is not null)
+			{
+				writer.WritePropertyName("query_string");
+				JsonSerializer.Serialize(writer, QueryStringDescriptor, options);
+			}
+			else if (QueryStringDescriptorAction is not null)
+			{
+				writer.WritePropertyName("query_string");
+				JsonSerializer.Serialize(writer, new IndexManagement.SettingsQueryStringDescriptor(QueryStringDescriptorAction), options);
+			}
+			else if (QueryStringValue is not null)
+			{
+				writer.WritePropertyName("query_string");
+				JsonSerializer.Serialize(writer, QueryStringValue, options);
+			}
+
+			if (RefreshIntervalValue is not null)
+			{
+				writer.WritePropertyName("refresh_interval");
+				JsonSerializer.Serialize(writer, RefreshIntervalValue, options);
+			}
+
+			if (RoutingDescriptor is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, RoutingDescriptor, options);
+			}
+			else if (RoutingDescriptorAction is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, new IndexManagement.IndexRoutingDescriptor(RoutingDescriptorAction), options);
+			}
+			else if (RoutingValue is not null)
+			{
+				writer.WritePropertyName("routing");
+				JsonSerializer.Serialize(writer, RoutingValue, options);
+			}
+
+			if (RoutingPartitionSizeValue.HasValue)
+			{
+				writer.WritePropertyName("routing_partition_size");
+				writer.WriteNumberValue(RoutingPartitionSizeValue.Value);
+			}
+
+			if (RoutingPathValue is not null)
+			{
+				writer.WritePropertyName("routing_path");
+				JsonSerializer.Serialize(writer, RoutingPathValue, options);
+			}
+
+			if (SearchDescriptor is not null)
+			{
+				writer.WritePropertyName("search");
+				JsonSerializer.Serialize(writer, SearchDescriptor, options);
+			}
+			else if (SearchDescriptorAction is not null)
+			{
+				writer.WritePropertyName("search");
+				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSearchDescriptor(SearchDescriptorAction), options);
+			}
+			else if (SearchValue is not null)
+			{
+				writer.WritePropertyName("search");
+				JsonSerializer.Serialize(writer, SearchValue, options);
+			}
+
+			if (ShardsValue.HasValue)
+			{
+				writer.WritePropertyName("shards");
+				writer.WriteNumberValue(ShardsValue.Value);
+			}
+
+			if (SimilarityDescriptor is not null)
+			{
+				writer.WritePropertyName("similarity");
+				JsonSerializer.Serialize(writer, SimilarityDescriptor, options);
+			}
+			else if (SimilarityDescriptorAction is not null)
+			{
+				writer.WritePropertyName("similarity");
+				JsonSerializer.Serialize(writer, new IndexManagement.SettingsSimilarityDescriptor(SimilarityDescriptorAction), options);
+			}
+			else if (SimilarityValue is not null)
+			{
+				writer.WritePropertyName("similarity");
+				JsonSerializer.Serialize(writer, SimilarityValue, options);
+			}
+
+			if (SoftDeletesDescriptor is not null)
+			{
+				writer.WritePropertyName("soft_deletes");
+				JsonSerializer.Serialize(writer, SoftDeletesDescriptor, options);
+			}
+			else if (SoftDeletesDescriptorAction is not null)
+			{
+				writer.WritePropertyName("soft_deletes");
+				JsonSerializer.Serialize(writer, new IndexManagement.SoftDeletesDescriptor(SoftDeletesDescriptorAction), options);
+			}
+			else if (SoftDeletesValue is not null)
+			{
+				writer.WritePropertyName("soft_deletes");
+				JsonSerializer.Serialize(writer, SoftDeletesValue, options);
 			}
 
 			if (TimeSeriesDescriptor is not null)

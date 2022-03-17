@@ -95,69 +95,170 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class MultiMatchQueryDescriptor<TDocument> : DescriptorBase<MultiMatchQueryDescriptor<TDocument>>
 	{
-		public MultiMatchQueryDescriptor()
+		internal MultiMatchQueryDescriptor(Action<MultiMatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public MultiMatchQueryDescriptor() : base()
 		{
 		}
 
-		internal MultiMatchQueryDescriptor(Action<MultiMatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? AnalyzerValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+		private string? AnalyzerValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; private set; }
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal string? FuzzyRewriteValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 
-		internal bool? FuzzyTranspositionsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 
-		internal bool? LenientValue { get; private set; }
+		private string? FuzzyRewriteValue { get; set; }
 
-		internal int? MaxExpansionsValue { get; private set; }
+		private bool? FuzzyTranspositionsValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private bool? LenientValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; private set; }
+		private int? MaxExpansionsValue { get; set; }
 
-		internal int? PrefixLengthValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal string QueryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
 
-		internal int? SlopValue { get; private set; }
+		private int? PrefixLengthValue { get; set; }
 
-		internal double? TieBreakerValue { get; private set; }
+		private string QueryValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; private set; }
+		private int? SlopValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; private set; }
+		private double? TieBreakerValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
-		public MultiMatchQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public MultiMatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness) => Assign(fuzziness, (a, v) => a.FuzzinessValue = v);
-		public MultiMatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite) => Assign(fuzzyRewrite, (a, v) => a.FuzzyRewriteValue = v);
-		public MultiMatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
-		public MultiMatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions) => Assign(maxExpansions, (a, v) => a.MaxExpansionsValue = v);
-		public MultiMatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op) => Assign(op, (a, v) => a.OperatorValue = v);
-		public MultiMatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength) => Assign(prefixLength, (a, v) => a.PrefixLengthValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Slop(int? slop) => Assign(slop, (a, v) => a.SlopValue = v);
-		public MultiMatchQueryDescriptor<TDocument> TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type) => Assign(type, (a, v) => a.TypeValue = v);
-		public MultiMatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery) => Assign(zeroTermsQuery, (a, v) => a.ZeroTermsQueryValue = v);
-		public MultiMatchQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public MultiMatchQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public MultiMatchQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Fields<TValue>(Expression<Func<TDocument, TValue>> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		{
+			FuzzinessValue = fuzziness;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
+		{
+			FuzzyRewriteValue = fuzzyRewrite;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Lenient(bool? lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
+		{
+			MaxExpansionsValue = maxExpansions;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
+		{
+			PrefixLengthValue = prefixLength;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Slop(int? slop)
+		{
+			SlopValue = slop;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> TieBreaker(double? tieBreaker)
+		{
+			TieBreakerValue = tieBreaker;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+		{
+			ZeroTermsQueryValue = zeroTermsQuery;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			if (!string.IsNullOrEmpty(AnalyzerValue))
 			{
 				writer.WritePropertyName("analyzer");
@@ -168,6 +269,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
 				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			if (FieldsValue is not null)
@@ -250,16 +357,278 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class MultiMatchQueryDescriptor : DescriptorBase<MultiMatchQueryDescriptor>
+	{
+		internal MultiMatchQueryDescriptor(Action<MultiMatchQueryDescriptor> configure) => configure.Invoke(this);
+		public MultiMatchQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private string? AnalyzerValue { get; set; }
+
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
+
+		private string? FuzzyRewriteValue { get; set; }
+
+		private bool? FuzzyTranspositionsValue { get; set; }
+
+		private bool? LenientValue { get; set; }
+
+		private int? MaxExpansionsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
+
+		private int? PrefixLengthValue { get; set; }
+
+		private string QueryValue { get; set; }
+
+		private int? SlopValue { get; set; }
+
+		private double? TieBreakerValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
+
+		public MultiMatchQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Fields<TDocument, TValue>(Expression<Func<TDocument, TValue>> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Fields<TDocument>(Expression<Func<TDocument, object>> fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
+		{
+			FuzzinessValue = fuzziness;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
+		{
+			FuzzyRewriteValue = fuzzyRewrite;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Lenient(bool? lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor MaxExpansions(int? maxExpansions)
+		{
+			MaxExpansionsValue = maxExpansions;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+		{
+			OperatorValue = op;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor PrefixLength(int? prefixLength)
+		{
+			PrefixLengthValue = prefixLength;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Slop(int? slop)
+		{
+			SlopValue = slop;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor TieBreaker(double? tieBreaker)
+		{
+			TieBreakerValue = tieBreaker;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? type)
+		{
+			TypeValue = type;
+			return Self;
+		}
+
+		public MultiMatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
+		{
+			ZeroTermsQueryValue = zeroTermsQuery;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
 			}
 
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
+			}
+
+			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
+			{
+				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
 			if (BoostValue.HasValue)
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (FuzzinessValue is not null)
+			{
+				writer.WritePropertyName("fuzziness");
+				JsonSerializer.Serialize(writer, FuzzinessValue, options);
+			}
+
+			if (FuzzyRewriteValue is not null)
+			{
+				writer.WritePropertyName("fuzzy_rewrite");
+				JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			}
+
+			if (FuzzyTranspositionsValue.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_transpositions");
+				writer.WriteBooleanValue(FuzzyTranspositionsValue.Value);
+			}
+
+			if (LenientValue.HasValue)
+			{
+				writer.WritePropertyName("lenient");
+				writer.WriteBooleanValue(LenientValue.Value);
+			}
+
+			if (MaxExpansionsValue.HasValue)
+			{
+				writer.WritePropertyName("max_expansions");
+				writer.WriteNumberValue(MaxExpansionsValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			if (OperatorValue is not null)
+			{
+				writer.WritePropertyName("operator");
+				JsonSerializer.Serialize(writer, OperatorValue, options);
+			}
+
+			if (PrefixLengthValue.HasValue)
+			{
+				writer.WritePropertyName("prefix_length");
+				writer.WriteNumberValue(PrefixLengthValue.Value);
+			}
+
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
+			if (SlopValue.HasValue)
+			{
+				writer.WritePropertyName("slop");
+				writer.WriteNumberValue(SlopValue.Value);
+			}
+
+			if (TieBreakerValue.HasValue)
+			{
+				writer.WritePropertyName("tie_breaker");
+				writer.WriteNumberValue(TieBreakerValue.Value);
+			}
+
+			if (TypeValue is not null)
+			{
+				writer.WritePropertyName("type");
+				JsonSerializer.Serialize(writer, TypeValue, options);
+			}
+
+			if (ZeroTermsQueryValue is not null)
+			{
+				writer.WritePropertyName("zero_terms_query");
+				JsonSerializer.Serialize(writer, ZeroTermsQueryValue, options);
 			}
 
 			writer.WriteEndObject();

@@ -45,20 +45,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityBm25Descriptor : DescriptorBase<SettingsSimilarityBm25Descriptor>
 	{
-		public SettingsSimilarityBm25Descriptor()
+		internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityBm25Descriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
-		internal int bValue { get; private set; }
+		private int bValue { get; set; }
 
-		internal bool DiscountOverlapsValue { get; private set; }
+		private bool DiscountOverlapsValue { get; set; }
 
-		internal double K1Value { get; private set; }
+		private double K1Value { get; set; }
 
-		public SettingsSimilarityBm25Descriptor b(int b) => Assign(b, (a, v) => a.bValue = v);
-		public SettingsSimilarityBm25Descriptor DiscountOverlaps(bool discountOverlaps = true) => Assign(discountOverlaps, (a, v) => a.DiscountOverlapsValue = v);
-		public SettingsSimilarityBm25Descriptor K1(double k1) => Assign(k1, (a, v) => a.K1Value = v);
+		public SettingsSimilarityBm25Descriptor b(int b)
+		{
+			bValue = b;
+			return Self;
+		}
+
+		public SettingsSimilarityBm25Descriptor DiscountOverlaps(bool discountOverlaps = true)
+		{
+			DiscountOverlapsValue = discountOverlaps;
+			return Self;
+		}
+
+		public SettingsSimilarityBm25Descriptor K1(double k1)
+		{
+			K1Value = k1;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

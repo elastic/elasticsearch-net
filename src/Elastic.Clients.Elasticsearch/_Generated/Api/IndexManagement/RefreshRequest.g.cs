@@ -60,23 +60,49 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 
-	public sealed partial class RefreshRequestDescriptor : RequestDescriptorBase<RefreshRequestDescriptor, RefreshRequestParameters>
+	public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescriptorBase<RefreshRequestDescriptor<TDocument>, RefreshRequestParameters>
 	{
+		internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public RefreshRequestDescriptor()
 		{
 		}
 
-		public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override bool SupportsBody => false;
+		public RefreshRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public RefreshRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public RefreshRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public RefreshRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class RefreshRequestDescriptor : RequestDescriptorBase<RefreshRequestDescriptor, RefreshRequestParameters>
+	{
+		internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor> configure) => configure.Invoke(this);
+		public RefreshRequestDescriptor()
 		{
 		}
 
-		internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => false;
 		public RefreshRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		public RefreshRequestDescriptor ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		public RefreshRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public RefreshRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+		{
+			RouteValues.Optional("index", indices);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

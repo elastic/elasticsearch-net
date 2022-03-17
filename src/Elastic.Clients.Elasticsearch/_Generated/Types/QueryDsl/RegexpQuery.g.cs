@@ -155,38 +155,100 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		public string Value { get; set; }
 	}
 
-	public sealed partial class RegexpQueryDescriptor<TDocument> : FieldNameQueryDescriptorBase<RegexpQueryDescriptor<TDocument>, TDocument>
+	public sealed partial class RegexpQueryDescriptor<TDocument> : DescriptorBase<RegexpQueryDescriptor<TDocument>>
 	{
-		public RegexpQueryDescriptor()
+		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public RegexpQueryDescriptor() : base()
 		{
 		}
 
-		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? CaseInsensitiveValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? FlagsValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal int? MaxDeterminizedStatesValue { get; private set; }
+		private bool? CaseInsensitiveValue { get; set; }
 
-		internal string? RewriteValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal string ValueValue { get; private set; }
+		private string? FlagsValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private int? MaxDeterminizedStatesValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string? RewriteValue { get; set; }
 
-		public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true) => Assign(caseInsensitive, (a, v) => a.CaseInsensitiveValue = v);
-		public RegexpQueryDescriptor<TDocument> Flags(string? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
-		public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates) => Assign(maxDeterminizedStates, (a, v) => a.MaxDeterminizedStatesValue = v);
-		public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite) => Assign(rewrite, (a, v) => a.RewriteValue = v);
-		public RegexpQueryDescriptor<TDocument> Value(string value) => Assign(value, (a, v) => a.ValueValue = v);
-		public RegexpQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public RegexpQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		private string ValueValue { get; set; }
+
+		public RegexpQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
+		{
+			CaseInsensitiveValue = caseInsensitive;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> Flags(string? flags)
+		{
+			FlagsValue = flags;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates)
+		{
+			MaxDeterminizedStatesValue = maxDeterminizedStates;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite)
+		{
+			RewriteValue = rewrite;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor<TDocument> Value(string value)
+		{
+			ValueValue = value;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
-			writer.WritePropertyName(settings.Inferrer.Field(_field));
 			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
+			}
+
 			if (CaseInsensitiveValue.HasValue)
 			{
 				writer.WritePropertyName("case_insensitive");
@@ -213,6 +275,99 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 			writer.WritePropertyName("value");
 			writer.WriteStringValue(ValueValue);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class RegexpQueryDescriptor : DescriptorBase<RegexpQueryDescriptor>
+	{
+		internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
+		public RegexpQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private bool? CaseInsensitiveValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private string? FlagsValue { get; set; }
+
+		private int? MaxDeterminizedStatesValue { get; set; }
+
+		private string? RewriteValue { get; set; }
+
+		private string ValueValue { get; set; }
+
+		public RegexpQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
+		{
+			CaseInsensitiveValue = caseInsensitive;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Flags(string? flags)
+		{
+			FlagsValue = flags;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
+		{
+			MaxDeterminizedStatesValue = maxDeterminizedStates;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Rewrite(string? rewrite)
+		{
+			RewriteValue = rewrite;
+			return Self;
+		}
+
+		public RegexpQueryDescriptor Value(string value)
+		{
+			ValueValue = value;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -225,6 +380,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteNumberValue(BoostValue.Value);
 			}
 
+			if (CaseInsensitiveValue.HasValue)
+			{
+				writer.WritePropertyName("case_insensitive");
+				writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(FlagsValue))
+			{
+				writer.WritePropertyName("flags");
+				writer.WriteStringValue(FlagsValue);
+			}
+
+			if (MaxDeterminizedStatesValue.HasValue)
+			{
+				writer.WritePropertyName("max_determinized_states");
+				writer.WriteNumberValue(MaxDeterminizedStatesValue.Value);
+			}
+
+			if (RewriteValue is not null)
+			{
+				writer.WritePropertyName("rewrite");
+				JsonSerializer.Serialize(writer, RewriteValue, options);
+			}
+
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(ValueValue);
+			writer.WriteEndObject();
 			writer.WriteEndObject();
 		}
 	}

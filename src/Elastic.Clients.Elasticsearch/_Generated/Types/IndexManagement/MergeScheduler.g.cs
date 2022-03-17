@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class MergeSchedulerDescriptor : DescriptorBase<MergeSchedulerDescriptor>
 	{
-		public MergeSchedulerDescriptor()
+		internal MergeSchedulerDescriptor(Action<MergeSchedulerDescriptor> configure) => configure.Invoke(this);
+		public MergeSchedulerDescriptor() : base()
 		{
 		}
 
-		internal MergeSchedulerDescriptor(Action<MergeSchedulerDescriptor> configure) => configure.Invoke(this);
-		internal int? MaxMergeCountValue { get; private set; }
+		private int? MaxMergeCountValue { get; set; }
 
-		internal int? MaxThreadCountValue { get; private set; }
+		private int? MaxThreadCountValue { get; set; }
 
-		public MergeSchedulerDescriptor MaxMergeCount(int? maxMergeCount) => Assign(maxMergeCount, (a, v) => a.MaxMergeCountValue = v);
-		public MergeSchedulerDescriptor MaxThreadCount(int? maxThreadCount) => Assign(maxThreadCount, (a, v) => a.MaxThreadCountValue = v);
+		public MergeSchedulerDescriptor MaxMergeCount(int? maxMergeCount)
+		{
+			MaxMergeCountValue = maxMergeCount;
+			return Self;
+		}
+
+		public MergeSchedulerDescriptor MaxThreadCount(int? maxThreadCount)
+		{
+			MaxThreadCountValue = maxThreadCount;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -39,34 +39,46 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class DisMaxQueryDescriptor : DescriptorBase<DisMaxQueryDescriptor>
 	{
-		public DisMaxQueryDescriptor()
+		internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
+		public DisMaxQueryDescriptor() : base()
 		{
 		}
 
-		internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
-		internal IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal double? TieBreakerValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> QueriesValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private double? TieBreakerValue { get; set; }
 
-		public DisMaxQueryDescriptor Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries) => Assign(queries, (a, v) => a.QueriesValue = v);
-		public DisMaxQueryDescriptor TieBreaker(double? tieBreaker) => Assign(tieBreaker, (a, v) => a.TieBreakerValue = v);
-		public DisMaxQueryDescriptor QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public DisMaxQueryDescriptor Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public DisMaxQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public DisMaxQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public DisMaxQueryDescriptor Queries(IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer> queries)
+		{
+			QueriesValue = queries;
+			return Self;
+		}
+
+		public DisMaxQueryDescriptor TieBreaker(double? tieBreaker)
+		{
+			TieBreakerValue = tieBreaker;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("queries");
-			JsonSerializer.Serialize(writer, QueriesValue, options);
-			if (TieBreakerValue.HasValue)
-			{
-				writer.WritePropertyName("tie_breaker");
-				writer.WriteNumberValue(TieBreakerValue.Value);
-			}
-
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
@@ -77,6 +89,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			writer.WritePropertyName("queries");
+			JsonSerializer.Serialize(writer, QueriesValue, options);
+			if (TieBreakerValue.HasValue)
+			{
+				writer.WritePropertyName("tie_breaker");
+				writer.WriteNumberValue(TieBreakerValue.Value);
 			}
 
 			writer.WriteEndObject();

@@ -165,74 +165,84 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class CardinalityAggregationDescriptor<TDocument> : DescriptorBase<CardinalityAggregationDescriptor<TDocument>>
 	{
-		public CardinalityAggregationDescriptor()
+		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public CardinalityAggregationDescriptor() : base()
 		{
 		}
 
-		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal int? PrecisionThresholdValue { get; private set; }
+		private ScriptBase? ScriptValue { get; set; }
 
-		internal bool? RehashValue { get; private set; }
+		private ScriptDescriptor ScriptDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
-		internal ScriptBase? ScriptValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 
-		internal Dictionary<string, object>? MetaValue { get; private set; }
+		private Dictionary<string, object>? MetaValue { get; set; }
 
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
+		private int? PrecisionThresholdValue { get; set; }
 
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
+		private bool? RehashValue { get; set; }
 
-		public CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? precisionThreshold) => Assign(precisionThreshold, (a, v) => a.PrecisionThresholdValue = v);
-		public CardinalityAggregationDescriptor<TDocument> Rehash(bool? rehash = true) => Assign(rehash, (a, v) => a.RehashValue = v);
-		public CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public CardinalityAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
 		public CardinalityAggregationDescriptor<TDocument> Script(ScriptBase? script)
 		{
 			ScriptDescriptor = null;
 			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
+			ScriptValue = script;
+			return Self;
 		}
 
 		public CardinalityAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
+			ScriptDescriptor = descriptor;
+			return Self;
 		}
 
 		public CardinalityAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
 		{
 			ScriptValue = null;
 			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
+			ScriptDescriptorAction = configure;
+			return Self;
 		}
 
-		public CardinalityAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? precisionThreshold)
+		{
+			PrecisionThresholdValue = precisionThreshold;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor<TDocument> Rehash(bool? rehash = true)
+		{
+			RehashValue = rehash;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("cardinality");
 			writer.WriteStartObject();
-			if (PrecisionThresholdValue.HasValue)
-			{
-				writer.WritePropertyName("precision_threshold");
-				writer.WriteNumberValue(PrecisionThresholdValue.Value);
-			}
-
-			if (RehashValue.HasValue)
-			{
-				writer.WritePropertyName("rehash");
-				writer.WriteBooleanValue(RehashValue.Value);
-			}
-
-			if (FieldValue is not null)
-			{
-				writer.WritePropertyName("field");
-				JsonSerializer.Serialize(writer, FieldValue, options);
-			}
-
 			if (ScriptDescriptor is not null)
 			{
 				writer.WritePropertyName("script");
@@ -247,6 +257,155 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (PrecisionThresholdValue.HasValue)
+			{
+				writer.WritePropertyName("precision_threshold");
+				writer.WriteNumberValue(PrecisionThresholdValue.Value);
+			}
+
+			if (RehashValue.HasValue)
+			{
+				writer.WritePropertyName("rehash");
+				writer.WriteBooleanValue(RehashValue.Value);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class CardinalityAggregationDescriptor : DescriptorBase<CardinalityAggregationDescriptor>
+	{
+		internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor> configure) => configure.Invoke(this);
+		public CardinalityAggregationDescriptor() : base()
+		{
+		}
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private int? PrecisionThresholdValue { get; set; }
+
+		private bool? RehashValue { get; set; }
+
+		public CardinalityAggregationDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor PrecisionThreshold(int? precisionThreshold)
+		{
+			PrecisionThresholdValue = precisionThreshold;
+			return Self;
+		}
+
+		public CardinalityAggregationDescriptor Rehash(bool? rehash = true)
+		{
+			RehashValue = rehash;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("cardinality");
+			writer.WriteStartObject();
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (PrecisionThresholdValue.HasValue)
+			{
+				writer.WritePropertyName("precision_threshold");
+				writer.WriteNumberValue(PrecisionThresholdValue.Value);
+			}
+
+			if (RehashValue.HasValue)
+			{
+				writer.WritePropertyName("rehash");
+				writer.WriteBooleanValue(RehashValue.Value);
 			}
 
 			writer.WriteEndObject();

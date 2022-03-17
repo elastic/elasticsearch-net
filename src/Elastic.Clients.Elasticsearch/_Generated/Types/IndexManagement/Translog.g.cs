@@ -41,42 +41,55 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class TranslogDescriptor : DescriptorBase<TranslogDescriptor>
 	{
-		public TranslogDescriptor()
+		internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
+		public TranslogDescriptor() : base()
 		{
 		}
 
-		internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
-		internal string? DurabilityValue { get; private set; }
+		private string? DurabilityValue { get; set; }
 
-		internal string? FlushThresholdSizeValue { get; private set; }
+		private string? FlushThresholdSizeValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; set; }
 
-		internal TranslogRetentionDescriptor RetentionDescriptor { get; private set; }
+		private TranslogRetentionDescriptor RetentionDescriptor { get; set; }
 
-		internal Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; private set; }
+		private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
 
-		public TranslogDescriptor Durability(string? durability) => Assign(durability, (a, v) => a.DurabilityValue = v);
-		public TranslogDescriptor FlushThresholdSize(string? flushThresholdSize) => Assign(flushThresholdSize, (a, v) => a.FlushThresholdSizeValue = v);
+		public TranslogDescriptor Durability(string? durability)
+		{
+			DurabilityValue = durability;
+			return Self;
+		}
+
+		public TranslogDescriptor FlushThresholdSize(string? flushThresholdSize)
+		{
+			FlushThresholdSizeValue = flushThresholdSize;
+			return Self;
+		}
+
 		public TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? retention)
 		{
 			RetentionDescriptor = null;
 			RetentionDescriptorAction = null;
-			return Assign(retention, (a, v) => a.RetentionValue = v);
+			RetentionValue = retention;
+			return Self;
 		}
 
 		public TranslogDescriptor Retention(IndexManagement.TranslogRetentionDescriptor descriptor)
 		{
 			RetentionValue = null;
 			RetentionDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.RetentionDescriptor = v);
+			RetentionDescriptor = descriptor;
+			return Self;
 		}
 
 		public TranslogDescriptor Retention(Action<IndexManagement.TranslogRetentionDescriptor> configure)
 		{
 			RetentionValue = null;
 			RetentionDescriptorAction = null;
-			return Assign(configure, (a, v) => a.RetentionDescriptorAction = v);
+			RetentionDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

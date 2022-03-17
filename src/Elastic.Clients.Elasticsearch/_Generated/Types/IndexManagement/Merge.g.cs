@@ -33,36 +33,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class MergeDescriptor : DescriptorBase<MergeDescriptor>
 	{
-		public MergeDescriptor()
+		internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
+		public MergeDescriptor() : base()
 		{
 		}
 
-		internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; set; }
 
-		internal MergeSchedulerDescriptor SchedulerDescriptor { get; private set; }
+		private MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
 
-		internal Action<MergeSchedulerDescriptor> SchedulerDescriptorAction { get; private set; }
+		private Action<MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
 
 		public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? scheduler)
 		{
 			SchedulerDescriptor = null;
 			SchedulerDescriptorAction = null;
-			return Assign(scheduler, (a, v) => a.SchedulerValue = v);
+			SchedulerValue = scheduler;
+			return Self;
 		}
 
 		public MergeDescriptor Scheduler(IndexManagement.MergeSchedulerDescriptor descriptor)
 		{
 			SchedulerValue = null;
 			SchedulerDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.SchedulerDescriptor = v);
+			SchedulerDescriptor = descriptor;
+			return Self;
 		}
 
 		public MergeDescriptor Scheduler(Action<IndexManagement.MergeSchedulerDescriptor> configure)
 		{
 			SchedulerValue = null;
 			SchedulerDescriptorAction = null;
-			return Assign(configure, (a, v) => a.SchedulerDescriptorAction = v);
+			SchedulerDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

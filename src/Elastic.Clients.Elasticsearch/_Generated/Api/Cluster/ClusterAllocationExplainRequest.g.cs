@@ -64,28 +64,48 @@ namespace Elastic.Clients.Elasticsearch.Cluster
 
 	public sealed partial class ClusterAllocationExplainRequestDescriptor : RequestDescriptorBase<ClusterAllocationExplainRequestDescriptor, ClusterAllocationExplainRequestParameters>
 	{
+		internal ClusterAllocationExplainRequestDescriptor(Action<ClusterAllocationExplainRequestDescriptor> configure) => configure.Invoke(this);
 		public ClusterAllocationExplainRequestDescriptor()
 		{
 		}
 
-		internal ClusterAllocationExplainRequestDescriptor(Action<ClusterAllocationExplainRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterAllocationExplain;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override bool SupportsBody => true;
 		public ClusterAllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
 		public ClusterAllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
-		internal string? CurrentNodeValue { get; private set; }
+		private string? CurrentNodeValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 
-		internal bool? PrimaryValue { get; private set; }
+		private bool? PrimaryValue { get; set; }
 
-		internal int? ShardValue { get; private set; }
+		private int? ShardValue { get; set; }
 
-		public ClusterAllocationExplainRequestDescriptor CurrentNode(string? currentNode) => Assign(currentNode, (a, v) => a.CurrentNodeValue = v);
-		public ClusterAllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index) => Assign(index, (a, v) => a.IndexValue = v);
-		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary = true) => Assign(primary, (a, v) => a.PrimaryValue = v);
-		public ClusterAllocationExplainRequestDescriptor Shard(int? shard) => Assign(shard, (a, v) => a.ShardValue = v);
+		public ClusterAllocationExplainRequestDescriptor CurrentNode(string? currentNode)
+		{
+			CurrentNodeValue = currentNode;
+			return Self;
+		}
+
+		public ClusterAllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
+		{
+			IndexValue = index;
+			return Self;
+		}
+
+		public ClusterAllocationExplainRequestDescriptor Primary(bool? primary = true)
+		{
+			PrimaryValue = primary;
+			return Self;
+		}
+
+		public ClusterAllocationExplainRequestDescriptor Shard(int? shard)
+		{
+			ShardValue = shard;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

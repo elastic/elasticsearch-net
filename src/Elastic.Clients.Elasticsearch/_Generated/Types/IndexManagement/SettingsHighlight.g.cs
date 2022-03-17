@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsHighlightDescriptor : DescriptorBase<SettingsHighlightDescriptor>
 	{
-		public SettingsHighlightDescriptor()
+		internal SettingsHighlightDescriptor(Action<SettingsHighlightDescriptor> configure) => configure.Invoke(this);
+		public SettingsHighlightDescriptor() : base()
 		{
 		}
 
-		internal SettingsHighlightDescriptor(Action<SettingsHighlightDescriptor> configure) => configure.Invoke(this);
-		internal int? MaxAnalyzedOffsetValue { get; private set; }
+		private int? MaxAnalyzedOffsetValue { get; set; }
 
-		public SettingsHighlightDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset) => Assign(maxAnalyzedOffset, (a, v) => a.MaxAnalyzedOffsetValue = v);
+		public SettingsHighlightDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset)
+		{
+			MaxAnalyzedOffsetValue = maxAnalyzedOffset;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

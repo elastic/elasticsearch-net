@@ -74,8 +74,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 
-	public sealed partial class ExistsRequestDescriptor : RequestDescriptorBase<ExistsRequestDescriptor, ExistsRequestParameters>
+	public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescriptorBase<ExistsRequestDescriptor<TDocument>, ExistsRequestParameters>
 	{
+		internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 		{
 		}
@@ -84,7 +85,37 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
+		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
+		protected override bool SupportsBody => false;
+		public ExistsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public ExistsRequestDescriptor<TDocument> ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ExistsRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+		public ExistsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		public ExistsRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		public ExistsRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+		public ExistsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+		{
+			RouteValues.Required("index", indices);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class ExistsRequestDescriptor : RequestDescriptorBase<ExistsRequestDescriptor, ExistsRequestParameters>
+	{
 		internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor> configure) => configure.Invoke(this);
+		public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+		{
+		}
+
+		internal ExistsRequestDescriptor()
+		{
+		}
+
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
 		protected override bool SupportsBody => false;
@@ -94,6 +125,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		public ExistsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		public ExistsRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		public ExistsRequestDescriptor Local(bool? local = true) => Qs("local", local);
+		public ExistsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+		{
+			RouteValues.Required("index", indices);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch
 	public class RouteValues : Dictionary<string, IUrlParameter>
 	{
 		/// <summary>
-		///     Used specifically by index requests to determine whether to use PUT or POST.
+		/// Used specifically by index requests to determine whether to use PUT or POST.
 		/// </summary>
 		internal bool ContainsId { get; private set; }
 
@@ -41,10 +41,23 @@ namespace Elastic.Clients.Elasticsearch
 			return resolved;
 		}
 
-		private RouteValues Route(string name, IUrlParameter routeValue)
+		private RouteValues Route(string name, IUrlParameter? routeValue, bool required = true)
 		{
 			switch (routeValue)
 			{
+				case null when !required:
+					{
+						if (!ContainsKey(name))
+							return this;
+						Remove(name);
+						if (IsId(name))
+							ContainsId = false; // invalidate cache
+						return this;
+					}
+
+				case null:
+					throw new ArgumentNullException(name, $"{name} is required to build a URL to this API.");
+
 				default:
 					this[name] = routeValue;
 					if (IsId(name))
@@ -55,13 +68,9 @@ namespace Elastic.Clients.Elasticsearch
 
 		private static bool IsId(string key) => key.Equals("id", StringComparison.OrdinalIgnoreCase);
 
-		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
+		internal RouteValues Required(string route, IUrlParameter? value) => Route(route, value);
 
-		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value);
-
-		//internal RouteValues Optional(string route, Metrics value) => Route(route, value, false);
-
-		//internal RouteValues Optional(string route, IndexMetrics value) => Route(route, value, false);
+		internal RouteValues Optional(string route, IUrlParameter? value) => Route(route, value, false);
 
 		internal TActual Get<TActual>(string route)
 		{

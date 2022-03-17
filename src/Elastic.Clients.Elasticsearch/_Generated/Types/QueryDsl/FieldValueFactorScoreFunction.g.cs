@@ -47,57 +47,106 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : DescriptorBase<FieldValueFactorScoreFunctionDescriptor<TDocument>>
 	{
-		public FieldValueFactorScoreFunctionDescriptor()
+		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public FieldValueFactorScoreFunctionDescriptor() : base()
 		{
 		}
 
-		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal double? FactorValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field FieldValue { get; private set; }
+		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
 
-		internal double? MissingValue { get; private set; }
+		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; private set; }
+		private double? FactorValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
-		internal double? WeightValue { get; private set; }
+		private double? MissingValue { get; set; }
 
-		internal QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
 
-		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
+		private double? WeightValue { get; set; }
 
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor) => Assign(factor, (a, v) => a.FactorValue = v);
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier) => Assign(modifier, (a, v) => a.ModifierValue = v);
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
-			return Assign(filter, (a, v) => a.FilterValue = v);
+			FilterValue = filter;
+			return Self;
 		}
 
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+			FilterDescriptor = descriptor;
+			return Self;
 		}
 
 		public FieldValueFactorScoreFunctionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+			FilterDescriptorAction = configure;
+			return Self;
 		}
 
-		public FieldValueFactorScoreFunctionDescriptor<TDocument> Weight(double? weight) => Assign(weight, (a, v) => a.WeightValue = v);
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
+		{
+			FactorValue = factor;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
+		{
+			ModifierValue = modifier;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor<TDocument> Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
 			if (FactorValue.HasValue)
 			{
 				writer.WritePropertyName("factor");
@@ -118,6 +167,108 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				JsonSerializer.Serialize(writer, ModifierValue, options);
 			}
 
+			if (WeightValue.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteNumberValue(WeightValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class FieldValueFactorScoreFunctionDescriptor : DescriptorBase<FieldValueFactorScoreFunctionDescriptor>
+	{
+		internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
+		public FieldValueFactorScoreFunctionDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+		private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+		private double? FactorValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+
+		private double? MissingValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
+
+		private double? WeightValue { get; set; }
+
+		public FieldValueFactorScoreFunctionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterValue = filter;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)
+		{
+			FactorValue = factor;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Missing(double? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? modifier)
+		{
+			ModifierValue = modifier;
+			return Self;
+		}
+
+		public FieldValueFactorScoreFunctionDescriptor Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (FilterDescriptor is not null)
 			{
 				writer.WritePropertyName("filter");
@@ -126,12 +277,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (FactorValue.HasValue)
+			{
+				writer.WritePropertyName("factor");
+				writer.WriteNumberValue(FactorValue.Value);
+			}
+
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+			if (MissingValue.HasValue)
+			{
+				writer.WritePropertyName("missing");
+				writer.WriteNumberValue(MissingValue.Value);
+			}
+
+			if (ModifierValue is not null)
+			{
+				writer.WritePropertyName("modifier");
+				JsonSerializer.Serialize(writer, ModifierValue, options);
 			}
 
 			if (WeightValue.HasValue)

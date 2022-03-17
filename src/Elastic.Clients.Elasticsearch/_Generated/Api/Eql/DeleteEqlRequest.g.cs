@@ -40,8 +40,9 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override bool SupportsBody => false;
 	}
 
-	public sealed partial class DeleteEqlRequestDescriptor : RequestDescriptorBase<DeleteEqlRequestDescriptor, DeleteEqlRequestParameters>
+	public sealed partial class DeleteEqlRequestDescriptor<TDocument> : RequestDescriptorBase<DeleteEqlRequestDescriptor<TDocument>, DeleteEqlRequestParameters>
 	{
+		internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public DeleteEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
 		}
@@ -50,10 +51,40 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		{
 		}
 
-		internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override bool SupportsBody => false;
+		public DeleteEqlRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class DeleteEqlRequestDescriptor : RequestDescriptorBase<DeleteEqlRequestDescriptor, DeleteEqlRequestParameters>
+	{
+		internal DeleteEqlRequestDescriptor(Action<DeleteEqlRequestDescriptor> configure) => configure.Invoke(this);
+		public DeleteEqlRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		internal DeleteEqlRequestDescriptor()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override bool SupportsBody => false;
+		public DeleteEqlRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

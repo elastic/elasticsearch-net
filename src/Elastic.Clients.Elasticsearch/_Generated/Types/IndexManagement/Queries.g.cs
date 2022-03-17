@@ -33,36 +33,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class QueriesDescriptor : DescriptorBase<QueriesDescriptor>
 	{
-		public QueriesDescriptor()
+		internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
+		public QueriesDescriptor() : base()
 		{
 		}
 
-		internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; set; }
 
-		internal CacheQueriesDescriptor CacheDescriptor { get; private set; }
+		private CacheQueriesDescriptor CacheDescriptor { get; set; }
 
-		internal Action<CacheQueriesDescriptor> CacheDescriptorAction { get; private set; }
+		private Action<CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
 
 		public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? cache)
 		{
 			CacheDescriptor = null;
 			CacheDescriptorAction = null;
-			return Assign(cache, (a, v) => a.CacheValue = v);
+			CacheValue = cache;
+			return Self;
 		}
 
 		public QueriesDescriptor Cache(IndexManagement.CacheQueriesDescriptor descriptor)
 		{
 			CacheValue = null;
 			CacheDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.CacheDescriptor = v);
+			CacheDescriptor = descriptor;
+			return Self;
 		}
 
 		public QueriesDescriptor Cache(Action<IndexManagement.CacheQueriesDescriptor> configure)
 		{
 			CacheValue = null;
 			CacheDescriptorAction = null;
-			return Assign(configure, (a, v) => a.CacheDescriptorAction = v);
+			CacheDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

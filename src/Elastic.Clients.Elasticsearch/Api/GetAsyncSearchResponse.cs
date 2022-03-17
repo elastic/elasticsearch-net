@@ -31,7 +31,7 @@ public abstract partial class AsyncSearchResponseBase
 	public DateTimeOffset ExpirationTime => ExpirationTimeInMillis.DateTimeOffset;
 }
 
-public sealed partial class AsyncSearchSubmitRequestDescriptor<TDocument>
+public sealed partial class AsyncSearchSubmitRequestDescriptor
 {
-	public AsyncSearchSubmitRequestDescriptor<TDocument> MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll()) : Query(q => q.MatchAll(selector));
+	public AsyncSearchSubmitRequestDescriptor MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll()) : Query(q => q.MatchAll(selector));
 }
