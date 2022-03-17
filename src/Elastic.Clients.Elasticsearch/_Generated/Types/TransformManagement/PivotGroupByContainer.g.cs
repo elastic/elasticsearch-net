@@ -83,26 +83,32 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 	public sealed partial class PivotGroupByContainerDescriptor<TDocument> : DescriptorBase<PivotGroupByContainerDescriptor<TDocument>>
 	{
-		public PivotGroupByContainerDescriptor()
+		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public PivotGroupByContainerDescriptor() : base()
 		{
 		}
 
-		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal bool ContainsVariant { get; private set; }
 
 		internal string ContainedVariantName { get; private set; }
 
 		internal PivotGroupByContainer Container { get; private set; }
 
-		internal object ContainerVariantDescriptorAction { get; private set; }
+		internal IDescriptor Descriptor { get; private set; }
 
-		private void Set(object descriptorAction, string variantName)
+		internal Type DescriptorType { get; private set; }
+
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : IDescriptor, new()
 		{
 			if (ContainsVariant)
 				throw new Exception("TODO");
-			ContainerVariantDescriptorAction = descriptorAction;
 			ContainedVariantName = variantName;
 			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
 		}
 
 		private void Set(IPivotGroupByContainerVariant variant, string variantName)
@@ -114,10 +120,6 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			ContainsVariant = true;
 		}
 
-		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
-		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
-		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			if (!ContainsVariant)
@@ -134,32 +136,80 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 			writer.WriteStartObject();
 			writer.WritePropertyName(ContainedVariantName);
-			writer.WriteStartObject();
-			if (ContainedVariantName == "date_histogram")
-			{
-				var descriptor = new Aggregations.DateHistogramAggregationDescriptor<TDocument>();
-				((Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
-			if (ContainedVariantName == "terms")
-			{
-				var descriptor = new Aggregations.TermsAggregationDescriptor<TDocument>();
-				((Action<Aggregations.TermsAggregationDescriptor<TDocument>>)ContainerVariantDescriptorAction).Invoke(descriptor);
-				JsonSerializer.Serialize(writer, descriptor, options);
-				Finalise();
-				return;
-			}
-
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
 			writer.WriteEndObject();
-			writer.WriteEndObject();
-			void Finalise()
-			{
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-			}
 		}
+
+		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	}
+
+	public sealed partial class PivotGroupByContainerDescriptor : DescriptorBase<PivotGroupByContainerDescriptor>
+	{
+		internal PivotGroupByContainerDescriptor(Action<PivotGroupByContainerDescriptor> configure) => configure.Invoke(this);
+		public PivotGroupByContainerDescriptor() : base()
+		{
+		}
+
+		internal bool ContainsVariant { get; private set; }
+
+		internal string ContainedVariantName { get; private set; }
+
+		internal PivotGroupByContainer Container { get; private set; }
+
+		internal IDescriptor Descriptor { get; private set; }
+
+		internal Type DescriptorType { get; private set; }
+
+		private void Set<T>(Action<T> descriptorAction, string variantName)
+			where T : IDescriptor, new()
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+			DescriptorType = typeof(T);
+			var descriptor = new T();
+			descriptorAction?.Invoke(descriptor);
+			Descriptor = descriptor;
+		}
+
+		private void Set(IPivotGroupByContainerVariant variant, string variantName)
+		{
+			if (ContainsVariant)
+				throw new Exception("TODO");
+			Container = new PivotGroupByContainer(variant);
+			ContainedVariantName = variantName;
+			ContainsVariant = true;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			if (!ContainsVariant)
+			{
+				writer.WriteNullValue();
+				return;
+			}
+
+			if (Container is not null)
+			{
+				JsonSerializer.Serialize(writer, Container, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WritePropertyName(ContainedVariantName);
+			JsonSerializer.Serialize(writer, Descriptor, DescriptorType, options);
+			writer.WriteEndObject();
+		}
+
+		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
+		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+		public void DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
+		public void Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+		public void Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	}
 }

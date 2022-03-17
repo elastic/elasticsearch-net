@@ -37,17 +37,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexVersioningDescriptor : DescriptorBase<IndexVersioningDescriptor>
 	{
-		public IndexVersioningDescriptor()
+		internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
+		public IndexVersioningDescriptor() : base()
 		{
 		}
 
-		internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
-		internal string CreatedValue { get; private set; }
+		private string CreatedValue { get; set; }
 
-		internal string? CreatedStringValue { get; private set; }
+		private string? CreatedStringValue { get; set; }
 
-		public IndexVersioningDescriptor Created(string created) => Assign(created, (a, v) => a.CreatedValue = v);
-		public IndexVersioningDescriptor CreatedString(string? createdString) => Assign(createdString, (a, v) => a.CreatedStringValue = v);
+		public IndexVersioningDescriptor Created(string created)
+		{
+			CreatedValue = created;
+			return Self;
+		}
+
+		public IndexVersioningDescriptor CreatedString(string? createdString)
+		{
+			CreatedStringValue = createdString;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

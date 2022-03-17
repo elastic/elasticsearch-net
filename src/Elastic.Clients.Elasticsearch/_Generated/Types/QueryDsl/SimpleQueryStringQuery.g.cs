@@ -83,59 +83,140 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : DescriptorBase<SimpleQueryStringQueryDescriptor<TDocument>>
 	{
-		public SimpleQueryStringQueryDescriptor()
+		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public SimpleQueryStringQueryDescriptor() : base()
 		{
 		}
 
-		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal bool? AnalyzeWildcardValue { get; private set; }
+		private string? QueryNameValue { get; set; }
 
-		internal string? AnalyzerValue { get; private set; }
+		private bool? AnalyzeWildcardValue { get; set; }
 
-		internal bool? AutoGenerateSynonymsPhraseQueryValue { get; private set; }
+		private string? AnalyzerValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; private set; }
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 
-		internal IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; private set; }
+		private float? BoostValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 
-		internal int? FuzzyMaxExpansionsValue { get; private set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 
-		internal int? FuzzyPrefixLengthValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
 
-		internal bool? FuzzyTranspositionsValue { get; private set; }
+		private int? FuzzyMaxExpansionsValue { get; set; }
 
-		internal bool? LenientValue { get; private set; }
+		private int? FuzzyPrefixLengthValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; private set; }
+		private bool? FuzzyTranspositionsValue { get; set; }
 
-		internal string QueryValue { get; private set; }
+		private bool? LenientValue { get; set; }
 
-		internal string? QuoteFieldSuffixValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
-		internal string? QueryNameValue { get; private set; }
+		private string QueryValue { get; set; }
 
-		internal float? BoostValue { get; private set; }
+		private string? QuoteFieldSuffixValue { get; set; }
 
-		public SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(analyzeWildcard, (a, v) => a.AnalyzeWildcardValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) => Assign(autoGenerateSynonymsPhraseQuery, (a, v) => a.AutoGenerateSynonymsPhraseQueryValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Assign(defaultOperator, (a, v) => a.DefaultOperatorValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields) => Assign(fields, (a, v) => a.FieldsValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags) => Assign(flags, (a, v) => a.FlagsValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(fuzzyMaxExpansions, (a, v) => a.FuzzyMaxExpansionsValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(fuzzyPrefixLength, (a, v) => a.FuzzyPrefixLengthValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(fuzzyTranspositions, (a, v) => a.FuzzyTranspositionsValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Lenient(bool? lenient = true) => Assign(lenient, (a, v) => a.LenientValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch) => Assign(minimumShouldMatch, (a, v) => a.MinimumShouldMatchValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Query(string query) => Assign(query, (a, v) => a.QueryValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix) => Assign(quoteFieldSuffix, (a, v) => a.QuoteFieldSuffixValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName) => Assign(queryName, (a, v) => a.QueryNameValue = v);
-		public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost) => Assign(boost, (a, v) => a.BoostValue = v);
+		public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
+		{
+			AnalyzeWildcardValue = analyzeWildcard;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator)
+		{
+			DefaultOperatorValue = defaultOperator;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags)
+		{
+			FlagsValue = flags;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? fuzzyMaxExpansions)
+		{
+			FuzzyMaxExpansionsValue = fuzzyMaxExpansions;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? fuzzyPrefixLength)
+		{
+			FuzzyPrefixLengthValue = fuzzyPrefixLength;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> Lenient(bool? lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? quoteFieldSuffix)
+		{
+			QuoteFieldSuffixValue = quoteFieldSuffix;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(QueryNameValue))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(QueryNameValue);
+			}
+
 			if (AnalyzeWildcardValue.HasValue)
 			{
 				writer.WritePropertyName("analyze_wildcard");
@@ -152,6 +233,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
 				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
+			if (BoostValue.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(BoostValue.Value);
 			}
 
 			if (DefaultOperatorValue is not null)
@@ -210,16 +297,224 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 				writer.WriteStringValue(QuoteFieldSuffixValue);
 			}
 
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class SimpleQueryStringQueryDescriptor : DescriptorBase<SimpleQueryStringQueryDescriptor>
+	{
+		internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor> configure) => configure.Invoke(this);
+		public SimpleQueryStringQueryDescriptor() : base()
+		{
+		}
+
+		private string? QueryNameValue { get; set; }
+
+		private bool? AnalyzeWildcardValue { get; set; }
+
+		private string? AnalyzerValue { get; set; }
+
+		private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
+
+		private float? BoostValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
+
+		private IEnumerable<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
+
+		private int? FuzzyMaxExpansionsValue { get; set; }
+
+		private int? FuzzyPrefixLengthValue { get; set; }
+
+		private bool? FuzzyTranspositionsValue { get; set; }
+
+		private bool? LenientValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+		private string QueryValue { get; set; }
+
+		private string? QuoteFieldSuffixValue { get; set; }
+
+		public SimpleQueryStringQueryDescriptor QueryName(string? queryName)
+		{
+			QueryNameValue = queryName;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
+		{
+			AnalyzeWildcardValue = analyzeWildcard;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
+		{
+			AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor Boost(float? boost)
+		{
+			BoostValue = boost;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator)
+		{
+			DefaultOperatorValue = defaultOperator;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor Fields(IEnumerable<Elastic.Clients.Elasticsearch.Field>? fields)
+		{
+			FieldsValue = fields;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags)
+		{
+			FlagsValue = flags;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? fuzzyMaxExpansions)
+		{
+			FuzzyMaxExpansionsValue = fuzzyMaxExpansions;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? fuzzyPrefixLength)
+		{
+			FuzzyPrefixLengthValue = fuzzyPrefixLength;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
+		{
+			FuzzyTranspositionsValue = fuzzyTranspositions;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor Lenient(bool? lenient = true)
+		{
+			LenientValue = lenient;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+		{
+			MinimumShouldMatchValue = minimumShouldMatch;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor Query(string query)
+		{
+			QueryValue = query;
+			return Self;
+		}
+
+		public SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? quoteFieldSuffix)
+		{
+			QuoteFieldSuffixValue = quoteFieldSuffix;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
 			if (!string.IsNullOrEmpty(QueryNameValue))
 			{
 				writer.WritePropertyName("_name");
 				writer.WriteStringValue(QueryNameValue);
 			}
 
+			if (AnalyzeWildcardValue.HasValue)
+			{
+				writer.WritePropertyName("analyze_wildcard");
+				writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
+			}
+
+			if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
+			{
+				writer.WritePropertyName("auto_generate_synonyms_phrase_query");
+				writer.WriteBooleanValue(AutoGenerateSynonymsPhraseQueryValue.Value);
+			}
+
 			if (BoostValue.HasValue)
 			{
 				writer.WritePropertyName("boost");
 				writer.WriteNumberValue(BoostValue.Value);
+			}
+
+			if (DefaultOperatorValue is not null)
+			{
+				writer.WritePropertyName("default_operator");
+				JsonSerializer.Serialize(writer, DefaultOperatorValue, options);
+			}
+
+			if (FieldsValue is not null)
+			{
+				writer.WritePropertyName("fields");
+				JsonSerializer.Serialize(writer, FieldsValue, options);
+			}
+
+			if (FlagsValue is not null)
+			{
+				writer.WritePropertyName("flags");
+				JsonSerializer.Serialize(writer, FlagsValue, options);
+			}
+
+			if (FuzzyMaxExpansionsValue.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_max_expansions");
+				writer.WriteNumberValue(FuzzyMaxExpansionsValue.Value);
+			}
+
+			if (FuzzyPrefixLengthValue.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_prefix_length");
+				writer.WriteNumberValue(FuzzyPrefixLengthValue.Value);
+			}
+
+			if (FuzzyTranspositionsValue.HasValue)
+			{
+				writer.WritePropertyName("fuzzy_transpositions");
+				writer.WriteBooleanValue(FuzzyTranspositionsValue.Value);
+			}
+
+			if (LenientValue.HasValue)
+			{
+				writer.WritePropertyName("lenient");
+				writer.WriteBooleanValue(LenientValue.Value);
+			}
+
+			if (MinimumShouldMatchValue is not null)
+			{
+				writer.WritePropertyName("minimum_should_match");
+				JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+			}
+
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
+			if (!string.IsNullOrEmpty(QuoteFieldSuffixValue))
+			{
+				writer.WritePropertyName("quote_field_suffix");
+				writer.WriteStringValue(QuoteFieldSuffixValue);
 			}
 
 			writer.WriteEndObject();

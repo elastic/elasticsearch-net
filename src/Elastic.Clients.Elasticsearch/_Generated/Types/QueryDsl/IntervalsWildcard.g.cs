@@ -45,21 +45,105 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class IntervalsWildcardDescriptor<TDocument> : DescriptorBase<IntervalsWildcardDescriptor<TDocument>>
 	{
-		public IntervalsWildcardDescriptor()
+		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public IntervalsWildcardDescriptor() : base()
 		{
 		}
 
-		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal string? AnalyzerValue { get; private set; }
+		private string? AnalyzerValue { get; set; }
 
-		internal string PatternValue { get; private set; }
+		private string PatternValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
-		public IntervalsWildcardDescriptor<TDocument> Analyzer(string? analyzer) => Assign(analyzer, (a, v) => a.AnalyzerValue = v);
-		public IntervalsWildcardDescriptor<TDocument> Pattern(string pattern) => Assign(pattern, (a, v) => a.PatternValue = v);
-		public IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
-		public IntervalsWildcardDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField) => Assign(useField, (a, v) => a.UseFieldValue = v);
+		public IntervalsWildcardDescriptor<TDocument> Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor<TDocument> Pattern(string pattern)
+		{
+			PatternValue = pattern;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
+		{
+			UseFieldValue = useField;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+		{
+			UseFieldValue = useField;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(AnalyzerValue))
+			{
+				writer.WritePropertyName("analyzer");
+				writer.WriteStringValue(AnalyzerValue);
+			}
+
+			writer.WritePropertyName("pattern");
+			writer.WriteStringValue(PatternValue);
+			if (UseFieldValue is not null)
+			{
+				writer.WritePropertyName("use_field");
+				JsonSerializer.Serialize(writer, UseFieldValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class IntervalsWildcardDescriptor : DescriptorBase<IntervalsWildcardDescriptor>
+	{
+		internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor> configure) => configure.Invoke(this);
+		public IntervalsWildcardDescriptor() : base()
+		{
+		}
+
+		private string? AnalyzerValue { get; set; }
+
+		private string PatternValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
+
+		public IntervalsWildcardDescriptor Analyzer(string? analyzer)
+		{
+			AnalyzerValue = analyzer;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor Pattern(string pattern)
+		{
+			PatternValue = pattern;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
+		{
+			UseFieldValue = useField;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
+		{
+			UseFieldValue = useField;
+			return Self;
+		}
+
+		public IntervalsWildcardDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
+		{
+			UseFieldValue = useField;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

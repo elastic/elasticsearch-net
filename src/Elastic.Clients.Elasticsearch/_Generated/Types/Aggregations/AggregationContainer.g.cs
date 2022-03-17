@@ -148,13 +148,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
-	public sealed partial class AggregationContainerDescriptor<TDocument>
+	public sealed partial class AggregationContainerDescriptor<TDocument> : DescriptorBase<AggregationContainerDescriptor<TDocument>>
 	{
-		public AggregationContainerDescriptor()
+		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public AggregationContainerDescriptor() : base()
 		{
 		}
 
-		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public AggregationContainerDescriptor<TDocument> Avg(string name, Action<AverageAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
@@ -231,6 +231,174 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public AggregationContainerDescriptor<TDocument> WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+		}
+	}
+
+	public sealed partial class AggregationContainerDescriptor : DescriptorBase<AggregationContainerDescriptor>
+	{
+		internal AggregationContainerDescriptor(Action<AggregationContainerDescriptor> configure) => configure.Invoke(this);
+		public AggregationContainerDescriptor() : base()
+		{
+		}
+
+		public AggregationContainerDescriptor Avg(string name, Action<AverageAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+		}
+
+		public AggregationContainerDescriptor Avg<TDocument>(string name, Action<AverageAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
+		}
+
+		public AggregationContainerDescriptor Boxplot(string name, Action<BoxplotAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("boxplot", configure));
+		}
+
+		public AggregationContainerDescriptor Boxplot<TDocument>(string name, Action<BoxplotAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("boxplot", configure));
+		}
+
+		public AggregationContainerDescriptor Cardinality(string name, Action<CardinalityAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor Cardinality<TDocument>(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor DateHistogram(string name, Action<DateHistogramAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor DateHistogram<TDocument>(string name, Action<DateHistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor ExtendedStats<TDocument>(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor Max(string name, Action<MaxAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("max", configure));
+		}
+
+		public AggregationContainerDescriptor Max<TDocument>(string name, Action<MaxAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("max", configure));
+		}
+
+		public AggregationContainerDescriptor MedianAbsoluteDeviation(string name, Action<MedianAbsoluteDeviationAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("median_absolute_deviation", configure));
+		}
+
+		public AggregationContainerDescriptor MedianAbsoluteDeviation<TDocument>(string name, Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("median_absolute_deviation", configure));
+		}
+
+		public AggregationContainerDescriptor Min(string name, Action<MinAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("min", configure));
+		}
+
+		public AggregationContainerDescriptor Min<TDocument>(string name, Action<MinAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("min", configure));
+		}
+
+		public AggregationContainerDescriptor MultiTerms(string name, Action<MultiTermsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("multi_terms", configure));
+		}
+
+		public AggregationContainerDescriptor MultiTerms<TDocument>(string name, Action<MultiTermsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("multi_terms", configure));
+		}
+
+		public AggregationContainerDescriptor Nested(string name, Action<NestedAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
+		}
+
+		public AggregationContainerDescriptor Nested<TDocument>(string name, Action<NestedAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
+		}
+
+		public AggregationContainerDescriptor Stats(string name, Action<StatsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("stats", configure));
+		}
+
+		public AggregationContainerDescriptor Stats<TDocument>(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("stats", configure));
+		}
+
+		public AggregationContainerDescriptor StringStats(string name, Action<StringStatsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("string_stats", configure));
+		}
+
+		public AggregationContainerDescriptor StringStats<TDocument>(string name, Action<StringStatsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("string_stats", configure));
+		}
+
+		public AggregationContainerDescriptor Sum(string name, Action<SumAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("sum", configure));
+		}
+
+		public AggregationContainerDescriptor Sum<TDocument>(string name, Action<SumAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("sum", configure));
+		}
+
+		public AggregationContainerDescriptor Terms(string name, Action<TermsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
+		}
+
+		public AggregationContainerDescriptor Terms<TDocument>(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
+		}
+
+		public AggregationContainerDescriptor ValueCount(string name, Action<ValueCountAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("value_count", configure));
+		}
+
+		public AggregationContainerDescriptor ValueCount<TDocument>(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("value_count", configure));
+		}
+
+		public AggregationContainerDescriptor WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
+		}
+
+		public AggregationContainerDescriptor WeightedAvg<TDocument>(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("weighted_avg", configure));
 		}

@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexSettingsLifecycleDescriptor : DescriptorBase<IndexSettingsLifecycleDescriptor>
 	{
-		public IndexSettingsLifecycleDescriptor()
+		internal IndexSettingsLifecycleDescriptor(Action<IndexSettingsLifecycleDescriptor> configure) => configure.Invoke(this);
+		public IndexSettingsLifecycleDescriptor() : base()
 		{
 		}
 
-		internal IndexSettingsLifecycleDescriptor(Action<IndexSettingsLifecycleDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Name NameValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
 
-		public IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name name) => Assign(name, (a, v) => a.NameValue = v);
+		public IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+		{
+			NameValue = name;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

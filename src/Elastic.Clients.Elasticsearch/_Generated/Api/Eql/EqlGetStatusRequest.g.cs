@@ -40,8 +40,9 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		protected override bool SupportsBody => false;
 	}
 
-	public sealed partial class EqlGetStatusRequestDescriptor : RequestDescriptorBase<EqlGetStatusRequestDescriptor, EqlGetStatusRequestParameters>
+	public sealed partial class EqlGetStatusRequestDescriptor<TDocument> : RequestDescriptorBase<EqlGetStatusRequestDescriptor<TDocument>, EqlGetStatusRequestParameters>
 	{
+		internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		public EqlGetStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 		{
 		}
@@ -50,10 +51,40 @@ namespace Elastic.Clients.Elasticsearch.Eql
 		{
 		}
 
-		internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override bool SupportsBody => false;
+		public EqlGetStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+		}
+	}
+
+	public sealed partial class EqlGetStatusRequestDescriptor : RequestDescriptorBase<EqlGetStatusRequestDescriptor, EqlGetStatusRequestParameters>
+	{
+		internal EqlGetStatusRequestDescriptor(Action<EqlGetStatusRequestDescriptor> configure) => configure.Invoke(this);
+		public EqlGetStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+		{
+		}
+
+		internal EqlGetStatusRequestDescriptor()
+		{
+		}
+
+		internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override bool SupportsBody => false;
+		public EqlGetStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 		}

@@ -45,20 +45,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityDfrDescriptor : DescriptorBase<SettingsSimilarityDfrDescriptor>
 	{
-		public SettingsSimilarityDfrDescriptor()
+		internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityDfrDescriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffectValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffectValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.DFRBasicModel BasicModelValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.DFRBasicModel BasicModelValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
 
-		public SettingsSimilarityDfrDescriptor AfterEffect(Elastic.Clients.Elasticsearch.DFRAfterEffect afterEffect) => Assign(afterEffect, (a, v) => a.AfterEffectValue = v);
-		public SettingsSimilarityDfrDescriptor BasicModel(Elastic.Clients.Elasticsearch.DFRBasicModel basicModel) => Assign(basicModel, (a, v) => a.BasicModelValue = v);
-		public SettingsSimilarityDfrDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization) => Assign(normalization, (a, v) => a.NormalizationValue = v);
+		public SettingsSimilarityDfrDescriptor AfterEffect(Elastic.Clients.Elasticsearch.DFRAfterEffect afterEffect)
+		{
+			AfterEffectValue = afterEffect;
+			return Self;
+		}
+
+		public SettingsSimilarityDfrDescriptor BasicModel(Elastic.Clients.Elasticsearch.DFRBasicModel basicModel)
+		{
+			BasicModelValue = basicModel;
+			return Self;
+		}
+
+		public SettingsSimilarityDfrDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization)
+		{
+			NormalizationValue = normalization;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

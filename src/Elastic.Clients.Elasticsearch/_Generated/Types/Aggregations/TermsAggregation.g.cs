@@ -443,120 +443,238 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 	public sealed partial class TermsAggregationDescriptor<TDocument> : DescriptorBase<TermsAggregationDescriptor<TDocument>>
 	{
-		public TermsAggregationDescriptor()
-		{
-		}
-
 		internal TermsAggregationDescriptor(Action<TermsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Field? FieldValue { get; private set; }
-
-		internal string? FormatValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; private set; }
-
-		internal int? MinDocCountValue { get; private set; }
-
-		internal object? MissingValue { get; private set; }
-
-		internal bool? MissingBucketValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; private set; }
-
-		internal IEnumerable<TermsOrder>? OrderValue { get; private set; }
-
-		internal ScriptBase? ScriptValue { get; private set; }
-
-		internal int? ShardSizeValue { get; private set; }
-
-		internal bool? ShowTermDocCountErrorValue { get; private set; }
-
-		internal int? SizeValue { get; private set; }
-
-		internal string? ValueTypeValue { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; private set; }
-
-		internal Dictionary<string, object>? MetaValue { get; private set; }
-
-		internal ScriptDescriptor ScriptDescriptor { get; private set; }
-
-		internal Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; private set; }
-
-		internal Action<ScriptDescriptor> ScriptDescriptorAction { get; private set; }
-
-		internal Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; private set; }
-
-		public TermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode) => Assign(collectMode, (a, v) => a.CollectModeValue = v);
-		public TermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude) => Assign(exclude, (a, v) => a.ExcludeValue = v);
-		public TermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint) => Assign(executionHint, (a, v) => a.ExecutionHintValue = v);
-		public TermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field) => Assign(field, (a, v) => a.FieldValue = v);
-		public TermsAggregationDescriptor<TDocument> Format(string? format) => Assign(format, (a, v) => a.FormatValue = v);
-		public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include) => Assign(include, (a, v) => a.IncludeValue = v);
-		public TermsAggregationDescriptor<TDocument> MinDocCount(int? minDocCount) => Assign(minDocCount, (a, v) => a.MinDocCountValue = v);
-		public TermsAggregationDescriptor<TDocument> Missing(object? missing) => Assign(missing, (a, v) => a.MissingValue = v);
-		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true) => Assign(missingBucket, (a, v) => a.MissingBucketValue = v);
-		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder) => Assign(missingOrder, (a, v) => a.MissingOrderValue = v);
-		public TermsAggregationDescriptor<TDocument> Order(IEnumerable<TermsOrder>? order) => Assign(order, (a, v) => a.OrderValue = v);
-		public TermsAggregationDescriptor<TDocument> Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure) => Assign(configure, (a, v) => a.OrderValue = v?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value);
-		public TermsAggregationDescriptor<TDocument> Script(ScriptBase? script)
+		public TermsAggregationDescriptor() : base()
 		{
-			ScriptDescriptor = null;
-			ScriptDescriptorAction = null;
-			return Assign(script, (a, v) => a.ScriptValue = v);
 		}
 
-		public TermsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.ScriptDescriptor = v);
-		}
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 
-		public TermsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
-		{
-			ScriptValue = null;
-			ScriptDescriptorAction = null;
-			return Assign(configure, (a, v) => a.ScriptDescriptorAction = v);
-		}
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> AggregationsDescriptor { get; set; }
 
-		public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize) => Assign(shardSize, (a, v) => a.ShardSizeValue = v);
-		public TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true) => Assign(showTermDocCountError, (a, v) => a.ShowTermDocCountErrorValue = v);
-		public TermsAggregationDescriptor<TDocument> Size(int? size) => Assign(size, (a, v) => a.SizeValue = v);
-		public TermsAggregationDescriptor<TDocument> ValueType(string? valueType) => Assign(valueType, (a, v) => a.ValueTypeValue = v);
+		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+
+		private IEnumerable<TermsOrder>? OrderValue { get; set; }
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private string? FormatValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private int? MinDocCountValue { get; set; }
+
+		private object? MissingValue { get; set; }
+
+		private bool? MissingBucketValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
+
+		private int? ShardSizeValue { get; set; }
+
+		private bool? ShowTermDocCountErrorValue { get; set; }
+
+		private int? SizeValue { get; set; }
+
+		private string? ValueTypeValue { get; set; }
+
 		public TermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 		{
 			AggregationsDescriptor = null;
 			AggregationsDescriptorAction = null;
-			return Assign(aggregations, (a, v) => a.AggregationsValue = v);
+			AggregationsValue = aggregations;
+			return Self;
 		}
 
 		public TermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument> descriptor)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.AggregationsDescriptor = v);
+			AggregationsDescriptor = descriptor;
+			return Self;
 		}
 
 		public TermsAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor<TDocument>> configure)
 		{
 			AggregationsValue = null;
 			AggregationsDescriptorAction = null;
-			return Assign(configure, (a, v) => a.AggregationsDescriptorAction = v);
+			AggregationsDescriptorAction = configure;
+			return Self;
 		}
 
-		public TermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) => Assign(selector, (a, v) => a.MetaValue = v?.Invoke(new FluentDictionary<string, object>()));
+		public TermsAggregationDescriptor<TDocument> Order(IEnumerable<TermsOrder>? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure)
+		{
+			OrderValue = configure?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode)
+		{
+			CollectModeValue = collectMode;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+		{
+			ExcludeValue = exclude;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint)
+		{
+			ExecutionHintValue = executionHint;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+		{
+			IncludeValue = include;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
+		{
+			MinDocCountValue = minDocCount;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Missing(object? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> MissingBucket(bool? missingBucket = true)
+		{
+			MissingBucketValue = missingBucket;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
+		{
+			MissingOrderValue = missingOrder;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize)
+		{
+			ShardSizeValue = shardSize;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? showTermDocCountError = true)
+		{
+			ShowTermDocCountErrorValue = showTermDocCountError;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor<TDocument> ValueType(string? valueType)
+		{
+			ValueTypeValue = valueType;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
 			writer.WritePropertyName("terms");
 			writer.WriteStartObject();
+			if (OrderValue is not null)
+			{
+				writer.WritePropertyName("order");
+				JsonSerializer.Serialize(writer, OrderValue, options);
+			}
+
+			if (ScriptDescriptor is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+			}
+			else if (ScriptDescriptorAction is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, new ScriptDescriptor(ScriptDescriptorAction), options);
+			}
+			else if (ScriptValue is not null)
+			{
+				writer.WritePropertyName("script");
+				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
 			if (CollectModeValue is not null)
 			{
 				writer.WritePropertyName("collect_mode");
@@ -617,6 +735,275 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				JsonSerializer.Serialize(writer, MissingOrderValue, options);
 			}
 
+			if (ShardSizeValue.HasValue)
+			{
+				writer.WritePropertyName("shard_size");
+				writer.WriteNumberValue(ShardSizeValue.Value);
+			}
+
+			if (ShowTermDocCountErrorValue.HasValue)
+			{
+				writer.WritePropertyName("show_term_doc_count_error");
+				writer.WriteBooleanValue(ShowTermDocCountErrorValue.Value);
+			}
+
+			if (SizeValue.HasValue)
+			{
+				writer.WritePropertyName("size");
+				writer.WriteNumberValue(SizeValue.Value);
+			}
+
+			if (!string.IsNullOrEmpty(ValueTypeValue))
+			{
+				writer.WritePropertyName("value_type");
+				writer.WriteStringValue(ValueTypeValue);
+			}
+
+			writer.WriteEndObject();
+			if (MetaValue is not null)
+			{
+				writer.WritePropertyName("meta");
+				JsonSerializer.Serialize(writer, MetaValue, options);
+			}
+
+			if (AggregationsDescriptor is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			}
+			else if (AggregationsDescriptorAction is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+			}
+			else if (AggregationsValue is not null)
+			{
+				writer.WritePropertyName("aggregations");
+				JsonSerializer.Serialize(writer, AggregationsValue, options);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class TermsAggregationDescriptor : DescriptorBase<TermsAggregationDescriptor>
+	{
+		internal TermsAggregationDescriptor(Action<TermsAggregationDescriptor> configure) => configure.Invoke(this);
+		public TermsAggregationDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor AggregationsDescriptor { get; set; }
+
+		private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> AggregationsDescriptorAction { get; set; }
+
+		private IEnumerable<TermsOrder>? OrderValue { get; set; }
+
+		private ScriptBase? ScriptValue { get; set; }
+
+		private ScriptDescriptor ScriptDescriptor { get; set; }
+
+		private Action<ScriptDescriptor> ScriptDescriptorAction { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+
+		private string? FormatValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
+
+		private Dictionary<string, object>? MetaValue { get; set; }
+
+		private int? MinDocCountValue { get; set; }
+
+		private object? MissingValue { get; set; }
+
+		private bool? MissingBucketValue { get; set; }
+
+		private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
+
+		private int? ShardSizeValue { get; set; }
+
+		private bool? ShowTermDocCountErrorValue { get; set; }
+
+		private int? SizeValue { get; set; }
+
+		private string? ValueTypeValue { get; set; }
+
+		public TermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+		{
+			AggregationsDescriptor = null;
+			AggregationsDescriptorAction = null;
+			AggregationsValue = aggregations;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor descriptor)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			AggregationsDescriptor = descriptor;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationContainerDescriptor> configure)
+		{
+			AggregationsValue = null;
+			AggregationsDescriptorAction = null;
+			AggregationsDescriptorAction = configure;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Order(IEnumerable<TermsOrder>? order)
+		{
+			OrderValue = order;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Order(Func<Elastic.Clients.Elasticsearch.TermsOrderDescriptor, IPromise<IList<TermsOrder>>> configure)
+		{
+			OrderValue = configure?.Invoke(new Elastic.Clients.Elasticsearch.TermsOrderDescriptor())?.Value;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Script(ScriptBase? script)
+		{
+			ScriptDescriptor = null;
+			ScriptDescriptorAction = null;
+			ScriptValue = script;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Script(ScriptDescriptor descriptor)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptor = descriptor;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Script(Action<ScriptDescriptor> configure)
+		{
+			ScriptValue = null;
+			ScriptDescriptorAction = null;
+			ScriptDescriptorAction = configure;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? collectMode)
+		{
+			CollectModeValue = collectMode;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
+		{
+			ExcludeValue = exclude;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint)
+		{
+			ExecutionHintValue = executionHint;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+		{
+			FieldValue = field;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Format(string? format)
+		{
+			FormatValue = format;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
+		{
+			IncludeValue = include;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+			return Self;
+		}
+
+		public TermsAggregationDescriptor MinDocCount(int? minDocCount)
+		{
+			MinDocCountValue = minDocCount;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Missing(object? missing)
+		{
+			MissingValue = missing;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor MissingBucket(bool? missingBucket = true)
+		{
+			MissingBucketValue = missingBucket;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
+		{
+			MissingOrderValue = missingOrder;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor ShardSize(int? shardSize)
+		{
+			ShardSizeValue = shardSize;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor ShowTermDocCountError(bool? showTermDocCountError = true)
+		{
+			ShowTermDocCountErrorValue = showTermDocCountError;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor Size(int? size)
+		{
+			SizeValue = size;
+			return Self;
+		}
+
+		public TermsAggregationDescriptor ValueType(string? valueType)
+		{
+			ValueTypeValue = valueType;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName("terms");
+			writer.WriteStartObject();
 			if (OrderValue is not null)
 			{
 				writer.WritePropertyName("order");
@@ -637,6 +1024,66 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			{
 				writer.WritePropertyName("script");
 				JsonSerializer.Serialize(writer, ScriptValue, options);
+			}
+
+			if (CollectModeValue is not null)
+			{
+				writer.WritePropertyName("collect_mode");
+				JsonSerializer.Serialize(writer, CollectModeValue, options);
+			}
+
+			if (ExcludeValue is not null)
+			{
+				writer.WritePropertyName("exclude");
+				JsonSerializer.Serialize(writer, ExcludeValue, options);
+			}
+
+			if (ExecutionHintValue is not null)
+			{
+				writer.WritePropertyName("execution_hint");
+				JsonSerializer.Serialize(writer, ExecutionHintValue, options);
+			}
+
+			if (FieldValue is not null)
+			{
+				writer.WritePropertyName("field");
+				JsonSerializer.Serialize(writer, FieldValue, options);
+			}
+
+			if (!string.IsNullOrEmpty(FormatValue))
+			{
+				writer.WritePropertyName("format");
+				writer.WriteStringValue(FormatValue);
+			}
+
+			if (IncludeValue is not null)
+			{
+				writer.WritePropertyName("include");
+				JsonSerializer.Serialize(writer, IncludeValue, options);
+			}
+
+			if (MinDocCountValue.HasValue)
+			{
+				writer.WritePropertyName("min_doc_count");
+				writer.WriteNumberValue(MinDocCountValue.Value);
+			}
+
+			if (MissingValue is not null)
+			{
+				writer.WritePropertyName("missing");
+				JsonSerializer.Serialize(writer, MissingValue, options);
+			}
+
+			if (MissingBucketValue.HasValue)
+			{
+				writer.WritePropertyName("missing_bucket");
+				writer.WriteBooleanValue(MissingBucketValue.Value);
+			}
+
+			if (MissingOrderValue is not null)
+			{
+				writer.WritePropertyName("missing_order");
+				JsonSerializer.Serialize(writer, MissingOrderValue, options);
 			}
 
 			if (ShardSizeValue.HasValue)
@@ -678,7 +1125,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (AggregationsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("aggregations");
-				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor<TDocument>(AggregationsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new AggregationContainerDescriptor(AggregationsDescriptorAction), options);
 			}
 			else if (AggregationsValue is not null)
 			{

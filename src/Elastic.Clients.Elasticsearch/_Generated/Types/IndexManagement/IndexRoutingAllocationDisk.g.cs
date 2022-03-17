@@ -33,14 +33,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexRoutingAllocationDiskDescriptor : DescriptorBase<IndexRoutingAllocationDiskDescriptor>
 	{
-		public IndexRoutingAllocationDiskDescriptor()
+		internal IndexRoutingAllocationDiskDescriptor(Action<IndexRoutingAllocationDiskDescriptor> configure) => configure.Invoke(this);
+		public IndexRoutingAllocationDiskDescriptor() : base()
 		{
 		}
 
-		internal IndexRoutingAllocationDiskDescriptor(Action<IndexRoutingAllocationDiskDescriptor> configure) => configure.Invoke(this);
-		internal Union<bool?, string?>? ThresholdEnabledValue { get; private set; }
+		private Union<bool?, string?>? ThresholdEnabledValue { get; set; }
 
-		public IndexRoutingAllocationDiskDescriptor ThresholdEnabled(Union<bool?, string?>? thresholdEnabled) => Assign(thresholdEnabled, (a, v) => a.ThresholdEnabledValue = v);
+		public IndexRoutingAllocationDiskDescriptor ThresholdEnabled(Union<bool?, string?>? thresholdEnabled)
+		{
+			ThresholdEnabledValue = thresholdEnabled;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
-		public static Id Id<T>(T document) where T : class => Elastic.Clients.Elasticsearch.Id.From(document);
+		public static Id Id<T>(T document) where T : class => Elasticsearch.Id.From(document);
 
 		public static Fields Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			new(fields.Select(f => new Field(f)));
@@ -55,11 +55,11 @@ namespace Elastic.Clients.Elasticsearch
 		/// </summary>
 		public static Field Field<T, TValue>(Expression<Func<T, TValue>> path, double? boost = null,
 			string format = null)
-			where T : class => new(path, boost, format);
+			 => new(path, boost, format);
 
 		/// <inheritdoc cref="Field{T, TValue}" />
 		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null, string format = null)
-			where T : class => new(path, boost, format);
+			 => new(path, boost, format);
 
 		public static Field Field(string field, double? boost = null, string format = null) =>
 			new(field, boost, format);

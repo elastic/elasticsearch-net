@@ -79,19 +79,19 @@ namespace Tests.AsyncSearch
 			},
 			{
 				StatusStep, u =>
-				u.Calls<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequest, AsyncSearchStatusResponse<Project>>(
+				u.Calls<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequest, AsyncSearchStatusResponse>(
 					v => new AsyncSearchStatusRequest(v),
 					(v, d) => d,
-					(v, c, f) => c.AsyncSearch.Status<Project>(v, f),
-					(v, c, f) => c.AsyncSearch.StatusAsync<Project>(v, f),
-					(v, c, r) => c.AsyncSearch.Status<Project>(r),
-					(v, c, r) => c.AsyncSearch.StatusAsync<Project>(r),
+					(v, c, f) => c.AsyncSearch.Status(v, f),
+					(v, c, f) => c.AsyncSearch.StatusAsync(v, f),
+					(v, c, r) => c.AsyncSearch.Status(r),
+					(v, c, r) => c.AsyncSearch.StatusAsync(r),
 					uniqueValueSelector: values => values.ExtendedValue<string>("id")
 				)
 			},
 			{
 				GetStep, u =>
-				u.Calls<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequest, GetAsyncSearchResponse<Project>>(
+				u.Calls<GetAsyncSearchRequestDescriptor<Project>, GetAsyncSearchRequest, GetAsyncSearchResponse<Project>>(
 					v => new GetAsyncSearchRequest(v),
 					(v, d) => d,
 					(v, c, f) => c.AsyncSearch.Get<Project>(v, f),
@@ -125,7 +125,7 @@ namespace Tests.AsyncSearch
 		});
 
 		[I]
-		public async Task AsyncSearchStatusResponse() => await Assert<AsyncSearchStatusResponse<Project>>(StatusStep, r =>
+		public async Task AsyncSearchStatusResponse() => await Assert<AsyncSearchStatusResponse>(StatusStep, r =>
 		{
 			r.ShouldBeValid();
 			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);

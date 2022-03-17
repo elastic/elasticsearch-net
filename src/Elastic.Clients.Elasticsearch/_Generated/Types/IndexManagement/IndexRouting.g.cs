@@ -37,63 +37,69 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexRoutingDescriptor : DescriptorBase<IndexRoutingDescriptor>
 	{
-		public IndexRoutingDescriptor()
+		internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
+		public IndexRoutingDescriptor() : base()
 		{
 		}
 
-		internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? AllocationValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? AllocationValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; private set; }
+		private IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
 
-		internal IndexRoutingAllocationDescriptor AllocationDescriptor { get; private set; }
+		private Action<IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
 
-		internal IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; set; }
 
-		internal Action<IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; private set; }
+		private IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
 
-		internal Action<IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; private set; }
+		private Action<IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
 
 		public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? allocation)
 		{
 			AllocationDescriptor = null;
 			AllocationDescriptorAction = null;
-			return Assign(allocation, (a, v) => a.AllocationValue = v);
+			AllocationValue = allocation;
+			return Self;
 		}
 
 		public IndexRoutingDescriptor Allocation(IndexManagement.IndexRoutingAllocationDescriptor descriptor)
 		{
 			AllocationValue = null;
 			AllocationDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.AllocationDescriptor = v);
+			AllocationDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexRoutingDescriptor Allocation(Action<IndexManagement.IndexRoutingAllocationDescriptor> configure)
 		{
 			AllocationValue = null;
 			AllocationDescriptorAction = null;
-			return Assign(configure, (a, v) => a.AllocationDescriptorAction = v);
+			AllocationDescriptorAction = configure;
+			return Self;
 		}
 
 		public IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? rebalance)
 		{
 			RebalanceDescriptor = null;
 			RebalanceDescriptorAction = null;
-			return Assign(rebalance, (a, v) => a.RebalanceValue = v);
+			RebalanceValue = rebalance;
+			return Self;
 		}
 
 		public IndexRoutingDescriptor Rebalance(IndexManagement.IndexRoutingRebalanceDescriptor descriptor)
 		{
 			RebalanceValue = null;
 			RebalanceDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.RebalanceDescriptor = v);
+			RebalanceDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexRoutingDescriptor Rebalance(Action<IndexManagement.IndexRoutingRebalanceDescriptor> configure)
 		{
 			RebalanceValue = null;
 			RebalanceDescriptorAction = null;
-			return Assign(configure, (a, v) => a.RebalanceDescriptorAction = v);
+			RebalanceDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

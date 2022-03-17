@@ -85,7 +85,16 @@ namespace Elastic.Clients.Elasticsearch
 
 	public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptorBase<CreateRequestDescriptor<TDocument>, CreateRequestParameters>
 	{
-		public CreateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+		internal CreateRequestDescriptor(Action<CreateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+		internal CreateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+		{
+		}
+
+		public CreateRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public CreateRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
+		public CreateRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
+		public CreateRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
+		public CreateRequestDescriptor(Id id) : this(typeof(TDocument), id)
 		{
 		}
 
@@ -93,12 +102,9 @@ namespace Elastic.Clients.Elasticsearch
 		{
 		}
 
-		internal CreateRequestDescriptor(Action<CreateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 		internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override bool SupportsBody => true;
-		internal TDocument DocumentValue { get; private set; }
-
 		public CreateRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 		public CreateRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 		public CreateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
@@ -106,8 +112,23 @@ namespace Elastic.Clients.Elasticsearch
 		public CreateRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		public CreateRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 		public CreateRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		public CreateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+		{
+			RouteValues.Required("id", id);
+			return Self;
+		}
+
+		public CreateRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+		{
+			RouteValues.Required("index", index);
+			return Self;
+		}
+
+		private TDocument DocumentValue { get; set; }
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
+			SourceSerialisation.Serialize(DocumentValue, writer, settings.SourceSerializer);
 		}
 	}
 }

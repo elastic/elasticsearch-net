@@ -37,41 +37,49 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 
 	public sealed partial class ScoreFunctionBaseDescriptor<TDocument> : DescriptorBase<ScoreFunctionBaseDescriptor<TDocument>>
 	{
-		public ScoreFunctionBaseDescriptor()
+		internal ScoreFunctionBaseDescriptor(Action<ScoreFunctionBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
+		public ScoreFunctionBaseDescriptor() : base()
 		{
 		}
 
-		internal ScoreFunctionBaseDescriptor(Action<ScoreFunctionBaseDescriptor<TDocument>> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
 
-		internal double? WeightValue { get; private set; }
+		private QueryContainerDescriptor<TDocument> FilterDescriptor { get; set; }
 
-		internal QueryContainerDescriptor<TDocument> FilterDescriptor { get; private set; }
+		private Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 
-		internal Action<QueryContainerDescriptor<TDocument>> FilterDescriptorAction { get; private set; }
+		private double? WeightValue { get; set; }
 
 		public ScoreFunctionBaseDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
 		{
 			FilterDescriptor = null;
 			FilterDescriptorAction = null;
-			return Assign(filter, (a, v) => a.FilterValue = v);
+			FilterValue = filter;
+			return Self;
 		}
 
 		public ScoreFunctionBaseDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.FilterDescriptor = v);
+			FilterDescriptor = descriptor;
+			return Self;
 		}
 
 		public ScoreFunctionBaseDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
-			return Assign(configure, (a, v) => a.FilterDescriptorAction = v);
+			FilterDescriptorAction = configure;
+			return Self;
 		}
 
-		public ScoreFunctionBaseDescriptor<TDocument> Weight(double? weight) => Assign(weight, (a, v) => a.WeightValue = v);
+		public ScoreFunctionBaseDescriptor<TDocument> Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
@@ -84,6 +92,80 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			{
 				writer.WritePropertyName("filter");
 				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+			}
+			else if (FilterValue is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterValue, options);
+			}
+
+			if (WeightValue.HasValue)
+			{
+				writer.WritePropertyName("weight");
+				writer.WriteNumberValue(WeightValue.Value);
+			}
+
+			writer.WriteEndObject();
+		}
+	}
+
+	public sealed partial class ScoreFunctionBaseDescriptor : DescriptorBase<ScoreFunctionBaseDescriptor>
+	{
+		internal ScoreFunctionBaseDescriptor(Action<ScoreFunctionBaseDescriptor> configure) => configure.Invoke(this);
+		public ScoreFunctionBaseDescriptor() : base()
+		{
+		}
+
+		private Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? FilterValue { get; set; }
+
+		private QueryContainerDescriptor FilterDescriptor { get; set; }
+
+		private Action<QueryContainerDescriptor> FilterDescriptorAction { get; set; }
+
+		private double? WeightValue { get; set; }
+
+		public ScoreFunctionBaseDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryContainer? filter)
+		{
+			FilterDescriptor = null;
+			FilterDescriptorAction = null;
+			FilterValue = filter;
+			return Self;
+		}
+
+		public ScoreFunctionBaseDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptor = descriptor;
+			return Self;
+		}
+
+		public ScoreFunctionBaseDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		{
+			FilterValue = null;
+			FilterDescriptorAction = null;
+			FilterDescriptorAction = configure;
+			return Self;
+		}
+
+		public ScoreFunctionBaseDescriptor Weight(double? weight)
+		{
+			WeightValue = weight;
+			return Self;
+		}
+
+		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+		{
+			writer.WriteStartObject();
+			if (FilterDescriptor is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, FilterDescriptor, options);
+			}
+			else if (FilterDescriptorAction is not null)
+			{
+				writer.WritePropertyName("filter");
+				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

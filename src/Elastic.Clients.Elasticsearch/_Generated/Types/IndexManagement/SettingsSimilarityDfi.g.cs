@@ -37,14 +37,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityDfiDescriptor : DescriptorBase<SettingsSimilarityDfiDescriptor>
 	{
-		public SettingsSimilarityDfiDescriptor()
+		internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityDfiDescriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasureValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasureValue { get; set; }
 
-		public SettingsSimilarityDfiDescriptor IndependenceMeasure(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure independenceMeasure) => Assign(independenceMeasure, (a, v) => a.IndependenceMeasureValue = v);
+		public SettingsSimilarityDfiDescriptor IndependenceMeasure(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure independenceMeasure)
+		{
+			IndependenceMeasureValue = independenceMeasure;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();

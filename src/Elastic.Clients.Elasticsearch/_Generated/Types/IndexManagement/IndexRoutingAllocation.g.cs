@@ -45,93 +45,107 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class IndexRoutingAllocationDescriptor : DescriptorBase<IndexRoutingAllocationDescriptor>
 	{
-		public IndexRoutingAllocationDescriptor()
+		internal IndexRoutingAllocationDescriptor(Action<IndexRoutingAllocationDescriptor> configure) => configure.Invoke(this);
+		public IndexRoutingAllocationDescriptor() : base()
 		{
 		}
 
-		internal IndexRoutingAllocationDescriptor(Action<IndexRoutingAllocationDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? DiskValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? DiskValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? EnableValue { get; private set; }
+		private IndexRoutingAllocationDiskDescriptor DiskDescriptor { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? IncludeValue { get; private set; }
+		private Action<IndexRoutingAllocationDiskDescriptor> DiskDescriptorAction { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecoveryValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? EnableValue { get; set; }
 
-		internal IndexRoutingAllocationDiskDescriptor DiskDescriptor { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? IncludeValue { get; set; }
 
-		internal IndexRoutingAllocationIncludeDescriptor IncludeDescriptor { get; private set; }
+		private IndexRoutingAllocationIncludeDescriptor IncludeDescriptor { get; set; }
 
-		internal IndexRoutingAllocationInitialRecoveryDescriptor InitialRecoveryDescriptor { get; private set; }
+		private Action<IndexRoutingAllocationIncludeDescriptor> IncludeDescriptorAction { get; set; }
 
-		internal Action<IndexRoutingAllocationDiskDescriptor> DiskDescriptorAction { get; private set; }
+		private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecoveryValue { get; set; }
 
-		internal Action<IndexRoutingAllocationIncludeDescriptor> IncludeDescriptorAction { get; private set; }
+		private IndexRoutingAllocationInitialRecoveryDescriptor InitialRecoveryDescriptor { get; set; }
 
-		internal Action<IndexRoutingAllocationInitialRecoveryDescriptor> InitialRecoveryDescriptorAction { get; private set; }
+		private Action<IndexRoutingAllocationInitialRecoveryDescriptor> InitialRecoveryDescriptorAction { get; set; }
 
 		public IndexRoutingAllocationDescriptor Disk(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? disk)
 		{
 			DiskDescriptor = null;
 			DiskDescriptorAction = null;
-			return Assign(disk, (a, v) => a.DiskValue = v);
+			DiskValue = disk;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor Disk(IndexManagement.IndexRoutingAllocationDiskDescriptor descriptor)
 		{
 			DiskValue = null;
 			DiskDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.DiskDescriptor = v);
+			DiskDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor Disk(Action<IndexManagement.IndexRoutingAllocationDiskDescriptor> configure)
 		{
 			DiskValue = null;
 			DiskDescriptorAction = null;
-			return Assign(configure, (a, v) => a.DiskDescriptorAction = v);
+			DiskDescriptorAction = configure;
+			return Self;
 		}
 
-		public IndexRoutingAllocationDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? enable) => Assign(enable, (a, v) => a.EnableValue = v);
+		public IndexRoutingAllocationDescriptor Enable(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? enable)
+		{
+			EnableValue = enable;
+			return Self;
+		}
+
 		public IndexRoutingAllocationDescriptor Include(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? include)
 		{
 			IncludeDescriptor = null;
 			IncludeDescriptorAction = null;
-			return Assign(include, (a, v) => a.IncludeValue = v);
+			IncludeValue = include;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor Include(IndexManagement.IndexRoutingAllocationIncludeDescriptor descriptor)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.IncludeDescriptor = v);
+			IncludeDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor Include(Action<IndexManagement.IndexRoutingAllocationIncludeDescriptor> configure)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
-			return Assign(configure, (a, v) => a.IncludeDescriptorAction = v);
+			IncludeDescriptorAction = configure;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor InitialRecovery(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? initialRecovery)
 		{
 			InitialRecoveryDescriptor = null;
 			InitialRecoveryDescriptorAction = null;
-			return Assign(initialRecovery, (a, v) => a.InitialRecoveryValue = v);
+			InitialRecoveryValue = initialRecovery;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor InitialRecovery(IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor descriptor)
 		{
 			InitialRecoveryValue = null;
 			InitialRecoveryDescriptorAction = null;
-			return Assign(descriptor, (a, v) => a.InitialRecoveryDescriptor = v);
+			InitialRecoveryDescriptor = descriptor;
+			return Self;
 		}
 
 		public IndexRoutingAllocationDescriptor InitialRecovery(Action<IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor> configure)
 		{
 			InitialRecoveryValue = null;
 			InitialRecoveryDescriptorAction = null;
-			return Assign(configure, (a, v) => a.InitialRecoveryDescriptorAction = v);
+			InitialRecoveryDescriptorAction = configure;
+			return Self;
 		}
 
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

@@ -216,7 +216,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			bulkAll.Wait(TimeSpan.FromMinutes(1), x => { });
 			Console.WriteLine($"Completed in {sw.Elapsed} with {dropped.Count} dropped logs");
 
-			var countResult = Client.Count<Log>(s => s.Index(IndicesWildCard));
+			var countResult = Client.Count(s => s.Index(IndicesWildCard));
 			Console.WriteLine($"Stored {countResult.Count} in {IndicesWildCard} indices");
 		}
 

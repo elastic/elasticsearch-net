@@ -155,25 +155,25 @@ namespace Elastic.Clients.Elasticsearch
 
 		void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings) => Serialize(writer, options, settings);
 
-		protected RequestDescriptorBase() => _descriptor = (TDescriptor)this;
+		internal RequestDescriptorBase() => _descriptor = (TDescriptor)this;
 
 		protected abstract void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings);
 
-		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) =>
+		internal RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) =>
 			_descriptor = (TDescriptor)this;
 
 		protected TDescriptor Self => _descriptor;
 
 		protected RouteValues RouteValues => ((IRequest<TParameters>)this).RouteValues;
 
-		protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
+		//protected TDescriptor Assign<TValue>(TValue value, Action<TDescriptor, TValue> assign) => Fluent.Assign(_descriptor, value, assign);
 
-		protected TDescriptor InvokeAndAssign<T>(Action<T> configure, Action<TDescriptor, T> assign) where T : new()
-		{
-			var d = new T();
-			configure(d);
-			return Fluent.Assign(_descriptor, d, assign);
-		}
+		//protected TDescriptor InvokeAndAssign<T>(Action<T> configure, Action<TDescriptor, T> assign) where T : new()
+		//{
+		//	var d = new T();
+		//	configure(d);
+		//	return Fluent.Assign(_descriptor, d, assign);
+		//}
 
 		protected TDescriptor Qs(string name, object value)
 		{

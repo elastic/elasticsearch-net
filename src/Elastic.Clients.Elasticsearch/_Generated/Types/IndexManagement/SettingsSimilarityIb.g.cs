@@ -45,20 +45,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 	public sealed partial class SettingsSimilarityIbDescriptor : DescriptorBase<SettingsSimilarityIbDescriptor>
 	{
-		public SettingsSimilarityIbDescriptor()
+		internal SettingsSimilarityIbDescriptor(Action<SettingsSimilarityIbDescriptor> configure) => configure.Invoke(this);
+		public SettingsSimilarityIbDescriptor() : base()
 		{
 		}
 
-		internal SettingsSimilarityIbDescriptor(Action<SettingsSimilarityIbDescriptor> configure) => configure.Invoke(this);
-		internal Elastic.Clients.Elasticsearch.IBDistribution DistributionValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IBDistribution DistributionValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.IBLambda LambdaValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.IBLambda LambdaValue { get; set; }
 
-		internal Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; private set; }
+		private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
 
-		public SettingsSimilarityIbDescriptor Distribution(Elastic.Clients.Elasticsearch.IBDistribution distribution) => Assign(distribution, (a, v) => a.DistributionValue = v);
-		public SettingsSimilarityIbDescriptor Lambda(Elastic.Clients.Elasticsearch.IBLambda lambda) => Assign(lambda, (a, v) => a.LambdaValue = v);
-		public SettingsSimilarityIbDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization) => Assign(normalization, (a, v) => a.NormalizationValue = v);
+		public SettingsSimilarityIbDescriptor Distribution(Elastic.Clients.Elasticsearch.IBDistribution distribution)
+		{
+			DistributionValue = distribution;
+			return Self;
+		}
+
+		public SettingsSimilarityIbDescriptor Lambda(Elastic.Clients.Elasticsearch.IBLambda lambda)
+		{
+			LambdaValue = lambda;
+			return Self;
+		}
+
+		public SettingsSimilarityIbDescriptor Normalization(Elastic.Clients.Elasticsearch.Normalization normalization)
+		{
+			NormalizationValue = normalization;
+			return Self;
+		}
+
 		protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 		{
 			writer.WriteStartObject();
