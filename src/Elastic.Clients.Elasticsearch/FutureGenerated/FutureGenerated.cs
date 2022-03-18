@@ -1064,20 +1064,16 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
-	public partial class ElasticsearchClient
-	{
-		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null)
-		{
-			var descriptor = new SourceRequestDescriptor<TDocument>(document: id.Document, index: id?.Self?.Index, id: id?.Self?.Id);
-			configure?.Invoke(descriptor);
-			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
-		}
-	}
+	//public partial class ElasticsearchClient
+	//{
+	//	public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null)
+	//	{
+	//		var descriptor = new SourceRequestDescriptor<TDocument>(document: id.Document, index: id?.Self?.Index, id: id?.Self?.Id);
+	//		configure?.Invoke(descriptor);
+	//		return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+	//	}
+	//}
 
-	public partial interface IElasticsearchClient
-	{
-		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configure = null);
-	}
 
 	public abstract partial class BulkResponseItemBase
 	{
@@ -1544,29 +1540,6 @@ namespace Elastic.Clients.Elasticsearch
 	//}
 
 	public class DocType { }
-
-	public partial interface IElasticsearchClient
-	{
-		DeleteResponse Delete<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest);
-
-		Task<DeleteResponse> DeleteAsync<TDocument>(Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
-
-		CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest);
-
-		Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
-
-		IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest);
-
-		Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default);
-
-		Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null, CancellationToken cancellationToken = default);
-
-		UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest = null);
-
-		CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null);
-
-		Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default);
-	}
 
 	public partial class ElasticsearchClient
 	{

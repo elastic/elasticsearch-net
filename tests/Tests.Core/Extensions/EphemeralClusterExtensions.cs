@@ -23,7 +23,7 @@ namespace Tests.Core.Extensions
 			return new TestElasticsearchClientSettings(uris => new StaticNodePool(clusterNodes));
 		}
 
-		public static IElasticsearchClient GetOrAddClient<TConfig>(
+		public static ElasticsearchClient GetOrAddClient<TConfig>(
 			this IEphemeralCluster<TConfig> cluster,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null
 		)

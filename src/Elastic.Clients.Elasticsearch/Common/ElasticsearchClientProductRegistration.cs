@@ -12,7 +12,7 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 {
 	public ElasticsearchClientProductRegistration(Type markerType) : base(markerType) { }
 
-	public static ElasticsearchClientProductRegistration DefaultForElasticsearchClientsElasticsearch { get; } = new(typeof(IElasticsearchClient));
+	public static ElasticsearchClientProductRegistration DefaultForElasticsearchClientsElasticsearch { get; } = new(typeof(ElasticsearchClient));
 
 	/// <summary>
 	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ResponseBase.IsValid" />, we do not want the low level client throwing

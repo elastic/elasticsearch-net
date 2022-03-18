@@ -26,7 +26,7 @@ namespace Tests.Framework.EndpointTests
 
 		private HttpMethod ExpectedHttpMethod { get; }
 		private string ExpectedUrl { get; }
-		private IElasticsearchClient Client { get; }
+		private ElasticsearchClient Client { get; }
 
 		public static UrlTester ExpectUrl(HttpMethod method, string url,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> settings = null) =>
@@ -34,17 +34,17 @@ namespace Tests.Framework.EndpointTests
 
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 
-		public UrlTester Fluent<TResponse>(Func<IElasticsearchClient, TResponse> call) where TResponse : IResponse =>
+		public UrlTester Fluent<TResponse>(Func<ElasticsearchClient, TResponse> call) where TResponse : IResponse =>
 			WhenCalling(call, "fluent");
 
-		public UrlTester Request<TResponse>(Func<IElasticsearchClient, TResponse> call) where TResponse : IResponse =>
+		public UrlTester Request<TResponse>(Func<ElasticsearchClient, TResponse> call) where TResponse : IResponse =>
 			WhenCalling(call, "request");
 
-		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticsearchClient, Task<TResponse>> call)
+		public Task<UrlTester> FluentAsync<TResponse>(Func<ElasticsearchClient, Task<TResponse>> call)
 			where TResponse : IResponse =>
 			WhenCallingAsync(call, "fluent async");
 
-		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticsearchClient, Task<TResponse>> call)
+		public Task<UrlTester> RequestAsync<TResponse>(Func<ElasticsearchClient, Task<TResponse>> call)
 			where TResponse : IResponse =>
 			WhenCallingAsync(call, "request async");
 
@@ -59,14 +59,14 @@ namespace Tests.Framework.EndpointTests
 		//	return Assert("lowlevel async", callDetails);
 		//}
 
-		private UrlTester WhenCalling<TResponse>(Func<IElasticsearchClient, TResponse> call, string typeOfCall)
+		private UrlTester WhenCalling<TResponse>(Func<ElasticsearchClient, TResponse> call, string typeOfCall)
 			where TResponse : IResponse
 		{
 			var callDetails = call(Client);
 			return Assert(typeOfCall, callDetails.ApiCall);
 		}
 
-		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticsearchClient, Task<TResponse>> call,
+		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<ElasticsearchClient, Task<TResponse>> call,
 			string typeOfCall)
 			where TResponse : IResponse
 		{
