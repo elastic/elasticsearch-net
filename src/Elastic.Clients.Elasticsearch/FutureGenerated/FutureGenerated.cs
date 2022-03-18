@@ -1088,7 +1088,7 @@ namespace Elastic.Clients.Elasticsearch
 	// TODO - Should be added as a rule to the descriptor generator
 	//public sealed partial class SourceRequestDescriptor<TDocument>
 	//{
-	//	public SourceRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) { }
+	//	public SourceRequestDescriptor(TDocument documentWithId, IndexName index = null, Id id = null) : this(index ?? typeof(TDocument), id ?? Id.From(documentWithId)) => Doc
 	//}
 
 	public partial class SourceRequestDescriptor
@@ -1599,11 +1599,11 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>>(descriptor);
 		}
 
-		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor> configureRequest = null)
+		public SourceResponse<TDocument> Source<TDocument>(DocumentPath<TDocument> id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
 		{
-			var descriptor = new SourceRequestDescriptor(typeof(TDocument), new Id(typeof(TDocument)));
+			var descriptor = new SourceRequestDescriptor<TDocument>(document: id.Document, index: id?.Self?.Index ?? typeof(TDocument), id: id?.Self?.Id ?? Id.From(id.Document));
 			configureRequest?.Invoke(descriptor);
-			return DoRequest<SourceRequestDescriptor, SourceResponse<TDocument>>(descriptor);
+			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
 
 		public CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest = null)
