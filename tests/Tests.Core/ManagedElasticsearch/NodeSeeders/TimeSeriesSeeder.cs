@@ -15,9 +15,9 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders;
 public class TimeSeriesSeeder
 {
 	public static readonly string IndicesWildCard = "customlogs-*";
-	private readonly IElasticsearchClient _client;
+	private readonly ElasticsearchClient _client;
 
-	public TimeSeriesSeeder(IElasticsearchClient client) => _client = client;
+	public TimeSeriesSeeder(ElasticsearchClient client) => _client = client;
 
 	public void SeedNode()
 	{

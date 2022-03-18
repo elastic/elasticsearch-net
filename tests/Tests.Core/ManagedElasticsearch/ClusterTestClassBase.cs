@@ -19,7 +19,7 @@ namespace Tests.Core.ManagedElasticsearch
 			Cluster.ClusterConfiguration.CacheEsHomeInstallation = true;
 		}
 
-		public IElasticsearchClient Client => Cluster.Client;
+		public ElasticsearchClient Client => Cluster.Client;
 		public TCluster Cluster { get; }
 	}
 }

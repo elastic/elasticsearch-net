@@ -24,7 +24,7 @@ public static class IndexManyExtensions
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="index">Override the inferred indexname for T</param>
 	/// <param name="type">Override the inferred typename for T</param>
-	public static BulkResponse IndexMany<T>(this IElasticsearchClient client, IEnumerable<T> @objects, IndexName index = null)
+	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects, IndexName index = null)
 		where T : class
 	{
 		var bulkRequest = CreateIndexBulkRequest(objects, index);
@@ -41,7 +41,7 @@ public static class IndexManyExtensions
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="index">Override the inferred indexname for T</param>
 	/// <param name="type">Override the inferred typename for T</param>
-	public static Task<BulkResponse> IndexManyAsync<T>(this IElasticsearchClient client, IEnumerable<T> objects, IndexName index = null,
+	public static Task<BulkResponse> IndexManyAsync<T>(this ElasticsearchClient client, IEnumerable<T> objects, IndexName index = null,
 		CancellationToken cancellationToken = default
 	)
 		where T : class

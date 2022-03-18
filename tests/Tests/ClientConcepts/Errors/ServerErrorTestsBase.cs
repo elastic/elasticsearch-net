@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.Errors
 		}
 
 		protected abstract string Json { get; }
-		private IElasticsearchClient HighLevelClient { get; }
+		private ElasticsearchClient HighLevelClient { get; }
 
 		private string ResponseJson => string.Concat(@"{ ""error"": ", Json, @", ""status"":500 }");
 
