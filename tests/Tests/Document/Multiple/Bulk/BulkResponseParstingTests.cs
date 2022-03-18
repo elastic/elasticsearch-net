@@ -23,7 +23,7 @@ public class BulkResponseParstingTests : DocumentationTestBase
 		x.Items.Should().HaveCount(count).And.NotContain(i => i == null);
 	}
 
-	private static BulkResponse Deserialize(byte[] response, IElasticsearchClient client)
+	private static BulkResponse Deserialize(byte[] response, ElasticsearchClient client)
 	{
 		using var ms = new MemoryStream(response);
 		return client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);

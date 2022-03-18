@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ElasticsearchClient : IElasticsearchClient
+	public partial class ElasticsearchClient
 	{
 		public AsyncSearchNamespace AsyncSearch { get; private set; }
 
