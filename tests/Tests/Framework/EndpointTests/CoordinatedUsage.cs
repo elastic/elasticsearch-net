@@ -38,7 +38,7 @@ namespace Tests.Framework.EndpointTests
 			Prefix = prefix;
 		}
 
-		protected IElasticsearchClient Client => _cluster.Client;
+		protected ElasticsearchClient Client => _cluster.Client;
 		private string Prefix { get; }
 		private static string RandomFluent { get; } = $"f-{RandomString()}";
 		private static string RandomFluentAsync { get; } = $"fa-{RandomString()}";
@@ -78,10 +78,10 @@ namespace Tests.Framework.EndpointTests
 		public Func<string, LazyResponses> Calls<TDescriptor, TInitializer, TResponse>(
 			Func<string, TInitializer> initializerBody,
 			Func<string, TDescriptor, TDescriptor> fluentBody,
-			Func<string, IElasticsearchClient, Action<TDescriptor>, TResponse> fluent,
-			Func<string, IElasticsearchClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
-			Func<string, IElasticsearchClient, TInitializer, TResponse> request,
-			Func<string, IElasticsearchClient, TInitializer, Task<TResponse>> requestAsync,
+			Func<string, ElasticsearchClient, Action<TDescriptor>, TResponse> fluent,
+			Func<string, ElasticsearchClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
+			Func<string, ElasticsearchClient, TInitializer, TResponse> request,
+			Func<string, ElasticsearchClient, TInitializer, Task<TResponse>> requestAsync,
 			Action<TResponse, CallUniqueValues> onResponse = null,
 			Func<CallUniqueValues, string> uniqueValueSelector = null
 		)
@@ -105,14 +105,14 @@ namespace Tests.Framework.EndpointTests
 				, k);
 		}
 
-		public Func<string, LazyResponses> Call(Func<string, IElasticsearchClient, Task> call) =>
+		public Func<string, LazyResponses> Call(Func<string, ElasticsearchClient, Task> call) =>
 			Call(async (s, c) =>
 			{
 				await call(s, c);
 				return VoidResponse;
 			});
 
-		public Func<string, LazyResponses> Call<TResponse>(Func<string, IElasticsearchClient, Task<TResponse>> call) where TResponse : IResponse
+		public Func<string, LazyResponses> Call<TResponse>(Func<string, ElasticsearchClient, Task<TResponse>> call) where TResponse : IResponse
 		{
 			var client = Client;
 			return k => Usage.CallOnce(
@@ -136,13 +136,13 @@ namespace Tests.Framework.EndpointTests
 			EndpointUsage usage,
 			Func<string, TInitializer> initializerBody,
 			Func<string, TDescriptor, TDescriptor> fluentBody,
-			Func<string, IElasticsearchClient, Action<TDescriptor>, TResponse> fluent,
-			Func<string, IElasticsearchClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
-			Func<string, IElasticsearchClient, TInitializer, TResponse> request,
-			Func<string, IElasticsearchClient, TInitializer, Task<TResponse>> requestAsync,
+			Func<string, ElasticsearchClient, Action<TDescriptor>, TResponse> fluent,
+			Func<string, ElasticsearchClient, Action<TDescriptor>, Task<TResponse>> fluentAsync,
+			Func<string, ElasticsearchClient, TInitializer, TResponse> request,
+			Func<string, ElasticsearchClient, TInitializer, Task<TResponse>> requestAsync,
 			Action<TResponse, CallUniqueValues> onResponse,
 			Func<CallUniqueValues, string> uniqueValueSelector,
-			IElasticsearchClient client
+			ElasticsearchClient client
 		)
 			where TResponse : class, IResponse
 			where TDescriptor : class
@@ -151,7 +151,7 @@ namespace Tests.Framework.EndpointTests
 			var dict = new Dictionary<ClientMethod, IResponse>();
 			async Task InvokeApiCall(
 				ClientMethod method,
-				Func<string, IElasticsearchClient, ValueTask<TResponse>> invoke
+				Func<string, ElasticsearchClient, ValueTask<TResponse>> invoke
 			)
 			{
 				usage.CallUniqueValues.CurrentView = method;

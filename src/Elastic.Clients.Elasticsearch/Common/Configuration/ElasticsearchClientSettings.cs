@@ -409,7 +409,7 @@ namespace Elastic.Clients.Elasticsearch
 		protected ConnectionConfigurationBase(NodePool nodePool, ITransportClient connection,
 			Serializer? serializer,
 			IProductRegistration registration = null)
-			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(IElasticsearchClient))) =>
+			: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient))) =>
 				UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
 		bool ITransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;

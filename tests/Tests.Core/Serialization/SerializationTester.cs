@@ -19,13 +19,13 @@ namespace Tests.Core.Serialization
 {
 	public class SerializationTester
 	{
-		public SerializationTester(IElasticsearchClient client) => Client = client;
+		public SerializationTester(ElasticsearchClient client) => Client = client;
 
 		// TODO: This needs a fair bit of cleanup and refactoring. Code is hacked for initial testing using STJ
 
 		public static SerializationTester Default { get; } = new(TestClient.DefaultInMemoryClient);
 
-		public IElasticsearchClient Client { get; }
+		public ElasticsearchClient Client { get; }
 
 		//public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
 

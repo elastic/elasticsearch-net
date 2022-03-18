@@ -9,15 +9,6 @@ using Elastic.Clients.Elasticsearch.Helpers;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial interface IElasticsearchClient
-{
-	//HelpersNamespace Helpers { get; }
-
-	BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default);
-
-    BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default);
-}
-
 public partial class ElasticsearchClient
 {
 	//public HelpersNamespace Helpers { get; private set; }

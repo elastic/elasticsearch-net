@@ -24,7 +24,7 @@ namespace Tests.Framework.EndpointTests
 	{
 		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public override IElasticsearchClient Client => Cluster.Client;
+		public override ElasticsearchClient Client => Cluster.Client;
 		protected abstract bool ExpectIsValid { get; }
 		protected abstract int ExpectStatusCode { get; }
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
@@ -70,7 +70,7 @@ namespace Tests.Framework.EndpointTests
 	{
 		protected NdJsonApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public override IElasticsearchClient Client => Cluster.Client;
+		public override ElasticsearchClient Client => Cluster.Client;
 		protected abstract bool ExpectIsValid { get; }
 		protected abstract int ExpectStatusCode { get; }
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
