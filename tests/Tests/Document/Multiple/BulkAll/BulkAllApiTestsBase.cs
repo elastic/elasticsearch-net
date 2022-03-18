@@ -16,7 +16,7 @@ public abstract class BulkAllApiTestsBase : IClusterFixture<IntrusiveOperationCl
 {
 	protected BulkAllApiTestsBase(IntrusiveOperationCluster cluster) => Client = cluster.Client;
 
-	protected IElasticsearchClient Client { get; }
+	protected ElasticsearchClient Client { get; }
 
 	protected static string CreateIndexName() => $"project-copy-{Guid.NewGuid().ToString("N")[8..]}";
 

@@ -23,7 +23,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
 
-		public virtual IElasticsearchClient Client =>
+		public virtual ElasticsearchClient Client =>
 			this.GetOrAddClient(s => Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
 
 		protected virtual ElasticsearchClientSettings Authenticate(ElasticsearchClientSettings s) => s
