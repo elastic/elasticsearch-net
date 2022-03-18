@@ -47,7 +47,7 @@ namespace Tests.Document.Single.Update
 		protected override bool SupportsDeserialization => false;
 		protected override string ExpectedUrlPathAndQuery => $"/project/_update/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
-		protected override void IntegrationSetup(IElasticsearchClient client, CallUniqueValues values)
+		protected override void IntegrationSetup(ElasticsearchClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
 				Client.Index(Project.Instance, i => i.Id(id).Routing(id));

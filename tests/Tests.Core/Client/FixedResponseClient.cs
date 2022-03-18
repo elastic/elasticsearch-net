@@ -13,7 +13,7 @@ namespace Tests.Core.Client
 {
 	public static class FixedResponseClient
 	{
-		public static IElasticsearchClient Create(
+		public static ElasticsearchClient Create(
 			object response,
 			int statusCode = 200,
 			Func<ElasticsearchClientSettings, ElasticsearchClientSettings> modifySettings = null,
