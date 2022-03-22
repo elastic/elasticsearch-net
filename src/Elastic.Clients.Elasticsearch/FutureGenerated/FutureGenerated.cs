@@ -17,6 +17,84 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System.Linq.Expressions;
 using System.IO;
 
+namespace Elastic.Clients.Elasticsearch.Sql
+{
+	public partial class SqlTranslateResponse
+	{
+		[JsonInclude]
+		[JsonPropertyName("query")]
+		public QueryContainer Query { get; set; }
+	}
+
+	public static class SqlTranslateResponseExtensions
+	{
+		public static SearchRequest AsSearchRequest(this SqlTranslateResponse response)
+			=> new()
+			{
+				Query = response.Query,
+				//Size = response.Size,
+				//Fields = response.Fields
+			};
+	}
+}
+
+namespace Elastic.Clients.Elasticsearch
+{
+	[JsonConverter(typeof(SourceConfigConverter))]
+	public partial class SourceConfig
+	{
+		public bool HasBoolValue => Item1.HasValue;
+
+		public bool HasSourceFilterValue => Item2 is not null;
+
+		public bool TryGetBool(out bool? value)
+		{
+			if (Item1.HasValue)
+			{
+				value = Item1.Value;
+				return true;
+			}
+
+			value = null;
+			return false;
+		}
+
+		public bool TryGetSourceFilter(out SourceFilter? value)
+		{
+			if (Item2 is not null)
+			{
+				value = Item2;
+				return true;
+			}
+
+			value = null;
+			return false;
+		}
+	}
+
+	internal class SourceConfigConverter : JsonConverter<SourceConfig>
+	{
+		public override SourceConfig? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			switch (reader.TokenType)
+			{
+				case JsonTokenType.True:
+				case JsonTokenType.False:
+					var value = reader.GetBoolean();
+					return new SourceConfig(value);
+
+				case JsonTokenType.StartObject:
+					var sourceFilter = JsonSerializer.Deserialize<SourceFilter>(ref reader, options);
+					return new SourceConfig(sourceFilter);
+			}
+
+			return null;
+		}
+
+		public override void Write(Utf8JsonWriter writer, SourceConfig value, JsonSerializerOptions options) => throw new NotImplementedException();
+	}
+}
+
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
 	//public partial class TopMetricsValue
@@ -1129,7 +1207,8 @@ namespace Elastic.Clients.Elasticsearch
 	public enum FieldType
 	{
 		Date,
-		Text
+		Text,
+		Long
 	}
 
 	public partial class CountRequest<TDocument> : CountRequest
@@ -1472,6 +1551,10 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				case "date":
 					return FieldType.Date;
+				case "long":
+					return FieldType.Long;
+				case "text":
+					return FieldType.Text;
 			}
 
 			ThrowHelper.ThrowJsonException("Unexpected field type value.");
@@ -1484,6 +1567,12 @@ namespace Elastic.Clients.Elasticsearch
 			{
 				case FieldType.Date:
 					writer.WriteStringValue("date");
+					return;
+				case FieldType.Long:
+					writer.WriteStringValue("long");
+					return;
+				case FieldType.Text:
+					writer.WriteStringValue("text");
 					return;
 			}
 
@@ -1963,6 +2052,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class MatchAllQuery
 	{
 		public static implicit operator QueryContainer(MatchAllQuery matchAllQuery) => new(matchAllQuery);
+	}
+
+	public partial class QueryContainer
+	{
+		// TODO - Generate more of these!
+		public TermQuery Term => Variant as TermQuery;
 	}
 
 	//public sealed partial class BoolQueryDescriptor
