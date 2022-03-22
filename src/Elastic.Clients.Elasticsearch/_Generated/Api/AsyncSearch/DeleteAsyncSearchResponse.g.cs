@@ -22,7 +22,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public partial class DeleteAsyncSearchResponse : AcknowledgedResponseBase
+	public partial class DeleteAsyncSearchResponse : ResponseBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged { get; init; }
 	}
 }
