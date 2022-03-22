@@ -31,6 +31,15 @@ public abstract partial class AsyncSearchResponseBase
 	public DateTimeOffset ExpirationTime => ExpirationTimeInMillis.DateTimeOffset;
 }
 
+public partial class AsyncSearchStatusResponse
+{
+	[JsonIgnore]
+	public DateTimeOffset StartTime => StartTimeInMillis.DateTimeOffset;
+
+	[JsonIgnore]
+	public DateTimeOffset ExpirationTime => ExpirationTimeInMillis.DateTimeOffset;
+}
+
 public sealed partial class AsyncSearchSubmitRequestDescriptor
 {
 	public AsyncSearchSubmitRequestDescriptor MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll()) : Query(q => q.MatchAll(selector));
