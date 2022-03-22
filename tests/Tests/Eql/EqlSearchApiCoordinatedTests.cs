@@ -105,8 +105,6 @@ namespace Tests.Eql
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
-			r.IsPartial.Should().BeTrue();
-			r.IsRunning.Should().BeTrue();
 			r.ExpirationTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0);
 			r.StartTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0);
 
