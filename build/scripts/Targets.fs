@@ -49,7 +49,7 @@ module Main =
         Tests.SetTestEnvironmentVariables parsed
         
         let testChain = ["clean"; "version"; "restore"; "full-build"; ]
-        let buildChain = ["test"; "inherit-doc"; "documentation"; ]
+        let buildChain = ["test"; "inherit-doc"; ]
         let releaseChain =
             [ 
                 "build";

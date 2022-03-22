@@ -13,7 +13,13 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class UnionConverter : JsonConverterFactory
 {
-	public override bool CanConvert(Type typeToConvert) => typeToConvert.Name == typeof(Union<,>).Name || (typeToConvert.BaseType is not null && typeToConvert.BaseType.Name == typeof(Union<,>).Name);
+	private static readonly HashSet<Type> TypesToSkip = new HashSet<Type>
+	{
+		typeof(SourceConfig)
+	};
+
+	public override bool CanConvert(Type typeToConvert) => !TypesToSkip.Contains(typeToConvert) &&
+		(typeToConvert.Name == typeof(Union<,>).Name || (typeToConvert.BaseType is not null && typeToConvert.BaseType.Name == typeof(Union<,>).Name));
 
 	public override JsonConverter CreateConverter(
 		Type type,

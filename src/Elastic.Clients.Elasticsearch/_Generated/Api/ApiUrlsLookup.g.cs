@@ -46,6 +46,11 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 		internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
+		internal static ApiUrls SqlClearCursor = new ApiUrls(new[] { "/_sql/close" });
+		internal static ApiUrls SqlDeleteAsync = new ApiUrls(new[] { "/_sql/async/delete/{id}" });
+		internal static ApiUrls SqlGetAsync = new ApiUrls(new[] { "/_sql/async/{id}" });
+		internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "/_sql/async/status/{id}" });
+		internal static ApiUrls SqlQuery = new ApiUrls(new[] { "/_sql" });
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
 	}
 }
