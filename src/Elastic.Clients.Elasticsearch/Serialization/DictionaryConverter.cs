@@ -89,6 +89,10 @@ namespace Elastic.Clients.Elasticsearch
 					{
 						key = IndexName.Parse(propertyName) as TKey;
 					}
+					else if (typeof(TKey) == typeof(Field))
+					{
+						key = new Field(propertyName) as TKey;
+					}
 					else
 					{
 						key = (TKey)Activator.CreateInstance(typeof(TKey),

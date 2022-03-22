@@ -5,81 +5,37 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch
 {
 	/// <summary>
-	/// A lazily deserialized document.
+	/// <para>A lazily deserialized document.</para>
+	/// <para>Holds raw JSON bytes which can be lazily converted to a specific <see cref="Type"/> at a later time.</para>
 	/// </summary>
 	[JsonConverter(typeof(LazyDocumentConverter))]
-	public class LazyDocument
+	public readonly struct LazyDocument
 	{
-		private readonly Serializer _sourceSerializer;
-		private readonly Serializer _requestResponseSerializer;
-		private readonly IMemoryStreamFactory _memoryStreamFactory;
-
 		internal LazyDocument(byte[] bytes, IElasticsearchClientSettings settings)
 		{
 			Bytes = bytes;
-			
-			_sourceSerializer = settings.SourceSerializer;
-			_requestResponseSerializer = settings.RequestResponseSerializer;
-			_memoryStreamFactory = settings.MemoryStreamFactory;
+			Settings = settings;
 		}
 
-		internal byte[] Bytes { get; }
-
-		internal T AsUsingRequestResponseSerializer<T>()
-		{
-			using var ms = _memoryStreamFactory.Create(Bytes);
-			return _requestResponseSerializer.Deserialize<T>(ms);
-		}
+		internal byte[]? Bytes { get; }
+		internal IElasticsearchClientSettings? Settings { get; }
 
 		/// <summary>
 		/// Creates an instance of <typeparamref name="T" /> from this
 		/// <see cref="LazyDocument" /> instance.
 		/// </summary>
 		/// <typeparam name="T">The type</typeparam>
-		public T As<T>()
+		public T? As<T>()
 		{
-			using var ms = _memoryStreamFactory.Create(Bytes);
-			return _sourceSerializer.Deserialize<T>(ms);
-		}
+			if (Bytes is null || Settings is null || Bytes.Length == 0)
+				return default;
 
-		/// <summary>
-		/// Creates an instance of <paramref name="objectType" /> from this
-		/// <see cref="LazyDocument" /> instance.
-		/// </summary>
-		/// <param name="objectType">The type</param>
-		public object As(Type objectType)
-		{
-			using var ms = _memoryStreamFactory.Create(Bytes);
-			return _sourceSerializer.Deserialize(objectType, ms);
-		}
-
-		/// <summary>
-		/// Creates an instance of <typeparamref name="T" /> from this
-		/// <see cref="LazyDocument" /> instance.
-		/// </summary>
-		/// <typeparam name="T">The type</typeparam>
-		public ValueTask<T> AsAsync<T>(CancellationToken ct = default)
-		{
-			using var ms = _memoryStreamFactory.Create(Bytes);
-			return _sourceSerializer.DeserializeAsync<T>(ms, ct);
-		}
-
-		/// <summary>
-		/// Creates an instance of <paramref name="objectType" /> from this
-		/// <see cref="LazyDocument" /> instance.
-		/// </summary>
-		/// <param name="objectType">The type</param>
-		public ValueTask<object> AsAsync(Type objectType, CancellationToken ct = default)
-		{
-			using var ms = _memoryStreamFactory.Create(Bytes);
-			return _sourceSerializer.DeserializeAsync(objectType, ms, ct);
+			using var ms = Settings.MemoryStreamFactory.Create(Bytes);
+			return Settings.SourceSerializer.Deserialize<T>(ms);
 		}
 	}
 
@@ -101,6 +57,6 @@ namespace Elastic.Clients.Elasticsearch
 			return new LazyDocument(stream.ToArray(), _settings);
 		}
 
-		public override void Write(Utf8JsonWriter writer, LazyDocument value, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, LazyDocument value, JsonSerializerOptions options) => throw new NotImplementedException("We only ever expect to deserialize a LazyDocument on responses.");
 	}
 }

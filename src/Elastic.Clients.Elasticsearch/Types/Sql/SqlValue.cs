@@ -1,0 +1,32 @@
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace Elastic.Clients.Elasticsearch.Sql;
+
+[JsonConverter(typeof(SqlValueConverter))]
+public readonly struct SqlValue
+{
+	private readonly LazyDocument _lazyDocument;
+
+	internal SqlValue(LazyDocument lazyDocument) => _lazyDocument = lazyDocument;
+
+	public T? As<T>() => _lazyDocument.As<T>();
+}
+
+internal sealed class SqlValueConverter : JsonConverter<SqlValue>
+{
+	public override SqlValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType == JsonTokenType.Null)
+		{
+			reader.Read();
+			return default;
+		}
+
+		var lazyDoc = JsonSerializer.Deserialize<LazyDocument>(ref reader, options);
+		return new SqlValue(lazyDoc);
+	}
+
+	public override void Write(Utf8JsonWriter writer, SqlValue value, JsonSerializerOptions options) => throw new NotImplementedException();
+}
