@@ -43,6 +43,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			var propertyName = readerCopy.GetString();
+			if (propertyName == "auto_date_histogram")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation?>("auto_date_histogram", ref reader, options);
+			}
+
 			if (propertyName == "avg")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation?>("avg", ref reader, options);
@@ -71,6 +76,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "extended_stats")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>("extended_stats", ref reader, options);
+			}
+
+			if (propertyName == "histogram")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
 			}
 
 			if (propertyName == "max")
@@ -165,6 +175,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
+		public AggregationContainerDescriptor<TDocument> AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Avg(string name, Action<AverageAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
@@ -193,6 +208,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Histogram(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Max(string name, Action<MaxAggregationDescriptor<TDocument>> configure)
@@ -263,6 +283,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
+		public AggregationContainerDescriptor AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor AutoDateHistogram<TDocument>(string name, Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
+		}
+
 		public AggregationContainerDescriptor Avg(string name, Action<AverageAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("avg", configure));
@@ -321,6 +351,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor ExtendedStats<TDocument>(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor Histogram(string name, Action<HistogramAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
+		}
+
+		public AggregationContainerDescriptor Histogram<TDocument>(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
 		}
 
 		public AggregationContainerDescriptor Max(string name, Action<MaxAggregationDescriptor> configure)

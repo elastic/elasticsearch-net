@@ -108,6 +108,76 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	[JsonConverter(typeof(MinimumIntervalConverter))]
+	public enum MinimumInterval
+	{
+		[EnumMember(Value = "year")]
+		Year,
+		[EnumMember(Value = "second")]
+		Second,
+		[EnumMember(Value = "month")]
+		Month,
+		[EnumMember(Value = "minute")]
+		Minute,
+		[EnumMember(Value = "hour")]
+		Hour,
+		[EnumMember(Value = "day")]
+		Day
+	}
+
+	internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
+	{
+		public override MinimumInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "year":
+					return MinimumInterval.Year;
+				case "second":
+					return MinimumInterval.Second;
+				case "month":
+					return MinimumInterval.Month;
+				case "minute":
+					return MinimumInterval.Minute;
+				case "hour":
+					return MinimumInterval.Hour;
+				case "day":
+					return MinimumInterval.Day;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case MinimumInterval.Year:
+					writer.WriteStringValue("year");
+					return;
+				case MinimumInterval.Second:
+					writer.WriteStringValue("second");
+					return;
+				case MinimumInterval.Month:
+					writer.WriteStringValue("month");
+					return;
+				case MinimumInterval.Minute:
+					writer.WriteStringValue("minute");
+					return;
+				case MinimumInterval.Hour:
+					writer.WriteStringValue("hour");
+					return;
+				case MinimumInterval.Day:
+					writer.WriteStringValue("day");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(MissingOrderConverter))]
 	public enum MissingOrder
 	{

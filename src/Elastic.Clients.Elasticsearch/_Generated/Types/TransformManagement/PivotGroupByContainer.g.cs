@@ -54,6 +54,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 				return new PivotGroupByContainer(variant);
 			}
 
+			if (propertyName == "histogram")
+			{
+				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
+				return new PivotGroupByContainer(variant);
+			}
+
 			if (propertyName == "terms")
 			{
 				var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
@@ -70,6 +76,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 			switch (value.Variant)
 			{
 				case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation variant:
+					JsonSerializer.Serialize(writer, variant, options);
+					break;
+				case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation variant:
 					JsonSerializer.Serialize(writer, variant, options);
 					break;
 				case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation variant:
@@ -142,6 +151,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 
 		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
 		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
 		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
 		public void Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 	}
@@ -208,6 +219,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement
 		public void DateHistogram(Aggregations.DateHistogramAggregation variant) => Set(variant, "date_histogram");
 		public void DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
 		public void DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+		public void Histogram(Aggregations.HistogramAggregation variant) => Set(variant, "histogram");
+		public void Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+		public void Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
 		public void Terms(Aggregations.TermsAggregation variant) => Set(variant, "terms");
 		public void Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
 		public void Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");

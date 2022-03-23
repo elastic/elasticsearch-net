@@ -40,7 +40,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate? ValueCount(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate? Stats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate? ExtendedStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate? Histogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate? DateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate? AutoDateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate? StringTerms(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate? LongTerms(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate? DoubleTerms(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate?>(key);

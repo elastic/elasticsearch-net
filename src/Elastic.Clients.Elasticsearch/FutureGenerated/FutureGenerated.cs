@@ -406,12 +406,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					//		break;
 					//	}
 
-					//case "auto_date_histogram":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<AutoDateHistogramAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "auto_date_histogram":
+						{
+							var agg = JsonSerializer.Deserialize<AutoDateHistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					//case "children":
 					//	{
@@ -443,6 +443,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					case "diversified_sampler":
 						break;
+
 					//case "filter":
 					//	{
 					//		var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
@@ -485,12 +486,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					//		break;
 					//	}
 
-					//case "histogram":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<HistogramAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "histogram":
+						{
+							var agg = JsonSerializer.Deserialize<HistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					//case "ip_range":
 					//	{
