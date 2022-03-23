@@ -409,19 +409,19 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 						break;
 					}
 
-				//case "extended_stats_bucket":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<ExtendedStatsBucketAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "extended_stats_bucket":
+					{
+						var agg = JsonSerializer.Deserialize<ExtendedStatsBucketAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
-				//case "inference":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<InferenceAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "inference":
+					{
+						var agg = JsonSerializer.Deserialize<InferenceAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "max_bucket":
 					throw new Exception("The aggregate in response is not yet supported.");

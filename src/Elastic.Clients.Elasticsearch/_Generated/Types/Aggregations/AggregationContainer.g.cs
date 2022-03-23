@@ -103,6 +103,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>("extended_stats", ref reader, options);
 			}
 
+			if (propertyName == "extended_stats_bucket")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation?>("extended_stats_bucket", ref reader, options);
+			}
+
 			if (propertyName == "filters")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>("filters", ref reader, options);
@@ -116,6 +121,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "histogram")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
+			}
+
+			if (propertyName == "inference")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>("inference", ref reader, options);
 			}
 
 			if (propertyName == "ip_range")
@@ -330,6 +340,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> ExtendedStatsBucket(string name, Action<ExtendedStatsBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats_bucket", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Filters(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
@@ -343,6 +358,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Histogram(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Inference(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("inference", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> IpRange(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
@@ -583,6 +603,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
 		}
 
+		public AggregationContainerDescriptor ExtendedStatsBucket(string name, Action<ExtendedStatsBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats_bucket", configure));
+		}
+
 		public AggregationContainerDescriptor Filters(string name, Action<FiltersAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
@@ -611,6 +636,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Histogram<TDocument>(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
+		}
+
+		public AggregationContainerDescriptor Inference(string name, Action<InferenceAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("inference", configure));
+		}
+
+		public AggregationContainerDescriptor Inference<TDocument>(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("inference", configure));
 		}
 
 		public AggregationContainerDescriptor IpRange(string name, Action<IpRangeAggregationDescriptor> configure)

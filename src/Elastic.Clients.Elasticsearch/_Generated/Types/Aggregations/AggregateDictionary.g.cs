@@ -42,6 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate? Derivative(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate? Stats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate? ExtendedStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate? ExtendedStatsBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate? Histogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate? DateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate? AutoDateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate?>(key);
@@ -66,6 +67,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate? Composite(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate? ScriptedMetric(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate? TopHits(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate? Inference(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate? StringStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate? BoxPlot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate? TopMetrics(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate?>(key);
