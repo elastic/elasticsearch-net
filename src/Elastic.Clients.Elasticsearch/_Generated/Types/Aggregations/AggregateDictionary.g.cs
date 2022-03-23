@@ -31,6 +31,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 
 		public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate? Cardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate? TDigestPercentileRanks(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate? MedianAbsoluteDeviation(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MinAggregate? Min(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MinAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate? Max(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate?>(key);
@@ -62,6 +63,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate? Filters(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate? AdjacencyMatrix(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate? Composite(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate? ScriptedMetric(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate? StringStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate? BoxPlot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.RateAggregate? Rate(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate?>(key);

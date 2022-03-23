@@ -173,6 +173,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation?>("sampler", ref reader, options);
 			}
 
+			if (propertyName == "scripted_metric")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation?>("scripted_metric", ref reader, options);
+			}
+
 			if (propertyName == "stats")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>("stats", ref reader, options);
@@ -368,6 +373,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Sampler(string name, Action<SamplerAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> ScriptedMetric(string name, Action<ScriptedMetricAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("scripted_metric", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
@@ -671,6 +681,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Sampler<TDocument>(string name, Action<SamplerAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("sampler", configure));
+		}
+
+		public AggregationContainerDescriptor ScriptedMetric(string name, Action<ScriptedMetricAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("scripted_metric", configure));
+		}
+
+		public AggregationContainerDescriptor ScriptedMetric<TDocument>(string name, Action<ScriptedMetricAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("scripted_metric", configure));
 		}
 
 		public AggregationContainerDescriptor Stats(string name, Action<StatsAggregationDescriptor> configure)

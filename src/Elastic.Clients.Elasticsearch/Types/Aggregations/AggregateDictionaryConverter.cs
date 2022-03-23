@@ -299,15 +299,15 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				case "percentile_ranks":
 					throw new Exception("The aggregate in response is not yet supported.");
 
-				//case "tdigest_percentile_ranks":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<TDigestPercentileRanksAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "tdigest_percentile_ranks":
+					{
+						var agg = JsonSerializer.Deserialize<TDigestPercentileRanksAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
-				//case "percentiles":
-				//	break;
+				case "percentiles":
+					throw new Exception("The aggregate in response is not yet supported.");
 
 				case "rate":
 					{
@@ -316,12 +316,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 						break;
 					}
 
-				//case "scripted_metric":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<ScriptedMetricAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "scripted_metric":
+					{
+						var agg = JsonSerializer.Deserialize<ScriptedMetricAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "stats":
 					{
