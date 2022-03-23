@@ -39,6 +39,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.AvgAggregate? Avg(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AvgAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.WeightedAvgAggregate? WeightedAvg(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.WeightedAvgAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate? ValueCount(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate? Derivative(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate? Stats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate? ExtendedStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate? Histogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate?>(key);
@@ -70,6 +71,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate? TopMetrics(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate? TTest(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.RateAggregate? Rate(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate? CumulativeCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate? MatrixStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate?>(key);
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : AggregateBase => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;

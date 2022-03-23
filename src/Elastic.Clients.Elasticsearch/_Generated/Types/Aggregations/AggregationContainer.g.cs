@@ -78,6 +78,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>("composite", ref reader, options);
 			}
 
+			if (propertyName == "cumulative_cardinality")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation?>("cumulative_cardinality", ref reader, options);
+			}
+
 			if (propertyName == "date_histogram")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>("date_histogram", ref reader, options);
@@ -86,6 +91,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "date_range")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>("date_range", ref reader, options);
+			}
+
+			if (propertyName == "derivative")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation?>("derivative", ref reader, options);
 			}
 
 			if (propertyName == "extended_stats")
@@ -295,6 +305,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cumulative_cardinality", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> DateHistogram(string name, Action<DateHistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
@@ -303,6 +318,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> DateRange(string name, Action<DateRangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("date_range", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Derivative(string name, Action<DerivativeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("derivative", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
@@ -523,6 +543,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
 
+		public AggregationContainerDescriptor CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("cumulative_cardinality", configure));
+		}
+
 		public AggregationContainerDescriptor DateHistogram(string name, Action<DateHistogramAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
@@ -541,6 +566,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor DateRange<TDocument>(string name, Action<DateRangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("date_range", configure));
+		}
+
+		public AggregationContainerDescriptor Derivative(string name, Action<DerivativeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("derivative", configure));
 		}
 
 		public AggregationContainerDescriptor ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor> configure)

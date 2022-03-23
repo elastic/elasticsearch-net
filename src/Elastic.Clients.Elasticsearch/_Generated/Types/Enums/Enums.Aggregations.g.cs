@@ -108,6 +108,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	[JsonConverter(typeof(GapPolicyConverter))]
+	public enum GapPolicy
+	{
+		[EnumMember(Value = "skip")]
+		Skip,
+		[EnumMember(Value = "insert_zeros")]
+		InsertZeros
+	}
+
+	internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
+	{
+		public override GapPolicy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "skip":
+					return GapPolicy.Skip;
+				case "insert_zeros":
+					return GapPolicy.InsertZeros;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case GapPolicy.Skip:
+					writer.WriteStringValue("skip");
+					return;
+				case GapPolicy.InsertZeros:
+					writer.WriteStringValue("insert_zeros");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(MinimumIntervalConverter))]
 	public enum MinimumInterval
 	{

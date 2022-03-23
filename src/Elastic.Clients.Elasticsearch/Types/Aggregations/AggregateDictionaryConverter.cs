@@ -391,21 +391,23 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					throw new Exception("The aggregate in response is not yet supported.");
 				case "bucket_sort":
 					throw new Exception("The aggregate in response is not yet supported.");
-				//case "cumulative_cardinality":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<CumulativeCardinalityAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
 
-				//case "cumulative_sum":
-				//	break;
-				//case "derivative":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<DerivativeAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "cumulative_cardinality":
+					{
+						var agg = JsonSerializer.Deserialize<CumulativeCardinalityAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
+
+				case "cumulative_sum":
+					throw new Exception("The aggregate in response is not yet supported.");
+
+				case "derivative":
+					{
+						var agg = JsonSerializer.Deserialize<DerivativeAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				//case "extended_stats_bucket":
 				//	{
