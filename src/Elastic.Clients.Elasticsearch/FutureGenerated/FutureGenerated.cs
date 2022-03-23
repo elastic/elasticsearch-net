@@ -434,12 +434,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 							break;
 						}
 
-					//case "date_range":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<DateRangeAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "date_range":
+						{
+							var agg = JsonSerializer.Deserialize<DateRangeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					case "diversified_sampler":
 						break;
@@ -522,12 +522,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 					//case "parent":
 					//	break;
-					//case "range":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<RangeAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+
+					case "range":
+						{
+							var agg = JsonSerializer.Deserialize<RangeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					//case "rare_terms":
 					//	break;

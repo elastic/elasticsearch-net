@@ -63,6 +63,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>("date_histogram", ref reader, options);
 			}
 
+			if (propertyName == "date_range")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>("date_range", ref reader, options);
+			}
+
 			if (propertyName == "extended_stats")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>("extended_stats", ref reader, options);
@@ -91,6 +96,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "nested")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation?>("nested", ref reader, options);
+			}
+
+			if (propertyName == "range")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>("range", ref reader, options);
 			}
 
 			if (propertyName == "stats")
@@ -175,6 +185,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> DateRange(string name, Action<DateRangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_range", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
@@ -203,6 +218,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Nested(string name, Action<NestedAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Range(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
@@ -283,6 +303,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("date_histogram", configure));
 		}
 
+		public AggregationContainerDescriptor DateRange(string name, Action<DateRangeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_range", configure));
+		}
+
+		public AggregationContainerDescriptor DateRange<TDocument>(string name, Action<DateRangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("date_range", configure));
+		}
+
 		public AggregationContainerDescriptor ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
@@ -341,6 +371,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Nested<TDocument>(string name, Action<NestedAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("nested", configure));
+		}
+
+		public AggregationContainerDescriptor Range(string name, Action<RangeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
+		}
+
+		public AggregationContainerDescriptor Range<TDocument>(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
 		}
 
 		public AggregationContainerDescriptor Stats(string name, Action<StatsAggregationDescriptor> configure)
