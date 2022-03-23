@@ -108,6 +108,118 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	[JsonConverter(typeof(GapPolicyConverter))]
+	public enum GapPolicy
+	{
+		[EnumMember(Value = "skip")]
+		Skip,
+		[EnumMember(Value = "insert_zeros")]
+		InsertZeros
+	}
+
+	internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
+	{
+		public override GapPolicy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "skip":
+					return GapPolicy.Skip;
+				case "insert_zeros":
+					return GapPolicy.InsertZeros;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case GapPolicy.Skip:
+					writer.WriteStringValue("skip");
+					return;
+				case GapPolicy.InsertZeros:
+					writer.WriteStringValue("insert_zeros");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(MinimumIntervalConverter))]
+	public enum MinimumInterval
+	{
+		[EnumMember(Value = "year")]
+		Year,
+		[EnumMember(Value = "second")]
+		Second,
+		[EnumMember(Value = "month")]
+		Month,
+		[EnumMember(Value = "minute")]
+		Minute,
+		[EnumMember(Value = "hour")]
+		Hour,
+		[EnumMember(Value = "day")]
+		Day
+	}
+
+	internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
+	{
+		public override MinimumInterval Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "year":
+					return MinimumInterval.Year;
+				case "second":
+					return MinimumInterval.Second;
+				case "month":
+					return MinimumInterval.Month;
+				case "minute":
+					return MinimumInterval.Minute;
+				case "hour":
+					return MinimumInterval.Hour;
+				case "day":
+					return MinimumInterval.Day;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case MinimumInterval.Year:
+					writer.WriteStringValue("year");
+					return;
+				case MinimumInterval.Second:
+					writer.WriteStringValue("second");
+					return;
+				case MinimumInterval.Month:
+					writer.WriteStringValue("month");
+					return;
+				case MinimumInterval.Minute:
+					writer.WriteStringValue("minute");
+					return;
+				case MinimumInterval.Hour:
+					writer.WriteStringValue("hour");
+					return;
+				case MinimumInterval.Day:
+					writer.WriteStringValue("day");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(MissingOrderConverter))]
 	public enum MissingOrder
 	{
@@ -150,6 +262,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					return;
 				case MissingOrder.Default:
 					writer.WriteStringValue("default");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(RateModeConverter))]
+	public enum RateMode
+	{
+		[EnumMember(Value = "value_count")]
+		ValueCount,
+		[EnumMember(Value = "sum")]
+		Sum
+	}
+
+	internal sealed class RateModeConverter : JsonConverter<RateMode>
+	{
+		public override RateMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "value_count":
+					return RateMode.ValueCount;
+				case "sum":
+					return RateMode.Sum;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case RateMode.ValueCount:
+					writer.WriteStringValue("value_count");
+					return;
+				case RateMode.Sum:
+					writer.WriteStringValue("sum");
 					return;
 			}
 
@@ -248,6 +402,55 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					return;
 				case TermsAggregationExecutionHint.GlobalOrdinals:
 					writer.WriteStringValue("global_ordinals");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(TTestTypeConverter))]
+	public enum TTestType
+	{
+		[EnumMember(Value = "paired")]
+		Paired,
+		[EnumMember(Value = "homoscedastic")]
+		Homoscedastic,
+		[EnumMember(Value = "heteroscedastic")]
+		Heteroscedastic
+	}
+
+	internal sealed class TTestTypeConverter : JsonConverter<TTestType>
+	{
+		public override TTestType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "paired":
+					return TTestType.Paired;
+				case "homoscedastic":
+					return TTestType.Homoscedastic;
+				case "heteroscedastic":
+					return TTestType.Heteroscedastic;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TTestType.Paired:
+					writer.WriteStringValue("paired");
+					return;
+				case TTestType.Homoscedastic:
+					writer.WriteStringValue("homoscedastic");
+					return;
+				case TTestType.Heteroscedastic:
+					writer.WriteStringValue("heteroscedastic");
 					return;
 			}
 
