@@ -399,12 +399,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 							break;
 						}
 
-					//case "adjacency_matrix":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<AdjacencyMatrixAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "adjacency_matrix":
+						{
+							var agg = JsonSerializer.Deserialize<AdjacencyMatrixAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					case "auto_date_histogram":
 						{
@@ -413,19 +413,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 							break;
 						}
 
-					//case "children":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<ChildrenAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "children":
+						{
+							var agg = JsonSerializer.Deserialize<ChildrenAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
-					//case "composite":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<CompositeAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "composite":
+						{
+							var agg = JsonSerializer.Deserialize<CompositeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					case "date_histogram":
 						{
@@ -442,7 +442,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 						}
 
 					case "diversified_sampler":
-						break;
+						throw new Exception("The aggregate in response is not yet supported");
 
 					case "filter":
 						{
@@ -521,8 +521,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					//		break;
 					//	}
 
-					//case "parent":
-					//	break;
+					case "parent":
+						throw new Exception("The aggregate in response is not yet supported");
 
 					case "range":
 						{
@@ -531,8 +531,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 							break;
 						}
 
-					//case "rare_terms":
-					//	break;
+					case "rare_terms":
+						throw new Exception("The aggregate in response is not yet supported");
+
 					//case "reverse_nested":
 					//	{
 					//		var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);

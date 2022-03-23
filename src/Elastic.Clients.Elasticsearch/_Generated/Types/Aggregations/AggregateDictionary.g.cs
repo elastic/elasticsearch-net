@@ -50,10 +50,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate? MultiTerms(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate? Nested(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate? Filter(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate? Children(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate? Range(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate? DateRange(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate? IpRange(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate? Filters(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate? AdjacencyMatrix(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate? Composite(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate? StringStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate? BoxPlot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate?>(key);
 		private TAggregate TryGet<TAggregate>(string key)

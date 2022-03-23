@@ -43,6 +43,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			}
 
 			var propertyName = readerCopy.GetString();
+			if (propertyName == "adjacency_matrix")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>("adjacency_matrix", ref reader, options);
+			}
+
 			if (propertyName == "auto_date_histogram")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation?>("auto_date_histogram", ref reader, options);
@@ -61,6 +66,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "cardinality")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>("cardinality", ref reader, options);
+			}
+
+			if (propertyName == "children")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation?>("children", ref reader, options);
+			}
+
+			if (propertyName == "composite")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>("composite", ref reader, options);
 			}
 
 			if (propertyName == "date_histogram")
@@ -190,6 +205,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
+		public AggregationContainerDescriptor<TDocument> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
@@ -208,6 +228,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Cardinality(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Children(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Composite(string name, Action<CompositeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> DateHistogram(string name, Action<DateHistogramAggregationDescriptor<TDocument>> configure)
@@ -313,6 +343,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		{
 		}
 
+		public AggregationContainerDescriptor AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
+		}
+
+		public AggregationContainerDescriptor AdjacencyMatrix<TDocument>(string name, Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("adjacency_matrix", configure));
+		}
+
 		public AggregationContainerDescriptor AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("auto_date_histogram", configure));
@@ -351,6 +391,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Cardinality<TDocument>(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("cardinality", configure));
+		}
+
+		public AggregationContainerDescriptor Children(string name, Action<ChildrenAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
+		}
+
+		public AggregationContainerDescriptor Children<TDocument>(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("children", configure));
+		}
+
+		public AggregationContainerDescriptor Composite(string name, Action<CompositeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
+		}
+
+		public AggregationContainerDescriptor Composite<TDocument>(string name, Action<CompositeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("composite", configure));
 		}
 
 		public AggregationContainerDescriptor DateHistogram(string name, Action<DateHistogramAggregationDescriptor> configure)
