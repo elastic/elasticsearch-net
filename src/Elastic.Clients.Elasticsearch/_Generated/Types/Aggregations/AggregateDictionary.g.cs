@@ -50,6 +50,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate? MultiTerms(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate? Missing(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate? Nested(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate? ReverseNested(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate? Global(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate? Filter(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate? Children(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate?>(key);

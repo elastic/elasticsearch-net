@@ -161,19 +161,19 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 						break;
 					}
 
-				case "multi-terms":
+				case "multi_terms":
 					{
 						var agg = JsonSerializer.Deserialize<MultiTermsAggregate>(ref reader, options);
 						dictionary.Add(nameParts[1], agg);
 						break;
 					}
 
-				//case "nested":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<NestedAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "nested":
+					{
+						var agg = JsonSerializer.Deserialize<NestedAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "parent":
 					throw new Exception("The aggregate in response is not yet supported");
@@ -188,12 +188,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				case "rare_terms":
 					throw new Exception("The aggregate in response is not yet supported");
 
-				//case "reverse_nested":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "reverse_nested":
+					{
+						var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				//case "sampler":
 				//	{
@@ -293,7 +293,8 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					}
 
 				case "percentile_ranks":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
+
 				//case "tdigest_percentile_ranks":
 				//	{
 				//		var agg = JsonSerializer.Deserialize<TDigestPercentileRanksAggregate>(ref reader, options);
@@ -374,17 +375,17 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					}
 
 				case "avg_bucket":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "bucket_script":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "bucket_count_ks_test":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "bucket_correlation":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "bucket_selector":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "bucket_sort":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				//case "cumulative_cardinality":
 				//	{
 				//		var agg = JsonSerializer.Deserialize<CumulativeCardinalityAggregate>(ref reader, options);
@@ -416,17 +417,18 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				//	}
 
 				case "max_bucket":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "min_bucket":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "moving_avg":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "moving_fn":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "moving_percentiles":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 				case "normalize":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
+
 				//case "percentiles_bucket":
 				//	{
 				//		var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
@@ -435,7 +437,8 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				//	}
 
 				case "serial_diff":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
+
 				//case "stats_bucket":
 				//	{
 				//		var agg = JsonSerializer.Deserialize<StatsBucketAggregate>(ref reader, options);
@@ -445,6 +448,9 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 
 				case "sum_bucket":
 					break;
+
+				default:
+					throw new Exception("The aggregate in response is not yet supported.");
 			}
 		}
 

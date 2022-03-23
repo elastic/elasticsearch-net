@@ -148,6 +148,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>("range", ref reader, options);
 			}
 
+			if (propertyName == "reverse_nested")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation?>("reverse_nested", ref reader, options);
+			}
+
 			if (propertyName == "stats")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>("stats", ref reader, options);
@@ -318,6 +323,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Range(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> ReverseNested(string name, Action<ReverseNestedAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("reverse_nested", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
@@ -571,6 +581,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Range<TDocument>(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
+		}
+
+		public AggregationContainerDescriptor ReverseNested(string name, Action<ReverseNestedAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("reverse_nested", configure));
+		}
+
+		public AggregationContainerDescriptor ReverseNested<TDocument>(string name, Action<ReverseNestedAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("reverse_nested", configure));
 		}
 
 		public AggregationContainerDescriptor Stats(string name, Action<StatsAggregationDescriptor> configure)
