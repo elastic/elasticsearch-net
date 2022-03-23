@@ -22,7 +22,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class RefreshResponse : ShardsOperationResponseBase
+	public partial class RefreshResponse : ResponseBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 	}
 }

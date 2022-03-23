@@ -22,7 +22,14 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
-	public partial class DeleteResponse : IndicesResponseBase
+	public partial class DeleteResponse : ResponseBase
 	{
+		[JsonInclude]
+		[JsonPropertyName("acknowledged")]
+		public bool Acknowledged { get; init; }
+
+		[JsonInclude]
+		[JsonPropertyName("_shards")]
+		public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; init; }
 	}
 }
