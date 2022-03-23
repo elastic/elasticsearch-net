@@ -138,6 +138,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>("value_count", ref reader, options);
 			}
 
+			if (propertyName == "variable_width_histogram")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation?>("variable_width_histogram", ref reader, options);
+			}
+
 			if (propertyName == "weighted_avg")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>("weighted_avg", ref reader, options);
@@ -268,6 +273,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> ValueCount(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("value_count", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> VariableWidthHistogram(string name, Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("variable_width_histogram", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
@@ -471,6 +481,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor ValueCount<TDocument>(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("value_count", configure));
+		}
+
+		public AggregationContainerDescriptor VariableWidthHistogram(string name, Action<VariableWidthHistogramAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("variable_width_histogram", configure));
+		}
+
+		public AggregationContainerDescriptor VariableWidthHistogram<TDocument>(string name, Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("variable_width_histogram", configure));
 		}
 
 		public AggregationContainerDescriptor WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor> configure)

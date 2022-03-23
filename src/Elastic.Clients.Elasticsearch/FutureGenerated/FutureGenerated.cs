@@ -548,18 +548,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					//	}
 
 					case "significant_terms":
-						break;
-
-					case "significant_text":
-						// TODO
 						throw new Exception("The aggregate in response is not yet supported");
 
-					//case "variable_width_histogram":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "significant_text":
+						throw new Exception("The aggregate in response is not yet supported");
+
+					case "variable_width_histogram":
+						{
+							var agg = JsonSerializer.Deserialize<VariableWidthHistogramAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					case "avg":
 						{
