@@ -78,6 +78,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>("extended_stats", ref reader, options);
 			}
 
+			if (propertyName == "filters")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>("filters", ref reader, options);
+			}
+
 			if (propertyName == "histogram")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
@@ -213,6 +218,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Filters(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Histogram(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
@@ -361,6 +371,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor ExtendedStats<TDocument>(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("extended_stats", configure));
+		}
+
+		public AggregationContainerDescriptor Filters(string name, Action<FiltersAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
+		}
+
+		public AggregationContainerDescriptor Filters<TDocument>(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
 
 		public AggregationContainerDescriptor Histogram(string name, Action<HistogramAggregationDescriptor> configure)

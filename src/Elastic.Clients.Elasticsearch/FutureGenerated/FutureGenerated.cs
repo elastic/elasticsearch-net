@@ -444,19 +444,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 					case "diversified_sampler":
 						break;
 
-					//case "filter":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "filter":
+						{
+							var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
-					//case "filters":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<FiltersAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "filters":
+						{
+							var agg = JsonSerializer.Deserialize<FiltersAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					//case "geo_distance":
 					//	{
