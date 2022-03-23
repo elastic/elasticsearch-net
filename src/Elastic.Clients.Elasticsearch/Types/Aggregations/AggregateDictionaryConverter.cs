@@ -268,12 +268,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				//		break;
 				//	}
 
-				//case "matrix_stats":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<MatrixStatsAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "matrix_stats":
+					{
+						var agg = JsonSerializer.Deserialize<MatrixStatsAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "max":
 					{
@@ -308,12 +308,13 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 
 				//case "percentiles":
 				//	break;
-				//case "rate":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<RateAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+
+				case "rate":
+					{
+						var agg = JsonSerializer.Deserialize<RateAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				//case "scripted_metric":
 				//	{

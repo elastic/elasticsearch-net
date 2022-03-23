@@ -64,6 +64,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate? Composite(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate? StringStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate? BoxPlot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.RateAggregate? Rate(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate? MatrixStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate?>(key);
 		private TAggregate TryGet<TAggregate>(string key)
 			where TAggregate : AggregateBase => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 	}

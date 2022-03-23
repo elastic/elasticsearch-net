@@ -113,6 +113,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>("ip_range", ref reader, options);
 			}
 
+			if (propertyName == "matrix_stats")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation?>("matrix_stats", ref reader, options);
+			}
+
 			if (propertyName == "max")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation?>("max", ref reader, options);
@@ -151,6 +156,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "range")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>("range", ref reader, options);
+			}
+
+			if (propertyName == "rate")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation?>("rate", ref reader, options);
 			}
 
 			if (propertyName == "reverse_nested")
@@ -300,6 +310,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> MatrixStats(string name, Action<MatrixStatsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("matrix_stats", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Max(string name, Action<MaxAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("max", configure));
@@ -338,6 +353,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Range(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Rate(string name, Action<RateAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("rate", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> ReverseNested(string name, Action<ReverseNestedAggregationDescriptor<TDocument>> configure)
@@ -533,6 +553,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
 		}
 
+		public AggregationContainerDescriptor MatrixStats(string name, Action<MatrixStatsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("matrix_stats", configure));
+		}
+
+		public AggregationContainerDescriptor MatrixStats<TDocument>(string name, Action<MatrixStatsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("matrix_stats", configure));
+		}
+
 		public AggregationContainerDescriptor Max(string name, Action<MaxAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("max", configure));
@@ -611,6 +641,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Range<TDocument>(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
+		}
+
+		public AggregationContainerDescriptor Rate(string name, Action<RateAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("rate", configure));
+		}
+
+		public AggregationContainerDescriptor Rate<TDocument>(string name, Action<RateAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("rate", configure));
 		}
 
 		public AggregationContainerDescriptor ReverseNested(string name, Action<ReverseNestedAggregationDescriptor> configure)

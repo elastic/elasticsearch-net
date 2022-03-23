@@ -227,6 +227,48 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	[JsonConverter(typeof(RateModeConverter))]
+	public enum RateMode
+	{
+		[EnumMember(Value = "value_count")]
+		ValueCount,
+		[EnumMember(Value = "sum")]
+		Sum
+	}
+
+	internal sealed class RateModeConverter : JsonConverter<RateMode>
+	{
+		public override RateMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "value_count":
+					return RateMode.ValueCount;
+				case "sum":
+					return RateMode.Sum;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case RateMode.ValueCount:
+					writer.WriteStringValue("value_count");
+					return;
+				case RateMode.Sum:
+					writer.WriteStringValue("sum");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(TermsAggregationCollectModeConverter))]
 	public enum TermsAggregationCollectMode
 	{
