@@ -193,9 +193,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation?>("sum", ref reader, options);
 			}
 
+			if (propertyName == "t_test")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>("t_test", ref reader, options);
+			}
+
 			if (propertyName == "terms")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>("terms", ref reader, options);
+			}
+
+			if (propertyName == "top_hits")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation?>("top_hits", ref reader, options);
+			}
+
+			if (propertyName == "top_metrics")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>("top_metrics", ref reader, options);
 			}
 
 			if (propertyName == "value_count")
@@ -395,9 +410,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("sum", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> TTest(string name, Action<TTestAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("t_test", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Terms(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> TopHits(string name, Action<TopHitsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_hits", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> TopMetrics(string name, Action<TopMetricsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_metrics", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> ValueCount(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
@@ -723,6 +753,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("sum", configure));
 		}
 
+		public AggregationContainerDescriptor TTest(string name, Action<TTestAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("t_test", configure));
+		}
+
+		public AggregationContainerDescriptor TTest<TDocument>(string name, Action<TTestAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("t_test", configure));
+		}
+
 		public AggregationContainerDescriptor Terms(string name, Action<TermsAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
@@ -731,6 +771,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Terms<TDocument>(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("terms", configure));
+		}
+
+		public AggregationContainerDescriptor TopHits(string name, Action<TopHitsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_hits", configure));
+		}
+
+		public AggregationContainerDescriptor TopHits<TDocument>(string name, Action<TopHitsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_hits", configure));
+		}
+
+		public AggregationContainerDescriptor TopMetrics(string name, Action<TopMetricsAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_metrics", configure));
+		}
+
+		public AggregationContainerDescriptor TopMetrics<TDocument>(string name, Action<TopMetricsAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("top_metrics", configure));
 		}
 
 		public AggregationContainerDescriptor ValueCount(string name, Action<ValueCountAggregationDescriptor> configure)

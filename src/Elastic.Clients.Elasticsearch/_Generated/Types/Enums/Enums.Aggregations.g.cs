@@ -367,6 +367,55 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		}
 	}
 
+	[JsonConverter(typeof(TTestTypeConverter))]
+	public enum TTestType
+	{
+		[EnumMember(Value = "paired")]
+		Paired,
+		[EnumMember(Value = "homoscedastic")]
+		Homoscedastic,
+		[EnumMember(Value = "heteroscedastic")]
+		Heteroscedastic
+	}
+
+	internal sealed class TTestTypeConverter : JsonConverter<TTestType>
+	{
+		public override TTestType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "paired":
+					return TTestType.Paired;
+				case "homoscedastic":
+					return TTestType.Homoscedastic;
+				case "heteroscedastic":
+					return TTestType.Heteroscedastic;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TTestType.Paired:
+					writer.WriteStringValue("paired");
+					return;
+				case TTestType.Homoscedastic:
+					writer.WriteStringValue("homoscedastic");
+					return;
+				case TTestType.Heteroscedastic:
+					writer.WriteStringValue("heteroscedastic");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(ValueTypeConverter))]
 	public enum ValueType
 	{

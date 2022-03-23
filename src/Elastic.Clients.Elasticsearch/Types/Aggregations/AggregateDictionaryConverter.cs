@@ -344,26 +344,26 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 						break;
 					}
 
-				//case "t_test":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<TTestAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "t_test":
+					{
+						var agg = JsonSerializer.Deserialize<TTestAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
-				//case "top_hits":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<TopHitsAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "top_hits":
+					{
+						var agg = JsonSerializer.Deserialize<TopHitsAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
-				//case "top_metrics":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "top_metrics":
+					{
+						var agg = JsonSerializer.Deserialize<TopMetricsAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "value_count":
 					{
