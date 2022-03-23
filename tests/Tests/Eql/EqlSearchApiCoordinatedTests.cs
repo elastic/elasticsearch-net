@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Clients.Elasticsearch.Eql;
@@ -105,8 +106,16 @@ namespace Tests.Eql
 		{
 			r.ShouldBeValid();
 			r.Id.Should().NotBeNullOrEmpty();
-			r.ExpirationTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0);
-			r.StartTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(0);
+
+			if (r.ExpirationTimeInMillis.HasValue)
+			{
+				r.ExpirationTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(DateTimeOffset.Now.AddHours(-2).ToUnixTimeMilliseconds());
+			}
+
+			if (r.StartTimeInMillis.HasValue)
+			{
+				r.StartTimeInMillis.Value.MillisecondsSinceEpoch.Should().BeGreaterThan(DateTimeOffset.Now.AddHours(-2).ToUnixTimeMilliseconds());
+			}
 
 			if (!r.IsRunning)
 			{
