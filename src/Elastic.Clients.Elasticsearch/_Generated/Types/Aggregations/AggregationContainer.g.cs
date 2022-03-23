@@ -98,6 +98,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>("filters", ref reader, options);
 			}
 
+			if (propertyName == "global")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation?>("global", ref reader, options);
+			}
+
 			if (propertyName == "histogram")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
@@ -121,6 +126,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "min")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>("min", ref reader, options);
+			}
+
+			if (propertyName == "missing")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>("missing", ref reader, options);
 			}
 
 			if (propertyName == "multi_terms")
@@ -260,6 +270,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> Global(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Histogram(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
@@ -283,6 +298,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Min(string name, Action<MinAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("min", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> Missing(string name, Action<MissingAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("missing", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> MultiTerms(string name, Action<MultiTermsAggregationDescriptor<TDocument>> configure)
@@ -453,6 +473,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("filters", configure));
 		}
 
+		public AggregationContainerDescriptor Global(string name, Action<GlobalAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
+		}
+
+		public AggregationContainerDescriptor Global<TDocument>(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("global", configure));
+		}
+
 		public AggregationContainerDescriptor Histogram(string name, Action<HistogramAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
@@ -501,6 +531,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Min<TDocument>(string name, Action<MinAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("min", configure));
+		}
+
+		public AggregationContainerDescriptor Missing(string name, Action<MissingAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("missing", configure));
+		}
+
+		public AggregationContainerDescriptor Missing<TDocument>(string name, Action<MissingAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("missing", configure));
 		}
 
 		public AggregationContainerDescriptor MultiTerms(string name, Action<MultiTermsAggregationDescriptor> configure)
