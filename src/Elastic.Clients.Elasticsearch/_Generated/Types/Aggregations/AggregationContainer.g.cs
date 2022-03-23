@@ -173,6 +173,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation?>("parent", ref reader, options);
 			}
 
+			if (propertyName == "percentiles_bucket")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation?>("percentiles_bucket", ref reader, options);
+			}
+
 			if (propertyName == "range")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>("range", ref reader, options);
@@ -201,6 +206,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			if (propertyName == "stats")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>("stats", ref reader, options);
+			}
+
+			if (propertyName == "stats_bucket")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation?>("stats_bucket", ref reader, options);
 			}
 
 			if (propertyName == "string_stats")
@@ -410,6 +420,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
 		}
 
+		public AggregationContainerDescriptor<TDocument> PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("percentiles_bucket", configure));
+		}
+
 		public AggregationContainerDescriptor<TDocument> Range(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
@@ -438,6 +453,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("stats", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> StatsBucket(string name, Action<StatsBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("stats_bucket", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> StringStats(string name, Action<StringStatsAggregationDescriptor<TDocument>> configure)
@@ -738,6 +758,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return SetContainer(name, AggregationContainer.CreateWithAction("parent", configure));
 		}
 
+		public AggregationContainerDescriptor PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("percentiles_bucket", configure));
+		}
+
 		public AggregationContainerDescriptor Range(string name, Action<RangeAggregationDescriptor> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("range", configure));
@@ -796,6 +821,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Stats<TDocument>(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("stats", configure));
+		}
+
+		public AggregationContainerDescriptor StatsBucket(string name, Action<StatsBucketAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("stats_bucket", configure));
 		}
 
 		public AggregationContainerDescriptor StringStats(string name, Action<StringStatsAggregationDescriptor> configure)

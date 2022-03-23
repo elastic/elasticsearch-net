@@ -32,6 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 
 		public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate? Cardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate? TDigestPercentileRanks(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate? PercentilesBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate? MedianAbsoluteDeviation(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MinAggregate? Min(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MinAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate? Max(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate?>(key);
@@ -41,6 +42,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate? ValueCount(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate? Derivative(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate? Stats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate? StatsBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate? ExtendedStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate? ExtendedStatsBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate? Histogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate?>(key);

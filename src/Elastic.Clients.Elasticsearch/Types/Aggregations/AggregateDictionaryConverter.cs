@@ -436,25 +436,25 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				case "normalize":
 					throw new Exception("The aggregate in response is not yet supported.");
 
-				//case "percentiles_bucket":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "percentiles_bucket":
+					{
+						var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "serial_diff":
 					throw new Exception("The aggregate in response is not yet supported.");
 
-				//case "stats_bucket":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<StatsBucketAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "stats_bucket":
+					{
+						var agg = JsonSerializer.Deserialize<StatsBucketAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "sum_bucket":
-					break;
+					throw new Exception("The aggregate in response is not yet supported.");
 
 				default:
 					throw new Exception("The aggregate in response is not yet supported.");
