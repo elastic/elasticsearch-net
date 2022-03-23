@@ -1,0 +1,57 @@
+[[installation]]
+== Installation
+
+This page shows you how to install the .NET client for {es}.
+
+[discrete]
+[[dot-net-client]]
+=== Installing the .NET client
+
+For SDK style projects, you can install the {es} client by running the following 
+.NET CLI command in your terminal:
+
+[source,shell]
+----
+dotnet add package Elastic.Clients.Elasticsearch
+----
+
+This command adds a package reference to your project (csproj) file for the 
+latest stable version of the client.
+
+If you prefer, you may also manually add a package reference inside your project 
+file:
+
+[source,shell]
+----
+<PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.0.0" />
+----
+
+To install a different version, modify the version as necessary.
+
+For Visual Studio users, the .NET client can also be installed from the Package
+Manager Console inside Visual Studio using the following command:
+
+[source,shell]
+----
+Install-Package Elastic.Clients.Elasticsearch
+----
+
+Alternatively, search for `Elastic.Clients.Elasticsearch` in the NuGet Package 
+Manager UI.
+
+// To learn how to connect the {es} client, refer to the Connecting section.
+
+[discrete]
+[[compatibility]]
+=== Compatibility
+
+The {es} client is compatible with currently maintained .NET runtime versions. 
+Compatibility with EOL runtimes is not guaranteed or supported.
+
+Language clients are forward compatible; meaning that clients support 
+communicating with greater or equal minor versions of {es}. {es} language 
+clients are only backward compatible with default distributions and without 
+guarantees made.
+
+Refer to the https://www.elastic.co/support/eol[end-of-life policy] for more 
+information.

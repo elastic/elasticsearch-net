@@ -1,7 +1,7 @@
 :title-separator: |
 
 [[elasticsearch-net-reference]]
-= Elasticsearch .NET Clients
+= Elasticsearch .NET Client
 
 ////
 IMPORTANT NOTE
@@ -13,9 +13,9 @@ please modify the original csharp file found at the link and submit the PR with 
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
-include::introduction.asciidoc[]
+include::intro.asciidoc[]
 
-include::installation.asciidoc[]
+include::install.asciidoc[]
 
 include::breaking-changes.asciidoc[]
 
