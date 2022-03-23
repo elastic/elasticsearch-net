@@ -1,0 +1,23 @@
+[[introduction]]
+== Introduction
+
+This is the documentation for the .NET client for {es}. This page gives you a 
+quick overview of the main features of the client.
+
+// For breaking changes, refer to this page.
+
+[discrete]
+[[features]]
+=== Features
+
+* One-to-one mapping with REST API.
+* Strongly typed requests and responses for {es} APIs.
+* Fluent API for building requests.
+* Helpers for common tasks such as bulk indexing of documents. 
+* Pluggable serialization of requests and responses based on System.Text.Json.
+* Diagnostics, auditing, and .NET activity integration.
+
+The .NET {es} client is built upon the Elastic Transport library which provides:
+
+* Connection management and load balancing across all available nodes.
+* Request retries and dead connections handling.

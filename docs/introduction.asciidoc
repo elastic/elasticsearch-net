@@ -10,7 +10,7 @@ If you wish to submit a PR for any spelling mistakes, typos or grammatical error
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[introduction]]
+[[introduction-old]]
 == Introduction
 
 This is the documentation page for `Elasticsearch.Net` and `NEST`, the two 
