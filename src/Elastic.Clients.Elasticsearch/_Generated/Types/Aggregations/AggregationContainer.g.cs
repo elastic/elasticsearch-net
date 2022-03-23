@@ -88,6 +88,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
 			}
 
+			if (propertyName == "ip_range")
+			{
+				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>("ip_range", ref reader, options);
+			}
+
 			if (propertyName == "max")
 			{
 				return AggregationContainerSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation?>("max", ref reader, options);
@@ -228,6 +233,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor<TDocument> Histogram(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
+		}
+
+		public AggregationContainerDescriptor<TDocument> IpRange(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
 		}
 
 		public AggregationContainerDescriptor<TDocument> Max(string name, Action<MaxAggregationDescriptor<TDocument>> configure)
@@ -391,6 +401,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public AggregationContainerDescriptor Histogram<TDocument>(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
 		{
 			return SetContainer(name, AggregationContainer.CreateWithAction("histogram", configure));
+		}
+
+		public AggregationContainerDescriptor IpRange(string name, Action<IpRangeAggregationDescriptor> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
+		}
+
+		public AggregationContainerDescriptor IpRange<TDocument>(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
+		{
+			return SetContainer(name, AggregationContainer.CreateWithAction("ip_range", configure));
 		}
 
 		public AggregationContainerDescriptor Max(string name, Action<MaxAggregationDescriptor> configure)

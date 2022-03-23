@@ -493,12 +493,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 							break;
 						}
 
-					//case "ip_range":
-					//	{
-					//		var agg = JsonSerializer.Deserialize<IpRangeAggregate>(ref reader, options);
-					//		dictionary.Add(nameParts[1], agg);
-					//		break;
-					//	}
+					case "ip_range":
+						{
+							var agg = JsonSerializer.Deserialize<IpRangeAggregate>(ref reader, options);
+							dictionary.Add(nameParts[1], agg);
+							break;
+						}
 
 					//case "missing":
 					//	{

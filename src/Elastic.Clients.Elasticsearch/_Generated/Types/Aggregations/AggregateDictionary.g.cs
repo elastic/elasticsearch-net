@@ -52,6 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate? Filter(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate? Range(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate? DateRange(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate? IpRange(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate? Filters(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate? StringStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate? BoxPlot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxPlotAggregate?>(key);
