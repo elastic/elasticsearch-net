@@ -54,6 +54,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 		public Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate? Global(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate? Filter(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate? Children(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate? Parent(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate?>(key);
+		public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate? Sampler(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate? Range(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate? DateRange(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate?>(key);
 		public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate? IpRange(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate?>(key);

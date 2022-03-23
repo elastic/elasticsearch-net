@@ -176,7 +176,11 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					}
 
 				case "parent":
-					throw new Exception("The aggregate in response is not yet supported");
+					{
+						var agg = JsonSerializer.Deserialize<ParentAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "range":
 					{
@@ -195,12 +199,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 						break;
 					}
 
-				//case "sampler":
-				//	{
-				//		var agg = JsonSerializer.Deserialize<SamplerAggregate>(ref reader, options);
-				//		dictionary.Add(nameParts[1], agg);
-				//		break;
-				//	}
+				case "sampler":
+					{
+						var agg = JsonSerializer.Deserialize<SamplerAggregate>(ref reader, options);
+						dictionary.Add(nameParts[1], agg);
+						break;
+					}
 
 				case "significant_terms":
 					throw new Exception("The aggregate in response is not yet supported");
