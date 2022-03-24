@@ -45,7 +45,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-elastic-managed-
             
-      - run: "./build.sh integrate ${{ matrix.stack_version }} readonly,writable random:test_only_one --report"
+      - run: "./build.sh integrate ${{ matrix.stack_version }} random:test_only_one --report"
         name: ${{ matrix.stack_version }}
       - name: Results ${{ matrix.stack_version }}
         # only report on if the previous run failed, otherwise this ends up being too noisy
