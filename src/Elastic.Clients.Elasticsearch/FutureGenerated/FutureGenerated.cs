@@ -2326,6 +2326,8 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch
 			Query(new MatchAllQuery());
 			return Self;
 		}
+
+		internal override void BeforeRequest() => TypedKeys(true);
 	}
 
 	public sealed partial class GetAsyncSearchRequestDescriptor
