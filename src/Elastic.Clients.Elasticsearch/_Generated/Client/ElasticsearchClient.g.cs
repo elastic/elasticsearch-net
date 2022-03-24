@@ -20,6 +20,7 @@ using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Sql;
+using Elastic.Clients.Elasticsearch.Tasks;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,6 +40,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SqlNamespace Sql { get; private set; }
 
+		public TasksNamespace Tasks { get; private set; }
+
 		private partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
@@ -46,6 +49,7 @@ namespace Elastic.Clients.Elasticsearch
 			Eql = new EqlNamespace(this);
 			IndexManagement = new IndexManagementNamespace(this);
 			Sql = new SqlNamespace(this);
+			Tasks = new TasksNamespace(this);
 		}
 
 		public BulkResponse Bulk(BulkRequest request)
