@@ -131,11 +131,10 @@ namespace Tests.AsyncSearch
 			r.StartTime.Should().BeOnOrBefore(DateTimeOffset.Now);
 			r.ExpirationTime.Should().BeOnOrAfter(DateTimeOffset.Now);
 
-			// TODO - Fix PR pending to make the int nullable.
-			//if (r.IsRunning)
-			//	r.CompletionStatus.HasValue.Should().BeFalse();
-			//else
-			//	r.CompletionStatus?.Should().Be(200);
+			if (r.IsRunning)
+				r.CompletionStatus.HasValue.Should().BeFalse();
+			else
+				r.CompletionStatus?.Should().Be(200);
 
 			r.Shards.Total.Should().BeGreaterOrEqualTo(1);
 		});
