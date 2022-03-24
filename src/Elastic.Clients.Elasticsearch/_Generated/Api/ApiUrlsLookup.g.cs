@@ -51,6 +51,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SqlGetAsync = new ApiUrls(new[] { "/_sql/async/{id}" });
 		internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "/_sql/async/status/{id}" });
 		internal static ApiUrls SqlQuery = new ApiUrls(new[] { "/_sql" });
+		internal static ApiUrls TasksGet = new ApiUrls(new[] { "/_tasks/{task_id}" });
+		internal static ApiUrls TasksCancel = new ApiUrls(new[] { "/_tasks/_cancel", "/_tasks/{task_id}/_cancel" });
+		internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
 	}
 }
