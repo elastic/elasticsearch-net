@@ -50,7 +50,7 @@ And features such as
 
 include::{output-dir}/getting-started.asciidoc[]
 
-[[connecting]]
+[[connecting-nest]]
 == Connecting
 
 NEST uses sensible defaults for connecting to and interacting with an Elasticsearch cluster but provides numerous
