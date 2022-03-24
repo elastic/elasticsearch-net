@@ -30,4 +30,3 @@ include::search.asciidoc[]
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]
-
