@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Tasks;
 
 namespace Elastic.Clients.Elasticsearch
 {
@@ -73,33 +74,43 @@ namespace Elastic.Clients.Elasticsearch
 				{
 					if (reader.TokenType == JsonTokenType.EndObject)
 						return dictionary;
+
 					// Get the key.
 					if (reader.TokenType != JsonTokenType.PropertyName)
 						throw new JsonException();
-					var propertyName = reader.GetString();
 
-					if (propertyName is null)
-						throw new SerializationException("Oh no!"); // TODO handle this better
+					var keyValue = reader.GetString();
+
+					if (keyValue is null)
+						throw new JsonException("Key was null.");
 
 					// TODO: This is all very basic
 					TKey key;
+
 					if (typeof(TKey) == typeof(string))
-						key = (TKey)Activator.CreateInstance(typeof(string), propertyName.ToCharArray());
+					{
+						key = (TKey)Activator.CreateInstance(typeof(string), keyValue.ToCharArray());
+					}
 					else if (typeof(TKey) == typeof(IndexName))
 					{
-						key = IndexName.Parse(propertyName) as TKey;
+						key = IndexName.Parse(keyValue) as TKey;
 					}
 					else if (typeof(TKey) == typeof(Field))
 					{
-						key = new Field(propertyName) as TKey;
+						key = new Field(keyValue) as TKey;
+					}
+					else if (typeof(TKey) == typeof(TaskId))
+					{
+						key = new TaskId(keyValue) as TKey;
 					}
 					else
 					{
-						key = (TKey)Activator.CreateInstance(typeof(TKey),
-							BindingFlags.Instance,
-							null,
-							new object[] { propertyName },
-							null);
+						throw new JsonException("Unsupported dictionary key");
+						//key = (TKey)Activator.CreateInstance(typeof(TKey),
+						//	BindingFlags.Instance,
+						//	null,
+						//	new object[] { propertyName },
+						//	null);
 					}
 
 					// Get the value.
