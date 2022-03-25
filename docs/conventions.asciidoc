@@ -29,8 +29,6 @@ please modify the original csharp file found at the link and submit the PR with 
 --
 Conventions that apply to both Elasticsearch.Net and NEST
 
-* <<lifetimes, Component lifetimes>>
-
 * <<thrown-exceptions, Exceptions>>
 
 * <<transports-and-pipelines, Transports and pipelines>>
@@ -44,8 +42,6 @@ Conventions that apply to both Elasticsearch.Net and NEST
 * <<request-overrides, Request overrides>>
 
 --
-
-include::client-concepts/low-level/lifetimes.asciidoc[]
 
 [[thrown-exceptions]]
 == Exceptions
