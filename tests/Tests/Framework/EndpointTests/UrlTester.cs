@@ -34,18 +34,18 @@ namespace Tests.Framework.EndpointTests
 
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 
-		public UrlTester Fluent<TResponse>(Func<ElasticsearchClient, TResponse> call) where TResponse : IResponse =>
+		public UrlTester Fluent<TResponse>(Func<ElasticsearchClient, TResponse> call) where TResponse : IElasticsearchResponse =>
 			WhenCalling(call, "fluent");
 
-		public UrlTester Request<TResponse>(Func<ElasticsearchClient, TResponse> call) where TResponse : IResponse =>
+		public UrlTester Request<TResponse>(Func<ElasticsearchClient, TResponse> call) where TResponse : IElasticsearchResponse =>
 			WhenCalling(call, "request");
 
 		public Task<UrlTester> FluentAsync<TResponse>(Func<ElasticsearchClient, Task<TResponse>> call)
-			where TResponse : IResponse =>
+			where TResponse : IElasticsearchResponse =>
 			WhenCallingAsync(call, "fluent async");
 
 		public Task<UrlTester> RequestAsync<TResponse>(Func<ElasticsearchClient, Task<TResponse>> call)
-			where TResponse : IResponse =>
+			where TResponse : IElasticsearchResponse =>
 			WhenCallingAsync(call, "request async");
 
 		//public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
@@ -60,7 +60,7 @@ namespace Tests.Framework.EndpointTests
 		//}
 
 		private UrlTester WhenCalling<TResponse>(Func<ElasticsearchClient, TResponse> call, string typeOfCall)
-			where TResponse : IResponse
+			where TResponse : IElasticsearchResponse
 		{
 			var callDetails = call(Client);
 			return Assert(typeOfCall, callDetails.ApiCall);
@@ -68,7 +68,7 @@ namespace Tests.Framework.EndpointTests
 
 		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<ElasticsearchClient, Task<TResponse>> call,
 			string typeOfCall)
-			where TResponse : IResponse
+			where TResponse : IElasticsearchResponse
 		{
 			var callDetails = (await call(Client)).ApiCall;
 			return Assert(typeOfCall, callDetails);
