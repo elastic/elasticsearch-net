@@ -38,6 +38,7 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls GraphExplore = new ApiUrls(new[] { "/{index}/_graph/explore" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementRefresh = new ApiUrls(new[] { "/_refresh", "/{index}/_refresh" });
