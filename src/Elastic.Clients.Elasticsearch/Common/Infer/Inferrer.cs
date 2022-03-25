@@ -39,7 +39,7 @@ namespace Elastic.Clients.Elasticsearch
 			//		Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>>();
 			//CreateSearchResponseDelegates =
 			//	new ConcurrentDictionary<Type,
-			//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>();
+			//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IElasticsearchResponse>>>();
 		}
 
 		//internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>
@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch
 		//	CreateMultiHitDelegates { get; }
 
 		//internal ConcurrentDictionary<Type,
-		//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IResponse>>>
+		//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, IElasticsearchResponse>>>
 		//	CreateSearchResponseDelegates { get; }
 
 		private FieldResolver FieldResolver { get; }

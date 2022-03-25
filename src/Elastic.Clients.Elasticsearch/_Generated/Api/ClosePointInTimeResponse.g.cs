@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class ClosePointInTimeResponse : ResponseBase
+	public partial class ClosePointInTimeResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("num_freed")]

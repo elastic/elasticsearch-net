@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public abstract partial class EqlSearchResponseBase<TEvent> : ResponseBase
+	public abstract partial class EqlSearchResponseBase<TEvent> : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("hits")]

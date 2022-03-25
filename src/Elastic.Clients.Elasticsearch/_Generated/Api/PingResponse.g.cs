@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class PingResponse : ResponseBase
+	public partial class PingResponse : ElasticsearchResponseBase
 	{
 	}
 }

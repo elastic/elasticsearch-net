@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class DeleteResponse : ResponseBase
+	public partial class DeleteResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("forced_refresh")]
