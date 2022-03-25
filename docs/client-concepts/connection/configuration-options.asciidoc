@@ -15,10 +15,10 @@ please modify the original csharp file found at the link and submit the PR with 
 [[configuration-options]]
 === Configuration options
 
-Connecting to Elasticsearch with <<elasticsearch-net-getting-started,Elasticsearch.Net>> and <<nest-getting-started,NEST>> is easy, but
+Connecting to Elasticsearch with <<nest-getting-started,NEST>> is easy, but
 it's entirely possible that you'd like to change the default connection behaviour. There are a number of configuration options available
-on `ConnectionConfiguration` for the low level client and `ConnectionSettings` for the high level client that can be used to control
-how the clients interact with Elasticsearch.
+on `ConnectionSettings` that can be used to control how the client interact with 
+Elasticsearch.
 
 ==== Options on ConnectionConfiguration
 
