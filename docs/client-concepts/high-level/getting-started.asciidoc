@@ -18,10 +18,6 @@ please modify the original csharp file found at the link and submit the PR with 
 NEST is a high level Elasticsearch .NET client that still maps very closely to the original Elasticsearch API.
 All requests and responses are exposed through types, making it ideal for getting up and running quickly.
 
-Under the covers, NEST uses the <<elasticsearch-net,Elasticsearch.Net low level client>> to dispatch requests and
-responses, using and extending many of the types within Elasticsearch.Net. The low level client itself is still
-exposed on the high level client through the `.LowLevel` property.
-
 [float]
 === Connecting
 
@@ -45,8 +41,7 @@ var client = new ElasticClient(settings);
 ----
 
 In this example, a default index was also specified to use if no other index is supplied for the request or can be inferred for the
-POCO generic type parameter in the request. There are many other <<configuration-options,Configuration options>> on `ConnectionSettings`, which it inherits
-from `ConnectionConfiguration`, the type used to pass additional configuration options to the low level client in <<elasticsearch-net,Elasticsearch.Net>>.
+POCO generic type parameter in the request. There are many other <<configuration-options,Configuration options>> on `ConnectionSettings`.
 
 TIP: Specifying a default index is _optional_ but NEST may throw an exception if no index can be inferred for a given request. To understand more around how
 an index can be specified for a request, see <<index-name-inference,Index name inference>>.

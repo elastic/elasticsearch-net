@@ -29,9 +29,10 @@ this is https://blogs.msdn.microsoft.com/adarshk/2005/01/02/understanding-system
 
 So, what is a connection pool in NEST responsible for? It is responsible for managing the nodes in an Elasticsearch
 cluster to which a connection can be made and there is one instance of an `IConnectionPool` associated with an
-instance of `ConnectionSettings`. Since a <<lifetimes,single client and connection settings instance is recommended for the
-life of the application>>, the lifetime of a single connection pool instance will also be bound to the lifetime
-of the application.
+instance of `ConnectionSettings`. Since a single client and connection settings 
+instance is recommended for the life of the application, the lifetime of a 
+single connection pool instance will also be bound to the lifetime of the 
+application.
 
 There are five types of connection pool
 
