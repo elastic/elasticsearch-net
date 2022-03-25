@@ -15,32 +15,28 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-// TODO - Converter
-
 internal sealed class FieldsConverter : JsonConverter<Fields>
 {
 	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
+		if (reader.TokenType == JsonTokenType.String)
+		{
+			Fields fields = reader.GetString();
+			return fields;
+		}
+		else if (reader.TokenType == JsonTokenType.StartArray)
+		{
+			var fields = new List<Field>();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+			{
+				var field = JsonSerializer.Deserialize<Field>(ref reader, options);
+				fields.Add(field);
+			}
+			return new Fields(fields);
+		}
+
 		reader.Read();
-
-		if (reader.TokenType != JsonTokenType.StartArray)
-		{
-			return null;
-		}
-
-		var fields = new List<Field>();
-		while (reader.Read())
-		{
-			if (reader.TokenType == JsonTokenType.EndArray)
-				break;
-
-			var field = JsonSerializer.Deserialize(ref reader, typeof(Field), options);
-
-			if (field is Field f)
-				fields.Add(f);
-		}
-
-		return new Fields(fields);
+		return null;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
