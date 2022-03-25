@@ -23,8 +23,6 @@ include::breaking-changes.asciidoc[]
 
 include::conventions.asciidoc[]
 
-include::low-level.asciidoc[]
-
 include::high-level.asciidoc[]
 
 include::troubleshooting.asciidoc[]
@@ -34,4 +32,3 @@ include::search.asciidoc[]
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]
-
