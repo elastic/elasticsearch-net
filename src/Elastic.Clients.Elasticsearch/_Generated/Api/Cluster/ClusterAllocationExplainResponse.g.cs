@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster
 {
-	public partial class ClusterAllocationExplainResponse : ResponseBase
+	public partial class ClusterAllocationExplainResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("allocate_explanation")]

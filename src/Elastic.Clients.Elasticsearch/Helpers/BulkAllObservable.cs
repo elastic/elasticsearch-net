@@ -238,7 +238,7 @@ public class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 		return await BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
 	}
 
-	private Exception ThrowOnBadBulk(IResponse response, string message)
+	private Exception ThrowOnBadBulk(IElasticsearchResponse response, string message)
 	{
 		_incrementFailed();
 		_partitionedBulkRequest.BackPressure?.Release();

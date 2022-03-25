@@ -20,7 +20,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -84,7 +84,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class NdJsonApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{

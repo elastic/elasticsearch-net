@@ -16,7 +16,7 @@ namespace Tests.Framework.EndpointTests
 {
 	public class CoordinatedUsage : KeyedCollection<string, LazyResponses>
 	{
-		public static readonly IResponse VoidResponse = new PingResponse();
+		public static readonly IElasticsearchResponse VoidResponse = new PingResponse();
 
 		private readonly ITestCluster _cluster;
 
@@ -85,7 +85,7 @@ namespace Tests.Framework.EndpointTests
 			Action<TResponse, CallUniqueValues> onResponse = null,
 			Func<CallUniqueValues, string> uniqueValueSelector = null
 		)
-			where TResponse : class, IResponse
+			where TResponse : class, IElasticsearchResponse
 			where TDescriptor : class
 			where TInitializer : class
 		{
@@ -112,13 +112,13 @@ namespace Tests.Framework.EndpointTests
 				return VoidResponse;
 			});
 
-		public Func<string, LazyResponses> Call<TResponse>(Func<string, ElasticsearchClient, Task<TResponse>> call) where TResponse : IResponse
+		public Func<string, LazyResponses> Call<TResponse>(Func<string, ElasticsearchClient, Task<TResponse>> call) where TResponse : IElasticsearchResponse
 		{
 			var client = Client;
 			return k => Usage.CallOnce(
 				() => new LazyResponses(k, async () =>
 				{
-					var dict = new Dictionary<ClientMethod, IResponse>();
+					var dict = new Dictionary<ClientMethod, IElasticsearchResponse>();
 					foreach (var (m, v) in _values)
 					{
 						var response = await call(v, client);
@@ -132,7 +132,7 @@ namespace Tests.Framework.EndpointTests
 
 		private string Sanitize(string value) => string.IsNullOrEmpty(Prefix) ? value : $"{Prefix}-{value}";
 
-		private async ValueTask<Dictionary<ClientMethod, IResponse>> CallAllClientMethodsOverloads<TDescriptor, TInitializer, TResponse>(
+		private async ValueTask<Dictionary<ClientMethod, IElasticsearchResponse>> CallAllClientMethodsOverloads<TDescriptor, TInitializer, TResponse>(
 			EndpointUsage usage,
 			Func<string, TInitializer> initializerBody,
 			Func<string, TDescriptor, TDescriptor> fluentBody,
@@ -144,11 +144,11 @@ namespace Tests.Framework.EndpointTests
 			Func<CallUniqueValues, string> uniqueValueSelector,
 			ElasticsearchClient client
 		)
-			where TResponse : class, IResponse
+			where TResponse : class, IElasticsearchResponse
 			where TDescriptor : class
 			where TInitializer : class
 		{
-			var dict = new Dictionary<ClientMethod, IResponse>();
+			var dict = new Dictionary<ClientMethod, IElasticsearchResponse>();
 			async Task InvokeApiCall(
 				ClientMethod method,
 				Func<string, ElasticsearchClient, ValueTask<TResponse>> invoke

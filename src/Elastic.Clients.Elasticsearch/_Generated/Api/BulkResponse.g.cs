@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch
 {
-	public partial class BulkResponse : ResponseBase
+	public partial class BulkResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("errors")]

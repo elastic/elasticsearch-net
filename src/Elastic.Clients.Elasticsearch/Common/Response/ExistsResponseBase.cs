@@ -6,7 +6,7 @@ using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch
 {
-	public abstract class ExistsResponseBase : ResponseBase
+	public abstract class ExistsResponseBase : ElasticsearchResponseBase
 	{
 		public bool Exists => ApiCall is {Success: true, HttpStatusCode: 200};
 	}
