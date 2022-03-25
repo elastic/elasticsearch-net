@@ -39,10 +39,9 @@ an {es} deployment in the cloud.
 using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
 
-var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>"));
+var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); <1>
 ----
-
-Replace the placeholder string values above with your cloud ID and the API key 
+<1> Replace the placeholder string values above with your cloud ID and the API key 
 configured for your application to access your deployment.
 
 
@@ -56,17 +55,19 @@ URL. It may also be convenient to use a single node during local application
 development. If the URL represents a single {es} node, be aware that this offers 
 no resiliency should the server be unreachable or unresponsive.
 
-By default, security features such as authentication and TLS are enabled on {es} clusters. 
-When you start {es} for the first time, TLS is configured automatically for the HTTP 
-layer. A CA certificate is generated and stored on disk which is used to sign the 
-certificates for the HTTP layer of the {es} cluster.
+By default, security features such as authentication and TLS are enabled on {es} 
+clusters. When you start {es} for the first time, TLS is configured 
+automatically for the HTTP layer. A CA certificate is generated and stored on 
+disk which is used to sign the certificates for the HTTP layer of the {es} 
+cluster.
 
 In order for the client to establish a connection with the cluster over HTTPS, 
 the CA certificate must be trusted by the client application. There are several 
-mechanisms for <<working-with-certificates, working with certificates>>, but the simplest choice is to use the 
-hex-encoded SHA-256 fingerprint of the CA certificate. The CA fingerprint is 
-output to the terminal when you start {es} for the first time. It can also be 
-retrieved from you cluster by running the following command:
+mechanisms for <<working-with-certificates, working with certificates>>, but the 
+simplest choice is to use the hex-encoded SHA-256 fingerprint of the CA 
+certificate. The CA fingerprint is output to the terminal when you start {es} 
+for the first time. It can also be retrieved from you cluster by running the 
+following command:
 
 [source,shell]
 ----
