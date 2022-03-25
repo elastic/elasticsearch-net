@@ -22,6 +22,8 @@ public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUr
 
 	internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
 
+	internal Indices(IEnumerable<string> indices) : base(new ManyIndices(indices)) { }
+
 	/// <summary>All indices. Represents _all</summary>
 	public static Indices All { get; } = new Indices(new AllIndicesMarker());
 
@@ -152,6 +154,16 @@ internal sealed class IndicesJsonConverter : JsonConverter<Indices>
 		{
 			Indices indices = reader.GetString();
 			return indices;
+		}
+		else if (reader.TokenType == JsonTokenType.StartArray)
+		{
+			var indices = new List<string>();
+			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+			{
+				var index = reader.GetString();
+				indices.Add(index);
+			}
+			return new Indices(indices);
 		}
 
 		reader.Read();

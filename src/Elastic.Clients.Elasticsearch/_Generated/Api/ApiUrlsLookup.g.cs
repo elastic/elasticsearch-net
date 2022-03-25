@@ -32,6 +32,11 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
+		internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
+		internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}/_execute" });
+		internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}", "/_enrich/policy" });
+		internal static ApiUrls EnrichPutPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
+		internal static ApiUrls EnrichStats = new ApiUrls(new[] { "/_enrich/_stats" });
 		internal static ApiUrls EqlDelete = new ApiUrls(new[] { "/_eql/search/{id}" });
 		internal static ApiUrls EqlGetStatus = new ApiUrls(new[] { "/_eql/search/status/{id}" });
 		internal static ApiUrls EqlSearch = new ApiUrls(new[] { "/{index}/_eql/search" });
