@@ -18,7 +18,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -64,7 +64,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class NdJsonApiIntegrationTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: NdJsonApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -111,10 +111,10 @@ namespace Tests.Framework.EndpointTests
 
 	public class ResponseAssertionException : Exception
 	{
-		public ResponseAssertionException(Exception innerException, IResponse response)
+		public ResponseAssertionException(Exception innerException, IElasticsearchResponse response)
 			: base(ResponseInMessage(innerException.Message, response), innerException) { }
 
-		private static string ResponseInMessage(string innerExceptionMessage, IResponse r) => $@"{innerExceptionMessage}
+		private static string ResponseInMessage(string innerExceptionMessage, IElasticsearchResponse r) => $@"{innerExceptionMessage}
 Response Under Test:
 {r.DebugInformation}";
 	}

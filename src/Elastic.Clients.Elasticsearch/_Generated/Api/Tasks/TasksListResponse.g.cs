@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks
 {
-	public partial class TasksListResponse : ResponseBase
+	public partial class TasksListResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("node_failures")]

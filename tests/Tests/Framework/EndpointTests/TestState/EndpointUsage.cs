@@ -49,7 +49,7 @@ namespace Tests.Framework.EndpointTests.TestState
 	}
 
 	public class SingleEndpointUsage<TResponse> : EndpointUsage
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 	{
 		private readonly Func<string, ElasticsearchClient, TResponse> _fluent;
 		private readonly Func<string, ElasticsearchClient, Task<TResponse>> _fluentAsync;
@@ -91,7 +91,7 @@ namespace Tests.Framework.EndpointTests.TestState
 
 				var randomCall = Random.Number(0, 3);
 
-				var dict = new Dictionary<ClientMethod, IResponse>();
+				var dict = new Dictionary<ClientMethod, IElasticsearchResponse>();
 
 				if (!oneRandomCall || randomCall == 0)
 					Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
@@ -115,7 +115,7 @@ namespace Tests.Framework.EndpointTests.TestState
 				return dict;
 			}));
 
-		private void Call(ElasticsearchClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method, Func<string, TResponse> call)
+		private void Call(ElasticsearchClient client, IDictionary<ClientMethod, IElasticsearchResponse> dict, ClientMethod method, Func<string, TResponse> call)
 		{
 			CallUniqueValues.CurrentView = method;
 			OnBeforeCall?.Invoke(client);
@@ -123,7 +123,7 @@ namespace Tests.Framework.EndpointTests.TestState
 			OnAfterCall?.Invoke(client);
 		}
 
-		private async Task CallAsync(ElasticsearchClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method,
+		private async Task CallAsync(ElasticsearchClient client, IDictionary<ClientMethod, IElasticsearchResponse> dict, ClientMethod method,
 			Func<string, Task<TResponse>> call
 		)
 		{

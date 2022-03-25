@@ -21,7 +21,7 @@ namespace Tests.Framework.EndpointTests
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TDescriptor, TInitializer>
 		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 		where TDescriptor : class
 		where TInitializer : class
 	{
@@ -99,7 +99,7 @@ namespace Tests.Framework.EndpointTests
 
 			static (ClientMethod, Func<ValueTask<TResponse>>) Api(ClientMethod method, Func<ValueTask<TResponse>> action) => (method, action);
 
-			var dict = new Dictionary<ClientMethod, IResponse>();
+			var dict = new Dictionary<ClientMethod, IElasticsearchResponse>();
 			var views = new[]
 			{
 				Api(ClientMethod.Initializer, () => new ValueTask<TResponse>(request(client, Initializer))),
