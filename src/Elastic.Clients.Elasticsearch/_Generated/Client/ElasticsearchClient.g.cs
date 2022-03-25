@@ -17,6 +17,7 @@
 
 using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.Enrich;
 using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.Graph;
 using Elastic.Clients.Elasticsearch.IndexManagement;
@@ -35,6 +36,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public ClusterNamespace Cluster { get; private set; }
 
+		public EnrichNamespace Enrich { get; private set; }
+
 		public EqlNamespace Eql { get; private set; }
 
 		public GraphNamespace Graph { get; private set; }
@@ -49,6 +52,7 @@ namespace Elastic.Clients.Elasticsearch
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
 			Cluster = new ClusterNamespace(this);
+			Enrich = new EnrichNamespace(this);
 			Eql = new EqlNamespace(this);
 			Graph = new GraphNamespace(this);
 			IndexManagement = new IndexManagementNamespace(this);
