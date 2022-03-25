@@ -22,7 +22,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class EqlGetStatusResponse : ResponseBase
+	public partial class EqlGetStatusResponse : ElasticsearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("completion_status")]
