@@ -26,7 +26,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	protected CoordinatedIntegrationTestBase(CoordinatedUsage coordinatedUsage) => _coordinatedUsage = coordinatedUsage;
 
 	protected async Task Assert<TResponse>(string name, Action<TResponse> assert)
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 	{
 		if (_coordinatedUsage.Skips(name))
 			return;
@@ -39,7 +39,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	}
 
 	protected async Task Assert<TResponse>(string name, Action<string, TResponse> assert)
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 	{
 		if (_coordinatedUsage.Skips(name))
 			return;
@@ -59,7 +59,7 @@ public abstract class CoordinatedIntegrationTestBase<TCluster>
 	}
 
 	private async Task AssertOnAllResponses<TResponse>(string name, LazyResponses responses, Action<string, TResponse> assert)
-		where TResponse : class, IResponse
+		where TResponse : class, IElasticsearchResponse
 	{
 		foreach (var (key, value) in await responses)
 		{
