@@ -16,6 +16,7 @@
 // ------------------------------------------------
 
 using Elastic.Clients.Elasticsearch.AsyncSearch;
+using Elastic.Clients.Elasticsearch.Ccr;
 using Elastic.Clients.Elasticsearch.Cluster;
 using Elastic.Clients.Elasticsearch.Enrich;
 using Elastic.Clients.Elasticsearch.Eql;
@@ -38,6 +39,8 @@ namespace Elastic.Clients.Elasticsearch
 	public partial class ElasticsearchClient
 	{
 		public AsyncSearchNamespace AsyncSearch { get; private set; }
+
+		public CcrNamespace Ccr { get; private set; }
 
 		public ClusterNamespace Cluster { get; private set; }
 
@@ -66,6 +69,7 @@ namespace Elastic.Clients.Elasticsearch
 		private partial void SetupNamespaces()
 		{
 			AsyncSearch = new AsyncSearchNamespace(this);
+			Ccr = new CcrNamespace(this);
 			Cluster = new ClusterNamespace(this);
 			Enrich = new EnrichNamespace(this);
 			Eql = new EqlNamespace(this);
