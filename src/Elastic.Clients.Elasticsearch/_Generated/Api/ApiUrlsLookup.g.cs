@@ -59,6 +59,11 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementRefresh = new ApiUrls(new[] { "/_refresh", "/{index}/_refresh" });
 		internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
+		internal static ApiUrls NodesHotThreads = new ApiUrls(new[] { "/_nodes/hot_threads", "/_nodes/{node_id}/hot_threads" });
+		internal static ApiUrls NodesInfo = new ApiUrls(new[] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" });
+		internal static ApiUrls NodesReloadSecureSettings = new ApiUrls(new[] { "/_nodes/reload_secure_settings", "/_nodes/{node_id}/reload_secure_settings" });
+		internal static ApiUrls NodesStats = new ApiUrls(new[] { "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}" });
+		internal static ApiUrls NodesUsage = new ApiUrls(new[] { "/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}" });
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
