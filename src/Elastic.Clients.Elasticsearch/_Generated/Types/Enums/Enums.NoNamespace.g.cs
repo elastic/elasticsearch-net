@@ -444,6 +444,62 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(GeoShapeRelationConverter))]
+	public enum GeoShapeRelation
+	{
+		[EnumMember(Value = "within")]
+		Within,
+		[EnumMember(Value = "intersects")]
+		Intersects,
+		[EnumMember(Value = "disjoint")]
+		Disjoint,
+		[EnumMember(Value = "contains")]
+		Contains
+	}
+
+	internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation>
+	{
+		public override GeoShapeRelation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "within":
+					return GeoShapeRelation.Within;
+				case "intersects":
+					return GeoShapeRelation.Intersects;
+				case "disjoint":
+					return GeoShapeRelation.Disjoint;
+				case "contains":
+					return GeoShapeRelation.Contains;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoShapeRelation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case GeoShapeRelation.Within:
+					writer.WriteStringValue("within");
+					return;
+				case GeoShapeRelation.Intersects:
+					writer.WriteStringValue("intersects");
+					return;
+				case GeoShapeRelation.Disjoint:
+					writer.WriteStringValue("disjoint");
+					return;
+				case GeoShapeRelation.Contains:
+					writer.WriteStringValue("contains");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(HealthStatusConverter))]
 	public enum HealthStatus
 	{
