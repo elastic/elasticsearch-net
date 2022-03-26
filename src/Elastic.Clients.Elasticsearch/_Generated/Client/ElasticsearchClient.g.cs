@@ -192,6 +192,62 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse>(descriptor);
 		}
 
+		public DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<DeleteByQueryRequest, DeleteByQueryResponse>(request);
+		}
+
+		public Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<DeleteByQueryRequest, DeleteByQueryResponse>(request, cancellationToken);
+		}
+
+		public DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new DeleteByQueryRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
+		}
+
+		public Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteByQueryRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteByQueryRequestDescriptor, DeleteByQueryResponse>(descriptor);
+		}
+
+		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request);
+		}
+
+		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(DeleteByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse>(request, cancellationToken);
+		}
+
+		public DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
+		}
+
+		public Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new DeleteByQueryRethrottleRequestDescriptor(task_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse>(descriptor);
+		}
+
 		public DeleteResponse Delete(DeleteRequest request)
 		{
 			request.BeforeRequest();
@@ -360,6 +416,90 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<PingRequestDescriptor, PingResponse>(descriptor);
 		}
 
+		public PutScriptResponse PutScript(PutScriptRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<PutScriptRequest, PutScriptResponse>(request);
+		}
+
+		public Task<PutScriptResponse> PutScriptAsync(PutScriptRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<PutScriptRequest, PutScriptResponse>(request, cancellationToken);
+		}
+
+		public PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new PutScriptRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
+		}
+
+		public Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new PutScriptRequestDescriptor(id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
+		}
+
+		public ReindexResponse Reindex(ReindexRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ReindexRequest, ReindexResponse>(request);
+		}
+
+		public Task<ReindexResponse> ReindexAsync(ReindexRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ReindexRequest, ReindexResponse>(request, cancellationToken);
+		}
+
+		public ReindexResponse Reindex(Action<ReindexRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ReindexRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+		}
+
+		public Task<ReindexResponse> ReindexAsync(Action<ReindexRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ReindexRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse>(descriptor);
+		}
+
+		public ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ReindexRethrottleRequest, ReindexRethrottleResponse>(request);
+		}
+
+		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(ReindexRethrottleRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ReindexRethrottleRequest, ReindexRethrottleResponse>(request, cancellationToken);
+		}
+
+		public ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<ReindexRethrottleRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
+		}
+
+		public Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<ReindexRethrottleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ReindexRethrottleRequestDescriptor(task_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
+		}
+
 		public SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
 		{
 			request.BeforeRequest();
@@ -414,6 +554,62 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+		}
+
+		public UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<UpdateByQueryRequest, UpdateByQueryResponse>(request);
+		}
+
+		public Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<UpdateByQueryRequest, UpdateByQueryResponse>(request, cancellationToken);
+		}
+
+		public UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new UpdateByQueryRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
+		}
+
+		public Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new UpdateByQueryRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse>(descriptor);
+		}
+
+		public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse>(request);
+		}
+
+		public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(UpdateByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse>(request, cancellationToken);
+		}
+
+		public UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id task_id, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
+		}
+
+		public Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new UpdateByQueryRethrottleRequestDescriptor(task_id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<UpdateByQueryRethrottleRequestDescriptor, UpdateByQueryRethrottleResponse>(descriptor);
 		}
 
 		public UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)

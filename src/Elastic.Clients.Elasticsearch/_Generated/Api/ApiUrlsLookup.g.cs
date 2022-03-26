@@ -31,6 +31,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls ClusterState = new ApiUrls(new[] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" });
 		internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 		internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
+		internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[] { "/{index}/_delete_by_query" });
+		internal static ApiUrls NoNamespaceDeleteByQueryRethrottle = new ApiUrls(new[] { "/_delete_by_query/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
 		internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}/_execute" });
@@ -86,6 +88,9 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NodesUsage = new ApiUrls(new[] { "/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}" });
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
+		internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[] { "/_scripts/{id}", "/_scripts/{id}/{context}" });
+		internal static ApiUrls NoNamespaceReindex = new ApiUrls(new[] { "/_reindex" });
+		internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[] { "/_reindex/{task_id}/_rethrottle" });
 		internal static ApiUrls SearchableSnapshotsCacheStats = new ApiUrls(new[] { "/_searchable_snapshots/cache/stats", "/_searchable_snapshots/{node_id}/cache/stats" });
 		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
 		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
@@ -109,6 +114,8 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls TasksGet = new ApiUrls(new[] { "/_tasks/{task_id}" });
 		internal static ApiUrls TasksCancel = new ApiUrls(new[] { "/_tasks/_cancel", "/_tasks/{task_id}/_cancel" });
 		internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
+		internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "/{index}/_update_by_query" });
+		internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "/_update_by_query/{task_id}/_rethrottle" });
 		internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });
 	}
 }

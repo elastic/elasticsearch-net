@@ -73,6 +73,48 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(ConflictsConverter))]
+	public enum Conflicts
+	{
+		[EnumMember(Value = "proceed")]
+		Proceed,
+		[EnumMember(Value = "abort")]
+		Abort
+	}
+
+	internal sealed class ConflictsConverter : JsonConverter<Conflicts>
+	{
+		public override Conflicts Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "proceed":
+					return Conflicts.Proceed;
+				case "abort":
+					return Conflicts.Abort;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Conflicts value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case Conflicts.Proceed:
+					writer.WriteStringValue("proceed");
+					return;
+				case Conflicts.Abort:
+					writer.WriteStringValue("abort");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(DFIIndependenceMeasureConverter))]
 	public enum DFIIndependenceMeasure
 	{
