@@ -22,6 +22,7 @@ using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.Graph;
 using Elastic.Clients.Elasticsearch.Ilm;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.Sql;
 using Elastic.Clients.Elasticsearch.Tasks;
 using System;
@@ -47,6 +48,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public IndexManagementNamespace IndexManagement { get; private set; }
 
+		public NodesNamespace Nodes { get; private set; }
+
 		public SqlNamespace Sql { get; private set; }
 
 		public TasksNamespace Tasks { get; private set; }
@@ -60,6 +63,7 @@ namespace Elastic.Clients.Elasticsearch
 			Graph = new GraphNamespace(this);
 			Ilm = new IlmNamespace(this);
 			IndexManagement = new IndexManagementNamespace(this);
+			Nodes = new NodesNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
 		}
