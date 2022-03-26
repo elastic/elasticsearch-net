@@ -71,6 +71,15 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
 		internal static ApiUrls SearchableSnapshotsStats = new ApiUrls(new[] { "/_searchable_snapshots/stats", "/{index}/_searchable_snapshots/stats" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
+		internal static ApiUrls SnapshotLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}" });
+		internal static ApiUrls SnapshotLifecycleManagementExecuteLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}/_execute" });
+		internal static ApiUrls SnapshotLifecycleManagementExecuteRetention = new ApiUrls(new[] { "/_slm/_execute_retention" });
+		internal static ApiUrls SnapshotLifecycleManagementGetLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}", "/_slm/policy" });
+		internal static ApiUrls SnapshotLifecycleManagementGetStats = new ApiUrls(new[] { "/_slm/stats" });
+		internal static ApiUrls SnapshotLifecycleManagementGetStatus = new ApiUrls(new[] { "/_slm/status" });
+		internal static ApiUrls SnapshotLifecycleManagementPutLifecycle = new ApiUrls(new[] { "/_slm/policy/{policy_id}" });
+		internal static ApiUrls SnapshotLifecycleManagementStart = new ApiUrls(new[] { "/_slm/start" });
+		internal static ApiUrls SnapshotLifecycleManagementStop = new ApiUrls(new[] { "/_slm/stop" });
 		internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls SqlClearCursor = new ApiUrls(new[] { "/_sql/close" });
 		internal static ApiUrls SqlDeleteAsync = new ApiUrls(new[] { "/_sql/async/delete/{id}" });
