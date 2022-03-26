@@ -44,6 +44,17 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NoNamespaceExists = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 		internal static ApiUrls GraphExplore = new ApiUrls(new[] { "/{index}/_graph/explore" });
+		internal static ApiUrls IndexLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "/_ilm/policy/{policy}" });
+		internal static ApiUrls IndexLifecycleManagementExplainLifecycle = new ApiUrls(new[] { "/{index}/_ilm/explain" });
+		internal static ApiUrls IndexLifecycleManagementGetLifecycle = new ApiUrls(new[] { "/_ilm/policy/{policy}", "/_ilm/policy" });
+		internal static ApiUrls IndexLifecycleManagementGetStatus = new ApiUrls(new[] { "/_ilm/status" });
+		internal static ApiUrls IndexLifecycleManagementMigrateToDataTiers = new ApiUrls(new[] { "/_ilm/migrate_to_data_tiers" });
+		internal static ApiUrls IndexLifecycleManagementMoveToStep = new ApiUrls(new[] { "/_ilm/move/{index}" });
+		internal static ApiUrls IndexLifecycleManagementPutLifecycle = new ApiUrls(new[] { "/_ilm/policy/{policy}" });
+		internal static ApiUrls IndexLifecycleManagementRemovePolicy = new ApiUrls(new[] { "/{index}/_ilm/remove" });
+		internal static ApiUrls IndexLifecycleManagementRetry = new ApiUrls(new[] { "/{index}/_ilm/retry" });
+		internal static ApiUrls IndexLifecycleManagementStart = new ApiUrls(new[] { "/_ilm/start" });
+		internal static ApiUrls IndexLifecycleManagementStop = new ApiUrls(new[] { "/_ilm/stop" });
 		internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
 		internal static ApiUrls IndexManagementRefresh = new ApiUrls(new[] { "/_refresh", "/{index}/_refresh" });
