@@ -24,6 +24,7 @@ using Elastic.Clients.Elasticsearch.Ilm;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
+using Elastic.Clients.Elasticsearch.Slm;
 using Elastic.Clients.Elasticsearch.Sql;
 using Elastic.Clients.Elasticsearch.Tasks;
 using System;
@@ -53,6 +54,8 @@ namespace Elastic.Clients.Elasticsearch
 
 		public SearchableSnapshotsNamespace SearchableSnapshots { get; private set; }
 
+		public SlmNamespace Slm { get; private set; }
+
 		public SqlNamespace Sql { get; private set; }
 
 		public TasksNamespace Tasks { get; private set; }
@@ -68,6 +71,7 @@ namespace Elastic.Clients.Elasticsearch
 			IndexManagement = new IndexManagementNamespace(this);
 			Nodes = new NodesNamespace(this);
 			SearchableSnapshots = new SearchableSnapshotsNamespace(this);
+			Slm = new SlmNamespace(this);
 			Sql = new SqlNamespace(this);
 			Tasks = new TasksNamespace(this);
 		}
