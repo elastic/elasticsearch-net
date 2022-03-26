@@ -304,6 +304,62 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
 		}
 
+		public ExistsSourceResponse ExistsSource(ExistsSourceRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ExistsSourceRequest, ExistsSourceResponse>(request);
+		}
+
+		public Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ExistsSourceRequest, ExistsSourceResponse>(request, cancellationToken);
+		}
+
+		public ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ExistsSourceRequestDescriptor(index, id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+		}
+
+		public Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ExistsSourceRequestDescriptor(index, id);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ExistsSourceRequestDescriptor, ExistsSourceResponse>(descriptor);
+		}
+
+		public FieldCapsResponse FieldCaps(FieldCapsRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<FieldCapsRequest, FieldCapsResponse>(request);
+		}
+
+		public Task<FieldCapsResponse> FieldCapsAsync(FieldCapsRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<FieldCapsRequest, FieldCapsResponse>(request, cancellationToken);
+		}
+
+		public FieldCapsResponse FieldCaps(Action<FieldCapsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new FieldCapsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+		}
+
+		public Task<FieldCapsResponse> FieldCapsAsync(Action<FieldCapsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new FieldCapsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse>(descriptor);
+		}
+
 		public GetResponse<TDocument> Get<TDocument>(GetRequest request)
 		{
 			request.BeforeRequest();
@@ -358,6 +414,62 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse>(descriptor);
+		}
+
+		public InfoResponse Info(InfoRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<InfoRequest, InfoResponse>(request);
+		}
+
+		public Task<InfoResponse> InfoAsync(InfoRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<InfoRequest, InfoResponse>(request, cancellationToken);
+		}
+
+		public InfoResponse Info(Action<InfoRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new InfoRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<InfoRequestDescriptor, InfoResponse>(descriptor);
+		}
+
+		public Task<InfoResponse> InfoAsync(Action<InfoRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new InfoRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<InfoRequestDescriptor, InfoResponse>(descriptor);
+		}
+
+		public KnnSearchResponse<TDocument> KnnSearch<TDocument>(KnnSearchRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<KnnSearchRequest, KnnSearchResponse<TDocument>>(request);
+		}
+
+		public Task<KnnSearchResponse<TDocument>> KnnSearchAsync<TDocument>(KnnSearchRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<KnnSearchRequest, KnnSearchResponse<TDocument>>(request, cancellationToken);
+		}
+
+		public KnnSearchResponse<TDocument> KnnSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<KnnSearchRequestDescriptor<TDocument>> configureRequest = null)
+		{
+			var descriptor = new KnnSearchRequestDescriptor<TDocument>(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<KnnSearchRequestDescriptor<TDocument>, KnnSearchResponse<TDocument>>(descriptor);
+		}
+
+		public Task<KnnSearchResponse<TDocument>> KnnSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<KnnSearchRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new KnnSearchRequestDescriptor<TDocument>(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<KnnSearchRequestDescriptor<TDocument>, KnnSearchResponse<TDocument>>(descriptor);
 		}
 
 		public OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
@@ -444,6 +556,50 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse>(descriptor);
 		}
 
+		public RankEvalResponse RankEval(RankEvalRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<RankEvalRequest, RankEvalResponse>(request);
+		}
+
+		public Task<RankEvalResponse> RankEvalAsync(RankEvalRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<RankEvalRequest, RankEvalResponse>(request, cancellationToken);
+		}
+
+		public RankEvalResponse RankEval(Action<RankEvalRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new RankEvalRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+		}
+
+		public RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new RankEvalRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+		}
+
+		public Task<RankEvalResponse> RankEvalAsync(Action<RankEvalRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new RankEvalRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+		}
+
+		public Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<RankEvalRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new RankEvalRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse>(descriptor);
+		}
+
 		public ReindexResponse Reindex(ReindexRequest request)
 		{
 			request.BeforeRequest();
@@ -500,6 +656,62 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
 		}
 
+		public ScriptContextResponse ScriptContext(ScriptContextRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ScriptContextRequest, ScriptContextResponse>(request);
+		}
+
+		public Task<ScriptContextResponse> ScriptContextAsync(ScriptContextRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ScriptContextRequest, ScriptContextResponse>(request, cancellationToken);
+		}
+
+		public ScriptContextResponse ScriptContext(Action<ScriptContextRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ScriptContextRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
+		}
+
+		public Task<ScriptContextResponse> ScriptContextAsync(Action<ScriptContextRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ScriptContextRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
+		}
+
+		public ScriptLanguagesResponse ScriptLanguages(ScriptLanguagesRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<ScriptLanguagesRequest, ScriptLanguagesResponse>(request);
+		}
+
+		public Task<ScriptLanguagesResponse> ScriptLanguagesAsync(ScriptLanguagesRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<ScriptLanguagesRequest, ScriptLanguagesResponse>(request, cancellationToken);
+		}
+
+		public ScriptLanguagesResponse ScriptLanguages(Action<ScriptLanguagesRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new ScriptLanguagesRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+		}
+
+		public Task<ScriptLanguagesResponse> ScriptLanguagesAsync(Action<ScriptLanguagesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new ScriptLanguagesRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
+		}
+
 		public SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
 		{
 			request.BeforeRequest();
@@ -528,6 +740,34 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>>(descriptor);
 		}
 
+		public SearchShardsResponse SearchShards(SearchShardsRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<SearchShardsRequest, SearchShardsResponse>(request);
+		}
+
+		public Task<SearchShardsResponse> SearchShardsAsync(SearchShardsRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<SearchShardsRequest, SearchShardsResponse>(request, cancellationToken);
+		}
+
+		public SearchShardsResponse SearchShards(Action<SearchShardsRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new SearchShardsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+		}
+
+		public Task<SearchShardsResponse> SearchShardsAsync(Action<SearchShardsRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new SearchShardsRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
+		}
+
 		public SourceResponse<TDocument> Source<TDocument>(SourceRequest request)
 		{
 			request.BeforeRequest();
@@ -554,6 +794,34 @@ namespace Elastic.Clients.Elasticsearch
 			configureRequest?.Invoke(descriptor);
 			descriptor.BeforeRequest();
 			return DoRequestAsync<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
+		}
+
+		public TermsEnumResponse TermsEnum(TermsEnumRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<TermsEnumRequest, TermsEnumResponse>(request);
+		}
+
+		public Task<TermsEnumResponse> TermsEnumAsync(TermsEnumRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<TermsEnumRequest, TermsEnumResponse>(request, cancellationToken);
+		}
+
+		public TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new TermsEnumRequestDescriptor(index);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
+		}
+
+		public Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new TermsEnumRequestDescriptor(index);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<TermsEnumRequestDescriptor, TermsEnumResponse>(descriptor);
 		}
 
 		public UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
