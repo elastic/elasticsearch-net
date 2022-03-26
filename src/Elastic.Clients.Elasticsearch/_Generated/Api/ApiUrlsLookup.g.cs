@@ -66,6 +66,10 @@ namespace Elastic.Clients.Elasticsearch
 		internal static ApiUrls NodesUsage = new ApiUrls(new[] { "/_nodes/usage", "/_nodes/{node_id}/usage", "/_nodes/usage/{metric}", "/_nodes/{node_id}/usage/{metric}" });
 		internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 		internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
+		internal static ApiUrls SearchableSnapshotsCacheStats = new ApiUrls(new[] { "/_searchable_snapshots/cache/stats", "/_searchable_snapshots/{node_id}/cache/stats" });
+		internal static ApiUrls SearchableSnapshotsClearCache = new ApiUrls(new[] { "/_searchable_snapshots/cache/clear", "/{index}/_searchable_snapshots/cache/clear" });
+		internal static ApiUrls SearchableSnapshotsMount = new ApiUrls(new[] { "/_snapshot/{repository}/{snapshot}/_mount" });
+		internal static ApiUrls SearchableSnapshotsStats = new ApiUrls(new[] { "/_searchable_snapshots/stats", "/{index}/_searchable_snapshots/stats" });
 		internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 		internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
 		internal static ApiUrls SqlClearCursor = new ApiUrls(new[] { "/_sql/close" });
