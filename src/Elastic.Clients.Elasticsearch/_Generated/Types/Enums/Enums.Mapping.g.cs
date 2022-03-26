@@ -100,4 +100,60 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 			writer.WriteNullValue();
 		}
 	}
+
+	[JsonConverter(typeof(TimeSeriesMetricTypeConverter))]
+	public enum TimeSeriesMetricType
+	{
+		[EnumMember(Value = "summary")]
+		Summary,
+		[EnumMember(Value = "histogram")]
+		Histogram,
+		[EnumMember(Value = "gauge")]
+		Gauge,
+		[EnumMember(Value = "counter")]
+		Counter
+	}
+
+	internal sealed class TimeSeriesMetricTypeConverter : JsonConverter<TimeSeriesMetricType>
+	{
+		public override TimeSeriesMetricType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "summary":
+					return TimeSeriesMetricType.Summary;
+				case "histogram":
+					return TimeSeriesMetricType.Histogram;
+				case "gauge":
+					return TimeSeriesMetricType.Gauge;
+				case "counter":
+					return TimeSeriesMetricType.Counter;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TimeSeriesMetricType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TimeSeriesMetricType.Summary:
+					writer.WriteStringValue("summary");
+					return;
+				case TimeSeriesMetricType.Histogram:
+					writer.WriteStringValue("histogram");
+					return;
+				case TimeSeriesMetricType.Gauge:
+					writer.WriteStringValue("gauge");
+					return;
+				case TimeSeriesMetricType.Counter:
+					writer.WriteStringValue("counter");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
 }
