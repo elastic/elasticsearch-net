@@ -787,6 +787,55 @@ namespace Elastic.Clients.Elasticsearch
 		}
 	}
 
+	[JsonConverter(typeof(LifecycleOperationModeConverter))]
+	public enum LifecycleOperationMode
+	{
+		[EnumMember(Value = "STOPPING")]
+		Stopping,
+		[EnumMember(Value = "STOPPED")]
+		Stopped,
+		[EnumMember(Value = "RUNNING")]
+		Running
+	}
+
+	internal sealed class LifecycleOperationModeConverter : JsonConverter<LifecycleOperationMode>
+	{
+		public override LifecycleOperationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "STOPPING":
+					return LifecycleOperationMode.Stopping;
+				case "STOPPED":
+					return LifecycleOperationMode.Stopped;
+				case "RUNNING":
+					return LifecycleOperationMode.Running;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, LifecycleOperationMode value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case LifecycleOperationMode.Stopping:
+					writer.WriteStringValue("STOPPING");
+					return;
+				case LifecycleOperationMode.Stopped:
+					writer.WriteStringValue("STOPPED");
+					return;
+				case LifecycleOperationMode.Running:
+					writer.WriteStringValue("RUNNING");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(NormalizationConverter))]
 	public enum Normalization
 	{
