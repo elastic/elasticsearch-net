@@ -28,19 +28,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		{
 		}
 
-		public AliasResponse Alias(AliasRequest request)
+		public AliasResponse GetAlias(AliasRequest request)
 		{
 			request.BeforeRequest();
 			return DoRequest<AliasRequest, AliasResponse>(request);
 		}
 
-		public Task<AliasResponse> AliasAsync(AliasRequest request, CancellationToken cancellationToken = default)
+		public Task<AliasResponse> GetAliasAsync(AliasRequest request, CancellationToken cancellationToken = default)
 		{
 			request.BeforeRequest();
 			return DoRequestAsync<AliasRequest, AliasResponse>(request, cancellationToken);
 		}
 
-		public AliasResponse Alias(Action<AliasRequestDescriptor> configureRequest = null)
+		public AliasResponse GetAlias(Action<AliasRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new AliasRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -48,7 +48,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequest<AliasRequestDescriptor, AliasResponse>(descriptor);
 		}
 
-		public Task<AliasResponse> AliasAsync(Action<AliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<AliasResponse> GetAliasAsync(Action<AliasRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new AliasRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -112,19 +112,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<CreateDataStreamRequestDescriptor, CreateDataStreamResponse>(descriptor);
 		}
 
-		public DataStreamResponse DataStream(DataStreamRequest request)
+		public DataStreamResponse GetDataStream(DataStreamRequest request)
 		{
 			request.BeforeRequest();
 			return DoRequest<DataStreamRequest, DataStreamResponse>(request);
 		}
 
-		public Task<DataStreamResponse> DataStreamAsync(DataStreamRequest request, CancellationToken cancellationToken = default)
+		public Task<DataStreamResponse> GetDataStreamAsync(DataStreamRequest request, CancellationToken cancellationToken = default)
 		{
 			request.BeforeRequest();
 			return DoRequestAsync<DataStreamRequest, DataStreamResponse>(request, cancellationToken);
 		}
 
-		public DataStreamResponse DataStream(Action<DataStreamRequestDescriptor> configureRequest = null)
+		public DataStreamResponse GetDataStream(Action<DataStreamRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new DataStreamRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequest<DataStreamRequestDescriptor, DataStreamResponse>(descriptor);
 		}
 
-		public Task<DataStreamResponse> DataStreamAsync(Action<DataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<DataStreamResponse> GetDataStreamAsync(Action<DataStreamRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new DataStreamRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
