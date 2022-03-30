@@ -280,6 +280,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse>(descriptor);
 		}
 
+		public MappingResponse GetMapping(MappingRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<MappingRequest, MappingResponse>(request);
+		}
+
+		public Task<MappingResponse> GetMappingAsync(MappingRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<MappingRequest, MappingResponse>(request, cancellationToken);
+		}
+
+		public MappingResponse GetMapping(Action<MappingRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new MappingRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<MappingRequestDescriptor, MappingResponse>(descriptor);
+		}
+
+		public Task<MappingResponse> GetMappingAsync(Action<MappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new MappingRequestDescriptor();
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<MappingRequestDescriptor, MappingResponse>(descriptor);
+		}
+
 		public MigrateToDataStreamResponse MigrateToDataStream(MigrateToDataStreamRequest request)
 		{
 			request.BeforeRequest();
