@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class DutchAnalyzer : IAnalyzersVariant
+	public partial class DutchAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("stopwords")]

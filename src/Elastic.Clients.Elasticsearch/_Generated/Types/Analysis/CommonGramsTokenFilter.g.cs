@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinitionsVariant
+	public partial class CommonGramsTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("common_words")]

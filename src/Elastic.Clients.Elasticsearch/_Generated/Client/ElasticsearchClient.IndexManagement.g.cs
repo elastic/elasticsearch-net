@@ -392,6 +392,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return DoRequestAsync<PutAliasRequestDescriptor, PutAliasResponse>(descriptor);
 		}
 
+		public PutMappingResponse PutMapping(PutMappingRequest request)
+		{
+			request.BeforeRequest();
+			return DoRequest<PutMappingRequest, PutMappingResponse>(request);
+		}
+
+		public Task<PutMappingResponse> PutMappingAsync(PutMappingRequest request, CancellationToken cancellationToken = default)
+		{
+			request.BeforeRequest();
+			return DoRequestAsync<PutMappingRequest, PutMappingResponse>(request, cancellationToken);
+		}
+
+		public PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest = null)
+		{
+			var descriptor = new PutMappingRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequest<PutMappingRequestDescriptor, PutMappingResponse>(descriptor);
+		}
+
+		public Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		{
+			var descriptor = new PutMappingRequestDescriptor(indices);
+			configureRequest?.Invoke(descriptor);
+			descriptor.BeforeRequest();
+			return DoRequestAsync<PutMappingRequestDescriptor, PutMappingResponse>(descriptor);
+		}
+
 		public RefreshResponse Refresh(RefreshRequest request)
 		{
 			request.BeforeRequest();
