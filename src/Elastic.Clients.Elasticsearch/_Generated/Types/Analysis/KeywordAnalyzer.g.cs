@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KeywordAnalyzer : IAnalyzersVariant
+	public partial class KeywordAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
