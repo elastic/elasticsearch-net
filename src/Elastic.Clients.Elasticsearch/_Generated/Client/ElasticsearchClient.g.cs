@@ -660,19 +660,19 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse>(descriptor);
 		}
 
-		public ScriptContextResponse ScriptContext(ScriptContextRequest request)
+		public ScriptContextResponse GetScriptContext(ScriptContextRequest request)
 		{
 			request.BeforeRequest();
 			return DoRequest<ScriptContextRequest, ScriptContextResponse>(request);
 		}
 
-		public Task<ScriptContextResponse> ScriptContextAsync(ScriptContextRequest request, CancellationToken cancellationToken = default)
+		public Task<ScriptContextResponse> GetScriptContextAsync(ScriptContextRequest request, CancellationToken cancellationToken = default)
 		{
 			request.BeforeRequest();
 			return DoRequestAsync<ScriptContextRequest, ScriptContextResponse>(request, cancellationToken);
 		}
 
-		public ScriptContextResponse ScriptContext(Action<ScriptContextRequestDescriptor> configureRequest = null)
+		public ScriptContextResponse GetScriptContext(Action<ScriptContextRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new ScriptContextRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -680,7 +680,7 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
 		}
 
-		public Task<ScriptContextResponse> ScriptContextAsync(Action<ScriptContextRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<ScriptContextResponse> GetScriptContextAsync(Action<ScriptContextRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ScriptContextRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -688,19 +688,19 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<ScriptContextRequestDescriptor, ScriptContextResponse>(descriptor);
 		}
 
-		public ScriptLanguagesResponse ScriptLanguages(ScriptLanguagesRequest request)
+		public ScriptLanguagesResponse GetScriptLanguages(ScriptLanguagesRequest request)
 		{
 			request.BeforeRequest();
 			return DoRequest<ScriptLanguagesRequest, ScriptLanguagesResponse>(request);
 		}
 
-		public Task<ScriptLanguagesResponse> ScriptLanguagesAsync(ScriptLanguagesRequest request, CancellationToken cancellationToken = default)
+		public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(ScriptLanguagesRequest request, CancellationToken cancellationToken = default)
 		{
 			request.BeforeRequest();
 			return DoRequestAsync<ScriptLanguagesRequest, ScriptLanguagesResponse>(request, cancellationToken);
 		}
 
-		public ScriptLanguagesResponse ScriptLanguages(Action<ScriptLanguagesRequestDescriptor> configureRequest = null)
+		public ScriptLanguagesResponse GetScriptLanguages(Action<ScriptLanguagesRequestDescriptor> configureRequest = null)
 		{
 			var descriptor = new ScriptLanguagesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -708,7 +708,7 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<ScriptLanguagesRequestDescriptor, ScriptLanguagesResponse>(descriptor);
 		}
 
-		public Task<ScriptLanguagesResponse> ScriptLanguagesAsync(Action<ScriptLanguagesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<ScriptLanguagesResponse> GetScriptLanguagesAsync(Action<ScriptLanguagesRequestDescriptor> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new ScriptLanguagesRequestDescriptor();
 			configureRequest?.Invoke(descriptor);
@@ -772,19 +772,19 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse>(descriptor);
 		}
 
-		public SourceResponse<TDocument> Source<TDocument>(SourceRequest request)
+		public SourceResponse<TDocument> GetSource<TDocument>(SourceRequest request)
 		{
 			request.BeforeRequest();
 			return DoRequest<SourceRequest, SourceResponse<TDocument>>(request);
 		}
 
-		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(SourceRequest request, CancellationToken cancellationToken = default)
+		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(SourceRequest request, CancellationToken cancellationToken = default)
 		{
 			request.BeforeRequest();
 			return DoRequestAsync<SourceRequest, SourceResponse<TDocument>>(request, cancellationToken);
 		}
 
-		public SourceResponse<TDocument> Source<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
+		public SourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null)
 		{
 			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
@@ -792,7 +792,7 @@ namespace Elastic.Clients.Elasticsearch
 			return DoRequest<SourceRequestDescriptor<TDocument>, SourceResponse<TDocument>>(descriptor);
 		}
 
-		public Task<SourceResponse<TDocument>> SourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
+		public Task<SourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<SourceRequestDescriptor<TDocument>> configureRequest = null, CancellationToken cancellationToken = default)
 		{
 			var descriptor = new SourceRequestDescriptor<TDocument>(index, id);
 			configureRequest?.Invoke(descriptor);
