@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class CustomAnalyzer : IAnalyzersVariant
+	public partial class CustomAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("char_filter")]
