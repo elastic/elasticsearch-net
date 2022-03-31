@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class TextProperty : Mapping.CorePropertyBase, IProperty
+	public partial class TextProperty : CorePropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]

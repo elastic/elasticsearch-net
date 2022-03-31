@@ -62,7 +62,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor<TDocument> Regression(Aggregations.RegressionInferenceOptionsDescriptor<TDocument> descriptor)
+		public InferenceConfigContainerDescriptor<TDocument> Regression(RegressionInferenceOptionsDescriptor<TDocument> descriptor)
 		{
 			RegressionValue = null;
 			RegressionDescriptorAction = null;
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor<TDocument> Regression(Action<Aggregations.RegressionInferenceOptionsDescriptor<TDocument>> configure)
+		public InferenceConfigContainerDescriptor<TDocument> Regression(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure)
 		{
 			RegressionValue = null;
 			RegressionDescriptorAction = null;
@@ -86,7 +86,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor<TDocument> Classification(Aggregations.ClassificationInferenceOptionsDescriptor descriptor)
+		public InferenceConfigContainerDescriptor<TDocument> Classification(ClassificationInferenceOptionsDescriptor descriptor)
 		{
 			ClassificationValue = null;
 			ClassificationDescriptorAction = null;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor<TDocument> Classification(Action<Aggregations.ClassificationInferenceOptionsDescriptor> configure)
+		public InferenceConfigContainerDescriptor<TDocument> Classification(Action<ClassificationInferenceOptionsDescriptor> configure)
 		{
 			ClassificationValue = null;
 			ClassificationDescriptorAction = null;
@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (RegressionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, new Aggregations.RegressionInferenceOptionsDescriptor<TDocument>(RegressionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new RegressionInferenceOptionsDescriptor<TDocument>(RegressionDescriptorAction), options);
 			}
 			else if (RegressionValue is not null)
 			{
@@ -129,7 +129,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ClassificationDescriptorAction is not null)
 			{
 				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, new Aggregations.ClassificationInferenceOptionsDescriptor(ClassificationDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ClassificationInferenceOptionsDescriptor(ClassificationDescriptorAction), options);
 			}
 			else if (ClassificationValue is not null)
 			{
@@ -168,7 +168,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor Regression(Aggregations.RegressionInferenceOptionsDescriptor descriptor)
+		public InferenceConfigContainerDescriptor Regression(RegressionInferenceOptionsDescriptor descriptor)
 		{
 			RegressionValue = null;
 			RegressionDescriptorAction = null;
@@ -176,7 +176,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor Regression(Action<Aggregations.RegressionInferenceOptionsDescriptor> configure)
+		public InferenceConfigContainerDescriptor Regression(Action<RegressionInferenceOptionsDescriptor> configure)
 		{
 			RegressionValue = null;
 			RegressionDescriptorAction = null;
@@ -192,7 +192,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor Classification(Aggregations.ClassificationInferenceOptionsDescriptor descriptor)
+		public InferenceConfigContainerDescriptor Classification(ClassificationInferenceOptionsDescriptor descriptor)
 		{
 			ClassificationValue = null;
 			ClassificationDescriptorAction = null;
@@ -200,7 +200,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			return Self;
 		}
 
-		public InferenceConfigContainerDescriptor Classification(Action<Aggregations.ClassificationInferenceOptionsDescriptor> configure)
+		public InferenceConfigContainerDescriptor Classification(Action<ClassificationInferenceOptionsDescriptor> configure)
 		{
 			ClassificationValue = null;
 			ClassificationDescriptorAction = null;
@@ -219,7 +219,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (RegressionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("regression");
-				JsonSerializer.Serialize(writer, new Aggregations.RegressionInferenceOptionsDescriptor(RegressionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new RegressionInferenceOptionsDescriptor(RegressionDescriptorAction), options);
 			}
 			else if (RegressionValue is not null)
 			{
@@ -235,7 +235,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 			else if (ClassificationDescriptorAction is not null)
 			{
 				writer.WritePropertyName("classification");
-				JsonSerializer.Serialize(writer, new Aggregations.ClassificationInferenceOptionsDescriptor(ClassificationDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ClassificationInferenceOptionsDescriptor(ClassificationDescriptorAction), options);
 			}
 			else if (ClassificationValue is not null)
 			{

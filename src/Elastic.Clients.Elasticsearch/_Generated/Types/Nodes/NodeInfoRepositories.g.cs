@@ -22,12 +22,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoRepositories
 	{
 		[JsonInclude]
 		[JsonPropertyName("url")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoRepositoriesUrl Url { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositoriesUrl Url { get; init; }
 	}
 }

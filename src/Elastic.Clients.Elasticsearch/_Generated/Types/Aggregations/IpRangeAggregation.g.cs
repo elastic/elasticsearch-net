@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(IpRangeAggregationConverter))]
-	public partial class IpRangeAggregation : Aggregations.BucketAggregationBase
+	public partial class IpRangeAggregation : BucketAggregationBase
 	{
 		public IpRangeAggregation(string name) : base(name)
 		{

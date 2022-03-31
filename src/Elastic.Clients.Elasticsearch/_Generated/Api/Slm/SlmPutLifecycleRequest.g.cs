@@ -118,7 +118,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return Self;
 		}
 
-		public SlmPutLifecycleRequestDescriptor Config(Slm.ConfigurationDescriptor descriptor)
+		public SlmPutLifecycleRequestDescriptor Config(ConfigurationDescriptor descriptor)
 		{
 			ConfigValue = null;
 			ConfigDescriptorAction = null;
@@ -126,7 +126,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return Self;
 		}
 
-		public SlmPutLifecycleRequestDescriptor Config(Action<Slm.ConfigurationDescriptor> configure)
+		public SlmPutLifecycleRequestDescriptor Config(Action<ConfigurationDescriptor> configure)
 		{
 			ConfigValue = null;
 			ConfigDescriptorAction = null;
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return Self;
 		}
 
-		public SlmPutLifecycleRequestDescriptor Retention(Slm.RetentionDescriptor descriptor)
+		public SlmPutLifecycleRequestDescriptor Retention(RetentionDescriptor descriptor)
 		{
 			RetentionValue = null;
 			RetentionDescriptorAction = null;
@@ -162,7 +162,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			return Self;
 		}
 
-		public SlmPutLifecycleRequestDescriptor Retention(Action<Slm.RetentionDescriptor> configure)
+		public SlmPutLifecycleRequestDescriptor Retention(Action<RetentionDescriptor> configure)
 		{
 			RetentionValue = null;
 			RetentionDescriptorAction = null;
@@ -187,7 +187,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			else if (ConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("config");
-				JsonSerializer.Serialize(writer, new Slm.ConfigurationDescriptor(ConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ConfigurationDescriptor(ConfigDescriptorAction), options);
 			}
 			else if (ConfigValue is not null)
 			{
@@ -215,7 +215,7 @@ namespace Elastic.Clients.Elasticsearch.Slm
 			else if (RetentionDescriptorAction is not null)
 			{
 				writer.WritePropertyName("retention");
-				JsonSerializer.Serialize(writer, new Slm.RetentionDescriptor(RetentionDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new RetentionDescriptor(RetentionDescriptorAction), options);
 			}
 			else if (RetentionValue is not null)
 			{

@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class InferenceProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class InferenceProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "inference";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "inference";
 		[JsonInclude]
 		[JsonPropertyName("field_map")]
 		public Dictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
@@ -104,7 +104,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Ingest.InferenceConfigDescriptor descriptor)
+		public InferenceProcessorDescriptor<TDocument> InferenceConfig(InferenceConfigDescriptor descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<Ingest.InferenceConfigDescriptor> configure)
+		public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<InferenceConfigDescriptor> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -179,7 +179,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Ingest.InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{
@@ -260,7 +260,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceProcessorDescriptor InferenceConfig(Ingest.InferenceConfigDescriptor descriptor)
+		public InferenceProcessorDescriptor InferenceConfig(InferenceConfigDescriptor descriptor)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -268,7 +268,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			return Self;
 		}
 
-		public InferenceProcessorDescriptor InferenceConfig(Action<Ingest.InferenceConfigDescriptor> configure)
+		public InferenceProcessorDescriptor InferenceConfig(Action<InferenceConfigDescriptor> configure)
 		{
 			InferenceConfigValue = null;
 			InferenceConfigDescriptorAction = null;
@@ -341,7 +341,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 			else if (InferenceConfigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("inference_config");
-				JsonSerializer.Serialize(writer, new Ingest.InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
 			}
 			else if (InferenceConfigValue is not null)
 			{

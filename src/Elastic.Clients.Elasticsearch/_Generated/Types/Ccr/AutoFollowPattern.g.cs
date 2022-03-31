@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
+namespace Elastic.Clients.Elasticsearch.Ccr
 {
 	public partial class AutoFollowPattern
 	{
@@ -32,6 +32,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern
 
 		[JsonInclude]
 		[JsonPropertyName("pattern")]
-		public Elastic.Clients.Elasticsearch.Ccr.GetAutoFollowPattern.AutoFollowPatternSummary Pattern { get; init; }
+		public Elastic.Clients.Elasticsearch.Ccr.AutoFollowPatternSummary Pattern { get; init; }
 	}
 }

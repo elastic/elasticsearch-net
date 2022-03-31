@@ -164,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(RateAggregationConverter))]
-	public partial class RateAggregation : Aggregations.FormatMetricAggregationBase
+	public partial class RateAggregation : FormatMetricAggregationBase
 	{
 		public RateAggregation(string name, Field field) : base(name) => Field = field;
 		public RateAggregation(string name) : base(name)

@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class DropProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class DropProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "drop";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "drop";
 	}
 
 	public sealed partial class DropProcessorDescriptor : DescriptorBase<DropProcessorDescriptor>

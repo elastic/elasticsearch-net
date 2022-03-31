@@ -24,12 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanNotQuery : QueryDsl.QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanNotQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "span_not";
+		string IQueryContainerVariant.QueryContainerVariantName => "span_not";
 		[JsonIgnore]
-		string QueryDsl.ISpanQueryVariant.SpanQueryVariantName => "span_not";
+		string ISpanQueryVariant.SpanQueryVariantName => "span_not";
 		[JsonInclude]
 		[JsonPropertyName("dist")]
 		public int? Dist { get; set; }
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor<TDocument> Exclude(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+		public SpanNotQueryDescriptor<TDocument> Exclude(SpanQueryDescriptor<TDocument> descriptor)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
@@ -96,7 +96,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor<TDocument> Exclude(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+		public SpanNotQueryDescriptor<TDocument> Exclude(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
@@ -112,7 +112,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor<TDocument> Include(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+		public SpanNotQueryDescriptor<TDocument> Include(SpanQueryDescriptor<TDocument> descriptor)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
@@ -120,7 +120,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor<TDocument> Include(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+		public SpanNotQueryDescriptor<TDocument> Include(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
@@ -169,7 +169,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ExcludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(ExcludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(ExcludeDescriptorAction), options);
 			}
 			else
 			{
@@ -185,7 +185,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (IncludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(IncludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(IncludeDescriptorAction), options);
 			}
 			else
 			{
@@ -264,7 +264,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor Exclude(QueryDsl.SpanQueryDescriptor descriptor)
+		public SpanNotQueryDescriptor Exclude(SpanQueryDescriptor descriptor)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
@@ -272,7 +272,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor Exclude(Action<QueryDsl.SpanQueryDescriptor> configure)
+		public SpanNotQueryDescriptor Exclude(Action<SpanQueryDescriptor> configure)
 		{
 			ExcludeValue = null;
 			ExcludeDescriptorAction = null;
@@ -288,7 +288,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor Include(QueryDsl.SpanQueryDescriptor descriptor)
+		public SpanNotQueryDescriptor Include(SpanQueryDescriptor descriptor)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
@@ -296,7 +296,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanNotQueryDescriptor Include(Action<QueryDsl.SpanQueryDescriptor> configure)
+		public SpanNotQueryDescriptor Include(Action<SpanQueryDescriptor> configure)
 		{
 			IncludeValue = null;
 			IncludeDescriptorAction = null;
@@ -345,7 +345,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (ExcludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("exclude");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor(ExcludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(ExcludeDescriptorAction), options);
 			}
 			else
 			{
@@ -361,7 +361,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (IncludeDescriptorAction is not null)
 			{
 				writer.WritePropertyName("include");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor(IncludeDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(IncludeDescriptorAction), options);
 			}
 			else
 			{

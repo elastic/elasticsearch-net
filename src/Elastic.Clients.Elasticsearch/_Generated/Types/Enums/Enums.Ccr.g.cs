@@ -22,43 +22,43 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Eql.Search
+namespace Elastic.Clients.Elasticsearch.Ccr
 {
-	[JsonConverter(typeof(ResultPositionConverter))]
-	public enum ResultPosition
+	[JsonConverter(typeof(FollowerIndexStatusConverter))]
+	public enum FollowerIndexStatus
 	{
-		[EnumMember(Value = "tail")]
-		Tail,
-		[EnumMember(Value = "head")]
-		Head
+		[EnumMember(Value = "paused")]
+		Paused,
+		[EnumMember(Value = "active")]
+		Active
 	}
 
-	internal sealed class ResultPositionConverter : JsonConverter<ResultPosition>
+	internal sealed class FollowerIndexStatusConverter : JsonConverter<FollowerIndexStatus>
 	{
-		public override ResultPosition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override FollowerIndexStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var enumString = reader.GetString();
 			switch (enumString)
 			{
-				case "tail":
-					return ResultPosition.Tail;
-				case "head":
-					return ResultPosition.Head;
+				case "paused":
+					return FollowerIndexStatus.Paused;
+				case "active":
+					return FollowerIndexStatus.Active;
 			}
 
 			ThrowHelper.ThrowJsonException();
 			return default;
 		}
 
-		public override void Write(Utf8JsonWriter writer, ResultPosition value, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, FollowerIndexStatus value, JsonSerializerOptions options)
 		{
 			switch (value)
 			{
-				case ResultPosition.Tail:
-					writer.WriteStringValue("tail");
+				case FollowerIndexStatus.Paused:
+					writer.WriteStringValue("paused");
 					return;
-				case ResultPosition.Head:
-					writer.WriteStringValue("head");
+				case FollowerIndexStatus.Active:
+					writer.WriteStringValue("active");
 					return;
 			}
 

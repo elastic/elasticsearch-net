@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ChildrenAggregationConverter))]
-	public partial class ChildrenAggregation : Aggregations.BucketAggregationBase
+	public partial class ChildrenAggregation : BucketAggregationBase
 	{
 		public ChildrenAggregation(string name) : base(name)
 		{

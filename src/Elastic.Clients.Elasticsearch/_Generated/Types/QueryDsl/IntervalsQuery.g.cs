@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 		internal IIntervalsQueryVariant Variant { get; }
 
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "intervals";
+		string IQueryContainerVariant.QueryContainerVariantName => "intervals";
 	}
 
 	internal sealed class IntervalsQueryConverter : JsonConverter<IntervalsQuery>

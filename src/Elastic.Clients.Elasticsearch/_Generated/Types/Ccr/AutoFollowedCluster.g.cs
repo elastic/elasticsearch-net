@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ccr.Stats
+namespace Elastic.Clients.Elasticsearch.Ccr
 {
 	public partial class AutoFollowedCluster
 	{

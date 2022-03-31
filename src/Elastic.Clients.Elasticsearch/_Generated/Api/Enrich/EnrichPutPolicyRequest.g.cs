@@ -87,7 +87,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor<TDocument> GeoMatch(Enrich.PolicyDescriptor<TDocument> descriptor)
+		public EnrichPutPolicyRequestDescriptor<TDocument> GeoMatch(PolicyDescriptor<TDocument> descriptor)
 		{
 			GeoMatchValue = null;
 			GeoMatchDescriptorAction = null;
@@ -95,7 +95,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor<TDocument> GeoMatch(Action<Enrich.PolicyDescriptor<TDocument>> configure)
+		public EnrichPutPolicyRequestDescriptor<TDocument> GeoMatch(Action<PolicyDescriptor<TDocument>> configure)
 		{
 			GeoMatchValue = null;
 			GeoMatchDescriptorAction = null;
@@ -111,7 +111,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor<TDocument> Match(Enrich.PolicyDescriptor<TDocument> descriptor)
+		public EnrichPutPolicyRequestDescriptor<TDocument> Match(PolicyDescriptor<TDocument> descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -119,7 +119,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor<TDocument> Match(Action<Enrich.PolicyDescriptor<TDocument>> configure)
+		public EnrichPutPolicyRequestDescriptor<TDocument> Match(Action<PolicyDescriptor<TDocument>> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -138,7 +138,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			else if (GeoMatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("geo_match");
-				JsonSerializer.Serialize(writer, new Enrich.PolicyDescriptor<TDocument>(GeoMatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PolicyDescriptor<TDocument>(GeoMatchDescriptorAction), options);
 			}
 			else if (GeoMatchValue is not null)
 			{
@@ -154,7 +154,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			else if (MatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("match");
-				JsonSerializer.Serialize(writer, new Enrich.PolicyDescriptor<TDocument>(MatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PolicyDescriptor<TDocument>(MatchDescriptorAction), options);
 			}
 			else if (MatchValue is not null)
 			{
@@ -206,7 +206,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor GeoMatch(Enrich.PolicyDescriptor descriptor)
+		public EnrichPutPolicyRequestDescriptor GeoMatch(PolicyDescriptor descriptor)
 		{
 			GeoMatchValue = null;
 			GeoMatchDescriptorAction = null;
@@ -214,7 +214,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor GeoMatch(Action<Enrich.PolicyDescriptor> configure)
+		public EnrichPutPolicyRequestDescriptor GeoMatch(Action<PolicyDescriptor> configure)
 		{
 			GeoMatchValue = null;
 			GeoMatchDescriptorAction = null;
@@ -230,7 +230,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor Match(Enrich.PolicyDescriptor descriptor)
+		public EnrichPutPolicyRequestDescriptor Match(PolicyDescriptor descriptor)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -238,7 +238,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			return Self;
 		}
 
-		public EnrichPutPolicyRequestDescriptor Match(Action<Enrich.PolicyDescriptor> configure)
+		public EnrichPutPolicyRequestDescriptor Match(Action<PolicyDescriptor> configure)
 		{
 			MatchValue = null;
 			MatchDescriptorAction = null;
@@ -257,7 +257,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			else if (GeoMatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("geo_match");
-				JsonSerializer.Serialize(writer, new Enrich.PolicyDescriptor(GeoMatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PolicyDescriptor(GeoMatchDescriptorAction), options);
 			}
 			else if (GeoMatchValue is not null)
 			{
@@ -273,7 +273,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 			else if (MatchDescriptorAction is not null)
 			{
 				writer.WritePropertyName("match");
-				JsonSerializer.Serialize(writer, new Enrich.PolicyDescriptor(MatchDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new PolicyDescriptor(MatchDescriptorAction), options);
 			}
 			else if (MatchValue is not null)
 			{

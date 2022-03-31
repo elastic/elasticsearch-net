@@ -22,68 +22,68 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoSettings
 	{
 		[JsonInclude]
 		[JsonPropertyName("action")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoAction? Action { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction? Action { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("bootstrap")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoBootstrap? Bootstrap { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap? Bootstrap { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("client")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoClient Client { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient Client { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("cluster")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsCluster Cluster { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Cluster { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("discovery")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoDiscover? Discovery { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover? Discovery { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("http")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsHttp Http { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp Http { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("ingest")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsIngest? Ingest { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsIngest? Ingest { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("network")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsNetwork? Network { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNetwork? Network { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("node")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsNode Node { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode Node { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("path")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoPath Path { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath Path { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("repositories")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoRepositories? Repositories { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositories? Repositories { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoScript? Script { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript? Script { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("search")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSearch? Search { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch? Search { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("transport")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsTransport Transport { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Transport { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("xpack")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoXpack? Xpack { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack? Xpack { get; init; }
 	}
 }

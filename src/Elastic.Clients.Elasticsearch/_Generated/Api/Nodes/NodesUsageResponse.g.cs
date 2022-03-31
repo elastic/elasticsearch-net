@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("nodes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.Usage.NodeUsage> Nodes { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeUsage> Nodes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("_nodes")]

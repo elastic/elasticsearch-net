@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStats
+namespace Elastic.Clients.Elasticsearch.SearchableSnapshots
 {
 	public partial class Shared
 	{

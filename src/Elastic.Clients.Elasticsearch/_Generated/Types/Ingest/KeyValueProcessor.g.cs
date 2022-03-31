@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class KeyValueProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class KeyValueProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "kv";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "kv";
 		[JsonInclude]
 		[JsonPropertyName("exclude_keys")]
 		public IEnumerable<string>? ExcludeKeys { get; set; }

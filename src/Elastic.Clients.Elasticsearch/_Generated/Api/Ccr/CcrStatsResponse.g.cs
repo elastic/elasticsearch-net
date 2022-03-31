@@ -26,10 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ccr
 	{
 		[JsonInclude]
 		[JsonPropertyName("auto_follow_stats")]
-		public Elastic.Clients.Elasticsearch.Ccr.Stats.AutoFollowStats AutoFollowStats { get; init; }
+		public Elastic.Clients.Elasticsearch.Ccr.AutoFollowStats AutoFollowStats { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("follow_stats")]
-		public Elastic.Clients.Elasticsearch.Ccr.Stats.FollowStats FollowStats { get; init; }
+		public Elastic.Clients.Elasticsearch.Ccr.FollowStats FollowStats { get; init; }
 	}
 }

@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class StringStatsAggregate : Aggregations.AggregateBase
+	public partial class StringStatsAggregate : AggregateBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("avg_length")]

@@ -22,17 +22,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoSettingsTransport
 	{
 		[JsonInclude]
 		[JsonPropertyName("features")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsTransportFeatures? Features { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures? Features { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoSettingsTransportType Type { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType Type { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("type.default")]

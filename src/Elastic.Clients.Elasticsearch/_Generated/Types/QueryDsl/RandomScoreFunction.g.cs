@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class RandomScoreFunction : QueryDsl.ScoreFunctionBase, IFunctionScoreContainerVariant
+	public partial class RandomScoreFunction : ScoreFunctionBase, IFunctionScoreContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "random_score";
+		string IFunctionScoreContainerVariant.FunctionScoreContainerVariantName => "random_score";
 		[JsonInclude]
 		[JsonPropertyName("field")]
 		public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
@@ -64,7 +64,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RandomScoreFunctionDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public RandomScoreFunctionDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -72,7 +72,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RandomScoreFunctionDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public RandomScoreFunctionDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -115,7 +115,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
@@ -172,7 +172,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RandomScoreFunctionDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		public RandomScoreFunctionDescriptor Filter(QueryContainerDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -180,7 +180,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public RandomScoreFunctionDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public RandomScoreFunctionDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -229,7 +229,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

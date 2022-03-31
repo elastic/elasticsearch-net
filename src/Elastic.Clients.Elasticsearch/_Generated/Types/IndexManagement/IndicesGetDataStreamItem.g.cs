@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class IndicesGetDataStreamItem
 	{
@@ -44,7 +44,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItemIndex> Indices { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesGetDataStreamItemIndex> Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("name")]
@@ -64,6 +64,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream
 
 		[JsonInclude]
 		[JsonPropertyName("timestamp_field")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStream.IndicesGetDataStreamItemTimestampField TimestampField { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndicesGetDataStreamItemTimestampField TimestampField { get; init; }
 	}
 }

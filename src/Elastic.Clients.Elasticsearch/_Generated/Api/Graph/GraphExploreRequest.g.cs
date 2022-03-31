@@ -116,7 +116,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor<TDocument> Connections(Graph.HopDescriptor<TDocument> descriptor)
+		public GraphExploreRequestDescriptor<TDocument> Connections(HopDescriptor<TDocument> descriptor)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -124,7 +124,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor<TDocument> Connections(Action<Graph.HopDescriptor<TDocument>> configure)
+		public GraphExploreRequestDescriptor<TDocument> Connections(Action<HopDescriptor<TDocument>> configure)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor<TDocument> Controls(Graph.ExploreControlsDescriptor<TDocument> descriptor)
+		public GraphExploreRequestDescriptor<TDocument> Controls(ExploreControlsDescriptor<TDocument> descriptor)
 		{
 			ControlsValue = null;
 			ControlsDescriptorAction = null;
@@ -148,7 +148,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor<TDocument> Controls(Action<Graph.ExploreControlsDescriptor<TDocument>> configure)
+		public GraphExploreRequestDescriptor<TDocument> Controls(Action<ExploreControlsDescriptor<TDocument>> configure)
 		{
 			ControlsValue = null;
 			ControlsDescriptorAction = null;
@@ -197,7 +197,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (ConnectionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("connections");
-				JsonSerializer.Serialize(writer, new Graph.HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
 			}
 			else if (ConnectionsValue is not null)
 			{
@@ -213,7 +213,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (ControlsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("controls");
-				JsonSerializer.Serialize(writer, new Graph.ExploreControlsDescriptor<TDocument>(ControlsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ExploreControlsDescriptor<TDocument>(ControlsDescriptorAction), options);
 			}
 			else if (ControlsValue is not null)
 			{
@@ -297,7 +297,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor Connections(Graph.HopDescriptor descriptor)
+		public GraphExploreRequestDescriptor Connections(HopDescriptor descriptor)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -305,7 +305,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor Connections(Action<Graph.HopDescriptor> configure)
+		public GraphExploreRequestDescriptor Connections(Action<HopDescriptor> configure)
 		{
 			ConnectionsValue = null;
 			ConnectionsDescriptorAction = null;
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor Controls(Graph.ExploreControlsDescriptor descriptor)
+		public GraphExploreRequestDescriptor Controls(ExploreControlsDescriptor descriptor)
 		{
 			ControlsValue = null;
 			ControlsDescriptorAction = null;
@@ -329,7 +329,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			return Self;
 		}
 
-		public GraphExploreRequestDescriptor Controls(Action<Graph.ExploreControlsDescriptor> configure)
+		public GraphExploreRequestDescriptor Controls(Action<ExploreControlsDescriptor> configure)
 		{
 			ControlsValue = null;
 			ControlsDescriptorAction = null;
@@ -378,7 +378,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (ConnectionsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("connections");
-				JsonSerializer.Serialize(writer, new Graph.HopDescriptor(ConnectionsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new HopDescriptor(ConnectionsDescriptorAction), options);
 			}
 			else if (ConnectionsValue is not null)
 			{
@@ -394,7 +394,7 @@ namespace Elastic.Clients.Elasticsearch.Graph
 			else if (ControlsDescriptorAction is not null)
 			{
 				writer.WritePropertyName("controls");
-				JsonSerializer.Serialize(writer, new Graph.ExploreControlsDescriptor(ControlsDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new ExploreControlsDescriptor(ControlsDescriptorAction), options);
 			}
 			else if (ControlsValue is not null)
 			{

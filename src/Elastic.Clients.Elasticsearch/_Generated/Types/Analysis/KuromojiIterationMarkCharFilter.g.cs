@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KuromojiIterationMarkCharFilter : Analysis.CharFilterBase, ICharFilterDefinition
+	public partial class KuromojiIterationMarkCharFilter : CharFilterBase, ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("normalize_kana")]

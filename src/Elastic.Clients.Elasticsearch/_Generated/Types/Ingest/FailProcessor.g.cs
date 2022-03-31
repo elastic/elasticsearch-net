@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest
 {
-	public partial class FailProcessor : Ingest.ProcessorBase, IProcessorContainerVariant
+	public partial class FailProcessor : ProcessorBase, IProcessorContainerVariant
 	{
 		[JsonIgnore]
-		string Ingest.IProcessorContainerVariant.ProcessorContainerVariantName => "fail";
+		string IProcessorContainerVariant.ProcessorContainerVariantName => "fail";
 		[JsonInclude]
 		[JsonPropertyName("message")]
 		public string Message { get; set; }

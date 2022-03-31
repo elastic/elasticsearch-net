@@ -22,21 +22,21 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class IndicesStats
 	{
 		[JsonInclude]
 		[JsonPropertyName("primaries")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats? Primaries { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Primaries { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]
-		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardStats>>? Shards { get; init; }
+		public Dictionary<string, IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? Shards { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("total")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndexStats? Total { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndexStats? Total { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("uuid")]
