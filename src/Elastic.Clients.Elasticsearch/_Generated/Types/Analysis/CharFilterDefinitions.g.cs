@@ -18,19 +18,49 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public interface ICharFilterDefinitionsVariant
+	public partial class CharFilterDefinitions : IsADictionaryBase<string, ICharFilterDefinition>
 	{
+		public CharFilterDefinitions()
+		{
+		}
+
+		public CharFilterDefinitions(IDictionary<string, ICharFilterDefinition> container) : base(container)
+		{
+		}
+
+		public void Add(string name, ICharFilterDefinition charfilterdefinitions) => BackingDictionary.Add(name, charfilterdefinitions);
 	}
 
-	public interface ICharFilterDefinitions : IIsADictionary<string, ICharFilterDefinitionsVariant>
+	internal sealed partial class CharFilterDefinitionInterfaceConverter
 	{
+		private static ICharFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			switch (type)
+			{
+				case "kuromoji_iteration_mark":
+					return JsonSerializer.Deserialize<KuromojiIterationMarkCharFilter>(ref reader, options);
+				case "icu_normalizer":
+					return JsonSerializer.Deserialize<IcuNormalizationCharFilter>(ref reader, options);
+				case "pattern_replace":
+					return JsonSerializer.Deserialize<PatternReplaceCharFilter>(ref reader, options);
+				case "mapping":
+					return JsonSerializer.Deserialize<MappingCharFilter>(ref reader, options);
+				case "html_strip":
+					return JsonSerializer.Deserialize<HtmlStripCharFilter>(ref reader, options);
+				default:
+					throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+			}
+		}
 	}
 
-	public class CharFilterDefinitions : IsADictionaryBase<string, ICharFilterDefinitionsVariant>
+	public partial interface ICharFilterDefinition
 	{
+		public string Type { get; }
 	}
 }

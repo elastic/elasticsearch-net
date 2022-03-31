@@ -24,6 +24,286 @@ using Elastic.Transport;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
+	[JsonConverter(typeof(DynamicMappingConverter))]
+	public enum DynamicMapping
+	{
+		[EnumMember(Value = "true")]
+		True,
+		[EnumMember(Value = "strict")]
+		Strict,
+		[EnumMember(Value = "runtime")]
+		Runtime,
+		[EnumMember(Value = "false")]
+		False
+	}
+
+	internal sealed class DynamicMappingConverter : JsonConverter<DynamicMapping>
+	{
+		public override DynamicMapping Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "true":
+					return DynamicMapping.True;
+				case "strict":
+					return DynamicMapping.Strict;
+				case "runtime":
+					return DynamicMapping.Runtime;
+				case "false":
+					return DynamicMapping.False;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, DynamicMapping value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case DynamicMapping.True:
+					writer.WriteStringValue("true");
+					return;
+				case DynamicMapping.Strict:
+					writer.WriteStringValue("strict");
+					return;
+				case DynamicMapping.Runtime:
+					writer.WriteStringValue("runtime");
+					return;
+				case DynamicMapping.False:
+					writer.WriteStringValue("false");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(GeoOrientationConverter))]
+	public enum GeoOrientation
+	{
+		[EnumMember(Value = "right")]
+		Right,
+		[EnumMember(Value = "left")]
+		Left
+	}
+
+	internal sealed class GeoOrientationConverter : JsonConverter<GeoOrientation>
+	{
+		public override GeoOrientation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "right":
+					return GeoOrientation.Right;
+				case "left":
+					return GeoOrientation.Left;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoOrientation value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case GeoOrientation.Right:
+					writer.WriteStringValue("right");
+					return;
+				case GeoOrientation.Left:
+					writer.WriteStringValue("left");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(GeoStrategyConverter))]
+	public enum GeoStrategy
+	{
+		[EnumMember(Value = "term")]
+		Term,
+		[EnumMember(Value = "recursive")]
+		Recursive
+	}
+
+	internal sealed class GeoStrategyConverter : JsonConverter<GeoStrategy>
+	{
+		public override GeoStrategy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "term":
+					return GeoStrategy.Term;
+				case "recursive":
+					return GeoStrategy.Recursive;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, GeoStrategy value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case GeoStrategy.Term:
+					writer.WriteStringValue("term");
+					return;
+				case GeoStrategy.Recursive:
+					writer.WriteStringValue("recursive");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(IndexOptionsConverter))]
+	public enum IndexOptions
+	{
+		[EnumMember(Value = "positions")]
+		Positions,
+		[EnumMember(Value = "offsets")]
+		Offsets,
+		[EnumMember(Value = "freqs")]
+		Freqs,
+		[EnumMember(Value = "docs")]
+		Docs
+	}
+
+	internal sealed class IndexOptionsConverter : JsonConverter<IndexOptions>
+	{
+		public override IndexOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "positions":
+					return IndexOptions.Positions;
+				case "offsets":
+					return IndexOptions.Offsets;
+				case "freqs":
+					return IndexOptions.Freqs;
+				case "docs":
+					return IndexOptions.Docs;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, IndexOptions value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case IndexOptions.Positions:
+					writer.WriteStringValue("positions");
+					return;
+				case IndexOptions.Offsets:
+					writer.WriteStringValue("offsets");
+					return;
+				case IndexOptions.Freqs:
+					writer.WriteStringValue("freqs");
+					return;
+				case IndexOptions.Docs:
+					writer.WriteStringValue("docs");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(MatchTypeConverter))]
+	public enum MatchType
+	{
+		[EnumMember(Value = "simple")]
+		Simple,
+		[EnumMember(Value = "regex")]
+		Regex
+	}
+
+	internal sealed class MatchTypeConverter : JsonConverter<MatchType>
+	{
+		public override MatchType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "simple":
+					return MatchType.Simple;
+				case "regex":
+					return MatchType.Regex;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, MatchType value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case MatchType.Simple:
+					writer.WriteStringValue("simple");
+					return;
+				case MatchType.Regex:
+					writer.WriteStringValue("regex");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(OnScriptErrorConverter))]
+	public enum OnScriptError
+	{
+		[EnumMember(Value = "fail")]
+		Fail,
+		[EnumMember(Value = "continue")]
+		Continue
+	}
+
+	internal sealed class OnScriptErrorConverter : JsonConverter<OnScriptError>
+	{
+		public override OnScriptError Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "fail":
+					return OnScriptError.Fail;
+				case "continue":
+					return OnScriptError.Continue;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, OnScriptError value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case OnScriptError.Fail:
+					writer.WriteStringValue("fail");
+					return;
+				case OnScriptError.Continue:
+					writer.WriteStringValue("continue");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
 	[JsonConverter(typeof(RuntimeFieldTypeConverter))]
 	public enum RuntimeFieldType
 	{
@@ -94,6 +374,83 @@ namespace Elastic.Clients.Elasticsearch.Mapping
 					return;
 				case RuntimeFieldType.Boolean:
 					writer.WriteStringValue("boolean");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
+	}
+
+	[JsonConverter(typeof(TermVectorOptionConverter))]
+	public enum TermVectorOption
+	{
+		[EnumMember(Value = "yes")]
+		Yes,
+		[EnumMember(Value = "with_positions_payloads")]
+		WithPositionsPayloads,
+		[EnumMember(Value = "with_positions_offsets_payloads")]
+		WithPositionsOffsetsPayloads,
+		[EnumMember(Value = "with_positions_offsets")]
+		WithPositionsOffsets,
+		[EnumMember(Value = "with_positions")]
+		WithPositions,
+		[EnumMember(Value = "with_offsets")]
+		WithOffsets,
+		[EnumMember(Value = "no")]
+		No
+	}
+
+	internal sealed class TermVectorOptionConverter : JsonConverter<TermVectorOption>
+	{
+		public override TermVectorOption Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "yes":
+					return TermVectorOption.Yes;
+				case "with_positions_payloads":
+					return TermVectorOption.WithPositionsPayloads;
+				case "with_positions_offsets_payloads":
+					return TermVectorOption.WithPositionsOffsetsPayloads;
+				case "with_positions_offsets":
+					return TermVectorOption.WithPositionsOffsets;
+				case "with_positions":
+					return TermVectorOption.WithPositions;
+				case "with_offsets":
+					return TermVectorOption.WithOffsets;
+				case "no":
+					return TermVectorOption.No;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, TermVectorOption value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case TermVectorOption.Yes:
+					writer.WriteStringValue("yes");
+					return;
+				case TermVectorOption.WithPositionsPayloads:
+					writer.WriteStringValue("with_positions_payloads");
+					return;
+				case TermVectorOption.WithPositionsOffsetsPayloads:
+					writer.WriteStringValue("with_positions_offsets_payloads");
+					return;
+				case TermVectorOption.WithPositionsOffsets:
+					writer.WriteStringValue("with_positions_offsets");
+					return;
+				case TermVectorOption.WithPositions:
+					writer.WriteStringValue("with_positions");
+					return;
+				case TermVectorOption.WithOffsets:
+					writer.WriteStringValue("with_offsets");
+					return;
+				case TermVectorOption.No:
+					writer.WriteStringValue("no");
 					return;
 			}
 
