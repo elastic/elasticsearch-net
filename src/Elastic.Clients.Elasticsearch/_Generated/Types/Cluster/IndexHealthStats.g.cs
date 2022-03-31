@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.Health
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class IndexHealthStats
 	{
@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Health
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.Health.ShardHealthStats>? Shards { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats>? Shards { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("status")]

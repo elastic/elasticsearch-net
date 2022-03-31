@@ -22,17 +22,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ingest.Simulate
+namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class PipelineSimulation
 	{
 		[JsonInclude]
 		[JsonPropertyName("doc")]
-		public Elastic.Clients.Elasticsearch.Ingest.Simulate.DocumentSimulation? Doc { get; init; }
+		public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("processor_results")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Simulate.PipelineSimulation>? ProcessorResults { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? ProcessorResults { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("processor_type")]

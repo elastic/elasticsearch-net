@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
+namespace Elastic.Clients.Elasticsearch.Ccr
 {
 	public partial class FollowerIndex
 	{
@@ -36,7 +36,7 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 
 		[JsonInclude]
 		[JsonPropertyName("parameters")]
-		public Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndexParameters? Parameters { get; init; }
+		public Elastic.Clients.Elasticsearch.Ccr.FollowerIndexParameters? Parameters { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("remote_cluster")]
@@ -44,6 +44,6 @@ namespace Elastic.Clients.Elasticsearch.Ccr.FollowInfo
 
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Ccr.FollowInfo.FollowerIndexStatus Status { get; init; }
+		public Elastic.Clients.Elasticsearch.Ccr.FollowerIndexStatus Status { get; init; }
 	}
 }

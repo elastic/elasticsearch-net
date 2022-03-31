@@ -52,7 +52,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public MergeDescriptor Scheduler(IndexManagement.MergeSchedulerDescriptor descriptor)
+		public MergeDescriptor Scheduler(MergeSchedulerDescriptor descriptor)
 		{
 			SchedulerValue = null;
 			SchedulerDescriptorAction = null;
@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			return Self;
 		}
 
-		public MergeDescriptor Scheduler(Action<IndexManagement.MergeSchedulerDescriptor> configure)
+		public MergeDescriptor Scheduler(Action<MergeSchedulerDescriptor> configure)
 		{
 			SchedulerValue = null;
 			SchedulerDescriptorAction = null;
@@ -79,7 +79,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 			else if (SchedulerDescriptorAction is not null)
 			{
 				writer.WritePropertyName("scheduler");
-				JsonSerializer.Serialize(writer, new IndexManagement.MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
 			}
 			else if (SchedulerValue is not null)
 			{

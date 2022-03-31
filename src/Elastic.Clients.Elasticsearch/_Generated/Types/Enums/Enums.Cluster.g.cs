@@ -22,7 +22,7 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.AllocationExplain
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	[JsonConverter(typeof(AllocationExplainDecisionConverter))]
 	public enum AllocationExplainDecision

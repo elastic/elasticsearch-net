@@ -24,12 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanOrQuery : QueryDsl.QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanOrQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "span_or";
+		string IQueryContainerVariant.QueryContainerVariantName => "span_or";
 		[JsonIgnore]
-		string QueryDsl.ISpanQueryVariant.SpanQueryVariantName => "span_or";
+		string ISpanQueryVariant.SpanQueryVariantName => "span_or";
 		[JsonInclude]
 		[JsonPropertyName("clauses")]
 		public IEnumerable<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }

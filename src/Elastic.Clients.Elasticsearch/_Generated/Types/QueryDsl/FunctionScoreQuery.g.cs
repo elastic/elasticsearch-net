@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class FunctionScoreQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class FunctionScoreQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "function_score";
+		string IQueryContainerVariant.QueryContainerVariantName => "function_score";
 		[JsonInclude]
 		[JsonPropertyName("boost_mode")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FunctionScoreQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public FunctionScoreQueryDescriptor<TDocument> Query(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FunctionScoreQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public FunctionScoreQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -163,7 +163,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else if (QueryValue is not null)
 			{
@@ -252,7 +252,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FunctionScoreQueryDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+		public FunctionScoreQueryDescriptor Query(QueryContainerDescriptor descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -260,7 +260,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public FunctionScoreQueryDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public FunctionScoreQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -321,7 +321,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueryDescriptorAction), options);
 			}
 			else if (QueryValue is not null)
 			{

@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class IndexStats
 	{
@@ -56,7 +56,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.IndicesStats? Indices { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("merges")]
@@ -88,7 +88,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("shard_stats")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardsTotalStats? ShardStats { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("store")]

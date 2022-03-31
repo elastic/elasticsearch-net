@@ -22,13 +22,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Ingest.GeoIpStats
+namespace Elastic.Clients.Elasticsearch.Ingest
 {
 	public partial class GeoIpNodeDatabases
 	{
 		[JsonInclude]
 		[JsonPropertyName("databases")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpStats.GeoIpNodeDatabaseName> Databases { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("files_in_temp")]

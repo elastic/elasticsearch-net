@@ -26,7 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich
 	{
 		[JsonInclude]
 		[JsonPropertyName("status")]
-		public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy.ExecuteEnrichPolicyStatus Status { get; init; }
+		public Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus Status { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("task_id")]

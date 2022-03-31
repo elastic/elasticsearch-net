@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		[JsonInclude]
 		[JsonPropertyName("file_sizes")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardFileSizeInfo> FileSizes { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fixed_bit_set")]

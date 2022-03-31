@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 	{
 		[JsonInclude]
 		[JsonPropertyName("hot_threads")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.HotThreads.HotThread> HotThreads { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.HotThread> HotThreads { get; init; }
 	}
 }

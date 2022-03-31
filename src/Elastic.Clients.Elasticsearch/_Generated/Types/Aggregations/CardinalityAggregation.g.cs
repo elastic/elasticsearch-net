@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(CardinalityAggregationConverter))]
-	public partial class CardinalityAggregation : Aggregations.MetricAggregationBase
+	public partial class CardinalityAggregation : MetricAggregationBase
 	{
 		public CardinalityAggregation(string name, Field field) : base(name) => Field = field;
 		public CardinalityAggregation(string name) : base(name)

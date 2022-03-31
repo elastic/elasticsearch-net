@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class ShardRouting
 	{
@@ -40,6 +40,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Stats
 
 		[JsonInclude]
 		[JsonPropertyName("state")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardRoutingState State { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
 	}
 }

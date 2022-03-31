@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class AsciiFoldingTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class AsciiFoldingTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("preserve_original")]

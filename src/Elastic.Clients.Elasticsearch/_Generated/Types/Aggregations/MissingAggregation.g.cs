@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(MissingAggregationConverter))]
-	public partial class MissingAggregation : Aggregations.BucketAggregationBase
+	public partial class MissingAggregation : BucketAggregationBase
 	{
 		public MissingAggregation(string name) : base(name)
 		{

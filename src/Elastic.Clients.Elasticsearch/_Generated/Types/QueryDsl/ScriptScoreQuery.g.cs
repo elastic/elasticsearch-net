@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class ScriptScoreQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class ScriptScoreQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "script_score";
+		string IQueryContainerVariant.QueryContainerVariantName => "script_score";
 		[JsonInclude]
 		[JsonPropertyName("min_score")]
 		public float? MinScore { get; set; }
@@ -74,7 +74,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor<TDocument> Query(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public ScriptScoreQueryDescriptor<TDocument> Query(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -82,7 +82,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public ScriptScoreQueryDescriptor<TDocument> Query(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -143,7 +143,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(QueryDescriptorAction), options);
 			}
 			else
 			{
@@ -222,7 +222,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor Query(QueryDsl.QueryContainerDescriptor descriptor)
+		public ScriptScoreQueryDescriptor Query(QueryContainerDescriptor descriptor)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -230,7 +230,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScriptScoreQueryDescriptor Query(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public ScriptScoreQueryDescriptor Query(Action<QueryContainerDescriptor> configure)
 		{
 			QueryValue = null;
 			QueryDescriptorAction = null;
@@ -291,7 +291,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (QueryDescriptorAction is not null)
 			{
 				writer.WritePropertyName("query");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(QueryDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(QueryDescriptorAction), options);
 			}
 			else
 			{

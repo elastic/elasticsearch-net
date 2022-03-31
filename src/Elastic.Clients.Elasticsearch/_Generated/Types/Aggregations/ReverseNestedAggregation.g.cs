@@ -113,7 +113,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ReverseNestedAggregationConverter))]
-	public partial class ReverseNestedAggregation : Aggregations.BucketAggregationBase
+	public partial class ReverseNestedAggregation : BucketAggregationBase
 	{
 		public ReverseNestedAggregation(string name) : base(name)
 		{

@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Cluster.PendingTasks
+namespace Elastic.Clients.Elasticsearch.Cluster
 {
 	public partial class PendingTask
 	{

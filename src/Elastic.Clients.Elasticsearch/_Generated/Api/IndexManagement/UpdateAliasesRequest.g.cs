@@ -47,7 +47,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 
 		[JsonInclude]
 		[JsonPropertyName("actions")]
-		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? Actions { get; set; }
+		public IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Action>? Actions { get; set; }
 	}
 
 	public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptorBase<UpdateAliasesRequestDescriptor, UpdateAliasesRequestParameters>
@@ -62,9 +62,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement
 		protected override bool SupportsBody => true;
 		public UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Time? masterTimeout) => Qs("master_timeout", masterTimeout);
 		public UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Time? timeout) => Qs("timeout", timeout);
-		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? ActionsValue { get; set; }
+		private IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Action>? ActionsValue { get; set; }
 
-		public UpdateAliasesRequestDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliases.Action>? actions)
+		public UpdateAliasesRequestDescriptor Actions(IEnumerable<Elastic.Clients.Elasticsearch.IndexManagement.Action>? actions)
 		{
 			ActionsValue = actions;
 			return Self;

@@ -147,7 +147,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(ExtendedStatsBucketAggregationConverter))]
-	public partial class ExtendedStatsBucketAggregation : Aggregations.PipelineAggregationBase
+	public partial class ExtendedStatsBucketAggregation : PipelineAggregationBase
 	{
 		public ExtendedStatsBucketAggregation(string name) : base(name)
 		{

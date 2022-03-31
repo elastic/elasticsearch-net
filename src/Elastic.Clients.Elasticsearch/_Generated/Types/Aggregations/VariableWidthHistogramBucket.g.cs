@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class VariableWidthHistogramBucket : Aggregations.MultiBucketBase
+	public partial class VariableWidthHistogramBucket : MultiBucketBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("key")]

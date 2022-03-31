@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping
 {
-	public partial class AggregateMetricDoubleProperty : Mapping.PropertyBase, IProperty
+	public partial class AggregateMetricDoubleProperty : PropertyBase, IProperty
 	{
 		[JsonInclude]
 		[JsonPropertyName("default_metric")]

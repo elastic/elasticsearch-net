@@ -25,7 +25,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch
 {
-	public abstract partial class AsyncSearchDocumentResponseBase<TDocument> : AsyncSearch.AsyncSearchResponseBase
+	public abstract partial class AsyncSearchDocumentResponseBase<TDocument> : AsyncSearchResponseBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("response")]

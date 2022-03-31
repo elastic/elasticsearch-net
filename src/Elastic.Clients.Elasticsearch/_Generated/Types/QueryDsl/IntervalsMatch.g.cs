@@ -27,9 +27,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class IntervalsMatch : IIntervalsContainerVariant, IIntervalsQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IIntervalsContainerVariant.IntervalsContainerVariantName => "match";
+		string IIntervalsContainerVariant.IntervalsContainerVariantName => "match";
 		[JsonIgnore]
-		string QueryDsl.IIntervalsQueryVariant.IntervalsQueryVariantName => "match";
+		string IIntervalsQueryVariant.IntervalsQueryVariantName => "match";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }
@@ -92,7 +92,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public IntervalsMatchDescriptor<TDocument> Filter(QueryDsl.IntervalsFilterDescriptor descriptor)
+		public IntervalsMatchDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -100,7 +100,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public IntervalsMatchDescriptor<TDocument> Filter(Action<QueryDsl.IntervalsFilterDescriptor> configure)
+		public IntervalsMatchDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -155,7 +155,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.IntervalsFilterDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
@@ -224,7 +224,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public IntervalsMatchDescriptor Filter(QueryDsl.IntervalsFilterDescriptor descriptor)
+		public IntervalsMatchDescriptor Filter(IntervalsFilterDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -232,7 +232,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public IntervalsMatchDescriptor Filter(Action<QueryDsl.IntervalsFilterDescriptor> configure)
+		public IntervalsMatchDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -293,7 +293,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.IntervalsFilterDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

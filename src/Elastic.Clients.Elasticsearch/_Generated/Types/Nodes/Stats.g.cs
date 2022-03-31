@@ -60,7 +60,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes
 
 		[JsonInclude]
 		[JsonPropertyName("indices")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.Stats.ShardStats? Indices { get; init; }
+		public Elastic.Clients.Elasticsearch.IndexManagement.ShardStats? Indices { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("ingest")]
