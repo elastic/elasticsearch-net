@@ -6,7 +6,8 @@ using System.Text.Json.Serialization;
 using Tests.Domain;
 using Tests.Core.Extensions;
 using System.Collections.Generic;
-using Elastic.Clients.Elasticsearch.Cluster.Health;
+using Elastic.Clients.Elasticsearch.Cluster;
+//using Elastic.Clients.Elasticsearch.Cluster.Health;
 
 namespace Tests.Serialization;
 

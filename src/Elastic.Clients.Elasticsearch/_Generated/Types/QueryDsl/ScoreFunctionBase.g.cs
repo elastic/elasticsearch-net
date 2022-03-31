@@ -58,7 +58,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScoreFunctionBaseDescriptor<TDocument> Filter(QueryDsl.QueryContainerDescriptor<TDocument> descriptor)
+		public ScoreFunctionBaseDescriptor<TDocument> Filter(QueryContainerDescriptor<TDocument> descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -66,7 +66,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScoreFunctionBaseDescriptor<TDocument> Filter(Action<QueryDsl.QueryContainerDescriptor<TDocument>> configure)
+		public ScoreFunctionBaseDescriptor<TDocument> Filter(Action<QueryContainerDescriptor<TDocument>> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -91,7 +91,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor<TDocument>(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{
@@ -132,7 +132,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScoreFunctionBaseDescriptor Filter(QueryDsl.QueryContainerDescriptor descriptor)
+		public ScoreFunctionBaseDescriptor Filter(QueryContainerDescriptor descriptor)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -140,7 +140,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public ScoreFunctionBaseDescriptor Filter(Action<QueryDsl.QueryContainerDescriptor> configure)
+		public ScoreFunctionBaseDescriptor Filter(Action<QueryContainerDescriptor> configure)
 		{
 			FilterValue = null;
 			FilterDescriptorAction = null;
@@ -165,7 +165,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (FilterDescriptorAction is not null)
 			{
 				writer.WritePropertyName("filter");
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryContainerDescriptor(FilterDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new QueryContainerDescriptor(FilterDescriptorAction), options);
 			}
 			else if (FilterValue is not null)
 			{

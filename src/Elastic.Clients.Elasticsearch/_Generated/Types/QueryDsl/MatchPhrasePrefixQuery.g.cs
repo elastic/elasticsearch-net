@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 	public partial class MatchPhrasePrefixQuery : FieldNameQueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "match_phrase_prefix";
+		string IQueryContainerVariant.QueryContainerVariantName => "match_phrase_prefix";
 		[JsonInclude]
 		[JsonPropertyName("analyzer")]
 		public string? Analyzer { get; set; }

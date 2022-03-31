@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public abstract partial class FormattableMetricAggregationBase : Aggregations.MetricAggregationBase
+	public abstract partial class FormattableMetricAggregationBase : MetricAggregationBase
 	{
 		protected FormattableMetricAggregationBase(string name) : base(name)
 		{

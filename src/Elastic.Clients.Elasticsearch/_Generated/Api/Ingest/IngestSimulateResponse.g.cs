@@ -26,6 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest
 	{
 		[JsonInclude]
 		[JsonPropertyName("docs")]
-		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Simulate.PipelineSimulation> Docs { get; init; }
+		public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation> Docs { get; init; }
 	}
 }

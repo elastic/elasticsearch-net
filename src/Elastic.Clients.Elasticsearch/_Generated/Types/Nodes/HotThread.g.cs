@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.HotThreads
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class HotThread
 	{

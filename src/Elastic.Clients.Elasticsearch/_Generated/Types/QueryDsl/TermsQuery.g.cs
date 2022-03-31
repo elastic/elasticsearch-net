@@ -24,10 +24,10 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class TermsQuery : QueryDsl.QueryBase, IQueryContainerVariant
+	public partial class TermsQuery : QueryBase, IQueryContainerVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "terms";
+		string IQueryContainerVariant.QueryContainerVariantName => "terms";
 	}
 
 	public sealed partial class TermsQueryDescriptor : DescriptorBase<TermsQueryDescriptor>

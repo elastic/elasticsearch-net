@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations
 {
-	public partial class RangeBucket : Aggregations.MultiBucketBase
+	public partial class RangeBucket : MultiBucketBase
 	{
 		[JsonInclude]
 		[JsonPropertyName("from")]

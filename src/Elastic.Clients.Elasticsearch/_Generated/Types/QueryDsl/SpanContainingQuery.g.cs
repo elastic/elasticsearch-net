@@ -24,12 +24,12 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl
 {
-	public partial class SpanContainingQuery : QueryDsl.QueryBase, IQueryContainerVariant, ISpanQueryVariant
+	public partial class SpanContainingQuery : QueryBase, IQueryContainerVariant, ISpanQueryVariant
 	{
 		[JsonIgnore]
-		string QueryDsl.IQueryContainerVariant.QueryContainerVariantName => "span_containing";
+		string IQueryContainerVariant.QueryContainerVariantName => "span_containing";
 		[JsonIgnore]
-		string QueryDsl.ISpanQueryVariant.SpanQueryVariantName => "span_containing";
+		string ISpanQueryVariant.SpanQueryVariantName => "span_containing";
 		[JsonInclude]
 		[JsonPropertyName("big")]
 		public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
@@ -70,7 +70,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor<TDocument> Big(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+		public SpanContainingQueryDescriptor<TDocument> Big(SpanQueryDescriptor<TDocument> descriptor)
 		{
 			BigValue = null;
 			BigDescriptorAction = null;
@@ -78,7 +78,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor<TDocument> Big(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+		public SpanContainingQueryDescriptor<TDocument> Big(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			BigValue = null;
 			BigDescriptorAction = null;
@@ -94,7 +94,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor<TDocument> Little(QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
+		public SpanContainingQueryDescriptor<TDocument> Little(SpanQueryDescriptor<TDocument> descriptor)
 		{
 			LittleValue = null;
 			LittleDescriptorAction = null;
@@ -102,7 +102,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor<TDocument> Little(Action<QueryDsl.SpanQueryDescriptor<TDocument>> configure)
+		public SpanContainingQueryDescriptor<TDocument> Little(Action<SpanQueryDescriptor<TDocument>> configure)
 		{
 			LittleValue = null;
 			LittleDescriptorAction = null;
@@ -133,7 +133,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (BigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("big");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(BigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(BigDescriptorAction), options);
 			}
 			else
 			{
@@ -149,7 +149,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (LittleDescriptorAction is not null)
 			{
 				writer.WritePropertyName("little");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor<TDocument>(LittleDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(LittleDescriptorAction), options);
 			}
 			else
 			{
@@ -204,7 +204,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor Big(QueryDsl.SpanQueryDescriptor descriptor)
+		public SpanContainingQueryDescriptor Big(SpanQueryDescriptor descriptor)
 		{
 			BigValue = null;
 			BigDescriptorAction = null;
@@ -212,7 +212,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor Big(Action<QueryDsl.SpanQueryDescriptor> configure)
+		public SpanContainingQueryDescriptor Big(Action<SpanQueryDescriptor> configure)
 		{
 			BigValue = null;
 			BigDescriptorAction = null;
@@ -228,7 +228,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor Little(QueryDsl.SpanQueryDescriptor descriptor)
+		public SpanContainingQueryDescriptor Little(SpanQueryDescriptor descriptor)
 		{
 			LittleValue = null;
 			LittleDescriptorAction = null;
@@ -236,7 +236,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			return Self;
 		}
 
-		public SpanContainingQueryDescriptor Little(Action<QueryDsl.SpanQueryDescriptor> configure)
+		public SpanContainingQueryDescriptor Little(Action<SpanQueryDescriptor> configure)
 		{
 			LittleValue = null;
 			LittleDescriptorAction = null;
@@ -267,7 +267,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (BigDescriptorAction is not null)
 			{
 				writer.WritePropertyName("big");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor(BigDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(BigDescriptorAction), options);
 			}
 			else
 			{
@@ -283,7 +283,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl
 			else if (LittleDescriptorAction is not null)
 			{
 				writer.WritePropertyName("little");
-				JsonSerializer.Serialize(writer, new QueryDsl.SpanQueryDescriptor(LittleDescriptorAction), options);
+				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(LittleDescriptorAction), options);
 			}
 			else
 			{

@@ -181,7 +181,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(RangeAggregationConverter))]
-	public partial class RangeAggregation : Aggregations.BucketAggregationBase
+	public partial class RangeAggregation : BucketAggregationBase
 	{
 		public RangeAggregation(string name) : base(name)
 		{

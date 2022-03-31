@@ -16,18 +16,53 @@
 // ------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
+using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement
+namespace Elastic.Clients.Elasticsearch.Eql
 {
-	public partial class StringFielddata
+	[JsonConverter(typeof(ResultPositionConverter))]
+	public enum ResultPosition
 	{
-		[JsonInclude]
-		[JsonPropertyName("format")]
-		public Elastic.Clients.Elasticsearch.IndexManagement.StringFielddataFormat Format { get; init; }
+		[EnumMember(Value = "tail")]
+		Tail,
+		[EnumMember(Value = "head")]
+		Head
+	}
+
+	internal sealed class ResultPositionConverter : JsonConverter<ResultPosition>
+	{
+		public override ResultPosition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var enumString = reader.GetString();
+			switch (enumString)
+			{
+				case "tail":
+					return ResultPosition.Tail;
+				case "head":
+					return ResultPosition.Head;
+			}
+
+			ThrowHelper.ThrowJsonException();
+			return default;
+		}
+
+		public override void Write(Utf8JsonWriter writer, ResultPosition value, JsonSerializerOptions options)
+		{
+			switch (value)
+			{
+				case ResultPosition.Tail:
+					writer.WriteStringValue("tail");
+					return;
+				case ResultPosition.Head:
+					writer.WriteStringValue("head");
+					return;
+			}
+
+			writer.WriteNullValue();
+		}
 	}
 }

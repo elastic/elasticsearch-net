@@ -22,7 +22,7 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Enrich.ExecutePolicy
+namespace Elastic.Clients.Elasticsearch.Enrich
 {
 	[JsonConverter(typeof(EnrichPolicyPhaseConverter))]
 	public enum EnrichPolicyPhase

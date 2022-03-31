@@ -130,7 +130,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(CumulativeCardinalityAggregationConverter))]
-	public partial class CumulativeCardinalityAggregation : Aggregations.PipelineAggregationBase
+	public partial class CumulativeCardinalityAggregation : PipelineAggregationBase
 	{
 		public CumulativeCardinalityAggregation(string name) : base(name)
 		{

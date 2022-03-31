@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
+namespace Elastic.Clients.Elasticsearch.IndexManagement
 {
 	public partial class CloseIndexResult
 	{
@@ -32,6 +32,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Close
 
 		[JsonInclude]
 		[JsonPropertyName("shards")]
-		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Close.CloseShardResult>? Shards { get; init; }
+		public Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult>? Shards { get; init; }
 	}
 }

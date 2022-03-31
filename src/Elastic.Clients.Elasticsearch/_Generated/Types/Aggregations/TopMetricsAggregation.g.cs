@@ -164,7 +164,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations
 	}
 
 	[JsonConverter(typeof(TopMetricsAggregationConverter))]
-	public partial class TopMetricsAggregation : Aggregations.MetricAggregationBase
+	public partial class TopMetricsAggregation : MetricAggregationBase
 	{
 		public TopMetricsAggregation(string name, Field field) : base(name) => Field = field;
 		public TopMetricsAggregation(string name) : base(name)

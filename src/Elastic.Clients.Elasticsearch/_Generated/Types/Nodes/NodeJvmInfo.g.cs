@@ -22,7 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeJvmInfo
 	{
@@ -40,7 +40,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Info
 
 		[JsonInclude]
 		[JsonPropertyName("mem")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoJvmMemory Mem { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Mem { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("memory_pools")]

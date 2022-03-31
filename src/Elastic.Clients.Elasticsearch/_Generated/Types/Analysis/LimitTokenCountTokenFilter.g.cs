@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class LimitTokenCountTokenFilter : Analysis.TokenFilterBase, ITokenFilterDefinition
+	public partial class LimitTokenCountTokenFilter : TokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("consume_all_tokens")]

@@ -22,144 +22,144 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable restore
-namespace Elastic.Clients.Elasticsearch.Nodes.Info
+namespace Elastic.Clients.Elasticsearch.Nodes
 {
 	public partial class NodeInfoSettingsIngest
 	{
 		[JsonInclude]
 		[JsonPropertyName("append")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Append { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Append { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("attachment")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Attachment { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Attachment { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("bytes")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Bytes { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Bytes { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("circle")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Circle { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Circle { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("convert")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Convert { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Convert { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("csv")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Csv { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Csv { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("date")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Date { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Date { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("date_index_name")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? DateIndexName { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? DateIndexName { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("dissect")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Dissect { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Dissect { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("dot_expander")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? DotExpander { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? DotExpander { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("drop")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Drop { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Drop { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("enrich")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Enrich { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Enrich { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("fail")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Fail { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Fail { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("foreach")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Foreach { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Foreach { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("geoip")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Geoip { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Geoip { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("grok")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Grok { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Grok { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("gsub")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Gsub { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Gsub { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("inference")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Inference { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Inference { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("join")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Join { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Join { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("json")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Json { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Json { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("kv")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Kv { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Kv { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("lowercase")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Lowercase { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Lowercase { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("pipeline")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Pipeline { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Pipeline { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("remove")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Remove { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Remove { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("rename")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Rename { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Rename { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("script")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Script { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Script { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("set")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Set { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Set { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("set_security_user")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? SetSecurityUser { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? SetSecurityUser { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("sort")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Sort { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Sort { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("split")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Split { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Split { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("trim")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Trim { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Trim { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("uppercase")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Uppercase { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Uppercase { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("urldecode")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? Urldecode { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? Urldecode { get; init; }
 
 		[JsonInclude]
 		[JsonPropertyName("user_agent")]
-		public Elastic.Clients.Elasticsearch.Nodes.Info.NodeInfoIngestInfo? UserAgent { get; init; }
+		public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo? UserAgent { get; init; }
 	}
 }

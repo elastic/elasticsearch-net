@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class HtmlStripCharFilter : Analysis.CharFilterBase, ICharFilterDefinition
+	public partial class HtmlStripCharFilter : CharFilterBase, ICharFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
