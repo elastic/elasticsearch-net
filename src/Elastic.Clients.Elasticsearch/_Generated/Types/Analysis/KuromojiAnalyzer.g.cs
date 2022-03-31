@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class KuromojiAnalyzer : IAnalyzersVariant
+	public partial class KuromojiAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("mode")]

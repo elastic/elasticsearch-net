@@ -6,24 +6,52 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Mapping;
 
-namespace Elastic.Clients.Elasticsearch
+namespace Elastic.Clients.Elasticsearch;
+
+// TODO : We need to handle these cases https://github.com/elastic/elasticsearch-specification/pull/1589
+
+internal sealed class IsADictionaryConverter : JsonConverterFactory
 {
-	internal sealed class IsADictionaryConverter<T, TValue> : JsonConverter<T> where T : IsADictionaryBase<string, TValue>
+	public override bool CanConvert(Type typeToConvert) =>
+		typeToConvert.BaseType is not null &&
+		typeToConvert.BaseType.IsGenericType &&
+		typeToConvert.BaseType.GetGenericTypeDefinition() == typeof(IsADictionaryBase<,>);
+
+	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+		var args = typeToConvert.BaseType.GetGenericArguments();
+
+		var keyType = args[0];
+		var valueType = args[1];
+
+		if (keyType.IsClass)
 		{
-			writer.WriteStartObject();
-
-			foreach (var item in value)
-			{
-				writer.WritePropertyName(item.Key);
-				JsonSerializer.Serialize(writer, item.Value, item.Value.GetType(), options);
-			}
-
-			writer.WriteEndObject();
+			return (JsonConverter)Activator.CreateInstance(
+				typeof(IsADictionaryConverterInner<,,>).MakeGenericType(typeToConvert, keyType, valueType));
 		}
+
+		return null;
+	}
+
+	private class IsADictionaryConverterInner<TType, TKey, TValue> : JsonConverter<TType>
+		where TKey : class
+		where TType : IsADictionaryBase<TKey, TValue>, new()
+	{
+		public override TType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			var dictionary = JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(ref reader, options);
+
+			if (dictionary is null)
+				return null;
+
+			return (TType)Activator.CreateInstance(typeof(TType), new object[] { dictionary });
+		}
+
+		public override void Write(Utf8JsonWriter writer, TType value, JsonSerializerOptions options) =>
+			JsonSerializer.Serialize<Dictionary<TKey, TValue>>(writer, value.BackingDictionary, options);
 	}
 }
+
+

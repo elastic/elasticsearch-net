@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch
 	{
 		internal readonly TValue PromisedValue;
 
-		protected DescriptorPromiseBase(TValue instance)
+		internal DescriptorPromiseBase(TValue instance)
 		{
 			PromisedValue = instance;
 			Self = (TDescriptor)this;

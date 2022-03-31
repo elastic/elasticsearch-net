@@ -61,7 +61,7 @@ namespace Elastic.Clients.Elasticsearch
 
 		string IUrlParameter.GetString(ITransportConfiguration settings)
 		{
-			if (!(settings is IElasticsearchClientSettings elasticsearchSettings))
+			if (settings is not IElasticsearchClientSettings elasticsearchSettings)
 			{
 				throw new ArgumentNullException(nameof(settings),
 					$"Can not resolve {nameof(PropertyName)} if no {nameof(IElasticsearchClientSettings)} is provided");

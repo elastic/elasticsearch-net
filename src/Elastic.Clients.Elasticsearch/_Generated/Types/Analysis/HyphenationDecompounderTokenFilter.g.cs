@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class HyphenationDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFilterDefinitionsVariant
+	public partial class HyphenationDecompounderTokenFilter : Analysis.CompoundWordTokenFilterBase, ITokenFilterDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("type")]
