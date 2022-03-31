@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class PatternAnalyzer : IAnalyzersVariant
+	public partial class PatternAnalyzer : IAnalyzer
 	{
 		[JsonInclude]
 		[JsonPropertyName("flags")]

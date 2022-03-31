@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Ilm.ExplainLifecycle
 {
-	public partial class LifecycleExplainUnmanaged : ILifecycleExplainsVariant
+	public partial class LifecycleExplainUnmanaged : ILifecycleExplain
 	{
 		[JsonInclude]
 		[JsonPropertyName("index")]

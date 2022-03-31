@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class NoriTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
+	public partial class NoriTokenizer : Analysis.TokenizerBase, ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("decompound_mode")]

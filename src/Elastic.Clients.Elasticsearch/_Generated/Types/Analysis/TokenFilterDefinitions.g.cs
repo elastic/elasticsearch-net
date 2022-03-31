@@ -18,19 +18,135 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public interface ITokenFilterDefinitionsVariant
+	public partial class TokenFilterDefinitions : IsADictionaryBase<string, ITokenFilterDefinition>
 	{
+		public TokenFilterDefinitions()
+		{
+		}
+
+		public TokenFilterDefinitions(IDictionary<string, ITokenFilterDefinition> container) : base(container)
+		{
+		}
+
+		public void Add(string name, ITokenFilterDefinition tokenfilterdefinitions) => BackingDictionary.Add(name, tokenfilterdefinitions);
 	}
 
-	public interface ITokenFilterDefinitions : IIsADictionary<string, ITokenFilterDefinitionsVariant>
+	internal sealed partial class TokenFilterDefinitionInterfaceConverter
 	{
+		private static ITokenFilterDefinition DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			switch (type)
+			{
+				case "dictionary_decompounder":
+					return JsonSerializer.Deserialize<DictionaryDecompounderTokenFilter>(ref reader, options);
+				case "phonetic":
+					return JsonSerializer.Deserialize<PhoneticTokenFilter>(ref reader, options);
+				case "icu_transform":
+					return JsonSerializer.Deserialize<IcuTransformTokenFilter>(ref reader, options);
+				case "icu_normalizer":
+					return JsonSerializer.Deserialize<IcuNormalizationTokenFilter>(ref reader, options);
+				case "icu_folding":
+					return JsonSerializer.Deserialize<IcuFoldingTokenFilter>(ref reader, options);
+				case "icu_collation":
+					return JsonSerializer.Deserialize<IcuCollationTokenFilter>(ref reader, options);
+				case "icu_tokenizer":
+					return JsonSerializer.Deserialize<IcuTokenizer>(ref reader, options);
+				case "kuromoji_part_of_speech":
+					return JsonSerializer.Deserialize<KuromojiPartOfSpeechTokenFilter>(ref reader, options);
+				case "kuromoji_readingform":
+					return JsonSerializer.Deserialize<KuromojiReadingFormTokenFilter>(ref reader, options);
+				case "kuromoji_stemmer":
+					return JsonSerializer.Deserialize<KuromojiStemmerTokenFilter>(ref reader, options);
+				case "word_delimiter":
+					return JsonSerializer.Deserialize<WordDelimiterTokenFilter>(ref reader, options);
+				case "word_delimiter_graph":
+					return JsonSerializer.Deserialize<WordDelimiterGraphTokenFilter>(ref reader, options);
+				case "uppercase":
+					return JsonSerializer.Deserialize<UppercaseTokenFilter>(ref reader, options);
+				case "unique":
+					return JsonSerializer.Deserialize<UniqueTokenFilter>(ref reader, options);
+				case "truncate":
+					return JsonSerializer.Deserialize<TruncateTokenFilter>(ref reader, options);
+				case "trim":
+					return JsonSerializer.Deserialize<TrimTokenFilter>(ref reader, options);
+				case "synonym":
+					return JsonSerializer.Deserialize<SynonymTokenFilter>(ref reader, options);
+				case "synonym_graph":
+					return JsonSerializer.Deserialize<SynonymGraphTokenFilter>(ref reader, options);
+				case "stop":
+					return JsonSerializer.Deserialize<StopTokenFilter>(ref reader, options);
+				case "stemmer":
+					return JsonSerializer.Deserialize<StemmerTokenFilter>(ref reader, options);
+				case "stemmer_override":
+					return JsonSerializer.Deserialize<StemmerOverrideTokenFilter>(ref reader, options);
+				case "snowball":
+					return JsonSerializer.Deserialize<SnowballTokenFilter>(ref reader, options);
+				case "shingle":
+					return JsonSerializer.Deserialize<ShingleTokenFilter>(ref reader, options);
+				case "reverse":
+					return JsonSerializer.Deserialize<ReverseTokenFilter>(ref reader, options);
+				case "remove_duplicates":
+					return JsonSerializer.Deserialize<RemoveDuplicatesTokenFilter>(ref reader, options);
+				case "predicate_token_filter":
+					return JsonSerializer.Deserialize<PredicateTokenFilter>(ref reader, options);
+				case "porter_stem":
+					return JsonSerializer.Deserialize<PorterStemTokenFilter>(ref reader, options);
+				case "pattern_replace":
+					return JsonSerializer.Deserialize<PatternReplaceTokenFilter>(ref reader, options);
+				case "pattern_capture":
+					return JsonSerializer.Deserialize<PatternCaptureTokenFilter>(ref reader, options);
+				case "nori_part_of_speech":
+					return JsonSerializer.Deserialize<NoriPartOfSpeechTokenFilter>(ref reader, options);
+				case "ngram":
+					return JsonSerializer.Deserialize<NGramTokenFilter>(ref reader, options);
+				case "multiplexer":
+					return JsonSerializer.Deserialize<MultiplexerTokenFilter>(ref reader, options);
+				case "lowercase":
+					return JsonSerializer.Deserialize<LowercaseTokenFilter>(ref reader, options);
+				case "limit":
+					return JsonSerializer.Deserialize<LimitTokenCountTokenFilter>(ref reader, options);
+				case "length":
+					return JsonSerializer.Deserialize<LengthTokenFilter>(ref reader, options);
+				case "kstem":
+					return JsonSerializer.Deserialize<KStemTokenFilter>(ref reader, options);
+				case "keyword_marker":
+					return JsonSerializer.Deserialize<KeywordMarkerTokenFilter>(ref reader, options);
+				case "keep":
+					return JsonSerializer.Deserialize<KeepWordsTokenFilter>(ref reader, options);
+				case "keep_types":
+					return JsonSerializer.Deserialize<KeepTypesTokenFilter>(ref reader, options);
+				case "hyphenation_decompounder":
+					return JsonSerializer.Deserialize<HyphenationDecompounderTokenFilter>(ref reader, options);
+				case "hunspell":
+					return JsonSerializer.Deserialize<HunspellTokenFilter>(ref reader, options);
+				case "fingerprint":
+					return JsonSerializer.Deserialize<FingerprintTokenFilter>(ref reader, options);
+				case "elision":
+					return JsonSerializer.Deserialize<ElisionTokenFilter>(ref reader, options);
+				case "edge_ngram":
+					return JsonSerializer.Deserialize<EdgeNGramTokenFilter>(ref reader, options);
+				case "delimited_payload":
+					return JsonSerializer.Deserialize<DelimitedPayloadTokenFilter>(ref reader, options);
+				case "condition":
+					return JsonSerializer.Deserialize<ConditionTokenFilter>(ref reader, options);
+				case "common_grams":
+					return JsonSerializer.Deserialize<CommonGramsTokenFilter>(ref reader, options);
+				case "asciifolding":
+					return JsonSerializer.Deserialize<AsciiFoldingTokenFilter>(ref reader, options);
+				default:
+					throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+			}
+		}
 	}
 
-	public class TokenFilterDefinitions : IsADictionaryBase<string, ITokenFilterDefinitionsVariant>
+	public partial interface ITokenFilterDefinition
 	{
+		public string Type { get; }
 	}
 }
