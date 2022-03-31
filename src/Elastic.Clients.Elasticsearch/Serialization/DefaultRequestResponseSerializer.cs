@@ -45,6 +45,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSourceSerializer
 					new SelfTwoWaySerializableConverterFactory(settings),
 					new IndicesJsonConverter(settings),
 					new DictionaryConverter(),
+					new IsADictionaryConverter(),
 					new UnionConverter()
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase

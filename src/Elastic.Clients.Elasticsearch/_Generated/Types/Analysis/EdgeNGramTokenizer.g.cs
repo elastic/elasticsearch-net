@@ -24,7 +24,7 @@ using System.Text.Json.Serialization;
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase, ITokenizerDefinitionsVariant
+	public partial class EdgeNGramTokenizer : Analysis.TokenizerBase, ITokenizerDefinition
 	{
 		[JsonInclude]
 		[JsonPropertyName("custom_token_chars")]

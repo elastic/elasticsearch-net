@@ -18,19 +18,43 @@
 using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis
 {
-	public interface INormalizersVariant
+	public partial class Normalizers : IsADictionaryBase<string, INormalizer>
 	{
+		public Normalizers()
+		{
+		}
+
+		public Normalizers(IDictionary<string, INormalizer> container) : base(container)
+		{
+		}
+
+		public void Add(string name, INormalizer normalizers) => BackingDictionary.Add(name, normalizers);
 	}
 
-	public interface INormalizers : IIsADictionary<string, INormalizersVariant>
+	internal sealed partial class NormalizerInterfaceConverter
 	{
+		private static INormalizer DeserializeVariant(string type, ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			switch (type)
+			{
+				case "custom":
+					return JsonSerializer.Deserialize<CustomNormalizer>(ref reader, options);
+				case "lowercase":
+					return JsonSerializer.Deserialize<LowercaseNormalizer>(ref reader, options);
+				default:
+					throw new JsonException("Encounted an unknown variant type which could not be deserialised.");
+			}
+		}
 	}
 
-	public class Normalizers : IsADictionaryBase<string, INormalizersVariant>
+	public partial interface INormalizer
 	{
+		public string Type { get; }
 	}
 }
